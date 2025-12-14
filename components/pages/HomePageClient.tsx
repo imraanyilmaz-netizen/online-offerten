@@ -575,15 +575,15 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
               {/* Desktop Layout - SEO Optimized */}
               <div className="hidden lg:block">
-                <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-start">
                 <div className="text-left space-y-6">
                   {/* Main H1 - Desktop */}
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight mb-2">
+                    <span className="text-gray-900">
                       Umzug, Reinigung
                     </span>
                     <br />
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
+                    <span className="text-gray-900">
                       und Renovierung
                     </span>
                     <br />
@@ -592,8 +592,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
                   {/* SEO Optimized Image - Desktop */}
                   <figure
-                    className="relative w-full"
-                    style={{ aspectRatio: '16/9', minHeight: '350px' }}
+                    className="relative w-full mt-4"
+                    style={{ aspectRatio: '16/9', minHeight: '300px' }}
                   >
                     <picture>
                       <source
@@ -623,16 +623,16 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   {/* SEO Optimized Features */}
                   <div className="mt-6">
                     <aside aria-label="Vorteile und Garantien">
-                      <ul className="flex flex-col items-start gap-4 md:gap-5" role="list">
+                      <ul className="flex flex-col items-start gap-3 md:gap-4" role="list">
                         {features.map((feature, index) => (
                           <li 
                             key={index}
-                            className="flex items-center text-gray-900 text-lg md:text-xl font-semibold"
+                            className="flex items-center text-gray-900 text-base md:text-lg font-semibold"
                             itemProp="featureList"
                           >
                             <div className="flex-shrink-0 mr-3" aria-hidden="true">
-                              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
-                                <CheckCircle2 className="w-5 h-5 text-white" />
+                              <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-md">
+                                <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
                               </div>
                             </div>
                             <span>{feature}</span>
