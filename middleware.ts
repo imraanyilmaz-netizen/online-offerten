@@ -4,7 +4,7 @@ import { createMiddlewareClient } from '@/lib/supabase/middleware'
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
   const supabase = createMiddlewareClient(request)
-
+  
   // Get user from session cookie
   const {
     data: { user },
@@ -20,16 +20,16 @@ export async function middleware(request: NextRequest) {
       
       // If redirect param matches role, redirect there
       if (redirectParam === 'admin-dashboard' && userRole === 'admin') {
-        return NextResponse.redirect(new URL('/admin-dashboard', request.url))
+        return NextResponse.redirect(new URL('/admin-dashboard', request.url), { status: 307 })
       } else if (redirectParam === 'partner-dashboard' && userRole === 'partner') {
-        return NextResponse.redirect(new URL('/partner/dashboard', request.url))
+        return NextResponse.redirect(new URL('/partner/dashboard', request.url), { status: 307 })
       }
       
       // Default role-based redirect
       if (userRole === 'admin') {
-        return NextResponse.redirect(new URL('/admin-dashboard', request.url))
+        return NextResponse.redirect(new URL('/admin-dashboard', request.url), { status: 307 })
       } else if (userRole === 'partner') {
-        return NextResponse.redirect(new URL('/partner/dashboard', request.url))
+        return NextResponse.redirect(new URL('/partner/dashboard', request.url), { status: 307 })
       }
       // If user has no role, allow them to stay on login page
     }
@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
     if (!user || userRole !== 'admin') {
       const loginUrl = new URL('/login', request.url)
       loginUrl.searchParams.set('redirect', 'admin-dashboard')
-      return NextResponse.redirect(loginUrl)
+      return NextResponse.redirect(loginUrl, { status: 307 })
     }
     return NextResponse.next()
   }
@@ -56,7 +56,7 @@ export async function middleware(request: NextRequest) {
     if (!user || userRole !== 'partner') {
       const loginUrl = new URL('/login', request.url)
       loginUrl.searchParams.set('redirect', 'partner-dashboard')
-      return NextResponse.redirect(loginUrl)
+      return NextResponse.redirect(loginUrl, { status: 307 })
     }
     return NextResponse.next()
   }

@@ -1,7 +1,6 @@
 'use client'
 
-import React, { Suspense, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { Suspense, useState } from 'react';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import PartnerPanel from '@/components/PartnerPanel';
 import { Loader2 } from 'lucide-react';
@@ -14,36 +13,28 @@ const LoadingFallback = () => (
 
 const PartnerDashboardPageClient = () => {
   const { user, loading } = useAuth();
-  const router = useRouter();
   const [companyName, setCompanyName] = useState('');
-
-  useEffect(() => {
-    if (!loading) {
-      if (!user || user.user_metadata?.role !== 'partner') {
-        router.push('/login?redirect=partner-dashboard');
-      }
-    }
-  }, [user, loading, router]);
 
   const pageTitle = companyName 
     ? `${companyName} - Partner-Dashboard` 
     : 'Partner-Dashboard';
 
+  // Middleware handles route protection and redirects
+  // We only show loading state here
   if (loading) {
     return <LoadingFallback />;
   }
 
+  // If user is not partner, middleware will redirect
+  // We just show loading while redirect happens
   if (!user || user.user_metadata?.role !== 'partner') {
-    return null; // Redirect is handled in useEffect
+    return <LoadingFallback />;
   }
 
   return (
-    <>
-      
-      <Suspense fallback={<LoadingFallback />}>
-        <PartnerPanel setCompanyName={setCompanyName} />
-      </Suspense>
-    </>
+    <Suspense fallback={<LoadingFallback />}>
+      <PartnerPanel setCompanyName={setCompanyName} />
+    </Suspense>
   );
 };
 
