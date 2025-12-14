@@ -459,9 +459,10 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     <>
       
       <div className="flex flex-col">
+        <main className="flex-grow">
         {/* Hero Section - SEO Optimized */}
         <section 
-          className="pt-20 md:pt-24 pb-12 md:pb-20 bg-gradient-to-br from-white via-green-50/30 to-white" 
+          className="py-12 md:py-20 bg-gradient-to-br from-white via-green-50/30 to-white" 
           style={{ minHeight: '600px' }}
           aria-label="Hero Section - Umzug und Reinigung Offerten vergleichen"
         >
@@ -575,9 +576,9 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
               {/* Desktop Layout - SEO Optimized */}
               <div className="hidden lg:grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-                <div className="text-left space-y-6">
+                <div className="text-left">
                   {/* Main H1 - Desktop */}
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+                  <h1 className="text-3xl md:text-4xl lg:text-6xl font-extrabold text-gray-900 mb-0 leading-tight tracking-tight">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
                       Umzug, Reinigung
                     </span>
@@ -586,12 +587,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       und Renovierung
                     </span>
                     <br />
-                    <span className="text-xl lg:text-2xl xl:text-3xl text-gray-800 font-bold mt-2 block">Einfach gratis mehrere Offerten einholen</span>
+                    <span className="text-xl md:text-2xl lg:text-3xl text-gray-800 font-bold mt-0 block mb-0">Einfach gratis mehrere Offerten einholen</span>
                   </h1>
 
                   {/* SEO Optimized Image - Desktop */}
                   <figure
-                    className="relative w-full"
+                    className="relative w-full mb-0"
                     style={{ aspectRatio: '16/9', minHeight: '350px' }}
                   >
                     <picture>
@@ -620,7 +621,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   </figure>
 
                   {/* SEO Optimized Features */}
-                  <div className="mt-6">
+                  <div className="mt-0">
                     <aside aria-label="Vorteile und Garantien">
                       <ul className="flex flex-col items-start gap-4 md:gap-5" role="list">
                         {features.map((feature, index) => (
@@ -642,8 +643,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   </div>
                 </div>
 
-                <div className="space-y-6">
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-left">
+                <div className="space-y-4">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center md:text-left">
                     Wählen Sie Ihre gewünschte Dienstleistung aus:
                   </h2>
                   
@@ -684,8 +685,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               </article>
             </div>
           </section>
-        
-        <main className="flex-grow">
+
           {/* How It Works Section */}
           <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 via-slate-100 to-gray-200 overflow-hidden">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
