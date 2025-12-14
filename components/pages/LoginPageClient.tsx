@@ -31,10 +31,10 @@ const LoginPageClient = () => {
   const [view, setView] = useState(searchParams?.get('register') ? 'register' : 'login')
   const [loginSuccess, setLoginSuccess] = useState(false)
 
-  // Kullanıcı giriş yapmışsa login sayfasından yönlendir
+  // Zaten login olmuş kullanıcıları login sayfasından yönlendir (yeni login için handleLogin içinde redirect yapılıyor)
   useEffect(() => {
-    // Auth loading bitmişse ve kullanıcı varsa yönlendir
-    if (!authLoading && user) {
+    // Auth loading bitmişse ve kullanıcı varsa yönlendir (sadece zaten login olmuş kullanıcılar için)
+    if (!authLoading && user && !loginSuccess) {
       const userRole = user.user_metadata?.role
       const redirectParam = searchParams?.get('redirect')
       
@@ -70,17 +70,8 @@ const LoginPageClient = () => {
       }
       
       if (redirectPath) {
-        // Login başarılı olduysa cookie'lerin set edilmesi için gecikme ekle
-        // Yoksa direkt yönlendir (zaten giriş yapmış kullanıcı)
-        const delay = loginSuccess ? 500 : 100
-        
-        setTimeout(() => {
-          router.replace(redirectPath) // ✅ Next.js App Router ile uyumlu navigation
-        }, delay)
-        
-        if (loginSuccess) {
-          setLoginSuccess(false)
-        }
+        // Zaten login olmuş kullanıcı için direkt yönlendir
+        router.replace(redirectPath)
       }
     }
   }, [user, authLoading, loginSuccess, searchParams, router])
@@ -92,38 +83,66 @@ const LoginPageClient = () => {
     const { error } = await signIn(email, password)
 
     if (!error) {
-      // Session'ın güncellenmesini bekle
+      // Session'ı direkt kontrol et ve redirect yap
       const supabase = createClient()
-      const { data: { session } } = await supabase.auth.getSession()
       
-      if (session) {
-        setLoading(false)
-        setLoginSuccess(true)
-        toast({
-          title: "Anmeldung erfolgreich",
-          description: "Sie werden weitergeleitet...",
-        })
-        // Yönlendirme useEffect'te user state güncellendiğinde yapılacak
-      } else {
-        // Session henüz hazır değil, biraz bekle
-        setTimeout(async () => {
-          const { data: { session: retrySession } } = await supabase.auth.getSession()
-          if (retrySession) {
-            setLoading(false)
-            setLoginSuccess(true)
-            toast({
-              title: "Anmeldung erfolgreich",
-              description: "Sie werden weitergeleitet...",
-            })
-          } else {
-            setLoading(false)
-            toast({
-              variant: "destructive",
-              title: "Anmeldung fehlgeschlagen",
-              description: "Session konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
-            })
+      // Session'ın hazır olmasını bekle (max 2 saniye)
+      let session = null
+      for (let i = 0; i < 10; i++) {
+        const { data: { session: currentSession } } = await supabase.auth.getSession()
+        if (currentSession) {
+          session = currentSession
+          break
+        }
+        await new Promise(resolve => setTimeout(resolve, 200))
+      }
+      
+      if (session?.user) {
+        const userRole = session.user.user_metadata?.role
+        const redirectParam = searchParams?.get('redirect')
+        
+        // Redirect path'ini belirle
+        let redirectPath = null
+        
+        if (redirectParam) {
+          if (redirectParam === 'admin-dashboard') {
+            redirectPath = '/admin-dashboard'
+          } else if (redirectParam === 'partner-dashboard') {
+            redirectPath = '/partner/dashboard'
           }
-        }, 1000)
+        }
+        
+        if (!redirectPath) {
+          if (userRole === 'admin') {
+            redirectPath = '/admin-dashboard'
+          } else if (userRole === 'partner') {
+            redirectPath = '/partner/dashboard'
+          }
+        }
+        
+        if (redirectPath) {
+          setLoading(false)
+          toast({
+            title: "Anmeldung erfolgreich",
+            description: "Sie werden weitergeleitet...",
+          })
+          // Direkt redirect yap
+          router.replace(redirectPath)
+        } else {
+          setLoading(false)
+          toast({
+            variant: "destructive",
+            title: "Anmeldung fehlgeschlagen",
+            description: "Rolle konnte nicht ermittelt werden.",
+          })
+        }
+      } else {
+        setLoading(false)
+        toast({
+          variant: "destructive",
+          title: "Anmeldung fehlgeschlagen",
+          description: "Session konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+        })
       }
     } else {
       setLoading(false)
