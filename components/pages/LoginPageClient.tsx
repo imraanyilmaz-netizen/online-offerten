@@ -9,14 +9,14 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
-import { createClient } from '@/lib/supabase/client'
 
 const LoginPageClient = () => {
   const { signIn, user, loading: authLoading } = useAuth()
   const { toast } = useToast()
+  const searchParams = useSearchParams()
   const router = useRouter()
 
   const pageTitle = "Partner Login"
@@ -27,23 +27,62 @@ const LoginPageClient = () => {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [view, setView] = useState(typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('register') ? 'register' : 'login')
+  const [view, setView] = useState(searchParams?.get('register') ? 'register' : 'login')
   const [loginSuccess, setLoginSuccess] = useState(false)
-  const [hasRedirected, setHasRedirected] = useState(false)
 
-  // Redirect already authenticated users away from login page
-  // Only redirect once to prevent loops
+  // Kullanıcı giriş yapmışsa login sayfasından yönlendir
   useEffect(() => {
-    if (!authLoading && user && !loginSuccess && !hasRedirected) {
+    // Auth loading bitmişse ve kullanıcı varsa yönlendir
+    if (!authLoading && user) {
       const userRole = user.user_metadata?.role
-      if (userRole === 'admin' || userRole === 'partner') {
-        setHasRedirected(true)
-        const redirectPath = userRole === 'admin' ? '/admin-dashboard' : '/partner/dashboard'
-        // Use router.replace to avoid adding to history
-        router.replace(redirectPath)
+      const redirectParam = searchParams?.get('redirect')
+      
+      // Redirect parametresini parse et
+      let redirectPath = null
+      
+      if (redirectParam) {
+        // Basit format: 'admin-dashboard' veya 'partner-dashboard'
+        if (redirectParam === 'admin-dashboard') {
+          redirectPath = '/admin-dashboard'
+        } else if (redirectParam === 'partner-dashboard') {
+          redirectPath = '/partner/dashboard'
+        } else {
+          // Eski format desteği: URL encoded path
+          try {
+            const decoded = decodeURIComponent(redirectParam)
+            if (decoded === '/admin-dashboard' || decoded === '/partner/dashboard') {
+              redirectPath = decoded
+            }
+          } catch (e) {
+            // Decode başarısız, ignore
+          }
+        }
+      }
+      
+      // Redirect parametresi yoksa veya geçersizse role'e göre belirle
+      if (!redirectPath) {
+        if (userRole === 'admin') {
+          redirectPath = '/admin-dashboard'
+        } else if (userRole === 'partner') {
+          redirectPath = '/partner/dashboard'
+        }
+      }
+      
+      if (redirectPath) {
+        // Login başarılı olduysa cookie'lerin set edilmesi için gecikme ekle
+        // Yoksa direkt yönlendir (zaten giriş yapmış kullanıcı)
+        const delay = loginSuccess ? 500 : 100
+        
+        setTimeout(() => {
+          window.location.replace(redirectPath) // replace kullan (history'ye ekleme)
+        }, delay)
+        
+        if (loginSuccess) {
+          setLoginSuccess(false)
+        }
       }
     }
-  }, [user, authLoading, loginSuccess, hasRedirected, router])
+  }, [user, authLoading, loginSuccess, searchParams])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -52,81 +91,12 @@ const LoginPageClient = () => {
     const { error } = await signIn(email, password)
 
     if (!error) {
-      // Wait for auth state change event (more reliable than polling)
-      const supabase = createClient()
-      
-      // Set up a promise that resolves when auth state changes to signed in
-      const waitForAuth = (): Promise<{ user: any; role: string | null }> => {
-        return new Promise((resolve, reject) => {
-          const timeout = setTimeout(() => {
-            reject(new Error('Auth timeout'))
-          }, 3000)
-          
-          const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-            if (event === 'SIGNED_IN' && session?.user) {
-              clearTimeout(timeout)
-              subscription.unsubscribe()
-              const role = session.user.user_metadata?.role || null
-              resolve({ user: session.user, role })
-            } else if (event === 'TOKEN_REFRESHED' && session?.user) {
-              // Token refreshed, user is authenticated
-              clearTimeout(timeout)
-              subscription.unsubscribe()
-              const role = session.user.user_metadata?.role || null
-              resolve({ user: session.user, role })
-            }
-          })
-          
-          // Also check current session in case auth state already changed
-          supabase.auth.getSession().then(({ data: { session } }) => {
-            if (session?.user) {
-              clearTimeout(timeout)
-              subscription.unsubscribe()
-              const role = session.user.user_metadata?.role || null
-              resolve({ user: session.user, role })
-            }
-          })
-        })
-      }
-      
-      try {
-        const { role } = await waitForAuth()
-        let redirectPath = null
-        
-        // Determine redirect path based on role
-        if (role === 'admin') {
-          redirectPath = '/admin-dashboard'
-        } else if (role === 'partner') {
-          redirectPath = '/partner/dashboard'
-        }
-        
-        if (redirectPath) {
-          setLoginSuccess(true)
-          setLoading(false)
-          toast({
-            title: "Anmeldung erfolgreich",
-            description: "Sie werden weitergeleitet...",
-          })
-          
-          // Use window.location for full page reload to ensure middleware runs
-          // This is critical for production (Vercel Edge runtime)
-          window.location.href = redirectPath
-        } else {
-          setLoading(false)
-          toast({
-            variant: "destructive",
-            title: "Anmeldung fehlgeschlagen",
-            description: "Rolle konnte nicht ermittelt werden.",
-          })
-        }
-      } catch (error) {
-        setLoading(false)
-        toast({
-          variant: "destructive",
-          title: "Anmeldung fehlgeschlagen",
-          description: "Session konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
-        })
-      }
+      setLoginSuccess(true)
+      toast({
+        title: "Anmeldung erfolgreich",
+        description: "Sie werden weitergeleitet...",
+      })
+      // Yönlendirme useEffect'te user state güncellendiğinde yapılacak
     } else {
       setLoading(false)
       toast({

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { Loader2 } from 'lucide-react';
@@ -9,27 +9,16 @@ import AdminPanel from '@/src/components/AdminPanel/AdminPanel';
 const AdminDashboardPageClient = () => {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    // Give auth context time to initialize after page load
-    // This is especially important after login redirect
-    const checkAuth = setTimeout(() => {
-      setIsChecking(false);
-    }, 500);
-
-    return () => clearTimeout(checkAuth);
-  }, []);
-
-  useEffect(() => {
-    // Only redirect if we've finished initial check AND loading is complete AND user is not admin
-    if (!isChecking && !loading && (!user || user.user_metadata?.role !== 'admin')) {
-      router.push('/login');
+    if (!loading) {
+      if (!user || user.user_metadata?.role !== 'admin') {
+        router.push('/login?redirect=admin-dashboard');
+      }
     }
-  }, [user, loading, router, isChecking]);
+  }, [user, loading, router]);
 
-  // Show loading while checking or auth context is loading
-  if (isChecking || loading) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-screen bg-gray-50">
         <div className="text-center">

@@ -7,35 +7,25 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next()
   
-  // Get cookie header for Supabase session detection
+  // Skip middleware for login page to avoid redirect loop
+  if (request.nextUrl.pathname === '/login') {
+    return response
+  }
+  
+  // In local development, allow access if auth check fails (client-side will handle it)
+  const isLocal = process.env.NODE_ENV === 'development' || 
+                 request.nextUrl.hostname === 'localhost' ||
+                 request.nextUrl.hostname === '127.0.0.1'
+  
+  // Get all cookies from the request
   const cookieHeader = request.headers.get('cookie') || ''
   
-  // Extract project ref for Supabase cookie key pattern
-  const projectRef = supabaseUrl.match(/https?:\/\/([^.]+)\.supabase\.co/)?.[1] || ''
-  const authTokenKey = projectRef ? `sb-${projectRef}-auth-token` : ''
-  
-  // Create Supabase client for middleware (Edge runtime compatible)
+  // Create Supabase client for middleware
   const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
       detectSessionInUrl: false,
-      storage: {
-        getItem: (key: string) => {
-          // Supabase stores session in specific cookie format: sb-{project-ref}-auth-token
-          // Try both the auth token key and the direct key lookup
-          const cookieValue = request.cookies.get(authTokenKey)?.value || 
-                             request.cookies.get(key)?.value || 
-                             null
-          return cookieValue
-        },
-        setItem: () => {
-          // Cannot set cookies in middleware - handled by Supabase client
-        },
-        removeItem: () => {
-          // Cannot remove cookies in middleware - handled by Supabase client
-        },
-      },
     },
     global: {
       headers: {
@@ -44,28 +34,36 @@ export async function middleware(request: NextRequest) {
     },
   })
 
-  // Get user from session - use getUser() for JWT validation in Edge runtime
-  // getUser() validates the JWT token from cookies, more reliable than getSession()
-  const { data: { user }, error } = await supabase.auth.getUser()
-  
-  // Allow /login page to be accessed by anyone (client-side will handle redirects)
-  if (request.nextUrl.pathname === '/login') {
-    return response
-  }
+  // Get user from session cookie
+  const {
+    data: { user },
+    error: authError
+  } = await supabase.auth.getUser()
 
-  // Protected route checks
+  // Admin route protection
   if (request.nextUrl.pathname.startsWith('/admin-dashboard')) {
     if (!user || user.user_metadata?.role !== 'admin') {
+      // In local development, let client-side handle auth (allow through)
+      if (isLocal) {
+        return response
+      }
       const loginUrl = new URL('/login', request.url)
+      loginUrl.searchParams.set('redirect', 'admin-dashboard')
       return NextResponse.redirect(loginUrl)
     }
   }
 
+  // Partner dashboard protection
   if (request.nextUrl.pathname.startsWith('/partner/dashboard') ||
       request.nextUrl.pathname.startsWith('/partner/credit-top-up') ||
       request.nextUrl.pathname.startsWith('/partner/einstellungen')) {
     if (!user || user.user_metadata?.role !== 'partner') {
+      // In local development, let client-side handle auth (allow through)
+      if (isLocal) {
+        return response
+      }
       const loginUrl = new URL('/login', request.url)
+      loginUrl.searchParams.set('redirect', 'partner-dashboard')
       return NextResponse.redirect(loginUrl)
     }
   }
@@ -75,10 +73,10 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/login',
     '/admin-dashboard/:path*',
     '/partner/dashboard/:path*',
     '/partner/credit-top-up/:path*',
     '/partner/einstellungen/:path*',
   ],
 }
+

@@ -21,13 +21,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 const UserMenu = ({ user, onLogout }) => {
   // Removed useTranslation
-  // Only calculate dashboardPath when role is clearly determined
-  const userRole = user?.user_metadata?.role;
-  const dashboardPath = userRole === 'admin' 
-    ? '/admin-dashboard' 
-    : userRole === 'partner'
-    ? '/partner/dashboard'
-    : null; // null if role is not determined
+  const dashboardPath = user?.user_metadata?.role === 'admin' ? '/admin-dashboard' : '/partner/dashboard';
   const settingsPath = '/partner/einstellungen';
 
   return (
@@ -49,14 +43,12 @@ const UserMenu = ({ user, onLogout }) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {dashboardPath && (
-          <DropdownMenuItem asChild>
-            <Link href={dashboardPath} className="cursor-pointer">
-              <LayoutDashboard className="mr-2 h-4 w-4" />
-              <span>Dashboard</span>
-            </Link>
-          </DropdownMenuItem>
-        )}
+        <DropdownMenuItem asChild>
+          <Link href={dashboardPath} className="cursor-pointer">
+            <LayoutDashboard className="mr-2 h-4 w-4" />
+            <span>Dashboard</span>
+          </Link>
+        </DropdownMenuItem>
         {user?.user_metadata?.role === 'partner' && (
             <DropdownMenuItem asChild>
                 <Link href={settingsPath} className="cursor-pointer">
@@ -286,14 +278,9 @@ const Navbar = () => {
                   ) : user ? (
                     <>
                       <p className="px-3 py-2 text-sm font-semibold text-gray-500 truncate">{user.email}</p>
-                      {user?.user_metadata?.role && (
-                        <NavItem 
-                          to={user.user_metadata.role === 'admin' ? '/admin-dashboard' : '/partner/dashboard'} 
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <LayoutDashboard size={18} /> Dashboard
-                        </NavItem>
-                      )}
+                      <NavItem to={user?.user_metadata?.role === 'admin' ? '/admin-dashboard' : '/partner/dashboard'} onClick={() => setMobileMenuOpen(false)}>
+                        <LayoutDashboard size={18} /> Dashboard
+                      </NavItem>
                       {user?.user_metadata?.role === 'partner' && (
                         <NavItem to={settingsPath} onClick={() => setMobileMenuOpen(false)}>
                           <Settings size={18} /> Einstellungen

@@ -47,8 +47,20 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     averageRating: 4.8 
   })
 
-  // Note: Auth redirects are now handled by middleware.ts for production safety
-  // Client-side redirects removed to prevent race conditions
+  // Auth redirect logic
+  useEffect(() => {
+    if (!loading && session) {
+      const userRole = user?.user_metadata?.role
+      const authRoutes = ['/login', '/forgot-password', '/partner-werden']
+      if (authRoutes.includes(pathname || '')) {
+        if (userRole === 'admin') {
+          router.replace('/admin-dashboard')
+        } else if (userRole === 'partner') {
+          router.replace('/partner/dashboard')
+        }
+      }
+    }
+  }, [session, user, loading, pathname, router])
 
   // Redirect .php files
   useEffect(() => {

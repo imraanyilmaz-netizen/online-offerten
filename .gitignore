@@ -1,45 +1,12 @@
-# Dependencies
 node_modules
-npm
-
-# Next.js build output
 .next
-out
-dist
-
-# Vite build output
 .vite
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE
-.vscode
-.idea
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
+.env*.local
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Build reports and artifacts
+.DS_Store
 build-errors.txt
 build-output.txt
-
-# Stray files
 ^C
 if
-npm
 index.html
+npm

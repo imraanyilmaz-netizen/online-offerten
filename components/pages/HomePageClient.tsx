@@ -457,28 +457,34 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
   return (
     <>
-      {/* Hero Section - SEO Optimized */}
-      <section 
-        className="pt-20 md:pt-24 pb-12 md:pb-16 lg:pb-20 bg-gradient-to-br from-white via-green-50/30 to-white w-full relative" 
-        aria-label="Hero Section - Umzug und Reinigung Offerten vergleichen"
-      >
-          <div className="container mx-auto max-w-7xl px-4 md:px-6 w-full relative z-10">
-            <div className="max-w-7xl mx-auto w-full">
-              {/* Mobile/Tablet Layout */}
-              <div className="lg:hidden">
-                {/* Main H1 - Mobile/Tablet */}
-                <h1 className="text-[2.4rem] md:text-4xl font-extrabold text-gray-900 mb-4 md:mb-6 leading-tight tracking-tight text-center md:text-left">
-                  <span className="text-gray-900">
-                    Umzug, Reinigung
-                  </span>
-                  <br />
-                  <span className="text-gray-900">
-                    und Renovierung
-                  </span>
-                  <br />
-                  <span className="text-xl md:text-2xl text-gray-800 font-bold mt-2 block">Einfach gratis mehrere Offerten einholen</span>
-                </h1>
+      
+      <div className="flex flex-col">
+        {/* Hero Section - SEO Optimized */}
+        <section 
+          className="pt-20 md:pt-24 pb-12 md:pb-20 bg-gradient-to-br from-white via-green-50/30 to-white" 
+          style={{ minHeight: '600px' }}
+          aria-label="Hero Section - Umzug und Reinigung Offerten vergleichen"
+        >
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
+              <article className="max-w-7xl mx-auto text-center md:text-left">
+                {/* Mobile: H1 and Subheading */}
+                <div className="lg:hidden">
+                  {/* Main H1 - SEO Optimized */}
+                  <h1 className="text-[2.4rem] md:text-4xl lg:text-6xl font-extrabold text-gray-900 mb-2 md:mb-3 leading-tight tracking-tight">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
+                      Umzug, Reinigung
+                    </span>
+                    <br />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
+                      und Renovierung
+                    </span>
+                    <br />
+                    <span className="text-xl md:text-2xl lg:text-3xl text-gray-800 font-bold mt-1 block mb-2 md:mb-3">Einfach gratis mehrere Offerten einholen</span>
+                  </h1>
+                </div>
 
+              {/* Mobile Layout */}
+              <div className="lg:hidden">
                 <div className="text-left">
 
                   {/* SEO Optimized Image - Mobile */}
@@ -542,41 +548,41 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   {!isMounted && (
                     <div style={{ height: '80px' }} aria-hidden="true" />
                   )}
-
-                  {/* Features Section - Mobile - SEO Optimized */}
-                  <div className="mt-6 md:mt-8 text-left">
-                    <aside aria-label="Vorteile und Garantien" className="text-left">
-                      <ul className="flex flex-col items-start gap-4 md:gap-5" role="list">
-                        {features.map((feature, index) => (
-                          <li 
-                            key={index}
-                            className="flex items-center text-gray-900 text-base md:text-lg font-semibold"
-                            itemProp="featureList"
-                          >
-                            <div className="flex-shrink-0 mr-3" aria-hidden="true">
-                              <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-md">
-                                <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                              </div>
-                            </div>
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </aside>
-                  </div>
                 </div>
               </div>
 
+               {/* Features Section - Mobile - SEO Optimized */}
+               <div className="lg:hidden mt-6 md:mt-8 text-left">
+                 <aside aria-label="Vorteile und Garantien" className="text-left">
+                   <ul className="flex flex-col items-start gap-4 md:gap-5" role="list">
+                    {features.map((feature, index) => (
+                      <li 
+                        key={index}
+                        className="flex items-center text-gray-900 text-base md:text-lg font-semibold"
+                        itemProp="featureList"
+                      >
+                        <div className="flex-shrink-0 mr-3" aria-hidden="true">
+                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-md">
+                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                          </div>
+                        </div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </aside>
+              </div>
+
               {/* Desktop Layout - SEO Optimized */}
-              <div className="hidden lg:grid lg:grid-cols-2 gap-12 xl:gap-16 items-start">
+              <div className="hidden lg:grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
                 <div className="text-left space-y-6">
                   {/* Main H1 - Desktop */}
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight mb-2">
-                    <span className="text-gray-900">
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
                       Umzug, Reinigung
                     </span>
                     <br />
-                    <span className="text-gray-900">
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
                       und Renovierung
                     </span>
                     <br />
@@ -585,8 +591,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
                   {/* SEO Optimized Image - Desktop */}
                   <figure
-                    className="relative w-full mt-4"
-                    style={{ aspectRatio: '16/9', minHeight: '300px' }}
+                    className="relative w-full"
+                    style={{ aspectRatio: '16/9', minHeight: '350px' }}
                   >
                     <picture>
                       <source
@@ -616,16 +622,16 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   {/* SEO Optimized Features */}
                   <div className="mt-6">
                     <aside aria-label="Vorteile und Garantien">
-                      <ul className="flex flex-col items-start gap-3 md:gap-4" role="list">
+                      <ul className="flex flex-col items-start gap-4 md:gap-5" role="list">
                         {features.map((feature, index) => (
                           <li 
                             key={index}
-                            className="flex items-center text-gray-900 text-base md:text-lg font-semibold"
+                            className="flex items-center text-gray-900 text-lg md:text-xl font-semibold"
                             itemProp="featureList"
                           >
                             <div className="flex-shrink-0 mr-3" aria-hidden="true">
-                              <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-md">
-                                <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
+                                <CheckCircle2 className="w-5 h-5 text-white" />
                               </div>
                             </div>
                             <span>{feature}</span>
@@ -675,11 +681,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   </div>
                 </div>
               </div>
+              </article>
             </div>
-          </div>
-      </section>
-      
-      {/* How It Works Section */}
+          </section>
+        
+        <main className="flex-grow">
+          {/* How It Works Section */}
           <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 via-slate-100 to-gray-200 overflow-hidden">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <div className="text-center mb-16 md:mb-24">
@@ -1298,6 +1305,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               </div>
             </div>
           </section>
+        </main>
+      </div>
     </>
   );
 };
