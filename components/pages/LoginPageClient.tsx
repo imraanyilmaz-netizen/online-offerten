@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
+import { createClient } from '@/lib/supabase/client'
 
 const LoginPageClient = () => {
   const { signIn, user, loading: authLoading } = useAuth()
@@ -74,7 +75,7 @@ const LoginPageClient = () => {
         const delay = loginSuccess ? 500 : 100
         
         setTimeout(() => {
-          window.location.replace(redirectPath) // replace kullan (history'ye ekleme)
+          router.replace(redirectPath) // ✅ Next.js App Router ile uyumlu navigation
         }, delay)
         
         if (loginSuccess) {
@@ -82,7 +83,7 @@ const LoginPageClient = () => {
         }
       }
     }
-  }, [user, authLoading, loginSuccess, searchParams])
+  }, [user, authLoading, loginSuccess, searchParams, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -91,12 +92,39 @@ const LoginPageClient = () => {
     const { error } = await signIn(email, password)
 
     if (!error) {
-      setLoginSuccess(true)
-      toast({
-        title: "Anmeldung erfolgreich",
-        description: "Sie werden weitergeleitet...",
-      })
-      // Yönlendirme useEffect'te user state güncellendiğinde yapılacak
+      // Session'ın güncellenmesini bekle
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session) {
+        setLoading(false)
+        setLoginSuccess(true)
+        toast({
+          title: "Anmeldung erfolgreich",
+          description: "Sie werden weitergeleitet...",
+        })
+        // Yönlendirme useEffect'te user state güncellendiğinde yapılacak
+      } else {
+        // Session henüz hazır değil, biraz bekle
+        setTimeout(async () => {
+          const { data: { session: retrySession } } = await supabase.auth.getSession()
+          if (retrySession) {
+            setLoading(false)
+            setLoginSuccess(true)
+            toast({
+              title: "Anmeldung erfolgreich",
+              description: "Sie werden weitergeleitet...",
+            })
+          } else {
+            setLoading(false)
+            toast({
+              variant: "destructive",
+              title: "Anmeldung fehlgeschlagen",
+              description: "Session konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+            })
+          }
+        }, 1000)
+      }
     } else {
       setLoading(false)
       toast({
