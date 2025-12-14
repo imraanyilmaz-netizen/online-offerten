@@ -461,12 +461,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
       <div className="flex flex-col">
         {/* Hero Section - SEO Optimized */}
         <section 
-          className="pt-20 md:pt-24 pb-12 md:pb-20 bg-gradient-to-br from-white via-green-50/30 to-white" 
+          className="pt-20 md:pt-24 pb-12 md:pb-20 bg-gradient-to-br from-white via-green-50/30 to-white w-full relative" 
           style={{ minHeight: '600px' }}
           aria-label="Hero Section - Umzug und Reinigung Offerten vergleichen"
         >
-            <div className="container mx-auto max-w-7xl px-4 md:px-6">
-              <article className="max-w-7xl mx-auto text-center md:text-left">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6 w-full relative z-10">
+              <div className="max-w-7xl mx-auto w-full text-center md:text-left relative">
                 {/* Mobile: H1 and Subheading */}
                 <div className="lg:hidden">
                   {/* Main H1 - SEO Optimized */}
@@ -574,7 +574,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               </div>
 
               {/* Desktop Layout - SEO Optimized */}
-              <div className="hidden lg:grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+              <div className="hidden lg:block">
+                <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
                 <div className="text-left space-y-6">
                   {/* Main H1 - Desktop */}
                   <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
@@ -680,8 +681,9 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     )}
                   </div>
                 </div>
+                </div>
               </div>
-              </article>
+              </div>
             </div>
           </section>
         
