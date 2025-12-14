@@ -1,8 +1,8 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/SupabaseAuthContext'
 import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
@@ -17,6 +17,8 @@ const LoginPageClient = () => {
   const { signIn } = useAuth()
   const { toast } = useToast()
   const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
 
   const pageTitle = "Partner Login"
   const welcomeMessage = "Willkommen zurück!"
@@ -27,6 +29,16 @@ const LoginPageClient = () => {
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
+
+  // Remove redirect query param from URL immediately
+  useEffect(() => {
+    if (searchParams?.has('redirect')) {
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete('redirect')
+      const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname
+      router.replace(newUrl)
+    }
+  }, [searchParams, pathname, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -40,7 +52,7 @@ const LoginPageClient = () => {
         title: "Anmeldung erfolgreich",
         description: "Sie werden weitergeleitet...",
       })
-      // Redirect is handled by middleware.ts based on user role and redirect query param
+      // Redirect is handled by middleware.ts based on user role
     } else {
       toast({
         variant: "destructive",
