@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
-import { supabase } from '@/lib/customSupabaseClient';
+import { createClient } from '@/lib/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -54,6 +54,7 @@ const PartnerSettingsPageClient = () => {
     if (!user) return;
     setLoading(true);
     try {
+      const supabase = createClient();
       const { data, error } = await supabase
         .from('partners')
         .select('*')
@@ -126,6 +127,7 @@ const PartnerSettingsPageClient = () => {
     if (!user) return;
     setSaving(true);
     try {
+      const supabase = createClient();
       const { phone, website, message } = formData;
       const { error } = await supabase
         .from('partners')
@@ -156,6 +158,7 @@ const PartnerSettingsPageClient = () => {
     }
     setSaving(true);
     
+    const supabase = createClient();
     const { error: updateError } = await supabase.auth.updateUser({ password: passwordData.newPassword });
 
     if (updateError) {

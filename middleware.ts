@@ -7,32 +7,12 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next()
   
-  // Get all cookies from the request
+  // Get cookie header for Supabase session detection
   const cookieHeader = request.headers.get('cookie') || ''
   
-  // Parse cookies for Supabase storage adapter (Edge runtime requirement)
-  const parseCookies = (cookieString: string): Record<string, string> => {
-    if (!cookieString) return {}
-    return cookieString.split(';').reduce((acc, cookie) => {
-      const [name, ...valueParts] = cookie.trim().split('=')
-      if (name) {
-        try {
-          acc[name] = decodeURIComponent(valueParts.join('='))
-        } catch {
-          acc[name] = valueParts.join('=')
-        }
-      }
-      return acc
-    }, {} as Record<string, string>)
-  }
-  
-  const cookies = parseCookies(cookieHeader)
-  
-  // Extract all possible Supabase cookie keys (Supabase uses sb-{project-ref}-auth-token)
+  // Extract project ref for Supabase cookie key pattern
   const projectRef = supabaseUrl.match(/https?:\/\/([^.]+)\.supabase\.co/)?.[1] || ''
-  const authTokenKeys = projectRef 
-    ? [`sb-${projectRef}-auth-token`, `sb-${projectRef}-auth-token-code-verifier`]
-    : []
+  const authTokenKey = projectRef ? `sb-${projectRef}-auth-token` : ''
   
   // Create Supabase client for middleware (Edge runtime compatible)
   const supabase = createClient(supabaseUrl, supabaseAnonKey, {
@@ -42,18 +22,18 @@ export async function middleware(request: NextRequest) {
       detectSessionInUrl: false,
       storage: {
         getItem: (key: string) => {
-          // Try multiple possible cookie keys
-          for (const authKey of authTokenKeys) {
-            if (cookies[authKey]) return cookies[authKey]
-          }
-          // Fallback to direct key lookup
-          return cookies[key] || null
+          // Supabase stores session in specific cookie format: sb-{project-ref}-auth-token
+          // Try both the auth token key and the direct key lookup
+          const cookieValue = request.cookies.get(authTokenKey)?.value || 
+                             request.cookies.get(key)?.value || 
+                             null
+          return cookieValue
         },
         setItem: () => {
-          // Cannot set cookies in middleware
+          // Cannot set cookies in middleware - handled by Supabase client
         },
         removeItem: () => {
-          // Cannot remove cookies in middleware
+          // Cannot remove cookies in middleware - handled by Supabase client
         },
       },
     },
@@ -64,13 +44,11 @@ export async function middleware(request: NextRequest) {
     },
   })
 
-  // Get user from session - use getSession for Edge runtime compatibility
-  // getSession reads from cookies, getUser validates JWT (both work in Edge)
-  const { data: { session } } = await supabase.auth.getSession()
-  const user = session?.user || null
-
+  // Get user from session - use getUser() for JWT validation in Edge runtime
+  // getUser() validates the JWT token from cookies, more reliable than getSession()
+  const { data: { user }, error } = await supabase.auth.getUser()
+  
   // Allow /login page to be accessed by anyone (client-side will handle redirects)
-  // This prevents redirect loops that can occur with middleware redirects
   if (request.nextUrl.pathname === '/login') {
     return response
   }
@@ -104,4 +82,3 @@ export const config = {
     '/partner/einstellungen/:path*',
   ],
 }
-
