@@ -7,7 +7,6 @@ import { HelmetProvider } from 'react-helmet-async'
 import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
-import { useAuth } from '@/contexts/SupabaseAuthContext'
 import { logoUrl } from '@/assets/logoConstants'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
@@ -40,37 +39,11 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { user, session, loading } = useAuth()
   const [reviewStats, setReviewStats] = useState({ 
     totalReviews: 142,
     realReviewCount: 0,
     averageRating: 4.8 
   })
-
-  // Auth redirect logic with redirect query param support
-  useEffect(() => {
-    if (!loading && session) {
-      const userRole = user?.user_metadata?.role
-      const authRoutes = ['/login', '/forgot-password', '/partner-werden']
-      if (authRoutes.includes(pathname || '')) {
-        // Check for redirect query parameter
-        const redirectParam = searchParams?.get('redirect')
-        
-        if (redirectParam === 'admin-dashboard' && userRole === 'admin') {
-          router.replace('/admin-dashboard')
-        } else if (redirectParam === 'partner-dashboard' && userRole === 'partner') {
-          router.replace('/partner/dashboard')
-        } else {
-          // Default role-based redirect when no redirect param or invalid redirect
-          if (userRole === 'admin') {
-            router.replace('/admin-dashboard')
-          } else if (userRole === 'partner') {
-            router.replace('/partner/dashboard')
-          }
-        }
-      }
-    }
-  }, [session, user, loading, pathname, router, searchParams])
 
   // Redirect .php files
   useEffect(() => {

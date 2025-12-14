@@ -40,7 +40,7 @@ const LoginPageClient = () => {
         title: "Anmeldung erfolgreich",
         description: "Sie werden weitergeleitet...",
       })
-      // Redirect logic is handled by AuthProvider on state change
+      // Redirect is handled by middleware.ts based on user role and redirect query param
     } else {
       toast({
         variant: "destructive",

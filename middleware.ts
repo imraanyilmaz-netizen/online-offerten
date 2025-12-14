@@ -1,82 +1,76 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://uhkiaodpzvhsuqfrwgih.supabase.co'
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVoa2lhb2RwenZoc3VxZnJ3Z2loIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk1NzY4NDAsImV4cCI6MjA2NTE1Mjg0MH0.PI2YNNYtcUgQYooV-6z2P6qK-1tIQF8DL7oILhfHmDg'
+import { createMiddlewareClient } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next()
-  
-  // Skip middleware for login page to avoid redirect loop
-  if (request.nextUrl.pathname === '/login') {
-    return response
-  }
-  
-  // In local development, allow access if auth check fails (client-side will handle it)
-  const isLocal = process.env.NODE_ENV === 'development' || 
-                 request.nextUrl.hostname === 'localhost' ||
-                 request.nextUrl.hostname === '127.0.0.1'
-  
-  // Get all cookies from the request
-  const cookieHeader = request.headers.get('cookie') || ''
-  
-  // Create Supabase client for middleware
-  const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-      detectSessionInUrl: false,
-    },
-    global: {
-      headers: {
-        cookie: cookieHeader,
-      },
-    },
-  })
+  const { pathname, searchParams } = request.nextUrl
+  const supabase = createMiddlewareClient(request)
 
   // Get user from session cookie
   const {
     data: { user },
-    error: authError
   } = await supabase.auth.getUser()
 
-  // Admin route protection
-  if (request.nextUrl.pathname.startsWith('/admin-dashboard')) {
-    if (!user || user.user_metadata?.role !== 'admin') {
-      // In local development, let client-side handle auth (allow through)
-      if (isLocal) {
-        return response
+  const userRole = user?.user_metadata?.role
+
+  // Redirect authenticated users away from /login
+  if (pathname === '/login') {
+    if (user) {
+      // Check for redirect query parameter
+      const redirectParam = searchParams.get('redirect')
+      
+      // If redirect param matches role, redirect there
+      if (redirectParam === 'admin-dashboard' && userRole === 'admin') {
+        return NextResponse.redirect(new URL('/admin-dashboard', request.url))
+      } else if (redirectParam === 'partner-dashboard' && userRole === 'partner') {
+        return NextResponse.redirect(new URL('/partner/dashboard', request.url))
       }
+      
+      // Default role-based redirect
+      if (userRole === 'admin') {
+        return NextResponse.redirect(new URL('/admin-dashboard', request.url))
+      } else if (userRole === 'partner') {
+        return NextResponse.redirect(new URL('/partner/dashboard', request.url))
+      }
+      // If user has no role, allow them to stay on login page
+    }
+    // If not authenticated, allow access to login page
+    return NextResponse.next()
+  }
+
+  // Admin route protection
+  if (pathname.startsWith('/admin-dashboard')) {
+    if (!user || userRole !== 'admin') {
       const loginUrl = new URL('/login', request.url)
       loginUrl.searchParams.set('redirect', 'admin-dashboard')
       return NextResponse.redirect(loginUrl)
     }
+    return NextResponse.next()
   }
 
-  // Partner dashboard protection
-  if (request.nextUrl.pathname.startsWith('/partner/dashboard') ||
-      request.nextUrl.pathname.startsWith('/partner/credit-top-up') ||
-      request.nextUrl.pathname.startsWith('/partner/einstellungen')) {
-    if (!user || user.user_metadata?.role !== 'partner') {
-      // In local development, let client-side handle auth (allow through)
-      if (isLocal) {
-        return response
-      }
+  // Partner route protection
+  if (
+    pathname.startsWith('/partner/dashboard') ||
+    pathname.startsWith('/partner/credit-top-up') ||
+    pathname.startsWith('/partner/einstellungen')
+  ) {
+    if (!user || userRole !== 'partner') {
       const loginUrl = new URL('/login', request.url)
       loginUrl.searchParams.set('redirect', 'partner-dashboard')
       return NextResponse.redirect(loginUrl)
     }
+    return NextResponse.next()
   }
 
-  return response
+  // Allow all other routes
+  return NextResponse.next()
 }
 
 export const config = {
   matcher: [
+    '/login',
     '/admin-dashboard/:path*',
     '/partner/dashboard/:path*',
     '/partner/credit-top-up/:path*',
     '/partner/einstellungen/:path*',
   ],
 }
-
