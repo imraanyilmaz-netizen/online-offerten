@@ -685,7 +685,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               </article>
             </div>
           </section>
-
+        
           {/* How It Works Section */}
           <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 via-slate-100 to-gray-200 overflow-hidden">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
