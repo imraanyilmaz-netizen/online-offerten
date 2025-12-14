@@ -29,20 +29,21 @@ const LoginPageClient = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('register') ? 'register' : 'login')
   const [loginSuccess, setLoginSuccess] = useState(false)
+  const [hasRedirected, setHasRedirected] = useState(false)
 
-  // Redirect already logged-in users away from login page
-  // Middleware also handles this, but client-side provides immediate feedback
+  // Redirect already authenticated users away from login page
+  // Only redirect once to prevent loops
   useEffect(() => {
-    if (!authLoading && user && !loginSuccess) {
+    if (!authLoading && user && !loginSuccess && !hasRedirected) {
       const userRole = user.user_metadata?.role
       if (userRole === 'admin' || userRole === 'partner') {
-        setLoginSuccess(true)
-        // Use window.location to trigger middleware check on server
+        setHasRedirected(true)
         const redirectPath = userRole === 'admin' ? '/admin-dashboard' : '/partner/dashboard'
-        window.location.href = redirectPath
+        // Use router.replace to avoid adding to history
+        router.replace(redirectPath)
       }
     }
-  }, [user, authLoading, loginSuccess])
+  }, [user, authLoading, loginSuccess, hasRedirected, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()

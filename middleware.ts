@@ -66,22 +66,12 @@ export async function middleware(request: NextRequest) {
 
   // Get user from session - use getSession for Edge runtime compatibility
   // getSession reads from cookies, getUser validates JWT (both work in Edge)
-  const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+  const { data: { session } } = await supabase.auth.getSession()
   const user = session?.user || null
 
-  // Handle /login page: redirect authenticated users to their dashboard
+  // Allow /login page to be accessed by anyone (client-side will handle redirects)
+  // This prevents redirect loops that can occur with middleware redirects
   if (request.nextUrl.pathname === '/login') {
-    if (user && user.user_metadata?.role) {
-      const role = user.user_metadata.role
-      if (role === 'admin') {
-        const adminUrl = new URL('/admin-dashboard', request.url)
-        return NextResponse.redirect(adminUrl)
-      } else if (role === 'partner') {
-        const partnerUrl = new URL('/partner/dashboard', request.url)
-        return NextResponse.redirect(partnerUrl)
-      }
-    }
-    // Not authenticated or no role - allow access to login page
     return response
   }
 
