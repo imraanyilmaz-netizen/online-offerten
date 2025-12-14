@@ -254,4 +254,3 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     </HelmetProvider>
   )
 }
-
