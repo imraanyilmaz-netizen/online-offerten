@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  const { pathname, searchParams } = request.nextUrl
+  const { pathname } = request.nextUrl
   const supabase = createMiddlewareClient(request)
   
   // Get user from session cookie
@@ -15,17 +15,7 @@ export async function middleware(request: NextRequest) {
   // Redirect authenticated users away from /login
   if (pathname === '/login') {
     if (user) {
-      // Check for redirect query parameter
-      const redirectParam = searchParams.get('redirect')
-      
-      // If redirect param matches role, redirect there
-      if (redirectParam === 'admin-dashboard' && userRole === 'admin') {
-        return NextResponse.redirect(new URL('/admin-dashboard', request.url), { status: 307 })
-      } else if (redirectParam === 'partner-dashboard' && userRole === 'partner') {
-        return NextResponse.redirect(new URL('/partner/dashboard', request.url), { status: 307 })
-      }
-      
-      // Default role-based redirect
+      // Role-based redirect (no redirect query param needed)
       if (userRole === 'admin') {
         return NextResponse.redirect(new URL('/admin-dashboard', request.url), { status: 307 })
       } else if (userRole === 'partner') {
@@ -40,9 +30,8 @@ export async function middleware(request: NextRequest) {
   // Admin route protection
   if (pathname.startsWith('/admin-dashboard')) {
     if (!user || userRole !== 'admin') {
-      const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set('redirect', 'admin-dashboard')
-      return NextResponse.redirect(loginUrl, { status: 307 })
+      // Redirect to login without query params
+      return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
     }
     return NextResponse.next()
   }
@@ -54,9 +43,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/partner/einstellungen')
   ) {
     if (!user || userRole !== 'partner') {
-      const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set('redirect', 'partner-dashboard')
-      return NextResponse.redirect(loginUrl, { status: 307 })
+      // Redirect to login without query params
+      return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
     }
     return NextResponse.next()
   }
