@@ -47,20 +47,30 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     averageRating: 4.8 
   })
 
-  // Auth redirect logic
+  // Auth redirect logic with redirect query param support
   useEffect(() => {
     if (!loading && session) {
       const userRole = user?.user_metadata?.role
       const authRoutes = ['/login', '/forgot-password', '/partner-werden']
       if (authRoutes.includes(pathname || '')) {
-        if (userRole === 'admin') {
+        // Check for redirect query parameter
+        const redirectParam = searchParams?.get('redirect')
+        
+        if (redirectParam === 'admin-dashboard' && userRole === 'admin') {
           router.replace('/admin-dashboard')
-        } else if (userRole === 'partner') {
+        } else if (redirectParam === 'partner-dashboard' && userRole === 'partner') {
           router.replace('/partner/dashboard')
+        } else {
+          // Default role-based redirect when no redirect param or invalid redirect
+          if (userRole === 'admin') {
+            router.replace('/admin-dashboard')
+          } else if (userRole === 'partner') {
+            router.replace('/partner/dashboard')
+          }
         }
       }
     }
-  }, [session, user, loading, pathname, router])
+  }, [session, user, loading, pathname, router, searchParams])
 
   // Redirect .php files
   useEffect(() => {
