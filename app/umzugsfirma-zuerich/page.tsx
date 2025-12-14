@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Umzugsfirma Zürich: Vergleichen Sie mehrere Zügelfirmen Zürich und Umzugsunternemen Zürich. Umzugsfirma vergleichen Zürich - Kostenlos und unverbindlich Offerten von geprüften Umzugsfirmen vergleichen. Privatumzug, Geschäftsumzug, Reinigung & mehr. Bis zu 40% sparen!',
   
   alternates: {
-    canonical: 'https://online-offerten.ch/umzugsfirma-zurich',
+    canonical: 'https://online-offerten.ch/umzugsfirma-zuerich',
   },
 }
 

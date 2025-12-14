@@ -13,7 +13,7 @@ const AdminDashboardPageClient = () => {
   useEffect(() => {
     if (!loading) {
       if (!user || user.user_metadata?.role !== 'admin') {
-        router.push('/login?redirect=admin-dashboard');
+        router.push('/login');
       }
     }
   }, [user, loading, router]);
