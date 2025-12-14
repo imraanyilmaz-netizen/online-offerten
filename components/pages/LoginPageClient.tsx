@@ -31,12 +31,13 @@ const LoginPageClient = () => {
   const [loginSuccess, setLoginSuccess] = useState(false)
 
   // Zaten login olmuş kullanıcıları login sayfasından yönlendir (role'e göre otomatik)
+  // Bu useEffect sadece sayfa yüklendiğinde zaten login olmuş kullanıcılar için çalışır
   useEffect(() => {
     if (!authLoading && user && !loginSuccess) {
       const userRole = user.user_metadata?.role
       let redirectPath = null
       
-      // Sadece role'e göre yönlendir (redirect parametresi kullanılmıyor)
+      // Sadece role'e göre yönlendir
       if (userRole === 'admin') {
         redirectPath = '/admin-dashboard'
       } else if (userRole === 'partner') {
@@ -44,6 +45,7 @@ const LoginPageClient = () => {
       }
       
       if (redirectPath) {
+        setLoginSuccess(true)
         router.replace(redirectPath)
       }
     }
@@ -56,18 +58,20 @@ const LoginPageClient = () => {
     const { error } = await signIn(email, password)
 
     if (!error) {
-      // Session'ı direkt kontrol et ve redirect yap
+      // Auth context'in güncellenmesini bekle
       const supabase = createClient()
       
-      // Session'ın hazır olmasını bekle (max 2 saniye)
+      // Session'ın hazır olmasını bekle (max 3 saniye)
       let session = null
-      for (let i = 0; i < 10; i++) {
+      let attempts = 0
+      while (attempts < 15) {
         const { data: { session: currentSession } } = await supabase.auth.getSession()
-        if (currentSession) {
+        if (currentSession?.user) {
           session = currentSession
           break
         }
         await new Promise(resolve => setTimeout(resolve, 200))
+        attempts++
       }
       
       if (session?.user) {
@@ -82,11 +86,14 @@ const LoginPageClient = () => {
         }
         
         if (redirectPath) {
+          setLoginSuccess(true)
           setLoading(false)
           toast({
             title: "Anmeldung erfolgreich",
             description: "Sie werden weitergeleitet...",
           })
+          // Auth context'in güncellenmesi için kısa bir gecikme
+          await new Promise(resolve => setTimeout(resolve, 500))
           router.replace(redirectPath)
         } else {
           setLoading(false)
