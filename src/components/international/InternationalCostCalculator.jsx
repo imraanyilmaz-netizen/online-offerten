@@ -1,0 +1,295 @@
+import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { toast } from '@/components/ui/use-toast';
+import { ArrowRight, Calculator, Check, Loader2, ChevronsDown, ChevronsUp } from 'lucide-react';
+import { pricingData, countryDistances } from '@/data/internationalPricing';
+import CountryFlag from './CountryFlag';
+
+const NewCustomerForm = lazy(() => import('@/components/NewCustomerForm'));
+
+const FullPageLoader = () => (
+  <div className="flex h-64 w-full items-center justify-center bg-white/80 backdrop-blur-sm">
+    <Loader2 className="h-12 w-12 animate-spin text-green-600" />
+  </div>
+);
+
+
+const InternationalCostCalculator = () => {
+  const { t } = useTranslation('internationaleUmzugPage');
+
+  const [fromCountry, setFromCountry] = useState('CH');
+  const [toCountry, setToCountry] = useState('DE');
+  const [moveType, setMoveType] = useState('private');
+  const [rooms, setRooms] = useState(3.5);
+  const [area, setArea] = useState(100);
+  const [includePiano, setIncludePiano] = useState(false);
+  const [includeCleaning, setIncludeCleaning] = useState(false);
+  const [estimatedCost, setEstimatedCost] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const countries = useMemo(() => {
+    const countryNames = t('calculator.countries', { returnObjects: true });
+    return Object.entries(countryNames).map(([code, name]) => ({ code, name }));
+  }, [t]);
+
+  const handleCountryChange = (type, value) => {
+    if (type === 'from') {
+      setFromCountry(value);
+      if (value === 'CH') {
+        // If from is CH, 'to' can be anything but CH
+        if (toCountry === 'CH') setToCountry('DE'); // Set a default if 'to' was also CH
+      } else {
+        // If from is not CH, 'to' must be CH
+        setToCountry('CH');
+      }
+    } else { // type === 'to'
+      setToCountry(value);
+      if (value === 'CH') {
+        // If 'to' is CH, 'from' can be anything but CH
+        if (fromCountry === 'CH') setFromCountry('DE'); // Set a default if 'from' was also CH
+      } else {
+        // If 'to' is not CH, 'from' must be CH
+        setFromCountry('CH');
+      }
+    }
+  };
+
+  const handleMoveTypeChange = (newMoveType) => {
+    setMoveType(newMoveType);
+    if (newMoveType === 'business') {
+      setIncludePiano(false);
+      setIncludeCleaning(false);
+    }
+  };
+
+  const calculateCost = () => {
+    if (fromCountry === toCountry) {
+      toast({
+        title: t('calculator.errorTitle'),
+        description: t('calculator.sameCountryError'),
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const distanceKey = [fromCountry, toCountry].sort().join('_');
+    const distance = countryDistances[distanceKey] || 1000; // Default distance
+    const moveData = pricingData[moveType];
+    
+    let baseCost;
+    if (moveType === 'private') {
+      baseCost = moveData.base + (rooms * moveData.perRoom);
+    } else { // business
+      baseCost = moveData.base + (area * moveData.perSqm);
+    }
+
+    const distanceCost = distance * moveData.perKm;
+    const pianoCost = includePiano ? pricingData.piano.cost : 0;
+    const cleaningCost = includeCleaning ? pricingData.cleaning.base + (pricingData.cleaning.perRoom * rooms) : 0;
+    
+    const totalCost = baseCost + distanceCost + pianoCost + cleaningCost;
+    
+    const minCost = totalCost * 0.85;
+    const maxCost = totalCost * 1.15;
+
+    setEstimatedCost({ min: Math.round(minCost / 100) * 100, max: Math.round(maxCost / 100) * 100 });
+  };
+  
+  const handleShowForm = () => {
+    setShowForm(true);
+    setTimeout(() => {
+        const formElement = document.getElementById('international-quote-form');
+        if (formElement) {
+            formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 100);
+  };
+
+  const initialFormDataForQuote = useMemo(() => {
+    const formData = {
+        service: 'umzug',
+        umzugArt: 'international',
+        from_country: fromCountry,
+        to_country: toCountry,
+        needsdisassembly: true,
+        needspacking: true,
+        additional_cleaning: includeCleaning
+    };
+
+    if (moveType === 'private') {
+        formData.from_rooms = rooms;
+        formData.from_object_type = 'wohnung';
+    } else {
+        formData.from_rooms = area; // Using rooms field for area in business context
+        formData.from_object_type = 'buero';
+    }
+
+    if (includePiano) {
+        formData.special_transport_items = ['klaviertransport'];
+        formData.hasspecialitems = true;
+    }
+
+    return formData;
+}, [fromCountry, toCountry, moveType, rooms, area, includePiano, includeCleaning]);
+
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+  };
+  
+  const renderCountryOption = (country) => (
+    <SelectItem key={country.code} value={country.code} className="py-2">
+      <div className="flex items-center">
+        <CountryFlag countryCode={country.code} className="w-5 h-5 mr-3 rounded-sm" />
+        <span>{country.name}</span>
+      </div>
+    </SelectItem>
+  );
+
+  return (
+    <>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100"
+      >
+        <div className="flex items-center mb-6">
+          <Calculator className="w-8 h-8 mr-4 text-green-500" />
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-800">{t('calculator.title')}</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <motion.div variants={itemVariants}>
+            <Label htmlFor="from-country" className="font-semibold text-slate-700">{t('calculator.from')}</Label>
+            <Select value={fromCountry} onValueChange={(val) => handleCountryChange('from', val)}>
+              <SelectTrigger id="from-country" className="mt-1 bg-slate-50">
+                <SelectValue placeholder="Select country" />
+              </SelectTrigger>
+              <SelectContent>{countries.filter(c => c.code !== toCountry).map(renderCountryOption)}</SelectContent>
+            </Select>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Label htmlFor="to-country" className="font-semibold text-slate-700">{t('calculator.to')}</Label>
+            <Select value={toCountry} onValueChange={(val) => handleCountryChange('to', val)}>
+              <SelectTrigger id="to-country" className="mt-1 bg-slate-50">
+                <SelectValue placeholder="Select country" />
+              </SelectTrigger>
+              <SelectContent>{countries.filter(c => c.code !== fromCountry).map(renderCountryOption)}</SelectContent>
+            </Select>
+          </motion.div>
+        </div>
+
+        <motion.div variants={itemVariants} className="mb-6">
+          <Label className="font-semibold text-slate-700">{t('calculator.moveType')}</Label>
+          <div className="grid grid-cols-2 gap-2 mt-2">
+            <Button variant={moveType === 'private' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('private')} className={`transition-all ${moveType === 'private' ? 'bg-green-600 text-white' : ''}`}>{t('calculator.private')}</Button>
+            <Button variant={moveType === 'business' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('business')} className={`transition-all ${moveType === 'business' ? 'bg-green-600 text-white' : ''}`}>{t('calculator.business')}</Button>
+          </div>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {moveType === 'private' ? (
+            <motion.div key="private-rooms" variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <Label htmlFor="rooms-slider" className="font-semibold text-slate-700">{t('calculator.roomsLabel')}</Label>
+                <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{rooms} {t('calculator.rooms')}</span>
+              </div>
+              <Slider id="rooms-slider" value={[rooms]} onValueChange={(val) => setRooms(val[0])} min={1} max={10} step={0.5} />
+            </motion.div>
+          ) : (
+            <motion.div key="business-area" variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <Label htmlFor="area-slider" className="font-semibold text-slate-700">{t('calculator.areaLabel')}</Label>
+                <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{area} m²</span>
+              </div>
+              <Slider id="area-slider" value={[area]} onValueChange={(val) => setArea(val[0])} min={20} max={500} step={10} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {moveType === 'private' && (
+            <motion.div 
+              key="private-options" 
+              initial={{ opacity: 0, y: -10 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              exit={{ opacity: 0, y: -10 }} 
+              className="space-y-4 mb-8"
+            >
+              <div className="flex items-center space-x-2">
+                <Checkbox id="piano" checked={includePiano} onCheckedChange={setIncludePiano} />
+                <Label htmlFor="piano" className="text-slate-600 cursor-pointer">{t('calculator.piano')}</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="cleaning" checked={includeCleaning} onCheckedChange={setIncludeCleaning} />
+                <Label htmlFor="cleaning" className="text-slate-600 cursor-pointer">{t('calculator.cleaning')}</Label>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
+        <motion.div variants={itemVariants}>
+          <Button onClick={calculateCost} size="lg" className="w-full bg-green-500 hover:bg-green-600 text-white group">
+            {t('calculator.calculateButton')}
+            <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </motion.div>
+
+        <AnimatePresence>
+          {estimatedCost && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="mt-8 p-6 bg-slate-50 rounded-lg text-center border-t-4 border-green-400"
+            >
+              <h3 className="text-lg font-semibold text-slate-600 mb-2">{t('calculator.estimatedCost')}</h3>
+              <p className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
+                CHF {estimatedCost.min.toLocaleString('de-CH')} - {estimatedCost.max.toLocaleString('de-CH')}
+              </p>
+              <p className="text-xs text-slate-500 mb-6">{t('calculator.disclaimer')}</p>
+              
+              <Button onClick={handleShowForm} className="bg-blue-500 hover:bg-blue-600 text-white group">
+                {t('calculator.requestQuoteButton')}
+                <ChevronsDown className="w-5 h-5 ml-2 transition-transform group-hover:translate-y-1" />
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      <AnimatePresence>
+        {showForm && (
+          <motion.div
+            id="international-quote-form"
+            className="mt-16"
+            initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
+            animate={{ opacity: 1, scaleY: 1, transition: { duration: 0.7, ease: 'easeInOut' } }}
+            exit={{ opacity: 0, scaleY: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
+          >
+            <Suspense fallback={<FullPageLoader />}>
+              <NewCustomerForm initialDataFromProps={initialFormDataForQuote} formId="international-form" />
+            </Suspense>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default InternationalCostCalculator;

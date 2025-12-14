@@ -1,0 +1,35 @@
+{
+  "home": "Home",
+  "about": "About Us",
+  "contact": "Contact",
+  "login": "Login",
+  "logout": "Logout",
+  "dashboard": "Dashboard",
+  "umzugSchweiz": "Switzerland",
+  "zurich": "Zurich",
+  "luzern": "Lucerne",
+  "stGallen": "St. Gallen",
+  "basel": "Basel",
+  "moreLocations": "More locations",
+  "kosten": "Costs",
+  "umzugskostenRechner": "Moving Cost Calculator",
+  "reinigungskostenRechner": "Cleaning Cost Calculator",
+  "guenstigUmziehen": "Move cheaply",
+  "umzugsfirmaVergleichen": "Compare moving companies",
+  "languageSwitcher": {
+    "label": "Change language",
+    "de": "German",
+    "en": "English"
+  },
+  "logoutSuccessTitle": "Logged out successfully",
+  "logoutSuccessDescription": "You have been successfully logged out. Goodbye!",
+  "logoutFailedTitle": "Logout failed",
+  "logoutFailedDescription": "An error occurred. Please try again.",
+  "sessionAlreadyEnded": "Your session had already ended. You have been securely logged out.",
+  "menu": {
+    "offerten": "QUOTES",
+    "kostenTools": "COSTS & TOOLS",
+    "ratgeber": "GUIDE",
+    "kontakt": "CONTACT"
+  }
+}

@@ -1,0 +1,36 @@
+﻿{
+  "meta": {
+    "defaultTitle": "Online-Offerten.ch | Umzug, Reinigung, Entsorgung - Schweizweit",
+    "defaultDescription": "Erhalten Sie kostenlose Offerten für Umzug, Reinigung und Entsorgung. Vergleichen Sie die besten Umzugsfirmen und Reinigungsfirmen in der Schweiz und sparen Sie."
+  },
+  "siteName": "Online-Offerten.ch",
+  "standortePage": {
+    "metaTitle": "Standorte | Umzugsfirmen in Ihrer Nähe | Online-Offerten.ch",
+    "metaDescription": "Finden Sie lokale und geprüfte Umzugsfirmen und Reinigungsunternehmen in Zürich, Bern, Basel, Genf und der ganzen Schweiz. Holen Sie jetzt Ihre offerten ein.",
+    "metaKeywords": "standorte, umzugsfirma zürich, umzugsfirma bern, umzugsfirma basel, umzugsfirma genf, reinigungsfirma schweiz, malerfirma schweiz, lokale firmen, umzugsunternehmen nach kanton",
+    "title": "Unsere Standorte in der Schweiz",
+    "subtitle": "Von Zürich bis Genf, von Basel bis Lugano – auf unserer Plattform finden Sie verlässliche Umzugsfirmen aus Ihrer Region. Holen Sie jetzt kostenlose Offerten ein!",
+    "locationImageAlt": "Bild von {{locationName}}",
+    "seoContent": {
+      "title": "Standorte in der gesamten Schweiz",
+      "p1": "Online-Offerten.ch ist Ihre zentrale Anlaufstelle für professionelle Dienstleistungen in der gesamten Schweiz. Wir verbinden Sie mit geprüften Umzugs-, Reinigungs- und Malerfirmen in allen wichtigen Städten und Regionen der Schweiz. Egal ob Sie in Zürich, Bern, Basel, Luzern oder einer anderen Stadt wohnen – wir haben den richtigen Partner für Sie.",
+      "p2": "Unsere Plattform deckt alle grossen Städte und Regionen der Schweiz ab. Von den urbanen Zentren wie Zürich, Genf und Basel bis hin zu kleineren Städten wie Thun, Biel oder Freiburg – überall finden Sie qualifizierte Partnerfirmen, die Ihnen bei Ihrem Umzug, Ihrer Reinigung oder Ihren Malerarbeiten helfen können.",
+      "p3": "Jeder Standort bietet eine Auswahl an lokalen Experten, die die regionalen Besonderheiten und Anforderungen kennen. Unsere Partnerfirmen sind nicht nur fachlich qualifiziert, sondern auch mit den örtlichen Gegebenheiten vertraut. Das garantiert Ihnen eine reibungslose und effiziente Durchführung Ihrer Projekte.",
+      "p4": "Die Vorteile unserer Standortübersicht sind vielfältig: Sie sparen Zeit bei der Suche nach passenden Dienstleistern, erhalten transparente Preise durch unseren Offertenvergleich und können sich auf geprüfte Qualität verlassen. Alle unsere Partnerfirmen werden sorgfältig ausgewählt und regelmässig überprüft, um höchste Standards zu gewährleisten.",
+      "p5": "Wählen Sie einfach Ihren Standort aus der Übersicht unten aus, um mehr über die verfügbaren Dienstleistungen in Ihrer Region zu erfahren. Sie erhalten detaillierte Informationen zu den lokalen Partnern und können direkt kostenlose Offerten anfordern. So finden Sie schnell und einfach den perfekten Dienstleister für Ihre Bedürfnisse."
+    }
+  },
+  "learnMore": "Mehr erfahren",
+  "footer": {
+    "copyright": "© {{year}} {{siteName}}. Alle Rechte vorbehalten."
+  },
+  "cta": {
+    "getFreeQuote": "Kostenlose Offerten anfordern",
+    "getOffersNow": "Jetzt kostenlose Offerten anfordern"
+  },
+  "errors": {
+    "fetchErrorTitle": "Fehler beim Abrufen der Daten",
+    "fetchErrorGeneric": "Es gab ein Problem bei der Verbindung zum Server. Bitte versuchen Sie es später erneut.",
+    "formSubmissionError": "Fehler beim Absenden des Formulars. Bitte überprüfen Sie Ihre Eingaben und versuchen Sie es erneut."
+  }
+}

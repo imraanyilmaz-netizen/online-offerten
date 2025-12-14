@@ -1,0 +1,35 @@
+{
+  "home": "Startseite",
+  "about": "Über uns",
+  "contact": "Kontakt",
+  "login": "Anmelden",
+  "logout": "Abmelden",
+  "dashboard": "Dashboard",
+  "umzugSchweiz": "Schweiz",
+  "zurich": "Zürich",
+  "luzern": "Luzern",
+  "stGallen": "St. Gallen",
+  "basel": "Basel",
+  "moreLocations": "Weitere Standorte",
+  "kosten": "Kosten",
+  "umzugskostenRechner": "Umzugskosten Rechner",
+  "reinigungskostenRechner": "Reinigungskosten Rechner",
+  "guenstigUmziehen": "Günstig umziehen",
+  "umzugsfirmaVergleichen": "Umzugsfirma vergleichen",
+  "languageSwitcher": {
+    "label": "Sprache wechseln",
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "logoutSuccessTitle": "Erfolgreich abgemeldet",
+  "logoutSuccessDescription": "Sie wurden erfolgreich abgemeldet. Auf Wiedersehen!",
+  "logoutFailedTitle": "Abmeldung fehlgeschlagen",
+  "logoutFailedDescription": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+  "sessionAlreadyEnded": "Ihre Sitzung war bereits beendet. Sie wurden sicher abgemeldet.",
+  "menu": {
+    "offerten": "OFFERTEN",
+    "kostenTools": "KOSTEN & TOOLS",
+    "ratgeber": "RATGEBER",
+    "kontakt": "KONTAKT"
+  }
+}

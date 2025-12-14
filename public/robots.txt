@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://online-offerten.ch/sitemap.xml
+
+# Disallow admin and private routes
+Disallow: /admin-dashboard
+Disallow: /partner/dashboard
+Disallow: /partner/settings
+Disallow: /partner/guthaben-aufladen
+Disallow: /payment/success
+Disallow: /payment/cancel
+Disallow: /login
+Disallow: /forgot-password
+Disallow: /update-password
+
+# Allow important pages - AÇIK VE NET
+Allow: /partner-suche
+Allow: /ratgeber/
+Allow: /reinigungskosten-rechner
+Allow: /umzugskosten-rechner
+Allow: /checklisten
+# /partner/ ve /ratgeber/ OTOMATİK olarak izinli!

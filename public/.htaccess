@@ -1,0 +1,86 @@
+# .htaccess
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # WWW -> non-WWW yönlendirme (HTTP ve HTTPS için)
+    RewriteCond %{HTTP_HOST} ^www\.online-offerten\.ch [NC]
+    RewriteRule ^(.*)$ https://online-offerten.ch/$1 [L,R=301]
+    
+    # HTTP -> HTTPS yönlendirme
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteRule ^(.*)$ https://online-offerten.ch/$1 [L,R=301]
+    
+    # SPA routing için - dosya ve klasörler mevcut değilse index.html'e yönlendir
+    # Ancak asset dosyaları (JS, CSS, images, fonts) için yönlendirme yapma
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !\.(js|mjs|css|json|png|jpg|jpeg|gif|svg|webp|avif|woff|woff2|ttf|otf|ico|pdf)$ [NC]
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_mime.c>
+    # JavaScript MIME types
+    AddType application/javascript js mjs
+    AddType application/json json
+    AddType text/css css
+    
+    # Image MIME types
+    AddType image/svg+xml svg svgz
+    AddType image/png png
+    AddType image/jpeg jpg jpeg
+    AddType image/gif gif
+    AddType image/webp webp
+    AddType image/avif avif
+    
+    # Font MIME types
+    AddType font/woff woff
+    AddType font/woff2 woff2
+    AddType application/font-ttf ttf
+    AddType application/font-otf otf
+</IfModule>
+
+<IfModule mod_headers.c>
+
+    # Service Worker - No cache to ensure updates
+    <If "%{REQUEST_URI} =~ m#sw\.js$#">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </If>
+    
+    # Cache everything on CDN by default
+    Header set Cache-Control "public, s-maxage=604800, max-age=0"
+
+    # Cache in browser all assets (JS, CSS) - long cache with immutable
+    <If "%{REQUEST_URI} =~ m#^/assets/.*$#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+    
+    # Cache fonts - long cache with immutable
+    <If "%{REQUEST_URI} =~ m#\.(woff|woff2|ttf|otf)$#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+    
+    # Cache images for long period (1 year) with immutable
+    <If "%{REQUEST_URI} =~ m#\.(png|jpg|jpeg|gif|svg|webp|avif|ico)$#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+    
+    # Cache HTML for shorter period with revalidation
+    <If "%{REQUEST_URI} =~ m#\.html$#">
+        Header set Cache-Control "public, max-age=3600, must-revalidate"
+    </If>
+    
+    # Cache manifest.json
+    <If "%{REQUEST_URI} =~ m#manifest\.json$#">
+        Header set Cache-Control "public, max-age=86400, must-revalidate"
+    </If>
+    
+    # Enable compression
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml
+    </IfModule>
+</IfModule>

@@ -1,0 +1,42 @@
+{
+  "calculator": {
+    "title": "International Moving Cost Calculator",
+    "from": "From",
+    "to": "To",
+    "moveType": "Move Type",
+    "private": "Private",
+    "business": "Business",
+    "roomsLabel": "Number of Rooms",
+    "rooms": "rooms",
+    "areaLabel": "Area (m²)",
+    "piano": "I have a piano / grand piano to transport",
+    "cleaning": "I need move-out cleaning",
+    "calculateButton": "Calculate Costs",
+    "estimatedCost": "Estimated Cost",
+    "disclaimer": "*The costs are an estimate and may vary depending on individual circumstances.",
+    "requestQuoteButton": "Request Quotes",
+    "errorTitle": "Error",
+    "sameCountryError": "Origin and destination countries cannot be the same.",
+    "countries": {
+      "CH": "Switzerland",
+      "DE": "Germany",
+      "AT": "Austria",
+      "FR": "France",
+      "IT": "Italy",
+      "ES": "Spain",
+      "PT": "Portugal",
+      "BE": "Belgium",
+      "DK": "Denmark",
+      "NL": "Netherlands",
+      "GB": "United Kingdom",
+      "PL": "Poland",
+      "CZ": "Czech Republic",
+      "HU": "Hungary",
+      "SE": "Sweden",
+      "NO": "Norway",
+      "FI": "Finland",
+      "GR": "Greece"
+    }
+  }
+}
+

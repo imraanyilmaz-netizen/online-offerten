@@ -1,0 +1,130 @@
+/* Font loading - loaded asynchronously from index.html to prevent render blocking */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KÖKLÜ VE MODERN CSS SIFIRLAMASI */
+@layer base {
+  :root {
+    --background: 240 10% 99%;
+    --foreground: 240 10% 3.9%;
+    --card: 240 10% 99%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 240 10% 99%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142.1 76.2% 36.3%; /* Green */
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+  }
+}
+
+/* TEMEL STİLLER VE YAZI TİPİ */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Font fallback chain to prevent layout shift - system fonts load instantly */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent text rendering shift */
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* 📱 IPHONE ZOOM ENGELLEME - EN GÜÇLÜ ÇÖZÜM */
+@layer base {
+  /* Genel Dokunma Eylemleri */
+  html, body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+
+  /* Form elemanları için kesin çözüm */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px !important; /* Zoom'u engellemek için kritik */
+    min-height: 44px; /* Dokunma alanını iyileştirir */
+    border-radius: 0 !important; /* iOS'un varsayılan stilini kaldırır */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* iOS Safari için odaklanma durumunda zoom'u engelle */
+  @supports (-webkit-touch-callout: none) {
+    input:focus,
+    textarea:focus,
+    select:focus {
+      font-size: 16px !important;
+    }
+  }
+}
+
+/* Scrollbar Stilleri */
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary) / 0.3);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--primary) / 0.5);
+  }
+}
+
+/* Footer Layout Shift Prevention */
+footer.footer-fixed-height {
+  /* Reserve space to prevent layout shift */
+  min-height: 550px;
+  contain: layout style paint;
+}
+
+@media (min-width: 768px) {
+  footer.footer-fixed-height {
+    min-height: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  footer.footer-fixed-height {
+    min-height: 650px;
+  }
+}
+
+/* Tiptap Editor link styling */
+.prose a {
+  color: var(--primary); /* Tailwind'in yeşil rengini kullanır */
+  text-decoration: underline;
+}
+.prose a:hover {
+  color: var(--primary); /* Hover durumunda da yeşil kalır */
+}
