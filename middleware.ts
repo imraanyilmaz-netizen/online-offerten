@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname, searchParams } = request.nextUrl
   const supabase = createMiddlewareClient(request)
   
   // Get user from session cookie
@@ -14,6 +14,16 @@ export async function middleware(request: NextRequest) {
 
   // Redirect authenticated users away from /login
   if (pathname === '/login') {
+    // Clean up redirect query parameter - redirect to clean /login URL
+    if (searchParams.has('redirect')) {
+      const cleanUrl = new URL('/login', request.url)
+      // Keep other params like 'register' if they exist
+      if (searchParams.has('register')) {
+        cleanUrl.searchParams.set('register', searchParams.get('register') || 'true')
+      }
+      return NextResponse.redirect(cleanUrl, { status: 307 })
+    }
+    
     if (user) {
       // Role-based redirect (no redirect query param needed)
       if (userRole === 'admin') {
