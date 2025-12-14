@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
 import { createClient } from '@/lib/supabase/client'
@@ -17,7 +17,6 @@ import { createClient } from '@/lib/supabase/client'
 const LoginPageClient = () => {
   const { signIn, user, loading: authLoading } = useAuth()
   const { toast } = useToast()
-  const searchParams = useSearchParams()
   const router = useRouter()
 
   const pageTitle = "Partner Login"
@@ -28,53 +27,27 @@ const LoginPageClient = () => {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [view, setView] = useState(searchParams?.get('register') ? 'register' : 'login')
+  const [view, setView] = useState(typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('register') ? 'register' : 'login')
   const [loginSuccess, setLoginSuccess] = useState(false)
 
-  // Zaten login olmuş kullanıcıları login sayfasından yönlendir (yeni login için handleLogin içinde redirect yapılıyor)
+  // Zaten login olmuş kullanıcıları login sayfasından yönlendir (role'e göre otomatik)
   useEffect(() => {
-    // Auth loading bitmişse ve kullanıcı varsa yönlendir (sadece zaten login olmuş kullanıcılar için)
     if (!authLoading && user && !loginSuccess) {
       const userRole = user.user_metadata?.role
-      const redirectParam = searchParams?.get('redirect')
-      
-      // Redirect parametresini parse et
       let redirectPath = null
       
-      if (redirectParam) {
-        // Basit format: 'admin-dashboard' veya 'partner-dashboard'
-        if (redirectParam === 'admin-dashboard') {
-          redirectPath = '/admin-dashboard'
-        } else if (redirectParam === 'partner-dashboard') {
-          redirectPath = '/partner/dashboard'
-        } else {
-          // Eski format desteği: URL encoded path
-          try {
-            const decoded = decodeURIComponent(redirectParam)
-            if (decoded === '/admin-dashboard' || decoded === '/partner/dashboard') {
-              redirectPath = decoded
-            }
-          } catch (e) {
-            // Decode başarısız, ignore
-          }
-        }
-      }
-      
-      // Redirect parametresi yoksa veya geçersizse role'e göre belirle
-      if (!redirectPath) {
-        if (userRole === 'admin') {
-          redirectPath = '/admin-dashboard'
-        } else if (userRole === 'partner') {
-          redirectPath = '/partner/dashboard'
-        }
+      // Sadece role'e göre yönlendir (redirect parametresi kullanılmıyor)
+      if (userRole === 'admin') {
+        redirectPath = '/admin-dashboard'
+      } else if (userRole === 'partner') {
+        redirectPath = '/partner/dashboard'
       }
       
       if (redirectPath) {
-        // Zaten login olmuş kullanıcı için direkt yönlendir
         router.replace(redirectPath)
       }
     }
-  }, [user, authLoading, loginSuccess, searchParams, router])
+  }, [user, authLoading, loginSuccess, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -99,25 +72,13 @@ const LoginPageClient = () => {
       
       if (session?.user) {
         const userRole = session.user.user_metadata?.role
-        const redirectParam = searchParams?.get('redirect')
-        
-        // Redirect path'ini belirle
         let redirectPath = null
         
-        if (redirectParam) {
-          if (redirectParam === 'admin-dashboard') {
-            redirectPath = '/admin-dashboard'
-          } else if (redirectParam === 'partner-dashboard') {
-            redirectPath = '/partner/dashboard'
-          }
-        }
-        
-        if (!redirectPath) {
-          if (userRole === 'admin') {
-            redirectPath = '/admin-dashboard'
-          } else if (userRole === 'partner') {
-            redirectPath = '/partner/dashboard'
-          }
+        // Sadece role'e göre yönlendir (redirect parametresi kullanılmıyor)
+        if (userRole === 'admin') {
+          redirectPath = '/admin-dashboard'
+        } else if (userRole === 'partner') {
+          redirectPath = '/partner/dashboard'
         }
         
         if (redirectPath) {
@@ -126,7 +87,6 @@ const LoginPageClient = () => {
             title: "Anmeldung erfolgreich",
             description: "Sie werden weitergeleitet...",
           })
-          // Direkt redirect yap
           router.replace(redirectPath)
         } else {
           setLoading(false)

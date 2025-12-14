@@ -48,7 +48,6 @@ export async function middleware(request: NextRequest) {
         return response
       }
       const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set('redirect', 'admin-dashboard')
       return NextResponse.redirect(loginUrl)
     }
   }
@@ -63,7 +62,6 @@ export async function middleware(request: NextRequest) {
         return response
       }
       const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set('redirect', 'partner-dashboard')
       return NextResponse.redirect(loginUrl)
     }
   }
