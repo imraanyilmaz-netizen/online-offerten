@@ -34,6 +34,11 @@ const nextConfig = {
         destination: '/checklists',
         permanent: true, // 308 redirect
       },
+      {
+        source: '/umzugsfirma-zurich',
+        destination: '/umzugsfirma-zuerich',
+        permanent: true, // 308 redirect
+      },
     ];
   },
   // Transpile packages if needed
