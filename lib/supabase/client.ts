@@ -10,11 +10,15 @@ let supabaseInstance: ReturnType<typeof createSupabaseClient> | null = null
 
 export function createClient() {
   if (!supabaseInstance) {
+    // Check if we're in a browser environment
+    const isBrowser = typeof window !== 'undefined'
+    
     supabaseInstance = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
       auth: {
-        persistSession: true,
+        persistSession: isBrowser,
         autoRefreshToken: true,
-        detectSessionInUrl: true
+        detectSessionInUrl: true,
+        storage: isBrowser ? window.localStorage : undefined
       }
     })
   }
