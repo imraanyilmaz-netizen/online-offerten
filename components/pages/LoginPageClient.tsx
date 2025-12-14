@@ -30,26 +30,19 @@ const LoginPageClient = () => {
   const [view, setView] = useState(typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('register') ? 'register' : 'login')
   const [loginSuccess, setLoginSuccess] = useState(false)
 
-  // Zaten login olmuş kullanıcıları login sayfasından yönlendir (role'e göre otomatik)
-  // Bu useEffect sadece sayfa yüklendiğinde zaten login olmuş kullanıcılar için çalışır
+  // Redirect already logged-in users away from login page
+  // Middleware also handles this, but client-side provides immediate feedback
   useEffect(() => {
     if (!authLoading && user && !loginSuccess) {
       const userRole = user.user_metadata?.role
-      let redirectPath = null
-      
-      // Sadece role'e göre yönlendir
-      if (userRole === 'admin') {
-        redirectPath = '/admin-dashboard'
-      } else if (userRole === 'partner') {
-        redirectPath = '/partner/dashboard'
-      }
-      
-      if (redirectPath) {
+      if (userRole === 'admin' || userRole === 'partner') {
         setLoginSuccess(true)
-        router.replace(redirectPath)
+        // Use window.location to trigger middleware check on server
+        const redirectPath = userRole === 'admin' ? '/admin-dashboard' : '/partner/dashboard'
+        window.location.href = redirectPath
       }
     }
-  }, [user, authLoading, loginSuccess, router])
+  }, [user, authLoading, loginSuccess])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -58,28 +51,51 @@ const LoginPageClient = () => {
     const { error } = await signIn(email, password)
 
     if (!error) {
-      // Session'ı direkt kontrol et ve redirect yap
+      // Wait for auth state change event (more reliable than polling)
       const supabase = createClient()
       
-      // Session'ın hazır olmasını bekle (max 2 saniye)
-      let session = null
-      for (let i = 0; i < 10; i++) {
-        const { data: { session: currentSession } } = await supabase.auth.getSession()
-        if (currentSession?.user) {
-          session = currentSession
-          break
-        }
-        await new Promise(resolve => setTimeout(resolve, 200))
+      // Set up a promise that resolves when auth state changes to signed in
+      const waitForAuth = (): Promise<{ user: any; role: string | null }> => {
+        return new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => {
+            reject(new Error('Auth timeout'))
+          }, 3000)
+          
+          const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+            if (event === 'SIGNED_IN' && session?.user) {
+              clearTimeout(timeout)
+              subscription.unsubscribe()
+              const role = session.user.user_metadata?.role || null
+              resolve({ user: session.user, role })
+            } else if (event === 'TOKEN_REFRESHED' && session?.user) {
+              // Token refreshed, user is authenticated
+              clearTimeout(timeout)
+              subscription.unsubscribe()
+              const role = session.user.user_metadata?.role || null
+              resolve({ user: session.user, role })
+            }
+          })
+          
+          // Also check current session in case auth state already changed
+          supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session?.user) {
+              clearTimeout(timeout)
+              subscription.unsubscribe()
+              const role = session.user.user_metadata?.role || null
+              resolve({ user: session.user, role })
+            }
+          })
+        })
       }
       
-      if (session?.user) {
-        const userRole = session.user.user_metadata?.role
+      try {
+        const { role } = await waitForAuth()
         let redirectPath = null
         
-        // Sadece role'e göre yönlendir
-        if (userRole === 'admin') {
+        // Determine redirect path based on role
+        if (role === 'admin') {
           redirectPath = '/admin-dashboard'
-        } else if (userRole === 'partner') {
+        } else if (role === 'partner') {
           redirectPath = '/partner/dashboard'
         }
         
@@ -90,8 +106,10 @@ const LoginPageClient = () => {
             title: "Anmeldung erfolgreich",
             description: "Sie werden weitergeleitet...",
           })
-          // Direkt redirect yap (setTimeout yok - local'de çalışan versiyon)
-          router.replace(redirectPath)
+          
+          // Use window.location for full page reload to ensure middleware runs
+          // This is critical for production (Vercel Edge runtime)
+          window.location.href = redirectPath
         } else {
           setLoading(false)
           toast({
@@ -100,7 +118,7 @@ const LoginPageClient = () => {
             description: "Rolle konnte nicht ermittelt werden.",
           })
         }
-      } else {
+      } catch (error) {
         setLoading(false)
         toast({
           variant: "destructive",

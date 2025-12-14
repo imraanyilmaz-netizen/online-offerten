@@ -457,13 +457,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
   return (
     <>
-      
-      <div className="flex flex-col">
-        {/* Hero Section - SEO Optimized */}
-        <section 
-          className="pt-20 md:pt-24 pb-12 md:pb-16 lg:pb-20 bg-gradient-to-br from-white via-green-50/30 to-white w-full relative" 
-          aria-label="Hero Section - Umzug und Reinigung Offerten vergleichen"
-        >
+      {/* Hero Section - SEO Optimized */}
+      <section 
+        className="pt-20 md:pt-24 pb-12 md:pb-16 lg:pb-20 bg-gradient-to-br from-white via-green-50/30 to-white w-full relative" 
+        aria-label="Hero Section - Umzug und Reinigung Offerten vergleichen"
+      >
           <div className="container mx-auto max-w-7xl px-4 md:px-6 w-full relative z-10">
             <div className="max-w-7xl mx-auto w-full">
               {/* Mobile/Tablet Layout */}
@@ -679,10 +677,9 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               </div>
             </div>
           </div>
-        </section>
-        
-        <main className="flex-grow">
-          {/* How It Works Section */}
+      </section>
+      
+      {/* How It Works Section */}
           <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 via-slate-100 to-gray-200 overflow-hidden">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <div className="text-center mb-16 md:mb-24">
@@ -1301,8 +1298,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               </div>
             </div>
           </section>
-        </main>
-      </div>
     </>
   );
 };
