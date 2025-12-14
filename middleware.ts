@@ -20,12 +20,29 @@ export async function middleware(request: NextRequest) {
   // Get all cookies from the request
   const cookieHeader = request.headers.get('cookie') || ''
   
-  // Create Supabase client for middleware
+  // Create Supabase client for middleware with proper cookie handling
   const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
       detectSessionInUrl: false,
+      storage: {
+        getItem: (key: string) => {
+          // Parse cookies from header
+          const cookies = cookieHeader.split(';').reduce((acc, cookie) => {
+            const [name, ...valueParts] = cookie.trim().split('=')
+            acc[name] = valueParts.join('=')
+            return acc
+          }, {} as Record<string, string>)
+          return cookies[key] || null
+        },
+        setItem: () => {
+          // Cannot set cookies in middleware
+        },
+        removeItem: () => {
+          // Cannot remove cookies in middleware
+        },
+      },
     },
     global: {
       headers: {

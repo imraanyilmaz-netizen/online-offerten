@@ -58,27 +58,25 @@ const LoginPageClient = () => {
     const { error } = await signIn(email, password)
 
     if (!error) {
-      // Auth context'in güncellenmesini bekle
+      // Session'ı direkt kontrol et ve redirect yap
       const supabase = createClient()
       
-      // Session'ın hazır olmasını bekle (max 3 saniye)
+      // Session'ın hazır olmasını bekle (max 2 saniye)
       let session = null
-      let attempts = 0
-      while (attempts < 15) {
+      for (let i = 0; i < 10; i++) {
         const { data: { session: currentSession } } = await supabase.auth.getSession()
         if (currentSession?.user) {
           session = currentSession
           break
         }
         await new Promise(resolve => setTimeout(resolve, 200))
-        attempts++
       }
       
       if (session?.user) {
         const userRole = session.user.user_metadata?.role
         let redirectPath = null
         
-        // Sadece role'e göre yönlendir (redirect parametresi kullanılmıyor)
+        // Sadece role'e göre yönlendir
         if (userRole === 'admin') {
           redirectPath = '/admin-dashboard'
         } else if (userRole === 'partner') {
@@ -92,8 +90,7 @@ const LoginPageClient = () => {
             title: "Anmeldung erfolgreich",
             description: "Sie werden weitergeleitet...",
           })
-          // Auth context'in güncellenmesi için kısa bir gecikme
-          await new Promise(resolve => setTimeout(resolve, 500))
+          // Direkt redirect yap (setTimeout yok - local'de çalışan versiyon)
           router.replace(redirectPath)
         } else {
           setLoading(false)
