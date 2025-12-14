@@ -30,13 +30,20 @@ const LoginPageClient = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
 
-  // Remove redirect query param from URL immediately
+  // Remove redirect query param from URL immediately - run on every render if needed
   useEffect(() => {
-    if (searchParams?.has('redirect')) {
-      const params = new URLSearchParams(searchParams.toString())
-      params.delete('redirect')
-      const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname
-      router.replace(newUrl)
+    if (typeof window !== 'undefined' && searchParams?.has('redirect')) {
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('redirect')) {
+        params.delete('redirect')
+        const newUrl = params.toString() 
+          ? `${pathname}?${params.toString()}` 
+          : pathname || '/login'
+        // Use window.history.replaceState for immediate URL update
+        window.history.replaceState({}, '', newUrl)
+        // Also use router.replace as backup
+        router.replace(newUrl)
+      }
     }
   }, [searchParams, pathname, router])
 

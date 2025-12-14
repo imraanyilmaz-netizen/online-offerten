@@ -2,7 +2,7 @@
 
 import React, { Suspense, useState } from 'react';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
-import PartnerPanel from '@/components/PartnerPanel';
+import PartnerPanel from '@/src/components/PartnerPanel';
 import { Loader2 } from 'lucide-react';
 
 const LoadingFallback = () => (

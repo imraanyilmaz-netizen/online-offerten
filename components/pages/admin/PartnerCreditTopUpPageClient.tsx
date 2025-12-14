@@ -32,11 +32,11 @@ const PartnerCreditTopUpPageClient = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Client-side auth guard
+  // Client-side auth guard - middleware handles redirects
   useEffect(() => {
     if (!authLoading) {
       if (!user || user.user_metadata?.role !== 'partner') {
-        router.push('/login?redirect=partner-dashboard');
+        router.push('/login');
       }
     }
   }, [user, authLoading, router]);
