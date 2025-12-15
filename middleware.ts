@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
   }
   
   const supabase = createMiddlewareClient(request)
-  
+
   // Get user from session cookie
   const {
     data: { user },
@@ -58,7 +58,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
     }
     return NextResponse.next()
-  }
+    }
 
   // Allow all other routes
   return NextResponse.next()

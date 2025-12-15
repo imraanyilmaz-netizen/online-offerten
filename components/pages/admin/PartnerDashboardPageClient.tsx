@@ -32,9 +32,9 @@ const PartnerDashboardPageClient = () => {
   }
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <PartnerPanel setCompanyName={setCompanyName} />
-    </Suspense>
+      <Suspense fallback={<LoadingFallback />}>
+        <PartnerPanel setCompanyName={setCompanyName} />
+      </Suspense>
   );
 };
 

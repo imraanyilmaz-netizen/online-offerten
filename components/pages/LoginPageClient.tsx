@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
 
 const LoginPageClient = () => {
-  const { signIn } = useAuth()
+  const { signIn, user, loading: authLoading } = useAuth()
   const { toast } = useToast()
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -47,6 +47,19 @@ const LoginPageClient = () => {
     }
   }, [searchParams, pathname, router])
 
+  // Redirect after successful login (like old system)
+  useEffect(() => {
+    if (!authLoading && user && pathname === '/login') {
+      const userRole = user.user_metadata?.role
+      
+      if (userRole === 'admin') {
+        router.push('/admin-dashboard')
+      } else if (userRole === 'partner') {
+        router.push('/partner/dashboard')
+      }
+    }
+  }, [user, authLoading, pathname, router])
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -59,7 +72,7 @@ const LoginPageClient = () => {
         title: "Anmeldung erfolgreich",
         description: "Sie werden weitergeleitet...",
       })
-      // Redirect is handled by middleware.ts based on user role
+      // Redirect logic is handled by useEffect above (like old system)
     } else {
       toast({
         variant: "destructive",
