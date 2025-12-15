@@ -1,9 +1,13 @@
+'use client'
+
 import React from 'react';
 import AdminPanelCore from './AdminPanelCore';
 import AdminPanelTabs from './AdminPanelTabs';
 import { Loader2 } from 'lucide-react';
 
 const AdminPanel = () => {
+  console.log('[AdminPanel] Component rendering')
+  
   const {
     loading,
     stats,
@@ -14,6 +18,8 @@ const AdminPanel = () => {
     handleDeletePartner,
     fetchStats
   } = AdminPanelCore();
+
+  console.log('[AdminPanel] AdminPanelCore result:', { loading, hasStats: !!stats, partnersCount: partners?.length })
 
   if (loading) {
     return (

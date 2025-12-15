@@ -26,7 +26,7 @@ const LoginPageClient = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
 
@@ -49,31 +49,41 @@ const LoginPageClient = () => {
 
   // Redirect after successful login (like old system)
   useEffect(() => {
+    console.log('[LoginPage] Redirect useEffect:', { loading: authLoading, hasUser: !!user, pathname, userRole: user?.user_metadata?.role })
     if (!authLoading && user && pathname === '/login') {
       const userRole = user.user_metadata?.role
       
       if (userRole === 'admin') {
+        console.log('[LoginPage] Redirecting admin to /admin-dashboard')
         router.push('/admin-dashboard')
       } else if (userRole === 'partner') {
+        console.log('[LoginPage] Redirecting partner to /partner/dashboard')
         router.push('/partner/dashboard')
+      } else {
+        console.log('[LoginPage] User has no role, not redirecting')
       }
     }
   }, [user, authLoading, pathname, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
+    setIsSubmitting(true)
+    console.log('[LoginPage] handleLogin called:', { email })
 
     const { error } = await signIn(email, password)
 
-    setLoading(false)
+    console.log('[LoginPage] signIn result:', { hasError: !!error, errorMessage: error?.message })
+
+    setIsSubmitting(false)
     if (!error) {
+      console.log('[LoginPage] Login successful, waiting for user state update')
       toast({
         title: "Anmeldung erfolgreich",
         description: "Sie werden weitergeleitet...",
       })
       // Redirect logic is handled by useEffect above (like old system)
     } else {
+      console.log('[LoginPage] Login failed:', error?.message)
       toast({
         variant: "destructive",
         title: "Anmeldung fehlgeschlagen",
@@ -163,8 +173,8 @@ const LoginPageClient = () => {
                         </button>
                       </div>
                     </div>
-                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105" disabled={loading}>
-                      {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105" disabled={isSubmitting}>
+                      {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                       Anmelden
                     </Button>
                   </form>
@@ -196,3 +206,4 @@ const LoginPageClient = () => {
 }
 
 export default LoginPageClient
+

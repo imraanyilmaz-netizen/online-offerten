@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import AdminPanelCore from './AdminPanel/AdminPanelCore';
 import AdminPanelTabs from './AdminPanel/AdminPanelTabs';

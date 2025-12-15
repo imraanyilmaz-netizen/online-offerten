@@ -8,6 +8,16 @@ import AdminPanel from '@/src/components/AdminPanel/AdminPanel';
 const AdminDashboardPageClient = () => {
   const { user, loading } = useAuth();
 
+  // Debug logging
+  React.useEffect(() => {
+    console.log('[AdminDashboardPageClient] State:', { 
+      loading, 
+      hasUser: !!user, 
+      userEmail: user?.email,
+      userRole: user?.user_metadata?.role 
+    })
+  }, [user, loading])
+
   // Middleware handles route protection and redirects
   // We only show loading state here
   if (loading) {
@@ -21,9 +31,13 @@ const AdminDashboardPageClient = () => {
     );
   }
 
-  // If user is not admin, middleware will redirect
-  // We just show loading or nothing while redirect happens
-  if (!user || user.user_metadata?.role !== 'admin') {
+  // If user is not admin after loading completes, show error
+  // Middleware should have redirected already, but show message just in case
+  if (!loading && (!user || user.user_metadata?.role !== 'admin')) {
+    console.log('[AdminDashboardPageClient] User not admin or missing:', { 
+      hasUser: !!user, 
+      userRole: user?.user_metadata?.role 
+    })
     return (
       <div className="flex justify-center items-center h-screen bg-gray-50">
         <div className="text-center">
@@ -32,6 +46,11 @@ const AdminDashboardPageClient = () => {
         </div>
       </div>
     );
+  }
+
+  // Only render AdminPanel if we have confirmed admin user
+  if (!user || user.user_metadata?.role !== 'admin') {
+    return null
   }
 
   return (

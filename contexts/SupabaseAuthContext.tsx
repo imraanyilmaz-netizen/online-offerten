@@ -28,6 +28,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const supabase = createClient()
 
   const handleSession = useCallback(async (session: Session | null) => {
+    console.log('[AuthContext] handleSession called:', { 
+      hasSession: !!session, 
+      userEmail: session?.user?.email,
+      userRole: session?.user?.user_metadata?.role 
+    })
     setSession(session)
     setUser(session?.user ?? null)
     setLoading(false)
@@ -36,7 +41,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const initAuth = () => {
       const getSession = async () => {
-        const { data: { session } } = await supabase.auth.getSession()
+        const { data: { session }, error } = await supabase.auth.getSession()
+        
+        // Check for invalid token errors (missing sub claim, etc.)
+        if (error && (error.message?.includes('missing sub claim') || 
+                      error.message?.includes('invalid claim') ||
+                      error.message?.includes('JWT'))) {
+          console.warn('[AuthContext] Invalid session detected, clearing:', error.message)
+          // Clear corrupted session
+          await supabase.auth.signOut()
+          handleSession(null)
+          return
+        }
+        
+        // Validate session has proper user structure
+        if (session?.user && !session.user.id) {
+          console.warn('[AuthContext] Session missing user.id, clearing')
+          await supabase.auth.signOut()
+          handleSession(null)
+          return
+        }
+        
         handleSession(session)
       }
 
@@ -44,6 +69,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
         async (event, session) => {
+          console.log('[AuthContext] onAuthStateChange:', { 
+            event, 
+            hasSession: !!session,
+            userEmail: session?.user?.email,
+            userRole: session?.user?.user_metadata?.role 
+          })
+          
+          // Validate session on auth state change
+          if (session?.user && !session.user.id) {
+            console.warn('[AuthContext] Session missing user.id in onAuthStateChange, clearing')
+            await supabase.auth.signOut()
+            handleSession(null)
+            return
+          }
+          
           handleSession(session)
         }
       )
@@ -101,9 +141,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [toast, supabase])
 
   const signIn = useCallback(async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    console.log('[AuthContext] signIn called:', { email })
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
+    })
+
+    console.log('[AuthContext] signIn result:', { 
+      hasError: !!error, 
+      errorMessage: error?.message,
+      hasSession: !!data?.session,
+      userEmail: data?.session?.user?.email,
+      userRole: data?.session?.user?.user_metadata?.role 
     })
 
     if (error) {
@@ -112,6 +161,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         title: "Sign in Failed",
         description: error.message || "Something went wrong",
       })
+    } else {
+      console.log('[AuthContext] signIn successful, session should be set')
     }
 
     return { error }

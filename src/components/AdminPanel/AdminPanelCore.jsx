@@ -1,5 +1,7 @@
+'use client'
+
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '@/lib/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 
 const AdminPanelCore = () => {

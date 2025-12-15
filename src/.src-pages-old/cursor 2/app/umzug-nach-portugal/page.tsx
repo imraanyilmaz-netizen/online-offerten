@@ -1,0 +1,15 @@
+import type { Metadata } from 'next'
+import UmzugNachPortugalPageClient from '@/components/pages/international/UmzugNachPortugalPageClient'
+
+export const metadata: Metadata = {
+  title: 'Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2025',
+  description: 'Ihr Leitfaden für den Umzug von der Schweiz nach Portugal. Entdecken Sie Kosten, Tipps für Zoll & NIF, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.',
+  keywords: 'umzug nach portugal, umzug schweiz portugal, umzugsfirma schweiz portugal, internationaler umzug portugal, umzug nach lissabon, umzug nach porto, umzug nach faro, umzugsfirma international, zügelfirma schweiz portugal, umzug schweiz nach portugal, umzugskosten schweiz portugal, umzugsfirma vergleichen portugal, günstiger umzug portugal, umzug nach portugal preise, umzug nach portugal kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug portugal',
+  alternates: {
+    canonical: 'https://online-offerten.ch/umzug-nach-portugal',
+  },
+}
+
+export default function UmzugNachPortugalPage() {
+  return <UmzugNachPortugalPageClient />
+}

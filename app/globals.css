@@ -38,5 +38,83 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
+
+  /* iPhone zoom engelleme */
+  html, body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+
+  /* Form elemanları için zoom engelleme */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px !important;
+    min-height: 44px;
+    border-radius: 0 !important;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    input:focus,
+    textarea:focus,
+    select:focus {
+      font-size: 16px !important;
+    }
+  }
+}
+
+/* Scrollbar Stilleri */
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary) / 0.3);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--primary) / 0.5);
+  }
+}
+
+/* Footer Layout Shift Prevention */
+footer.footer-fixed-height {
+  min-height: 550px;
+  contain: layout style paint;
+}
+
+@media (min-width: 768px) {
+  footer.footer-fixed-height {
+    min-height: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  footer.footer-fixed-height {
+    min-height: 650px;
+  }
+}
+
+/* Tiptap Editor link styling */
+.prose a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.prose a:hover {
+  color: var(--primary);
 }
 

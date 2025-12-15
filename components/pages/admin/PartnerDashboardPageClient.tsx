@@ -19,16 +19,35 @@ const PartnerDashboardPageClient = () => {
     ? `${companyName} - Partner-Dashboard` 
     : 'Partner-Dashboard';
 
+  // Debug logging
+  React.useEffect(() => {
+    console.log('[PartnerDashboardPageClient] State:', { 
+      loading, 
+      hasUser: !!user, 
+      userEmail: user?.email,
+      userRole: user?.user_metadata?.role 
+    })
+  }, [user, loading])
+
   // Middleware handles route protection and redirects
   // We only show loading state here
   if (loading) {
     return <LoadingFallback />;
   }
 
-  // If user is not partner, middleware will redirect
-  // We just show loading while redirect happens
-  if (!user || user.user_metadata?.role !== 'partner') {
+  // If user is not partner after loading completes, show error
+  // Middleware should have redirected already, but show message just in case
+  if (!loading && (!user || user.user_metadata?.role !== 'partner')) {
+    console.log('[PartnerDashboardPageClient] User not partner or missing:', { 
+      hasUser: !!user, 
+      userRole: user?.user_metadata?.role 
+    })
     return <LoadingFallback />;
+  }
+
+  // Only render PartnerPanel if we have confirmed partner user
+  if (!user || user.user_metadata?.role !== 'partner') {
+    return null
   }
 
   return (

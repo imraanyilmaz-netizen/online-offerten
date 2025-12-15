@@ -47,9 +47,25 @@ const nextConfig = {
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
   webpack: (config, { isServer }) => {
     // Ignore src/pages directory (old Pages Router)
+    // Performance: Ignore more directories to speed up file watching
     config.watchOptions = {
       ...config.watchOptions,
-      ignored: ['**/src/pages/**', '**/node_modules/**'],
+      ignored: [
+        '**/src/pages/**', 
+        '**/node_modules/**',
+        '**/.next/**',
+        '**/.git/**',
+        '**/public/**',
+        '**/build-*.txt',
+        '**/*.md',
+        '**/scripts/**',
+        '**/supabase/functions/**',
+        '**/plugins/**',
+        '**/tools/**',
+        '**/temp_*.tsx',
+      ],
+      aggregateTimeout: 300,
+      poll: false,
     };
     // Add aliases to resolve both root and src directories
     // Next.js will try both paths automatically with this configuration
@@ -101,6 +117,17 @@ const nextConfig = {
     if (!config.resolve.alias) {
       config.resolve.alias = {};
     }
+    
+    // Performance: Optimize webpack for development
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+      };
+    }
+    
     return config;
   },
 }

@@ -7,9 +7,9 @@ const IMAGE_CACHE = `images-${CACHE_VERSION}`;
 const API_CACHE = `api-${CACHE_VERSION}`;
 
 // Assets to cache on install
+// Note: Next.js App Router doesn't have /index.html, only /
 const STATIC_ASSETS = [
   '/',
-  '/index.html',
   '/manifest.json',
   '/favicon.ico',
   '/favicon-16x16.png',
@@ -37,10 +37,26 @@ self.addEventListener('install', (event) => {
   console.log('[SW] Installing service worker...');
   event.waitUntil(
     Promise.all([
-      // Cache static assets
+      // Cache static assets - handle errors gracefully
       caches.open(STATIC_CACHE).then((cache) => {
         console.log('[SW] Caching static assets');
-        return cache.addAll(STATIC_ASSETS);
+        // Cache each asset individually to handle missing files gracefully
+        return Promise.allSettled(
+          STATIC_ASSETS.map(url => 
+            fetch(url)
+              .then(response => {
+                if (response.ok) {
+                  return cache.put(url, response);
+                } else {
+                  console.warn('[SW] Failed to cache (not found):', url);
+                }
+              })
+              .catch(err => {
+                console.warn('[SW] Failed to cache:', url, err.message);
+                // Don't throw - continue with other assets
+              })
+          )
+        );
       }),
       // Pre-cache critical images for LCP
       caches.open(IMAGE_CACHE).then((cache) => {
@@ -58,7 +74,12 @@ self.addEventListener('install', (event) => {
         );
       })
     ]).then(() => {
+      console.log('[SW] Installation complete');
       return self.skipWaiting(); // Activate immediately
+    }).catch((error) => {
+      console.error('[SW] Installation error:', error);
+      // Still skip waiting even if caching fails
+      return self.skipWaiting();
     })
   );
 });
@@ -178,9 +199,9 @@ async function cacheFirst(request, cacheName) {
         return anyCached;
       }
       
-      // For HTML requests, return index.html as fallback
+      // For HTML requests, return root as fallback (Next.js App Router)
       if (request.headers.get('accept')?.includes('text/html')) {
-        const fallback = await cache.match('/index.html');
+        const fallback = await cache.match('/');
         if (fallback) return fallback;
       }
       
@@ -221,9 +242,9 @@ async function networkFirst(request, cacheName, maxAge = CACHE_DURATIONS.html) {
       return cachedResponse;
     }
 
-    // For HTML requests, return index.html as fallback
+    // For HTML requests, return root as fallback (Next.js App Router)
     if (request.headers.get('accept')?.includes('text/html')) {
-      const fallback = await cache.match('/index.html');
+      const fallback = await cache.match('/');
       if (fallback) return fallback;
     }
 
@@ -234,16 +255,32 @@ async function networkFirst(request, cacheName, maxAge = CACHE_DURATIONS.html) {
 // Message handler for cache updates
 self.addEventListener('message', (event) => {
   // Handle message immediately to prevent channel timeout
-  if (!event.data) {
+  if (!event.data || typeof event.data !== 'object') {
     return;
   }
 
+  // Helper function to safely send message response
+  const safePostMessage = (data) => {
+    try {
+      // Only respond if we have an open port (our messages)
+      // Chrome extensions may send messages without ports
+      if (event.ports && Array.isArray(event.ports) && event.ports.length > 0) {
+        const port = event.ports[0];
+        if (port && typeof port.postMessage === 'function') {
+          port.postMessage(data);
+        }
+      }
+    } catch (error) {
+      // Port may be closed or invalid, ignore silently
+      // This prevents "message channel closed" errors from Chrome extensions
+    }
+  };
+
+  // Only handle our known message types
+  // Ignore Chrome extension messages and other unknown types
   if (event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
-    // Send immediate response if source expects one
-    if (event.ports && event.ports[0]) {
-      event.ports[0].postMessage({ success: true });
-    }
+    safePostMessage({ success: true });
     return;
   }
   
@@ -251,21 +288,32 @@ self.addEventListener('message', (event) => {
     // Use waitUntil for async operations but don't block response
     event.waitUntil(
       caches.open(STATIC_CACHE).then((cache) => {
-        return cache.addAll(event.data.urls || []);
+        // Cache each URL individually to handle errors gracefully
+        return Promise.allSettled(
+          (event.data.urls || []).map(url =>
+            fetch(url)
+              .then(response => {
+                if (response.ok) {
+                  return cache.put(url, response);
+                } else {
+                  console.warn('[SW] Failed to cache URL (not found):', url);
+                }
+              })
+              .catch((error) => {
+                console.warn('[SW] Failed to cache URL:', url, error.message);
+              })
+          )
+        );
       }).catch((error) => {
         console.warn('[SW] Cache URLs error:', error);
       })
     );
     // Send immediate response
-    if (event.ports && event.ports[0]) {
-      event.ports[0].postMessage({ success: true });
-    }
+    safePostMessage({ success: true });
     return;
   }
 
-  // Send response for any other messages to prevent timeout
-  if (event.ports && event.ports[0]) {
-    event.ports[0].postMessage({ received: true });
-  }
+  // Ignore all other message types (likely from Chrome extensions)
+  // Don't send response to avoid "message channel closed" errors
 });
 
