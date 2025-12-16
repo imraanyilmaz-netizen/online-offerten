@@ -43,13 +43,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const getSession = async () => {
         const { data: { session }, error } = await supabase.auth.getSession()
         
-        // Check for invalid token errors (missing sub claim, etc.)
-        if (error && (error.message?.includes('missing sub claim') || 
-                      error.message?.includes('invalid claim') ||
-                      error.message?.includes('JWT'))) {
+        // Check for invalid token errors (missing sub claim, refresh token not found, etc.)
+        if (error && (
+          error.message?.includes('missing sub claim') || 
+          error.message?.includes('invalid claim') ||
+          error.message?.includes('JWT') ||
+          error.message?.includes('Invalid Refresh Token') ||
+          error.message?.includes('Refresh Token Not Found') ||
+          error.message?.includes('refresh_token')
+        )) {
           console.warn('[AuthContext] Invalid session detected, clearing:', error.message)
-          // Clear corrupted session
-          await supabase.auth.signOut()
+          // Clear corrupted session and storage
+          try {
+            await supabase.auth.signOut()
+            // Also clear localStorage manually as backup
+            if (typeof window !== 'undefined') {
+              const keys = Object.keys(localStorage)
+              keys.forEach(key => {
+                if (key.includes('supabase') || key.includes('auth-token')) {
+                  localStorage.removeItem(key)
+                }
+              })
+            }
+          } catch (signOutError) {
+            console.warn('[AuthContext] Error during signOut:', signOutError)
+          }
           handleSession(null)
           return
         }
@@ -75,6 +93,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             userEmail: session?.user?.email,
             userRole: session?.user?.user_metadata?.role 
           })
+          
+          // Handle token refresh errors
+          if (event === 'TOKEN_REFRESHED' && !session) {
+            console.warn('[AuthContext] Token refresh failed, clearing session')
+            await supabase.auth.signOut()
+            handleSession(null)
+            return
+          }
           
           // Validate session on auth state change
           if (session?.user && !session.user.id) {

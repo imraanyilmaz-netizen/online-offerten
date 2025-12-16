@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomerForm from '@/components/NewCustomerForm';
 import LanguageSwitcher from '@/components/LanguageSwitcher'; // Geri eklendi - müşteri formu için
 import { motion } from 'framer-motion';
@@ -10,20 +10,50 @@ import { useTranslation } from 'react-i18next'; // i18n geri eklendi - SEO için
 import { getLanguageFromUrl } from '@/lib/urlMap'; // Canonical URL için
 
 const QuoteFormPageClient = () => {
-  const { t } = useTranslation('newCustomerForm'); // i18n geri eklendi
+  const { t, i18n, ready } = useTranslation('newCustomerForm'); // i18n geri eklendi
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   
-  // i18n ile dinamik meta bilgileri
-  const metaTitle = t('meta.title');
-  const metaDescription = t('meta.description');
+  // Client-side mount kontrolü
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // URL'den dil algılama ve i18n dilini güncelle
+  useEffect(() => {
+    if (!mounted) return;
+    const detectedLang = getLanguageFromUrl(pathname || '/');
+    if (detectedLang && i18n.language !== detectedLang) {
+      // Render sırasında state güncellemesini önle
+      const timeoutId = setTimeout(() => {
+        i18n.changeLanguage(detectedLang);
+      }, 0);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [pathname, i18n.language, i18n, mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    // document.documentElement.lang'ı güncelle
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language, mounted]);
   
   // Canonical URL'i dil bazlı belirle
-  const currentLang = getLanguageFromUrl(pathname || '/');
+  const currentLang = mounted ? getLanguageFromUrl(pathname || '/') : 'de';
   const canonicalUrl = currentLang === 'en' 
     ? 'https://online-offerten.ch/free-quote-request'
     : 'https://online-offerten.ch/kostenlose-offerte-anfordern';
 
-  // i18n ile dinamik hero ve diğer metinler
+  // Loading state - hydration mismatch'i önlemek için
+  if (!mounted || !ready) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 relative overflow-hidden flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+      </div>
+    );
+  }
+  
+  // i18n ile dinamik hero ve diğer metinler - sadece ready ve mounted olduğunda
   const heroTitle = t('quoteFormPage.heroTitle');
   const heroDescription = t('quoteFormPage.heroDescription');
 

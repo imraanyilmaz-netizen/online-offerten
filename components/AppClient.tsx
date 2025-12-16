@@ -7,6 +7,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
+import ClientRouteProtection from '@/components/ClientRouteProtection'
 import { logoUrl } from '@/assets/logoConstants'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
@@ -214,6 +215,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   return (
     <HelmetProvider>
       <I18nextProvider i18n={i18n}>
+        <ClientRouteProtection />
         <ScrollToTop />
         <Layout>
           <AnimatePresence mode="wait">

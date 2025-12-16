@@ -1,8 +1,8 @@
 'use client'
 
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '@/contexts/SupabaseAuthContext'
 import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
@@ -14,11 +14,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
 
 const LoginPageClient = () => {
-  const { signIn, user, loading: authLoading } = useAuth()
+  const { signIn } = useAuth()
   const { toast } = useToast()
   const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
 
   const pageTitle = "Partner Login"
   const welcomeMessage = "Willkommen zurück!"
@@ -29,41 +27,6 @@ const LoginPageClient = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
-
-  // Remove redirect query param from URL immediately - run on every render if needed
-  useEffect(() => {
-    if (typeof window !== 'undefined' && searchParams?.has('redirect')) {
-      const params = new URLSearchParams(window.location.search)
-      if (params.has('redirect')) {
-        params.delete('redirect')
-        const newUrl = params.toString() 
-          ? `${pathname}?${params.toString()}` 
-          : pathname || '/login'
-        // Use window.history.replaceState for immediate URL update
-        window.history.replaceState({}, '', newUrl)
-        // Also use router.replace as backup
-        router.replace(newUrl)
-      }
-    }
-  }, [searchParams, pathname, router])
-
-  // Redirect after successful login (like old system)
-  useEffect(() => {
-    console.log('[LoginPage] Redirect useEffect:', { loading: authLoading, hasUser: !!user, pathname, userRole: user?.user_metadata?.role })
-    if (!authLoading && user && pathname === '/login') {
-      const userRole = user.user_metadata?.role
-      
-      if (userRole === 'admin') {
-        console.log('[LoginPage] Redirecting admin to /admin-dashboard')
-        router.push('/admin-dashboard')
-      } else if (userRole === 'partner') {
-        console.log('[LoginPage] Redirecting partner to /partner/dashboard')
-        router.push('/partner/dashboard')
-      } else {
-        console.log('[LoginPage] User has no role, not redirecting')
-      }
-    }
-  }, [user, authLoading, pathname, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -76,12 +39,13 @@ const LoginPageClient = () => {
 
     setIsSubmitting(false)
     if (!error) {
-      console.log('[LoginPage] Login successful, waiting for user state update')
+      console.log('[LoginPage] Login successful')
       toast({
         title: "Anmeldung erfolgreich",
         description: "Sie werden weitergeleitet...",
       })
-      // Redirect logic is handled by useEffect above (like old system)
+      // Redirect is handled automatically by ClientRouteProtection component
+      // based on user role - no manual redirect needed
     } else {
       console.log('[LoginPage] Login failed:', error?.message)
       toast({

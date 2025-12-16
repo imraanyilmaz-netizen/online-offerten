@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,8 +23,10 @@ const FullPageLoader = () => (
 
 
 const InternationalCostCalculator = () => {
-  const { t } = useTranslation('internationaleUmzugPage');
+  const { t, ready } = useTranslation('internationaleUmzugPage');
+  const [mounted, setMounted] = useState(false);
 
+  // All hooks must be called before any conditional returns
   const [fromCountry, setFromCountry] = useState('CH');
   const [toCountry, setToCountry] = useState('DE');
   const [moveType, setMoveType] = useState('private');
@@ -33,10 +37,68 @@ const InternationalCostCalculator = () => {
   const [estimatedCost, setEstimatedCost] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
+  // All hooks (including useMemo) must be called before any conditional returns
   const countries = useMemo(() => {
+    // Safe fallback if t is not ready yet
+    if (!ready || !t) {
+      return [];
+    }
+    try {
     const countryNames = t('calculator.countries', { returnObjects: true });
-    return Object.entries(countryNames).map(([code, name]) => ({ code, name }));
-  }, [t]);
+      return Object.entries(countryNames || {}).map(([code, name]) => ({ code, name }));
+    } catch (error) {
+      return [];
+    }
+  }, [t, ready]);
+
+  const initialFormDataForQuote = useMemo(() => {
+    const formData = {
+        service: 'umzug',
+        umzugArt: 'international',
+        from_country: fromCountry,
+        to_country: toCountry,
+        needsdisassembly: true,
+        needspacking: true,
+        additional_cleaning: includeCleaning
+    };
+
+    if (moveType === 'private') {
+        formData.from_rooms = rooms;
+        formData.from_object_type = 'wohnung';
+    } else {
+        formData.from_rooms = area; // Using rooms field for area in business context
+        formData.from_object_type = 'buero';
+    }
+
+    if (includePiano) {
+        formData.special_transport_items = ['klaviertransport'];
+        formData.hasspecialitems = true;
+    }
+
+    return formData;
+  }, [fromCountry, toCountry, moveType, rooms, area, includePiano, includeCleaning]);
+
+  // Prevent hydration mismatch by only rendering translations after mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Wait for i18n to be ready and component to be mounted
+  if (!mounted || !ready) {
+    return (
+      <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100">
+        <div className="flex items-center mb-6">
+          <Calculator className="w-8 h-8 mr-4 text-green-500" />
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-800">
+            Internationaler Umzug Kostenrechner
+          </h2>
+        </div>
+        <div className="flex h-64 w-full items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-green-600" />
+        </div>
+      </div>
+    );
+  }
 
   const handleCountryChange = (type, value) => {
     if (type === 'from') {
@@ -110,33 +172,6 @@ const InternationalCostCalculator = () => {
         }
     }, 100);
   };
-
-  const initialFormDataForQuote = useMemo(() => {
-    const formData = {
-        service: 'umzug',
-        umzugArt: 'international',
-        from_country: fromCountry,
-        to_country: toCountry,
-        needsdisassembly: true,
-        needspacking: true,
-        additional_cleaning: includeCleaning
-    };
-
-    if (moveType === 'private') {
-        formData.from_rooms = rooms;
-        formData.from_object_type = 'wohnung';
-    } else {
-        formData.from_rooms = area; // Using rooms field for area in business context
-        formData.from_object_type = 'buero';
-    }
-
-    if (includePiano) {
-        formData.special_transport_items = ['klaviertransport'];
-        formData.hasspecialitems = true;
-    }
-
-    return formData;
-}, [fromCountry, toCountry, moveType, rooms, area, includePiano, includeCleaning]);
 
 
   const containerVariants = {

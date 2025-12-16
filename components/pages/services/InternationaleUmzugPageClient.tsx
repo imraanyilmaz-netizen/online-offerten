@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
@@ -207,11 +207,22 @@ const ArticleSection = () => {
 
 const InternationaleUmzugPageClient = () => {
   const imageUrl = 'https://online-offerten.ch/image/umzugsservice-Schweiz/lnternatIonale-umzuege.png'
-  
-  const pageVariants = {
+  const [mounted, setMounted] = useState(false)
+
+  // Prevent hydration mismatch by only showing animations after mount
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Show content immediately, but disable animations until mounted to prevent SSR mismatch
+  const pageVariants = mounted ? {
     initial: { opacity: 0, y: 20 },
     in: { opacity: 1, y: 0 },
     out: { opacity: 0, y: -20 },
+  } : {
+    initial: { opacity: 1, y: 0 },
+    in: { opacity: 1, y: 0 },
+    out: { opacity: 1, y: 0 },
   }
 
   const featureVariants = {
@@ -343,9 +354,9 @@ const InternationaleUmzugPageClient = () => {
         className="bg-gradient-to-b from-slate-50 to-white"
       >
         <motion.section
-          initial={{ opacity: 0 }}
+          initial={mounted ? { opacity: 0 } : { opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: mounted ? 0.8 : 0 }}
           className="relative w-full bg-gray-100 py-12 md:py-16"
           itemScope
           itemType="https://schema.org/Service"
@@ -354,9 +365,9 @@ const InternationaleUmzugPageClient = () => {
             <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
               <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl" itemProp="description">
                 <motion.div
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={mounted ? { y: 20, opacity: 0 } : { y: 0, opacity: 1 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                  transition={{ delay: mounted ? 0.2 : 0, duration: mounted ? 0.6 : 0 }}
                 >
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
                     Umzugsfirmen vergleichen für Auslandsumzug
@@ -366,9 +377,9 @@ const InternationaleUmzugPageClient = () => {
                   </p>
                 </motion.div>
                 <motion.p
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={mounted ? { y: 20, opacity: 0 } : { y: 0, opacity: 1 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
+                  transition={{ delay: mounted ? 0.4 : 0, duration: mounted ? 0.6 : 0 }}
                   className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium"
                 >
                   Vergleichen Sie online mehrere geprüfte Umzugsfirmen für Ihren Auslandsumzug in einem Schritt. Erhalten Sie kostenlose Offerten von zertifizierten Speditionen, die auf internationale Umzüge spezialisiert sind. Von der Zollabwicklung bis zur Endmontage – finden Sie den besten Partner für Ihren Umzug nach Deutschland, Österreich, Frankreich, Spanien oder ganz Europa.
@@ -436,7 +447,7 @@ const InternationaleUmzugPageClient = () => {
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                initial={mounted ? { opacity: 0, x: -30 } : { opacity: 1, x: 0 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.3 }}
@@ -451,7 +462,7 @@ const InternationaleUmzugPageClient = () => {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
+                initial={mounted ? { opacity: 0, x: 30 } : { opacity: 1, x: 0 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.4 }}
@@ -501,7 +512,7 @@ const InternationaleUmzugPageClient = () => {
         <section className="py-12 md:py-20 bg-slate-100 mt-12 md:mt-16">
           <div className="container mx-auto max-w-navbar px-4 md:px-6 text-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={mounted ? { opacity: 0, scale: 0.9 } : { opacity: 1, scale: 1 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}

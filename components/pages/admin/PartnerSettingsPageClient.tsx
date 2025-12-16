@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { createClient } from '@/lib/supabase/client';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
@@ -18,12 +18,12 @@ import ReviewCard from '@/components/PartnerProfilePageParts/ReviewCard';
 import { formatDate } from '@/lib/utils'; // Import formatDate from utils
 
 const PartnerSettingsPageClient = () => {
-  const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const [partnerData, setPartnerData] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
   const [formData, setFormData] = useState({
@@ -41,14 +41,38 @@ const PartnerSettingsPageClient = () => {
     confirmPassword: '',
   });
 
-  // Client-side auth guard - middleware handles redirects
+  // Client-only auth check
   useEffect(() => {
-    if (!authLoading) {
-      if (!user || user.user_metadata?.role !== 'partner') {
-        router.push('/login');
+    const checkAuth = async () => {
+      try {
+        const { createClient } = await import('@/lib/supabase/client');
+        const supabase = createClient();
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error || !session) {
+          console.log('[PartnerSettingsPageClient] No session, redirecting to /login');
+          router.replace('/login');
+          return;
+        }
+
+        const userRole = session.user?.user_metadata?.role;
+        
+        if (userRole !== 'partner') {
+          console.log('[PartnerSettingsPageClient] User is not partner, redirecting to /');
+          router.replace('/');
+          return;
+        }
+
+        // User is partner - set user and continue
+        setUser(session.user);
+      } catch (error) {
+        console.error('[PartnerSettingsPageClient] Auth check error:', error);
+        router.replace('/login');
       }
-    }
-  }, [user, authLoading, router]);
+    };
+
+    checkAuth();
+  }, [router]);
 
   const fetchPartnerData = useCallback(async () => {
     if (!user) return;
@@ -94,8 +118,8 @@ const PartnerSettingsPageClient = () => {
     }
   }, [fetchPartnerData, user]);
 
-  // Show loading while checking auth
-  if (authLoading) {
+  // Show loading while checking auth or loading data
+  if (loading && !user) {
     return (
       <div className="flex justify-center items-center h-screen bg-gray-50">
         <div className="text-center">

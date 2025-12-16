@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import InternationaleUmzugPageClient from '@/components/pages/services/InternationaleUmzugPageClient'
 
 export const metadata: Metadata = {
@@ -14,7 +15,17 @@ export const metadata: Metadata = {
   },
 }
 
+const LoadingFallback = () => (
+  <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+  </div>
+)
+
 export default function InternationaleUmzugPage() {
-  return <InternationaleUmzugPageClient />
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <InternationaleUmzugPageClient />
+    </Suspense>
+  )
 }
 

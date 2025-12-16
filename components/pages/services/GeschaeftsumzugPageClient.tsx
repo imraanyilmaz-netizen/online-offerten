@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -13,6 +13,12 @@ import {
 
 const GeschaeftsumzugPageClient = () => {
   const router = useRouter()
+  const [mounted, setMounted] = useState(false)
+
+  // Prevent hydration mismatch by only showing animations after mount
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // SEO Data (moved to server component, but kept for schema generation if needed client-side)
   const metaTitle = "Büroumzug & Firmenumzug – Geschäftsumzug Offerten kostenlos | Umzugsfirmen vergleichen"
@@ -170,14 +176,22 @@ const GeschaeftsumzugPageClient = () => {
     { icon: TrendingDown, text: "100% kostenlos & unverbindlich" },
   ]
 
+  // Show content immediately, but disable animations until mounted to prevent SSR mismatch
+  const animationProps = mounted ? {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.5 }
+  } : {
+    initial: { opacity: 1 },
+    animate: { opacity: 1 },
+    transition: { duration: 0 }
+  }
+
   return (
     <>
-      
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        {...animationProps}
         className="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-100"
       >
         {/* Hero Section */}

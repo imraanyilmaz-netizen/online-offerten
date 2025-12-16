@@ -9,11 +9,20 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
 // Custom storage that syncs between localStorage and cookies
+// Always returns a storage object to prevent Supabase warnings
 const createCookieStorage = () => {
+  // Server-side: return a no-op storage
+  if (typeof window === 'undefined') {
+    return {
+      getItem: (): string | null => null,
+      setItem: (): void => {},
+      removeItem: (): void => {},
+    }
+  }
+  
+  // Client-side: return full storage implementation
   return {
     getItem: (key: string): string | null => {
-      if (typeof window === 'undefined') return null
-      
       // Read from localStorage (primary storage)
       const value = localStorage.getItem(key)
       
@@ -46,8 +55,6 @@ const createCookieStorage = () => {
       return value
     },
     setItem: (key: string, value: string): void => {
-      if (typeof window === 'undefined') return
-      
       console.log('[Supabase Storage] setItem called:', { key, valueLength: value?.length })
       
       // Store in localStorage (primary storage)
@@ -64,8 +71,6 @@ const createCookieStorage = () => {
       }
     },
     removeItem: (key: string): void => {
-      if (typeof window === 'undefined') return
-      
       // Remove from localStorage
       localStorage.removeItem(key)
       
@@ -83,14 +88,42 @@ let supabaseInstance: ReturnType<typeof createSupabaseClient> | null = null
 
 export function createClient() {
   if (!supabaseInstance) {
+    // Always provide storage (no-op on server-side) to prevent Supabase warnings
+    const storage = createCookieStorage()
+    
     supabaseInstance = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
       auth: {
         persistSession: true,
         autoRefreshToken: true,
         detectSessionInUrl: true,
-        storage: typeof window !== 'undefined' ? createCookieStorage() : undefined
+        storage: storage,
+        // Handle refresh token errors gracefully
+        flowType: 'pkce'
       }
     })
+
+    // Listen for auth errors and clear invalid tokens
+    if (typeof window !== 'undefined') {
+      supabaseInstance.auth.onAuthStateChange((event, session) => {
+        // If token refresh fails, clear the session
+        if (event === 'TOKEN_REFRESHED' && !session) {
+          console.warn('[Supabase Client] Token refresh failed, clearing storage')
+          // Clear all auth-related storage
+          const keys = Object.keys(localStorage)
+          keys.forEach(key => {
+            if (key.includes('supabase') || key.includes('auth-token')) {
+              localStorage.removeItem(key)
+            }
+          })
+          // Clear cookies
+          document.cookie.split(";").forEach(c => {
+            if (c.includes('auth-token')) {
+              document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/")
+            }
+          })
+        }
+      })
+    }
   }
   return supabaseInstance
 }

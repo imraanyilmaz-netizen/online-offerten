@@ -1,7 +1,8 @@
 'use client'
 
-import React, { Suspense, useState } from 'react';
-import { useAuth } from '@/contexts/SupabaseAuthContext';
+import React, { Suspense, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 import PartnerPanel from '@/src/components/PartnerPanel';
 import { Loader2 } from 'lucide-react';
 
@@ -12,48 +13,56 @@ const LoadingFallback = () => (
 );
 
 const PartnerDashboardPageClient = () => {
-  const { user, loading } = useAuth();
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(true);
+  const [user, setUser] = React.useState<any>(null);
   const [companyName, setCompanyName] = useState('');
 
-  const pageTitle = companyName 
-    ? `${companyName} - Partner-Dashboard` 
-    : 'Partner-Dashboard';
+  // Client-only auth check
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const supabase = createClient();
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error || !session) {
+          console.log('[PartnerDashboardPageClient] No session, redirecting to /login');
+          router.replace('/login');
+          return;
+        }
 
-  // Debug logging
-  React.useEffect(() => {
-    console.log('[PartnerDashboardPageClient] State:', { 
-      loading, 
-      hasUser: !!user, 
-      userEmail: user?.email,
-      userRole: user?.user_metadata?.role 
-    })
-  }, [user, loading])
+        const userRole = session.user?.user_metadata?.role;
+        
+        if (userRole !== 'partner') {
+          console.log('[PartnerDashboardPageClient] User is not partner, redirecting to /');
+          router.replace('/');
+          return;
+        }
 
-  // Middleware handles route protection and redirects
-  // We only show loading state here
+        // User is partner - allow access
+        setUser(session.user);
+        setLoading(false);
+      } catch (error) {
+        console.error('[PartnerDashboardPageClient] Auth check error:', error);
+        router.replace('/login');
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
   if (loading) {
     return <LoadingFallback />;
   }
 
-  // If user is not partner after loading completes, show error
-  // Middleware should have redirected already, but show message just in case
-  if (!loading && (!user || user.user_metadata?.role !== 'partner')) {
-    console.log('[PartnerDashboardPageClient] User not partner or missing:', { 
-      hasUser: !!user, 
-      userRole: user?.user_metadata?.role 
-    })
-    return <LoadingFallback />;
-  }
-
-  // Only render PartnerPanel if we have confirmed partner user
   if (!user || user.user_metadata?.role !== 'partner') {
-    return null
+    return null;
   }
 
   return (
-      <Suspense fallback={<LoadingFallback />}>
-        <PartnerPanel setCompanyName={setCompanyName} />
-      </Suspense>
+    <Suspense fallback={<LoadingFallback />}>
+      <PartnerPanel setCompanyName={setCompanyName} />
+    </Suspense>
   );
 };
 
