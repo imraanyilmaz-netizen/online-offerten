@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 
 const AdminPanelCore = () => {
@@ -11,6 +11,7 @@ const AdminPanelCore = () => {
   const [partners, setPartners] = useState([]);
 
   const fetchStats = useCallback(async () => {
+      const supabase = createClient();
       const { data, error } = await supabase.rpc('get_admin_stats');
       if (error) {
         console.error('Error fetching admin stats:', error);
@@ -23,6 +24,7 @@ const AdminPanelCore = () => {
   
   const fetchPartners = useCallback(async () => {
     try {
+      const supabase = createClient();
       const { data, error } = await supabase.from('partners').select('*').order('created_at', { ascending: false });
       if (error) throw error;
       setPartners(data || []);
@@ -47,6 +49,7 @@ const AdminPanelCore = () => {
 
   const handleUpdatePartnerStatus = async (partnerId, status) => {
     try {
+      const supabase = createClient();
       const { error } = await supabase.from('partners').update({ status }).eq('id', partnerId);
       if (error) throw error;
       toast({ title: 'Erfolgreich', description: 'Partnerstatus wurde aktualisiert.' });
@@ -59,6 +62,7 @@ const AdminPanelCore = () => {
 
   const handleUpdatePartner = async (partnerId, updateData) => {
     try {
+      const supabase = createClient();
       const { error } = await supabase.from('partners').update(updateData).eq('id', partnerId);
       if (error) throw error;
       fetchPartners();
@@ -70,6 +74,7 @@ const AdminPanelCore = () => {
 
   const handleDeletePartner = async (partnerId) => {
     try {
+      const supabase = createClient();
       const { error } = await supabase.rpc('delete_partner_fully', { p_partner_id: partnerId });
       if (error) throw error;
       fetchPartners();
