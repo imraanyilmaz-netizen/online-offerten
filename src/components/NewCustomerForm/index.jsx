@@ -140,26 +140,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const [showExitDialog, setShowExitDialog] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
   
-  // Handle browser navigation blocking (beforeunload)
-  useEffect(() => {
-    if (isSubmitted) return;
-      
-    const params = new URLSearchParams(searchParams?.toString());
-    const currentStepFromUrl = params.get('step');
-    const shouldBlock = !currentStepFromUrl || currentStepFromUrl === '1';
-    
-    if (shouldBlock) {
-      const handleBeforeUnload = (e) => {
-        e.preventDefault();
-        e.returnValue = '';
-      };
-      
-      window.addEventListener('beforeunload', handleBeforeUnload);
-      return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-      };
-    }
-  }, [searchParams, isSubmitted]);
+  // beforeunload event'ini kaldırdık - tarayıcının varsayılan dialog'u yerine özel popup kullanıyoruz
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams?.toString());
@@ -196,13 +177,34 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   };
   
   const handleConfirmExit = () => {
+    const navigationPath = pendingNavigation;
     setShowExitDialog(false);
-    if (pendingNavigation) {
-      router.push(pendingNavigation);
-      setPendingNavigation(null);
-    } else {
-      router.back();
-    }
+    setPendingNavigation(null);
+    
+    // Kısa bir delay ile navigation yap ki dialog kapanma animasyonu tamamlansın
+    setTimeout(() => {
+      if (navigationPath) {
+        // Belirli bir path varsa oraya git
+        router.push(navigationPath);
+      } else {
+        // Formdan tamamen çık - önceki sayfaya git
+        const referrer = document.referrer;
+        if (referrer && referrer.includes(window.location.origin)) {
+          // Referrer aynı origin'de ise, path'i parse et ve router.push kullan
+          try {
+            const referrerUrl = new URL(referrer);
+            const referrerPath = referrerUrl.pathname + referrerUrl.search;
+            router.push(referrerPath);
+          } catch (e) {
+            // URL parse hatası olursa ana sayfaya git
+            router.push('/');
+          }
+        } else {
+          // Referrer yoksa veya farklı origin'de ise ana sayfaya git
+          router.push('/');
+        }
+      }
+    }, 100);
   };
 
   const handleStayInForm = () => {
@@ -223,7 +225,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     const params = new URLSearchParams(searchParams?.toString());
     params.set('service', serviceId);
     if(currentStep > 1) params.delete('step');
-    router.push(`${pathname}?${params.toString()}`, { replace: true });
+    const newUrl = `${pathname}?${params.toString()}`;
+    // router.replace kullan ki URL değişikliği görünsün ama history'ye entry eklenmesin
+    router.replace(newUrl);
     
     if (serviceId === 'umzug' && !isFromUrl) {
       setTimeout(scrollToUmzugArt, 50); 
@@ -292,6 +296,42 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   }, [searchParams?.toString(), currentStep, isSubmitted]);
 
+  // Browser geri tuşu ile formdan çıkış kontrolü
+  // Sadece Step 1'de ve formdan tamamen çıkışta uyarı ver
+  useEffect(() => {
+    if (isSubmitted) return;
+    
+    // Step 2'deyken history manipulation yapma - normal navigation'a izin ver
+    // Step 2'den Step 1'e geçiş için başka bir useEffect handle ediyor
+    if (currentStep === 2) {
+      return;
+    }
+    
+    // Sadece Step 1'deyken history manipulation yap
+    if (currentStep !== 1) {
+      return;
+    }
+    
+    const handlePopState = (e) => {
+      // Step 1'de ve form doluysa uyarı ver (formdan tamamen çıkış)
+      const hasFormData = formData.service || formData.email || formData.firstName;
+      if (hasFormData && !showExitDialog) {
+        e.preventDefault();
+        window.history.pushState(null, '', window.location.href);
+        setPendingNavigation(null);
+        setShowExitDialog(true);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    // History'ye bir entry ekle ki popstate event'i tetiklensin (sadece Step 1'de)
+    window.history.pushState(null, '', window.location.href);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [isSubmitted, currentStep, formData.service, formData.email, formData.firstName, showExitDialog]);
+
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
@@ -355,7 +395,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const stepTitle = getStepTitle();
   
   const handleNavigateHome = () => {
-    router.push('/');
+    setPendingNavigation('/');
+    setShowExitDialog(true);
   };
 
   const renderStepContent = () => {

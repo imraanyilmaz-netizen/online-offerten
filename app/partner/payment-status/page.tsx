@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import PaymentSuccessPageClient from '@/components/pages/payment/PaymentSuccessPageClient'
 
+// Force dynamic - no static generation for payment status
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: 'Payment Status - Online-Offerten.ch',
   description: 'Zahlungsstatus für Partner-Guthaben',

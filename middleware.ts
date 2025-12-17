@@ -73,6 +73,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
   
+  // Skip /login route to prevent redirect loops
+  if (pathname === '/login' || pathname.startsWith('/login/')) {
+    return NextResponse.next()
+  }
+  
   const protectedRoutes = [
     '/admin-dashboard',
     '/partner/dashboard',
@@ -114,7 +119,8 @@ export async function middleware(request: NextRequest) {
       if (pathname.startsWith('/admin-dashboard')) {
         if (userRole !== 'admin') {
           console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
-          return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
+          const loginUrl = new URL('/login', request.nextUrl.origin)
+          return NextResponse.redirect(loginUrl, { status: 307 })
         }
       } else if (
         pathname.startsWith('/partner/dashboard') ||
@@ -123,7 +129,8 @@ export async function middleware(request: NextRequest) {
       ) {
         if (userRole !== 'partner') {
           console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
-          return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
+          const loginUrl = new URL('/login', request.nextUrl.origin)
+          return NextResponse.redirect(loginUrl, { status: 307 })
         }
       }
       
@@ -150,7 +157,8 @@ export async function middleware(request: NextRequest) {
         hasCookies: !!cookieHeader,
         hasAuthCookie
       })
-      return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
+      const loginUrl = new URL('/login', request.nextUrl.origin)
+      return NextResponse.redirect(loginUrl, { status: 307 })
     }
     
     const userRole = user.user_metadata?.role
@@ -159,7 +167,8 @@ export async function middleware(request: NextRequest) {
     if (pathname.startsWith('/admin-dashboard')) {
       if (userRole !== 'admin') {
         console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: user.email })
-        return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
+        const loginUrl = new URL('/login', request.nextUrl.origin)
+        return NextResponse.redirect(loginUrl, { status: 307 })
       }
     } else if (
       pathname.startsWith('/partner/dashboard') ||
@@ -168,7 +177,8 @@ export async function middleware(request: NextRequest) {
     ) {
       if (userRole !== 'partner') {
         console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: user.email })
-        return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
+        const loginUrl = new URL('/login', request.nextUrl.origin)
+        return NextResponse.redirect(loginUrl, { status: 307 })
       }
     }
     
@@ -181,7 +191,8 @@ export async function middleware(request: NextRequest) {
       pathname,
       hasCookies: !!cookieHeader
     })
-    return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
+    const loginUrl = new URL('/login', request.nextUrl.origin)
+    return NextResponse.redirect(loginUrl, { status: 307 })
   }
 }
 

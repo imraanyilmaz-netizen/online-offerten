@@ -44,6 +44,21 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     realReviewCount: 0,
     averageRating: 4.8 
   })
+  const [isNavigating, setIsNavigating] = useState(false)
+
+  // Fix Router Cache: Refresh router cache on navigation
+  useEffect(() => {
+    // Small delay to ensure navigation is complete
+    const timer = setTimeout(() => {
+      if (typeof window !== 'undefined' && pathname) {
+        // Force router cache refresh for client-side navigation
+        router.refresh()
+        setIsNavigating(false)
+      }
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [pathname, router])
 
   // Redirect .php files
   useEffect(() => {
@@ -79,24 +94,26 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }
   }, [pathname])
 
-  // Normalize path to lowercase
+  // Normalize path to lowercase - debounced to prevent navigation loops
   useEffect(() => {
-    if (!pathname) return
+    if (!pathname || isNavigating) return
     const normalizedPath = pathname.toLowerCase()
     
     if (pathname !== normalizedPath) {
+      setIsNavigating(true)
       const search = searchParams?.toString()
       router.replace(normalizedPath + (search ? `?${search}` : ''))
     }
-  }, [pathname, searchParams, router])
+  }, [pathname, searchParams, router, isNavigating])
 
-  // Remove lang/lng query params
+  // Remove lang/lng query params - debounced to prevent navigation loops
   useEffect(() => {
-    if (!searchParams) return
+    if (!searchParams || isNavigating) return
     const lang = searchParams.get('lang')
     const lng = searchParams.get('lng')
     
     if (lang || lng) {
+      setIsNavigating(true)
       const params = new URLSearchParams(searchParams.toString())
       params.delete('lang')
       params.delete('lng')
@@ -107,7 +124,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
         router.replace(newUrl)
       }
     }
-  }, [searchParams, pathname, router])
+  }, [searchParams, pathname, router, isNavigating])
 
   // Fetch review stats (deferred)
   useEffect(() => {
@@ -216,17 +233,28 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
       <I18nextProvider i18n={i18n}>
         <ScrollToTop />
         <Layout>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
+          <Suspense fallback={
+            <div className="flex justify-center items-center min-h-screen">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+            </div>
+          }>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={pathname}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15, ease: 'easeInOut' }}
+                onAnimationStart={() => setIsNavigating(true)}
+                onAnimationComplete={() => {
+                  // Small delay to ensure content is rendered
+                  setTimeout(() => setIsNavigating(false), 50)
+                }}
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
+          </Suspense>
         </Layout>
         {shouldShowFloatingReview && (
           <Suspense fallback={null}>
