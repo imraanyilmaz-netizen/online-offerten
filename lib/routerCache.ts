@@ -11,12 +11,9 @@ export function clearRouterCache(path?: string) {
   if (typeof window === 'undefined') return
 
   // Clear Next.js router cache
-  if ('next' in window && 'router' in window.next) {
-    // @ts-ignore - Internal Next.js API
-    const router = window.next.router
-    if (router && typeof router.refresh === 'function') {
-      router.refresh()
-    }
+  const windowWithNext = window as typeof window & { next?: { router?: { refresh?: () => void } } }
+  if (windowWithNext.next && windowWithNext.next.router && typeof windowWithNext.next.router.refresh === 'function') {
+    windowWithNext.next.router.refresh()
   }
 
   // Clear fetch cache for the path
@@ -39,11 +36,8 @@ export function forceRouterRefresh() {
   if (typeof window === 'undefined') return
 
   // Use Next.js router refresh
-  if ('next' in window && 'router' in window.next) {
-    // @ts-ignore - Internal Next.js API
-    const router = window.next.router
-    if (router && typeof router.refresh === 'function') {
-      router.refresh()
-    }
+  const windowWithNext = window as typeof window & { next?: { router?: { refresh?: () => void } } }
+  if (windowWithNext.next && windowWithNext.next.router && typeof windowWithNext.next.router.refresh === 'function') {
+    windowWithNext.next.router.refresh()
   }
 }
