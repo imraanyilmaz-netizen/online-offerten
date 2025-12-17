@@ -179,7 +179,7 @@ const PartnerPanel = ({ setCompanyName }) => {
               </Link>
             </Button>
               <Button asChild className="flex-1 sm:flex-none h-11 bg-green-600 hover:bg-green-700 text-white font-semibold">
-              <Link href="/partner/credit-topup">
+              <Link href="/partner/credit-top-up">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Guthaben aufladen
               </Link>
@@ -188,7 +188,7 @@ const PartnerPanel = ({ setCompanyName }) => {
           </div>
         </header>
 
-        <PartnerStats stats={stats} onTopUpClick={() => router.push('/partner/credit-topup')} />
+        <PartnerStats stats={stats} onTopUpClick={() => router.push('/partner/credit-top-up')} />
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="overflow-x-auto scrollbar-hide overflow-y-visible border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6 py-3">

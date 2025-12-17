@@ -108,23 +108,7 @@ const PartnerCreditTopUpPageClient = () => {
     }
   }, [searchParams?.toString()]);
 
-  // Show loading while checking auth
-  if (authLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
-        <div className="text-center">
-          <Loader2 className="w-12 h-12 text-green-600 animate-spin mx-auto" />
-          <p className="mt-4 text-lg text-gray-600">Laden...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Don't render if not authorized (redirect is handled in useEffect)
-  if (!user || user.user_metadata?.role !== 'partner') {
-    return null;
-  }
-
+  // All hooks must be called before any conditional returns
   const validateAmount = useCallback((value: string) => {
     if (minAmount === null) {
       // Settings not loaded yet, don't validate
@@ -138,17 +122,6 @@ const PartnerCreditTopUpPageClient = () => {
     setError('');
     return true;
   }, [minAmount]);
-
-  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9.]/g, '');
-    setAmount(value);
-    validateAmount(value);
-  };
-
-  const handleQuickAmountClick = (quickAmount: number) => {
-    setAmount(String(quickAmount));
-    validateAmount(String(quickAmount));
-  };
 
   const handleTopUp = useCallback(async () => {
     if (!validateAmount(amount)) return;
@@ -189,6 +162,34 @@ const PartnerCreditTopUpPageClient = () => {
       setIsLoading(false);
     }
   }, [user, amount, toast, validateAmount]);
+
+  // Show loading while checking auth
+  if (authLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-gray-50">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 text-green-600 animate-spin mx-auto" />
+          <p className="mt-4 text-lg text-gray-600">Laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if not authorized (redirect is handled in useEffect)
+  if (!user || user.user_metadata?.role !== 'partner') {
+    return null;
+  }
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9.]/g, '');
+    setAmount(value);
+    validateAmount(value);
+  };
+
+  const handleQuickAmountClick = (quickAmount: number) => {
+    setAmount(String(quickAmount));
+    validateAmount(String(quickAmount));
+  };
   
   const handleModalClose = () => {
     setClientSecret(null);

@@ -25,7 +25,7 @@ const PaymentSuccessPageClient = () => {
     if (!checkoutSessionId) {
       setStatus('error');
       setMessage('Zahlungsinformationen fehlen. Sie werden weitergeleitet...');
-      setTimeout(() => router.push('/partner/credit-topup'), 5000);
+      setTimeout(() => router.push('/partner/credit-top-up'), 5000);
       return;
     }
 
@@ -78,7 +78,7 @@ const PaymentSuccessPageClient = () => {
           title: 'Zahlungsfehler',
           description: e instanceof Error ? e.message : String(e) || 'Zahlungsüberprüfung fehlgeschlagen. Bitte versuchen Sie es erneut.',
         });
-        setTimeout(() => router.push('/partner/credit-topup'), 5000);
+        setTimeout(() => router.push('/partner/credit-top-up'), 5000);
       }
     };
 

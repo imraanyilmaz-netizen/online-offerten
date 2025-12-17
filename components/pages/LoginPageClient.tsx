@@ -12,6 +12,33 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Loader2, Eye, EyeOff } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
+import { createClient } from '@/lib/supabase/client'
+
+const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
+
+// Helper function to wait for cookie to be set
+const waitForCookie = async (maxWait = 2000): Promise<boolean> => {
+  const startTime = Date.now()
+  while (Date.now() - startTime < maxWait) {
+    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+      const [name, ...rest] = cookie.trim().split('=')
+      if (name && rest.length > 0) {
+        acc[name] = decodeURIComponent(rest.join('='))
+      }
+      return acc
+    }, {} as Record<string, string>)
+    
+    // Check if cookie exists (either full cookie or split cookies)
+    if (cookies[COOKIE_NAME] || cookies[`${COOKIE_NAME}.0`]) {
+      console.log('[LoginPage] Cookie found, ready to redirect')
+      return true
+    }
+    
+    await new Promise(resolve => setTimeout(resolve, 100))
+  }
+  console.warn('[LoginPage] Cookie not found after waiting')
+  return false
+}
 
 const LoginPageClient = () => {
   const { signIn } = useAuth()
@@ -37,15 +64,195 @@ const LoginPageClient = () => {
 
     console.log('[LoginPage] signIn result:', { hasError: !!error, errorMessage: error?.message })
 
-    setIsSubmitting(false)
     if (!error) {
-      console.log('[LoginPage] Login successful')
+      console.log('[LoginPage] Login successful, waiting for auth state change...')
+      
+      // Wait for onAuthStateChange event to fire and session to be saved
+      const supabase = createClient()
+      
+      // Wait for SIGNED_IN event
+      await new Promise<void>((resolve) => {
+        const timeout = setTimeout(() => {
+          console.warn('[LoginPage] Auth state change timeout, proceeding anyway')
+          resolve()
+        }, 2000)
+        
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+          console.log('[LoginPage] Auth state change:', { event, hasSession: !!session })
+          if (event === 'SIGNED_IN' && session) {
+            clearTimeout(timeout)
+            subscription.unsubscribe()
+            resolve()
+          }
+        })
+      })
+      
+      // Wait a bit more for localStorage to be updated
+      await new Promise(resolve => setTimeout(resolve, 300))
+      
+      // Get session to determine user role
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+      
+      if (sessionError || !session) {
+        console.error('[LoginPage] Failed to get session after login:', sessionError)
+        toast({
+          variant: "destructive",
+          title: "Fehler",
+          description: "Session konnte nicht abgerufen werden.",
+        })
+        setIsSubmitting(false)
+        return
+      }
+
+      const userRole = session.user?.user_metadata?.role
+      console.log('[LoginPage] User role detected:', userRole)
+
+      // Debug: Check all localStorage keys
+      const allKeys = Object.keys(localStorage)
+      const supabaseKeys = allKeys.filter(key => key.includes('supabase') || key.includes('auth-token'))
+      console.log('[LoginPage] localStorage keys:', { allKeys, supabaseKeys })
+
+      // Manually sync localStorage to cookie as backup
+      // This ensures cookie is set before redirect
+      let sessionValue = localStorage.getItem(COOKIE_NAME)
+      
+      // If not found with exact name, try to find any Supabase auth token
+      if (!sessionValue) {
+        for (const key of supabaseKeys) {
+          if (key.includes('auth-token')) {
+            sessionValue = localStorage.getItem(key)
+            console.log('[LoginPage] Found session in different key:', key)
+            break
+          }
+        }
+      }
+      
+      if (sessionValue) {
+        console.log('[LoginPage] Manually syncing cookie from localStorage...', { 
+          sessionValueLength: sessionValue.length,
+          sessionValuePreview: sessionValue.substring(0, 50) + '...'
+        })
+        
+        // Parse session and create minimal cookie payload (only what middleware needs)
+        let minimalSession: any = null
+        try {
+          const fullSession = JSON.parse(sessionValue)
+          // Create minimal session with only essential data for middleware
+          minimalSession = {
+            access_token: fullSession.access_token,
+            user: {
+              id: fullSession.user?.id,
+              email: fullSession.user?.email,
+              user_metadata: {
+                role: fullSession.user?.user_metadata?.role
+              }
+            }
+          }
+          console.log('[LoginPage] Created minimal session payload', {
+            originalSize: sessionValue.length,
+            minimalSize: JSON.stringify(minimalSession).length,
+            reduction: `${Math.round((1 - JSON.stringify(minimalSession).length / sessionValue.length) * 100)}%`
+          })
+        } catch (e) {
+          console.error('[LoginPage] Failed to parse session, using full session:', e)
+          minimalSession = sessionValue
+        }
+        
+        const expires = new Date()
+        expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
+        const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
+        const cookieValue = encodeURIComponent(typeof minimalSession === 'string' ? minimalSession : JSON.stringify(minimalSession))
+        
+        // Cookie size limit is ~4KB, but account for cookie name and attributes (~200 bytes)
+        // So actual data limit is ~3800 bytes
+        const MAX_COOKIE_SIZE = 3800
+        if (cookieValue.length > MAX_COOKIE_SIZE) {
+          console.log('[LoginPage] Cookie still too large after optimization, splitting into parts...', { 
+            cookieValueLength: cookieValue.length,
+            maxSize: MAX_COOKIE_SIZE
+          })
+          // Split cookie into chunks
+          let index = 0
+          let offset = 0
+          while (offset < cookieValue.length) {
+            const chunk = cookieValue.substring(offset, offset + MAX_COOKIE_SIZE)
+            const cookieName = index === 0 ? COOKIE_NAME : `${COOKIE_NAME}.${index}`
+            document.cookie = `${cookieName}=${chunk}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
+            offset += MAX_COOKIE_SIZE
+            index++
+          }
+          console.log('[LoginPage] Cookie split into', index, 'parts')
+        } else {
+          document.cookie = `${COOKIE_NAME}=${cookieValue}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
+          console.log('[LoginPage] Cookie set successfully (single cookie)', {
+            cookieValueLength: cookieValue.length
+          })
+        }
+        
+        // Wait a bit for cookie to be set
+        await new Promise(resolve => setTimeout(resolve, 200))
+        
+        // Check if cookie was actually set
+        const cookiesAfter = document.cookie.split(';').reduce((acc, cookie) => {
+          const [name, ...rest] = cookie.trim().split('=')
+          if (name && rest.length > 0) {
+            acc[name] = decodeURIComponent(rest.join('='))
+          }
+          return acc
+        }, {} as Record<string, string>)
+        
+        const cookieSet = !!cookiesAfter[COOKIE_NAME] || !!cookiesAfter[`${COOKIE_NAME}.0`]
+        const splitCookies = Object.keys(cookiesAfter).filter(key => key.startsWith(COOKIE_NAME))
+        console.log('[LoginPage] Cookie manually synced', { 
+          cookieName: COOKIE_NAME,
+          cookieValueLength: cookieValue.length,
+          cookieSet,
+          splitCookies,
+          allCookies: Object.keys(cookiesAfter)
+        })
+        
+        if (!cookieSet) {
+          console.error('[LoginPage] ❌ Cookie was NOT set! This will cause redirect loop.')
+        }
+      } else {
+        console.warn('[LoginPage] No session value in localStorage to sync', { 
+          checkedKey: COOKIE_NAME,
+          supabaseKeys 
+        })
+      }
+
+      // Wait for cookie to be set before redirecting
+      console.log('[LoginPage] Waiting for cookie to be set...')
+      const cookieReady = await waitForCookie(1000)
+      
+      if (!cookieReady) {
+        console.warn('[LoginPage] Cookie not ready, but proceeding with redirect anyway')
+      }
+
+      // Redirect based on role using window.location.href for full page reload
+      // This ensures middleware intercepts the request properly
+      if (userRole === 'admin') {
+        console.log('[LoginPage] Redirecting admin to /admin-dashboard')
+        toast({
+          title: "Anmeldung erfolgreich",
+          description: "Sie werden zum Admin-Dashboard weitergeleitet...",
+        })
+        window.location.href = '/admin-dashboard'
+      } else if (userRole === 'partner') {
+        console.log('[LoginPage] Redirecting partner to /partner/dashboard')
+        toast({
+          title: "Anmeldung erfolgreich",
+          description: "Sie werden zum Partner-Dashboard weitergeleitet...",
+        })
+        window.location.href = '/partner/dashboard'
+      } else {
+        console.log('[LoginPage] No specific role, redirecting to home')
       toast({
         title: "Anmeldung erfolgreich",
         description: "Sie werden weitergeleitet...",
       })
-      // Redirect is handled automatically by ClientRouteProtection component
-      // based on user role - no manual redirect needed
+        window.location.href = '/'
+      }
     } else {
       console.log('[LoginPage] Login failed:', error?.message)
       toast({
@@ -53,6 +260,7 @@ const LoginPageClient = () => {
         title: "Anmeldung fehlgeschlagen",
         description: "Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.",
       })
+      setIsSubmitting(false)
     }
   }
 

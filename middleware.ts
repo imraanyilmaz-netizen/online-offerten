@@ -39,9 +39,24 @@ function parseUserFromCookie(cookieHeader: string) {
     }
     
     if (sessionValue) {
-      const session = JSON.parse(sessionValue)
-      if (session?.user) {
-        return session.user
+      try {
+        const session = JSON.parse(sessionValue)
+        if (session?.user) {
+          console.log('[Middleware] Parsed session from cookie:', {
+            hasUser: !!session.user,
+            userId: session.user.id,
+            userEmail: session.user.email,
+            userRole: session.user.user_metadata?.role,
+            isMinimal: !session.user.user_metadata?.company_name // Minimal session doesn't have company_name
+          })
+          return session.user
+        }
+      } catch (parseError) {
+        console.error('[Middleware] Failed to parse session from cookie:', {
+          error: parseError instanceof Error ? parseError.message : String(parseError),
+          sessionValueLength: sessionValue.length,
+          sessionValuePreview: sessionValue.substring(0, 100)
+        })
       }
     }
   } catch (error) {
