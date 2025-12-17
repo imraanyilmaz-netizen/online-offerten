@@ -46,19 +46,9 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   })
   const [isNavigating, setIsNavigating] = useState(false)
 
-  // Fix Router Cache: Refresh router cache on navigation
-  useEffect(() => {
-    // Small delay to ensure navigation is complete
-    const timer = setTimeout(() => {
-      if (typeof window !== 'undefined' && pathname) {
-        // Force router cache refresh for client-side navigation
-        router.refresh()
-        setIsNavigating(false)
-      }
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [pathname, router])
+  // Fix Router Cache: Refresh router cache on navigation (only when needed)
+  // Removed automatic refresh to prevent infinite refresh loops
+  // Router cache is handled by Next.js automatically
 
   // Redirect .php files
   useEffect(() => {
