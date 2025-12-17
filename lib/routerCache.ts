@@ -11,11 +11,13 @@ export function clearRouterCache(path?: string) {
   if (typeof window === 'undefined') return
 
   // Clear Next.js router cache
-  if ('next' in window && 'router' in window.next) {
-    // @ts-ignore - Internal Next.js API
-    const router = window.next.router
-    if (router && typeof router.refresh === 'function') {
-      router.refresh()
+  if ('next' in window) {
+    const nextWindow = window as typeof window & { next?: { router?: { refresh?: () => void } } }
+    if (nextWindow.next && 'router' in nextWindow.next && nextWindow.next.router) {
+      const router = nextWindow.next.router
+      if (router && typeof router.refresh === 'function') {
+        router.refresh()
+      }
     }
   }
 
@@ -39,11 +41,13 @@ export function forceRouterRefresh() {
   if (typeof window === 'undefined') return
 
   // Use Next.js router refresh
-  if ('next' in window && 'router' in window.next) {
-    // @ts-ignore - Internal Next.js API
-    const router = window.next.router
-    if (router && typeof router.refresh === 'function') {
-      router.refresh()
+  if ('next' in window) {
+    const nextWindow = window as typeof window & { next?: { router?: { refresh?: () => void } } }
+    if (nextWindow.next && 'router' in nextWindow.next && nextWindow.next.router) {
+      const router = nextWindow.next.router
+      if (router && typeof router.refresh === 'function') {
+        router.refresh()
+      }
     }
   }
 }
