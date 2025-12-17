@@ -16,8 +16,10 @@ const PaymentSuccessPageClient = () => {
   const { user, session } = useAuth();
   const { toast } = useToast();
   
-  const [status, setStatus] = useState('verifying'); // verifying, success, error
+  const [status, setStatus] = useState('verifying'); // verifying, success, error, pending
   const [message, setMessage] = useState('Zahlung wird überprüft');
+  const [retryCount, setRetryCount] = useState(0);
+  const MAX_RETRIES = 10; // Maximum 10 retries (50 seconds total)
 
   useEffect(() => {
     const checkoutSessionId = searchParams?.get('session_id');
@@ -29,9 +31,9 @@ const PaymentSuccessPageClient = () => {
       return;
     }
 
-    const verifyPayment = async () => {
+    const verifyPayment = async (currentRetry = 0) => {
       try {
-        console.log("Verifying payment for session:", checkoutSessionId);
+        console.log("Verifying payment for session:", checkoutSessionId, `(Retry ${currentRetry})`);
         
         // ✅ SADECE sessionId gönder - partnerId KALDIRILDI
         const { data, error } = await supabase.functions.invoke('verify-stripe-session', {
@@ -66,8 +68,19 @@ const PaymentSuccessPageClient = () => {
           }
           
           setTimeout(() => router.push('/partner/dashboard'), 3000);
+        } else if (data.status === 'pending' || (data.success === false && currentRetry < MAX_RETRIES)) {
+          // Payment is still pending - retry after a delay
+          setStatus('verifying');
+          setMessage(`Zahlung wird noch verarbeitet... (${currentRetry + 1}/${MAX_RETRIES})`);
+          setRetryCount(currentRetry + 1);
+          
+          // Retry after 5 seconds
+          setTimeout(() => {
+            verifyPayment(currentRetry + 1);
+          }, 5000);
         } else {
-          throw new Error(data.message || 'Payment verification failed');
+          // Max retries reached or unknown status
+          throw new Error(data.message || 'Zahlung konnte nicht verifiziert werden. Bitte kontaktieren Sie den Support.');
         }
       } catch (e: any) {
         console.error('Payment verification failed:', e);
@@ -83,7 +96,7 @@ const PaymentSuccessPageClient = () => {
     };
 
     // ✅ DOĞRUDAN ÇAĞIR - session kontrolü YOK
-    verifyPayment();
+    verifyPayment(0);
   }, [searchParams, router, toast]); // Removed t dependency
 
   const StatusIcon = () => {

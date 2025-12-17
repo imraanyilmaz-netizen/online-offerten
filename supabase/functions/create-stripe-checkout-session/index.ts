@@ -178,7 +178,7 @@ serve(async (req) => {
     
     // Success and cancel URLs (still required even in embedded mode)
     formData.append('success_url', `${siteUrl}/partner/payment-status?success=true&session_id={CHECKOUT_SESSION_ID}`);
-    formData.append('cancel_url', `${siteUrl}/partner/guthaben-aufladen?canceled=true`);
+    formData.append('cancel_url', `${siteUrl}/partner/credit-top-up?canceled=true`);
 
     const stripeResponse = await fetch(checkoutSessionUrl, {
       method: 'POST',
