@@ -179,7 +179,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const handleConfirmExit = () => {
     const navigationPath = pendingNavigation;
     setShowExitDialog(false);
-    setPendingNavigation(null);
+      setPendingNavigation(null);
     
     // Kısa bir delay ile navigation yap ki dialog kapanma animasyonu tamamlansın
     setTimeout(() => {
@@ -199,11 +199,11 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             // URL parse hatası olursa ana sayfaya git
             router.push('/');
           }
-        } else {
+    } else {
           // Referrer yoksa veya farklı origin'de ise ana sayfaya git
           router.push('/');
         }
-      }
+    }
     }, 100);
   };
 

@@ -390,14 +390,7 @@ const KlaviertransportPageClient = () => {
 
   return (
     <>
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-gradient-to-b from-gray-50 via-slate-100 to-gray-50"
-      >
+      <div className="bg-gradient-to-b from-gray-50 via-slate-100 to-gray-50">
         <Hero quoteUrl={quoteUrl} />
         <ContentSection sectionData={whyData} />
         <div className="w-full bg-gray-200 h-px" />
@@ -410,7 +403,7 @@ const KlaviertransportPageClient = () => {
         <ContentSection sectionData={checklistData} />
         <FaqSection faqData={faqData} />
         <Cta quoteUrl={quoteUrl} />
-      </motion.div>
+      </div>
     </>
   )
 }

@@ -26,6 +26,20 @@ const nextConfig = {
   },
   // React strict mode
   reactStrictMode: true,
+  // Source maps: Disable in production to avoid "missing source maps" warnings
+  // This is just a warning, not an error - third-party libraries may not include source maps
+  productionBrowserSourceMaps: false,
+  // Modern JavaScript: Use SWC compiler with modern JavaScript features
+  // This helps Google Speed Test recognize modern JavaScript
+  compiler: {
+    // Remove console.log in production
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
+  // Modern JavaScript output: Target modern browsers
+  // This reduces bundle size and improves performance
+  swcMinify: true,
   // Fix Router Cache issues - disable aggressive caching for client-side navigation
   onDemandEntries: {
     // Period (in ms) where the server will keep pages in the buffer
@@ -133,6 +147,34 @@ const nextConfig = {
         removeEmptyChunks: false,
         splitChunks: false,
       };
+      
+      // Modern JavaScript: Target modern browsers (ES2020+)
+      // This helps Google Speed Test recognize modern JavaScript
+      if (!config.output) {
+        config.output = {};
+      }
+      // Use modern JavaScript syntax in output
+      config.output.environment = {
+        ...config.output.environment,
+        arrowFunction: true,
+        bigIntLiteral: true,
+        const: true,
+        destructuring: true,
+        dynamicImport: true,
+        forOf: true,
+        module: true,
+      };
+      
+      // Suppress source map warnings for third-party libraries
+      // This prevents "missing source maps" warnings in browser console
+      if (config.devtool) {
+        // Keep existing devtool setting but suppress warnings
+        config.ignoreWarnings = [
+          ...(config.ignoreWarnings || []),
+          /Failed to parse source map/,
+          /Missing source map/,
+        ];
+      }
     }
     
     return config;

@@ -35,20 +35,22 @@ function parseUserFromCookie(cookieHeader: string) {
       }
       if (parts.length > 0) {
         sessionValue = parts.join('')
-      }
+  }
     }
     
     if (sessionValue) {
       try {
         const session = JSON.parse(sessionValue)
         if (session?.user) {
-          console.log('[Middleware] Parsed session from cookie:', {
-            hasUser: !!session.user,
-            userId: session.user.id,
-            userEmail: session.user.email,
-            userRole: session.user.user_metadata?.role,
-            isMinimal: !session.user.user_metadata?.company_name // Minimal session doesn't have company_name
-          })
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Middleware] Parsed session from cookie:', {
+          hasUser: !!session.user,
+          userId: session.user.id,
+          userEmail: session.user.email,
+          userRole: session.user.user_metadata?.role,
+          isMinimal: !session.user.user_metadata?.company_name // Minimal session doesn't have company_name
+        })
+      }
           return session.user
         }
       } catch (parseError) {
@@ -72,7 +74,7 @@ export async function middleware(request: NextRequest) {
   if (pathname.includes('_rsc') || request.nextUrl.searchParams.has('_rsc')) {
     return NextResponse.next()
   }
-  
+
   // Skip /login route to prevent redirect loops
   if (pathname === '/login' || pathname.startsWith('/login/')) {
     return NextResponse.next()
@@ -90,17 +92,19 @@ export async function middleware(request: NextRequest) {
   if (!isProtectedRoute) {
     return NextResponse.next()
   }
-  
-  // Debug: Log cookie info
+
+  // Debug: Log cookie info (only in development)
   const cookieHeader = request.headers.get('cookie') || ''
   const hasAuthCookie = cookieHeader.includes('sb-uhkiaodpzvhsuqfrwgih-auth-token')
   
-  console.log('[Middleware] Request:', {
-    pathname,
-    hasCookies: !!cookieHeader,
-    cookieLength: cookieHeader.length,
-    hasAuthCookie
-  })
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[Middleware] Request:', {
+      pathname,
+      hasCookies: !!cookieHeader,
+      cookieLength: cookieHeader.length,
+      hasAuthCookie
+    })
+  }
   
   try {
     // First, try to parse user directly from cookie (faster and more reliable)
@@ -109,54 +113,66 @@ export async function middleware(request: NextRequest) {
     if (userFromCookie && userFromCookie.id) {
       const userRole = userFromCookie.user_metadata?.role
       
-      console.log('[Middleware] User from cookie:', {
-        userId: userFromCookie.id,
-        userEmail: userFromCookie.email,
-        userRole
-      })
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Middleware] User from cookie:', {
+          userId: userFromCookie.id,
+          userEmail: userFromCookie.email,
+          userRole
+        })
+      }
       
       // Role-based access control
       if (pathname.startsWith('/admin-dashboard')) {
         if (userRole !== 'admin') {
-          console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
+          if (process.env.NODE_ENV === 'development') {
+            console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
+          }
           const loginUrl = new URL('/login', request.nextUrl.origin)
           return NextResponse.redirect(loginUrl, { status: 307 })
         }
       } else if (
-        pathname.startsWith('/partner/dashboard') ||
-        pathname.startsWith('/partner/credit-top-up') ||
-        pathname.startsWith('/partner/einstellungen')
-      ) {
+    pathname.startsWith('/partner/dashboard') ||
+    pathname.startsWith('/partner/credit-top-up') ||
+    pathname.startsWith('/partner/einstellungen')
+  ) {
         if (userRole !== 'partner') {
-          console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
+          if (process.env.NODE_ENV === 'development') {
+            console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
+          }
           const loginUrl = new URL('/login', request.nextUrl.origin)
           return NextResponse.redirect(loginUrl, { status: 307 })
-        }
+    }
       }
       
-      console.log('[Middleware] ✅ Access granted (from cookie):', { pathname, userRole, userEmail: userFromCookie.email })
-      return NextResponse.next()
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Middleware] ✅ Access granted (from cookie):', { pathname, userRole, userEmail: userFromCookie.email })
+      }
+    return NextResponse.next()
     }
-    
+
     // Fallback: Try getUser() if cookie parse failed
     const supabase = createMiddlewareClient(request)
     const { data: { user }, error } = await supabase.auth.getUser()
     
-    console.log('[Middleware] getUser result:', {
-      hasUser: !!user,
-      userEmail: user?.email,
-      userRole: user?.user_metadata?.role,
-      error: error?.message,
-      errorCode: error?.status
-    })
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Middleware] getUser result:', {
+        hasUser: !!user,
+        userEmail: user?.email,
+        userRole: user?.user_metadata?.role,
+        error: error?.message,
+        errorCode: error?.status
+      })
+    }
     
     if (error || !user) {
-      console.log('[Middleware] No user found, redirecting to /login:', { 
-        error: error?.message,
-        errorStatus: error?.status,
-        hasCookies: !!cookieHeader,
-        hasAuthCookie
-      })
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Middleware] No user found, redirecting to /login:', { 
+          error: error?.message,
+          errorStatus: error?.status,
+          hasCookies: !!cookieHeader,
+          hasAuthCookie
+        })
+      }
       const loginUrl = new URL('/login', request.nextUrl.origin)
       return NextResponse.redirect(loginUrl, { status: 307 })
     }
@@ -166,7 +182,9 @@ export async function middleware(request: NextRequest) {
     // Role-based access control
     if (pathname.startsWith('/admin-dashboard')) {
       if (userRole !== 'admin') {
-        console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: user.email })
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: user.email })
+        }
         const loginUrl = new URL('/login', request.nextUrl.origin)
         return NextResponse.redirect(loginUrl, { status: 307 })
       }
@@ -176,14 +194,18 @@ export async function middleware(request: NextRequest) {
       pathname.startsWith('/partner/einstellungen')
     ) {
       if (userRole !== 'partner') {
-        console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: user.email })
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: user.email })
+        }
         const loginUrl = new URL('/login', request.nextUrl.origin)
         return NextResponse.redirect(loginUrl, { status: 307 })
       }
     }
     
-    console.log('[Middleware] ✅ Access granted (from getUser):', { pathname, userRole, userEmail: user.email })
-    return NextResponse.next()
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Middleware] ✅ Access granted (from getUser):', { pathname, userRole, userEmail: user.email })
+    }
+  return NextResponse.next()
   } catch (error) {
     console.error('[Middleware] ❌ Exception:', {
       error: error instanceof Error ? error.message : String(error),

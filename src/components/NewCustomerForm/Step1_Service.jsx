@@ -936,7 +936,12 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
                         />
                         <Label htmlFor="additional_cleaning" className="flex-grow cursor-pointer">
                             <span className="font-semibold text-base text-gray-800">{t('step1.additionalCleaningLabel')}</span>
-                            <p className="text-sm text-gray-600 font-normal">{t('step1.additionalCleaningDescription')}</p>
+                            <p className="text-sm text-gray-600 font-normal">
+                              {formData.umzugArt === 'geschaeftsumzug' 
+                                ? t('step1.additionalCleaningDescriptionBusiness')
+                                : t('step1.additionalCleaningDescription')
+                              }
+                            </p>
                         </Label>
                     </div>
                   </div>

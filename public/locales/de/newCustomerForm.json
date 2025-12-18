@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "title": "Kostenlose Offerten anfordern für Umzug, Reinigung, Maler & mehr",
     "description": "Fordern Sie jetzt kostenlos und unverbindlich Offerten für Umzug, Reinigung, Malerarbeiten, Gartenarbeiten oder Räumung an. Mit nur einer Anfrage mehrere Offerten vergleichen und bis zu 40 % sparen."
@@ -142,6 +142,7 @@
     "additionalCleaningTitle": "Zusätzliche Umzugsreinigung?",
     "additionalCleaningLabel": "Ja, ich wünsche eine Umzugsreinigung mit Abnahmegarantie.",
     "additionalCleaningDescription": "Perfekt für die Wohnungsübergabe. Unsere Partner sorgen für eine reibungslose Abnahme.",
+    "additionalCleaningDescriptionBusiness": "Perfekt für die Übergabe von Geschäftsräumen. Unsere Partner sorgen für eine reibungslose Abnahme.",
     "specialTransportTypeQuestion": "Was möchten Sie transportieren?",
     "specialTransportTypePiano": "Klavier / Flügel",
     "specialTransportTypeSafe": "Tresor / Safe",

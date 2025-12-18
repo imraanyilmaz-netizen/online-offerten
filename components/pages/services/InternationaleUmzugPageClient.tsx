@@ -1,8 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, Globe2, Clock, ListChecks, Star } from 'lucide-react'
@@ -207,35 +206,7 @@ const ArticleSection = () => {
 
 const InternationaleUmzugPageClient = () => {
   const imageUrl = 'https://online-offerten.ch/image/umzugsservice-Schweiz/lnternatIonale-umzuege.png'
-  const [mounted, setMounted] = useState(false)
 
-  // Prevent hydration mismatch by only showing animations after mount
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Show content immediately, but disable animations until mounted to prevent SSR mismatch
-  const pageVariants = mounted ? {
-    initial: { opacity: 0, y: 20 },
-    in: { opacity: 1, y: 0 },
-    out: { opacity: 0, y: -20 },
-  } : {
-    initial: { opacity: 1, y: 0 },
-    in: { opacity: 1, y: 0 },
-    out: { opacity: 1, y: 0 },
-  }
-
-  const featureVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-      },
-    }),
-  }
 
   const services = [
     {
@@ -344,19 +315,8 @@ const InternationaleUmzugPageClient = () => {
 
   return (
     <>
-      
-      <motion.div
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={{ duration: 0.5 }}
-        className="bg-gradient-to-b from-slate-50 to-white"
-      >
-        <motion.section
-          initial={mounted ? { opacity: 0 } : { opacity: 1 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: mounted ? 0.8 : 0 }}
+      <div className="bg-gradient-to-b from-slate-50 to-white">
+        <section
           className="relative w-full bg-gray-100 py-12 md:py-16"
           itemScope
           itemType="https://schema.org/Service"
@@ -364,32 +324,20 @@ const InternationaleUmzugPageClient = () => {
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
               <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl" itemProp="description">
-                <motion.div
-                  initial={mounted ? { y: 20, opacity: 0 } : { y: 0, opacity: 1 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: mounted ? 0.2 : 0, duration: mounted ? 0.6 : 0 }}
-                >
+                <div>
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
                     Umzugsfirmen vergleichen für Auslandsumzug
                   </h1>
                   <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-4">
                     Mehrere Firmen online vergleichen & bis zu 40% sparen
                   </p>
-                </motion.div>
-                <motion.p
-                  initial={mounted ? { y: 20, opacity: 0 } : { y: 0, opacity: 1 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: mounted ? 0.4 : 0, duration: mounted ? 0.6 : 0 }}
+                </div>
+                <p
                   className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium"
                 >
                   Vergleichen Sie online mehrere geprüfte Umzugsfirmen für Ihren Auslandsumzug in einem Schritt. Erhalten Sie kostenlose Offerten von zertifizierten Speditionen, die auf internationale Umzüge spezialisiert sind. Von der Zollabwicklung bis zur Endmontage – finden Sie den besten Partner für Ihren Umzug nach Deutschland, Österreich, Frankreich, Spanien oder ganz Europa.
-                </motion.p>
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                  className="mb-6"
-                >
+                </p>
+                <div className="mb-6">
                   <Button
                     asChild
                     size="lg"
@@ -400,13 +348,8 @@ const InternationaleUmzugPageClient = () => {
                       <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
-                </motion.div>
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                  className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6"
-                >
+                </div>
+                <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6">
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
@@ -419,7 +362,7 @@ const InternationaleUmzugPageClient = () => {
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-base text-gray-700 font-medium">Kostenlos & unverbindlich</span>
                   </div>
-                </motion.div>
+                </div>
               </article>
               <aside className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden md:pl-4" aria-label="Auslandsumzug Dienstleistung Illustration">
                 <figure className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
@@ -441,17 +384,12 @@ const InternationaleUmzugPageClient = () => {
               </aside>
             </div>
           </div>
-        </motion.section>
+        </section>
 
         <section className="py-12 md:py-20">
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-              <motion.div
-                initial={mounted ? { opacity: 0, x: -30 } : { opacity: 1, x: 0 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-              >
+              <div>
                 <h2 className="text-3xl font-bold text-slate-800 mb-4">Umzugsfirmen vergleichen für Auslandsumzug: Mehrere Angebote online prüfen</h2>
                 <p className="text-slate-600 leading-relaxed mb-4 font-medium">
                   Planen Sie einen Umzug ins Ausland und suchen nach der besten Umzugsfirma für Ihren Auslandsumzug? Vergleichen Sie mehrere geprüfte Umzugsunternehmen online und finden Sie das beste Angebot. Ob Umzug nach Deutschland, Umzug nach Österreich, Umzug nach Frankreich, Umzug nach Spanien, Umzug nach Italien oder ein anderes europäisches Land – jeder internationale Umzug hat seine eigenen logistischen und administrativen Herausforderungen, insbesondere bei der Zollabwicklung. Die Wahl der richtigen Umzugsfirma ist daher entscheidend für einen stressfreien Ablauf.
@@ -459,36 +397,27 @@ const InternationaleUmzugPageClient = () => {
                 <p className="text-slate-600 leading-relaxed font-medium">
                   Auf unserer Plattform können Sie online mehrere Umzugsfirmen vergleichen und mit nur einer Anfrage kostenlose Offerten von geprüften Speditionen erhalten, die auf internationale Transporte spezialisiert sind. Diese Experten kennen die spezifischen Bestimmungen des Ziellandes, kümmern sich um die notwendigen Papiere und sorgen dafür, dass Ihr Hab und Gut sicher und pünktlich ankommt. Durch den direkten Vergleich mehrerer Firmen sparen Sie nicht nur Zeit und Nerven, sondern auch bis zu 40% der Umzugskosten.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={mounted ? { opacity: 0, x: 30 } : { opacity: 1, x: 0 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.4 }}
+              <div
                 className="bg-white p-6 md:p-8 rounded-xl shadow-2xl border border-slate-100"
               >
                 <h3 className="text-2xl font-semibold text-slate-700 mb-6">Unser Service für Ihren Auslandsumzug</h3>
                 <ul className="space-y-4">
                   {services.map((service, index) => (
-                    <motion.li 
+                    <li 
                       key={index} 
                       className="flex items-start"
-                      custom={index}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                      variants={featureVariants}
                     >
                       <CheckCircle className="text-green-500 w-6 h-6 mr-3 mt-1 flex-shrink-0" />
                       <div>
                         <strong className="font-semibold text-slate-800">{service.title}</strong>
                         <p className="text-slate-600 m-0">{service.text}</p>
                       </div>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
@@ -511,12 +440,7 @@ const InternationaleUmzugPageClient = () => {
 
         <section className="py-12 md:py-20 bg-slate-100 mt-12 md:mt-16">
           <div className="container mx-auto max-w-navbar px-4 md:px-6 text-center">
-            <motion.div
-              initial={mounted ? { opacity: 0, scale: 0.9 } : { opacity: 1, scale: 1 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+            <div>
               <Globe2 className="mx-auto text-green-500 h-16 w-16 mb-4" />
               <h2 className="text-3xl font-bold text-slate-800 mb-4">Bereit für Ihr neues Zuhause im Ausland?</h2>
               <p className="text-slate-600 max-w-xl mx-auto mb-8">
@@ -525,10 +449,10 @@ const InternationaleUmzugPageClient = () => {
               <Button asChild size="lg" className="bg-green-500 hover:bg-green-600 text-white shadow-lg transform hover:scale-105 transition-transform duration-300 px-10 py-3">
                 <Link href="/kostenlose-offerte-anfordern?service=international">Kostenlose Offerten anfordern</Link>
               </Button>
-            </motion.div>
+            </div>
           </div>
         </section>
-      </motion.div>
+      </div>
     </>
   )
 }

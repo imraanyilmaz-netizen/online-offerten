@@ -2,7 +2,6 @@
 
 import React from 'react'
 
-import { motion } from 'framer-motion'
 import Hero from '@/components/SpezialtransportePageParts/Hero'
 import TransportTabs from '@/components/SpezialtransportePageParts/TransportTabs'
 import Cta from '@/components/SpezialtransportePageParts/Cta'
@@ -48,18 +47,11 @@ const SpezialtransportePageClient = () => {
 
   return (
     <>
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-gradient-to-b from-gray-50 via-slate-100 to-gray-50"
-      >
+      <div className="bg-gradient-to-b from-gray-50 via-slate-100 to-gray-50">
         <Hero />
         <TransportTabs />
         <Cta />
-      </motion.div>
+      </div>
     </>
   )
 }

@@ -8,7 +8,7 @@ import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
 import { logoUrl } from '@/assets/logoConstants'
-import { motion, AnimatePresence } from 'framer-motion'
+// Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
 import dynamic from 'next/dynamic'
 
 // Lazy load FloatingReviewSummary
@@ -46,40 +46,9 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   })
   const [isNavigating, setIsNavigating] = useState(false)
 
-  // Fix Router Cache: Refresh router cache on navigation
-  useEffect(() => {
-    // Skip refresh if navigating
-    if (!pathname || isNavigating) {
-      return
-    }
-    
-    // Skip refresh for likely 404 pages (short random strings without dashes)
-    // This prevents refresh loops on 404 pages
-    // Valid routes typically have dashes or are common paths like /login, /kontakt
-    const validShortRoutes = ['/login', '/kontakt', '/agb', '/datenschutz', '/ueber-uns', '/services', '/standorte']
-    const isLikely404 = pathname.length > 1 && 
-      pathname.length < 30 && 
-      !pathname.includes('-') && 
-      pathname !== '/' &&
-      !validShortRoutes.includes(pathname) && // Not a known valid short route
-      !pathname.match(/^\/(privatumzug|geschaeftsumzug|reinigung|partner|ratgeber|umzugsfirma)/) // Not a known route prefix
-    
-    if (isLikely404) {
-      // Likely a 404 page, skip refresh to prevent loops
-      return
-    }
-    
-    // Small delay to ensure navigation is complete
-    const timer = setTimeout(() => {
-      if (typeof window !== 'undefined' && pathname) {
-        // Force router cache refresh for client-side navigation
-        router.refresh()
-        setIsNavigating(false)
-      }
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [pathname, router, isNavigating])
+  // Router cache refresh - REMOVED to prevent blank page issues
+  // Next.js App Router handles cache automatically
+  // router.refresh() was causing blank pages on client-side navigation
 
   // Redirect .php files (but not 404 pages)
   useEffect(() => {
@@ -168,6 +137,8 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
       setIsNavigating(true)
       const search = searchParams?.toString()
       router.replace(normalizedPath + (search ? `?${search}` : ''))
+      // Reset isNavigating after navigation completes
+      setTimeout(() => setIsNavigating(false), 100)
     }
   }, [pathname, searchParams, router, isNavigating])
 
@@ -201,6 +172,10 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
         : pathname || ''
       if (newUrl) {
         router.replace(newUrl)
+        // Reset isNavigating after navigation completes
+        setTimeout(() => setIsNavigating(false), 100)
+      } else {
+        setIsNavigating(false)
       }
     }
   }, [searchParams, pathname, router, isNavigating])
@@ -280,7 +255,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
 
   // Inject schema markup (client-side only)
   useEffect(() => {
-    if (typeof document === 'undefined') return
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
     
     const script = document.createElement('script')
     script.type = 'application/ld+json'
@@ -317,22 +292,9 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
             </div>
           }>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={pathname}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15, ease: 'easeInOut' }}
-                onAnimationStart={() => setIsNavigating(true)}
-                onAnimationComplete={() => {
-                  // Small delay to ensure content is rendered
-                  setTimeout(() => setIsNavigating(false), 50)
-                }}
-              >
-                {children}
-              </motion.div>
-            </AnimatePresence>
+            {/* Removed AnimatePresence and motion.div wrapper to prevent blank page issues */}
+            {/* Next.js App Router handles page transitions automatically */}
+            {children}
           </Suspense>
         </Layout>
         {shouldShowFloatingReview && (
