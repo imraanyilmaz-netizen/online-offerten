@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run sitemap && next build",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "node -r dotenv/config scripts/generate-sitemap.js",

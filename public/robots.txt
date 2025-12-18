@@ -8,7 +8,9 @@ Sitemap: https://online-offerten.ch/sitemap.xml
 Disallow: /admin-dashboard
 Disallow: /partner/dashboard
 Disallow: /partner/settings
+Disallow: /partner/credit-top-up
 Disallow: /partner/guthaben-aufladen
+Disallow: /partner/payment-status
 Disallow: /payment/success
 Disallow: /payment/cancel
 Disallow: /login

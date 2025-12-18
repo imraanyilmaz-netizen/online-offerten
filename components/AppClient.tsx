@@ -60,12 +60,39 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     return () => clearTimeout(timer)
   }, [pathname, router])
 
-  // Redirect .php files
+  // Redirect .php files and handle invalid routes
   useEffect(() => {
     if (pathname?.endsWith('.php')) {
       router.replace('/404')
     }
   }, [pathname, router])
+
+  // Global error handler for 404 and fetch errors
+  useEffect(() => {
+    const handleError = (event: ErrorEvent) => {
+      // Suppress 404 errors for invalid routes (common from bots/scanners)
+      if (event.message?.includes('404') || event.message?.includes('Not Found')) {
+        // Silently ignore - Next.js will show 404 page
+        return
+      }
+    }
+
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      // Suppress 404 fetch errors
+      if (event.reason?.message?.includes('404') || event.reason?.status === 404) {
+        // Silently ignore - Next.js will show 404 page
+        return
+      }
+    }
+
+    window.addEventListener('error', handleError)
+    window.addEventListener('unhandledrejection', handleUnhandledRejection)
+
+    return () => {
+      window.removeEventListener('error', handleError)
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection)
+    }
+  }, [])
 
   // Google Analytics
   useEffect(() => {

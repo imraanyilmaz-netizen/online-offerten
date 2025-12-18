@@ -2,14 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createClient } from '@supabase/supabase-js';
-import { routePaths } from '../src/routePaths.js';
-// Import locationRoutes from .js file (not .jsx) for Node.js compatibility
-import { locationRoutes } from '../src/locationRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const publicPath = path.join(rootDir, 'public');
+const appPath = path.join(rootDir, 'app');
 
 const BASE_URL = 'https://online-offerten.ch';
 
@@ -71,6 +69,46 @@ function createUrlEntry(url, lastmod, changefreq = 'daily', priority = '0.8') {
   </url>`;
 }
 
+// Get all static routes from app directory
+function getStaticRoutes() {
+  const routes = [];
+  
+  // Recursively scan app directory for page.tsx files
+  function scanDirectory(dir, basePath = '') {
+    if (!fs.existsSync(dir)) {
+      return;
+    }
+    
+    const items = fs.readdirSync(dir, { withFileTypes: true });
+    
+    for (const item of items) {
+      const fullPath = path.join(dir, item.name);
+      const routePath = basePath ? `${basePath}/${item.name}` : `/${item.name}`;
+      
+      if (item.isDirectory()) {
+        // Skip dynamic routes (contain [ or (...))
+        if (item.name.startsWith('[') || item.name.startsWith('(')) {
+          continue;
+        }
+        
+        // Check if this directory has a page.tsx or page.jsx
+        const pageFile = path.join(fullPath, 'page.tsx');
+        const pageFileJsx = path.join(fullPath, 'page.jsx');
+        
+        if (fs.existsSync(pageFile) || fs.existsSync(pageFileJsx)) {
+          routes.push(routePath);
+        }
+        
+        // Recursively scan subdirectories
+        scanDirectory(fullPath, routePath);
+      }
+    }
+  }
+  
+  scanDirectory(appPath);
+  return routes;
+}
+
 async function generateSitemap() {
   const { posts, partners } = await fetchDynamicRoutes();
   const today = new Date().toISOString();
@@ -84,48 +122,80 @@ async function generateSitemap() {
     '/hofreinigung', '/raeumung-entsorgung', '/malerarbeiten', '/gartenarbeiten'
   ];
 
+  // Location pages (umzugsfirma-* pages)
+  const locationPagePrefixes = [
+    '/umzugsfirma-aargau', '/umzugsfirma-basel', '/umzugsfirma-bern',
+    '/umzugsfirma-biel-bienne', '/umzugsfirma-freiburg', '/umzugsfirma-genf',
+    '/umzugsfirma-lausanne', '/umzugsfirma-lugano', '/umzugsfirma-luzern',
+    '/umzugsfirma-st-gallen', '/umzugsfirma-thun', '/umzugsfirma-winterthur',
+    '/umzugsfirma-zuerich'
+  ];
+
   // Private and admin routes that should NOT be in sitemap
   const excludedRoutes = [
     '/forgot-password',
     '/update-password',
     '/admin-dashboard',
     '/partner/dashboard',
-    '/partner/settings',
-    '/partner/guthaben-aufladen',
+    '/partner/einstellungen',
+    '/partner/credit-top-up',
+    '/partner/guthaben-aufladen', // Legacy route (kept for compatibility)
+    '/partner/payment-status',
     '/payment/success',
     '/payment/cancel',
-    '/login', // Login page should also be excluded
+    '/login',
+    '/anfrage-status', // Private route
+    '/bewertung', // Private route
+    '/post', // Internal route
   ];
 
-  // 1. Static pages from routePaths.js
-  const staticPages = routePaths
-    .filter(route => 
-      !route.path.includes(':') && 
-      !route.path.includes('*') && 
-      !locationRoutes.some(lr => lr.path === route.path.replace('/','')) &&
-      !excludedRoutes.includes(route.path) &&
-      !route.private // Exclude all private routes
-    )
+  // Get all static routes from app directory
+  const allStaticRoutes = getStaticRoutes();
+  console.log(`✅ Found ${allStaticRoutes.length} static routes in app directory`);
+
+  // 1. Static pages from app directory
+  const staticPages = allStaticRoutes
+    .filter(route => {
+      // Exclude dynamic routes (already filtered in getStaticRoutes, but double-check)
+      if (route.includes('[') || route.includes('(')) {
+        return false;
+      }
+      // Exclude private routes
+      if (excludedRoutes.includes(route)) {
+        return false;
+      }
+      // Exclude location pages (handled separately)
+      if (locationPagePrefixes.some(prefix => route.startsWith(prefix))) {
+        return false;
+      }
+      return true;
+    })
     .map(route => {
       // Higher priority for service pages
-      const isServicePage = servicePages.includes(route.path);
-      const priority = route.path === '/' ? '1.0' : (isServicePage ? '0.9' : '0.7');
+      const isServicePage = servicePages.includes(route);
+      const priority = route === '/' ? '1.0' : (isServicePage ? '0.9' : '0.7');
       const changefreq = isServicePage ? 'weekly' : 'monthly';
-      return createUrlEntry(`${BASE_URL}${route.path}`, today, changefreq, priority);
+      return createUrlEntry(`${BASE_URL}${route}`, today, changefreq, priority);
     });
 
-  // 2. Location pages from locationRoutes.js
+  // 2. Location pages (umzugsfirma-* pages)
   // Location pages are important for SEO, so we use weekly changefreq and 0.9 priority
-  const locationPages = locationRoutes.map(route => {
-    // Standorte page gets slightly higher priority
-    const priority = route.path === 'standorte' ? '0.95' : '0.9';
-    return createUrlEntry(`${BASE_URL}/${route.path}`, today, 'weekly', priority);
-  });
+  const locationPages = locationPagePrefixes
+    .filter(route => allStaticRoutes.includes(route))
+    .map(route => {
+      const priority = route === '/standorte' ? '0.95' : '0.9';
+      return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', priority);
+    });
 
-  // 3. Dynamic blog post pages
+  // 3. Standorte page (if exists)
+  if (allStaticRoutes.includes('/standorte')) {
+    locationPages.push(createUrlEntry(`${BASE_URL}/standorte`, today, 'weekly', '0.95'));
+  }
+
+  // 4. Dynamic blog post pages
   const postPages = posts.map(post => createUrlEntry(`${BASE_URL}/ratgeber/${post.slug}`, post.updated_at, 'weekly', '0.8'));
 
-  // 4. Dynamic partner profile pages
+  // 5. Dynamic partner profile pages
   const partnerPages = partners
     .filter(partner => partner.slug) // Ensure slug exists
     .map(partner => createUrlEntry(`${BASE_URL}/partner/${partner.slug}`, partner.updated_at || today, 'weekly', '0.6'));

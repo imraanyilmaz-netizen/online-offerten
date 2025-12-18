@@ -1,6 +1,6 @@
 'use client'
 
-import ErrorBoundary from '@/components/ErrorBoundary'
+import ErrorBoundary from '@/src/components/ErrorBoundary'
 import type { ReactNode } from 'react'
 
 interface ErrorBoundaryWrapperProps {

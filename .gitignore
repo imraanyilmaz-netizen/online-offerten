@@ -6,6 +6,8 @@ node_modules
 .DS_Store
 build-errors.txt
 build-output.txt
+tsconfig.tsbuildinfo
+*.tsbuildinfo
 ^C
 if
 index.html
