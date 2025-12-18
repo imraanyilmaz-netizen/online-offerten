@@ -48,6 +48,27 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
 
   // Fix Router Cache: Refresh router cache on navigation
   useEffect(() => {
+    // Skip refresh if navigating
+    if (!pathname || isNavigating) {
+      return
+    }
+    
+    // Skip refresh for likely 404 pages (short random strings without dashes)
+    // This prevents refresh loops on 404 pages
+    // Valid routes typically have dashes or are common paths like /login, /kontakt
+    const validShortRoutes = ['/login', '/kontakt', '/agb', '/datenschutz', '/ueber-uns', '/services', '/standorte']
+    const isLikely404 = pathname.length > 1 && 
+      pathname.length < 30 && 
+      !pathname.includes('-') && 
+      pathname !== '/' &&
+      !validShortRoutes.includes(pathname) && // Not a known valid short route
+      !pathname.match(/^\/(privatumzug|geschaeftsumzug|reinigung|partner|ratgeber|umzugsfirma)/) // Not a known route prefix
+    
+    if (isLikely404) {
+      // Likely a 404 page, skip refresh to prevent loops
+      return
+    }
+    
     // Small delay to ensure navigation is complete
     const timer = setTimeout(() => {
       if (typeof window !== 'undefined' && pathname) {
@@ -58,12 +79,14 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }, 100)
 
     return () => clearTimeout(timer)
-  }, [pathname, router])
+  }, [pathname, router, isNavigating])
 
-  // Redirect .php files and handle invalid routes
+  // Redirect .php files (but not 404 pages)
   useEffect(() => {
-    if (pathname?.endsWith('.php')) {
-      router.replace('/404')
+    if (pathname?.endsWith('.php') && pathname !== '/404') {
+      // Don't redirect to /404, let Next.js handle it naturally
+      // Just prevent the .php extension from being processed
+      return
     }
   }, [pathname, router])
 
@@ -124,6 +147,21 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   // Normalize path to lowercase - debounced to prevent navigation loops
   useEffect(() => {
     if (!pathname || isNavigating) return
+    
+    // Skip normalization for likely 404 pages (short random strings like /sfdsdf)
+    // Only normalize known valid routes
+    const validShortRoutes = ['/login', '/kontakt', '/agb', '/datenschutz', '/ueber-uns', '/services', '/standorte']
+    const isLikely404 = pathname.length > 1 && 
+      pathname.length < 30 && 
+      !pathname.includes('-') && 
+      pathname !== '/' &&
+      !validShortRoutes.includes(pathname) && // Not a known valid short route
+      !pathname.match(/^\/(privatumzug|geschaeftsumzug|reinigung|partner|ratgeber|umzugsfirma)/) // Not a known route prefix
+    
+    if (isLikely404) {
+      return
+    }
+    
     const normalizedPath = pathname.toLowerCase()
     
     if (pathname !== normalizedPath) {
@@ -136,6 +174,20 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   // Remove lang/lng query params - debounced to prevent navigation loops
   useEffect(() => {
     if (!searchParams || isNavigating) return
+    
+    // Skip for likely 404 pages (short random strings)
+    const validShortRoutes = ['/login', '/kontakt', '/agb', '/datenschutz', '/ueber-uns', '/services', '/standorte']
+    const isLikely404 = pathname && pathname.length > 1 && 
+      pathname.length < 30 && 
+      !pathname.includes('-') && 
+      pathname !== '/' &&
+      !validShortRoutes.includes(pathname) && // Not a known valid short route
+      !pathname.match(/^\/(privatumzug|geschaeftsumzug|reinigung|partner|ratgeber|umzugsfirma)/) // Not a known route prefix
+    
+    if (isLikely404) {
+      return
+    }
+    
     const lang = searchParams.get('lang')
     const lng = searchParams.get('lng')
     
