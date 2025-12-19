@@ -152,7 +152,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options,
+      options: {
+        emailRedirectTo: 'https://online-offerten.ch/email-confirmed',
+        ...options,
+      },
     })
 
     if (error) {

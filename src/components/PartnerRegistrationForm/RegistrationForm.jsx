@@ -156,6 +156,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         email: formData.email,
         password: formData.password,
         options: {
+          emailRedirectTo: 'https://online-offerten.ch/email-confirmed',
           data: partnerMetaData,
         },
       });
