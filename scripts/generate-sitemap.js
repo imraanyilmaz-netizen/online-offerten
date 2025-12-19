@@ -185,7 +185,7 @@ async function generateSitemap() {
     .map(route => {
       const priority = route === '/standorte' ? '0.95' : '0.9';
       return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', priority);
-    });
+  });
 
   // 3. Standorte page (if exists)
   if (allStaticRoutes.includes('/standorte')) {

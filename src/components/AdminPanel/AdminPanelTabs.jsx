@@ -16,10 +16,12 @@ const AdminPanelTabs = ({
   stats,
   onRefreshPartners,
   onUpdatePartner,
-  onDeletePartner
+  onDeletePartner,
+  onRefreshReviews
 }) => {
   const [activeTab, setActiveTab] = useState('quotes');
-  const pendingPartnerCount = partners?.filter(p => p.status === 'inactive' || p.status === 'pending').length || 0;
+  // Sadece "pending" (Ausstehend) partnerleri say - "inactive" partnerler sayılmamalı
+  const pendingPartnerCount = partners?.filter(p => p.status === 'pending').length || 0;
   const pendingReviewsCount = stats?.pending_reviews_count || 0;
 
   return (
@@ -106,7 +108,7 @@ const AdminPanelTabs = ({
             </TabsContent>
             
             <TabsContent value="reviews" className="mt-0">
-                <ReviewManagement />
+                <ReviewManagement onRefresh={onRefreshReviews} />
             </TabsContent>
 
             <TabsContent value="ratgeber" className="mt-0">

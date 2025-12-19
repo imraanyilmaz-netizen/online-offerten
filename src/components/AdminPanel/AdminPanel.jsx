@@ -16,7 +16,8 @@ const AdminPanel = () => {
     handleUpdatePartnerStatus,
     handleUpdatePartner,
     handleDeletePartner,
-    fetchStats
+    fetchStats,
+    fetchPendingReviewsCount
   } = AdminPanelCore();
 
   console.log('[AdminPanel] AdminPanelCore result:', { loading, hasStats: !!stats, partnersCount: partners?.length })
@@ -42,6 +43,7 @@ const AdminPanel = () => {
           onUpdatePartnerStatus={handleUpdatePartnerStatus}
           onUpdatePartner={handleUpdatePartner}
           onDeletePartner={handleDeletePartner}
+          onRefreshReviews={fetchPendingReviewsCount}
         />
       </div>
     </div>

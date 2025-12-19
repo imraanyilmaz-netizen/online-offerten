@@ -9,6 +9,7 @@ const AdminPanelCore = () => {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({});
   const [partners, setPartners] = useState([]);
+  const [pendingReviewsCount, setPendingReviewsCount] = useState(0);
 
   const fetchStats = useCallback(async () => {
       const supabase = createClient();
@@ -21,6 +22,25 @@ const AdminPanelCore = () => {
       }
       return { data, error };
   }, [toast]);
+
+  // Pending reviews sayısını direkt hesapla (sadece approval_status = 'pending' olanlar)
+  const fetchPendingReviewsCount = useCallback(async () => {
+    try {
+      const supabase = createClient();
+      const { count, error } = await supabase
+        .from('customer_reviews')
+        .select('*', { count: 'exact', head: true })
+        .eq('approval_status', 'pending');
+      
+      if (error) {
+        console.error('Error fetching pending reviews count:', error);
+      } else {
+        setPendingReviewsCount(count || 0);
+      }
+    } catch (error) {
+      console.error('Error fetching pending reviews count:', error);
+    }
+  }, []);
   
   const fetchPartners = useCallback(async () => {
     try {
@@ -38,10 +58,11 @@ const AdminPanelCore = () => {
     setLoading(true);
     await Promise.all([
       fetchStats(),
-      fetchPartners()
+      fetchPartners(),
+      fetchPendingReviewsCount()
     ]);
     setLoading(false);
-  }, [fetchStats, fetchPartners]);
+  }, [fetchStats, fetchPartners, fetchPendingReviewsCount]);
 
   useEffect(() => {
     fetchAllData();
@@ -86,13 +107,14 @@ const AdminPanelCore = () => {
 
   return {
     loading,
-    stats,
+    stats: { ...stats, pending_reviews_count: pendingReviewsCount },
     partners,
     fetchPartners,
     handleUpdatePartnerStatus,
     handleUpdatePartner,
     handleDeletePartner,
-    fetchStats
+    fetchStats,
+    fetchPendingReviewsCount
   };
 };
 

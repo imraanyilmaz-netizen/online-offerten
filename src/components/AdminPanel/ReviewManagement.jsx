@@ -197,7 +197,7 @@ const ReviewCard = ({ review, onUpdate }) => {
   );
 };
 
-const ReviewList = ({ status }) => {
+const ReviewList = ({ status, onRefresh }) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -221,6 +221,14 @@ const ReviewList = ({ status }) => {
     }
     setLoading(false);
   }, [status]);
+
+  const handleUpdate = useCallback(async () => {
+    await fetchReviews();
+    // Pending count'u güncelle (eğer bir review onaylandı/reddedildiyse)
+    if (onRefresh) {
+      onRefresh();
+    }
+  }, [fetchReviews, onRefresh]);
   
   useEffect(() => {
     fetchReviews();
@@ -232,13 +240,13 @@ const ReviewList = ({ status }) => {
   return (
     <div className="space-y-4">
       {reviews.map(review => (
-        <ReviewCard key={review.id} review={review} onUpdate={fetchReviews} />
+        <ReviewCard key={review.id} review={review} onUpdate={handleUpdate} />
       ))}
     </div>
   );
 };
 
-const ReviewManagement = () => {
+const ReviewManagement = ({ onRefresh }) => {
   return (
     <Card>
       <CardHeader>
@@ -253,13 +261,13 @@ const ReviewManagement = () => {
             <TabsTrigger value="rejected">Abgelehnt</TabsTrigger>
           </TabsList>
           <TabsContent value="pending" className="pt-4">
-            <ReviewList status="pending" />
+            <ReviewList status="pending" onRefresh={onRefresh} />
           </TabsContent>
           <TabsContent value="approved" className="pt-4">
-            <ReviewList status="approved" />
+            <ReviewList status="approved" onRefresh={onRefresh} />
           </TabsContent>
           <TabsContent value="rejected" className="pt-4">
-            <ReviewList status="rejected" />
+            <ReviewList status="rejected" onRefresh={onRefresh} />
           </TabsContent>
         </Tabs>
       </CardContent>
