@@ -703,7 +703,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 </h2>
                 <p className="text-md md:text-lg text-slate-600 max-w-2xl mx-auto">
                   Mit Online-Offerten vergleichen Sie in nur wenigen Minuten mehrere Angebote 
-                  für Umzug, Reinigung und Handwerkerleistungen in der Schweiz.
+                  für Umzug, Reinigung und Renovierung in der Schweiz.
                 </p>
                 </div>
 
@@ -758,7 +758,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-                  Umzug, Reinigung & Handwerker Offerten vergleichen
+                  Umzug, Reinigung & Renovierung Offerten vergleichen
                 </h2>
                 <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                   Von Privatumzug bis Gartenarbeiten – finden Sie den passenden Partner für Ihr Projekt. Professionell, zuverlässig und zu fairen Preisen.
@@ -970,19 +970,43 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   
                   <div className="prose prose-lg text-gray-700 max-w-none space-y-4">
                     <p className="text-base md:text-lg leading-relaxed">
-                      Wenn Sie in der Schweiz auf der Suche nach professionellen Dienstleistungen sind, dann ist das Offerten vergleichen Schweiz der erste wichtige Schritt zu einer fundierten Entscheidung. Unabhängig davon, ob Sie einen Umzug planen, eine gründliche Reinigung benötigen oder Handwerker für Ihr Projekt suchen – der Vergleich mehrerer Angebote hilft Ihnen dabei, die beste Lösung für Ihre individuellen Bedürfnisse zu finden.
+                      Wenn Sie in der Schweiz einen Umzug, eine Reinigung oder Renovierungsarbeiten planen, 
+                      ist das Offerten vergleichen der wichtigste Schritt zu einer fundierten Entscheidung. 
+                      Unabhängig davon, ob Sie einen Privatumzug organisieren, eine gründliche Reinigung 
+                      benötigen oder Ihre Wohnung renovieren möchten – der Vergleich mehrerer Offerten hilft 
+                      Ihnen dabei, die beste Lösung für Ihre individuellen Bedürfnisse zu finden.
                     </p>
                     <p className="text-base md:text-lg leading-relaxed">
-                      Für viele Schweizer Haushalte und Unternehmen steht am Anfang eines jeden Projekts die Frage nach den Kosten. Gerade bei Umzug Offerten können die Preise zwischen verschiedenen Anbietern erheblich variieren. Ein Umzug ist nicht nur eine logistische Herausforderung, sondern auch eine finanzielle Investition. Durch einen sorgfältigen Vergleich können Sie nicht nur Geld sparen, sondern auch sicherstellen, dass alle notwendigen Leistungen im Preis inbegriffen sind – von der professionellen Verpackung Ihrer Möbel bis hin zur Montage am Zielort.
+                      Für viele Schweizer Haushalte und Unternehmen steht zu Beginn eines Projekts die Frage 
+                      nach den Kosten im Mittelpunkt. Gerade bei Umzug Offerten können die Preise zwischen 
+                      verschiedenen Anbietern erheblich variieren. Ein Umzug ist nicht nur eine logistische 
+                      Herausforderung, sondern auch eine finanzielle Investition. Wenn Sie Umzug Offerten 
+                      vergleichen, können Sie Geld sparen und gleichzeitig sicherstellen, dass alle wichtigen 
+                      Leistungen – von der professionellen Verpackung bis zur Montage am Zielort – im Preis 
+                      enthalten sind.
                     </p>
                     <p className="text-base md:text-lg leading-relaxed">
-                      Ähnlich verhält es sich mit Reinigung Offerten. Ob Sie eine Umzugsreinigung benötigen, die Wohnungsübergabe erfolgreich meistern möchten oder eine regelmäßige Büroreinigung suchen – jede Situation erfordert spezifische Leistungen. Professionelle Reinigungsfirmen bieten unterschiedliche Pakete und Servicelevel an. Ein Vergleich ermöglicht es Ihnen, genau das Angebot zu finden, das zu Ihrem Budget und Ihren Qualitätsansprüchen passt. Zudem können Sie so sicherstellen, dass wichtige Aspekte wie Versicherungsschutz, Abnahmegarantien und Umweltfreundlichkeit der Reinigungsmittel berücksichtigt werden.
+                      Auch bei Reinigung Offerten lohnt sich ein genauer Vergleich. Ob Umzugsreinigung mit 
+                      Abnahmegarantie, Wohnungsreinigung oder Büroreinigung – jede Situation erfordert 
+                      spezifische Leistungen. Professionelle Reinigungsfirmen bieten unterschiedliche Pakete 
+                      und Servicelevel an. Durch das Vergleichen von Reinigung Offerten finden Sie ein Angebot, 
+                      das zu Ihrem Budget und Ihren Qualitätsansprüchen passt. Gleichzeitig können Sie Aspekte 
+                      wie Versicherungsschutz, Erfahrung und Umweltfreundlichkeit berücksichtigen.
                     </p>
                     <p className="text-base md:text-lg leading-relaxed">
-                      Neben Umzugs- und Reinigungsdienstleistungen spielen auch Handwerker Angebote eine zentrale Rolle im Schweizer Markt. Ob Malerarbeiten, Gartenpflege, Renovierungen oder spezielle Handwerksleistungen – qualifizierte Fachkräfte sind gefragt. Der Vergleich verschiedener Angebote hilft Ihnen dabei, nicht nur die wirtschaftlichste Lösung zu finden, sondern auch einen Handwerker zu identifizieren, der über die notwendige Expertise, Referenzen und Versicherungen verfügt. Dies ist besonders wichtig, da viele Handwerksarbeiten eine langfristige Investition darstellen und Fehler teuer werden können.
+                      Renovierungsarbeiten sind oft langfristige Investitionen und sollten sorgfältig geplant 
+                      werden. Ob Malerarbeiten, kleinere Renovationen oder umfassende Modernisierungen – der 
+                      Vergleich von Renovierung Offerten hilft Ihnen dabei, den passenden Anbieter für Ihr 
+                      Projekt zu finden. So vermeiden Sie unnötige Kosten und stellen sicher, dass die Arbeiten 
+                      fachgerecht und zuverlässig ausgeführt werden.
                     </p>
                     <p className="text-base md:text-lg leading-relaxed">
-                      Online-Offerten.ch vereinfacht diesen Vergleichsprozess erheblich. Anstatt stundenlang im Internet zu recherchieren und unzählige Telefonate zu führen, können Sie mit nur einer kostenlosen Anfrage mehrere geprüfte Anbieter erreichen. Unsere Plattform verbindet Sie mit qualifizierten Firmen in Ihrer Region, die Ihnen detaillierte und transparente Offerten zukommen lassen. So sparen Sie nicht nur Zeit, sondern gewinnen auch die Sicherheit, eine fundierte Entscheidung zu treffen. Alle Partner in unserem Netzwerk wurden sorgfältig geprüft und erfüllen hohe Qualitätsstandards. Starten Sie noch heute Ihren Vergleich und finden Sie den idealen Dienstleister für Ihr Projekt.
+                      Online-Offerten.ch vereinfacht das Offerten vergleichen in der Schweiz erheblich. 
+                      Anstatt lange zu recherchieren oder zahlreiche Telefonate zu führen, erhalten Sie mit 
+                      nur einer kostenlosen Anfrage mehrere transparente Offerten von geprüften Anbietern aus 
+                      Ihrer Region. Alle Partner auf unserer Plattform werden sorgfältig geprüft und erfüllen 
+                      hohe Qualitätsstandards. Starten Sie jetzt Ihren Vergleich und finden Sie den passenden 
+                      Anbieter für Umzug, Reinigung oder Renovierung in der ganzen Schweiz.
                     </p>
                   </div>
 
