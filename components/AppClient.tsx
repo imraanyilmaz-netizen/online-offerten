@@ -8,6 +8,9 @@ import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
 import { logoUrl } from '@/assets/logoConstants'
+import CookieConsent from '@/components/CookieConsent'
+import GTMProvider from '@/components/GTMProvider'
+import { updateGTMConsent, getCookiePreferences } from '@/lib/gtm'
 // Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
 import dynamic from 'next/dynamic'
 
@@ -86,16 +89,45 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Google Analytics
+  // Listen for cookie consent updates
   useEffect(() => {
-    initializeGA().then(() => {
-      if (ReactGA && TRACKING_ID && TRACKING_ID !== "G-XXXXXXXXXX") {
-        ReactGA.send({ 
-          hitType: "pageview", 
-          page: pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
+    const handleConsentUpdate = (event: CustomEvent) => {
+      const prefs = event.detail
+      updateGTMConsent(prefs)
+      
+      // Initialize Google Analytics if analytics consent is granted
+      if (prefs.analytics) {
+        initializeGA().then(() => {
+          if (ReactGA && TRACKING_ID && TRACKING_ID !== "G-XXXXXXXXXX") {
+            ReactGA.send({ 
+              hitType: "pageview", 
+              page: pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
+            })
+          }
         })
       }
-    })
+    }
+    
+    window.addEventListener('cookie-consent-updated', handleConsentUpdate as EventListener)
+    
+    return () => {
+      window.removeEventListener('cookie-consent-updated', handleConsentUpdate as EventListener)
+    }
+  }, [pathname, searchParams])
+
+  // Google Analytics (only if analytics cookies are accepted)
+  useEffect(() => {
+    const preferences = getCookiePreferences()
+    if (preferences.analytics) {
+      initializeGA().then(() => {
+        if (ReactGA && TRACKING_ID && TRACKING_ID !== "G-XXXXXXXXXX") {
+          ReactGA.send({ 
+            hitType: "pageview", 
+            page: pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
+          })
+        }
+      })
+    }
   }, [pathname, searchParams])
 
   // Canonical URL redirect
@@ -285,23 +317,26 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   return (
     <HelmetProvider>
       <I18nextProvider i18n={i18n}>
-        <ScrollToTop />
-        <Layout>
-          <Suspense fallback={
-            <div className="flex justify-center items-center min-h-screen">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
-            </div>
-          }>
-            {/* Removed AnimatePresence and motion.div wrapper to prevent blank page issues */}
-            {/* Next.js App Router handles page transitions automatically */}
-            {children}
-          </Suspense>
-        </Layout>
-        {shouldShowFloatingReview && (
-          <Suspense fallback={null}>
-            <FloatingReviewSummary />
-          </Suspense>
-        )}
+        <GTMProvider>
+          <ScrollToTop />
+          <Layout>
+            <Suspense fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+              </div>
+            }>
+              {/* Removed AnimatePresence and motion.div wrapper to prevent blank page issues */}
+              {/* Next.js App Router handles page transitions automatically */}
+              {children}
+            </Suspense>
+          </Layout>
+          {shouldShowFloatingReview && (
+            <Suspense fallback={null}>
+              <FloatingReviewSummary />
+            </Suspense>
+          )}
+          <CookieConsent />
+        </GTMProvider>
       </I18nextProvider>
     </HelmetProvider>
   )
