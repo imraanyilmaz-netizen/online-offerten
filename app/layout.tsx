@@ -6,6 +6,7 @@ import { AuthProvider } from '@/contexts/SupabaseAuthContext'
 import { Toaster } from '@/components/ui/toaster'
 import AppClient from '@/components/AppClient'
 import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -96,6 +97,7 @@ export default function RootLayout({
             <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
               <AppClient>
                 {children}
+                <SpeedInsights />
               </AppClient>
             </Suspense>
           </ErrorBoundaryWrapper>

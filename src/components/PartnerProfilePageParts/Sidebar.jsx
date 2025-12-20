@@ -2,7 +2,7 @@ import React from 'react';
 // Removed useTranslation
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, Phone, Globe, Calendar, Users, Shield, FileText } from 'lucide-react';
+import { MapPin, Phone, Globe, Calendar, Shield, FileText } from 'lucide-react';
 import StarRating from './StarRating';
 import {
   Accordion,
@@ -52,7 +52,6 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
             {renderLinkItem(Phone, '', partner.phone, `tel:${partner.phone}`)}
             {renderLinkItem(Globe, '', partner.website, partner.website?.startsWith('http') ? partner.website : `https://${partner.website}`)}
             {renderInfoItem(Calendar, 'Gegründet im Jahr', partner.year_founded)}
-            {renderInfoItem(Users, 'Mitarbeiter', partner.employee_count)}
             {renderInfoItem(FileText, 'Handelsregisternummer', partner.commercial_register_number)}
             {partner.liability_insurance && renderInfoItem(Shield, 'Haftpflichtversicherung vorhanden', true)}
           </ul>
