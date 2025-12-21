@@ -148,7 +148,7 @@ const ReinigungPageClient = () => {
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900">
-                    Reinigungsfirma für einen stressfreien Reinigung.
+                    Reinigungsfirma für eine stressfreie Reinigung
                   </h1>
                 </motion.div>
                 <motion.p

@@ -73,7 +73,7 @@ const Footer = React.memo(() => {
 
   return (
     <footer 
-      className="bg-gray-800 text-white pt-16 pb-8 flex-shrink-0 footer-fixed-height"
+      className="bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 text-white pt-16 pb-8 flex-shrink-0 footer-fixed-height"
       style={{ contain: 'layout style paint' }}
     >
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
@@ -214,7 +214,7 @@ const Footer = React.memo(() => {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+        <div className="border-t border-green-700/50 mt-8 pt-8 text-center text-green-200 text-sm">
           <p>© {currentYear} Online-Offerten.ch. Alle Rechte vorbehalten.</p>
         </div>
       </div>
