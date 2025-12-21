@@ -278,8 +278,8 @@ const InternationaleUmzugPageClient = () => {
     }
   ]
 
-  const metaTitle = "Umzugsfirmen vergleichen für Auslandsumzug » Mehrere Firmen vergleichen & bis zu 40% sparen | Online Offerten vergleichen"
-  const metaDescription = "Umzugsfirmen vergleichen für Auslandsumzug: Vergleichen Sie online mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Kostenlos und unverbindlich Offerten von Fachfirmen für internationale Umzüge erhalten. Umzug nach Deutschland, Österreich, Frankreich, Spanien & ganz Europa."
+  const metaTitle = "Internationaler Umzug: Kostenlose Offerten vergleichen | Online-Offerten.ch"
+  const metaDescription = "Internationaler Umzug: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa."
   const canonicalUrl = "/internationale-umzuege"
 
   const schema = {

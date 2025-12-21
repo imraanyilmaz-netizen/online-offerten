@@ -29,7 +29,7 @@ const HausreinigungPageClient = () => {
   // SEO Data
   const metaTitle = "Hausreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen";
   const metaDescription = "Professionelle Hausreinigung mit 100% Abnahmegarantie: Über 12 Jahre Erfahrung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Hausreinigung garantiert.";
-  const metaKeywords = "hausreinigung mit abnahmegarantie, hausreinigung schweiz, hausreinigung preise, hausreinigung kosten, reinigungsfirma haus, professionelle hausreinigung, abnahmegarantie hausreinigung, hausreinigung zürich, hausreinigung bern, hausreinigung basel, einfamilienhaus reinigung, hausreinigung offerte";
+  // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/hausreinigung';
 
   // FAQ Data
@@ -355,9 +355,9 @@ const HausreinigungPageClient = () => {
                   </p>
 
                   {/* H2: Unsere Leistungen im Bereich Hausreinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Hausreinigung</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Reinigung</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Hausreinigung. Dazu gehören die gründliche Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer, Schlafzimmer, Keller und Dachboden. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Fassadenreinigung, Hofreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass Ihr Haus den höchsten Qualitätsstandards entspricht.
+                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die professionelle Reinigung. Dazu gehören die gründliche Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer, Schlafzimmer, Keller und Dachboden. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Fassadenreinigung, Hofreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass Ihr Haus den höchsten Qualitätsstandards entspricht.
                   </p>
 
                   {/* Leistungen Image */}
@@ -405,7 +405,7 @@ const HausreinigungPageClient = () => {
                   {/* H2: Vorteile unserer Hausreinigung mit Abnahmegarantie */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Vorteile unserer Hausreinigung mit Abnahmegarantie</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Die Abnahmegarantie ist ein entscheidender Vorteil bei der Hausreinigung. Sie bedeutet, dass die Reinigungsfirma garantiert, dass alle Bereiche Ihres Hauses gründlich und professionell gereinigt werden. Sollten Sie Mängel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis alles den Anforderungen entspricht. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zusätzlich profitieren Sie von unserer über 12-jährigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk geprüfter, versicherter Reinigungsfirmen, die speziell auf grössere Objekte wie Einfamilienhäuser spezialisiert sind.
+                    Die Abnahmegarantie ist ein entscheidender Vorteil bei der professionellen Reinigung. Sie bedeutet, dass die Reinigungsfirma garantiert, dass alle Bereiche Ihres Hauses gründlich und professionell gereinigt werden. Sollten Sie Mängel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis alles den Anforderungen entspricht. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zusätzlich profitieren Sie von unserer über 12-jährigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk geprüfter, versicherter Reinigungsfirmen, die speziell auf grössere Objekte wie Einfamilienhäuser spezialisiert sind.
                   </p>
 
                   {/* Abnahmegarantie Image */}
@@ -432,7 +432,7 @@ const HausreinigungPageClient = () => {
                   {/* H2: Was bei einer gründlichen Hausreinigung gereinigt wird */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was bei einer gründlichen Hausreinigung gereinigt wird</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Eine umfassende Hausreinigung beinhaltet die Reinigung aller Räume und Bereiche eines Hauses. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke, Heizkörper und Lichtschalter in allen Etagen. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Backofen, Kühlschrank, Spüle und Arbeitsflächen gereinigt. Alle Badezimmer werden komplett gereinigt, inklusive Toiletten, Duschen, Badewannen, Waschbecken und Fliesen. Fenster werden innen und aussen gereinigt, Treppenhäuser werden gründlich gereinigt, und Keller sowie Dachboden werden bei Bedarf gereinigt. Alle Oberflächen werden desinfiziert, und eine professionelle Reinigung geht weit über das normale Putzen hinaus.
+                    Eine umfassende Reinigung beinhaltet die Reinigung aller Räume und Bereiche eines Hauses. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke, Heizkörper und Lichtschalter in allen Etagen. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Backofen, Kühlschrank, Spüle und Arbeitsflächen gereinigt. Alle Badezimmer werden komplett gereinigt, inklusive Toiletten, Duschen, Badewannen, Waschbecken und Fliesen. Fenster werden innen und aussen gereinigt, Treppenhäuser werden gründlich gereinigt, und Keller sowie Dachboden werden bei Bedarf gereinigt. Alle Oberflächen werden desinfiziert, und eine professionelle Reinigung geht weit über das normale Putzen hinaus.
                   </p>
 
                   {/* H2: Hausreinigung für Familien mit Kindern */}
@@ -509,7 +509,7 @@ const HausreinigungPageClient = () => {
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Hausreinigung sind */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Hausreinigung sind</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
                     Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Hausreinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und speziell auf grössere Objekte wie Einfamilienhäuser spezialisiert sind. Alle Partnerfirmen bieten eine 100% Abnahmegarantie und verwenden moderne, umweltfreundliche Reinigungsmittel. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
@@ -547,9 +547,9 @@ const HausreinigungPageClient = () => {
 
                   {/* H2: Häufig gestellte Fragen zur Hausreinigung */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Hausreinigung</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Reinigung</h2>
                     <p className="text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
-                      Häufig gestellte Fragen zur Hausreinigung mit Abnahmegarantie: Was kostet eine professionelle Hausreinigung? Was beinhaltet eine umfassende Hausreinigung? Wie lange dauert eine Hausreinigung? Was bedeutet Abnahmegarantie? Sind die Reinigungskräfte versichert? Kann ich zwischen regelmässiger und einmaliger Reinigung wählen? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
+                      Häufig gestellte Fragen zur professionellen Reinigung mit Abnahmegarantie: Was kostet eine professionelle Reinigung? Was beinhaltet eine umfassende Reinigung? Wie lange dauert eine Reinigung? Was bedeutet Abnahmegarantie? Sind die Reinigungskräfte versichert? Kann ich zwischen regelmässiger und einmaliger Reinigung wählen? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (

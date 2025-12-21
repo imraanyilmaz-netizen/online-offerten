@@ -29,9 +29,9 @@ const UmzugsfirmaVergleichenPageClient = () => {
   const costFactorIcons = [Truck, ArrowRight, PiggyBank, FileText, Calendar, Award];
 
   // SEO Data
-  const metaTitle = "Umzugsfirma vergleichen – Jetzt Offerten vergleichen & sparen";
+  const metaTitle = "Umzugsfirma vergleichen: Kostenlose Offerten & bis zu 40% sparen";
   const metaDescription = "Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz für Ihren Privatumzug oder die Reinigung. Sparen Sie Zeit und Geld mit nur einer Anfrage! Bis zu 6 Offerten im Vergleich.";
-  const metaKeywords = "umzugsfirma vergleichen, umzugsfirma vergleich, zügelfirma vergleichen, zügelfirma vergleich, umzugsfirmen vergleichen, umzugsofferten vergleichen, umzugsofferten, angebote vergleichen, umzugsunternehmen schweiz, beste umzugsfirma, umzugsfirma schweiz vergleichen, umzugsfirma preisvergleich, zügelfirma preisvergleich, umzugsfirma kostenlos vergleichen, umzugsofferte vergleichen, umzugsfirma empfehlung, beste zügelfirma, umzugsfirma online vergleichen, umzugsfirma finden vergleichen, umzugsfirma schweiz, zügelfirma schweiz";
+  // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/umzugsfirma-vergleichen';
 
   // Data
@@ -75,7 +75,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
     },
     {
       title: "Klar definierter Leistungsumfang",
-      content: "Die günstigste Offerte ist nicht immer die beste. Vergleichen Sie Äpfel mit Äpfeln. Ist der Ein- und Auspackservice enthalten? Werden Möbel fachgerecht demontiert und wieder montiert? Ist die Endreinigung mit Abnahmegarantie Teil des Pakets? Eine detaillierte Leistungsbeschreibung im Vertrag verhindert Missverständnisse am Umzugstag."
+      content: "Die günstigste Offerte ist nicht immer die beste. Prüfen Sie, ob Äpfel mit Äpfeln verglichen werden. Ist der Ein- und Auspackservice enthalten? Werden Möbel fachgerecht demontiert und wieder montiert? Ist die Endreinigung mit Abnahmegarantie Teil des Pakets? Eine detaillierte Leistungsbeschreibung im Vertrag verhindert Missverständnisse am Umzugstag."
     },
     {
       title: "Erfahrung und lokales Know-how",
@@ -131,8 +131,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
 
   const faqItems = [
     {
-      question: "Wie viele Offerten sind ideal für einen Vergleich?",
-      answer: "Drei bis sechs Offerten sind der 'Sweet Spot'. Weniger als drei gibt Ihnen keine solide Vergleichsbasis. Mehr als sechs kann schnell unübersichtlich und überwältigend werden. Unser System zielt darauf ab, Ihnen genau diese optimale Anzahl an passenden Offerten zu liefern."
+      question: "Wie viele Offerten sind ideal für einen Preisvergleich?",
+      answer: "Drei bis sechs Offerten sind der 'Sweet Spot'. Weniger als drei gibt Ihnen keine solide Vergleichsbasis. Mehr als sechs kann schnell unübersichtlich und überwältigend werden. Unser System zielt darauf ab, Ihnen genau diese optimale Anzahl an passenden Angeboten zu liefern."
     },
     {
       question: "Was bedeutet 'Abnahmegarantie' bei der Umzugsreinigung wirklich?",
@@ -188,7 +188,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           <div className="relative container mx-auto max-w-navbar px-4 md:px-6 py-20 md:py-28 text-center z-10">
             <motion.div initial="hidden" animate="visible" variants={fadeIn}>
               <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 tracking-tight">Umzugsfirmen clever vergleichen und bis zu 40% sparen</h1>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">Der definitive Leitfaden für Ihren stressfreien Umzug in der Schweiz. Vergleichen Sie Umzugsfirmen und finden Sie geprüfte Profis für Privatumzug und Reinigung. Erhalten Sie transparente Offerten und treffen Sie die beste Wahl für Ihr Budget und Ihre Nerven.</p>
+              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">Der definitive Leitfaden für Ihren stressfreien Umzug in der Schweiz. Holen Sie mehrere Offerten von Umzugsfirmen ein und finden Sie geprüfte Profis für Privatumzug und Reinigung. Erhalten Sie transparente Angebote und treffen Sie die beste Wahl für Ihr Budget und Ihre Nerven.</p>
               <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white font-bold group px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
                 <Link href="/kostenlose-offerte-anfordern">
                   Jetzt kostenlos Offerten anfordern
@@ -235,10 +235,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
 
           <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <Card className="bg-white shadow-xl p-6 md:p-10 border-t-4 border-green-500">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Umzugsfirma vergleichen – So finden Sie den besten Partner für Ihren Umzug</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">So finden Sie die beste Umzugsfirma: Ihr Leitfaden zum Preisvergleich</h2>
               <div className="prose max-w-none text-slate-600 leading-relaxed space-y-4">
-                <p>Ein Umzug ist mehr als nur der Transport von Kisten von A nach B; er ist ein bedeutender Schritt in einen neuen Lebensabschnitt. Die Wahl der richtigen Umzugsfirma ist dabei der entscheidende Faktor, der über einen stressfreien Start oder ein kostspieliges Chaos entscheidet. Viele machen den Fehler, sich von der erstbesten oder vermeintlich günstigsten Offerte locken zu lassen, ohne die Details zu prüfen. Doch ein gründlicher Vergleich von Umzugsfirmen ist unerlässlich, um versteckte Kosten, unzureichenden Versicherungsschutz oder unprofessionelle Dienstleistungen zu vermeiden. Eine seriöse Zügelfirma bietet Transparenz, Verlässlichkeit und die Sicherheit, dass Ihr Hab und Gut in besten Händen ist. Es geht darum, einen Partner zu finden, dem Sie vertrauen können – einen Partner, der die Komplexität Ihres Umzugs versteht und Ihnen mit Rat und Tat zur Seite steht. Ein systematischer Vergleich schützt Sie nicht nur vor finanziellen Überraschungen, sondern sichert auch die Qualität und Sorgfalt, die Ihr Eigentum verdient. Nehmen Sie sich die Zeit, Offerten detailliert zu prüfen, denn diese Investition zahlt sich in Form von gespartem Geld, Zeit und Nerven um ein Vielfaches aus.</p>
-                <p>Der Prozess, verschiedene Umzugsfirmen zu vergleichen, kann auf den ersten Blick überwältigend wirken. Unzählige Anbieter werben mit verlockenden Preisen, doch wie trennt man die Spreu vom Weizen? Genau hier setzt unsere Plattform an. Anstatt stundenlang im Internet zu recherchieren, unzählige Telefonate zu führen und auf Rückmeldungen zu warten, bündeln wir den Prozess für Sie. Mit nur einer einzigen, kostenlosen Anfrage erreichen Sie ein Netzwerk von sorgfältig geprüften und qualifizierten Umzugsunternehmen in Ihrer Region. Diese Firmen wissen, dass sie im direkten Wettbewerb zueinander stehen, was sie dazu motiviert, Ihnen nicht nur wettbewerbsfähige, sondern auch faire und transparente Offerten zu unterbreiten. Sie erhalten bis zu sechs vergleichbare Offerten direkt in Ihr Postfach. So können Sie in aller Ruhe Preise, den detaillierten Leistungsumfang, Kundenbewertungen und die angebotenen Versicherungsleistungen nebeneinanderlegen. Dieser strukturierte Ansatz ermöglicht es Ihnen, eine fundierte Entscheidung zu treffen, die nicht allein auf dem Preis basiert, sondern das beste Gesamtpaket aus Kosten, Service und Vertrauenswürdigkeit berücksichtigt. Starten Sie jetzt Ihren Vergleich und machen Sie den ersten Schritt zu einem reibungslosen und erfolgreichen Umzug.</p>
+                <p>Ein Umzug ist mehr als nur der Transport von Kisten von A nach B; er ist ein bedeutender Schritt in einen neuen Lebensabschnitt. Die Wahl der richtigen Umzugsfirma ist dabei der entscheidende Faktor, der über einen stressfreien Start oder ein kostspieliges Chaos entscheidet. Viele machen den Fehler, sich von der erstbesten oder vermeintlich günstigsten Offerte locken zu lassen, ohne die Details zu prüfen. Doch ein gründlicher Preisvergleich mehrerer Anbieter ist unerlässlich, um versteckte Kosten, unzureichenden Versicherungsschutz oder unprofessionelle Dienstleistungen zu vermeiden. Eine seriöse Zügelfirma bietet Transparenz, Verlässlichkeit und die Sicherheit, dass Ihr Hab und Gut in besten Händen ist. Es geht darum, einen Partner zu finden, dem Sie vertrauen können – einen Partner, der die Komplexität Ihres Umzugs versteht und Ihnen mit Rat und Tat zur Seite steht. Ein systematischer Vergleich mehrerer Offerten schützt Sie nicht nur vor finanziellen Überraschungen, sondern sichert auch die Qualität und Sorgfalt, die Ihr Eigentum verdient. Nehmen Sie sich die Zeit, Angebote detailliert zu prüfen, denn diese Investition zahlt sich in Form von gespartem Geld, Zeit und Nerven um ein Vielfaches aus.</p>
+                <p>Der Prozess, verschiedene Umzugsfirmen miteinander zu vergleichen, kann auf den ersten Blick überwältigend wirken. Unzählige Anbieter werben mit verlockenden Preisen, doch wie trennt man die Spreu vom Weizen? Genau hier setzt unsere Plattform an. Anstatt stundenlang im Internet zu recherchieren, unzählige Telefonate zu führen und auf Rückmeldungen zu warten, bündeln wir den Prozess für Sie. Mit nur einer einzigen, kostenlosen Anfrage erreichen Sie ein Netzwerk von sorgfältig geprüften und qualifizierten Umzugsunternehmen in Ihrer Region. Diese Firmen wissen, dass sie im direkten Wettbewerb zueinander stehen, was sie dazu motiviert, Ihnen nicht nur wettbewerbsfähige, sondern auch faire und transparente Offerten zu unterbreiten. Sie erhalten bis zu sechs Angebote direkt in Ihr Postfach. So können Sie in aller Ruhe Preise, den detaillierten Leistungsumfang, Kundenbewertungen und die angebotenen Versicherungsleistungen nebeneinanderlegen. Dieser strukturierte Ansatz ermöglicht es Ihnen, eine fundierte Entscheidung zu treffen, die nicht allein auf dem Preis basiert, sondern das beste Gesamtpaket aus Kosten, Service und Vertrauenswürdigkeit berücksichtigt. Starten Sie jetzt Ihre Offertensuche und machen Sie den ersten Schritt zu einem reibungslosen und erfolgreichen Umzug.</p>
               </div>
             </Card>
           </motion.section>
@@ -286,7 +286,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
 
           <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3 text-center">Was kostet ein Umzug? Die 6 wichtigsten Kostenfaktoren im Detail</h2>
-            <p className="text-lg text-slate-600 mb-12 text-center max-w-3xl mx-auto">Die Kosten für einen Umzug sind so individuell wie der Umzug selbst. Um Umzugsfirmen zu vergleichen und Offerten fair bewerten zu können, müssen Sie die entscheidenden Preistreiber kennen:</p>
+            <p className="text-lg text-slate-600 mb-12 text-center max-w-3xl mx-auto">Die Kosten für einen Umzug sind so individuell wie der Umzug selbst. Um mehrere Anbieter miteinander zu vergleichen und Offerten fair bewerten zu können, müssen Sie die entscheidenden Preistreiber kennen:</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {costFactors.map((factor, index) => {
                 const Icon = costFactorIcons[index % costFactorIcons.length];
@@ -306,7 +306,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </motion.section>
 
           <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Häufig gestellte Fragen zum Umzugsfirmen-Vergleich</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Häufig gestellte Fragen zum Preisvergleich von Umzugsfirmen</h2>
             <Accordion type="single" collapsible className="w-full max-w-navbar mx-auto bg-white p-4 rounded-lg shadow-xl">
               {faqItems.map((item, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
@@ -323,7 +323,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             className="text-center py-16 md:py-20 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl shadow-2xl"
             variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Starten Sie jetzt Ihren intelligenten Vergleich</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Starten Sie jetzt Ihre Offertensuche</h2>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto px-4">Verschwenden Sie keine Zeit mehr mit mühsamer Recherche. Füllen Sie unser Formular in wenigen Minuten aus und lassen Sie die besten Umzugsfirmen um Sie werben. Einfach, schnell und effizient.</p>
             <Button asChild size="lg" className="bg-white text-green-700 hover:bg-gray-100 font-bold group px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
               <Link href="/kostenlose-offerte-anfordern">

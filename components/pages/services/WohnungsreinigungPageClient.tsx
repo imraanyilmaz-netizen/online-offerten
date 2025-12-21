@@ -29,7 +29,7 @@ const WohnungsreinigungPageClient = () => {
   // SEO Data
   const metaTitle = "Wohnungsreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen";
   const metaDescription = "Professionelle Wohnungsreinigung mit 100% Abnahmegarantie: Über 12 Jahre Erfahrung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.";
-  const metaKeywords = "wohnungsreinigung mit abnahmegarantie, wohnungsreinigung schweiz, wohnungsreinigung preise, wohnungsreinigung kosten, reinigungsfirma wohnung, professionelle wohnungsreinigung, abnahmegarantie reinigung, wohnungsreinigung zürich, wohnungsreinigung bern, wohnungsreinigung basel, wohnungsreinigung luzern, wohnungsreinigung offerte, endreinigung wohnung";
+  // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/wohnungsreinigung';
 
   // FAQ Data
@@ -363,9 +363,9 @@ const WohnungsreinigungPageClient = () => {
                   </p>
 
                   {/* H2: Unsere Leistungen im Bereich Wohnungsreinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6 break-words">Unsere Leistungen im Bereich Wohnungsreinigung</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full">
-                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Wohnungsreinigung. Dazu gehören die gründliche Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Fassadenreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass die Wohnung den Anforderungen entspricht.
+                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die professionelle Reinigung. Dazu gehören die gründliche Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Fassadenreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass die Wohnung den Anforderungen entspricht.
                   </p>
 
                   {/* Leistungen Image */}
@@ -412,7 +412,7 @@ const WohnungsreinigungPageClient = () => {
                   {/* H2: Vorteile unserer Reinigung mit Abnahmegarantie */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6 break-words">Vorteile unserer Reinigung mit Abnahmegarantie</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full">
-                    Die Abnahmegarantie ist ein entscheidender Vorteil bei der Wohnungsreinigung. Sie bedeutet, dass die Reinigungsfirma garantiert, dass die Wohnung den Anforderungen für die Übergabe entspricht. Sollte der Vermieter oder neue Eigentümer Mängel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis die Wohnung den Anforderungen entspricht. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zusätzlich profitieren Sie von unserer über 12-jährigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk geprüfter, versicherter Reinigungsfirmen.
+                    Die Abnahmegarantie ist ein entscheidender Vorteil bei der professionellen Reinigung. Sie bedeutet, dass die Reinigungsfirma garantiert, dass die Wohnung den Anforderungen für die Übergabe entspricht. Sollte der Vermieter oder neue Eigentümer Mängel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis die Wohnung den Anforderungen entspricht. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zusätzlich profitieren Sie von unserer über 12-jährigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk geprüfter, versicherter Reinigungsfirmen.
                   </p>
 
                   {/* Abnahmegarantie Image */}
@@ -438,7 +438,7 @@ const WohnungsreinigungPageClient = () => {
                   {/* H2: Was bei einer gründlichen Wohnungsreinigung gereinigt wird */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6 break-words">Was bei einer gründlichen Wohnungsreinigung gereinigt wird</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full">
-                    Eine umfassende Wohnungsreinigung beinhaltet die Reinigung aller Räume und Bereiche. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke und Heizkörper. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Backofen, Kühlschrank, Spüle und Arbeitsflächen gereinigt. Das Badezimmer wird komplett gereinigt, inklusive Toilette, Dusche, Badewanne, Waschbecken und Fliesen. Fenster werden innen und aussen gereinigt, und alle Oberflächen werden desinfiziert. Eine professionelle Reinigung geht weit über das normale Putzen hinaus und sorgt für ein hygienisch sauberes Zuhause.
+                    Eine umfassende Reinigung beinhaltet die Reinigung aller Räume und Bereiche. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke und Heizkörper. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Backofen, Kühlschrank, Spüle und Arbeitsflächen gereinigt. Das Badezimmer wird komplett gereinigt, inklusive Toilette, Dusche, Badewanne, Waschbecken und Fliesen. Fenster werden innen und aussen gereinigt, und alle Oberflächen werden desinfiziert. Eine professionelle Reinigung geht weit über das normale Putzen hinaus und sorgt für ein hygienisch sauberes Zuhause.
                   </p>
 
                   {/* H2: Reinigung für Haushalte mit Haustieren */}
@@ -547,9 +547,9 @@ const WohnungsreinigungPageClient = () => {
 
                   {/* H2: Häufig gestellte Fragen zur Wohnungsreinigung */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Wohnungsreinigung</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Reinigung</h2>
                     <p className="text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
-                      Häufig gestellte Fragen zur Wohnungsreinigung mit Abnahmegarantie: Was kostet eine professionelle Wohnungsreinigung? Was beinhaltet eine umfassende Wohnungsreinigung? Wie lange dauert eine Wohnungsreinigung? Was bedeutet Abnahmegarantie? Sind die Reinigungskräfte versichert? Kann ich die Reinigung flexibel planen? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
+                      Häufig gestellte Fragen zur professionellen Reinigung mit Abnahmegarantie: Was kostet eine professionelle Reinigung? Was beinhaltet eine umfassende Reinigung? Wie lange dauert eine Reinigung? Was bedeutet Abnahmegarantie? Sind die Reinigungskräfte versichert? Kann ich die Reinigung flexibel planen? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (

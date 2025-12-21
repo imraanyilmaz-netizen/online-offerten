@@ -29,7 +29,7 @@ const UnterhaltsreinigungPageClient = () => {
   // SEO Data
   const metaTitle = "Unterhaltsreinigung – Kostenlose Offerten vergleichen";
   const metaDescription = "Unterhaltsreinigung für Büro, Haus oder Wohnung: Fordern Sie kostenlose Offerten an und vergleichen Sie professionelle Reinigungsservices bequem online.";
-  const metaKeywords = "unterhaltsreinigung schweiz, unterhaltsreinigung preise, regelmässige reinigung, wöchentliche reinigung, reinigungsfirma regelmässig, unterhaltsreinigung zürich, unterhaltsreinigung bern, unterhaltsreinigung basel";
+  // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/unterhaltsreinigung';
 
   // FAQ Data
@@ -347,13 +347,13 @@ const UnterhaltsreinigungPageClient = () => {
                   {/* H2: Warum eine professionelle Unterhaltsreinigung sinnvoll ist */}
                   <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Warum eine professionelle Unterhaltsreinigung sinnvoll ist</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Eine professionelle Unterhaltsreinigung bietet zahlreiche Vorteile, die über die reine Sauberkeit hinausgehen. Sie spart wertvolle Zeit, die Sie für Familie, Beruf oder Hobbys nutzen können. Ihr Zuhause bleibt kontinuierlich sauber und gepflegt, ohne dass Sie selbst Zeit investieren müssen. Professionelle Reinigungskräfte verfügen über das Fachwissen und die richtigen Geräte, um auch schwer zugängliche Stellen gründlich zu reinigen. Zudem trägt eine regelmässige professionelle Reinigung zur Gesundheit bei, indem sie Allergene, Bakterien und Viren effektiv entfernt. Besonders für berufstätige Personen, Familien mit Kindern oder Senioren ist eine regelmässige Unterhaltsreinigung eine grosse Entlastung.
+                    Eine professionelle regelmässige Reinigung bietet zahlreiche Vorteile, die über die reine Sauberkeit hinausgehen. Sie spart wertvolle Zeit, die Sie für Familie, Beruf oder Hobbys nutzen können. Ihr Zuhause bleibt kontinuierlich sauber und gepflegt, ohne dass Sie selbst Zeit investieren müssen. Professionelle Reinigungskräfte verfügen über das Fachwissen und die richtigen Geräte, um auch schwer zugängliche Stellen gründlich zu reinigen. Zudem trägt eine regelmässige professionelle Reinigung zur Gesundheit bei, indem sie Allergene, Bakterien und Viren effektiv entfernt. Besonders für berufstätige Personen, Familien mit Kindern oder Senioren ist eine regelmässige Reinigung eine grosse Entlastung.
                   </p>
                   
                   {/* H2: Unsere Leistungen im Bereich Unterhaltsreinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Unterhaltsreinigung</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Reinigung</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Unterhaltsreinigung. Dazu gehören die regelmässige Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten flexible Reinigungsfrequenzen: wöchentliche, zweiwöchentliche oder monatliche Reinigung. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert, ihre Mitarbeiter sind vertrauenswürdig und geschult, und sie bieten flexible Terminplanung, die sich an Ihre Bedürfnisse anpasst.
+                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die regelmässige Reinigung. Dazu gehören die regelmässige Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten flexible Reinigungsfrequenzen: wöchentliche, zweiwöchentliche oder monatliche Reinigung. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert, ihre Mitarbeiter sind vertrauenswürdig und geschult, und sie bieten flexible Terminplanung, die sich an Ihre Bedürfnisse anpasst.
                   </p>
 
                   {/* Leistungen Image */}
@@ -429,13 +429,13 @@ const UnterhaltsreinigungPageClient = () => {
                   {/* H2: Was bei einer umfassenden Unterhaltsreinigung gereinigt wird */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was bei einer umfassenden Unterhaltsreinigung gereinigt wird</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Eine umfassende Unterhaltsreinigung beinhaltet die Reinigung aller Räume und Bereiche. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke und Heizkörper. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Arbeitsflächen, Spüle und gegebenenfalls Kühlschrank gereinigt. Das Badezimmer wird komplett gereinigt, inklusive Waschbecken, Spiegel, Dusche oder Badewanne. Abfalleimer werden geleert, und es wird grundlegende Ordnung geschaffen. Fenster können auf Wunsch ebenfalls gereinigt werden. Eine professionelle Unterhaltsreinigung geht über das normale Putzen hinaus und sorgt für ein hygienisch sauberes Zuhause.
+                    Eine umfassende Reinigung beinhaltet die Reinigung aller Räume und Bereiche. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke und Heizkörper. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Arbeitsflächen, Spüle und gegebenenfalls Kühlschrank gereinigt. Das Badezimmer wird komplett gereinigt, inklusive Waschbecken, Spiegel, Dusche oder Badewanne. Abfalleimer werden geleert, und es wird grundlegende Ordnung geschaffen. Fenster können auf Wunsch ebenfalls gereinigt werden. Eine professionelle Reinigung geht über das normale Putzen hinaus und sorgt für ein hygienisch sauberes Zuhause.
                   </p>
 
                   {/* H2: Unterhaltsreinigung für verschiedene Räume und Bereiche */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unterhaltsreinigung für verschiedene Räume und Bereiche</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Professionelle Unterhaltsreinigung wird für alle Räume und Bereiche angeboten, von kleinen Studios bis hin zu grossen Familienhäusern. Jeder Raum hat seine eigenen Besonderheiten: Küchen erfordern die Reinigung von Arbeitsflächen, Herd und Spüle, während Badezimmer besondere Aufmerksamkeit für Sanitäranlagen benötigen. Wohnzimmer und Schlafzimmer benötigen gründliches Staubwischen und Bodenreinigung. Professionelle Reinigungsfirmen passen ihre Methoden und den Umfang der Reinigung an die spezifischen Anforderungen jedes Raumes an. Unabhängig von der Grösse oder Art der Räume, alle Reinigungsfirmen in unserem Netzwerk bieten flexible Reinigungspläne, die sich an Ihre Bedürfnisse anpassen.
+                    Professionelle Reinigung wird für alle Räume und Bereiche angeboten, von kleinen Studios bis hin zu grossen Familienhäusern. Jeder Raum hat seine eigenen Besonderheiten: Küchen erfordern die Reinigung von Arbeitsflächen, Herd und Spüle, während Badezimmer besondere Aufmerksamkeit für Sanitäranlagen benötigen. Wohnzimmer und Schlafzimmer benötigen gründliches Staubwischen und Bodenreinigung. Professionelle Reinigungsfirmen passen ihre Methoden und den Umfang der Reinigung an die spezifischen Anforderungen jedes Raumes an. Unabhängig von der Grösse oder Art der Räume, alle Reinigungsfirmen in unserem Netzwerk bieten flexible Reinigungspläne, die sich an Ihre Bedürfnisse anpassen.
                   </p>
 
                   {/* Räume Image */}
@@ -467,7 +467,7 @@ const UnterhaltsreinigungPageClient = () => {
                   {/* H2: Moderne und umweltfreundliche Reinigungsmittel */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Moderne und umweltfreundliche Reinigungsmittel</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmittel. Diese sind nicht nur besser für die Umwelt, sondern auch für Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders für Haushalte mit Kindern, Allergikern oder Haustieren empfehlenswert. Sie sind effektiv gegen Schmutz und Bakterien, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine schädlichen Chemikalien in Ihrer Wohnung zurückbleiben. Dies ist besonders wichtig bei regelmässiger Unterhaltsreinigung, da die Reinigungsmittel regelmässig verwendet werden.
+                    Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmittel. Diese sind nicht nur besser für die Umwelt, sondern auch für Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders für Haushalte mit Kindern, Allergikern oder Haustieren empfehlenswert. Sie sind effektiv gegen Schmutz und Bakterien, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine schädlichen Chemikalien in Ihrer Wohnung zurückbleiben. Dies ist besonders wichtig bei regelmässiger Reinigung, da die Reinigungsmittel regelmässig verwendet werden.
                   </p>
 
                   {/* Umweltfreundlich Image */}
@@ -499,7 +499,7 @@ const UnterhaltsreinigungPageClient = () => {
                   {/* H2: Was kostet eine professionelle Unterhaltsreinigung? */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was kostet eine professionelle Unterhaltsreinigung?</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Die Kosten für Unterhaltsreinigung hängen von der Grösse der Wohnung, der Reinigungsfrequenz und dem Umfang der Leistungen ab. Preise liegen typischerweise zwischen 20 und 40 CHF pro Stunde oder 0.80-1.50 CHF pro m². Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 2-3 Stunden pro Reinigung. Bei wöchentlicher Reinigung bedeutet dies monatliche Kosten von etwa 160-480 CHF, bei zweiwöchentlicher Reinigung etwa 80-240 CHF. Grössere Wohnungen oder zusätzliche Leistungen können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
+                    Die Kosten für regelmässige Reinigung hängen von der Grösse der Wohnung, der Reinigungsfrequenz und dem Umfang der Leistungen ab. Preise liegen typischerweise zwischen 20 und 40 CHF pro Stunde oder 0.80-1.50 CHF pro m². Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 2-3 Stunden pro Reinigung. Bei wöchentlicher Reinigung bedeutet dies monatliche Kosten von etwa 160-480 CHF, bei zweiwöchentlicher Reinigung etwa 80-240 CHF. Grössere Wohnungen oder zusätzliche Leistungen können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* Trust Elements */}
@@ -543,9 +543,9 @@ const UnterhaltsreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Unterhaltsreinigung sind */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Unterhaltsreinigung sind</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Unterhaltsreinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und bieten flexible Reinigungspläne, die sich an Ihre Bedürfnisse anpassen. Ihre Mitarbeiter sind vertrauenswürdig, geschult und versichert. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Unterhaltsreinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
+                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre regelmässige Reinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und bieten flexible Reinigungspläne, die sich an Ihre Bedürfnisse anpassen. Ihre Mitarbeiter sind vertrauenswürdig, geschult und versichert. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* CTA 2 - After Richtiger Partner */}
@@ -576,9 +576,9 @@ const UnterhaltsreinigungPageClient = () => {
 
                   {/* FAQ Section */}
                   <div className="mt-6 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Unterhaltsreinigung</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Reinigung</h2>
                     <p className="text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
-                      Häufig gestellte Fragen zur professionellen Unterhaltsreinigung: Was kostet eine regelmässige Unterhaltsreinigung? Wie oft sollte eine Unterhaltsreinigung durchgeführt werden? Was beinhaltet eine umfassende Unterhaltsreinigung? Kann ich die Reinigungszeiten flexibel gestalten? Sind die Reinigungskräfte vertrauenswürdig? Wie lange dauert eine Unterhaltsreinigung? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
+                      Häufig gestellte Fragen zur professionellen Reinigung: Was kostet eine regelmässige Reinigung? Wie oft sollte eine Reinigung durchgeführt werden? Was beinhaltet eine umfassende Reinigung? Kann ich die Reinigungszeiten flexibel gestalten? Sind die Reinigungskräfte vertrauenswürdig? Wie lange dauert eine Reinigung? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (

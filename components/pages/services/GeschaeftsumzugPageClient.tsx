@@ -15,9 +15,9 @@ const GeschaeftsumzugPageClient = () => {
   const router = useRouter()
 
   // SEO Data (moved to server component, but kept for schema generation if needed client-side)
-  const metaTitle = "Büroumzug & Firmenumzug – Geschäftsumzug Offerten kostenlos | Umzugsfirmen vergleichen"
+  const metaTitle = "Geschäftsumzug: Kostenlose Offerten vergleichen | Online-Offerten.ch"
   const metaDescription = "Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen. Schnell, transparent und regional."
-  const metaKeywords = "büroumzug, firmenumzug, geschäftsumzug, umzugsfirmen, büroumzug kosten, firmenumzug kosten, angebote vergleichen, offerten kostenlos, büro zügeln, unternehmen umziehen, relocation service business, geschäftsumzug schweiz, büroumzug schweiz, firmenumzug schweiz, umzugsfirmen vergleichen, geschäftsumzug zürich, geschäftsumzug bern, geschäftsumzug basel"
+  // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = "/geschaeftsumzug"
 
   // FAQ Data for Schema

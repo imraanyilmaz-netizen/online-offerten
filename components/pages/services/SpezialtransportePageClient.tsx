@@ -7,8 +7,8 @@ import TransportTabs from '@/components/SpezialtransportePageParts/TransportTabs
 import Cta from '@/components/SpezialtransportePageParts/Cta'
 
 const SpezialtransportePageClient = () => {
-  const metaTitle = "Klaviertransport, Tresortransport & Maschinen Transport Schweiz » Spezialtransporte vergleichen & bis zu 40% sparen"
-  const metaDescription = "Klaviertransport, Tresortransport und Maschinen & Geräte Transport: Vergleichen Sie kostenlos mehrere geprüfte Spezialtransport-Firmen. Klavier Transport, Tresor Transport, Maschinentransport – sicher, versichert und professionell. Jetzt Offerten anfordern!"
+  const metaTitle = "Spezialtransporte: Kostenlose Offerten vergleichen | Online-Offerten.ch"
+  const metaDescription = "Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!"
   const canonicalUrl = "/spezialtransporte"
 
   const transportTypes = [

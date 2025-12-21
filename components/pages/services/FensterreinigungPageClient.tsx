@@ -29,7 +29,7 @@ const FensterreinigungPageClient = () => {
   // SEO Data
   const metaTitle = "Fensterreinigung – Kostenlose Offerten vergleichen";
   const metaDescription = "Fensterreinigung vom Profi: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für streifenfreie und professionelle Ergebnisse.";
-  const metaKeywords = "fensterreinigung schweiz, fensterreinigung preise, fenster putzen, reinigungsfirma fenster, professionelle fensterreinigung, fensterreinigung zürich, fensterreinigung bern, fensterreinigung basel";
+  // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/fensterreinigung';
 
   // FAQ Data
@@ -352,13 +352,13 @@ const FensterreinigungPageClient = () => {
                   {/* H2: Warum eine professionelle Fensterreinigung sinnvoll ist */}
                   <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Warum eine professionelle Fensterreinigung sinnvoll ist</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Eine professionelle Fensterreinigung bietet zahlreiche Vorteile, die über die reine Sauberkeit hinausgehen. Saubere Fenster lassen mehr natürliches Licht ins Haus, verbessern das Erscheinungsbild erheblich und steigern den Wert Ihrer Immobilie. Professionelle Reinigungskräfte verfügen über das Fachwissen und die richtigen Geräte, um auch schwer zugängliche Fenster gründlich zu reinigen. Zudem entfernen sie hartnäckige Rückstände wie Kalk, Vogelkot oder Insekten, die bei normaler Reinigung oft zurückbleiben. Besonders bei höheren Stockwerken oder schwer zugänglichen Fenstern ist professionelle Hilfe unerlässlich, da Sicherheit und Qualität oberste Priorität haben.
+                    Eine professionelle Reinigung der Fenster bietet zahlreiche Vorteile, die über die reine Sauberkeit hinausgehen. Saubere Fenster lassen mehr natürliches Licht ins Haus, verbessern das Erscheinungsbild erheblich und steigern den Wert Ihrer Immobilie. Professionelle Reinigungskräfte verfügen über das Fachwissen und die richtigen Geräte, um auch schwer zugängliche Fenster gründlich zu reinigen. Zudem entfernen sie hartnäckige Rückstände wie Kalk, Vogelkot oder Insekten, die bei normaler Reinigung oft zurückbleiben. Besonders bei höheren Stockwerken oder schwer zugänglichen Fenstern ist professionelle Hilfe unerlässlich, da Sicherheit und Qualität oberste Priorität haben.
                   </p>
                   
                   {/* H2: Unsere Leistungen im Bereich Fensterreinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Fensterreinigung</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Fenster</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Fensterreinigung. Dazu gehören die gründliche Reinigung von Fensterscheiben innen und aussen, die Reinigung von Fensterrahmen und -bänken, die Reinigung von Fenstergriffen, die Entfernung von Kalkablagerungen, die Reinigung von Rollläden oder Jalousien, sowie die Reinigung von Türen mit Glas. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln für streifenfreie Ergebnisse. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert und ihre Mitarbeiter sind geschult für Höhenarbeit und Sicherheit.
+                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Reinigung der Fenster. Dazu gehören die gründliche Reinigung von Fensterscheiben innen und aussen, die Reinigung von Fensterrahmen und -bänken, die Reinigung von Fenstergriffen, die Entfernung von Kalkablagerungen, die Reinigung von Rollläden oder Jalousien, sowie die Reinigung von Türen mit Glas. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln für streifenfreie Ergebnisse. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert und ihre Mitarbeiter sind geschult für Höhenarbeit und Sicherheit.
                   </p>
 
                   {/* Leistungen Image */}
@@ -387,8 +387,8 @@ const FensterreinigungPageClient = () => {
                   <div className="mt-6 md:mt-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200 mb-6 md:mb-8">
                     <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">
                       {city && !locationLoading 
-                        ? `Professionelle Fensterreinigung in ${city}`
-                        : 'Professionelle Fensterreinigung buchen'
+                        ? `Professionelle Reinigung der Fenster in ${city}`
+                        : 'Professionelle Reinigung der Fenster buchen'
                       }
                     </h3>
                     <p className="text-base text-gray-700 mb-3 md:mb-4">
@@ -407,7 +407,7 @@ const FensterreinigungPageClient = () => {
                   {/* H2: Vorteile unserer Fensterreinigung */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Vorteile unserer Fensterreinigung</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Professionelle Fensterreinigung bietet zahlreiche Vorteile gegenüber der eigenen Reinigung. Sie spart wertvolle Zeit, die Sie für Familie, Beruf oder Hobbys nutzen können. Professionelle Reinigungskräfte verwenden spezielle Techniken und Mittel für streifenfreie Ergebnisse, die bei normaler Reinigung schwer zu erreichen sind. Zudem haben sie die richtige Ausrüstung für Höhenarbeit und schwer zugängliche Fenster. Professionelle Reinigungsfirmen sind versichert, was Ihnen Sicherheit gibt. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
+                    Professionelle Reinigung der Fenster bietet zahlreiche Vorteile gegenüber der eigenen Reinigung. Sie spart wertvolle Zeit, die Sie für Familie, Beruf oder Hobbys nutzen können. Professionelle Reinigungskräfte verwenden spezielle Techniken und Mittel für streifenfreie Ergebnisse, die bei normaler Reinigung schwer zu erreichen sind. Zudem haben sie die richtige Ausrüstung für Höhenarbeit und schwer zugängliche Fenster. Professionelle Reinigungsfirmen sind versichert, was Ihnen Sicherheit gibt. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
                   </p>
 
                   {/* Vorteile Image */}
@@ -434,7 +434,7 @@ const FensterreinigungPageClient = () => {
                   {/* H2: Was bei einer gründlichen Fensterreinigung gereinigt wird */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was bei einer gründlichen Fensterreinigung gereinigt wird</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Eine umfassende Fensterreinigung beinhaltet die Reinigung aller Fenster und glasbezogenen Elemente. Dazu gehören die gründliche Reinigung der Fensterscheiben innen und aussen mit streifenfreien Methoden, die Reinigung von Fensterrahmen und -bänken, die Entfernung von Kalkablagerungen und Wasserflecken, die Reinigung von Fenstergriffen und Beschlägen, die Reinigung von Rollläden oder Jalousien, sowie die Reinigung von Türen mit Glas. Professionelle Reinigungskräfte verwenden spezielle Techniken und Mittel, um auch hartnäckige Rückstände wie Vogelkot, Insekten oder Pollen zu entfernen. Eine professionelle Reinigung geht weit über das normale Putzen hinaus und sorgt für strahlend saubere Fenster.
+                    Eine umfassende Reinigung der Fenster beinhaltet die Reinigung aller Fenster und glasbezogenen Elemente. Dazu gehören die gründliche Reinigung der Fensterscheiben innen und aussen mit streifenfreien Methoden, die Reinigung von Fensterrahmen und -bänken, die Entfernung von Kalkablagerungen und Wasserflecken, die Reinigung von Fenstergriffen und Beschlägen, die Reinigung von Rollläden oder Jalousien, sowie die Reinigung von Türen mit Glas. Professionelle Reinigungskräfte verwenden spezielle Techniken und Mittel, um auch hartnäckige Rückstände wie Vogelkot, Insekten oder Pollen zu entfernen. Eine professionelle Reinigung geht weit über das normale Putzen hinaus und sorgt für strahlend saubere Fenster.
                   </p>
 
                   {/* H2: Fensterreinigung für hohe Gebäude und schwer zugängliche Fenster */}
@@ -511,9 +511,9 @@ const FensterreinigungPageClient = () => {
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Fensterreinigung sind */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Fensterreinigung sind</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Fenster sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Fensterreinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für Höhenarbeit. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Fensterreinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
+                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Fenster. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für Höhenarbeit. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Fenster zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* Trust & Erfahrung Section */}
@@ -549,9 +549,9 @@ const FensterreinigungPageClient = () => {
 
                   {/* H2: Häufig gestellte Fragen zur Fensterreinigung */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Fensterreinigung</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Reinigung</h2>
                     <p className="text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
-                      Häufig gestellte Fragen zur professionellen Fensterreinigung: Was kostet eine professionelle Fensterreinigung? Wie oft sollte ich meine Fenster professionell reinigen lassen? Wird auch die Aussenreinigung durchgeführt? Wie lange dauert eine Fensterreinigung? Kann ich nach der Reinigung sofort wieder die Fenster öffnen? Sind die Reinigungskräfte versichert? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
+                      Häufig gestellte Fragen zur professionellen Reinigung der Fenster: Was kostet eine professionelle Fensterreinigung? Wie oft sollte ich meine Fenster professionell reinigen lassen? Wird auch die Aussenreinigung durchgeführt? Wie lange dauert eine Fensterreinigung? Kann ich nach der Reinigung sofort wieder die Fenster öffnen? Sind die Reinigungskräfte versichert? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (

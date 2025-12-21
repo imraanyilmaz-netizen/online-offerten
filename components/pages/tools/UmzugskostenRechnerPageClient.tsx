@@ -14,28 +14,27 @@ import HourlyRateBox from '@/components/UmzugskostenRechnerSections/HourlyRateBo
 import RegionalDifferences from '@/components/UmzugskostenRechnerSections/RegionalDifferences';
 
 const UmzugskostenRechnerPageClient = () => {
-  // SEO Data
-  const metaTitle = "Was kostet ein Umzug? - Umzugskosten Umzugsfirma Vergleichen";
-  const metaDescription = "⏱️ In 2 Minuten wissen, was Ihr Umzug kostet! Kostenloser Umzugskosten-Rechner mit sofortiger Preis-Schätzung. Vergleichen Sie Offerten & sparen Sie bis zu 40%.";
-  const metaKeywords = "umzugskosten berechnen, kosten für den umzug, umzugsbudget, preiskalkulator, kostenlose umzugsschätzung, was kostet mein umzug, umzugspreis sofort wissen, kostenlose umzugsangebote, umzugskosten rechner, umzugskosten schweiz, umzugskosten online berechnen, umzugskosten kalkulator, umzugspreis berechnen, umzugskosten schätzen, umzugskosten rechner schweiz, umzugskosten vergleichen, günstige umzugskosten, umzugskosten pro zimmer, umzugskosten pro km";
+  // SEO Data - Optimized with keyword variations
+  const metaTitle = "Umzugskosten-Rechner: Kostenlose Schätzung in 2 Minuten | Online-Offerten.ch";
+  const metaDescription = "In 2 Minuten wissen, was Ihr Umzug kostet! Kostenloser Umzugskosten-Rechner mit sofortiger Preis-Schätzung. Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.";
   const canonicalUrl = '/umzugskosten-rechner';
 
   // FAQ Data
   const faqItems = [
     {
-      question: "Wie berechnet man die Umzugskosten?",
-      answer: "Die Umzugskosten werden basierend auf mehreren Faktoren berechnet: Wohnungsgrösse (Anzahl Zimmer), Distanz zwischen Alt- und Neuwohnung, Zusatzleistungen wie Reinigung oder Möbelmontage. Unser kostenloser Umzugskosten-Rechner berücksichtigt all diese Faktoren und liefert Ihnen in nur 2 Minuten eine verlässliche Schätzung."
+      question: "Wie berechnet man die Kosten für den Umzug?",
+      answer: "Die Kosten für den Umzug werden basierend auf mehreren Faktoren berechnet: Wohnungsgrösse (Anzahl Zimmer), Distanz zwischen Alt- und Neuwohnung, Zusatzleistungen wie Reinigung oder Möbelmontage. Unser kostenloser Rechner berücksichtigt all diese Faktoren und liefert Ihnen in nur 2 Minuten eine verlässliche Schätzung."
     },
     {
       question: "Was kostet ein Umzug in der Schweiz durchschnittlich?",
-      answer: "Die durchschnittlichen Umzugskosten in der Schweiz variieren je nach Wohnungsgrösse. Für eine 3.5-Zimmer-Wohnung liegen die Kosten zwischen CHF 1'200 und CHF 1'800 für den reinen Transport. Mit Zusatzleistungen wie Möbelmontage und Reinigung können die Kosten auf CHF 2'200 bis CHF 3'200 steigen."
+      answer: "Die durchschnittlichen Kosten für einen Umzug in der Schweiz variieren je nach Wohnungsgrösse. Für eine 3.5-Zimmer-Wohnung liegt der Umzugspreis zwischen CHF 1'200 und CHF 1'800 für den reinen Transport. Mit Zusatzleistungen wie Möbelmontage und Reinigung können die Kosten auf CHF 2'200 bis CHF 3'200 steigen."
     },
     {
       question: "Kann ich bei einem Umzug Geld sparen?",
       answer: "Ja, Sie können bei Ihrem Umzug sparen, indem Sie flexible Umzugstermine ausserhalb der Hauptsaison (Juni-August) wählen, mehrere Offerten vergleichen und unnötige Zusatzleistungen vermeiden. Ein Vergleich von mindestens 3 Offerten kann Ihnen bis zu 30% sparen."
     },
     {
-      question: "Was beeinflusst die Umzugskosten am meisten?",
+      question: "Was beeinflusst die Kosten für den Umzug am meisten?",
       answer: "Die wichtigsten Faktoren sind: Das Volumen der Umzugsgüter, die Distanz zwischen den Wohnorten, Stockwerke und Zugangssituation sowie gewählte Zusatzleistungen wie Ein- und Auspacken oder Möbelmontage."
     },
     {
@@ -48,8 +47,8 @@ const UmzugskostenRechnerPageClient = () => {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "Umzugskosten 2024 berechnen » Kostenlose Schätzung & Offerten",
-    "description": "⏱️ In 2 Minuten wissen, was Ihr Umzug kostet! Kostenloser Umzugskosten-Rechner mit sofortiger Preis-Schätzung. Vergleichen Sie Offerten & sparen Sie bis zu 40%.",
+    "name": "Kosten für den Umzug 2024 berechnen » Kostenlose Schätzung & Offerten",
+    "description": "In 2 Minuten wissen, was Ihr Umzug kostet! Kostenloser Umzugskosten-Rechner mit sofortiger Preis-Schätzung. Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.",
     "step": [{
       "@type": "HowToStep",
       "name": "Wohnungsgrösse angeben",
@@ -61,7 +60,7 @@ const UmzugskostenRechnerPageClient = () => {
     }, {
       "@type": "HowToStep",
       "name": "Kosten berechnen",
-      "text": "Erhalten Sie eine sofortige Schätzung Ihrer Umzugskosten und wissen Sie sofort, was Ihr Umzug kostet."
+      "text": "Erhalten Sie eine sofortige Schätzung Ihrer Umzugskosten und wissen Sie sofort, was der Umzug kostet."
     }],
     "estimatedCost": {
       "@type": "MonetaryAmount",
@@ -104,7 +103,7 @@ const UmzugskostenRechnerPageClient = () => {
     },
     "about": {
       "@type": "Service",
-      "name": "Umzugskosten-Rechner",
+      "name": "Kostenlose Umzugskosten-Berechnung",
       "description": metaDescription,
       "provider": {
         "@type": "Organization",
@@ -133,10 +132,10 @@ const UmzugskostenRechnerPageClient = () => {
               <Calculator className="w-12 h-12 md:w-16 md:h-16 text-green-400" aria-hidden="true" />
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-shadow-lg">
-              Was kostet ein Umzug?
+              Umzugskosten berechnen: Was kostet ein Umzug?
             </h1>
             <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-8">
-              Unser Umzugskosten-Rechner gibt Ihnen eine schnelle und verlässliche Schätzung. Geben Sie einfach Ihre Daten ein und erhalten Sie in Sekunden einen Richtpreis für Ihren Umzug in der Schweiz.
+              Unser kostenloser Rechner gibt Ihnen eine schnelle und verlässliche Schätzung. Geben Sie einfach Ihre Daten ein und erhalten Sie in Sekunden einen Richtpreis für Ihren Umzug in der Schweiz.
             </p>
           </div>
         </motion.section>
@@ -152,13 +151,13 @@ const UmzugskostenRechnerPageClient = () => {
           >
             <div className="flex items-center mb-4">
               <CheckCircle className="w-8 h-8 text-green-600 mr-4" />
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Umzugskosten sofort berechnen</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Kosten für den Umzug sofort berechnen</h2>
             </div>
             <p className="text-lg text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: "Sie planen einen Umzug und möchten <strong>kostenlos eine erste Preis-Indikation</strong> erhalten? Unser Preiskalkulator liefert Ihnen in <strong>nur 2 Minuten eine verlässliche Schätzung</strong> für Ihren Umzug in der gesamten Schweiz. So können Sie Ihr Umzugsbudget besser planen und wissen sofort, was Ihr Umzug kostet." }} />
           </motion.section>
 
           <section id="moving-cost-calculator-section">
-            <h2 className="sr-only">Umzugskosten online berechnen</h2>
+            <h2 className="sr-only">Umzugspreis online kalkulieren</h2>
             <MovingCostCalculator />
           </section>
 
@@ -177,11 +176,11 @@ const UmzugskostenRechnerPageClient = () => {
           </motion.section>
 
           <section>
-            <SectionTitle icon={<TrendingUp />} title="Welche Faktoren beeinflussen die Umzugskosten?" />
+            <SectionTitle icon={<TrendingUp />} title="Welche Faktoren beeinflussen die Kosten für den Umzug?" />
             <FactorsList />
           </section>
           
-          <p className="text-gray-600 text-center text-lg">Jeder Umzug ist einzigartig. Um Ihnen eine genaue Vorstellung zu geben, wie sich die Kosten für den Umzug zusammensetzen können, haben wir eine beispielhafte Tabelle erstellt. Diese Preise sind Schätzungen und können je nach Ihren spezifischen Anforderungen variieren. Für eine genaue, auf Sie zugeschnittene Offerte, nutzen Sie unseren Kostenrechner.</p>
+          <p className="text-gray-600 text-center text-lg">Jeder Umzug ist einzigartig. Um Ihnen eine genaue Vorstellung zu geben, wie sich der Umzugspreis zusammensetzen kann, haben wir eine beispielhafte Tabelle erstellt. Diese Preise sind Schätzungen und können je nach Ihren spezifischen Anforderungen variieren. Für eine genaue, auf Sie zugeschnittene Offerte, nutzen Sie unseren Kostenrechner.</p>
 
           <section>
             <SectionTitle icon={null} title="Preisbeispiele für Umzüge in der Schweiz" />
@@ -253,7 +252,7 @@ const UmzugskostenRechnerPageClient = () => {
             itemScope
             itemType="https://schema.org/FAQPage"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Häufige Fragen zu Umzugskosten</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Häufige Fragen zu Umzugskosten und Preisen</h2>
             <div className="space-y-6">
               {faqItems.map((item, index) => (
                 <article 

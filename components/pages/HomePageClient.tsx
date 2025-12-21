@@ -479,7 +479,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     </span>
                     <br />
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                      Kostenlose Offerten vergleichen und sparen
+                      Kostenlose Offerten vergleichen
                     </span>
                   </h1>
                   <p className="text-base md:text-lg text-gray-700 mb-5 md:mb-6 leading-relaxed">

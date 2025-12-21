@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import InternationaleUmzugPageClient from '@/components/pages/services/InternationaleUmzugPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirmen vergleichen für Auslandsumzug » Mehrere Firmen vergleichen & bis zu 40% sparen | Online Offerten vergleichen',
-  description: 'Umzugsfirmen vergleichen für Auslandsumzug: Vergleichen Sie online mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Kostenlos und unverbindlich Offerten von Fachfirmen für internationale Umzüge erhalten. Umzug nach Deutschland, Österreich, Frankreich, Spanien & ganz Europa.',
+  title: 'Internationaler Umzug: Kostenlose Offerten vergleichen | Online-Offerten.ch',
+  description: 'Internationaler Umzug: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa.',
   alternates: {
     canonical: 'https://online-offerten.ch/internationale-umzuege',
   },
   openGraph: {
-    title: 'Umzugsfirmen vergleichen für Auslandsumzug',
-    description: 'Vergleichen Sie online mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Kostenlos und unverbindlich Offerten von Fachfirmen für internationale Umzüge erhalten.',
+    title: 'Internationaler Umzug: Kostenlose Offerten vergleichen | Online-Offerten.ch',
+    description: 'Internationaler Umzug: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa.',
     url: 'https://online-offerten.ch/internationale-umzuege',
   },
 }

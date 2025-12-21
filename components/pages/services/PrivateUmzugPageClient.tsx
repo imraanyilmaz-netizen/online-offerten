@@ -225,13 +225,13 @@ const PrivateUmzugPageClient = () => {
               {/* Article Section 1 */}
               <section>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Ein Privatumzug (auch Wohnungsumzug oder Hausumzug genannt) ist mehr als nur der Transport von Möbeln von A nach B. Es ist der Beginn eines neuen Kapitels. Ob Sie in eine grössere Wohnung ziehen, mit Ihrem Partner zusammenziehen oder einfach einen Tapetenwechsel brauchen – ein gut geplanter privater Umzug ist der Schlüssel zu einem reibungslosen Start. Eine professionelle Umzugsfirma kann Ihnen dabei helfen, den Prozess stressfrei und effizient zu gestalten.
+                  Ein Wohnungsumzug oder Hausumzug ist mehr als nur der Transport von Möbeln von A nach B. Es ist der Beginn eines neuen Kapitels. Ob Sie in eine grössere Wohnung ziehen, mit Ihrem Partner zusammenziehen oder einfach einen Tapetenwechsel brauchen – ein gut geplanter privater Umzug ist der Schlüssel zu einem reibungslosen Start. Eine professionelle Umzugsfirma kann Ihnen dabei helfen, den Prozess stressfrei und effizient zu gestalten.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
                   Von der ersten Besichtigung über das sichere Verpacken Ihres Hab und Guts bis hin zum Transport und der Möbelmontage am neuen Ort – erfahrene Umzugsunternehmen bieten einen Rundum-Service, der genau auf Ihre Bedürfnisse zugeschnitten ist. Egal ob Wohnungsumzug in Zürich, Hausumzug in Bern oder Privatumzug in Basel – wir finden die passende Firma für Sie.
                 </p>
                 <p className="text-gray-700 leading-relaxed mt-4">
-                  In der Schweiz gibt es eine Vielzahl von Anbietern für Privatumzüge. Doch wie finden Sie die richtige Zügelfirma, die zuverlässig arbeitet und ein faires Preis-Leistungs-Verhältnis bietet? Vergleichen Sie Privatumzug Offerten kostenlos und finden Sie die beste Offerte für Ihren Umzug.
+                  In der Schweiz gibt es eine Vielzahl von Anbietern für Wohnungsumzüge. Doch wie finden Sie die richtige Zügelfirma, die zuverlässig arbeitet und ein faires Preis-Leistungs-Verhältnis bietet? Vergleichen Sie Offerten kostenlos und finden Sie die beste Offerte für Ihren Umzug.
                 </p>
               </section>
 
@@ -242,7 +242,7 @@ const PrivateUmzugPageClient = () => {
                   Die richtige Planung ist die halbe Miete
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Eine sorgfältige Planung ist das A und O für einen erfolgreichen Privatumzug oder Wohnungsumzug. Je früher Sie beginnen, desto entspannter wird der Umzugstag. Unsere Experten empfehlen, mindestens zwei bis drei Monate vor dem geplanten Datum mit der Organisation zu beginnen.
+                  Eine sorgfältige Planung ist das A und O für einen erfolgreichen Wohnungsumzug. Je früher Sie beginnen, desto entspannter wird der Umzugstag. Unsere Experten empfehlen, mindestens zwei bis drei Monate vor dem geplanten Datum mit der Organisation zu beginnen.
                 </p>
                 <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
                   <h3 className="font-bold text-lg text-gray-700 mb-2">Was gehört in einen Umzugsplan?</h3>
@@ -288,7 +288,7 @@ const PrivateUmzugPageClient = () => {
                   Was kostet ein Privatumzug in der Schweiz?
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Die Kosten für einen Privatumzug (Wohnungsumzug oder Hausumzug) hängen von verschiedenen Faktoren ab: der Wohnungsgrösse, der Distanz zwischen den Wohnorten, dem Stockwerk und dem Umfang der gewünschten Dienstleistungen (z.B. Ein- und Auspackservice, Möbelmontage).
+                  Die Kosten für einen Wohnungsumzug oder Hausumzug hängen von verschiedenen Faktoren ab: der Wohnungsgrösse, der Distanz zwischen den Wohnorten, dem Stockwerk und dem Umfang der gewünschten Dienstleistungen (z.B. Ein- und Auspackservice, Möbelmontage).
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Als grobe Richtlinie können Sie mit folgenden Preisen rechnen: Für eine 2.5-Zimmer-Wohnung beginnen die Kosten bei ca. 800 CHF, während ein Umzug einer 4.5-Zimmer-Wohnung zwischen 1'500 und 2'500 CHF kosten kann.
@@ -345,7 +345,7 @@ const PrivateUmzugPageClient = () => {
                   Der Umzugsmarkt ist gross. Achten Sie bei der Wahl Ihrer Zügelfirma auf Qualitätssiegel, Kundenbewertungen und transparente Offerten. Ein persönlicher Besichtigungstermin vor Ort ist oft ein Zeichen von Seriosität.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Über unsere Plattform können Sie Privatumzug Offerten kostenlos vergleichen. Sie erhalten ausschliesslich Offerten von geprüften und bewerteten Umzugsunternehmen aus Ihrer Region. So können Sie sicher sein, einen vertrauenswürdigen Partner für Ihren Privatumzug zu finden.
+                  Über unsere Plattform können Sie Offerten kostenlos vergleichen. Sie erhalten ausschliesslich Offerten von geprüften und bewerteten Umzugsunternehmen aus Ihrer Region. So können Sie sicher sein, einen vertrauenswürdigen Partner für Ihren Wohnungsumzug zu finden.
                 </p>
               </section>
 
@@ -356,10 +356,10 @@ const PrivateUmzugPageClient = () => {
                   Lokale Expertise für Ihren Umzug
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Ob Sie einen Privatumzug innerhalb einer Stadt planen oder in einen anderen Kanton umziehen – eine Firma mit lokaler Expertise kennt die Gegebenheiten vor Ort, wie z.B. Parkregelungen oder Zufahrtsbeschränkungen. Das spart Zeit und Nerven am Umzugstag. Egal ob Wohnungsumzug in Zürich, Hausumzug in Bern oder Privatumzug in Basel – lokale Umzugsfirmen kennen die Besonderheiten Ihrer Region.
+                  Ob Sie einen Wohnungsumzug innerhalb einer Stadt planen oder in einen anderen Kanton umziehen – eine Firma mit lokaler Expertise kennt die Gegebenheiten vor Ort, wie z.B. Parkregelungen oder Zufahrtsbeschränkungen. Das spart Zeit und Nerven am Umzugstag. Egal ob Wohnungsumzug in Zürich, Hausumzug in Bern oder Privatumzug in Basel – lokale Umzugsfirmen kennen die Besonderheiten Ihrer Region.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Wir vermitteln Ihnen Umzugsfirmen in der ganzen Schweiz. Finden Sie den passenden Partner für Ihren Privatumzug in <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma-bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma-basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma-luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
+                  Wir vermitteln Ihnen Umzugsfirmen in der ganzen Schweiz. Finden Sie den passenden Partner für Ihren Wohnungsumzug in <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma-bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma-basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma-luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
                 </p>
               </section>
 
@@ -370,7 +370,7 @@ const PrivateUmzugPageClient = () => {
                   Starten Sie jetzt Ihren stressfreien Privatumzug
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Ein Privatumzug (Wohnungsumzug oder Hausumzug) muss nicht kompliziert sein. Mit der richtigen Vorbereitung und einem zuverlässigen Partner an Ihrer Seite wird der Start in Ihr neues Zuhause zu einem positiven Erlebnis. <Link href="/kostenlose-offerte-anfordern" className="text-green-600 hover:underline font-semibold">Fordern Sie jetzt Ihre kostenlosen und unverbindlichen Offerten an</Link> und machen Sie den ersten Schritt in Richtung eines entspannten privaten Umzugs.
+                  Ein Wohnungsumzug oder Hausumzug muss nicht kompliziert sein. Mit der richtigen Vorbereitung und einem zuverlässigen Partner an Ihrer Seite wird der Start in Ihr neues Zuhause zu einem positiven Erlebnis. <Link href="/kostenlose-offerte-anfordern" className="text-green-600 hover:underline font-semibold">Fordern Sie jetzt Ihre kostenlosen und unverbindlichen Offerten an</Link> und machen Sie den ersten Schritt in Richtung eines entspannten Umzugs.
                 </p>
               </section>
 
@@ -453,7 +453,7 @@ const PrivateUmzugPageClient = () => {
                               </table>
                               <p className="mt-2 text-xs text-gray-500 italic">*Die Preise sind Schätzungen und können je nach Distanz und Aufwand variieren.</p>
                             </div>
-                            <p className="mt-3 text-sm text-gray-600">Tipp: Vergleichen Sie Privatumzug Offerten kostenlos, um das beste Preis-Leistungs-Verhältnis zu finden. Die Preise können stark variieren.</p>
+                            <p className="mt-3 text-sm text-gray-600">Tipp: Vergleichen Sie Offerten kostenlos, um das beste Preis-Leistungs-Verhältnis zu finden. Die Preise können stark variieren.</p>
                             <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg shadow-sm">
                               <div className="flex items-start md:items-center">
                                 <Calculator className="w-8 h-8 md:w-6 md:h-6 mr-3 text-green-600 flex-shrink-0 mt-1 md:mt-0" />
@@ -483,7 +483,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Welche Leistungen sind bei einem Standard-Privatumzug inklusive?
+                          Welche Leistungen sind bei einem Standard-Wohnungsumzug inklusive?
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -601,7 +601,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Wann sollte ich mit der Planung meines Privatumzugs beginnen?
+                          Wann sollte ich mit der Planung meines Wohnungsumzugs beginnen?
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
