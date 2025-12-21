@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     template: '%s | Online-Offerten.ch'
   },
   description: 'Vergleichen Sie kostenlose Offerten von geprüften Umzugsfirmen und Reinigungsfirmen. Bis zu 40% sparen – schnell, sicher und unverbindlich.',
-  keywords: ['Umzugsfirma', 'Reinigungsfirma', 'Offerten', 'Vergleich', 'Schweiz'],
   authors: [{ name: 'Online-Offerten.ch' }],
   creator: 'Online-Offerten.ch',
   publisher: 'Online-Offerten.ch',

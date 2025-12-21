@@ -4,10 +4,10 @@ import HomePageClient from '@/components/pages/HomePageClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Kostenlose Umzugs-, Reinigungs- & Renovierungsofferten vergleichen | Online-Offerten.ch',
+  title: 'Offerten vergleichen – Umzug, Reinigung oder Renovierung',
   description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen aus Ihrer Region anfordern. Mehrere Angebote vergleichen und bis zu 40% sparen.',
   openGraph: {
-    title: 'Kostenlose Umzugs-, Reinigungs- & Renovierungsofferten vergleichen',
+    title: 'Offerten vergleichen – Umzug, Reinigung oder Renovierung',
     description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen aus Ihrer Region anfordern. Mehrere Angebote vergleichen und bis zu 40% sparen.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },
