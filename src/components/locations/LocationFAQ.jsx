@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Calculator, ArrowLeftRight as ArrowsHorizontal, HelpCircle, Truck, Sparkles, Brush } from 'lucide-react';
+import { Calculator, ArrowLeftRight as ArrowsHorizontal, HelpCircle, Truck, Sparkles } from 'lucide-react';
 
 const FaqItem = ({ faq, locationName }) => {
   const router = useRouter();
@@ -99,7 +99,7 @@ const FaqCategory = ({ title, icon, faqs, locationName, delay }) => (
 const LocationFAQ = ({ faqs, city }) => {
   const locationName = city;
 
-  if (!faqs || (!faqs.move && !faqs.clean && !faqs.paint)) {
+  if (!faqs || (!faqs.move && !faqs.clean)) {
     return null;
   }
 
@@ -116,7 +116,7 @@ const LocationFAQ = ({ faqs, city }) => {
           <HelpCircle className="w-8 h-8 text-green-600" />
         </div>
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-          Häufig gestellte Fragen zu Umzug, Reinigung & Malerarbeiten in {locationName}
+          Häufig gestellte Fragen zu Umzug & Reinigung in {locationName}
         </h2>
         <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
           Finden Sie Antworten auf die wichtigsten Fragen rund um unsere Dienstleistungen in {locationName}.
@@ -140,17 +140,6 @@ const LocationFAQ = ({ faqs, city }) => {
                 locationName={locationName}
                 delay={0.4}
               />
-          )}
-          {faqs.paint && faqs.paint.length > 0 && (
-               <div className="lg:col-span-2">
-                <FaqCategory
-                    title="Fragen zu Malerarbeiten"
-                    icon={<Brush className="w-8 h-8 mr-3 text-blue-500" />}
-                    faqs={faqs.paint}
-                    locationName={locationName}
-                    delay={0.6}
-                />
-               </div>
           )}
       </div>
     </div>

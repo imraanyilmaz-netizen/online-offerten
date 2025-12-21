@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import CantonFlag from '@/components/CantonFlag';
@@ -8,8 +8,14 @@ import { Button } from '@/components/ui/button';
 import { getLocalizedUrl } from '@/lib/urlMap';
 
 const LocationCard = ({ location }) => {
-  const { t, i18n } = useTranslation('locationPageNav');
-  if (!location) return null;
+  const { t, i18n, ready } = useTranslation('locationPageNav');
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  if (!location || !mounted || !ready) return null;
 
   const correctSlug = getLocalizedUrl(`/${location.slug}`, i18n.language);
 
@@ -37,10 +43,28 @@ const LocationCard = ({ location }) => {
 
 
 const LocationPageNavigation = ({ allLocations, currentCity }) => {
-  const { t } = useTranslation('locationPageNav');
+  const { t, ready } = useTranslation('locationPageNav');
   const scrollContainerRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   const otherLocations = allLocations.filter(loc => loc.name !== currentCity);
+  
+  // Prevent hydration mismatch by not rendering until mounted and i18n is ready
+  if (!mounted || !ready) {
+    return (
+      <div className="border-t border-slate-200 pt-10 mt-12 md:mt-16">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+            Weitere Standorte entdecken
+          </h2>
+        </div>
+      </div>
+    );
+  }
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {

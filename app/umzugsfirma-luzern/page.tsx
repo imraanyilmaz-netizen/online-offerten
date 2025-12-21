@@ -2,11 +2,18 @@ import type { Metadata } from 'next'
 import UmzugsfirmaLuzernPageClient from '@/components/pages/locations/UmzugsfirmaLuzernPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma Luzern » Günstig zügeln | Top-Firmen',
-  description: 'Ihre Umzugsfirma in Luzern für einen stressfreien Umzug. Vergleichen Sie kostenlose Offerten von geprüften Zügelfirmen und Reinigungsfirmen in der Region Luzern.',
-  keywords: 'umzugsfirma luzern, zügelfirma luzern, umzug luzern, reinigung luzern, umzugsreinigung, umzugsservice luzern',
+  title: 'Umzugsfirma Luzern > Umzugsofferten vergleichen',
+  description: 'Finden Sie die passende Zügelfirma & Reinigungsfirma in Luzern - Umzugsofferten vergleichen bis zu 40% sparen! - Kostenlose Offerten',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-luzern',
+  },
+  openGraph: {
+    title: 'Umzugsfirma Luzern > Umzugsofferten vergleichen',
+    description: 'Finden Sie die passende Zügelfirma & Reinigungsfirma in Luzern - Umzugsofferten vergleichen bis zu 40% sparen! - Kostenlose Offerten',
+    url: 'https://online-offerten.ch/umzugsfirma-luzern',
+    siteName: 'Online-Offerten.ch',
+    locale: 'de_CH',
+    type: 'website',
   },
 }
 
