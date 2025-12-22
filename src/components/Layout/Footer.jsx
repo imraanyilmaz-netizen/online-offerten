@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-// Removed useTranslation
 import { logoUrl } from '@/assets/logoConstants.js';
-// Removed getLocalizedUrl
+import { Mail, MapPin, Building2, Sparkles, FileText } from 'lucide-react';
 
 const Footer = React.memo(() => {
   // Removed useTranslation
@@ -73,78 +72,89 @@ const Footer = React.memo(() => {
 
   return (
     <footer 
-      className="bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 text-white pt-16 pb-8 flex-shrink-0 footer-fixed-height"
+      className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-20 pb-12 flex-shrink-0 footer-fixed-height relative overflow-hidden"
       style={{ contain: 'layout style paint' }}
     >
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8 mb-12" style={{ minHeight: '350px' }}>
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8 mb-16">
           
           {/* Logo & Beschreibung */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <img 
-                src={logoUrl} 
-                alt="Online-Offerten.ch Logo" 
-                loading="eager"
-                className="h-10 w-10" 
-                width="40" 
-                height="40"
-                style={{ display: 'block', flexShrink: 0 }}
-              />
-              <span className="text-xl font-bold text-white">Online-Offerten.ch</span>
+          <div className="col-span-2 md:col-span-2 lg:col-span-3">
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
+              <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                <img 
+                  src={logoUrl} 
+                  alt="Online-Offerten.ch Logo" 
+                  loading="eager"
+                  className="h-8 w-8" 
+                  width="32" 
+                  height="32"
+                  style={{ display: 'block', flexShrink: 0 }}
+                />
+              </div>
+              <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Online-Offerten.ch</span>
             </Link>
-            <p className="text-sm text-gray-400 pr-4 mb-6">Online-Offerten.ch – Ihr zuverlässiges Portal für Umzugsofferten, Reinigungsofferten, Malerofferten und Gärtnerofferten in der ganzen Schweiz. Vergleichen Sie online geprüfte Firmen und sparen Sie bis zu 40%. Finden Sie schnell und einfach den passenden Partner für Ihren Umzug oder Ihr Projekt – unverbindlich und transparent.</p>
+            <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-md">
+              Ihr zuverlässiges Portal für Umzugsofferten, Reinigungsofferten, Malerofferten und Gärtnerofferten in der ganzen Schweiz. Vergleichen Sie online geprüfte Firmen und sparen Sie bis zu 40%. Finden Sie schnell und einfach den passenden Partner für Ihren Umzug oder Ihr Projekt – unverbindlich und transparent.
+            </p>
+            <div className="flex items-center gap-2 text-slate-400 text-sm">
+              <Mail className="w-4 h-4" />
+              <a href="mailto:info@online-offerten.ch" className="hover:text-green-400 transition-colors">
+                info@online-offerten.ch
+              </a>
+            </div>
           </div>
 
-          {/* Umzug, Weitere Services & Kosten & Tools - 2. Kolon */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Umzug</h3>
-            <ul className="space-y-2 text-gray-400 text-sm mb-6">
-              {umzugServices.map(link => (
-                <li key={link.to}>
-                  <Link href={link.to} className="hover:text-green-400 transition-colors">{link.text}</Link>
-                </li>
-              ))}
-            </ul>
-            
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Weitere Services</h3>
-            <ul className="space-y-2 text-gray-400 text-sm mb-6">
-              {weitereServices.map(link => (
-                <li key={link.to}>
-                  <Link href={link.to} className="hover:text-green-400 transition-colors">{link.text}</Link>
-                </li>
-              ))}
-            </ul>
-            
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Kosten & Tools</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              {kostenTools.map(link => (
-                <li key={link.to}>
-                  <Link href={link.to} className="hover:text-green-400 transition-colors">
-                    {link.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Reinigung Services */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Reinigung</h3>
-            <div className="space-y-3">
-              <ul className="space-y-2 text-gray-400 text-sm">
-                {hauptReinigung.map(link => (
-                  <li key={link.to}>
-                    <Link href={link.to} className="hover:text-green-400 transition-colors">{link.text}</Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Services Column */}
+          <div className="lg:col-span-2">
+            <h3 className="text-base font-bold mb-6 text-white flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-green-400" />
+              Services
+            </h3>
+            <div className="space-y-6">
               <div>
-                <h4 className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">WEITERE</h4>
-                <ul className="space-y-1.5 text-gray-400 text-sm">
-                  {weitereReinigung.map(link => (
+                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Umzug</h4>
+                <ul className="space-y-2.5">
+                  {umzugServices.map(link => (
                     <li key={link.to}>
-                      <Link href={link.to} className="hover:text-green-400 transition-colors">{link.text}</Link>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Weitere Services</h4>
+                <ul className="space-y-2.5">
+                  {weitereServices.map(link => (
+                    <li key={link.to}>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Kosten & Tools</h4>
+                <ul className="space-y-2.5">
+                  {kostenTools.map(link => (
+                    <li key={link.to}>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -152,30 +162,73 @@ const Footer = React.memo(() => {
             </div>
           </div>
 
-          {/* Standorte - 4. Kolon (mobil ve tablette 5. kolon ile yan yana) */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Standorte</h3>
-            <div className="grid grid-cols-1 gap-2">
+          {/* Reinigung Services */}
+          <div className="col-span-1 md:col-span-1 lg:col-span-2">
+            <h3 className="text-base font-bold mb-6 text-white flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-green-400" />
+              Reinigung
+            </h3>
+            <div className="space-y-6">
+              <ul className="space-y-2.5">
+                {hauptReinigung.map(link => (
+                  <li key={link.to}>
+                    <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      {link.text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
               <div>
-                <h4 className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">HAUPTSTÄDTE</h4>
-                <ul className="space-y-1.5 text-gray-400 text-sm">
-                  {hauptstaedte.map(link => (
+                <h4 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Weitere</h4>
+                <ul className="space-y-2.5">
+                  {weitereReinigung.map(link => (
                     <li key={link.to}>
-                      <Link href={link.to} className="hover:text-green-400 transition-colors">{link.text}</Link>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-4">
-                <h4 className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">WEITERE STÄDTE</h4>
-                <ul className="space-y-1.5 text-gray-400 text-sm">
+            </div>
+          </div>
+
+          {/* Standorte & Company Info */}
+          <div className="col-span-1 md:col-span-1 lg:col-span-2">
+            <h3 className="text-base font-bold mb-6 text-white flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-green-400" />
+              Standorte
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Hauptstädte</h4>
+                <ul className="space-y-2.5">
+                  {hauptstaedte.map(link => (
+                    <li key={link.to}>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Weitere Städte</h4>
+                <ul className="space-y-2.5">
                   {weitereStaedte.map(link => (
                     <li key={link.to}>
-                      <Link href={link.to} className="hover:text-green-400 transition-colors">{link.text}</Link>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
                     </li>
                   ))}
                   <li className="pt-2">
-                    <Link href="/standorte" className="hover:text-green-400 transition-colors font-semibold text-green-400">
+                    <Link href="/standorte" className="text-sm font-semibold text-green-400 hover:text-green-300 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full group-hover:scale-125 transition-transform"></span>
                       Alle Standorte →
                     </Link>
                   </li>
@@ -184,38 +237,81 @@ const Footer = React.memo(() => {
             </div>
           </div>
 
-          {/* Firmen finden & Unternehmen - 5. Kolon */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Firmen finden</h3>
-            <ul className="space-y-2 text-gray-400 text-sm mb-6">
-              <li><Link href="/umzugsfirma-in-der-naehe" className="hover:text-green-400 transition-colors">Umzugsfirma finden</Link></li>
-              <li><Link href="/reinigungsfirma-in-der-naehe" className="hover:text-green-400 transition-colors">Reinigungsfirma finden</Link></li>
-              <li><Link href="/malerfirma-in-der-naehe" className="hover:text-green-400 transition-colors">Malerfirma finden</Link></li>
-            </ul>
-            
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Unternehmen</h3>
-            <ul className="space-y-2 text-gray-400 text-sm mb-6">
-              <li><Link href="/ueber-uns" className="hover:text-green-400 transition-colors">Über uns</Link></li>
-              <li><Link href="/kontakt" className="hover:text-green-400 transition-colors">Kontakt</Link></li>
-              <li><Link href="/partner-suche" className="hover:text-green-400 transition-colors">Partner-Suche</Link></li>
-              <li><Link href="/partner-werden" className="hover:text-green-400 transition-colors">Partner werden</Link></li>
-            </ul>
-            
-            <h3 className="text-lg font-semibold mb-4 block text-gray-200">Rechtliches</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li><Link href="/datenschutz" className="hover:text-green-400 transition-colors">Datenschutz</Link></li>
-              <li><Link href="/agb" className="hover:text-green-400 transition-colors">AGB</Link></li>
-              <li className="pt-3 text-gray-300">
-                <a href="mailto:info@online-offerten.ch" className="hover:text-green-400 transition-colors">
-                  info@online-offerten.ch
-                </a>
-              </li>
-            </ul>
+          {/* Company & Legal */}
+          <div className="col-span-1 md:col-span-1 lg:col-span-2">
+            <h3 className="text-base font-bold mb-6 text-white flex items-center gap-2">
+              <FileText className="w-5 h-5 text-green-400" />
+              Unternehmen
+            </h3>
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Firmen finden</h4>
+                <ul className="space-y-2.5">
+                  <li>
+                    <Link href="/umzugsfirma-in-der-naehe" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      Umzugsfirma finden
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/reinigungsfirma-in-der-naehe" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      Reinigungsfirma finden
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/malerfirma-in-der-naehe" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      Malerfirma finden
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Unternehmen</h4>
+                <ul className="space-y-2.5">
+                  <li>
+                    <Link href="/ueber-uns" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      Über uns
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/kontakt" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      Kontakt
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/partner-suche" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      Partner-Suche
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/partner-werden" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                      Partner werden
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-green-700/50 mt-8 pt-8 text-center text-green-200 text-sm">
-          <p>© {currentYear} Online-Offerten.ch. Alle Rechte vorbehalten.</p>
+        <div className="border-t border-slate-700/50 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-slate-400">
+              © {currentYear} Online-Offerten.ch. Alle Rechte vorbehalten.
+            </p>
+            <div className="flex items-center gap-6 text-sm text-slate-400">
+              <Link href="/datenschutz" className="hover:text-green-400 transition-colors">Datenschutz</Link>
+              <span className="text-slate-600">•</span>
+              <Link href="/agb" className="hover:text-green-400 transition-colors">AGB</Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

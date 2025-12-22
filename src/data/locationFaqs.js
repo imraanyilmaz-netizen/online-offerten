@@ -17,9 +17,10 @@ export const faqs = {
               en: "Guide prices for a move in {city}"
             },
             data: [
-              { size: '1.5 - 2.5 Zimmer', cost: '600 - 1,200 CHF' },
-              { size: '3.5 - 4.5 Zimmer', cost: '1,200 - 2,200 CHF' },
-              { size: '5.5+ Zimmer / Haus', cost: 'ab 2,000 CHF' }
+              { size: '1.5 - 2 Zimmer', cost: '800 - 1,500 CHF' },
+              { size: '2.5 - 3 Zimmer', cost: '1,200 - 2,000 CHF' },
+              { size: '3.5 - 4.5 Zimmer', cost: '1,600 - 2,800 CHF' },
+              { size: '5.5+ Zimmer / Haus', cost: '2,500 - 5,000+ CHF' }
             ]
           },
           {

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import CustomerForm from '@/components/NewCustomerForm';
 import LanguageSwitcher from '@/components/LanguageSwitcher'; // Geri eklendi - müşteri formu için
 import { motion } from 'framer-motion';
-import { CheckCircle2, Shield, Clock, Users, TrendingUp, Send } from 'lucide-react';
+import { Users, Send } from 'lucide-react';
 import { useTranslation } from 'react-i18next'; // i18n geri eklendi - SEO için
 import { getLanguageFromUrl } from '@/lib/urlMap'; // Canonical URL için
 
@@ -57,12 +57,6 @@ const QuoteFormPageClient = () => {
   const heroTitle = t('quoteFormPage.heroTitle');
   const heroDescription = t('quoteFormPage.heroDescription');
 
-  const benefits = [
-    { icon: CheckCircle2, text: t('quoteFormPage.benefits.free') },
-    { icon: Shield, text: t('quoteFormPage.benefits.verified') },
-    { icon: Clock, text: t('quoteFormPage.benefits.fast') },
-    { icon: TrendingUp, text: t('quoteFormPage.benefits.save') },
-  ];
 
   const trustSection = {
     title: t('quoteFormPage.trustSection.title'),
@@ -106,29 +100,6 @@ const QuoteFormPageClient = () => {
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               {heroDescription}
             </p>
-
-            {/* Benefits */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
-            >
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                  className="flex flex-col items-center p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300"
-                >
-                  <benefit.icon className="w-6 h-6 text-green-600 mb-2" />
-                  <span className="text-xs md:text-sm text-gray-700 text-center font-medium leading-tight">
-                    {benefit.text}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
         </motion.div>
 

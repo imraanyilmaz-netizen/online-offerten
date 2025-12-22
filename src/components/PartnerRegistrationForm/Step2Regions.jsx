@@ -45,7 +45,7 @@ const regionGroups = [
 
 const allCantons = regionGroups.flatMap(group => group.cantons);
 
-const Step2Regions = ({ formData, onRegionChange }) => {
+const Step2Regions = ({ formData, onRegionChange, errors = {} }) => {
 
   const getCantonById = (id) => allCantons.find(c => c.id === id);
 
@@ -53,6 +53,12 @@ const Step2Regions = ({ formData, onRegionChange }) => {
     <div>
       <h3 className="text-xl font-semibold mb-2">Wählen Sie Ihre Service-Regionen</h3>
       <p className="text-slate-500 mb-6">In welchen Regionen bieten Sie Ihre Dienstleistungen an?</p>
+      
+      {errors.selectedRegions && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-sm text-red-600">{errors.selectedRegions}</p>
+        </div>
+      )}
       
       <Accordion type="multiple" className="w-full">
         {regionGroups.map(group => (

@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building, MapPin, Briefcase, ShieldCheck, Lock, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
+const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const employeeCountOptions = [
@@ -31,57 +31,161 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
   };
 
   return (
-    <div>
-      <h3 className="text-xl font-semibold mb-2 text-slate-800">Firmendaten eingeben</h3>
-      <p className="text-slate-500 mb-8">Vervollständigen Sie Ihr Profil</p>
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-bold mb-3 text-slate-900">Firmendaten eingeben</h3>
+        <p className="text-slate-600 text-base">Vervollständigen Sie Ihr Profil mit Ihren Firmendaten</p>
+      </div>
       
       <div className="space-y-6">
         
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Building className="h-5 w-5 text-primary" />
-              Kontaktdaten
+        <Card className="border-2 border-slate-200 shadow-sm">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-slate-900">
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Building className="h-5 w-5 text-green-600" />
+              </div>
+              Kontaktdaten & Firmenadresse
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <CardContent className="pt-6">
+            <div className="space-y-6">
               <div>
-                <Label htmlFor="companyName">Firmenname *</Label>
-                <Input id="companyName" value={formData.companyName} onChange={onInputChange} required />
+                <h4 className="text-sm font-semibold text-slate-700 mb-4">Kontaktdaten</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="companyName" className="text-sm font-semibold text-slate-700">
+                      Firmenname <span className="text-red-500">*</span>
+                    </Label>
+                    <Input 
+                      id="companyName" 
+                      value={formData.companyName} 
+                      onChange={onInputChange} 
+                      required 
+                      className={`h-11 ${errors.companyName ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      placeholder="Firmenname eingeben"
+                    />
+                    {errors.companyName && (
+                      <p className="text-sm text-red-600 font-medium mt-1.5">{errors.companyName}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contactPerson" className="text-sm font-semibold text-slate-700">
+                      Ansprechpartner <span className="text-red-500">*</span>
+                    </Label>
+                    <Input 
+                      id="contactPerson" 
+                      value={formData.contactPerson} 
+                      onChange={onInputChange} 
+                      required 
+                      className={`h-11 ${errors.contactPerson ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      placeholder="Name des Ansprechpartners"
+                    />
+                    {errors.contactPerson && (
+                      <p className="text-sm text-red-600 font-medium mt-1.5">{errors.contactPerson}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-semibold text-slate-700">
+                      E-Mail-Adresse <span className="text-red-500">*</span>
+                    </Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      value={formData.email} 
+                      onChange={onInputChange} 
+                      required 
+                      className={`h-11 ${errors.email ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      placeholder="beispiel@firma.ch"
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-red-600 font-medium mt-1.5">{errors.email}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-sm font-semibold text-slate-700">
+                      Telefonnummer <span className="text-red-500">*</span>
+                    </Label>
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      value={formData.phone} 
+                      onChange={onInputChange} 
+                      required 
+                      className={`h-11 ${errors.phone ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      placeholder="+41 XX XXX XX XX"
+                    />
+                    {errors.phone && (
+                      <p className="text-sm text-red-600 font-medium mt-1.5">{errors.phone}</p>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div>
-                <Label htmlFor="contactPerson">Ansprechpartner *</Label>
-                <Input id="contactPerson" value={formData.contactPerson} onChange={onInputChange} required />
-              </div>
-              <div>
-                <Label htmlFor="email">E-Mail *</Label>
-                <Input id="email" type="email" value={formData.email} onChange={onInputChange} required />
-              </div>
-              <div>
-                <Label htmlFor="phone">Telefon *</Label>
-                <Input id="phone" type="tel" value={formData.phone} onChange={onInputChange} required />
+              
+              <div className="pt-4 border-t border-slate-200">
+                <h4 className="text-sm font-semibold text-slate-700 mb-4 flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-blue-600" />
+                  Firmenadresse
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="address_street" className="text-sm font-semibold text-slate-700">
+                      Straße
+                    </Label>
+                    <AddressInput
+                      value={formData.address_street}
+                      onChange={onInputChange}
+                      onSelect={handleAddressSelect}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="address_zip" className="text-sm font-semibold text-slate-700">
+                      PLZ
+                    </Label>
+                    <Input 
+                      id="address_zip" 
+                      value={formData.address_zip} 
+                      onChange={onInputChange}
+                      className="h-11 border-slate-300 focus-visible:ring-green-500"
+                      placeholder="z.B. 8000"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="address_city" className="text-sm font-semibold text-slate-700">
+                      Ort
+                    </Label>
+                    <Input 
+                      id="address_city" 
+                      value={formData.address_city} 
+                      onChange={onInputChange}
+                      className="h-11 border-slate-300 focus-visible:ring-green-500"
+                      placeholder="z.B. Zürich"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-green-200 bg-green-50/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg text-green-800">
-              <Lock className="h-5 w-5 text-green-600" />
+        <Card className="border-2 border-green-200 bg-gradient-to-br from-green-50/50 to-emerald-50/30 shadow-sm">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-200">
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-green-900">
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Lock className="h-5 w-5 text-green-600" />
+              </div>
               Partner Panel Zugang
             </CardTitle>
-            <p className="text-sm text-green-700">
+            <p className="text-sm text-green-700 mt-2">
               Erstellen Sie ein sicheres Passwort für den Zugang zu Ihrem Partner-Dashboard
             </p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="password" className="flex items-center gap-2">
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-sm font-semibold text-slate-700 flex items-center gap-2">
                   <Lock size={16} className="text-green-600" />
-                  Passwort *
+                  Passwort <span className="text-red-500">*</span>
                 </Label>
                 <div className="relative">
                   <Input
@@ -89,9 +193,9 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
                     type={showPassword ? "text" : "password"}
                     value={formData.password || ''}
                     onChange={handlePasswordChange}
-                    placeholder="Passwort eingeben"
+                    placeholder="Mindestens 8 Zeichen"
                     required
-                    className="pr-10"
+                    className={`h-11 pr-10 ${errors.password ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
                   />
                   <Button
                     type="button"
@@ -101,20 +205,24 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-gray-400" />
+                      <EyeOff className="h-4 w-4 text-slate-400 hover:text-slate-600" />
                     ) : (
-                      <Eye className="h-4 w-4 text-gray-400" />
+                      <Eye className="h-4 w-4 text-slate-400 hover:text-slate-600" />
                     )}
                   </Button>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Mindestens 8 Zeichen, empfohlen: Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen
-                </p>
+                {errors.password ? (
+                  <p className="text-sm text-red-600 font-medium mt-1.5">{errors.password}</p>
+                ) : (
+                  <p className="text-xs text-slate-500 mt-1.5">
+                    Mindestens 8 Zeichen, empfohlen: Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen
+                  </p>
+                )}
               </div>
-              <div>
-                <Label htmlFor="confirmPassword" className="flex items-center gap-2">
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword" className="text-sm font-semibold text-slate-700 flex items-center gap-2">
                   <Lock size={16} className="text-green-600" />
-                  Passwort bestätigen *
+                  Passwort bestätigen <span className="text-red-500">*</span>
                 </Label>
                 <div className="relative">
                   <Input
@@ -122,9 +230,9 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
                     type={showConfirmPassword ? "text" : "password"}
                     value={formData.confirmPassword || ''}
                     onChange={handlePasswordChange}
-                    placeholder="Passwort bestätigen"
+                    placeholder="Passwort wiederholen"
                     required
-                    className="pr-10"
+                    className={`h-11 pr-10 ${errors.confirmPassword ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
                   />
                   <Button
                     type="button"
@@ -134,14 +242,17 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? (
-                      <EyeOff className="h-4 w-4 text-gray-400" />
+                      <EyeOff className="h-4 w-4 text-slate-400 hover:text-slate-600" />
                     ) : (
-                      <Eye className="h-4 w-4 text-gray-400" />
+                      <Eye className="h-4 w-4 text-slate-400 hover:text-slate-600" />
                     )}
                   </Button>
                 </div>
-                {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                  <p className="text-xs text-red-500 mt-1">
+                {errors.confirmPassword && (
+                  <p className="text-sm text-red-600 font-medium mt-1.5">{errors.confirmPassword}</p>
+                )}
+                {!errors.confirmPassword && formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                  <p className="text-xs text-red-600 font-medium mt-1.5">
                     Passwörter stimmen nicht überein
                   </p>
                 )}
@@ -150,56 +261,49 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <MapPin className="h-5 w-5 text-primary" />
-              Firmenadresse
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-              <div className="md:col-span-5">
-                <Label htmlFor="address_street">Straße</Label>
-                <AddressInput
-                  value={formData.address_street}
-                  onChange={onInputChange}
-                  onSelect={handleAddressSelect}
-                />
+        <Card className="border-2 border-slate-200 shadow-sm">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-slate-900">
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <Briefcase className="h-5 w-5 text-purple-600" />
               </div>
-              <div className="md:col-span-2">
-                <Label htmlFor="address_zip">PLZ</Label>
-                <Input id="address_zip" value={formData.address_zip} onChange={onInputChange} />
-              </div>
-              <div className="md:col-span-3">
-                <Label htmlFor="address_city">Ort</Label>
-                <Input id="address_city" value={formData.address_city} onChange={onInputChange} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Briefcase className="h-5 w-5 text-primary" />
               Zusätzliche Details
             </CardTitle>
+            <p className="text-sm text-slate-600 mt-2">Optionale Informationen über Ihr Unternehmen</p>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
-              <div>
-                <Label htmlFor="website">Website</Label>
-                <Input id="website" value={formData.website} onChange={onInputChange} placeholder="https://www.beispiel.ch" />
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="website" className="text-sm font-semibold text-slate-700">
+                  Website
+                </Label>
+                <Input 
+                  id="website" 
+                  value={formData.website} 
+                  onChange={onInputChange} 
+                  placeholder="https://www.beispiel.ch"
+                  className="h-11 border-slate-300 focus-visible:ring-green-500"
+                />
               </div>
-              <div>
-                <Label htmlFor="year_founded">Gründungsjahr</Label>
-                <Input id="year_founded" type="number" value={formData.year_founded} onChange={onInputChange} placeholder="z.B. 2020" />
+              <div className="space-y-2">
+                <Label htmlFor="year_founded" className="text-sm font-semibold text-slate-700">
+                  Gründungsjahr
+                </Label>
+                <Input 
+                  id="year_founded" 
+                  type="number" 
+                  value={formData.year_founded} 
+                  onChange={onInputChange} 
+                  placeholder="z.B. 2020"
+                  className="h-11 border-slate-300 focus-visible:ring-green-500"
+                />
               </div>
-              <div>
-                <Label>Anzahl Mitarbeiter</Label>
+              <div className="space-y-2">
+                <Label className="text-sm font-semibold text-slate-700">
+                  Anzahl Mitarbeiter
+                </Label>
                 <Select onValueChange={(value) => onValueChange('employee_count', value)} value={formData.employee_count}>
-                  <SelectTrigger>
+                  <SelectTrigger className="h-11 border-slate-300 focus:ring-green-500">
                     <SelectValue placeholder="Bitte wählen..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -209,53 +313,68 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange }) => {
                   </SelectContent>
                 </Select>
               </div>
-              <div>
-                <Label>Haftpflichtversicherung</Label>
+              <div className="space-y-2">
+                <Label className="text-sm font-semibold text-slate-700">
+                  Haftpflichtversicherung
+                </Label>
                 <RadioGroup
                   onValueChange={(value) => onValueChange('liability_insurance', value === 'true')}
                   value={formData.liability_insurance === null ? '' : String(formData.liability_insurance)}
-                  className="flex items-center space-x-4 h-10"
+                  className="flex items-center space-x-6 h-11"
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="true" id="liability_yes" />
-                    <Label htmlFor="liability_yes" className="font-normal cursor-pointer">Ja</Label>
+                    <Label htmlFor="liability_yes" className="font-normal cursor-pointer text-slate-700">Ja</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="false" id="liability_no" />
-                    <Label htmlFor="liability_no" className="font-normal cursor-pointer">Nein</Label>
+                    <Label htmlFor="liability_no" className="font-normal cursor-pointer text-slate-700">Nein</Label>
                   </div>
                 </RadioGroup>
               </div>
-              <div className="md:col-span-2">
-                <Label htmlFor="commercial_register_number">Handelsregisternummer</Label>
-                <Input id="commercial_register_number" value={formData.commercial_register_number} onChange={onInputChange} placeholder="z.B. CHE-123.456.789" />
+              <div className="md:col-span-2 space-y-2">
+                <Label htmlFor="commercial_register_number" className="text-sm font-semibold text-slate-700">
+                  Handelsregisternummer
+                </Label>
+                <Input 
+                  id="commercial_register_number" 
+                  value={formData.commercial_register_number} 
+                  onChange={onInputChange} 
+                  placeholder="z.B. CHE-123.456.789"
+                  className="h-11 border-slate-300 focus-visible:ring-green-500"
+                />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-50 border-green-200/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <ShieldCheck className="h-5 w-5 text-green-600" />
+        <Card className={`border-2 shadow-sm ${errors.agreedToTerms ? "border-red-200 bg-red-50/30" : "border-green-200 bg-gradient-to-br from-green-50/50 to-emerald-50/30"}`}>
+          <CardHeader className={`border-b ${errors.agreedToTerms ? "bg-red-50 border-red-200" : "bg-gradient-to-r from-green-50 to-emerald-50 border-green-200"}`}>
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-slate-900">
+              <div className={`p-2 rounded-lg ${errors.agreedToTerms ? "bg-red-100" : "bg-green-100"}`}>
+                <ShieldCheck className={`h-5 w-5 ${errors.agreedToTerms ? "text-red-600" : "text-green-600"}`} />
+              </div>
               Bestätigung
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="flex items-start space-x-3">
+          <CardContent className="pt-6">
+            <div className="flex items-start space-x-4">
               <Checkbox
                 id="agreedToTerms"
                 checked={formData.agreedToTerms}
                 onCheckedChange={(checked) => onValueChange('agreedToTerms', checked)}
-                className="mt-0.5"
+                className={`mt-1 h-5 w-5 ${errors.agreedToTerms ? "border-red-500" : ""}`}
               />
-              <div className="grid gap-1.5 leading-none">
+              <div className="grid gap-2 leading-relaxed flex-1">
                 <label
                   htmlFor="agreedToTerms"
-                  className="text-sm text-slate-600 leading-relaxed"
+                  className="text-sm text-slate-700 leading-relaxed cursor-pointer"
                 >
-                  Ich akzeptiere die <a href="/agb" target="_blank" rel="noopener noreferrer" className="underline text-green-600 hover:text-green-800">Allgemeinen Geschäftsbedingungen</a> und die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="underline text-green-600 hover:text-green-800">Datenschutzerklärung</a>.
+                  Ich akzeptiere die <a href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">Allgemeinen Geschäftsbedingungen</a> und die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">Datenschutzerklärung</a>.
                 </label>
+                {errors.agreedToTerms && (
+                  <p className="text-sm text-red-600 font-medium mt-1">{errors.agreedToTerms}</p>
+                )}
               </div>
             </div>
           </CardContent>

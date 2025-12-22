@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next'; // i18n geri eklendi - müşteri formu için
 import { Button } from '@/components/ui/button';
@@ -52,14 +52,17 @@ const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
   );
 };
 
-const TrustBadge = () => {
+const TrustBadge = memo(() => {
     const { t } = useTranslation('newCustomerForm'); // i18n geri eklendi
     const [stats, setStats] = useState({ average_rating: 0, review_count: 0 });
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        let isMounted = true;
         const fetchRating = async () => {
             const { data, error } = await supabase.rpc('get_recent_average_rating');
+            if (!isMounted) return;
+            
             if (!error && data) {
                 setStats({
                     average_rating: data.average_rating,
@@ -71,6 +74,10 @@ const TrustBadge = () => {
             setLoading(false);
         };
         fetchRating();
+        
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     if (loading) {
@@ -86,12 +93,13 @@ const TrustBadge = () => {
     return (
         <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-center">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-                <p className="font-medium text-green-800">{t('trustBadge.intro', { count: stats.review_count })}</p>
                 <StarRating rating={stats.average_rating} reviewCount={stats.review_count} />
             </div>
         </div>
     );
-};
+});
+
+TrustBadge.displayName = 'TrustBadge';
 
 const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" }) => {
   const { t, i18n } = useTranslation(['newCustomerForm', 'common']); // i18n geri eklendi
@@ -100,6 +108,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const searchParams = useSearchParams();
   const umzugArtSectionRef = useRef(null);
   const formRef = useRef(null);
+  
+  // Memoize searchParams string to prevent unnecessary re-renders
+  const searchParamsString = useMemo(() => searchParams?.toString() || '', [searchParams]);
   
   const {
     formData,
@@ -116,7 +127,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   } = useNewCustomerForm(initialDataFromProps);
 
   const [currentStep, setCurrentStep] = useState(1);
-  const validate = useNewFormValidation(formData, i18n.language); // i18n.language geri eklendi
+  const validate = useNewFormValidation(formData);
   
   // Müşteri formu için URL'den dil algılama
   useEffect(() => {
@@ -142,35 +153,70 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   
   // beforeunload event'ini kaldırdık - tarayıcının varsayılan dialog'u yerine özel popup kullanıyoruz
 
+  // URL'den step parametresini kontrol et - tek bir useEffect ile tüm step geçişlerini yönet
   useEffect(() => {
-    const params = new URLSearchParams(searchParams?.toString());
+    const params = new URLSearchParams(searchParamsString);
     const stepFromUrl = params.get('step');
-    // Only allow Step 2 if Step 1 is completed
-    if (stepFromUrl === '2' && isStep1Completed) {
-      setCurrentStep(2);
-    } else if (stepFromUrl === '2' && !isStep1Completed) {
-      // Redirect to Step 1 if trying to access Step 2 without completing Step 1
-      const newParams = new URLSearchParams(searchParams?.toString());
-      newParams.delete('step');
-      router.push(`${pathname}?${newParams.toString()}`, { replace: true });
-      setCurrentStep(1);
-    } else if (!stepFromUrl || stepFromUrl === '1') {
+    
+    // Sadece URL gerçekten değiştiğinde işlem yap (currentStep ile karşılaştır)
+    const targetStep = stepFromUrl === '2' ? 2 : 1;
+    
+    // Eğer zaten doğru step'teysek, hiçbir şey yapma (gereksiz re-render'ları önle)
+    if (currentStep === targetStep) {
+      return;
+    }
+    
+    // Step 2'ye geçiş kontrolü
+    if (stepFromUrl === '2') {
+      if (isStep1Completed && currentStep !== 2) {
+        // Step 1 tamamlandıysa ve step 2'de değilsek, step 2'ye geç
+        setCurrentStep(2);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (formRef.current) {
+              formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      } else if (!isStep1Completed) {
+        // Step 1 tamamlanmadıysa, step 2'ye erişimi engelle ve step 1'e yönlendir
+        const newParams = new URLSearchParams(searchParamsString);
+        newParams.delete('step');
+        router.push(`${pathname}?${newParams.toString()}`, { replace: true });
+        setCurrentStep(1);
+      }
+    } 
+    // Step 1'e geçiş kontrolü (URL'de step yoksa veya step=1 ise)
+    else if ((!stepFromUrl || stepFromUrl === '1') && currentStep !== 1) {
       setCurrentStep(1);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams?.toString(), isStep1Completed]);
+  }, [searchParamsString, isStep1Completed, currentStep, pathname, router]);
 
-  const updateUrlStep = (step, replace = true) => {
-    const params = new URLSearchParams(searchParams?.toString());
+  const updateUrlStep = useCallback((step, replace = true) => {
+    const params = new URLSearchParams(searchParamsString);
     if (step > 1) {
       params.set('step', step);
     } else {
       params.delete('step');
     }
-    // Step 2'ye geçerken history'ye entry ekle (geri tuşu için)
-    // Step 1'e dönerken replace kullan (history'yi temizle)
-    router.push(`${pathname}?${params.toString()}`, { replace });
-  };
+    // Step 2'ye geçildiğinde scroll pozisyonunu koru
+    if (step === 2) {
+      // Scroll pozisyonunu kaydet
+      const currentScrollY = window.scrollY;
+      // URL'i güncelle
+      router.push(`${pathname}?${params.toString()}`, { replace });
+      // Scroll pozisyonunu koru ve form alanına scroll yap
+      requestAnimationFrame(() => {
+        // Next.js'in scroll davranışını override et
+        if (formRef.current) {
+          formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    } else {
+      // Step 1'e dönerken history'yi temizle
+      router.push(`${pathname}?${params.toString()}`, { replace });
+    }
+  }, [searchParamsString, pathname, router, formRef]);
 
   const scrollToFormTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -222,7 +268,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   
   const memoizedHandleServiceSelect = useCallback((serviceId, isFromUrl = false) => {
     handleServiceSelect(serviceId, isFromUrl);
-    const params = new URLSearchParams(searchParams?.toString());
+    const params = new URLSearchParams(searchParamsString);
     params.set('service', serviceId);
     if(currentStep > 1) params.delete('step');
     const newUrl = `${pathname}?${params.toString()}`;
@@ -232,37 +278,58 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     if (serviceId === 'umzug' && !isFromUrl) {
       setTimeout(scrollToUmzugArt, 50); 
     }
-  }, [scrollToUmzugArt, handleServiceSelect, pathname, currentStep, searchParams, router]);
+  }, [scrollToUmzugArt, handleServiceSelect, pathname, currentStep, searchParamsString, router]);
 
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams?.toString());
+    const params = new URLSearchParams(searchParamsString);
     const serviceFromUrl = params.get('service');
     if (serviceFromUrl && serviceFromUrl !== formData.service) {
       handleServiceSelect(serviceFromUrl, true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams?.toString()]); 
+  }, [searchParamsString, formData.service, handleServiceSelect]); 
 
-  // Check if Step 1 is completed whenever formData changes
+  // Check if Step 1 is completed whenever formData changes - memoized for performance
+  const step1ValidationResult = useMemo(() => {
+    return validate(1);
+  }, [
+    formData.service, 
+    formData.umzugArt, 
+    formData.special_transport_type, 
+    formData.special_transport_other_details, 
+    formData.cleaning_frequency, 
+    formData.what_to_clean, 
+    formData.estimated_area, 
+    formData.floor_types, 
+    formData.floor_area, 
+    formData.fassadenreinigung_flaeche, 
+    formData.fassadenreinigung_erreichbarkeit, 
+    formData.fassadenreinigung_verschmutzung, 
+    formData.fensterreinigung_anzahl, 
+    formData.fensterreinigung_scope, 
+    formData.fensterreinigung_zugang, 
+    formData.raeumung_scope, 
+    formData.what_to_paint, 
+    formData.what_to_garden,
+    validate
+  ]);
+
   useEffect(() => {
-    const { isValid } = validate(1);
-    setIsStep1Completed(isValid);
-  }, [formData.service, formData.umzugArt, formData.special_transport_type, formData.special_transport_other_details, formData.cleaning_frequency, formData.what_to_clean, formData.estimated_area, formData.floor_types, formData.floor_area, formData.fassadenreinigung_flaeche, formData.fassadenreinigung_erreichbarkeit, formData.fassadenreinigung_verschmutzung, formData.fensterreinigung_anzahl, formData.fensterreinigung_scope, formData.fensterreinigung_zugang, formData.raeumung_scope, formData.what_to_paint, formData.what_to_garden, validate]);
+    setIsStep1Completed(step1ValidationResult.isValid);
+  }, [step1ValidationResult.isValid]);
 
   const handleNextStep = () => {
     if (currentStep < TOTAL_FORM_STEPS) {
       const { isValid, errors } = validate(currentStep);
       if (isValid) {
         setErrors({}); 
+        // Step 2'ye geçerken history'ye entry ekle (geri tuşu için)
+        // setIsStep1Completed zaten useEffect ile otomatik yönetiliyor, burada set etmeye gerek yok
         if (currentStep === 1) {
-          setIsStep1Completed(true);
-          // Step 2'ye geçerken history'ye entry ekle (geri tuşu için)
           updateUrlStep(currentStep + 1, false);
         } else {
           updateUrlStep(currentStep + 1);
         }
-        scrollToFormTop();
       } else {
         setErrors(errors);
         toast({ title: t('errors.validationErrorTitle'), description: t('errors.validationErrorDescription'), variant: "destructive" });
@@ -283,18 +350,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   };
 
-  // Step 2'den geri tuşuna basıldığında Step 1'e geçiş için URL değişikliğini dinle
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams?.toString());
-    const stepFromUrl = params.get('step');
-    
-    // URL'de step parametresi yoksa veya step=1 ise ve şu an Step 2'deysek
-    // Bu, geri tuşuna basıldığında Step 1'e dönüldüğü anlamına gelir
-    if ((!stepFromUrl || stepFromUrl === '1') && currentStep === 2 && !isSubmitted) {
-      setCurrentStep(1);
-      scrollToFormTop();
-    }
-  }, [searchParams?.toString(), currentStep, isSubmitted]);
+  // Bu useEffect kaldırıldı - step kontrolü yukarıdaki tek useEffect'te yapılıyor
+  // Geri tuşu ile step 1'e dönüş, yukarıdaki useEffect tarafından handle ediliyor
 
   // Browser geri tuşu ile formdan çıkış kontrolü
   // Sadece Step 1'de ve formdan tamamen çıkışta uyarı ver
@@ -371,15 +428,15 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   };
 
-  const resetFormAndSteps = () => {
+  const resetFormAndSteps = useCallback(() => {
     setIsSubmitted(false);
     updateUrlStep(1);
     setErrors({});
     resetForm();
-    const params = new URLSearchParams(searchParams?.toString());
+    const params = new URLSearchParams(searchParamsString);
     params.delete('step');
     router.push(`${pathname}?${params.toString()}`, { replace: true });
-  };
+  }, [updateUrlStep, setErrors, resetForm, searchParamsString, pathname, router]);
   
   const getStepTitle = () => {
     switch (currentStep) {
