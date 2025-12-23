@@ -308,7 +308,7 @@ const HofreinigungPageClient = () => {
                   transition={{ delay: 0.4, duration: 0.6 }}
                   className="text-base md:text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed"
                 >
-                  Professionelle Reinigung von Höfen, Einfahrten, Terrassen und Aussenbereichen. Gründliche Reinigung für ein gepflegtes Äusseres. Über 12 Jahre Erfahrung. Reinigungsofferten online vergleichen und bis zu 40% sparen.
+                  Professionelle Reinigung von Höfen, Einfahrten, Terrassen und Aussenbereichen. Gründliche Reinigung für ein gepflegtes Äusseres. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
                 
                 <motion.div
@@ -428,7 +428,6 @@ const HofreinigungPageClient = () => {
                   {/* Bullet Points - Vorteile */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
                     <li>Entfernung von hartnäckigen Verschmutzungen wie Ölflecken, Moos und Algen</li>
-                    <li>Über 12 Jahre Erfahrung im Bereich Reinigung</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Spezielle Geräte wie Hochdruckreiniger für optimale Ergebnisse</li>
                     <li>Schonende Reinigung für empfindliche Oberflächen</li>
@@ -553,38 +552,10 @@ const HofreinigungPageClient = () => {
                     Die optimale Reinigungsfrequenz hängt von verschiedenen Faktoren ab: Nutzung, Witterung, Lage und individuelle Präferenzen. Viele Hausbesitzer lassen ihre Höfe ein- bis zweimal jährlich professionell reinigen, typischerweise im Frühjahr und Herbst. Bei starker Verschmutzung, in Gebieten mit viel Regen oder Schatten, oder vor besonderen Anlässen kann öfter gereinigt werden. Regelmässige Reinigung verhindert die Ansammlung von hartnäckigen Verschmutzungen wie Moos oder Algen und hält Aussenbereiche in optimalem Zustand. Professionelle Reinigungsfirmen beraten Sie gerne bei der optimalen Frequenz für Ihre spezifischen Aussenbereiche und berücksichtigen dabei Faktoren wie Nutzung, Witterung und Oberflächentyp.
                   </p>
 
-                  {/* Trust & Erfahrung Section */}
-                  <div className="mt-6 md:mt-8 p-4 md:p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 mb-6 md:mb-8">
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Über 12 Jahre Erfahrung im Bereich Reinigung</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                      <div className="flex items-start">
-                        <Award className="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-gray-900 text-base">Über 12 Jahre Erfahrung</p>
-                          <p className="text-sm text-gray-600">Erfahrung in der Reinigungsbranche</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start">
-                        <ShieldCheck className="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-gray-900 text-base">Qualitätsgarantie</p>
-                          <p className="text-sm text-gray-600">Professionelle Qualität</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start">
-                        <Star className="w-6 h-6 text-yellow-500 fill-yellow-500 mr-3 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-gray-900 text-base">{reviewStats.averageRating.toFixed(1)}/5 Sterne Bewertung</p>
-                          <p className="text-sm text-gray-600">Von über {reviewStats.totalReviews} Kunden bewertet</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
                   {/* H2: Warum wir der richtige Partner für Ihre Hofreinigung sind */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Höfe sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Höfe. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und Erfahrung mit Aussenbereichen haben. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für Reinigung der Höfe, wie leistungsstarke Hochdruckreiniger und spezielle Reinigungsmittel. Sie kennen die richtigen Methoden für verschiedene Oberflächen und können empfindliche Materialien wie Naturstein oder Holz schonend reinigen. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Höfe zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
+                    Wir sind der vertrauenswürdige Partner für Ihre Höfe. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und Erfahrung mit Aussenbereichen haben. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für Reinigung der Höfe, wie leistungsstarke Hochdruckreiniger und spezielle Reinigungsmittel. Sie kennen die richtigen Methoden für verschiedene Oberflächen und können empfindliche Materialien wie Naturstein oder Holz schonend reinigen. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Höfe zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* Customer Reviews */}

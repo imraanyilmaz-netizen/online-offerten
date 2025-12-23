@@ -295,7 +295,7 @@ const FassadenreinigungPageClient = () => {
                   transition={{ delay: 0.4, duration: 0.6 }}
                   className="text-base md:text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed"
                 >
-                  Professionelle Fassadenreinigung für ein gepflegtes Äusseres. Entfernung von Algen, Moos und Verschmutzungen. Über 12 Jahre Erfahrung. Reinigungsofferten online vergleichen und bis zu 40% sparen.
+                  Professionelle Fassadenreinigung für ein gepflegtes Äusseres. Entfernung von Algen, Moos und Verschmutzungen. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
                 
                 <motion.div
@@ -415,7 +415,6 @@ const FassadenreinigungPageClient = () => {
                   {/* Bullet Points - Vorteile */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
                     <li>Professionelle Reinigung mit umweltschonenden Methoden</li>
-                    <li>Über 12 Jahre Erfahrung im Bereich Reinigung</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Richtige Ausrüstung für Höhenarbeit</li>
                     <li>Geschulte Mitarbeiter mit Sicherheitszertifikaten</li>
@@ -499,21 +498,6 @@ const FassadenreinigungPageClient = () => {
                     Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro m². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Grössere Gebäude, höhere Fassaden oder besonders verschmutzte Bereiche können höhere Kosten verursachen. Die Reinigungsmethode (Hochdruckreinigung vs. schonende Reinigung) und das Material beeinflussen ebenfalls die Kosten. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
-                  {/* Trust Elements */}
-                  <div className="my-6 md:my-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6">Über 12 Jahre Erfahrung im Bereich Reinigung</h3>
-                    <div className="grid grid-cols-2 gap-4 md:gap-6">
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3">
-                          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-100 flex items-center justify-center">
-                            <Award className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">Über 12 Jahre Erfahrung</div>
-                          <p className="text-sm md:text-base text-gray-700">Über 12 Jahre Erfahrung im Bereich Reinigung</p>
-                        </div>
-                      </div>
                       <div className="flex items-start">
                         <div className="flex-shrink-0 mr-3">
                           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-100 flex items-center justify-center">
@@ -542,7 +526,7 @@ const FassadenreinigungPageClient = () => {
                   {/* H2: Warum wir der richtige Partner für Ihre Fassadenreinigung sind */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Fassade sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Fassade. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen haben die richtige Ausrüstung für Höhenarbeit, sind versichert und ihre Mitarbeiter sind geschult für Sicherheit. Sie verwenden moderne, umweltfreundliche Reinigungsmittel und kennen die richtigen Methoden für jedes Fassadenmaterial. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Fassaden zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
+                    Wir sind der vertrauenswürdige Partner für Ihre Fassade. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen haben die richtige Ausrüstung für Höhenarbeit, sind versichert und ihre Mitarbeiter sind geschult für Sicherheit. Sie verwenden moderne, umweltfreundliche Reinigungsmittel und kennen die richtigen Methoden für jedes Fassadenmaterial. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Fassaden zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* CTA 2 - After Richtiger Partner */}

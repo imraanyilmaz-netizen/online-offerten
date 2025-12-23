@@ -32,7 +32,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
 
   return (
     <div className="space-y-8">
-      <div>
+    <div>
         <h3 className="text-2xl font-bold mb-3 text-slate-900">Firmendaten eingeben</h3>
         <p className="text-slate-600 text-base">Vervollständigen Sie Ihr Profil mit Ihren Firmendaten</p>
       </div>
@@ -161,8 +161,8 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                       className="h-11 border-slate-300 focus-visible:ring-green-500"
                       placeholder="z.B. Zürich"
                     />
-                  </div>
-                </div>
+              </div>
+              </div>
               </div>
             </div>
           </CardContent>
@@ -172,7 +172,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
           <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-200">
             <CardTitle className="flex items-center gap-3 text-xl font-bold text-green-900">
               <div className="p-2 bg-green-100 rounded-lg">
-                <Lock className="h-5 w-5 text-green-600" />
+              <Lock className="h-5 w-5 text-green-600" />
               </div>
               Partner Panel Zugang
             </CardTitle>
@@ -215,8 +215,8 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                   <p className="text-sm text-red-600 font-medium mt-1.5">{errors.password}</p>
                 ) : (
                   <p className="text-xs text-slate-500 mt-1.5">
-                    Mindestens 8 Zeichen, empfohlen: Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen
-                  </p>
+                  Mindestens 8 Zeichen, empfohlen: Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen
+                </p>
                 )}
               </div>
               <div className="space-y-2">

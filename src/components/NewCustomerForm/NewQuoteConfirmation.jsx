@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { MailCheck, CheckCircle2 as CheckCircle, ArrowLeft, PartyPopper, Link2, ListChecks, BookOpen, ArrowRight, BellRing } from 'lucide-react';
+import { MailCheck, CheckCircle2 as CheckCircle, ArrowLeft, PartyPopper, Link2, ListChecks, BookOpen, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const NewQuoteConfirmation = ({ onResetForm }) => {
@@ -78,28 +78,6 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
               </p>
             </div>
           </div>
-          
-          {/* Highlighted Red Box for crucial info */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.7, type: 'spring', stiffness: 150 }}
-            className="flex items-start bg-red-50/50 border-l-4 border-red-500 p-4 rounded-md text-red-800 mt-4 shadow-sm"
-          >
-            <BellRing className="h-5 w-5 mr-3 mt-1 flex-shrink-0 text-red-600" />
-            <div>
-              <p className="font-semibold text-base mb-1">
-                {t('quoteConfirmation.emailInfoText')}
-              </p>
-              <ul className="list-disc list-inside text-sm space-y-1 pl-4">
-                <li>{t('quoteConfirmation.emailInfoPoint1')}</li>
-                <li>{t('quoteConfirmation.emailInfoPoint2')}</li>
-                <li>{t('quoteConfirmation.emailInfoPoint3')}</li>
-              </ul>
-            </div>
-          </motion.div>
-          {/* End Highlighted Red Box */}
-
 
           <div className="border-t border-gray-200 my-4"></div>
           <div className="flex items-start">

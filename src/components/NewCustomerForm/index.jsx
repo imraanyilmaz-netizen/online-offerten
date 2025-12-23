@@ -108,6 +108,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const searchParams = useSearchParams();
   const umzugArtSectionRef = useRef(null);
   const formRef = useRef(null);
+  const hasInitializedServiceFromUrl = useRef(false);
+  const userManuallySelectedService = useRef(false);
   
   // Memoize searchParams string to prevent unnecessary re-renders
   const searchParamsString = useMemo(() => searchParams?.toString() || '', [searchParams]);
@@ -170,7 +172,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     if (stepFromUrl === '2') {
       if (isStep1Completed && currentStep !== 2) {
         // Step 1 tamamlandıysa ve step 2'de değilsek, step 2'ye geç
-        setCurrentStep(2);
+      setCurrentStep(2);
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             if (formRef.current) {
@@ -181,9 +183,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       } else if (!isStep1Completed) {
         // Step 1 tamamlanmadıysa, step 2'ye erişimi engelle ve step 1'e yönlendir
         const newParams = new URLSearchParams(searchParamsString);
-        newParams.delete('step');
-        router.push(`${pathname}?${newParams.toString()}`, { replace: true });
-        setCurrentStep(1);
+      newParams.delete('step');
+      router.push(`${pathname}?${newParams.toString()}`, { replace: true });
+      setCurrentStep(1);
       }
     } 
     // Step 1'e geçiş kontrolü (URL'de step yoksa veya step=1 ise)
@@ -214,7 +216,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       });
     } else {
       // Step 1'e dönerken history'yi temizle
-      router.push(`${pathname}?${params.toString()}`, { replace });
+    router.push(`${pathname}?${params.toString()}`, { replace });
     }
   }, [searchParamsString, pathname, router, formRef]);
 
@@ -268,6 +270,12 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   
   const memoizedHandleServiceSelect = useCallback((serviceId, isFromUrl = false) => {
     handleServiceSelect(serviceId, isFromUrl);
+    
+    // Kullanıcı manuel seçim yaptıysa flag'i set et (URL'den otomatik seçim değilse)
+    if (!isFromUrl) {
+      userManuallySelectedService.current = true;
+    }
+    
     const params = new URLSearchParams(searchParamsString);
     params.set('service', serviceId);
     if(currentStep > 1) params.delete('step');
@@ -281,11 +289,28 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   }, [scrollToUmzugArt, handleServiceSelect, pathname, currentStep, searchParamsString, router]);
 
 
+  // URL'den service parametresini sadece ilk yüklemede oku
+  // Kullanıcı manuel seçim yaptığında URL güncellenir ama tekrar URL'den okuma yapılmaz
   useEffect(() => {
+    // Eğer kullanıcı zaten manuel seçim yaptıysa, URL'den okuma yapma
+    if (userManuallySelectedService.current) {
+      return;
+    }
+    
+    // Sadece ilk yüklemede ve daha önce URL'den okuma yapılmadıysa çalış
+    if (hasInitializedServiceFromUrl.current) {
+      return;
+    }
+    
     const params = new URLSearchParams(searchParamsString);
     const serviceFromUrl = params.get('service');
+    
     if (serviceFromUrl && serviceFromUrl !== formData.service) {
       handleServiceSelect(serviceFromUrl, true);
+      hasInitializedServiceFromUrl.current = true;
+    } else if (!serviceFromUrl) {
+      // URL'de service yoksa bile flag'i true yap, tekrar kontrol etme
+      hasInitializedServiceFromUrl.current = true;
     }
   }, [searchParamsString, formData.service, handleServiceSelect]); 
 
@@ -507,17 +532,17 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       ref={formRef}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-6xl mx-auto py-6 sm:py-8 md:py-12 px-2 sm:px-0"
+      className="w-full max-w-6xl mx-auto py-3 sm:py-4 md:py-5 px-2 sm:px-0"
     >
-      <div className="text-center p-4 sm:p-6 md:p-8">
+      <div className="px-4 sm:px-6 md:px-8 mb-3">
+        <TrustBadge />
+      </div>
+
+      <div className="text-center p-2 sm:p-3 md:p-4">
         <p className="text-sm sm:text-base md:text-lg text-gray-600 font-medium">{stepTitle}</p>
       </div>
 
-      <div className="px-4 sm:px-6 md:px-8 mb-4">
-        <TrustBadge />
-      </div>
-      
-      <div className="p-3 sm:p-4">
+      <div className="p-2 sm:p-3">
           <div className="flex justify-between items-center mb-1.5 sm:mb-2 px-1 sm:px-2">
               <span className="text-xs text-gray-500">{t('stepProgress', { currentStep, totalSteps: TOTAL_FORM_STEPS })}</span>
           </div>
@@ -531,7 +556,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           </div>
       </div>
       
-      <form onSubmit={handleSubmitForm} className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8" noValidate>
+      <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6" noValidate>
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStep}

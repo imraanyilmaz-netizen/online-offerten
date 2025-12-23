@@ -49,7 +49,7 @@ const mainCategories = [
 const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors = {} }) => {
   return (
     <div className="space-y-6">
-      <div>
+    <div>
         <h3 className="text-2xl font-bold mb-3 text-slate-900">Wählen Sie Ihre Leistungen</h3>
         <p className="text-slate-600 text-base">Bitte wählen Sie zunächst eine oder mehrere Hauptkategorien aus, dann die detaillierten Dienstleistungen.</p>
       </div>
@@ -131,21 +131,21 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
                       {category.services.map(service => {
                         const isServiceSelected = formData.selectedServices.includes(service.id);
                         return (
-                          <div
+                      <div
                             key={service.id + category.id}
                             className={`flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer ${
                               isServiceSelected
                                 ? 'bg-green-50 border-green-300 shadow-sm'
                                 : 'hover:bg-slate-50 border-slate-200 hover:border-slate-300'
                             }`}
-                            onClick={() => onServiceChange(service.id)}
-                          >
-                            <Checkbox
+                        onClick={() => onServiceChange(service.id)}
+                      >
+                        <Checkbox
                               id={service.id + category.id}
                               checked={isServiceSelected}
-                              onCheckedChange={() => onServiceChange(service.id)}
+                          onCheckedChange={() => onServiceChange(service.id)}
                               className="mt-0.5"
-                            />
+                        />
                             <div className="grid gap-1 flex-1">
                               <Label 
                                 htmlFor={service.id + category.id} 
@@ -154,15 +154,15 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
                                 }`}
                               >
                                 {service.icon && <service.icon className={`w-4 h-4 mr-2 ${isServiceSelected ? 'text-green-600' : 'text-slate-500'}`} />}
-                                {service.label}
-                              </Label>
+                            {service.label}
+                          </Label>
                               {service.desc && (
                                 <p className={`text-xs ${isServiceSelected ? 'text-green-700' : 'text-slate-500'}`}>
                                   {service.desc}
                                 </p>
                               )}
-                            </div>
-                          </div>
+                        </div>
+                      </div>
                         );
                       })}
                     </div>

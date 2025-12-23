@@ -227,11 +227,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
   // Services - SEO optimized with keyword variations
   const services = useMemo(() => [
-    { id: 'umzug', label: 'Umzug Offerten anfordern', subLabel: 'Privat, Geschäftlich, International', icon: <Home />, colors: 'bg-blue-100 text-blue-600' },
-    { id: 'reinigung', label: 'Reinigung Angebote vergleichen', subLabel: 'Umzugs-, Büro-, Fensterreinigung', icon: <Sparkles />, colors: 'bg-yellow-100 text-yellow-500' },
-    { id: 'maler', label: 'Maler Offerten erhalten', subLabel: 'Innen-, Aussenanstrich, Fassaden', icon: <Paintbrush />, colors: 'bg-pink-100 text-pink-500' },
-    { id: 'raeumung', label: 'Räumung & Entsorgung', subLabel: 'Wohnungsräumung, Entrümpelung', icon: <Recycle />, colors: 'bg-purple-100 text-purple-500' },
-    { id: 'garten', label: 'Gartenarbeiten Preisvergleich', subLabel: 'Gartenpflege, Landschaftsbau', icon: <Sprout />, colors: 'bg-green-100 text-green-600' },
+    { id: 'umzug', label: 'Offerten für Umzüge anfordern', subLabel: 'Privat · Geschäftlich · International', icon: <Home />, colors: 'bg-blue-100 text-blue-600' },
+    { id: 'reinigung', label: 'Reinigungsofferten vergleichen', subLabel: 'Umzugs-, Büro- & Fensterreinigung', icon: <Sparkles />, colors: 'bg-yellow-100 text-yellow-500' },
+    { id: 'maler', label: 'Offerten für Malerarbeiten erhalten', subLabel: 'Innen- & Aussenanstrich · Fassadenarbeiten', icon: <Paintbrush />, colors: 'bg-pink-100 text-pink-500' },
+    { id: 'raeumung', label: 'Räumung & Entsorgung', subLabel: 'Wohnungsräumung & Entrümpelung', icon: <Recycle />, colors: 'bg-purple-100 text-purple-500' },
+    { id: 'garten', label: 'Preisvergleich für Gartenarbeiten', subLabel: 'Gartenpflege & Landschaftsbau', icon: <Sprout />, colors: 'bg-green-100 text-green-600' },
   ], []);
 
   const features = ['Mit einer Anfrage mehrere Anbieter finden', 'Angebote vergleichen', 'Geprüfte Firmen aus Ihrer Region', 'Unverbindlich und gratis'];
@@ -475,17 +475,16 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   {/* Main H1 - SEO Optimized */}
                   <h1 className="text-[2.4rem] md:text-4xl lg:text-6xl font-extrabold text-gray-900 mb-4 md:mb-5 leading-tight tracking-tight">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                      Umzug, Reinigung & Renovierung:
+                      Umzug, Reinigung & Renovierung
                     </span>
                     <br />
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                      Kostenlose Offerten vergleichen
+                      Kostenlose Offerten erhalten & vergleichen
                     </span>
                   </h1>
-                  <p className="text-base md:text-lg text-gray-700 mb-5 md:mb-6 leading-relaxed">
-                    Fordern Sie kostenlos mehrere Angebote für Umzug, Reinigung, Renovierung 
-                    und weitere Dienstleistungen in der ganzen Schweiz an. Finden Sie geprüfte Anbieter 
-                    aus Ihrer Region und sparen Sie Zeit und Geld.
+                  <p className="text-base md:text-lg text-gray-700 mb-5 md:mb-6 leading-relaxed text-left">
+                    Fordern Sie kostenlos mehrere Offerten für Umzug, Reinigung, Renovierung und weitere Dienstleistungen in der ganzen Schweiz an.
+                    Finden Sie geprüfte Anbieter aus Ihrer Region und sparen Sie Zeit und Geld.
                   </p>
                 </div>
 
@@ -523,37 +522,39 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   </div>
 
                   {/* H2 for Service Selection - SEO Hierarchy */}
-                  <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-5 md:mb-6 text-left">
-                    Einfach gratis mehrere Offerten einholen
-                  </h4>
-                  
-                  <div className="space-y-3 mb-8">
-                    {services.map((service) => (
-                      <ServiceCard
-                        key={service.id}
-                        serviceId={service.id}
-                        label={service.label}
-                        subLabel={service.subLabel}
-                        icon={service.icon}
-                        onClick={handleServiceSelection}
-                        isSelected={selectedService === service.id}
-                        colors={service.colors}
-                      />
-                    ))}
-                  </div>
+                  <div className="bg-white rounded-xl shadow-md border border-gray-200 p-5 md:p-6">
+                    <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-5 md:mb-6 text-left">
+                      Einfach & gratis mehrere Offerten einholen
+                    </h4>
+                    
+                    <div className="space-y-3 mb-8">
+                      {services.map((service) => (
+                        <ServiceCard
+                          key={service.id}
+                          serviceId={service.id}
+                          label={service.label}
+                          subLabel={service.subLabel}
+                          icon={service.icon}
+                          onClick={handleServiceSelection}
+                          isSelected={selectedService === service.id}
+                          colors={service.colors}
+                        />
+                      ))}
+                    </div>
 
-                  {isMounted && selectedService && (
-                    <Button 
-                      size="lg" 
-                      className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-5 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                      onClick={handleStartRequest}
-                    >
-                      Anfrage jetzt starten
-                    </Button>
-                  )}
-                  {!isMounted && (
-                    <div style={{ height: '80px' }} aria-hidden="true" />
-                  )}
+                    {isMounted && selectedService && (
+                      <Button 
+                        size="lg" 
+                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-5 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        onClick={handleStartRequest}
+                      >
+                        Anfrage jetzt starten
+                      </Button>
+                    )}
+                    {!isMounted && (
+                      <div style={{ height: '80px' }} aria-hidden="true" />
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -584,11 +585,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 {/* Main H1 - Desktop - Full Width */}
                 <h1 className="text-3xl md:text-4xl lg:text-6xl font-extrabold text-gray-900 mb-6 md:mb-8 leading-tight tracking-tight w-full text-left">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                    Umzug, Reinigung & Renovierung:
+                    Umzug, Reinigung & Renovierung
                   </span>
                   <br />
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                    Kostenlose Offerten vergleichen und sparen
+                    Kostenlose Offerten erhalten & vergleichen
                   </span>
                 </h1>
               </div>
@@ -596,9 +597,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                 <div className="text-left pr-4 lg:pr-8">
                   <p className="text-base md:text-lg lg:text-xl text-gray-700 mb-5 md:mb-6 leading-relaxed pr-0">
-                    Fordern Sie kostenlos mehrere Angebote für Umzug, Reinigung, Renovierung 
-                    und weitere Dienstleistungen in der ganzen Schweiz an. Finden Sie geprüfte Anbieter 
-                    aus Ihrer Region und sparen Sie Zeit und Geld.
+                    Fordern Sie kostenlos mehrere Offerten für Umzug, Reinigung, Renovierung und weitere Dienstleistungen in der ganzen Schweiz an.
+                    Finden Sie geprüfte Anbieter aus Ihrer Region und sparen Sie Zeit und Geld.
                   </p>
 
                   {/* SEO Optimized Image - Desktop */}
@@ -653,44 +653,46 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   </div>
                 </div>
 
-                <div className="space-y-4 pt-16 lg:pt-24">
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center md:text-left">
-                    Einfach gratis mehrere Offerten einholen
-                  </h2>
-                  <p className="text-base md:text-lg text-gray-700 mb-6 text-center md:text-left">
-                    Schritt 1: Wählen Sie Ihre gewünschte Dienstleistung aus:
-                  </p>
-                  <div className="space-y-3">
-                  {services.map((service) => (
-                    <ServiceCard
-                      key={service.id}
-                      serviceId={service.id}
-                      label={service.label}
-                      subLabel={service.subLabel}
-                      icon={service.icon}
-                      onClick={handleServiceSelection}
-                      isSelected={selectedService === service.id}
-                      colors={service.colors}
-                    />
-                  ))}
-                  </div>
-
-                  <div className="mt-6" style={{ minHeight: '80px' }}>
-                    {isMounted && selectedService ? (
-                      <Button 
-                        size="lg" 
-                        className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-6 text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]"
-                        onClick={handleStartRequest}
-                      >
-                        Anfrage jetzt starten
-                        <ArrowRight className="w-5 h-5 ml-2 inline-block" />
-                      </Button>
-                    ) : (
-                      <div
-                        style={{ height: '80px' }}
-                        aria-hidden="true"
+                <div className="space-y-4 pt-2 lg:pt-4">
+                  <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 md:p-8">
+                    <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center md:text-left">
+                      Einfach & gratis mehrere Offerten einholen
+                    </h4>
+                    <p className="text-base md:text-lg text-gray-700 mb-6 text-center md:text-left">
+                      Schritt 1: Wählen Sie Ihre gewünschte Dienstleistung aus:
+                    </p>
+                    <div className="space-y-3">
+                    {services.map((service) => (
+                      <ServiceCard
+                        key={service.id}
+                        serviceId={service.id}
+                        label={service.label}
+                        subLabel={service.subLabel}
+                        icon={service.icon}
+                        onClick={handleServiceSelection}
+                        isSelected={selectedService === service.id}
+                        colors={service.colors}
                       />
-                    )}
+                    ))}
+                    </div>
+
+                    <div className="mt-6" style={{ minHeight: '80px' }}>
+                      {isMounted && selectedService ? (
+                        <Button 
+                          size="lg" 
+                          className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-6 text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]"
+                          onClick={handleStartRequest}
+                        >
+                          Anfrage jetzt starten
+                          <ArrowRight className="w-5 h-5 ml-2 inline-block" />
+                        </Button>
+                      ) : (
+                        <div
+                          style={{ height: '80px' }}
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -709,13 +711,13 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
               <div className="text-center mb-16 md:mb-20">
                 <p className="inline-block text-xs md:text-sm font-bold text-green-300 uppercase tracking-widest mb-4 px-4 py-2 bg-green-800/50 backdrop-blur-sm rounded-full border border-green-700/50">
-                  Wie es funktioniert
+                  WIE ES FUNKTIONIERT
                 </p>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
-                  So einfach geht's
+                  So funktioniert's
                 </h2>
                 <p className="text-lg md:text-xl text-green-100 max-w-3xl mx-auto leading-relaxed">
-                  In nur 3 einfachen Schritten erhalten Sie passende Offerten von geprüften Partnern
+                  In nur 3 Schritten erhalten Sie passende Offerten von geprüften Partnern.
                 </p>
               </div>
 
@@ -724,7 +726,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   { 
                     id: 1, 
                     title: "Formular ausfüllen", 
-                    desc: "Beschreiben Sie Ihr Projekt in unserem intelligenten Formular. Je mehr Details, desto genauer die Offerten.", 
+                    desc: "Beschreiben Sie Ihr Projekt in unserem intelligenten Formular. Je detaillierter Ihre Angaben, desto genauer die Offerten.", 
                     icon: FileText,
                     gradient: "from-green-500 to-emerald-600",
                     bgGradient: "from-green-50 to-emerald-50",
@@ -732,7 +734,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   },
                   { 
                     id: 2, 
-                    title: "Angebote vergleichen", 
+                    title: "Offerten vergleichen", 
                     desc: "Sie erhalten bis zu 6 kostenlose Offerten von qualifizierten Partnern – schnell und unverbindlich.", 
                     icon: GitCompareArrows,
                     gradient: "from-blue-500 to-cyan-600",
@@ -742,7 +744,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   { 
                     id: 3, 
                     title: "Anbieter wählen", 
-                    desc: "Vergleichen Sie Preise und Leistungen. Wählen Sie den besten Partner – einfach und sicher.", 
+                    desc: "Vergleichen Sie Preise und Leistungen und wählen Sie den besten Partner – einfach, sicher und transparent.", 
                     icon: UsersRound,
                     gradient: "from-purple-500 to-pink-600",
                     bgGradient: "from-purple-50 to-pink-50",
@@ -801,7 +803,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                         Geprüft und versichert
                       </p>
                       <p className="text-green-100 text-base md:text-lg">
-                        Alle unsere Partner sind verifiziert und versichert – für Ihre volle Sicherheit bei jedem Auftrag.
+                        Alle unsere Partner sind geprüft und versichert – für maximale Sicherheit bei jedem Auftrag.
                       </p>
                     </div>
                   </div>
@@ -1021,11 +1023,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
-                  Kosten sparen mit dem richtigen Anbieter: Offerten vergleichen leicht gemacht
+                  Kosten sparen mit dem richtigen Anbieter – Offerten einfach vergleichen
                 </h2>
                 <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                  Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Anbietern. 
-                  Sparen Sie Zeit, Geld und finden Sie den passenden Partner für Ihr Projekt.
+                  Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Partnern.
+                  <br />
+                  Sparen Sie Zeit und Geld und finden Sie den passenden Partner für Ihr Projekt.
                 </p>
               </div>
 
@@ -1035,10 +1038,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
                     <Home className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Umzug Offerten</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Offerten für Umzüge</h3>
                   <p className="text-gray-600 leading-relaxed">
-                    Vergleichen Sie Preise für Privatumzug, Geschäftsumzug und internationale Transporte. 
-                    Sparen Sie bis zu 40% durch professionelle Anbieter.
+                    Vergleichen Sie Preise für private Umzüge, Geschäftsumzüge und internationale Transporte.
+                    <br />
+                    Sparen Sie bis zu 40 % mit professionellen Anbietern.
                   </p>
                 </div>
 
@@ -1047,9 +1051,10 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
                     <Sparkles className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Reinigung Offerten</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Reinigungsofferten vergleichen</h3>
                   <p className="text-gray-600 leading-relaxed">
-                    Umzugsreinigung mit Abnahmegarantie, Wohnungs- oder Büroreinigung. 
+                    Umzugsreinigung mit Abnahmegarantie sowie Wohnungs- und Büroreinigung.
+                    <br />
                     Finden Sie geprüfte Profis für jeden Reinigungsbedarf.
                   </p>
                 </div>
@@ -1059,10 +1064,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
                     <Paintbrush className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Renovierung Offerten</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Renovationsofferten vergleichen</h3>
                   <p className="text-gray-600 leading-relaxed">
-                    Malerarbeiten, Renovationen oder Modernisierungen. 
-                    Vergleichen Sie transparente Preise für alle Renovierungsprojekte.
+                    Malerarbeiten, Renovationen und Modernisierungen.
+                    <br />
+                    Vergleichen Sie transparente Preise für alle Renovationsprojekte.
                   </p>
                 </div>
               </div>
@@ -1073,46 +1079,49 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                       Warum Offerten vergleichen?
                     </h3>
-                    <div className="mt-8 prose prose-lg max-w-none text-gray-700 space-y-4 text-base md:text-lg leading-relaxed text-left">
+                    <div className="mt-8 prose prose-lg max-w-none text-gray-700 space-y-6 text-base md:text-lg leading-relaxed text-left">
                       <p>
-                        Wenn Sie in der Schweiz einen Umzug, eine Reinigung oder Renovierungsarbeiten planen, 
-                        ist das Einholen mehrerer Offerten der wichtigste Schritt zu einer fundierten Entscheidung. 
-                        Unabhängig davon, ob Sie einen Privatumzug organisieren, eine gründliche Reinigung 
-                        benötigen oder Ihre Wohnung renovieren möchten – ein Preisvergleich verschiedener Angebote hilft 
-                        Ihnen dabei, die beste Lösung für Ihre individuellen Bedürfnisse zu finden.
+                        Wenn Sie in der Schweiz einen Umzug, eine Reinigung oder Renovierungsarbeiten planen, ist das Einholen mehrerer Offerten ein entscheidender Schritt für eine fundierte Entscheidung. Ein Vergleich verschiedener Anbieter hilft Ihnen dabei, die beste Leistung zum fairen Preis zu finden – unabhängig davon, ob es sich um einen Privatumzug, eine professionelle Reinigung oder eine Renovation handelt.
                       </p>
-                      <p>
-                        Für viele Schweizer Haushalte und Unternehmen steht zu Beginn eines Projekts die Frage 
-                        nach den Kosten im Mittelpunkt. Gerade bei Umzugsofferten können die Preise zwischen 
-                        verschiedenen Anbietern erheblich variieren. Ein Umzug ist nicht nur eine logistische 
-                        Herausforderung, sondern auch eine finanzielle Investition. Wenn Sie mehrere Angebote 
-                        vergleichen, können Sie Geld sparen und gleichzeitig sicherstellen, dass alle wichtigen 
-                        Leistungen – von der professionellen Verpackung bis zur Montage am Zielort – im Preis 
-                        enthalten sind.
-                      </p>
-                      <p>
-                        Auch bei Reinigungsofferten lohnt sich ein genauer Preisvergleich. Ob Umzugsreinigung mit 
-                        Abnahmegarantie, Wohnungsreinigung oder Büroreinigung – jede Situation erfordert 
-                        spezifische Leistungen. Professionelle Reinigungsfirmen bieten unterschiedliche Pakete 
-                        und Servicelevel an. Durch das Vergleichen verschiedener Angebote finden Sie ein Angebot, 
-                        das zu Ihrem Budget und Ihren Qualitätsansprüchen passt. Gleichzeitig können Sie Aspekte 
-                        wie Versicherungsschutz, Erfahrung und Umweltfreundlichkeit berücksichtigen.
-                      </p>
-                      <p>
-                        Renovierungsarbeiten sind oft langfristige Investitionen und sollten sorgfältig geplant 
-                        werden. Ob Malerarbeiten, kleinere Renovationen oder umfassende Modernisierungen – das 
-                        Einholen mehrerer Renovierungsofferten hilft Ihnen dabei, den passenden Anbieter für Ihr 
-                        Projekt zu finden. So vermeiden Sie unnötige Kosten und stellen sicher, dass die Arbeiten 
-                        fachgerecht und zuverlässig ausgeführt werden.
-                      </p>
-                      <p>
-                        Online-Offerten.ch vereinfacht das Offerten vergleichen in der Schweiz erheblich. 
-                        Anstatt lange zu recherchieren oder zahlreiche Telefonate zu führen, erhalten Sie mit 
-                        nur einer kostenlosen Anfrage mehrere transparente Offerten von geprüften Anbietern aus 
-                        Ihrer Region. Alle Partner auf unserer Plattform werden sorgfältig geprüft und erfüllen 
-                        hohe Qualitätsstandards. Starten Sie jetzt Ihren Angebotsvergleich und finden Sie den passenden 
-                        Anbieter für Umzug, Reinigung oder Renovierung in der ganzen Schweiz.
-                      </p>
+
+                      <div>
+                        <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-6">
+                          Mehr Transparenz bei Umzugsofferten
+                        </h4>
+                        <p>
+                          Gerade bei Umzügen können sich die Preise und Leistungen je nach Anbieter deutlich unterscheiden. Ein Umzug ist nicht nur organisatorisch anspruchsvoll, sondern auch mit Kosten verbunden. Durch den Vergleich mehrerer Umzugsofferten sparen Sie Geld und stellen sicher, dass alle wichtigen Leistungen – von der Verpackung bis zur Montage am Zielort – im Preis enthalten sind.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-6">
+                          Reinigungsofferten vergleichen lohnt sich
+                        </h4>
+                        <p>
+                          Auch bei Reinigungsarbeiten gibt es grosse Unterschiede bei Preis, Umfang und Servicequalität. Ob Umzugsreinigung mit Abnahmegarantie, Wohnungs- oder Büroreinigung – jede Situation erfordert individuelle Leistungen. Durch das Vergleichen verschiedener Reinigungsofferten finden Sie ein Angebot, das zu Ihrem Budget und Ihren Qualitätsansprüchen passt. Zusätzlich können Sie Kriterien wie Versicherung, Erfahrung und Umweltfreundlichkeit berücksichtigen.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-6">
+                          Renovierungsofferten für langfristige Investitionen
+                        </h4>
+                        <p>
+                          Renovations- und Malerarbeiten sind oft langfristige Investitionen. Ein sorgfältiger Vergleich mehrerer Renovierungsofferten hilft Ihnen, unnötige Kosten zu vermeiden und einen zuverlässigen Anbieter zu finden. So stellen Sie sicher, dass Ihr Projekt fachgerecht, termingerecht und in der gewünschten Qualität umgesetzt wird.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-6">
+                          Offerten vergleichen – einfach & kostenlos
+                        </h4>
+                        <p>
+                          Online-Offerten.ch macht das Offerten vergleichen in der Schweiz einfach und effizient. Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Anbietern aus Ihrer Region. Alle Partner werden sorgfältig geprüft und erfüllen hohe Qualitätsstandards.
+                        </p>
+                        <p className="mt-4">
+                          Starten Sie jetzt Ihren Offertenvergleich und finden Sie den passenden Anbieter für Umzug, Reinigung oder Renovierung – in der ganzen Schweiz.
+                        </p>
+                      </div>
                     </div>
                     <div className="mt-8">
                       <Button asChild size="lg" className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white group px-8 py-6 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
@@ -1253,14 +1262,14 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             <div className="container mx-auto max-w-navbar px-4">
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nützliche Helfer für Ihren Umzug</h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">Planen Sie Ihren Umzug optimal mit unseren praktischen Tools und Ratgebern.</p>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">Planen Sie Ihren Umzug effizient mit unseren praktischen Tools und hilfreichen Ratgebern.</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {[
-                  { icon: <Calculator />, title: 'Umzugskosten-Rechner', description: 'Erhalten Sie eine schnelle Schätzung Ihrer Umzugskosten.', linkTo: '/umzugskosten-rechner', button: 'Tool nutzen' },
-                  { icon: <Sparkles />, title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie die Kosten für Ihre Umzugsreinigung.', linkTo: '/reinigungskosten-rechner', button: 'Tool nutzen' },
-                  { icon: <ListChecks />, title: 'Checklisten', description: 'Behalten Sie den Überblick mit unseren detaillierten Umzugs-Checklisten.', linkTo: '/checklisten', button: 'Tool nutzen' },
-                  { icon: <BookOpen />, title: 'Ratgeber & Tipps', description: 'Profitieren Sie von unserem Expertenwissen rund um Umzug, Reinigung und Lagerung.', linkTo: '/ratgeber', button: 'Tool nutzen' }
+                  { icon: <Calculator />, title: 'Umzugskosten-Rechner', description: 'Erhalten Sie in wenigen Schritten eine unverbindliche Schätzung Ihrer Umzugskosten.', linkTo: '/umzugskosten-rechner', button: 'Jetzt berechnen' },
+                  { icon: <Sparkles />, title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung.', linkTo: '/reinigungskosten-rechner', button: 'Kosten berechnen' },
+                  { icon: <ListChecks />, title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten.', linkTo: '/checklisten', button: 'Checkliste ansehen' },
+                  { icon: <BookOpen />, title: 'Ratgeber & Tipps', description: 'Profitieren Sie von unserem Expertenwissen rund um Umzug und Reinigung.', linkTo: '/ratgeber', button: 'Jetzt informieren' }
                 ].map((tool) => (
                   <div key={tool.title} className="h-full">
                     <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 border-transparent hover:border-green-500 bg-white rounded-xl overflow-hidden">
@@ -1472,16 +1481,21 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-5 tracking-tight">
                     Bereit für den nächsten Schritt?
                   </h2>
-                  <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    Planen Sie frühzeitig und sichern Sie sich die besten Termine. Geprüfte Umzugs-, Reinigungs-, Maler- und Gartenfirmen sind besonders in den Sommermonaten und rund um Kündigungstermine schnell ausgebucht. Starten Sie jetzt Ihre kostenlose Anfrage und erhalten Sie mehrere Angebote – ohne Verpflichtung.
-                  </p>
+                  <div className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed space-y-3">
+                    <p>
+                      Planen Sie frühzeitig und sichern Sie sich die besten Termine. Geprüfte Umzugs-, Reinigungs-, Maler- und Gartenfirmen sind besonders in den Sommermonaten und rund um Kündigungstermine schnell ausgebucht.
+                    </p>
+                    <p>
+                      Starten Sie jetzt Ihre kostenlose Anfrage und erhalten Sie mehrere Offerten – unverbindlich und ohne Verpflichtung.
+                    </p>
+                  </div>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                   {[
-                    { title: 'Kostenlose Offerten', text: 'Fordern Sie jetzt kostenlos und unverbindlich Offerten von geprüften Umzugs-, Reinigungs-, Maler- und Gartenfirmen an. Vergleichen Sie Preise und Leistungen und finden Sie den idealen Partner für Ihr Projekt.' },
-                    { title: 'Zeit & Geld sparen', text: 'Vergleichen Sie mehrere Angebote und sparen Sie wertvolle Zeit, Geld und Nerven bei der Suche.' },
-                    { title: 'Beste Firma finden', text: 'Finden Sie die beste Firma in Ihrer Nähe – mit nur wenigen Klicks und ohne Stress.' }
+                    { title: 'Kostenlose Offerten anfordern', text: 'Fordern Sie kostenlos und unverbindlich mehrere Offerten von geprüften Umzugs-, Reinigungs-, Maler- und Gartenfirmen an. Vergleichen Sie Preise und Leistungen und finden Sie den passenden Partner für Ihr Projekt.' },
+                    { title: 'Zeit & Geld sparen', text: 'Vergleichen Sie mehrere Offerten und sparen Sie wertvolle Zeit, Geld und Aufwand bei der Suche nach dem richtigen Anbieter.' },
+                    { title: 'Die beste Firma finden', text: 'Finden Sie die passende Firma in Ihrer Nähe – mit nur wenigen Klicks, einfach und stressfrei.' }
                   ].map((benefit) => (
                     <div key={benefit.title} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-gray-100">
                       <div className="flex items-start space-x-4">

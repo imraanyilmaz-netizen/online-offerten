@@ -28,7 +28,7 @@ const BueroreinigungPageClient = () => {
 
   // SEO Data
   const metaTitle = "Büroreinigung – Kostenlose Offerten vergleichen";
-  const metaDescription = "Professionelle Büroreinigung: Über 12 Jahre Erfahrung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Büroreinigung garantiert.";
+  const metaDescription = "Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Büroreinigung garantiert.";
   // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/bueroreinigung';
 
@@ -292,7 +292,7 @@ const BueroreinigungPageClient = () => {
                   transition={{ delay: 0.4, duration: 0.6 }}
                   className="text-base md:text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed"
                 >
-                  Gründliche Büroreinigung für ein sauberes und produktives Arbeitsumfeld. Über 12 Jahre Erfahrung. Büroreinigungsofferten online vergleichen und bis zu 40% sparen.
+                  Gründliche Büroreinigung für ein sauberes und produktives Arbeitsumfeld. Büroreinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
                 
                 <motion.div
@@ -422,7 +422,6 @@ const BueroreinigungPageClient = () => {
                   {/* Bullet Points - Vorteile */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
                     <li>Qualitätsgarantie für sorgenfreie Reinigung</li>
-                    <li>Über 12 Jahre Erfahrung im Bereich Büroreinigung</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Umweltfreundliche Reinigungsmittel</li>
                     <li>Flexible Terminplanung ausserhalb der Geschäftszeiten</li>
@@ -519,20 +518,13 @@ const BueroreinigungPageClient = () => {
                   {/* H2: Warum wir der richtige Partner für Ihre Büroreinigung sind */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Geschäftsreinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und speziell auf Geschäftsräume und Büroumgebungen spezialisiert sind. Unsere Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und verstehen die besonderen Anforderungen von Büros, wie den Schutz vertraulicher Dokumente, die schonende Reinigung von IT-Geräten und die flexible Terminplanung. Für Umzugsreinigungen oder Endreinigungen bieten unsere Partnerfirmen auch eine Abnahmegarantie an. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
+                    Wir sind der vertrauenswürdige Partner für Ihre Geschäftsreinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und speziell auf Geschäftsräume und Büroumgebungen spezialisiert sind. Unsere Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und verstehen die besonderen Anforderungen von Büros, wie den Schutz vertraulicher Dokumente, die schonende Reinigung von IT-Geräten und die flexible Terminplanung. Für Umzugsreinigungen oder Endreinigungen bieten unsere Partnerfirmen auch eine Abnahmegarantie an. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* Trust & Erfahrung Section */}
                   <div className="mt-6 md:mt-8 p-4 md:p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 mb-6 md:mb-8">
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Über 12 Jahre Erfahrung im Bereich Reinigung</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Vertrauen & Erfahrung</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                      <div className="flex items-start">
-                        <Award className="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-bold text-gray-900 text-base">Über 12 Jahre Erfahrung</p>
-                          <p className="text-sm text-gray-600">Erfahrung in der Reinigungsbranche</p>
-                        </div>
-                      </div>
                       <div className="flex items-start">
                         <ShieldCheck className="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
                         <div>

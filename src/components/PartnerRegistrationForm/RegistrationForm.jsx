@@ -163,17 +163,17 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
       if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
         toast({ variant: "destructive", title: "Fehler", description: "Bitte überprüfen Sie Ihre Eingaben." });
-        return false;
-      }
+      return false;
+    }
     }
     
     if (step === 2) {
       if (formData.selectedRegions.length === 0) {
         newErrors.selectedRegions = "Bitte wählen Sie mindestens eine Region aus.";
         setErrors(newErrors);
-        toast({ variant: "destructive", title: "Fehler", description: "Bitte wählen Sie mindestens eine Region aus." });
-        return false;
-      }
+      toast({ variant: "destructive", title: "Fehler", description: "Bitte wählen Sie mindestens eine Region aus." });
+      return false;
+    }
     }
     
     if (step === 3) {
@@ -191,8 +191,8 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
       if (!formData.email || formData.email.trim() === '') {
         newErrors.email = "E-Mail-Adresse ist ein Pflichtfeld.";
       } else {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
           newErrors.email = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
         }
       }

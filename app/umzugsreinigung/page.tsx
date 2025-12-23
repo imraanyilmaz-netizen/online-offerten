@@ -3,7 +3,7 @@ import UmzugsreinigungPageClient from '@/components/pages/services/Umzugsreinigu
 
 export const metadata: Metadata = {
   title: 'Umzugsreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen',
-  description: 'Professionelle Umzugsreinigung mit 100% Abnahmegarantie: Über 12 Jahre Erfahrung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
+  description: 'Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsreinigung',
   },

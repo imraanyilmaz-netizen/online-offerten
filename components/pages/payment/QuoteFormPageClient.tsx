@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import CustomerForm from '@/components/NewCustomerForm';
 import LanguageSwitcher from '@/components/LanguageSwitcher'; // Geri eklendi - müşteri formu için
 import { motion } from 'framer-motion';
-import { Users, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { useTranslation } from 'react-i18next'; // i18n geri eklendi - SEO için
 import { getLanguageFromUrl } from '@/lib/urlMap'; // Canonical URL için
 
@@ -57,12 +57,6 @@ const QuoteFormPageClient = () => {
   const heroTitle = t('quoteFormPage.heroTitle');
   const heroDescription = t('quoteFormPage.heroDescription');
 
-
-  const trustSection = {
-    title: t('quoteFormPage.trustSection.title'),
-    description: t('quoteFormPage.trustSection.description')
-  };
-
   return (
     <>
       
@@ -78,68 +72,40 @@ const QuoteFormPageClient = () => {
           <LanguageSwitcher className="" />
         </div>
 
+        {/* Form Section */}
+        <div className="relative z-10 pb-8 pt-4 md:pt-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="max-w-4xl mx-auto px-4"
+          >
+            <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative z-10 pt-12 pb-8 px-4"
+                className="pt-4 pb-3 px-6 md:px-8 text-center border-b border-gray-200"
         >
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-lg mb-6"
-            >
-              <Send className="w-8 h-8 text-white" />
-            </motion.div>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
+                <div className="flex items-center justify-center gap-3 mb-3">
+                  <div className="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg shadow-sm">
+                    <Send className="w-5 h-5 text-white" />
+                  </div>
+                  <h1 className="text-xl md:text-2xl font-bold text-gray-900">
               {heroTitle}
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+                </div>
+                <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
               {heroDescription}
             </p>
-          </div>
         </motion.div>
 
-        {/* Form Section */}
-        <div className="relative z-10 pb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="max-w-navbar mx-auto px-4"
-          >
-            <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden">
               <CustomerForm />
             </div>
           </motion.div>
         </div>
 
-        {/* Additional Trust Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="relative z-10 pb-12 px-4"
-        >
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 md:p-8 border border-green-100 shadow-sm">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left">
-                <Users className="w-12 h-12 text-green-600 flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">
-                    {trustSection.title}
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    {trustSection.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       <style>{`

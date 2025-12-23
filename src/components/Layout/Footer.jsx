@@ -88,15 +88,15 @@ const Footer = React.memo(() => {
           <div className="col-span-2 md:col-span-2 lg:col-span-3">
             <Link href="/" className="flex items-center gap-3 mb-6 group">
               <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                <img 
-                  src={logoUrl} 
-                  alt="Online-Offerten.ch Logo" 
-                  loading="eager"
+              <img 
+                src={logoUrl} 
+                alt="Online-Offerten.ch Logo" 
+                loading="eager"
                   className="h-8 w-8" 
                   width="32" 
                   height="32"
-                  style={{ display: 'block', flexShrink: 0 }}
-                />
+                style={{ display: 'block', flexShrink: 0 }}
+              />
               </div>
               <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Online-Offerten.ch</span>
             </Link>
@@ -121,43 +121,43 @@ const Footer = React.memo(() => {
               <div>
                 <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Umzug</h4>
                 <ul className="space-y-2.5">
-                  {umzugServices.map(link => (
-                    <li key={link.to}>
+              {umzugServices.map(link => (
+                <li key={link.to}>
                       <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
                         <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
                         {link.text}
                       </Link>
-                    </li>
-                  ))}
-                </ul>
+                </li>
+              ))}
+            </ul>
               </div>
-              
+            
               <div>
                 <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Weitere Services</h4>
                 <ul className="space-y-2.5">
-                  {weitereServices.map(link => (
-                    <li key={link.to}>
+              {weitereServices.map(link => (
+                <li key={link.to}>
                       <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
                         <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
                         {link.text}
                       </Link>
-                    </li>
-                  ))}
-                </ul>
+                </li>
+              ))}
+            </ul>
               </div>
-              
+            
               <div>
                 <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Kosten & Tools</h4>
                 <ul className="space-y-2.5">
-                  {kostenTools.map(link => (
-                    <li key={link.to}>
+              {kostenTools.map(link => (
+                <li key={link.to}>
                       <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
                         <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                        {link.text}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
               </div>
             </div>
           </div>
@@ -265,7 +265,7 @@ const Footer = React.memo(() => {
                       Malerfirma finden
                     </Link>
                   </li>
-                </ul>
+            </ul>
               </div>
               
               <div>
@@ -294,8 +294,8 @@ const Footer = React.memo(() => {
                       <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
                       Partner werden
                     </Link>
-                  </li>
-                </ul>
+              </li>
+            </ul>
               </div>
             </div>
           </div>

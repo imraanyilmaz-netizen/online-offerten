@@ -309,7 +309,7 @@ const BodenreinigungPageClient = () => {
                   transition={{ delay: 0.4, duration: 0.6 }}
                   className="text-base md:text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed"
                 >
-                  Professionelle Bodenreinigung für alle Bodenbeläge. Teppich, Parkett, Fliesen, Laminat, Vinyl, Stein. Über 12 Jahre Erfahrung. Reinigungsofferten online vergleichen und bis zu 40% sparen.
+                  Professionelle Bodenreinigung für alle Bodenbeläge. Teppich, Parkett, Fliesen, Laminat, Vinyl, Stein. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
                 
                 <motion.div
@@ -439,7 +439,6 @@ const BodenreinigungPageClient = () => {
                   {/* Bullet Points - Vorteile */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
                     <li>Entfernung von tief sitzenden Verschmutzungen und Allergenen</li>
-                    <li>Über 12 Jahre Erfahrung im Bereich Reinigung</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Spezielle Geräte für verschiedene Bodenbeläge</li>
                     <li>Schonende Reinigung für empfindliche Böden</li>
@@ -551,21 +550,6 @@ const BodenreinigungPageClient = () => {
                     Die optimale Reinigungsfrequenz hängt vom Belagstyp und der Nutzung ab. Teppiche sollten etwa alle 6-12 Monate professionell gereinigt werden, abhängig von der Nutzung und dem Verschmutzungsgrad. Parkett benötigt regelmässige, schonende Reinigung, etwa alle 3-6 Monate, abhängig von der Nutzung. Fliesen können häufiger gereinigt werden, etwa alle 2-4 Monate, besonders wenn Fugenreinigung erforderlich ist. Laminat und Vinyl benötigen regelmässige Reinigung, etwa alle 3-6 Monate. Professionelle Reinigungsfirmen beraten Sie gerne bei der optimalen Frequenz für Ihre spezifischen Böden und berücksichtigen dabei Faktoren wie Nutzung, Verschmutzungsgrad und Belagstyp.
                   </p>
 
-                  {/* Trust Elements */}
-                  <div className="my-6 md:my-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6">Über 12 Jahre Erfahrung im Bereich Reinigung</h3>
-                    <div className="grid grid-cols-2 gap-4 md:gap-6">
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3">
-                          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-100 flex items-center justify-center">
-                            <Award className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">Über 12 Jahre Erfahrung</div>
-                          <p className="text-sm md:text-base text-gray-700">Über 12 Jahre Erfahrung im Bereich Reinigung</p>
-                        </div>
-                      </div>
                       <div className="flex items-start">
                         <div className="flex-shrink-0 mr-3">
                           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-100 flex items-center justify-center">
@@ -594,7 +578,7 @@ const BodenreinigungPageClient = () => {
                   {/* H2: Warum wir der richtige Partner für Ihre Bodenreinigung sind */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Böden sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
-                    Mit über 12 Jahren Erfahrung im Bereich Reinigungsdienstleistungen sind wir der vertrauenswürdige Partner für Ihre Böden. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und Erfahrung mit verschiedenen Bodenbelägen haben. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für verschiedene Belagstypen, wie Dampfreiniger, Teppichreinigungsmaschinen und spezielle Reinigungsmittel. Sie kennen die richtigen Methoden für jeden Belagstyp und können empfindliche Böden wie Parkett oder Laminat schonend reinigen. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Böden zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
+                    Wir sind der vertrauenswürdige Partner für Ihre Böden. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und Erfahrung mit verschiedenen Bodenbelägen haben. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für verschiedene Belagstypen, wie Dampfreiniger, Teppichreinigungsmaschinen und spezielle Reinigungsmittel. Sie kennen die richtigen Methoden für jeden Belagstyp und können empfindliche Böden wie Parkett oder Laminat schonend reinigen. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Böden zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* CTA 2 - After Richtiger Partner */}
