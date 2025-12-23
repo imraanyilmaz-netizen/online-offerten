@@ -474,7 +474,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   {/* Badge */}
                   <div className="text-left mb-4">
                     <p className="inline-block text-xs md:text-sm font-bold text-green-700 uppercase tracking-widest px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                      OFFERTEN VERGLEICHEN
+                      ONLINE OFFERTEN
                     </p>
                   </div>
                   {/* Main H1 - SEO Optimized */}
