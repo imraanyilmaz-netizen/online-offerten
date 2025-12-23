@@ -474,7 +474,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   {/* Badge */}
                   <div className="text-left mb-4">
                     <p className="inline-block text-xs md:text-sm font-bold text-green-700 uppercase tracking-widest px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                      ONLINE OFFERTEN
+                    ONLINE OFFERTEN
                     </p>
                   </div>
                   {/* Main H1 - SEO Optimized */}
@@ -589,7 +589,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               <div className="hidden lg:block">
                 {/* Badge */}
                 <p className="inline-block text-xs md:text-sm font-bold text-green-700 uppercase tracking-widest mb-4 px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                  OFFERTEN VERGLEICHEN
+                  ONLINE OFFERTEN
                 </p>
                 {/* Main H1 - Desktop - Full Width */}
                 <h1 className="text-3xl md:text-4xl lg:text-[38px] font-extrabold text-gray-900 mb-6 md:mb-8 leading-tight tracking-tight w-full text-left">
