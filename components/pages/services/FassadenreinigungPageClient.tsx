@@ -498,31 +498,6 @@ const FassadenreinigungPageClient = () => {
                     Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro m². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Grössere Gebäude, höhere Fassaden oder besonders verschmutzte Bereiche können höhere Kosten verursachen. Die Reinigungsmethode (Hochdruckreinigung vs. schonende Reinigung) und das Material beeinflussen ebenfalls die Kosten. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3">
-                          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-100 flex items-center justify-center">
-                            <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">Qualitätsgarantie</div>
-                          <p className="text-sm md:text-base text-gray-700">Qualitätsgarantie für professionelle Ergebnisse</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3">
-                          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-100 flex items-center justify-center">
-                            <Star className="w-5 h-5 md:w-6 md:h-6 text-yellow-500 fill-yellow-500" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">{reviewStats.averageRating.toFixed(1)}/5 Sterne Bewertung</div>
-                          <p className="text-sm md:text-base text-gray-700">Von über {reviewStats.totalReviews} Kunden bewertet</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
                   {/* H2: Warum wir der richtige Partner für Ihre Fassadenreinigung sind */}
                   <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Fassade sind</h2>
                   <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">

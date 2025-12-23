@@ -234,7 +234,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     { id: 'garten', label: 'Preisvergleich für Gartenarbeiten', subLabel: 'Gartenpflege & Landschaftsbau', icon: <Sprout />, colors: 'bg-green-100 text-green-600' },
   ], []);
 
-  const features = ['Mit einer Anfrage mehrere Anbieter finden', 'Angebote vergleichen', 'Geprüfte Firmen aus Ihrer Region', 'Unverbindlich und gratis'];
+  const features = ['Mit einer Anfrage mehrere Anbieter finden', 'Offerten vergleichen', 'Geprüfte Firmen aus Ihrer Region', 'Unverbindlich und gratis'];
 
   // Structured Data - SEO Optimized
   const structuredData = useMemo(() => ({
@@ -464,16 +464,21 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
         <main className="flex-grow">
         {/* Hero Section - SEO Optimized */}
         <section 
-          className="py-16 md:py-24 lg:py-28 bg-gradient-to-br from-white via-green-50/30 to-white" 
-          style={{ minHeight: '600px' }}
+          className="py-8 md:py-12 lg:py-16 bg-gradient-to-br from-white via-green-50/30 to-white" 
           aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
         >
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <article className="max-w-navbar mx-auto text-center md:text-left">
                 {/* Mobile: H1 and Subheading */}
                 <div className="lg:hidden">
+                  {/* Badge */}
+                  <div className="text-left mb-4">
+                    <p className="inline-block text-xs md:text-sm font-bold text-green-700 uppercase tracking-widest px-4 py-2 bg-green-50 rounded-full border border-green-200">
+                      OFFERTEN VERGLEICHEN
+                    </p>
+                  </div>
                   {/* Main H1 - SEO Optimized */}
-                  <h1 className="text-[2.4rem] md:text-4xl lg:text-6xl font-extrabold text-gray-900 mb-4 md:mb-5 leading-tight tracking-tight">
+                  <h1 className="text-3xl md:text-4xl lg:text-[38px] font-extrabold text-gray-900 mb-4 md:mb-5 leading-tight tracking-tight text-left">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
                       Umzug, Reinigung & Renovierung
                     </span>
@@ -582,8 +587,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
               {/* Desktop Layout - SEO Optimized */}
               <div className="hidden lg:block">
+                {/* Badge */}
+                <p className="inline-block text-xs md:text-sm font-bold text-green-700 uppercase tracking-widest mb-4 px-4 py-2 bg-green-50 rounded-full border border-green-200">
+                  OFFERTEN VERGLEICHEN
+                </p>
                 {/* Main H1 - Desktop - Full Width */}
-                <h1 className="text-3xl md:text-4xl lg:text-6xl font-extrabold text-gray-900 mb-6 md:mb-8 leading-tight tracking-tight w-full text-left">
+                <h1 className="text-3xl md:text-4xl lg:text-[38px] font-extrabold text-gray-900 mb-6 md:mb-8 leading-tight tracking-tight w-full text-left">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
                     Umzug, Reinigung & Renovierung
                   </span>
