@@ -55,42 +55,63 @@ const UmzugsfirmaZurichPageClient = () => {
   ];
 
   const faqItemsForSchema = faqs.move.concat(faqs.clean);
-  const schemaData = {
+  
+  // LocalBusiness Schema
+  const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
-    "provider": {
-      "@type": "Organization",
-      "name": `Online-Offerten.ch - Umzugsfirmen in ${city}`
+    "@type": "LocalBusiness",
+    "name": "Umzugsfirmen in Zürich",
+    "description": "Geprüfte Umzugsfirmen und Zügelfirmen in Zürich vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Zürich",
+      "addressRegion": "ZH",
+      "addressCountry": "CH"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "47.3769",
+      "longitude": "8.5417"
     },
     "areaServed": {
       "@type": "City",
-      "name": "Zürich",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Zürich",
-        "addressRegion": "ZH",
-        "addressCountry": "CH"
-      }
+      "name": "Zürich"
     },
-    "name": metaTitle,
-    "description": metaDescription,
-    "mainEntity": {
-        "@type": "FAQPage",
-        "mainEntity": faqItemsForSchema.map(item => ({
-            "@type": "Question",
-            "name": ((item.question as any).de || item.question as any).replace('{city}', city),
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.answer.map(ans => typeof ans === 'string' ? ans : (ans.de || ans)).join(' ').replace(/{city}/g, city)
-            }
-        }))
-    }
+    "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
+    "url": "https://online-offerten.ch/umzugsfirma-zuerich",
+    "telephone": "+41",
+    "priceRange": "$$"
+  };
+
+  // FAQ Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItemsForSchema.map(item => ({
+      "@type": "Question",
+      "name": ((item.question as any).de || item.question as any).replace('{city}', city),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer.map(ans => typeof ans === 'string' ? ans : (ans.de || ans)).join(' ').replace(/{city}/g, city)
+      }
+    }))
+  };
+
+  // Combined Schema
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      localBusinessSchema,
+      faqSchema
+    ]
   };
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
+      />
       <div className="bg-white overflow-x-hidden">
         {/* Hero Section - Split Layout */}
         <motion.section
@@ -98,8 +119,6 @@ const UmzugsfirmaZurichPageClient = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           className="relative w-full py-12 md:py-16 lg:py-20 overflow-hidden"
-          itemScope
-          itemType="https://schema.org/Service"
         >
           {/* Background Image - Right Side */}
           <div 
@@ -131,16 +150,11 @@ const UmzugsfirmaZurichPageClient = () => {
                 transition={{ delay: 0.2, duration: 0.6 }}
                 className="bg-white rounded-xl shadow-xl p-5 md:p-6 lg:p-7 w-full overflow-x-hidden"
               >
-                <h1 
-                  className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 leading-tight break-words"
-                  itemProp="name"
-                >
-                  Umzugsfirma{' '}
-                  <span className="text-green-600 underline decoration-green-500 decoration-2 underline-offset-4">Zürich</span>{' '}
-                  für einen stressfreien Umzug.
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 leading-tight break-words">
+                  Umzugsfirma Zürich – geprüfte Zügelfirmen vergleichen
                 </h1>
                 
-                <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed font-medium break-words" itemProp="description">
+                <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed font-medium break-words">
                   Kostenlose Offerten von geprüften Umzugsfirmen in{' '}
                   <span className="font-semibold text-green-600 underline decoration-green-400 decoration-1">Zürich</span>{' '}
                   vergleichen und die beste Firma für Ihren Umzug finden. Professionelle Zügelfirmen in Zürich bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, internationale Umzüge und Spezialtransporte. Qualitativ hochwertige Umzugsunternehmen mit Reinigung, Räumung, Entsorgung und Lagerung. Mehrere Anbieter vergleichen und bis zu 40% sparen!
@@ -246,7 +260,7 @@ const UmzugsfirmaZurichPageClient = () => {
 
               <article className="pt-8 border-t border-gray-200 space-y-8 w-full min-w-0">
                 <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugskosten in Zürich im Überblick</h2>
-                <p className="font-medium break-words w-full">Die Umzugskosten in Zürich gehören zu den höchsten der Schweiz, lassen sich aber mit der richtigen Planung optimieren. Durch den Vergleich mehrerer Anbieter finden Sie das beste Angebot und sparen bis zu 40%. Die Kosten hängen von vielen Variablen ab. Unsere Preistabelle gibt Ihnen eine realistische Einschätzung für einen Umzug innerhalb von Zürich.</p>
+                <p className="font-medium break-words w-full">Die Umzugskosten in Zürich gehören zu den höchsten der Schweiz, lassen sich aber mit der richtigen Planung optimieren. Durch den Vergleich mehrerer Anbieter finden Sie das beste Angebot und sparen bis zu 40%. Die Kosten hängen von vielen Variablen ab. Unsere Preistabelle gibt Ihnen eine realistische Einschätzung für einen Umzug innerhalb von Zürich. Für eine detaillierte Kostenberechnung nutzen Sie unseren <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten-Rechner</Link>, der Ihnen in nur 2 Minuten eine verlässliche Preis-Schätzung liefert.</p>
                 
                 <h3 className="text-2xl font-semibold text-gray-800 pt-4 break-words">Detaillierte Kostenschätzung für Ihren Zürich-Umzug</h3>
                  <div className="my-4 overflow-x-auto w-full">

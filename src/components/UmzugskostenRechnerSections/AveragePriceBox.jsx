@@ -16,6 +16,7 @@ const AveragePriceBox = () => {
           <div>
             <p className="text-lg font-medium">3.5-Zimmer-Wohnung</p>
             <p className="text-3xl md:text-4xl font-bold">ca. CHF 1'500</p>
+            <p className="text-sm text-green-100 mt-1">(Basis: CHF 1'200 + durchschnittliche Distanz)</p>
           </div>
         </div>
         <p className="text-sm md:text-base text-green-100 max-w-xs text-center md:text-left">Durchschnittspreis für einen Standardumzug innerhalb derselben Stadt.</p>

@@ -81,6 +81,7 @@ const LocationInfo = ({ zip, onLocationUpdate }) => {
 const MovingCostCalculator = () => {
   const [rooms, setRooms] = useState("3.5");
   const [cleaning, setCleaning] = useState("no");
+  const [furnitureAssembly, setFurnitureAssembly] = useState("no");
   const [fromZip, setFromZip] = useState("");
   const [toZip, setToZip] = useState("");
   const [fromLocation, setFromLocation] = useState(null);
@@ -109,6 +110,7 @@ const MovingCostCalculator = () => {
     "5.5": 2250,
   };
   const cleaningCost = 500; 
+  const furnitureAssemblyCost = 400; // Möbel De-/Montage maliyeti
   const costPerKm = 2; 
 
   const handleCalculateCost = async () => {
@@ -139,9 +141,16 @@ const MovingCostCalculator = () => {
       let distance = distanceData?.distance_km;
 
       if (distanceData?.warning) {
+        // Backend'den gelen uyarıyı Almanca'ya çevir
+        let germanWarning = distanceData.warning;
+        if (distanceData.warning.includes("Could not find coordinates")) {
+          germanWarning = "Koordinaten für eine oder beide Postleitzahlen konnten nicht gefunden werden. Es wird eine Standarddistanz verwendet.";
+        } else if (distanceData.warning.includes("Using a default distance")) {
+          germanWarning = "Es wird eine Standarddistanz verwendet.";
+        }
         toast({ 
           title: "Distanz-Warnung", 
-          description: distanceData.warning, 
+          description: germanWarning, 
           variant: "default", 
           duration: 7000 
         });
@@ -162,6 +171,9 @@ const MovingCostCalculator = () => {
       let totalCost = basePrices[rooms] || basePrices["3.5"]; 
       if (cleaning === "yes") {
         totalCost += cleaningCost;
+      }
+      if (furnitureAssembly === "yes") {
+        totalCost += furnitureAssemblyCost;
       }
       totalCost += distance * costPerKm;
       
@@ -191,6 +203,7 @@ const MovingCostCalculator = () => {
         to_city: toLocation?.city || '',
         to_canton: toLocation?.canton || '',
         additional_cleaning: cleaning === 'yes',
+        furniture_assembly: furnitureAssembly === 'yes',
         calculated_distance: calculatedDistance,
     });
     setShowInlineForm(true);
@@ -246,6 +259,18 @@ const MovingCostCalculator = () => {
               </Select>
             </div>
             <div>
+              <Label htmlFor="furnitureAssembly" className="block text-sm font-medium text-gray-700 mb-1">Möbel De-/Montage?</Label>
+              <Select value={furnitureAssembly} onValueChange={setFurnitureAssembly}>
+                <SelectTrigger id="furnitureAssembly">
+                  <SelectValue placeholder="Möbelmontage auswählen" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no">Nein</SelectItem>
+                  <SelectItem value="yes">Ja</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
               <Label htmlFor="from_zip" className="block text-sm font-medium text-gray-700 mb-1">Von (PLZ)</Label>
               <Input type="text" id="from_zip" value={fromZip} onChange={(e) => setFromZip(e.target.value)} placeholder="z.B. 8000" />
               <LocationInfo zip={fromZip} onLocationUpdate={handleFromLocationUpdate} />
@@ -256,9 +281,32 @@ const MovingCostCalculator = () => {
               <LocationInfo zip={toZip} onLocationUpdate={handleToLocationUpdate} />
             </div>
           </div>
-          <Button onClick={handleCalculateCost} size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white group" disabled={isLoading}>
-            {isLoading ? <Loader2 className="w-5 h-5 mr-2 animate-spin" /> : "Jetzt Preis berechnen"}
-            {!isLoading && <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />}
+          <Button 
+            onClick={handleCalculateCost} 
+            size="lg" 
+            className={`w-full text-white group transition-all duration-300 ${
+              calculatedCost !== null 
+                ? 'bg-green-700 hover:bg-green-800 shadow-lg' 
+                : 'bg-green-600 hover:bg-green-700'
+            }`}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Berechne...
+              </>
+            ) : calculatedCost !== null ? (
+              <>
+                Neu berechnen
+                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+              </>
+            ) : (
+              <>
+                Jetzt Preis berechnen
+                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+              </>
+            )}
           </Button>
           
           {error && <p className="text-red-600 text-sm text-center py-2 bg-red-50 rounded-md">{error}</p>}
@@ -297,7 +345,7 @@ const MovingCostCalculator = () => {
           animate={{ opacity: 1, scaleY: 1 }}
           exit={{ opacity: 0, scaleY: 0 }}
           transition={{ duration: 0.3 }}
-          className="mt-8"
+          className="mt-8 p-6 bg-white rounded-lg border-2 border-gray-200 shadow-lg"
         >
           <Suspense fallback={<FormLoadingSpinner />}>
            <NewCustomerForm 

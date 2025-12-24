@@ -12,6 +12,8 @@ import {
   MapPin, Calculator, ListChecks, BookOpen, ArrowRight,
   Star, User, ChevronLeft, Send, Loader2, HelpCircle
 } from 'lucide-react';
+import MovingCostCalculator from '@/components/UmzugskostenRechnerSections/MovingCostCalculator';
+import CleaningCostCalculator from '@/components/ReinigungskostenRechnerSections/CleaningCostCalculator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion } from 'framer-motion';
 // Supabase lazy loaded to reduce initial bundle size
@@ -202,6 +204,7 @@ interface HomePageClientProps {
 const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClientProps) => {
   const router = useRouter();
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedCalculator, setSelectedCalculator] = useState<string | null>('umzug');
   const [isMounted, setIsMounted] = useState(false);
   
   // Prevent hydration mismatch by only showing conditional content after mount
@@ -817,6 +820,72 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Cost Calculators Section */}
+          <section className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
+            <div className="container mx-auto max-w-navbar px-4 md:px-6">
+              <div className="text-center mb-8 md:mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Kosten schnell berechnen
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Wählen Sie eine Kategorie und erhalten Sie sofort eine Kostenschätzung
+                </p>
+              </div>
+
+              {/* Category Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 md:mb-12">
+                <Button
+                  onClick={() => setSelectedCalculator(selectedCalculator === 'umzug' ? null : 'umzug')}
+                  size="lg"
+                  className={`w-full sm:w-auto px-8 py-6 text-lg font-semibold rounded-xl transition-all duration-300 ${
+                    selectedCalculator === 'umzug'
+                      ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg'
+                      : 'bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-green-500'
+                  }`}
+                >
+                  <Calculator className="w-5 h-5 mr-2" />
+                  Umzugskosten berechnen
+                </Button>
+                <Button
+                  onClick={() => setSelectedCalculator(selectedCalculator === 'reinigung' ? null : 'reinigung')}
+                  size="lg"
+                  className={`w-full sm:w-auto px-8 py-6 text-lg font-semibold rounded-xl transition-all duration-300 ${
+                    selectedCalculator === 'reinigung'
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg'
+                      : 'bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-blue-500'
+                  }`}
+                >
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Reinigungskosten berechnen
+                </Button>
+              </div>
+
+              {/* Calculator Display */}
+              <div className="max-w-4xl mx-auto">
+                {selectedCalculator === 'umzug' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <MovingCostCalculator />
+                  </motion.div>
+                )}
+                {selectedCalculator === 'reinigung' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <CleaningCostCalculator />
+                  </motion.div>
+                )}
               </div>
             </div>
           </section>

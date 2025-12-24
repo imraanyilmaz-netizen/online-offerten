@@ -37,6 +37,7 @@ const initialFormData = {
   phone: '',
   preferred_time: '',
   additional_piano: false,
+  furniture_assembly: false,
   additional_info: '',
   how_found: '',
   quotes_wanted: '4',

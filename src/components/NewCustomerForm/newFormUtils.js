@@ -394,6 +394,7 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     preferredtime: preferredTimeLabel,
     additional_cleaning: formData.additional_cleaning,
     additional_services_piano: formData.additional_piano,
+    furniture_assembly: formData.furniture_assembly,
     how_found: howFoundLabel,
     quoteswanted: quotesWantedValue,
     agree_terms: formData.agree_terms,

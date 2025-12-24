@@ -275,7 +275,7 @@ const CleaningCostCalculator = () => {
           animate={{ opacity: 1, scaleY: 1 }}
           exit={{ opacity: 0, scaleY: 0 }}
           transition={{ duration: 0.3 }}
-          className="mt-8"
+          className="mt-8 p-6 bg-white rounded-lg border-2 border-gray-200 shadow-lg"
         >
            <Suspense fallback={<FormLoadingSpinner />}>
              <NewCustomerForm 

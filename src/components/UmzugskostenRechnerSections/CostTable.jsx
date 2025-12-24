@@ -8,26 +8,32 @@ const CostTable = () => {
     {
       size: "1.5 Zimmer",
       transportOnly: "CHF 600 - 900",
-      transportAssembly: "CHF 800 - 1'200",
-      transportAssemblyCleaning: "CHF 1'200 - 1'800"
+      transportAssembly: "CHF 1'000 - 1'300",
+      transportAssemblyCleaning: "CHF 1'500 - 1'800"
     },
     {
       size: "2.5 Zimmer",
-      transportOnly: "CHF 900 - 1'300",
-      transportAssembly: "CHF 1'100 - 1'700",
-      transportAssemblyCleaning: "CHF 1'600 - 2'400"
+      transportOnly: "CHF 900 - 1'200",
+      transportAssembly: "CHF 1'300 - 1'600",
+      transportAssemblyCleaning: "CHF 1'800 - 2'100"
     },
     {
       size: "3.5 Zimmer",
       transportOnly: "CHF 1'200 - 1'800",
-      transportAssembly: "CHF 1'500 - 2'300",
-      transportAssemblyCleaning: "CHF 2'200 - 3'200"
+      transportAssembly: "CHF 1'600 - 2'200",
+      transportAssemblyCleaning: "CHF 2'100 - 2'700"
     },
     {
       size: "4.5 Zimmer",
-      transportOnly: "CHF 1'700 - 2'400",
-      transportAssembly: "CHF 2'000 - 3'000",
-      transportAssemblyCleaning: "CHF 2'800 - 4'000"
+      transportOnly: "CHF 1'750 - 2'500",
+      transportAssembly: "CHF 2'150 - 2'900",
+      transportAssemblyCleaning: "CHF 2'650 - 3'400"
+    },
+    {
+      size: "5.5+ Zimmer",
+      transportOnly: "CHF 2'250 - 3'500",
+      transportAssembly: "CHF 2'650 - 3'900",
+      transportAssemblyCleaning: "CHF 3'150 - 4'400"
     }
   ];
 

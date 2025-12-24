@@ -173,18 +173,13 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       if (isStep1Completed && currentStep !== 2) {
         // Step 1 tamamlandıysa ve step 2'de değilsek, step 2'ye geç
       setCurrentStep(2);
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            if (formRef.current) {
-              formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          });
-        });
+        // URL'den step=2 geldiğinde scroll yapma (sayfa ilk yüklendiğinde)
+        // Sadece handleNextStep ile step değişikliğinde scroll yapılacak
       } else if (!isStep1Completed) {
         // Step 1 tamamlanmadıysa, step 2'ye erişimi engelle ve step 1'e yönlendir
         const newParams = new URLSearchParams(searchParamsString);
       newParams.delete('step');
-      router.push(`${pathname}?${newParams.toString()}`, { replace: true });
+      router.push(`${pathname}?${newParams.toString()}`, { replace: true, scroll: false });
       setCurrentStep(1);
       }
     } 
@@ -201,23 +196,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     } else {
       params.delete('step');
     }
-    // Step 2'ye geçildiğinde scroll pozisyonunu koru
-    if (step === 2) {
-      // Scroll pozisyonunu kaydet
-      const currentScrollY = window.scrollY;
-      // URL'i güncelle
-      router.push(`${pathname}?${params.toString()}`, { replace });
-      // Scroll pozisyonunu koru ve form alanına scroll yap
-      requestAnimationFrame(() => {
-        // Next.js'in scroll davranışını override et
-        if (formRef.current) {
-          formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    } else {
-      // Step 1'e dönerken history'yi temizle
-    router.push(`${pathname}?${params.toString()}`, { replace });
-    }
+    // URL'i güncelle - scroll: false ile Next.js'in otomatik scroll'unu engelle
+    // Manuel scroll handleNextStep ve useEffect'te yapılıyor
+    router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
   }, [searchParamsString, pathname, router, formRef]);
 
   const scrollToFormTop = () => {
@@ -352,8 +333,15 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         // setIsStep1Completed zaten useEffect ile otomatik yönetiliyor, burada set etmeye gerek yok
         if (currentStep === 1) {
           updateUrlStep(currentStep + 1, false);
+          // Step 2'ye geçerken formun başına scroll yap
+          setTimeout(() => {
+            scrollToFormTop();
+          }, 100);
         } else {
           updateUrlStep(currentStep + 1);
+          setTimeout(() => {
+            scrollToFormTop();
+          }, 100);
         }
       } else {
         setErrors(errors);
@@ -371,7 +359,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     if (currentStep > 1) {
       setErrors({});
       updateUrlStep(currentStep - 1);
-      scrollToFormTop();
+      // Scroll yapma - form konumunda kal
     }
   };
 
@@ -444,7 +432,10 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       if (error) throw error;
       setIsSubmitted(true);
       toast({ title: t('quoteConfirmation.title'), description: t('quoteConfirmation.subtitle') });
-      window.scrollTo(0, 0);
+      // Teşekkür sayfasına geçerken en başa scroll yap
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
     } catch (error) {
       console.error('Error submitting quote:', error);
       toast({ title: t('errors.submissionErrorTitle'), description: `${t('errors.submissionErrorDescription')} ${error.message}`, variant: 'destructive' });

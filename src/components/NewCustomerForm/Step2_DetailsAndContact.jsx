@@ -645,10 +645,16 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
       <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
         <div className="space-y-3">
           { formData.service === 'umzug' && formData.umzugArt !== 'klaviertransport' && (
-            <div className="flex items-center space-x-2">
-              <Checkbox id="additional_piano" name="additional_piano" checked={formData.additional_piano || false} onCheckedChange={(checked) => handleCheckboxChange('additional_piano', checked)} className="h-4 w-4 accent-green-600"/>
-              <Label htmlFor="additional_piano" className="font-normal text-sm text-slate-700">{t('step3.additionalPianoLabel')}</Label>
-            </div>
+            <>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="additional_piano" name="additional_piano" checked={formData.additional_piano || false} onCheckedChange={(checked) => handleCheckboxChange('additional_piano', checked)} className="h-4 w-4 accent-green-600"/>
+                <Label htmlFor="additional_piano" className="font-normal text-sm text-slate-700">{t('step3.additionalPianoLabel')}</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="furniture_assembly" name="furniture_assembly" checked={formData.furniture_assembly || false} onCheckedChange={(checked) => handleCheckboxChange('furniture_assembly', checked)} className="h-4 w-4 accent-green-600"/>
+                <Label htmlFor="furniture_assembly" className="font-normal text-sm text-slate-700">Möbel De-/Montage</Label>
+              </div>
+            </>
           )}
         </div>
         <div className="space-y-1 pt-3">
