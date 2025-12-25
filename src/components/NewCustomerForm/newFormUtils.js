@@ -209,6 +209,11 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     }
   }
 
+  // Möbel De-/Montage bilgisini ekle (sadece Privatumzug ve Internationaler Umzug için)
+  if (formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'international') && formData.furniture_assembly) {
+    serviceSpecificDetails.push('Möbel De-/Montage: Ja');
+  }
+
   const serviceDetailsString = serviceSpecificDetails.join('\n');
 
   const umzugArtLabel = formData.umzugArt ? {
@@ -394,7 +399,6 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     preferredtime: preferredTimeLabel,
     additional_cleaning: formData.additional_cleaning,
     additional_services_piano: formData.additional_piano,
-    furniture_assembly: formData.furniture_assembly,
     how_found: howFoundLabel,
     quoteswanted: quotesWantedValue,
     agree_terms: formData.agree_terms,

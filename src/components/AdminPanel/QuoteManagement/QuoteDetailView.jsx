@@ -166,6 +166,7 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
             <EmailConfirmationDetail quote={quote} />
             {isMovingService(quote.servicetype) && quote.umzugart && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
             {isMovingService(quote.servicetype) && quote.additional_services_piano && <QuoteDetail label="Klaviertransport" value="Ja" />}
+            {isMovingService(quote.servicetype) && (quote.umzugart === 'Privatumzug' || quote.umzugart === 'Internationalumzug') && quote.services_detail1 && quote.services_detail1.includes('Möbel De-/Montage: Ja') && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
             {isMovingService(quote.servicetype) && <QuoteDetail label="Spezialtransport Art" value={quote.special_transport_type} />}
             {isMovingService(quote.servicetype) && <QuoteDetail label="Details Spezialtransport" value={quote.special_transport_other_details} />}
 

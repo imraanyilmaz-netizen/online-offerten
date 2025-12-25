@@ -206,7 +206,7 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
 
       <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
         <div className="space-y-3">
-            { formData.service === 'umzug' && formData.umzugArt !== 'klaviertransport' && (
+            { formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'international') && (
                  <div className="flex items-center space-x-2">
                     <Checkbox id="additional_piano" name="additional_piano" checked={formData.additional_piano || false} onCheckedChange={(checked) => handleCheckboxChange('additional_piano', checked)} />
                     <Label htmlFor="additional_piano" className="font-normal text-sm sm:text-base text-slate-700">{t('step3.additionalPianoLabel')}</Label>

@@ -644,7 +644,7 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
       {/* Additional Info - Full Width Below */}
       <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
         <div className="space-y-3">
-          { formData.service === 'umzug' && formData.umzugArt !== 'klaviertransport' && (
+          { formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'international') && (
             <>
               <div className="flex items-center space-x-2">
                 <Checkbox id="additional_piano" name="additional_piano" checked={formData.additional_piano || false} onCheckedChange={(checked) => handleCheckboxChange('additional_piano', checked)} className="h-4 w-4 accent-green-600"/>
