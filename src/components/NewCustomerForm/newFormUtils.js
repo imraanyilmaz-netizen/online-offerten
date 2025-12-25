@@ -117,16 +117,7 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     if (formData.umzugArt === 'unterhaltsreinigung' && formData.cleaning_frequency) {
         const frequencyLabel = tAdmin(`step1.cleaningFrequency.${formData.cleaning_frequency}`);
         serviceSpecificDetails.push(`${tAdmin('step1.cleaningFrequency.title')}: ${frequencyLabel}`);
-    } else if (['wohnungsreinigung', 'hausreinigung', 'buero'].includes(formData.umzugArt)) {
-        const whatToCleanKeys = Object.keys(formData.what_to_clean || {}).filter(key => formData.what_to_clean[key]);
-        if (whatToCleanKeys.length > 0) {
-            const whatToCleanLabels = whatToCleanKeys.map(key => tAdmin(`step1.whatToClean.${key}`)).join(', ');
-            serviceSpecificDetails.push(`${tAdmin('step1.whatToClean.title')}: ${whatToCleanLabels}`);
-        }
-        if (formData.estimated_area) {
-            const areaLabel = tAdmin(`step1.estimatedArea.${formData.estimated_area}`);
-            serviceSpecificDetails.push(`${tAdmin('step1.estimatedArea.title')}: ${areaLabel}`);
-        }
+    // Wohnungsreinigung ve Hausreinigung için bu detaylar artık eklenmeyecek
     } else if (formData.umzugArt === 'bodenreinigung') {
         const floorTypeKeys = Object.keys(formData.floor_types || {}).filter(key => formData.floor_types[key]);
         if (floorTypeKeys.length > 0) {

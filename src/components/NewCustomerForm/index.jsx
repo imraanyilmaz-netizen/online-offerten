@@ -432,9 +432,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       if (error) throw error;
       setIsSubmitted(true);
       toast({ title: t('quoteConfirmation.title'), description: t('quoteConfirmation.subtitle') });
-      // Teşekkür sayfasına geçerken en başa scroll yap
+      // Teşekkür mesajının görünmesi için formun bulunduğu konuma scroll et
       setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     } catch (error) {
       console.error('Error submitting quote:', error);

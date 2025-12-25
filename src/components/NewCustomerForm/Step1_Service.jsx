@@ -75,7 +75,7 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
         <div className="space-y-4">
             <div>
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.whatToClean.title')} <span className="text-red-500">*</span></h5>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {whatToCleanOptions.map(option => (
                         <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_clean?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
                             <div className="flex items-center">
@@ -101,7 +101,7 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                     name="estimated_area"
                     value={formData.estimated_area || ''}
                     onValueChange={(value) => handleRadioGroupChange('estimated_area', value)}
-                    className="grid grid-cols-2 gap-2"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-2"
                 >
                     {areaOptions.map(option => (
                         <Label 
@@ -136,7 +136,7 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
         <div className="space-y-4">
             <div>
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.floorTypes.title')} <span className="text-red-500">*</span></h5>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {floorTypeOptions.map(option => (
                         <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.floor_types?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
                             <div className="flex items-center">
@@ -162,7 +162,7 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                     name="floor_area"
                     value={formData.floor_area || ''}
                     onValueChange={(value) => handleRadioGroupChange('floor_area', value)}
-                    className="grid grid-cols-2 gap-2"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-2"
                 >
                     {areaOptions.map(option => (
                         <Label 
@@ -306,7 +306,7 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
 const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckboxChange, errors, subQuestionsRef }) => {
     const { t } = useTranslation('newCustomerForm');
     const cleaningFrequencyOptions = ['einmalig', 'woechentlich', 'zweiwoechig', 'monatlich'];
-    const showGeneralCleaningDetails = ['wohnungsreinigung', 'hausreinigung', 'buero'].includes(formData.umzugArt);
+    const showGeneralCleaningDetails = false; // Bu sorular artık gösterilmeyecek
     const showFloorCleaningDetails = formData.umzugArt === 'bodenreinigung';
     const showFrequencyDetails = formData.umzugArt === 'unterhaltsreinigung';
     const showFassadenreinigungDetails = formData.umzugArt === 'fassadenreinigung';

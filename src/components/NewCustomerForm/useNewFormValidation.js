@@ -21,10 +21,8 @@ const useNewFormValidation = (formData) => {
       } else if (formData.service === 'reinigung') {
         if (!formData.umzugArt) step1Errors.umzugArt = t('errors.umzugArtMissing');
         else if (formData.umzugArt === 'unterhaltsreinigung' && !formData.cleaning_frequency) step1Errors.cleaning_frequency = t('errors.fieldRequired');
-        else if (['wohnungsreinigung', 'hausreinigung', 'buero'].includes(formData.umzugArt)) {
-          if (!Object.values(formData.what_to_clean || {}).some(v => v)) step1Errors.what_to_clean = t('errors.whatToCleanMissing');
-          if (!formData.estimated_area) step1Errors.estimated_area = t('errors.fieldRequired');
-        } else if (formData.umzugArt === 'bodenreinigung') {
+        // Wohnungsreinigung ve Hausreinigung için bu sorular artık zorunlu değil
+        else if (formData.umzugArt === 'bodenreinigung') {
           if (!Object.values(formData.floor_types || {}).some(v => v)) step1Errors.floor_types = t('errors.floorTypesMissing');
           if (!formData.floor_area) step1Errors.floor_area = t('errors.fieldRequired');
         } else if (formData.umzugArt === 'fassadenreinigung') {
