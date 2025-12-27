@@ -107,10 +107,10 @@ const UmzugsoffertenPageClient = () => {
             },
             {
               "@type": "Question",
-              "name": "Kann ich Umzugsofferten auch für internationale Umzüge anfordern?",
+              "name": "Kann ich Umzugsofferten auch für Auslandumzüge anfordern?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ja, Sie können auch für internationale Umzüge <strong>Preisvorschläge</strong> anfordern. Viele unserer Partnerfirmen sind auf Umzüge ins Ausland spezialisiert und können Ihnen <strong>Kostenvoranschläge</strong> für Umzüge nach Deutschland, Österreich, Frankreich, Italien und andere europäische Länder erstellen. Internationale Umzüge erfordern zusätzliche Planung und Dokumentation, daher sollten Sie diese frühzeitig anfragen."
+                "text": "Ja, Sie können auch für Auslandumzüge <strong>Preisvorschläge</strong> anfordern. Viele unserer Partnerfirmen sind auf Umzüge ins Ausland spezialisiert und können Ihnen <strong>Kostenvoranschläge</strong> für Umzüge nach Deutschland, Österreich, Frankreich, Italien und andere europäische Länder erstellen. Auslandumzüge erfordern zusätzliche Planung und Dokumentation, daher sollten Sie diese frühzeitig anfragen."
               }
             },
             {
@@ -246,8 +246,8 @@ const UmzugsoffertenPageClient = () => {
       a: "Eine professionelle <strong>Umzugsofferte</strong> sollte folgende Informationen enthalten: Gesamtpreis mit detaillierter Aufschlüsselung, alle enthaltenen Leistungen (Verpackung, Transport, Montage/Demontage), Versicherungsschutz und Deckungssumme, Umzugsdatum und Zeitfenster, Anzahl der Umzugshelfer und Fahrzeuge, Zusatzleistungen und deren Kosten, Zahlungsbedingungen und Stornierungsbedingungen. Achten Sie darauf, dass alle Leistungen schriftlich festgehalten sind. Eine seriöse Umzugsfirma bietet transparente <strong>Preise</strong> ohne versteckte Kosten."
     },
     {
-      q: "Kann ich Umzugsofferten auch für internationale Umzüge anfordern?",
-      a: "Ja, Sie können auch für internationale Umzüge <strong>Preisvorschläge</strong> anfordern. Viele unserer Partnerfirmen sind auf Umzüge ins Ausland spezialisiert und können Ihnen <strong>Kostenvoranschläge</strong> für Umzüge nach Deutschland, Österreich, Frankreich, Italien und andere europäische Länder erstellen. Internationale Umzüge erfordern zusätzliche Planung und Dokumentation, daher sollten Sie diese frühzeitig anfragen. Die <strong>Angebote</strong> enthalten dann auch Informationen zu Zollbestimmungen, Transportdauer und internationalen Versicherungen."
+      q: "Kann ich Umzugsofferten auch für Auslandumzüge anfordern?",
+      a: "Ja, Sie können auch für Auslandumzüge <strong>Preisvorschläge</strong> anfordern. Viele unserer Partnerfirmen sind auf Umzüge ins Ausland spezialisiert und können Ihnen <strong>Kostenvoranschläge</strong> für Umzüge nach Deutschland, Österreich, Frankreich, Italien und andere europäische Länder erstellen. Auslandumzüge erfordern zusätzliche Planung und Dokumentation, daher sollten Sie diese frühzeitig anfragen. Die <strong>Angebote</strong> enthalten dann auch Informationen zu Zollbestimmungen, Transportdauer und internationalen Versicherungen."
     },
     {
       q: "Wie kann ich bei Umzugsofferten sparen?",

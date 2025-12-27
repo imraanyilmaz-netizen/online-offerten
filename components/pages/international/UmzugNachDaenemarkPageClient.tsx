@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Heart, Info, ShieldCheck, Sparkles, Star, Truck } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Heart, Info, ShieldCheck, Sparkles, Star, Truck } from 'lucide-react';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
 const Section = ({ children, className = '' }: any) => (
@@ -23,7 +23,7 @@ const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
     <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 flex items-center">
-      <Icon size={32} className="mr-4 text-green-600" />
+      {Icon && <Icon size={32} className="mr-4 text-green-600" />}
       {title}
     </h2>
   );
@@ -41,7 +41,7 @@ const UmzugNachDaenemarkPageClient = () => {
 
   const metaTitle = "Umzug nach Dänemark: Kosten, Checkliste & Tipps für Ihr Hygge-Heim";
   const metaDescription = "Alles für Ihren Umzug nach Dänemark. Infos zu Kosten, eine komplette Checkliste inkl. CPR-Nummer und Tipps für den Start ins Hygge-Leben. Jetzt Offerten vergleichen!";
-  const metaKeywords = "umzug nach dänemark, umzug schweiz dänemark, umzugsfirma schweiz dänemark, internationaler umzug dänemark, umzug nach kopenhagen, umzug nach aarhus, umzug nach odense, umzugsfirma international, zügelfirma schweiz dänemark, umzug schweiz nach dänemark, umzugskosten schweiz dänemark, umzugsfirma vergleichen dänemark, günstiger umzug dänemark, umzug nach dänemark preise, umzug nach dänemark kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug dänemark";
+  const metaKeywords = "umzug nach dänemark, umzug schweiz dänemark, umzugsfirma schweiz dänemark, internationaler umzug dänemark, umzug nach kopenhagen, umzug nach aarhus, umzug nach odense, umzugsfirma international, zügelfirma schweiz dänemark, umzug schweiz nach dänemark, umzugskosten schweiz dänemark, umzugsfirma vergleichen dänemark, günstiger umzug dänemark, umzug nach dänemark preise, umzug nach dänemark kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge dänemark";
 
   const costTable = [
     { size: "1-2 Zimmer (ca. 20-30 m³)", cost: "3.000 – 5.000 CHF" },
@@ -128,7 +128,7 @@ const UmzugNachDaenemarkPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Was kostet ein Umzug nach Dänemark?" />
+                <SectionTitle title="Was kostet ein Umzug nach Dänemark?" />
                 <p className="text-gray-700 leading-relaxed mb-4">Die Kosten für einen Umzug nach Dänemark liegen generell etwas höher als für einen Umzug nach Deutschland, was auf das höhere Preisniveau in Dänemark zurückzuführen ist. Eine sorgfältige Planung und ein detaillierter Offertenvergleich sind daher entscheidend, um das Budget im Griff zu haben.</p>
                 <p className="text-gray-700 leading-relaxed mb-8">Wichtige Faktoren sind das Volumen Ihres Hausrats, die zurückzulegende Distanz und spezielle Anforderungen wie der Transport über Fähren oder Brücken (z.B. Öresundbrücke). Zusatzleistungen wie ein Verpackungsservice oder die Möbelmontage beeinflussen den Preis ebenfalls.</p>
                 

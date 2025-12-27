@@ -90,7 +90,7 @@ const InternationalCostCalculator = () => {
         <div className="flex items-center mb-6">
           <Calculator className="w-8 h-8 mr-4 text-green-500" />
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800">
-            Internationaler Umzug Kostenrechner
+            Auslandumzug Kostenrechner
           </h2>
         </div>
         <div className="flex h-64 w-full items-center justify-center">

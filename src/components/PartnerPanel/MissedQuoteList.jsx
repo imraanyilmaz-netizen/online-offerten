@@ -18,7 +18,7 @@ const MissedQuoteList = ({ quotes }) => {
 
   const isMovingService = (servicetype) => {
     if (!servicetype) return false;
-    return servicetype.toLowerCase().includes('umzug') || servicetype.toLowerCase().includes('international') || servicetype.toLowerCase().includes('privatumzug') || servicetype.toLowerCase().includes('geschäftsumzug') || servicetype.toLowerCase().includes('internationalumzug');
+    return servicetype.toLowerCase().includes('umzug') || servicetype.toLowerCase().includes('international') || servicetype.toLowerCase().includes('privatumzug') || servicetype.toLowerCase().includes('geschäftsumzug') || servicetype.toLowerCase().includes('auslandumzug');
   };
 
   const getReasonDetails = (reason) => {

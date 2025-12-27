@@ -23,7 +23,7 @@ const UmzugsfirmaGenfPageClient = () => {
 
   const services = [
     "Privat- und Geschäftsumzüge in und um Genf.",
-    "Internationale Umzüge, insbesondere von und nach Frankreich.",
+    "Auslandumzug, insbesondere von und nach Frankreich.",
     "Professionelle Umzugsreinigung mit Abnahmegarantie.",
     "Möbellagerung in sicheren und modernen Lagerräumen.",
     "Spezialtransporte für Kunst und wertvolle Gegenstände."
@@ -102,10 +102,10 @@ const UmzugsfirmaGenfPageClient = () => {
               </div>
 
               <article className="pt-8 border-t border-gray-200">
-                  <h2 className="text-2xl font-bold text-gray-800">Spezialist für internationale Umzüge</h2>
+                  <h2 className="text-2xl font-bold text-gray-800">Spezialist für Auslandumzüge</h2>
                   <div className="p-4 bg-blue-50 rounded-lg border flex items-center mt-4">
                       <Globe className="h-8 w-8 text-blue-600 mr-4"/>
-                      <p className="text-gray-700">Dank der Grenznähe zu Frankreich sind unsere Partner in Genf Experten für internationale Umzüge und Zollformalitäten.</p>
+                      <p className="text-gray-700">Dank der Grenznähe zu Frankreich sind unsere Partner in Genf Experten für Auslandumzüge und Zollformalitäten.</p>
                   </div>
               </article>
               

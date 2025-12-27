@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
@@ -24,7 +24,7 @@ const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 flex items-center">
-      <Icon size={36} className="mr-4 text-green-600" />
+      {Icon && <Icon size={36} className="mr-4 text-green-600" />}
       {title}
     </h2>
   );
@@ -42,7 +42,7 @@ const UmzugNachPortugalPageClient = () => {
 
   const metaTitle = "Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2025";
   const metaDescription = "Ihr Leitfaden für den Umzug von der Schweiz nach Portugal. Entdecken Sie Kosten, Tipps für Zoll & NIF, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.";
-  const metaKeywords = "umzug nach portugal, umzug schweiz portugal, umzugsfirma schweiz portugal, internationaler umzug portugal, umzug nach lissabon, umzug nach porto, umzug nach faro, umzugsfirma international, zügelfirma schweiz portugal, umzug schweiz nach portugal, umzugskosten schweiz portugal, umzugsfirma vergleichen portugal, günstiger umzug portugal, umzug nach portugal preise, umzug nach portugal kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug portugal";
+  const metaKeywords = "umzug nach portugal, umzug schweiz portugal, umzugsfirma schweiz portugal, internationaler umzug portugal, umzug nach lissabon, umzug nach porto, umzug nach faro, umzugsfirma international, zügelfirma schweiz portugal, umzug schweiz nach portugal, umzugskosten schweiz portugal, umzugsfirma vergleichen portugal, günstiger umzug portugal, umzug nach portugal preise, umzug nach portugal kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge portugal";
 
   const costTable = [
     { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "3.500 – 5.500 CHF" },
@@ -180,7 +180,7 @@ const UmzugNachPortugalPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Was kostet ein Umzug nach Portugal?" />
+                <SectionTitle title="Was kostet ein Umzug nach Portugal?" />
                 <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Portugal sind aufgrund der grossen Distanz höher als bei Umzügen in Nachbarländer. Die Preise variieren stark je nach Volumen, Service und Route.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">

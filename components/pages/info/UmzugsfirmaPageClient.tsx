@@ -119,7 +119,7 @@ const UmzugsfirmaPageClient = () => {
               "name": "Kann ich mit einer Umzugsfirma auch einen internationalen Umzug durchführen?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ja, viele Umzugsfirmen bieten auch internationale Umzüge an. Diese erfordern zusätzliche Planung, Zolldokumentation und Koordination. Bei Online-Offerten.ch können Sie auch für internationale Umzüge Offerten anfordern. Spezialisierte Umzugsfirmen für internationale Umzüge verfügen über die notwendige Expertise und Erfahrung im Umgang mit Zollbestimmungen und Transportlogistik über Landesgrenzen hinweg."
+                "text": "Ja, viele Umzugsfirmen bieten auch Auslandumzüge an. Diese erfordern zusätzliche Planung, Zolldokumentation und Koordination. Bei Online-Offerten.ch können Sie auch für Auslandumzüge Offerten anfordern. Spezialisierte Umzugsfirmen für Auslandumzüge verfügen über die notwendige Expertise und Erfahrung im Umgang mit Zollbestimmungen und Transportlogistik über Landesgrenzen hinweg."
               }
             },
             {
@@ -252,7 +252,7 @@ const UmzugsfirmaPageClient = () => {
     },
     {
       q: "Kann ich mit einer Umzugsfirma auch einen internationalen Umzug durchführen?",
-      a: "Ja, viele Umzugsfirmen bieten auch internationale Umzüge an. Diese erfordern zusätzliche Planung, Zolldokumentation und Koordination. Bei Online-Offerten.ch können Sie auch für internationale Umzüge Offerten anfordern. Spezialisierte Umzugsfirmen für internationale Umzüge verfügen über die notwendige Expertise und Erfahrung im Umgang mit Zollbestimmungen und Transportlogistik über Landesgrenzen hinweg. Internationale Umzüge sind komplexer und erfordern mehr Vorlaufzeit als lokale Umzüge."
+      a: "Ja, viele Umzugsfirmen bieten auch Auslandumzüge an. Diese erfordern zusätzliche Planung, Zolldokumentation und Koordination. Bei Online-Offerten.ch können Sie auch für Auslandumzüge Offerten anfordern. Spezialisierte Umzugsfirmen für Auslandumzüge verfügen über die notwendige Expertise und Erfahrung im Umgang mit Zollbestimmungen und Transportlogistik über Landesgrenzen hinweg. Auslandumzüge sind komplexer und erfordern mehr Vorlaufzeit als lokale Umzüge."
     },
     {
       q: "Ist der Service von Online-Offerten.ch wirklich kostenlos?",
@@ -288,7 +288,7 @@ const UmzugsfirmaPageClient = () => {
       icon: Sparkles
     },
     {
-      title: "Internationale Umzüge",
+      title: "Auslandumzug",
       description: "Umzüge ins Ausland mit Zolldokumentation und internationaler Logistik.",
       link: "/internationale-umzuege",
       icon: Globe

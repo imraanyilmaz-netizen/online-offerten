@@ -37,7 +37,7 @@ export const serviceMap = {
   // General keys from older versions
   'private': 'Privatumzug',
   'business': 'Geschäftsumzug',
-  'international': 'Internationaler Umzug',
+  'international': 'Auslandumzug',
   'cleaning': 'Reinigung',
   'storage': 'Einlagerung',
   'disposal': 'Räumung & Entsorgung',
@@ -47,9 +47,9 @@ export const serviceMap = {
   // STANDART ANAHTARLAR (Partnerlerin kullandığı) ve varyasyonları
   'privatumzug': 'Privatumzug',
   'geschaeftsumzug': 'Geschäftsumzug',
-  'internationaler_umzug': 'Internationaler Umzug',
-  'internationalumzug': 'Internationaler Umzug', // Legacy
-  'internationale': 'Internationaler Umzug', // Legacy
+  'internationaler_umzug': 'Auslandumzug',
+  'internationalumzug': 'Auslandumzug', // Legacy
+  'internationale': 'Auslandumzug', // Legacy
   'spezialtransport': 'Spezialtransport',
   'special_transport': 'Spezialtransport', // Legacy
   'kleintransport': 'Kleintransport',
@@ -110,8 +110,9 @@ export const serviceMap = {
   // Büyük harfli varyasyonlar
   'Privatumzug': 'Privatumzug',
   'Geschäftsumzug': 'Geschäftsumzug',
-  'Internationaler Umzug': 'Internationaler Umzug',
-  'Internationale Umzüge': 'Internationaler Umzug',
+  'Internationaler Umzug': 'Auslandumzug',
+  'Internationale Umzüge': 'Auslandumzug',
+  'Auslandumzug': 'Auslandumzug',
   'Spezialtransporte': 'Spezialtransporte',
   'Umzugsreinigung': 'Umzugsreinigung',
   'Wohnungsreinigung': 'Wohnungsreinigung',

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
@@ -42,7 +42,7 @@ const UmzugNachItalienPageClient = () => {
 
   const metaTitle = "Umzug nach Italien: Ihr Guide für Kosten & Planung 2025";
   const metaDescription = "Alles für Ihren Umzug von der Schweiz nach Italien. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Umzugsfirmen für einen stressfreien Start in 'La Dolce Vita'.";
-  const metaKeywords = "umzug nach italien, umzug schweiz italien, umzugsfirma schweiz italien, internationaler umzug italien, umzug nach rom, umzug nach mailand, umzug nach neapel, umzugsfirma international, zügelfirma schweiz italien, umzug schweiz nach italien, umzugskosten schweiz italien, umzugsfirma vergleichen italien, günstiger umzug italien, umzug nach italien preise, umzug nach italien kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug italien";
+  const metaKeywords = "umzug nach italien, umzug schweiz italien, umzugsfirma schweiz italien, internationaler umzug italien, umzug nach rom, umzug nach mailand, umzug nach neapel, umzugsfirma international, zügelfirma schweiz italien, umzug schweiz nach italien, umzugskosten schweiz italien, umzugsfirma vergleichen italien, günstiger umzug italien, umzug nach italien preise, umzug nach italien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge italien";
 
   const costTable = [
     { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "2.200 – 3.800 CHF" },
@@ -104,7 +104,7 @@ const UmzugNachItalienPageClient = () => {
       answer: "Ja, aber Sie müssen es innerhalb von drei Monaten nach Ihrer Anmeldung in Italien ummelden. Dieser Vorgang ('immatricolazione') kann bürokratisch sein. Sie benötigen unter anderem die europäische Konformitätsbescheinigung (COC) und müssen die Schweizer Kennzeichen abgeben. Eine spezialisierte Agentur ('agenzia di pratiche auto') kann dabei helfen."
     },
     {
-      question: "Was sollte ich über das Packen für einen internationalen Umzug wissen?",
+      question: "Was sollte ich über das Packen für einen Auslandumzug wissen?",
       answer: "Verwenden Sie stabile Umzugskartons und packen Sie diese nicht zu schwer (maximal 15-20 kg). Beschriften Sie jeden Karton deutlich mit dem Inhalt und dem Zielraum auf Deutsch und Italienisch (z.B. 'Küche / Fragile' -> 'Cucina / Fragile'). Erstellen Sie eine detaillierte Inventarliste, die auch für den Zoll wichtig ist. Wertgegenstände und persönliche Dokumente sollten Sie immer persönlich transportieren."
     },
     {
@@ -182,7 +182,7 @@ const UmzugNachItalienPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Die Kosten: Was kostet ein Umzug nach Italien?" />
+                <SectionTitle title="Die Kosten: Was kostet ein Umzug nach Italien?" />
                 <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Italien werden von mehreren Faktoren beeinflusst: dem Volumen des Umzugsguts, der Entfernung (z.B. Zürich-Mailand vs. Genf-Sizilien), dem Serviceumfang und der Zugänglichkeit der Wohnorte. Die folgende Tabelle bietet eine grobe Kostenschätzung.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">

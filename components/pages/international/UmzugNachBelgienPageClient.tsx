@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Briefcase, Sparkles, Trash2, ShieldCheck, Home, Info, Truck } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Briefcase, Sparkles, Trash2, ShieldCheck, Home, Info, Truck } from 'lucide-react';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
 interface SectionProps {
@@ -27,7 +27,7 @@ const Section = ({ children, className = '' }: SectionProps) => (
 import type { LucideIcon } from 'lucide-react';
 
 interface SectionTitleProps {
-  icon: LucideIcon;
+  icon?: LucideIcon;
   title: string;
 }
 
@@ -35,7 +35,7 @@ const SectionTitle = ({ icon, title }: SectionTitleProps) => {
   const Icon = icon;
   return (
     <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 flex items-center">
-      <Icon size={32} className="mr-4 text-green-600" />
+      {Icon && <Icon size={32} className="mr-4 text-green-600" />}
       {title}
     </h2>
   );
@@ -57,7 +57,7 @@ const UmzugNachBelgienPageClient = () => {
 
   const metaTitle = "Umzug nach Belgien | Günstige Umzugsfirmen aus der Schweiz";
   const metaDescription = "Planen Sie Ihren Umzug von der Schweiz nach Belgien? Vergleichen Sie hier professionelle und geprüfte Umzugsfirmen. Kostenlose Offerten für Privatumzug, Geschäftsumzug, Reinigung und Entsorgung.";
-  const metaKeywords = "umzug nach belgien, umzug schweiz belgien, umzugsfirma schweiz belgien, internationaler umzug belgien, umzug nach brüssel, umzug nach antwerpen, umzug nach gent, umzugsfirma international, zügelfirma schweiz belgien, umzug schweiz nach belgien, umzugskosten schweiz belgien, umzugsfirma vergleichen belgien, günstiger umzug belgien, umzug nach belgien preise, umzug nach belgien kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug belgien";
+  const metaKeywords = "umzug nach belgien, umzug schweiz belgien, umzugsfirma schweiz belgien, internationaler umzug belgien, umzug nach brüssel, umzug nach antwerpen, umzug nach gent, umzugsfirma international, zügelfirma schweiz belgien, umzug schweiz nach belgien, umzugskosten schweiz belgien, umzugsfirma vergleichen belgien, günstiger umzug belgien, umzug nach belgien preise, umzug nach belgien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge belgien";
 
   const costTable = [
     { size: "1-2 Zimmer (ca. 15-25 m³)", cost: "1.700 – 3.000 CHF" },
@@ -187,7 +187,7 @@ const UmzugNachBelgienPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Welche Kosten entstehen bei einem Umzug nach Belgien?" />
+                <SectionTitle title="Welche Kosten entstehen bei einem Umzug nach Belgien?" />
                 <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Belgien sind von mehreren Faktoren abhängig. Entscheidend sind das Ladevolumen (in m³), die genaue Distanz (z.B. von Zürich nach Brüssel), der gewünschte Serviceumfang (z.B. mit oder ohne Verpackungsservice) und die Gegebenheiten vor Ort wie Stockwerk und Lift.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">

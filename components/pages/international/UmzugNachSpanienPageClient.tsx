@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
@@ -24,7 +24,7 @@ const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 flex items-center">
-      <Icon size={36} className="mr-4 text-green-600" />
+      {Icon && <Icon size={36} className="mr-4 text-green-600" />}
       {title}
     </h2>
   );
@@ -42,7 +42,7 @@ const UmzugNachSpanienPageClient = () => {
 
   const metaTitle = "Umzug nach Spanien: Ihr Guide für Kosten & Planung 2025";
   const metaDescription = "Alles für Ihren Umzug von der Schweiz nach Spanien. Entdecken Sie Kosten, Tipps für Zoll & NIE, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.";
-  const metaKeywords = "umzug nach spanien, umzug schweiz spanien, umzugsfirma schweiz spanien, internationaler umzug spanien, umzug nach madrid, umzug nach barcelona, umzug nach valencia, umzugsfirma international, zügelfirma schweiz spanien, umzug schweiz nach spanien, umzugskosten schweiz spanien, umzugsfirma vergleichen spanien, günstiger umzug spanien, umzug nach spanien preise, umzug nach spanien kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug spanien";
+  const metaKeywords = "umzug nach spanien, umzug schweiz spanien, umzugsfirma schweiz spanien, internationaler umzug spanien, umzug nach madrid, umzug nach barcelona, umzug nach valencia, umzugsfirma international, zügelfirma schweiz spanien, umzug schweiz nach spanien, umzugskosten schweiz spanien, umzugsfirma vergleichen spanien, günstiger umzug spanien, umzug nach spanien preise, umzug nach spanien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge spanien";
 
   const costTable = [
     { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "2.800 – 4.500 CHF" },
@@ -180,7 +180,7 @@ const UmzugNachSpanienPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Kostenkalkulation: Was kostet ein Umzug nach Spanien?" />
+                <SectionTitle title="Kostenkalkulation: Was kostet ein Umzug nach Spanien?" />
                 <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Spanien hängen stark vom Volumen, der Distanz (z.B. Genf-Barcelona vs. Zürich-Málaga) und dem Servicelevel ab. Die folgende Tabelle bietet eine grobe Orientierung.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">

@@ -90,7 +90,7 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
         }
         break;
       case 'international':
-        finalServiceType = 'Internationalumzug';
+        finalServiceType = 'Auslandumzug';
         break;
       case 'spezialtransport':
         finalServiceType = 'Spezialtransport';
@@ -200,7 +200,7 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     }
   }
 
-  // Möbel De-/Montage bilgisini ekle (sadece Privatumzug ve Internationaler Umzug için)
+  // Möbel De-/Montage bilgisini ekle (sadece Privatumzug und Auslandumzug için)
   if (formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'international') && formData.furniture_assembly) {
     serviceSpecificDetails.push('Möbel De-/Montage: Ja');
   }
@@ -392,7 +392,6 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     additional_services_piano: formData.additional_piano,
     how_found: howFoundLabel,
     quoteswanted: quotesWantedValue,
-    agree_terms: formData.agree_terms,
     status: 'pending', 
   };
   

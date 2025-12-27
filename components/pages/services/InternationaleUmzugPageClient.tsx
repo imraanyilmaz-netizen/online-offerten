@@ -278,8 +278,8 @@ const InternationaleUmzugPageClient = () => {
     }
   ]
 
-  const metaTitle = "Internationaler Umzug: Kostenlose Offerten vergleichen | Online-Offerten.ch"
-  const metaDescription = "Internationaler Umzug: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa."
+  const metaTitle = "Internationale Umzüge: Kostenlose Offerten vergleichen | Online-Offerten.ch"
+  const metaDescription = "Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa."
   const canonicalUrl = "/internationale-umzuege"
 
   const schema = {
@@ -335,7 +335,7 @@ const InternationaleUmzugPageClient = () => {
                 <p
                   className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium"
                 >
-                  Vergleichen Sie online mehrere geprüfte Umzugsfirmen für Ihren Auslandsumzug in einem Schritt. Erhalten Sie kostenlose Offerten von zertifizierten Speditionen, die auf internationale Umzüge spezialisiert sind. Von der Zollabwicklung bis zur Endmontage – finden Sie den besten Partner für Ihren Umzug nach Deutschland, Österreich, Frankreich, Spanien oder ganz Europa.
+                  Vergleichen Sie online mehrere geprüfte Umzugsfirmen für Ihren internationalen Umzug in einem Schritt. Erhalten Sie kostenlose Offerten von zertifizierten Speditionen, die auf internationale Umzüge spezialisiert sind. Von der Zollabwicklung bis zur Endmontage – finden Sie den besten Partner für Ihren Umzug nach Deutschland, Österreich, Frankreich, Spanien oder ganz Europa.
                 </p>
                 <div className="mb-6">
                   <Button
@@ -390,9 +390,9 @@ const InternationaleUmzugPageClient = () => {
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
               <div>
-                <h2 className="text-3xl font-bold text-slate-800 mb-4">Umzugsfirmen vergleichen für Auslandsumzug: Mehrere Angebote online prüfen</h2>
+                <h2 className="text-3xl font-bold text-slate-800 mb-4">Umzugsfirmen vergleichen für Auslandumzug: Mehrere Angebote online prüfen</h2>
                 <p className="text-slate-600 leading-relaxed mb-4 font-medium">
-                  Planen Sie einen Umzug ins Ausland und suchen nach der besten Umzugsfirma für Ihren Auslandsumzug? Vergleichen Sie mehrere geprüfte Umzugsunternehmen online und finden Sie das beste Angebot. Ob Umzug nach Deutschland, Umzug nach Österreich, Umzug nach Frankreich, Umzug nach Spanien, Umzug nach Italien oder ein anderes europäisches Land – jeder internationale Umzug hat seine eigenen logistischen und administrativen Herausforderungen, insbesondere bei der Zollabwicklung. Die Wahl der richtigen Umzugsfirma ist daher entscheidend für einen stressfreien Ablauf.
+                  Planen Sie einen Umzug ins Ausland und suchen nach der besten Umzugsfirma für Ihren Auslandumzug? Vergleichen Sie mehrere geprüfte Umzugsunternehmen online und finden Sie das beste Angebot. Ob Umzug nach Deutschland, Umzug nach Österreich, Umzug nach Frankreich, Umzug nach Spanien, Umzug nach Italien oder ein anderes europäisches Land – jeder Auslandumzug hat seine eigenen logistischen und administrativen Herausforderungen, insbesondere bei der Zollabwicklung. Die Wahl der richtigen Umzugsfirma ist daher entscheidend für einen stressfreien Ablauf.
                 </p>
                 <p className="text-slate-600 leading-relaxed font-medium">
                   Auf unserer Plattform können Sie online mehrere Umzugsfirmen vergleichen und mit nur einer Anfrage kostenlose Offerten von geprüften Speditionen erhalten, die auf internationale Transporte spezialisiert sind. Diese Experten kennen die spezifischen Bestimmungen des Ziellandes, kümmern sich um die notwendigen Papiere und sorgen dafür, dass Ihr Hab und Gut sicher und pünktlich ankommt. Durch den direkten Vergleich mehrerer Firmen sparen Sie nicht nur Zeit und Nerven, sondern auch bis zu 40% der Umzugskosten.
@@ -402,7 +402,7 @@ const InternationaleUmzugPageClient = () => {
               <div
                 className="bg-white p-6 md:p-8 rounded-xl shadow-2xl border border-slate-100"
               >
-                <h3 className="text-2xl font-semibold text-slate-700 mb-6">Unser Service für Ihren Auslandsumzug</h3>
+                <h3 className="text-2xl font-semibold text-slate-700 mb-6">Unser Service für Ihren internationalen Umzug</h3>
                 <ul className="space-y-4">
                   {services.map((service, index) => (
                     <li 

@@ -172,10 +172,10 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             },
             {
               "@type": "Question",
-              "name": "Kann ich auch für internationale Umzüge eine Umzugsfirma in der Nähe finden?",
+              "name": "Kann ich auch für Auslandumzüge eine Umzugsfirma in der Nähe finden?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ja, viele Umzugsunternehmen in der Schweiz bieten auch internationale Umzüge an. Auch wenn die Zielregion im Ausland liegt, können lokale Umzugsanbieter mit internationaler Expertise die beste Wahl sein. Sie können in Ihrer Anfrage angeben, dass es sich um einen internationalen Umzug handelt, und erhalten Offerten von spezialisierten Anbietern."
+                "text": "Ja, viele Umzugsunternehmen in der Schweiz bieten auch Auslandumzüge an. Auch wenn die Zielregion im Ausland liegt, können lokale Umzugsanbieter mit internationaler Expertise die beste Wahl sein. Sie können in Ihrer Anfrage angeben, dass es sich um einen Auslandumzug handelt, und erhalten Offerten von spezialisierten Anbietern."
               }
             },
             {
@@ -306,8 +306,8 @@ const UmzugsfirmaInDerNaehePageClient = () => {
       a: "Eine professionelle Offerte sollte folgende Informationen enthalten: Gesamtpreis mit detaillierter Aufschlüsselung, alle enthaltenen Leistungen (Verpackung, Transport, Montage/Demontage), Versicherungsschutz und Deckungssumme, Umzugsdatum und Zeitfenster, Anzahl der Umzugshelfer und Fahrzeuge, Zusatzleistungen und deren Kosten, Zahlungsbedingungen und Stornierungsbedingungen. Achten Sie darauf, dass alle Leistungen schriftlich festgehalten sind. Eine seriöse Umzugsfirma bietet transparente Offerten ohne versteckte Kosten."
     },
     {
-      q: "Kann ich auch für internationale Umzüge eine Umzugsfirma in der Nähe finden?",
-      a: "Ja, viele Umzugsunternehmen in der Schweiz bieten auch internationale Umzüge an. Auch wenn die Zielregion im Ausland liegt, können lokale Umzugsanbieter mit internationaler Expertise die beste Wahl sein. Sie können in Ihrer Anfrage angeben, dass es sich um einen internationalen Umzug handelt, und erhalten Offerten von spezialisierten Anbietern. Internationale Umzüge erfordern zusätzliche Planung und Dokumentation, daher sollten Sie diese frühzeitig anfragen."
+      q: "Kann ich auch für Auslandumzüge eine Umzugsfirma in der Nähe finden?",
+      a: "Ja, viele Umzugsunternehmen in der Schweiz bieten auch Auslandumzüge an. Auch wenn die Zielregion im Ausland liegt, können lokale Umzugsanbieter mit internationaler Expertise die beste Wahl sein. Sie können in Ihrer Anfrage angeben, dass es sich um einen Auslandumzug handelt, und erhalten Offerten von spezialisierten Anbietern. Auslandumzüge erfordern zusätzliche Planung und Dokumentation, daher sollten Sie diese frühzeitig anfragen."
     },
     {
       q: "Wie kann ich bei einer Umzugsfirma in der Nähe sparen?",

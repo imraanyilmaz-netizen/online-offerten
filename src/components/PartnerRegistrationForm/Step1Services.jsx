@@ -9,7 +9,7 @@ const mainCategories = [
   { id: 'umzug', label: 'Umzug', icon: Truck, services: [
     { id: 'privatumzug', label: 'Privatumzug', desc: 'Wohnung, Haus, WG-Zimmer' },
     { id: 'geschaeftsumzug', label: 'Geschäftsumzug', desc: 'Büro, Ladenlokal, Werkstatt' },
-    { id: 'internationaler_umzug', label: 'Internationaler Umzug', desc: 'Umzüge ins oder aus dem Ausland' },
+    { id: 'internationaler_umzug', label: 'Auslandumzug', desc: 'Umzüge ins oder aus dem Ausland' },
     { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
     { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
     { id: 'moebellift_service', label: 'Möbellift', desc: 'Bis 400 kg, max. 27m Länge', icon: Wind },

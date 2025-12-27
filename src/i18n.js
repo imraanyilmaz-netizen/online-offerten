@@ -10,7 +10,7 @@ const getPageNamespaceFromPath = (path) => {
   const cleanPath = path.replace(/^\/en\//, '/').replace(/^\/en$/, '/');
   
   // Sadece mevcut namespace'ler:
-  // - internationaleUmzugPage (internationale-umzuege sayfası için)
+  // - internationaleUmzugPage (auslandumzug sayfası için)
   // - locationPageNav (location sayfaları için)
   // - newCustomerForm (form sayfası için)
   

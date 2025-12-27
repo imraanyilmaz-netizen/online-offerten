@@ -157,7 +157,7 @@ const UmzugsfirmaZurichPageClient = () => {
                 <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed font-medium break-words">
                   Kostenlose Offerten von geprüften Umzugsfirmen in{' '}
                   <span className="font-semibold text-green-600 underline decoration-green-400 decoration-1">Zürich</span>{' '}
-                  vergleichen und die beste Firma für Ihren Umzug finden. Professionelle Zügelfirmen in Zürich bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, internationale Umzüge und Spezialtransporte. Qualitativ hochwertige Umzugsunternehmen mit Reinigung, Räumung, Entsorgung und Lagerung. Mehrere Anbieter vergleichen und bis zu 40% sparen!
+                  vergleichen und die beste Firma für Ihren Umzug finden. Professionelle Zügelfirmen in Zürich bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Qualitativ hochwertige Umzugsunternehmen mit Reinigung, Räumung, Entsorgung und Lagerung. Mehrere Anbieter vergleichen und bis zu 40% sparen!
                 </p>
                 
                 <div className="mb-4">

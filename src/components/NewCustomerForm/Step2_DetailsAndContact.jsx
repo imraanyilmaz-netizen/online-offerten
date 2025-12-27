@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Home, Building, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText, ShieldCheck } from 'lucide-react';
+import { Home, Building, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { countries } from '@/data/countries';
@@ -697,18 +697,6 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
            {errors && errors.quotes_wanted && <p className="text-xs text-red-500 mt-1">{errors.quotes_wanted}</p>}
         </SectionCard>
       </div>
-
-      <SectionCard icon={<ShieldCheck className="w-6 h-6 text-green-600" />} titleKey="step3.termsTitle">
-        <div className="flex items-start space-x-2.5">
-            <Checkbox id="agree_terms" name="agree_terms" checked={formData.agree_terms || false} onCheckedChange={(checked) => handleCheckboxChange('agree_terms', checked)} className="mt-0.5 h-4 w-4 accent-green-600"/>
-            <Label htmlFor="agree_terms" className="text-sm sm:text-base font-normal text-slate-600">
-              <Trans i18nKey="step3.termsLabel" ns="newCustomerForm">
-                Ich stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert und verarbeitet werden. Ich akzeptiere die <Link href="/datenschutz" target="_blank" className="text-green-600 hover:underline">Datenschutzbestimmungen</Link> und <Link href="/agb" target="_blank" className="text-green-600 hover:underline">AGB</Link>.
-              </Trans>
-            </Label>
-        </div>
-        {errors && errors.agree_terms && <p className="text-sm text-red-500 mt-1 ml-7">{errors.agree_terms}</p>}
-      </SectionCard>
     </div>
   );
 };

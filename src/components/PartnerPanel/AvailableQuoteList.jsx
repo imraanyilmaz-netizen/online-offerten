@@ -54,7 +54,7 @@ const AddressBox = ({ title, icon: Icon, quote, type }) => {
     
     const country = countries.find(c => c.code === countryCode);
 
-    const isInternational = quote.servicetype === 'Internationalumzug';
+    const isInternational = quote.servicetype === 'Auslandumzug';
     
     return (
         <div>
@@ -224,7 +224,7 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                             <EmailConfirmationDetail quote={quote} />
                             {serviceCategory === 'moving' && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
                             {serviceCategory === 'moving' && quote.additional_services_piano && <QuoteDetail label="Klaviertransport" value="Ja" />}
-                            {serviceCategory === 'moving' && (quote.umzugart === 'Privatumzug' || quote.umzugart === 'Internationalumzug') && quote.services_detail1 && quote.services_detail1.includes('Möbel De-/Montage: Ja') && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
+                            {serviceCategory === 'moving' && (quote.umzugart === 'Privatumzug' || quote.umzugart === 'Auslandumzug') && quote.services_detail1 && quote.services_detail1.includes('Möbel De-/Montage: Ja') && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
                             {serviceCategory === 'moving' && <QuoteDetail label="Spezialtransport Art" value={quote.special_transport_type} />}
                             {serviceCategory === 'moving' && <QuoteDetail label="Details Spezialtransport" value={quote.special_transport_other_details} className="md:col-span-2"/>}
                             

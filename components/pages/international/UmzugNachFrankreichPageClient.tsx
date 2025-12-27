@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Briefcase, Sparkles, Trash2, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Briefcase, Sparkles, Trash2, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
@@ -24,7 +24,7 @@ const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 flex items-center">
-      <Icon size={36} className="mr-4 text-green-600" />
+      {Icon && <Icon size={36} className="mr-4 text-green-600" />}
       {title}
     </h2>
   );
@@ -42,7 +42,7 @@ const UmzugNachFrankreichPageClient = () => {
 
   const metaTitle = "Umzug nach Frankreich: Umfassender Guide & Kosten 2025";
   const metaDescription = "Ihr kompletter Ratgeber für den Umzug von der Schweiz nach Frankreich. Erfahren Sie alles über Kosten, Zoll, Planung und finden Sie die besten Umzugsfirmen. Inklusive FAQ und Checkliste.";
-  const metaKeywords = "umzug nach frankreich, umzug schweiz frankreich, umzugsfirma schweiz frankreich, internationaler umzug frankreich, umzug nach paris, umzug nach lyon, umzug nach marseille, umzugsfirma international, zügelfirma schweiz frankreich, umzug schweiz nach frankreich, umzugskosten schweiz frankreich, umzugsfirma vergleichen frankreich, günstiger umzug frankreich, umzug nach frankreich preise, umzug nach frankreich kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug frankreich";
+  const metaKeywords = "umzug nach frankreich, umzug schweiz frankreich, umzugsfirma schweiz frankreich, internationaler umzug frankreich, umzug nach paris, umzug nach lyon, umzug nach marseille, umzugsfirma international, zügelfirma schweiz frankreich, umzug schweiz nach frankreich, umzugskosten schweiz frankreich, umzugsfirma vergleichen frankreich, günstiger umzug frankreich, umzug nach frankreich preise, umzug nach frankreich kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge frankreich";
 
   const costTable = [
     { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "2.000 – 3.500 CHF" },
@@ -150,7 +150,7 @@ const UmzugNachFrankreichPageClient = () => {
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-10">
               <Section className="border-t-0 pt-0">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Ihr Weg nach Frankreich: Ein Leitfaden für den perfekten Start</h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-4">Ein Umzug von der Schweiz nach Frankreich ist mehr als nur ein Transport von A nach B. Es ist der Beginn eines neuen Lebenskapitels, geprägt von einer reichen Kultur, exzellenter Küche und malerischen Landschaften. Doch bevor Sie das 'Savoir-vivre' geniessen können, steht eine sorgfältige Planung an. Die administrativen und logistischen Hürden eines internationalen Umzugs können komplex sein, insbesondere im Hinblick auf Zollbestimmungen und die Auswahl des richtigen Partners.</p>
+                <p className="text-lg text-gray-600 leading-relaxed mb-4">Ein Umzug von der Schweiz nach Frankreich ist mehr als nur ein Transport von A nach B. Es ist der Beginn eines neuen Lebenskapitels, geprägt von einer reichen Kultur, exzellenter Küche und malerischen Landschaften. Doch bevor Sie das 'Savoir-vivre' geniessen können, steht eine sorgfältige Planung an. Die administrativen und logistischen Hürden eines Auslandumzugs können komplex sein, insbesondere im Hinblick auf Zollbestimmungen und die Auswahl des richtigen Partners.</p>
                 <p className="text-gray-700 leading-relaxed">Dieser umfassende Leitfaden soll Ihnen als verlässlicher Kompass dienen. Wir beleuchten alle wichtigen Aspekte Ihres Umzugs: von der detaillierten Kostenkalkulation über die notwendigen Zollformalitäten bis hin zur strategischen Auswahl der passenden Umzugsfirma. Das Ziel ist es, Ihnen nicht nur Geld und Zeit zu sparen, sondern auch den Stress zu minimieren, damit Ihre Ankunft in Frankreich so entspannt wie möglich verläuft.</p>
                  <p className="text-gray-700 leading-relaxed mt-4">Durch den Vergleich von qualifizierten, auf Frankreich-Umzüge spezialisierten Unternehmen stellen Sie sicher, dass Ihr wertvolles Umzugsgut in erfahrenen Händen ist. So können Sie sich auf die Vorfreude konzentrieren – auf Croissants zum Frühstück, Spaziergänge an der Seine oder die Sonne an der Côte d'Azur.</p>
               </Section>
@@ -189,7 +189,7 @@ const UmzugNachFrankreichPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Was kostet ein Umzug von der Schweiz nach Frankreich?" />
+                <SectionTitle title="Was kostet ein Umzug von der Schweiz nach Frankreich?" />
                 <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug nach Frankreich variieren stark und hängen von diversen Faktoren ab. Das Volumen Ihres Haushalts, die Distanz (z.B. Genf-Paris vs. Zürich-Nizza), die Zugänglichkeit der Wohnungen und der Umfang der gewünschten Dienstleistungen sind die Hauptpreistreiber. Die folgende Tabelle gibt Ihnen eine erste Orientierung.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
@@ -24,7 +24,7 @@ const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 flex items-center">
-      <Icon size={36} className="mr-4 text-green-600" />
+      {Icon && <Icon size={36} className="mr-4 text-green-600" />}
       {title}
     </h2>
   );
@@ -42,7 +42,7 @@ const UmzugNachOesterreichPageClient = () => {
 
   const metaTitle = "Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2025";
   const metaDescription = "Ihr kompletter Leitfaden für den Umzug von der Schweiz nach Österreich. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Firmen für Transport und Reinigung.";
-  const metaKeywords = "umzug nach österreich, umzug schweiz österreich, umzugsfirma schweiz österreich, internationaler umzug österreich, umzug nach wien, umzug nach salzburg, umzug nach graz, umzugsfirma international, zügelfirma schweiz österreich, umzug schweiz nach österreich, umzugskosten schweiz österreich, umzugsfirma vergleichen österreich, günstiger umzug österreich, umzug nach österreich preise, umzug nach österreich kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug österreich";
+  const metaKeywords = "umzug nach österreich, umzug schweiz österreich, umzugsfirma schweiz österreich, internationaler umzug österreich, umzug nach wien, umzug nach salzburg, umzug nach graz, umzugsfirma international, zügelfirma schweiz österreich, umzug schweiz nach österreich, umzugskosten schweiz österreich, umzugsfirma vergleichen österreich, günstiger umzug österreich, umzug nach österreich preise, umzug nach österreich kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge österreich";
 
   const costTable = [
     { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "1.800 – 3.200 CHF" },
@@ -180,7 +180,7 @@ const UmzugNachOesterreichPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Die Kosten im Blick: Was kostet ein Umzug nach Österreich?" />
+                <SectionTitle title="Die Kosten im Blick: Was kostet ein Umzug nach Österreich?" />
                 <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Österreich hängen vom Volumen, der Distanz (z.B. Genf-Wien vs. St. Gallen-Bregenz) und dem gewünschten Servicelevel ab. Die folgende Tabelle gibt Ihnen eine erste Orientierung.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">

@@ -106,7 +106,6 @@ const useNewFormValidation = (formData) => {
         if (!formData.phone) step2errors.phone = t('errors.phoneRequired');
         if (!formData.move_date) step2errors.move_date = t('errors.dateRequired');
         if (!formData.quotes_wanted) step2errors.quotes_wanted = t('errors.quotesWantedRequired');
-        if (!formData.agree_terms) step2errors.agree_terms = t('errors.agreeTermsMissing'); 
         
         return step2errors;
     };

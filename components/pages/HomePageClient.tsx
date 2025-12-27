@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { 
-  CheckCircle2, Home, Sparkles, Recycle, ChevronRight, Paintbrush, Sprout,
+  CheckCircle2, Home, Sparkles, ChevronRight, Paintbrush, Sprout,
   FileText, GitCompareArrows, Award, KeyRound as UsersRound,
   MapPin, Calculator, ListChecks, BookOpen, ArrowRight,
   Star, User, ChevronLeft, Send, Loader2, HelpCircle,
@@ -21,45 +21,6 @@ import { motion } from 'framer-motion';
 import { formatDate, cn } from '@/lib/utils';
 import { getGermanServiceName } from '@/lib/dataMapping';
 import { locations } from '@/data/locations';
-
-// Service Card Component
-interface ServiceCardProps {
-  serviceId: string;
-  label: string;
-  subLabel: string;
-  icon: React.ReactNode;
-  onClick: (serviceId: string) => void;
-  isSelected: boolean;
-  colors: string;
-}
-
-const ServiceCard = React.memo(({ serviceId, label, subLabel, icon, onClick, isSelected, colors }: ServiceCardProps) => {
-  return (
-    <div
-      className="w-full cursor-pointer"
-      onClick={() => onClick(serviceId)}
-    >
-      <div className={`w-full bg-white border rounded-lg p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-all duration-200 group ${
-        isSelected 
-          ? 'border-green-500 ring-2 ring-green-500/50 bg-green-50/50' 
-          : 'border-gray-200 hover:border-gray-300'
-      }`}>
-        <div className="flex items-center flex-1">
-          {icon && (
-            <div className={`mr-4 p-2.5 rounded-full ${colors} flex-shrink-0`}>
-              {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement, { size: 20, className: 'text-current' }) : icon}
-            </div>
-          )}
-          <div className="flex-1 min-w-0 text-left">
-            <div className="font-semibold text-base text-gray-800 mb-0.5">{label}</div>
-            <div className="text-sm text-gray-500 truncate">{subLabel}</div>
-          </div>
-        </div>
-        <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 ml-2" />
-      </div>
-    </div>
-  );
-});
 
 // Review Card Component
 interface ReviewCardProps {
@@ -204,7 +165,6 @@ interface HomePageClientProps {
 
 const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClientProps) => {
   const router = useRouter();
-  const [selectedService, setSelectedService] = useState<string | null>(null);
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>('umzug');
   const [isMounted, setIsMounted] = useState(false);
   
@@ -225,20 +185,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // SEO Data - Optimized with keyword variations to avoid stuffing
-  const metaTitle = "Kostenlose Offerten für Umzug, Reinigung & Renovierung | Online-Offerten.ch";
   const metaDescription = "Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen aus Ihrer Region anfordern. Mehrere Angebote vergleichen und bis zu 40% sparen.";
-  // Meta keywords removed - Google no longer uses meta keywords for ranking
-
-  // Services - SEO optimized with keyword variations
-  const services = useMemo(() => [
-    { id: 'umzug', label: 'Offerten für Umzüge anfordern', subLabel: 'Privat · Geschäftlich · International', icon: <Home />, colors: 'bg-blue-100 text-blue-600' },
-    { id: 'reinigung', label: 'Reinigungsofferten vergleichen', subLabel: 'Umzugs-, Büro- & Fensterreinigung', icon: <Sparkles />, colors: 'bg-yellow-100 text-yellow-500' },
-    { id: 'maler', label: 'Offerten für Malerarbeiten erhalten', subLabel: 'Innen- & Aussenanstrich · Fassadenarbeiten', icon: <Paintbrush />, colors: 'bg-pink-100 text-pink-500' },
-    { id: 'raeumung', label: 'Räumung & Entsorgung', subLabel: 'Wohnungsräumung & Entrümpelung', icon: <Recycle />, colors: 'bg-purple-100 text-purple-500' },
-    { id: 'garten', label: 'Preisvergleich für Gartenarbeiten', subLabel: 'Gartenpflege & Landschaftsbau', icon: <Sprout />, colors: 'bg-green-100 text-green-600' },
-  ], []);
-
-  const features = ['Mit einer Anfrage mehrere Anbieter finden', 'Offerten vergleichen', 'Geprüfte Firmen aus Ihrer Region', 'Unverbindlich und gratis'];
 
   // Structured Data - SEO Optimized
   const structuredData = useMemo(() => ({
@@ -282,17 +229,9 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   }), []);
 
   // Handlers
-  const handleServiceSelection = useCallback((serviceType: string) => {
-    setSelectedService(prevService => prevService === serviceType ? null : serviceType);
-  }, []);
-
   const handleStartRequest = useCallback(() => {
-    if (selectedService) {
-      router.push(`/kostenlose-offerte-anfordern?service=${selectedService}`);
-    } else {
-      router.push('/kostenlose-offerte-anfordern');
-    }
-  }, [selectedService, router]);
+    router.push('/kostenlose-offerte-anfordern');
+  }, [router]);
 
   // Fetch Reviews - lazy load Supabase to reduce initial bundle
   useEffect(() => {
@@ -364,17 +303,25 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     fetchPosts();
   }, [initialPosts]);
 
-  // Scroll handlers
-  const checkScrollability = () => {
+  // Scroll handlers - optimized with useCallback
+  const getVisibleCardsCount = useCallback(() => {
+    if (typeof window === 'undefined') return 1;
+    const width = window.innerWidth;
+    if (width >= 1024) return 3;
+    if (width >= 640) return 2;
+    return 1;
+  }, []);
+
+  const checkScrollability = useCallback(() => {
     const el = scrollContainerRef.current;
     if (el) {
       const hasOverflow = el.scrollWidth > el.clientWidth;
       setCanScrollLeft(el.scrollLeft > 0);
       setCanScrollRight(hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
     }
-  };
+  }, []);
 
-  const checkPostsScrollability = () => {
+  const checkPostsScrollability = useCallback(() => {
     const el = postsScrollRef.current;
     if (el) {
       const hasOverflow = el.scrollWidth > el.clientWidth;
@@ -384,13 +331,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
       const containerWidth = el.clientWidth;
       const scrollLeft = el.scrollLeft;
       const gap = 24;
-      const getVisibleCardsCount = () => {
-        if (typeof window === 'undefined') return 1;
-        const width = window.innerWidth;
-        if (width >= 1024) return 3;
-        if (width >= 640) return 2;
-        return 1;
-      };
       const visibleCards = getVisibleCardsCount();
       const cardWidth = containerWidth / visibleCards;
       const cardWidthWithGap = cardWidth + gap;
@@ -398,7 +338,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
       const totalPages = Math.ceil(posts.length / visibleCards);
       setCurrentIndex(Math.min(Math.max(0, pageIndex), totalPages - 1));
     }
-  };
+  }, [posts.length, getVisibleCardsCount]);
 
   useEffect(() => {
     const el = scrollContainerRef.current;
@@ -410,7 +350,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
         el.removeEventListener('scroll', checkScrollability);
       };
     }
-  }, []);
+  }, [checkScrollability]);
 
   useEffect(() => {
     const el = postsScrollRef.current;
@@ -423,36 +363,28 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
         window.removeEventListener('resize', checkPostsScrollability);
       };
     }
-  }, [posts.length]);
+  }, [posts.length, checkPostsScrollability]);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = useCallback((direction: 'left' | 'right') => {
     const el = scrollContainerRef.current;
     if (el) {
       const scrollAmount = el.clientWidth * 0.9;
       el.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
-  };
+  }, []);
 
-  const scrollPosts = (direction: 'left' | 'right') => {
+  const scrollPosts = useCallback((direction: 'left' | 'right') => {
     const el = postsScrollRef.current;
     if (el) {
       const scrollAmount = el.clientWidth * 0.85;
       el.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
-  };
+  }, []);
 
-  const getVisibleCardsCount = () => {
-    if (typeof window === 'undefined') return 1;
-    const width = window.innerWidth;
-    if (width >= 1024) return 3;
-    if (width >= 640) return 2;
-    return 1;
-  };
+  const visibleCards = useMemo(() => getVisibleCardsCount(), [getVisibleCardsCount]);
+  const totalPages = useMemo(() => Math.ceil(posts.length / visibleCards), [posts.length, visibleCards]);
 
-  const visibleCards = getVisibleCardsCount();
-  const totalPages = Math.ceil(posts.length / visibleCards);
-
-  const scrollToIndex = (index: number) => {
+  const scrollToIndex = useCallback((index: number) => {
     const el = postsScrollRef.current;
     if (el) {
       const containerWidth = el.clientWidth;
@@ -461,11 +393,15 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
       const cardWidthWithGap = cardWidth + gap;
       el.scrollTo({ left: index * cardWidthWithGap, behavior: 'smooth' });
     }
-  };
+  }, [visibleCards]);
 
   return (
     <>
-      
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="flex flex-col">
         <main className="flex-grow">
         {/* Hero Section - SEO Optimized */}
@@ -475,11 +411,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
         >
             <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-12 items-center">
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                >
+                <div>
                   <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-6">
                     100% kostenlos
                   </div>
@@ -490,7 +422,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     Bis zu 40% sparen durch Vergleich
                   </p>
                   <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                    Wählen Sie einen Service und vergleichen Sie mehrere Offerten von geprüften Anbietern. Erhalten Sie bis zu 6 kostenlose Offerten für Umzug, Reinigung oder Renovierung – <strong>100% kostenlos, unverbindlich und transparent</strong>.
+                    Wählen Sie einen Service und vergleichen Sie mehrere Offerten von geprüften Anbietern. Erhalten Sie bis zu 4 kostenlose Offerten für Umzug, Reinigung oder Renovierung – <strong>100% kostenlos, unverbindlich und transparent</strong>.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button
@@ -530,20 +462,16 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       <span>Bis zu 40% sparen</span>
                     </div>
                   </div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="relative"
-                >
+                </div>
+                <div className="relative">
                   <div className="flex items-center justify-center mb-6">
                     <img 
                       src="/image/online-offerten.avif" 
                       alt="Online Offerten" 
                       className="w-full h-auto max-w-md rounded-lg"
-                      loading="lazy"
+                      loading="eager"
                       decoding="async"
+                      fetchPriority="high"
                     />
                   </div>
                   <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
@@ -581,7 +509,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </section>
@@ -778,17 +706,17 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {/* Umzug */}
-                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-teal-500 p-5">
+                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-teal-500 p-6 md:p-7">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 rounded-lg bg-teal-50">
-                      <Home className="w-5 h-5 text-teal-600" />
+                    <div className="p-2.5 rounded-lg bg-teal-50">
+                      <Home className="w-6 h-6 text-teal-600" />
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold text-teal-600">Umzug</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-teal-600">Umzug</h3>
                   </div>
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                     Vergleichen Sie Umzug Offerten von professionellen Umzugsfirmen.
                   </p>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-3">
                     {[
                       { to: '/privatumzug', title: 'Privatumzug' },
                       { to: '/geschaeftsumzug', title: 'Geschäftsumzug' },
@@ -798,10 +726,10 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     ].map((service) => (
                       <li key={service.to}>
                         <Link href={service.to}
-                          className="group flex items-center text-gray-700 hover:text-teal-600 transition-colors text-xs md:text-sm"
+                          className="group flex items-center text-gray-700 hover:text-teal-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-teal-50"
                         >
-                          <ArrowRight className="w-3 h-3 mr-1.5 text-teal-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline">{service.title}</span>
+                          <ArrowRight className="w-5 h-5 mr-2.5 text-teal-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline font-semibold">{service.title}</span>
                         </Link>
                       </li>
                     ))}
@@ -809,17 +737,17 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 </div>
 
                 {/* Reinigung */}
-                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-yellow-500 p-5">
+                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-yellow-500 p-6 md:p-7">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 rounded-lg bg-yellow-50">
-                      <Sparkles className="w-5 h-5 text-yellow-600" />
+                    <div className="p-2.5 rounded-lg bg-yellow-50">
+                      <Sparkles className="w-6 h-6 text-yellow-600" />
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold text-yellow-600">Reinigung</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-yellow-600">Reinigung</h3>
                   </div>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <p className="text-gray-600 mb-4 text-base leading-relaxed">
                     Vergleichen Sie Reinigung Offerten von professionellen Reinigungsfirmen.
                   </p>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-3">
                     {[
                       { to: '/wohnungsreinigung', title: 'Wohnungsreinigung' },
                       { to: '/hausreinigung', title: 'Hausreinigung' },
@@ -832,10 +760,10 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     ].map((service) => (
                       <li key={service.to}>
                         <Link href={service.to}
-                          className="group flex items-center text-gray-700 hover:text-yellow-600 transition-colors text-xs md:text-sm"
+                          className="group flex items-center text-gray-700 hover:text-yellow-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-yellow-50"
                         >
-                          <ArrowRight className="w-3 h-3 mr-1.5 text-yellow-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline">{service.title}</span>
+                          <ArrowRight className="w-5 h-5 mr-2.5 text-yellow-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline font-semibold">{service.title}</span>
                         </Link>
                       </li>
                     ))}
@@ -843,25 +771,25 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 </div>
 
                 {/* Malerarbeiten & Gartenarbeiten */}
-                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-blue-500 p-5">
+                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-blue-500 p-6 md:p-7">
                   {/* Malerarbeiten */}
                   <div className="mb-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg bg-blue-50">
-                        <Paintbrush className="w-5 h-5 text-blue-600" />
+                      <div className="p-2.5 rounded-lg bg-blue-50">
+                        <Paintbrush className="w-6 h-6 text-blue-600" />
                       </div>
-                      <h3 className="text-lg md:text-xl font-bold text-blue-600">Malerarbeiten</h3>
+                      <h3 className="text-xl md:text-2xl font-bold text-blue-600">Malerarbeiten</h3>
                     </div>
-                    <p className="text-gray-600 mb-3 text-sm leading-relaxed">
+                    <p className="text-gray-600 mb-3 text-base leading-relaxed">
                       Vergleichen Sie Maler Offerten von professionellen Malerfirmen.
                     </p>
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-3">
                       <li>
                         <Link href="/malerarbeiten"
-                          className="group flex items-center text-gray-700 hover:text-blue-600 transition-colors text-xs md:text-sm"
+                          className="group flex items-center text-gray-700 hover:text-blue-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-blue-50"
                         >
-                          <ArrowRight className="w-3 h-3 mr-1.5 text-blue-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline">Malerarbeiten</span>
+                          <ArrowRight className="w-5 h-5 mr-2.5 text-blue-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline font-semibold">Malerarbeiten</span>
                         </Link>
                       </li>
                     </ul>
@@ -870,21 +798,21 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   {/* Gartenarbeiten */}
                   <div className="border-t border-gray-200 pt-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg bg-green-50">
-                        <Sprout className="w-5 h-5 text-green-600" />
+                      <div className="p-2.5 rounded-lg bg-green-50">
+                        <Sprout className="w-6 h-6 text-green-600" />
                       </div>
-                      <h3 className="text-lg md:text-xl font-bold text-green-600">Gartenarbeiten</h3>
+                      <h3 className="text-xl md:text-2xl font-bold text-green-600">Gartenarbeiten</h3>
                     </div>
-                    <p className="text-gray-600 mb-3 text-sm leading-relaxed">
+                    <p className="text-gray-600 mb-3 text-base leading-relaxed">
                       Vergleichen Sie Gartenarbeiten Offerten von professionellen Gartenfirmen.
                     </p>
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-3">
                       <li>
                         <Link href="/gartenarbeiten"
-                          className="group flex items-center text-gray-700 hover:text-green-600 transition-colors text-xs md:text-sm"
+                          className="group flex items-center text-gray-700 hover:text-green-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-green-50"
                         >
-                          <ArrowRight className="w-3 h-3 mr-1.5 text-green-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline">Gartenarbeiten</span>
+                          <ArrowRight className="w-5 h-5 mr-2.5 text-green-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline font-semibold">Gartenarbeiten</span>
                         </Link>
                       </li>
                     </ul>
@@ -1230,7 +1158,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     {
                       value: "faq-7",
                       question: "Für welche Dienstleistungen kann ich Offerten anfordern?",
-                      answer: "Sie können Offerten für Umzüge (Privatumzug, Geschäftsumzug, internationale Umzüge, Spezialtransporte), Reinigungsdienstleistungen (Wohnungsreinigung, Büroreinigung, Umzugsreinigung, Grundreinigung), Malerarbeiten (Innen- und Aussenanstriche) sowie Gartenpflege anfordern. Unser Netzwerk umfasst geprüfte Partnerfirmen für alle diese Bereiche in der ganzen Schweiz."
+                      answer: "Sie können Offerten für Umzüge (Privatumzug, Geschäftsumzug, Auslandumzug, Spezialtransporte), Reinigungsdienstleistungen (Wohnungsreinigung, Büroreinigung, Umzugsreinigung, Grundreinigung), Malerarbeiten (Innen- und Aussenanstriche) sowie Gartenpflege anfordern. Unser Netzwerk umfasst geprüfte Partnerfirmen für alle diese Bereiche in der ganzen Schweiz."
                     }
                   ].map((item, index) => (
                     <motion.div

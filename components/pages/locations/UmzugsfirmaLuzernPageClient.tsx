@@ -75,7 +75,7 @@ const UmzugsfirmaLuzernPageClient = () => {
     { title: "Spezialtransporte", icon: Package, text: "Klaviertransport, Tresortransport und Transport von Kunstgegenständen. Professionelle Spezialisten für empfindliche Güter." },
     { title: "Umzugsreinigung", icon: Sparkles, text: "Endreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe an Ihren Vermieter." },
     { title: "Lagerung", icon: Truck, text: "Sichere Einlagerung Ihrer Möbel und Kartons für kurze oder längere Zeiträume." },
-    { title: "Internationale Umzüge", icon: Globe, text: "Umzüge ins oder aus dem Ausland. Professionelle Zollabwicklung und internationale Logistik." }
+    { title: "Auslandumzug", icon: Globe, text: "Umzüge ins oder aus dem Ausland. Professionelle Zollabwicklung und internationale Logistik." }
   ];
 
   const advantages = [
@@ -197,7 +197,7 @@ const UmzugsfirmaLuzernPageClient = () => {
                 <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed font-medium break-words overflow-wrap-anywhere" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }} itemProp="description">
                   Umzugsfirma Luzern vergleichen: Kostenlose Offerten von geprüften Umzugsfirmen in{' '}
                   <span className="font-semibold text-green-600 underline decoration-green-400 decoration-1">Luzern</span>{' '}
-                  und der Zentralschweiz. Professionelle Zügelfirmen in Luzern bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, internationale Umzüge und Spezialtransporte. Qualitativ hochwertige Umzugsunternehmen mit Reinigung, Räumung, Entsorgung und Lagerung. Mehrere Anbieter vergleichen und bis zu 40% sparen!
+                  und der Zentralschweiz. Professionelle Zügelfirmen in Luzern bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Qualitativ hochwertige Umzugsunternehmen mit Reinigung, Räumung, Entsorgung und Lagerung. Mehrere Anbieter vergleichen und bis zu 40% sparen!
                 </p>
                 
                 <div className="mb-4">

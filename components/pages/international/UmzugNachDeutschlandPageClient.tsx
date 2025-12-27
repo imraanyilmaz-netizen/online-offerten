@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Euro, FileText, Briefcase, Sparkles, Trash2, ShieldCheck, Home, Info, Truck } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Briefcase, Sparkles, Trash2, ShieldCheck, Home, Info, Truck } from 'lucide-react';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
 const Section = ({ children, className = '' }: any) => (
@@ -41,7 +41,7 @@ const UmzugNachDeutschlandPageClient = () => {
 
   const metaTitle = "Umzug nach Deutschland | Umzugsfirmen aus der Schweiz vergleichen";
   const metaDescription = "Planen Sie Ihren Umzug von der Schweiz nach Deutschland? Vergleichen Sie hier professionelle Umzugsfirmen für Privatumzug, Geschäftsumzug, Reinigung und Entsorgung. Holen Sie sich jetzt kostenlose Offerten.";
-  const metaKeywords = "umzug nach deutschland, umzug schweiz deutschland, umzugsfirma schweiz deutschland, internationaler umzug deutschland, umzug nach berlin, umzug nach münchen, umzug nach hamburg, umzug nach frankfurt, umzugsfirma international, zügelfirma schweiz deutschland, umzug schweiz nach deutschland, umzugskosten schweiz deutschland, umzugsfirma vergleichen deutschland, günstiger umzug deutschland, umzug nach deutschland preise, umzug nach deutschland kosten, umzugsfirma schweiz, internationaler umzug, auslandsumzug deutschland";
+  const metaKeywords = "umzug nach deutschland, umzug schweiz deutschland, umzugsfirma schweiz deutschland, internationaler umzug deutschland, umzug nach berlin, umzug nach münchen, umzug nach hamburg, umzug nach frankfurt, umzugsfirma international, zügelfirma schweiz deutschland, umzug schweiz nach deutschland, umzugskosten schweiz deutschland, umzugsfirma vergleichen deutschland, günstiger umzug deutschland, umzug nach deutschland preise, umzug nach deutschland kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge deutschland";
 
   const costTable = [
     { size: "1-2 Zimmer (ca. 15-25 m³)", cost: "1.800 – 3.200 CHF" },
@@ -174,7 +174,7 @@ const UmzugNachDeutschlandPageClient = () => {
               </Section>
 
               <Section>
-                <SectionTitle icon={Euro} title="Was kostet ein Umzug von der Schweiz nach Deutschland?" />
+                <SectionTitle title="Was kostet ein Umzug von der Schweiz nach Deutschland?" />
                 <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen internationalen Umzug hängen von vielen Faktoren ab. Dazu gehören das Volumen des Umzugsguts (in m³), die Distanz zwischen dem alten und neuen Wohnort, die Zugänglichkeit der Wohnungen (Stockwerk, Lift) und die gewünschten Zusatzleistungen wie Verpackungsservice, Möbelmontage oder die Endreinigung.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">
@@ -245,7 +245,7 @@ const UmzugNachDeutschlandPageClient = () => {
                   Geprüfte Partner
                 </h3>
                 <img  alt="Umzugshelfer tragen eine Kiste in einen LKW" className="w-full h-56 object-cover rounded-lg shadow-md mb-3" src="https://images.unsplash.com/photo-1696583545337-05099b905626" />
-                <p className="text-sm text-gray-600 mt-2">Vergleichen Sie Offerten von qualifizierten und erfahrenen Umzugsunternehmen für internationale Transporte.</p>
+                <p className="text-sm text-gray-600 mt-2">Vergleichen Sie Offerten von qualifizierten und erfahrenen Umzugsunternehmen für internationale Umzüge.</p>
               </motion.div>
               <motion.div 
                 initial={{ opacity: 0, x: 30 }}

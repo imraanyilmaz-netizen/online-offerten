@@ -64,7 +64,7 @@ const AddressBox = ({ title, quote, type }) => {
     const countryCode = isFrom ? quote.from_country : quote.to_country;
     
     const country = countries.find(c => c.code === countryCode);
-    const isInternational = quote.servicetype === 'Internationalumzug';
+    const isInternational = quote.servicetype === 'Auslandumzug';
     
     if (!zip && !street) return null;
 
@@ -174,7 +174,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
                     <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
                     {isMoving && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
                     {isMoving && quote.additional_services_piano && <QuoteDetail label="Klaviertransport" value="Ja" />}
-                    {isMoving && (quote.umzugart === 'Privatumzug' || quote.umzugart === 'Internationalumzug') && quote.services_detail1 && quote.services_detail1.includes('Möbel De-/Montage: Ja') && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
+                    {isMoving && (quote.umzugart === 'Privatumzug' || quote.umzugart === 'Auslandumzug') && quote.services_detail1 && quote.services_detail1.includes('Möbel De-/Montage: Ja') && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
                     {isMoving && <QuoteDetail label="Spezialtransport Art" value={quote.special_transport_type} />}
                     {isMoving && <QuoteDetail label="Details Spezialtransport" value={quote.special_transport_other_details} />}
 
