@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -14,42 +13,39 @@ import { Globe as GlobeIcon } from 'lucide-react';
 import { useLanguageSwitcher } from '@/lib/languageUtils';
 
 const LanguageSwitcher = ({ className }) => {
-  const { t, i18n } = useTranslation(['navbar']);
   const pathname = usePathname();
   const switchLanguage = useLanguageSwitcher();
-  const [currentLang, setCurrentLang] = useState(i18n.language || 'de'); // Default to 'de'
+  const [currentLang, setCurrentLang] = useState('de'); // Default to 'de'
 
   useEffect(() => {
-    const handleLanguageChange = (lng) => {
-      setCurrentLang(lng);
-    };
-
-    i18n.on('languageChanged', handleLanguageChange);
-    
-    return () => {
-      i18n.off('languageChanged', handleLanguageChange);
-    };
-  }, [i18n]);
+    // Detect language from URL
+    if (pathname?.startsWith('/en')) {
+      setCurrentLang('en');
+    } else {
+      setCurrentLang('de');
+    }
+  }, [pathname]);
 
   const changeLanguage = (lng) => {
     // Use URL-based language switching instead of i18n.changeLanguage
     switchLanguage(pathname, lng);
+    setCurrentLang(lng);
   };
 
   return (
     <div className={className} style={{ zIndex: 9999, pointerEvents: 'auto' }}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" aria-label={t('languageSwitcher.label', 'Sprache ändern')} style={{ pointerEvents: 'auto', zIndex: 10000 }}>
+          <Button variant="outline" size="sm" aria-label="Sprache ändern" style={{ pointerEvents: 'auto', zIndex: 10000 }}>
             <GlobeIcon size={16} className="mr-1" /> {(currentLang || 'de').toUpperCase()}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => changeLanguage('de')} disabled={currentLang === 'de'}>
-            {t('languageSwitcher.de', 'Deutsch')}
+            Deutsch
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => changeLanguage('en')} disabled={currentLang === 'en'}>
-            {t('languageSwitcher.en', 'English')}
+            English
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -38,7 +38,6 @@ const LocationCard = ({ location }) => {
 
 
 const LocationPageNavigation = ({ allLocations, currentCity }) => {
-  const { t, ready } = useTranslation('locationPageNav');
   const scrollContainerRef = useRef(null);
   const [mounted, setMounted] = useState(false);
   
@@ -47,19 +46,6 @@ const LocationPageNavigation = ({ allLocations, currentCity }) => {
   }, []);
   
   const otherLocations = allLocations.filter(loc => loc.name !== currentCity);
-  
-  // Prevent hydration mismatch by not rendering until mounted and i18n is ready
-  if (!mounted || !ready) {
-    return (
-      <div className="border-t border-slate-200 pt-10 mt-12 md:mt-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-            Weitere Standorte entdecken
-          </h2>
-        </div>
-      </div>
-    );
-  }
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
+import React, { useState, useLayoutEffect, useMemo, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -87,19 +87,19 @@ const InternationalCostCalculator = () => {
     return formData;
   }, [fromCountry, toCountry, moveType, rooms, area, includePiano, includeCleaning]);
 
-  // Prevent hydration mismatch by only rendering translations after mount
-  useEffect(() => {
+  // Prevent hydration mismatch by only rendering after mount
+  useLayoutEffect(() => {
     setMounted(true);
   }, []);
 
-  // Wait for i18n to be ready and component to be mounted
-  if (!mounted || !ready) {
+  // Wait for component to be mounted
+  if (!mounted) {
     return (
       <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100">
         <div className="flex items-center mb-6">
           <Calculator className="w-8 h-8 mr-4 text-green-500" />
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800">
-            Auslandumzug Kostenrechner
+            Internationaler Umzug Kostenrechner
           </h2>
         </div>
         <div className="flex h-64 w-full items-center justify-center">
@@ -212,25 +212,25 @@ const InternationalCostCalculator = () => {
       >
         <div className="flex items-center mb-6">
           <Calculator className="w-8 h-8 mr-4 text-green-500" />
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800">{t('calculator.title')}</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Internationaler Umzug Kostenrechner</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <motion.div variants={itemVariants}>
-            <Label htmlFor="from-country" className="font-semibold text-slate-700">{t('calculator.from')}</Label>
+            <Label htmlFor="from-country" className="font-semibold text-slate-700">Von</Label>
             <Select value={fromCountry} onValueChange={(val) => handleCountryChange('from', val)}>
               <SelectTrigger id="from-country" className="mt-1 bg-slate-50">
-                <SelectValue placeholder="Select country" />
+                <SelectValue placeholder="Land auswählen" />
               </SelectTrigger>
               <SelectContent>{countries.filter(c => c.code !== toCountry).map(renderCountryOption)}</SelectContent>
             </Select>
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Label htmlFor="to-country" className="font-semibold text-slate-700">{t('calculator.to')}</Label>
+            <Label htmlFor="to-country" className="font-semibold text-slate-700">Nach</Label>
             <Select value={toCountry} onValueChange={(val) => handleCountryChange('to', val)}>
               <SelectTrigger id="to-country" className="mt-1 bg-slate-50">
-                <SelectValue placeholder="Select country" />
+                <SelectValue placeholder="Land auswählen" />
               </SelectTrigger>
               <SelectContent>{countries.filter(c => c.code !== fromCountry).map(renderCountryOption)}</SelectContent>
             </Select>
@@ -238,10 +238,10 @@ const InternationalCostCalculator = () => {
         </div>
 
         <motion.div variants={itemVariants} className="mb-6">
-          <Label className="font-semibold text-slate-700">{t('calculator.moveType')}</Label>
+          <Label className="font-semibold text-slate-700">Umzugsart</Label>
           <div className="grid grid-cols-2 gap-2 mt-2">
-            <Button variant={moveType === 'private' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('private')} className={`transition-all ${moveType === 'private' ? 'bg-green-600 text-white' : ''}`}>{t('calculator.private')}</Button>
-            <Button variant={moveType === 'business' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('business')} className={`transition-all ${moveType === 'business' ? 'bg-green-600 text-white' : ''}`}>{t('calculator.business')}</Button>
+            <Button variant={moveType === 'private' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('private')} className={`transition-all ${moveType === 'private' ? 'bg-green-600 text-white' : ''}`}>Privat</Button>
+            <Button variant={moveType === 'business' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('business')} className={`transition-all ${moveType === 'business' ? 'bg-green-600 text-white' : ''}`}>Geschäftlich</Button>
           </div>
         </motion.div>
 
@@ -276,11 +276,11 @@ const InternationalCostCalculator = () => {
             >
               <div className="flex items-center space-x-2">
                 <Checkbox id="piano" checked={includePiano} onCheckedChange={setIncludePiano} />
-                <Label htmlFor="piano" className="text-slate-600 cursor-pointer">{t('calculator.piano')}</Label>
+                <Label htmlFor="piano" className="text-slate-600 cursor-pointer">Klaviertransport inklusive</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox id="cleaning" checked={includeCleaning} onCheckedChange={setIncludeCleaning} />
-                <Label htmlFor="cleaning" className="text-slate-600 cursor-pointer">{t('calculator.cleaning')}</Label>
+                <Label htmlFor="cleaning" className="text-slate-600 cursor-pointer">Umzugsreinigung inklusive</Label>
               </div>
             </motion.div>
           )}

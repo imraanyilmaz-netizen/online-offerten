@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, MapPin, Truck, Sparkles, Brush as PaintBrush, BookOpen, Calendar } from 'lucide-react';
@@ -61,7 +60,7 @@ const ServiceSection = ({ title, intro, list, icon: Icon, delay, city, serviceKe
                 <div className="mt-8">
                     <Button asChild size="lg" className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white group shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-xl px-4 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6 text-sm sm:text-base md:text-lg font-semibold justify-center sm:justify-start">
                         <Link href={`/kostenlose-offerte-anfordern?city=${city}&service=${serviceKey}`} className="flex items-center justify-center sm:justify-start w-full">
-                            <span className="text-center sm:text-left">{t('cta.getOffersNow')} für {title.split(' in')[0]}</span>
+                            <span className="text-center sm:text-left">Jetzt Offerten anfordern für {title.split(' in')[0]}</span>
                             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 flex-shrink-0 transition-transform group-hover:translate-x-2" />
                         </Link>
                     </Button>
@@ -186,15 +185,13 @@ const RatgeberSection = ({ city }) => {
 };
 
 const CombinedServicePage = ({ city, canton, namespace }) => {
-  const { t, i18n } = useTranslation(namespace);
-
-  const metaTitle = t('meta.title', { city });
-  const metaDescription = t('meta.description', { city });
-  const metaKeywords = t('meta.keywords', { city });
-  
   // Canonical URL oluştur
   const locationData = locations.find(loc => loc.name === city);
   const canonicalUrl = `https://online-offerten.ch/${locationData?.slug || `umzug-reinigung-maler-${city.toLowerCase()}`}`;
+
+  const metaTitle = `Umzug, Reinigung & Malerarbeiten in ${city} – Offerten vergleichen`;
+  const metaDescription = `Finden Sie geprüfte Umzugs-, Reinigungs- und Malerfirmen in ${city}. Vergleichen Sie mehrere Offerten und sparen Sie bis zu 40%.`;
+  const metaKeywords = `Umzugsfirma ${city}, Reinigungsfirma ${city}, Malerfirma ${city}, Offerten ${city}`;
 
   const faqItemsForSchema = (faqs.move || []).concat(faqs.clean || []).concat(faqs.paint || []);
   const schemaData = {
@@ -230,13 +227,13 @@ const CombinedServicePage = ({ city, canton, namespace }) => {
         "@type": "FAQPage",
         "mainEntity": faqItemsForSchema.map(item => ({
             "@type": "Question",
-            "name": (item.question[i18n.language] || item.question.de || '').replace('{city}', city),
+            "name": (item.question?.de || item.question || '').replace('{city}', city),
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": item.answer.map(ans => {
-                    const content = ans[i18n.language] || ans.de || ans;
-                    return typeof content === 'string' ? content : (content.text ? content.text[i18n.language] || content.text.de : '');
-                }).join(' ').replace(/{city}/g, city)
+                "text": (Array.isArray(item.answer) ? item.answer.map(ans => {
+                    const content = ans?.de || ans || '';
+                    return typeof content === 'string' ? content : (content.text?.de || content.text || '');
+                }).join(' ') : (item.answer?.de || item.answer || '')).replace(/{city}/g, city)
             }
         })).filter(item => item.name)
     } : undefined
@@ -245,25 +242,25 @@ const CombinedServicePage = ({ city, canton, namespace }) => {
   const sections = [
     {
         key: 'umzug',
-        title: t('umzug.title', { city }),
-        intro: t('umzug.intro', { returnObjects: true, city }),
-        list: t('umzug.list', { returnObjects: true, city }),
+        title: `Umzugsfirma ${city}`,
+        intro: [`Finden Sie die beste Umzugsfirma in ${city}. Professionelle Umzugsunternehmen für Ihren Wohnungswechsel.`],
+        list: ['Privatumzug', 'Geschäftsumzug', 'Internationaler Umzug', 'Spezialtransporte', 'Klaviertransport'],
         icon: Truck,
         serviceKey: 'umzug'
     },
     {
         key: 'reinigung',
-        title: t('reinigung.title', { city }),
-        intro: t('reinigung.intro', { returnObjects: true, city }),
-        list: t('reinigung.list', { returnObjects: true, city }),
+        title: `Reinigungsfirma ${city}`,
+        intro: [`Professionelle Reinigungsdienste in ${city}. Umzugsreinigung, Wohnungsreinigung und mehr.`],
+        list: ['Wohnungsreinigung', 'Hausreinigung', 'Büroreinigung', 'Umzugsreinigung', 'Grundreinigung'],
         icon: Sparkles,
         serviceKey: 'reinigung'
     },
     {
         key: 'maler',
-        title: t('maler.title', { city }),
-        intro: t('maler.intro', { returnObjects: true, city }),
-        list: t('maler.list', { returnObjects: true, city }),
+        title: `Malerfirma ${city}`,
+        intro: [`Malerarbeiten in ${city}. Professionelle Malerbetriebe für Innen- und Aussenanstriche.`],
+        list: ['Innenanstrich', 'Aussenanstrich', 'Fassadenanstrich', 'Renovation'],
         icon: PaintBrush,
         serviceKey: 'maler'
     },
@@ -289,9 +286,11 @@ const CombinedServicePage = ({ city, canton, namespace }) => {
                 {/* Left Column - Text Content */}
                 <div className="md:col-span-2 bg-gray-100 p-6 md:p-8 lg:p-10 rounded-xl order-1 md:order-1">
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
-                    {t('header.title', { city })}
+                    Umzug, Reinigung & Malerarbeiten in {city}
                   </h1>
-                  <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('header.subtitle', { city }) }} />
+                  <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
+                    Finden Sie geprüfte Umzugs-, Reinigungs- und Malerfirmen in {city}. Vergleichen Sie mehrere Offerten und sparen Sie bis zu 40%.
+                  </p>
                   
                   {/* CTA Button */}
                   <Button 
@@ -299,7 +298,7 @@ const CombinedServicePage = ({ city, canton, namespace }) => {
                     size="lg" 
                     className="bg-green-600 hover:bg-green-700 text-white text-base md:text-lg px-6 py-6 mb-6 group w-full md:w-auto"
                   >
-                    {t('header.ctaButton', { city })}
+                    Jetzt Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
                   
@@ -308,15 +307,15 @@ const CombinedServicePage = ({ city, canton, namespace }) => {
                     <ul className="space-y-3">
                       <li className="flex items-center">
                         <CheckCircle className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700 font-medium">{t('header.benefit1')}</span>
+                        <span className="text-gray-700 font-medium">Geprüfte Anbieter aus {city}</span>
                       </li>
                       <li className="flex items-center">
                         <CheckCircle className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700 font-medium">{t('header.benefit2')}</span>
+                        <span className="text-gray-700 font-medium">Unverbindliche Anfrage</span>
                       </li>
                       <li className="flex items-center">
                         <CheckCircle className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700 font-medium">{t('header.benefit3')}</span>
+                        <span className="text-gray-700 font-medium">Bis zu 40% sparen</span>
                       </li>
                     </ul>
                   </div>
@@ -331,7 +330,7 @@ const CombinedServicePage = ({ city, canton, namespace }) => {
                 >
                   <img 
                     src={locationImage}
-                    alt={t('header.imageAlt', { city })}
+                    alt={`Umzug, Reinigung & Malerarbeiten in ${city}`}
                     className="w-full h-full object-cover"
                     loading="eager"
                     fetchPriority="high"
@@ -347,7 +346,7 @@ const CombinedServicePage = ({ city, canton, namespace }) => {
                 <ServiceSection key={section.key} {...section} delay={index * 0.2} city={city} />
             ))}
             
-            <DistrictsSection districts={t('districts', { returnObjects: true, city })} city={city} />
+            {/* Districts section removed - no translation data available */}
           </main>
 
           {/* Ratgeber Section - Umzug Category */}
