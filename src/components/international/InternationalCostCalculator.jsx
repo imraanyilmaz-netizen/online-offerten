@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
-import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -23,7 +22,6 @@ const FullPageLoader = () => (
 
 
 const InternationalCostCalculator = () => {
-  const { t, ready } = useTranslation('internationaleUmzugPage');
   const [mounted, setMounted] = useState(false);
 
   // All hooks must be called before any conditional returns
@@ -39,17 +37,28 @@ const InternationalCostCalculator = () => {
 
   // All hooks (including useMemo) must be called before any conditional returns
   const countries = useMemo(() => {
-    // Safe fallback if t is not ready yet
-    if (!ready || !t) {
-      return [];
-    }
-    try {
-    const countryNames = t('calculator.countries', { returnObjects: true });
-      return Object.entries(countryNames || {}).map(([code, name]) => ({ code, name }));
-    } catch (error) {
-      return [];
-    }
-  }, [t, ready]);
+    const countryNames = {
+      "CH": "Schweiz",
+      "DE": "Deutschland",
+      "AT": "Österreich",
+      "FR": "Frankreich",
+      "IT": "Italien",
+      "ES": "Spanien",
+      "PT": "Portugal",
+      "BE": "Belgien",
+      "DK": "Dänemark",
+      "NL": "Niederlande",
+      "GB": "Vereinigtes Königreich",
+      "PL": "Polen",
+      "CZ": "Tschechien",
+      "HU": "Ungarn",
+      "SE": "Schweden",
+      "NO": "Norwegen",
+      "FI": "Finnland",
+      "GR": "Griechenland"
+    };
+    return Object.entries(countryNames).map(([code, name]) => ({ code, name }));
+  }, []);
 
   const initialFormDataForQuote = useMemo(() => {
     const formData = {
@@ -133,8 +142,8 @@ const InternationalCostCalculator = () => {
   const calculateCost = () => {
     if (fromCountry === toCountry) {
       toast({
-        title: t('calculator.errorTitle'),
-        description: t('calculator.sameCountryError'),
+        title: 'Fehler',
+        description: 'Start- und Zielland dürfen nicht identisch sein.',
         variant: 'destructive',
       });
       return;
@@ -240,15 +249,15 @@ const InternationalCostCalculator = () => {
           {moveType === 'private' ? (
             <motion.div key="private-rooms" variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <Label htmlFor="rooms-slider" className="font-semibold text-slate-700">{t('calculator.roomsLabel')}</Label>
-                <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{rooms} {t('calculator.rooms')}</span>
+                <Label htmlFor="rooms-slider" className="font-semibold text-slate-700">Anzahl Zimmer</Label>
+                <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{rooms} Zimmer</span>
               </div>
               <Slider id="rooms-slider" value={[rooms]} onValueChange={(val) => setRooms(val[0])} min={1} max={10} step={0.5} />
             </motion.div>
           ) : (
             <motion.div key="business-area" variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <Label htmlFor="area-slider" className="font-semibold text-slate-700">{t('calculator.areaLabel')}</Label>
+                <Label htmlFor="area-slider" className="font-semibold text-slate-700">Fläche (m²)</Label>
                 <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{area} m²</span>
               </div>
               <Slider id="area-slider" value={[area]} onValueChange={(val) => setArea(val[0])} min={20} max={500} step={10} />
@@ -280,7 +289,7 @@ const InternationalCostCalculator = () => {
 
         <motion.div variants={itemVariants}>
           <Button onClick={calculateCost} size="lg" className="w-full bg-green-500 hover:bg-green-600 text-white group">
-            {t('calculator.calculateButton')}
+            Kosten berechnen
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
         </motion.div>
@@ -293,14 +302,14 @@ const InternationalCostCalculator = () => {
               exit={{ opacity: 0, y: 20 }}
               className="mt-8 p-6 bg-slate-50 rounded-lg text-center border-t-4 border-green-400"
             >
-              <h3 className="text-lg font-semibold text-slate-600 mb-2">{t('calculator.estimatedCost')}</h3>
+              <h3 className="text-lg font-semibold text-slate-600 mb-2">Geschätzte Kosten</h3>
               <p className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
                 CHF {estimatedCost.min.toLocaleString('de-CH')} - {estimatedCost.max.toLocaleString('de-CH')}
               </p>
-              <p className="text-xs text-slate-500 mb-6">{t('calculator.disclaimer')}</p>
+              <p className="text-xs text-slate-500 mb-6">*Die Kosten sind eine Schätzung und können je nach individuellen Umständen variieren.</p>
               
               <Button onClick={handleShowForm} className="bg-blue-500 hover:bg-blue-600 text-white group">
-                {t('calculator.requestQuoteButton')}
+                Offerten anfordern
                 <ChevronsDown className="w-5 h-5 ml-2 transition-transform group-hover:translate-y-1" />
               </Button>
             </motion.div>

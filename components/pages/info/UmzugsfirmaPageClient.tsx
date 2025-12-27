@@ -226,32 +226,32 @@ const UmzugsfirmaPageClient = () => {
   ]
 
   const faqItems = [
-    {
-      q: "Was ist eine Umzugsfirma und welche Dienstleistungen bietet sie?",
+    { 
+      q: "Was ist eine Umzugsfirma und welche Dienstleistungen bietet sie?", 
       a: "Eine Umzugsfirma ist ein professionelles Unternehmen, das auf den Transport von Umzugsgut spezialisiert ist. Eine gute Umzugsfirma bietet umfassende Dienstleistungen wie Verpackung, Transport, Montage und Demontage von Möbeln, Umzugsreinigung sowie Spezialtransporte für wertvolle Gegenstände wie Klaviere oder Antiquitäten. Eine seriöse Umzugsfirma übernimmt alle organisatorischen Aufgaben rund um Ihren Umzug und sorgt für einen stressfreien Wohnungswechsel. Professionelle Umzugsfirmen verfügen über geschultes Personal, spezielle Fahrzeuge und das notwendige Equipment für einen sicheren Transport."
     },
-    {
-      q: "Wie finde ich die richtige Umzugsfirma für meinen Umzug?",
+    { 
+      q: "Wie finde ich die richtige Umzugsfirma für meinen Umzug?", 
       a: "Die Suche nach der richtigen Umzugsfirma beginnt mit einer klaren Definition Ihrer Bedürfnisse. Überlegen Sie, welche Leistungen Sie benötigen, wann der Umzug stattfinden soll und welches Budget Sie zur Verfügung haben. Nutzen Sie Vergleichsportale wie Online-Offerten.ch, um mehrere Offerten von geprüften Umzugsfirmen zu erhalten. Vergleichen Sie nicht nur die Preise, sondern auch die enthaltenen Leistungen, Versicherungen und Bewertungen. Eine seriöse Umzugsfirma bietet transparente Offerten, ist versichert und verfügt über positive Kundenbewertungen. Achten Sie auch auf die Erreichbarkeit und Kommunikationsqualität der Umzugsfirma."
     },
-    {
-      q: "Was kostet eine Umzugsfirma in der Schweiz?",
+    { 
+      q: "Was kostet eine Umzugsfirma in der Schweiz?", 
       a: "Die Kosten für eine Umzugsfirma hängen von verschiedenen Faktoren ab: Umzugsstrecke, Umfang des Umzugsguts, Anzahl der Stockwerke, benötigte Leistungen und Umzugsdatum. Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF. Geschäftsumzüge oder Umzüge mit Spezialtransporten können deutlich teurer sein. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Umzugsfirmen. Durch den Vergleich können Sie bis zu 40% sparen. Eine günstige Umzugsfirma bedeutet nicht immer das beste Angebot – achten Sie auf Qualität und enthaltene Leistungen."
     },
-    {
-      q: "Worauf sollte ich bei der Auswahl einer Umzugsfirma achten?",
+    { 
+      q: "Worauf sollte ich bei der Auswahl einer Umzugsfirma achten?", 
       a: "Bei der Auswahl einer Umzugsfirma sollten Sie auf mehrere Kriterien achten: Versicherungsschutz (Transportversicherung und Betriebshaftpflicht), Erfahrung und Referenzen, transparente und detaillierte Offerten, Erreichbarkeit und Kommunikation, Bewertungen und Empfehlungen sowie die Verfügbarkeit am gewünschten Umzugstag. Eine professionelle Umzugsfirma bietet eine kostenlose Besichtigung vor Ort, erstellt eine schriftliche Offerte und beantwortet alle Ihre Fragen transparent. Vermeiden Sie Umzugsfirmen, die nur mündliche Zusagen machen oder Druck ausüben, sofort zu buchen."
     },
-    {
-      q: "Wie viele Offerten erhalte ich von Umzugsfirmen?",
+    { 
+      q: "Wie viele Offerten erhalte ich von Umzugsfirmen?", 
       a: "Sie erhalten bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Umzugsfirmen aus Ihrer Region. Diese Offerten werden Ihnen per E-Mail zugesendet und enthalten alle wichtigen Details wie Preis, enthaltene Leistungen, Versicherungen und Kontaktinformationen. So haben Sie die perfekte Vergleichsgrundlage, um die beste Umzugsfirma für Ihren Bedarf zu finden. In Ballungsgebieten wie Zürich, Basel oder Bern erhalten Sie meist alle 6 Offerten, in ländlicheren Regionen können es auch 3-4 Offerten sein."
     },
-    {
-      q: "Wie wird die Qualität der Umzugsfirmen sichergestellt?",
+    { 
+      q: "Wie wird die Qualität der Umzugsfirmen sichergestellt?", 
       a: "Wir arbeiten nur mit geprüften und versicherten Partnerfirmen zusammen. Alle Umzugsfirmen in unserem Netzwerk durchlaufen einen strengen Prüfprozess, der Versicherungen, Lizenzen und Referenzen umfasst. Zusätzlich können Sie die Bewertungen anderer Kunden einsehen, um sich ein umfassendes Bild von der Qualität der Dienstleistung zu machen. Unsere Partner sind etablierte Umzugsfirmen mit langjähriger Erfahrung. Wir überprüfen regelmässig die Qualität unserer Partnerfirmen und nehmen nur seriöse Umzugsfirmen in unser Netzwerk auf."
     },
-    {
-      q: "Kann ich mit einer Umzugsfirma auch einen internationalen Umzug durchführen?",
+    { 
+      q: "Kann ich mit einer Umzugsfirma auch einen internationalen Umzug durchführen?", 
       a: "Ja, viele Umzugsfirmen bieten auch Auslandumzüge an. Diese erfordern zusätzliche Planung, Zolldokumentation und Koordination. Bei Online-Offerten.ch können Sie auch für Auslandumzüge Offerten anfordern. Spezialisierte Umzugsfirmen für Auslandumzüge verfügen über die notwendige Expertise und Erfahrung im Umgang mit Zollbestimmungen und Transportlogistik über Landesgrenzen hinweg. Auslandumzüge sind komplexer und erfordern mehr Vorlaufzeit als lokale Umzüge."
     },
     {
@@ -368,7 +368,7 @@ const UmzugsfirmaPageClient = () => {
                 <span className="block text-2xl md:text-3xl text-gray-700 font-bold mt-4">
                   Bis zu 40% sparen bei Ihrem Umzug
                 </span>
-              </h1>
+          </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
                 Finden Sie die <strong>beste Umzugsfirma</strong> für Ihren Umzug in der Schweiz. Vergleichen Sie <strong>bis zu 6 kostenlose Offerten</strong> von geprüften Umzugsfirmen – <strong>100% kostenlos und unverbindlich</strong>. Sparen Sie Zeit und Geld durch den direkten Vergleich professioneller Umzugsfirmen.
               </p>
@@ -389,7 +389,7 @@ const UmzugsfirmaPageClient = () => {
                 >
                   <Calculator className="mr-2 h-5 w-5" />
                   Kosten berechnen
-                </Button>
+          </Button>
               </div>
               <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-600">
                 <div className="flex items-center">
@@ -435,7 +435,7 @@ const UmzugsfirmaPageClient = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+              </section>
 
       {/* Why Compare Section */}
       <section className="py-16 md:py-24 bg-white">
@@ -465,23 +465,23 @@ const UmzugsfirmaPageClient = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="h-full border-2 hover:border-green-500 transition-colors">
-                  <CardHeader>
+                    <CardHeader>
                     <div className="flex items-center mb-4">
                       <div className="bg-green-100 p-3 rounded-lg mr-4">
                         <feature.icon className="h-6 w-6 text-green-600" />
                       </div>
                       <CardTitle className="text-xl">{feature.title}</CardTitle>
                     </div>
-                  </CardHeader>
-                  <CardContent>
+                    </CardHeader>
+                    <CardContent>
                     <p className="text-gray-600">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+                </div>
+              </section>
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
@@ -563,18 +563,18 @@ const UmzugsfirmaPageClient = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="h-full">
-                  <CardHeader>
+                    <CardHeader>
                     <div className="flex items-center mb-4">
                       <div className="bg-blue-100 p-3 rounded-lg mr-4">
                         <criterion.icon className="h-6 w-6 text-blue-600" />
                       </div>
                       <CardTitle className="text-lg">{criterion.title}</CardTitle>
                     </div>
-                  </CardHeader>
-                  <CardContent>
+                    </CardHeader>
+                    <CardContent>
                     <p className="text-gray-600">{criterion.description}</p>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
               </motion.div>
             ))}
           </div>
@@ -622,8 +622,8 @@ const UmzugsfirmaPageClient = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+                </div>
+              </section>
 
       {/* Detailed Content Section - SEO Rich Content */}
       <section className="py-16 md:py-24 bg-white">
@@ -700,10 +700,10 @@ const UmzugsfirmaPageClient = () => {
                   <p className="text-gray-700">
                     Beim Vergleich von <strong>Umzugsfirmen</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Eine etwas teurere <strong>Umzugsfirma</strong> kann durch bessere Leistungen, Versicherungen und Erfahrung das bessere Angebot sein. Nutzen Sie unseren Umzugskosten-Rechner, um eine realistische Preiserwartung zu entwickeln, bevor Sie <strong>Umzugsfirmen</strong> kontaktieren.
                   </p>
-                </div>
-              </div>
+        </div>
+      </div>
             </motion.div>
-          </div>
+        </div>
         </div>
       </section>
 
@@ -726,7 +726,7 @@ const UmzugsfirmaPageClient = () => {
           </motion.div>
 
           <div className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full">
               {faqItems.map((item, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border-b">
                   <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-green-600">
@@ -734,12 +734,12 @@ const UmzugsfirmaPageClient = () => {
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700 leading-relaxed">
                     {item.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
+      </div>
       </section>
 
       {/* CTA Section */}
@@ -774,7 +774,7 @@ const UmzugsfirmaPageClient = () => {
               >
                 <Calculator className="mr-2 h-5 w-5" />
                 Kosten berechnen
-              </Button>
+          </Button>
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-green-50">
               <div className="flex items-center">

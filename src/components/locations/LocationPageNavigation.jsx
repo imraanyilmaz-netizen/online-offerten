@@ -1,29 +1,24 @@
 import Link from 'next/link';
 import React, { useRef, useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import CantonFlag from '@/components/CantonFlag';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getLocalizedUrl } from '@/lib/urlMap';
 
 const LocationCard = ({ location }) => {
-  const { t, i18n, ready } = useTranslation('locationPageNav');
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
     setMounted(true);
   }, []);
   
-  if (!location || !mounted || !ready) return null;
-
-  const correctSlug = getLocalizedUrl(`/${location.slug}`, i18n.language);
+  if (!location || !mounted) return null;
 
   return (
     <div className="h-full">
-      <Link href={correctSlug} className="group block card-hover bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col">
+      <Link href={`/${location.slug}`} className="group block card-hover bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col">
         <div className="relative">
-          <img src={location.image} className="w-full h-40 object-cover" alt={t('locationImageAlt', { locationName: location.name })} />
+          <img src={location.image} className="w-full h-40 object-cover" alt={`Umzugsfirma ${location.name}`} />
           <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-md">
             <CantonFlag canton={location.canton} className="w-8 h-8 object-contain" />
           </div>
@@ -32,7 +27,7 @@ const LocationCard = ({ location }) => {
           <h3 className="text-xl font-bold text-gray-800 mb-2">{location.name}</h3>
           <p className="text-gray-600 text-sm mb-4 flex-grow">{location.description}</p>
           <div className="flex items-center text-green-600 font-semibold mt-auto">
-            <span>{t('learnMore')}</span>
+            <span>Mehr erfahren</span>
             <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
           </div>
         </div>
@@ -87,13 +82,13 @@ const LocationPageNavigation = ({ allLocations, currentCity }) => {
           transition={{ duration: 0.5 }}
           className="text-2xl md:text-3xl font-bold text-gray-800"
         >
-          {t('exploreOtherLocations')}
+          Weitere Standorte entdecken
         </motion.h2>
         <div className="hidden md:flex items-center gap-2">
-           <Button variant="outline" size="icon" onClick={() => scroll('left')} aria-label={t('previousLocation')}>
+           <Button variant="outline" size="icon" onClick={() => scroll('left')} aria-label="Vorherige Standorte">
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" onClick={() => scroll('right')} aria-label={t('nextLocation')}>
+          <Button variant="outline" size="icon" onClick={() => scroll('right')} aria-label="Nächste Standorte">
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>

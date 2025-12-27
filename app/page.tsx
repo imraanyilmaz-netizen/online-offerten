@@ -49,6 +49,17 @@ async function getHomePageData() {
 export default async function HomePage() {
   const { reviews, posts } = await getHomePageData()
 
-  return <HomePageClient initialReviews={reviews} initialPosts={posts} />
+  return (
+    <>
+      {/* Preload hero image for faster LCP */}
+      <link
+        rel="preload"
+        as="image"
+        href="/image/online-offerten.webp"
+        fetchPriority="high"
+      />
+      <HomePageClient initialReviews={reviews} initialPosts={posts} />
+    </>
+  )
 }
 

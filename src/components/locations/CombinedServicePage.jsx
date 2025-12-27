@@ -13,7 +13,6 @@ import { supabase } from '@/lib/supabaseClient';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 
 const ServiceSection = ({ title, intro, list, icon: Icon, delay, city, serviceKey }) => {
-    const { t } = useTranslation('common');
     return (
         <motion.section
             className="py-12 md:py-16"

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import NextImage from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -233,77 +234,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     router.push('/kostenlose-offerte-anfordern');
   }, [router]);
 
-  // Fetch Reviews - lazy load Supabase to reduce initial bundle
-  useEffect(() => {
-    // If initial reviews are provided, skip fetch
-    if (initialReviews && initialReviews.length > 0) {
-      return;
-    }
-    
-    const fetchReviews = async () => {
-      setReviewsLoading(true);
-      try {
-        // Lazy load Supabase client only when needed
-        const { supabase } = await import('@/lib/supabaseClient');
-        const { data: reviewsData, error: reviewsError } = await supabase
-          .from('customer_reviews')
-          .select(`
-            id, customer_name, rating, city, review_date, 
-            rating_price, rating_workflow, rating_administration, 
-            review_text,
-            service_type, partner_name,
-            partners (slug, company_name)
-          `)
-          .eq('approval_status', 'approved')
-          .eq('show_on_homepage', true)
-          .not('partner_id', 'is', null)
-          .order('review_date', { ascending: false })
-          .limit(9);
-        
-        if (reviewsError) {
-          console.error('Error fetching reviews:', reviewsError);
-        } else {
-          setReviews(reviewsData || []);
-        }
-      } catch (error) {
-        console.error('Error loading Supabase:', error);
-      } finally {
-        setReviewsLoading(false);
-        checkScrollability();
-      }
-    };
-
-    fetchReviews();
-  }, [initialReviews]);
-
-  // Fetch Posts - lazy load Supabase to reduce initial bundle
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        // Lazy load Supabase client only when needed
-        const { supabase } = await import('@/lib/supabaseClient');
-        const { data, error } = await supabase
-          .from('posts')
-          .select('id, title, slug, meta_description, featured_image_url, category, tags')
-          .eq('status', 'published')
-          .order('published_at', { ascending: false })
-          .limit(9);
-
-        if (error) {
-          console.error('Error fetching posts:', error);
-        } else {
-          setPosts(data || []);
-        }
-      } catch (error) {
-        console.error('Error loading Supabase:', error);
-      } finally {
-        setPostsLoading(false);
-      }
-    };
-    fetchPosts();
-  }, [initialPosts]);
-
-  // Scroll handlers - optimized with useCallback
+  // Scroll handlers - optimized with useCallback (defined before useEffects that use them)
   const getVisibleCardsCount = useCallback(() => {
     if (typeof window === 'undefined') return 1;
     const width = window.innerWidth;
@@ -320,6 +251,96 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
       setCanScrollRight(hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
     }
   }, []);
+
+  // Fetch Reviews - lazy load Supabase to reduce initial bundle
+  // Delay fetch to prioritize hero rendering
+  useEffect(() => {
+    // If initial reviews are provided, skip fetch
+    if (initialReviews && initialReviews.length > 0) {
+      return;
+    }
+    
+    // Delay fetch to allow hero to render first
+    const timeoutId = setTimeout(() => {
+      const fetchReviews = async () => {
+        setReviewsLoading(true);
+        try {
+          // Lazy load Supabase client only when needed
+          const { supabase } = await import('@/lib/supabaseClient');
+          const { data: reviewsData, error: reviewsError } = await supabase
+            .from('customer_reviews')
+            .select(`
+              id, customer_name, rating, city, review_date, 
+              rating_price, rating_workflow, rating_administration, 
+              review_text,
+              service_type, partner_name,
+              partners (slug, company_name)
+            `)
+            .eq('approval_status', 'approved')
+            .eq('show_on_homepage', true)
+            .not('partner_id', 'is', null)
+            .order('review_date', { ascending: false })
+            .limit(9);
+          
+          if (reviewsError) {
+            console.error('Error fetching reviews:', reviewsError);
+          } else {
+            setReviews(reviewsData || []);
+          }
+        } catch (error) {
+          console.error('Error loading Supabase:', error);
+        } finally {
+          setReviewsLoading(false);
+          // Call checkScrollability after a small delay to ensure DOM is ready
+          setTimeout(() => {
+            const el = scrollContainerRef.current;
+            if (el) {
+              const hasOverflow = el.scrollWidth > el.clientWidth;
+              setCanScrollLeft(el.scrollLeft > 0);
+              setCanScrollRight(hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+            }
+          }, 50);
+        }
+      };
+
+      fetchReviews();
+    }, 100); // Small delay to prioritize hero rendering
+
+    return () => clearTimeout(timeoutId);
+  }, [initialReviews]);
+
+  // Fetch Posts - lazy load Supabase to reduce initial bundle
+  // Delay fetch to prioritize hero rendering
+  useEffect(() => {
+    // Delay fetch to allow hero to render first
+    const timeoutId = setTimeout(() => {
+      const fetchPosts = async () => {
+        try {
+          // Lazy load Supabase client only when needed
+          const { supabase } = await import('@/lib/supabaseClient');
+          const { data, error } = await supabase
+            .from('posts')
+            .select('id, title, slug, meta_description, featured_image_url, category, tags')
+            .eq('status', 'published')
+            .order('published_at', { ascending: false })
+            .limit(9);
+
+          if (error) {
+            console.error('Error fetching posts:', error);
+          } else {
+            setPosts(data || []);
+          }
+        } catch (error) {
+          console.error('Error loading Supabase:', error);
+        } finally {
+          setPostsLoading(false);
+        }
+      };
+      fetchPosts();
+    }, 200); // Delay to prioritize hero rendering
+
+    return () => clearTimeout(timeoutId);
+  }, [initialPosts]);
 
   const checkPostsScrollability = useCallback(() => {
     const el = postsScrollRef.current;
@@ -413,16 +434,13 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
                   <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-6">
-                    100% kostenlos
+                    Unverbindlich & transparent
                   </div>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                    Kostenlose Offerten erhalten & vergleichen
+                    Offerten vergleichen & den passenden Anbieter finden
                   </h1>
-                  <p className="text-2xl md:text-3xl text-gray-700 font-bold mb-4">
-                    Bis zu 40% sparen durch Vergleich
-                  </p>
                   <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                    Wählen Sie einen Service und vergleichen Sie mehrere Offerten von geprüften Anbietern. Erhalten Sie bis zu 4 kostenlose Offerten für Umzug, Reinigung oder Renovierung – <strong>100% kostenlos, unverbindlich und transparent</strong>.
+                    Wählen Sie einen Service und erhalten Sie mehrere Offerten von geprüften Anbietern für Umzug, Reinigung oder Renovierung. Einfach vergleichen und bis zu 40% sparen.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button
@@ -431,7 +449,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
                     >
                       <Search className="mr-2 h-5 w-5" />
-                      Jetzt vergleichen
+                      Jetzt Offerten vergleichen
                     </Button>
                     <Button
                       onClick={() => {
@@ -448,63 +466,64 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       Kosten berechnen
                     </Button>
                   </div>
-                  <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-600">
+                  <p className="mt-4 text-sm text-gray-500">
+                    Die Anfrage ist kostenlos und unverbindlich.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-600">
                     <div className="flex items-center">
                       <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
                       <span>Geprüfte Anbieter aus Ihrer Region</span>
                     </div>
                     <div className="flex items-center">
                       <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                      <span>100% kostenlos & unverbindlich</span>
+                      <span>Unverbindliche Anfrage – keine Verpflichtung</span>
                     </div>
                     <div className="flex items-center">
                       <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                      <span>Bis zu 40% sparen</span>
+                      <span>Bis zu 40% sparen durch Vergleich</span>
                     </div>
                   </div>
                 </div>
                 <div className="relative">
                   <div className="flex items-center justify-center mb-6">
-                    <img 
-                      src="/image/online-offerten.avif" 
+                    <NextImage 
+                      src="/image/online-offerten.webp" 
                       alt="Online Offerten" 
+                      width={600}
+                      height={400}
                       className="w-full h-auto max-w-md rounded-lg"
-                      loading="eager"
-                      decoding="async"
-                      fetchPriority="high"
+                      priority
+                      quality={85}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                     />
                   </div>
                   <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
-                      Finden Sie Ihre Dienstleister
+                      Ihre Vorteile auf einen Blick
                     </h3>
                     <div className="space-y-4">
                       <div className="flex items-start">
                         <MapPin className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">Geprüfte Anbieter</p>
-                          <p className="text-sm text-gray-600">Qualitätsgeprüfte Partner aus Ihrer Region</p>
+                          <p className="font-semibold text-gray-900">Geprüfte Anbieter aus Ihrer Region</p>
                         </div>
                       </div>
                       <div className="flex items-start">
                         <ShieldCheck className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">100% kostenlos</p>
-                          <p className="text-sm text-gray-600">Keine Gebühren, keine Verpflichtungen</p>
+                          <p className="font-semibold text-gray-900">Unverbindliche Anfrage</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <GitCompareArrows className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900">Mehrere Offerten vergleichen</p>
                         </div>
                       </div>
                       <div className="flex items-start">
                         <TrendingUp className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                         <div>
                           <p className="font-semibold text-gray-900">Bis zu 40% sparen</p>
-                          <p className="text-sm text-gray-600">Durch Vergleich mehrerer Offerten</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start">
-                        <Users className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900">Mehrere Offerten</p>
-                          <p className="text-sm text-gray-600">Bis zu 4 kostenlose Offerten vergleichen</p>
                         </div>
                       </div>
                     </div>
