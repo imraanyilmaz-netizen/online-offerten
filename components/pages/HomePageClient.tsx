@@ -539,7 +539,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 >
                   <div className="flex items-center justify-center mb-6">
                     <img 
-                      src="/image/online-offerten.png" 
+                      src="/image/online-offerten.avif" 
                       alt="Online Offerten" 
                       className="w-full h-auto max-w-md rounded-lg"
                       loading="lazy"
