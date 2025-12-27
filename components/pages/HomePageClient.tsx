@@ -10,7 +10,8 @@ import {
   CheckCircle2, Home, Sparkles, Recycle, ChevronRight, Paintbrush, Sprout,
   FileText, GitCompareArrows, Award, KeyRound as UsersRound,
   MapPin, Calculator, ListChecks, BookOpen, ArrowRight,
-  Star, User, ChevronLeft, Send, Loader2, HelpCircle
+  Star, User, ChevronLeft, Send, Loader2, HelpCircle,
+  ShieldCheck, TrendingUp, Users, Search
 } from 'lucide-react';
 import MovingCostCalculator from '@/components/UmzugskostenRechnerSections/MovingCostCalculator';
 import CleaningCostCalculator from '@/components/ReinigungskostenRechnerSections/CleaningCostCalculator';
@@ -288,6 +289,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   const handleStartRequest = useCallback(() => {
     if (selectedService) {
       router.push(`/kostenlose-offerte-anfordern?service=${selectedService}`);
+    } else {
+      router.push('/kostenlose-offerte-anfordern');
     }
   }, [selectedService, router]);
 
@@ -467,253 +470,124 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
         <main className="flex-grow">
         {/* Hero Section - SEO Optimized */}
         <section 
-          className="py-8 md:py-12 lg:py-16 bg-gradient-to-br from-white via-green-50/30 to-white" 
+          className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 py-16 md:py-24 overflow-hidden" 
           aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
         >
-            <div className="container mx-auto max-w-navbar px-4 md:px-6">
-              <article className="max-w-navbar mx-auto text-center md:text-left">
-                {/* Mobile: H1 and Subheading */}
-                <div className="lg:hidden">
-                  {/* Badge */}
-                  <div className="text-left mb-4">
-                    <p className="inline-block text-xs md:text-sm font-bold text-green-700 uppercase tracking-widest px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                    ONLINE OFFERTEN
-                    </p>
+            <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-6">
+                    100% kostenlos
                   </div>
-                  {/* Main H1 - SEO Optimized */}
-                  <h1 className="text-3xl md:text-4xl lg:text-[38px] font-extrabold text-gray-900 mb-4 md:mb-5 leading-tight tracking-tight text-left">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                      Umzug, Reinigung & Renovierung
-                    </span>
-                    <br />
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                      Kostenlose Offerten erhalten & vergleichen
-                    </span>
-                  </h1>
-                  <p className="text-base md:text-lg text-gray-700 mb-5 md:mb-6 leading-relaxed text-left">
-                    Fordern Sie kostenlos mehrere Offerten für Umzug, Reinigung, Renovierung und weitere Dienstleistungen in der ganzen Schweiz an.
-                    Finden Sie geprüfte Anbieter aus Ihrer Region und sparen Sie Zeit und Geld.
-                  </p>
-                </div>
-
-              {/* Mobile Layout */}
-              <div className="lg:hidden">
-                <div className="text-left">
-
-                  {/* SEO Optimized Image - Mobile */}
-                  <div className="mb-5 md:mb-6">
-                    <figure className="relative w-full">
-                      <picture>
-                        <source
-                          type="image/avif"
-                          srcSet="https://online-offerten.ch/privatumzug/umzug-reinigung-maler-gertner-min-600-192.avif 800w, https://online-offerten.ch/privatumzug/umzug-reinigung-maler-gertner-min-600-192.avif 1200w"
-                          sizes="(max-width: 768px) 800px, 1200px"
-                        />
-                        <img  
-                          alt="Professionelle Dienstleister für Umzug, Reinigung, Malerarbeiten und Gartenarbeiten in der Schweiz. Umzugshelfer, Reinigungskräfte, Maler und Gärtner bei der Arbeit."
-                          className="w-full h-full object-contain"
-                          src="https://online-offerten.ch/privatumzug/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.avif"
-                          sizes="(max-width: 768px) 800px, 1200px"
-                          fetchPriority="high"
-                          loading="eager"
-                          width="1200"
-                          height="675"
-                          style={{ display: 'block' }}
-                          decoding="async"
-                          itemProp="image"
-                        />
-                      </picture>
-                      <figcaption className="sr-only">
-                        Professionelle Dienstleister für Umzug, Reinigung, Malerarbeiten und Gartenarbeiten in der Schweiz
-                      </figcaption>
-                    </figure>
-                  </div>
-
-                  {/* H2 for Service Selection - SEO Hierarchy */}
-                  <div className="bg-white rounded-xl shadow-md border border-gray-200 p-5 md:p-6">
-                    <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-5 md:mb-6 text-left">
-                      Einfach & gratis mehrere Offerten einholen
-                    </h4>
-                    
-                    <div className="space-y-3 mb-8">
-                      {services.map((service) => (
-                        <ServiceCard
-                          key={service.id}
-                          serviceId={service.id}
-                          label={service.label}
-                          subLabel={service.subLabel}
-                          icon={service.icon}
-                          onClick={handleServiceSelection}
-                          isSelected={selectedService === service.id}
-                          colors={service.colors}
-                        />
-                      ))}
-                    </div>
-
-                    {isMounted && selectedService && (
-                      <Button 
-                        size="lg" 
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-5 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                        onClick={handleStartRequest}
-                      >
-                        Anfrage jetzt starten
-                      </Button>
-                    )}
-                    {!isMounted && (
-                      <div style={{ height: '80px' }} aria-hidden="true" />
-                    )}
-                  </div>
-                </div>
-              </div>
-
-               {/* Features Section - Mobile - SEO Optimized */}
-               <div className="lg:hidden mt-5 md:mt-6 text-left">
-                 <aside aria-label="Vorteile und Garantien" className="text-left">
-                   <ul className="flex flex-col items-start gap-5 md:gap-6" role="list">
-                    {features.map((feature, index) => (
-                      <li 
-                        key={index}
-                        className="flex items-center text-gray-900 text-base md:text-lg font-semibold"
-                        itemProp="featureList"
-                      >
-                        <div className="flex-shrink-0 mr-3" aria-hidden="true">
-                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-md">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                          </div>
-                        </div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </aside>
-              </div>
-
-              {/* Desktop Layout - SEO Optimized */}
-              <div className="hidden lg:block">
-                {/* Badge */}
-                <p className="inline-block text-xs md:text-sm font-bold text-green-700 uppercase tracking-widest mb-4 px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                  ONLINE OFFERTEN
-                </p>
-                {/* Main H1 - Desktop - Full Width */}
-                <h1 className="text-3xl md:text-4xl lg:text-[38px] font-extrabold text-gray-900 mb-6 md:mb-8 leading-tight tracking-tight w-full text-left">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
-                    Umzug, Reinigung & Renovierung
-                  </span>
-                  <br />
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-green-700 to-gray-900">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
                     Kostenlose Offerten erhalten & vergleichen
-                  </span>
-                </h1>
-              </div>
-
-              <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-                <div className="text-left pr-4 lg:pr-8">
-                  <p className="text-base md:text-lg lg:text-xl text-gray-700 mb-5 md:mb-6 leading-relaxed pr-0">
-                    Fordern Sie kostenlos mehrere Offerten für Umzug, Reinigung, Renovierung und weitere Dienstleistungen in der ganzen Schweiz an.
-                    Finden Sie geprüfte Anbieter aus Ihrer Region und sparen Sie Zeit und Geld.
+                  </h1>
+                  <p className="text-2xl md:text-3xl text-gray-700 font-bold mb-4">
+                    Bis zu 40% sparen durch Vergleich
                   </p>
-
-                  {/* SEO Optimized Image - Desktop */}
-                  <figure
-                    className="relative w-full mb-5 md:mb-6"
-                  >
-                    <picture>
-                      <source
-                        type="image/avif"
-                        srcSet="https://online-offerten.ch/privatumzug/umzug-reinigung-maler-gertner-min-600-192.avif 1600w"
-                        sizes="(max-width: 1200px) 1200px, 1600px"
-                      />
-                      <img  
-                      alt="Professionelle Dienstleister für Umzug, Reinigung, Malerarbeiten und Gartenarbeiten in der Schweiz. Umzugshelfer, Reinigungskräfte, Maler und Gärtner bei der Arbeit."
-                        className="w-full h-full object-contain"
-                        src="https://online-offerten.ch/privatumzug/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.avif"
-                        sizes="(max-width: 1200px) 1200px, 1600px"
-                        fetchPriority="high"
-                        loading="eager"
-                      width="1600"
-                      height="900"
-                      style={{ display: 'block' }}
+                  <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                    Wählen Sie einen Service und vergleichen Sie mehrere Offerten von geprüften Anbietern. Erhalten Sie bis zu 6 kostenlose Offerten für Umzug, Reinigung oder Renovierung – <strong>100% kostenlos, unverbindlich und transparent</strong>.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Button
+                      onClick={handleStartRequest}
+                      size="lg"
+                      className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
+                    >
+                      <Search className="mr-2 h-5 w-5" />
+                      Jetzt vergleichen
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        const element = document.getElementById('kosten-berechnen');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }}
+                      variant="outline"
+                      size="lg"
+                      className="text-lg px-8 py-6"
+                    >
+                      <Calculator className="mr-2 h-5 w-5" />
+                      Kosten berechnen
+                    </Button>
+                  </div>
+                  <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-600">
+                    <div className="flex items-center">
+                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
+                      <span>Geprüfte Anbieter aus Ihrer Region</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
+                      <span>100% kostenlos & unverbindlich</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
+                      <span>Bis zu 40% sparen</span>
+                    </div>
+                  </div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="relative"
+                >
+                  <div className="flex items-center justify-center mb-6">
+                    <img 
+                      src="/image/online-offerten.png" 
+                      alt="Online Offerten" 
+                      className="w-full h-auto max-w-md rounded-lg"
+                      loading="lazy"
                       decoding="async"
-                      itemProp="image"
-                      />
-                    </picture>
-                    <figcaption className="sr-only">
-                      Professionelle Dienstleister für Umzug, Reinigung, Malerarbeiten und Gartenarbeiten in der Schweiz
-                    </figcaption>
-                  </figure>
-
-                  {/* SEO Optimized Features */}
-                  <div className="mt-5 md:mt-6">
-                    <aside aria-label="Vorteile und Garantien">
-                      <ul className="flex flex-col items-start gap-5 md:gap-6" role="list">
-                        {features.map((feature, index) => (
-                          <li 
-                            key={index}
-                            className="flex items-center text-gray-900 text-lg md:text-xl font-semibold"
-                            itemProp="featureList"
-                          >
-                            <div className="flex-shrink-0 mr-3" aria-hidden="true">
-                              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
-                                <CheckCircle2 className="w-5 h-5 text-white" />
-                              </div>
-                            </div>
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </aside>
+                    />
                   </div>
-                </div>
-
-                <div className="space-y-4 pt-2 lg:pt-4">
-                  <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 md:p-8">
-                    <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center md:text-left">
-                      Einfach & gratis mehrere Offerten einholen
-                    </h4>
-                    <p className="text-base md:text-lg text-gray-700 mb-6 text-center md:text-left">
-                      Schritt 1: Wählen Sie Ihre gewünschte Dienstleistung aus:
-                    </p>
-                    <div className="space-y-3">
-                    {services.map((service) => (
-                      <ServiceCard
-                        key={service.id}
-                        serviceId={service.id}
-                        label={service.label}
-                        subLabel={service.subLabel}
-                        icon={service.icon}
-                        onClick={handleServiceSelection}
-                        isSelected={selectedService === service.id}
-                        colors={service.colors}
-                      />
-                    ))}
-                    </div>
-
-                    <div className="mt-6" style={{ minHeight: '80px' }}>
-                      {isMounted && selectedService ? (
-                        <Button 
-                          size="lg" 
-                          className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-6 text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]"
-                          onClick={handleStartRequest}
-                        >
-                          Anfrage jetzt starten
-                          <ArrowRight className="w-5 h-5 ml-2 inline-block" />
-                        </Button>
-                      ) : (
-                        <div
-                          style={{ height: '80px' }}
-                          aria-hidden="true"
-                        />
-                      )}
+                  <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                      Finden Sie Ihre Dienstleister
+                    </h3>
+                    <div className="space-y-4">
+                      <div className="flex items-start">
+                        <MapPin className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900">Geprüfte Anbieter</p>
+                          <p className="text-sm text-gray-600">Qualitätsgeprüfte Partner aus Ihrer Region</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <ShieldCheck className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900">100% kostenlos</p>
+                          <p className="text-sm text-gray-600">Keine Gebühren, keine Verpflichtungen</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <TrendingUp className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900">Bis zu 40% sparen</p>
+                          <p className="text-sm text-gray-600">Durch Vergleich mehrerer Offerten</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <Users className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-semibold text-gray-900">Mehrere Offerten</p>
+                          <p className="text-sm text-gray-600">Bis zu 4 kostenlose Offerten vergleichen</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
-              </article>
             </div>
           </section>
         
           {/* How It Works Section */}
-          <section className="py-20 md:py-28 bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 relative overflow-hidden">
+          <section className="py-12 md:py-16 bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 relative overflow-hidden">
             {/* Decorative background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-20 right-10 w-72 h-72 bg-green-700/30 rounded-full blur-3xl"></div>
@@ -721,19 +595,19 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             </div>
             
             <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-              <div className="text-center mb-16 md:mb-20">
-                <p className="inline-block text-xs md:text-sm font-bold text-green-300 uppercase tracking-widest mb-4 px-4 py-2 bg-green-800/50 backdrop-blur-sm rounded-full border border-green-700/50">
+              <div className="text-center mb-8 md:mb-10">
+                <p className="inline-block text-xs font-bold text-green-300 uppercase tracking-widest mb-3 px-3 py-1.5 bg-green-800/50 backdrop-blur-sm rounded-full border border-green-700/50">
                   WIE ES FUNKTIONIERT
                 </p>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-3 tracking-tight leading-tight">
                   So funktioniert's
                 </h2>
-                <p className="text-lg md:text-xl text-green-100 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-base md:text-lg text-green-100 max-w-2xl mx-auto leading-relaxed">
                   In nur 3 Schritten erhalten Sie passende Offerten von geprüften Partnern.
-                </p>
-              </div>
+                  </p>
+                </div>
 
-              <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-16">
+              <div className="grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto mb-8">
                 {[
                   { 
                     id: 1, 
@@ -747,7 +621,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   { 
                     id: 2, 
                     title: "Offerten vergleichen", 
-                    desc: "Sie erhalten bis zu 6 kostenlose Offerten von qualifizierten Partnern – schnell und unverbindlich.", 
+                    desc: "Sie erhalten bis zu 4 kostenlose Offerten von qualifizierten Partnern – schnell und unverbindlich.", 
                     icon: GitCompareArrows,
                     gradient: "from-blue-500 to-cyan-600",
                     bgGradient: "from-blue-50 to-cyan-50",
@@ -765,57 +639,57 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 ].map((step) => {
                   const IconComponent = step.icon;
                   return (
-                    <div 
-                      key={step.id} 
+                  <div 
+                    key={step.id} 
                       className="group relative"
-                    >
+                  >
                       {/* Card */}
-                      <div className={`relative h-full bg-gradient-to-br ${step.bgGradient} rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/50 backdrop-blur-sm hover:-translate-y-2`}>
+                      <div className={`relative h-full bg-gradient-to-br ${step.bgGradient} rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 backdrop-blur-sm hover:-translate-y-1`}>
                         {/* Step number badge */}
-                        <div className={`absolute -top-4 -right-4 w-14 h-14 bg-gradient-to-br ${step.gradient} rounded-full flex items-center justify-center text-white font-bold text-xl shadow-xl ring-4 ring-green-900`}>
-                          {step.id}
-                        </div>
+                        <div className={`absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br ${step.gradient} rounded-full flex items-center justify-center text-white font-bold text-base shadow-lg ring-2 ring-green-900`}>
+                        {step.id}
+                      </div>
                         
                         {/* Icon container */}
-                        <div className={`mb-6 w-20 h-20 bg-gradient-to-br ${step.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                          <IconComponent className="w-10 h-10 text-white" strokeWidth={2.5} />
-                        </div>
-                        
+                        <div className={`mb-4 w-14 h-14 bg-gradient-to-br ${step.gradient} rounded-xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300`}>
+                          <IconComponent className="w-7 h-7 text-white" strokeWidth={2.5} />
+                    </div>
+
                         {/* Content */}
-                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
-                          {step.title}
-                        </h3>
-                        <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-                          {step.desc}
-                        </p>
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight">
+                        {step.title}
+                      </h3>
+                        <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+                        {step.desc}
+                      </p>
                         
                         {/* Arrow decoration */}
                         {step.id < 3 && (
-                          <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 z-10">
-                            <ChevronRight className="w-8 h-8 text-green-700/50 group-hover:text-green-400 transition-colors" />
-                          </div>
+                          <div className="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
+                            <ChevronRight className="w-6 h-6 text-green-700/50 group-hover:text-green-400 transition-colors" />
+                    </div>
                         )}
-                      </div>
+                  </div>
                     </div>
                   );
                 })}
               </div>
               
               {/* Trust badge */}
-              <div className="max-w-2xl mx-auto">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-xl border border-white/20">
-                  <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+              <div className="max-w-xl mx-auto">
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 md:p-5 shadow-lg border border-white/20">
+                  <div className="flex items-center justify-center gap-3 md:gap-4">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-lg">
-                        <Award className="w-8 h-8 text-white" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-md">
+                        <Award className="w-6 h-6 text-white" />
                       </div>
                     </div>
-                    <div className="text-center md:text-left">
-                      <p className="text-lg md:text-xl font-semibold text-white mb-2">
+                    <div className="text-center">
+                      <p className="text-base md:text-lg font-semibold text-white mb-1">
                         Geprüft und versichert
                       </p>
-                      <p className="text-green-100 text-base md:text-lg">
-                        Alle unsere Partner sind geprüft und versichert – für maximale Sicherheit bei jedem Auftrag.
+                      <p className="text-green-100 text-sm md:text-base">
+                        Alle unsere Partner sind geprüft und versichert.
                       </p>
                     </div>
                   </div>
@@ -825,7 +699,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           </section>
 
           {/* Cost Calculators Section */}
-          <section className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
+          <section id="kosten-berechnen" className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <div className="text-center mb-8 md:mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -891,205 +765,129 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           </section>
 
           {/* Services Overview Section */}
-          <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 via-gray-100 to-slate-100">
+          <section className="py-12 md:py-16 bg-gradient-to-b from-slate-50 via-gray-100 to-slate-100">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+              <div className="text-center mb-8 md:mb-10">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3 leading-tight">
                   Beliebte Dienstleistungen
                 </h2>
-                <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                  Von Privatumzug bis Gartenarbeiten – finden Sie den passenden Partner für Ihr Projekt. Professionell, zuverlässig und zu fairen Preisen.
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                  Von Privatumzug bis Gartenarbeiten – finden Sie den passenden Partner für Ihr Projekt.
                 </p>
               </div>
 
-              <div className="space-y-6 md:space-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {/* Umzug */}
-                <div className="rounded-xl shadow-xl hover:shadow-2xl overflow-hidden bg-white border-l-4 border-teal-500">
-                  <div className="grid md:grid-cols-2 gap-0 md:grid-flow-dense">
-                    <div className="relative h-64 md:h-auto overflow-hidden md:col-start-2">
-                      <img
-                        src="https://online-offerten.ch/image/umzugsfirma.avif"
-                        alt="Professionelle Umzugsfirma für Privat- und Geschäftsumzüge in der ganzen Schweiz"
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                        width="600"
-                        height="400"
-                      />
+                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-teal-500 p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-teal-50">
+                      <Home className="w-5 h-5 text-teal-600" />
                     </div>
-                    <div className="p-6 md:p-8 flex flex-col md:col-start-1 md:row-start-1">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 rounded-lg bg-teal-50">
-                          <Home className="w-6 h-6 text-teal-600" />
-                        </div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-teal-600 mb-0">Umzug</h3>
-                      </div>
-                      <p className="text-gray-600 mb-6 text-sm md:text-base leading-relaxed font-medium">
-                        Vergleichen Sie Umzug Offerten von professionellen Umzugsfirmen in der Schweiz und finden Sie das beste Angebot für Ihren Umzug.
-                      </p>
-                      <ul className="space-y-2">
-                        {[
-                          { to: '/privatumzug', title: 'Privatumzug' },
-                          { to: '/geschaeftsumzug', title: 'Geschäftsumzug' },
-                          { to: '/internationale-umzuege', title: 'Internationale Umzüge' },
-                          { to: '/spezialtransporte', title: 'Spezialtransporte' },
-                          { to: '/klaviertransport', title: 'Klaviertransport' }
-                        ].map((service) => (
-                          <li key={service.to}>
-                            <Link href={service.to}
-                              className="group flex items-center text-gray-700 hover:text-teal-600 transition-colors text-sm md:text-base"
-                            >
-                              <ArrowRight className="w-4 h-4 mr-2 text-teal-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                              <span className="group-hover:underline">{service.title}</span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-teal-600">Umzug</h3>
                   </div>
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    Vergleichen Sie Umzug Offerten von professionellen Umzugsfirmen.
+                  </p>
+                  <ul className="space-y-1.5">
+                    {[
+                      { to: '/privatumzug', title: 'Privatumzug' },
+                      { to: '/geschaeftsumzug', title: 'Geschäftsumzug' },
+                      { to: '/internationale-umzuege', title: 'Internationale Umzüge' },
+                      { to: '/spezialtransporte', title: 'Spezialtransporte' },
+                      { to: '/klaviertransport', title: 'Klaviertransport' }
+                    ].map((service) => (
+                      <li key={service.to}>
+                        <Link href={service.to}
+                          className="group flex items-center text-gray-700 hover:text-teal-600 transition-colors text-xs md:text-sm"
+                        >
+                          <ArrowRight className="w-3 h-3 mr-1.5 text-teal-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline">{service.title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
                 {/* Reinigung */}
-                <div className="rounded-xl shadow-xl hover:shadow-2xl overflow-hidden bg-white border-l-4 border-yellow-500">
-                  <div className="grid md:grid-cols-2 gap-0">
-                    <div className="relative h-64 md:h-auto overflow-hidden">
-                      <img
-                        src="https://online-offerten.ch/privatumzug/reinigungsfirma.avif"
-                        alt="Professionelle Reinigungsdienstleistungen für Wohnungen, Häuser und Büros in der Schweiz"
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                        width="600"
-                        height="400"
-                      />
+                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-yellow-500 p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-yellow-50">
+                      <Sparkles className="w-5 h-5 text-yellow-600" />
                     </div>
-                    <div className="p-6 md:p-8 flex flex-col">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 rounded-lg bg-yellow-50">
-                          <Sparkles className="w-6 h-6 text-yellow-600" />
-                        </div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-yellow-600 mb-0">Reinigung</h3>
-                      </div>
-                      <p className="text-gray-600 mb-6 text-sm md:text-base leading-relaxed font-medium">
-                        Vergleichen Sie Reinigung Offerten von professionellen Reinigungsfirmen in der Schweiz und finden Sie das beste Angebot für Ihre Reinigung.
-                      </p>
-                      <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                        <ul className="space-y-2">
-                          {[
-                            { to: '/wohnungsreinigung', title: 'Wohnungsreinigung' },
-                            { to: '/hausreinigung', title: 'Hausreinigung' },
-                            { to: '/bueroreinigung', title: 'Büroreinigung' },
-                            { to: '/umzugsreinigung', title: 'Umzugsreinigung' },
-                            { to: '/unterhaltsreinigung', title: 'Unterhaltsreinigung' },
-                            { to: '/grundreinigung', title: 'Grundreinigung' }
-                          ].map((service) => (
-                            <li key={service.to}>
-                              <Link href={service.to}
-                                className="group flex items-center text-gray-700 hover:text-yellow-600 transition-colors text-sm md:text-base"
-                              >
-                                <ArrowRight className="w-4 h-4 mr-2 text-yellow-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                                <span className="group-hover:underline">{service.title}</span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                        <ul className="space-y-2">
-                          {[
-                            { to: '/baureinigung', title: 'Baureinigung' },
-                            { to: '/fensterreinigung', title: 'Fensterreinigung' },
-                            { to: '/bodenreinigung', title: 'Bodenreinigung' },
-                            { to: '/fassadenreinigung', title: 'Fassadenreinigung' },
-                            { to: '/hofreinigung', title: 'Hofreinigung' }
-                          ].map((service) => (
-                            <li key={service.to}>
-                              <Link href={service.to}
-                                className="group flex items-center text-gray-700 hover:text-yellow-600 transition-colors text-sm md:text-base"
-                              >
-                                <ArrowRight className="w-4 h-4 mr-2 text-yellow-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                                <span className="group-hover:underline">{service.title}</span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-yellow-600">Reinigung</h3>
                   </div>
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    Vergleichen Sie Reinigung Offerten von professionellen Reinigungsfirmen.
+                  </p>
+                  <ul className="space-y-1.5">
+                    {[
+                      { to: '/wohnungsreinigung', title: 'Wohnungsreinigung' },
+                      { to: '/hausreinigung', title: 'Hausreinigung' },
+                      { to: '/bueroreinigung', title: 'Büroreinigung' },
+                      { to: '/umzugsreinigung', title: 'Umzugsreinigung' },
+                      { to: '/unterhaltsreinigung', title: 'Unterhaltsreinigung' },
+                      { to: '/grundreinigung', title: 'Grundreinigung' },
+                      { to: '/baureinigung', title: 'Baureinigung' },
+                      { to: '/fensterreinigung', title: 'Fensterreinigung' }
+                    ].map((service) => (
+                      <li key={service.to}>
+                        <Link href={service.to}
+                          className="group flex items-center text-gray-700 hover:text-yellow-600 transition-colors text-xs md:text-sm"
+                        >
+                          <ArrowRight className="w-3 h-3 mr-1.5 text-yellow-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline">{service.title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
                 {/* Malerarbeiten & Gartenarbeiten */}
-                <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-                  <div className="rounded-xl shadow-xl hover:shadow-2xl overflow-hidden bg-white border-l-4 border-blue-500">
-                    <div className="grid md:grid-cols-2 gap-0">
-                      <div className="relative h-64 md:h-auto overflow-hidden">
-                        <img
-                          src="https://online-offerten.ch/bilder/malerarbeiten-600-400.webp"
-                          alt="Professionelle Malerarbeiten für Innen- und Außenbereiche in der Schweiz"
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          decoding="async"
-                          width="600"
-                          height="400"
-                        />
+                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-blue-500 p-5">
+                  {/* Malerarbeiten */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 rounded-lg bg-blue-50">
+                        <Paintbrush className="w-5 h-5 text-blue-600" />
                       </div>
-                      <div className="p-6 md:p-8 flex flex-col">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="p-2 rounded-lg bg-blue-50">
-                            <Paintbrush className="w-6 h-6 text-blue-600" />
-                          </div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-0">Malerarbeiten</h3>
-                        </div>
-                        <p className="text-gray-600 mb-6 text-sm md:text-base leading-relaxed font-medium">
-                          Vergleichen Sie Maler Offerten von professionellen Malerfirmen in der Schweiz und finden Sie das beste Angebot für Ihre Malerarbeiten.
-                        </p>
-                        <ul className="space-y-2">
-                          <li>
-                            <Link href="/malerarbeiten"
-                              className="group flex items-center text-gray-700 hover:text-blue-600 transition-colors text-sm md:text-base"
-                            >
-                              <ArrowRight className="w-4 h-4 mr-2 text-blue-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                              <span className="group-hover:underline">Malerarbeiten</span>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-blue-600">Malerarbeiten</h3>
                     </div>
+                    <p className="text-gray-600 mb-3 text-sm leading-relaxed">
+                      Vergleichen Sie Maler Offerten von professionellen Malerfirmen.
+                    </p>
+                    <ul className="space-y-1.5">
+                      <li>
+                        <Link href="/malerarbeiten"
+                          className="group flex items-center text-gray-700 hover:text-blue-600 transition-colors text-xs md:text-sm"
+                        >
+                          <ArrowRight className="w-3 h-3 mr-1.5 text-blue-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline">Malerarbeiten</span>
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
 
-                  <div className="rounded-xl shadow-xl hover:shadow-2xl overflow-hidden bg-white border-l-4 border-green-500">
-                    <div className="grid md:grid-cols-2 gap-0">
-                      <div className="relative h-64 md:h-auto overflow-hidden">
-                        <img
-                          src="https://online-offerten.ch/bilder/gartenarbeiten-600-400.webp"
-                          alt="Professionelle Gartenpflege und Landschaftsbau in der Schweiz"
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          decoding="async"
-                          width="600"
-                          height="400"
-                        />
+                  {/* Gartenarbeiten */}
+                  <div className="border-t border-gray-200 pt-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 rounded-lg bg-green-50">
+                        <Sprout className="w-5 h-5 text-green-600" />
                       </div>
-                      <div className="p-6 md:p-8 flex flex-col">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="p-2 rounded-lg bg-green-50">
-                            <Sprout className="w-6 h-6 text-green-600" />
-                          </div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-green-600 mb-0">Gartenarbeiten</h3>
-                        </div>
-                        <p className="text-gray-600 mb-6 text-sm md:text-base leading-relaxed font-medium">
-                          Vergleichen Sie Gartenarbeiten Offerten von professionellen Gartenfirmen in der Schweiz und finden Sie das beste Angebot für Ihre Gartenarbeiten.
-                        </p>
-                        <ul className="space-y-2">
-                          <li>
-                            <Link href="/gartenarbeiten"
-                              className="group flex items-center text-gray-700 hover:text-green-600 transition-colors text-sm md:text-base"
-                            >
-                              <ArrowRight className="w-4 h-4 mr-2 text-green-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                              <span className="group-hover:underline">Gartenarbeiten</span>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-green-600">Gartenarbeiten</h3>
                     </div>
+                    <p className="text-gray-600 mb-3 text-sm leading-relaxed">
+                      Vergleichen Sie Gartenarbeiten Offerten von professionellen Gartenfirmen.
+                    </p>
+                    <ul className="space-y-1.5">
+                      <li>
+                        <Link href="/gartenarbeiten"
+                          className="group flex items-center text-gray-700 hover:text-green-600 transition-colors text-xs md:text-sm"
+                        >
+                          <ArrowRight className="w-3 h-3 mr-1.5 text-green-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                          <span className="group-hover:underline">Gartenarbeiten</span>
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -1102,7 +900,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
                   Kosten sparen mit dem richtigen Anbieter – Offerten einfach vergleichen
-                </h2>
+                  </h2>
                 <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                   Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Partnern.
                   <br />
@@ -1160,23 +958,23 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     <div className="mt-8 prose prose-lg max-w-none text-gray-700 space-y-6 text-base md:text-lg leading-relaxed text-left">
                       <p>
                         Wenn Sie in der Schweiz einen Umzug, eine Reinigung oder Renovierungsarbeiten planen, ist das Einholen mehrerer Offerten ein entscheidender Schritt für eine fundierte Entscheidung. Ein Vergleich verschiedener Anbieter hilft Ihnen dabei, die beste Leistung zum fairen Preis zu finden – unabhängig davon, ob es sich um einen Privatumzug, eine professionelle Reinigung oder eine Renovation handelt.
-                      </p>
+                    </p>
 
                       <div>
                         <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-6">
                           Mehr Transparenz bei Umzugsofferten
                         </h4>
                         <p>
-                          Gerade bei Umzügen können sich die Preise und Leistungen je nach Anbieter deutlich unterscheiden. Ein Umzug ist nicht nur organisatorisch anspruchsvoll, sondern auch mit Kosten verbunden. Durch den Vergleich mehrerer Umzugsofferten sparen Sie Geld und stellen sicher, dass alle wichtigen Leistungen – von der Verpackung bis zur Montage am Zielort – im Preis enthalten sind.
-                        </p>
-                      </div>
+                          Gerade bei Umzügen können sich Preise und Leistungen je nach Anbieter deutlich unterscheiden. Durch den Vergleich mehrerer <Link href="/umzugsofferten" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsofferten</Link> sparen Sie Geld und stellen sicher, dass alle wichtigen Leistungen – von der Verpackung bis zur Montage am Zielort – transparent aufgeführt sind.
+                    </p>
+                  </div>
 
                       <div>
                         <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 mt-6">
                           Reinigungsofferten vergleichen lohnt sich
                         </h4>
                         <p>
-                          Auch bei Reinigungsarbeiten gibt es grosse Unterschiede bei Preis, Umfang und Servicequalität. Ob Umzugsreinigung mit Abnahmegarantie, Wohnungs- oder Büroreinigung – jede Situation erfordert individuelle Leistungen. Durch das Vergleichen verschiedener Reinigungsofferten finden Sie ein Angebot, das zu Ihrem Budget und Ihren Qualitätsansprüchen passt. Zusätzlich können Sie Kriterien wie Versicherung, Erfahrung und Umweltfreundlichkeit berücksichtigen.
+                          Auch bei Reinigungsarbeiten gibt es grosse Unterschiede bei Preis, Umfang und Servicequalität. Ob Umzugsreinigung mit Abnahmegarantie, Wohnungs- oder Büroreinigung – durch den Vergleich mehrerer Reinigungsofferten finden Sie ein Angebot, das zu Ihrem Budget und Ihren Qualitätsansprüchen passt.
                         </p>
                       </div>
 
@@ -1185,7 +983,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                           Renovierungsofferten für langfristige Investitionen
                         </h4>
                         <p>
-                          Renovations- und Malerarbeiten sind oft langfristige Investitionen. Ein sorgfältiger Vergleich mehrerer Renovierungsofferten hilft Ihnen, unnötige Kosten zu vermeiden und einen zuverlässigen Anbieter zu finden. So stellen Sie sicher, dass Ihr Projekt fachgerecht, termingerecht und in der gewünschten Qualität umgesetzt wird.
+                          Renovations- und <Link href="/malerfirma" className="text-green-600 hover:text-green-700 font-semibold underline">Malerarbeiten</Link> sind oft langfristige Investitionen. Ein sorgfältiger Vergleich mehrerer Renovierungsofferten hilft Ihnen, unnötige Kosten zu vermeiden und einen zuverlässigen Anbieter zu finden.
                         </p>
                       </div>
 
@@ -1194,21 +992,21 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                           Offerten vergleichen – einfach & kostenlos
                         </h4>
                         <p>
-                          Online-Offerten.ch macht das Offerten vergleichen in der Schweiz einfach und effizient. Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Anbietern aus Ihrer Region. Alle Partner werden sorgfältig geprüft und erfüllen hohe Qualitätsstandards.
+                          Online-Offerten.ch macht das Offerten vergleichen in der Schweiz einfach und effizient. Nach Auswahl Ihres gewünschten Services erhalten Sie mehrere transparente Offerten von geprüften Anbietern aus Ihrer Region. Alle Partner werden sorgfältig geprüft und erfüllen hohe Qualitätsstandards.
                         </p>
                         <p className="mt-4">
-                          Starten Sie jetzt Ihren Offertenvergleich und finden Sie den passenden Anbieter für Umzug, Reinigung oder Renovierung – in der ganzen Schweiz.
+                          Starten Sie jetzt Ihren Offertenvergleich und finden Sie den passenden Anbieter für Umzug, Reinigung oder Renovierung – kostenlos und unverbindlich.
                         </p>
                       </div>
                     </div>
                     <div className="mt-8">
                       <Button asChild size="lg" className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white group px-8 py-6 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-                        <Link href="/kostenlose-offerte-anfordern">
-                          Jetzt kostenlose Offerten anfordern
-                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                      </Button>
-                    </div>
+                      <Link href="/kostenlose-offerte-anfordern">
+                        Jetzt kostenlose Offerten anfordern
+                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -1402,7 +1200,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     {
                       value: "faq-1",
                       question: "Wie funktioniert der Offertenvergleich auf Online-Offerten.ch?",
-                      answer: "Der Prozess ist ganz einfach: Füllen Sie unser kurzes Online-Formular aus und beschreiben Sie Ihr Projekt (Umzug, Reinigung, Malerarbeiten oder Gartenpflege). Wir leiten Ihre Anfrage dann an bis zu 6 passende, geprüfte Partnerfirmen aus Ihrer Region weiter. Diese senden Ihnen innerhalb kurzer Zeit kostenlose und unverbindliche Offerten zu. Sie können die Angebote in Ruhe vergleichen und das beste für sich auswählen."
+                      answer: "Der Prozess ist ganz einfach: Füllen Sie unser kurzes Online-Formular aus und beschreiben Sie Ihr Projekt (Umzug, Reinigung, Malerarbeiten oder Gartenpflege). Wir leiten Ihre Anfrage dann an bis zu 4 passende, geprüfte Partnerfirmen aus Ihrer Region weiter. Diese senden Ihnen innerhalb kurzer Zeit kostenlose und unverbindliche Offerten zu. Sie können die Angebote in Ruhe vergleichen und das beste für sich auswählen."
                     },
                     {
                       value: "faq-2",
@@ -1412,7 +1210,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     {
                       value: "faq-3",
                       question: "Wie viele Offerten erhalte ich und wie schnell?",
-                      answer: "Sie erhalten in der Regel zwischen 3 und 6 passende Offerten von verschiedenen Partnerfirmen. Die meisten Firmen antworten innerhalb von 24-48 Stunden auf Ihre Anfrage. In dringenden Fällen können Sie auch schneller Offerten erhalten. Alle Offerten werden Ihnen direkt per E-Mail zugesendet, sodass Sie sie bequem vergleichen können."
+                      answer: "Sie erhalten in der Regel zwischen 3 und 4 passende Offerten von verschiedenen Partnerfirmen. Die meisten Firmen antworten innerhalb von 24-48 Stunden auf Ihre Anfrage. In dringenden Fällen können Sie auch schneller Offerten erhalten. Alle Offerten werden Ihnen direkt per E-Mail zugesendet, sodass Sie sie bequem vergleichen können."
                     },
                     {
                       value: "faq-4",
@@ -1565,7 +1363,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     </p>
                     <p>
                       Starten Sie jetzt Ihre kostenlose Anfrage und erhalten Sie mehrere Offerten – unverbindlich und ohne Verpflichtung.
-                    </p>
+                  </p>
                   </div>
                 </div>
                 

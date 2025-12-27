@@ -1,269 +1,895 @@
 'use client'
 
-import Link from 'next/link';
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import CleaningCostCalculator from '@/components/ReinigungskostenRechnerSections/CleaningCostCalculator';
-import { CheckCircle, Search, FileText, Star, ArrowRight, Sparkles } from 'lucide-react';
-
-interface SectionProps {
-  id: string;
-  title: string;
-  children: React.ReactNode;
-  className?: string;
-}
-
-const Section = ({ id, title, children, className = '' }: SectionProps) => (
-  <section id={id} className={`py-12 md:py-16 ${className}`}>
-    <div className="container mx-auto max-w-navbar px-4">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">{title}</h2>
-      {children}
-    </div>
-  </section>
-);
-
-const PageNavigation = () => (
-  <div className="sticky top-20 bg-white/80 backdrop-blur-sm z-30 p-4 rounded-lg shadow-md border mb-12 hidden lg:block">
-    <p className="font-bold text-lg mb-3 text-center text-gray-700">Auf dieser Seite</p>
-    <nav>
-      <ul className="space-y-2 text-center">
-        <li><a href="#warum-vergleichen" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Warum Offerten vergleichen?</a></li>
-        <li><a href="#so-funktionierts" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">So funktioniert's</a></li>
-        <li><a href="#kostenrechner" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Kosten Rechner</a></li>
-        <li><a href="#leistungen" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Unsere Reinigungsleistungen</a></li>
-        <li><a href="#spartipps" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Tipps zum Sparen</a></li>
-        <li><a href="#faq" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Häufige Fragen</a></li>
-      </ul>
-    </nav>
-  </div>
-);
+import React, { useEffect } from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { 
+  ArrowRight, CheckCircle, ShieldCheck, Clock, TrendingUp, Users, Award, 
+  Star, Calculator, MapPin, Home, Building, Globe, Sparkles, Droplets,
+  HelpCircle, Info, FileText, Search, HeartHandshake, Zap, Target, 
+  Phone, Mail, Calendar, Navigation2, Route, Sparkle, Wrench, Shield
+} from 'lucide-react'
 
 const ReinigungsfirmaInDerNaehePageClient = () => {
-  const canonicalPath = '/reinigungsfirma-in-der-naehe';
+  const router = useRouter()
+  const canonicalUrl = 'https://online-offerten.ch/reinigungsfirma-in-der-naehe'
 
-  const metaTitle = "Reinigungsfirma in der Nähe finden & vergleichen » 6 Offerten kostenlos | Schweiz";
-  const metaDescription = "Finden Sie die beste Reinigungsfirma in Ihrer Nähe. Vergleichen Sie kostenlos bis zu 6 Offerten von geprüften Reinigungsfirmen für Umzugsreinigung mit Abnahmegarantie, Büroreinigung, Fensterreinigung & mehr. Bis zu 40% sparen – schnell, sicher und unverbindlich.";
-  // Meta keywords removed - Google no longer uses this tag (since 2009)
+  // Inject structured data
+  useEffect(() => {
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://online-offerten.ch/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Reinigungsfirma in der Nähe",
+              "item": canonicalUrl
+            }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Reinigungsfirma in der Nähe finden",
+          "serviceType": "Reinigungsservice",
+          "description": "Finden Sie die besten lokalen Reinigungsunternehmen. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Reinigungsanbietern in Ihrer Region für Büroreinigung, Haushaltsreinigung und mehr.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Online-Offerten.ch",
+            "url": "https://online-offerten.ch",
+            "logo": "https://online-offerten.ch/image/logo.png"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Switzerland"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
+            "priceCurrency": "CHF",
+            "price": "0",
+            "name": "Kostenlose Reinigungsfirma Offerten in der Nähe"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://online-offerten.ch/#organization",
+          "name": "Online-Offerten.ch",
+          "url": "https://online-offerten.ch",
+          "logo": "https://online-offerten.ch/image/logo.png",
+          "description": "Vergleichsportal für Reinigungsfirmen in der Schweiz",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "CH"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Switzerland"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Wie finde ich eine Reinigungsfirma in der Nähe?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Um lokale Reinigungsunternehmen zu finden, können Sie unser kostenloses Vergleichsportal nutzen. Füllen Sie einfach das Online-Formular aus und beschreiben Sie Ihre Reinigungsanforderungen. Wir vermitteln Ihnen dann bis zu 6 geprüfte Reinigungsanbieter aus Ihrer Region, die sich direkt bei Ihnen melden und Ihnen individuelle Offerten erstellen."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wie viel kostet eine Reinigungsfirma?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Die Kosten für einen Reinigungsservice hängen von verschiedenen Faktoren ab: Art der Reinigung (Büroreinigung, Haushaltsreinigung, Endreinigung), Grösse der zu reinigenden Fläche, Häufigkeit der Reinigung und benötigte Leistungen. Eine durchschnittliche Wohnungsreinigung in der Schweiz kostet zwischen 500 und 1.200 CHF. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Reinigungsunternehmen."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Warum sollte ich eine Reinigungsfirma in der Nähe wählen?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ein Reinigungsservice vor Ort bietet mehrere Vorteile: Kürzere Anfahrtswege reduzieren die Kosten, lokale Expertise über örtliche Gegebenheiten, schnellere Reaktionszeiten bei Notfällen, persönlicherer Service und bessere Erreichbarkeit. Regionale Reinigungsunternehmen kennen die örtlichen Gegebenheiten besonders gut."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wie viele Offerten erhalte ich von Reinigungsfirmen in meiner Nähe?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sie erhalten bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Reinigungsanbietern aus Ihrer Region. Nachdem Sie das Formular ausgefüllt haben, nehmen die lokalen Reinigungsunternehmen direkt Kontakt mit Ihnen auf (per Telefon oder E-Mail) und erstellen Ihnen eine individuelle Offerte. In Ballungsgebieten wie Zürich, Basel oder Bern erhalten Sie meist alle 6 Offerten, in ländlicheren Regionen können es auch 3-4 Offerten sein."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wie lange im Voraus sollte ich eine Reinigungsfirma in der Nähe buchen?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Wir empfehlen, mindestens 1-2 Wochen im Voraus zu buchen, besonders für Endreinigungen oder regelmässige Reinigungen. Frühzeitige Buchung gibt Ihnen mehr Auswahl bei lokalen Reinigungsanbietern und oft auch bessere Preise. Last-Minute-Buchungen sind oft deutlich teurer und die Auswahl an verfügbaren Reinigungsunternehmen ist begrenzt."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Sind die Reinigungsfirmen in meiner Nähe versichert?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja, alle Reinigungsunternehmen in unserem Netzwerk sind geprüft und verfügen über eine gültige Betriebshaftpflichtversicherung. Wir prüfen alle Partnerfirmen vor der Aufnahme in unser Netzwerk auf Versicherungen, Lizenzen und Referenzen. Die Versicherungsdetails sind in der Regel in den Offerten enthalten, falls nicht, sollten Sie danach fragen."
+              }
+            }
+          ]
+        }
+      ]
+    }
 
-  const faqs = [
-    { q: "Was bedeutet Abnahmegarantie bei der Umzugsreinigung?", a: "Die Abnahmegarantie bedeutet, dass die Reinigungsfirma dafür haftet, dass die Wohnung vom Vermieter abgenommen wird. Sollte der Vermieter bei der Übergabe Nachreinigungen verlangen, führt die Firma diese kostenlos durch, bis die Abnahme erfolgreich ist." },
-    { q: "Wie viele Offerten erhalte ich über Online-Offerten.ch?", a: "Sie erhalten mit nur einer Anfrage bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Reinigungsfirmen aus Ihrer Region. Das gibt Ihnen eine solide Grundlage für den Vergleich." },
-    { q: "Ist der Service wirklich kostenlos für mich?", a: "Ja, unser Offertenvergleich ist für Sie als anfragende Person zu 100% kostenlos und ohne jegliche Verpflichtung. Sie entscheiden frei, ob und welche Offerte Sie annehmen möchten." },
-    { q: "Wie lange im Voraus sollte ich eine Reinigungsfirma buchen?", a: "Besonders in den Hauptumzugsmonaten empfehlen wir, die Reinigungsfirma mindestens 3-4 Wochen im Voraus zu buchen. So sichern Sie sich Ihren Wunschtermin und haben eine grössere Auswahl an Anbietern." },
-    { q: "Worauf sollte ich bei der Auswahl einer Reinigungsfirma achten?", a: "Achten Sie nicht nur auf den Preis. Prüfen Sie, ob eine Abnahmegarantie angeboten wird, ob die Firma versichert ist und lesen Sie Bewertungen anderer Kunden. Eine transparente Offerte, die alle Leistungen detailliert auflistet, ist ebenfalls ein Zeichen für Seriosität." },
-  ];
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.text = JSON.stringify(schemaData)
+    script.id = 'reinigungsfirma-in-der-naehe-schema'
+    
+    const existing = document.getElementById('reinigungsfirma-in-der-naehe-schema')
+    if (existing) existing.remove()
+    
+    document.head.appendChild(script)
+    
+    return () => {
+      const scriptToRemove = document.getElementById('reinigungsfirma-in-der-naehe-schema')
+      if (scriptToRemove) scriptToRemove.remove()
+    }
+  }, [])
 
-  const savingsTips = [
-    { title: "Flexibles Datum", description: "Reinigungen unter der Woche sind oft günstiger als am Wochenende. Fragen Sie nach flexiblen Terminen." },
-    { title: "Grobe Vorreinigung", description: "Entfernen Sie groben Schmutz und Müll selbst. Das spart der Reinigungsfirma Zeit und Ihnen Kosten." },
-    { title: "Kombinierte Offerten", description: "Wenn Sie auch einen Umzug planen, fragen Sie nach Kombi-Offerten für Umzug und Reinigung. Viele Firmen bieten hier Rabatte." },
-    { title: "Genaue Angaben machen", description: "Je präziser Ihre Angaben zur Grösse und zum Zustand der Wohnung sind, desto genauer und verbindlicher sind die Offerten." },
-    { title: "Frühzeitig anfragen", description: "Starten Sie Ihre Anfrage frühzeitig, um von einer grösseren Auswahl und potenziell besseren Preisen zu profitieren." },
-  ];
-  
+  const handleCtaClick = () => {
+    router.push('/kostenlose-offerte-anfordern?service=reinigung')
+  }
+
+  const features = [
+    {
+      icon: MapPin,
+      title: 'Lokale Reinigungsfirmen',
+      description: 'Finden Sie geprüfte Reinigungsfirmen direkt in Ihrer Region'
+    },
+    {
+      icon: ShieldCheck,
+      title: '100% kostenlos & unverbindlich',
+      description: 'Keine Gebühren, keine versteckten Kosten, keine Verpflichtungen'
+    },
+    {
+      icon: TrendingUp,
+      title: 'Bis zu 40% sparen',
+      description: 'Durch den Vergleich mehrerer lokaler Reinigungsfirmen finden Sie die besten Preise'
+    },
+    {
+      icon: Users,
+      title: 'Nur geprüfte Firmen',
+      description: 'Alle Partnerfirmen sind versichert und verfügen über positive Bewertungen'
+    },
+    {
+      icon: Clock,
+      title: 'Schnelle Antworten',
+      description: 'Erhalten Sie die ersten Offerten bereits innerhalb von 24 Stunden'
+    },
+    {
+      icon: Navigation2,
+      title: 'Regionale Expertise',
+      description: 'Lokale Reinigungsfirmen kennen die örtlichen Gegebenheiten besonders gut'
+    }
+  ]
+
+  const faqItems = [
+    {
+      q: "Wie finde ich eine Reinigungsfirma in der Nähe?",
+      a: "Um lokale Reinigungsunternehmen zu finden, können Sie unser kostenloses Vergleichsportal nutzen. Füllen Sie einfach das Online-Formular aus und beschreiben Sie Ihre Reinigungsanforderungen. Wir vermitteln Ihnen dann bis zu 6 geprüfte Reinigungsanbieter aus Ihrer Region, die sich direkt bei Ihnen melden und Ihnen individuelle Offerten erstellen. Die regionalen Reinigungsunternehmen kennen die örtlichen Gegebenheiten besonders gut."
+    },
+    {
+      q: "Wie viel kostet eine Reinigungsfirma?",
+      a: "Die Kosten für einen Reinigungsservice hängen von verschiedenen Faktoren ab: Art der Reinigung (Büroreinigung, Haushaltsreinigung, Endreinigung), Grösse der zu reinigenden Fläche, Häufigkeit der Reinigung und benötigte Leistungen. Eine durchschnittliche Wohnungsreinigung in der Schweiz kostet zwischen 500 und 1.200 CHF. Büroreinigung kann zwischen 200 und 800 CHF pro Reinigung kosten. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Reinigungsunternehmen. Durch den Vergleich können Sie bis zu 40% sparen."
+    },
+    {
+      q: "Wie viel Geld muss man für eine Reinigung einplanen?",
+      a: "Für eine Reinigung sollten Sie je nach Art und Grösse folgende Budgets einplanen: Wohnungsreinigung (1.5-2.5 Zimmer): 500-800 CHF, Wohnungsreinigung (3.5 Zimmer): 800-1.100 CHF, Wohnungsreinigung (4.5 Zimmer): 950-1.300 CHF, Büroreinigung (klein): 200-400 CHF, Büroreinigung (mittel): 400-600 CHF, Büroreinigung (gross): 600-800 CHF. Zusätzlich sollten Sie 10-20% Reserve für unvorhergesehene Kosten einplanen. Durch den Vergleich mehrerer Offerten von regionalen Reinigungsunternehmen können Sie bis zu 40% sparen."
+    },
+    {
+      q: "Wie teuer ist eine Reinigungsfirma in der Schweiz?",
+      a: "Die Preise für Reinigungsunternehmen in der Schweiz variieren je nach Region und Art der Reinigung. In Ballungsgebieten wie Zürich, Basel oder Genf sind die Preise oft höher als in ländlicheren Regionen. Eine durchschnittliche Wohnungsreinigung kostet zwischen 500 und 1.200 CHF. Durch den Vergleich mehrerer Offerten von Reinigungsanbietern in Ihrer Region finden Sie die besten Preise und können erheblich sparen. Lokale Reinigungsunternehmen können oft günstigere Preise anbieten, da sie kürzere Anfahrtswege haben."
+    },
+    {
+      q: "Wie viel zahlt man für eine Reinigung?",
+      a: "Die Kosten für eine Reinigung hängen von mehreren Faktoren ab. Eine Wohnungsreinigung (1.5-2.5 Zimmer) kostet durchschnittlich 500-800 CHF, eine Wohnungsreinigung (3.5 Zimmer) 800-1.100 CHF, und eine Wohnungsreinigung (4.5+ Zimmer) ab 950 CHF. Büroreinigung kostet je nach Grösse zwischen 200 und 800 CHF pro Reinigung. Zusätzliche Kosten können für Spezialreinigungen, Fensterreinigung oder regelmässige Reinigungen anfallen. Der Vergleich mehrerer Offerten von Reinigungsanbietern vor Ort hilft Ihnen, die besten Preise zu finden."
+    },
+    {
+      q: "Warum sollte ich eine Reinigungsfirma in der Nähe wählen?",
+      a: "Ein Reinigungsservice vor Ort bietet mehrere Vorteile: Kürzere Anfahrtswege reduzieren die Kosten und Umweltbelastung, lokale Expertise über örtliche Gegebenheiten und Zugänglichkeit, schnellere Reaktionszeiten bei Notfällen oder kurzfristigen Änderungen, persönlicherer Service und bessere Erreichbarkeit, sowie Unterstützung der lokalen Wirtschaft. Regionale Reinigungsunternehmen kennen die örtlichen Gegebenheiten besonders gut und können flexibler auf Ihre Bedürfnisse eingehen."
+    },
+    {
+      q: "Wie viele Offerten erhalte ich von Reinigungsfirmen in meiner Nähe?",
+      a: "Sie erhalten bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Reinigungsanbietern aus Ihrer Region. Nachdem Sie das Formular ausgefüllt haben, nehmen die lokalen Reinigungsunternehmen direkt Kontakt mit Ihnen auf (per Telefon oder E-Mail) und erstellen Ihnen eine individuelle Offerte. In Ballungsgebieten wie Zürich, Basel oder Bern erhalten Sie meist alle 6 Offerten, in ländlicheren Regionen können es auch 3-4 Offerten sein. Jede Offerte wird individuell auf Ihre Bedürfnisse zugeschnitten."
+    },
+    {
+      q: "Ist der Service wirklich kostenlos?",
+      a: "Ja, unser Service ist für Sie als anfragende Person zu 100% kostenlos und unverbindlich. Sie erhalten bis zu 6 Offerten von geprüften Reinigungsanbietern in Ihrer Region, ohne dafür etwas zu bezahlen. Es gibt keine versteckten Gebühren oder Verpflichtungen. Sie entscheiden selbst, ob und welche Offerte Sie annehmen möchten. Die Reinigungsfirmen zahlen eine kleine Gebühr, wenn Sie deren Offerte annehmen – für Sie bleibt der Service komplett kostenlos."
+    },
+    {
+      q: "Wie wird die Qualität der Reinigungsfirmen sichergestellt?",
+      a: "Wir arbeiten nur mit geprüften und versicherten Partnerfirmen zusammen. Alle Reinigungsunternehmen in unserem Netzwerk durchlaufen einen strengen Prüfprozess, der Versicherungen, Lizenzen und Referenzen umfasst. Zusätzlich können Sie die Bewertungen anderer Kunden einsehen, um sich ein umfassendes Bild von der Qualität der Dienstleistung zu machen. Unsere Partner sind etablierte Reinigungsanbieter mit langjähriger Erfahrung. Wir überprüfen regelmässig die Qualität unserer Partnerfirmen."
+    },
+    {
+      q: "Wie lange im Voraus sollte ich eine Reinigungsfirma in der Nähe buchen?",
+      a: "Wir empfehlen, mindestens 1-2 Wochen im Voraus zu buchen, besonders für Endreinigungen oder regelmässige Reinigungen. Frühzeitige Buchung gibt Ihnen mehr Auswahl bei lokalen Reinigungsanbietern und oft auch bessere Preise. Last-Minute-Buchungen sind oft deutlich teurer und die Auswahl an verfügbaren Reinigungsunternehmen ist begrenzt. Planen Sie Ihre Reinigung frühzeitig und fordern Sie rechtzeitig Offerten an."
+    },
+    {
+      q: "Was sollte eine gute Offerte einer Reinigungsfirma enthalten?",
+      a: "Eine professionelle Offerte sollte folgende Informationen enthalten: Gesamtpreis mit detaillierter Aufschlüsselung, alle enthaltenen Leistungen (welche Räume, welche Reinigungsarbeiten), verwendete Reinigungsmittel und Materialien, Dauer der Reinigung, Versicherungsschutz, Reinigungstermin und Zeitfenster, Zahlungsbedingungen und Garantien. Achten Sie darauf, dass alle Leistungen schriftlich festgehalten sind. Eine seriöse Reinigungsfirma bietet transparente Offerten ohne versteckte Kosten."
+    },
+    {
+      q: "Bieten Reinigungsfirmen auch Spezialreinigungen an?",
+      a: "Ja, viele Reinigungsunternehmen bieten auch Spezialreinigungen an. Dies umfasst Teppichreinigung, Fensterreinigung, Fassadenreinigung, Baureinigung, Unterhaltsreinigung und mehr. Wenn Sie sowohl Standardreinigung als auch Spezialreinigungen benötigen, kann eine Reinigungsfirma, die beide Dienstleistungen anbietet, kosteneffizienter sein. Fragen Sie in Ihrer Anfrage nach, ob die Reinigungsfirma auch Ihre gewünschten Spezialreinigungen anbietet."
+    },
+    {
+      q: "Sind die Reinigungsfirmen in meiner Nähe versichert?",
+      a: "Ja, alle Reinigungsunternehmen in unserem Netzwerk sind geprüft und verfügen über eine gültige Betriebshaftpflichtversicherung. Wir prüfen alle Partnerfirmen vor der Aufnahme in unser Netzwerk auf Versicherungen, Lizenzen und Referenzen. Die Versicherungsdetails sind in der Regel in den Offerten enthalten, falls nicht, sollten Sie danach fragen. Seriöse Reinigungsanbieter vor Ort werden Ihnen gerne die Versicherungsnachweise zeigen."
+    },
+    {
+      q: "Was passiert, nachdem ich eine Anfrage gesendet habe?",
+      a: "Nachdem Sie das Formular ausgefüllt haben, wird Ihre Anfrage an passende Reinigungsunternehmen in Ihrer Region weitergeleitet. Diese nehmen dann direkt Kontakt mit Ihnen auf (per Telefon oder E-Mail) und erstellen Ihnen eine individuelle Offerte. Sie erhalten in der Regel innerhalb von 24-48 Stunden die ersten Rückmeldungen von den lokalen Reinigungsanbietern. Alle Offerten werden Ihnen direkt von den Reinigungsunternehmen zugesendet und enthalten alle wichtigen Details wie Preis, Leistungen, Versicherungen und Kontaktinformationen."
+    },
+    {
+      q: "Wie erkenne ich eine seriöse Reinigungsfirma in der Nähe?",
+      a: "Eine seriöse lokale Reinigungsfirma erkennt man an mehreren Merkmalen: Sie bietet schriftliche, detaillierte Offerten mit klarer Preisaufschlüsselung, verfügt über gültige Versicherungen und kann Referenzen vorweisen, ist erreichbar und antwortet schnell auf Anfragen, kommuniziert professionell und transparent, verwendet umweltfreundliche Reinigungsmittel (falls gewünscht), und hat positive Bewertungen von anderen Kunden. Vermeiden Sie Reinigungsanbieter, die nur mündliche Zusagen machen oder Druck ausüben."
+    },
+    {
+      q: "Was sind die Vorteile einer regionalen Reinigungsfirma?",
+      a: "Regionale Reinigungsunternehmen in Ihrer Nähe bieten zahlreiche Vorteile: Kürzere Anfahrtswege reduzieren Kosten und Umweltbelastung, lokale Expertise über örtliche Gegebenheiten und Zugänglichkeit, schnellere Reaktionszeiten bei Notfällen, persönlicherer Service und bessere Erreichbarkeit, Kenntnis der örtlichen Gegebenheiten und baulichen Besonderheiten, sowie Unterstützung der lokalen Wirtschaft. Lokale Reinigungsanbieter können flexibler auf Ihre Bedürfnisse eingehen und vermeiden unnötige Komplikationen."
+    },
+    {
+      q: "Wie kann ich bei einer Reinigungsfirma in der Nähe sparen?",
+      a: "Der beste Weg, um zu sparen, ist der Vergleich mehrerer Offerten. Studien zeigen, dass Kunden durch den Vergleich durchschnittlich 30-40% der Reinigungskosten einsparen können. Weitere Sparmöglichkeiten: Flexibel beim Reinigungstermin sein (Wochentage sind oft günstiger), Eigenleistung bei Vorarbeiten erbringen, regelmässige Reinigungen buchen (oft günstiger als einmalige), frühzeitig buchen (Last-Minute-Buchungen sind teurer), und Offerten genau vergleichen - nicht nur auf den Preis achten, sondern auch auf enthaltene Leistungen. Regionale Reinigungsunternehmen können durch kürzere Anfahrtswege zusätzliche Einsparungen bieten."
+    }
+  ]
+
+  const benefits = [
+    {
+      icon: Route,
+      title: "Kürzere Anfahrtswege",
+      description: "Lokale Reinigungsunternehmen haben kürzere Anfahrtswege, was die Kosten reduziert und die Umweltbelastung minimiert."
+    },
+    {
+      icon: Navigation2,
+      title: "Lokale Expertise",
+      description: "Regionale Reinigungsfirmen kennen die örtlichen Gegebenheiten, Zugänglichkeiten und baulichen Besonderheiten besonders gut."
+    },
+    {
+      icon: Clock,
+      title: "Schnellere Reaktionszeiten",
+      description: "Bei Notfällen oder kurzfristigen Änderungen können regionale Reinigungsfirmen schneller reagieren."
+    },
+    {
+      icon: HeartHandshake,
+      title: "Persönlicher Service",
+      description: "Lokale Reinigungsfirmen legen oft mehr Wert auf persönliche Beziehungen und langfristige Kundenbindung."
+    },
+    {
+      icon: Building,
+      title: "Unterstützung der lokalen Wirtschaft",
+      description: "Durch die Beauftragung einer regionalen Reinigungsfirma unterstützen Sie lokale Unternehmen."
+    },
+    {
+      icon: ShieldCheck,
+      title: "Bessere Erreichbarkeit",
+      description: "Regionale Reinigungsfirmen sind erreichbarer und reagieren schneller auf Ihre Anliegen."
+    }
+  ]
+
   const services = [
-    { title: "Umzugsreinigung mit Abnahmegarantie", description: "Der Klassiker für einen sorgenfreien Auszug. Wir garantieren die erfolgreiche Wohnungsübergabe an Ihren Vermieter.", link: "/umzugsreinigung" },
-    { title: "Büro- und Gewerbereinigung", description: "Sorgen Sie für ein sauberes und repräsentatives Arbeitsumfeld für Mitarbeiter und Kunden. Regelmässig oder einmalig.", link: "/bueroreinigung" },
-    { title: "Fenster- und Storenreinigung", description: "Streifenfreier Glanz für Ihre Fenster, Glasfronten und Storen. Wir bringen wieder Licht in Ihre Räume.", link: "/fensterreinigung" },
-    { title: "Unterhaltsreinigung", description: "Regelmässige Reinigung für Privathaushalte und Firmen. Individuell auf Ihre Bedürfnisse und Frequenzen zugeschnitten.", link: "/unterhaltsreinigung" },
-    { title: "Baureinigung", description: "Von der Grob- bis zur Feinreinigung nach Neu- oder Umbauten. Wir machen Ihr Objekt bezugsfertig.", link: "/baureinigung" },
-    { title: "Spezialreinigungen", description: "Teppichreinigung, Fassadenreinigung oder andere spezielle Anforderungen? Unsere Partner sind darauf vorbereitet.", link: "/grundreinigung" },
-    { title: "Wohnungsreinigung", description: "Professionelle Reinigung für Ihre Wohnung. Gründlich, zuverlässig und individuell auf Ihre Bedürfnisse abgestimmt.", link: "/wohnungsreinigung" },
-    { title: "Hausreinigung", description: "Umfassende Reinigung für Ihr gesamtes Haus. Von Küche bis Bad – wir sorgen für makellose Sauberkeit.", link: "/hausreinigung" },
-    { title: "Grundreinigung", description: "Intensive Tiefenreinigung für einen sauberen Start. Ideal für den Einzug oder nach Renovationen.", link: "/grundreinigung" },
-    { title: "Bodenreinigung", description: "Professionelle Reinigung und Pflege Ihrer Böden. Von Parkett über Laminat bis zu Fliesen – wir kennen jeden Belag.", link: "/bodenreinigung" },
-    { title: "Fassadenreinigung", description: "Professionelle Reinigung Ihrer Gebäudefassade. Wir sorgen für ein gepflegtes und einladendes Erscheinungsbild.", link: "/fassadenreinigung" },
-    { title: "Hofreinigung", description: "Saubere Aussenbereiche für Ihr Zuhause oder Unternehmen. Von Einfahrten bis zu Terrassen – wir machen alles blitzblank.", link: "/hofreinigung" },
-  ];
+    {
+      title: "Wohnungsreinigung",
+      description: "Professionelle Reinigung für Ihre Wohnung. Gründlich, zuverlässig und individuell auf Ihre Bedürfnisse abgestimmt.",
+      icon: Home,
+      link: "/wohnungsreinigung"
+    },
+    {
+      title: "Hausreinigung",
+      description: "Umfassende Reinigung für Ihr gesamtes Haus. Von Küche bis Bad – wir sorgen für makellose Sauberkeit.",
+      icon: Home,
+      link: "/hausreinigung"
+    },
+    {
+      title: "Büroreinigung",
+      description: "Professionelle Büro- und Gewerbereinigung für ein sauberes Arbeitsumfeld. Regelmässig oder einmalig.",
+      icon: Building,
+      link: "/bueroreinigung"
+    },
+    {
+      title: "Umzugsreinigung",
+      description: "Professionelle Endreinigung für Wohnungsübergabe. Mit Abnahmegarantie für sorgenfreien Auszug.",
+      icon: Sparkles,
+      link: "/umzugsreinigung"
+    },
+    {
+      title: "Unterhaltsreinigung",
+      description: "Regelmässige Reinigung für Privathaushalte und Firmen. Individuell auf Ihre Bedürfnisse zugeschnitten.",
+      icon: Clock,
+      link: "/unterhaltsreinigung"
+    },
+    {
+      title: "Grundreinigung",
+      description: "Intensive Tiefenreinigung für einen sauberen Start. Ideal für den Einzug oder nach Renovationen.",
+      icon: Droplets,
+      link: "/grundreinigung"
+    },
+    {
+      title: "Baureinigung",
+      description: "Von der Grob- bis zur Feinreinigung nach Neu- oder Umbauten. Wir machen Ihr Objekt bezugsfertig.",
+      icon: Wrench,
+      link: "/baureinigung"
+    },
+    {
+      title: "Fensterreinigung",
+      description: "Streifenfreier Glanz für Ihre Fenster, Glasfronten und Storen. Innen und aussen.",
+      icon: Sparkle,
+      link: "/fensterreinigung"
+    },
+    {
+      title: "Bodenreinigung",
+      description: "Professionelle Reinigung und Pflege Ihrer Böden. Von Parkett über Laminat bis zu Fliesen – wir kennen jeden Belag.",
+      icon: Shield,
+      link: "/bodenreinigung"
+    },
+    {
+      title: "Fassadenreinigung",
+      description: "Professionelle Reinigung Ihrer Gebäudefassade. Wir sorgen für ein gepflegtes und einladendes Erscheinungsbild.",
+      icon: Building,
+      link: "/fassadenreinigung"
+    },
+    {
+      title: "Hofreinigung",
+      description: "Professionelle Reinigung von Höfen, Terrassen und Aussenbereichen. Für ein gepflegtes Äusseres.",
+      icon: Globe,
+      link: "/hofreinigung"
+    }
+  ]
+
+  const locations = [
+    { name: "Reinigungsfirma Zürich", link: "/reinigungsfirma-zuerich" },
+    { name: "Reinigungsfirma Basel", link: "/reinigungsfirma-basel" },
+    { name: "Reinigungsfirma Bern", link: "/reinigungsfirma-bern" },
+    { name: "Reinigungsfirma Genf", link: "/reinigungsfirma-genf" },
+    { name: "Reinigungsfirma Lausanne", link: "/reinigungsfirma-lausanne" },
+    { name: "Reinigungsfirma Luzern", link: "/reinigungsfirma-luzern" },
+    { name: "Reinigungsfirma St. Gallen", link: "/reinigungsfirma-st-gallen" },
+    { name: "Reinigungsfirma Winterthur", link: "/reinigungsfirma-winterthur" }
+  ]
 
   return (
     <>
-      
-      <div className="bg-blue-50">
-        <div className="container mx-auto max-w-navbar px-4 pt-16 pb-12 text-center">
-          <Sparkles className="mx-auto h-12 w-12 text-blue-500 mb-4" />
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
-            Reinigungsfirma in der Nähe finden
-          </h1>
-          <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Kostenlos bis zu 6 Offerten für Ihre Reinigung vergleichen. Ob Umzugsreinigung mit Abnahmegarantie oder Büroreinigung – finden Sie den besten Anbieter.
-          </p>
-          <Button asChild size="lg" className="mt-8 bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6">
-            <Link href="/kostenlose-offerte-anfordern?service=reinigung">Jetzt kostenlos Offerten anfordern</Link>
-          </Button>
+      {/* Hero Section - Unique Design for Cleaning Services */}
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
         </div>
-      </div>
-
-      <div className="container mx-auto max-w-navbar px-4 my-12">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <aside className="w-full lg:w-1/4">
-            <PageNavigation />
-          </aside>
-          <main className="w-full lg:w-3/4">
-            <article className="prose prose-lg max-w-none text-gray-700">
-              <p className="lead" dangerouslySetInnerHTML={{ __html: "Eine saubere Wohnung oder ein gepflegtes Büro ist Ihre Visitenkarte. Besonders bei einem Umzug ist eine professionelle <strong>Endreinigung mit Abnahmegarantie</strong> unerlässlich für eine stressfreie Wohnungsübergabe. Doch wie findet man eine zuverlässige und preiswerte <strong>Reinigungsfirma in der Nähe</strong>? Der Markt ist gross und unübersichtlich. Online-Offerten.ch bringt Licht ins Dunkel und hilft Ihnen, mit minimalem Aufwand den perfekten Reinigungspartner zu finden." }}></p>
-              
-              <img className="w-full rounded-lg shadow-lg my-8" alt="Ein professioneller Reinigungsmitarbeiter putzt ein grosses Fenster in einer modernen Wohnung" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952" loading="lazy" decoding="async" />
-
-              <h3 id="warum-vergleichen">Warum sich der Vergleich von Reinigungs-Offerten lohnt</h3>
-              <p>Die Preise und Leistungen von Reinigungsfirmen können stark variieren. Wer blind die erstbeste Firma beauftragt, zahlt oft zu viel oder erhält nicht die gewünschte Qualität. Ein systematischer Vergleich schützt Sie vor bösen Überraschungen und hilft Ihnen, das beste Angebot für Ihre individuellen Bedürfnisse zu finden.</p>
-              <p className="mt-4">In der Schweiz gibt es Hunderte von Reinigungsunternehmen, die ihre Dienste anbieten. Die Preise können für dieselbe Leistung um 30-50% variieren, abhängig von Faktoren wie Standort, Erfahrung der Firma, verwendeten Reinigungsmitteln und dem Umfang der angebotenen Services. Ohne einen systematischen Vergleich ist es praktisch unmöglich, das beste Preis-Leistungs-Verhältnis zu finden.</p>
-              <p className="mt-4">Besonders bei wichtigen Anlässen wie einem Umzug oder einer Wohnungsübergabe ist die Qualität der Reinigung entscheidend. Eine professionelle Reinigungsfirma, die eine Abnahmegarantie anbietet, kann Ihnen viel Stress ersparen und sicherstellen, dass Ihr Vermieter die Wohnung problemlos akzeptiert. Durch den Vergleich mehrerer Angebote können Sie nicht nur Geld sparen, sondern auch sicherstellen, dass Sie eine Firma wählen, die Ihren Qualitätsansprüchen entspricht.</p>
-              <ul className="list-none p-0 mt-6">
-                <li className="flex items-start mb-4"><CheckCircle className="text-blue-500 mr-3 mt-1 flex-shrink-0" /><span dangerouslySetInnerHTML={{ __html: "<strong>Bis zu 40% Kosten sparen:</strong> Durch den direkten Vergleich mehrerer Offerten erkennen Sie das beste Preis-Leistungs-Verhältnis und schonen Ihr Budget. Studien zeigen, dass Kunden durch den Vergleich mehrerer Angebote durchschnittlich 30-40% der Reinigungskosten einsparen können." }}></span></li>
-                <li className="flex items-start mb-4"><CheckCircle className="text-blue-500 mr-3 mt-1 flex-shrink-0" /><span dangerouslySetInnerHTML={{ __html: "<strong>Garantierte Qualität:</strong> Wir arbeiten nur mit geprüften und versicherten Reinigungsunternehmen zusammen, die Erfahrung in ihrem Fachgebiet haben. Alle Partner in unserem Netzwerk wurden sorgfältig ausgewählt und erfüllen hohe Qualitätsstandards." }}></span></li>
-                <li className="flex items-start mb-4"><CheckCircle className="text-blue-500 mr-3 mt-1 flex-shrink-0" /><span dangerouslySetInnerHTML={{ __html: "<strong>Sicherheit mit Abnahmegarantie:</strong> Insbesondere bei der Umzugsreinigung ist die Abnahmegarantie Gold wert. Sie gibt Ihnen die Sicherheit, dass die Wohnung vom Vermieter akzeptiert wird. Sollten Nachreinigungen notwendig sein, übernimmt die Firma diese kostenlos." }}></span></li>
-                <li className="flex items-start mb-4"><CheckCircle className="text-blue-500 mr-3 mt-1 flex-shrink-0" /><span dangerouslySetInnerHTML={{ __html: "<strong>Zeitersparnis:</strong> Statt stundenlang selbst zu recherchieren und Firmen zu kontaktieren, erhalten Sie mit nur einem Formular passende Offerten direkt in Ihr Postfach. So sparen Sie wertvolle Zeit und können sich auf andere wichtige Aspekte Ihres Umzugs oder Ihrer Reinigung konzentrieren." }}></span></li>
-              </ul>
-              
-              <h3 id="so-funktionierts">In 3 einfachen Schritten zur perfekten Reinigung</h3>
-              <p>Finden Sie Ihre Reinigungsfirma so einfach wie nie zuvor. Unser benutzerfreundliches System wurde entwickelt, um Ihnen den Prozess so unkompliziert wie möglich zu gestalten. Sie müssen keine langen Telefonate führen oder Dutzende von Websites durchsuchen – alles, was Sie brauchen, ist eine einzige Anfrage, und wir übernehmen den Rest.</p>
-              <p className="mt-4">Der gesamte Prozess dauert nur wenige Minuten und ist vollständig kostenlos. Innerhalb kurzer Zeit erhalten Sie bis zu 6 detaillierte Offerten von qualifizierten Reinigungsfirmen in Ihrer Region. Diese können Sie dann in Ruhe vergleichen, um die beste Option für Ihre spezifischen Bedürfnisse zu finden. Ob es sich um eine einmalige Wohnungsreinigung, eine regelmässige Büroreinigung oder eine Umzugsreinigung mit Abnahmegarantie handelt – wir finden die passenden Anbieter für Sie.</p>
-              <div className="grid md:grid-cols-3 gap-6 my-8">
-                <Card className="text-center border-blue-200">
-                  <CardHeader>
-                    <FileText className="mx-auto h-12 w-12 text-blue-600" />
-                    <CardTitle className="mt-4">1. Anfrage starten</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-3">Füllen Sie unser kurzes, benutzerfreundliches Formular mit den Details zu Ihrer Reinigung aus. Geben Sie Informationen wie Reinigungstyp, Wohnungsgrösse, gewünschtes Datum und besondere Anforderungen an.</p>
-                    <p className="text-sm text-gray-600">Das dauert nur wenige Minuten. Je genauer Ihre Angaben sind, desto präziser und vergleichbarer sind die Offerten, die Sie erhalten. Sie können auch spezielle Wünsche wie umweltfreundliche Reinigungsmittel oder bestimmte Zeitfenster angeben.</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center border-blue-200">
-                  <CardHeader>
-                    <Search className="mx-auto h-12 w-12 text-blue-600" />
-                    <CardTitle className="mt-4">2. Offerten vergleichen</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-3">Erhalten Sie bis zu 6 detaillierte Offerten von lokalen Profis direkt in Ihr Postfach. Alle Offerten sind transparent aufgeschlüsselt und enthalten alle wichtigen Informationen wie Preise, enthaltene Leistungen und Zeitrahmen.</p>
-                    <p className="text-sm text-gray-600">Vergleichen Sie Preise, Leistungen, Bewertungen und Versicherungen in Ruhe. Sie haben genügend Zeit, um die beste Option für Ihre Reinigung zu finden. Achten Sie dabei nicht nur auf den Preis, sondern auch auf Qualität, Erfahrung und Kundenbewertungen.</p>
-                  </CardContent>
-                </Card>
-                <Card className="text-center border-blue-200">
-                  <CardHeader>
-                    <Star className="mx-auto h-12 w-12 text-blue-600" />
-                    <CardTitle className="mt-4">3. Partner auswählen</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-3">Wählen Sie die für Sie beste Reinigungsfirma aus und kontaktieren Sie sie direkt. Alle Reinigungsfirmen in unserem Netzwerk sind geprüft, versichert und verfügen über langjährige Erfahrung.</p>
-                    <p className="text-sm text-gray-600">Nach der Auswahl können Sie direkt mit der Firma kommunizieren, um Details zu klären und den Reinigungstermin zu vereinbaren. Freuen Sie sich auf strahlende Sauberkeit und einen professionellen Service, der Ihre Erwartungen erfüllt oder übertrifft.</p>
-                  </CardContent>
-                </Card>
+        <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-6">
+                <MapPin className="h-4 w-4 mr-2" />
+                Lokale Reinigungsfirmen finden
               </div>
-              
-              <h3 className="text-2xl font-bold text-gray-800 mt-12 mb-6">Was macht eine gute Reinigungsfirma aus?</h3>
-              <p>Bei der Auswahl einer Reinigungsfirma gibt es mehrere wichtige Kriterien, die Sie beachten sollten. Eine professionelle Reinigungsfirma zeichnet sich durch verschiedene Faktoren aus, die über den reinen Preis hinausgehen und entscheidend für die Qualität der Dienstleistung sind.</p>
-              <p className="mt-4">Erfahrung und Expertise sind grundlegend. Eine etablierte Reinigungsfirma mit langjähriger Erfahrung kennt die Herausforderungen verschiedener Reinigungsszenarien und kann diese professionell bewältigen. Sie verfügt über geschultes Personal, bewährte Reinigungsmethoden und das notwendige Equipment, um auch anspruchsvolle Reinigungsaufgaben erfolgreich durchzuführen. Besonders wichtig ist die Spezialisierung: Eine Firma, die sich auf Umzugsreinigung spezialisiert hat, kennt die Anforderungen von Vermietern genau und kann eine Abnahmegarantie mit Vertrauen anbieten.</p>
-              <p className="mt-4">Versicherungsschutz ist ein weiterer kritischer Punkt, den viele Kunden übersehen. Eine seriöse Reinigungsfirma verfügt über eine umfassende Betriebshaftpflichtversicherung und gegebenenfalls eine separate Versicherung für Beschädigungen. Dies schützt Sie im Falle von Schäden während der Reinigung. Fragen Sie immer nach den Versicherungsdetails und lassen Sie sich diese schriftlich bestätigen. Eine professionelle Firma wird Ihnen gerne Auskunft geben und die entsprechenden Nachweise vorlegen.</p>
-              <p className="mt-4">Transparenz bei den Kosten ist ebenfalls wichtig. Eine professionelle Reinigungsfirma erstellt eine detaillierte Offerte, die alle Kostenpunkte klar auflistet. Dazu gehören Grundkosten, Zusatzleistungen, mögliche Zuschläge für Wochenenden oder Feiertage sowie Versicherungen. Vorsicht ist geboten bei unrealistisch günstigen Angeboten, die oft versteckte Kosten enthalten oder wichtige Leistungen nicht abdecken. Eine transparente Offerte schützt Sie vor bösen Überraschungen und ermöglicht einen fairen Vergleich.</p>
-              <p className="mt-4">Kundenbewertungen und Referenzen geben Ihnen wertvolle Einblicke in die Qualität der Dienstleistung. Lesen Sie Bewertungen auf unserer Plattform und fragen Sie bei Bedarf nach Referenzen. Eine gute Reinigungsfirma wird Ihnen gerne Referenzen von zufriedenen Kunden zur Verfügung stellen. Achten Sie dabei nicht nur auf die Anzahl der Bewertungen, sondern auch auf deren Qualität und Aktualität. Bewertungen von Kunden, die ähnliche Reinigungsaufgaben hatten wie Sie, sind besonders aussagekräftig.</p>
-              
-              <h3 className="text-2xl font-bold text-gray-800 mt-12 mb-6">Vorteile einer regionalen Reinigungsfirma</h3>
-              <p>Die Wahl einer Reinigungsfirma in Ihrer Nähe bietet zahlreiche Vorteile, die oft übersehen werden. Regionale Reinigungsunternehmen kennen die örtlichen Gegebenheiten, Kundenpräferenzen und Besonderheiten Ihrer Region besonders gut.</p>
-              <p className="mt-4">Lokale Expertise bedeutet, dass die Reinigungsfirma mit den örtlichen Gegebenheiten und Besonderheiten Ihrer Region vertraut ist. Sie kennt die typischen Wohnungsgrössen, baulichen Gegebenheiten und kann auf Basis dieser Kenntnisse realistische Offerten erstellen. Regionale Firmen sind auch besser mit lokalen Lieferanten und Dienstleistern vernetzt, was bei speziellen Anforderungen hilfreich sein kann. Zudem kennen sie die örtlichen Verkehrsverhältnisse und können die Anfahrtszeiten und -kosten präziser kalkulieren.</p>
-              <p className="mt-4">Kürzere Anfahrtswege reduzieren nicht nur die Kosten, sondern auch die Umweltbelastung. Eine regionale Firma muss keine langen Anfahrten zurücklegen, was sich positiv auf den Gesamtpreis auswirkt und gleichzeitig die CO2-Bilanz verbessert. Zudem sind regionale Unternehmen oft flexibler bei kurzfristigen Änderungen oder Notfällen. Wenn beispielsweise ein Umzugstermin verschoben wird oder kurzfristig eine zusätzliche Reinigung benötigt wird, kann eine lokale Firma schneller reagieren.</p>
-              <p className="mt-4">Persönlicher Service ist ein weiterer Vorteil. Regionale Reinigungsfirmen legen oft mehr Wert auf persönliche Beziehungen und langfristige Kundenbindung. Sie sind erreichbarer, reagieren schneller auf Ihre Anliegen und bieten oft einen persönlicheren, kundenorientierteren Service. Bei Bedarf können Sie auch nach der Reinigung noch auf deren Service zurückgreifen oder bei Fragen direkt Kontakt aufnehmen.</p>
-              <p className="mt-4">Unterstützung der lokalen Wirtschaft ist ein positiver Nebeneffekt. Durch die Beauftragung einer regionalen Reinigungsfirma unterstützen Sie lokale Unternehmen und tragen zur Stärkung der regionalen Wirtschaft bei. Zudem haben Sie die Gewissheit, dass die erwirtschafteten Gelder in Ihrer Region bleiben und zur Schaffung lokaler Arbeitsplätze beitragen.</p>
-              
-              <h3 className="text-2xl font-bold text-gray-800 mt-12 mb-6">Worauf Sie bei der Auswahl achten sollten</h3>
-              <p>Die richtige Auswahl einer Reinigungsfirma kann den Unterschied zwischen einer zufriedenstellenden Erfahrung und Enttäuschungen ausmachen. Hier sind die wichtigsten Punkte, die Sie bei Ihrer Entscheidung berücksichtigen sollten, um sicherzustellen, dass Sie die beste Wahl treffen.</p>
-              <p className="mt-4"><strong>Detaillierte Offerten:</strong> Eine seriöse Reinigungsfirma erstellt eine umfassende Offerte, die alle Leistungen und Kosten transparent auflistet. Achten Sie darauf, dass Versicherungen, verwendete Reinigungsmittel, Zusatzleistungen und mögliche Zuschläge klar aufgeführt sind. Eine gute Offerte sollte auch den zeitlichen Rahmen, die Anzahl der Mitarbeiter und die verwendeten Reinigungsmethoden erwähnen. Vorsicht bei pauschalen Angeboten ohne Details – diese können später zu unangenehmen Überraschungen führen.</p>
-              <p className="mt-4"><strong>Besichtigung vor Ort:</strong> Bei grösseren Reinigungsprojekten, insbesondere bei Umzugsreinigungen, ist eine kostenlose Besichtigung vor Ort Standard und empfehlenswert. Dies ermöglicht es der Firma, den Umfang genau einzuschätzen, problematische Stellen zu identifizieren und eine realistische Offerte zu erstellen. Eine Firma, die keine Besichtigung anbietet oder diese verweigert, sollte Sie skeptisch machen. Eine professionelle Reinigungsfirma wird immer eine Besichtigung empfehlen, um eine genaue Kostenschätzung zu erstellen.</p>
-              <p className="mt-4"><strong>Versicherungsnachweis:</strong> Lassen Sie sich die Versicherungsnachweise zeigen. Eine professionelle Reinigungsfirma verfügt über eine Betriebshaftpflichtversicherung, die Schäden während der Reinigung abdeckt. Die Deckungssumme sollte angemessen sein und dem Wert Ihrer Einrichtung entsprechen. Fragen Sie auch nach einer speziellen Versicherung für teure Gegenstände oder empfindliche Materialien. Alle Details zur Versicherung sollten transparent in der Offerte ausgewiesen sein.</p>
-              <p className="mt-4"><strong>Bewertungen und Referenzen:</strong> Nutzen Sie die Bewertungen auf unserer Plattform und fragen Sie bei Bedarf nach Referenzen. Kontaktieren Sie ehemalige Kunden, um sich ein Bild von der Qualität der Dienstleistung zu machen. Achten Sie dabei auf Bewertungen, die ähnliche Reinigungsaufgaben beschreiben wie Ihre. Eine Firma mit vielen positiven Bewertungen für Umzugsreinigungen ist wahrscheinlich eine gute Wahl, wenn Sie ebenfalls eine Umzugsreinigung benötigen.</p>
-              <p className="mt-4"><strong>Kommunikation und Erreichbarkeit:</strong> Eine gute Reinigungsfirma ist erreichbar und kommuniziert klar und zeitnah. Wenn eine Firma schwer erreichbar ist, Fragen nicht beantwortet oder unprofessionell kommuniziert, ist dies ein Warnsignal. Sie sollten in der Lage sein, bei Fragen oder Bedenken jederzeit Kontakt aufzunehmen. Eine professionelle Firma wird Ihre Anfragen innerhalb eines angemessenen Zeitrahmens beantworten und transparent kommunizieren.</p>
-              <p className="mt-4"><strong>Flexibilität und Zuverlässigkeit:</strong> Reinigungen können unvorhergesehene Herausforderungen mit sich bringen. Eine flexible Reinigungsfirma kann auf Änderungen reagieren und Lösungen finden, ohne sofort zusätzliche Kosten zu verlangen. Zuverlässigkeit ist ebenfalls entscheidend – die Firma sollte pünktlich erscheinen und die vereinbarten Leistungen termingerecht erbringen. Erkundigen Sie sich nach der Zuverlässigkeit der Firma durch Bewertungen und Referenzen.</p>
-            </article>
-          </main>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
+                <span className="block">Reinigungsfirma</span>
+                <span className="block text-blue-600 mt-2">in der Nähe finden</span>
+                <span className="block text-2xl md:text-3xl text-gray-700 font-bold mt-4">
+                  Professionelle Reinigung in Ihrer Region
+                </span>
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                Finden Sie die <strong>beste Reinigungsfirma in Ihrer Nähe</strong>. Vergleichen Sie <strong>bis zu 6 kostenlose Offerten</strong> von geprüften <strong>Reinigungsunternehmen in Ihrer Region</strong> – <strong>100% kostenlos und unverbindlich</strong>. Lokale Expertise, kürzere Wege, bessere Preise.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  onClick={handleCtaClick}
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
+                >
+                  <Search className="mr-2 h-5 w-5" />
+                  Jetzt vergleichen
+                </Button>
+                <Button
+                  onClick={() => router.push('/reinigungskosten-rechner')}
+                  variant="outline"
+                  size="lg"
+                  className="text-lg px-8 py-6"
+                >
+                  <Calculator className="mr-2 h-5 w-5" />
+                  Reinigungskosten berechnen
+                </Button>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-600">
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                  <span>Lokale Reinigungsfirmen</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                  <span>100% kostenlos</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                  <span>Nur geprüfte Firmen</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                  <span>Bis zu 40% sparen</span>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-blue-200">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="bg-blue-100 p-4 rounded-full">
+                    <Sparkles className="h-12 w-12 text-blue-600" />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                  Finden Sie Ihre Reinigungsfirma
+                </h3>
+                <div className="space-y-4">
+                  {features.slice(0, 4).map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <feature.icon className="h-6 w-6 text-blue-600 mr-3 mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold text-gray-900">{feature.title}</p>
+                        <p className="text-sm text-gray-600">{feature.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <Section id="kostenrechner" title="Was kostet eine professionelle Reinigung?" className="bg-blue-100">
-        <p className="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-12">
-          Die Kosten einer Reinigung hängen von Grösse, Verschmutzungsgrad und gewünschten Leistungen ab. Nutzen Sie unseren Rechner für eine erste Kostenschätzung.
-        </p>
-        <div className="max-w-navbar mx-auto">
-          <CleaningCostCalculator />
+      {/* Why Local Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Warum eine lokale Reinigungsfirma wählen?
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Regionale Reinigungsunternehmen bieten zahlreiche Vorteile, die oft übersehen werden. Erfahren Sie, warum ein <strong>Reinigungsservice vor Ort</strong> die beste Wahl für Ihre Reinigung sein kann.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card className="h-full border-2 hover:border-blue-500 transition-colors">
+                  <CardHeader>
+                    <div className="flex items-center mb-4">
+                      <div className="bg-blue-100 p-3 rounded-lg mr-4">
+                        <benefit.icon className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <CardTitle className="text-xl">{benefit.title}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </Section>
-      
-      <Section id="leistungen" title="Für jeden Bedarf die passende Reinigung">
-        <p className="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-12">
-          Unsere Partnerfirmen bieten ein breites Spektrum an Reinigungsdienstleistungen für Privat- und Geschäftskunden.
-        </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      </section>
+
+      {/* Services Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Welche Reinigungsleistungen benötigen Sie?
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Verschiedene Reinigungsbetriebe spezialisieren sich auf unterschiedliche Arten von Reinigungsarbeiten. Finden Sie den richtigen Fachbetrieb für Ihren spezifischen Bedarf.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-                <Link key={index} href={service.link} className="block">
-                    <Card className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-3 text-blue-800">
-                                <CheckCircle className="text-blue-500 flex-shrink-0" />
-                                {service.title}
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="flex-grow">
-                            <p className="text-gray-600 mb-4">{service.description}</p>
-                            <div className="flex items-center text-blue-600 font-semibold mt-auto">
-                                Mehr erfahren
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                            </div>
-                        </CardContent>
-                    </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Link href={service.link}>
+                  <Card className="h-full hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer">
+                    <CardHeader>
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-100 p-3 rounded-lg mr-4">
+                          <service.icon className="h-6 w-6 text-blue-600" />
+                        </div>
+                        <CardTitle className="text-xl">{service.title}</CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600">{service.description}</p>
+                      <div className="mt-4 flex items-center text-blue-600 font-semibold text-sm">
+                        <span>Mehr erfahren</span>
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </div>
+                    </CardContent>
+                  </Card>
                 </Link>
+              </motion.div>
             ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
+      {/* How It Works Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              So finden Sie einen Reinigungsservice vor Ort
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              In nur 3 einfachen Schritten finden Sie die perfekten Reinigungsunternehmen in Ihrer Region.
+            </p>
+          </motion.div>
 
-      <Section id="spartipps" title="Clevere Tipps für eine günstige Reinigung" className="bg-blue-100">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {savingsTips.map((tip, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3">
-                  <Sparkles className="text-blue-500" />
-                  {tip.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">{tip.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
-      <Section id="faq" title="Häufig gestellte Fragen (FAQ)">
-        <div className="max-w-navbar mx-auto">
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-lg font-semibold text-left">{faq.q}</AccordionTrigger>
-                <AccordionContent className="text-base text-gray-700">
-                  {faq.a}
-                </AccordionContent>
-              </AccordionItem>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                number: "01",
+                title: "Anfrage ausfüllen",
+                description: "Beschreiben Sie Ihre Reinigungsanforderungen in unserem Formular. Geben Sie Art der Reinigung, Flächengrösse, Reinigungstermin und gewünschte Leistungen an. Je genauer Ihre Angaben, desto präziser sind die Offerten.",
+                icon: FileText
+              },
+              {
+                number: "02",
+                title: "Offerten erhalten",
+                description: "Erhalten Sie bis zu 6 Offerten von lokalen Reinigungsunternehmen. Die Anbieter nehmen direkt Kontakt mit Ihnen auf und erstellen individuelle Offerten.",
+                icon: Mail
+              },
+              {
+                number: "03",
+                title: "Vergleichen & auswählen",
+                description: "Vergleichen Sie Preise, Leistungen und Bewertungen. Wählen Sie den besten Reinigungsanbieter in Ihrer Region für Ihre Reinigung aus.",
+                icon: Star
+              }
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="relative"
+              >
+                {index < 2 && (
+                  <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-blue-200 z-0" style={{ width: 'calc(100% - 3rem)' }} />
+                )}
+                <Card className="relative z-10 h-full border-2 border-blue-200 hover:border-blue-500 transition-colors">
+                  <CardHeader className="text-center">
+                    <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                      {step.number}
+                    </div>
+                    <div className="flex justify-center mb-4">
+                      <div className="bg-blue-100 p-3 rounded-lg">
+                        <step.icon className="h-6 w-6 text-blue-600" />
+                      </div>
+                    </div>
+                    <CardTitle className="text-lg">{step.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 text-center">{step.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </Accordion>
+          </div>
         </div>
-      </Section>
+      </section>
 
-      <div className="bg-blue-700">
-        <div className="container mx-auto max-w-navbar px-4 py-16 text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Bereit für makellose Sauberkeit?</h2>
-          <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Starten Sie jetzt Ihren kostenlosen Offertenvergleich und überlassen Sie die Reinigung den Profis.
-          </p>
-          <Button asChild size="lg" className="bg-white hover:bg-gray-100 text-blue-700 font-bold text-lg px-8 py-6">
-            <Link href="/kostenlose-offerte-anfordern?service=reinigung">Jetzt Offerten für Reinigung anfordern!</Link>
-          </Button>
+      {/* Location Links Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Reinigungsfirmen in Ihrer Region
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Finden Sie Reinigungsfirmen in den grössten Städten der Schweiz. Wir vermitteln Ihnen geprüfte Partner aus Ihrer Region.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {locations.map((location, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+              >
+                <Link href={location.link}>
+                  <Card className="h-full hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer">
+                    <CardContent className="p-6">
+                      <div className="flex items-center">
+                        <MapPin className="h-5 w-5 text-blue-600 mr-3" />
+                        <span className="font-semibold text-gray-900">{location.name}</span>
+                        <ArrowRight className="h-4 w-4 text-gray-400 ml-auto" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Detailed Content Section - SEO Rich Content */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="max-w-4xl mx-auto prose prose-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Lokale Reinigungsunternehmen finden: Ihr kompletter Ratgeber
+              </h2>
+              
+              <div className="text-gray-700 leading-relaxed space-y-6">
+                <p className="text-lg">
+                  Eine <strong>Reinigungsfirma in der Nähe</strong> zu finden, ist der erste Schritt zu einer professionellen und kostengünstigen Reinigung in der Schweiz. Wenn Sie nach einem <strong>Reinigungsservice vor Ort</strong> suchen, sollten Sie mehrere <strong>regionale Reinigungsunternehmen vergleichen</strong>, um die beste Offerte zu erhalten. Bei Online-Offerten.ch können Sie <strong>kostenlose Offerten von geprüften Reinigungsanbietern in Ihrer Region</strong> anfordern und diese in Ruhe vergleichen.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  Warum eine lokale Reinigungsfirma wählen?
+                </h3>
+                <p>
+                  Ein <strong>Reinigungsservice vor Ort</strong> bietet zahlreiche Vorteile, die oft übersehen werden. Regionale <strong>Reinigungsunternehmen in Ihrer Region</strong> kennen die örtlichen Gegebenheiten, Zugänglichkeiten und baulichen Besonderheiten besonders gut. Lokale <strong>Reinigungsbetriebe</strong> haben kürzere Anfahrtswege, was die Kosten reduziert und die Umweltbelastung minimiert. <strong>Reinigungsanbieter vor Ort</strong> können schneller auf Notfälle oder kurzfristige Änderungen reagieren.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  So finden Sie einen Reinigungsservice vor Ort
+                </h3>
+                <p>
+                  Um den richtigen <strong>Reinigungsanbieter in Ihrer Nähe</strong> zu finden, sollten Sie systematisch vorgehen. Zunächst definieren Sie Ihre Anforderungen: Art der Reinigung (Büroreinigung, Haushaltsreinigung, Endreinigung), zu reinigende Flächen, Reinigungstermin und gewünschte Leistungen. Dann fordern Sie mehrere Offerten von verschiedenen <strong>lokalen Reinigungsunternehmen</strong> an – am besten über ein Vergleichsportal wie Online-Offerten.ch. Vergleichen Sie die Offerten nicht nur nach Preis, sondern auch nach enthaltenen Leistungen, verwendeten Reinigungsmitteln und Bewertungen. Ein <strong>Reinigungsservice in der Nähe</strong> kann Vorteile haben, aber auch weiter entfernte Anbieter können gute Angebote machen.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  Vorteile regionaler Reinigungsunternehmen
+                </h3>
+                <p>
+                  Die Wahl eines <strong>Reinigungsservice vor Ort</strong> bietet zahlreiche Vorteile. <strong>Lokale Reinigungsunternehmen</strong> kennen die örtlichen Gegebenheiten, Zugänglichkeiten und baulichen Besonderheiten besonders gut. Eine <strong>Reinigungsfirma in Ihrer Nähe</strong> hat kürzere Anfahrtswege, was die Kosten reduziert. Regionale <strong>Reinigungsbetriebe</strong> sind oft flexibler bei kurzfristigen Änderungen oder Notfällen. Lokale Anbieter legen oft mehr Wert auf persönliche Beziehungen und langfristige Kundenbindung.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  Wie viel kostet ein Reinigungsservice vor Ort?
+                </h3>
+                <p>
+                  Die Kosten für einen <strong>Reinigungsanbieter in Ihrer Region</strong> hängen von verschiedenen Faktoren ab: Art der Reinigung, Grösse der zu reinigenden Fläche, Häufigkeit der Reinigung, benötigte Leistungen und Reinigungstermin. <strong>Lokale Reinigungsunternehmen</strong> können durch kürzere Anfahrtswege günstigere Preise anbieten. Eine durchschnittliche Wohnungsreinigung in der Schweiz kostet zwischen 500 und 1.200 CHF. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen <strong>Reinigungsanbietern in Ihrer Nähe</strong>.
+                </p>
+
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
+                  <h4 className="text-xl font-bold text-gray-900 mb-4">
+                    💰 Preisbeispiele: Was kostet eine Reinigung konkret?
+                  </h4>
+                  <div className="space-y-4 text-gray-700">
+                    <div className="border-l-4 border-blue-600 pl-4">
+                      <p className="font-semibold text-gray-900 mb-1">Umzugsreinigung</p>
+                      <p><strong>Beispiel:</strong> Eine 3-Zimmer-Wohnung (80 m²) kostet für eine Umzugsreinigung in Zürich durchschnittlich <strong>CHF 650–950</strong>. In Basel oder Bern liegen die Preise bei <strong>CHF 600–900</strong>.</p>
+                    </div>
+                    <div className="border-l-4 border-blue-600 pl-4">
+                      <p className="font-semibold text-gray-900 mb-1">Wohnungsreinigung</p>
+                      <p><strong>Beispiel:</strong> Eine 3.5-Zimmer-Wohnung (95 m²) kostet für eine Grundreinigung in Zürich durchschnittlich <strong>CHF 800–1.100</strong>. Eine 2.5-Zimmer-Wohnung (65 m²) kostet <strong>CHF 500–750</strong>.</p>
+                    </div>
+                    <div className="border-l-4 border-blue-600 pl-4">
+                      <p className="font-semibold text-gray-900 mb-1">Büroreinigung</p>
+                      <p><strong>Beispiel:</strong> Ein Büro mit 150 m² kostet für eine regelmässige Reinigung in Zürich durchschnittlich <strong>CHF 400–600</strong> pro Reinigung. Ein kleineres Büro (50 m²) kostet <strong>CHF 200–350</strong>.</p>
+                    </div>
+                    <div className="border-l-4 border-blue-600 pl-4">
+                      <p className="font-semibold text-gray-900 mb-1">Unterhaltsreinigung</p>
+                      <p><strong>Beispiel:</strong> Eine 4-Zimmer-Wohnung (110 m²) kostet für eine wöchentliche Unterhaltsreinigung in Zürich durchschnittlich <strong>CHF 120–180</strong> pro Reinigung. Monatlich sind das <strong>CHF 480–720</strong>.</p>
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-gray-300">
+                      <p className="text-sm text-gray-600 italic">
+                        <strong>Hinweis:</strong> Diese Preise sind Richtwerte und können je nach Anbieter, Reinigungsaufwand, Termin und Region variieren. Durch den Vergleich mehrerer Offerten von lokalen Reinigungsunternehmen können Sie bis zu 40% sparen.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  Büroreinigung vs. Haushaltsreinigung: Was brauchen Sie?
+                </h3>
+                <p>
+                  <strong>Büroreinigung</strong> bezieht sich auf Reinigungsarbeiten in Geschäftsräumen, Büros und Gewerbeimmobilien. <strong>Haushaltsreinigung</strong> umfasst Reinigungsarbeiten in Privatwohnungen und -häusern. <strong>Büroreinigung</strong> erfordert oft spezielle Reinigungsmittel und Equipment für gewerbliche Umgebungen. Ein <strong>Reinigungsbetrieb</strong>, der <strong>Büroreinigung</strong> anbietet, benötigt oft spezielle Ausrüstung und Erfahrung mit gewerblichen Standards. Viele <strong>Reinigungsunternehmen</strong> bieten beide Dienstleistungen an, aber einige spezialisieren sich auf eine bestimmte Art von Reinigung. Wählen Sie einen <strong>Fachbetrieb</strong>, der Erfahrung mit Ihrer spezifischen Art von Reinigung hat.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  Endreinigung und Umzugsreinigung: Professionelle Übergabe
+                </h3>
+                <p>
+                  Eine <strong>Endreinigung</strong> ist besonders wichtig bei Wohnungsübergaben. Lokale <strong>Reinigungsunternehmen</strong> kennen die Anforderungen der örtlichen Vermieter und können eine erfolgreiche Übergabe garantieren. Eine <strong>Umzugsreinigung</strong> umfasst sowohl die Reinigung der alten als auch der neuen Wohnung. Regionale <strong>Reinigungsbetriebe</strong> können oft beide Reinigungen kosteneffizienter anbieten, da sie kürzere Anfahrtswege haben.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  Regelmässige Reinigung: Unterhaltsreinigung vor Ort
+                </h3>
+                <p>
+                  Für <strong>regelmässige Reinigungen</strong> ist eine <strong>Reinigungsfirma in Ihrer Nähe</strong> besonders vorteilhaft. Lokale <strong>Reinigungsanbieter</strong> können flexibler auf Ihre Terminwünsche eingehen und haben kürzere Anfahrtszeiten. Eine <strong>Unterhaltsreinigung</strong> kann wöchentlich, zweiwöchentlich oder monatlich durchgeführt werden. Regionale <strong>Reinigungsunternehmen</strong> bieten oft bessere Konditionen für langfristige Verträge.
+                </p>
+
+                <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
+                  <h4 className="text-xl font-bold text-gray-900 mb-3">
+                    💡 Pro-Tipp: Lokale Reinigungsunternehmen richtig auswählen
+                  </h4>
+                  <p className="text-gray-700">
+                    Beim Vergleich von <strong>Reinigungsanbietern in Ihrer Region</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, verwendeten Reinigungsmittel, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein <strong>Reinigungsservice vor Ort</strong> mit lokaler Expertise kann trotz etwas höherem Preis das bessere Angebot sein, da er die örtlichen Gegebenheiten besser kennt.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Häufig gestellte Fragen (FAQ)
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Alles, was Sie über lokale Reinigungsunternehmen wissen müssen – beantwortet von unseren Experten.
+            </p>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 leading-relaxed">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Bereit, lokale Reinigungsunternehmen zu finden?
+            </h2>
+            <p className="text-xl mb-8 text-blue-50">
+              Fordern Sie jetzt kostenlos und unverbindlich bis zu 6 Offerten von geprüften Reinigungsanbietern in Ihrer Region an. Vergleichen Sie Preise und sparen Sie bis zu 40% bei Ihrer Reinigung.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                onClick={handleCtaClick}
+                size="lg"
+                className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-6 shadow-xl"
+              >
+                <Zap className="mr-2 h-5 w-5" />
+                Jetzt Anfrage senden
+              </Button>
+              <Button
+                onClick={() => router.push('/reinigungskosten-rechner')}
+                size="lg"
+                className="bg-blue-500 hover:bg-blue-400 text-white border-2 border-white text-lg px-8 py-6 shadow-lg"
+              >
+                <Calculator className="mr-2 h-5 w-5" />
+                Reinigungskosten berechnen
+              </Button>
+            </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-blue-50">
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 mr-2" />
+                <span>100% kostenlos</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 mr-2" />
+                <span>Unverbindlich</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 mr-2" />
+                <span>Nur geprüfte Reinigungsfirmen</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 mr-2" />
+                <span>Bis zu 40% sparen</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </>
-  );
-};
+  )
+}
 
-export default ReinigungsfirmaInDerNaehePageClient;
+export default ReinigungsfirmaInDerNaehePageClient

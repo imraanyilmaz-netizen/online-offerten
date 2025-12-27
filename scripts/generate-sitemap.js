@@ -119,7 +119,8 @@ async function generateSitemap() {
     '/klaviertransport', '/reinigung', '/wohnungsreinigung', '/hausreinigung', 
     '/bueroreinigung', '/umzugsreinigung', '/unterhaltsreinigung', '/grundreinigung', 
     '/baureinigung', '/fensterreinigung', '/bodenreinigung', '/fassadenreinigung', 
-    '/hofreinigung', '/raeumung-entsorgung', '/malerarbeiten', '/gartenarbeiten'
+    '/hofreinigung', '/raeumung-entsorgung', '/malerarbeiten', '/gartenarbeiten',
+    '/umzugsfirma', '/umzugsfirma-in-der-naehe', '/umzugsfirma-vergleichen'
   ];
 
   // Location pages (umzugsfirma-* pages)
