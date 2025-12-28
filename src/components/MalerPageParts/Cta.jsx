@@ -22,7 +22,7 @@ const Cta = () => {
         size="lg"
         className="bg-green-600 hover:bg-green-700 text-white group px-10 py-7 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
       >
-        <Link href="/kostenlose-offerte-anfordern?service=maler">
+        <Link href="/kostenlose-offerte-anfordern?service=maler&step=2">
           Jetzt Kostenlose Offerten Anfordern
           <ArrowRight className="w-6 h-6 ml-3 transition-transform group-hover:translate-x-1.5" />
         </Link>

@@ -45,7 +45,7 @@ const Hero = () => {
                 size="lg"
                 className="bg-green-600 hover:bg-green-700 text-white font-bold group px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
               >
-                <Link href="/kostenlose-offerte-anfordern?service=maler">
+                <Link href="/kostenlose-offerte-anfordern?service=maler&step=2">
                   Jetzt kostenlose Offerten anfordern →
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                 </Link>

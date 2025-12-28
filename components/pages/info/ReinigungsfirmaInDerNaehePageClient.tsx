@@ -57,7 +57,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
           },
           "offers": {
             "@type": "Offer",
-            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
+            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung&step=2",
             "priceCurrency": "CHF",
             "price": "0",
             "name": "Kostenlose Reinigungsfirma Offerten in der Nähe"
@@ -152,7 +152,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
   }, [])
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=reinigung')
+    router.push('/kostenlose-offerte-anfordern?service=reinigung&step=2')
   }
 
   const features = [

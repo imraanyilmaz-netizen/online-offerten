@@ -170,7 +170,7 @@ const UmzugsfirmaZurichPageClient = () => {
                 
                 {/* Service Grid */}
                 <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Zürich"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=Zürich"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Home className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -179,7 +179,7 @@ const UmzugsfirmaZurichPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Zürich"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug&city=Zürich"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Building className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -188,7 +188,7 @@ const UmzugsfirmaZurichPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Zürich"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international&city=Zürich"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Globe className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -197,7 +197,7 @@ const UmzugsfirmaZurichPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Zürich"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport&city=Zürich"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Package className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -206,7 +206,7 @@ const UmzugsfirmaZurichPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Zürich"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=kleintransport&city=Zürich"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Truck className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -215,7 +215,7 @@ const UmzugsfirmaZurichPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Zürich"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=moebellift&city=Zürich"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <MapPin className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -251,7 +251,7 @@ const UmzugsfirmaZurichPageClient = () => {
                 <h3 className="text-2xl font-bold text-gray-800 mb-4 break-words">Umzugsunternehmen in Zürich vergleichen: Jetzt starten!</h3>
                 <p className="text-gray-700 mb-6 font-medium break-words w-full">Mit nur einer Anfrage erhalten Sie bis zu fünf kostenlose und unverbindliche Offerten von Top-Umzugsfirmen aus Zürich. Vergleichen Sie mehrere Anbieter und sparen Sie bis zu 40%.</p>
                 <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group shadow-lg transform hover:scale-105 transition-transform">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Zürich">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Zürich">
                     Jetzt kostenlose Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>

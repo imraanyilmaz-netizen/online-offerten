@@ -57,7 +57,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
           },
           "offers": {
             "@type": "Offer",
-            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug",
+            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2",
             "priceCurrency": "CHF",
             "price": "0",
             "name": "Kostenlose Umzugsfirma Offerten in der Nähe"
@@ -224,7 +224,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
   }, [])
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=umzug')
+    router.push('/kostenlose-offerte-anfordern?service=umzug&step=2')
   }
 
   const features = [

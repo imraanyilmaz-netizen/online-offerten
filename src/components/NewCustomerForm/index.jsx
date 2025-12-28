@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next'; // i18n geri eklendi - müşteri formu için
 import { Button } from '@/components/ui/button';
 import Step1_Service from '@/components/NewCustomerForm/Step1_Service';
+import Step2_ServiceDetails from '@/components/NewCustomerForm/Step2_ServiceDetails';
 import Step2_DetailsAndContact from '@/components/NewCustomerForm/Step2_DetailsAndContact';
 import NewQuoteConfirmation from '@/components/NewCustomerForm/NewQuoteConfirmation';
 import { toast } from '@/components/ui/use-toast';
@@ -18,7 +19,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { supabase } from '@/lib/supabaseClient';
 import { getLanguageFromUrl } from '@/lib/urlMap'; // Müşteri formu için dil algılama
 
-const TOTAL_FORM_STEPS = 2;
+const TOTAL_FORM_STEPS = 3;
 
 const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
   const { t } = useTranslation('newCustomerForm'); // i18n geri eklendi
@@ -128,7 +129,17 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     setErrors,
   } = useNewCustomerForm(initialDataFromProps);
 
-  const [currentStep, setCurrentStep] = useState(1);
+  // Initial step: Wenn initialDataFromProps._initialStep gesetzt ist, verwende diesen, sonst aus URL oder 1
+  const getInitialStep = () => {
+    if (initialDataFromProps._initialStep) {
+      return initialDataFromProps._initialStep;
+    }
+    const params = new URLSearchParams(searchParamsString);
+    const stepFromUrl = params.get('step');
+    return stepFromUrl === '3' ? 3 : (stepFromUrl === '2' ? 2 : 1);
+  };
+  
+  const [currentStep, setCurrentStep] = useState(getInitialStep());
   const validate = useNewFormValidation(formData);
   
   // Müşteri formu için URL'den dil algılama
@@ -150,6 +161,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isStep1Completed, setIsStep1Completed] = useState(false);
+  const [isStep2Completed, setIsStep2Completed] = useState(false);
   const [showExitDialog, setShowExitDialog] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
   
@@ -159,35 +171,68 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   useEffect(() => {
     const params = new URLSearchParams(searchParamsString);
     const stepFromUrl = params.get('step');
+    const serviceFromUrl = params.get('service');
     
     // Sadece URL gerçekten değiştiğinde işlem yap (currentStep ile karşılaştır)
-    const targetStep = stepFromUrl === '2' ? 2 : 1;
+    const targetStep = stepFromUrl === '3' ? 3 : (stepFromUrl === '2' ? 2 : 1);
     
     // Eğer zaten doğru step'teysek, hiçbir şey yapma (gereksiz re-render'ları önle)
     if (currentStep === targetStep) {
       return;
     }
     
-    // Step 2'ye geçiş kontrolü
-    if (stepFromUrl === '2') {
-      if (isStep1Completed && currentStep !== 2) {
-        // Step 1 tamamlandıysa ve step 2'de değilsek, step 2'ye geç
-      setCurrentStep(2);
-        // URL'den step=2 geldiğinde scroll yapma (sayfa ilk yüklendiğinde)
-        // Sadece handleNextStep ile step değişikliğinde scroll yapılacak
+    // Step 2 veya 3'e geçiş kontrolü
+    if (stepFromUrl === '2' || stepFromUrl === '3') {
+      // Wenn _initialStep gesetzt ist (z.B. vom Rechner), direkt zu diesem Schritt springen
+      if (initialDataFromProps._initialStep && initialDataFromProps._initialStep === targetStep) {
+        if (formData.service && currentStep !== targetStep) {
+          setCurrentStep(targetStep);
+        }
+        return;
+      }
+      
+      // Wenn Service in URL ist und formData.service noch nicht gesetzt ist, warte kurz
+      if (serviceFromUrl && !formData.service) {
+        // Service wird in einem anderen useEffect gesetzt, warte darauf
+        return;
+      }
+      
+      if (isStep1Completed && currentStep !== targetStep) {
+        // Step 1 tamamlandıysa und doğru step'te değilsek, hedef step'e geç
+        setCurrentStep(targetStep);
+      } else if (!isStep1Completed && formData.service) {
+        // Service ist gesetzt, aber Step 1 noch nicht validiert - prüfe nochmal
+        const { isValid } = validate(1);
+        if (isValid) {
+          setCurrentStep(targetStep);
+        } else {
+          // Step 1 tamamlanmadıysa, step 2/3'e erişimi engelle und step 1'e yönlendir
+          const newParams = new URLSearchParams(searchParamsString);
+          newParams.delete('step');
+          // Service-Parameter beibehalten
+          if (formData.service) {
+            newParams.set('service', formData.service);
+          }
+          router.push(`${pathname}?${newParams.toString()}`, { replace: true, scroll: false });
+          setCurrentStep(1);
+        }
       } else if (!isStep1Completed) {
-        // Step 1 tamamlanmadıysa, step 2'ye erişimi engelle ve step 1'e yönlendir
+        // Step 1 tamamlanmadıysa, step 2/3'e erişimi engelle und step 1'e yönlendir
         const newParams = new URLSearchParams(searchParamsString);
-      newParams.delete('step');
-      router.push(`${pathname}?${newParams.toString()}`, { replace: true, scroll: false });
-      setCurrentStep(1);
+        newParams.delete('step');
+        // Service-Parameter beibehalten, wenn er bereits in der URL ist
+        if (formData.service) {
+          newParams.set('service', formData.service);
+        }
+        router.push(`${pathname}?${newParams.toString()}`, { replace: true, scroll: false });
+        setCurrentStep(1);
       }
     } 
     // Step 1'e geçiş kontrolü (URL'de step yoksa veya step=1 ise)
     else if ((!stepFromUrl || stepFromUrl === '1') && currentStep !== 1) {
       setCurrentStep(1);
     }
-  }, [searchParamsString, isStep1Completed, currentStep, pathname, router]);
+  }, [searchParamsString, isStep1Completed, currentStep, pathname, router, formData.service, validate]);
 
   const updateUrlStep = useCallback((step, replace = true) => {
     const params = new URLSearchParams(searchParamsString);
@@ -196,10 +241,14 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     } else {
       params.delete('step');
     }
+    // Service-Parameter beibehalten, wenn er bereits in der URL ist oder wenn formData.service gesetzt ist
+    if (formData.service) {
+      params.set('service', formData.service);
+    }
     // URL'i güncelle - scroll: false ile Next.js'in otomatik scroll'unu engelle
     // Manuel scroll handleNextStep ve useEffect'te yapılıyor
     router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
-  }, [searchParamsString, pathname, router, formRef]);
+  }, [searchParamsString, pathname, router, formRef, formData.service]);
 
   const scrollToFormTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -248,6 +297,10 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       });
     }
   }, [umzugArtSectionRef]);
+
+  // Ref to track if user manually changed umzugArt
+  const userManuallySelectedUmzugArt = useRef(false);
+  const hasInitializedUmzugArtFromUrl = useRef(false);
   
   const memoizedHandleServiceSelect = useCallback((serviceId, isFromUrl = false) => {
     handleServiceSelect(serviceId, isFromUrl);
@@ -255,6 +308,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     // Kullanıcı manuel seçim yaptıysa flag'i set et (URL'den otomatik seçim değilse)
     if (!isFromUrl) {
       userManuallySelectedService.current = true;
+      // Wenn Service geändert wird, umzugArt Refs zurücksetzen, damit URL wieder gelesen werden kann
+      userManuallySelectedUmzugArt.current = false;
+      hasInitializedUmzugArtFromUrl.current = false;
     }
     
     const params = new URLSearchParams(searchParamsString);
@@ -268,6 +324,33 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       setTimeout(scrollToUmzugArt, 50); 
     }
   }, [scrollToUmzugArt, handleServiceSelect, pathname, currentStep, searchParamsString, router]);
+
+  // Memoized handleUmzugArtChange that updates URL
+  const memoizedHandleUmzugArtChange = useCallback((umzugArtValue, isFromUrl = false) => {
+    handleUmzugArtChange(umzugArtValue);
+    
+    // Mark that user manually selected umzugArt (if not from URL)
+    if (!isFromUrl) {
+      userManuallySelectedUmzugArt.current = true;
+    }
+    
+    // Update URL with new umzugArt
+    const params = new URLSearchParams(searchParamsString);
+    if (umzugArtValue) {
+      params.set('umzugArt', umzugArtValue);
+    } else {
+      params.delete('umzugArt');
+    }
+    // Keep service and step in URL
+    if (formData.service) {
+      params.set('service', formData.service);
+    }
+    if (currentStep > 1) {
+      params.set('step', currentStep.toString());
+    }
+    const newUrl = `${pathname}?${params.toString()}`;
+    router.replace(newUrl);
+  }, [handleUmzugArtChange, pathname, currentStep, searchParamsString, router, formData.service]);
 
 
   // URL'den service parametresini sadece ilk yüklemede oku
@@ -293,13 +376,62 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       // URL'de service yoksa bile flag'i true yap, tekrar kontrol etme
       hasInitializedServiceFromUrl.current = true;
     }
-  }, [searchParamsString, formData.service, handleServiceSelect]); 
+  }, [searchParamsString, formData.service, handleServiceSelect]);
+
+  // URL'den umzugArt parametresini oku ve otomatik setzen
+  useEffect(() => {
+    // Eğer kullanıcı zaten manuel seçim yaptıysa, URL'den okuma yapma
+    if (userManuallySelectedUmzugArt.current) {
+      return;
+    }
+    
+    // Sadece ilk yüklemede ve daha önce URL'den okuma yapılmadıysa çalış
+    if (hasInitializedUmzugArtFromUrl.current) {
+      return;
+    }
+    
+    const params = new URLSearchParams(searchParamsString);
+    const umzugArtFromUrl = params.get('umzugArt');
+    
+    // Nur wenn service=umzug ist und umzugArt in URL vorhanden ist
+    if (formData.service === 'umzug' && umzugArtFromUrl && umzugArtFromUrl !== formData.umzugArt) {
+      memoizedHandleUmzugArtChange(umzugArtFromUrl, true);
+      hasInitializedUmzugArtFromUrl.current = true;
+    } else if (!umzugArtFromUrl) {
+      // URL'de umzugArt yoksa bile flag'i true yap, tekrar kontrol etme
+      hasInitializedUmzugArtFromUrl.current = true;
+    }
+  }, [searchParamsString, formData.service, formData.umzugArt, memoizedHandleUmzugArtChange]);
+
+  // URL'den special_transport_type parametresini oku ve otomatik setzen
+  useEffect(() => {
+    const params = new URLSearchParams(searchParamsString);
+    const specialTransportTypeFromUrl = params.get('special_transport_type');
+    
+    // Nur wenn service=umzug, umzugArt=spezialtransport ist und special_transport_type in URL vorhanden ist
+    if (formData.service === 'umzug' && formData.umzugArt === 'spezialtransport' && specialTransportTypeFromUrl && specialTransportTypeFromUrl !== formData.special_transport_type) {
+      handleRadioGroupChange('special_transport_type', specialTransportTypeFromUrl);
+    }
+  }, [searchParamsString, formData.service, formData.umzugArt, formData.special_transport_type, handleRadioGroupChange]); 
 
   // Check if Step 1 is completed whenever formData changes - memoized for performance
+  // Step 1: Nur Hauptservice-Auswahl
   const step1ValidationResult = useMemo(() => {
     return validate(1);
   }, [
-    formData.service, 
+    formData.service,
+    validate
+  ]);
+
+  useEffect(() => {
+    setIsStep1Completed(step1ValidationResult.isValid);
+  }, [step1ValidationResult.isValid]);
+
+  // Check if Step 2 is completed whenever formData changes
+  const step2ValidationResult = useMemo(() => {
+    return validate(2);
+  }, [
+    formData.service,
     formData.umzugArt, 
     formData.special_transport_type, 
     formData.special_transport_other_details, 
@@ -321,8 +453,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   ]);
 
   useEffect(() => {
-    setIsStep1Completed(step1ValidationResult.isValid);
-  }, [step1ValidationResult.isValid]);
+    setIsStep2Completed(step2ValidationResult.isValid);
+  }, [step2ValidationResult.isValid]);
 
   const handleNextStep = () => {
     if (currentStep < TOTAL_FORM_STEPS) {
@@ -330,10 +462,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       if (isValid) {
         setErrors({}); 
         // Step 2'ye geçerken history'ye entry ekle (geri tuşu için)
-        // setIsStep1Completed zaten useEffect ile otomatik yönetiliyor, burada set etmeye gerek yok
         if (currentStep === 1) {
           updateUrlStep(currentStep + 1, false);
-          // Step 2'ye geçerken formun başına scroll yap
           setTimeout(() => {
             scrollToFormTop();
           }, 100);
@@ -459,6 +589,22 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         case 1:
             return t('step1.headerTitle');
         case 2:
+            // Dynamischer Titel basierend auf dem ausgewählten Service
+            switch (formData.service) {
+                case 'umzug':
+                    return t('step1.moveTypeSelectionTitle');
+                case 'reinigung':
+                    return t('step1.cleaningTypeSelectionTitle');
+                case 'maler':
+                    return t('step1.painterTypeSelectionTitle');
+                case 'raeumung':
+                    return t('step1.entsorgungTypeSelectionTitle');
+                case 'garten':
+                    return t('step1.whatToGardenTitle');
+                default:
+                    return t('step1.moveTypeSelectionTitle') || 'Welche Art planen Sie?';
+            }
+        case 3:
             return t('step2.headerTitleNew');
         default:
             return '';
@@ -478,7 +624,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         return <Step1_Service 
                   formData={formData} 
                   handleServiceSelect={memoizedHandleServiceSelect} 
-                  handleUmzugArtChange={handleUmzugArtChange} 
+                  handleUmzugArtChange={memoizedHandleUmzugArtChange} 
                   handleRadioGroupChange={handleRadioGroupChange}
                   handleChange={handleChange}
                   handleCheckboxChange={handleCheckboxChange}
@@ -489,6 +635,21 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       case 2:
         return (
           <div className={!isStep1Completed ? 'pointer-events-none opacity-50' : ''}>
+            <Step2_ServiceDetails 
+              formData={formData} 
+              handleUmzugArtChange={handleUmzugArtChange} 
+              handleRadioGroupChange={handleRadioGroupChange}
+              handleChange={handleChange}
+              handleCheckboxChange={handleCheckboxChange}
+              handleSelectChange={handleSelectChange}
+              errors={formData.errors} 
+              umzugArtSectionRef={umzugArtSectionRef}
+            />
+          </div>
+        );
+      case 3:
+        return (
+          <div className={(!isStep1Completed || !isStep2Completed) ? 'pointer-events-none opacity-50' : ''}>
             <Step2_DetailsAndContact 
               formData={formData} 
               handleChange={handleChange} 
@@ -555,7 +716,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: currentStep > (currentStep+1) ? -30 : 30 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={currentStep === 2 && !isStep1Completed ? 'pointer-events-none opacity-50' : ''}
+            className={(currentStep === 2 && !isStep1Completed) || (currentStep === 3 && (!isStep1Completed || !isStep2Completed)) ? 'pointer-events-none opacity-50' : ''}
           >
             {renderStepContent()}
           </motion.div>
@@ -573,12 +734,12 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           
           <div className="flex-grow sm:block hidden"></div> {}
 
-          {currentStep === 1 && (
+          {currentStep < TOTAL_FORM_STEPS && (
             <Button 
               type="button" 
               onClick={handleNextStep} 
               className="bg-green-500 hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!isStep1Completed}
+              disabled={(currentStep === 1 && !isStep1Completed) || (currentStep === 2 && !isStep2Completed)}
             >
                 {t('nextButton')}
                 <ArrowLeft className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 rotate-180" />

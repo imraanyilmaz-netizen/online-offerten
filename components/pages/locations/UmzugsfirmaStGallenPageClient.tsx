@@ -93,7 +93,7 @@ const UmzugsfirmaStGallenPageClient = () => {
 
               <div className="text-center bg-gray-100 p-6 rounded-lg border-l-4 border-gray-400">
                  <Button asChild size="lg" className="bg-gray-800 hover:bg-gray-900 text-white group shadow-lg">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=St. Gallen">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=St. Gallen">
                     Offerten für St. Gallen anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>

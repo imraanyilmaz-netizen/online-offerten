@@ -210,7 +210,7 @@ const UmzugsfirmaLuzernPageClient = () => {
                 
                 {/* Service Grid */}
                 <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Luzern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=Luzern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Home className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -219,7 +219,7 @@ const UmzugsfirmaLuzernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Luzern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug&city=Luzern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Building className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -228,7 +228,7 @@ const UmzugsfirmaLuzernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Luzern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international&city=Luzern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Globe className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -237,7 +237,7 @@ const UmzugsfirmaLuzernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Luzern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport&city=Luzern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Package className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -401,7 +401,7 @@ const UmzugsfirmaLuzernPageClient = () => {
                   Vergleichen Sie kostenlos mehrere Umzugsfirmen in Luzern und finden Sie das beste Angebot für Ihren Umzug. Einfach, schnell und völlig unverbindlich.
                 </p>
                 <Button asChild size="lg" className="bg-white text-green-600 hover:bg-gray-100 font-bold text-lg px-8 py-6 shadow-xl">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Luzern">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=Luzern">
                     Jetzt kostenlose Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Link>

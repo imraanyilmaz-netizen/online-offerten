@@ -185,7 +185,7 @@ const ArticleSection = () => {
         <h3 className="text-2xl md:text-3xl font-semibold text-blue-800 mb-4">Starten Sie sorgenfrei in Ihr neues Abenteuer</h3>
         <p className="mb-6">Ein internationaler Umzug muss nicht stressig sein. Mit dem richtigen Partner an Ihrer Seite können Sie sich auf das konzentrieren, was wirklich zählt: Ihr neues Leben im Ausland.</p>
         <Button asChild size="lg" className="bg-green-500 hover:bg-green-600 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <Link href="/kostenlose-offerte-anfordern?service=international">Jetzt kostenlose Offerten für den Auslandsumzug anfordern</Link>
+          <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international">Jetzt kostenlose Offerten für den Auslandsumzug anfordern</Link>
         </Button>
       </div>
 

@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
+import { useRouter } from 'next/navigation';
 
 const NewCustomerForm = lazy(() => import('@/components/NewCustomerForm/index'));
 
@@ -79,6 +80,7 @@ const LocationInfo = ({ zip, onLocationUpdate }) => {
 
 
 const MovingCostCalculator = () => {
+  const router = useRouter();
   const [rooms, setRooms] = useState("3.5");
   const [cleaning, setCleaning] = useState("no");
   const [furnitureAssembly, setFurnitureAssembly] = useState("no");
@@ -192,6 +194,7 @@ const MovingCostCalculator = () => {
   };
   
   const handleOpenQuoteForm = () => {
+    // Setze die initialen Formulardaten mit service=umzug und step=2
     setInitialFormDataForForm({
         service: 'umzug',
         umzugArt: 'privatumzug',
@@ -205,11 +208,24 @@ const MovingCostCalculator = () => {
         additional_cleaning: cleaning === 'yes',
         furniture_assembly: furnitureAssembly === 'yes',
         calculated_distance: calculatedDistance,
+        // Setze einen speziellen Parameter, um direkt zu Schritt 2 zu springen
+        _initialStep: 2,
     });
+    
+    // Öffne das Inline-Formular
     setShowInlineForm(true);
+    
+    // Scroll zum Formular und aktualisiere die URL für Schritt 2
     setTimeout(() => {
         const formElement = document.getElementById('calculator-inline-form');
         formElement?.scrollIntoView({ behavior: 'smooth' });
+        
+        // Aktualisiere die URL, damit das Formular zu Schritt 2 springt
+        const params = new URLSearchParams(window.location.search);
+        params.set('service', 'umzug');
+        params.set('step', '2');
+        params.set('umzugArt', 'privatumzug');
+        window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
     }, 100);
   };
   
@@ -349,6 +365,7 @@ const MovingCostCalculator = () => {
         >
           <Suspense fallback={<FormLoadingSpinner />}>
            <NewCustomerForm 
+              key={`form-${showInlineForm}-${initialFormDataForForm.service || 'default'}`}
               initialDataFromProps={initialFormDataForForm}
             />
           </Suspense>

@@ -11,7 +11,7 @@ const GartenarbeitenPageClient = () => {
   const router = useRouter()
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=garten')
+    router.push('/kostenlose-offerte-anfordern?service=garten&step=2')
   }
 
   const schema = {
@@ -30,7 +30,7 @@ const GartenarbeitenPageClient = () => {
     },
     "offers": {
       "@type": "Offer",
-      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=garten",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=garten&step=2",
       "priceCurrency": "CHF",
       "name": "Kostenlose Offerte für Gartenarbeiten"
     }

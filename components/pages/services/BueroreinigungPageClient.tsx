@@ -23,7 +23,7 @@ const BueroreinigungPageClient = () => {
   });
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=reinigung');
+    router.push('/kostenlose-offerte-anfordern?service=reinigung&step=2');
   };
 
   // SEO Data

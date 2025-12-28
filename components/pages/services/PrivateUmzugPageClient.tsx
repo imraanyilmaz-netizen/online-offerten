@@ -11,6 +11,7 @@ import {
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
   Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box
 } from 'lucide-react';
+import UmzugTypesSidebar from '@/components/UmzugPageParts/UmzugTypesSidebar';
 
 const PrivateUmzugPageClient = () => {
   const router = useRouter();
@@ -67,7 +68,7 @@ const PrivateUmzugPageClient = () => {
         },
         "offers": {
           "@type": "Offer",
-          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=privatumzug",
+            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug",
           "priceCurrency": "CHF",
           "name": "Kostenlose Offerte für Privatumzug"
         }
@@ -87,7 +88,7 @@ const PrivateUmzugPageClient = () => {
   };
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=privatumzug');
+    router.push('/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug');
   };
 
   // Services for Sidebar
@@ -278,7 +279,7 @@ const PrivateUmzugPageClient = () => {
                   <li>Kein Stress: Sie müssen sich nicht um die körperlich anstrengende Arbeit kümmern.</li>
                 </ul>
                 <p className="text-gray-700 leading-relaxed">
-                  Ein professionelles Umzugsunternehmen ist besonders dann sinnvoll, wenn Sie viele Möbel, schwere Gegenstände oder eine grosse Wohnung haben. <Link href="/kostenlose-offerte-anfordern" className="text-green-600 hover:underline font-semibold">Holen Sie sich unverbindliche Offerten</Link> und vergleichen Sie die Kosten mit dem Aufwand eines Umzugs in Eigenregie.
+                  Ein professionelles Umzugsunternehmen ist besonders dann sinnvoll, wenn Sie viele Möbel, schwere Gegenstände oder eine grosse Wohnung haben. <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-600 hover:underline font-semibold">Holen Sie sich unverbindliche Offerten</Link> und vergleichen Sie die Kosten mit dem Aufwand eines Umzugs in Eigenregie.
                 </p>
               </section>
 
@@ -370,7 +371,7 @@ const PrivateUmzugPageClient = () => {
                   Starten Sie jetzt Ihren stressfreien Privatumzug
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Ein Wohnungsumzug oder Hausumzug muss nicht kompliziert sein. Mit der richtigen Vorbereitung und einem zuverlässigen Partner an Ihrer Seite wird der Start in Ihr neues Zuhause zu einem positiven Erlebnis. <Link href="/kostenlose-offerte-anfordern" className="text-green-600 hover:underline font-semibold">Fordern Sie jetzt Ihre kostenlosen und unverbindlichen Offerten an</Link> und machen Sie den ersten Schritt in Richtung eines entspannten Umzugs.
+                  Ein Wohnungsumzug oder Hausumzug muss nicht kompliziert sein. Mit der richtigen Vorbereitung und einem zuverlässigen Partner an Ihrer Seite wird der Start in Ihr neues Zuhause zu einem positiven Erlebnis. <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-600 hover:underline font-semibold">Fordern Sie jetzt Ihre kostenlosen und unverbindlichen Offerten an</Link> und machen Sie den ersten Schritt in Richtung eines entspannten Umzugs.
                 </p>
               </section>
 
@@ -723,7 +724,7 @@ const PrivateUmzugPageClient = () => {
                   size="lg" 
                   className="bg-green-600 hover:bg-green-700 text-white group px-10 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                 >
-                  <Link href="/kostenlose-offerte-anfordern?service=privatumzug">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug">
                     Kostenlose Offerten für Privatumzug
                     <ArrowRight className="w-6 h-6 ml-3 transition-transform group-hover:translate-x-1.5" />
                   </Link>
@@ -739,34 +740,8 @@ const PrivateUmzugPageClient = () => {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="lg:col-span-1 space-y-8 self-start sticky top-28"
             >
-              {/* Service Selector */}
-              <div className="bg-white p-6 rounded-2xl shadow-xl">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Schnellanfrage starten</h3>
-                <nav>
-                  {services.filter(service => service?.path).map((service) => (
-                    <Link key={service.path} href={service.path}>
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        className={`flex items-center p-3 my-1.5 rounded-lg transition-colors duration-200 ${
-                          service.active
-                            ? 'bg-green-100 text-green-800 font-bold border-l-4 border-green-500'
-                            : 'text-gray-600 hover:bg-gray-100'
-                        }`}
-                      >
-                        <service.icon className="w-5 h-5 mr-4" />
-                        <span className="flex-1">{service.name}</span>
-                        <ArrowRight className={`w-4 h-4 transition-opacity ${service.active ? 'opacity-100' : 'opacity-0'}`} />
-                      </motion.div>
-                    </Link>
-                  ))}
-                </nav>
-                <Button asChild className="w-full mt-5 bg-green-600 hover:bg-green-700 text-white group">
-                  <Link href="/kostenlose-offerte-anfordern">
-                    Kostenlose Offerten für Privatumzug
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
-              </div>
+              {/* Umzug Types Sidebar */}
+              <UmzugTypesSidebar activeType="privatumzug" />
 
               {/* Professional Team */}
               <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">

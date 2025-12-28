@@ -10,6 +10,7 @@ import {
   ArrowRight, CheckCircle, Building2, Shield, TrendingDown, Clock, Users, Award,
   MessageSquare
 } from 'lucide-react'
+import UmzugTypesSidebar from '@/components/UmzugPageParts/UmzugTypesSidebar'
 
 const GeschaeftsumzugPageClient = () => {
   const router = useRouter()
@@ -111,7 +112,7 @@ const GeschaeftsumzugPageClient = () => {
         ],
         "offers": {
           "@type": "Offer",
-          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=geschaeftsumzug",
+            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug",
           "priceCurrency": "CHF",
           "price": "0",
           "name": "Kostenlose Offerte anfordern"
@@ -154,7 +155,7 @@ const GeschaeftsumzugPageClient = () => {
   }
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=geschaeftsumzug')
+    router.push('/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug')
   }
 
   const stats = [
@@ -513,8 +514,10 @@ const GeschaeftsumzugPageClient = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="lg:col-span-2 space-y-6"
+              className="lg:col-span-1 space-y-6 self-start sticky top-28"
             >
+              <UmzugTypesSidebar activeType="geschaeftsumzug" />
+              
               <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
                 <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                   <MessageSquare className="w-6 h-6 mr-2 text-green-600" />

@@ -84,7 +84,7 @@ const MalerfirmaWinterthurPageClient = () => {
           },
           "offers": {
             "@type": "Offer",
-            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler",
+            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler&step=2",
             "priceCurrency": "CHF",
             "price": "0"
           }
@@ -138,7 +138,7 @@ const MalerfirmaWinterthurPageClient = () => {
   }, [])
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=maler')
+    router.push('/kostenlose-offerte-anfordern?service=maler&step=2')
   }
 
   const services = [

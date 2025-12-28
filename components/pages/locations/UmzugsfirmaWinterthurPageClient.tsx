@@ -93,7 +93,7 @@ const UmzugsfirmaWinterthurPageClient = () => {
 
               <div className="text-center bg-gray-100 p-6 rounded-lg border-l-4 border-blue-500">
                 <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white group shadow-lg">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Winterthur">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Winterthur">
                     Offerten für Winterthur anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>

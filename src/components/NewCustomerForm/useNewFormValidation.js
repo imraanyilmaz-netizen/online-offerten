@@ -111,7 +111,16 @@ const useNewFormValidation = (formData) => {
     };
     
     if (step === 1) {
+      // Step 1: Nur Hauptservice-Auswahl
+      if (!formData.service) {
+        errors.service = t('errors.serviceMissing');
+      }
+    } else if (step === 2) {
+      // Step 2: Detaillierte Service-Fragen (umzugArt, etc.)
       errors = validateStep1();
+    } else if (step === 3) {
+      // Step 3: Details und Kontakt
+      errors = validateStep2();
     } else if (step === 'all') {
       errors = {
         ...validateStep1(),

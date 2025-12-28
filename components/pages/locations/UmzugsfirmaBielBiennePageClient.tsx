@@ -95,7 +95,7 @@ const UmzugsfirmaBielBiennePageClient = () => {
               <div className="mt-8 text-center bg-teal-50 p-6 rounded-lg border-l-4 border-teal-500">
                 <h3 className="text-xl font-bold text-gray-800 mb-3">Bereit für Ihren Umzug?</h3>
                 <Button asChild size="lg" className="bg-teal-600 hover:bg-teal-700 text-white group shadow-lg">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Biel-Bienne">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Biel-Bienne">
                     Kostenlose Offerten für Biel/Bienne anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>

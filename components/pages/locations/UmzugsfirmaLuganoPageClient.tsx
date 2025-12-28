@@ -94,7 +94,7 @@ const UmzugsfirmaLuganoPageClient = () => {
 
               <div className="text-center bg-gray-100 p-6 rounded-lg border-l-4 border-green-500">
                 <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group shadow-lg">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Lugano">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Lugano">
                     Offerten für Lugano anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>

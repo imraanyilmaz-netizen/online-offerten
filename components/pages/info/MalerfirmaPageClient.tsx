@@ -57,7 +57,7 @@ const MalerfirmaPageClient = () => {
           },
           "offers": {
             "@type": "Offer",
-            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler",
+            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler&step=2",
             "priceCurrency": "CHF",
             "price": "0",
             "name": "Kostenlose Malerfirma Offerten"
@@ -189,7 +189,7 @@ const MalerfirmaPageClient = () => {
   }, [])
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=maler')
+    router.push('/kostenlose-offerte-anfordern?service=maler&step=2')
   }
 
   const features = [

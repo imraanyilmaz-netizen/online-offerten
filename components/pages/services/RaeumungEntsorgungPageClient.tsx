@@ -20,7 +20,7 @@ const RaeumungEntsorgungPageClient = () => {
   const router = useRouter()
 
   const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=raeumung')
+    router.push('/kostenlose-offerte-anfordern?service=raeumung&step=2')
   }
 
   const benefits = [
@@ -138,7 +138,7 @@ const RaeumungEntsorgungPageClient = () => {
     },
     "offers": {
       "@type": "Offer",
-      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=raeumung",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=raeumung&step=2",
       "priceCurrency": "CHF",
       "price": "0",
       "availability": "https://schema.org/InStock",

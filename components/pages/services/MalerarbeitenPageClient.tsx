@@ -95,7 +95,7 @@ const MalerarbeitenPageClient = () => {
         },
         "offers": {
           "@type": "Offer",
-          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler",
+          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler&step=2",
           "priceCurrency": "CHF",
           "name": "Kostenlose Maler Offerten"
         }

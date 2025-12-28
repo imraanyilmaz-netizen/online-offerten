@@ -167,7 +167,7 @@ const UmzugsfirmaBernPageClient = () => {
                 
                 {/* Service Grid */}
                 <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Bern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=Bern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
                   >
                     <Home className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -176,7 +176,7 @@ const UmzugsfirmaBernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Bern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug&city=Bern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group"
                   >
                     <Building className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -185,7 +185,7 @@ const UmzugsfirmaBernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Bern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international&city=Bern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group"
                   >
                     <Globe className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -194,7 +194,7 @@ const UmzugsfirmaBernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Bern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport&city=Bern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group"
                   >
                     <Package className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -203,7 +203,7 @@ const UmzugsfirmaBernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Bern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=kleintransport&city=Bern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group"
                   >
                     <Truck className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -212,7 +212,7 @@ const UmzugsfirmaBernPageClient = () => {
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                   
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Bern"
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=moebellift&city=Bern"
                     className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group"
                   >
                     <MapPin className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -248,7 +248,7 @@ const UmzugsfirmaBernPageClient = () => {
                   <h3 className="text-2xl font-bold text-gray-800 mb-4 break-words">Umzugsfirma vergleichen Bern: Jetzt starten!</h3>
                   <p className="text-gray-700 mb-6 font-medium break-words w-full">Umzugsfirma Bern: Mit nur einer Anfrage erhalten Sie bis zu fünf kostenlose und unverbindliche Offerten von Top-Umzugsfirmen aus Bern. Vergleichen Sie mehrere Zügelfirmen Bern und Umzugsunternemen Bern und sparen Sie bis zu 40%.</p>
                   <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group shadow-lg transform hover:scale-105 transition-transform">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Bern">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Bern">
                       Umzugsfirmen vergleichen Bern & Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>

@@ -7,33 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const ServiceButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) => {
-  const { t } = useTranslation('newCustomerForm');
-  return (
-    <motion.button
-      type="button"
-      onClick={() => onClick(id)}
-      className={`w-full p-3 sm:p-4 border-2 rounded-lg text-left transition-all duration-200 ease-in-out transform hover:-translate-y-0.5
-        ${selected 
-          ? 'bg-green-50 border-green-500 shadow-lg ring-2 ring-green-500 ring-offset-1' 
-          : 'bg-white border-gray-200 hover:border-green-400 hover:shadow-md'
-        }`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <div className="flex items-center mb-1">
-        {icon && (
-          <span className={`mr-2 sm:mr-3 p-1.5 sm:p-2 rounded-md ${selected ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'}`}>
-            {icon}
-          </span>
-        )}
-        <span className={`font-semibold text-base md:text-lg ${selected ? 'text-green-700' : 'text-gray-800'}`}>{t(labelKey)}</span>
-      </div>
-      <p className={`text-xs md:text-sm ${selected ? 'text-green-600' : 'text-gray-500'}`}>{t(subLabelKey)}</p>
-    </motion.button>
-  );
-};
-
 const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) => {
   const { t } = useTranslation('newCustomerForm');
   return (
@@ -306,7 +279,7 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
 const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckboxChange, errors, subQuestionsRef }) => {
     const { t } = useTranslation('newCustomerForm');
     const cleaningFrequencyOptions = ['einmalig', 'woechentlich', 'zweiwoechig', 'monatlich'];
-    const showGeneralCleaningDetails = false; // Bu sorular artık gösterilmeyecek
+    const showGeneralCleaningDetails = false;
     const showFloorCleaningDetails = formData.umzugArt === 'bodenreinigung';
     const showFrequencyDetails = formData.umzugArt === 'unterhaltsreinigung';
     const showFassadenreinigungDetails = formData.umzugArt === 'fassadenreinigung';
@@ -414,7 +387,6 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                         />
                     </motion.div>
                 )}
-
 
                 {showFensterreinigungDetails && (
                     <motion.div
@@ -669,7 +641,7 @@ const GardenWorkSection = ({ formData, handleRadioGroupChange, handleChange, err
 };
 
 
-const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, handleRadioGroupChange, handleChange, handleCheckboxChange, handleSelectChange, errors, umzugArtSectionRef }) => {
+const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroupChange, handleChange, handleCheckboxChange, handleSelectChange, errors, umzugArtSectionRef }) => {
   const { t } = useTranslation('newCustomerForm');
   const subQuestionsRef = useRef(null);
 
@@ -681,21 +653,13 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
     }
   }, [formData.umzugArt]);
 
-  const mainServices = [
-    { id: 'umzug', labelKey: 'step1.mainServiceMove', subLabelKey: 'step1.mainServiceMoveSublabel', icon: <Home size={20} /> },
-    { id: 'reinigung', labelKey: 'step1.mainServiceCleaning', subLabelKey: 'step1.mainServiceCleaningSublabel', icon: <Sparkles size={20} /> },
-    { id: 'maler', labelKey: 'step1.mainServicePainter', subLabelKey: 'step1.mainServicePainterSublabel', icon: <Paintbrush size={20} /> },
-    { id: 'raeumung', labelKey: 'step1.mainServiceDisposal', subLabelKey: 'step1.mainServiceDisposalSublabel', icon: <Recycle size={20} /> },
-    { id: 'garten', labelKey: 'step1.mainServiceGarden', subLabelKey: 'step1.mainServiceGardenSublabel', icon: <Leaf size={20} /> },
-  ];
-
   const umzugSubTypes = [
     { id: 'privatumzug', labelKey: 'step1.privateMoveLabel', subLabelKey: 'step1.privateMoveDescription', icon: <Home size={16} /> },
     { id: 'geschaeftsumzug', labelKey: 'step1.businessMoveLabel', subLabelKey: 'step1.businessMoveDescription', icon: <Briefcase size={16} /> },
     { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe size={16} /> },
     { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
     { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck size={16} /> },
-    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <Wind size={16} /> } // Added Möbellift
+    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <Wind size={16} /> }
   ];
 
   const malerSubTypes = [
@@ -719,25 +683,291 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
     'komplette_raeumung', 'einzelne_raeume', 'keller_dachboden'
   ];
   
+  if (!formData.service) {
+    return (
+      <div className="space-y-6 sm:space-y-8">
+        <div className="text-center py-8">
+          <p className="text-gray-500">{t('step1.mainServiceDescription')}</p>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="space-y-6 sm:space-y-8">
-      <div>
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1.5 sm:mb-2">{t('step1.mainServiceQuestion')} <span className="text-red-500">*</span></h2>
-        <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{t('step1.mainServiceDescription')}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-          {mainServices.map((service) => (
-            <ServiceButton 
-              key={service.id}
-              {...service}
-              selected={formData.service === service.id}
-              onClick={handleServiceSelect}
+      <AnimatePresence>
+        {formData.service === 'garten' && (
+          <GardenWorkSection 
+            formData={formData}
+            handleRadioGroupChange={handleRadioGroupChange}
+            handleChange={handleChange}
+            errors={errors}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {formData.service === 'reinigung' && (
+          <>
+            <CleaningInfoBox 
+              formData={formData} 
+              handleUmzugArtChange={handleUmzugArtChange} 
+              errors={errors} 
             />
-          ))}
-        </div>
-        {errors && errors.service && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.service}</p>}
-      </div>
+            <CleaningSubQuestions 
+              formData={formData} 
+              handleRadioGroupChange={handleRadioGroupChange} 
+              handleCheckboxChange={handleCheckboxChange} 
+              errors={errors}
+              subQuestionsRef={subQuestionsRef}
+            />
+          </>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {formData.service === 'maler' && (
+          <motion.div
+            initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
+            animate={{ opacity: 1, scaleY: 1, y: 0 }}
+            exit={{ opacity: 0, scaleY: 0, y: -10 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="space-y-4 sm:space-y-6 pt-4 sm:pt-6 border-t border-gray-200"
+          >
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.painterTypeSelectionTitle')} <span className="text-red-500">*</span></h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.painterTypeSelectionSubtitle')}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+                {malerSubTypes.map((subType) => (
+                  <UmzugArtButton
+                    key={subType.id}
+                    {...subType}
+                    selected={formData.umzugArt === subType.id}
+                    onClick={handleUmzugArtChange}
+                  />
+                ))}
+              </div>
+              {errors && errors.umzugArt && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.umzugArt}</p>}
+            </div>
+            
+            <AnimatePresence>
+                {formData.umzugArt && (
+                    <motion.div className="space-y-4">
+                        <WhatToPaintSection 
+                            formData={formData}
+                            handleCheckboxChange={handleCheckboxChange}
+                            handleChange={handleChange}
+                            errors={errors}
+                        />
+                        <MalerOptionalDetails
+                            formData={formData}
+                            handleRadioGroupChange={handleRadioGroupChange}
+                            errors={errors}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {formData.service === 'raeumung' && (
+          <motion.div
+            initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
+            animate={{ opacity: 1, scaleY: 1, y: 0 }}
+            exit={{ opacity: 0, scaleY: 0, y: -10 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-gray-200"
+          >
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.entsorgungTypeSelectionTitle')} <span className="text-red-500">*</span></h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.entsorgungTypeSelectionSubtitle')}</p>
+              <RadioGroup 
+                name="umzugArt" 
+                value={formData.umzugArt || ''} 
+                onValueChange={(value) => handleUmzugArtChange(value)} 
+                className="space-y-2.5 sm:space-y-3"
+              >
+                {entsorgungSubTypes.map(opt => (
+                  <Label 
+                    key={opt.id}
+                    htmlFor={`entsorgung_${opt.id}`}
+                    className={`p-3 sm:p-4 border-2 rounded-lg transition-all cursor-pointer flex items-start gap-3 sm:gap-4
+                      ${formData.umzugArt === opt.id ? 'bg-green-50 border-green-500 shadow-md ring-1 ring-green-500' : 'bg-white border-gray-200 hover:border-green-300'}`
+                    }
+                  >
+                    <RadioGroupItem value={opt.id} id={`entsorgung_${opt.id}`} className="mt-1 shrink-0" />
+                    <div className="flex-grow">
+                      <span className="font-semibold text-base text-gray-800">{t(opt.labelKey)}</span>
+                      <p className="text-sm text-gray-600 font-normal mt-1">{t(opt.subLabelKey)}</p>
+                    </div>
+                  </Label>
+                ))}
+              </RadioGroup>
+              {errors && errors.umzugArt && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.umzugArt}</p>}
+            </div>
+
+            <AnimatePresence>
+              {formData.umzugArt === 'raeumung' && (
+                <motion.div
+                  initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
+                  animate={{ opacity: 1, scaleY: 1, y: 0 }}
+                  exit={{ opacity: 0, scaleY: 0, y: -10 }}
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                  className="space-y-3 sm:space-y-4"
+                >
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.raeumungScope.title')} <span className="text-red-500">*</span></h3>
+                  <RadioGroup
+                    name="raeumung_scope"
+                    value={formData.raeumung_scope || ''}
+                    onValueChange={(value) => handleRadioGroupChange('raeumung_scope', value)}
+                    className="grid grid-cols-1 sm:grid-cols-3 gap-2"
+                  >
+                    {raeumungScopeOptions.map(option => (
+                      <Label
+                        key={option}
+                        htmlFor={`scope_${option}`}
+                        className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
+                          ${formData.raeumung_scope === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`
+                        }
+                      >
+                        <RadioGroupItem value={option} id={`scope_${option}`} className="h-5 w-5 shrink-0" />
+                        <span className="font-normal text-sm text-gray-800">{t(`step1.raeumungScope.${option}`)}</span>
+                      </Label>
+                    ))}
+                  </RadioGroup>
+                  {errors && errors.raeumung_scope && <p className="text-sm text-red-500 mt-2">{errors.raeumung_scope}</p>}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {formData.service === 'umzug' && (
+          <motion.div
+            ref={umzugArtSectionRef}
+            id="umzugArtSection"
+            initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
+            animate={{ opacity: 1, scaleY: 1, y: 0 }}
+            exit={{ opacity: 0, scaleY: 0, y: -10 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-gray-200"
+          >
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.moveTypeSelectionTitle')} <span className="text-red-500">*</span></h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.moveTypeSelectionSubtitle')}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+                {umzugSubTypes.map((subType) => (
+                  <UmzugArtButton
+                    key={subType.id}
+                    {...subType}
+                    selected={formData.umzugArt === subType.id}
+                    onClick={handleUmzugArtChange}
+                  />
+                ))}
+              </div>
+              {errors && errors.umzugArt && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.umzugArt}</p>}
+            </div>
+
+            <AnimatePresence>
+              {(formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug') && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                  className="space-y-3 sm:space-y-4 pt-4 sm:pt-4 border-t border-gray-100"
+                >
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.additionalCleaningTitle')}</h3>
+                  <div className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.additional_cleaning ? 'bg-teal-50 border-teal-500 shadow-md' : 'bg-white border-gray-200 hover:border-teal-400'}`}>
+                    <div className="flex items-center">
+                        <Checkbox 
+                            id="additional_cleaning" 
+                            name="additional_cleaning" 
+                            checked={formData.additional_cleaning || false} 
+                            onCheckedChange={(checked) => handleCheckboxChange('additional_cleaning', checked)}
+                            className="h-5 w-5 mr-3"
+                        />
+                        <Label htmlFor="additional_cleaning" className="flex-grow cursor-pointer">
+                            <span className="font-semibold text-base text-gray-800">{t('step1.additionalCleaningLabel')}</span>
+                            <p className="text-sm text-gray-600 font-normal">
+                              {formData.umzugArt === 'geschaeftsumzug' 
+                                ? t('step1.additionalCleaningDescriptionBusiness')
+                                : t('step1.additionalCleaningDescription')
+                              }
+                            </p>
+                        </Label>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {formData.umzugArt === 'spezialtransport' && (
+                <motion.div
+                  initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
+                  animate={{ opacity: 1, scaleY: 1, y: 0 }}
+                  exit={{ opacity: 0, scaleY: 0, y: -10 }}
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                  className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-gray-100"
+                >
+                  <h3 className="text-sm md:text-base font-semibold text-gray-700">{t('step1.specialTransportTypeQuestion')} <span className="text-red-500">*</span></h3>
+                  <RadioGroup 
+                    name="special_transport_type" 
+                    value={formData.special_transport_type || ''} 
+                    onValueChange={(value) => handleRadioGroupChange('special_transport_type', value)} 
+                    className="space-y-2"
+                  >
+                    {specialTransportOptions.map(opt => (
+                      <div key={opt.value} className={`p-2.5 sm:p-3 border rounded-md transition-colors ${formData.special_transport_type === opt.value ? 'bg-blue-50 border-blue-400' : 'bg-gray-50 border-gray-200 hover:border-gray-300'}`}>
+                        <div className="flex items-center">
+                          <RadioGroupItem value={opt.value} id={`special_transport_${opt.value}`} className="mr-2 sm:mr-3" />
+                          {opt.icon}
+                          <Label htmlFor={`special_transport_${opt.value}`} className="font-normal text-sm sm:text-base cursor-pointer flex-grow">{t(opt.labelKey)}</Label>
+                        </div>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                  {errors && errors.special_transport_type && <p className="text-sm text-red-500 mt-1 sm:mt-1.5">{errors.special_transport_type}</p>}
+
+                  <AnimatePresence>
+                    {formData.special_transport_type === 'sonstiges' && (
+                      <motion.div
+                        initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
+                        animate={{ opacity: 1, scaleY: 1, y: 0 }}
+                        exit={{ opacity: 0, scaleY: 0, y: -10 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="pt-1.5 sm:pt-2"
+                      >
+                        <Label htmlFor="special_transport_other_details" className="font-medium text-sm sm:text-base text-gray-700">
+                          {t('step1.specialTransportDescriptionOtherLabel')} <span className="text-red-500">*</span>
+                        </Label>
+                        <Input
+                          id="special_transport_other_details"
+                          name="special_transport_other_details"
+                          value={formData.special_transport_other_details || ''}
+                          onChange={handleChange}
+                          placeholder={t('step1.specialTransportDescriptionOtherPlaceholder')}
+                          className="mt-1 bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+                        />
+                        {errors && errors.special_transport_other_details && <p className="text-sm text-red-500 mt-1 sm:mt-1.5">{errors.special_transport_other_details}</p>}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-export default Step1_Service;
+export default Step2_ServiceDetails;
+

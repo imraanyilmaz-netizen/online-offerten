@@ -146,7 +146,7 @@ const UmzugsfirmaAargauPageClient = () => {
                 <h3 className="text-xl font-bold text-gray-800 mb-3">Bereit für Ihren Umzug im Aargau?</h3>
                 <p className="text-gray-700 mb-5">Starten Sie jetzt Ihre Anfrage und erhalten Sie in Kürze bis zu 5 Offerten.</p>
                 <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700 text-white group shadow-lg">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&city=Aargau">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Aargau">
                     Kostenlose Aargau-Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>
