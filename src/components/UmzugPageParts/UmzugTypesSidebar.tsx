@@ -1,9 +1,17 @@
 import Link from 'next/link';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, Building2, Globe, Truck, Box, Wind, ArrowRight } from 'lucide-react';
+import { Home, Building2, Globe, Truck, Box, Wind, ArrowRight, LucideIcon } from 'lucide-react';
 
-const umzugTypes = [
+interface UmzugType {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  link: string;
+}
+
+const umzugTypes: UmzugType[] = [
   {
     id: 'privatumzug',
     title: 'Privatumzug',
@@ -48,7 +56,12 @@ const umzugTypes = [
   }
 ];
 
-const UmzugTypeItem = ({ type, isActive = false }) => {
+interface UmzugTypeItemProps {
+  type: UmzugType;
+  isActive?: boolean;
+}
+
+const UmzugTypeItem: React.FC<UmzugTypeItemProps> = ({ type, isActive = false }) => {
   const Icon = type.icon;
   
   return (
@@ -81,7 +94,11 @@ const UmzugTypeItem = ({ type, isActive = false }) => {
   );
 };
 
-const UmzugTypesSidebar = ({ activeType = null }) => {
+interface UmzugTypesSidebarProps {
+  activeType?: string | null;
+}
+
+const UmzugTypesSidebar: React.FC<UmzugTypesSidebarProps> = ({ activeType = null }) => {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl">
       <h3 className="text-xl font-semibold text-gray-800 mb-4">
