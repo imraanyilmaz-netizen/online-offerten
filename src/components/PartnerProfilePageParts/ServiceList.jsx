@@ -19,7 +19,7 @@ const ServiceList = ({ services, mainCategories, className }) => {
     maler: { label: 'Malerarbeiten', services: [] },
   };
 
-  const umzugServices = ['privatumzug', 'geschaeftsumzug', 'internationaler_umzug', 'spezialtransport', 'kleintransport', 'umzugsreinigung_opt', 'raeumung_service', 'entsorgung_service'];
+  const umzugServices = ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'umzugsreinigung_opt', 'raeumung_service', 'entsorgung_service'];
   const reinigungServices = ['wohnungsreinigung', 'hausreinigung', 'buero_reinigung', 'umzugsreinigung', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung'];
   const malerServices = ['maler_service'];
   

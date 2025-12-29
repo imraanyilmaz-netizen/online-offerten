@@ -8,6 +8,39 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/standorte',
   },
+  openGraph: {
+    title: 'Standorte | Umzugsfirmen & Reinigungsfirmen in der ganzen Schweiz',
+    description: 'Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Schweizer Städten. Von Zürich bis Genf, von Basel bis Bern - wir haben Partner in Ihrer Nähe.',
+    url: 'https://online-offerten.ch/standorte',
+    siteName: 'Online-Offerten.ch',
+    images: [
+      {
+        url: 'https://online-offerten.ch/image/services-professionals.png',
+        width: 1200,
+        height: 630,
+        alt: 'Standorte',
+      },
+    ],
+    locale: 'de_CH',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Standorte | Umzugsfirmen & Reinigungsfirmen in der ganzen Schweiz',
+    description: 'Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Schweizer Städten. Von Zürich bis Genf, von Basel bis Bern.',
+    images: ['https://online-offerten.ch/image/services-professionals.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function StandortePage() {

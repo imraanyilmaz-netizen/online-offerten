@@ -13,6 +13,34 @@ export const metadata: Metadata = {
     title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Renovierung',
     description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Renovierungsfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%.',
     url: 'https://online-offerten.ch/kostenlose-offerte-anfordern',
+    siteName: 'Online-Offerten.ch',
+    images: [
+      {
+        url: 'https://online-offerten.ch/image/services-professionals.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kostenlose Offerten anfordern',
+      },
+    ],
+    locale: 'de_CH',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Renovierung',
+    description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Renovierungsfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%.',
+    images: ['https://online-offerten.ch/image/services-professionals.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 

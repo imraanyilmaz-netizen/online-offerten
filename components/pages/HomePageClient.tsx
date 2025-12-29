@@ -191,43 +191,68 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   // Structured Data - SEO Optimized
   const structuredData = useMemo(() => ({
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Kostenlose Offerten für Umzug, Reinigung & Renovierung",
-    "description": metaDescription,
-    "alternateName": "Offerten Portal aus Ihrer Region",
-    "serviceType": [
-      "Umzugsdienst",
-      "Reinigungsdienst",
-      "Malerarbeiten",
-      "Gartenarbeiten",
-      "Räumung & Entsorgung"
-    ],
-    "provider": {
-      "@type": "Organization",
-      "@id": "https://online-offerten.ch/#organization",
-      "name": "Online-Offerten.ch",
-      "url": "https://online-offerten.ch",
-      "logo": "https://online-offerten.ch/image/online-offerten.ch.jpg",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "info@online-offerten.ch",
-        "areaServed": "CH",
-        "availableLanguage": ["de"]
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://online-offerten.ch/"
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": "Kostenlose Offerten für Umzug, Reinigung & Renovierung",
+        "description": metaDescription,
+        "alternateName": "Offerten Portal aus Ihrer Region",
+        "serviceType": [
+          "Umzugsdienst",
+          "Reinigungsdienst",
+          "Malerarbeiten",
+          "Gartenarbeiten",
+          "Räumung & Entsorgung"
+        ],
+        "provider": {
+          "@type": "Organization",
+          "@id": "https://online-offerten.ch/#organization",
+          "name": "Online-Offerten.ch",
+          "url": "https://online-offerten.ch",
+          "logo": "https://online-offerten.ch/image/online-offerten.ch.jpg"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Switzerland",
+          "identifier": "CH"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CHF",
+          "availability": "https://schema.org/InStock",
+          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://online-offerten.ch/#organization",
+        "name": "Online-Offerten.ch",
+        "url": "https://online-offerten.ch",
+        "logo": "https://online-offerten.ch/image/online-offerten.ch.jpg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "info@online-offerten.ch",
+          "areaServed": "CH",
+          "availableLanguage": ["de"]
+        },
+        "sameAs": [
+          "https://online-offerten.ch"
+        ]
       }
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Switzerland",
-      "identifier": "CH"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "CHF",
-      "availability": "https://schema.org/InStock",
-      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern"
-    }
-  }), []);
+    ]
+  }), [metaDescription]);
 
   // Handlers
   const handleStartRequest = useCallback(() => {

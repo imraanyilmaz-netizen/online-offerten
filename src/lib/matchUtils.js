@@ -3,8 +3,8 @@ import { getGermanServiceName } from './dataMapping';
 const serviceKeyMap = {
   'privatumzug': 'privatumzug',
   'geschäftsumzug': 'geschaeftsumzug',
-  'internationaler umzug': 'internationaler_umzug',
-  'internationalumzug': 'internationaler_umzug',
+  'internationaler umzug': 'auslandumzug',
+  'internationalumzug': 'auslandumzug',
   'spezialtransport': 'spezialtransport',
   'spezialtransporte': 'spezialtransport',
   'kleintransport': 'kleintransport',
@@ -41,7 +41,8 @@ const serviceKeyMap = {
   'moebellift_service': 'moebellift_service',
   // Add partner-side keys if they differ
   'geschaeftsumzug': 'geschaeftsumzug',
-  'internationaler_umzug': 'internationaler_umzug',
+  'internationaler_umzug': 'auslandumzug',
+  'auslandumzug': 'auslandumzug',
   'raeumung_service': 'raeumung_service',
   'entsorgung_service': 'entsorgung_service',
   'lagerung': 'lagerung',

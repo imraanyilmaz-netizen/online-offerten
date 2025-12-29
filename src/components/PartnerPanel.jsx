@@ -191,8 +191,8 @@ const PartnerPanel = ({ setCompanyName }) => {
         <PartnerStats stats={stats} onTopUpClick={() => router.push('/partner/credit-top-up')} />
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="overflow-x-auto scrollbar-hide overflow-y-visible border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6 py-3">
-            <TabsList className="p-2 bg-transparent rounded-lg justify-start sm:justify-start gap-2 min-w-[700px] sm:min-w-0">
+          <div className="overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6 py-3">
+            <TabsList className="p-2 bg-transparent rounded-lg justify-start sm:justify-start gap-2 min-w-[700px] sm:min-w-0 min-h-[60px] items-center">
               <TabsTrigger 
                 value="available"
                 className="flex items-center gap-2 flex-shrink-0 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg text-sm font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"

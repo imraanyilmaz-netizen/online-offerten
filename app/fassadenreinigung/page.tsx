@@ -7,6 +7,39 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/fassadenreinigung',
   },
+  openGraph: {
+    title: 'Fassadenreinigung – Kostenlose Offerten vergleichen',
+    description: 'Fassadenreinigung für Haus oder Gebäude: Erhalten Sie kostenlose Offerten und vergleichen Sie erfahrene Reinigungsfirmen für nachhaltige Sauberkeit.',
+    url: 'https://online-offerten.ch/fassadenreinigung',
+    siteName: 'Online-Offerten.ch',
+    images: [
+      {
+        url: 'https://online-offerten.ch/image/services-professionals.png',
+        width: 1200,
+        height: 630,
+        alt: 'Fassadenreinigung',
+      },
+    ],
+    locale: 'de_CH',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fassadenreinigung – Kostenlose Offerten vergleichen',
+    description: 'Fassadenreinigung für Haus oder Gebäude: Erhalten Sie kostenlose Offerten und vergleichen Sie erfahrene Reinigungsfirmen.',
+    images: ['https://online-offerten.ch/image/services-professionals.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function FassadenreinigungPage() {

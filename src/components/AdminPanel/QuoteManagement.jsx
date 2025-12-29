@@ -96,29 +96,29 @@ const QuoteManagement = () => {
         <p className="text-base text-gray-600 leading-relaxed max-w-3xl">Verwalten Sie eingehende Kundenanfragen, weisen Sie Partner zu und versenden Sie die Anfragen.</p>
       </header>
       <Tabs defaultValue="new_quote" className="w-full">
-        <div className="overflow-x-auto scrollbar-hide border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6">
-          <TabsList className="p-2 bg-transparent rounded-lg justify-start sm:justify-start gap-2">
+        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6 sticky top-0 z-10">
+          <TabsList className="p-2 bg-transparent rounded-lg justify-start sm:justify-start gap-2 min-h-[60px] items-center">
             <TabsTrigger 
               value="new_quote" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
             >
                 <SlidersHorizontal className="w-4 h-4"/> Neue Anfragen ({filteredQuotes.new_quote.length})
             </TabsTrigger>
             <TabsTrigger 
               value="matched" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
             >
                 <CheckCircle className="w-4 h-4"/> Zugewiesen ({filteredQuotes.matched.length})
             </TabsTrigger>
             <TabsTrigger 
               value="approved" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
             >
                 <Send className="w-4 h-4"/> Versendet ({filteredQuotes.approved.length})
             </TabsTrigger>
             <TabsTrigger 
               value="archived" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
             >
                 <Archive className="w-4 h-4"/> Archiv ({filteredQuotes.archived.length})
             </TabsTrigger>

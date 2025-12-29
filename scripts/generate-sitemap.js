@@ -73,6 +73,13 @@ function createUrlEntry(url, lastmod, changefreq = 'daily', priority = '0.8') {
 function getStaticRoutes() {
   const routes = [];
   
+  // Check if homepage (app/page.tsx) exists
+  const homepageFile = path.join(appPath, 'page.tsx');
+  const homepageFileJsx = path.join(appPath, 'page.jsx');
+  if (fs.existsSync(homepageFile) || fs.existsSync(homepageFileJsx)) {
+    routes.push('/');
+  }
+  
   // Recursively scan app directory for page.tsx files
   function scanDirectory(dir, basePath = '') {
     if (!fs.existsSync(dir)) {
@@ -132,6 +139,20 @@ async function generateSitemap() {
     '/umzugsfirma-zuerich'
   ];
 
+  // Reinigungsfirma location pages (reinigungsfirma-* pages)
+  const reinigungsfirmaLocationPages = [
+    '/reinigungsfirma-zuerich', '/reinigungsfirma-basel', '/reinigungsfirma-bern',
+    '/reinigungsfirma-genf', '/reinigungsfirma-lausanne', '/reinigungsfirma-luzern',
+    '/reinigungsfirma-st-gallen', '/reinigungsfirma-winterthur'
+  ];
+
+  // Malerfirma location pages (malerfirma-* pages)
+  const malerfirmaLocationPages = [
+    '/malerfirma-zuerich', '/malerfirma-basel', '/malerfirma-bern',
+    '/malerfirma-genf', '/malerfirma-lausanne', '/malerfirma-luzern',
+    '/malerfirma-st-gallen', '/malerfirma-winterthur'
+  ];
+
   // Private and admin routes that should NOT be in sitemap
   const excludedRoutes = [
     '/forgot-password',
@@ -169,13 +190,21 @@ async function generateSitemap() {
       if (locationPagePrefixes.some(prefix => route.startsWith(prefix))) {
         return false;
       }
+      // Exclude reinigungsfirma location pages (handled separately)
+      if (reinigungsfirmaLocationPages.some(prefix => route.startsWith(prefix))) {
+        return false;
+      }
+      // Exclude malerfirma location pages (handled separately)
+      if (malerfirmaLocationPages.some(prefix => route.startsWith(prefix))) {
+        return false;
+      }
       return true;
     })
     .map(route => {
       // Higher priority for service pages
       const isServicePage = servicePages.includes(route);
       const priority = route === '/' ? '1.0' : (isServicePage ? '0.9' : '0.7');
-      const changefreq = isServicePage ? 'weekly' : 'monthly';
+      const changefreq = route === '/' ? 'daily' : (isServicePage ? 'weekly' : 'monthly');
       return createUrlEntry(`${BASE_URL}${route}`, today, changefreq, priority);
     });
 
@@ -188,15 +217,27 @@ async function generateSitemap() {
       return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', priority);
   });
 
-  // 3. Standorte page (if exists)
+  // 3. Reinigungsfirma location pages (reinigungsfirma-* pages)
+  // These are important for SEO, so we use weekly changefreq and 0.9 priority
+  const reinigungsfirmaPages = reinigungsfirmaLocationPages
+    .filter(route => allStaticRoutes.includes(route))
+    .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.9'));
+
+  // 4. Malerfirma location pages (malerfirma-* pages)
+  // These are important for SEO, so we use weekly changefreq and 0.9 priority
+  const malerfirmaPages = malerfirmaLocationPages
+    .filter(route => allStaticRoutes.includes(route))
+    .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.9'));
+
+  // 5. Standorte page (if exists)
   if (allStaticRoutes.includes('/standorte')) {
     locationPages.push(createUrlEntry(`${BASE_URL}/standorte`, today, 'weekly', '0.95'));
   }
 
-  // 4. Dynamic blog post pages
+  // 6. Dynamic blog post pages
   const postPages = posts.map(post => createUrlEntry(`${BASE_URL}/ratgeber/${post.slug}`, post.updated_at, 'weekly', '0.8'));
 
-  // 5. Dynamic partner profile pages
+  // 7. Dynamic partner profile pages
   const partnerPages = partners
     .filter(partner => partner.slug) // Ensure slug exists
     .map(partner => createUrlEntry(`${BASE_URL}/partner/${partner.slug}`, partner.updated_at || today, 'weekly', '0.6'));
@@ -207,9 +248,18 @@ async function generateSitemap() {
     console.warn('⚠️  No partner profile pages added to sitemap. Check API key and partner data.');
   }
 
+  // Sort staticPages to put homepage first
+  const sortedStaticPages = staticPages.sort((a, b) => {
+    if (a.includes('<loc>https://online-offerten.ch/</loc>')) return -1;
+    if (b.includes('<loc>https://online-offerten.ch/</loc>')) return 1;
+    return 0;
+  });
+
   const allUrls = [
-    ...staticPages,
+    ...sortedStaticPages, // Homepage will be first (priority 1.0)
     ...locationPages,
+    ...reinigungsfirmaPages,
+    ...malerfirmaPages,
     ...postPages,
     ...partnerPages,
   ];

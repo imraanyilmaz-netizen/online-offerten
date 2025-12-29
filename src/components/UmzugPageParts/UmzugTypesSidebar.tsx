@@ -65,29 +65,29 @@ const UmzugTypeItem: React.FC<UmzugTypeItemProps> = ({ type, isActive = false })
   const Icon = type.icon;
   
   return (
-    <Link href={type.link}>
+    <Link href={type.link} className="group">
       <motion.div
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className={`p-4 rounded-lg border-2 transition-all duration-200 cursor-pointer mb-3 ${
+        className={`p-5 rounded-lg border-2 transition-all duration-200 cursor-pointer ${
           isActive
             ? 'bg-green-50 border-green-500 shadow-md'
             : 'bg-white border-gray-200 hover:border-green-400 hover:shadow-sm'
         }`}
       >
-        <div className="flex items-start gap-3">
-          <div className={`p-2 rounded-md ${isActive ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'}`}>
-            <Icon className="w-5 h-5" />
+        <div className="flex items-start gap-4">
+          <div className={`p-3 rounded-md flex-shrink-0 ${isActive ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'}`}>
+            <Icon className="w-6 h-6" />
           </div>
-          <div className="flex-1">
-            <h4 className={`font-semibold text-base mb-1 ${isActive ? 'text-green-800' : 'text-gray-800'}`}>
+          <div className="flex-1 min-w-0">
+            <h4 className={`font-semibold text-lg mb-1.5 ${isActive ? 'text-green-800' : 'text-gray-800'}`}>
               {type.title}
             </h4>
-            <p className={`text-sm ${isActive ? 'text-green-700' : 'text-gray-600'}`}>
+            <p className={`text-sm leading-relaxed ${isActive ? 'text-green-700' : 'text-gray-600'}`}>
               {type.description}
             </p>
           </div>
-          <ArrowRight className={`w-4 h-4 mt-1 transition-opacity ${isActive ? 'opacity-100 text-green-600' : 'opacity-0 group-hover:opacity-100 text-gray-400'}`} />
+          <ArrowRight className={`w-5 h-5 mt-1 flex-shrink-0 transition-opacity ${isActive ? 'opacity-100 text-green-600' : 'opacity-0 group-hover:opacity-100 text-gray-400'}`} />
         </div>
       </motion.div>
     </Link>
@@ -100,11 +100,11 @@ interface UmzugTypesSidebarProps {
 
 const UmzugTypesSidebar: React.FC<UmzugTypesSidebarProps> = ({ activeType = null }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-xl">
-      <h3 className="text-xl font-semibold text-gray-800 mb-4">
+    <div className="bg-white p-7 rounded-2xl shadow-xl">
+      <h3 className="text-2xl font-semibold text-gray-800 mb-6">
         Umzugstypen
       </h3>
-      <nav className="space-y-2">
+      <nav className="space-y-3">
         {umzugTypes.map((type) => (
           <UmzugTypeItem
             key={type.id}
@@ -118,4 +118,5 @@ const UmzugTypesSidebar: React.FC<UmzugTypesSidebarProps> = ({ activeType = null
 };
 
 export default UmzugTypesSidebar;
+
 

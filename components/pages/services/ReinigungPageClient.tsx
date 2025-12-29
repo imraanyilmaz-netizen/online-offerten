@@ -6,8 +6,11 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, CheckCircle, ShieldCheck, Clock, Sparkles, ThumbsUp, BookOpen, Award, HelpCircle } from 'lucide-react'
+import { ArrowRight, CheckCircle, ShieldCheck, Clock, Sparkles, ThumbsUp, BookOpen, Award, HelpCircle, Users, TrendingUp } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import PricingTable from '@/components/SEO/PricingTable'
+import HowItWorks from '@/components/SEO/HowItWorks'
+import WhyChooseUs from '@/components/SEO/WhyChooseUs'
 
 const ReinigungPageClient = () => {
   const router = useRouter()
@@ -114,6 +117,20 @@ const ReinigungPageClient = () => {
   ]
 
   const costData = [
+    "1.5-2.5 Zimmer: CHF 500-800",
+    "3.5 Zimmer: CHF 800-1'100",
+    "4.5 Zimmer: CHF 950-1'300",
+    "5.5+ Zimmer: ab CHF 1'200"
+  ]
+
+  const pricingTableData = [
+    { size: "1.5 - 2.5 Zimmer", cost: "500 - 800 CHF", description: "Kleine Wohnung, WG-Zimmer" },
+    { size: "3.5 Zimmer", cost: "800 - 1'100 CHF", description: "Standard Wohnung" },
+    { size: "4.5 Zimmer", cost: "950 - 1'300 CHF", description: "Grössere Wohnung" },
+    { size: "5.5+ Zimmer", cost: "Ab 1'200 CHF", description: "Einfamilienhaus, Villa" }
+  ]
+
+  const oldCostData = [
     "1.5 - 2.5 Zimmer-Wohnung: CHF 500 - 800",
     "3.5 Zimmer-Wohnung: CHF 800 - 1'100",
     "4.5 Zimmer-Wohnung: CHF 950 - 1'300",
@@ -206,6 +223,40 @@ const ReinigungPageClient = () => {
             </div>
           </div>
         </motion.section>
+
+        {/* How It Works Section */}
+        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+          <HowItWorks
+            title="So einfach ist es"
+            ctaText="Jetzt kostenlose Reinigungs-Offerten anfordern"
+            ctaLink="/kostenlose-offerte-anfordern?service=reinigung"
+          />
+        </div>
+
+        {/* Why Choose Us Section */}
+        <div className="container mx-auto max-w-navbar px-4 md:px-6 pb-12 md:pb-16">
+          <WhyChooseUs
+            title="Warum Online-Offerten.ch?"
+            subtitle="Ihre Vorteile beim Vergleich von Reinigungs-Offerten"
+            advantages={[
+              {
+                icon: <ShieldCheck className="h-8 w-8" />,
+                title: "Geprüfte Reinigungsfirmen",
+                description: "Alle unsere Partner werden sorgfältig geprüft. Sie erhalten nur Offerten von vertrauenswürdigen, zertifizierten Reinigungsfirmen mit Abnahmegarantie."
+              },
+              {
+                icon: <TrendingUp className="h-8 w-8" />,
+                title: "Bis zu 40% sparen",
+                description: "Durch den Vergleich mehrerer Reinigungs-Offerten finden Sie das beste Preis-Leistungs-Verhältnis und sparen erheblich."
+              },
+              {
+                icon: <Users className="h-8 w-8" />,
+                title: "100% kostenlos",
+                description: "Die Anfrage ist vollständig kostenlos und unverbindlich. Keine versteckten Kosten, keine Verpflichtungen."
+              }
+            ]}
+          />
+        </div>
 
         <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
           <section className="grid md:grid-cols-2 gap-12 items-center">
@@ -343,6 +394,22 @@ const ReinigungPageClient = () => {
                 Zusammenfassend lässt sich sagen, dass eine professionelle Umzugsreinigung eine kluge Investition in Ihren Seelenfrieden ist. Sie delegieren eine der anspruchsvollsten Aufgaben des Umzugsprozesses an Experten und sichern sich durch die Abnahmegarantie vollständig ab. Nutzen Sie die Macht des Vergleichs auf Online-Offerten.ch, um den idealen Reinigungspartner zu finden, der Ihnen eine makellose Wohnungsübergabe garantiert. So können Sie sich voll und ganz auf das freuen, was wirklich zählt: der Start in Ihrem neuen Zuhause. Weitere Informationen finden Sie auf unseren <Link href="/standorte" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Standorte-Seiten</Link> oder in unserem <Link href="/ratgeber" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Ratgeber</Link>.
               </p>
             </div>
+          </motion.section>
+
+          {/* Pricing Table Section */}
+          <motion.section
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="my-12"
+          >
+            <PricingTable
+              title="Preise für Umzugsreinigung"
+              subtitle="Durchschnittliche Preise in der Schweiz"
+              rows={pricingTableData}
+              serviceType="reinigung"
+            />
           </motion.section>
 
           {/* FAQ Section */}

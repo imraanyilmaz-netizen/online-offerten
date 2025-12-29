@@ -142,16 +142,27 @@ const CleaningCostCalculator = () => {
       fromRoomsValue = `${roomNumber}_zimmer_einfamilienhaus`;
     }
     
+    // Setze die initialen Formulardaten mit service=reinigung und step=2
     setInitialFormDataForForm({
         service: 'reinigung',
         from_rooms: fromRoomsValue,
-        // from_zip: zip, // ZIP code removed
+        // Setze einen speziellen Parameter, um direkt zu Schritt 2 zu springen
+        _initialStep: 2,
     });
 
+    // Öffne das Inline-Formular
     setShowInlineForm(true);
+    
+    // Scroll zum Formular und aktualisiere die URL für Schritt 2
     setTimeout(() => {
         const formElement = document.getElementById('calculator-inline-form-cleaning');
         formElement?.scrollIntoView({ behavior: 'smooth' });
+        
+        // Aktualisiere die URL, damit das Formular zu Schritt 2 springt
+        const params = new URLSearchParams(window.location.search);
+        params.set('service', 'reinigung');
+        params.set('step', '2');
+        window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
     }, 100);
   };
 
@@ -279,6 +290,7 @@ const CleaningCostCalculator = () => {
         >
            <Suspense fallback={<FormLoadingSpinner />}>
              <NewCustomerForm 
+                key={`form-${showInlineForm}-${initialFormDataForForm.service || 'default'}`}
                 initialDataFromProps={initialFormDataForForm}
               />
            </Suspense>

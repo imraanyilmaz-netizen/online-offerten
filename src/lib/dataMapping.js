@@ -47,7 +47,7 @@ export const serviceMap = {
   // STANDART ANAHTARLAR (Partnerlerin kullandığı) ve varyasyonları
   'privatumzug': 'Privatumzug',
   'geschaeftsumzug': 'Geschäftsumzug',
-  'internationaler_umzug': 'Auslandumzug',
+  'auslandumzug': 'Auslandumzug',
   'internationalumzug': 'Auslandumzug', // Legacy
   'internationale': 'Auslandumzug', // Legacy
   'spezialtransport': 'Spezialtransport',

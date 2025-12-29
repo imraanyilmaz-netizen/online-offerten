@@ -9,9 +9,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { 
   ArrowRight, CheckCircle, PackagePlus, ClipboardList, Users, ShieldCheck, 
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
-  Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box
+  Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box,
+  TrendingUp
 } from 'lucide-react';
 import UmzugTypesSidebar from '@/components/UmzugPageParts/UmzugTypesSidebar';
+import PricingTable from '@/components/SEO/PricingTable';
+import HowItWorks from '@/components/SEO/HowItWorks';
+import WhyChooseUs from '@/components/SEO/WhyChooseUs';
+import StructuredData from '@/components/SEO/StructuredData';
 
 const PrivateUmzugPageClient = () => {
   const router = useRouter();
@@ -113,7 +118,22 @@ const PrivateUmzugPageClient = () => {
 
   return (
     <>
-      
+      <StructuredData
+        breadcrumbs={[
+          { name: 'Home', item: 'https://online-offerten.ch/' },
+          { name: 'Privatumzug', item: 'https://online-offerten.ch/privatumzug' }
+        ]}
+        service={{
+          name: 'Privatumzug Offerten vergleichen',
+          serviceType: 'Privatumzug',
+          description: metaDescription,
+          url: 'https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug'
+        }}
+        faq={faqItemsForSchema.map(item => ({
+          question: item.q,
+          answer: item.a
+        }))}
+      />
       <div className="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-100">
         
         {/* Hero Section */}
@@ -134,12 +154,11 @@ const PrivateUmzugPageClient = () => {
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
-                    <span className="block">Privatumzug Offerten</span>
-                    <span className="block text-green-600 mt-2">kostenlos vergleichen</span>
-                    <span className="block text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mt-3">
-                      Finden Sie die beste Umzugsfirma für Ihren Wohnungswechsel
-                    </span>
+                    Privatumzug Offerten kostenlos vergleichen
                   </h1>
+                  <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-4">
+                    Finden Sie die beste Umzugsfirma für Ihren Wohnungswechsel
+                  </h2>
                 </motion.div>
                 <motion.p
                   initial={{ y: 20, opacity: 0 }}
@@ -212,6 +231,40 @@ const PrivateUmzugPageClient = () => {
             </div>
           </div>
         </motion.section>
+
+        {/* How It Works Section */}
+        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+          <HowItWorks
+            title="So einfach ist es"
+            ctaText="Jetzt kostenlose Privatumzug-Offerten anfordern"
+            ctaLink="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug"
+          />
+        </div>
+
+        {/* Why Choose Us Section */}
+        <div className="container mx-auto max-w-navbar px-4 md:px-6 pb-12 md:pb-16">
+          <WhyChooseUs
+            title="Warum Online-Offerten.ch?"
+            subtitle="Ihre Vorteile beim Vergleich von Privatumzug-Offerten"
+            advantages={[
+              {
+                icon: <ShieldCheck className="h-8 w-8" />,
+                title: "Geprüfte Umzugsfirmen",
+                description: "Alle unsere Partner werden sorgfältig geprüft. Sie erhalten nur Offerten von vertrauenswürdigen, zertifizierten Zügelfirmen."
+              },
+              {
+                icon: <TrendingUp className="h-8 w-8" />,
+                title: "Bis zu 40% sparen",
+                description: "Durch den Vergleich mehrerer Privatumzug-Offerten finden Sie das beste Preis-Leistungs-Verhältnis und sparen erheblich."
+              },
+              {
+                icon: <Users className="h-8 w-8" />,
+                title: "100% kostenlos",
+                description: "Die Anfrage ist vollständig kostenlos und unverbindlich. Keine versteckten Kosten, keine Verpflichtungen."
+              }
+            ]}
+          />
+        </div>
 
         <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
@@ -404,6 +457,54 @@ const PrivateUmzugPageClient = () => {
                 </ul>
               </section>
 
+              {/* Related Services Section */}
+              <section className="pt-8 border-t border-gray-200">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <Sparkles className="w-5 h-5 mr-2 text-green-600" />
+                    Weitere Services
+                  </h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li>
+                      <Link href="/reinigung" className="text-green-600 hover:underline font-medium flex items-center">
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Umzugsreinigung mit Abnahmegarantie
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/geschaeftsumzug" className="text-green-600 hover:underline font-medium flex items-center">
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Geschäftsumzug Offerten vergleichen
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/internationale-umzuege" className="text-green-600 hover:underline font-medium flex items-center">
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Internationale Umzüge
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/malerarbeiten" className="text-green-600 hover:underline font-medium flex items-center">
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Malerarbeiten Offerten vergleichen
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/raeumung-entsorgung" className="text-green-600 hover:underline font-medium flex items-center">
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Räumung & Entsorgung
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/umzugsfirma-in-der-naehe" className="text-green-600 hover:underline font-medium flex items-center">
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Umzugsfirma in Ihrer Nähe finden
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+
               {/* FAQ Section */}
               <section className="pt-6 border-t border-gray-200">
                 <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-6 flex items-center">
@@ -433,26 +534,19 @@ const PrivateUmzugPageClient = () => {
                               Die Kosten hängen stark von der Wohnungsgrösse und dem Umzugsvolumen ab. Unser <Link href="/umzugskosten-rechner" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechner</Link> gibt Ihnen eine gute erste Schätzung. Hier ist eine grobe Übersicht:
                             </p>
                             <div className="my-4">
-                              <table className="w-full text-sm text-left text-gray-500">
-                                <caption className="p-2 text-md font-semibold text-left text-gray-900 bg-gray-100 rounded-t-lg">
-                                  Durchschnittliche Umzugskosten (ohne Zusatzleistungen)
-                                </caption>
-                                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-                                  <tr>
-                                    <th scope="col" className="px-4 py-2">Wohnungsgrösse</th>
-                                    <th scope="col" className="px-4 py-2">Geschätzte Kosten (CHF)</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {costTableData.map((item, index) => (
-                                    <tr key={index} className="bg-white border-b hover:bg-gray-50">
-                                      <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{item.size}</td>
-                                      <td className="px-4 py-2">{item.cost}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                              <p className="mt-2 text-xs text-gray-500 italic">*Die Preise sind Schätzungen und können je nach Distanz und Aufwand variieren.</p>
+                              <PricingTable
+                                title="Preise für Privatumzüge"
+                                subtitle="Durchschnittliche Preise in der Schweiz"
+                                rows={costTableData.map(item => ({
+                                  size: item.size,
+                                  cost: item.cost,
+                                  description: item.size.includes('1.5') ? 'Kleine Wohnung, WG-Zimmer' : 
+                                               item.size.includes('3.5') ? 'Standard Wohnung' :
+                                               item.size.includes('4.5') ? 'Grössere Wohnung' :
+                                               'Einfamilienhaus, Villa'
+                                }))}
+                                serviceType="umzug"
+                              />
                             </div>
                             <p className="mt-3 text-sm text-gray-600">Tipp: Vergleichen Sie Offerten kostenlos, um das beste Preis-Leistungs-Verhältnis zu finden. Die Preise können stark variieren.</p>
                             <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg shadow-sm">

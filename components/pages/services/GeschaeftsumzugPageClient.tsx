@@ -315,13 +315,13 @@ const GeschaeftsumzugPageClient = () => {
         </section>
         
         <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
-          <div className="grid lg:grid-cols-5 gap-8 md:gap-12 items-start">
+          <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <motion.main
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="lg:col-span-3 bg-white p-6 md:p-10 rounded-2xl shadow-2xl space-y-10"
+              className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-2xl space-y-10"
             >
               {/* Intro */}
               <section>
