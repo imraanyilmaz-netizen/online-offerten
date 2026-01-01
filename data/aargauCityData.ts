@@ -265,6 +265,24 @@ export const aargauCityData: Record<string, AargauCityData> = {
     intro: 'Wettingen, die traditionsreiche Klosterstadt im Limmattal, verbindet historischen Charme mit modernem Wachstum. Die Stadt ist bekannt für das Kloster Wettingen und ihre gute Verkehrsanbindung nach Zürich. Ein Umzug nach Wettingen bedeutet, in eine wachsende Stadt mit hoher Lebensqualität zu ziehen.',
     portalIntro: 'Wer eine Umzugsfirma in Wettingen sucht, sollte mehrere Angebote vergleichen. Als neutrales Vergleichsportal ermöglichen wir Ihnen, geprüfte Umzugsfirmen in Wettingen zu finden und unverbindliche Offerten einzuholen. Durch den direkten Vergleich finden Sie nicht nur das beste Preis-Leistungs-Verhältnis, sondern auch Anbieter, die die Besonderheiten der wachsenden Stadt und die Nähe zu Zürich kennen.',
     services: 'Umzugsfirmen in Wettingen bieten alle gängigen Umzugsdienstleistungen an. Dazu gehören Privatumzüge, Geschäftsumzüge, Spezialtransporte und Umzugsreinigung. Viele Anbieter haben Erfahrung mit Umzügen in die wachsende Stadt und kennen die lokalen Besonderheiten.',
+    serviceDetails: [
+      {
+        name: 'Privatumzug',
+        description: 'Privatumzüge in Wettingen erfordern flexible Planung, da die Stadt kontinuierlich wächst. Erfahrene Umzugsfirmen kennen die verschiedenen Quartiere und können Umzüge entsprechend planen. Viele Gebäude in älteren Quartieren haben keine Lifts, was den Transport in höhere Stockwerke beeinflusst.'
+      },
+      {
+        name: 'Geschäftsumzug',
+        description: 'Geschäftsumzüge in Wettingen profitieren von der Nähe zu Zürich und der guten Verkehrsanbindung. Professionelle Anbieter kennen die Bürostandorte und können Umzüge auch während der Geschäftszeiten effizient planen. Viele Firmen bieten auch IT-Umzüge und Büroreinigung als Zusatzleistung an.'
+      },
+      {
+        name: 'Internationaler Umzug',
+        description: 'Internationale Umzüge von oder nach Wettingen werden durch die ausgezeichnete S-Bahn-Verbindung nach Zürich erleichtert. Umzugsfirmen mit internationaler Erfahrung können Zollformalitäten und Dokumentation professionell abwickeln. Die Nähe zum Flughafen Zürich macht Wettingen zu einem idealen Ausgangspunkt für Auslandumzüge.'
+      },
+      {
+        name: 'Spezialtransport',
+        description: 'Spezialtransporte in Wettingen erfordern oft besondere Expertise, besonders bei Umzügen in ältere Quartiere. Professionelle Anbieter haben Erfahrung mit Klavieren, Tresoren und wertvollen Kunstgegenständen. Die wachsende Stadt erfordert flexible Planung und Anpassung an verschiedene Wohnlagen.'
+      }
+    ],
     localFeatures: 'Umzüge in Wettingen erfordern besondere Aufmerksamkeit für die Unterschiede zwischen Altbau und Neubau: Während Neubaugebiete oft moderne Liftsysteme haben, fehlen diese in vielen älteren Gebäuden. Quartierwechsel innerhalb Wettingens erfordern Kenntnis der verschiedenen Wohnlagen – von historischen Gebäuden bis zu modernen Wohnsiedlungen. Professionelle Umzugsfirmen berücksichtigen diese Unterschiede bei der Planung und Auswahl der Ausrüstung.',
     advantages: 'Ein Umzug nach Wettingen bietet zahlreiche Vorteile: Die Nähe zu Zürich, die hohe Lebensqualität und die gute Verkehrsanbindung. Die Stadt ist ideal für Familien und Berufstätige, die die Nähe zu Zürich schätzen, aber in einer ruhigeren Umgebung leben möchten.',
     advantagesExtended: 'Für Pendler nach Zürich ist Wettingen ideal: Die ausgezeichnete S-Bahn-Verbindung ermöglicht kurze Fahrzeiten, während die Wohnkosten deutlich günstiger sind als in Zürich. Die Nähe zu Baden und Zürich bietet zusätzliche Arbeitsmöglichkeiten. Familien profitieren von der hohen Lebensqualität, guten Schulen und zahlreichen Freizeitmöglichkeiten. Die Neubaugebiete bieten moderne Wohnungen mit zeitgemässer Ausstattung. Senioren finden in Wettingen eine ruhige, aber gut angebundene Umgebung mit medizinischer Versorgung und Einkaufsmöglichkeiten in der Nähe.',
