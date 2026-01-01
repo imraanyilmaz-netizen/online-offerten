@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
@@ -12,15 +12,20 @@ import {
   Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box,
   TrendingUp
 } from 'lucide-react';
-import UmzugTypesSidebar from '@/components/UmzugPageParts/UmzugTypesSidebar';
-import PricingTable from '@/components/SEO/PricingTable';
-import HowItWorks from '@/components/SEO/HowItWorks';
-import WhyChooseUs from '@/components/SEO/WhyChooseUs';
-import StructuredData from '@/components/SEO/StructuredData';
+import dynamic from 'next/dynamic';
+
+// Lazy load components for better performance
+const UmzugTypesSidebar = dynamic(() => import('@/components/UmzugPageParts/UmzugTypesSidebar'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-2xl" />
+});
+const PricingTable = dynamic(() => import('@/components/SEO/PricingTable'));
+const HowItWorks = dynamic(() => import('@/components/SEO/HowItWorks'));
+const WhyChooseUs = dynamic(() => import('@/components/SEO/WhyChooseUs'));
+const StructuredData = dynamic(() => import('@/components/SEO/StructuredData'));
 
 const PrivateUmzugPageClient = () => {
   const router = useRouter();
-  const imageUrl = 'https://online-offerten.ch/image/umzugsservice-Schweiz/privatumzug-offerten-kostenlos-vergleichen.png';
+  const imageUrl = '/image/umzugsservice-Schweiz/privatumzug-offerten-kostenlos-vergleichen.png';
 
   // SEO Data
   const metaTitle = "Privatumzug Offerten kostenlos vergleichen » Bis zu 40% sparen";
@@ -137,10 +142,7 @@ const PrivateUmzugPageClient = () => {
       <div className="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-100">
         
         {/* Hero Section */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        <section
           className="relative w-full bg-gray-100 py-12 md:py-16"
           itemScope
           itemType="https://schema.org/Service"
@@ -148,32 +150,18 @@ const PrivateUmzugPageClient = () => {
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
               <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl" itemProp="description">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                >
+                <div>
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
                     Privatumzug Offerten kostenlos vergleichen
                   </h1>
                   <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-4">
                     Finden Sie die beste Umzugsfirma für Ihren Wohnungswechsel
                   </h2>
-                </motion.div>
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium"
-                >
+                </div>
+                <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium">
                   Erhalten Sie unverbindliche Angebote von zertifizierten Zügelfirmen in der ganzen Schweiz. Für Ihren Wohnungsumzug oder Hausumzug vermitteln wir Ihnen vertrauenswürdige Partner aus Ihrer Region – schnell, einfach und ohne versteckte Kosten.
-                </motion.p>
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                  className="mb-6"
-                >
+                </p>
+                <div className="mb-6">
                   <Button
                     size="lg"
                     onClick={handleCtaClick}
@@ -182,13 +170,8 @@ const PrivateUmzugPageClient = () => {
                     Unverbindliche Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </motion.div>
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                  className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6"
-                >
+                </div>
+                <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6">
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
@@ -201,7 +184,7 @@ const PrivateUmzugPageClient = () => {
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-base text-gray-700 font-medium">Kostenfrei & ohne Verpflichtung</span>
                   </div>
-                </motion.div>
+                </div>
               </article>
               <aside className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden md:pl-4" aria-label="Privatumzug Dienstleistung Illustration">
                 <figure className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
@@ -211,15 +194,16 @@ const PrivateUmzugPageClient = () => {
                   {/* Subtle border/shadow effect */}
                   <div className="absolute inset-0 rounded-2xl ring-4 ring-green-500/10 pointer-events-none z-20"></div>
                   
-                <img
+                <Image
                   src={imageUrl}
                     alt="Zufriedene Familie nach erfolgreichem Privatumzug in der Schweiz - Professionelle Umzugsfirma bei der Arbeit"
                     className="w-full h-full object-cover rounded-2xl"
                   loading="eager"
-                  fetchPriority="high"
-                    width="600"
-                    height="400"
+                  priority
+                  width={600}
+                  height={400}
                     itemProp="image"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   
                   {/* Decorative corner accent */}
@@ -230,7 +214,7 @@ const PrivateUmzugPageClient = () => {
               </aside>
             </div>
           </div>
-        </motion.section>
+        </section>
 
         {/* How It Works Section */}
         <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
@@ -269,11 +253,7 @@ const PrivateUmzugPageClient = () => {
         <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             
-            <motion.main 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+            <main 
               className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-2xl space-y-8"
             >
               {/* Article Section 1 */}
@@ -442,17 +422,13 @@ const PrivateUmzugPageClient = () => {
                     "Zeitersparnis: Statt mühsam selbst zu suchen, erhalten Sie passende Offerten direkt in Ihr Postfach.",
                     "Regionale Partner: Wir finden für Sie die besten Umzugsprofis direkt aus Ihrer Nähe."
                   ].map((advantage, index) => (
-                    <motion.li
+                    <li
                       key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.5 }}
                       className="flex items-start py-2"
                     >
                       <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
                       <span className="text-gray-700">{advantage}</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </section>
@@ -513,12 +489,6 @@ const PrivateUmzugPageClient = () => {
                 </h3>
                 <Accordion type="single" collapsible className="w-full bg-slate-50 rounded-lg shadow">
                   {/* FAQ 1 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                  >
                     <AccordionItem value="item-1" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
@@ -565,15 +535,8 @@ const PrivateUmzugPageClient = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
-                  </motion.div>
 
                   {/* FAQ 2 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                  >
                     <AccordionItem value="item-2" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
@@ -602,15 +565,8 @@ const PrivateUmzugPageClient = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
-                  </motion.div>
 
                   {/* FAQ 3 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
-                  >
                     <AccordionItem value="item-3" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
@@ -645,15 +601,8 @@ const PrivateUmzugPageClient = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
-                  </motion.div>
 
                   {/* FAQ 4 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 }}
-                  >
                     <AccordionItem value="item-4" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
@@ -683,15 +632,8 @@ const PrivateUmzugPageClient = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
-                  </motion.div>
 
                   {/* FAQ 5 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.7 }}
-                  >
                     <AccordionItem value="item-5" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
@@ -770,15 +712,8 @@ const PrivateUmzugPageClient = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
-                  </motion.div>
 
                   {/* FAQ 6 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.8 }}
-                  >
                     <AccordionItem value="item-6" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
@@ -807,7 +742,6 @@ const PrivateUmzugPageClient = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
-                  </motion.div>
                 </Accordion>
               </section>
 
@@ -824,14 +758,10 @@ const PrivateUmzugPageClient = () => {
                   </Link>
                 </Button>
               </div>
-            </motion.main>
+            </main>
 
             {/* Sidebar */}
-            <motion.aside 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+            <aside 
               className="lg:col-span-1 space-y-8 self-start sticky top-28"
             >
               {/* Umzug Types Sidebar */}
@@ -843,10 +773,15 @@ const PrivateUmzugPageClient = () => {
                   <Users size={24} className="mr-2 text-blue-500" />
                   Professionelles Team
                 </h3>
-                <img  
+                <Image  
                   alt="Ein professionelles Umzugsteam, das Möbel transportiert" 
                   className="w-full h-56 object-cover rounded-lg shadow-md mb-3"
-                  src="https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/021faa27c88d2aec378906ffc232e35c.png" />
+                  src="https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/021faa27c88d2aec378906ffc232e35c.png"
+                  width={400}
+                  height={224}
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
                 <p className="text-sm text-gray-600 mt-2">Unsere Teams sind erfahren und zuverlässig.</p>
               </div>
 
@@ -861,7 +796,7 @@ const PrivateUmzugPageClient = () => {
                 </blockquote>
                 <p className="text-right text-sm text-green-700 font-medium mt-3">- Maria S., Bern</p>
               </div>
-            </motion.aside>
+            </aside>
             
           </div>
         </div>

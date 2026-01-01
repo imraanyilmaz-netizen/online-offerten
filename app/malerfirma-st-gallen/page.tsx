@@ -5,7 +5,6 @@ import MalerfirmaStGallenPageClient from '@/components/pages/locations/Malerfirm
 export const metadata: Metadata = {
   title: 'Malerfirma in St. Gallen finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma in St. Gallen finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in St. Gallen. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma St. Gallen, Malerfirma in St. Gallen, Maler St. Gallen, Malerarbeiten St. Gallen, Innenanstrich St. Gallen, Aussenanstrich St. Gallen, Fassadenanstrich St. Gallen, Malerfirma St. Gallen vergleichen, Malerbetrieb St. Gallen',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-st-gallen',
   },

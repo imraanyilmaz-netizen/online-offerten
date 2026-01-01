@@ -5,75 +5,69 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const TermsAndConditionsPageClient = () => {
   const pageTitle = "Allgemeine Geschäftsbedingungen (AGB) für Partnerfirmen"
-  const lastUpdated = "Zuletzt aktualisiert: 20. Juni 2025"
+  const lastUpdated = "Zuletzt aktualisiert: 31. Dezember 2025"
 
   const sections = [
     {
       title: "1. Geltungsbereich",
       content: [
-        "Diese Allgemeinen Geschäftsbedingungen (AGB) regeln die vertraglichen Beziehungen zwischen Online-Offerten.ch (nachfolgend \"Plattform\") und den auf der Plattform registrierten Partnerfirmen (nachfolgend \"Partner\") für die Vermittlung von Kundenanfragen (Leads) im Bereich Umzug und damit verbundenen Dienstleistungen in der Schweiz."
+        "Diese Allgemeinen Geschäftsbedingungen (AGB) regeln die vertraglichen Beziehungen zwischen Online-Offerten.ch (nachfolgend \"Plattform\") und den auf der Plattform registrierten Partnerfirmen (nachfolgend \"Partner\") für die Vermittlung von Kundenanfragen (Leads) im Bereich Umzug, Reinigung, Maler- und Gartenservices in der Schweiz."
       ]
     },
     {
       title: "2. Leistungen der Plattform",
       content: [
-        "Die Plattform betreibt eine Online-Vermittlungsplattform, auf der Privat- und Geschäftskunden (nachfolgend \"Kunden\") Anfragen für Umzüge und verwandte Dienstleistungen einstellen können.",
-        "Die Plattform leitet qualifizierte Anfragen an registrierte und geprüfte Partner weiter. Die Plattform schuldet keinen Erfolg in Form eines Vertragsabschlusses zwischen dem Partner und dem Kunden.",
-        "Die Auswahl der Partner, an die eine Anfrage weitergeleitet wird, erfolgt auf Basis der vom Partner angegebenen Dienstleistungen und regionalen Tätigkeitsgebiete."
+        "Die Plattform betreibt eine Online-Vermittlungsplattform, auf der Privat- und Geschäftskunden (nachfolgend \"Kunden\") Anfragen für Dienstleistungen einstellen können. Die Plattform leitet qualifizierte Anfragen an registrierte und geprüfte Partner weiter. Ein Vertragsabschluss zwischen Partner und Kunde ist nicht garantiert. Die Plattform ist zu keinem Zeitpunkt Vertragspartei."
       ]
     },
     {
       title: "3. Registrierung und Pflichten des Partners",
       content: [
-        "Die Registrierung als Partner erfordert die wahrheitsgemässe und vollständige Angabe der im Registrierungsformular geforderten Informationen.",
-        "Der Partner verpflichtet sich, alle Angaben, insbesondere zu angebotenen Dienstleistungen, Tätigkeitsgebieten und Kontaktdaten, stets aktuell zu halten.",
-        "Der Partner sichert zu, über alle notwendigen Bewilligungen, Versicherungen (insb. eine gültige Betriebshaftpflichtversicherung) und Qualifikationen zur Ausführung der angebotenen Dienstleistungen zu verfügen.",
-        "Der Partner verpflichtet sich, die erhaltenen Kundendaten vertraulich zu behandeln und ausschliesslich zur Erstellung einer Offerte für die angefragte Dienstleistung zu verwenden. Eine Weitergabe der Daten an Dritte ist untersagt."
+        "<strong>3.1 Registrierung</strong><br>Die Registrierung als Partner erfordert die wahrheitsgemässe und vollständige Angabe aller geforderten Informationen.",
+        "",
+        "<strong>3.2 Pflichten des Partners</strong><br>• Der Partner verpflichtet sich, alle Angaben zu Dienstleistungen, Tätigkeitsgebieten und Kontaktdaten aktuell zu halten.<br>• Der Partner sichert zu, über alle erforderlichen Bewilligungen, Versicherungen (z. B. Betriebshaftpflichtversicherung) und Qualifikationen zur Ausführung der angebotenen Dienstleistungen zu verfügen.<br>• Partner müssen die erhaltenen Kundendaten vertraulich behandeln und ausschliesslich zur Erstellung eines Angebots verwenden.<br>• Weitergabe der Daten an Dritte ist untersagt.<br>• Bei Verstoss gegen diese Pflichten behält sich die Plattform vor, den Partner zu sperren oder die Partnerschaft zu kündigen."
       ]
     },
     {
-      title: "4. Umgang mit Anfragen und Vertragsabschluss",
+      title: "4. Umgang mit Anfragen und Angebotsabgabe",
       content: [
-        "Die Weiterleitung einer Anfrage durch die Plattform stellt keine verbindliche Offerte dar.",
-        "Der Partner entscheidet eigenständig, ob er auf eine Anfrage eine Offerte unterbreiten möchte.",
-        "Der Vertrag über die auszuführende Dienstleistung kommt ausschliesslich und direkt zwischen dem Partner und dem Kunden zustande. Die Plattform ist zu keinem Zeitpunkt Vertragspartei dieses Vertrags.",
-        "Die Preisgestaltung, die Vertragsbedingungen und die Ausführung der Dienstleistung liegen in der alleinigen Verantwortung des Partners."
+        "• Die Weiterleitung einer Anfrage stellt keine verbindliche Offerte dar.<br>• Der Partner entscheidet eigenständig, ob er auf eine Anfrage ein Angebot unterbreitet.<br>• Die Preisgestaltung, Vertragsbedingungen und Ausführung der Dienstleistung liegen in der Verantwortung des Partners.<br>• Die Plattform vermittelt nur; es gibt keine Garantie für Auftragsabschluss.<br>• Partner müssen Kunden innerhalb von 24 Stunden kontaktieren, wenn nötig eine Begehung durchführen und Angebote fristgerecht erstellen.<br>• Kundendaten dürfen nur einmalig für die Angebotsabgabe verwendet werden."
       ]
     },
     {
       title: "5. Vergütung",
       content: [
-        "Die Registrierung auf der Plattform ist kostenlos. Für die Vermittlung von qualifizierten Anfragen können Gebühren anfallen. Die genauen Konditionen und Preise werden dem Partner separat mitgeteilt und bedürfen seiner Zustimmung vor dem Kauf von Anfragen.",
-        "Es fallen keine Provisionen oder sonstigen Gebühren bei einem erfolgreichen Vertragsabschluss zwischen Partner und Kunde an."
+        "• Registrierung auf der Plattform ist kostenlos.<br>• Für die Vermittlung qualifizierter Anfragen können Gebühren anfallen, die vorab kommuniziert und genehmigt werden müssen.<br>• Erfolgt ein Vertragsabschluss zwischen Partner und Kunde, fallen keine weiteren Provisionen oder Gebühren für die Plattform an.<br>• Zahlungsmodalitäten: Guthaben, Rechnung, Kreditkarte/Lastschrift. Die Abrechnung erfolgt monatlich oder wöchentlich gemäss Einstellung im Backend."
       ]
     },
     {
       title: "6. Haftung",
       content: [
-        "Die Plattform haftet nicht für die Richtigkeit und Vollständigkeit der von Kunden gemachten Angaben in den Anfragen.",
-        "Jegliche Haftung der Plattform für Schäden, die aus dem Vertragsverhältnis zwischen dem Partner und dem Kunden entstehen, ist ausgeschlossen. Dies betrifft insbesondere, aber nicht ausschliesslich, Mängel bei der Leistungserbringung, Zahlungsausfälle oder sonstige Streitigkeiten.",
-        "Die Plattform haftet nur für direkte Schäden, die durch vorsätzliches oder grob fahrlässiges Verhalten der eigenen Organe verursacht wurden. Die Haftung für leichte Fahrlässigkeit sowie für indirekte Schäden und Folgeschäden wird vollumfänglich ausgeschlossen."
+        "• Die Plattform haftet nicht für Richtigkeit oder Vollständigkeit der Kundendaten.<br>• Jegliche Haftung für Schäden, die aus Vertragsverhältnissen zwischen Partner und Kunde entstehen, ist ausgeschlossen, ausser bei vorsätzlichem oder grob fahrlässigem Verhalten.<br>• Leichte Fahrlässigkeit, indirekte Schäden und Folgeschäden sind ausgeschlossen."
       ]
     },
     {
       title: "7. Datenschutz",
       content: [
-        "Der Umgang mit Personendaten ist in unserer separaten Datenschutzerklärung geregelt, welche einen integralen Bestandteil dieser AGB bildet. Der Partner verpflichtet sich, die Bestimmungen des Schweizer Datenschutzgesetzes (DSG) einzuhalten."
+        "• Der Umgang mit personenbezogenen Daten richtet sich nach unserer Datenschutzerklärung, die integraler Bestandteil dieser AGB ist.<br>• Partner verpflichten sich, die Vorgaben des Schweizer Datenschutzgesetzes (DSG) einzuhalten.<br>• Kundendaten dürfen nicht weiterverkauft oder für andere Zwecke verwendet werden.<br>• Nach Auftragserfüllung oder bei nicht erfolgter Angebotsabgabe werden Kundendaten innerhalb eines angemessenen Zeitraums gelöscht."
       ]
     },
     {
       title: "8. Vertragsdauer und Kündigung",
       content: [
-        "Die Partnerschaft wird auf unbestimmte Zeit geschlossen. Sie kann von beiden Parteien jederzeit ohne Angabe von Gründen schriftlich (per E-Mail ausreichend) gekündigt werden.",
-        "Die Plattform behält sich das Recht vor, Partner bei Verstössen gegen diese AGB, bei negativen Kundenbewertungen oder aus anderen wichtigen Gründen mit sofortiger Wirkung zu sperren oder zu kündigen."
+        "• Die Partnerschaft wird auf unbestimmte Zeit geschlossen.<br>• Kündigung jederzeit schriftlich per E-Mail möglich.<br>• Bei Verstössen gegen AGB oder negativer Bewertung kann die Plattform Partner sofort sperren oder kündigen."
       ]
     },
     {
-      title: "9. Schlussbestimmungen",
+      title: "9. Gerichtsstand und anwendbares Recht",
       content: [
-        "Die Plattform behält sich das Recht vor, diese AGB jederzeit zu ändern. Änderungen werden dem Partner in geeigneter Form mitgeteilt und gelten als genehmigt, wenn der Partner nicht innert 14 Tagen widerspricht.",
-        "Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.",
-        "Es gilt ausschliesslich Schweizer Recht. Gerichtsstand ist Zürich, Schweiz."
+        "• Ausschliesslich Schweizer Recht ist anwendbar.<br>• Gerichtsstand für alle Streitigkeiten ist Zürich, Schweiz.<br>• Sollten einzelne Bestimmungen unwirksam sein, bleibt die Gültigkeit der übrigen Bestimmungen unberührt."
+      ]
+    },
+    {
+      title: "10. Schlussbestimmungen",
+      content: [
+        "• Änderungen der AGB werden den Partnern mitgeteilt und gelten als genehmigt, wenn nicht innerhalb von 14 Tagen Widerspruch erfolgt.<br>• Diese AGB gelten auch für zukünftige Dienstleistungen, selbst wenn sie nicht explizit in jedem Einzelfall beigefügt sind."
       ]
     }
   ]
@@ -88,16 +82,17 @@ const TermsAndConditionsPageClient = () => {
             </CardTitle>
             <p className="text-sm text-slate-500">{lastUpdated}</p>
           </CardHeader>
-          <CardContent className="prose prose-slate max-w-none prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-p:leading-relaxed prose-a:text-green-600 prose-a:no-underline hover:prose-a:underline prose-ul:list-disc prose-ul:pl-6">
+          <CardContent className="prose prose-slate max-w-none prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-8 prose-h2:pb-2 prose-h2:border-b prose-p:leading-relaxed prose-p:mb-4 prose-a:text-green-600 prose-a:no-underline hover:prose-a:underline prose-ul:list-disc prose-ul:pl-6">
             {sections.map((section, index) => (
-              <div key={index}>
+              <div key={index} className={index > 0 ? "mt-10" : "mt-6"}>
                 <h2>{section.title}</h2>
                 {Array.isArray(section.content) ? (
-                  section.content.map((paragraph, pIndex) => (
-                    <p key={pIndex} dangerouslySetInnerHTML={{ __html: paragraph }} />
-                  ))
+                  section.content.map((paragraph, pIndex) => {
+                    if (!paragraph) return <br key={pIndex} className="mb-4" />
+                    return <p key={pIndex} className="mb-4" dangerouslySetInnerHTML={{ __html: paragraph }} />
+                  })
                 ) : (
-                  <p dangerouslySetInnerHTML={{ __html: section.content }} />
+                  <p className="mb-4" dangerouslySetInnerHTML={{ __html: section.content }} />
                 )}
               </div>
             ))}

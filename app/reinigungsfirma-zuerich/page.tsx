@@ -5,7 +5,6 @@ import ReinigungsfirmaStadtPageClient from '@/components/pages/info/Reinigungsfi
 export const metadata: Metadata = {
   title: 'Reinigungsfirma Zürich finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Reinigungsfirma Zürich finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Zürich. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Reinigungsfirma Zürich, Reinigungsfirma Zürich finden, Reinigungsfirma Zürich vergleichen, Reinigungsfirma in Zürich, Reinigungsunternehmen Zürich, Reinigungsservice Zürich, Büroreinigung Zürich, Haushaltsreinigung Zürich, Umzugsreinigung Zürich, Reinigungsfirma Zürich Preise',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-zuerich',
   },

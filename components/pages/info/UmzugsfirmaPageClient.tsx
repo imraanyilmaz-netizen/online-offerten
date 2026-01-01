@@ -178,13 +178,26 @@ const UmzugsfirmaPageClient = () => {
     script.id = 'umzugsfirma-schema'
     
     const existing = document.getElementById('umzugsfirma-schema')
-    if (existing) existing.remove()
+    if (existing && existing.parentNode) {
+      try {
+        existing.remove()
+      } catch (e) {
+        // Element zaten kaldırılmış olabilir
+      }
+    }
     
     document.head.appendChild(script)
     
     return () => {
+      if (typeof document === 'undefined') return
       const scriptToRemove = document.getElementById('umzugsfirma-schema')
-      if (scriptToRemove) scriptToRemove.remove()
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        try {
+          scriptToRemove.remove()
+        } catch (e) {
+          // Element zaten kaldırılmış olabilir
+        }
+      }
     }
   }, [])
 

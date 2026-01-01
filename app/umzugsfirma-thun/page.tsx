@@ -4,7 +4,6 @@ import UmzugsfirmaThunPageClient from '@/components/pages/locations/UmzugsfirmaT
 export const metadata: Metadata = {
   title: 'Umzugsfirma Thun | Ihr Umzugspartner am Thunersee | Online-Offerten.ch',
   description: 'Professionelle Umzugsfirma in Thun für private und geschäftliche Umzüge. Vergleichen Sie Offerten und sparen Sie bis zu 40% bei Ihrem Umzug.',
-  keywords: 'umzugsfirma thun, umzug thun, zügelfirma thun, umzugsunternehmen thunersee, günstig umziehen thun',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-thun',
   },

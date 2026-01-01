@@ -12,6 +12,7 @@ import CantonFlag from '@/components/CantonFlag';
 import LocationFAQ from '@/components/locations/LocationFAQ';
 import { faqs } from '@/data/locationFaqs';
 import LocationSidebar from '@/components/locations/LocationSidebar';
+import { cityServiceData } from '@/data/cityLocalBusinessData';
 
 const AdvantageItem = ({ text, delay }: any) => {
   return (
@@ -66,41 +67,73 @@ const UmzugsfirmaBernPageClient = () => {
   ];
 
   const faqItemsForSchema = faqs.move.concat(faqs.clean);
-  const schemaData = {
+  const cityData = cityServiceData[city];
+  
+  // Service Schema with areaServed (correct for platform/aggregator model)
+  const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "name": cityData.displayName,
+    "description": `Geprüfte Umzugsfirmen und Zügelfirmen in ${city} vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen.`,
     "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
     "provider": {
       "@type": "Organization",
-      "name": `Online-Offerten.ch - Umzugsfirmen in ${city}`
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
     },
     "areaServed": {
       "@type": "City",
-      "name": "Bern",
+      "name": city,
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Bern",
-        "addressRegion": "BE",
+        "addressLocality": cityData.addressLocality,
+        "addressRegion": cityData.addressRegion,
         "addressCountry": "CH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": cityData.latitude,
+        "longitude": cityData.longitude
       }
     },
-    "name": metaTitle,
-    "description": metaDescription,
-    "mainEntity": {
-        "@type": "FAQPage",
-        "mainEntity": faqItemsForSchema.map(item => ({
-            "@type": "Question",
-            "name": ((item.question as any).de || item.question as any).replace('{city}', city),
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.answer.map(ans => typeof ans === 'string' ? ans : (ans.de || ans)).join(' ').replace(/{city}/g, city)
-            }
-        }))
+    "url": `https://online-offerten.ch${canonicalUrl}`,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CHF",
+      "name": "Kostenlose Umzugsofferten"
     }
+  };
+
+  // FAQ Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItemsForSchema.map(item => ({
+      "@type": "Question",
+      "name": ((item.question as any).de || item.question as any).replace('{city}', city),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer.map(ans => typeof ans === 'string' ? ans : (ans.de || ans)).join(' ').replace(/{city}/g, city)
+      }
+    }))
+  };
+
+  // Combined Schema
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      serviceSchema,
+      faqSchema
+    ]
   };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       
       <div className="bg-white overflow-x-hidden">
         {/* Hero Section - Split Layout */}

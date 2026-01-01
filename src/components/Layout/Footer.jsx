@@ -101,7 +101,11 @@ const Footer = React.memo(() => {
               <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Online-Offerten.ch</span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-md">
-              Ihr zuverlässiges Portal für Umzugsofferten, Reinigungsofferten, Malerofferten und Gärtnerofferten in der ganzen Schweiz. Vergleichen Sie online geprüfte Firmen und sparen Sie bis zu 40%. Finden Sie schnell und einfach den passenden Partner für Ihren Umzug oder Ihr Projekt – unverbindlich und transparent.
+              Online-Offerten.ch ist eine unabhängige Schweizer Vermittlungsplattform für Umzugsofferten, Reinigungsofferten, Malerofferten und Gärtnerofferten.
+              <br /><br />
+              Wir verbinden Privat- und Geschäftskunden mit geprüften, regionalen Partnerfirmen in der ganzen Schweiz. Nach dem Ausfüllen des Formulars wird Ihre Anfrage an bis zu 6 passende Anbieter in Ihrer Nähe weitergeleitet.
+              <br /><br />
+              Die Partnerfirmen kontaktieren Sie direkt mit individuellen Offerten. Der Vergleich ist 100% kostenlos und unverbindlich – die Entscheidung liegt ausschliesslich bei Ihnen.
             </p>
             <div className="flex items-center gap-2 text-slate-400 text-sm">
               <Mail className="w-4 h-4" />

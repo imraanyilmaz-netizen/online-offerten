@@ -24,7 +24,7 @@ const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
     <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 flex items-center">
-      <Icon size={36} className="mr-4 text-green-600" />
+      {Icon && <Icon size={36} className="mr-4 text-green-600" />}
       {title}
     </h2>
   );

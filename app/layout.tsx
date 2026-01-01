@@ -17,38 +17,38 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Umzugsfirma & Reinigungsfirma vergleichen – Gratis Offerten aus Ihrer Region',
+    default: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | Online-Offerten.ch',
     template: '%s | Online-Offerten.ch'
   },
-  description: 'Vergleichen Sie kostenlose Offerten von geprüften Umzugsfirmen und Reinigungsfirmen. Bis zu 40% sparen – schnell, sicher und unverbindlich.',
+  description: 'Kostenlose Offerten für Umzug, Reinigung & Renovierung vergleichen. Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region. Unverbindlich & transparent.',
   authors: [{ name: 'Online-Offerten.ch' }],
   creator: 'Online-Offerten.ch',
   publisher: 'Online-Offerten.ch',
   metadataBase: new URL('https://online-offerten.ch'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://online-offerten.ch',
   },
   openGraph: {
     type: 'website',
     locale: 'de_CH',
     url: 'https://online-offerten.ch',
     siteName: 'Online-Offerten.ch',
-    title: 'Umzugsfirma & Reinigungsfirma vergleichen – Gratis Offerten',
-    description: 'Vergleichen Sie kostenlose Offerten von geprüften Umzugsfirmen und Reinigungsfirmen.',
+    title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
+    description: 'Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region',
     images: [
       {
-        url: 'https://online-offerten.ch/image/services-professionals.png',
+        url: 'https://online-offerten.ch/image/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Online Offerten',
+        alt: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirma & Reinigungsfirma vergleichen',
-    description: 'Vergleichen Sie kostenlose Offerten von geprüften Umzugsfirmen und Reinigungsfirmen.',
-    images: ['https://online-offerten.ch/image/services-professionals.png'],
+    title: 'Offerten vergleichen - Kostenlose Offerten',
+    description: 'Bis zu 40% sparen mit geprüften Firmen',
+    images: ['https://online-offerten.ch/image/og-image.jpg'],
   },
   robots: {
     index: true,

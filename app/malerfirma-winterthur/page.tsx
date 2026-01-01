@@ -5,7 +5,6 @@ import MalerfirmaWinterthurPageClient from '@/components/pages/locations/Malerfi
 export const metadata: Metadata = {
   title: 'Malerfirma in Winterthur finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma in Winterthur finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Winterthur. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma Winterthur, Malerfirma in Winterthur, Maler Winterthur, Malerarbeiten Winterthur, Innenanstrich Winterthur, Aussenanstrich Winterthur, Fassadenanstrich Winterthur, Malerfirma Winterthur vergleichen, Malerbetrieb Winterthur',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-winterthur',
   },

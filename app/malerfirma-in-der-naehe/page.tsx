@@ -5,7 +5,6 @@ import MalerfirmaInDerNaehePageClient from '@/components/pages/info/MalerfirmaIn
 export const metadata: Metadata = {
   title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma in der Nähe, Malerfirma in der Nähe finden, Malerfirma in der Nähe Schweiz, Malerfirma in der Nähe vergleichen, Malerfirma in meiner Nähe, Malerfirma in der Nähe suchen, nahe Malerfirma, lokale Malerfirma, Malerfirma in der Region, Malerbetrieb in der Nähe, Malerservice in der Nähe',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-in-der-naehe',
   },

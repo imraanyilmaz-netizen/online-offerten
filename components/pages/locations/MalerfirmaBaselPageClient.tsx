@@ -128,13 +128,26 @@ const MalerfirmaBaselPageClient = () => {
     script.id = 'malerfirma-basel-schema'
     
     const existing = document.getElementById('malerfirma-basel-schema')
-    if (existing) existing.remove()
+    if (existing && existing.parentNode) {
+      try {
+        existing.remove()
+      } catch (e) {
+        // Element zaten kaldırılmış olabilir
+      }
+    }
     
     document.head.appendChild(script)
     
     return () => {
+      if (typeof document === 'undefined') return
       const scriptToRemove = document.getElementById('malerfirma-basel-schema')
-      if (scriptToRemove) scriptToRemove.remove()
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        try {
+          scriptToRemove.remove()
+        } catch (e) {
+          // Element zaten kaldırılmış olabilir
+        }
+      }
     }
   }, [])
 

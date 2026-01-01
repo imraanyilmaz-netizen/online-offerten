@@ -5,7 +5,6 @@ import MalerfirmaLausannePageClient from '@/components/pages/locations/Malerfirm
 export const metadata: Metadata = {
   title: 'Malerfirma in Lausanne finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma in Lausanne finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Lausanne. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma Lausanne, Malerfirma in Lausanne, Maler Lausanne, Malerarbeiten Lausanne, Innenanstrich Lausanne, Aussenanstrich Lausanne, Fassadenanstrich Lausanne, Malerfirma Lausanne vergleichen, Malerbetrieb Lausanne',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-lausanne',
   },

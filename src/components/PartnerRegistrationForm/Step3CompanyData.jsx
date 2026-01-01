@@ -130,7 +130,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="address_street" className="text-sm font-semibold text-slate-700">
-                      Straße
+                      Strasse
                     </Label>
                     <AddressInput
                       value={formData.address_street}
@@ -215,7 +215,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                   <p className="text-sm text-red-600 font-medium mt-1.5">{errors.password}</p>
                 ) : (
                   <p className="text-xs text-slate-500 mt-1.5">
-                  Mindestens 8 Zeichen, empfohlen: Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen
+                  Mindestens 8 Zeichen, empfohlen: Gross-/Kleinbuchstaben, Zahlen und Sonderzeichen
                 </p>
                 )}
               </div>

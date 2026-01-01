@@ -28,7 +28,7 @@ const HofreinigungPageClient = () => {
 
   // SEO Data
   const metaTitle = "Hofreinigung – Kostenlose Offerten vergleichen";
-  const metaDescription = "Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Außenbereiche und gepflegte Umgebung.";
+  const metaDescription = "Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Aussenbereiche und gepflegte Umgebung.";
   // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/hofreinigung';
 

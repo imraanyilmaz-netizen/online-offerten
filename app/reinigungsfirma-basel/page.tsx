@@ -5,7 +5,6 @@ import ReinigungsfirmaStadtPageClient from '@/components/pages/info/Reinigungsfi
 export const metadata: Metadata = {
   title: 'Reinigungsfirma Basel finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Reinigungsfirma Basel finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Basel. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Reinigungsfirma Basel, Reinigungsfirma Basel finden, Reinigungsfirma Basel vergleichen, Reinigungsfirma in Basel, Reinigungsunternehmen Basel, Reinigungsservice Basel, Büroreinigung Basel, Haushaltsreinigung Basel, Umzugsreinigung Basel, Reinigungsfirma Basel Preise',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-basel',
   },

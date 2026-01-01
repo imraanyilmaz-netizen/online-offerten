@@ -106,6 +106,7 @@ const useNewFormValidation = (formData) => {
         if (!formData.phone) step2errors.phone = t('errors.phoneRequired');
         if (!formData.move_date) step2errors.move_date = t('errors.dateRequired');
         if (!formData.quotes_wanted) step2errors.quotes_wanted = t('errors.quotesWantedRequired');
+        if (!formData.datenschutz) step2errors.datenschutz = t('errors.datenschutzRequired') || 'Bitte akzeptieren Sie die Datenschutzerklärung.';
         
         return step2errors;
     };

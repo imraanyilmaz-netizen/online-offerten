@@ -4,7 +4,6 @@ import MalerarbeitenPageClient from '@/components/pages/services/MalerarbeitenPa
 export const metadata: Metadata = {
   title: 'Malerarbeiten Schweiz finden & vergleichen » Kostenlose Offerten | Bis zu 40% sparen',
   description: 'Malerarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Malerfirmen. Innenanstrich, Aussenanstrich, Fassadenanstrich & Renovierung – sicher, professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!',
-  keywords: 'malerarbeiten, malerarbeiten schweiz, malerarbeiten vergleichen, malerarbeiten kostenlos, malerfirma, malerfirma schweiz, malerfirma vergleichen, maler finden, innenanstrich, aussenanstrich, fassadenanstrich, wohnung streichen, malerfirma zürich, malerfirma bern, malerfirma basel, malerfirma luzern, maler offerten, malerarbeiten preise, maler kosten schweiz, innenanstrich kosten, fassade streichen preise, wohnung streichen kosten, malerfirma finden, malerfirma in der nähe, malerarbeiten preisvergleich, malerarbeiten planen, malerarbeiten offerte',
   alternates: {
     canonical: 'https://online-offerten.ch/malerarbeiten',
   },

@@ -137,13 +137,26 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
     script.id = `reinigungsfirma-${slug}-schema`
     
     const existing = document.getElementById(`reinigungsfirma-${slug}-schema`)
-    if (existing) existing.remove()
+    if (existing && existing.parentNode) {
+      try {
+        existing.remove()
+      } catch (e) {
+        // Element zaten kaldırılmış olabilir
+      }
+    }
     
     document.head.appendChild(script)
     
     return () => {
+      if (typeof document === 'undefined') return
       const scriptToRemove = document.getElementById(`reinigungsfirma-${slug}-schema`)
-      if (scriptToRemove) scriptToRemove.remove()
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        try {
+          scriptToRemove.remove()
+        } catch (e) {
+          // Element zaten kaldırılmış olabilir
+        }
+      }
     }
   }, [name, slug, canonicalUrl])
 
@@ -161,11 +174,6 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
       icon: ShieldCheck,
       title: '100% kostenlos & unverbindlich',
       description: 'Keine Gebühren, keine versteckten Kosten, keine Verpflichtungen'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Bis zu 40% sparen',
-      description: `Durch den Vergleich mehrerer Reinigungsfirmen in ${name} finden Sie die besten Preise`
     },
     {
       icon: Users,
@@ -191,7 +199,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
     },
     {
       q: `Wie viel kostet eine Reinigungsfirma in ${name}?`,
-      a: `Die Kosten für einen Reinigungsservice in ${name} hängen von verschiedenen Faktoren ab: Art der Reinigung (Büroreinigung, Haushaltsreinigung, Endreinigung), Grösse der zu reinigenden Fläche, Häufigkeit der Reinigung und benötigte Leistungen. Eine durchschnittliche Wohnungsreinigung in ${name} kostet zwischen 500 und 1.200 CHF. Büroreinigung kann zwischen 200 und 800 CHF pro Reinigung kosten. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Reinigungsunternehmen in ${name}. Durch den Vergleich können Sie bis zu 40% sparen.`
+      a: `Die Kosten für einen Reinigungsservice in ${name} hängen von verschiedenen Faktoren ab: Art der Reinigung (Büroreinigung, Haushaltsreinigung, Endreinigung), Grösse der zu reinigenden Fläche, Häufigkeit der Reinigung und benötigte Leistungen. Eine durchschnittliche Wohnungsreinigung in ${name} kostet zwischen 500 und 1.200 CHF. Büroreinigung kann zwischen 200 und 800 CHF pro Reinigung kosten. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Reinigungsunternehmen in ${name}.`
     },
     {
       q: `Warum sollte ich eine Reinigungsfirma in ${name} wählen?`,
@@ -312,7 +320,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                Finden Sie die <strong>beste Reinigungsfirma in {name}</strong>. Vergleichen Sie <strong>bis zu 6 kostenlose Offerten</strong> von geprüften <strong>Reinigungsunternehmen in {name}</strong> – <strong>100% kostenlos und unverbindlich</strong>. Lokale Expertise, kürzere Wege, bessere Preise.
+                Finden Sie die <strong>beste Reinigungsfirma in {name}</strong>. Vergleichen Sie <strong>bis zu 6 kostenlose Offerten</strong> von geprüften <strong>Reinigungsunternehmen in {name}</strong>. Lokale Expertise, kürzere Wege, bessere Preise.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -337,10 +345,6 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
                   <span>Reinigungsfirmen in {name}</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
-                  <span>100% kostenlos</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
@@ -657,7 +661,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
               Bereit, Reinigungsunternehmen in {name} zu finden?
             </h2>
             <p className="text-xl mb-8 text-blue-50">
-              Fordern Sie jetzt kostenlos und unverbindlich bis zu 6 Offerten von geprüften Reinigungsanbietern in {name} an. Vergleichen Sie Preise und sparen Sie bis zu 40% bei Ihrer Reinigung.
+              Fordern Sie jetzt kostenlos und unverbindlich bis zu 6 Offerten von geprüften Reinigungsanbietern in {name} an. Vergleichen Sie Preise und finden Sie die beste Offerte für Ihre Reinigung.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -680,19 +684,11 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
             <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-blue-50">
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2" />
-                <span>100% kostenlos</span>
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2" />
                 <span>Unverbindlich</span>
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2" />
                 <span>Nur geprüfte Reinigungsfirmen</span>
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2" />
-                <span>Bis zu 40% sparen</span>
               </div>
             </div>
           </motion.div>

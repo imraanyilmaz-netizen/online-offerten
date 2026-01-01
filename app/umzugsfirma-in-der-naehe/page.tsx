@@ -3,15 +3,14 @@ import { Suspense } from 'react'
 import UmzugsfirmaInDerNaehePageClient from '@/components/pages/info/UmzugsfirmaInDerNaehePageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma in der Nähe finden » Bis zu 40% sparen | Online-Offerten.ch',
-  description: 'Umzugsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Umzugsfirma in der Nähe, Umzugsfirma in der Nähe finden, Umzugsfirma in der Nähe Schweiz, Umzugsfirma in der Nähe vergleichen, Umzugsfirma in meiner Nähe, Umzugsfirma in der Nähe suchen, nahe Umzugsfirma, lokale Umzugsfirma, Umzugsfirma in der Region',
+  title: 'Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen | Online-Offerten.ch',
+  description: 'Umzugsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und transparent. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-in-der-naehe',
   },
   openGraph: {
-    title: 'Umzugsfirma in der Nähe finden » Bis zu 40% sparen',
-    description: 'Umzugsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und bis zu 40% günstiger.',
+    title: 'Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen',
+    description: 'Umzugsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und transparent.',
     url: 'https://online-offerten.ch/umzugsfirma-in-der-naehe',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirma in der Nähe finden » Bis zu 40% sparen',
+    title: 'Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen',
     description: 'Umzugsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/umzugsfirma-in-der-naehe-finden.png'],
   },

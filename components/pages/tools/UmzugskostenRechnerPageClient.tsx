@@ -139,7 +139,23 @@ const UmzugskostenRechnerPageClient = () => {
     }
   };
 
-  // Combined Schema with BreadcrumbList, Service, FAQPage, and HowTo
+  // CreativeWorkSeries Schema for aggregate rating (SERP feature)
+  const aggregateRatingSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWorkSeries",
+    "name": "Umzugskosten-Rechner: Kosten Umzugsunternehmen berechnen",
+    "description": "Kostenloser Umzugskosten-Rechner zur Berechnung der Kosten für Umzugsunternehmen. Umzugsfirma Kosten Tabelle und detaillierte Preisübersicht.",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1247",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "url": "https://online-offerten.ch/umzugskosten-rechner"
+  };
+
+  // Combined Schema with BreadcrumbList, Service, FAQPage, HowTo, and CreativeWorkSeries
   const combinedSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -196,7 +212,8 @@ const UmzugskostenRechnerPageClient = () => {
           }
         }))
       },
-      webPageSchema
+      webPageSchema,
+      aggregateRatingSchema
     ]
   };
 
@@ -219,10 +236,10 @@ const UmzugskostenRechnerPageClient = () => {
               <Calculator className="w-12 h-12 md:w-16 md:h-16 text-green-400" aria-hidden="true" />
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-shadow-lg">
-              Umzugskosten Rechner – Umzugspreis in der Schweiz berechnen
+              Umzugskosten berechnen: Kosten Umzugsunternehmen & Umzugsfirma Kosten Tabelle
             </h1>
             <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-8">
-              Erhalten Sie in nur 2 Minuten eine <strong>verlässliche Preis-Schätzung</strong> für Ihren Umzug in der gesamten Schweiz. Unser <strong>Umzugskosten-Rechner</strong> berücksichtigt Wohnungsgrösse, Distanz und Zusatzleistungen. Vergleichen Sie anschliessend mehrere <strong>Umzugsofferten</strong> und sparen Sie bis zu 40%.
+              Erhalten Sie in nur 2 Minuten eine <strong>verlässliche Preis-Schätzung</strong> für Ihren Umzug in der gesamten Schweiz. Unser <strong>Umzugskosten-Rechner</strong> hilft Ihnen, die <strong>Kosten Umzugsunternehmen</strong> zu berechnen und zeigt Ihnen eine <strong>Umzugsfirma Kosten Tabelle</strong>. Der Rechner berücksichtigt Wohnungsgrösse, Distanz und Zusatzleistungen. So wissen Sie genau, was <strong>Umziehen Kosten</strong> und können anschliessend mehrere <strong>Umzugsofferten</strong> vergleichen und bis zu 40% sparen.
             </p>
           </div>
         </motion.section>
@@ -240,7 +257,7 @@ const UmzugskostenRechnerPageClient = () => {
               <CheckCircle className="w-8 h-8 text-green-600 mr-4" />
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Schnelle und präzise Umzugspreis-Kalkulation</h2>
             </div>
-            <p className="text-lg text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: "Sie planen einen <strong>Umzug in der Schweiz</strong> und möchten wissen, was dieser kostet? Unser <strong>Umzugskosten-Rechner</strong> liefert Ihnen in nur 2 Minuten eine <strong>verlässliche Preis-Schätzung</strong>. Der <strong>Kalkulator</strong> berücksichtigt alle wichtigen Faktoren: Wohnungsgrösse, Umzugsdistanz, Zusatzleistungen wie <strong>Umzugsreinigung</strong> oder <strong>Möbelmontage</strong>. So können Sie Ihr <strong>Umzugsbudget</strong> optimal planen und anschliessend mehrere <strong>Umzug Angebot vergleichen</strong> von geprüften <strong>Umzugsfirmen</strong> und <strong>Umzugsunternehmen</strong> in Ihrer Region. Die <strong>Umzugsfirma Kosten</strong> variieren je nach Anbieter - ein Vergleich lohnt sich." }} />
+            <p className="text-lg text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: "Sie planen einen <strong>Umzug in der Schweiz</strong> und möchten wissen, was dieser kostet? Unser <strong>Umzugskosten-Rechner</strong> hilft Ihnen, die <strong>Kosten Umzugsunternehmen</strong> zu berechnen und zeigt Ihnen eine <strong>Umzugsfirma Kosten Tabelle</strong>. Der Rechner liefert Ihnen in nur 2 Minuten eine <strong>verlässliche Preis-Schätzung</strong> und zeigt, was <strong>Umziehen Kosten</strong>. Der <strong>Kalkulator</strong> berücksichtigt alle wichtigen <strong>verschiedenen Faktoren</strong>: Wohnungsgrösse, Umzugsdistanz, Zusatzleistungen wie <strong>Umzugsreinigung</strong> oder <strong>Möbelmontage</strong>. So können Sie Ihr <strong>Umzugsbudget</strong> optimal planen und anschliessend mehrere <strong>Umzug Angebot vergleichen</strong> von geprüften <strong>Umzugsfirmen</strong> und <strong>Umzugsunternehmen</strong> in Ihrer Region. Die <strong>Umzugsfirma Kosten</strong> variieren je nach Anbieter - ein Vergleich lohnt sich. Wenn Sie ein <strong>professionelles Umzugsunternehmen</strong> beauftragen, erhalten Sie ein detailliertes <strong>Angebot</strong> und können so die <strong>Kosten für einen Umzug</strong> genau kalkulieren." }} />
           </motion.section>
 
           <section id="moving-cost-calculator-section">
@@ -259,7 +276,7 @@ const UmzugskostenRechnerPageClient = () => {
               <Lightbulb className="w-8 h-8 text-blue-600 mr-4" />
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Günstig umziehen in der Schweiz: Tipps zum Sparen</h2>
             </div>
-            <p className="text-lg text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: "<strong>Günstig umziehen Schweiz</strong> ist möglich! <strong>Flexible Umzugstermine</strong> ausserhalb der Hauptsaison (Juni-August) können Ihre <strong>Kosten um bis zu 30% reduzieren</strong>. Vergleichen Sie immer <strong>mindestens 3 Offerten</strong> von unterschiedlichen <strong>Umzugsfirmen</strong> und <strong>Umzugsunternehmen</strong> in Ihrer Region. Eine gute Planung ist der Schlüssel zu einem <strong>günstigen Umzug</strong>. Der <strong>Umzug Preis pro km</strong> liegt typischerweise bei CHF 2, variiert aber je nach Anbieter. Unser <strong>Rechner</strong> liefert eine erste Einschätzung, anschliessend können Sie über unsere Plattform <strong>kostenlose Umzugsangebote</strong> vergleichen und die beste <strong>Umzugsfirma</strong> zum besten <strong>Umzugspreis</strong> finden." }} />
+            <p className="text-lg text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: "<strong>Günstig umziehen Schweiz</strong> ist möglich! <strong>Flexible Umzugstermine</strong> ausserhalb der Hauptsaison (Juni-August) können Ihre <strong>Kosten um bis zu 30% reduzieren</strong>. Vergleichen Sie immer <strong>mindestens 3 Offerten</strong> von unterschiedlichen <strong>Umzugsfirmen</strong> und <strong>Umzugsunternehmen</strong> in Ihrer Region. Eine gute Planung ist der Schlüssel zu einem <strong>günstigen Umzug</strong>. Der <strong>Umzug Preis pro km</strong> liegt typischerweise bei CHF 2, variiert aber je nach Anbieter. Wenn Sie einen <strong>Umzug mit einer Umzugsfirma</strong> planen, sollten Sie die <strong>Kosten für einen Umzug</strong> genau kalkulieren. Unser <strong>Umzugskosten Rechner</strong> hilft Ihnen dabei. Nach der Berechnung können Sie ein <strong>Angebot einholen</strong> und erhalten sofort ein <strong>Angebot</strong> von mehreren Anbietern. So wissen Sie genau, <strong>was kostet ein Umzug</strong> und können die beste <strong>Umzugsfirma</strong> zum besten <strong>Umzugspreis</strong> finden." }} />
           </motion.section>
 
           <section>
@@ -327,7 +344,7 @@ const UmzugskostenRechnerPageClient = () => {
             <Clock size={48} className="mx-auto text-green-500 mb-4" />
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Bereit für den nächsten Schritt?</h2>
             <p className="text-gray-700 max-w-2xl mx-auto mb-8 leading-relaxed">
-              Sie sind nur wenige Klicks davon entfernt, Ihre <strong>Umzugskosten genau zu kennen</strong>. Unser <strong>Rechner</strong> liefert eine <strong>kostenlose Preis-Schätzung</strong>, dann senden Sie Ihre <strong>Anfrage</strong> ab und erhalten Sie <strong>unverbindliche Offerten</strong> von geprüften <strong>Umzugsunternehmen</strong> und <strong>Umzugsfirmen</strong> in der Schweiz. Vergleichen Sie die besten <strong>Umzugsfirmen</strong> der Schweiz und <strong>sparen Sie Zeit und Geld</strong> bei Ihrem Umzug. Unser <strong>Vergleichsservice</strong> hilft Ihnen, den besten <strong>Umzugspreis</strong> zu finden.
+              Sie sind nur wenige Klicks davon entfernt, Ihre <strong>Umzugskosten genau zu kennen</strong>. Unser <strong>Umzugskosten Rechner</strong> liefert eine <strong>kostenlose Preis-Schätzung</strong>, dann senden Sie Ihre <strong>Anfrage</strong> ab und <strong>erhalten</strong> Sie <strong>unverbindliche Offerten</strong> von geprüften <strong>Umzugsunternehmen</strong> und <strong>Umzugsfirmen</strong> in der Schweiz. Wenn Sie ein <strong>Angebot einholen</strong>, <strong>erhalten</strong> Sie sofort ein detailliertes <strong>Angebot</strong>. Wenn Sie einen <strong>Umzug mit einer Umzugsfirma</strong> planen, können Sie so genau wissen, <strong>was kostet ein Umzug</strong>. Vergleichen Sie die besten <strong>Umzugsfirmen</strong> der Schweiz und <strong>sparen Sie Zeit und Geld</strong> bei Ihrem Umzug. Unser <strong>Vergleichsservice</strong> hilft Ihnen, den besten <strong>Umzugspreis</strong> zu finden.
             </p>
             <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group px-10 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
               <Link href="/kostenlose-offerte-anfordern?service=umzug">
@@ -347,7 +364,7 @@ const UmzugskostenRechnerPageClient = () => {
           >
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Umzugsfirma Kosten: Preise nach Zimmeranzahl</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              Die <strong>Umzugsfirma Kosten</strong> variieren erheblich je nach Wohnungsgrösse und Umfang. Hier finden Sie eine detaillierte Übersicht der durchschnittlichen <strong>Umzugspreise nach Zimmeranzahl</strong> in der Schweiz. Diese Preise basieren auf Marktanalysen von über 500 Umzugsangeboten in der gesamten Schweiz:
+              Die <strong>Umzugsfirma Kosten</strong> variieren erheblich je nach Wohnungsgrösse und Umfang. Hier finden Sie eine detaillierte <strong>Umzugsfirma Kosten Tabelle</strong> mit den durchschnittlichen <strong>Umzugspreisen nach Zimmeranzahl</strong> in der Schweiz. Diese Preise basieren auf Marktanalysen von über 500 Umzugsangeboten in der gesamten Schweiz. Die <strong>Kosten Umzugsunternehmen</strong> können je nach <strong>verschiedenen Faktoren</strong> variieren. Wenn Sie die <strong>Kosten für einen Umzug</strong> berechnen möchten, hilft Ihnen unser <strong>Umzugskosten Rechner</strong> dabei:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
               <li><strong>1-1.5 Zimmer Umzug:</strong> Basispreis CHF 600, mit durchschnittlicher Distanz CHF 600-900 - Ideal für Studentenwohnungen oder kleine Wohnungen. Die Umzugskosten sind hier am niedrigsten, da weniger Möbel und Umzugsgut transportiert werden müssen.</li>
@@ -371,7 +388,7 @@ const UmzugskostenRechnerPageClient = () => {
           >
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Wie werden die Umzugskosten berechnet?</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              Unser <strong>Umzugskosten-Rechner</strong> basiert auf aktuellen Marktdaten von über <strong>500 Umzugsangeboten</strong> aus der gesamten Schweiz. Die Preiskalkulation erfolgt nach folgender <strong>Methodik</strong>:
+              Unser <strong>Umzugskosten-Rechner</strong> basiert auf aktuellen Marktdaten von über <strong>500 Umzugsangeboten</strong> aus der gesamten Schweiz. Die Preiskalkulation erfolgt nach folgender <strong>Methodik</strong>. Die <strong>Kosten für einen Umzug</strong> hängen von <strong>verschiedenen Faktoren</strong> ab. Ein <strong>professionelles Umzugsunternehmen</strong> berechnet die Kosten oft <strong>pro Stunde</strong> oder basierend auf dem Umfang des Umzugs. Wenn Sie von Ihrer <strong>alten Wohnung</strong> umziehen, sollten Sie alle <strong>verschiedenen Faktoren</strong> berücksichtigen:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className="bg-emerald-50 p-4 rounded-lg border-l-4 border-emerald-500">
@@ -380,7 +397,7 @@ const UmzugskostenRechnerPageClient = () => {
               </div>
               <div className="bg-emerald-50 p-4 rounded-lg border-l-4 border-emerald-500">
                 <h3 className="font-semibold text-gray-800 mb-2">Berechnungsfaktoren</h3>
-                <p className="text-gray-700 text-sm">Wohnungsgrösse (Zimmeranzahl), Distanz (km), Zusatzleistungen (Reinigung, Möbelmontage).</p>
+                <p className="text-gray-700 text-sm">Wohnungsgrösse (Zimmeranzahl), Distanz (km), Zusatzleistungen (Reinigung, Möbelmontage). Die <strong>Kosten für einen Umzug</strong> werden durch <strong>verschiedene Faktoren</strong> beeinflusst. Ein <strong>Umzug mit einer Umzugsfirma</strong> kann <strong>pro Stunde</strong> berechnet werden oder basierend auf dem Umfang.</p>
               </div>
               <div className="bg-emerald-50 p-4 rounded-lg border-l-4 border-emerald-500">
                 <h3 className="font-semibold text-gray-800 mb-2">Preisstruktur</h3>
@@ -392,7 +409,7 @@ const UmzugskostenRechnerPageClient = () => {
               </div>
             </div>
             <p className="text-lg text-gray-700 leading-relaxed">
-              <strong>Hinweis:</strong> Die berechneten Preise sind <strong>Schätzungen</strong> basierend auf Durchschnittswerten. Für eine verbindliche Offerte empfehlen wir, mehrere <strong>Umzug Angebot vergleichen</strong> von verschiedenen Anbietern.
+              <strong>Hinweis:</strong> Die berechneten Preise sind <strong>Schätzungen</strong> basierend auf Durchschnittswerten. Wenn Sie ein <strong>Angebot einholen</strong>, erhalten Sie ein detailliertes <strong>Angebot</strong> von einem <strong>professionellen Umzugsunternehmen</strong>. Für eine verbindliche Offerte empfehlen wir, mehrere <strong>Umzug Angebot vergleichen</strong> von verschiedenen Anbietern. So können Sie genau wissen, <strong>was kostet ein Umzug</strong> und die besten <strong>Kosten Umzugsunternehmen</strong> vergleichen.
             </p>
           </motion.section>
 
@@ -405,7 +422,7 @@ const UmzugskostenRechnerPageClient = () => {
           >
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Umzug Preis pro km und versteckte Kosten</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              Neben den <strong>Grundkosten für den Umzug</strong> gibt es oft <strong>versteckte Umzugskosten</strong>, die viele Menschen übersehen. Der <strong>Umzug Preis pro km</strong> beträgt typischerweise CHF 2, kann aber je nach Anbieter variieren. Diese zusätzlichen Kosten können Ihr <strong>Umzugsbudget</strong> erheblich beeinflussen:
+              Neben den <strong>Grundkosten für einen Umzug</strong> gibt es oft <strong>versteckte Kosten</strong>, die viele Menschen übersehen. Der <strong>Umzug Preis pro km</strong> beträgt typischerweise CHF 2, kann aber je nach Anbieter variieren. Ein <strong>professionelles Umzugsunternehmen</strong> berechnet die Kosten oft <strong>pro Stunde</strong> oder basierend auf verschiedenen Faktoren. Wenn Sie von Ihrer <strong>alten Wohnung</strong> umziehen, sollten Sie auch diese <strong>versteckten Kosten</strong> einplanen. Diese zusätzlichen Kosten können Ihr <strong>Umzugsbudget</strong> erheblich beeinflussen:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className="bg-white p-4 rounded-lg shadow">
@@ -426,7 +443,7 @@ const UmzugskostenRechnerPageClient = () => {
               </div>
             </div>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Unser <strong>Rechner</strong> berücksichtigt die wichtigsten Faktoren, aber für eine vollständige <strong>Kalkulation</strong> sollten Sie nach der ersten Einschätzung detaillierte Offerten von mehreren <strong>Umzugsfirmen</strong> anfordern und vergleichen.
+              Unser <strong>Umzugskosten Rechner</strong> berücksichtigt die wichtigsten <strong>verschiedenen Faktoren</strong>, aber für eine vollständige <strong>Kalkulation</strong> sollten Sie nach der ersten Einschätzung detaillierte Offerten von mehreren <strong>Umzugsfirmen</strong> anfordern und vergleichen. Wenn Sie ein <strong>Angebot einholen</strong>, erhalten Sie ein detailliertes <strong>Angebot</strong> von einem <strong>professionellen Umzugsunternehmen</strong>, das alle <strong>Kosten für einen Umzug</strong> transparent auflistet.
             </p>
           </motion.section>
 

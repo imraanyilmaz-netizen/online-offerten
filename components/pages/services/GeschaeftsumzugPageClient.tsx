@@ -28,7 +28,7 @@ const GeschaeftsumzugPageClient = () => {
       "name": "Was kostet ein Büroumzug?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, größere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen."
+        "text": "Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, grössere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen."
       }
     },
     {
@@ -44,7 +44,7 @@ const GeschaeftsumzugPageClient = () => {
       "name": "Wie lange dauert ein Geschäftsumzug?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Die Dauer hängt von der Unternehmensgröße und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, größere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung."
+        "text": "Die Dauer hängt von der Unternehmensgrösse und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, grössere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung."
       }
     },
     {
@@ -326,7 +326,7 @@ const GeschaeftsumzugPageClient = () => {
               {/* Intro */}
               <section>
                 <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                  Ein Geschäftsumzug ist mehr als nur der Transport von Möbeln – es ist ein strategisches Projekt, das die Zukunft Ihres Unternehmens maßgeblich beeinflussen kann. Ob Büroumzug, Firmenumzug oder Unternehmensumzug: Professionelle Planung und Durchführung sind entscheidend, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Übergang zu gewährleisten. Wir unterstützen Sie beim Firmenumzug in Zürich, Bern, Basel, Luzern und der ganzen Schweiz mit geprüften regionalen Umzugsfirmen in Ihrer Nähe.
+                  Ein Geschäftsumzug ist mehr als nur der Transport von Möbeln – es ist ein strategisches Projekt, das die Zukunft Ihres Unternehmens massgeblich beeinflussen kann. Ob Büroumzug, Firmenumzug oder Unternehmensumzug: Professionelle Planung und Durchführung sind entscheidend, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Übergang zu gewährleisten. Wir unterstützen Sie beim Firmenumzug in Zürich, Bern, Basel, Luzern und der ganzen Schweiz mit geprüften regionalen Umzugsfirmen in Ihrer Nähe.
                 </p>
               </section>
 
@@ -337,7 +337,7 @@ const GeschaeftsumzugPageClient = () => {
                 </h2>
                 <div className="text-gray-700 leading-relaxed text-lg space-y-4">
                   <p>
-                    Ein Geschäftsumzug erfordert präzise Planung und professionelle Durchführung, um Ausfallzeiten zu minimieren und einen nahtlosen Übergang zu gewährleisten. Unsere spezialisierten Partnerfirmen verstehen die Komplexität von Firmenumzügen und bieten maßgeschneiderte Lösungen für Unternehmen jeder Größe. Von der detaillierten Inventarisierung über den sicheren Transport von Büromöbeln und IT-Equipment bis hin zur termingerechten Einrichtung am neuen Standort – wir koordinieren jeden Schritt Ihres Geschäftsumzugs sorgfältig.
+                    Ein Geschäftsumzug erfordert präzise Planung und professionelle Durchführung, um Ausfallzeiten zu minimieren und einen nahtlosen Übergang zu gewährleisten. Unsere spezialisierten Partnerfirmen verstehen die Komplexität von Firmenumzügen und bieten massgeschneiderte Lösungen für Unternehmen jeder Grösse. Von der detaillierten Inventarisierung über den sicheren Transport von Büromöbeln und IT-Equipment bis hin zur termingerechten Einrichtung am neuen Standort – wir koordinieren jeden Schritt Ihres Geschäftsumzugs sorgfältig.
                   </p>
                 </div>
               </section>
@@ -349,7 +349,7 @@ const GeschaeftsumzugPageClient = () => {
                 </h2>
                 <div className="text-gray-700 leading-relaxed text-lg space-y-4">
                   <p>
-                    Die Kosten für einen Geschäftsumzug variieren stark je nach Umfang, Distanz und Aufwand. Ein kleiner Büroumzug kann bereits ab 2.000 CHF beginnen, während größere Firmenumzüge schnell 10.000 CHF oder mehr kosten können. Die wichtigsten Faktoren sind das Volumen des Umzugsguts, die Entfernung zwischen den Standorten, der Bedarf an Spezialtransporten für IT-Equipment oder schwere Maschinen sowie zusätzliche Dienstleistungen wie Verpackung, Möbelmontage oder Zwischenlagerung. Um die besten Preise zu finden, sollten Sie mehrere Offerten von geprüften Umzugsfirmen vergleichen. Durch einen detaillierten Vergleich können Sie bis zu 40% der Kosten sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
+                    Die Kosten für einen Geschäftsumzug variieren stark je nach Umfang, Distanz und Aufwand. Ein kleiner Büroumzug kann bereits ab 2.000 CHF beginnen, während grössere Firmenumzüge schnell 10.000 CHF oder mehr kosten können. Die wichtigsten Faktoren sind das Volumen des Umzugsguts, die Entfernung zwischen den Standorten, der Bedarf an Spezialtransporten für IT-Equipment oder schwere Maschinen sowie zusätzliche Dienstleistungen wie Verpackung, Möbelmontage oder Zwischenlagerung. Um die besten Preise zu finden, sollten Sie mehrere Offerten von geprüften Umzugsfirmen vergleichen. Durch einen detaillierten Vergleich können Sie bis zu 40% der Kosten sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
                   </p>
                 </div>
               </section>
@@ -385,7 +385,7 @@ const GeschaeftsumzugPageClient = () => {
                 </h2>
                 <div className="text-gray-700 leading-relaxed text-lg space-y-4">
                   <p>
-                    Ein detaillierter Vergleich von Offerten verschiedener Umzugsfirmen ist unerlässlich, um das beste Preis-Leistungs-Verhältnis zu finden. Durch den Vergleich können Sie nicht nur bis zu 40% der Kosten sparen, sondern auch sicherstellen, dass alle wichtigen Leistungen abgedeckt sind. Achten Sie dabei auf transparente Kostenvoranschläge, die alle Leistungen klar auflisten. Fragen Sie gezielt nach möglichen Zusatzkosten für Parkgenehmigungen, Außenaufzüge oder Wochenendzuschläge. Ein seriöses Unternehmen wird alle Kosten transparent kommunizieren. Vergleichen Sie nicht nur die Preise, sondern auch Versicherungen, Referenzen und die Erfahrung mit Geschäftsumzügen. 👉 Jetzt Firmenumzug-Offerten vergleichen (100% kostenlos)
+                    Ein detaillierter Vergleich von Offerten verschiedener Umzugsfirmen ist unerlässlich, um das beste Preis-Leistungs-Verhältnis zu finden. Durch den Vergleich können Sie nicht nur bis zu 40% der Kosten sparen, sondern auch sicherstellen, dass alle wichtigen Leistungen abgedeckt sind. Achten Sie dabei auf transparente Kostenvoranschläge, die alle Leistungen klar auflisten. Fragen Sie gezielt nach möglichen Zusatzkosten für Parkgenehmigungen, Aussenaufzüge oder Wochenendzuschläge. Ein seriöses Unternehmen wird alle Kosten transparent kommunizieren. Vergleichen Sie nicht nur die Preise, sondern auch Versicherungen, Referenzen und die Erfahrung mit Geschäftsumzügen. 👉 Jetzt Firmenumzug-Offerten vergleichen (100% kostenlos)
                   </p>
                 </div>
               </section>
@@ -420,7 +420,7 @@ const GeschaeftsumzugPageClient = () => {
                 </h2>
                 <div className="text-gray-700 leading-relaxed text-lg space-y-4">
                   <p>
-                    Die Dauer eines Geschäftsumzugs hängt von verschiedenen Faktoren ab: der Größe des Unternehmens, der Menge des zu transportierenden Inventars und der Entfernung zwischen den Standorten. Kleinere Büros können oft an einem Wochenende umziehen, während größere Unternehmen mehrere Tage oder sogar Wochen benötigen können. Ein typischer Büroumzug für ein mittelgroßes Unternehmen dauert in der Regel 1-3 Tage. Die genaue Zeitplanung wird nach einer Vor-Ort-Besichtigung durch die Umzugsfirma erstellt. Wichtig ist, dass Sie ausreichend Zeit für die Planung einplanen, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Ablauf zu gewährleisten.
+                    Die Dauer eines Geschäftsumzugs hängt von verschiedenen Faktoren ab: der Grösse des Unternehmens, der Menge des zu transportierenden Inventars und der Entfernung zwischen den Standorten. Kleinere Büros können oft an einem Wochenende umziehen, während grössere Unternehmen mehrere Tage oder sogar Wochen benötigen können. Ein typischer Büroumzug für ein mittelgrosses Unternehmen dauert in der Regel 1-3 Tage. Die genaue Zeitplanung wird nach einer Vor-Ort-Besichtigung durch die Umzugsfirma erstellt. Wichtig ist, dass Sie ausreichend Zeit für die Planung einplanen, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Ablauf zu gewährleisten.
                   </p>
                 </div>
               </section>
@@ -432,7 +432,7 @@ const GeschaeftsumzugPageClient = () => {
                 </h2>
                 <div className="text-gray-700 leading-relaxed text-lg space-y-4">
                   <p>
-                    Für einen erfolgreichen Büroumzug oder Firmenumzug gibt es einige wichtige Tipps zu beachten. Planen Sie frühzeitig und beginnen Sie mindestens 3-6 Monate vor dem Umzugstermin. Bilden Sie ein internes Projektteam und klären Sie Verantwortlichkeiten. Nutzen Sie die Gelegenheit zum Ausmisten und Entrümpeln, um Umzugskosten zu sparen. Entwickeln Sie ein klares Beschriftungssystem für Kartons und Möbel. Planen Sie den IT-Umzug besonders sorgfältig, da dies das Herzstück der meisten Unternehmen ist. Kommunizieren Sie transparent mit Ihren Mitarbeitern über den bevorstehenden Umzug. Und schließlich: Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen, um das beste Preis-Leistungs-Verhältnis zu finden.
+                    Für einen erfolgreichen Büroumzug oder Firmenumzug gibt es einige wichtige Tipps zu beachten. Planen Sie frühzeitig und beginnen Sie mindestens 3-6 Monate vor dem Umzugstermin. Bilden Sie ein internes Projektteam und klären Sie Verantwortlichkeiten. Nutzen Sie die Gelegenheit zum Ausmisten und Entrümpeln, um Umzugskosten zu sparen. Entwickeln Sie ein klares Beschriftungssystem für Kartons und Möbel. Planen Sie den IT-Umzug besonders sorgfältig, da dies das Herzstück der meisten Unternehmen ist. Kommunizieren Sie transparent mit Ihren Mitarbeitern über den bevorstehenden Umzug. Und schliesslich: Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen, um das beste Preis-Leistungs-Verhältnis zu finden.
                   </p>
                 </div>
               </section>
@@ -483,7 +483,7 @@ const GeschaeftsumzugPageClient = () => {
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
                     <h4 className="text-xl font-semibold text-gray-800 mb-3">Was kostet ein Büroumzug?</h4>
                     <p className="text-gray-700 leading-relaxed text-base">
-                      Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, größere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen.
+                      Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, grössere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen.
                     </p>
                   </div>
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -495,7 +495,7 @@ const GeschaeftsumzugPageClient = () => {
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
                     <h4 className="text-xl font-semibold text-gray-800 mb-3">Wie lange dauert ein Geschäftsumzug?</h4>
                     <p className="text-gray-700 leading-relaxed text-base">
-                      Die Dauer hängt von der Unternehmensgröße und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, größere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung.
+                      Die Dauer hängt von der Unternehmensgrösse und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, grössere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung.
                     </p>
                   </div>
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">

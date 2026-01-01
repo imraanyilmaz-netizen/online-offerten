@@ -5,7 +5,6 @@ import MalerfirmaBaselPageClient from '@/components/pages/locations/MalerfirmaBa
 export const metadata: Metadata = {
   title: 'Malerfirma in Basel finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma in Basel finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Basel. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma Basel, Malerfirma in Basel, Maler Basel, Malerarbeiten Basel, Innenanstrich Basel, Aussenanstrich Basel, Fassadenanstrich Basel, Malerfirma Basel vergleichen, Malerbetrieb Basel',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-basel',
   },

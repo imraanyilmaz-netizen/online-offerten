@@ -103,7 +103,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
               "name": "Wie viel Geld muss man für einen Umzug einplanen?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Für einen Umzug sollten Sie je nach Wohnungsgrösse folgende Budgets einplanen: 1.5-2.5 Zimmer: 600-1.200 CHF, 3.5 Zimmer: 1.100-1.800 CHF, 4.5 Zimmer: 1.600-2.500 CHF, 5.5+ Zimmer: ab 2.200 CHF. Zusätzlich sollten Sie 10-20% Reserve für unvorhergesehene Kosten einplanen. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
+                "text": "Für einen Umzug sollten Sie je nach Wohnungsgrösse folgende Budgets einplanen: 1.5-2.5 Zimmer: 600-1.200 CHF, 3.5 Zimmer: 1.100-1.800 CHF, 4.5 Zimmer: 1.600-2.500 CHF, 5.5+ Zimmer: ab 2.200 CHF. Zusätzlich sollten Sie 10-20% Reserve für unvorhergesehene Kosten einplanen. Durch den Vergleich mehrerer Offerten erhalten Sie die besten Preise."
               }
             },
             {
@@ -213,13 +213,26 @@ const UmzugsfirmaInDerNaehePageClient = () => {
     script.id = 'umzugsfirma-in-der-naehe-schema'
     
     const existing = document.getElementById('umzugsfirma-in-der-naehe-schema')
-    if (existing) existing.remove()
+    if (existing && existing.parentNode) {
+      try {
+        existing.remove()
+      } catch (e) {
+        // Element zaten kaldırılmış olabilir
+      }
+    }
     
     document.head.appendChild(script)
     
     return () => {
+      if (typeof document === 'undefined') return
       const scriptToRemove = document.getElementById('umzugsfirma-in-der-naehe-schema')
-      if (scriptToRemove) scriptToRemove.remove()
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        try {
+          scriptToRemove.remove()
+        } catch (e) {
+          // Element zaten kaldırılmış olabilir
+        }
+      }
     }
   }, [])
 
@@ -240,7 +253,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
     },
     {
       icon: TrendingUp,
-      title: 'Bis zu 40% sparen',
+      title: 'Transparente Preise & individuelle Offerten',
       description: 'Durch den Vergleich mehrerer lokaler Umzugsfirmen finden Sie die besten Preise'
     },
     {
@@ -267,11 +280,11 @@ const UmzugsfirmaInDerNaehePageClient = () => {
     },
     {
       q: "Wie viel kostet eine Umzugsfirma?",
-      a: "Die Kosten für einen Umzugsservice hängen von verschiedenen Faktoren ab: Umzugsstrecke, Umfang des Umzugsguts, Anzahl der Stockwerke, benötigte Leistungen und Umzugsdatum. Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF. Geschäftsumzüge oder Umzüge mit Spezialtransporten können deutlich teurer sein. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Umzugsunternehmen. Durch den Vergleich können Sie bis zu 40% sparen."
+      a: "Die Kosten für einen Umzugsservice hängen von verschiedenen Faktoren ab: Umzugsstrecke, Umfang des Umzugsguts, Anzahl der Stockwerke, benötigte Leistungen und Umzugsdatum. Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF. Geschäftsumzüge oder Umzüge mit Spezialtransporten können deutlich teurer sein. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Umzugsunternehmen. Durch den Vergleich erhalten Sie die besten Konditionen."
     },
     {
       q: "Wie viel Geld muss man für einen Umzug einplanen?",
-      a: "Für einen Umzug sollten Sie je nach Wohnungsgrösse folgende Budgets einplanen: 1.5-2.5 Zimmer: 600-1.200 CHF, 3.5 Zimmer: 1.100-1.800 CHF, 4.5 Zimmer: 1.600-2.500 CHF, 5.5+ Zimmer: ab 2.200 CHF. Zusätzlich sollten Sie 10-20% Reserve für unvorhergesehene Kosten einplanen. Durch den Vergleich mehrerer Offerten von regionalen Umzugsunternehmen können Sie bis zu 40% sparen. Lokale Zügelfirmen haben oft kürzere Anfahrtswege, was sich positiv auf den Preis auswirkt."
+      a: "Für einen Umzug sollten Sie je nach Wohnungsgrösse folgende Budgets einplanen: 1.5-2.5 Zimmer: 600-1.200 CHF, 3.5 Zimmer: 1.100-1.800 CHF, 4.5 Zimmer: 1.600-2.500 CHF, 5.5+ Zimmer: ab 2.200 CHF. Zusätzlich sollten Sie 10-20% Reserve für unvorhergesehene Kosten einplanen. Durch den Vergleich mehrerer Offerten von regionalen Umzugsunternehmen erhalten Sie die besten Preise. Lokale Zügelfirmen haben oft kürzere Anfahrtswege, was sich positiv auf den Preis auswirkt."
     },
     {
       q: "Wie teuer ist eine Umzugsfirma in der Schweiz?",
@@ -778,7 +791,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2" />
-                <span>Bis zu 40% sparen</span>
+                <span>Schnelle Antworten innerhalb von 24h</span>
               </div>
             </div>
           </motion.div>

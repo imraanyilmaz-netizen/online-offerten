@@ -5,7 +5,6 @@ import ReinigungsfirmaInDerNaehePageClient from '@/components/pages/info/Reinigu
 export const metadata: Metadata = {
   title: 'Reinigungsfirma in der Nähe finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Reinigungsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Reinigungsfirma in der Nähe, Reinigungsfirma in der Nähe finden, Reinigungsfirma in der Nähe Schweiz, Reinigungsfirma in der Nähe vergleichen, Reinigungsfirma in meiner Nähe, Reinigungsfirma in der Nähe suchen, nahe Reinigungsfirma, lokale Reinigungsfirma, Reinigungsfirma in der Region, Reinigungsunternehmen in der Nähe, Reinigungsservice in der Nähe',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-in-der-naehe',
   },

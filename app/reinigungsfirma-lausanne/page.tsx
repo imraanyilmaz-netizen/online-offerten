@@ -5,7 +5,6 @@ import ReinigungsfirmaStadtPageClient from '@/components/pages/info/Reinigungsfi
 export const metadata: Metadata = {
   title: 'Reinigungsfirma Lausanne finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Reinigungsfirma Lausanne finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Lausanne. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Reinigungsfirma Lausanne, Reinigungsfirma Lausanne finden, Reinigungsfirma Lausanne vergleichen, Reinigungsfirma in Lausanne, Reinigungsunternehmen Lausanne, Reinigungsservice Lausanne, Büroreinigung Lausanne, Haushaltsreinigung Lausanne, Umzugsreinigung Lausanne, Reinigungsfirma Lausanne Preise',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-lausanne',
   },

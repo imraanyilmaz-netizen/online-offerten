@@ -2,15 +2,14 @@ import type { Metadata } from 'next'
 import UmzugskostenRechnerPageClient from '@/components/pages/tools/UmzugskostenRechnerPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugskosten-Rechner 2024: Kostenlos berechnen in 2 Minuten | Online-Offerten.ch',
-  description: 'Umzugskosten kostenlos berechnen: In 2 Minuten wissen, was Ihr Umzug kostet! Unser Rechner liefert sofortige Preis-Schätzung für Umzüge in der Schweiz. Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.',
-  keywords: 'umzugskosten rechner, umzugskosten berechnen, umzugskosten schweiz, umzug preis berechnen, umzugskosten kalkulator, kosten umzug schweiz, umzugskosten schätzung, umzug preis, umzugskosten rechner schweiz, umzug kostenlos berechnen, umzugskosten pro zimmer, umzugskosten vergleich, umzugsfirma preise, umzugsunternehmen kosten, umzugspreis schweiz, umzugsbudget berechnen, umzugskosten schätzen, was kostet ein umzug, umzugskosten 2024, günstiger umzug, umzugsofferten vergleichen, umzugskosten sparen, umzugskosten zürich, umzugskosten genf, umzugskosten bern, umzugskosten basel, umzugskosten steuer absetzen, umzugskosten kalkulation, umzugskosten tabelle, umzugskosten nach distanz, umzugskosten nach zimmeranzahl, versteckte umzugskosten, umzugskosten checkliste',
+  title: 'Umzugskosten berechnen: Kosten Umzugsunternehmen & Umzugsfirma Kosten Tabelle | Online-Offerten.ch',
+  description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Umzugskosten-Rechner für die Schweiz. In 2 Minuten wissen, was Ihr Umzug kostet! Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugskosten-rechner',
   },
   openGraph: {
-    title: 'Umzugskosten-Rechner 2024: Kostenlos berechnen in 2 Minuten',
-    description: 'Umzugskosten kostenlos berechnen: In 2 Minuten wissen, was Ihr Umzug kostet! Unser Rechner liefert sofortige Preis-Schätzung für Umzüge in der Schweiz.',
+    title: 'Umzugskosten berechnen: Kosten Umzugsunternehmen & Umzugsfirma Kosten Tabelle',
+    description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Umzugskosten-Rechner für die Schweiz. In 2 Minuten wissen, was Ihr Umzug kostet!',
     url: 'https://online-offerten.ch/umzugskosten-rechner',
     siteName: 'Online-Offerten.ch',
     locale: 'de_CH',
@@ -26,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugskosten-Rechner 2024: Kostenlos berechnen',
-    description: 'Umzugskosten kostenlos berechnen: In 2 Minuten wissen, was Ihr Umzug kostet!',
+    title: 'Umzugskosten berechnen: Kosten Umzugsunternehmen & Umzugsfirma Kosten Tabelle',
+    description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Rechner für die Schweiz.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },
   robots: {

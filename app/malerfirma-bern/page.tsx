@@ -5,7 +5,6 @@ import MalerfirmaBernPageClient from '@/components/pages/locations/MalerfirmaBer
 export const metadata: Metadata = {
   title: 'Malerfirma in Bern finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma in Bern finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Bern. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma Bern, Malerfirma in Bern, Maler Bern, Malerarbeiten Bern, Innenanstrich Bern, Aussenanstrich Bern, Fassadenanstrich Bern, Malerfirma Bern vergleichen, Malerbetrieb Bern',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-bern',
   },

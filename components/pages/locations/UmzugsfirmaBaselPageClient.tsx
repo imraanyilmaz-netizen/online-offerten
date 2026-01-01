@@ -11,6 +11,7 @@ import CantonFlag from '@/components/CantonFlag';
 import LocationFAQ from '@/components/locations/LocationFAQ';
 import { faqs } from '@/data/locationFaqs';
 import LocationSidebar from '@/components/locations/LocationSidebar';
+import { cityServiceData } from '@/data/cityLocalBusinessData';
 
 const AdvantageItem = ({ text, delay }: any) => {
   return (
@@ -73,27 +74,47 @@ const UmzugsfirmaBaselPageClient = () => {
   ];
 
   const faqItemsForSchema = faqs.move.concat(faqs.clean);
-  const schemaData = {
+  const cityData = cityServiceData[city];
+  
+  // Service Schema with areaServed (correct for platform/aggregator model)
+  const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "name": cityData.displayName,
+    "description": `Geprüfte Umzugsfirmen und Zügelfirmen in ${city} vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen.`,
     "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
     "provider": {
       "@type": "Organization",
-      "name": `Online-Offerten.ch - Umzugsfirmen in ${city}`
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
     },
     "areaServed": {
       "@type": "City",
-      "name": "Basel",
+      "name": city,
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Basel",
-        "addressRegion": "BS",
+        "addressLocality": cityData.addressLocality,
+        "addressRegion": cityData.addressRegion,
         "addressCountry": "CH"
+    },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": cityData.latitude,
+        "longitude": cityData.longitude
       }
     },
-    "name": metaTitle,
-    "description": metaDescription,
-    "mainEntity": {
+    "url": `https://online-offerten.ch${canonicalUrl}`,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CHF",
+      "name": "Kostenlose Umzugsofferten"
+    }
+  };
+
+  // FAQ Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": faqItemsForSchema.map(item => ({
             "@type": "Question",
@@ -103,11 +124,23 @@ const UmzugsfirmaBaselPageClient = () => {
                 "text": item.answer.map((ans: any) => typeof ans === 'string' ? ans : (ans.de || ans)).join(' ').replace(/{city}/g, city)
             }
         }))
-    }
+  };
+
+  // Combined Schema
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      serviceSchema,
+      faqSchema
+    ]
   };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       
       <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 md:py-16">
         <div className="container mx-auto max-w-navbar px-4 md:px-6">

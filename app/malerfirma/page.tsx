@@ -5,7 +5,6 @@ import MalerfirmaPageClient from '@/components/pages/info/MalerfirmaPageClient'
 export const metadata: Metadata = {
   title: 'Malerfirma finden & vergleichen » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma finden und vergleichen ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in der Schweiz. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma, Malerfirma Schweiz, Malerfirma finden, Malerfirma vergleichen, beste Malerfirma, Malerfirma in der Nähe, Malerfirma Zürich, Malerfirma Basel, Malerfirma Bern, günstige Malerfirma, seriöse Malerfirma, Malerfirma Offerten, Maler finden, Malerarbeiten, Innenanstrich, Aussenanstrich, Fassadenanstrich',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma',
   },

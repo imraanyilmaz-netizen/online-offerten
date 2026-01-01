@@ -12,6 +12,7 @@ import CantonFlag from '@/components/CantonFlag';
 import LocationFAQ from '@/components/locations/LocationFAQ';
 import { faqs } from '@/data/locationFaqs';
 import LocationSidebar from '@/components/locations/LocationSidebar';
+import { cityServiceData } from '@/data/cityLocalBusinessData';
 
 const AdvantageItem = ({ icon: Icon, title, text, delay }: any) => {
   return (
@@ -55,32 +56,42 @@ const UmzugsfirmaZurichPageClient = () => {
   ];
 
   const faqItemsForSchema = faqs.move.concat(faqs.clean);
+  const cityData = cityServiceData[city];
   
-  // LocalBusiness Schema
-  const localBusinessSchema = {
+  // Service Schema with areaServed (correct for platform/aggregator model)
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Umzugsfirmen in Zürich",
+    "@type": "Service",
+    "name": cityData.displayName,
     "description": "Geprüfte Umzugsfirmen und Zügelfirmen in Zürich vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Zürich",
-      "addressRegion": "ZH",
-      "addressCountry": "CH"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "47.3769",
-      "longitude": "8.5417"
+    "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
+    "provider": {
+      "@type": "Organization",
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
     },
     "areaServed": {
       "@type": "City",
-      "name": "Zürich"
+      "name": city,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": cityData.addressLocality,
+        "addressRegion": cityData.addressRegion,
+        "addressCountry": "CH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": cityData.latitude,
+        "longitude": cityData.longitude
+      }
     },
-    "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
-    "url": "https://online-offerten.ch/umzugsfirma-zuerich",
-    "telephone": "+41",
-    "priceRange": "$$"
+    "url": `https://online-offerten.ch${canonicalUrl}`,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CHF",
+      "name": "Kostenlose Umzugsofferten"
+    }
   };
 
   // FAQ Schema
@@ -101,7 +112,7 @@ const UmzugsfirmaZurichPageClient = () => {
   const combinedSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      localBusinessSchema,
+      serviceSchema,
       faqSchema
     ]
   };

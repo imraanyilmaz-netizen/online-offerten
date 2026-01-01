@@ -12,7 +12,7 @@ import {
   FileText, GitCompareArrows, Award, KeyRound as UsersRound,
   MapPin, Calculator, ListChecks, BookOpen, ArrowRight,
   Star, User, ChevronLeft, Send, Loader2, HelpCircle,
-  ShieldCheck, TrendingUp, Users, Search
+  ShieldCheck, TrendingUp, Users, Search, Clock
 } from 'lucide-react';
 import MovingCostCalculator from '@/components/UmzugskostenRechnerSections/MovingCostCalculator';
 import CleaningCostCalculator from '@/components/ReinigungskostenRechnerSections/CleaningCostCalculator';
@@ -250,6 +250,17 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
         "sameAs": [
           "https://online-offerten.ch"
         ]
+      },
+      {
+        "@type": "QAPage",
+        "mainEntity": {
+          "@type": "Question",
+          "name": "Wo kann ich kostenlose Offerten für Umzug und Reinigung vergleichen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Auf Online-Offerten.ch finden Sie qualifizierte Umzugsfirmen & Reinigungsfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Alle Offerten sind unverbindlich und transparent."
+          }
+        }
       }
     ]
   }), [metaDescription]);
@@ -462,10 +473,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     Unverbindlich & transparent
                   </div>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                    Offerten vergleichen & den passenden Anbieter finden
+                  Kostenlose Offerten vergleichen & den passenden Anbieter finden
                   </h1>
                   <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                    Wählen Sie einen Service und erhalten Sie mehrere Offerten von geprüften Anbietern für Umzug, Reinigung oder Renovierung. Einfach vergleichen und bis zu 40% sparen.
+                  Finden Sie qualifizierte Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen in Ihrer Region – 
+verglichen, geprüft & bis zu 40% günstiger. 
+Endlich stressfrei: Vertrauenswürdige Partner finden & vergleichen
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button
@@ -505,7 +518,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     </div>
                     <div className="flex items-center">
                       <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                      <span>Bis zu 40% sparen durch Vergleich</span>
+                      <span>Schnelle Antworten innerhalb von 24h</span>
                     </div>
                   </div>
                 </div>
@@ -546,13 +559,42 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                         </div>
                       </div>
                       <div className="flex items-start">
-                        <TrendingUp className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                        <Award className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">Bis zu 40% sparen</p>
+                          <p className="font-semibold text-gray-900">Transparente Preise & individuelle Offerten</p>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* SEO Optimized Content Section */}
+          <section className="py-8 md:py-12 bg-white">
+            <div className="container mx-auto max-w-navbar px-4 md:px-6">
+              <div className="max-w-4xl mx-auto">
+                <div className="p-6 md:p-8 bg-green-50 rounded-xl border border-green-200">
+                  <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+                    <strong>Online-Offerten.ch</strong> ist Ihr kostenloser Preisvergleich für{' '}
+                    <Link href="/umzugsofferten" className="text-green-600 font-semibold hover:text-green-700 underline">
+                      Umzugsofferten
+                    </Link>
+                    ,{' '}
+                    <Link href="/reinigung" className="text-green-600 font-semibold hover:text-green-700 underline">
+                      Reinigungsofferten
+                    </Link>
+                    ,{' '}
+                    <Link href="/malerarbeiten" className="text-green-600 font-semibold hover:text-green-700 underline">
+                      Malerarbeiten Offerten
+                    </Link>
+                    {' '}und{' '}
+                    <Link href="/gartenarbeiten" className="text-green-600 font-semibold hover:text-green-700 underline">
+                      Gartenarbeiten Offerten
+                    </Link>
+                    . Vergleichen Sie mehrere Angebote und finden Sie den besten Preis. Alle Offerten sind <strong>100% kostenlos & unverbindlich</strong>.
+                  </p>
                 </div>
               </div>
             </div>
@@ -1187,7 +1229,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     {
                       value: "faq-4",
                       question: "Sind die Partnerfirmen geprüft und versichert?",
-                      answer: "Ja, alle Partnerfirmen auf unserer Plattform werden von uns sorgfältig geprüft. Wir verifizieren ihre Geschäftslizenzen, Versicherungen und Qualifikationen. Zudem sammeln wir regelmäßig Kundenbewertungen, um sicherzustellen, dass nur zuverlässige und professionelle Firmen in unserem Netzwerk sind. Ihre Sicherheit und Zufriedenheit stehen für uns an erster Stelle."
+                      answer: "Ja, alle Partnerfirmen auf unserer Plattform werden von uns sorgfältig geprüft. Wir verifizieren ihre Geschäftslizenzen, Versicherungen und Qualifikationen. Zudem sammeln wir regelmässig Kundenbewertungen, um sicherzustellen, dass nur zuverlässige und professionelle Firmen in unserem Netzwerk sind. Ihre Sicherheit und Zufriedenheit stehen für uns an erster Stelle."
                     },
                     {
                       value: "faq-5",

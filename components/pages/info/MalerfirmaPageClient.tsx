@@ -178,13 +178,26 @@ const MalerfirmaPageClient = () => {
     script.id = 'malerfirma-schema'
     
     const existing = document.getElementById('malerfirma-schema')
-    if (existing) existing.remove()
+    if (existing && existing.parentNode) {
+      try {
+        existing.remove()
+      } catch (e) {
+        // Element zaten kaldırılmış olabilir
+      }
+    }
     
     document.head.appendChild(script)
     
     return () => {
+      if (typeof document === 'undefined') return
       const scriptToRemove = document.getElementById('malerfirma-schema')
-      if (scriptToRemove) scriptToRemove.remove()
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        try {
+          scriptToRemove.remove()
+        } catch (e) {
+          // Element zaten kaldırılmış olabilir
+        }
+      }
     }
   }, [])
 
@@ -341,7 +354,7 @@ const MalerfirmaPageClient = () => {
     },
     {
       factor: "Flächengrösse",
-      description: "Die zu streichende Fläche in Quadratmetern bestimmt maßgeblich den Preis. Größere Flächen können pro Quadratmeter günstiger sein."
+      description: "Die zu streichende Fläche in Quadratmetern bestimmt massgeblich den Preis. Grössere Flächen können pro Quadratmeter günstiger sein."
     },
     {
       factor: "Vorarbeiten",

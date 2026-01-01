@@ -4,22 +4,22 @@ import HomePageClient from '@/components/pages/HomePageClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Offerten vergleichen – Umzug, Reinigung oder Renovierung',
-  description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen aus Ihrer Region anfordern. Mehrere Angebote vergleichen und bis zu 40% sparen.',
+  title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | Online-Offerten.ch',
+  description: 'Kostenlose Offerten für Umzug, Reinigung & Renovierung vergleichen. Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region. Unverbindlich & transparent.',
   alternates: {
     canonical: 'https://online-offerten.ch/',
   },
   openGraph: {
-    title: 'Offerten vergleichen – Umzug, Reinigung oder Renovierung',
-    description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen aus Ihrer Region anfordern. Mehrere Angebote vergleichen und bis zu 40% sparen.',
+    title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
+    description: 'Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region',
     url: 'https://online-offerten.ch/',
     siteName: 'Online-Offerten.ch',
     images: [
       {
-        url: 'https://online-offerten.ch/image/services-professionals.png',
+        url: 'https://online-offerten.ch/image/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Offerten vergleichen – Umzug, Reinigung oder Renovierung',
+        alt: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
       },
     ],
     locale: 'de_CH',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Offerten vergleichen – Umzug, Reinigung oder Renovierung',
-    description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen aus Ihrer Region anfordern. Mehrere Angebote vergleichen und bis zu 40% sparen.',
-    images: ['https://online-offerten.ch/image/services-professionals.png'],
+    title: 'Offerten vergleichen - Kostenlose Offerten',
+    description: 'Bis zu 40% sparen mit geprüften Firmen',
+    images: ['https://online-offerten.ch/image/og-image.jpg'],
   },
   robots: {
     index: true,

@@ -697,6 +697,36 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
            {errors && errors.quotes_wanted && <p className="text-xs text-red-500 mt-1">{errors.quotes_wanted}</p>}
         </SectionCard>
       </div>
+
+      {/* Datenschutz Checkbox */}
+      <Card className="w-full bg-white shadow-md border-gray-200 rounded-lg overflow-hidden">
+        <CardContent className="p-4">
+          <div className="flex items-start space-x-3">
+            <Checkbox 
+              id="datenschutz" 
+              name="datenschutz" 
+              checked={formData.datenschutz || false} 
+              onCheckedChange={(checked) => handleCheckboxChange('datenschutz', checked)} 
+              className={`h-5 w-5 mt-0.5 ${errors && errors.datenschutz ? "border-red-500" : ""}`}
+              required
+            />
+            <Label htmlFor="datenschutz" className="text-sm text-slate-700 leading-relaxed cursor-pointer flex-1">
+              Ich akzeptiere die{' '}
+              <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">
+                AGB
+              </Link>
+              {' '}und die{' '}
+              <Link href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">
+                Datenschutzerklärung
+              </Link>
+              .
+            </Label>
+          </div>
+          {errors && errors.datenschutz && (
+            <p className="text-sm text-red-500 mt-2">{errors.datenschutz}</p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -41,6 +41,7 @@ const initialFormData = {
   additional_info: '',
   how_found: '',
   quotes_wanted: '4',
+  datenschutz: false,
   errors: {},
   cleaning_frequency: '',
   what_to_clean: {},

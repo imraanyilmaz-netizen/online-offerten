@@ -5,7 +5,6 @@ import ReinigungsfirmaStadtPageClient from '@/components/pages/info/Reinigungsfi
 export const metadata: Metadata = {
   title: 'Reinigungsfirma Bern finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Reinigungsfirma Bern finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Bern. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Reinigungsfirma Bern, Reinigungsfirma Bern finden, Reinigungsfirma Bern vergleichen, Reinigungsfirma in Bern, Reinigungsunternehmen Bern, Reinigungsservice Bern, Büroreinigung Bern, Haushaltsreinigung Bern, Umzugsreinigung Bern, Reinigungsfirma Bern Preise',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-bern',
   },

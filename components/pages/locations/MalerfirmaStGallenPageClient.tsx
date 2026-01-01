@@ -98,13 +98,26 @@ const MalerfirmaStGallenPageClient = () => {
     script.id = 'malerfirma-st-gallen-schema'
     
     const existing = document.getElementById('malerfirma-st-gallen-schema')
-    if (existing) existing.remove()
+    if (existing && existing.parentNode) {
+      try {
+        existing.remove()
+      } catch (e) {
+        // Element zaten kaldırılmış olabilir
+      }
+    }
     
     document.head.appendChild(script)
     
     return () => {
+      if (typeof document === 'undefined') return
       const scriptToRemove = document.getElementById('malerfirma-st-gallen-schema')
-      if (scriptToRemove) scriptToRemove.remove()
+      if (scriptToRemove && scriptToRemove.parentNode) {
+        try {
+          scriptToRemove.remove()
+        } catch (e) {
+          // Element zaten kaldırılmış olabilir
+        }
+      }
     }
   }, [])
 

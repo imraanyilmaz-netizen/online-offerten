@@ -5,7 +5,6 @@ import ReinigungsfirmaStadtPageClient from '@/components/pages/info/Reinigungsfi
 export const metadata: Metadata = {
   title: 'Reinigungsfirma St. Gallen finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Reinigungsfirma St. Gallen finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in St. Gallen. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Reinigungsfirma St. Gallen, Reinigungsfirma St. Gallen finden, Reinigungsfirma St. Gallen vergleichen, Reinigungsfirma in St. Gallen, Reinigungsunternehmen St. Gallen, Reinigungsservice St. Gallen, Büroreinigung St. Gallen, Haushaltsreinigung St. Gallen, Umzugsreinigung St. Gallen, Reinigungsfirma St. Gallen Preise',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-st-gallen',
   },

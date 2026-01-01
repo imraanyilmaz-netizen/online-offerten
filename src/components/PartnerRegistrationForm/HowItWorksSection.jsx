@@ -24,7 +24,7 @@ const HowItWorksSection = () => {
     { 
       icon: Award, 
       title: "Erfolg feiern & wachsen", 
-      desc: "Gewinnen Sie regelmäßig neue Aufträge und bauen Sie Ihr Umzugs-, Reinigungs-, Maler- oder Gartenbau-Unternehmen erfolgreich aus. Mit qualifizierten Kundenanfragen aus Ihrer Region wächst Ihr Geschäft kontinuierlich." 
+      desc: "Gewinnen Sie regelmässig neue Aufträge und bauen Sie Ihr Umzugs-, Reinigungs-, Maler- oder Gartenbau-Unternehmen erfolgreich aus. Mit qualifizierten Kundenanfragen aus Ihrer Region wächst Ihr Geschäft kontinuierlich." 
     },
   ];
 

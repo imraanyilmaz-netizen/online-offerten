@@ -211,7 +211,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Menü öffnen/schließen"
+                aria-label="Menü öffnen/schliessen"
                 className="ml-auto"
               >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

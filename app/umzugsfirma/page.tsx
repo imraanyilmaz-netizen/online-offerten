@@ -5,7 +5,6 @@ import UmzugsfirmaPageClient from '@/components/pages/info/UmzugsfirmaPageClient
 export const metadata: Metadata = {
   title: 'Umzugsfirma finden & vergleichen » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Umzugsfirma finden und vergleichen ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in der Schweiz. Privatumzug, Geschäftsumzug, Umzugsreinigung – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Umzugsfirma, Umzugsfirma Schweiz, Umzugsfirma finden, Umzugsfirma vergleichen, beste Umzugsfirma, Umzugsfirma in der Nähe, Umzugsfirma Zürich, Umzugsfirma Basel, Umzugsfirma Bern, günstige Umzugsfirma, seriöse Umzugsfirma, Umzugsfirma Offerten',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma',
   },

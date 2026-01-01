@@ -3,13 +3,13 @@ import HofreinigungPageClient from '@/components/pages/services/HofreinigungPage
 
 export const metadata: Metadata = {
   title: 'Hofreinigung – Kostenlose Offerten vergleichen',
-  description: 'Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Außenbereiche und gepflegte Umgebung.',
+  description: 'Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Aussenbereiche und gepflegte Umgebung.',
   alternates: {
     canonical: 'https://online-offerten.ch/hofreinigung',
   },
   openGraph: {
     title: 'Hofreinigung – Kostenlose Offerten vergleichen',
-    description: 'Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Außenbereiche und gepflegte Umgebung.',
+    description: 'Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Aussenbereiche und gepflegte Umgebung.',
     url: 'https://online-offerten.ch/hofreinigung',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hofreinigung – Kostenlose Offerten vergleichen',
-    description: 'Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Außenbereiche.',
+    description: 'Professionelle Hofreinigung: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für saubere Aussenbereiche.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },
   robots: {

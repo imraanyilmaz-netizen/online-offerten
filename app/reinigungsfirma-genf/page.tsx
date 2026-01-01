@@ -5,7 +5,6 @@ import ReinigungsfirmaStadtPageClient from '@/components/pages/info/Reinigungsfi
 export const metadata: Metadata = {
   title: 'Reinigungsfirma Genf finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Reinigungsfirma Genf finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Genf. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Reinigungsfirma Genf, Reinigungsfirma Genf finden, Reinigungsfirma Genf vergleichen, Reinigungsfirma in Genf, Reinigungsunternehmen Genf, Reinigungsservice Genf, Büroreinigung Genf, Haushaltsreinigung Genf, Umzugsreinigung Genf, Reinigungsfirma Genf Preise',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-genf',
   },

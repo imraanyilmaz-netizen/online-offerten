@@ -5,7 +5,6 @@ import MalerfirmaZurichPageClient from '@/components/pages/locations/MalerfirmaZ
 export const metadata: Metadata = {
   title: 'Malerfirma in Zürich finden » Bis zu 40% sparen | Online-Offerten.ch',
   description: 'Malerfirma in Zürich finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Zürich. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
-  keywords: 'Malerfirma Zürich, Malerfirma in Zürich, Maler Zürich, Malerarbeiten Zürich, Innenanstrich Zürich, Aussenanstrich Zürich, Fassadenanstrich Zürich, Malerfirma Zürich vergleichen, Malerbetrieb Zürich',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-zuerich',
   },
