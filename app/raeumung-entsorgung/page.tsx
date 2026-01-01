@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import RaeumungEntsorgungPageClient from '@/components/pages/services/RaeumungEntsorgungPageClient'
 
 export const metadata: Metadata = {
-  title: 'Räumung & Entsorgung Schweiz finden & vergleichen » Kostenlose Offerten | Professionell & Günstig',
+  title: 'Räumung & Entsorgung Schweiz: Kostenlose Offerten',
   description: 'Räumung & Entsorgung Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Entsorgungsfirmen. Wohnungsräumung, Haushaltsauflösung, Kellerräumung & umweltgerechte Entsorgung – professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/raeumung-entsorgung',

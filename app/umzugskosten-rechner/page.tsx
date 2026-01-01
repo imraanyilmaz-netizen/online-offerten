@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugskostenRechnerPageClient from '@/components/pages/tools/UmzugskostenRechnerPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugskosten berechnen: Kosten Umzugsunternehmen & Umzugsfirma Kosten Tabelle | Online-Offerten.ch',
+  title: 'Umzugskosten berechnen: Kostenlos & schnell',
   description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Umzugskosten-Rechner für die Schweiz. In 2 Minuten wissen, was Ihr Umzug kostet! Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugskosten-rechner',

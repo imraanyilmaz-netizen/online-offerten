@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import UmzugsfirmaPageClient from '@/components/pages/info/UmzugsfirmaPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma finden & vergleichen » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Umzugsfirma finden & vergleichen – Bis zu 40% sparen',
   description: 'Umzugsfirma finden und vergleichen ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in der Schweiz. Privatumzug, Geschäftsumzug, Umzugsreinigung – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma',

@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import PartnerRegistrationPageClient from '@/components/pages/PartnerRegistrationPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma, Reinigungsfirma, Malerbetrieb & Gartenbau Partner werden | Kostenlose Registrierung',
+  title: 'Partner werden: Kostenlose Registrierung',
   description: 'Werden Sie Partner für Umzug, Reinigung, Malerarbeiten & Gartenbau. Erhalten Sie qualifizierte Kundenanfragen aus Ihrer Region. Kostenlos registrieren & mehr Aufträge gewinnen.',
   alternates: {
     canonical: 'https://online-offerten.ch/partner-werden',
   },
   openGraph: {
-    title: 'Umzugsfirma, Reinigungsfirma, Malerbetrieb & Gartenbau Partner werden | Kostenlose Registrierung',
+    title: 'Partner werden: Kostenlose Registrierung',
     description: 'Werden Sie Partner für Umzug, Reinigung, Malerarbeiten & Gartenbau. Erhalten Sie qualifizierte Kundenanfragen aus Ihrer Region. Kostenlos registrieren & mehr Aufträge gewinnen.',
     url: 'https://online-offerten.ch/partner-werden',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirma, Reinigungsfirma, Malerbetrieb & Gartenbau Partner werden | Kostenlose Registrierung',
+    title: 'Partner werden: Kostenlose Registrierung',
     description: 'Werden Sie Partner für Umzug, Reinigung, Malerarbeiten & Gartenbau. Erhalten Sie qualifizierte Kundenanfragen aus Ihrer Region.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },

@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import MalerfirmaStGallenPageClient from '@/components/pages/locations/MalerfirmaStGallenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Malerfirma in St. Gallen finden » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Malerfirma in St. Gallen finden – Bis zu 40% sparen',
   description: 'Malerfirma in St. Gallen finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in St. Gallen. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-st-gallen',

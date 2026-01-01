@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import MalerarbeitenPageClient from '@/components/pages/services/MalerarbeitenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Malerarbeiten Schweiz finden & vergleichen » Kostenlose Offerten | Bis zu 40% sparen',
+  title: 'Malerarbeiten Schweiz: Kostenlose Offerten vergleichen',
   description: 'Malerarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Malerfirmen. Innenanstrich, Aussenanstrich, Fassadenanstrich & Renovierung – sicher, professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/malerarbeiten',

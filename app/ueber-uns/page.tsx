@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import AboutPageClient from '@/components/pages/AboutPageClient'
 
 export const metadata: Metadata = {
-  title: 'Über uns | Online-Offerten.ch - Ihre Experten für Umzug & Reinigung',
+  title: 'Über uns – Ihre Experten für Umzug & Reinigung',
   description: 'Erfahren Sie mehr über Online-Offerten.ch, Ihre zuverlässige Plattform für Umzugs-, Reinigungs- und Räumungsdienste in der Schweiz. Unsere Mission, Vision und Werte.',
   alternates: {
     canonical: 'https://online-offerten.ch/ueber-uns',
   },
   openGraph: {
-    title: 'Über uns | Online-Offerten.ch - Ihre Experten für Umzug & Reinigung',
+    title: 'Über uns – Ihre Experten für Umzug & Reinigung',
     description: 'Erfahren Sie mehr über Online-Offerten.ch, Ihre zuverlässige Plattform für Umzugs-, Reinigungs- und Räumungsdienste in der Schweiz. Unsere Mission, Vision und Werte.',
     url: 'https://online-offerten.ch/ueber-uns',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Über uns | Online-Offerten.ch - Ihre Experten für Umzug & Reinigung',
+    title: 'Über uns – Ihre Experten für Umzug & Reinigung',
     description: 'Erfahren Sie mehr über Online-Offerten.ch, Ihre zuverlässige Plattform für Umzugs-, Reinigungs- und Räumungsdienste in der Schweiz.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },

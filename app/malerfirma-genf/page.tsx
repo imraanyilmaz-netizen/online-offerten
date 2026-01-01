@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import MalerfirmaGenfPageClient from '@/components/pages/locations/MalerfirmaGenfPageClient'
 
 export const metadata: Metadata = {
-  title: 'Malerfirma in Genf finden » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Malerfirma in Genf finden – Bis zu 40% sparen',
   description: 'Malerfirma in Genf finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Genf. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-genf',

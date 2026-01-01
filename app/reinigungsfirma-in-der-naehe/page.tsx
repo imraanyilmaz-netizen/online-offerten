@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import ReinigungsfirmaInDerNaehePageClient from '@/components/pages/info/ReinigungsfirmaInDerNaehePageClient'
 
 export const metadata: Metadata = {
-  title: 'Reinigungsfirma in der Nähe finden » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Reinigungsfirma in der Nähe finden – Bis zu 40% sparen',
   description: 'Reinigungsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-in-der-naehe',

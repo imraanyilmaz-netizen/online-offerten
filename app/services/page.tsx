@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import ServicesPageClient from '@/components/pages/ServicesPageClient'
 
 export const metadata: Metadata = {
-  title: 'Dienstleistungen | Umzug, Reinigung, Räumung - Online-offerten.ch',
+  title: 'Dienstleistungen: Umzug, Reinigung & Räumung',
   description: 'Entdecken Sie unsere umfassenden Dienstleistungen für Umzug, Reinigung, Räumung und mehr in der Schweiz. Fordern Sie jetzt Ihre kostenlose offerten an.',
   alternates: {
     canonical: 'https://online-offerten.ch/services',
   },
   openGraph: {
-    title: 'Dienstleistungen | Umzug, Reinigung, Räumung - Online-offerten.ch',
+    title: 'Dienstleistungen: Umzug, Reinigung & Räumung',
     description: 'Entdecken Sie unsere umfassenden Dienstleistungen für Umzug, Reinigung, Räumung und mehr in der Schweiz. Fordern Sie jetzt Ihre kostenlose offerten an.',
     url: 'https://online-offerten.ch/services',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dienstleistungen | Umzug, Reinigung, Räumung - Online-offerten.ch',
+    title: 'Dienstleistungen: Umzug, Reinigung & Räumung',
     description: 'Entdecken Sie unsere umfassenden Dienstleistungen für Umzug, Reinigung, Räumung und mehr in der Schweiz.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },

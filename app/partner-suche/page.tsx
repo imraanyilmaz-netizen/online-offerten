@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import PartnerSearchPageClient from '@/components/pages/PartnerSearchPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirmen & Reinigungsfirmen Schweiz finden & vergleichen » Kostenlose Offerten',
+  title: 'Umzugsfirmen & Reinigungsfirmen Schweiz finden',
   description: 'Finden Sie qualifizierte Umzugsfirmen und Reinigungsfirmen in Ihrer Region. Vergleichen Sie Bewertungen, Services und Preise von verifizierten Partnern auf Online-Offerten.ch.',
   alternates: {
     canonical: 'https://online-offerten.ch/partner-suche',
   },
   openGraph: {
-    title: 'Umzugsfirmen & Reinigungsfirmen Schweiz finden & vergleichen » Kostenlose Offerten',
+    title: 'Umzugsfirmen & Reinigungsfirmen Schweiz finden',
     description: 'Finden Sie qualifizierte Umzugsfirmen und Reinigungsfirmen in Ihrer Region. Vergleichen Sie Bewertungen, Services und Preise von verifizierten Partnern auf Online-Offerten.ch.',
     url: 'https://online-offerten.ch/partner-suche',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirmen & Reinigungsfirmen Schweiz finden & vergleichen » Kostenlose Offerten',
+    title: 'Umzugsfirmen & Reinigungsfirmen Schweiz finden',
     description: 'Finden Sie qualifizierte Umzugsfirmen und Reinigungsfirmen in Ihrer Region. Vergleichen Sie Bewertungen, Services und Preise von verifizierten Partnern.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },

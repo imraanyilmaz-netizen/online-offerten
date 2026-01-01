@@ -122,7 +122,7 @@ async function generateSitemap() {
 
   // Service pages that should have higher priority
   const servicePages = [
-    '/privatumzug', '/geschaeftsumzug', '/internationale-umzuege', '/spezialtransporte', 
+    '/privatumzug', '/geschaeftsumzug', '/umzugshilfe', '/internationale-umzuege', '/spezialtransporte', 
     '/klaviertransport', '/reinigung', '/wohnungsreinigung', '/hausreinigung', 
     '/bueroreinigung', '/umzugsreinigung', '/unterhaltsreinigung', '/grundreinigung', 
     '/baureinigung', '/fensterreinigung', '/bodenreinigung', '/fassadenreinigung', 
@@ -169,6 +169,7 @@ async function generateSitemap() {
     '/anfrage-status', // Private route
     '/bewertung', // Private route
     '/post', // Internal route
+    '/email-confirmed', // Email confirmation page (noindex, nofollow)
   ];
 
   // Get all static routes from app directory

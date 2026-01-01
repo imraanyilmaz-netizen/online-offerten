@@ -4,7 +4,7 @@ import HomePageClient from '@/components/pages/HomePageClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | Online-Offerten.ch',
+  title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
   description: 'Kostenlose Offerten für Umzug, Reinigung & Renovierung vergleichen. Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region. Unverbindlich & transparent.',
   alternates: {
     canonical: 'https://online-offerten.ch/',

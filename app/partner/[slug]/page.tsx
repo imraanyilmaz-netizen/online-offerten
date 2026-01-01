@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   
   if (!partner) {
     return {
-      title: 'Partner nicht gefunden | Online-Offerten.ch',
+      title: 'Partner nicht gefunden',
     }
   }
 
   return {
-    title: `${partner.company_name} | Umzugsfirma & Reinigungsfirma | Online-Offerten.ch`,
+    title: `${partner.company_name} | Umzugsfirma & Reinigungsfirma`,
     description: partner.description || `Professionelle Umzugs- und Reinigungsdienstleistungen von ${partner.company_name} in ${partner.address_city}. Jetzt kostenlose Offerte anfordern.`,
     alternates: {
       canonical: `https://online-offerten.ch/partner/${partner.slug}`,

@@ -476,9 +476,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   Kostenlose Offerten vergleichen & den passenden Anbieter finden
                   </h1>
                   <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                  Finden Sie qualifizierte Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen in Ihrer Region – 
-verglichen, geprüft & bis zu 40% günstiger. 
-Endlich stressfrei: Vertrauenswürdige Partner finden & vergleichen
+                  Finden Sie qualifizierte Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Endlich stressfrei: Vertrauenswürdige Partner finden & vergleichen
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button

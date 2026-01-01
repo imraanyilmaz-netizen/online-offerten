@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import LoginPageClient from '@/components/pages/LoginPageClient'
 
 export const metadata: Metadata = {
-  title: 'Anmeldung - Partner & Admin Login | Online-Offerten.ch',
+  title: 'Anmeldung - Partner & Admin Login',
   description: 'Melden Sie sich als Partner oder Administrator bei Online-Offerten.ch an, um Ihr Dashboard zu nutzen und Ihre Anfragen zu verwalten.',
   robots: {
     index: false,

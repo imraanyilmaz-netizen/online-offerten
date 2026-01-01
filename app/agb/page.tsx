@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import TermsAndConditionsPageClient from '@/components/pages/TermsAndConditionsPageClient'
 
 export const metadata: Metadata = {
-  title: 'Allgemeine Geschäftsbedingungen | Online-Offerten.ch',
+  title: 'Allgemeine Geschäftsbedingungen',
   description: 'Lesen Sie unsere Allgemeinen Geschäftsbedingungen (AGB) für Partnerfirmen. Gültig für Umzugsfirmen in der Schweiz.',
   robots: {
     index: false,

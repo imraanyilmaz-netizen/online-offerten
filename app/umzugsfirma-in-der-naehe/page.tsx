@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import UmzugsfirmaInDerNaehePageClient from '@/components/pages/info/UmzugsfirmaInDerNaehePageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen | Online-Offerten.ch',
+  title: 'Umzugsfirma in der Nähe finden – Geprüfte Partner',
   description: 'Umzugsfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und transparent. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-in-der-naehe',

@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import MalerfirmaLuzernPageClient from '@/components/pages/locations/MalerfirmaLuzernPageClient'
 
 export const metadata: Metadata = {
-  title: 'Malerfirma in Luzern finden » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Malerfirma in Luzern finden – Bis zu 40% sparen',
   description: 'Malerfirma in Luzern finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Luzern. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-luzern',

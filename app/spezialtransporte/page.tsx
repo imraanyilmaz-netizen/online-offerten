@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import SpezialtransportePageClient from '@/components/pages/services/SpezialtransportePageClient'
 
 export const metadata: Metadata = {
-  title: 'Spezialtransporte: Kostenlose Offerten vergleichen | Online-Offerten.ch',
+  title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
   description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/spezialtransporte',
   },
   openGraph: {
-    title: 'Spezialtransporte: Kostenlose Offerten vergleichen | Online-Offerten.ch',
+    title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
     description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!',
     url: 'https://online-offerten.ch/spezialtransporte',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Spezialtransporte: Kostenlose Offerten vergleichen | Online-Offerten.ch',
+    title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
     description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },

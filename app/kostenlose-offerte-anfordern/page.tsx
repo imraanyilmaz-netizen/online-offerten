@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import QuoteFormPageClient from '@/components/pages/payment/QuoteFormPageClient'
 
 export const metadata: Metadata = {
-  title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Renovierung | Online-Offerten.ch',
+  title: 'Kostenlose Offerten anfordern – Umzug & Reinigung',
   description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Renovierungsfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%. Unverbindlich & kostenlos.',
   
   alternates: {

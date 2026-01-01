@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import ReinigungsfirmaStadtPageClient from '@/components/pages/info/ReinigungsfirmaStadtPageClient'
 
 export const metadata: Metadata = {
-  title: 'Reinigungsfirma Basel finden » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Reinigungsfirma Basel finden – Bis zu 40% sparen',
   description: 'Reinigungsfirma Basel finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Basel. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-basel',

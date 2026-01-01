@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import ReinigungsfirmaStadtPageClient from '@/components/pages/info/ReinigungsfirmaStadtPageClient'
 
 export const metadata: Metadata = {
-  title: 'Reinigungsfirma Bern finden » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Reinigungsfirma Bern finden – Bis zu 40% sparen',
   description: 'Reinigungsfirma Bern finden ✓ Bis zu 6 kostenlose Offerten von geprüften Reinigungsfirmen in Bern. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma-bern',

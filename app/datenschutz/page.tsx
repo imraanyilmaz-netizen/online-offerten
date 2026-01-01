@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import PrivacyPolicyPageClient from '@/components/pages/PrivacyPolicyPageClient'
 
 export const metadata: Metadata = {
-  title: 'Datenschutzbestimmungen | Online-Offerten.ch',
+  title: 'Datenschutzbestimmungen',
   description: 'Erfahren Sie, wie wir Ihre Daten schützen. Unsere Datenschutzbestimmungen gemäss Schweizer DSG.',
   robots: {
     index: false,

@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import MalerfirmaInDerNaehePageClient from '@/components/pages/info/MalerfirmaInDerNaehePageClient'
 
 export const metadata: Metadata = {
-  title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen | Online-Offerten.ch',
+  title: 'Malerfirma in der Nähe finden – Bis zu 40% sparen',
   description: 'Malerfirma in der Nähe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/malerfirma-in-der-naehe',
