@@ -115,6 +115,15 @@ export const cityServiceData: Record<string, {
     latitude: '47.1367',
     longitude: '7.2467',
     canonicalUrl: '/umzugsfirma-biel-bienne'
+  },
+  'Aargau': {
+    name: 'Aargau',
+    displayName: 'Zügelfirma Aargau – Online-Offerten.ch',
+    addressLocality: 'Aarau',
+    addressRegion: 'AG',
+    latitude: '47.3925',
+    longitude: '8.0447',
+    canonicalUrl: '/umzugsfirma-aargau'
   }
 }
 

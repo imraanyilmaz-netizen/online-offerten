@@ -139,6 +139,20 @@ async function generateSitemap() {
     '/umzugsfirma-zuerich'
   ];
 
+  // Aargau city pages (dynamic routes)
+  const aargauCityPages = [
+    '/umzugsfirma-aargau/aarau',
+    '/umzugsfirma-aargau/baden',
+    '/umzugsfirma-aargau/zofingen',
+    '/umzugsfirma-aargau/brugg',
+    '/umzugsfirma-aargau/wettingen'
+  ];
+
+  // Cost pages
+  const costPages = [
+    '/umzugskosten-aargau'
+  ];
+
   // Reinigungsfirma location pages (reinigungsfirma-* pages)
   const reinigungsfirmaLocationPages = [
     '/reinigungsfirma-zuerich', '/reinigungsfirma-basel', '/reinigungsfirma-bern',
@@ -191,6 +205,14 @@ async function generateSitemap() {
       if (locationPagePrefixes.some(prefix => route.startsWith(prefix))) {
         return false;
       }
+      // Exclude Aargau city pages (handled separately)
+      if (aargauCityPages.includes(route)) {
+        return false;
+      }
+      // Exclude cost pages (handled separately)
+      if (costPages.includes(route)) {
+        return false;
+      }
       // Exclude reinigungsfirma location pages (handled separately)
       if (reinigungsfirmaLocationPages.some(prefix => route.startsWith(prefix))) {
         return false;
@@ -218,27 +240,37 @@ async function generateSitemap() {
       return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', priority);
   });
 
-  // 3. Reinigungsfirma location pages (reinigungsfirma-* pages)
+  // 3. Aargau city pages (dynamic routes)
+  // City pages are important for SEO, so we use weekly changefreq and 0.8 priority
+  const aargauCityPagesEntries = aargauCityPages
+    .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.8'));
+
+  // 4. Cost pages
+  // Cost pages are important for SEO, so we use weekly changefreq and 0.9 priority
+  const costPagesEntries = costPages
+    .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.9'));
+
+  // 5. Reinigungsfirma location pages (reinigungsfirma-* pages)
   // These are important for SEO, so we use weekly changefreq and 0.9 priority
   const reinigungsfirmaPages = reinigungsfirmaLocationPages
     .filter(route => allStaticRoutes.includes(route))
     .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.9'));
 
-  // 4. Malerfirma location pages (malerfirma-* pages)
+  // 6. Malerfirma location pages (malerfirma-* pages)
   // These are important for SEO, so we use weekly changefreq and 0.9 priority
   const malerfirmaPages = malerfirmaLocationPages
     .filter(route => allStaticRoutes.includes(route))
     .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.9'));
 
-  // 5. Standorte page (if exists)
+  // 7. Standorte page (if exists)
   if (allStaticRoutes.includes('/standorte')) {
     locationPages.push(createUrlEntry(`${BASE_URL}/standorte`, today, 'weekly', '0.95'));
   }
 
-  // 6. Dynamic blog post pages
+  // 8. Dynamic blog post pages
   const postPages = posts.map(post => createUrlEntry(`${BASE_URL}/ratgeber/${post.slug}`, post.updated_at, 'weekly', '0.8'));
 
-  // 7. Dynamic partner profile pages
+  // 9. Dynamic partner profile pages
   const partnerPages = partners
     .filter(partner => partner.slug) // Ensure slug exists
     .map(partner => createUrlEntry(`${BASE_URL}/partner/${partner.slug}`, partner.updated_at || today, 'weekly', '0.6'));
@@ -259,6 +291,8 @@ async function generateSitemap() {
   const allUrls = [
     ...sortedStaticPages, // Homepage will be first (priority 1.0)
     ...locationPages,
+    ...aargauCityPagesEntries,
+    ...costPagesEntries,
     ...reinigungsfirmaPages,
     ...malerfirmaPages,
     ...postPages,
