@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import UmzugsfirmaZurichPageClient from '@/components/pages/locations/UmzugsfirmaZurichPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma Zürich > Umzugsofferten vergleichen',
-  description: 'Finden Sie die passende Zügelfirma & Reinigungsfirma in Zürich - Umzugsofferten vergleichen bis zu 40% sparen! - Kostenlose Offerten',
+  title: 'Umzugsfirma Zürich » Top Umzugsunternehmen vergleichen & sparen',
+  description: 'Umzugsfirma Zürich finden ✓ Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen. Kostenlose Offerten für Privat- & Geschäftsumzug.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-zuerich',
   },
   openGraph: {
-    title: 'Umzugsfirma Zürich > Umzugsofferten vergleichen',
-    description: 'Finden Sie die passende Zügelfirma & Reinigungsfirma in Zürich - Umzugsofferten vergleichen bis zu 40% sparen! - Kostenlose Offerten',
+    title: 'Umzugsfirma Zürich » Top Umzugsunternehmen vergleichen & sparen',
+    description: 'Umzugsfirma Zürich finden ✓ Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen. Kostenlose Offerten für Privat- & Geschäftsumzug.',
     url: 'https://online-offerten.ch/umzugsfirma-zuerich',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirma Zürich > Umzugsofferten vergleichen',
-    description: 'Finden Sie die passende Zügelfirma & Reinigungsfirma in Zürich - Umzugsofferten vergleichen bis zu 40% sparen!',
+    title: 'Umzugsfirma Zürich » Top Umzugsunternehmen vergleichen & sparen',
+    description: 'Umzugsfirma Zürich finden ✓ Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },
   robots: {

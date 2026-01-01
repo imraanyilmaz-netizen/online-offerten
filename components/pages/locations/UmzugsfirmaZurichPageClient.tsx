@@ -11,8 +11,16 @@ import LocationPageNavigation from '@/components/locations/LocationPageNavigatio
 import CantonFlag from '@/components/CantonFlag';
 import LocationFAQ from '@/components/locations/LocationFAQ';
 import { faqs } from '@/data/locationFaqs';
-import LocationSidebar from '@/components/locations/LocationSidebar';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
+import dynamic from 'next/dynamic';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
+
+// Lazy load LocationSidebar for better performance
+const LocationSidebar = dynamic(() => import('@/components/locations/LocationSidebar'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-2xl" />
+});
 
 const AdvantageItem = ({ icon: Icon, title, text, delay }: any) => {
   return (
@@ -36,8 +44,8 @@ const UmzugsfirmaZurichPageClient = () => {
   const city = "Zürich";
   const locationData = locations.find(loc => loc.name === city);
 
-  const metaTitle = "Umzugsfirma Zürich: Kostenlose Offerten vergleichen | Online-Offerten.ch";
-  const metaDescription = "Kostenlose Offerten von geprüften Umzugsfirmen in Zürich vergleichen. Privatumzug, Geschäftsumzug & mehr. Bis zu 40% sparen!";
+  const metaTitle = "Umzugsfirma Zürich » Top Umzugsunternehmen vergleichen & sparen";
+  const metaDescription = "Umzugsfirma Zürich finden ✓ Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen. Kostenlose Offerten für Privat- & Geschäftsumzug.";
   const canonicalUrl = '/umzugsfirma-zuerich';
 
   const costTableRows = [
@@ -123,7 +131,7 @@ const UmzugsfirmaZurichPageClient = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
       />
-      <div className="bg-white overflow-x-hidden">
+      <div className={`bg-white overflow-x-hidden ${inter.className}`}>
         {/* Hero Section - Split Layout */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -139,6 +147,8 @@ const UmzugsfirmaZurichPageClient = () => {
               maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
             }}
+            role="img"
+            aria-label="Professionelle Umzugsfirma in Zürich - Umzugsunternehmen bei der Arbeit"
           ></div>
           
           {/* Gradient Overlay - White from left to right */}
@@ -162,7 +172,7 @@ const UmzugsfirmaZurichPageClient = () => {
                 className="bg-white rounded-xl shadow-xl p-5 md:p-6 lg:p-7 w-full overflow-x-hidden"
               >
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 leading-tight break-words">
-                  Umzugsfirma Zürich – geprüfte Zügelfirmen vergleichen
+                  Umzugsfirma Zürich: Geprüfte Zügelfirmen finden & vergleichen
                 </h1>
                 
                 <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed font-medium break-words">

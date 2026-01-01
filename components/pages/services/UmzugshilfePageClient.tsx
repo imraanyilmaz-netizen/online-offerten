@@ -9,8 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { 
   ArrowRight, CheckCircle, Users, ShieldCheck, Clock, TrendingUp, 
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
-  Building, Globe, PackagePlus, Sparkles, Trash2, Brush as PaintBrush, Box,
-  HandHeart
+  Building, Globe, PackagePlus, Sparkles, Trash2, Brush as PaintBrush, Box
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
@@ -31,7 +30,7 @@ const UmzugshilfePageClient = () => {
   const metaTitle = "Umzugshilfe finden & vergleichen » Kostenlose Offerten";
   const metaDescription = "Umzugshilfe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugshelfern und Umzugsfirmen. Professionelle Umzugshilfe für Privatumzug, Geschäftsumzug – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!";
   const canonicalUrl = "https://online-offerten.ch/umzugshilfe";
-  const ogImageUrl = "https://online-offerten.ch/image/umzugsservice-Schweiz/umzugshilfe-finden-vergleichen.png";
+  const ogImageUrl = "https://online-offerten.ch/image/umzugsservice-Schweiz/umzugshilfe-finden-vergleichen.webp";
 
   // FAQ Data for Schema
   const faqItemsForSchema = [
@@ -635,7 +634,7 @@ const UmzugshilfePageClient = () => {
 
             {/* Sidebar */}
             <aside className="lg:col-span-1">
-              <UmzugTypesSidebar services={services} />
+              <UmzugTypesSidebar activeType={null} />
             </aside>
           </div>
         </div>
