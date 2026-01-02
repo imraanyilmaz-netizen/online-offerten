@@ -59,11 +59,53 @@ const serviceSchema = {
   }
 }
 
+// FAQ Schema - Zürich spezifische FAQs
+const zurichFAQs = [
+  {
+    question: "Wie finde ich eine zuverlässige Umzugsfirma in Zürich?",
+    answer: "Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen. Achten Sie auf lokale Erfahrung, besonders mit Umzügen in der Zürcher Innenstadt und den verschiedenen Quartieren. Seriöse Firmen kennen die Parkregelungen, können Halteverbotszonen organisieren und haben Erfahrung mit den typischen Herausforderungen Zürcher Umzüge."
+  },
+  {
+    question: "Was kostet ein Umzug innerhalb von Zürich?",
+    answer: "Die Kosten variieren je nach Wohnungsgrösse, Distanz, Stockwerk und Zugänglichkeit. Ein Umzug innerhalb Zürichs kostet typischerweise zwischen 850 und 3'200 CHF für eine 3.5-Zimmer-Wohnung. Umzüge in höhere Stockwerke ohne Lift oder in die Altstadt können teurer sein. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden."
+  },
+  {
+    question: "Gibt es Besonderheiten bei Umzügen in die Zürcher Altstadt?",
+    answer: "Ja, die engen Gassen, begrenzten Parkmöglichkeiten und die vielen Altstadtgebäude ohne Lift erfordern sorgfältige Planung. Professionelle Umzugsfirmen beantragen Halteverbotszonen rechtzeitig und verwenden geeignete Fahrzeuge für die Altstadt. Viele Gebäude haben steile Treppen, was den Transport in höhere Stockwerke beeinflusst."
+  },
+  {
+    question: "Wie lange im Voraus sollte ich eine Umzugsfirma in Zürich buchen?",
+    answer: "Für einen reibungslosen Ablauf empfehlen wir eine Buchung 4-6 Wochen im Voraus, besonders für Umzüge in die Innenstadt oder während der Hauptumzugszeit (Monatsende). Kurzfristige Buchungen sind möglich, aber die Auswahl an verfügbaren Terminen ist dann begrenzter. Frühbucher erhalten oft bessere Konditionen."
+  },
+  {
+    question: "Kann ich auch einen Umzug von Zürich nach Winterthur organisieren?",
+    answer: "Ja, viele Umzugsfirmen in Zürich bieten auch Umzüge in andere Städte im Kanton an, wie Winterthur, Uster oder Dietikon. Die kurze Distanz macht solche Umzüge oft kostengünstiger als erwartet. Vergleichen Sie mehrere Offerten, um das beste Angebot für Ihren Umzug innerhalb des Kantons zu finden."
+  },
+  {
+    question: "Welche Versicherung benötige ich für einen Umzug in Zürich?",
+    answer: "Professionelle Umzugsfirmen in Zürich sind versichert gemäss OR und verfügen über Transport- und Betriebshaftpflichtversicherung. Zusätzlich können Sie eine Umzugsversicherung für wertvolle Gegenstände abschliessen. Fragen Sie nach dem Versicherungsschutz und prüfen Sie, ob Ihre Hausratversicherung den Umzug abdeckt."
+  }
+]
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": zurichFAQs.map(faq => ({
+    "@type": "Question",
+    "name": String(faq.question),
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": String(faq.answer)
+    }
+  }))
+}
+
 // Combined Schema
 const combinedSchema = {
   "@context": "https://schema.org",
   "@graph": [
-    serviceSchema
+    serviceSchema,
+    faqSchema
   ]
 }
 
@@ -664,6 +706,64 @@ export default function UmzugsfirmaZurichPage() {
                 </div>
               </div>
             </article>
+          </div>
+        </section>
+
+        {/* FAQ Section - Zürich spezifisch */}
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Häufige Fragen zu Umzügen in Zürich
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Antworten auf die wichtigsten Fragen rund um Umzüge im Kanton Zürich
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Wie finde ich eine zuverlässige Umzugsfirma in Zürich?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen. Achten Sie auf lokale Erfahrung, besonders mit Umzügen in der Zürcher Innenstadt und den verschiedenen Quartieren. Seriöse Firmen kennen die Parkregelungen, können Halteverbotszonen organisieren und haben Erfahrung mit den typischen Herausforderungen Zürcher Umzüge.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Was kostet ein Umzug innerhalb von Zürich?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Die Kosten variieren je nach Wohnungsgrösse, Distanz, Stockwerk und Zugänglichkeit. Ein Umzug innerhalb Zürichs kostet typischerweise zwischen 850 und 3'200 CHF für eine 3.5-Zimmer-Wohnung. Umzüge in höhere Stockwerke ohne Lift oder in die Altstadt können teurer sein. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Gibt es Besonderheiten bei Umzügen in die Zürcher Altstadt?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Ja, die engen Gassen, begrenzten Parkmöglichkeiten und die vielen Altstadtgebäude ohne Lift erfordern sorgfältige Planung. Professionelle Umzugsfirmen beantragen Halteverbotszonen rechtzeitig und verwenden geeignete Fahrzeuge für die Altstadt. Viele Gebäude haben steile Treppen, was den Transport in höhere Stockwerke beeinflusst.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Wie lange im Voraus sollte ich eine Umzugsfirma in Zürich buchen?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Für einen reibungslosen Ablauf empfehlen wir eine Buchung 4-6 Wochen im Voraus, besonders für Umzüge in die Innenstadt oder während der Hauptumzugszeit (Monatsende). Kurzfristige Buchungen sind möglich, aber die Auswahl an verfügbaren Terminen ist dann begrenzter. Frühbucher erhalten oft bessere Konditionen.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Kann ich auch einen Umzug von Zürich nach Winterthur organisieren?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Ja, viele Umzugsfirmen in Zürich bieten auch Umzüge in andere Städte im Kanton an, wie Winterthur, Uster oder Dietikon. Die kurze Distanz macht solche Umzüge oft kostengünstiger als erwartet. Vergleichen Sie mehrere Offerten, um das beste Angebot für Ihren Umzug innerhalb des Kantons zu finden.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Welche Versicherung benötige ich für einen Umzug in Zürich?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Professionelle Umzugsfirmen in Zürich sind versichert gemäss OR und verfügen über Transport- und Betriebshaftpflichtversicherung. Zusätzlich können Sie eine Umzugsversicherung für wertvolle Gegenstände abschliessen. Fragen Sie nach dem Versicherungsschutz und prüfen Sie, ob Ihre Hausratversicherung den Umzug abdeckt.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

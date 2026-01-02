@@ -59,11 +59,53 @@ const serviceSchema = {
   }
 }
 
+// FAQ Schema - Aargau spezifische FAQs
+const aargauFAQs = [
+  {
+    question: "Wie finde ich eine seriöse Umzugsfirma im Aargau?",
+    answer: "Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen im Aargau. Achten Sie auf lokale Erfahrung, besonders mit Umzügen in historischen Städten wie Aarau oder Baden. Seriöse Firmen kennen die Besonderheiten der Aargauer Altstädte mit ihren Riegelhäusern und engen Gassen und können Umzüge professionell planen."
+  },
+  {
+    question: "Was kostet ein Umzug innerhalb des Aargaus?",
+    answer: "Die Kosten hängen von Wohnungsgrösse, Distanz, Stockwerk und Zugänglichkeit ab. Ein Umzug innerhalb des Aargaus kostet typischerweise zwischen 600 und 2'800 CHF für eine 3.5-Zimmer-Wohnung. Die zentrale Lage zwischen Zürich, Basel und Bern macht den Aargau zu einer kostengünstigen Region für Umzüge."
+  },
+  {
+    question: "Gibt es Besonderheiten bei Umzügen in Aargauer Altstädte?",
+    answer: "Ja, die historischen Altstädte mit ihren typischen Riegelhäusern und engen Gassen erfordern besondere Sorgfalt. Viele Gebäude haben keine Lifts, und die engen Durchfahrten erfordern kleinere Fahrzeuge. Professionelle Umzugsfirmen beantragen Halteverbotszonen rechtzeitig und verwenden geeignete Ausrüstung für Altstadtumzüge."
+  },
+  {
+    question: "Wie lange im Voraus sollte ich eine Umzugsfirma im Aargau buchen?",
+    answer: "Für einen reibungslosen Ablauf empfehlen wir eine Buchung 4-6 Wochen im Voraus, besonders für Umzüge in die Altstädte von Aarau, Baden oder Zofingen. Kurzfristige Buchungen sind möglich, aber die Auswahl an verfügbaren Terminen ist dann begrenzter. Frühbucher profitieren oft von besseren Konditionen."
+  },
+  {
+    question: "Kann ich auch einen Umzug von Aarau nach Baden organisieren?",
+    answer: "Ja, viele Umzugsfirmen im Aargau bieten Umzüge zwischen den verschiedenen Städten im Kanton an, wie von Aarau nach Baden, Zofingen oder Brugg. Die kurzen Distanzen innerhalb des Aargaus machen solche Umzüge oft kostengünstiger. Vergleichen Sie mehrere Offerten für den besten Preis."
+  },
+  {
+    question: "Welche Vorteile bietet ein Umzug in den Aargau?",
+    answer: "Der Aargau bietet eine ideale Balance zwischen zentraler Lage und moderaten Lebenshaltungskosten. Die Nähe zu Zürich, Basel und Bern ermöglicht flexible Arbeitsstandorte, während die Wohnkosten deutlich niedriger sind. Familien schätzen die hohe Lebensqualität, gute Schulen und die Nähe zur Natur."
+  }
+]
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": aargauFAQs.map(faq => ({
+    "@type": "Question",
+    "name": String(faq.question),
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": String(faq.answer)
+    }
+  }))
+}
+
 // Combined Schema
 const combinedSchema = {
   "@context": "https://schema.org",
   "@graph": [
-    serviceSchema
+    serviceSchema,
+    faqSchema
   ]
 }
 
@@ -661,6 +703,64 @@ export default function UmzugsfirmaAargauPage() {
                 </Button>
               </article>
             </main>
+          </div>
+        </section>
+
+        {/* FAQ Section - Aargau spezifisch */}
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Häufige Fragen zu Umzügen im Aargau
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Antworten auf die wichtigsten Fragen rund um Umzüge im Kanton Aargau
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Wie finde ich eine seriöse Umzugsfirma im Aargau?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen im Aargau. Achten Sie auf lokale Erfahrung, besonders mit Umzügen in historischen Städten wie Aarau oder Baden. Seriöse Firmen kennen die Besonderheiten der Aargauer Altstädte mit ihren Riegelhäusern und engen Gassen und können Umzüge professionell planen.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Was kostet ein Umzug innerhalb des Aargaus?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Die Kosten hängen von Wohnungsgrösse, Distanz, Stockwerk und Zugänglichkeit ab. Ein Umzug innerhalb des Aargaus kostet typischerweise zwischen 600 und 2'800 CHF für eine 3.5-Zimmer-Wohnung. Die zentrale Lage zwischen Zürich, Basel und Bern macht den Aargau zu einer kostengünstigen Region für Umzüge.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Gibt es Besonderheiten bei Umzügen in Aargauer Altstädte?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Ja, die historischen Altstädte mit ihren typischen Riegelhäusern und engen Gassen erfordern besondere Sorgfalt. Viele Gebäude haben keine Lifts, und die engen Durchfahrten erfordern kleinere Fahrzeuge. Professionelle Umzugsfirmen beantragen Halteverbotszonen rechtzeitig und verwenden geeignete Ausrüstung für Altstadtumzüge.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Wie lange im Voraus sollte ich eine Umzugsfirma im Aargau buchen?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Für einen reibungslosen Ablauf empfehlen wir eine Buchung 4-6 Wochen im Voraus, besonders für Umzüge in die Altstädte von Aarau, Baden oder Zofingen. Kurzfristige Buchungen sind möglich, aber die Auswahl an verfügbaren Terminen ist dann begrenzter. Frühbucher profitieren oft von besseren Konditionen.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Kann ich auch einen Umzug von Aarau nach Baden organisieren?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Ja, viele Umzugsfirmen im Aargau bieten Umzüge zwischen den verschiedenen Städten im Kanton an, wie von Aarau nach Baden, Zofingen oder Brugg. Die kurzen Distanzen innerhalb des Aargaus machen solche Umzüge oft kostengünstiger. Vergleichen Sie mehrere Offerten für den besten Preis.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Welche Vorteile bietet ein Umzug in den Aargau?</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Der Aargau bietet eine ideale Balance zwischen zentraler Lage und moderaten Lebenshaltungskosten. Die Nähe zu Zürich, Basel und Bern ermöglicht flexible Arbeitsstandorte, während die Wohnkosten deutlich niedriger sind. Familien schätzen die hohe Lebensqualität, gute Schulen und die Nähe zur Natur.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
