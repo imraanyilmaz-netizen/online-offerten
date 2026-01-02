@@ -241,6 +241,16 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
                       'Spezialtransport': Package
                     }
                     const Icon = iconMap[serviceDetail.name] || Home
+                    
+                    // Service links mapping
+                    const serviceLinks: Record<string, string> = {
+                      'Privatumzug': '/privatumzug',
+                      'Geschäftsumzug': '/geschaeftsumzug',
+                      'Internationaler Umzug': '/internationale-umzuege',
+                      'Spezialtransport': '/spezialtransporte'
+                    }
+                    const serviceLink = serviceLinks[serviceDetail.name] || '#'
+                    
                     return (
                       <div
                         key={index}
@@ -253,6 +263,10 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
                         <p className="text-gray-700 leading-relaxed">
                           {serviceDetail.description}
                         </p>
+                        <Link href={serviceLink} className="inline-flex items-center mt-4 text-green-600 hover:text-green-800 font-semibold">
+                          Mehr erfahren
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Link>
                       </div>
                     );
                   })

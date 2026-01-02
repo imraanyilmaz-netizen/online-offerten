@@ -113,10 +113,10 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
   }
 
   const services = [
-    { name: 'Privatumzug', icon: Home, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=${cityName}` },
-    { name: 'Geschäftsumzug', icon: Building, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug&city=${cityName}` },
-    { name: 'Internationaler Umzug', icon: Globe, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international&city=${cityName}` },
-    { name: 'Spezialtransport', icon: Package, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport&city=${cityName}` }
+    { name: 'Privatumzug', icon: Home, link: '/privatumzug' },
+    { name: 'Geschäftsumzug', icon: Building, link: '/geschaeftsumzug' },
+    { name: 'Internationaler Umzug', icon: Globe, link: '/internationale-umzuege' },
+    { name: 'Spezialtransport', icon: Package, link: '/spezialtransporte' }
   ]
 
   const benefits = [
