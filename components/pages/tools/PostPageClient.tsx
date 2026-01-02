@@ -143,6 +143,62 @@ const PostPageClient = () => {
                                 </div>
                             )}
 
+                            {/* Internal Links Section */}
+                            <div className="mt-8 pt-6 border-t">
+                                <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded-lg">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-4">
+                                        Weitere Informationen
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 mb-3">Services</h4>
+                                            <ul className="space-y-2">
+                                                <li>
+                                                    <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-medium underline">
+                                                        Umzugsfirmen vergleichen
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/reinigung" className="text-green-600 hover:text-green-700 font-medium underline">
+                                                        Reinigungsfirmen finden
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/malerfirma" className="text-green-600 hover:text-green-700 font-medium underline">
+                                                        Malerfirmen vergleichen
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 mb-3">Tools & Ratgeber</h4>
+                                            <ul className="space-y-2">
+                                                <li>
+                                                    <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-700 font-medium underline">
+                                                        Umzugskosten berechnen
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/reinigungskosten-rechner" className="text-green-600 hover:text-green-700 font-medium underline">
+                                                        Reinigungskosten berechnen
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/checklisten" className="text-green-600 hover:text-green-700 font-medium underline">
+                                                        Umzugs-Checklisten
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href={ratgeberBasePath} className="text-green-600 hover:text-green-700 font-medium underline">
+                                                        Alle Ratgeber-Artikel
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                              <Button asChild variant="outline" className="mt-8">
                                 <Link href={ratgeberBasePath}>
                                     <ArrowLeft className="mr-2 h-4 w-4" />

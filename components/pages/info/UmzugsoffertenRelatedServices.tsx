@@ -25,7 +25,7 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {[
             { name: "Umzugsreinigung", link: "/umzugsreinigung", icon: Sparkles },
             { name: "Geschäftsumzug", link: "/geschaeftsumzug", icon: Building },
@@ -50,6 +50,71 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Additional Internal Links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="bg-green-50 border-l-4 border-green-600 p-6 rounded-lg max-w-4xl mx-auto"
+        >
+          <h3 className="text-xl font-bold text-gray-900 mb-4">
+            Weitere Informationen
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-3">Umzugsservices</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/privatumzug" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Privatumzug Offerten vergleichen
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Umzugsfirmen finden
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Umzugsfirma Zürich
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/umzugsfirma-basel" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Umzugsfirma Basel
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-3">Tools & Ratgeber</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Umzugskosten berechnen
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ratgeber" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Ratgeber & Tipps
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/checklisten" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Umzugs-Checklisten
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/reinigung" className="text-green-600 hover:text-green-700 font-medium underline">
+                    Reinigungsfirmen vergleichen
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

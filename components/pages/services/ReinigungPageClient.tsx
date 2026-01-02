@@ -16,8 +16,8 @@ const ReinigungPageClient = () => {
   const router = useRouter()
 
   // SEO Data (moved to server component, but kept for schema generation if needed client-side)
-  const metaTitle = "Umzugsreinigung mit Abnahmegarantie » Kostenlose Offerten vergleichen | Schweiz"
-  const metaDescription = "Professionelle Umzugsreinigung mit Abnahmegarantie. Holen Sie jetzt kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Nähe ein und sparen Sie bis zu 40%."
+  const metaTitle = "Reinigungsfirma – Kostenlose Offerten vergleichen | Schweiz"
+  const metaDescription = "Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%."
   const metaKeywords = "umzugsreinigung mit abnahmegarantie, endreinigung wohnung, reinigungsfirma für umzug, wohnungsreinigung mit abnahmegarantie, umzugsreinigung preise, reinigungsofferte, endreinigung kosten, umzugsreinigung zürich, reinigung nach umzug, privatumzug reinigung"
   const canonicalUrl = "/reinigung"
 
@@ -513,6 +513,71 @@ const ReinigungPageClient = () => {
                   </h4>
                 </Link>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Additional Internal Links */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-blue-50 border-l-4 border-blue-600 p-6 md:p-8 rounded-lg mt-8"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Weitere Informationen & Services
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">Reinigungsarten</h4>
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="/umzugsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Umzugsreinigung mit Abnahmegarantie
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/wohnungsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Wohnungsreinigung Offerten
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/bueroreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Büroreinigung vergleichen
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/grundreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Grundreinigung buchen
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">Verwandte Services</h4>
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="/umzugsfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Umzugsfirmen finden
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/malerfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Malerfirmen vergleichen
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/ratgeber" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Ratgeber & Tipps
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/reinigungskosten-rechner" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      Reinigungskosten berechnen
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </motion.div>
 

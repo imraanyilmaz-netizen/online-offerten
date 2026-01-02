@@ -761,6 +761,77 @@ const MalerfirmaPageClient = () => {
         </div>
       </section>
 
+      {/* Internal Links Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="bg-blue-50 border-l-4 border-blue-600 p-6 md:p-8 rounded-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Weitere Informationen & Services
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-3">Malerarbeiten</h4>
+                  <ul className="space-y-2">
+                    <li>
+                      <Link href="/malerarbeiten" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Malerarbeiten Offerten vergleichen
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/malerfirma-in-der-naehe" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Malerfirma in der Nähe finden
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/malerfirma-zuerich" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Malerfirma Zürich
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/malerfirma-basel" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Malerfirma Basel
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-3">Verwandte Services</h4>
+                  <ul className="space-y-2">
+                    <li>
+                      <Link href="/reinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Reinigungsfirmen vergleichen
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/umzugsfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Umzugsfirmen finden
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/ratgeber" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Ratgeber & Tipps
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/kostenlose-offerte-anfordern" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                        Kostenlose Offerten anfordern
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto max-w-navbar px-4 md:px-6">

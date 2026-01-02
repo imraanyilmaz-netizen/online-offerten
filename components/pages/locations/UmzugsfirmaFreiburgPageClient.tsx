@@ -109,6 +109,67 @@ const UmzugsfirmaFreiburgPageClient = () => {
                     ))}
                   </ul>
               </article>
+
+              {/* Internal Links Section */}
+              <article className="pt-8 border-t border-gray-200">
+                <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded-lg">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    Weitere Informationen & Services
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-3">Umzugsservices</h4>
+                      <ul className="space-y-2">
+                        <li>
+                          <Link href="/privatumzug" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Privatumzug Offerten vergleichen
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/geschaeftsumzug" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Geschäftsumzug Offerten
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/umzugsofferten" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Umzugsofferten vergleichen
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Umzugsfirmen finden
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-3">Verwandte Services</h4>
+                      <ul className="space-y-2">
+                        <li>
+                          <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Umzugsreinigung mit Abnahmegarantie
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/reinigung" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Reinigungsfirmen vergleichen
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/ratgeber" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Ratgeber & Tipps
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-700 font-medium underline">
+                            Umzugskosten berechnen
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
             </motion.main>
 
             <LocationSidebar city={city} districts={undefined as any} searches={undefined as any} />

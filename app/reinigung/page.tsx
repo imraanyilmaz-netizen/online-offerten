@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import ReinigungPageClient from '@/components/pages/services/ReinigungPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsreinigung mit Abnahmegarantie – Offerten vergleichen',
-  description: 'Professionelle Umzugsreinigung mit Abnahmegarantie. Holen Sie jetzt kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Nähe ein und sparen Sie bis zu 40%.',
+  title: 'Reinigungsfirma – Kostenlose Offerten vergleichen | Online-Offerten.ch',
+  description: 'Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung',
   },
   openGraph: {
-    title: 'Umzugsreinigung mit Abnahmegarantie » Kostenlose Offerten vergleichen',
-    description: 'Professionelle Umzugsreinigung mit Abnahmegarantie. Holen Sie jetzt kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Nähe ein und sparen Sie bis zu 40%.',
+    title: 'Reinigungsfirma – Kostenlose Offerten vergleichen',
+    description: 'Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%.',
     url: 'https://online-offerten.ch/reinigung',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: 'https://online-offerten.ch/image/services-professionals.png',
         width: 1200,
         height: 630,
-        alt: 'Umzugsreinigung mit Abnahmegarantie',
+        alt: 'Reinigungsfirma',
       },
     ],
     locale: 'de_CH',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsreinigung mit Abnahmegarantie » Kostenlose Offerten vergleichen',
-    description: 'Professionelle Umzugsreinigung mit Abnahmegarantie. Holen Sie jetzt kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Nähe ein und sparen Sie bis zu 40%.',
+    title: 'Reinigungsfirma – Kostenlose Offerten vergleichen',
+    description: 'Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },
   robots: {
