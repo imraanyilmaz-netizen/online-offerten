@@ -10,6 +10,7 @@ import LocationPageNavigation from '@/components/locations/LocationPageNavigatio
 import CantonFlag from '@/components/CantonFlag';
 import LocationSidebar from '@/components/locations/LocationSidebar';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
+import { faqs } from '@/data/locationFaqs';
 
 const AdvantageItem = ({ text, delay }: any) => {
   return (

@@ -9,6 +9,7 @@ import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import CantonFlag from '@/components/CantonFlag';
 import LocationSidebar from '@/components/locations/LocationSidebar';
+import { faqs } from '@/data/locationFaqs';
 
 const UmzugsfirmaLausannePageClient = () => {
   const city = "Lausanne";
