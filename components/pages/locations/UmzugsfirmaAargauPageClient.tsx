@@ -11,6 +11,7 @@ import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import CantonFlag from '@/components/CantonFlag';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
+import { faqs } from '@/data/locationFaqs';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -140,7 +141,7 @@ const UmzugsfirmaAargauPageClient = () => {
   // FAQ Schema - Ensure all values are plain strings
   const faqSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
+        "@type": "FAQPage",
     "mainEntity": faqItemsForSchema
       .map(item => {
         // Extract question text - ensure it's a string
@@ -161,10 +162,10 @@ const UmzugsfirmaAargauPageClient = () => {
         }
         
         return {
-          "@type": "Question",
+            "@type": "Question",
           "name": String(questionText), // Ensure it's a string
-          "acceptedAnswer": {
-            "@type": "Answer",
+            "acceptedAnswer": {
+                "@type": "Answer",
             "text": String(answerText) // Ensure it's a string
           }
         }
@@ -226,19 +227,19 @@ const UmzugsfirmaAargauPageClient = () => {
               {/* Left Content */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
                 className="text-gray-900 lg:col-span-3"
-              >
+          >
                 <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
                   <CantonFlag canton={(locationData as any)?.canton} className="w-8 h-8 object-contain" />
                   <span className="text-sm font-medium text-gray-700">Kanton Aargau</span>
-                </div>
+            </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
                   <span className="block">Umzugsfirma Aargau</span>
                   <span className="block text-green-600 mt-2">Geprüfte Anbieter vergleichen</span>
-                </h1>
+            </h1>
                 
                 <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed max-w-2xl">
                   Finden Sie die besten <strong className="text-gray-900">Umzugsdienstleister</strong> und <strong>Zügelunternehmen im Kanton Aargau</strong> für Ihren Umzug. Vergleichen Sie kostenlos mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> in <strong>Aarau</strong>, <strong>Baden</strong>, <strong>Zofingen</strong> und der ganzen Region. Professionelle <strong>Transportunternehmen für Umzüge</strong> und <strong>regionale Zügelprofis</strong> bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Alle Partner sind <strong>versichert gemäss OR</strong>.
@@ -288,7 +289,7 @@ const UmzugsfirmaAargauPageClient = () => {
               {/* Right Image */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
+              animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 lg:col-span-2"
               >
@@ -304,7 +305,7 @@ const UmzugsfirmaAargauPageClient = () => {
               </motion.div>
             </div>
           </div>
-        </section>
+              </section>
 
         {/* Service Selection Cards */}
         <section className="py-12 md:py-16 bg-gradient-to-br from-green-50 to-emerald-50 border-b border-gray-200">
@@ -398,11 +399,11 @@ const UmzugsfirmaAargauPageClient = () => {
                 size="lg" 
                 className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg rounded-lg shadow-xl"
               >
-                <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Aargau">
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Aargau">
                   Jetzt Offerten einholen
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
+                  </Link>
+                </Button>
             </div>
           </div>
         </section>
@@ -609,9 +610,9 @@ const UmzugsfirmaAargauPageClient = () => {
                         <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                         <span className="text-gray-700"><strong>Lokale Profis mit Ortskenntnis</strong></span>
                       </div>
-                    </div>
+                      </div>
                   </div>
-
+                  
                   <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-8 text-white text-center">
                     <h3 className="text-2xl md:text-3xl font-bold mb-4">
                       Jetzt Umzugsofferten für Aarau erhalten
@@ -700,8 +701,8 @@ const UmzugsfirmaAargauPageClient = () => {
                       );
                     })}
                   </div>
-                </article>
-
+              </article>
+              
                 {/* Checklist */}
                 <article className="bg-gradient-to-br from-slate-50 to-gray-100 rounded-2xl p-8 md:p-10 border border-gray-200">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Checkliste für die perfekte Wahl</h2>
@@ -750,7 +751,7 @@ const UmzugsfirmaAargauPageClient = () => {
                       );
                     })}
                   </div>
-                </article>
+              </article>
 
                 {/* CTA Section */}
                 <article className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 md:p-12 text-white text-center">
@@ -774,13 +775,13 @@ const UmzugsfirmaAargauPageClient = () => {
               </main>
           </div>
         </section>
-
+          
 
         {/* Navigation */}
         <section className="py-12 bg-white border-t border-gray-200">
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
-            <LocationPageNavigation allLocations={locations} currentCity={city} />
-          </div>
+          <LocationPageNavigation allLocations={locations} currentCity={city} />
+        </div>
         </section>
       </div>
     </>
