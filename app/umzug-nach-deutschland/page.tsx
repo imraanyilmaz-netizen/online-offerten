@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugNachDeutschlandPageClient from '@/components/pages/international/UmzugNachDeutschlandPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Deutschland | Umzugsfirmen aus der Schweiz vergleichen',
+  title: 'Umzug nach Deutschland – Umzugsfirmen vergleichen',
   description: 'Planen Sie Ihren Umzug von der Schweiz nach Deutschland? Vergleichen Sie hier professionelle Umzugsfirmen für Privatumzug, Geschäftsumzug, Reinigung und Entsorgung. Holen Sie sich jetzt kostenlose Offerten.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzug-nach-deutschland',

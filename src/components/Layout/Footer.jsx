@@ -21,7 +21,6 @@ const Footer = React.memo(() => {
 
   // Weitere wichtige Städte
   const weitereStaedte = [
-    { to: '/umzugsfirma-winterthur', text: 'Winterthur' },
     { to: '/umzugsfirma-aargau', text: 'Aargau' },
     { to: '/umzugsfirma-thun', text: 'Thun' },
     { to: '/umzugsfirma-biel-bienne', text: 'Biel/Bienne' },

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import ReinigungPageClient from '@/components/pages/services/ReinigungPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsreinigung mit Abnahmegarantie » Kostenlose Offerten vergleichen | Schweiz',
+  title: 'Umzugsreinigung mit Abnahmegarantie – Offerten vergleichen',
   description: 'Professionelle Umzugsreinigung mit Abnahmegarantie. Holen Sie jetzt kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Nähe ein und sparen Sie bis zu 40%.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung',

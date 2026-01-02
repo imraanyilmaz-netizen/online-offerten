@@ -16,7 +16,7 @@ const GeschaeftsumzugPageClient = () => {
   const router = useRouter()
 
   // SEO Data (moved to server component, but kept for schema generation if needed client-side)
-  const metaTitle = "Geschäftsumzug: Kostenlose Offerten vergleichen | Online-Offerten.ch"
+  const metaTitle = "Geschäftsumzug: Kostenlose Offerten vergleichen"
   const metaDescription = "Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen. Schnell, transparent und regional."
   // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = "/geschaeftsumzug"

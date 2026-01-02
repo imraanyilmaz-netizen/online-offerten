@@ -360,8 +360,7 @@ const UmzugsfirmaPageClient = () => {
     { name: "Umzugsfirma Genf", link: "/umzugsfirma-genf" },
     { name: "Umzugsfirma Lausanne", link: "/umzugsfirma-lausanne" },
     { name: "Umzugsfirma Luzern", link: "/umzugsfirma-luzern" },
-    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-st-gallen" },
-    { name: "Umzugsfirma Winterthur", link: "/umzugsfirma-winterthur" }
+    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-st-gallen" }
   ]
 
   return (

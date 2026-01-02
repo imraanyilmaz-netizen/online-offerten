@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugNachPortugalPageClient from '@/components/pages/international/UmzugNachPortugalPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2025',
+  title: 'Umzug nach Portugal: Kosten & Planung 2025',
   description: 'Ihr Leitfaden für den Umzug von der Schweiz nach Portugal. Entdecken Sie Kosten, Tipps für Zoll & NIF, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzug-nach-portugal',

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugskostenAargauPageClient from '@/components/pages/locations/UmzugskostenAargauPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugskosten Aargau – Preise & Kostenfaktoren 2025 | Online-Offerten.ch',
+  title: 'Umzugskosten Aargau – Preise & Kostenfaktoren 2025',
   description: 'Umzugskosten Aargau berechnen ✓ Detaillierte Preisübersicht & Spartipps. Kostenlose Offerten vergleichen & bis zu 40% sparen. Regionale Preisunterschiede erklärt.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugskosten-aargau',

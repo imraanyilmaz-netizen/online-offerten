@@ -1,43 +1,34 @@
 import type { Metadata } from 'next'
-import AargauCityPageClient from '@/components/pages/locations/cities/AargauCityPageClient'
+import ZurichCityPageClient from '@/components/pages/locations/cities/ZurichCityPageClient'
 
-const cities = ['aarau', 'baden', 'zofingen', 'brugg', 'wettingen'] as const
+const cities = ['winterthur'] as const
 
 export async function generateStaticParams() {
   return cities.map(city => ({ city }))
 }
 
 const cityNames: Record<string, string> = {
-  aarau: 'Aarau',
-  baden: 'Baden',
-  zofingen: 'Zofingen',
-  brugg: 'Brugg',
-  wettingen: 'Wettingen'
+  winterthur: 'Winterthur'
 }
 
 export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
   const cityName = cityNames[params.city] || params.city
   const citySlug = params.city
   
-  // Meta-Titles gemäß Plan Zeile 161: "[Stadt] Umzugsfirma – Geprüfte Anbieter vergleichen | Online-Offerten.ch"
   const metaTitles: Record<string, string> = {
-    'Baden': `Baden Umzugsfirma – Geprüfte Anbieter vergleichen`,
-    'Aarau': `Aarau Umzugsfirma – Geprüfte Anbieter vergleichen`,
-    'Zofingen': `Zofingen Umzugsfirma – Geprüfte Anbieter vergleichen`,
-    'Brugg': `Brugg Umzugsfirma – Geprüfte Anbieter vergleichen`,
-    'Wettingen': `Wettingen Umzugsfirma – Geprüfte Anbieter vergleichen`
+    'Winterthur': `Winterthur Umzugsfirma – Geprüfte Anbieter vergleichen`
   };
 
   return {
     title: metaTitles[cityName] || `${cityName} Umzugsfirma – Geprüfte Anbieter vergleichen`,
     description: `Umzugsfirma ${cityName} finden ✓ Geprüfte Zügelfirmen und Umzugsunternehmen in ${cityName} vergleichen & bis zu 40% sparen. Kostenlose Offerten für Privat- & Geschäftsumzug.`,
     alternates: {
-      canonical: `https://online-offerten.ch/umzugsfirma-aargau/${citySlug}`,
+      canonical: `https://online-offerten.ch/umzugsfirma-zuerich/${citySlug}`,
     },
     openGraph: {
       title: metaTitles[cityName] || `${cityName} Umzugsfirma – Geprüfte Anbieter vergleichen`,
       description: `Geprüfte Zügelfirmen und Umzugsunternehmen in ${cityName} vergleichen & bis zu 40% sparen. Kostenlose Offerten.`,
-      url: `https://online-offerten.ch/umzugsfirma-aargau/${citySlug}`,
+      url: `https://online-offerten.ch/umzugsfirma-zuerich/${citySlug}`,
       siteName: 'Online-Offerten.ch',
       images: [
         {
@@ -70,7 +61,7 @@ export async function generateMetadata({ params }: { params: { city: string } })
   }
 }
 
-export default function AargauCityPage({ params }: { params: { city: string } }) {
-  return <AargauCityPageClient city={params.city} />
+export default function ZurichCityPage({ params }: { params: { city: string } }) {
+  return <ZurichCityPageClient city={params.city} />
 }
 

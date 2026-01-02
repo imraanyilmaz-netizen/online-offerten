@@ -9,8 +9,6 @@ import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import CantonFlag from '@/components/CantonFlag';
-import LocationFAQ from '@/components/locations/LocationFAQ';
-import { faqs } from '@/data/locationFaqs';
 import LocationSidebar from '@/components/locations/LocationSidebar';
 
 const AdvantageItem = ({ icon: Icon, title, text, delay }: any) => {
@@ -434,7 +432,6 @@ const UmzugsfirmaLuzernPageClient = () => {
             />
           </div>
           
-          <LocationFAQ city={city} faqs={faqs} />
 
           <LocationPageNavigation allLocations={locations} currentCity={city} />
         </div>

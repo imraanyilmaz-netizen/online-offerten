@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugNachDaenemarkPageClient from '@/components/pages/international/UmzugNachDaenemarkPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Dänemark: Kosten, Checkliste & Tipps für Ihr Hygge-Heim',
+  title: 'Umzug nach Dänemark: Kosten & Checkliste 2025',
   description: 'Alles für Ihren Umzug nach Dänemark. Infos zu Kosten, eine komplette Checkliste inkl. CPR-Nummer und Tipps für den Start ins Hygge-Leben. Jetzt Offerten vergleichen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzug-nach-daenemark',

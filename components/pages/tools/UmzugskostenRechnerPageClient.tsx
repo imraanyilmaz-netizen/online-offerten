@@ -14,7 +14,7 @@ import RegionalDifferences from '@/components/UmzugskostenRechnerSections/Region
 
 const UmzugskostenRechnerPageClient = () => {
   // SEO Data - Optimized with keyword variations
-  const metaTitle = "Umzugskosten-Rechner: Kostenlose Schätzung in 2 Minuten | Online-Offerten.ch";
+  const metaTitle = "Umzugskosten-Rechner: Kostenlose Schätzung in 2 Minuten";
   const metaDescription = "In 2 Minuten wissen, was Ihr Umzug kostet! Kostenloser Umzugskosten-Rechner mit sofortiger Preis-Schätzung. Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.";
   const canonicalUrl = '/umzugskosten-rechner';
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugNachOesterreichPageClient from '@/components/pages/international/UmzugNachOesterreichPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2025',
+  title: 'Umzug nach Österreich: Kosten & Planung 2025',
   description: 'Ihr kompletter Leitfaden für den Umzug von der Schweiz nach Österreich. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Firmen für Transport und Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzug-nach-oesterreich',

@@ -358,7 +358,7 @@ const KlaviertransportPageClient = () => {
     ]
   }
 
-  const metaTitle = "Klaviertransport: Kostenlose Offerten vergleichen | Online-Offerten.ch"
+  const metaTitle = "Klaviertransport: Kostenlose Offerten vergleichen"
   const metaDescription = "Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen. Flügeltransport, Piano-Transport & mehr. Professionell versichert, bis zu 40% sparen!"
 
   const schema = {

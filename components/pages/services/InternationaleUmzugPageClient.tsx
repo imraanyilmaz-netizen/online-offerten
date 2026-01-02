@@ -278,7 +278,7 @@ const InternationaleUmzugPageClient = () => {
     }
   ]
 
-  const metaTitle = "Internationale Umzüge: Kostenlose Offerten vergleichen | Online-Offerten.ch"
+  const metaTitle = "Internationale Umzüge: Kostenlose Offerten vergleichen"
   const metaDescription = "Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa."
   const canonicalUrl = "/internationale-umzuege"
 

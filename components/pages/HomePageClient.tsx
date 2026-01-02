@@ -253,12 +253,29 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
       },
       {
         "@type": "QAPage",
+        "answerCount": 1,
+        "datePublished": "2024-01-01",
         "mainEntity": {
           "@type": "Question",
           "name": "Wo kann ich kostenlose Offerten für Umzug und Reinigung vergleichen?",
+          "text": "Wo kann ich kostenlose Offerten für Umzug und Reinigung vergleichen?",
+          "datePublished": "2024-01-01",
+          "url": "https://online-offerten.ch/",
+          "author": {
+            "@type": "Organization",
+            "name": "Online-Offerten.ch"
+          },
+          "upvoteCount": 0,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Auf Online-Offerten.ch finden Sie qualifizierte Umzugsfirmen & Reinigungsfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Alle Offerten sind unverbindlich und transparent."
+            "text": "Auf Online-Offerten.ch finden Sie qualifizierte Umzugsfirmen & Reinigungsfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Alle Offerten sind unverbindlich und transparent.",
+            "datePublished": "2024-01-01",
+            "url": "https://online-offerten.ch/",
+            "author": {
+              "@type": "Organization",
+              "name": "Online-Offerten.ch"
+            },
+            "upvoteCount": 0
           }
         }
       }

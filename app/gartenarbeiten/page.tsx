@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import GartenarbeitenPageClient from '@/components/pages/services/GartenarbeitenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Gartenarbeiten Schweiz: Kostenlose Offerten vergleichen',
+  title: 'Gartenarbeiten Schweiz: Offerten vergleichen',
   description: 'Gartenarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Gärtnereien und Landschaftsbauern. Gartenpflege, Terrassenverlegung, Pool-Service & mehr – professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/gartenarbeiten',

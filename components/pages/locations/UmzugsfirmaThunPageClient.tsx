@@ -8,8 +8,6 @@ import { ArrowRight, CheckCircle } from 'lucide-react';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import CantonFlag from '@/components/CantonFlag';
-import LocationFAQ from '@/components/locations/LocationFAQ';
-import { faqs } from '@/data/locationFaqs';
 import LocationSidebar from '@/components/locations/LocationSidebar';
 
 const UmzugsfirmaThunPageClient = () => {
@@ -113,7 +111,6 @@ const UmzugsfirmaThunPageClient = () => {
             <LocationSidebar city={city} districts={undefined as any} searches={undefined as any} />
           </div>
           
-          <LocationFAQ city={city} faqs={faqs} />
 
           <LocationPageNavigation allLocations={locations} currentCity={city} />
         </div>

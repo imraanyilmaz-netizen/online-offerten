@@ -20,7 +20,7 @@ const RatgeberPageClient = () => {
   
   const ratgeberBasePath = '/ratgeber';
   
-  const metaTitle = "Ratgeber & Tipps für Umzug, Reinigung & Lagerung | Online-Offerten.ch";
+  const metaTitle = "Ratgeber & Tipps für Umzug, Reinigung & Lagerung";
   const metaDescription = "Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und die richtige Lagerung. Machen Sie Ihren Übergang einfacher mit unserem Ratgeber.";
   const metaKeywords = "ratgeber, umzugsratgeber, reinigungsratgeber, umzugstipps, reinigungstipps, umzugscheckliste, reinigungscheckliste, umzug planen, schweiz, umzugsguide, reinigungsguide, lagerung tipps";
 

@@ -85,7 +85,6 @@ const urlMap = {
   '/umzugsfirma-luzern': '/moving-company-lucerne',
   '/umzugsfirma-st-gallen': '/moving-company-st-gallen',
   '/umzugsfirma-thun': '/moving-company-thun',
-  '/umzugsfirma-winterthur': '/moving-company-winterthur',
   '/umzugsfirma-zuerich': '/moving-company-zurich',
 };
 

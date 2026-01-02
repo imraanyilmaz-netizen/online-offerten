@@ -71,15 +71,6 @@ export const cityServiceData: Record<string, {
     longitude: '9.3767',
     canonicalUrl: '/umzugsfirma-st-gallen'
   },
-  'Winterthur': {
-    name: 'Winterthur',
-    displayName: 'Umzugsofferten Winterthur – Online-Offerten.ch',
-    addressLocality: 'Winterthur',
-    addressRegion: 'ZH',
-    latitude: '47.4999',
-    longitude: '8.7266',
-    canonicalUrl: '/umzugsfirma-winterthur'
-  },
   'Lugano': {
     name: 'Lugano',
     displayName: 'Umzugsofferten Lugano – Online-Offerten.ch',

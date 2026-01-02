@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import StandortePageClient from '@/components/pages/StandortePageClient'
 
 export const metadata: Metadata = {
-  title: 'Standorte | Umzugsfirmen & Reinigungsfirmen in der ganzen Schweiz',
+  title: 'Standorte: Umzugsfirmen & Reinigungsfirmen Schweiz',
   description: 'Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Schweizer Städten. Von Zürich bis Genf, von Basel bis Bern - wir haben Partner in Ihrer Nähe.',
   alternates: {
     canonical: 'https://online-offerten.ch/standorte',
   },
   openGraph: {
-    title: 'Standorte | Umzugsfirmen & Reinigungsfirmen in der ganzen Schweiz',
+    title: 'Standorte: Umzugsfirmen & Reinigungsfirmen Schweiz',
     description: 'Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Schweizer Städten. Von Zürich bis Genf, von Basel bis Bern - wir haben Partner in Ihrer Nähe.',
     url: 'https://online-offerten.ch/standorte',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Standorte | Umzugsfirmen & Reinigungsfirmen in der ganzen Schweiz',
+    title: 'Standorte: Umzugsfirmen & Reinigungsfirmen Schweiz',
     description: 'Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Schweizer Städten. Von Zürich bis Genf, von Basel bis Bern.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },

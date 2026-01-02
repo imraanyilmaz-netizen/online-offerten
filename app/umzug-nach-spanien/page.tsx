@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugNachSpanienPageClient from '@/components/pages/international/UmzugNachSpanienPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Spanien: Ihr Guide für Kosten & Planung 2025',
+  title: 'Umzug nach Spanien: Kosten & Planung 2025',
   description: 'Alles für Ihren Umzug von der Schweiz nach Spanien. Entdecken Sie Kosten, Tipps für Zoll & NIE, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzug-nach-spanien',

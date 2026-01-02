@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugsfirmaStGallenPageClient from '@/components/pages/locations/UmzugsfirmaStGallenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma St. Gallen | Günstige Offerten | Top Service',
+  title: 'Umzugsfirma St. Gallen – Top Anbieter vergleichen',
   description: 'Ihre Umzugsfirma in St. Gallen für einen stressfreien Umzug. Vergleichen Sie geprüfte Umzugsunternehmen und erhalten Sie die besten Offerten.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-st-gallen',

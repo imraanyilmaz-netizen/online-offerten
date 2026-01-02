@@ -135,7 +135,7 @@ async function generateSitemap() {
     '/umzugsfirma-aargau', '/umzugsfirma-basel', '/umzugsfirma-bern',
     '/umzugsfirma-biel-bienne', '/umzugsfirma-freiburg', '/umzugsfirma-genf',
     '/umzugsfirma-lausanne', '/umzugsfirma-lugano', '/umzugsfirma-luzern',
-    '/umzugsfirma-st-gallen', '/umzugsfirma-thun', '/umzugsfirma-winterthur',
+    '/umzugsfirma-st-gallen', '/umzugsfirma-thun',
     '/umzugsfirma-zuerich'
   ];
 
@@ -233,9 +233,13 @@ async function generateSitemap() {
 
   // 2. Location pages (umzugsfirma-* pages)
   // Location pages are important for SEO, so we use weekly changefreq and 0.9 priority
+  // Pillar page (Aargau) gets priority 1.0 per plan
   const locationPages = locationPagePrefixes
     .filter(route => allStaticRoutes.includes(route))
     .map(route => {
+      if (route === '/umzugsfirma-aargau') {
+        return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '1.0');
+      }
       const priority = route === '/standorte' ? '0.95' : '0.9';
       return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', priority);
   });

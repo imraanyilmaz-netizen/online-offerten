@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugsfirmaGenfPageClient from '@/components/pages/locations/UmzugsfirmaGenfPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma Genf | Top Umzugsunternehmen | Günstige Offerten',
+  title: 'Umzugsfirma Genf – Top Anbieter vergleichen',
   description: 'Ihre professionelle Umzugsfirma in Genf. Erhalten Sie kostenlose & unverbindliche Offerten von geprüften Umzugsunternehmen für Ihren Umzug in Genf.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-genf',

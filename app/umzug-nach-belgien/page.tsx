@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugNachBelgienPageClient from '@/components/pages/international/UmzugNachBelgienPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Belgien | Günstige Umzugsfirmen aus der Schweiz',
+  title: 'Umzug nach Belgien – Umzugsfirmen vergleichen',
   description: 'Planen Sie Ihren Umzug von der Schweiz nach Belgien? Vergleichen Sie hier professionelle und geprüfte Umzugsfirmen. Kostenlose Offerten für Privatumzug, Geschäftsumzug, Reinigung und Entsorgung.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzug-nach-belgien',

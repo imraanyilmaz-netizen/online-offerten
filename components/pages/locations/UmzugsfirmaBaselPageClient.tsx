@@ -8,8 +8,6 @@ import { ArrowRight, CheckCircle, Award, ShieldCheck, Package, Sparkles, MapPin 
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import CantonFlag from '@/components/CantonFlag';
-import LocationFAQ from '@/components/locations/LocationFAQ';
-import { faqs } from '@/data/locationFaqs';
 import LocationSidebar from '@/components/locations/LocationSidebar';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 
@@ -320,7 +318,6 @@ const UmzugsfirmaBaselPageClient = () => {
             />
           </div>
           
-          <LocationFAQ city={city} faqs={faqs} />
 
           <LocationPageNavigation allLocations={locations} currentCity={city} />
         </div>

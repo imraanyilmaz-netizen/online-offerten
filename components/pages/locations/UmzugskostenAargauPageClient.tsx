@@ -98,7 +98,10 @@ const UmzugskostenAargauPageClient: React.FC = () => {
     },
     {
       question: 'Kann ich die Umzugskosten im Aargau im Voraus berechnen?',
-      answer: 'Ja, Sie können unsere kostenlosen Tools nutzen: Den <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten-Rechner</Link> für eine erste Schätzung oder mehrere kostenlose Offerten von geprüften Umzugsfirmen anfordern, um genaue Preise zu erhalten.'
+      answer: 'Ja, Sie können unsere kostenlosen Tools nutzen: Den Umzugskosten-Rechner für eine erste Schätzung oder mehrere kostenlose Offerten von geprüften Umzugsfirmen anfordern, um genaue Preise zu erhalten.',
+      hasLink: true,
+      linkText: 'Umzugskosten-Rechner',
+      linkUrl: '/umzugskosten-rechner'
     },
     {
       question: 'Gibt es regionale Besonderheiten, die die Umzugskosten im Aargau beeinflussen?',
@@ -122,40 +125,72 @@ const UmzugskostenAargauPageClient: React.FC = () => {
     "description": "Umzugskosten im Aargau variieren je nach Wohnungsgrösse, Distanz und Zusatzleistungen"
   }
 
-  // FAQ Schema
+  // FAQ Schema - Ensure all values are plain strings
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": typeof faq.answer === 'string' ? faq.answer : faq.answer
-      }
-    }))
+    "mainEntity": faqs
+      .map(faq => {
+        // Extract plain text from answer (remove link references for schema)
+        let answerText = typeof faq.answer === 'string' ? faq.answer : (faq.answer || '')
+        // Replace link text with just the text for schema
+        if (faq.hasLink && faq.linkText) {
+          answerText = answerText.replace(faq.linkText, faq.linkText)
+        }
+        return {
+          "@type": "Question",
+          "name": String(faq.question || ''),
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": String(answerText)
+          }
+        }
+      })
+      .filter(item => item.name && item.acceptedAnswer.text) // Filter out invalid entries
+  }
+
+  // Organization Schema (per plan: Organization Schema auf allen Seiten)
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Online-Offerten.ch",
+    "url": "https://online-offerten.ch",
+    "logo": "https://online-offerten.ch/logo.png",
+    "description": "Vergleichsportal für Umzugsfirmen, Reinigungsfirmen und Malerbetriebe in der Schweiz",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CH"
+    },
+    "sameAs": [
+      "https://www.facebook.com/onlineofferten",
+      "https://www.instagram.com/onlineofferten"
+    ]
+  }
+
+  // Service Schema
+  const serviceSchema = {
+    "@type": "Service",
+    "name": String("Umzugskosten Aargau"),
+    "description": "Detaillierte Preisübersicht und Kostenfaktoren für Umzüge im Aargau",
+    "provider": {
+      "@type": "Organization",
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
+    },
+    "areaServed": {
+      "@type": "State",
+      "name": String("Aargau")
+    }
   }
 
   // Combined Schema
   const combinedSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      organizationSchema,
+      serviceSchema,
       priceSpecificationSchema,
-      faqSchema,
-      {
-        "@type": "Service",
-        "name": "Umzugskosten Aargau",
-        "description": "Detaillierte Preisübersicht und Kostenfaktoren für Umzüge im Aargau",
-        "provider": {
-          "@type": "Organization",
-          "name": "Online-Offerten.ch",
-          "url": "https://online-offerten.ch"
-        },
-        "areaServed": {
-          "@type": "State",
-          "name": "Aargau"
-        }
-      }
+      faqSchema
     ]
   }
 
@@ -205,8 +240,14 @@ const UmzugskostenAargauPageClient: React.FC = () => {
               <p className="text-gray-700 leading-relaxed mb-4">
                 In diesem umfassenden Guide erfahren Sie alles über die Umzugskosten im Aargau: Durchschnittspreise nach Wohnungsgrösse, Kostenfaktoren, regionale Preisunterschiede, versteckte Kosten, Spartipps und saisonale Variationen. Unser Ziel ist es, Ihnen eine transparente Übersicht zu geben, damit Sie fundierte Entscheidungen treffen können.
               </p>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Der Kanton Aargau bietet eine ideale Balance zwischen urbaner Infrastruktur und ländlicher Ruhe. Mit Städten wie Aarau, Baden, Zofingen, Brugg und Wettingen verfügt der Aargau über eine vielfältige Region, die sowohl für Familien als auch für Berufstätige attraktiv ist. Die zentrale Lage zwischen Zürich, Basel und Bern macht den Aargau zu einem beliebten Ziel für Umzüge, besonders für Menschen, die die Nähe zu den Metropolen schätzen, aber günstigere Lebenshaltungskosten bevorzugen.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Die Umzugskosten im Aargau werden von verschiedenen Faktoren beeinflusst. Die Wohnungsgrösse ist der wichtigste Faktor, gefolgt von der Distanz zwischen Alt- und Neulage. Weitere wichtige Faktoren sind das Stockwerk, die Verfügbarkeit eines Lifts, der gewählte Umzugstag und die Saison. Zusatzleistungen wie Umzugsreinigung, Möbelmontage oder Entsorgung erhöhen die Kosten zusätzlich.
+              </p>
               <p className="text-gray-700 leading-relaxed">
-                Durch den Vergleich mehrerer kostenloser Offerten von geprüften Umzugsfirmen können Sie bis zu 40% sparen. Alle Partner sind geprüfte Partner nach Schweizer Standards und versichert gemäss OR.
+                Durch den Vergleich mehrerer kostenloser Offerten von geprüften Umzugsfirmen können Sie bis zu 40% sparen. Alle Partner sind geprüfte Partner nach Schweizer Standards und versichert gemäss OR. Transparente Preisvergleiche helfen Ihnen, das beste Angebot für Ihr Budget zu finden.
               </p>
             </article>
 
@@ -245,8 +286,11 @@ const UmzugskostenAargauPageClient: React.FC = () => {
             {/* Cost Factors */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Kostenfaktoren für Umzüge im Aargau</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
+              <p className="text-gray-700 leading-relaxed mb-4">
                 Verschiedene Faktoren beeinflussen die Umzugskosten erheblich. Verstehen Sie diese Faktoren, um realistische Erwartungen zu haben und die besten Entscheidungen zu treffen.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Die Berechnung der Umzugskosten basiert auf einer komplexen Kombination von Faktoren. Jeder Umzug ist einzigartig, und die Preise variieren entsprechend. Professionelle Umzugsfirmen berücksichtigen alle relevanten Aspekte, um eine faire und transparente Preisgestaltung zu gewährleisten. Im Aargau sind die Preise aufgrund der regionalen Gegebenheiten oft günstiger als in den grossen Metropolen, aber dennoch müssen alle Faktoren sorgfältig berücksichtigt werden.
               </p>
               <div className="grid md:grid-cols-2 gap-6">
                 {costFactors.map((factor, index) => (
@@ -270,8 +314,11 @@ const UmzugskostenAargauPageClient: React.FC = () => {
             {/* Regional Comparison */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Regionale Preisunterschiede im Aargau</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
+              <p className="text-gray-700 leading-relaxed mb-4">
                 Die Umzugskosten variieren leicht zwischen den verschiedenen Städten im Aargau. Hier finden Sie eine Übersicht der durchschnittlichen Preise für eine 2.5-3-Zimmer-Wohnung:
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Innerhalb des Kantons Aargau gibt es leichte Preisunterschiede, die hauptsächlich auf die Grösse der Stadt, die Nähe zu den Metropolen und die lokale Infrastruktur zurückzuführen sind. Städte wie Baden und Wettingen, die näher zu Zürich liegen, haben tendenziell leicht höhere Preise als kleinere Städte wie Zofingen. Die Kantonshauptstadt Aarau bietet moderate Preise, während Brugg aufgrund seiner zentralen Lage ebenfalls moderate Preise aufweist.
               </p>
               <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden shadow-lg">
                 <div className="overflow-x-auto">
@@ -295,16 +342,29 @@ const UmzugskostenAargauPageClient: React.FC = () => {
                   </table>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed mt-6">
+              <p className="text-gray-700 leading-relaxed mt-4">
                 Wie Sie sehen, sind die Umzugskosten im Aargau deutlich günstiger als in Zürich oder Basel. Dies macht den Aargau zu einer attraktiven Region für Umzüge, besonders für Familien und Berufstätige, die die Nähe zu den Metropolen schätzen, aber günstigere Lebenshaltungskosten bevorzugen.
+              </p>
+              <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Vergleich: Aargau vs. andere Kantone</h3>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Im Vergleich zu anderen Schweizer Kantonen bietet der Aargau sehr attraktive Umzugspreise. Während ein Umzug in Zürich für eine 3.5-Zimmer-Wohnung durchschnittlich 1.800 bis 3.500 CHF kostet, liegen die Preise im Aargau bei 1.900 bis 3.200 CHF – eine Ersparnis von 20-30%. Ähnlich verhält es sich mit Basel, wo die Preise bei 1.700 bis 3.200 CHF liegen.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Im Vergleich zu ländlicheren Kantonen wie Appenzell oder Glarus sind die Preise im Aargau leicht höher, was auf die bessere Infrastruktur und die Nähe zu den Metropolen zurückzuführen ist. Dennoch bleiben die Preise im Aargau sehr wettbewerbsfähig und bieten ein ausgezeichnetes Preis-Leistungs-Verhältnis.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Die zentrale Lage des Aargaus zwischen den drei grossen Metropolen Zürich, Basel und Bern macht ihn zu einem idealen Ziel für Umzüge. Die gute Verkehrsanbindung und die vielfältige Infrastruktur sorgen dafür, dass Umzugsfirmen effizient arbeiten können, was sich in günstigeren Preisen niederschlägt.
               </p>
             </article>
 
             {/* Hidden Costs */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Versteckte Kosten bei Umzügen im Aargau</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
+              <p className="text-gray-700 leading-relaxed mb-4">
                 Neben den Grundkosten für den Umzug fallen oft zusätzliche Kosten an, die nicht immer im ersten Angebot enthalten sind. Diese versteckten Kosten können die Gesamtkosten erheblich erhöhen:
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Viele Menschen unterschätzen die versteckten Kosten bei einem Umzug. Diese zusätzlichen Ausgaben können Ihr Budget erheblich belasten, wenn Sie nicht darauf vorbereitet sind. Im Aargau sind einige dieser Kosten aufgrund der regionalen Gegebenheiten oft niedriger als in den Metropolen, aber dennoch sollten Sie sie in Ihrer Budgetplanung berücksichtigen. Seriöse Umzugsfirmen listen alle Kosten transparent auf, aber es ist wichtig, dass Sie bei der Offerte explizit nach allen zusätzlichen Kosten fragen.
               </p>
               <div className="space-y-4">
                 {hiddenCosts.map((cost, index) => (
@@ -333,8 +393,11 @@ const UmzugskostenAargauPageClient: React.FC = () => {
             {/* Savings Tips */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Spartipps für Umzüge im Aargau</h2>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Mit den richtigen Strategien können Sie erheblich bei Ihrem Umzug sparen. Hier sind die effektivsten Spartipps, die speziell für Umzüge im Aargau relevant sind:
+              </p>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Mit den richtigen Strategien können Sie erheblich bei Ihrem Umzug sparen. Hier sind die effektivsten Spartipps:
+                Der Aargau bietet aufgrund seiner geografischen Lage und Infrastruktur besondere Möglichkeiten zum Sparen. Die gute Verkehrsanbindung ermöglicht es Umzugsfirmen, effizienter zu arbeiten, was sich in günstigeren Preisen niederschlägt. Zudem sind die Parkmöglichkeiten oft besser als in den Metropolen, was zusätzliche Kosten für Halteverbotszonen reduziert.
               </p>
               <div className="grid md:grid-cols-2 gap-6">
                 {savingsTips.map((tip, index) => (
@@ -359,8 +422,11 @@ const UmzugskostenAargauPageClient: React.FC = () => {
             {/* Seasonal Variations */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Saisonale Preisvariationen</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
+              <p className="text-gray-700 leading-relaxed mb-4">
                 Die Saison hat einen erheblichen Einfluss auf die Umzugskosten. Planen Sie Ihren Umzug wenn möglich in der Nebensaison, um zu sparen:
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Die Nachfrage nach Umzugsdienstleistungen variiert stark über das Jahr. In der Hauptsaison (Frühling und Sommer) sind Umzugsfirmen oft ausgebucht, was zu höheren Preisen führt. In der Nebensaison (Herbst und Winter) sind die Preise deutlich günstiger, und Sie haben mehr Flexibilität bei der Terminwahl. Im Aargau sind diese saisonalen Schwankungen weniger ausgeprägt als in den Metropolen, aber dennoch spürbar.
               </p>
               <div className="grid md:grid-cols-2 gap-6">
                 {seasonalVariations.map((season, index) => (
@@ -390,22 +456,37 @@ const UmzugskostenAargauPageClient: React.FC = () => {
             {/* FAQ */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Häufige Fragen zu Umzugskosten im Aargau</h2>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Hier finden Sie Antworten auf die häufigsten Fragen zu Umzugskosten im Aargau. Diese Informationen helfen Ihnen, die Kosten besser zu verstehen und fundierte Entscheidungen zu treffen.
+              </p>
               <div className="space-y-4">
                 {faqs.map((faq, index) => (
                   <div key={index} className="bg-gray-50 rounded-xl p-6 border-2 border-gray-200">
                     <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                    <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                    <p className="text-gray-700 leading-relaxed">
+                      {faq.hasLink ? (
+                        <>
+                          {faq.answer.split(faq.linkText)[0]}
+                          <Link href={faq.linkUrl} className="text-green-600 hover:text-green-800 underline font-semibold">
+                            {faq.linkText}
+                          </Link>
+                          {faq.answer.split(faq.linkText)[1]}
+                        </>
+                      ) : (
+                        faq.answer
+                      )}
+                    </p>
                   </div>
                 ))}
               </div>
             </article>
 
-            {/* Internal Links */}
+            {/* Internal Links - Varied anchor texts per plan */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Erfahren Sie mehr über <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirmen im Aargau vergleichen</Link> oder informieren Sie sich über <Link href="/umzugsfirma-aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma-aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen Aargau finden</Link> und <Link href="/umzugsfirma-aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Anbieter im Kanton Aargau</Link>.
+                  Erfahren Sie mehr über <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirmen im Aargau vergleichen</Link>, <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen Aargau finden</Link> oder informieren Sie sich über <Link href="/umzugsfirma-aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma-aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma Baden</Link> und <Link href="/umzugsfirma-aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Anbieter im Kanton Aargau</Link>.
                 </p>
               </div>
             </article>

@@ -132,7 +132,7 @@ const schemaData = {
 }
 
 export const metadata: Metadata = {
-  title: 'Umzugsofferten kostenlos vergleichen – Bis zu 40% sparen',
+  title: 'Umzugsofferten vergleichen – Bis zu 40% sparen',
   description: 'Umzugsofferten kostenlos vergleichen ✓ Bis zu 6 Offerten von geprüften Umzugsfirmen erhalten. Umzug offerten Schweiz – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsofferten',

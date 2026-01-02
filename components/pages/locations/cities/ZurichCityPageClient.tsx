@@ -3,23 +3,24 @@
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, CheckCircle, MapPin, Building, Home, Package, Globe, Truck, ShieldCheck, Clock, Users } from 'lucide-react'
-import { aargauCityData } from '@/data/aargauCityData'
-import type { AargauCityData } from '@/data/aargauCityData'
+import { ArrowRight, CheckCircle, MapPin, Building, Home, Package, Globe, Truck, ShieldCheck, Clock, Users, Calculator } from 'lucide-react'
+import { zurichCityData } from '@/data/zurichCityData'
+import type { ZurichCityData } from '@/data/zurichCityData'
+import ServiceGrid from '@/components/pages/locations/ServiceGrid.client'
 
-interface AargauCityPageClientProps {
+interface ZurichCityPageClientProps {
   city: string
 }
 
-const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => {
-  const cityData: AargauCityData | undefined = aargauCityData[city.toLowerCase()]
+const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => {
+  const cityData: ZurichCityData | undefined = zurichCityData[city.toLowerCase()]
   
   if (!cityData) {
     return <div>Stadt nicht gefunden</div>
   }
 
   const cityName = cityData.name
-  const canonicalUrl = `/umzugsfirma-aargau/${city}`
+  const canonicalUrl = `/umzugsfirma-zuerich/${city}`
 
   // Service Schema - Ensure all values are plain strings
   const serviceSchema = {
@@ -39,7 +40,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
       "address": {
         "@type": "PostalAddress",
         "addressLocality": String(cityName),
-        "addressRegion": "AG",
+        "addressRegion": "ZH",
         "addressCountry": "CH"
       }
     },
@@ -65,7 +66,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
           "text": String(faq.answer || '')
         }
       }))
-      .filter(item => item.name && item.acceptedAnswer.text) // Filter out invalid entries
+      .filter(item => item.name && item.acceptedAnswer.text)
   }
 
   // LocalBusiness Schema - Ensure all values are plain strings
@@ -77,13 +78,13 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
     "address": {
       "@type": "PostalAddress",
       "addressLocality": String(cityName),
-      "addressRegion": "AG",
+      "addressRegion": "ZH",
       "addressCountry": "CH"
     },
     "url": `https://online-offerten.ch${canonicalUrl}`
   }
 
-  // Organization Schema (per plan: Organization Schema auf allen Seiten)
+  // Organization Schema
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -112,11 +113,12 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
     ]
   }
 
-  const services = [
-    { name: 'Privatumzug', icon: Home, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=${cityName}` },
-    { name: 'Geschäftsumzug', icon: Building, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug&city=${cityName}` },
-    { name: 'Internationaler Umzug', icon: Globe, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international&city=${cityName}` },
-    { name: 'Spezialtransport', icon: Package, link: `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport&city=${cityName}` }
+  // Cost table data
+  const costTableRows = [
+    { size: "1.5 - 2 Zimmer", staff: "2 Zügelmänner, 1 LKW", cost: "850 – 1'600" },
+    { size: "2.5 - 3 Zimmer", staff: "3 Zügelmänner, 1 LKW", cost: "1'400 – 2'300" },
+    { size: "3.5 - 4.5 Zimmer", staff: "3-4 Zügelmänner, 1-2 LKW", cost: "1'900 – 3'200" },
+    { size: "5.5+ Zimmer / Haus", staff: "4-5 Zügelmänner, 2 LKW", cost: "3'000 – 5'500+" }
   ]
 
   const benefits = [
@@ -161,17 +163,27 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
             <nav className="flex items-center space-x-2 text-sm">
               <Link href="/" className="text-gray-600 hover:text-green-600">Start</Link>
               <span className="text-gray-400">/</span>
-              <Link href="/umzugsfirma-aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
+              <Link href="/umzugsfirma-zuerich" className="text-gray-600 hover:text-green-600">Umzugsfirma Zürich</Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 font-medium">{cityName}</span>
             </nav>
           </div>
         </section>
 
+        {/* Service Selection Cards */}
+        <section className="py-12 md:py-16 bg-gradient-to-br from-green-50 to-emerald-50 border-b border-gray-200">
+          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+              Wählen Sie Ihre gewünschte Dienstleistung
+            </h2>
+            <ServiceGrid city={cityName} />
+          </div>
+        </section>
+
         {/* Main Content */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
-            {/* Portal-focused Introduction - First paragraph per plan */}
+            {/* Portal-focused Introduction */}
             <article className="mb-12 bg-green-50 rounded-xl p-8 md:p-10 border border-green-200">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
                 Umzugsfirma {cityName} vergleichen – Kostenlose Offerten geprüfter Anbieter
@@ -222,46 +234,68 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 {cityData.serviceDetails && cityData.serviceDetails.length > 0 ? (
                   cityData.serviceDetails.map((serviceDetail, index) => {
-                    const matchingService = services.find(s => s.name === serviceDetail.name);
+                    const iconMap: Record<string, typeof Home> = {
+                      'Privatumzug': Home,
+                      'Geschäftsumzug': Building,
+                      'Internationaler Umzug': Globe,
+                      'Spezialtransport': Package
+                    }
+                    const Icon = iconMap[serviceDetail.name] || Home
                     return (
                       <div
                         key={index}
                         className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-green-500 transition-all"
                       >
-                        {matchingService && (
-                          <matchingService.icon className="w-8 h-8 text-green-600 mb-3" />
-                        )}
+                        <Icon className="w-8 h-8 text-green-600 mb-3" />
                         <h3 className="text-xl font-semibold text-gray-900 mb-3">
                           {serviceDetail.name}
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
                           {serviceDetail.description}
                         </p>
-                        {matchingService && (
-                          <Link href={matchingService.link} className="inline-flex items-center mt-4 text-green-600 hover:text-green-800 font-semibold">
-                            Mehr erfahren
-                            <ArrowRight className="ml-2 w-4 h-4" />
-                          </Link>
-                        )}
                       </div>
                     );
                   })
-                ) : (
-                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {services.map((service, index) => (
-                      <Link
-                        key={index}
-                        href={service.link}
-                        className="group bg-white border-2 border-gray-200 hover:border-green-500 rounded-xl p-5 transition-all hover:shadow-lg"
-                      >
-                        <service.icon className="w-8 h-8 text-green-600 mb-3 group-hover:scale-110 transition-transform" />
-                        <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
-                          {service.name}
-                        </h3>
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                ) : null}
+              </div>
+            </article>
+
+            {/* Umzugskosten */}
+            <article className="mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Umzugskosten in {cityName}</h2>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Die Umzugskosten in {cityName} hängen von verschiedenen Faktoren ab. Durch den Vergleich mehrerer Anbieter finden Sie das beste Angebot und sparen bis zu 40%. Die Kosten variieren je nach Umzugsvolumen, Distanz, Stockwerk und Zugänglichkeit.
+              </p>
+              
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4">
+                  <h3 className="text-xl font-bold text-white">Detaillierte Kostenschätzung für Ihren {cityName}-Umzug</h3>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Wohnungsgrösse</th>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Personal & LKW</th>
+                        <th className="px-6 py-4 text-right font-semibold text-gray-900 border-b border-gray-200">Geschätzte Kosten (CHF)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {costTableRows.map((row, index) => (
+                        <tr key={index} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-4 border-b border-gray-100 text-gray-700">{row.size}</td>
+                          <td className="px-6 py-4 border-b border-gray-100 text-gray-700">{row.staff}</td>
+                          <td className="px-6 py-4 border-b border-gray-100 text-right font-semibold text-green-600">{row.cost}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                  <p className="text-sm text-gray-600 italic">
+                    Hinweis: Diese Preise sind Schätzungen für Umzüge innerhalb von {cityName}. Faktoren wie Stockwerk, Liftverfügbarkeit, Distanz und Zusatzleistungen beeinflussen den Endpreis. Für eine exakte Kalkulation nutzen Sie unseren <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten-Rechner</Link>.
+                  </p>
+                </div>
               </div>
             </article>
 
@@ -273,17 +307,12 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
               </p>
             </article>
 
-            {/* Advantages */}
+            {/* Advantages - Shortened */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Vorteile eines Umzugs nach {cityName}</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 {cityData.advantages}
               </p>
-              {cityData.advantagesExtended && (
-                <p className="text-gray-700 leading-relaxed">
-                  {cityData.advantagesExtended}
-                </p>
-              )}
             </article>
 
             {/* Benefits */}
@@ -313,12 +342,12 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
               </div>
             </article>
 
-            {/* Internal Links - Varied anchor texts per plan */}
+            {/* Internal Links */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Erfahren Sie mehr über <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Aargau-Übersicht</Link>, <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Aargau</Link> oder <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>. Informieren Sie sich auch über die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten in {cityName} berechnen</Link>, die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Preise für Umzüge in {cityName}</Link> oder <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Was kostet ein Umzug nach {cityName}?</Link>.
+                  Erfahren Sie mehr über <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Zürich-Übersicht</Link>, <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Kanton Zürich</Link> oder <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>.
                 </p>
               </div>
             </article>
@@ -353,5 +382,5 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
   )
 }
 
-export default AargauCityPageClient
+export default ZurichCityPageClient
 

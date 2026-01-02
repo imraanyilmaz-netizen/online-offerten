@@ -10,8 +10,6 @@ import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import CantonFlag from '@/components/CantonFlag';
-import LocationFAQ from '@/components/locations/LocationFAQ';
-import { faqs } from '@/data/locationFaqs';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 import { Inter } from 'next/font/google';
 
@@ -80,11 +78,11 @@ const UmzugsfirmaAargauPageClient = () => {
     canonicalUrl: '/umzugsfirma-aargau'
   };
   
-  // Service Schema
+  // Service Schema - Ensure all values are plain strings
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": cityData.displayName,
+    "name": String(cityData?.displayName || `Umzugsfirmen im Aargau`),
     "description": "Geprüfte Zügelfirmen und Umzugsunternehmen im Aargau vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen in Aarau, Baden, Zofingen und der ganzen Region.",
     "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
     "provider": {
@@ -94,17 +92,17 @@ const UmzugsfirmaAargauPageClient = () => {
     },
     "areaServed": {
       "@type": "City",
-      "name": city,
+      "name": String(city),
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": cityData.addressLocality,
-        "addressRegion": cityData.addressRegion,
+        "addressLocality": String(cityData?.addressLocality || 'Aarau'),
+        "addressRegion": String(cityData?.addressRegion || 'AG'),
         "addressCountry": "CH"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": cityData.latitude,
-        "longitude": cityData.longitude
+        "latitude": String(cityData?.latitude || "47.3925"),
+        "longitude": String(cityData?.longitude || "8.0447")
       }
     },
     "url": `https://online-offerten.ch${canonicalUrl}`,
@@ -116,18 +114,62 @@ const UmzugsfirmaAargauPageClient = () => {
     }
   };
 
-  // FAQ Schema
+  // FAQ Schema - Helper function to extract text-only answers (plain strings only)
+  const extractFAQAnswerText = (answerArray: any[]): string => {
+    const textParts: string[] = []
+    
+    if (!Array.isArray(answerArray)) {
+      return ''
+    }
+    
+    answerArray.forEach((ans) => {
+      // Only extract plain strings - skip all objects
+      if (typeof ans === 'string') {
+        textParts.push(ans.replace(/{city}/g, 'Aargau'))
+      } else if (ans && typeof ans === 'object' && ans.de && typeof ans.de === 'string') {
+        // Handle { de: "text" } format - extract only the string
+        textParts.push(ans.de.replace(/{city}/g, 'Aargau'))
+      }
+      // Skip all other objects (table, calculator_link, etc.) - they cause [object Object] issues
+    })
+    
+    const result = textParts.filter(Boolean).join(' ').trim()
+    return result || `Umzugsfirmen im Aargau vergleichen und die beste Firma finden. Kostenlose Offerten von geprüften Anbietern.`
+  }
+
+  // FAQ Schema - Ensure all values are plain strings
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqItemsForSchema.map(item => ({
-      "@type": "Question",
-      "name": ((item.question as any).de || item.question as any).replace('{city}', 'Aargau'),
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.answer.map(ans => typeof ans === 'string' ? ans : (ans.de || ans)).join(' ').replace(/{city}/g, 'Aargau')
-      }
-    }))
+    "mainEntity": faqItemsForSchema
+      .map(item => {
+        // Extract question text - ensure it's a string
+        let questionText = ''
+        if (typeof item.question === 'string') {
+          questionText = item.question
+        } else if (item.question && typeof item.question === 'object' && item.question.de) {
+          questionText = item.question.de
+        }
+        questionText = questionText.replace('{city}', 'Aargau')
+        
+        // Extract answer text - only plain strings
+        const answerText = extractFAQAnswerText(item.answer || [])
+        
+        // Only return if both question and answer are valid strings
+        if (!questionText || !answerText) {
+          return null
+        }
+        
+        return {
+          "@type": "Question",
+          "name": String(questionText), // Ensure it's a string
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": String(answerText) // Ensure it's a string
+          }
+        }
+      })
+      .filter((item): item is NonNullable<typeof item> => item !== null) // Type guard to filter nulls
   };
 
   // Organization Schema
@@ -435,7 +477,7 @@ const UmzugsfirmaAargauPageClient = () => {
                 <article>
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Umzugskosten im Aargau</h2>
                   <p className="text-gray-700 leading-relaxed mb-6">
-                    Die Umzugskosten im Aargau sind im Vergleich zu den grossen Städten wie Zürich oder Basel oft günstiger, lassen sich aber mit der richtigen Planung weiter optimieren. Durch den Vergleich mehrerer <strong>geprüfter Partner nach Schweizer Standards</strong> finden Sie das beste Angebot und sparen bis zu 40%. Alle Anbieter sind <strong>versichert gemäss OR</strong> und verfügen über umfassende Erfahrung. Eine detaillierte Übersicht finden Sie auf unserer Seite <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten im Aargau berechnen</Link> oder erfahren Sie mehr über die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Preisübersicht für Umzüge im Aargau</Link>.
+                    Die Umzugskosten im Aargau sind im Vergleich zu den grossen Städten wie Zürich oder Basel oft günstiger, lassen sich aber mit der richtigen Planung weiter optimieren. Durch den Vergleich mehrerer <strong>geprüfter Partner nach Schweizer Standards</strong> finden Sie das beste Angebot und sparen bis zu 40%. Alle Anbieter sind <strong>versichert gemäss OR</strong> und verfügen über umfassende Erfahrung. Eine detaillierte Übersicht finden Sie auf unserer Seite <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten im Aargau berechnen</Link>, erfahren Sie mehr über die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Preisübersicht für Umzüge im Aargau</Link> oder informieren Sie sich über <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Was kostet ein Umzug im Aargau?</Link>.
                   </p>
                   
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
@@ -733,12 +775,6 @@ const UmzugsfirmaAargauPageClient = () => {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-16 md:py-24 bg-gray-50">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
-            <LocationFAQ city={city} faqs={faqs} />
-          </div>
-        </section>
 
         {/* Navigation */}
         <section className="py-12 bg-white border-t border-gray-200">

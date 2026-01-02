@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UmzugsfirmaLausannePageClient from '@/components/pages/locations/UmzugsfirmaLausannePageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma Lausanne | Top Offerten | Stressfrei umziehen',
+  title: 'Umzugsfirma Lausanne – Top Anbieter vergleichen',
   description: 'Ihre zuverlässige Umzugsfirma in Lausanne. Fordern Sie jetzt kostenlose Offerten von geprüften Umzugsunternehmen für Ihren Umzug am Genfersee an.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-lausanne',

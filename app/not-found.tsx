@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import NotFoundPageClient from '@/components/pages/NotFoundPageClient'
 
 export const metadata: Metadata = {
-  title: 'Seite nicht gefunden (404) | Online-offerten.ch',
+  title: 'Seite nicht gefunden (404)',
   description: 'Die von Ihnen gesuchte Seite konnte nicht gefunden werden. Bitte überprüfen Sie die URL oder kehren Sie zur Startseite zurück.',
   robots: {
     index: false,

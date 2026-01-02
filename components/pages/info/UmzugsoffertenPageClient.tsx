@@ -251,8 +251,7 @@ const UmzugsoffertenPageClient = () => {
     { name: "Umzugsofferten Genf", link: "/umzugsfirma-genf", title: "Genf Umzugsofferten vergleichen" },
     { name: "Umzugsofferten Lausanne", link: "/umzugsfirma-lausanne", title: "Lausanne Umzugsofferten vergleichen" },
     { name: "Umzugsofferten Luzern", link: "/umzugsfirma-luzern", title: "Luzern Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten St. Gallen", link: "/umzugsfirma-st-gallen", title: "St. Gallen Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten Winterthur", link: "/umzugsfirma-winterthur", title: "Winterthur Umzugsofferten vergleichen" }
+    { name: "Umzugsofferten St. Gallen", link: "/umzugsfirma-st-gallen", title: "St. Gallen Umzugsofferten vergleichen" }
   ]
 
   return (

@@ -64,6 +64,11 @@ const nextConfig = {
         destination: '/umzugsfirma-zuerich',
         permanent: true, // 308 redirect
       },
+      {
+        source: '/floor-cleaning',
+        destination: '/bodenreinigung',
+        permanent: true, // 308 redirect
+      },
     ];
   },
   // Transpile packages if needed
