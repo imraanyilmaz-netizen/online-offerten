@@ -89,7 +89,7 @@ const PostPageClient = () => {
         <>
             
             
-            <div className="container mx-auto max-w-navbar px-4 py-8 md:py-12">
+            <div className="container mx-auto max-w-navbar px-4 py-8 md:py-12 overflow-x-visible">
                 <nav className="flex items-center text-sm text-gray-500 mb-8">
                     <Link href="/" className="hover:text-green-600 flex items-center">
                         <Home className="h-4 w-4 mr-1.5" /> Startseite
@@ -100,9 +100,9 @@ const PostPageClient = () => {
                     <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</span>
                 </nav>
 
-                <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-                    <main className="lg:col-span-8">
-                        <article className="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <div className="lg:grid lg:grid-cols-12 lg:gap-12 min-w-0">
+                    <main className="lg:col-span-8 min-w-0 overflow-x-visible">
+                        <article className="bg-white p-6 md:p-8 rounded-2xl shadow-lg overflow-visible min-w-0 max-w-full">
                             {post.featured_image_url && (
                                 <ImageWithFallback
                                     src={post.featured_image_url}
@@ -110,7 +110,7 @@ const PostPageClient = () => {
                                     className="w-full h-auto max-h-[500px] object-cover rounded-xl mb-8 shadow-md"
                                 />
                             )}
-                            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</h1>
+                            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-normal break-words w-full min-w-0 max-w-none -mx-6 md:-mx-8 px-6 md:px-8" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere', width: 'calc(100% + 3rem)', maxWidth: 'none', overflow: 'visible', textOverflow: 'unset', whiteSpace: 'normal' }}>{post.title && post.title.trim() ? post.title.trim() : (post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : '')}</h1>
                             
                             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500 mb-6 border-b pb-4">
                                 {post.category && (

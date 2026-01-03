@@ -7,7 +7,7 @@ const TiptapRenderer = ({ jsonContent }) => {
   if (typeof jsonContent === 'string') {
     return (
       <div
-        className="prose prose-lg dark:prose-invert max-w-none prose-sm sm:prose-base lg:prose-lg xl:prose-xl [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-6 [&_p:empty]:mb-6 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3"
+        className="prose prose-lg dark:prose-invert max-w-none prose-sm sm:prose-base lg:prose-lg xl:prose-xl [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-4 [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block"
         dangerouslySetInnerHTML={{ __html: jsonContent }}
       />
     );
@@ -111,7 +111,7 @@ const TiptapRenderer = ({ jsonContent }) => {
     const htmlContent = convertTipTapToHTML(jsonContent);
     return (
       <div
-        className="prose prose-lg dark:prose-invert max-w-none prose-sm sm:prose-base lg:prose-lg xl:prose-xl [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-6 [&_p:empty]:mb-6 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3"
+        className="prose prose-lg dark:prose-invert max-w-none prose-sm sm:prose-base lg:prose-lg xl:prose-xl [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-4 [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block"
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
     );

@@ -149,7 +149,7 @@ const TiptapEditor = ({ content, onChange }) => {
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px] p-6 [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-6 [&_p:empty]:mb-6 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-3',
+        class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px] p-6 [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-4 [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block',
       },
       transformPastedHTML(html) {
         // Boş paragrafları koru - &nbsp; ekle
