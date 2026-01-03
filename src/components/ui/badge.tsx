@@ -22,7 +22,12 @@ const badgeVariants = cva(
   }
 );
 
-function Badge({ className, variant, asChild, ...props }) {
+interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline';
+  asChild?: boolean;
+}
+
+function Badge({ className, variant, asChild = false, ...props }: BadgeProps) {
   // asChild prop'unu DOM elementine geçirme (React uyarısını önlemek için)
   return (
     <div className={cn(badgeVariants({ variant }), className)} {...props} />
@@ -30,3 +35,4 @@ function Badge({ className, variant, asChild, ...props }) {
 }
 
 export { Badge, badgeVariants };
+
