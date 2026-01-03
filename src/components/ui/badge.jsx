@@ -22,7 +22,8 @@ const badgeVariants = cva(
   }
 );
 
-function Badge({ className, variant, ...props }) {
+function Badge({ className, variant, asChild, ...props }) {
+  // asChild prop'unu DOM elementine geçirme (React uyarısını önlemek için)
   return (
     <div className={cn(badgeVariants({ variant }), className)} {...props} />
   );

@@ -28,10 +28,13 @@ const ImageWithFallback = ({ src, fallbackSrc = "https://via.placeholder.com/800
         alt={alt || "Bild nicht verfügbar"}
         loading={props.loading || "lazy"}
         decoding="async"
+        fetchPriority={props.fetchPriority || "auto"}
         width={props.width || 800}
         height={props.height || 400}
         style={{ display: 'block', ...props.style }}
-        {...props}
+        {...Object.fromEntries(Object.entries(props).filter(([key]) => 
+          !['fetchPriority', 'fetchpriority', 'loading', 'width', 'height', 'style', 'src', 'fallbackSrc', 'alt'].includes(key)
+        ))}
       />
     );
   }
@@ -42,7 +45,7 @@ const ImageWithFallback = ({ src, fallbackSrc = "https://via.placeholder.com/800
   // Try WebP format first, fallback to original format
   // But skip WebP for Supabase storage URLs since they don't have WebP versions
   const webpSrc = !isSupabaseStorage && src?.replace(/\.(png|jpg|jpeg)$/i, '.webp');
-  const isAboveFold = props.loading === 'eager' || props.fetchpriority === 'high';
+  const isAboveFold = props.loading === 'eager' || props.fetchPriority === 'high';
 
   // If Supabase storage URL, use simple img tag without picture element
   if (isSupabaseStorage) {
@@ -53,11 +56,13 @@ const ImageWithFallback = ({ src, fallbackSrc = "https://via.placeholder.com/800
         onError={handleError}
         loading={isAboveFold ? "eager" : (props.loading || "lazy")}
         decoding={isAboveFold ? "sync" : "async"}
-        fetchpriority={props.fetchpriority || (isAboveFold ? "high" : "auto")}
+        fetchPriority={props.fetchPriority || (isAboveFold ? "high" : "auto")}
         width={props.width || 800}
         height={props.height || 400}
         style={{ display: 'block', ...props.style }}
-        {...props}
+        {...Object.fromEntries(Object.entries(props).filter(([key]) => 
+          !['fetchPriority', 'fetchpriority', 'loading', 'width', 'height', 'style', 'src', 'fallbackSrc', 'alt'].includes(key)
+        ))}
       />
     );
   }
@@ -78,11 +83,13 @@ const ImageWithFallback = ({ src, fallbackSrc = "https://via.placeholder.com/800
         onError={handleError}
         loading={isAboveFold ? "eager" : (props.loading || "lazy")}
         decoding={isAboveFold ? "sync" : "async"}
-        fetchpriority={props.fetchpriority || (isAboveFold ? "high" : "auto")}
+        fetchPriority={props.fetchPriority || (isAboveFold ? "high" : "auto")}
         width={props.width || 800}
         height={props.height || 400}
         style={{ display: 'block', ...props.style }}
-        {...props}
+        {...Object.fromEntries(Object.entries(props).filter(([key]) => 
+          !['fetchPriority', 'fetchpriority', 'loading', 'width', 'height', 'style', 'src', 'fallbackSrc', 'alt'].includes(key)
+        ))}
       />
     </picture>
   );

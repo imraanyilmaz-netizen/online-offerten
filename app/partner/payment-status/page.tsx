@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/partner/payment-status',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function PartnerPaymentStatusPage() {

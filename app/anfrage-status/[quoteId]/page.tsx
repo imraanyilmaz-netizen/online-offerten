@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/anfrage-status',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function QuoteStatusPage() {

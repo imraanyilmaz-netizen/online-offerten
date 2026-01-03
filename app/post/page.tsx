@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/post',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function PostPage() {

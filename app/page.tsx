@@ -310,7 +310,7 @@ export default async function HomePage() {
                       <div className="flex items-start">
                         <MapPin className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">Geprüfte Anbieter aus Ihrer Region</p>
+                          <p className="font-semibold text-gray-900">Lokale Partner in Ihrer Nähe</p>
                         </div>
                       </div>
                       <div className="flex items-start">
@@ -487,7 +487,7 @@ export default async function HomePage() {
           </section>
 
           {/* Client Components - Interactive parts */}
-          <HomePageClient initialReviews={reviews} initialPosts={posts} />
+      <HomePageClient initialReviews={reviews} initialPosts={posts} />
         </main>
       </div>
     </>

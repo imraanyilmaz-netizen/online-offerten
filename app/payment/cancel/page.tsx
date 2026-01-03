@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/payment/cancel',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function PaymentCancelPage() {

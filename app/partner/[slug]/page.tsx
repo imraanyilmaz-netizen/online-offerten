@@ -30,11 +30,32 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
   }
 
+  const title = `${partner.company_name} | Bewertungen und Informationen`
+  
+  // Generate description
+  let description = partner.description
+  if (!description) {
+    const city = partner.address_city ? ` in ${partner.address_city}` : ''
+    description = `Bewertungen, Kontakt & Informationen zu ${partner.company_name}${city}. Jetzt kostenlose Offerte anfordern.`
+  }
+
   return {
-    title: `${partner.company_name} | Umzugsfirma & Reinigungsfirma`,
-    description: partner.description || `Professionelle Umzugs- und Reinigungsdienstleistungen von ${partner.company_name} in ${partner.address_city}. Jetzt kostenlose Offerte anfordern.`,
+    title,
+    description,
     alternates: {
       canonical: `https://online-offerten.ch/partner/${partner.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://online-offerten.ch/partner/${partner.slug}`,
+      siteName: 'Online-Offerten.ch',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
     },
   }
 }

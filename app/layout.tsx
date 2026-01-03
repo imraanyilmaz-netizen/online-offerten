@@ -16,10 +16,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | Online-Offerten.ch',
-    template: '%s | Online-Offerten.ch'
-  },
+  title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | Online-Offerten.ch',
   description: 'Kostenlose Offerten für Umzug, Reinigung & Renovierung vergleichen. Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region. Unverbindlich & transparent.',
   authors: [{ name: 'Online-Offerten.ch' }],
   creator: 'Online-Offerten.ch',

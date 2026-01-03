@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/admin-dashboard',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function AdminDashboardPage() {

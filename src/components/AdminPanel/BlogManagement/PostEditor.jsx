@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, Save, ArrowLeft, X, UploadCloud, Trash2, Tag, MessageSquare } from 'lucide-react';
+import { Loader2, Save, ArrowLeft, X, UploadCloud, Trash2, Tag, MessageSquare, HelpCircle, Plus } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { locations } from '@/data/locations';
 
@@ -27,7 +27,7 @@ const PostEditor = ({ post, onBack }) => {
 
   // Form state
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState('');
   const [status, setStatus] = useState('draft');
   const [category, setCategory] = useState('');
   const [tags, setTags] = useState([]);
@@ -44,6 +44,7 @@ const PostEditor = ({ post, onBack }) => {
   const [availableReviews, setAvailableReviews] = useState([]);
   const [selectedReviewIds, setSelectedReviewIds] = useState([]);
   const [readMoreText, setReadMoreText] = useState('');
+  const [faqs, setFaqs] = useState([]);
 
   const generateSlug = (text) => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
 
@@ -64,10 +65,114 @@ const PostEditor = ({ post, onBack }) => {
     fetchReviews();
   }, [toast]);
 
+  // TipTap JSON formatını HTML'e dönüştür (geriye dönük uyumluluk için)
+  const convertTipTapToHTML = (json) => {
+    if (!json || typeof json === 'string') return json || '';
+    if (!json.content) return '';
+    
+    let html = '';
+    json.content.forEach(node => {
+      if (node.type === 'paragraph') {
+        let text = '';
+        if (node.content) {
+          node.content.forEach(child => {
+            if (child.type === 'text') {
+              let formattedText = child.text;
+              if (child.marks) {
+                child.marks.forEach(mark => {
+                  if (mark.type === 'bold') formattedText = `<strong>${formattedText}</strong>`;
+                  if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
+                  if (mark.type === 'underline') formattedText = `<u>${formattedText}</u>`;
+                });
+              }
+              text += formattedText;
+            } else if (child.type === 'hardBreak') {
+              text += '<br>';
+            }
+          });
+        }
+        html += `<p>${text}</p>`;
+      } else if (node.type === 'heading') {
+        const level = node.attrs?.level || 1;
+        let text = '';
+        if (node.content) {
+          node.content.forEach(child => {
+            if (child.type === 'text') {
+              let formattedText = child.text;
+              if (child.marks) {
+                child.marks.forEach(mark => {
+                  if (mark.type === 'bold') formattedText = `<strong>${formattedText}</strong>`;
+                  if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
+                });
+              }
+              text += formattedText;
+            }
+          });
+        }
+        html += `<h${level}>${text}</h${level}>`;
+      } else if (node.type === 'bulletList' || node.type === 'orderedList') {
+        const tag = node.type === 'bulletList' ? 'ul' : 'ol';
+        let items = '';
+        if (node.content) {
+          node.content.forEach(item => {
+            if (item.type === 'listItem' && item.content) {
+              let itemText = '';
+              item.content.forEach(para => {
+                if (para.type === 'paragraph' && para.content) {
+                  para.content.forEach(child => {
+                    if (child.type === 'text') itemText += child.text;
+                  });
+                }
+              });
+              items += `<li>${itemText}</li>`;
+            }
+          });
+        }
+        html += `<${tag}>${items}</${tag}>`;
+      } else if (node.type === 'blockquote') {
+        let text = '';
+        if (node.content) {
+          node.content.forEach(child => {
+            if (child.type === 'paragraph' && child.content) {
+              child.content.forEach(textNode => {
+                if (textNode.type === 'text') text += textNode.text;
+              });
+            }
+          });
+        }
+        html += `<blockquote>${text}</blockquote>`;
+      } else if (node.type === 'codeBlock') {
+        let code = '';
+        if (node.content) {
+          node.content.forEach(child => {
+            if (child.type === 'text') code += child.text;
+          });
+        }
+        html += `<pre><code>${code}</code></pre>`;
+      } else if (node.type === 'image') {
+        const src = node.attrs?.src || '';
+        const alt = node.attrs?.alt || '';
+        html += `<img src="${src}" alt="${alt}" />`;
+      } else if (node.type === 'horizontalRule') {
+        html += '<hr>';
+      }
+    });
+    return html;
+  };
+
   useEffect(() => {
     if (post) {
       setTitle(post.title || '');
-      setContent(post.content || { type: 'doc', content: [] });
+      // Content'i HTML string olarak sakla (TipTap JSON'dan dönüştür)
+      const contentValue = post.content || '';
+      if (typeof contentValue === 'string') {
+        setContent(contentValue);
+      } else if (typeof contentValue === 'object' && contentValue !== null) {
+        // TipTap JSON formatından HTML'e dönüştür
+        setContent(convertTipTapToHTML(contentValue));
+      } else {
+        setContent('');
+      }
       setStatus(post.status || 'draft');
       setCategory(post.category || '');
       setTags(Array.isArray(post.tags) ? post.tags : []);
@@ -78,10 +183,11 @@ const PostEditor = ({ post, onBack }) => {
       setFeaturedImageUrl(post.featured_image_url || '');
       setSelectedReviewIds(post.selected_review_ids || []);
       setReadMoreText(post.read_more_text || '');
+      setFaqs(Array.isArray(post.faq) && post.faq.length > 0 ? post.faq : []);
     } else {
       // Reset for new post
       setTitle('');
-      setContent({ type: 'doc', content: [] });
+      setContent(''); // HTML string olarak başlat
       setStatus('draft');
       setCategory('');
       setTags([]);
@@ -92,6 +198,7 @@ const PostEditor = ({ post, onBack }) => {
       setFeaturedImageUrl('');
       setSelectedReviewIds([]);
       setReadMoreText('');
+      setFaqs([]);
     }
     setImageFile(null);
     setTagInput('');
@@ -186,6 +293,20 @@ const PostEditor = ({ post, onBack }) => {
     );
   };
 
+  const addFaq = () => {
+    setFaqs([...faqs, { question: '', answer: '' }]);
+  };
+
+  const removeFaq = (index) => {
+    setFaqs(faqs.filter((_, i) => i !== index));
+  };
+
+  const updateFaq = (index, field, value) => {
+    const updatedFaqs = [...faqs];
+    updatedFaqs[index] = { ...updatedFaqs[index], [field]: value };
+    setFaqs(updatedFaqs);
+  };
+
   const handleSave = async () => {
     setLoading(true);
     try {
@@ -204,23 +325,46 @@ const PostEditor = ({ post, onBack }) => {
         await supabase.from('tags').upsert({ name: pendingTag }, { onConflict: 'name' });
       }
 
+      // FAQ verilerini temizle ve formatla - question önce, answer sonra (sıralama garantisi)
+      const validFaqs = faqs
+        .filter(faq => faq && faq.question?.trim() && faq.answer?.trim())
+        .map(faq => {
+          // Sıralamayı garanti etmek için obje oluşturma
+          const faqObj = {};
+          faqObj.question = faq.question.trim();
+          faqObj.answer = faq.answer.trim();
+          return faqObj;
+        });
+
+      // Veriyi temizle ve doğrula
       const postData = {
-        title,
-        content,
-        status,
-        featured_image_url: finalImageUrl,
-        category: category || null,
-        tags: tagsToSave,
-        locations: selectedLocations,
-        meta_title: metaTitle,
-        meta_description: metaDescription,
-        slug,
-        author_id: user.id,
-        updated_at: new Date().toISOString(),
-        selected_review_ids: selectedReviewIds,
-        read_more_text: readMoreText,
+        title: title.trim() || null,
+        content: content || null,
+        status: status || 'draft',
+        featured_image_url: finalImageUrl && finalImageUrl.trim() ? finalImageUrl.trim() : null,
+        category: category && category.trim() ? category.trim() : null,
+        tags: Array.isArray(tagsToSave) && tagsToSave.length > 0 ? tagsToSave : null,
+        locations: Array.isArray(selectedLocations) && selectedLocations.length > 0 ? selectedLocations : null,
+        meta_title: metaTitle && metaTitle.trim() ? metaTitle.trim() : null,
+        meta_description: metaDescription && metaDescription.trim() ? metaDescription.trim() : null,
+        slug: slug.trim() || null,
+        author_id: user?.id || null,
+        selected_review_ids: Array.isArray(selectedReviewIds) && selectedReviewIds.length > 0 ? selectedReviewIds : null,
+        read_more_text: readMoreText && readMoreText.trim() ? readMoreText.trim() : null,
+        faq: validFaqs.length > 0 ? validFaqs : null,
         ...(status === 'published' && (!post || post.status !== 'published') && { published_at: new Date().toISOString() })
       };
+
+      // Pflichtfelder prüfen
+      if (!postData.title) {
+        throw new Error('Titel ist erforderlich');
+      }
+      if (!postData.slug) {
+        throw new Error('Slug ist erforderlich');
+      }
+      if (!postData.author_id) {
+        throw new Error('Autor ist erforderlich');
+      }
 
       let response;
       if (post?.id) {
@@ -229,20 +373,32 @@ const PostEditor = ({ post, onBack }) => {
         response = await supabase.from('posts').insert([postData]).select().single();
       }
 
-      if (response.error) throw response.error;
+      if (response.error) {
+        console.error('Supabase Error:', response.error);
+        console.error('Post Data:', JSON.stringify(postData, null, 2));
+        throw new Error(response.error.message || `Fehler beim Speichern: ${JSON.stringify(response.error)}`);
+      }
+      
       toast({ title: 'Erfolg', description: 'Beitrag erfolgreich gespeichert.' });
-      onBack();
+      // onBack() çağrısını kaldırdık - sayfa editörde kalacak, kullanıcı değişikliklere devam edebilir
     } catch (error) {
-      toast({ title: 'Fehler', description: `Beitrag konnte nicht gespeichert werden: ${error.message}`, variant: 'destructive' });
+      console.error('Save Error:', error);
+      const errorMessage = error.message || 'Unbekannter Fehler beim Speichern des Beitrags';
+      toast({ 
+        title: 'Fehler', 
+        description: `Beitrag konnte nicht gespeichert werden: ${errorMessage}`, 
+        variant: 'destructive' 
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <div className="px-4 md:px-6 pb-6 md:pb-8 pt-4 md:pt-6">
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="lg:col-span-2 space-y-6">
-        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mb-2">
           <Button variant="outline" size="icon" onClick={onBack}><ArrowLeft className="w-4 h-4" /></Button>
           <h2 className="text-2xl font-bold">{post ? 'Beitrag bearbeiten' : 'Neuen Beitrag erstellen'}</h2>
         </div>
@@ -250,6 +406,71 @@ const PostEditor = ({ post, onBack }) => {
         <Suspense fallback={<div className="flex items-center justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-gray-400" /></div>}>
           <TiptapEditor content={content} onChange={setContent} />
         </Suspense>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <HelpCircle className="w-5 h-5 text-green-600" />
+              FAQ (Häufige Fragen)
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <p className="text-xs text-muted-foreground mb-3">
+                Fügen Sie Fragen und Antworten hinzu, die für Google AI Overview und Rich Results verwendet werden.
+              </p>
+              {faqs.map((faq, index) => (
+                <div key={index} className="p-4 border rounded-lg space-y-3 bg-gray-50">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold text-gray-700">Frage {index + 1}</span>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="h-6 w-6"
+                      onClick={() => removeFaq(index)}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div>
+                    <Label className="text-xs">Frage</Label>
+                    <Input
+                      value={faq.question}
+                      onChange={(e) => updateFaq(index, 'question', e.target.value)}
+                      placeholder="z.B. Was kostet eine Umzugsreinigung?"
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs">Antwort</Label>
+                    <Textarea
+                      value={faq.answer}
+                      onChange={(e) => updateFaq(index, 'answer', e.target.value)}
+                      placeholder="Detaillierte Antwort hier eingeben..."
+                      className="mt-1 min-h-[80px]"
+                      rows={3}
+                    />
+                  </div>
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="outline"
+                onClick={addFaq}
+                className="w-full"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Neue FAQ hinzufügen
+              </Button>
+              {faqs.length === 0 && (
+                <p className="text-xs text-muted-foreground text-center py-4">
+                  Noch keine FAQs hinzugefügt. Klicken Sie auf "Neue FAQ hinzufügen".
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="lg:col-span-1 space-y-6">
@@ -285,7 +506,7 @@ const PostEditor = ({ post, onBack }) => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label>Öne Çıkan Görsel</Label>
+              <Label>Titelbild</Label>
               <div className="mt-1 space-y-3">
                 {/* URL Input */}
                 <div>
@@ -400,7 +621,7 @@ const PostEditor = ({ post, onBack }) => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-green-600" />
-              Müşteri Yorumları Ekle
+              Kundenrezensionen hinzufügen
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -430,6 +651,7 @@ const PostEditor = ({ post, onBack }) => {
             </ScrollArea>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

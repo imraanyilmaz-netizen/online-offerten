@@ -6,7 +6,9 @@ import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Tag, Folder, Home, ChevronRight, Loader2, ArrowLeft } from 'lucide-react';
+import { Calendar, Tag, Folder, Home, ChevronRight, Loader2, ArrowLeft, HelpCircle } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { motion } from 'framer-motion';
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx';
 import PostSidebar from '@/components/tools/PostSidebar';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
@@ -27,7 +29,7 @@ const PostPageClient = () => {
             
             const { data: postData, error: postError } = await supabase
                 .from('posts')
-                .select('*')
+                .select('*, meta_title, faq')
                 .eq('slug', slug)
                 .single();
 
@@ -95,7 +97,7 @@ const PostPageClient = () => {
                     <ChevronRight className="h-4 w-4 mx-1.5" />
                     <Link href={ratgeberBasePath} className="hover:text-green-600">Ratgeber</Link>
                     <ChevronRight className="h-4 w-4 mx-1.5" />
-                    <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.title}</span>
+                    <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</span>
                 </nav>
 
                 <div className="lg:grid lg:grid-cols-12 lg:gap-12">
@@ -108,7 +110,7 @@ const PostPageClient = () => {
                                     className="w-full h-auto max-h-[500px] object-cover rounded-xl mb-8 shadow-md"
                                 />
                             )}
-                            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">{post.title}</h1>
+                            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</h1>
                             
                             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500 mb-6 border-b pb-4">
                                 {post.category && (
@@ -124,6 +126,66 @@ const PostPageClient = () => {
                             </div>
                             
                             <TiptapRenderer jsonContent={post.content} />
+
+                            {/* FAQ Section */}
+                            {post.faq && Array.isArray(post.faq) && post.faq.length > 0 && post.faq.some((faq: any) => faq.question?.trim() && faq.answer?.trim()) && (
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5 }}
+                                    className="mt-12 pt-8 border-t border-gray-200"
+                                >
+                                    <div className="flex items-center mb-8">
+                                        <div className="p-3 bg-gradient-to-br from-green-100 to-green-50 rounded-full mr-4 shadow-sm">
+                                            <HelpCircle className="w-7 h-7 text-green-600" />
+                                        </div>
+                                        <div>
+                                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                                                Häufige Fragen (FAQ)
+                                            </h2>
+                                            <p className="text-sm text-gray-500 mt-1">Antworten auf die wichtigsten Fragen</p>
+                                        </div>
+                                    </div>
+                                    <Accordion type="single" collapsible className="w-full space-y-3">
+                                        {post.faq
+                                            .filter((faq: any) => faq.question?.trim() && faq.answer?.trim())
+                                            .map((faq: any, index: number) => (
+                                                <motion.div
+                                                    key={index}
+                                                    initial={{ opacity: 0, y: 15 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                                                >
+                                                    <AccordionItem 
+                                                        value={`item-${index}`} 
+                                                        className="border border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50/50 shadow-sm hover:shadow-lg transition-all duration-300 mb-3 overflow-hidden group"
+                                                    >
+                                                        <AccordionTrigger className="text-left hover:no-underline py-5 px-6 text-base md:text-lg font-semibold text-gray-800 hover:text-green-600 transition-colors">
+                                                            <div className="flex items-start gap-4 w-full">
+                                                                <div className="flex-shrink-0 mt-0.5">
+                                                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-sm group-hover:shadow-md transition-all">
+                                                                        <span className="text-white font-bold text-sm">{index + 1}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <span className="flex-1 pr-4 leading-snug">{faq.question.trim()}</span>
+                                                            </div>
+                                                        </AccordionTrigger>
+                                                        <AccordionContent className="pt-2 pb-6 px-6 text-gray-700 leading-relaxed">
+                                                            <div className="flex items-start gap-4 pl-14">
+                                                                <div className="w-1 h-auto bg-gradient-to-b from-green-400 to-green-500 rounded-full flex-shrink-0 min-h-[40px]"></div>
+                                                                <div className="flex-1 bg-green-50/50 rounded-lg p-4 border-l-4 border-green-400">
+                                                                    <p className="whitespace-pre-wrap leading-relaxed text-base">{faq.answer.trim()}</p>
+                                                                </div>
+                                                            </div>
+                                                        </AccordionContent>
+                                                    </AccordionItem>
+                                                </motion.div>
+                                            ))}
+                                    </Accordion>
+                                </motion.div>
+                            )}
 
                             {post.tags && post.tags.length > 0 && (
                                 <div className="mt-8 pt-6 border-t">

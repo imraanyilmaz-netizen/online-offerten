@@ -367,7 +367,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
   return (
     <>
-      
+        
           {/* How It Works Section */}
           <section className="py-12 md:py-16 bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 relative overflow-hidden">
             {/* Decorative background elements */}

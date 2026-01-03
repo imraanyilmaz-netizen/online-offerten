@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/partner/credit-top-up',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function PartnerCreditTopUpPage() {
