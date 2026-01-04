@@ -266,12 +266,7 @@ async function generateSitemap() {
     .filter(route => allStaticRoutes.includes(route))
     .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.9'));
 
-  // 7. Standorte page (if exists)
-  if (allStaticRoutes.includes('/standorte')) {
-    locationPages.push(createUrlEntry(`${BASE_URL}/standorte`, today, 'weekly', '0.95'));
-  }
-
-  // 8. Dynamic blog post pages
+  // 7. Dynamic blog post pages
   const postPages = posts.map(post => createUrlEntry(`${BASE_URL}/ratgeber/${post.slug}`, post.updated_at, 'weekly', '0.8'));
 
   // 9. Dynamic partner profile pages

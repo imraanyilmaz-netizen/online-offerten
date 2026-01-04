@@ -134,56 +134,43 @@ const PostPageClient = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5 }}
-                                    className="mt-12 pt-8 border-t border-gray-200"
+                                    className="mt-16 pt-12 border-t border-gray-200"
                                 >
-                                    <div className="flex items-center mb-8">
-                                        <div className="p-3 bg-gradient-to-br from-green-100 to-green-50 rounded-full mr-4 shadow-sm">
-                                            <HelpCircle className="w-7 h-7 text-green-600" />
-                                        </div>
-                                        <div>
-                                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-                                                Häufige Fragen (FAQ)
-                                            </h2>
-                                            <p className="text-sm text-gray-500 mt-1">Antworten auf die wichtigsten Fragen</p>
-                                        </div>
+                                    <div className="text-center mb-12">
+                                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                                            Häufige Fragen (FAQ)
+                                        </h2>
+                                        <p className="text-lg text-gray-600">Antworten auf die wichtigsten Fragen</p>
                                     </div>
-                                    <Accordion type="single" collapsible className="w-full space-y-3">
-                                        {post.faq
-                                            .filter((faq: any) => faq.question?.trim() && faq.answer?.trim())
-                                            .map((faq: any, index: number) => (
-                                                <motion.div
-                                                    key={index}
-                                                    initial={{ opacity: 0, y: 15 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ delay: index * 0.1, duration: 0.4 }}
-                                                >
-                                                    <AccordionItem 
-                                                        value={`item-${index}`} 
-                                                        className="border border-gray-200 rounded-xl bg-gradient-to-br from-white to-gray-50/50 shadow-sm hover:shadow-lg transition-all duration-300 mb-3 overflow-hidden group"
+                                    <div className="max-w-4xl mx-auto">
+                                        <Accordion type="single" collapsible className="w-full space-y-4">
+                                            {post.faq
+                                                .filter((faq: any) => faq.question?.trim() && faq.answer?.trim())
+                                                .map((faq: any, index: number) => (
+                                                    <motion.div
+                                                        key={index}
+                                                        initial={{ opacity: 0, y: 15 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ delay: index * 0.05, duration: 0.3 }}
                                                     >
-                                                        <AccordionTrigger className="text-left hover:no-underline py-5 px-6 text-base md:text-lg font-semibold text-gray-800 hover:text-green-600 transition-colors">
-                                                            <div className="flex items-start gap-4 w-full">
-                                                                <div className="flex-shrink-0 mt-0.5">
-                                                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-sm group-hover:shadow-md transition-all">
-                                                                        <span className="text-white font-bold text-sm">{index + 1}</span>
-                                                                    </div>
+                                                        <AccordionItem 
+                                                            value={`item-${index}`} 
+                                                            className="border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden"
+                                                        >
+                                                            <AccordionTrigger className="text-left hover:no-underline py-5 px-6 hover:bg-gray-50 transition-colors">
+                                                                <span className="text-lg font-semibold text-gray-900 pr-8">{faq.question.trim()}</span>
+                                                            </AccordionTrigger>
+                                                            <AccordionContent className="px-6 pb-6 pt-0">
+                                                                <div className="pt-2 border-t border-gray-100">
+                                                                    <p className="text-gray-700 leading-relaxed text-base whitespace-pre-wrap">{faq.answer.trim()}</p>
                                                                 </div>
-                                                                <span className="flex-1 pr-4 leading-snug">{faq.question.trim()}</span>
-                                                            </div>
-                                                        </AccordionTrigger>
-                                                        <AccordionContent className="pt-2 pb-6 px-6 text-gray-700 leading-relaxed">
-                                                            <div className="flex items-start gap-4 pl-14">
-                                                                <div className="w-1 h-auto bg-gradient-to-b from-green-400 to-green-500 rounded-full flex-shrink-0 min-h-[40px]"></div>
-                                                                <div className="flex-1 bg-green-50/50 rounded-lg p-4 border-l-4 border-green-400">
-                                                                    <p className="whitespace-pre-wrap leading-relaxed text-base">{faq.answer.trim()}</p>
-                                                                </div>
-                                                            </div>
-                                                        </AccordionContent>
-                                                    </AccordionItem>
-                                                </motion.div>
-                                            ))}
-                                    </Accordion>
+                                                            </AccordionContent>
+                                                        </AccordionItem>
+                                                    </motion.div>
+                                                ))}
+                                        </Accordion>
+                                    </div>
                                 </motion.div>
                             )}
 

@@ -159,10 +159,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     })
 
     if (error) {
+      let errorMessage = error.message || "Etwas ist schief gelaufen"
+      // Übersetze häufige Fehlermeldungen
+      if (error.message?.toLowerCase().includes('email not confirmed') || error.message?.toLowerCase().includes('email_not_confirmed')) {
+        errorMessage = "E-Mail nicht bestätigt"
+      } else if (error.message?.toLowerCase().includes('invalid login')) {
+        errorMessage = "Ungültige Anmeldedaten"
+      } else if (error.message?.toLowerCase().includes('user already registered')) {
+        errorMessage = "Benutzer ist bereits registriert"
+      }
       toast({
         variant: "destructive",
-        title: "Sign up Failed",
-        description: error.message || "Something went wrong",
+        title: "Registrierung fehlgeschlagen",
+        description: errorMessage,
       })
     }
 
@@ -185,10 +194,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     })
 
     if (error) {
+      let errorMessage = error.message || "Etwas ist schief gelaufen"
+      // Übersetze häufige Fehlermeldungen
+      if (error.message?.toLowerCase().includes('email not confirmed') || error.message?.toLowerCase().includes('email_not_confirmed')) {
+        errorMessage = "E-Mail nicht bestätigt"
+      } else if (error.message?.toLowerCase().includes('invalid login') || error.message?.toLowerCase().includes('invalid credentials')) {
+        errorMessage = "Ungültige Anmeldedaten"
+      } else if (error.message?.toLowerCase().includes('user not found')) {
+        errorMessage = "Benutzer nicht gefunden"
+      } else if (error.message?.toLowerCase().includes('wrong password')) {
+        errorMessage = "Falsches Passwort"
+      }
       toast({
         variant: "destructive",
-        title: "Sign in Failed",
-        description: error.message || "Something went wrong",
+        title: "Anmeldung fehlgeschlagen",
+        description: errorMessage,
       })
     } else {
       console.log('[AuthContext] signIn successful, session should be set')
@@ -203,8 +223,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (error && error.message !== 'Session from session_id claim in JWT does not exist' && error.message !== 'Authentifizierungssitzung nicht gefunden.') {
       toast({
         variant: "destructive",
-        title: "Sign out Failed",
-        description: error.message || "Something went wrong",
+        title: "Abmeldung fehlgeschlagen",
+        description: error.message || "Etwas ist schief gelaufen",
       })
       return { error }
     }
