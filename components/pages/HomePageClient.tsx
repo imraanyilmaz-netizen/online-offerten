@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import NextImage from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -163,6 +164,7 @@ interface HomePageClientProps {
 }
 
 const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClientProps) => {
+  const router = useRouter();
   const [selectedCalculator, setSelectedCalculator] = useState<string | null>('umzug');
   const [isMounted, setIsMounted] = useState(false);
   
@@ -529,7 +531,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <MovingCostCalculator />
+                    <MovingCostCalculator 
+                      onRequestQuote={() => {
+                        router.push('/kostenlose-offerte-anfordern?service=umzug&step=2');
+                      }}
+                      onFormOpened={() => {}}
+                    />
                   </motion.div>
                 )}
                 {selectedCalculator === 'reinigung' && (
