@@ -138,38 +138,38 @@ const PostPageClient = () => {
                                 >
                                     <div className="text-center mb-12">
                                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                                            Häufige Fragen (FAQ)
-                                        </h2>
+                                                Häufige Fragen (FAQ)
+                                            </h2>
                                         <p className="text-lg text-gray-600">Antworten auf die wichtigsten Fragen</p>
                                     </div>
                                     <div className="max-w-4xl mx-auto">
                                         <Accordion type="single" collapsible className="w-full space-y-4">
-                                            {post.faq
-                                                .filter((faq: any) => faq.question?.trim() && faq.answer?.trim())
-                                                .map((faq: any, index: number) => (
-                                                    <motion.div
-                                                        key={index}
-                                                        initial={{ opacity: 0, y: 15 }}
-                                                        whileInView={{ opacity: 1, y: 0 }}
-                                                        viewport={{ once: true }}
+                                        {post.faq
+                                            .filter((faq: any) => faq.question?.trim() && faq.answer?.trim())
+                                            .map((faq: any, index: number) => (
+                                                <motion.div
+                                                    key={index}
+                                                    initial={{ opacity: 0, y: 15 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
                                                         transition={{ delay: index * 0.05, duration: 0.3 }}
-                                                    >
-                                                        <AccordionItem 
-                                                            value={`item-${index}`} 
+                                                >
+                                                    <AccordionItem 
+                                                        value={`item-${index}`} 
                                                             className="border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden"
-                                                        >
+                                                    >
                                                             <AccordionTrigger className="text-left hover:no-underline py-5 px-6 hover:bg-gray-50 transition-colors">
                                                                 <span className="text-lg font-semibold text-gray-900 pr-8">{faq.question.trim()}</span>
-                                                            </AccordionTrigger>
+                                                        </AccordionTrigger>
                                                             <AccordionContent className="px-6 pb-6 pt-0">
                                                                 <div className="pt-2 border-t border-gray-100">
                                                                     <p className="text-gray-700 leading-relaxed text-base whitespace-pre-wrap">{faq.answer.trim()}</p>
-                                                                </div>
-                                                            </AccordionContent>
-                                                        </AccordionItem>
-                                                    </motion.div>
-                                                ))}
-                                        </Accordion>
+                                                            </div>
+                                                        </AccordionContent>
+                                                    </AccordionItem>
+                                                </motion.div>
+                                            ))}
+                                    </Accordion>
                                     </div>
                                 </motion.div>
                             )}

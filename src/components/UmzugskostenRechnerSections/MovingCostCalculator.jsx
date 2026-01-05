@@ -79,7 +79,7 @@ const LocationInfo = ({ zip, onLocationUpdate }) => {
 };
 
 
-const MovingCostCalculator = () => {
+const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOpenForm = false, onFormOpened, hideCalculator = false }) => {
   const router = useRouter();
   const [rooms, setRooms] = useState("3.5");
   const [cleaning, setCleaning] = useState("no");
@@ -95,6 +95,42 @@ const MovingCostCalculator = () => {
   const [error, setError] = useState(null);
   const [showInlineForm, setShowInlineForm] = useState(false);
   const [initialFormDataForForm, setInitialFormDataForForm] = useState({});
+
+  // Effect to open form when shouldOpenForm is true (component mounts with shouldOpenForm=true)
+  useEffect(() => {
+    if (shouldOpenForm && !hideInlineForm) {
+      console.log('[MovingCostCalculator] Opening form, shouldOpenForm:', shouldOpenForm, 'hideInlineForm:', hideInlineForm);
+      // Get form data from URL parameters
+      const params = new URLSearchParams(window.location.search);
+      const formData = {
+        service: params.get('service') || 'umzug',
+        umzugArt: params.get('umzugArt') || 'privatumzug',
+        from_rooms: params.get('from_rooms') || rooms,
+        from_zip: params.get('from_zip') || fromZip,
+        from_city: params.get('from_city') || fromLocation?.city || '',
+        from_canton: params.get('from_canton') || fromLocation?.canton || '',
+        to_zip: params.get('to_zip') || toZip,
+        to_city: params.get('to_city') || toLocation?.city || '',
+        to_canton: params.get('to_canton') || toLocation?.canton || '',
+        additional_cleaning: params.get('additional_cleaning') === 'true' || cleaning === 'yes',
+        furniture_assembly: params.get('furniture_assembly') === 'true' || furnitureAssembly === 'yes',
+        calculated_distance: params.get('calculated_distance') || calculatedDistance,
+        _initialStep: 2,
+      };
+      
+      console.log('[MovingCostCalculator] Setting form data:', formData);
+      setInitialFormDataForForm(formData);
+      setShowInlineForm(true);
+      
+      // Call onFormOpened after form is rendered (just for notification, not to close)
+      setTimeout(() => {
+        if (onFormOpened) {
+          console.log('[MovingCostCalculator] Form rendered, calling onFormOpened');
+          onFormOpened();
+        }
+      }, 500);
+    }
+  }, [shouldOpenForm, hideInlineForm]);
 
   const roomOptions = [
     { value: "1.5", label: "1 - 1.5 Zimmer" },
@@ -194,6 +230,30 @@ const MovingCostCalculator = () => {
   };
   
   const handleOpenQuoteForm = () => {
+    // Wenn onRequestQuote prop vorhanden ist, rufe diese Funktion auf (für Hero-Bereich)
+    if (onRequestQuote) {
+      // Setze URL-Parameter mit Formulardaten für die Seite
+      const params = new URLSearchParams(window.location.search);
+      params.set('service', 'umzug');
+      params.set('step', '2');
+      params.set('umzugArt', 'privatumzug');
+      if (rooms) params.set('from_rooms', rooms);
+      if (fromZip) params.set('from_zip', fromZip);
+      if (fromLocation?.city) params.set('from_city', fromLocation.city);
+      if (fromLocation?.canton) params.set('from_canton', fromLocation.canton);
+      if (toZip) params.set('to_zip', toZip);
+      if (toLocation?.city) params.set('to_city', toLocation.city);
+      if (toLocation?.canton) params.set('to_canton', toLocation.canton);
+      if (cleaning === 'yes') params.set('additional_cleaning', 'true');
+      if (furnitureAssembly === 'yes') params.set('furniture_assembly', 'true');
+      if (calculatedDistance) params.set('calculated_distance', calculatedDistance.toString());
+      
+      window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+      
+      onRequestQuote();
+      return;
+    }
+    
     // Setze die initialen Formulardaten mit service=umzug und step=2
     setInitialFormDataForForm({
         service: 'umzug',
@@ -239,15 +299,16 @@ const MovingCostCalculator = () => {
 
   return (
     <>
-      <Card className="shadow-xl border-green-500 border-2">
-        <CardHeader className="bg-green-50 rounded-t-lg">
-          <CardTitle className="text-2xl font-bold text-green-700 flex items-center">
-            <Calculator size={28} className="mr-3" />
-            Umzugskosten online berechnen
-          </CardTitle>
-          <CardDescription>Erhalten Sie eine sofortige Kostenschätzung basierend auf Ihren Angaben.</CardDescription>
-        </CardHeader>
-        <CardContent className="p-6 space-y-6">
+      {!hideCalculator && (
+        <Card className="shadow-xl border-green-500 border-2">
+          <CardHeader className="bg-green-50 rounded-t-lg">
+            <CardTitle className="text-2xl font-bold text-green-700 flex items-center">
+              <Calculator size={28} className="mr-3" />
+              Umzugskosten online berechnen
+            </CardTitle>
+            <CardDescription>Erhalten Sie eine sofortige Kostenschätzung basierend auf Ihren Angaben.</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <Label htmlFor="rooms" className="block text-sm font-medium text-gray-700 mb-1">Anzahl Zimmer</Label>
@@ -353,14 +414,15 @@ const MovingCostCalculator = () => {
           )}
         </CardContent>
       </Card>
+      )}
 
-      {showInlineForm && (
+      {showInlineForm && !hideInlineForm && (
         <motion.div
           id="calculator-inline-form"
-          initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-          animate={{ opacity: 1, scaleY: 1 }}
-          exit={{ opacity: 0, scaleY: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}
           className="mt-8 p-6 bg-white rounded-lg border-2 border-gray-200 shadow-lg"
         >
           <Suspense fallback={<FormLoadingSpinner />}>

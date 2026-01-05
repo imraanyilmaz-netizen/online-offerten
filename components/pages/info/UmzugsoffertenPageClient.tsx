@@ -258,22 +258,22 @@ const UmzugsoffertenPageClient = () => {
     <>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 py-12 md:py-20 overflow-hidden">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
+          <div className="grid md:grid-cols-5 gap-8 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              className="md:col-span-3"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                <span className="block">Umzugsofferten</span>
-                <span className="block text-green-600 mt-2">kostenlos vergleichen</span>
-                <span className="block text-2xl md:text-3xl text-gray-700 font-bold mt-4">
-                  Bis zu 40% sparen bei Ihrem Umzug
-                </span>
+                Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen
               </h1>
+              <p className="text-lg md:text-xl text-gray-700 mb-4 leading-relaxed">
+                Ihr Wegweiser zum besten Preis für Ihren Umzug in der Schweiz.
+              </p>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                Erhalten Sie <strong>bis zu 6 kostenlose Umzugsangebote</strong> von geprüften Umzugsfirmen in der ganzen Schweiz. Vergleichen Sie Preise, Leistungen und Bewertungen – <strong>100% kostenlos und unverbindlich</strong>. Finden Sie die beste Offerte für Ihren Wohnungswechsel.
+                Umzugsofferten sind der Schlüssel zu einem erfolgreichen und kostengünstigen Umzug in der Schweiz. Wenn Sie <strong>Preise von Umzugsfirmen</strong> vergleichen, erhalten Sie nicht nur die besten Konditionen, sondern auch einen umfassenden Überblick über die verfügbaren Dienstleistungen verschiedener Umzugsunternehmen. Mit nur einer einzigen Anfrage können Sie mehrere Angebote gleichzeitig einholen und diese bequem vergleichen. Bei <strong>Online-Offerten.ch</strong> können Sie <strong>kostenlose Preisvorschläge</strong> von bis zu 6 geprüften Umzugsfirmen in Ihrer Region anfordern und diese in Ruhe vergleichen – der gesamte Prozess ist online mit nur wenigen Klicks erledigt.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -313,7 +313,7 @@ const UmzugsoffertenPageClient = () => {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
+              className="relative md:col-span-2"
             >
               <div className="bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl p-8 shadow-2xl">
                 <div className="bg-white rounded-xl p-6 shadow-lg">
@@ -332,52 +332,6 @@ const UmzugsoffertenPageClient = () => {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Compare Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Warum mehrere Angebote vergleichen?
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Der Vergleich von <strong>mehreren Preisen</strong> ist der effektivste Weg, um faire Angebote zu finden und bei Ihrem Umzug Geld zu sparen. Studien zeigen, dass Kunden durch den Vergleich mehrerer Preisvorschläge durchschnittlich <strong>30-40% der Umzugskosten einsparen</strong> können.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className="h-full border-2 hover:border-green-500 transition-colors">
-                  <CardHeader>
-                    <div className="flex items-center mb-4">
-                      <div className="bg-green-100 p-3 rounded-lg mr-4">
-                        <feature.icon className="h-6 w-6 text-green-600" />
-                      </div>
-                      <CardTitle className="text-xl">{feature.title}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
@@ -440,6 +394,9 @@ const UmzugsoffertenPageClient = () => {
           </div>
         </div>
       </section>
+
+      {/* SEO Rich Content Section - Lazy Loaded */}
+      <UmzugsoffertenSEORichContent />
 
       {/* Cost Factors Section */}
       <section className="py-16 md:py-24 bg-white">
@@ -605,9 +562,6 @@ const UmzugsoffertenPageClient = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* SEO Rich Content Section - Lazy Loaded */}
-      <UmzugsoffertenSEORichContent />
 
       {/* Related Services Section - Lazy Loaded */}
       <UmzugsoffertenRelatedServices />

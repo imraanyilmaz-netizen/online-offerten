@@ -392,26 +392,23 @@ const UmzugsfirmaInDerNaehePageClient = () => {
       {/* Hero Section - Unique Design for Local Search */}
       <section className="relative bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+          <div className="grid md:grid-cols-5 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
+              className="md:col-span-3"
             >
               <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-6">
                 <MapPin className="h-4 w-4 mr-2" />
                 Lokale Umzugsfirmen finden
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                <span className="block">Umzugsfirma</span>
-                <span className="block text-green-600 mt-2">in der Nähe finden</span>
-                <span className="block text-2xl md:text-3xl text-gray-700 font-bold mt-4">
-                  Geprüfte Partner in Ihrer Region
-                </span>
+                Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                Finden Sie die <strong>beste Umzugsfirma in Ihrer Nähe</strong>. Vergleichen Sie <strong>bis zu 6 kostenlose Offerten</strong> von geprüften <strong>Umzugsunternehmen in Ihrer Region</strong> – <strong>100% kostenlos und unverbindlich</strong>. Lokale Expertise, kürzere Wege, bessere Preise.
+                Eine Umzugsfirma in der Nähe zu finden, ist der erste Schritt zu einem erfolgreichen Umzug. Bereits bei der Suche nach einem passenden Umzugsunternehmen lohnt es sich, frühzeitig verschiedene Anbieter zu recherchieren. Wenn Sie nach einem Umzugsservice vor Ort suchen, sollten Sie mehrere regionale Umzugsunternehmen vergleichen, da die Auswahl des richtigen Anbieters entscheidend für einen reibungslosen Ablauf und die Kosten ist. Bei Online-Offerten.ch können Sie kostenlose Offerten von geprüften Umzugsanbietern in Ihrer Region anfordern und diese in Ruhe vergleichen. Bei Fragen oder Unsicherheiten kann zudem professioneller Rat sehr hilfreich sein.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -455,8 +452,15 @@ const UmzugsfirmaInDerNaehePageClient = () => {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
+              className="relative md:col-span-2"
             >
+              <div className="mb-6">
+                <img 
+                  src="/image/umzugsservice-schweiz/umzugsfirma-in-der-naehe-finden.png" 
+                  alt="Umzugsfirma in der Nähe finden" 
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
+              </div>
               <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
                 <div className="flex items-center justify-center mb-6">
                   <div className="bg-green-100 p-4 rounded-full">
@@ -491,13 +495,13 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
               Warum eine lokale Umzugsfirma wählen?
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Regionale Umzugsunternehmen bieten zahlreiche Vorteile, die oft übersehen werden. Erfahren Sie, warum ein <strong>Umzugsservice vor Ort</strong> die beste Wahl für Ihren Umzug sein kann.
+            </h3>
+            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              Ein Umzugsservice vor Ort bietet zahlreiche Vorteile, die oft übersehen werden. Regionale Umzugsunternehmen in Ihrer Region kennen die örtlichen Gegebenheiten, Verkehrssituationen und Parkregelungen besonders gut. Der Standort des Umzugsunternehmens spielt dabei eine wichtige Rolle, da er die logistische Planung und die Effizienz des Umzugs erheblich erleichtert. Lokale Zügelfirmen haben kürzere Anfahrtswege, was die Kosten reduziert und die Umweltbelastung minimiert. Umzugsanbieter vor Ort können schneller auf Notfälle oder kurzfristige Änderungen reagieren. Ein weiterer Vorteil ist die oft gelobte Pünktlichkeit lokaler Anbieter, die für einen reibungslosen Ablauf sorgt.
             </p>
           </motion.div>
 
@@ -537,13 +541,13 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
               So finden Sie einen Umzugsservice vor Ort
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              In nur 3 einfachen Schritten finden Sie die perfekten Umzugsunternehmen in Ihrer Region.
+            </h3>
+            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              Um den richtigen Umzugsanbieter in Ihrer Nähe zu finden, sollten Sie systematisch vorgehen. Eine sorgfältige Vorbereitung ist dabei entscheidend, um einen reibungslosen Umzug zu gewährleisten – dazu gehört auch die frühzeitige Planung und Organisation aller notwendigen Schritte. Zunächst definieren Sie Ihre Anforderungen: Umzugsdatum, Umzugsstrecke, Wohnungsgrösse und gewünschte Leistungen. Dann fordern Sie mehrere Offerten von verschiedenen lokalen Umzugsunternehmen an – am besten über ein Vergleichsportal wie Online-Offerten.ch. Vergleichen Sie die Offerten nicht nur nach Preis, sondern auch nach enthaltenen Leistungen, Versicherungen und Bewertungen. Eine regionale Umzugsfirma kann Vorteile haben, aber auch weiter entfernte Anbieter können gute Angebote machen. Eine individuelle Beratung unterstützt Sie zusätzlich dabei, das passende Umzugsunternehmen auszuwählen.
             </p>
           </motion.div>
 
@@ -655,41 +659,41 @@ const UmzugsfirmaInDerNaehePageClient = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Lokale Umzugsunternehmen finden: Ihr kompletter Ratgeber
-              </h2>
-              
               <div className="text-gray-700 leading-relaxed space-y-6">
-                <p className="text-lg">
-                  Eine <strong>Umzugsfirma in der Nähe</strong> zu finden, ist der erste Schritt zu einem erfolgreichen Umzug. Wenn Sie nach einem <strong>Umzugsservice vor Ort</strong> suchen, sollten Sie mehrere <strong>regionale Umzugsunternehmen vergleichen</strong>, um die beste Offerte zu erhalten. Bei Online-Offerten.ch können Sie <strong>kostenlose Offerten von geprüften Umzugsanbietern in Ihrer Region</strong> anfordern und diese in Ruhe vergleichen.
-                </p>
-
-                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
-                  Warum eine lokale Umzugsfirma wählen?
-                </h3>
-                <p>
-                  Ein <strong>Umzugsservice vor Ort</strong> bietet zahlreiche Vorteile, die oft übersehen werden. Regionale <strong>Umzugsunternehmen in Ihrer Region</strong> kennen die örtlichen Gegebenheiten, Verkehrssituationen und Parkregelungen besonders gut. Lokale <strong>Zügelfirmen</strong> haben kürzere Anfahrtswege, was die Kosten reduziert und die Umweltbelastung minimiert. <strong>Umzugsanbieter vor Ort</strong> können schneller auf Notfälle oder kurzfristige Änderungen reagieren.
-                </p>
-
-                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
-                  So finden Sie einen Umzugsservice vor Ort
-                </h3>
-                <p>
-                  Um den richtigen <strong>Umzugsanbieter in Ihrer Nähe</strong> zu finden, sollten Sie systematisch vorgehen. Zunächst definieren Sie Ihre Anforderungen: Umzugsdatum, Umzugsstrecke, Wohnungsgrösse und gewünschte Leistungen. Dann fordern Sie mehrere Offerten von verschiedenen <strong>lokalen Umzugsunternehmen</strong> an – am besten über ein Vergleichsportal wie Online-Offerten.ch. Vergleichen Sie die Offerten nicht nur nach Preis, sondern auch nach enthaltenen Leistungen, Versicherungen und Bewertungen. Eine <strong>regionale Umzugsfirma</strong> kann Vorteile haben, aber auch weiter entfernte Anbieter können gute Angebote machen.
-                </p>
-
-                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   Vorteile regionaler Umzugsunternehmen
                 </h3>
                 <p>
-                  Die Wahl eines <strong>Umzugsservice vor Ort</strong> bietet zahlreiche Vorteile. <strong>Lokale Umzugsunternehmen</strong> kennen die örtlichen Gegebenheiten, Verkehrssituationen und baulichen Besonderheiten besonders gut. Eine <strong>Umzugsfirma in Ihrer Nähe</strong> hat kürzere Anfahrtswege, was die Kosten reduziert. Regionale <strong>Zügelfirmen</strong> sind oft flexibler bei kurzfristigen Änderungen oder Notfällen. Lokale Anbieter legen oft mehr Wert auf persönliche Beziehungen und langfristige Kundenbindung.
+                  Die Wahl eines Umzugsservice vor Ort bietet zahlreiche Vorteile. Lokale Umzugsunternehmen kennen die örtlichen Gegebenheiten, Verkehrssituationen und baulichen Besonderheiten besonders gut. Eine Umzugsfirma in Ihrer Nähe hat kürzere Anfahrtswege, was die Kosten reduziert. Regionale Zügelfirmen sind oft flexibler bei kurzfristigen Änderungen oder Notfällen. Lokale Anbieter legen oft mehr Wert auf persönliche Beziehungen und langfristige Kundenbindung und können besonders gut auf die individuellen Wünsche und Vorstellungen ihrer Kunden eingehen.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
                   Wie viel kostet ein Umzugsservice vor Ort?
                 </h3>
                 <p>
-                  Die Kosten für einen <strong>Umzugsanbieter in Ihrer Region</strong> hängen von verschiedenen Faktoren ab: Umzugsstrecke, Umfang des Umzugsguts, Anzahl der Stockwerke, benötigte Leistungen und Umzugsdatum. <strong>Lokale Umzugsunternehmen</strong> können durch kürzere Anfahrtswege günstigere Preise anbieten. Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen <strong>Umzugsanbietern in Ihrer Nähe</strong>.
+                  Die Umzugskosten für einen Umzugsanbieter in Ihrer Region hängen von verschiedenen Faktoren ab: Umzugsstrecke, Umfang des Umzugsguts, Anzahl der Stockwerke, benötigte Leistungen und Umzugsdatum. Viele Anbieter bieten einen Festpreis oder eine Abrechnung nach Aufwand an, sodass Sie zwischen transparenter Kostenplanung und flexibler Abrechnung wählen können. Beim Kostenvoranschlag sollten alle relevanten Räume und spezielle Gegenstände (z.B. Keller, Dachboden, Klavier) berücksichtigt werden, um realistische Angebote zu erhalten. Lokale Umzugsunternehmen können durch kürzere Anfahrtswege günstigere Preise anbieten. Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Umzugsanbietern in Ihrer Nähe.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
+                  Umzugscheckliste: Schritt für Schritt zum erfolgreichen Umzug
+                </h3>
+                <p className="mb-4">
+                  Ein gelungener Umzug beginnt mit einer durchdachten Planung und der richtigen Umzugsfirma an Ihrer Seite. Mit dieser Umzugscheckliste behalten Sie den Überblick und stellen sicher, dass Ihr Umzug in die neue Wohnung reibungslos und stressfrei abläuft:
+                </p>
+                <ul className="list-disc list-inside space-y-3 text-gray-700 mb-4 pl-4">
+                  <li><strong>Frühzeitig planen:</strong> Starten Sie mindestens acht Wochen vor dem gewünschten Umzugsdatum mit der Organisation. So bleibt genügend Zeit, um eine zuverlässige Umzugsfirma in der Nähe zu finden, Angebote einzuholen und die besten Dienstleistungen für Ihren Umzug auszuwählen.</li>
+                  <li><strong>Umzugsfirmen recherchieren:</strong> Suchen Sie gezielt nach erfahrenen Umzugsfirmen in Ihrer Umgebung, die sowohl Privat- als auch Firmenumzüge professionell durchführen. Lesen Sie aktuelle Bewertungen, holen Sie Empfehlungen ein und achten Sie auf die Erfahrung und Zuverlässigkeit der Anbieter.</li>
+                  <li><strong>Kostenlose Besichtigung vereinbaren:</strong> Viele Umzugsunternehmen bieten eine unverbindliche Besichtigung vor Ort an. Nutzen Sie diese Möglichkeit, um den Umfang Ihres Umzugsguts, besondere Anforderungen an den Transport oder die Lagerung sowie individuelle Wünsche direkt mit dem Team zu besprechen. So erhalten Sie einen transparenten Kostenvoranschlag.</li>
+                  <li><strong>Verpackung und Material abstimmen:</strong> Klären Sie mit Ihrer Umzugsfirma, welches Verpackungsmaterial benötigt wird und ob dieses gestellt wird. Professionelle Anbieter sorgen dafür, dass Ihre Möbel und persönlichen Gegenstände sicher und fachgerecht verpackt werden – das minimiert das Risiko von Schäden beim Transport.</li>
+                  <li><strong>Umzugsdatum und Zeit festlegen:</strong> Stimmen Sie das genaue Umzugsdatum und die Uhrzeit mit allen Beteiligten ab. So können Sie sicherstellen, dass das Team der Umzugsfirma pünktlich vor Ort ist und der Umzugsprozess reibungslos abläuft.</li>
+                  <li><strong>Räumung und Reinigung organisieren:</strong> Planen Sie rechtzeitig die Räumung und Reinigung Ihrer alten Wohnung. Viele Umzugsfirmen bieten diese Dienstleistungen an und sorgen dafür, dass Sie Ihre alte Bleibe besenrein übergeben können.</li>
+                  <li><strong>Lagerung und Transport klären:</strong> Falls Sie nicht alle Möbel oder Umzugsgüter sofort in die neue Wohnung bringen können, informieren Sie sich über die Möglichkeiten zur sicheren Lagerung. Seriöse Umzugsunternehmen bieten flexible Lösungen für Lagerung und Transport an.</li>
+                  <li><strong>Kommunikation und Koordination:</strong> Halten Sie während der gesamten Planung engen Kontakt zu Ihrer Umzugsfirma. So können Sie kurzfristige Änderungen, besondere Wünsche oder Fragen zum Ablauf jederzeit klären und Missverständnisse vermeiden.</li>
+                  <li><strong>Am Umzugstag:</strong> Am Tag des Umzugs sollten alle Vorbereitungen abgeschlossen sein. Überprüfen Sie, ob alle Möbel und Kartons transportbereit sind, und halten Sie wichtige Dokumente sowie Schlüssel griffbereit. Das Team der Umzugsfirma kümmert sich um das sichere Verladen und den Transport Ihres Umzugsguts.</li>
+                  <li><strong>Nach dem Umzug:</strong> Nach dem Entladen in der neuen Wohnung kontrollieren Sie, ob alle Gegenstände unversehrt angekommen sind. Prüfen Sie, ob alle vereinbarten Dienstleistungen – wie Aufbau der Möbel oder Endreinigung – zu Ihrer Zufriedenheit erledigt wurden.</li>
+                </ul>
+                <p>
+                  Mit dieser Checkliste und einer erfahrenen Umzugsfirma in der Nähe an Ihrer Seite wird Ihr Umzug zum Erfolg. Eine gute Planung, transparente Kommunikation und professionelle Unterstützung sorgen dafür, dass Sie entspannt in Ihr neues Zuhause starten können.
                 </p>
 
                 <div className="bg-green-50 border-l-4 border-green-600 p-6 my-8">
@@ -697,7 +701,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                     💡 Pro-Tipp: Lokale Umzugsunternehmen richtig auswählen
                   </h4>
                   <p className="text-gray-700">
-                    Beim Vergleich von <strong>Umzugsanbietern in Ihrer Region</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein <strong>Umzugsservice vor Ort</strong> mit lokaler Expertise kann trotz etwas höherem Preis das bessere Angebot sein, da er die örtlichen Gegebenheiten besser kennt.
+                    Beim Vergleich von Umzugsanbietern in Ihrer Region ist die Auswahl des richtigen Unternehmens entscheidend. Sie sollten nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein Umzugsservice vor Ort mit lokaler Expertise kann trotz etwas höherem Preis das bessere Angebot sein, da er die örtlichen Gegebenheiten besser kennt und oft eine breite Palette an Serviceleistungen sowie einen umfassenden Service von der Beratung bis zur Endreinigung bietet.
                   </p>
                 </div>
               </div>

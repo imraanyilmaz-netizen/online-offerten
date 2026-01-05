@@ -374,11 +374,14 @@ export default async function HomePage() {
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
                   Kosten sparen mit dem richtigen Anbieter – Offerten einfach vergleichen
                 </h2>
-                <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                  Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Partnern.
-                  <br />
-                  Sparen Sie Zeit und Geld und finden Sie den passenden Partner für Ihr Projekt.
-                </p>
+                <div className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed space-y-4">
+                  <p>
+                    Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Partnern. Sparen Sie Zeit und Geld und finden Sie den passenden Partner für Ihr Projekt.
+                  </p>
+                  <p>
+                    Viele Kunden haben durch den Offertenvergleich bereits erfolgreich Zeit und Geld gespart und sind mit dem Service sehr zufrieden.
+                  </p>
+                </div>
               </div>
 
               <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
