@@ -8,7 +8,6 @@ import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Gl
 import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
-import CantonFlag from '@/components/CantonFlag';
 import LocationSidebar from '@/components/locations/LocationSidebar';
 import { faqs } from '@/data/locationFaqs';
 
@@ -181,7 +180,6 @@ const UmzugsfirmaLuzernPageClient = () => {
                 className="bg-white rounded-xl shadow-xl p-5 md:p-6 lg:p-7 w-full max-w-full overflow-x-hidden overflow-wrap break-words"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <CantonFlag canton={(locationData as any)?.canton} className="w-10 h-10 md:w-12 md:h-12 object-contain" />
                   <span className="text-sm font-semibold text-green-600">Luzern & Zentralschweiz</span>
                 </div>
                 <h1 

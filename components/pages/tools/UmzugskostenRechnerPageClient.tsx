@@ -378,7 +378,7 @@ const UmzugskostenRechnerPageClient = () => {
               </p>
               <div className="mb-6">
                 <img 
-                  src="/image/umzugsservice-schweiz/umzugskosten-rechner.png" 
+                  src="/image/umzugsservice-Schweiz/umzugskosten-rechner.png" 
                   alt="Umzugskosten" 
                   className="w-full h-auto rounded-lg shadow-md"
                 />
@@ -604,7 +604,7 @@ const UmzugskostenRechnerPageClient = () => {
             </p>
             <div className="mb-6">
               <img 
-                src="/image/umzugsservice-schweiz/umzugskosten.png"
+                src="/image/umzugsservice-Schweiz/umzugskosten.png"
                 alt="Umzugskosten Rechner" 
                 className="w-full h-auto rounded-lg shadow-md"
               />

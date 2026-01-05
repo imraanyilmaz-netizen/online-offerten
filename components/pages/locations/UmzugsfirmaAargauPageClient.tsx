@@ -9,7 +9,6 @@ import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Gl
 import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
-import CantonFlag from '@/components/CantonFlag';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 import { faqs } from '@/data/locationFaqs';
 import { Inter } from 'next/font/google';
@@ -232,7 +231,6 @@ const UmzugsfirmaAargauPageClient = () => {
                 className="text-gray-900 lg:col-span-3"
           >
                 <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                  <CantonFlag canton={(locationData as any)?.canton} className="w-8 h-8 object-contain" />
                   <span className="text-sm font-medium text-gray-700">Kanton Aargau</span>
             </div>
                 

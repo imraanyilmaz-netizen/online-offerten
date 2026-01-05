@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import CantonFlag from '@/components/CantonFlag';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -21,9 +20,6 @@ const LocationCard = ({ location }) => {
       <Link href={`/${location.slug}`} className="group block card-hover bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col">
         <div className="relative">
           <img src={location.image} className="w-full h-40 object-cover" alt={`Umzugsfirma ${location.name}`} />
-          <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-md">
-            <CantonFlag canton={location.canton} className="w-8 h-8 object-contain" />
-          </div>
         </div>
         <div className="p-5 flex flex-col flex-grow">
           <h3 className="text-xl font-bold text-gray-800 mb-2">{location.name}</h3>

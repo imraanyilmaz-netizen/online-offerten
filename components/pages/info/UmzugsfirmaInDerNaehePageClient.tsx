@@ -456,7 +456,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             >
               <div className="mb-6">
                 <img 
-                  src="/image/umzugsservice-schweiz/umzugsfirma-in-der-naehe-finden.png" 
+                  src="/image/umzugsservice-Schweiz/umzugsfirma-in-der-naehe-finden.png" 
                   alt="Umzugsfirma in der Nähe finden" 
                   className="w-full h-auto rounded-lg shadow-md"
                 />

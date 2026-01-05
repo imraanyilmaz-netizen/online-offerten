@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle, Award, ShieldCheck, Package, Sparkles, MapPin } from 'lucide-react';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
-import CantonFlag from '@/components/CantonFlag';
 import LocationSidebar from '@/components/locations/LocationSidebar';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 import { faqs } from '@/data/locationFaqs';
@@ -150,9 +149,6 @@ const UmzugsfirmaBaselPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 md:mb-16 pt-8"
           >
-            <div className="inline-block p-3 bg-white rounded-full shadow-xl mb-6">
-              <CantonFlag canton={(locationData as any)?.canton} className="w-12 h-12 md:w-16 md:h-16 object-contain" />
-            </div>
             <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 text-shadow-md">
               Umzugsfirma <span className="text-green-600 underline decoration-green-500 decoration-2 underline-offset-4">Basel</span> für einen stressfreien Umzug.
             </h1>

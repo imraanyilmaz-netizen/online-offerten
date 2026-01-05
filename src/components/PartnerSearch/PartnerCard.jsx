@@ -2,7 +2,6 @@ import Link from 'next/link';
 import React from 'react';
 import { Star, MapPin, CheckCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import CantonFlag from '@/components/CantonFlag';
 
 const PartnerCard = ({ partner }) => {
 
@@ -17,15 +16,6 @@ const PartnerCard = ({ partner }) => {
     }
   };
 
-  const getCantonFromCity = (city) => {
-    const cityCantonMap = {
-      'Zürich': 'ZH', 'Bern': 'BE', 'Luzern': 'LU', 'Basel': 'BS',
-      'Genf': 'GE', 'St. Gallen': 'SG', 'Aarau': 'AG',
-    };
-    return cityCantonMap[city] || 'CH';
-  };
-
-  const canton = getCantonFromCity(partner.address_city);
   const rating = partner.average_rating || partner.rating || 0;
   const reviewCount = partner.review_count || 0;
   const partnerSlug = partner.slug || partner.id;
@@ -51,9 +41,6 @@ const PartnerCard = ({ partner }) => {
           />
         </div>
 
-        <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-md">
-          <CantonFlag canton={canton} className="w-8 h-8" />
-        </div>
         
         {partner.badge_tier && (
           <Badge className={`absolute top-3 left-3 text-xs font-bold uppercase tracking-wider ${getBadgeClass(partner.badge_tier)}`}>

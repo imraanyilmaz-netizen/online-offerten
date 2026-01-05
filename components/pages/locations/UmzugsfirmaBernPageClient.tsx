@@ -8,7 +8,6 @@ import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Gl
 import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
-import CantonFlag from '@/components/CantonFlag';
 import LocationSidebar from '@/components/locations/LocationSidebar';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 import { faqs } from '@/data/locationFaqs';

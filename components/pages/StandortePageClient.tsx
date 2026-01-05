@@ -4,7 +4,6 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { locations } from '@/data/locations'
-import CantonFlag from '@/components/CantonFlag'
 import { ArrowRight, Map } from 'lucide-react'
 
 const LocationCard = ({ location, delay }: { location: any; delay: number }) => {
@@ -23,9 +22,6 @@ const LocationCard = ({ location, delay }: { location: any; delay: number }) => 
       <Link href={locationHref} className="group block bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 h-full flex flex-col">
         <div className="relative">
           <img src={location.image} className="w-full h-48 object-cover" alt={`Bild von ${location.name}`} />
-          <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-md">
-            <CantonFlag canton={location.canton} className="w-8 h-8 object-contain" />
-          </div>
         </div>
         <div className="p-5 flex flex-col flex-grow">
           <h3 className="text-xl font-bold text-gray-800 mb-2">{location.name}</h3>

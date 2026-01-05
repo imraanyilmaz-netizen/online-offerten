@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, MapPin, Truck, Sparkles, Brush as PaintBrush, BookOpen, Calendar } from 'lucide-react';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
-import CantonFlag from '@/components/CantonFlag';
 import LocationFAQ from '@/components/locations/LocationFAQ';
 import { faqs } from '@/data/locationFaqs';
 import { supabase } from '@/lib/supabaseClient';

@@ -6,7 +6,6 @@ import ServiceGrid from '@/components/pages/locations/ServiceGrid.client'
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation'
 import { cityServiceData } from '@/data/cityLocalBusinessData'
 import { Button } from '@/components/ui/button'
-import CantonFlag from '@/components/CantonFlag'
 import { locations } from '@/data/locations'
 
 const city = "Zürich"
@@ -206,7 +205,6 @@ export default function UmzugsfirmaZurichPage() {
               {/* Left Content */}
               <div className="text-gray-900 lg:col-span-3">
                 <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                  <CantonFlag canton={(locationData as any)?.canton} className="w-8 h-8 object-contain" />
                   <span className="text-sm font-medium text-gray-700">Kanton Zürich</span>
                 </div>
                 
