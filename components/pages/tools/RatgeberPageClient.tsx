@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar, Loader2, ArrowRight } from 'lucide-react';
-import PostSidebar from '@/components/tools/PostSidebar';
+import RatgeberSidebar from '@/src/components/tools/RatgeberSidebar';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import SEO from '@/src/components/SEO';
 
@@ -169,7 +169,7 @@ const RatgeberPageClient = () => {
             </main>
             
             <aside className="lg:col-span-4 mt-12 lg:mt-0">
-              <PostSidebar recentPosts={recentPosts} ratgeberBasePath={ratgeberBasePath} category={undefined} tags={undefined} />
+              <RatgeberSidebar recentPosts={recentPosts} />
             </aside>
 
           </div>

@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tag, Folder, Clock, Sparkles, Calculator, ListChecks, ArrowRight, BookOpen } from 'lucide-react';
+import { Sparkles, Calculator, ListChecks, ArrowRight, BookOpen, Clock } from 'lucide-react';
 
-const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgeber' }) => {
+const RatgeberSidebar = ({ recentPosts }) => {
   return (
     <aside className="sticky top-24 space-y-8">
       {/* CTA Card */}
@@ -36,6 +35,12 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
         </CardHeader>
         <CardContent className="space-y-3">
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
+            <Link href="/umzugskosten-rechner">
+              <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <span className="flex-grow">Umzugskosten-Rechner</span>
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
             <Link href="/reinigungskosten-rechner">
               <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
               <span className="flex-grow">Reinigungskosten-Rechner</span>
@@ -60,7 +65,7 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
         </CardHeader>
         <CardContent>
           <Button asChild variant="outline" className="w-full bg-green-50 hover:bg-green-100 border-green-200 text-green-700 font-semibold">
-            <Link href={ratgeberBasePath}>
+            <Link href="/ratgeber">
               Alle Ratgeber ansehen
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
@@ -80,7 +85,7 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
           <CardContent>
             <ul className="space-y-4">
               {recentPosts.filter(recentPost => recentPost?.slug).map(recentPost => {
-                const postHref = `${ratgeberBasePath}/${recentPost.slug}`;
+                const postHref = `/ratgeber/${recentPost.slug}`;
                 return (
                 <li key={recentPost.slug} className="flex items-start gap-4">
                    <Link href={postHref} className="w-16 h-16 rounded-md overflow-hidden flex-shrink-0 block group">
@@ -102,45 +107,9 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
           </CardContent>
         </Card>
       )}
-
-      {/* Category and Tags */}
-      { (category || (tags && tags.length > 0)) && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Folder className="w-5 h-5 text-green-600" />
-              Kategorie & Tags
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {category && (
-              <div>
-                <h4 className="font-semibold text-sm mb-2">Kategorie</h4>
-                <Badge>{category}</Badge>
-              </div>
-            )}
-            {tags && tags.length > 0 && (
-              <div>
-                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                  <Tag className="w-4 h-4" />
-                  Tags
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {tags.map(tag => (
-                    <Badge key={tag} variant="secondary" asChild>
-                      <Link href={`${ratgeberBasePath}?tag=${encodeURIComponent(tag)}`}>
-                        #{tag}
-                      </Link>
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
     </aside>
   );
 };
 
-export default PostSidebar;
+export default RatgeberSidebar;
+

@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import GuenstigUmziehenPageClient from '@/components/pages/info/GuenstigUmziehenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Günstig umziehen: Der komplette Guide 2025 zum Sparen',
-  description: 'Günstig umziehen in der Schweiz? Entdecken Sie über 1500 Wörter voller Expertentipps, Kosten-Checklisten und erfahren Sie, wie Sie mit dem richtigen Firmenvergleich bis zu 40% sparen.',
+  title: 'Günstige Umzugsfirma: Der komplette Guide 2025 zum Sparen beim Umziehen',
+  description: 'Günstig umziehen in der Schweiz? Entdecken Sie bewährte Strategien, clevere Tricks und wie Sie durch den Vergleich von Umzugsfirmen Ihr Budget schonen. Bis zu 40% sparen mit unserem umfassenden Guide.',
   alternates: {
     canonical: 'https://online-offerten.ch/guenstig-umziehen',
   },
   openGraph: {
-    title: 'Günstig umziehen: Der komplette Guide 2025 zum Sparen',
-    description: 'Günstig umziehen in der Schweiz? Entdecken Sie über 1500 Wörter voller Expertentipps, Kosten-Checklisten und erfahren Sie, wie Sie mit dem richtigen Firmenvergleich bis zu 40% sparen.',
+    title: 'Günstige Umzugsfirma: Der komplette Guide 2025 zum Sparen beim Umziehen',
+    description: 'Günstig umziehen in der Schweiz? Entdecken Sie bewährte Strategien, clevere Tricks und wie Sie durch den Vergleich von Umzugsfirmen Ihr Budget schonen. Bis zu 40% sparen mit unserem umfassenden Guide.',
     url: 'https://online-offerten.ch/guenstig-umziehen',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Günstig umziehen: Der komplette Guide 2025 zum Sparen',
-    description: 'Günstig umziehen in der Schweiz? Entdecken Sie über 1500 Wörter voller Expertentipps, Kosten-Checklisten und erfahren Sie, wie Sie mit dem richtigen Firmenvergleich bis zu 40% sparen.',
+    title: 'Günstige Umzugsfirma: Der komplette Guide 2025 zum Sparen beim Umziehen',
+    description: 'Günstig umziehen in der Schweiz? Entdecken Sie bewährte Strategien, clevere Tricks und wie Sie durch den Vergleich von Umzugsfirmen Ihr Budget schonen. Bis zu 40% sparen mit unserem umfassenden Guide.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },
   robots: {

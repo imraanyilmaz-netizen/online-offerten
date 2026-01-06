@@ -245,7 +245,7 @@ const UmzugsoffertenPageClient = () => {
   ]
 
   const locations = [
-    { name: "Umzugsofferten Zürich", link: "/umzugsfirma-zuerich", title: "Zürich Umzugsofferten vergleichen" },
+    { name: "Umzugsofferten Zürich", link: "/umzugsofferten-zuerich", title: "Zürich Umzugsofferten vergleichen" },
     { name: "Umzugsofferten Basel", link: "/umzugsfirma-basel", title: "Basel Umzugsofferten vergleichen" },
     { name: "Umzugsofferten Bern", link: "/umzugsfirma-bern", title: "Bern Umzugsofferten vergleichen" },
     { name: "Umzugsofferten Genf", link: "/umzugsfirma-genf", title: "Genf Umzugsofferten vergleichen" },
@@ -267,7 +267,7 @@ const UmzugsoffertenPageClient = () => {
               className="md:col-span-3"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen
+                <span className="text-green-600">Umzugsofferten</span> kostenlos vergleichen » Bis zu 40% sparen
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-4 leading-relaxed">
                 Ihr Wegweiser zum besten Preis für Ihren Umzug in der Schweiz.

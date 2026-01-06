@@ -387,7 +387,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   So funktioniert's
                 </h2>
                 <p className="text-base md:text-lg text-green-100 max-w-2xl mx-auto leading-relaxed">
-                  In nur 3 Schritten erhalten Sie passende Offerten von geprüften Partnern.
+                  In nur 3 Schritten erhalten Sie passende Offerten von geprüften Partnern. Ein spezielles Programm vereinfacht dabei die Erstellung und Verwaltung Ihrer Offerten, sorgt für eine klare Struktur und ermöglicht eine unkomplizierte Kommunikation.
                   </p>
                 </div>
 
@@ -396,7 +396,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   { 
                     id: 1, 
                     title: "Formular ausfüllen", 
-                    desc: "Beschreiben Sie Ihr Projekt in unserem intelligenten Formular. Je detaillierter Ihre Angaben, desto genauer die Offerten.", 
+                    desc: "Beschreiben Sie Ihr Projekt in unserem intelligenten Formular. Geben Sie dabei auch das Datum der Angebotserstellung an, um die Aktualität Ihres Anliegens zu dokumentieren. Je detaillierter Ihre Angaben, desto genauer die Offerten.", 
                     icon: FileText,
                     gradient: "from-green-500 to-emerald-600",
                     bgGradient: "from-green-50 to-emerald-50",
@@ -405,7 +405,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   { 
                     id: 2, 
                     title: "Offerten vergleichen", 
-                    desc: "Sie erhalten bis zu 4 kostenlose Offerten von qualifizierten Partnern – schnell und unverbindlich.", 
+                    desc: "Sie erhalten bis zu 6 kostenlose Offerten von qualifizierten Partnern – schnell und unverbindlich. Die Offerten werden direkt an den Empfänger gesendet.", 
                     icon: GitCompareArrows,
                     gradient: "from-blue-500 to-cyan-600",
                     bgGradient: "from-blue-50 to-cyan-50",
@@ -414,7 +414,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   { 
                     id: 3, 
                     title: "Anbieter wählen", 
-                    desc: "Vergleichen Sie Preise und Leistungen und wählen Sie den besten Partner – einfach, sicher und transparent.", 
+                    desc: "Vergleichen Sie Preise und Leistungen und wählen Sie den besten Partner – einfach, sicher und transparent. Kundenbewertungen helfen Ihnen dabei, die Qualität der Dienstleister besser einzuschätzen und eine fundierte Entscheidung zu treffen.", 
                     icon: UsersRound,
                     gradient: "from-purple-500 to-pink-600",
                     bgGradient: "from-purple-50 to-pink-50",
@@ -561,7 +561,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   Beliebte Dienstleistungen
                 </h2>
                 <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-                  Von Privatumzug bis Gartenarbeiten – finden Sie den passenden Partner für Ihr Projekt.
+                  Von Privatumzug bis Gartenarbeiten – finden Sie den passenden Partner für Ihr Projekt. Vergleichen Sie verschiedene Dienstleister für zahlreiche Dienstleistungen und wählen Sie schnell und einfach den passenden Anbieter aus.
                 </p>
               </div>
 
@@ -575,7 +575,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     <h3 className="text-xl md:text-2xl font-bold text-teal-600">Umzug</h3>
                   </div>
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    Vergleichen Sie Umzug Offerten von professionellen Umzugsfirmen.
+                    Vergleichen Sie Umzug Offerten von professionellen Umzugsfirmen. Für spezielle Umzugsanforderungen, wie etwa den Einbau, Ausbau oder die Anpassung von Möbeln, stehen Ihnen geprüfte Handwerker zur Verfügung, die über die Plattform einfach und unabhängig vermittelt werden.
                   </p>
                   <ul className="space-y-3">
                     {[
@@ -642,7 +642,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       <h3 className="text-xl md:text-2xl font-bold text-blue-600">Malerarbeiten</h3>
                     </div>
                     <p className="text-gray-600 mb-3 text-base leading-relaxed">
-                      Vergleichen Sie Maler Offerten von professionellen Malerfirmen.
+                      Vergleichen Sie Maler Offerten von professionellen Malerfirmen. Dabei übernehmen spezialisierte Unternehmen die fachgerechte Ausführung der Malerarbeiten.
                     </p>
                     <ul className="space-y-3">
                       <li>
@@ -665,7 +665,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       <h3 className="text-xl md:text-2xl font-bold text-green-600">Gartenarbeiten</h3>
                     </div>
                     <p className="text-gray-600 mb-3 text-base leading-relaxed">
-                      Vergleichen Sie Gartenarbeiten Offerten von professionellen Gartenfirmen.
+                      Vergleichen Sie Gartenarbeiten Offerten von professionellen Gartenfirmen. Für grössere Gartenprojekte sind auch Ausschreibungen möglich, um gezielt passende Offerten online einzuholen.
                     </p>
                     <ul className="space-y-3">
                       <li>
@@ -797,6 +797,12 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     ... und viele mehr!
                   </Link>
                 </div>
+                <p className="text-base md:text-lg text-green-50 font-medium mb-4">
+                  Unser Netzwerk an Umzugs- und Reinigungsfirmen erstreckt sich über alle Kantone.
+                </p>
+                <p className="text-base md:text-lg text-green-50 font-medium mb-4">
+                  Online-Offerten.ch ist ein Portal, das als Vermittlungsplattform für geprüfte Anbieter in der ganzen Schweiz dient und Ihnen hilft, passende Dienstleister einfach und sicher zu vergleichen.
+                </p>
                 <p className="text-lg text-green-50 font-medium">
                   Finden Sie noch heute den idealen Partner für Ihr Vorhaben.
                 </p>
@@ -809,14 +815,14 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             <div className="container mx-auto max-w-navbar px-4">
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nützliche Helfer für Ihren Umzug</h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">Planen Sie Ihren Umzug effizient mit unseren praktischen Tools und hilfreichen Ratgebern.</p>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">Planen Sie Ihren Umzug effizient mit unseren praktischen Tools und hilfreichen Ratgebern. Moderne Software-Lösungen ermöglichen es Ihnen, Offerten online schnell und flexibel zu erstellen, Prozesse zu automatisieren und die gesamte Umzugsplanung bequem zu verwalten.</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {[
-                  { icon: <Calculator />, title: 'Umzugskosten-Rechner', description: 'Erhalten Sie in wenigen Schritten eine unverbindliche Schätzung Ihrer Umzugskosten.', linkTo: '/umzugskosten-rechner', button: 'Jetzt berechnen' },
-                  { icon: <Sparkles />, title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung.', linkTo: '/reinigungskosten-rechner', button: 'Kosten berechnen' },
-                  { icon: <ListChecks />, title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten.', linkTo: '/checklisten', button: 'Checkliste ansehen' },
-                  { icon: <BookOpen />, title: 'Ratgeber & Tipps', description: 'Profitieren Sie von unserem Expertenwissen rund um Umzug und Reinigung.', linkTo: '/ratgeber', button: 'Jetzt informieren' }
+                  { icon: <Calculator />, title: 'Umzugskosten-Rechner', description: 'Erhalten Sie in wenigen Schritten eine unverbindliche Schätzung Ihrer Umzugskosten. Die Ergebnisse des Rechners können Sie auch bequem per E-Mail versenden.', linkTo: '/umzugskosten-rechner', button: 'Jetzt berechnen' },
+                  { icon: <Sparkles />, title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung. Unser Reinigungskosten-Rechner steht Ihnen jederzeit zur Verfügung.', linkTo: '/reinigungskosten-rechner', button: 'Kosten berechnen' },
+                  { icon: <ListChecks />, title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten. Unsere Checklisten beantworten zudem häufig gestellte Fragen rund um die Umzugsplanung.', linkTo: '/checklisten', button: 'Checkliste ansehen' },
+                  { icon: <BookOpen />, title: 'Ratgeber & Tipps', description: 'Profitieren Sie von unserem Expertenwissen rund um Umzug und Reinigung. Unsere Tipps stammen von erfahrenen Fachleuten, die Ihnen mit ihrem Know-how gezielte Unterstützung bieten.', linkTo: '/ratgeber', button: 'Jetzt informieren' }
                 ].map((tool) => (
                   <div key={tool.title} className="h-full">
                     <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 border-transparent hover:border-green-500 bg-white rounded-xl overflow-hidden">
@@ -932,62 +938,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
               </div>
             </section>
           ) : null}
-
-          {/* Final CTA Section */}
-          <section className="py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-gray-50">
-            <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-[1300px] mx-auto">
-                <div className="text-center mb-12">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-xl mb-6 border-2 border-gray-100">
-                    <Send className="w-10 h-10 text-green-600" />
-                  </div>
-                  <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-5 tracking-tight">
-                    Bereit für den nächsten Schritt?
-                  </h2>
-                  <div className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed space-y-3">
-                    <p>
-                      Planen Sie frühzeitig und sichern Sie sich die besten Termine. Geprüfte Umzugs-, Reinigungs-, Maler- und Gartenfirmen sind besonders in den Sommermonaten und rund um Kündigungstermine schnell ausgebucht.
-                    </p>
-                    <p>
-                      Starten Sie jetzt Ihre kostenlose Anfrage und erhalten Sie mehrere Offerten – unverbindlich und ohne Verpflichtung.
-                  </p>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                  {[
-                    { title: 'Kostenlose Offerten anfordern', text: 'Fordern Sie kostenlos und unverbindlich mehrere Offerten von geprüften Umzugs-, Reinigungs-, Maler- und Gartenfirmen an. Vergleichen Sie Preise und Leistungen und finden Sie den passenden Partner für Ihr Projekt.' },
-                    { title: 'Zeit & Geld sparen', text: 'Vergleichen Sie mehrere Offerten und sparen Sie wertvolle Zeit, Geld und Aufwand bei der Suche nach dem richtigen Anbieter.' },
-                    { title: 'Die beste Firma finden', text: 'Finden Sie die passende Firma in Ihrer Nähe – mit nur wenigen Klicks, einfach und stressfrei.' }
-                  ].map((benefit) => (
-                    <div key={benefit.title} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-gray-100">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                          <CheckCircle2 className="w-6 h-6 text-green-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-gray-900 text-xl mb-2">{benefit.title}</h3>
-                          <p className="text-gray-600 leading-relaxed">{benefit.text}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="text-center">
-                  <Button
-                    asChild
-                    className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white group px-12 py-6 text-lg font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
-                  >
-                    <Link href="/kostenlose-offerte-anfordern">
-                      Jetzt kostenlos vergleichen
-                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </section>
     </>
   );
 };

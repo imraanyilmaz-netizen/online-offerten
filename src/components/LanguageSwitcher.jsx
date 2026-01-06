@@ -18,8 +18,8 @@ const LanguageSwitcher = ({ className }) => {
   const [currentLang, setCurrentLang] = useState('de'); // Default to 'de'
 
   useEffect(() => {
-    // Detect language from URL
-    if (pathname?.startsWith('/en')) {
+    // Detect language from URL - only /free-quote-request is English
+    if (pathname === '/free-quote-request') {
       setCurrentLang('en');
     } else {
       setCurrentLang('de');
