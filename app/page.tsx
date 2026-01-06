@@ -233,17 +233,14 @@ export default async function HomePage() {
         <main className="flex-grow">
           {/* Hero Section - SEO Optimized - SERVER RENDERED */}
           <section 
-            className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 py-16 md:py-24 overflow-hidden" 
+            className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 pt-4 md:py-16 md:py-24 overflow-hidden" 
             aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
           >
             <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                  <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-6">
-                    Unverbindlich & transparent
-                  </div>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                    <span className="text-green-600">Kostenlose Offerten vergleichen</span> & den passenden Anbieter finden
+                    Offerten vergleichen & den passenden Anbieter finden
                   </h1>
                   <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
                     Finden Sie qualifizierte Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Unsere Plattform ist speziell auf die Bedürfnisse des Schweizer Marktes und die dortigen Standards ausgerichtet. Endlich stressfrei: Vertrauenswürdige Partner finden & vergleichen
