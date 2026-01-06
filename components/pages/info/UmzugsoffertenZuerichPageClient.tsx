@@ -889,7 +889,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-blue-600 mr-3 mt-1 flex-shrink-0" />
-                    <span className="text-gray-700">Alternative: Online über eUmzugCH erledigen</span>
+                    <span className="text-gray-700">Alternative: Online über online-offerten.ch erledigen</span>
                   </li>
                 </ul>
               </div>
