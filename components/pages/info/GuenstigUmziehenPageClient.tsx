@@ -465,7 +465,7 @@ const GuenstigUmziehenPageClient = () => {
             
             {/* Sidebar */}
             <aside className="lg:col-span-4 mt-12 lg:mt-0">
-              <PostSidebar />
+              <PostSidebar category={undefined} tags={undefined} recentPosts={undefined} />
             </aside>
           </div>
         </div>
