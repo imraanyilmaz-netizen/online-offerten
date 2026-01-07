@@ -300,15 +300,15 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
   return (
     <>
       {!hideCalculator && (
-        <Card className="shadow-xl border-green-500 border-2">
-          <CardHeader className="bg-green-50 rounded-t-lg">
-            <CardTitle className="text-2xl font-bold text-green-700 flex items-center">
-              <Calculator size={28} className="mr-3" />
-              Umzugskosten online berechnen
-            </CardTitle>
-            <CardDescription>Erhalten Sie eine sofortige Kostenschätzung basierend auf Ihren Angaben.</CardDescription>
-          </CardHeader>
-          <CardContent className="p-6 space-y-6">
+      <Card className="shadow-xl border-green-500 border-2">
+        <CardHeader className="bg-green-50 rounded-t-lg">
+          <CardTitle className="text-2xl font-bold text-green-700 flex items-center">
+            <Calculator size={28} className="mr-3" />
+            Umzugskosten online berechnen
+          </CardTitle>
+          <CardDescription>Erhalten Sie eine sofortige Kostenschätzung basierend auf Ihren Angaben.</CardDescription>
+        </CardHeader>
+        <CardContent className="p-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <Label htmlFor="rooms" className="block text-sm font-medium text-gray-700 mb-1">Anzahl Zimmer</Label>

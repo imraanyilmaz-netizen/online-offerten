@@ -153,9 +153,9 @@ const GuenstigUmziehenPageClient = () => {
                   size="lg" 
                   className="bg-green-600 hover:bg-green-700 text-white font-bold group px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                 >
-                  Jetzt kostenlos & unverbindlich Offerten vergleichen
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
+                Jetzt kostenlos & unverbindlich Offerten vergleichen
+                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+              </Button>
                 <div className="mt-8 flex flex-wrap gap-4">
                   {[
                     { label: "Kostenlos & Unverbindlich", icon: CheckCircle },
@@ -169,7 +169,7 @@ const GuenstigUmziehenPageClient = () => {
                   ))}
                 </div>
               </motion.div>
-              <motion.div
+              <motion.div 
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -402,7 +402,7 @@ const GuenstigUmziehenPageClient = () => {
               {savingTips.map((tip, index) => {
                 const IconComponent = tip.icon;
                 return (
-                  <motion.div key={index} variants={fadeIn}>
+                 <motion.div key={index} variants={fadeIn}>
                     <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
                       <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 border-b">
                         <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-3">
@@ -411,13 +411,13 @@ const GuenstigUmziehenPageClient = () => {
                           </div>
                           <div className="flex-1">{tip.title}</div>
                           <IconComponent className="w-6 h-6 text-green-600" />
-                        </CardTitle>
+                         </CardTitle>
                       </CardHeader>
                       <CardContent className="p-6">
                         <p className="text-gray-700 leading-relaxed">{tip.text}</p>
                       </CardContent>
                     </Card>
-                  </motion.div>
+                 </motion.div>
                 );
               })}
             </div>
@@ -441,7 +441,7 @@ const GuenstigUmziehenPageClient = () => {
             <Card className="bg-white shadow-xl">
               <CardContent className="p-6 md:p-8">
                 <Accordion type="single" collapsible className="w-full">
-                  {faqItems.map((item, index) => (
+              {faqItems.map((item, index) => (
                     <AccordionItem 
                       key={index} 
                       value={`item-${index}`}
@@ -452,10 +452,10 @@ const GuenstigUmziehenPageClient = () => {
                       </AccordionTrigger>
                       <AccordionContent className="pt-2 pb-4">
                         <p className="text-gray-700 leading-relaxed">{item.answer}</p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
               </CardContent>
             </Card>
           </motion.section>
@@ -471,7 +471,7 @@ const GuenstigUmziehenPageClient = () => {
         </div>
 
         {/* CTA Section - Full Width */}
-        <motion.section
+          <motion.section 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -500,7 +500,7 @@ const GuenstigUmziehenPageClient = () => {
               </Link>
             </Button>
           </div>
-        </motion.section>
+          </motion.section>
       </div>
     </>
   );

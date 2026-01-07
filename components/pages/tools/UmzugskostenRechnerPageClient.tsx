@@ -237,7 +237,7 @@ const UmzugskostenRechnerPageClient = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }} 
                 transition={{ duration: 0.8 }}
               >
                 <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-6">
@@ -404,10 +404,10 @@ const UmzugskostenRechnerPageClient = () => {
               Die Vorteile einer detaillierten Kostenanalyse liegen darin, dass Sie Ihren Umzug besser planen, unerwartete Ausgaben vermeiden und gezielt Einsparpotenziale nutzen können.
             </p>
             <div className="mt-6">
-              <FactorsList />
+            <FactorsList />
             </div>
           </motion.section>
-
+          
           <motion.section 
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
@@ -480,12 +480,12 @@ const UmzugskostenRechnerPageClient = () => {
           </motion.section>
 
           <motion.section 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: true }} 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
             transition={{ duration: 0.5, delay: 0.35 }} 
             className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-indigo-500"
-          >
+            >
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">DIY-Umzug oder professionelle Umzugsfirma: Was passt zu Ihnen?</h2>
             <div className="text-lg text-gray-700 leading-relaxed space-y-4">
               <p>
@@ -656,7 +656,7 @@ const UmzugskostenRechnerPageClient = () => {
             <Accordion type="single" collapsible className="w-full space-y-3">
               {faqItems.map((item, index) => (
                 <AccordionItem
-                  key={index}
+                  key={index} 
                   value={`item-${index}`}
                   className="border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
                 >

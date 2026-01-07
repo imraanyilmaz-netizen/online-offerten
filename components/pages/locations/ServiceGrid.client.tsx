@@ -50,7 +50,7 @@ const ServiceGrid = ({ city }: ServiceGridProps) => {
     },
     { 
       id: 'moebellift',
-      name: 'Möbellift',
+      name: 'Möbellift mieten',
       description: 'Bis 400 kg, max. 27m Länge',
       icon: MapPin,
       umzugArt: 'moebellift'

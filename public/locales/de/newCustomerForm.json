@@ -41,7 +41,7 @@
     "specialTransportDescription": "Klavier, Tresor, Kunst & mehr",
     "kleintransportLabel": "Kleintransport",
     "kleintransportDescription": "Einzelne Möbel, kleine Lasten",
-    "moebelliftLabel": "Möbellift",
+    "moebelliftLabel": "Möbellift mieten",
     "moebelliftDescription": "Mit einer Tragkraft von bis zu 400 kg und einer maximalen Länge von 27 Metern",
     "cleaningTypeSelectionTitle": "Welche Art von Reinigung benötigen Sie?",
     "cleaningTypeSelectionSubtitle": "Wählen Sie die passende Reinigungsart für Ihr Anliegen.",
@@ -140,7 +140,7 @@
       }
     },
     "additionalCleaningTitle": "Zusätzliche Umzugsreinigung?",
-    "additionalCleaningLabel": "Ja, ich wünsche eine Umzugsreinigung mit Abnahmegarantie.",
+    "additionalCleaningLabel": "Ja, Inkl. Umzugsreinigung mit Abnahmegarantie?",
     "additionalCleaningDescription": "Perfekt für die Wohnungsübergabe. Unsere Partner sorgen für eine reibungslose Abnahme.",
     "additionalCleaningDescriptionBusiness": "Perfekt für die Übergabe von Geschäftsräumen. Unsere Partner sorgen für eine reibungslose Abnahme.",
     "specialTransportTypeQuestion": "Was möchten Sie transportieren?",

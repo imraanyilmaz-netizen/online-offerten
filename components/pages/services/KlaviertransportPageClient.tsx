@@ -552,14 +552,14 @@ const KlaviertransportPageClient = () => {
         <div className="container mx-auto max-w-navbar px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-8">
             <div className="lg:col-span-8">
-              <ContentSection sectionData={whyData} />
-              <ContentSection sectionData={processData} />
-              <ContentSection sectionData={costsData} />
-              <ContentSection sectionData={typesData} />
+        <ContentSection sectionData={whyData} />
+        <ContentSection sectionData={processData} />
+        <ContentSection sectionData={costsData} />
+        <ContentSection sectionData={typesData} />
               <ContentSection sectionData={servicesData} />
               <ContentSection sectionData={distanceData} />
               <ContentSection sectionData={insuranceData} />
-              <ContentSection sectionData={checklistData} />
+        <ContentSection sectionData={checklistData} />
             </div>
             
             <aside className="lg:col-span-4 mt-12 lg:mt-0">

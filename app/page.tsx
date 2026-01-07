@@ -233,23 +233,26 @@ export default async function HomePage() {
         <main className="flex-grow">
           {/* Hero Section - SEO Optimized - SERVER RENDERED */}
           <section 
-            className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 pt-4 md:py-16 md:py-24 overflow-hidden" 
+            className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden" 
             aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
           >
-            <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                    Offerten vergleichen & den passenden Anbieter finden
+            <div className="container mx-auto max-w-navbar px-4 sm:px-6 relative z-10">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+                {/* Left Column - Content */}
+                <div className="order-1 lg:order-1 text-center lg:text-left space-y-6 sm:space-y-8">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+                    <span className="text-green-600">Offerten vergleichen</span> & den passenden Anbieter finden
                   </h1>
-                  <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                  <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                     Finden Sie qualifizierte Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Unsere Plattform ist speziell auf die Bedürfnisse des Schweizer Marktes und die dortigen Standards ausgerichtet. Endlich stressfrei: Vertrauenswürdige Partner finden & vergleichen
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                     <Button
                       asChild
                       size="lg"
-                      className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
+                      className="bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                     >
                       <Link href="/kostenlose-offerte-anfordern">
                         <Search className="mr-2 h-5 w-5" />
@@ -260,7 +263,7 @@ export default async function HomePage() {
                       asChild
                       variant="outline"
                       size="lg"
-                      className="text-lg px-8 py-6"
+                      className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 border-2 hover:bg-gray-50 w-full sm:w-auto"
                     >
                       <Link href="#kosten-berechnen">
                         <Calculator className="mr-2 h-5 w-5" />
@@ -268,64 +271,70 @@ export default async function HomePage() {
                       </Link>
                     </Button>
                   </div>
-                  <p className="mt-4 text-sm text-gray-500">
+                  
+                  {/* Trust Badge */}
+                  <p className="text-sm sm:text-base text-gray-500 font-medium">
                     Die Anfrage ist kostenlos und unverbindlich.
                   </p>
-                  <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                      <span>Geprüfte Anbieter aus Ihrer Region</span>
+                  
+                  {/* Features List */}
+                  <div className="mt-8 sm:mt-10 space-y-3 sm:space-y-4">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-gray-700">Geprüfte Anbieter aus Ihrer Region</span>
                     </div>
-                    <div className="flex items-center">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                      <span>Für mehr Sicherheit werden alle Anbieter sorgfältig geprüft und durchlaufen einen Background-Check, um Risiken für unsere Kunden zu minimieren.</span>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-gray-700">Für mehr Sicherheit werden alle Anbieter sorgfältig geprüft und durchlaufen einen Background-Check, um Risiken für unsere Kunden zu minimieren.</span>
                     </div>
-                    <div className="flex items-center">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
-                      <span>Unverbindliche Anfrage – keine Verpflichtung</span>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-gray-700">Unverbindliche Anfrage – keine Verpflichtung</span>
                     </div>
                   </div>
                 </div>
-                <div className="relative">
-                  <div className="flex items-center justify-center mb-6">
+                
+                {/* Right Column - Image & Benefits Card */}
+                <div className="relative order-2 lg:order-last">
+                  <div className="flex items-center justify-center mb-6 sm:mb-8">
                     <NextImage 
                       src="/image/online-offerten.webp" 
                       alt="Online Offerten" 
                       width={600}
                       height={400}
-                      className="w-full h-auto max-w-md rounded-lg"
+                      className="w-full h-auto max-w-full sm:max-w-md rounded-xl shadow-lg"
                       priority
                       quality={85}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                     />
                   </div>
-                  <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 sm:border-4 border-green-200">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
                       Ihre Vorteile auf einen Blick
                     </h3>
-                    <div className="space-y-4">
-                      <div className="flex items-start">
-                        <MapPin className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                    <div className="space-y-3 sm:space-y-4">
+                      <div className="flex items-start gap-3">
+                        <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">Lokale Partner in Ihrer Nähe</p>
+                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Lokale Partner in Ihrer Nähe</p>
                         </div>
                       </div>
-                      <div className="flex items-start">
-                        <ShieldCheck className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <div className="flex items-start gap-3">
+                        <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">Unverbindliche Anfrage</p>
+                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Unverbindliche Anfrage</p>
                         </div>
                       </div>
-                      <div className="flex items-start">
-                        <GitCompareArrows className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <div className="flex items-start gap-3">
+                        <GitCompareArrows className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">Mehrere Offerten vergleichen</p>
+                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Mehrere Offerten vergleichen</p>
                         </div>
                       </div>
-                      <div className="flex items-start">
-                        <Award className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <div className="flex items-start gap-3">
+                        <Award className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="font-semibold text-gray-900">Transparente Preise & individuelle Offerten</p>
+                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Transparente Preise & individuelle Offerten</p>
                         </div>
                       </div>
                     </div>

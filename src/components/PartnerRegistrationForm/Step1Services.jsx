@@ -12,7 +12,7 @@ const mainCategories = [
     { id: 'auslandumzug', label: 'Auslandumzug', desc: 'Umzüge ins oder aus dem Ausland' },
     { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
     { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
-    { id: 'moebellift_service', label: 'Möbellift', desc: 'Bis 400 kg, max. 27m Länge', icon: Wind },
+    { id: 'moebellift_service', label: 'Möbellift mieten', desc: 'Bis 400 kg, max. 27m Länge', icon: Wind },
     { id: 'umzugsreinigung_opt', label: 'Umzugsreinigung' },
     { id: 'raeumung_service', label: 'Räumung' },
     { id: 'entsorgung_service', label: 'Entsorgung' },

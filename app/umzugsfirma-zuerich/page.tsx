@@ -210,11 +210,11 @@ export default function UmzugsfirmaZurichPage() {
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
                   <span className="block">Umzugsfirma Zürich</span>
-                  <span className="block text-green-600 mt-2">Geprüfte Anbieter vergleichen</span>
+                  <span className="block text-green-600 mt-2">Top Umzugsunternehmen vergleichen & sparen</span>
                 </h1>
                 
                 <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed max-w-2xl">
-                  Finden Sie die besten <strong className="text-gray-900">Umzugsdienstleister</strong> und <strong>Zügelunternehmen im Kanton Zürich</strong> für Ihren Umzug. Vergleichen Sie kostenlos mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> in <strong>Zürich</strong>, <strong>Winterthur</strong>, <strong>Uster</strong> und der ganzen Region. Professionelle <strong>Transportunternehmen für Umzüge</strong> und <strong>regionale Zügelprofis</strong> bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Alle Partner sind <strong>versichert gemäss OR</strong>.
+                  Unsere Umzugsfirma Zürich bietet Ihnen einen umfassenden Full Service Umzug, der keine Wünsche offenlässt. Wir übernehmen alles rund um Ihren Umzug – von Transport, Montage, Reinigung bis hin zu Einlagerungen – damit Sie sich um nichts kümmern müssen. Als zuverlässige Firma stehen wir Ihnen als starker Partner zur Seite und sorgen dafür, dass Ihr Umzug reibungslos und stressfrei abläuft.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -275,13 +275,60 @@ export default function UmzugsfirmaZurichPage() {
           </div>
         </section>
         
-        {/* Service Selection Cards */}
-        <section className="py-12 md:py-16 bg-gradient-to-br from-green-50 to-emerald-50 border-b border-gray-200">
+        {/* Two Column Layout: Content Left, Services Right */}
+        <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-              Wählen Sie Ihre gewünschte Dienstleistung
-            </h2>
-            <ServiceGrid city={city} />
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+              {/* Left Column - Content */}
+              <div className="lg:col-span-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                  Umzugsfirma Zürich – Geprüfte Zügelfirma vergleichen
+                </h2>
+                <div className="text-gray-700 mb-8 leading-relaxed space-y-4">
+                  <p>
+                    Wir sind Spezialist für jede Art von Umzug: Ob Privatumzüge, Geschäftsumzüge oder Spezialtransporte – unser erfahrenes Umzugsteam sorgt für einen professionellen und sicheren Ablauf des gesamten umzugsprozesses. Besonders beim zügeln Ihrer Möbel legen wir grössten Wert auf Sorgfalt und Sicherheit. Die hohe Qualität unserer Dienstleistungen und die Zufriedenheit unserer Kunden stehen für uns an erster Stelle. Unsere Kunden schätzen die individuelle Betreuung und die professionelle Ausführung, die wir als erfahrene Firma bieten.
+                  </p>
+                  <p>
+                    Ein weiterer Schwerpunkt unserer Leistungen sind Privatumzüge, bei denen wir auf Ihre persönlichen Bedürfnisse eingehen. Auch die Reinigung Ihrer alten Wohnung sowie flexible Einlagerungen in einem sicheren Lagerraum gehören zu unserem Full Service Angebot. Wir bieten Ihnen massgeschneiderte Lösungen für jede Situation und berücksichtigen dabei stets den jeweiligen Ort Ihres Umzugs.
+                  </p>
+                  <p>
+                    Für eine transparente und faire Angebotserstellung bieten wir Ihnen eine kostenlose Besichtigung vor Ort an. So können wir den Umfang Ihres Umzugs genau einschätzen und Ihnen ein individuelles Angebot unterbreiten.
+                  </p>
+                  <p className="text-lg">
+                    Finden Sie die besten <strong>Umzugsdienstleister</strong> und <strong>Zügelunternehmen im Kanton Zürich</strong> für Ihren Umzug. Vergleichen Sie kostenlos mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> in <strong>Zürich</strong>, <strong>Winterthur</strong>, <strong>Uster</strong> und der ganzen Region. Achten Sie dabei auch auf die <strong>Bewertung</strong> der Anbieter durch Kunden, da diese ein wichtiges Kriterium für die Auswahl einer zuverlässigen Umzugsfirma Zürich ist. Professionelle <strong>Transportunternehmen für Umzüge</strong> und <strong>regionale Zügelprofis</strong> bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Alle Partner sind <strong>versichert gemäss OR</strong>.
+                  </p>
+                </div>
+                
+                <article>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Einführung in den Umzugsmarkt Zürich
+                  </h2>
+                  <div className="prose prose-lg max-w-none space-y-4">
+                    <p className="text-gray-700 leading-relaxed">
+                      Der Umzugsmarkt in Zürich ist ein zentraler Bestandteil der lokalen Dienstleistungsbranche und bietet eine beeindruckende Vielfalt an Umzugsfirmen, die auf unterschiedlichste Umzugsbedürfnisse zugeschnittene Lösungen bereithalten. Als eine der führenden Umzugsfirmen in Zürich setzen wir auf einen umfassenden Full Service Umzug, der weit über den reinen Transport hinausgeht. Unser erfahrenes Team begleitet Sie von der ersten Planung bis zur erfolgreichen Durchführung Ihres Umzugs in Zürich – persönlich, effizient und zuverlässig.
+                    </p>
+                    <p className="text-gray-700 leading-relaxed">
+                      Unsere Umzugsfirma in Zürich versteht sich als starker Partner für Privatpersonen, Familien und Unternehmen, die einen reibungslosen Umzug in Zürich und Umgebung wünschen. Wir bieten Ihnen ein breites Spektrum an Umzugsdienstleistungen: vom lokalen Umzug über professionelle Transporte und fachgerechte Lagerung bis hin zu gründlichen Reinigungen mit Abnahmegarantie. Dank unserer langjährigen Erfahrung und unserem engagierten Team können wir flexibel auf Ihre individuellen Wünsche eingehen und Ihnen einen stressfreien Umzug ermöglichen.
+                    </p>
+                    <p className="text-gray-700 leading-relaxed">
+                      Transparenz und Fairness stehen bei uns an erster Stelle. Deshalb erhalten Sie von uns eine kostenlose und unverbindliche Offerte, die alle Kosten klar aufschlüsselt – ohne versteckte Gebühren. Ob Sie per E-Mail, Telefon oder über unser Online-Formular Kontakt aufnehmen: Wir beraten Sie persönlich und finden gemeinsam die optimale Lösung für Ihren Umzug in Zürich.
+                    </p>
+                  </div>
+                </article>
+              </div>
+              
+              {/* Right Column - Services */}
+              <div className="lg:col-span-4">
+                <div className="sticky top-24">
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200 shadow-lg">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                      Wählen Sie Ihre gewünschte Dienstleistung
+                    </h3>
+                    <ServiceGrid city={city} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
         
@@ -293,7 +340,7 @@ export default function UmzugsfirmaZurichPage() {
                 So funktioniert's: Ihr Umzug in Zürich leicht gemacht
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                In nur drei einfachen Schritten erhalten Sie mehrere Offerten von geprüften <strong>Umzugsfirmen in Zürich</strong> und <strong>Zügelfirmen</strong> aus Zürich
+                In nur drei einfachen Schritten erhalten Sie mehrere Offerten von geprüften <strong>Umzugsfirmen in Zürich</strong> und <strong>Zügelfirmen</strong> aus Zürich.
               </p>
             </div>
             
@@ -350,19 +397,37 @@ export default function UmzugsfirmaZurichPage() {
             <main className="space-y-12">
               {/* Introduction */}
               <article>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  Umzug im Kanton Zürich – Professionelle Anbieter vergleichen
-                </h2>
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 leading-relaxed mb-4">
-                    <strong>Zürich</strong>, die grösste Stadt der Schweiz, ist ein Anziehungspunkt für Menschen aus aller Welt. Ein Umzug in dieser dynamischen Metropole birgt jedoch besondere Herausforderungen. Dichter Verkehr, komplexe Parkregelungen und die Vielfalt der Wohnlagen – von Altstadtwohnungen bis zu modernen Neubauten am Stadtrand – machen die Wahl der richtigen Umzugsfirma zur wichtigsten Entscheidung Ihres Umzugsprojekts. Ein professionelles Umzugsunternehmen ist nicht nur ein Transportdienstleister; es ist Ihr Projektmanager, Logistikpartner und Problemlöser in einem. Ein Umzug in dieser Region – ob nach <Link href="/umzugsfirma-zuerich/winterthur" className="text-green-600 hover:text-green-800 underline font-semibold">Winterthur</Link>, <Link href="/umzugsfirma-zuerich/uster" className="text-green-600 hover:text-green-800 underline font-semibold">Uster</Link>, <Link href="/umzugsfirma-zuerich/dietikon" className="text-green-600 hover:text-green-800 underline font-semibold">Dietikon</Link>, <Link href="/umzugsfirma-zuerich/duebendorf" className="text-green-600 hover:text-green-800 underline font-semibold">Dübendorf</Link> oder in eine der vielen charmanten Gemeinden – erfordert einen professionellen <strong>Umzugsdienstleister</strong> oder <strong>Zügelunternehmen</strong>, der die Besonderheiten der Region kennt.
-                  </p>
-                  <p className="text-gray-700 leading-relaxed mb-4">
-                    Erfahrene <strong>Transportunternehmen für Umzüge</strong> im Kanton Zürich kennen die Verkehrswege, die Parkregelungen in den historischen Altstädten und die logistischen Herausforderungen der Region. Über unser Portal können Sie mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> vergleichen und die beste Lösung für Ihr Projekt finden. Professionelle <strong>regionale Zügelprofis</strong> kümmern sich um die Organisation von Halteverbotszonen, planen die schnellste Route und stellen sicher, dass Ihr Hab und Gut sicher und unversehrt im neuen Zuhause ankommt. Alle Partner sind <strong>versichert gemäss OR</strong> und verfügen über langjährige Erfahrung.
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">
-                    Der Vergleich mehrerer Anbieter gibt Ihnen die Sicherheit, einen geprüften und versicherten <strong>Umzugspartner im Kanton Zürich</strong> zu finden, der Ihren Ansprüchen gerecht wird. Durch den direkten Vergleich finden Sie das beste Preis-Leistungs-Verhältnis und sparen dabei erheblich. Unser <strong>Schweizer Kundenservice</strong> steht Ihnen bei allen Fragen zur Verfügung.
-                  </p>
+                <div className="grid lg:grid-cols-12 gap-8 items-start">
+                  {/* Left Column - Text */}
+                  <div className="lg:col-span-7 prose prose-lg max-w-none space-y-4">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                      Umzug im Kanton Zürich – Professionelle Zügelunternehmen vergleichen
+                    </h2>
+                    <p className="text-gray-700 leading-relaxed">
+                      <strong>Zürich</strong>, die grösste Stadt der Schweiz, ist ein Anziehungspunkt für Menschen aus aller Welt. Ein Umzug in dieser dynamischen Metropole birgt jedoch besondere Herausforderungen. Dichter Verkehr, komplexe Parkregelungen und die Vielfalt der Wohnlagen – von Altstadtwohnungen bis zu modernen Neubauten am Stadtrand – machen die Wahl der richtigen Umzugsfirma zur wichtigsten Entscheidung Ihres Umzugsprojekts. Ein professionelles Umzugsunternehmen ist nicht nur ein Transportdienstleister; es ist Ihr Projektmanager, Logistikpartner und Problemlöser in einem. Ein Umzug in dieser Region – ob nach Winterthur, Uster, Dietikon, Dübendorf oder in eine der vielen charmanten Gemeinden – erfordert einen professionellen <strong>Umzugsdienstleister</strong> oder <strong>Zügelunternehmen</strong>, der die Besonderheiten der Region kennt.
+                    </p>
+                    <p className="text-gray-700 leading-relaxed">
+                      Viele erfahrene Umzugsfirmen in Zürich bieten zudem professionelle Umzüge innerhalb von Europa an und verfügen über umfassende Erfahrung bei grenzüberschreitenden Transporten.
+                    </p>
+                    <p className="text-gray-700 leading-relaxed">
+                      Erfahrene <strong>Transportunternehmen für Umzüge</strong> im Kanton Zürich kennen die Verkehrswege, die Parkregelungen in den historischen Altstädten und die logistischen Herausforderungen der Region. Über unser Portal können Sie mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> vergleichen und die beste Lösung für Ihr Projekt finden. Professionelle <strong>regionale Zügelprofis</strong> kümmern sich um die Organisation von Halteverbotszonen, planen die schnellste Route und stellen sicher, dass Ihr Hab und Gut sicher und unversehrt im neuen Zuhause ankommt. Alle Partner sind <strong>versichert gemäss OR</strong> und verfügen über langjährige Erfahrung.
+                    </p>
+                    <p className="text-gray-700 leading-relaxed">
+                      Der Vergleich mehrerer Anbieter gibt Ihnen die Sicherheit, einen geprüften und versicherten <strong>Umzugspartner im Kanton Zürich</strong> zu finden, der Ihren Ansprüchen gerecht wird. Durch den direkten Vergleich finden Sie das beste Preis-Leistungs-Verhältnis und sparen dabei erheblich. Unser <strong>Schweizer Kundenservice</strong> steht Ihnen bei allen Fragen zur Verfügung.
+                    </p>
+                  </div>
+                  {/* Right Column - Image */}
+                  <div className="lg:col-span-5">
+                    <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                      <Image
+                        src="/image/umzugsservice-Schweiz/umzugsfirma-zuerich-professionell.webp"
+                        alt="Professionelle Umzugsfirma Zürich - Umzug im Kanton Zürich"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                      />
+                    </div>
+                  </div>
                 </div>
               </article>
             </main>
@@ -416,7 +481,7 @@ export default function UmzugsfirmaZurichPage() {
               <article>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Städte & Regionen im Kanton Zürich</h2>
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  Der Kanton Zürich bietet eine vielfältige Landschaft mit historischen Städten, idyllischen Dörfern und modernen Wirtschaftszentren. Unsere Partner-<strong>Umzugsdienstleister</strong> und <strong>regionale Zügelprofis</strong> sind in der ganzen Region aktiv. Alle verfügen über umfassende Erfahrung und sind <strong>geprüfte Partner nach Schweizer Standards</strong>. Erfahren Sie mehr über <Link href="/umzugsfirma-zuerich/winterthur" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Winterthur</Link>, <Link href="/umzugsfirma-zuerich/uster" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen in Uster finden</Link>, <Link href="/umzugsfirma-zuerich/dietikon" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsunternehmen Dietikon</Link>, <Link href="/umzugsfirma-zuerich/duebendorf" className="text-green-600 hover:text-green-800 underline font-semibold">Professionelle Umzugshilfe in Dübendorf</Link> und <Link href="/umzugsfirma-zuerich/schlieren" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsservice Schlieren</Link>:
+                  Der Kanton Zürich bietet eine vielfältige Landschaft mit historischen Städten, idyllischen Dörfern und modernen Wirtschaftszentren. Unsere Partner-<strong>Umzugsdienstleister</strong> und <strong>regionale Zügelprofis</strong> sind in der ganzen Region aktiv. Alle verfügen über umfassende Erfahrung und sind <strong>geprüfte Partner nach Schweizer Standards</strong>.
                 </p>
                 <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
                   {zurichCities.map((cityItem, index) => (
@@ -571,29 +636,46 @@ export default function UmzugsfirmaZurichPage() {
 
               {/* Services Overview */}
               <article>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Leistungen der Umzugsfirmen</h2>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                  Moderne <strong>Umzugsdienstleister</strong> und <strong>Zügelunternehmen</strong> bieten viel mehr als nur den Transport. Stellen Sie sich Ihr individuelles Servicepaket zusammen. Alle Partner verfügen über umfassende Erfahrung und sind <strong>versichert gemäss OR</strong>:
-                </p>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { icon: 'Home', title: 'Privatumzug', link: '/privatumzug', desc: 'Wohnungswechsel individuell' },
-                    { icon: 'Building', title: 'Geschäftsumzug', link: '/geschaeftsumzug', desc: 'Büro- und Firmenumzug' },
-                    { icon: 'Globe', title: 'Internationale Umzüge', link: '/internationale-umzuege', desc: 'Umzug ins Ausland' },
-                    { icon: 'Package', title: 'Spezialtransporte', link: '/spezialtransporte', desc: 'Klavier, Tresor, Maschinen' },
-                    { icon: 'Sparkles', title: 'Reinigung', link: '/reinigung', desc: 'Umzugsreinigung & mehr' },
-                    { icon: 'Sparkles', title: 'Umzugsreinigung', link: '/umzugsreinigung', desc: 'Mit Abnahmegarantie' },
-                    { icon: 'MapPin', title: 'Möbellagerung', link: '/umzugsfirma-zuerich', desc: 'Sichere Zwischenlagerung' }
-                  ].map((service, index) => (
-                    <Link
-                      key={index}
-                      href={service.link}
-                      className="group bg-white border-2 border-gray-200 hover:border-green-500 rounded-xl p-5 transition-all hover:shadow-lg"
-                    >
-                      <h4 className="font-semibold text-gray-900 mb-1 group-hover:text-green-600 transition-colors">{service.title}</h4>
-                      <p className="text-sm text-gray-600">{service.desc}</p>
-                    </Link>
-                  ))}
+                <div className="grid lg:grid-cols-12 gap-8 items-start">
+                  {/* Left Column - Image */}
+                  <div className="lg:col-span-5 order-2 lg:order-1">
+                    <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                      <Image
+                        src="/image/umzugsservice-Schweiz/umzugsfirma-zuerich-leistungen.webp"
+                        alt="Umzugsfirma Zürich Leistungen - Umzugsdienstleistungen"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                      />
+                    </div>
+                  </div>
+                  {/* Right Column - Text and Services */}
+                  <div className="lg:col-span-7 order-1 lg:order-2">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-6">Leistungen der Umzugsfirmen</h2>
+                    <p className="text-gray-700 leading-relaxed mb-6">
+                      Moderne <strong>Umzugsdienstleister</strong> und <strong>Zügelunternehmen</strong> bieten viel mehr als nur den Transport. Stellen Sie sich Ihr individuelles Servicepaket zusammen. Alle Partner verfügen über umfassende Erfahrung und sind <strong>versichert gemäss OR</strong>:
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {[
+                        { icon: 'Home', title: 'Privatumzug', link: '/privatumzug', desc: 'Wohnungswechsel individuell' },
+                        { icon: 'Building', title: 'Geschäftsumzug', link: '/geschaeftsumzug', desc: 'Büro- und Firmenumzug' },
+                        { icon: 'Globe', title: 'Internationale Umzüge', link: '/internationale-umzuege', desc: 'Umzug ins Ausland' },
+                        { icon: 'Package', title: 'Spezialtransporte', link: '/spezialtransporte', desc: 'Klavier, Tresor, Maschinen' },
+                        { icon: 'Sparkles', title: 'Reinigung', link: '/reinigung', desc: 'Umzugsreinigung & mehr' },
+                        { icon: 'Sparkles', title: 'Umzugsreinigung', link: '/umzugsreinigung', desc: 'Mit Abnahmegarantie' },
+                        { icon: 'MapPin', title: 'Möbellagerung', link: '/umzugsfirma-zuerich', desc: 'Sichere Zwischenlagerung' }
+                      ].map((service, index) => (
+                        <Link
+                          key={index}
+                          href={service.link}
+                          className="group bg-white border-2 border-gray-200 hover:border-green-500 rounded-xl p-5 transition-all hover:shadow-lg"
+                        >
+                          <h4 className="font-semibold text-gray-900 mb-1 group-hover:text-green-600 transition-colors">{service.title}</h4>
+                          <p className="text-sm text-gray-600">{service.desc}</p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </article>
 
@@ -607,7 +689,7 @@ export default function UmzugsfirmaZurichPage() {
                   {[
                     { title: 'Detaillierte Offerten einholen', text: 'Eine seriöse Offerte von einer Zügelfirma ist mehr als nur eine Zahl. Sie sollte alle Posten detailliert auflisten: Stundensätze, Mitarbeiterzahl, Fahrzeuggrösse, Versicherung und alle gebuchten Zusatzleistungen.' },
                     { title: 'Versicherungsschutz prüfen', text: 'Eine ausreichende Transport- und Betriebshaftpflichtversicherung ist nicht verhandelbar. Professionelle Umzugsdienstleister sind versichert gemäss OR und bis 100\'000 CHF versichert.' },
-                    { title: 'Bewertungen und Referenzen analysieren', text: 'Lesen Sie authentische Kundenbewertungen auf unserem Portal. Achten Sie auf Kommentare zu Pünktlichkeit, Sorgfalt und Teamfreundlichkeit. Unsere Partner verfügen über umfassende Erfahrung in der Vermittlung von Umzügen im Kanton Zürich.' },
+                    { title: 'Bewertungen und Referenzen analysieren', text: 'Lesen Sie authentische Kundenbewertungen auf unserem Portal. Achten Sie auf Kommentare zu Pünktlichkeit, Sorgfalt und Teamfreundlichkeit. Ein Beispiel: „Herr Isufi und sein Team haben unseren Umzug äusserst professionell und freundlich durchgeführt – wir fühlten uns bestens betreut." Unsere Partner verfügen über umfassende Erfahrung in der Vermittlung von Umzügen im Kanton Zürich.' },
                     { title: 'Regionale Kenntnisse prüfen', text: 'Ein Zügelunternehmen im Kanton Zürich sollte die Region kennen. Fragen Sie nach Erfahrungen mit Umzügen in Ihrer spezifischen Gemeinde.' }
                   ].map((item, index) => (
                     <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
