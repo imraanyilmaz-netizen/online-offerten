@@ -155,7 +155,7 @@ const RatgeberPageClient = () => {
                       <div className="mt-auto flex justify-between items-center">
                         <div className="flex items-center text-sm text-gray-600">
                           <Calendar className="w-4 h-4 mr-2" />
-                          <span>{new Date(post.published_at || post.created_at).toLocaleDateString('de-DE')}</span>
+                          <span>{new Date(post.created_at).toLocaleDateString('de-DE')}</span>
                         </div>
                         <div className="text-green-700 font-semibold text-sm flex items-center">
                           {getReadMoreText(post)} <ArrowRight className="ml-1.5 h-4 w-4" />

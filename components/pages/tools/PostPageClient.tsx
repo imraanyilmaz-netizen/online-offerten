@@ -29,7 +29,7 @@ const PostPageClient = () => {
             
             const { data: postData, error: postError } = await supabase
                 .from('posts')
-                .select('*, meta_title, faq')
+                .select('*, meta_title, faq, faq_title, faq_description, custom_html')
                 .eq('slug', slug)
                 .single();
 
@@ -121,7 +121,7 @@ const PostPageClient = () => {
                                 )}
                                 <div className="flex items-center">
                                     <Calendar className="h-4 w-4 mr-1.5" />
-                                    <span>{new Date(post.published_at || post.created_at).toLocaleDateString('de-DE')}</span>
+                                    <span>{new Date(post.created_at).toLocaleDateString('de-DE')}</span>
                                 </div>
                             </div>
                             
@@ -136,11 +136,13 @@ const PostPageClient = () => {
                                     transition={{ duration: 0.5 }}
                                     className="mt-16 pt-12 border-t border-gray-200"
                                 >
-                                    <div className="text-center mb-12">
-                                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                                                Häufige Fragen (FAQ)
+                                    <div className="text-left mb-12">
+                                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                                                {post.faq_title && post.faq_title.trim() ? post.faq_title.trim() : 'Häufige Fragen (FAQ)'}
                                             </h2>
-                                        <p className="text-lg text-gray-600">Antworten auf die wichtigsten Fragen</p>
+                                        <p className="text-base text-gray-600">
+                                            {post.faq_description && post.faq_description.trim() ? post.faq_description.trim() : 'Antworten auf die wichtigsten Fragen'}
+                                        </p>
                                     </div>
                                     <div className="max-w-4xl mx-auto">
                                         <Accordion type="single" collapsible className="w-full space-y-4">

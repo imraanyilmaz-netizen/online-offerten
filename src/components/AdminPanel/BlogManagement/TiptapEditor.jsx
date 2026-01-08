@@ -11,6 +11,10 @@ import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import Underline from '@tiptap/extension-underline';
 import { FontFamily } from '@tiptap/extension-font-family';
+import { Table } from '@tiptap/extension-table';
+import { TableRow } from '@tiptap/extension-table-row';
+import { TableCell } from '@tiptap/extension-table-cell';
+import { TableHeader } from '@tiptap/extension-table-header';
 import { Mark } from '@tiptap/core';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
@@ -91,7 +95,7 @@ const FontSize = Mark.create({
   },
 });
 
-const TiptapEditor = ({ content, onChange }) => {
+const TiptapEditor = ({ content, onChange, insertHtml }) => {
   const [isMounted, setIsMounted] = useState(false);
   const fileInputRef = useRef(null);
   const { toast } = useToast();
@@ -103,10 +107,28 @@ const TiptapEditor = ({ content, onChange }) => {
       StarterKit.configure({
         heading: {
           levels: [1, 2, 3, 4, 5, 6],
+          HTMLAttributes: {
+            class: '',
+          },
         },
         codeBlock: {
           HTMLAttributes: {
             class: 'bg-gray-100 rounded p-2 font-mono text-sm',
+          },
+        },
+        bulletList: {
+          HTMLAttributes: {
+            class: 'list-disc ml-6 mb-4',
+          },
+        },
+        orderedList: {
+          HTMLAttributes: {
+            class: 'list-decimal ml-6 mb-4',
+          },
+        },
+        listItem: {
+          HTMLAttributes: {
+            class: 'mb-2',
           },
         },
       }),
@@ -119,7 +141,7 @@ const TiptapEditor = ({ content, onChange }) => {
       }),
       FontSize,
       TextAlign.configure({
-        types: ['heading', 'paragraph'],
+        types: ['heading', 'paragraph', 'bulletList', 'orderedList', 'tableCell'],
       }),
       Underline,
       FontFamily.configure({
@@ -138,6 +160,27 @@ const TiptapEditor = ({ content, onChange }) => {
           class: 'max-w-full h-auto rounded-lg',
         },
       }),
+      Table.configure({
+        HTMLAttributes: {
+          class: 'border-collapse border border-gray-300 w-full my-4',
+        },
+        resizable: true,
+      }),
+      TableRow.configure({
+        HTMLAttributes: {
+          class: 'border border-gray-300',
+        },
+      }),
+      TableHeader.configure({
+        HTMLAttributes: {
+          class: 'border border-gray-300 bg-gray-100 px-4 py-2 font-semibold text-left',
+        },
+      }),
+      TableCell.configure({
+        HTMLAttributes: {
+          class: 'border border-gray-300 px-4 py-2',
+        },
+      }),
     ],
     content: content || '',
     onUpdate: ({ editor }) => {
@@ -149,7 +192,7 @@ const TiptapEditor = ({ content, onChange }) => {
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px] p-6 [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-4 [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block',
+        class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px] p-6 [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-4 [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_h1]:!text-4xl [&_h1]:!font-bold [&_h1]:!mt-8 [&_h1]:!mb-4 [&_h2]:!text-3xl [&_h2]:!font-bold [&_h2]:!mt-6 [&_h2]:!mb-4 [&_h3]:!text-2xl [&_h3]:!font-semibold [&_h3]:!mt-5 [&_h3]:!mb-3 [&_h4]:!text-xl [&_h4]:!font-semibold [&_h4]:!mt-4 [&_h4]:!mb-2 [&_h5]:!text-lg [&_h5]:!font-semibold [&_h5]:!mt-3 [&_h5]:!mb-2 [&_h6]:!text-base [&_h6]:!font-semibold [&_h6]:!mt-2 [&_h6]:!mb-2 [&_ul]:!list-disc [&_ul]:!ml-6 [&_ul]:!mb-4 [&_ul]:!pl-6 [&_ol]:!list-decimal [&_ol]:!ml-6 [&_ol]:!mb-4 [&_ol]:!pl-6 [&_li]:!mb-2 [&_li]:!list-item [&_table]:!border-collapse [&_table]:!w-full [&_table]:!my-4 [&_table]:!border [&_table]:!border-gray-300 [&_th]:!border [&_th]:!border-gray-300 [&_th]:!bg-gray-100 [&_th]:!px-4 [&_th]:!py-2 [&_th]:!font-semibold [&_th]:!text-left [&_td]:!border [&_td]:!border-gray-300 [&_td]:!px-4 [&_td]:!py-2',
       },
       transformPastedHTML(html) {
         // Boş paragrafları koru - &nbsp; ekle
@@ -170,6 +213,18 @@ const TiptapEditor = ({ content, onChange }) => {
       editor.commands.setContent(content, false);
     }
   }, [content, editor, isMounted]);
+
+  // Insert HTML from custom HTML field
+  useEffect(() => {
+    if (!isMounted || !editor || !insertHtml) return;
+    // Use setTimeout to avoid state update during render
+    const timeoutId = setTimeout(() => {
+      if (editor && insertHtml) {
+        editor.chain().focus().insertContent(insertHtml, { parseOptions: { preserveWhitespace: 'full' } }).run();
+      }
+    }, 0);
+    return () => clearTimeout(timeoutId);
+  }, [insertHtml, editor, isMounted]);
 
   const handleImageUpload = useCallback(async () => {
     const input = document.createElement('input');
@@ -270,32 +325,48 @@ const TiptapEditor = ({ content, onChange }) => {
           <Button
             variant={editor.isActive('bold') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleBold().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleBold().run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Bold className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('italic') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleItalic().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleItalic().run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Italic className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('underline') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleUnderline().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleUnderline().run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <UnderlineIcon className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('strike') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleStrike().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleStrike().run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Strikethrough className="h-4 w-4" />
           </Button>
@@ -306,32 +377,48 @@ const TiptapEditor = ({ content, onChange }) => {
           <Button
             variant={editor.isActive('heading', { level: 1 }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleHeading({ level: 1 }).run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Heading1 className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('heading', { level: 2 }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleHeading({ level: 2 }).run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Heading2 className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('heading', { level: 3 }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleHeading({ level: 3 }).run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Heading3 className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('heading', { level: 4 }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleHeading({ level: 4 }).run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Heading4 className="h-4 w-4" />
           </Button>
@@ -342,32 +429,56 @@ const TiptapEditor = ({ content, onChange }) => {
           <Button
             variant={editor.isActive('bulletList') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (editor) {
+                editor.chain().focus().toggleBulletList().run();
+              }
+            }}
             className="h-8 w-8 p-0"
+            type="button"
+            disabled={!editor}
           >
             <List className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('orderedList') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (editor) {
+                editor.chain().focus().toggleOrderedList().run();
+              }
+            }}
             className="h-8 w-8 p-0"
+            type="button"
+            disabled={!editor}
           >
             <ListOrdered className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('blockquote') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleBlockquote().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleBlockquote().run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Quote className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive('codeBlock') ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().toggleCodeBlock().run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Code className="h-4 w-4" />
           </Button>
@@ -378,32 +489,48 @@ const TiptapEditor = ({ content, onChange }) => {
           <Button
             variant={editor.isActive({ textAlign: 'left' }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().setTextAlign('left').run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().setTextAlign('left').run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <AlignLeft className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive({ textAlign: 'center' }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().setTextAlign('center').run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().setTextAlign('center').run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <AlignCenter className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive({ textAlign: 'right' }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().setTextAlign('right').run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().setTextAlign('right').run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <AlignRight className="h-4 w-4" />
           </Button>
           <Button
             variant={editor.isActive({ textAlign: 'justify' }) ? 'default' : 'ghost'}
             size="sm"
-            onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().setTextAlign('justify').run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <AlignJustify className="h-4 w-4" />
           </Button>
@@ -498,8 +625,12 @@ const TiptapEditor = ({ content, onChange }) => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => editor.chain().focus().setHorizontalRule().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().setHorizontalRule().run();
+            }}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Minus className="h-4 w-4" />
           </Button>
@@ -510,18 +641,26 @@ const TiptapEditor = ({ content, onChange }) => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => editor.chain().focus().undo().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().undo().run();
+            }}
             disabled={!editor.can().undo()}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Undo className="h-4 w-4" />
           </Button>
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => editor.chain().focus().redo().run()}
+            onClick={(e) => {
+              e.preventDefault();
+              editor.chain().focus().redo().run();
+            }}
             disabled={!editor.can().redo()}
             className="h-8 w-8 p-0"
+            type="button"
           >
             <Redo className="h-4 w-4" />
           </Button>

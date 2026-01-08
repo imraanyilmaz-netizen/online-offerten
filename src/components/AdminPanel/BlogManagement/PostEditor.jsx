@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, Save, ArrowLeft, X, UploadCloud, Trash2, Tag, MessageSquare, HelpCircle, Plus } from 'lucide-react';
+import { Loader2, Save, ArrowLeft, X, UploadCloud, Trash2, Tag, MessageSquare, HelpCircle, Plus, Code } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { locations } from '@/data/locations';
 
@@ -45,6 +45,10 @@ const PostEditor = ({ post, onBack }) => {
   const [selectedReviewIds, setSelectedReviewIds] = useState([]);
   const [readMoreText, setReadMoreText] = useState('');
   const [faqs, setFaqs] = useState([]);
+  const [faqTitle, setFaqTitle] = useState('');
+  const [faqDescription, setFaqDescription] = useState('');
+  const [customHtml, setCustomHtml] = useState('');
+  const [insertHtmlToEditor, setInsertHtmlToEditor] = useState(null);
 
   const generateSlug = (text) => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
 
@@ -184,6 +188,9 @@ const PostEditor = ({ post, onBack }) => {
       setSelectedReviewIds(post.selected_review_ids || []);
       setReadMoreText(post.read_more_text || '');
       setFaqs(Array.isArray(post.faq) && post.faq.length > 0 ? post.faq : []);
+      setFaqTitle(post.faq_title || '');
+      setFaqDescription(post.faq_description || '');
+      setCustomHtml(post.custom_html || '');
     } else {
       // Reset for new post
       setTitle('');
@@ -199,6 +206,9 @@ const PostEditor = ({ post, onBack }) => {
       setSelectedReviewIds([]);
       setReadMoreText('');
       setFaqs([]);
+      setFaqTitle('');
+      setFaqDescription('');
+      setCustomHtml('');
     }
     setImageFile(null);
     setTagInput('');
@@ -352,6 +362,9 @@ const PostEditor = ({ post, onBack }) => {
         selected_review_ids: Array.isArray(selectedReviewIds) && selectedReviewIds.length > 0 ? selectedReviewIds : null,
         read_more_text: readMoreText && readMoreText.trim() ? readMoreText.trim() : null,
         faq: validFaqs.length > 0 ? validFaqs : null,
+        faq_title: faqTitle && faqTitle.trim() ? faqTitle.trim() : null,
+        faq_description: faqDescription && faqDescription.trim() ? faqDescription.trim() : null,
+        custom_html: customHtml && customHtml.trim() ? customHtml.trim() : null,
         ...(status === 'published' && (!post || post.status !== 'published') && { published_at: new Date().toISOString() })
       };
 
@@ -404,7 +417,7 @@ const PostEditor = ({ post, onBack }) => {
         </div>
         <Input placeholder="Beitragstitel hier eingeben..." value={title} onChange={handleTitleChange} className="text-2xl font-bold h-14 border-0 shadow-none focus-visible:ring-0 px-2" />
         <Suspense fallback={<div className="flex items-center justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-gray-400" /></div>}>
-          <TiptapEditor content={content} onChange={setContent} />
+          <TiptapEditor content={content} onChange={setContent} insertHtml={insertHtmlToEditor} />
         </Suspense>
 
         <Card>
@@ -419,6 +432,29 @@ const PostEditor = ({ post, onBack }) => {
               <p className="text-xs text-muted-foreground mb-3">
                 Fügen Sie Fragen und Antworten hinzu, die für Google AI Overview und Rich Results verwendet werden.
               </p>
+              <div className="p-4 border rounded-lg space-y-3 bg-blue-50 border-blue-200">
+                <div>
+                  <Label className="text-xs">FAQ Bölümü Ana Başlık (Title) - Opsiyonel</Label>
+                  <Input
+                    value={faqTitle}
+                    onChange={(e) => setFaqTitle(e.target.value)}
+                    placeholder="z.B. FAQ - Häufige Fragen zum Möbellift mieten"
+                    className="mt-1"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">Bu başlık tüm FAQ bölümünün üstünde görüntülenecektir</p>
+                </div>
+                <div>
+                  <Label className="text-xs">FAQ Bölümü Alt Açıklama (Description) - Opsiyonel</Label>
+                  <Textarea
+                    value={faqDescription}
+                    onChange={(e) => setFaqDescription(e.target.value)}
+                    placeholder="z.B. Hier beantworten wir typische Detailfragen, die im Haupttext nur am Rande vorkommen."
+                    className="mt-1 min-h-[60px]"
+                    rows={2}
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">Bu açıklama ana başlığın altında görüntülenecektir</p>
+                </div>
+              </div>
               {faqs.map((faq, index) => (
                 <div key={index} className="p-4 border rounded-lg space-y-3 bg-gray-50">
                   <div className="flex items-center justify-between mb-2">
@@ -469,6 +505,43 @@ const PostEditor = ({ post, onBack }) => {
                 </p>
               )}
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Code className="w-5 h-5 text-green-600" />
+              HTML Kodu (Custom HTML)
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-xs text-muted-foreground mb-3">
+              HTML kodunu buraya ekleyin. "In Editor einfügen" butonuna tıklayarak kodu editöre ekleyebilirsiniz.
+            </p>
+            <Textarea
+              value={customHtml}
+              onChange={(e) => setCustomHtml(e.target.value)}
+              placeholder="<div>Ihr HTML-Code hier...</div>"
+              className="min-h-[200px] font-mono text-sm mb-3"
+              rows={10}
+            />
+            <Button
+              type="button"
+              onClick={() => {
+                if (customHtml.trim()) {
+                  setInsertHtmlToEditor(customHtml);
+                  // Reset after a short delay to allow re-insertion
+                  setTimeout(() => setInsertHtmlToEditor(null), 100);
+                }
+              }}
+              disabled={!customHtml.trim()}
+              className="w-full"
+              variant="outline"
+            >
+              <Code className="w-4 h-4 mr-2" />
+              In Editor einfügen
+            </Button>
           </CardContent>
         </Card>
       </div>

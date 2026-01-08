@@ -95,7 +95,7 @@ export default async function RatgeberPostPage({ params }: { params: { slug: str
   // Fetch post data for schema
   const { data: post } = await supabase
     .from('posts')
-    .select('title, meta_title, meta_description, featured_image_url, category, published_at, updated_at, created_at, faq')
+    .select('title, meta_title, meta_description, featured_image_url, category, published_at, updated_at, created_at, faq, faq_title, faq_description, custom_html')
     .eq('slug', params.slug)
     .eq('status', 'published')
     .single()

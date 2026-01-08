@@ -302,6 +302,24 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const userManuallySelectedUmzugArt = useRef(false);
   const hasInitializedUmzugArtFromUrl = useRef(false);
   
+  // Helper function to get the correct URL parameter name based on service
+  const getServiceArtParamName = useCallback((service) => {
+    switch (service) {
+      case 'umzug':
+        return 'umzugArt';
+      case 'reinigung':
+        return 'reinigungArt';
+      case 'maler':
+        return 'malerArt';
+      case 'raeumung':
+        return 'raeumungArt';
+      case 'garten':
+        return null; // Garten doesn't need this parameter
+      default:
+        return 'umzugArt'; // Default fallback
+    }
+  }, []);
+  
   const memoizedHandleServiceSelect = useCallback((serviceId, isFromUrl = false) => {
     handleServiceSelect(serviceId, isFromUrl);
     
@@ -315,6 +333,13 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     
     const params = new URLSearchParams(searchParamsString);
     params.set('service', serviceId);
+    
+    // Remove all service art parameters when service changes
+    params.delete('umzugArt');
+    params.delete('reinigungArt');
+    params.delete('malerArt');
+    params.delete('raeumungArt');
+    
     if(currentStep > 1) params.delete('step');
     const newUrl = `${pathname}?${params.toString()}`;
     // router.replace kullan ki URL değişikliği görünsün ama history'ye entry eklenmesin
@@ -334,13 +359,21 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       userManuallySelectedUmzugArt.current = true;
     }
     
-    // Update URL with new umzugArt
+    // Update URL with service-specific parameter name
     const params = new URLSearchParams(searchParamsString);
-    if (umzugArtValue) {
-      params.set('umzugArt', umzugArtValue);
-    } else {
-      params.delete('umzugArt');
+    
+    // Remove all service art parameters to avoid conflicts
+    params.delete('umzugArt');
+    params.delete('reinigungArt');
+    params.delete('malerArt');
+    params.delete('raeumungArt');
+    
+    // Set the correct parameter for current service
+    const paramName = getServiceArtParamName(formData.service);
+    if (paramName && umzugArtValue) {
+      params.set(paramName, umzugArtValue);
     }
+    
     // Keep service and step in URL
     if (formData.service) {
       params.set('service', formData.service);
@@ -350,7 +383,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
     const newUrl = `${pathname}?${params.toString()}`;
     router.replace(newUrl);
-  }, [handleUmzugArtChange, pathname, currentStep, searchParamsString, router, formData.service]);
+  }, [handleUmzugArtChange, pathname, currentStep, searchParamsString, router, formData.service, getServiceArtParamName]);
 
 
   // URL'den service parametresini sadece ilk yüklemede oku
@@ -378,8 +411,13 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   }, [searchParamsString, formData.service, handleServiceSelect]);
 
-  // URL'den umzugArt parametresini oku ve otomatik setzen
+  // URL'den servise özel art parametresini oku ve otomatik setzen
   useEffect(() => {
+    // Service seçilmemişse, art parametresi okuma
+    if (!formData.service) {
+      return;
+    }
+    
     // Eğer kullanıcı zaten manuel seçim yaptıysa, URL'den okuma yapma
     if (userManuallySelectedUmzugArt.current) {
       return;
@@ -391,17 +429,31 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
     
     const params = new URLSearchParams(searchParamsString);
-    const umzugArtFromUrl = params.get('umzugArt');
+    const paramName = getServiceArtParamName(formData.service);
     
-    // Nur wenn service=umzug ist und umzugArt in URL vorhanden ist
-    if (formData.service === 'umzug' && umzugArtFromUrl && umzugArtFromUrl !== formData.umzugArt) {
-      memoizedHandleUmzugArtChange(umzugArtFromUrl, true);
+    // Garten servisi için parametre gerekmez
+    if (!paramName) {
       hasInitializedUmzugArtFromUrl.current = true;
-    } else if (!umzugArtFromUrl) {
-      // URL'de umzugArt yoksa bile flag'i true yap, tekrar kontrol etme
+      return;
+    }
+    
+    // Servise özel parametreyi oku
+    const artValueFromUrl = params.get(paramName);
+    
+    if (artValueFromUrl && artValueFromUrl !== formData.umzugArt) {
+      memoizedHandleUmzugArtChange(artValueFromUrl, true);
+      hasInitializedUmzugArtFromUrl.current = true;
+    } else if (!artValueFromUrl) {
+      // URL'de parametre yoksa bile flag'i true yap, tekrar kontrol etme
       hasInitializedUmzugArtFromUrl.current = true;
     }
-  }, [searchParamsString, formData.service, formData.umzugArt, memoizedHandleUmzugArtChange]);
+  }, [searchParamsString, formData.service, formData.umzugArt, memoizedHandleUmzugArtChange, getServiceArtParamName]);
+
+  // Service değiştiğinde umzugArt URL okuma flag'ini sıfırla
+  useEffect(() => {
+    // Service değiştiğinde, yeni servis için URL'den umzugArt okunabilmesi için flag'i sıfırla
+    hasInitializedUmzugArtFromUrl.current = false;
+  }, [formData.service]);
 
   // URL'den special_transport_type parametresini oku ve otomatik setzen
   useEffect(() => {
@@ -412,7 +464,18 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     if (formData.service === 'umzug' && formData.umzugArt === 'spezialtransport' && specialTransportTypeFromUrl && specialTransportTypeFromUrl !== formData.special_transport_type) {
       handleRadioGroupChange('special_transport_type', specialTransportTypeFromUrl);
     }
-  }, [searchParamsString, formData.service, formData.umzugArt, formData.special_transport_type, handleRadioGroupChange]); 
+  }, [searchParamsString, formData.service, formData.umzugArt, formData.special_transport_type, handleRadioGroupChange]);
+
+  // URL'den raeumung_scope parametresini oku ve otomatik setzen
+  useEffect(() => {
+    const params = new URLSearchParams(searchParamsString);
+    const raeumungScopeFromUrl = params.get('raeumung_scope');
+    
+    // Nur wenn service=raeumung, raeumungArt=raeumung ist und raeumung_scope in URL vorhanden ist
+    if (formData.service === 'raeumung' && formData.umzugArt === 'raeumung' && raeumungScopeFromUrl && raeumungScopeFromUrl !== formData.raeumung_scope) {
+      handleRadioGroupChange('raeumung_scope', raeumungScopeFromUrl);
+    }
+  }, [searchParamsString, formData.service, formData.umzugArt, formData.raeumung_scope, handleRadioGroupChange]); 
 
   // Check if Step 1 is completed whenever formData changes - memoized for performance
   // Step 1: Nur Hauptservice-Auswahl
@@ -613,6 +676,110 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
 
   const stepTitle = getStepTitle();
   
+  // Get selected service names for Step 3
+  const getSelectedServiceText = () => {
+    if (currentStep !== 3) return null;
+    
+    const services = [];
+    
+    // Main service
+    if (formData.service === 'umzug' && formData.umzugArt) {
+      let umzugArtLabel = '';
+      switch (formData.umzugArt) {
+        case 'privatumzug':
+          umzugArtLabel = t('step1.privateMoveLabel');
+          break;
+        case 'geschaeftsumzug':
+          umzugArtLabel = t('step1.businessMoveLabel');
+          break;
+        case 'international':
+          umzugArtLabel = t('step1.internationalMoveLabel');
+          break;
+        case 'spezialtransport':
+          if (formData.special_transport_type) {
+            // Map special_transport_type to translation key
+            const transportTypeMap = {
+              'klaviertransport': 'specialTransportTypePiano',
+              'tresortransport': 'specialTransportTypeSafe',
+              'maschinen_geraete': 'specialTransportTypeMachine',
+              'sonstiges': 'specialTransportTypeOther'
+            };
+            const translationKey = transportTypeMap[formData.special_transport_type];
+            if (translationKey) {
+              umzugArtLabel = t(`step1.${translationKey}`);
+              // Fallback if translation not found
+              if (umzugArtLabel === `step1.${translationKey}`) {
+                umzugArtLabel = t('step1.specialTransportLabel');
+              }
+            } else {
+              umzugArtLabel = t('step1.specialTransportLabel');
+            }
+          } else {
+            umzugArtLabel = t('step1.specialTransportLabel');
+          }
+          break;
+        case 'kleintransport':
+          umzugArtLabel = t('step1.kleintransportLabel');
+          break;
+        case 'moebellift':
+          umzugArtLabel = t('step1.moebelliftLabel');
+          break;
+        default:
+          umzugArtLabel = t('step1.mainServiceMove');
+      }
+      if (umzugArtLabel) services.push(umzugArtLabel);
+    } else if (formData.service === 'reinigung' && formData.umzugArt) {
+      const cleaningLabel = t(`step1.cleaningOptions.${formData.umzugArt}`);
+      // Check if translation was found (not the key itself)
+      if (cleaningLabel && cleaningLabel !== `step1.cleaningOptions.${formData.umzugArt}`) {
+        services.push(cleaningLabel);
+      } else {
+        // Fallback to main cleaning service
+        services.push(t('step1.mainServiceCleaning'));
+      }
+    } else if (formData.service === 'maler' && formData.umzugArt) {
+      // Für Privat ve Für Gewerbe yerine her ikisi için de Malerarbeit kullan
+      services.push(t('step1.mainServicePainter'));
+    } else if (formData.service === 'raeumung' && formData.umzugArt) {
+      // entsorgungType keys: entsorgungTypeRaeumungLabel, entsorgungTypeEntsorgungLabel
+      let disposalLabel = '';
+      if (formData.umzugArt === 'raeumung') {
+        disposalLabel = t('step1.entsorgungTypeRaeumungLabel');
+      } else if (formData.umzugArt === 'entsorgung') {
+        disposalLabel = t('step1.entsorgungTypeEntsorgungLabel');
+      }
+      if (disposalLabel && disposalLabel !== 'step1.entsorgungTypeRaeumungLabel' && disposalLabel !== 'step1.entsorgungTypeEntsorgungLabel') {
+        services.push(disposalLabel);
+      } else {
+        services.push(t('step1.mainServiceDisposal'));
+      }
+    } else if (formData.service === 'garten') {
+      services.push(t('step1.mainServiceGarden'));
+    } else if (formData.service) {
+      // Fallback to main service name
+      const mainServiceKey = `step1.mainService${formData.service.charAt(0).toUpperCase() + formData.service.slice(1)}`;
+      const mainServiceLabel = t(mainServiceKey);
+      if (mainServiceLabel && mainServiceLabel !== mainServiceKey) {
+        services.push(mainServiceLabel);
+      }
+    }
+    
+    // Additional cleaning service (if selected)
+    if (formData.service === 'umzug' && formData.additionalCleaning) {
+      services.push(t('step1.mainServiceCleaning')); // "Reinigung" instead of "Umzugsreinigung"
+    }
+    
+    if (services.length === 0) return null;
+    
+    if (services.length === 1) {
+      return `Offerten für ${services[0]}`;
+    } else {
+      return `Offerten für ${services.join(' und ')}`;
+    }
+  };
+  
+  const selectedServiceText = getSelectedServiceText();
+  
   const handleNavigateHome = () => {
     setPendingNavigation('/');
     setShowExitDialog(true);
@@ -692,6 +859,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
 
       <div className="text-center p-2 sm:p-3 md:p-4">
         <p className="text-sm sm:text-base md:text-lg text-gray-600 font-medium">{stepTitle}</p>
+        {selectedServiceText && (
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">{selectedServiceText}</p>
+        )}
       </div>
 
       <div className="p-2 sm:p-3">
