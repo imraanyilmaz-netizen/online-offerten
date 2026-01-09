@@ -10,7 +10,6 @@ import { Calendar, Tag, Folder, Home, ChevronRight, Loader2, ArrowLeft, HelpCirc
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion } from 'framer-motion';
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx';
-import PostSidebar from '@/components/tools/PostSidebar';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 
 const PostPageClient = () => {
@@ -100,8 +99,8 @@ const PostPageClient = () => {
                     <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</span>
                 </nav>
 
-                <div className="lg:grid lg:grid-cols-12 lg:gap-12 min-w-0">
-                    <main className="lg:col-span-8 min-w-0 overflow-x-visible">
+                <div className="min-w-0">
+                    <main className="min-w-0 overflow-x-visible max-w-4xl mx-auto">
                         <article className="bg-white p-6 md:p-8 rounded-2xl shadow-lg overflow-visible min-w-0 max-w-full">
                             {post.featured_image_url && (
                                 <ImageWithFallback
@@ -176,80 +175,6 @@ const PostPageClient = () => {
                                 </motion.div>
                             )}
 
-                            {post.tags && post.tags.length > 0 && (
-                                <div className="mt-8 pt-6 border-t">
-                                    <h3 className="font-semibold text-lg mb-3 flex items-center">
-                                        <Tag className="h-5 w-5 mr-2 text-green-600"/>
-                                        Tags
-                                    </h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {post.tags.map((tag: string) => (
-                                            <Badge key={tag} variant="secondary" asChild className="">
-                                                <Link href={`${ratgeberBasePath}?tag=${encodeURIComponent(tag)}`}>
-                                                    #{tag}
-                                                </Link>
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Internal Links Section */}
-                            <div className="mt-8 pt-6 border-t">
-                                <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded-lg">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-4">
-                                        Weitere Informationen
-                                    </h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
-                                        <div>
-                                            <h4 className="font-semibold text-gray-900 mb-3">Services</h4>
-                                            <ul className="space-y-2">
-                                                <li>
-                                                    <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-medium underline">
-                                                        Umzugsfirmen vergleichen
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/reinigung" className="text-green-600 hover:text-green-700 font-medium underline">
-                                                        Reinigungsfirmen finden
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/malerfirma" className="text-green-600 hover:text-green-700 font-medium underline">
-                                                        Malerfirmen vergleichen
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold text-gray-900 mb-3">Tools & Ratgeber</h4>
-                                            <ul className="space-y-2">
-                                                <li>
-                                                    <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-700 font-medium underline">
-                                                        Umzugskosten berechnen
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/reinigungskosten-rechner" className="text-green-600 hover:text-green-700 font-medium underline">
-                                                        Reinigungskosten berechnen
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href="/checklisten" className="text-green-600 hover:text-green-700 font-medium underline">
-                                                        Umzugs-Checklisten
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href={ratgeberBasePath} className="text-green-600 hover:text-green-700 font-medium underline">
-                                                        Alle Ratgeber-Artikel
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                              <Button asChild variant="outline" className="mt-8">
                                 <Link href={ratgeberBasePath}>
                                     <ArrowLeft className="mr-2 h-4 w-4" />
@@ -258,15 +183,6 @@ const PostPageClient = () => {
                             </Button>
                         </article>
                     </main>
-
-                    <aside className="lg:col-span-4 mt-12 lg:mt-0">
-                        <PostSidebar 
-                            category={post.category} 
-                            tags={post.tags}
-                            recentPosts={recentPosts.filter(p => p.slug !== slug)}
-                            ratgeberBasePath={ratgeberBasePath}
-                        />
-                    </aside>
                 </div>
             </div>
         </>
