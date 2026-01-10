@@ -11,6 +11,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { motion } from 'framer-motion';
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
+import RatgeberSidebar from '@/src/components/tools/RatgeberSidebar';
 
 const PostPageClient = () => {
     const params = useParams();
@@ -41,12 +42,14 @@ const PostPageClient = () => {
             
             setPost(postData);
 
+            // Fetch recent posts excluding current post
             const { data: recentData, error: recentError } = await supabase
                 .from('posts')
                 .select('title, slug, featured_image_url')
                 .eq('status', 'published')
+                .neq('slug', slug) // Exclude current post
                 .order('published_at', { ascending: false })
-                .limit(5);
+                .limit(3); // Show only 3 recent posts in sidebar
 
             if (recentError) {
                 console.error('Error fetching recent posts:', recentError);
@@ -86,8 +89,6 @@ const PostPageClient = () => {
 
     return (
         <>
-            
-            
             <div className="container mx-auto max-w-navbar px-4 py-8 md:py-12 overflow-x-visible">
                 <nav className="flex items-center text-sm text-gray-500 mb-8">
                     <Link href="/" className="hover:text-green-600 flex items-center">
@@ -99,9 +100,10 @@ const PostPageClient = () => {
                     <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</span>
                 </nav>
 
-                <div className="min-w-0">
-                    <main className="min-w-0 overflow-x-visible max-w-4xl mx-auto">
-                        <article className="bg-white p-6 md:p-8 rounded-2xl shadow-lg overflow-visible min-w-0 max-w-full">
+                <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+                    {/* Main Content */}
+                    <main className="lg:col-span-8">
+                        <article className="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
                             {post.featured_image_url && (
                                 <ImageWithFallback
                                     src={post.featured_image_url}
@@ -183,6 +185,11 @@ const PostPageClient = () => {
                             </Button>
                         </article>
                     </main>
+
+                    {/* Sidebar */}
+                    <aside className="lg:col-span-4 mt-12 lg:mt-0">
+                        <RatgeberSidebar recentPosts={recentPosts} />
+                    </aside>
                 </div>
             </div>
         </>

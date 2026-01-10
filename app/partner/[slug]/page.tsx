@@ -7,11 +7,11 @@ import { notFound } from 'next/navigation'
 async function getPartnerData(slug: string) {
   const supabase = await createClient()
   
+  // Partner inaktif olsa bile verileri getir - yorumlar herzaman gösterilsin
   const { data: partnerData, error: partnerError } = await supabase
     .from('partners')
     .select('*')
     .eq('slug', slug)
-    .eq('is_active', true)
     .single()
 
   if (partnerError || !partnerData) {

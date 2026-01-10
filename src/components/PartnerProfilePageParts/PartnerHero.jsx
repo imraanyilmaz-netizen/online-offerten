@@ -6,9 +6,13 @@ import { Star, ShieldCheck, Send } from 'lucide-react';
 import QualityBadge from './QualityBadge';
 import StarRating from './StarRating';
 
-const PartnerHero = ({ partner, onGetOffer }) => {
+const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   // Removed useTranslation
   const heroImageUrl = partner.hero_image_url || 'https://horizons-cdn.hostinger.com/debf3bb6-240b-49e1-ac20-d04a2d77b10a/81069b02dbfff94bcdd6ba59576e64f5.png';
+  
+  // Gerçek yorum sayısı ve rating'i kullan (prop'tan gelen veya partner objesinden)
+  const displayRating = averageRating !== undefined ? averageRating : (partner.average_rating || 0);
+  const displayReviewCount = reviewCount !== undefined ? reviewCount : (partner.review_count || 0);
 
   return (
     <motion.section
@@ -67,11 +71,11 @@ const PartnerHero = ({ partner, onGetOffer }) => {
                 {partner.company_name}
               </h1>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                {partner.average_rating > 0 && (
+                {displayRating > 0 && displayReviewCount > 0 && (
                   <div className="flex items-center">
                     <StarRating 
-                      rating={partner.average_rating} 
-                      reviewCount={partner.review_count} 
+                      rating={displayRating} 
+                      reviewCount={displayReviewCount} 
                       starSize={22} 
                       textSize="text-base"
                     />
@@ -81,21 +85,24 @@ const PartnerHero = ({ partner, onGetOffer }) => {
               </div>
             </motion.div>
             
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mb-6"
-            >
-              <Button 
-                onClick={onGetOffer} 
-                size="lg" 
-                className="bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg transition-transform transform hover:scale-105"
+            {/* "Angebot anfordern" butonu sadece aktif partner'lar için göster */}
+            {partner.is_active && (
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="mb-6"
               >
-                <Send className="mr-2 h-5 w-5" />
-                Angebot anfordern
-              </Button>
-            </motion.div>
+                <Button 
+                  onClick={onGetOffer} 
+                  size="lg" 
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg transition-transform transform hover:scale-105"
+                >
+                  <Send className="mr-2 h-5 w-5" />
+                  Angebot anfordern
+                </Button>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

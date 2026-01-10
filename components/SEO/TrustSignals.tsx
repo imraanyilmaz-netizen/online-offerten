@@ -30,8 +30,32 @@ export default function TrustSignals({ variant = 'full', showLabels = true, clas
           .select('*', { count: 'exact', head: true })
           .eq('status', 'active')
 
-        // Fetch review stats
-        const { data: reviewData } = await supabase.rpc('get_recent_average_rating')
+        // Tüm onaylanmış yorumları say (sınırsız)
+        const { count: totalReviewCount, error: countError } = await supabase
+          .from('customer_reviews')
+          .select('*', { count: 'exact', head: true })
+          .eq('approval_status', 'approved')
+        
+        if (countError) {
+          console.error('Error fetching review count:', countError)
+        }
+        
+        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+        const { data: allReviews, error: reviewsError } = await supabase
+          .from('customer_reviews')
+          .select('rating')
+          .eq('approval_status', 'approved')
+        
+        if (reviewsError) {
+          console.error('Error fetching reviews for average:', reviewsError)
+        }
+        
+        // Average rating hesapla
+        let averageRating = 0
+        if (allReviews && allReviews.length > 0) {
+          const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
+          averageRating = totalRating / allReviews.length
+        }
 
         // Estimate customer count (based on quotes or reviews)
         const { count: quoteCount } = await supabase
@@ -41,8 +65,8 @@ export default function TrustSignals({ variant = 'full', showLabels = true, clas
         setStats({
           customerCount: quoteCount || 10000, // Fallback to 10k if not available
           partnerCount: partnerCount || 500, // Fallback to 500 if not available
-          reviewCount: (reviewData?.review_count || 0) + 142, // Add base count
-          averageRating: reviewData?.average_rating || 4.8, // Fallback to 4.8
+          reviewCount: totalReviewCount || 0, // Tüm onaylanmış yorumlar
+          averageRating: averageRating, // Gerçek rating
         })
       } catch (error) {
         console.error('Error fetching trust signals:', error)
@@ -50,8 +74,8 @@ export default function TrustSignals({ variant = 'full', showLabels = true, clas
         setStats({
           customerCount: 10000,
           partnerCount: 500,
-          reviewCount: 142,
-          averageRating: 4.8,
+          reviewCount: 0,
+          averageRating: 0,
         })
       } finally {
         setLoading(false)

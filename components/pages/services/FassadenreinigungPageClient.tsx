@@ -17,9 +17,8 @@ const FassadenreinigungPageClient = () => {
   const { city, loading: locationLoading } = useUserLocation();
   
   const [reviewStats, setReviewStats] = useState({ 
-    totalReviews: 142, 
-    realReviewCount: 0,
-    averageRating: 4.6 
+    reviewCount: 0,
+    averageRating: 0 
   });
 
   const handleCtaClick = () => {
@@ -64,21 +63,44 @@ const FassadenreinigungPageClient = () => {
     }
   ];
 
-  // Fetch review stats dynamically
+  // Fetch review stats dynamically - Sadece gerçek yorumlar
   useEffect(() => {
     const fetchReviewStats = async () => {
-      const { data: statsData, error: statsError } = await supabase.rpc('get_recent_average_rating');
-      
-      if (statsError) {
-        console.error('Error fetching review stats:', statsError);
-        setReviewStats({ totalReviews: 142, realReviewCount: 0, averageRating: 4.6 });
-      } else if (statsData) {
-        const realCount = statsData.review_count || 0;
+      try {
+        // Tüm onaylanmış yorumları say (sınırsız)
+        const { count: totalReviewCount, error: countError } = await supabase
+          .from('customer_reviews')
+          .select('*', { count: 'exact', head: true })
+          .eq('approval_status', 'approved');
+        
+        if (countError) {
+          console.error('Error fetching review count:', countError);
+        }
+        
+        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+        const { data: allReviews, error: reviewsError } = await supabase
+          .from('customer_reviews')
+          .select('rating')
+          .eq('approval_status', 'approved');
+        
+        if (reviewsError) {
+          console.error('Error fetching reviews for average:', reviewsError);
+        }
+        
+        // Average rating hesapla
+        let averageRating = 0;
+        if (allReviews && allReviews.length > 0) {
+          const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0);
+          averageRating = totalRating / allReviews.length;
+        }
+        
         setReviewStats({
-          totalReviews: realCount + 142,
-          realReviewCount: realCount,
-          averageRating: statsData.average_rating || 4.6
+          reviewCount: totalReviewCount || 0,
+          averageRating: averageRating
         });
+      } catch (error) {
+        console.error('Error in fetchReviewStats:', error);
+        setReviewStats({ reviewCount: 0, averageRating: 0 });
       }
     };
     
@@ -106,11 +128,11 @@ const FassadenreinigungPageClient = () => {
       "name": "Online-Offerten.ch",
       "url": "https://online-offerten.ch"
     },
-    ...(reviewStats.realReviewCount > 0 && reviewStats.averageRating > 0 ? {
+    ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": Number(reviewStats.averageRating.toFixed(1)),
-        "reviewCount": reviewStats.realReviewCount,
+        "reviewCount": reviewStats.reviewCount,
         "bestRating": 5,
         "worstRating": 1
       }

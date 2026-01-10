@@ -38,11 +38,40 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
     if (!partner?.id) return
 
     try {
+      // Önce toplam yorum sayısını ve average rating'i al
+      // Ana sayfada gösterilen yorumlar (show_on_homepage = true) partner profilinde gözükmesin
+      const { count: totalReviewCount, error: countError } = await supabase
+        .from('customer_reviews')
+        .select('*', { count: 'exact', head: true })
+        .eq('partner_id', partner.id)
+        .eq('approval_status', 'approved')
+        .or('show_on_homepage.is.null,show_on_homepage.eq.false')  // Ana sayfada gösterilen yorumları hariç tut
+
+      if (countError) {
+        console.error('Error fetching review count:', countError)
+      }
+
+      // Tüm yorumları al (average rating hesaplamak için)
+      // Ana sayfada gösterilen yorumları hariç tut
+      const { data: allReviewsData, error: allReviewsError } = await supabase
+        .from('customer_reviews')
+        .select('rating')
+        .eq('partner_id', partner.id)
+        .eq('approval_status', 'approved')
+        .or('show_on_homepage.is.null,show_on_homepage.eq.false')  // Ana sayfada gösterilen yorumları hariç tut
+
+      if (allReviewsError) {
+        console.error('Error fetching all reviews:', allReviewsError)
+      }
+
+      // Son 20 yorumu gösterilmek için al
+      // Ana sayfada gösterilen yorumları hariç tut
       const { data: reviewsData, error: reviewsError } = await supabase
         .from('customer_reviews')
         .select('*')
         .eq('partner_id', partner.id)
         .eq('approval_status', 'approved')
+        .or('show_on_homepage.is.null,show_on_homepage.eq.false')  // Ana sayfada gösterilen yorumları hariç tut
         .order('review_date', { ascending: false })
         .limit(20)
 
@@ -51,17 +80,29 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
       } else {
         setReviews(reviewsData || [])
         
-        if (reviewsData && reviewsData.length > 0) {
-          const totalRating = reviewsData.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
-          const avg = totalRating / reviewsData.length
+        // Gerçek toplam yorum sayısını kullan
+        const realReviewCount = totalReviewCount || 0
+        setReviewCount(realReviewCount)
+        
+        // Average rating'i tüm yorumlardan hesapla
+        if (allReviewsData && allReviewsData.length > 0) {
+          const totalRating = allReviewsData.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
+          const avg = totalRating / allReviewsData.length
           setAverageRating(avg)
-          setReviewCount(reviewsData.length)
           
-          // Update partner object with calculated rating and review count
+          // Update partner object with calculated rating and real review count
           setPartner((prev: any) => ({
             ...prev,
             average_rating: avg,
-            review_count: reviewsData.length
+            review_count: realReviewCount
+          }))
+        } else {
+          // Yorum yoksa sıfırla
+          setAverageRating(0)
+          setPartner((prev: any) => ({
+            ...prev,
+            average_rating: 0,
+            review_count: 0
           }))
         }
       }
@@ -84,7 +125,12 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PartnerHero partner={partner} onGetOffer={handleGetOffer} />
+      <PartnerHero 
+        partner={partner} 
+        onGetOffer={handleGetOffer}
+        averageRating={averageRating}
+        reviewCount={reviewCount}
+      />
       
       <div className="container mx-auto max-w-navbar px-4 md:px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

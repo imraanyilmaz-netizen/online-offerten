@@ -17,9 +17,8 @@ const WohnungsreinigungPageClient = () => {
   const { city, loading: locationLoading } = useUserLocation();
   
   const [reviewStats, setReviewStats] = useState({ 
-    totalReviews: 142, 
-    realReviewCount: 0,
-    averageRating: 4.8 
+    reviewCount: 0,
+    averageRating: 0 
   });
 
   const handleCtaClick = () => {
@@ -64,21 +63,44 @@ const WohnungsreinigungPageClient = () => {
     }
   ];
 
-  // Fetch review stats dynamically
+  // Fetch review stats dynamically - Tüm onaylanmış yorumlar (sınırsız)
   useEffect(() => {
     const fetchReviewStats = async () => {
-      const { data: statsData, error: statsError } = await supabase.rpc('get_recent_average_rating');
-      
-      if (statsError) {
-        console.error('Error fetching review stats:', statsError);
-        setReviewStats({ totalReviews: 142, realReviewCount: 0, averageRating: 4.8 });
-      } else if (statsData) {
-        const realCount = statsData.review_count || 0;
+      try {
+        // Tüm onaylanmış yorumları say (sınırsız)
+        const { count: totalReviewCount, error: countError } = await supabase
+          .from('customer_reviews')
+          .select('*', { count: 'exact', head: true })
+          .eq('approval_status', 'approved');
+        
+        if (countError) {
+          console.error('Error fetching review count:', countError);
+        }
+        
+        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+        const { data: allReviews, error: reviewsError } = await supabase
+          .from('customer_reviews')
+          .select('rating')
+          .eq('approval_status', 'approved');
+        
+        if (reviewsError) {
+          console.error('Error fetching reviews for average:', reviewsError);
+        }
+        
+        // Average rating hesapla
+        let averageRating = 0;
+        if (allReviews && allReviews.length > 0) {
+          const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0);
+          averageRating = totalRating / allReviews.length;
+        }
+        
         setReviewStats({
-          totalReviews: realCount + 142,
-          realReviewCount: realCount,
-          averageRating: statsData.average_rating || 4.8
+          reviewCount: totalReviewCount || 0,
+          averageRating: averageRating
         });
+      } catch (error) {
+        console.error('Error in fetchReviewStats:', error);
+        setReviewStats({ reviewCount: 0, averageRating: 0 });
       }
     };
     
@@ -106,11 +128,11 @@ const WohnungsreinigungPageClient = () => {
       "name": "Online-Offerten.ch",
       "url": "https://online-offerten.ch"
     },
-    ...(reviewStats.realReviewCount > 0 && reviewStats.averageRating > 0 ? {
+    ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": Number(reviewStats.averageRating.toFixed(1)),
-        "reviewCount": reviewStats.realReviewCount,
+        "reviewCount": reviewStats.reviewCount,
         "bestRating": 5,
         "worstRating": 1
       }
@@ -527,8 +549,12 @@ const WohnungsreinigungPageClient = () => {
                       <div className="flex items-start">
                         <Star className="w-6 h-6 text-yellow-500 fill-yellow-500 mr-3 flex-shrink-0 mt-1" />
                         <div>
-                          <p className="font-bold text-gray-900 text-base">{reviewStats.averageRating.toFixed(1)}/5 Sterne Bewertung</p>
-                          <p className="text-sm text-gray-600">Von über {reviewStats.totalReviews} Kunden bewertet</p>
+                          {reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 && (
+                            <>
+                              <p className="font-bold text-gray-900 text-base">{reviewStats.averageRating.toFixed(1)}/5 Sterne Bewertung</p>
+                              <p className="text-sm text-gray-600">Von {reviewStats.reviewCount} Kunden bewertet</p>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>

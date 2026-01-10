@@ -37,25 +37,47 @@ const FloatingReviewSummary = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Lazy load Supabase - defer to avoid blocking critical rendering path (3+ seconds)
+    // Lazy load Supabase - defer to avoid blocking critical rendering path
     const fetchRating = async () => {
-      // Delay significantly to prioritize critical rendering
-      // This prevents blocking the initial render and improves LCP
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      // Küçük gecikme ile critical rendering'i engellemeden yükle
+      await new Promise(resolve => setTimeout(resolve, 1000));
       try {
         const { supabase } = await import('@/lib/supabaseClient');
-        const { data, error } = await supabase.rpc('get_recent_average_rating');
-        if (!error && data) {
-          setStats({
-            average_rating: data.average_rating || 0,
-            review_count: (data.review_count || 0) + 142
-          });
-        } else {
-          setStats(prev => ({ ...prev, review_count: 142 }));
+        
+        // Tüm onaylanmış yorumları say (sınırsız)
+        const { count: totalReviewCount, error: countError } = await supabase
+          .from('customer_reviews')
+          .select('*', { count: 'exact', head: true })
+          .eq('approval_status', 'approved');
+        
+        if (countError) {
+          console.error('Error fetching review count:', countError);
         }
+        
+        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+        const { data: allReviews, error: reviewsError } = await supabase
+          .from('customer_reviews')
+          .select('rating')
+          .eq('approval_status', 'approved');
+        
+        if (reviewsError) {
+          console.error('Error fetching reviews for average:', reviewsError);
+        }
+        
+        // Average rating hesapla
+        let averageRating = 0;
+        if (allReviews && allReviews.length > 0) {
+          const totalRating = allReviews.reduce((sum, review) => sum + (review.rating || 0), 0);
+          averageRating = totalRating / allReviews.length;
+        }
+        
+        setStats({
+          average_rating: averageRating,
+          review_count: totalReviewCount || 0  // Tüm onaylanmış yorumlar
+        });
       } catch (error) {
         // Fallback if Supabase fails to load - don't block page
-        setStats(prev => ({ ...prev, review_count: 142 }));
+        setStats({ average_rating: 0, review_count: 0 });
       } finally {
         setLoading(false);
       }

@@ -4,7 +4,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Check, X, Star, Trash2, Undo2, Eye, EyeOff, Building, Globe } from 'lucide-react';
+import { Loader2, Check, X, Star, Trash2, Undo2, Eye, EyeOff, Building, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   AlertDialog,
@@ -200,27 +200,52 @@ const ReviewCard = ({ review, onUpdate }) => {
 const ReviewList = ({ status, onRefresh }) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const itemsPerPage = 10; // Sayfa başına 10 yorum (2 kolon x 5 satır)
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('customer_reviews')
-      .select(`
-        *,
-        partners!customer_reviews_partner_id_fkey (
-          company_name
-        )
-      `)
-      .eq('approval_status', status)
-      .order('created_at', { ascending: false });
+    try {
+      // Önce toplam sayıyı al
+      const { count, error: countError } = await supabase
+        .from('customer_reviews')
+        .select('*', { count: 'exact', head: true })
+        .eq('approval_status', status);
 
-    if (error) {
-      console.error(`Error fetching ${status} reviews:`, error);
-    } else {
-      setReviews(data);
+      if (countError) {
+        console.error(`Error fetching ${status} reviews count:`, countError);
+      } else {
+        setTotalCount(count || 0);
+      }
+
+      // Sayfalama ile yorumları çek
+      const from = (currentPage - 1) * itemsPerPage;
+      const to = from + itemsPerPage - 1;
+
+      const { data, error } = await supabase
+        .from('customer_reviews')
+        .select(`
+          *,
+          partners!customer_reviews_partner_id_fkey (
+            company_name
+          )
+        `)
+        .eq('approval_status', status)
+        .order('created_at', { ascending: false })
+        .range(from, to);
+
+      if (error) {
+        console.error(`Error fetching ${status} reviews:`, error);
+      } else {
+        setReviews(data || []);
+      }
+    } catch (err) {
+      console.error('Error:', err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  }, [status]);
+  }, [status, currentPage]);
 
   const handleUpdate = useCallback(async () => {
     await fetchReviews();
@@ -229,19 +254,107 @@ const ReviewList = ({ status, onRefresh }) => {
       onRefresh();
     }
   }, [fetchReviews, onRefresh]);
-  
+
+  useEffect(() => {
+    setCurrentPage(1); // Status değiştiğinde ilk sayfaya dön
+  }, [status]);
+
   useEffect(() => {
     fetchReviews();
   }, [fetchReviews]);
-  
+
+  // Sayfa değiştiğinde en üste kaydır
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  // Sayfa numaralarını hesapla
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+    
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
+
   if (loading) return <div className="flex justify-center p-8"><Loader2 className="w-8 h-8 animate-spin" /></div>;
-  if (reviews.length === 0) return <p className="text-center text-gray-500 p-8">Keine Bewertungen mit Status "{status}" gefunden.</p>;
+  if (reviews.length === 0 && currentPage === 1) return <p className="text-center text-gray-500 p-8">Keine Bewertungen mit Status "{status}" gefunden.</p>;
 
   return (
-    <div className="space-y-4">
-      {reviews.map(review => (
-        <ReviewCard key={review.id} review={review} onUpdate={handleUpdate} />
-      ))}
+    <div className="space-y-6">
+      {/* 2 Kolon Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {reviews.map(review => (
+          <ReviewCard key={review.id} review={review} onUpdate={handleUpdate} />
+        ))}
+      </div>
+
+      {/* Sayfalama (Pagination) */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 pt-4 border-t">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1 || loading}
+            className="flex items-center gap-1"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            Zurück
+          </Button>
+
+          <div className="flex items-center gap-1">
+            {getPageNumbers().map((pageNum) => (
+              <Button
+                key={pageNum}
+                variant={currentPage === pageNum ? "default" : "outline"}
+                size="sm"
+                onClick={() => handlePageChange(pageNum)}
+                disabled={loading}
+                className="min-w-[40px]"
+              >
+                {pageNum}
+              </Button>
+            ))}
+          </div>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages || loading}
+            className="flex items-center gap-1"
+          >
+            Weiter
+            <ChevronRight className="w-4 h-4" />
+          </Button>
+        </div>
+      )}
+
+      {/* Sayfa bilgisi */}
+      {totalCount > 0 && (
+        <p className="text-center text-sm text-gray-500 pt-2">
+          Seite {currentPage} von {totalPages} ({totalCount} Bewertungen insgesamt)
+        </p>
+      )}
     </div>
   );
 };

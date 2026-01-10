@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Calculator, TrendingUp, ArrowRight, MapPin, Clock, CheckCircle, Lightbulb, ShieldCheck, FileText } from 'lucide-react';
+import { Calculator, TrendingUp, ArrowRight, MapPin, Clock, CheckCircle, Lightbulb, ShieldCheck, FileText, Star } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import MovingCostCalculator from '@/components/UmzugskostenRechnerSections/MovingCostCalculator';
 import PostSidebar from '@/components/tools/PostSidebar';
@@ -14,10 +14,59 @@ import CostTable from '@/components/UmzugskostenRechnerSections/CostTable';
 import AveragePriceBox from '@/components/UmzugskostenRechnerSections/AveragePriceBox';
 import HourlyRateBox from '@/components/UmzugskostenRechnerSections/HourlyRateBox';
 import RegionalDifferences from '@/components/UmzugskostenRechnerSections/RegionalDifferences';
+import { supabase } from '@/lib/supabaseClient';
 
-const UmzugskostenRechnerPageClient = () => {
+const UmzugskostenRechnerPageClient = ({ initialReviewStats }: { initialReviewStats?: { reviewCount: number; averageRating: number } }) => {
   const router = useRouter();
   const [shouldOpenForm, setShouldOpenForm] = React.useState(false);
+  const [reviewStats, setReviewStats] = React.useState({ 
+    reviewCount: initialReviewStats?.reviewCount || 0,
+    averageRating: initialReviewStats?.averageRating || 0 
+  });
+  
+  // Fetch review stats dynamically - Tüm onaylanmış yorumlar (sınırsız)
+  React.useEffect(() => {
+    const fetchReviewStats = async () => {
+      try {
+        // Tüm onaylanmış yorumları say (sınırsız)
+        const { count: totalReviewCount, error: countError } = await supabase
+          .from('customer_reviews')
+          .select('*', { count: 'exact', head: true })
+          .eq('approval_status', 'approved');
+        
+        if (countError) {
+          console.error('Error fetching review count:', countError);
+        }
+        
+        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+        const { data: allReviews, error: reviewsError } = await supabase
+          .from('customer_reviews')
+          .select('rating')
+          .eq('approval_status', 'approved');
+        
+        if (reviewsError) {
+          console.error('Error fetching reviews for average:', reviewsError);
+        }
+        
+        // Average rating hesapla
+        let averageRating = 0;
+        if (allReviews && allReviews.length > 0) {
+          const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0);
+          averageRating = totalRating / allReviews.length;
+        }
+        
+        setReviewStats({
+          reviewCount: totalReviewCount || 0,
+          averageRating: averageRating
+        });
+      } catch (error) {
+        console.error('Error in fetchReviewStats:', error);
+        setReviewStats({ reviewCount: 0, averageRating: 0 });
+      }
+    };
+    
+    fetchReviewStats();
+  }, []);
   
   // SEO Data - Optimized with keyword variations
   const metaTitle = "Umzugskosten-Rechner: Kostenlose Schätzung in 2 Minuten";
@@ -145,24 +194,26 @@ const UmzugskostenRechnerPageClient = () => {
     }
   };
 
-  // CreativeWorkSeries Schema for aggregate rating (SERP feature)
-  const aggregateRatingSchema = {
+  // CreativeWorkSeries Schema for aggregate rating (SERP feature) - Dynamic
+  const aggregateRatingSchema = React.useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "CreativeWorkSeries",
     "name": "Umzugskosten-Rechner: Kosten Umzugsunternehmen berechnen",
     "description": "Kostenloser Umzugskosten-Rechner zur Berechnung der Kosten für Umzugsunternehmen. Umzugsfirma Kosten Tabelle und detaillierte Preisübersicht.",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "1247",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
+    ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": reviewStats.averageRating.toFixed(1),
+        "reviewCount": reviewStats.reviewCount.toString(),
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    } : {}),
     "url": "https://online-offerten.ch/umzugskosten-rechner"
-  };
+  }), [reviewStats]);
 
-  // Combined Schema with BreadcrumbList, Service, FAQPage, HowTo, and CreativeWorkSeries
-  const combinedSchema = {
+  // Combined Schema with BreadcrumbList, Service, FAQPage, HowTo, and CreativeWorkSeries - Dynamic
+  const combinedSchema = React.useMemo(() => ({
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -221,7 +272,7 @@ const UmzugskostenRechnerPageClient = () => {
       webPageSchema,
       aggregateRatingSchema
     ]
-  };
+  }), [reviewStats, faqItems, metaTitle, metaDescription]);
 
   return (
     <>
@@ -251,6 +302,58 @@ const UmzugskostenRechnerPageClient = () => {
                     In nur 2 Minuten eine verlässliche Schätzung
                   </span>
                 </h1>
+                
+                {/* Rating Section - Dynamic (Sadece gerçek yorumlar varsa göster) */}
+                {reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 && (() => {
+                  const rating = reviewStats.averageRating;
+                  const totalStars = 5;
+                  const fullStars = Math.floor(rating);
+                  const hasPartialStar = rating % 1 !== 0;
+                  const partialFill = hasPartialStar ? (rating % 1) * 100 : 0; // Percentage for partial star
+                  const emptyStars = totalStars - fullStars - (hasPartialStar ? 1 : 0);
+                  
+                  return (
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="flex items-center gap-1">
+                        <span className="text-2xl font-bold text-gray-900">
+                          {rating.toFixed(1).replace('.', ',')}
+                        </span>
+                        <div className="flex items-center ml-1">
+                          {[...Array(fullStars)].map((_, i) => (
+                            <Star 
+                              key={`full-${i}`} 
+                              className="w-5 h-5 text-yellow-400 fill-yellow-400" 
+                            />
+                          ))}
+                          {hasPartialStar && (
+                            <div style={{ position: 'relative' }}>
+                              <Star 
+                                key="partial-empty" 
+                                className="w-5 h-5 text-gray-300" 
+                              />
+                              <div style={{ position: 'absolute', top: 0, left: 0, width: `${partialFill}%`, overflow: 'hidden' }}>
+                                <Star 
+                                  key="partial-full" 
+                                  className="w-5 h-5 text-yellow-400 fill-yellow-400" 
+                                />
+                              </div>
+                            </div>
+                          )}
+                          {[...Array(emptyStars)].map((_, i) => (
+                            <Star 
+                              key={`empty-${i}`} 
+                              className="w-5 h-5 text-gray-300" 
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <span className="text-gray-600 text-lg">
+                        (<span className="font-semibold">{reviewStats.reviewCount.toLocaleString('de-DE')}</span> Bewertungen)
+                      </span>
+                    </div>
+                  );
+                })()}
+                
                 <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
                   Erhalten Sie eine <strong>kostenlose Preis-Schätzung</strong> für Ihren Umzug in der gesamten Schweiz. Unser <strong>Umzugskosten-Rechner</strong> hilft Ihnen, die <strong>Kosten Umzugsunternehmen</strong> zu berechnen und zeigt Ihnen eine <strong>Umzugsfirma Kosten Tabelle</strong>. <strong>100% kostenlos und unverbindlich</strong>.
                 </p>

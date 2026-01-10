@@ -39,10 +39,9 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [reviewStats, setReviewStats] = useState({ 
-    totalReviews: 142,
-    realReviewCount: 0,
-    averageRating: 4.8 
+  const [reviewStats, setReviewStats] = useState({
+    reviewCount: 0,
+    averageRating: 0
   })
   const [isNavigating, setIsNavigating] = useState(false)
 
@@ -180,22 +179,44 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }
   }, [searchParams, pathname, router, isNavigating])
 
-  // Fetch review stats (deferred)
+  // Fetch review stats - Tüm onaylanmış yorumlar (sınırsız)
   useEffect(() => {
     const fetchRating = async () => {
-      await new Promise(resolve => setTimeout(resolve, 5000))
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
-        const { data, error } = await supabase.rpc('get_recent_average_rating')
-        if (!error && data) {
-          const realCount = data.review_count || 0
-          setReviewStats({
-            totalReviews: realCount + 142,
-            realReviewCount: realCount,
-            averageRating: data.average_rating || 4.8
-          })
+        
+        // Tüm onaylanmış yorumları say (sınırsız)
+        const { count: totalReviewCount, error: countError } = await supabase
+          .from('customer_reviews')
+          .select('*', { count: 'exact', head: true })
+          .eq('approval_status', 'approved')
+        
+        if (countError) {
+          console.error('Error fetching review count:', countError)
         }
+        
+        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+        const { data: allReviews, error: reviewsError } = await supabase
+          .from('customer_reviews')
+          .select('rating')
+          .eq('approval_status', 'approved')
+        
+        if (reviewsError) {
+          console.error('Error fetching reviews for average:', reviewsError)
+        }
+        
+        // Average rating hesapla
+        let averageRating = 0
+        if (allReviews && allReviews.length > 0) {
+          const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
+          averageRating = totalRating / allReviews.length
+        }
+        
+        setReviewStats({
+          reviewCount: totalReviewCount || 0,
+          averageRating: averageRating
+        })
       } catch (error) {
         // Silently continue
       }
@@ -222,11 +243,11 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
           "https://www.facebook.com/onlineofferten",
           "https://www.instagram.com/onlineofferten"
         ],
-        ...(reviewStats.realReviewCount > 0 && reviewStats.averageRating > 0 ? {
+        ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
           "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": reviewStats.averageRating.toString(),
-            "reviewCount": reviewStats.realReviewCount.toString(),
+            "ratingValue": reviewStats.averageRating.toFixed(1),
+            "reviewCount": reviewStats.reviewCount.toString(),
             "bestRating": "5",
             "worstRating": "1"
           }
@@ -251,7 +272,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
         }
       }
     ]
-  }), [reviewStats.realReviewCount, reviewStats.averageRating])
+  }), [reviewStats.reviewCount, reviewStats.averageRating])
 
   // Inject schema markup (client-side only)
   useEffect(() => {

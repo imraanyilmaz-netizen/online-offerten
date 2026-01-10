@@ -2,6 +2,51 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Script from 'next/script'
 import UmzugsoffertenPageClient from '@/components/pages/info/UmzugsoffertenPageClient'
+import { createClient } from '@/lib/supabase/server'
+
+async function getReviewStats() {
+  try {
+    const supabase = await createClient();
+    
+    // Tüm onaylanmış yorumları say (sınırsız)
+    const { count: totalReviewCount, error: countError } = await supabase
+      .from('customer_reviews')
+      .select('*', { count: 'exact', head: true })
+      .eq('approval_status', 'approved');
+    
+    if (countError) {
+      console.error('Error fetching review count:', countError);
+    }
+    
+    // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+    const { data: allReviews, error: reviewsError } = await supabase
+      .from('customer_reviews')
+      .select('rating')
+      .eq('approval_status', 'approved');
+    
+    if (reviewsError) {
+      console.error('Error fetching reviews for average:', reviewsError);
+    }
+    
+    // Average rating hesapla
+    let averageRating = 0;
+    if (allReviews && allReviews.length > 0) {
+      const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0);
+      averageRating = totalRating / allReviews.length;
+    }
+    
+    return {
+      reviewCount: totalReviewCount || 0,
+      averageRating: averageRating
+    };
+  } catch (error) {
+    console.error('Error fetching review stats on server:', error);
+    return { 
+      reviewCount: 0, 
+      averageRating: 0 
+    };
+  }
+}
 
 // FAQ items for schema (must match client component)
 const faqItemsForSchema = [
@@ -35,9 +80,10 @@ const faqItemsForSchema = [
   }
 ]
 
-// Generate schema data (server-side)
+// Generate schema data (server-side) - Will be updated dynamically
 const canonicalUrl = 'https://online-offerten.ch/umzugsofferten'
-const schemaData = {
+function getSchemaData(reviewStats: { reviewCount: number; averageRating: number }) {
+  return {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -127,8 +173,24 @@ const schemaData = {
           "text": "Wählen Sie die Umzugsofferte aus, die am besten zu Ihren Bedürfnissen passt, und kontaktieren Sie die Umzugsfirma direkt."
         }
       ]
+    },
+    {
+      "@type": "CreativeWorkSeries",
+      "name": "Umzugsofferten: Kostenlos vergleichen",
+      "description": "Kostenlose Umzugsangebote von geprüften Umzugsfirmen in der Schweiz vergleichen. Bis zu 6 Preisvorschläge erhalten und bis zu 40% sparen.",
+      ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": reviewStats.averageRating.toFixed(1),
+          "reviewCount": reviewStats.reviewCount.toString(),
+          "bestRating": "5",
+          "worstRating": "1"
+        }
+      } : {}),
+      "url": "https://online-offerten.ch/umzugsofferten"
     }
-  ]
+    ]
+  };
 }
 
 export const metadata: Metadata = {
@@ -172,20 +234,22 @@ export const metadata: Metadata = {
   },
 }
 
-export default function UmzugsoffertenPage() {
+export default async function UmzugsoffertenPage() {
+  // ✅ Server-side'da güncel verileri çek
+  const reviewStats = await getReviewStats();
+  
+  // ✅ Server-side schema - Google için (her sayfa yüklendiğinde güncel)
+  const schemaData = getSchemaData(reviewStats);
+  
   return (
     <>
-      {/* Structured Data - Server-side optimized for faster indexing */}
-      <Script
-        id="umzugsofferten-schema"
+      {/* ✅ Server-side schema - Google bot ilk taramada görür */}
+      <script
         type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaData)
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
-        <UmzugsoffertenPageClient />
+        <UmzugsoffertenPageClient initialReviewStats={reviewStats} />
       </Suspense>
     </>
   )
