@@ -569,7 +569,7 @@ const UmzugsreinigungPageClient = () => {
                         <Star className="w-6 h-6 text-yellow-500 fill-yellow-500 mr-3 flex-shrink-0 mt-1" />
                         <div>
                           <p className="font-bold text-gray-900 text-base">{reviewStats.averageRating.toFixed(1)}/5 Sterne Bewertung</p>
-                          <p className="text-sm text-gray-600">Von über {reviewStats.totalReviews} Kunden bewertet</p>
+                          <p className="text-sm text-gray-600">Von über {reviewStats.reviewCount} Kunden bewertet</p>
                         </div>
                       </div>
                     </div>
