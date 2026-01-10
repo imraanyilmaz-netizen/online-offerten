@@ -34,14 +34,16 @@ async function getReviewStats() {
     }
     
     return {
-      reviewCount: totalReviewCount || 0,
-      averageRating: averageRating
+      totalReviews: totalReviewCount || 0,
+      averageRating: averageRating,
+      realReviewCount: totalReviewCount || 0
     };
   } catch (error) {
     console.error('Error fetching review stats on server:', error);
     return { 
-      reviewCount: 0, 
-      averageRating: 0 
+      totalReviews: 0, 
+      averageRating: 0,
+      realReviewCount: 0
     };
   }
 }
@@ -133,11 +135,11 @@ export default async function HausreinigungPage() {
           "url": "https://online-offerten.ch"
         },
         // Sadece gerçek yorumlar varsa göster
-        ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
+        ...(reviewStats.totalReviews > 0 && reviewStats.averageRating > 0 ? {
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": reviewStats.averageRating.toFixed(1),
-            "reviewCount": reviewStats.reviewCount.toString(),
+            "reviewCount": reviewStats.totalReviews.toString(),
             "bestRating": "5",
             "worstRating": "1"
           }
