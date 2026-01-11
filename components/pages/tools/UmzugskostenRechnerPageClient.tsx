@@ -15,7 +15,14 @@ import AveragePriceBox from '@/components/UmzugskostenRechnerSections/AveragePri
 import HourlyRateBox from '@/components/UmzugskostenRechnerSections/HourlyRateBox';
 import RegionalDifferences from '@/components/UmzugskostenRechnerSections/RegionalDifferences';
 
-const UmzugskostenRechnerPageClient = () => {
+interface UmzugskostenRechnerPageClientProps {
+  initialReviewStats?: {
+    reviewCount: number;
+    averageRating: number;
+  };
+}
+
+const UmzugskostenRechnerPageClient: React.FC<UmzugskostenRechnerPageClientProps> = ({ initialReviewStats }) => {
   const router = useRouter();
   const [shouldOpenForm, setShouldOpenForm] = React.useState(false);
   

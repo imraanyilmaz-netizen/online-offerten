@@ -79,7 +79,14 @@ const UmzugsoffertenRelatedServices = dynamic(
   }
 )
 
-const UmzugsoffertenPageClient = () => {
+interface UmzugsoffertenPageClientProps {
+  initialReviewStats?: {
+    reviewCount: number;
+    averageRating: number;
+  };
+}
+
+const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ initialReviewStats }) => {
   const router = useRouter()
   const canonicalUrl = 'https://online-offerten.ch/umzugsofferten'
 
