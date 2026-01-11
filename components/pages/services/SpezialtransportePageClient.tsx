@@ -20,33 +20,33 @@ const SpezialtransportePageClient = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Spezialtransport",
+    "name": metaTitle,
+    "serviceType": "Umzugsvermittlung",
+    "description": metaDescription,
     "provider": {
       "@type": "Organization",
-      "name": "Online-Offerten.ch"
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
     },
     "areaServed": {
       "@type": "Country",
-      "name": "CH"
+      "name": "Switzerland"
     },
-    "name": metaTitle,
-    "description": metaDescription,
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Spezialtransport-Dienstleistungen",
-      "itemListElement": transportTypes.map(transport => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": transport.title,
-          "description": metaDescription.substring(0, 250) + '...'
-        }
-      }))
+    "offers": {
+      "@type": "Offer",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport",
+      "priceCurrency": "CHF",
+      "price": "0",
+      "name": "Kostenlose Offerte für Spezialtransport"
     }
   }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-gradient-to-b from-gray-50 via-slate-100 to-gray-50">
         <Hero />
         <TransportTabs />

@@ -21,48 +21,12 @@ const ReinigungPageClient = () => {
   const metaKeywords = "umzugsreinigung mit abnahmegarantie, endreinigung wohnung, reinigungsfirma für umzug, wohnungsreinigung mit abnahmegarantie, umzugsreinigung preise, reinigungsofferte, endreinigung kosten, umzugsreinigung zürich, reinigung nach umzug, privatumzug reinigung"
   const canonicalUrl = "/reinigung"
 
-  // FAQ Data for Schema
-  const faqItemsForSchema = [
-    {
-      "@type": "Question",
-      "name": "Was genau bedeutet die 'Abnahmegarantie'?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Abnahmegarantie ist Ihre Versicherung für eine erfolgreiche Wohnungsübergabe. Das bedeutet konkret: Ein Mitarbeiter der Reinigungsfirma ist bei der Übergabe anwesend. Beanstandet der Vermieter einen Punkt bezüglich der Sauberkeit, wird dieser sofort und ohne Mehrkosten nachgereinigt. Die Garantie gilt, bis der Vermieter die Reinigung im Übergabeprotokoll als einwandfrei akzeptiert."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie viel kostet eine Umzugsreinigung?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Kosten variieren je nach Grösse der Wohnung, Verschmutzungsgrad und inkludierten Zusatzleistungen. Als grobe Richtlinie: 1.5-2.5 Zimmer: CHF 500-800, 3.5 Zimmer: CHF 800-1'100, 4.5 Zimmer: CHF 950-1'300, 5.5+ Zimmer: ab CHF 1'200."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was muss ich vor der Ankunft des Reinigungsteams tun?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Für einen reibungslosen Ablauf sollte die Wohnung komplett leer und geräumt sein. Alle persönlichen Gegenstände und Möbel müssen entfernt sein, damit das Team alle Flächen, Ecken und Schränke uneingeschränkt erreichen und reinigen kann. Stellen Sie zudem sicher, dass Strom und Wasser funktionieren."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie lange dauert eine professionelle Umzugsreinigung?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Dauer hängt stark von der Grösse und dem Zustand der Wohnung ab. In der Regel benötigt ein Team von 2-3 Personen für eine durchschnittlich grosse 3.5-Zimmer-Wohnung zwischen 6 und 9 Stunden. Planen Sie am besten einen ganzen Tag für die Reinigung ein."
-      }
-    }
-  ]
-
-  // Schema Data
+  // Schema Data - Single JSON-LD Service schema
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Umzugsreinigung",
-    "name": "Umzugsreinigung mit Abnahmegarantie",
+    "name": metaTitle,
+    "serviceType": "Reinigungsvermittlung",
     "description": metaDescription,
     "provider": {
       "@type": "Organization",
@@ -71,21 +35,14 @@ const ReinigungPageClient = () => {
     },
     "areaServed": {
       "@type": "Country",
-      "name": "CH"
-    },
-    "brand": {
-      "@type": "Brand",
-      "name": "Online-Offerten.ch"
+      "name": "Switzerland"
     },
     "offers": {
       "@type": "Offer",
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
       "priceCurrency": "CHF",
-      "name": "Kostenlose Offerte für Umzugsreinigung mit Abnahmegarantie"
-    },
-    "mainEntity": {
-      "@type": "FAQPage",
-      "mainEntity": faqItemsForSchema
+      "price": "0",
+      "name": "Kostenlose Offerte für Reinigung"
     }
   }
 
@@ -148,7 +105,10 @@ const ReinigungPageClient = () => {
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-slate-50">
         <motion.section
           initial={{ opacity: 0 }}

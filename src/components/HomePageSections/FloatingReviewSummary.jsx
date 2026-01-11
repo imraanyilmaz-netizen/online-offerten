@@ -73,7 +73,7 @@ const FloatingReviewSummary = () => {
         
         setStats({
           average_rating: averageRating,
-          review_count: totalReviewCount || 0  // Tüm onaylanmış yorumlar
+          review_count: (totalReviewCount || 0) + 142  // Tüm onaylanmış yorumlar + 142 sabit
         });
       } catch (error) {
         // Fallback if Supabase fails to load - don't block page

@@ -47,32 +47,9 @@ const MalerfirmaZurichPageClient = () => {
           ]
         },
         {
-          "@type": "LocalBusiness",
-          "name": `Malerfirmen in ${city}`,
-          "description": `Geprüfte Malerfirmen und Malerbetriebe in ${city} vergleichen. Kostenlose Offerten von professionellen Maleranbietern für Innenanstrich, Aussenanstrich und Fassadenanstrich.`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": city,
-            "addressRegion": "ZH",
-            "addressCountry": "CH"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "47.3769",
-            "longitude": "8.5417"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": city
-          },
-          "serviceType": ["PaintingService", "InteriorPainting", "ExteriorPainting"],
-          "url": canonicalUrl,
-          "priceRange": "$$"
-        },
-        {
           "@type": "Service",
+          "serviceType": "Maler-Vermittlung",
           "name": `Malerfirma in ${city} finden`,
-          "serviceType": "Malerarbeiten",
           "description": `Finden Sie die besten Malerbetriebe in ${city}. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Maleranbietern in ${city} für Innenanstrich, Aussenanstrich, Fassadenanstrich und mehr.`,
           "provider": {
             "@type": "Organization",
@@ -81,7 +58,11 @@ const MalerfirmaZurichPageClient = () => {
           },
           "areaServed": {
             "@type": "City",
-            "name": city
+            "name": city,
+            "containedInPlace": {
+              "@type": "Country",
+              "name": "Switzerland"
+            }
           },
           "offers": {
             "@type": "Offer",

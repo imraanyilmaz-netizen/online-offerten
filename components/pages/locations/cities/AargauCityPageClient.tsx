@@ -21,13 +21,13 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
   const cityName = cityData.name
   const canonicalUrl = `/umzugsfirma-aargau/${city}`
 
-  // Service Schema - Ensure all values are plain strings
+  // Service Schema - Correct structure for location pages
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": String(`Umzugsfirma ${cityName}`),
+    "serviceType": "Umzugsvermittlung",
+    "name": String(`Umzugsfirma ${cityName} vergleichen`),
     "description": `Geprüfte Umzugsfirmen und Zügelfirmen in ${cityName} vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen.`,
-    "serviceType": ["MovingCompany", "Moving and Storage"],
     "provider": {
       "@type": "Organization",
       "name": "Online-Offerten.ch",
@@ -36,79 +36,42 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
     "areaServed": {
       "@type": "City",
       "name": String(cityName),
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": String(cityName),
-        "addressRegion": "AG",
-        "addressCountry": "CH"
+      "containedInPlace": {
+        "@type": "Country",
+        "name": "Switzerland"
       }
     },
-    "url": `https://online-offerten.ch${canonicalUrl}`,
     "offers": {
       "@type": "Offer",
+      "url": `https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&city=${cityName}`,
       "price": "0",
       "priceCurrency": "CHF",
       "name": "Kostenlose Umzugsofferten"
     }
   }
 
-  // FAQ Schema - Ensure all values are plain strings
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": cityData.faqs
-      .map(faq => ({
-        "@type": "Question",
-        "name": String(faq.question || ''),
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": String(faq.answer || '')
-        }
-      }))
-      .filter(item => item.name && item.acceptedAnswer.text) // Filter out invalid entries
-  }
-
-  // LocalBusiness Schema - Ensure all values are plain strings
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": String(`Umzugsfirma ${cityName}`),
-    "description": `Geprüfte Umzugsfirmen in ${cityName} vergleichen`,
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": String(cityName),
-      "addressRegion": "AG",
-      "addressCountry": "CH"
-    },
-    "url": `https://online-offerten.ch${canonicalUrl}`
-  }
-
-  // Organization Schema (per plan: Organization Schema auf allen Seiten)
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Online-Offerten.ch",
-    "url": "https://online-offerten.ch",
-    "logo": "https://online-offerten.ch/logo.png",
-    "description": "Vergleichsportal für Umzugsfirmen, Reinigungsfirmen und Malerbetriebe in der Schweiz",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "CH"
-    },
-    "sameAs": [
-      "https://www.facebook.com/onlineofferten",
-      "https://www.instagram.com/onlineofferten"
-    ]
-  }
-
   // Combined Schema
   const combinedSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      organizationSchema,
-      serviceSchema,
-      faqSchema,
-      localBusinessSchema
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://online-offerten.ch/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": `Umzugsfirma ${cityName}`,
+            "item": `https://online-offerten.ch${canonicalUrl}`
+          }
+        ]
+      },
+      serviceSchema
     ]
   }
 

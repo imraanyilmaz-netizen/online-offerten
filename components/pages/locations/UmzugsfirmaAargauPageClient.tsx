@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -12,7 +12,6 @@ import LocationPageNavigation from '@/components/locations/LocationPageNavigatio
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 import { faqs } from '@/data/locationFaqs';
 import { Inter } from 'next/font/google';
-import { supabase } from '@/lib/supabaseClient';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -68,71 +67,6 @@ const UmzugsfirmaAargauPageClient = () => {
     }
   ];
 
-  // Review stats state - hem toplam hem şehre özel veriler için
-  const [reviewStats, setReviewStats] = useState({ 
-    totalReviewCount: 0,
-    totalAverageRating: 0,
-    cityReviews: [] as any[],
-    cityReviewCount: 0
-  });
-
-  // Fetch review stats dynamically
-  useEffect(() => {
-    const fetchReviewStats = async () => {
-      try {
-        const { count: totalReviewCount, error: countError } = await supabase
-          .from('customer_reviews')
-          .select('*', { count: 'exact', head: true })
-          .eq('approval_status', 'approved');
-
-        if (countError) console.error('Error fetching total review count:', countError);
-
-        const { data: allReviews, error: reviewsError } = await supabase
-          .from('customer_reviews')
-          .select('rating')
-          .eq('approval_status', 'approved');
-
-        if (reviewsError) console.error('Error fetching reviews for average:', reviewsError);
-
-        let totalAverageRating = 0;
-        if (allReviews && allReviews.length > 0) {
-          const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0);
-          totalAverageRating = totalRating / allReviews.length;
-        }
-
-        const { data: cityReviewsData, error: cityReviewsError } = await supabase
-          .from('customer_reviews')
-          .select('id, customer_name, rating, review_text, review_date, service_type, city')
-          .eq('approval_status', 'approved')
-          .ilike('city', `%${city}%`)
-          .order('review_date', { ascending: false })
-          .limit(10);
-
-        if (cityReviewsError) console.error('Error fetching city reviews:', cityReviewsError);
-
-        const { count: cityReviewCount, error: cityCountError } = await supabase
-          .from('customer_reviews')
-          .select('*', { count: 'exact', head: true })
-          .eq('approval_status', 'approved')
-          .ilike('city', `%${city}%`);
-
-        if (cityCountError) console.error('Error fetching city review count:', cityCountError);
-
-        setReviewStats({
-          totalReviewCount: totalReviewCount || 0,
-          totalAverageRating: totalAverageRating,
-          cityReviews: cityReviewsData || [],
-          cityReviewCount: cityReviewCount || 0
-        });
-      } catch (error) {
-        console.error('Error in fetchReviewStats:', error);
-        setReviewStats({ totalReviewCount: 0, totalAverageRating: 0, cityReviews: [], cityReviewCount: 0 });
-      }
-    };
-    
-    fetchReviewStats();
-  }, [city]);
-
   const faqItemsForSchema = faqs.move.concat(faqs.clean);
   const cityData = cityServiceData[city] || {
     name: 'Aargau',
@@ -144,161 +78,59 @@ const UmzugsfirmaAargauPageClient = () => {
     canonicalUrl: '/umzugsfirma-aargau'
   };
   
-  // Service Schema with review stats (dynamic) - Ensure all values are plain strings
-  const serviceSchema = useMemo(() => {
-    // Review structured data'ları oluştur - O şehre özel son 10 yorumdan
-    const reviewSchemas = (reviewStats.cityReviews || []).map((review: any) => ({
-      "@type": "Review",
-      "author": { "@type": "Person", "name": String(review.customer_name || "Anonymous") },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": Number(review.rating || 0),
-        "bestRating": 5,
-        "worstRating": 1
-      },
-      "reviewBody": String(review.review_text || ""),
-      "datePublished": String(review.review_date || new Date().toISOString())
-    }));
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": String(cityData?.displayName || `Umzugsfirmen im Aargau`),
-      "description": "Geprüfte Zügelfirmen und Umzugsunternehmen im Aargau vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen in Aarau, Baden, Zofingen und der ganzen Region.",
-      "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
-      "provider": {
-        "@type": "Organization",
-        "name": "Online-Offerten.ch",
-        "url": "https://online-offerten.ch"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": String(city),
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": String(cityData?.addressLocality || 'Aarau'),
-          "addressRegion": String(cityData?.addressRegion || 'AG'),
-          "addressCountry": "CH"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": String(cityData?.latitude || "47.3925"),
-          "longitude": String(cityData?.longitude || "8.0447")
-        }
-      },
-      "url": `https://online-offerten.ch${canonicalUrl}`,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "CHF",
-        "name": "Kostenlose Umzugsofferten im Aargau"
-      },
-      // ✅ Google için: TÜM yorumların toplamı ve ortalaması
-      ...(reviewStats.totalReviewCount > 0 && reviewStats.totalAverageRating > 0 ? {
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": String(reviewStats.totalAverageRating.toFixed(1)),
-          "reviewCount": String(reviewStats.totalReviewCount),
-          "bestRating": "5",
-          "worstRating": "1"
-        }
-      } : {}),
-      // ✅ Google için: O şehre özel son 10 yorum (structured data review array)
-      ...(reviewSchemas.length > 0 ? { "review": reviewSchemas } : {})
-    };
-  }, [city, cityData, canonicalUrl, reviewStats]);
-
-  // FAQ Schema - Helper function to extract text-only answers (plain strings only)
-  const extractFAQAnswerText = (answerArray: any[]): string => {
-    const textParts: string[] = []
-    
-    if (!Array.isArray(answerArray)) {
-      return ''
-    }
-    
-    answerArray.forEach((ans) => {
-      // Only extract plain strings - skip all objects
-      if (typeof ans === 'string') {
-        textParts.push(ans.replace(/{city}/g, 'Aargau'))
-      } else if (ans && typeof ans === 'object' && ans.de && typeof ans.de === 'string') {
-        // Handle { de: "text" } format - extract only the string
-        textParts.push(ans.de.replace(/{city}/g, 'Aargau'))
-      }
-      // Skip all other objects (table, calculator_link, etc.) - they cause [object Object] issues
-    })
-    
-    const result = textParts.filter(Boolean).join(' ').trim()
-    return result || `Umzugsfirmen im Aargau vergleichen und die beste Firma finden. Kostenlose Offerten von geprüften Anbietern.`
-  }
-
-  // FAQ Schema - Ensure all values are plain strings
-  const faqSchema = {
-    "@context": "https://schema.org",
-        "@type": "FAQPage",
-    "mainEntity": faqItemsForSchema
-      .map(item => {
-        // Extract question text - ensure it's a string
-        let questionText = ''
-        if (typeof item.question === 'string') {
-          questionText = item.question
-        } else if (item.question && typeof item.question === 'object' && item.question.de) {
-          questionText = item.question.de
-        }
-        questionText = questionText.replace('{city}', 'Aargau')
-        
-        // Extract answer text - only plain strings
-        const answerText = extractFAQAnswerText(item.answer || [])
-        
-        // Only return if both question and answer are valid strings
-        if (!questionText || !answerText) {
-          return null
-        }
-        
-        return {
-            "@type": "Question",
-          "name": String(questionText), // Ensure it's a string
-            "acceptedAnswer": {
-                "@type": "Answer",
-            "text": String(answerText) // Ensure it's a string
-          }
-        }
-      })
-      .filter((item): item is NonNullable<typeof item> => item !== null) // Type guard to filter nulls
-  };
-
-  // Organization Schema
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Online-Offerten.ch",
-    "url": "https://online-offerten.ch",
-    "logo": "https://online-offerten.ch/logo.png",
-    "description": "Vergleichsportal für Umzugsfirmen, Reinigungsfirmen und Malerbetriebe in der Schweiz",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "CH"
-    },
-    "sameAs": [
-      "https://www.facebook.com/onlineofferten",
-      "https://www.instagram.com/onlineofferten"
-    ]
-  };
-
-  // Combined Schema
-  const combinedSchema = useMemo(() => ({
+  const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
-      organizationSchema,
-      serviceSchema,
-      faqSchema
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://online-offerten.ch/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": `Umzugsfirma ${city}`,
+            "item": `https://online-offerten.ch${canonicalUrl}`
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "serviceType": "Umzugsvermittlung",
+        "name": `Umzugsfirma ${city} vergleichen`,
+        "description": metaDescription,
+        "provider": {
+          "@type": "Organization",
+          "name": "Online-Offerten.ch",
+          "url": "https://online-offerten.ch"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": city,
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Switzerland"
+          }
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&city=" + city,
+          "priceCurrency": "CHF",
+          "price": "0"
+        }
+      }
     ]
-  }), [organizationSchema, serviceSchema, faqSchema]);
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       <div className={`bg-white overflow-x-hidden ${inter.className}`}>
         {/* Modern Hero Section */}

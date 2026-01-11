@@ -21,137 +21,29 @@ const GeschaeftsumzugPageClient = () => {
   // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = "/geschaeftsumzug"
 
-  // FAQ Data for Schema
-  const faqItemsForSchema = [
-    {
-      "@type": "Question",
-      "name": "Was kostet ein Büroumzug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, grössere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie finde ich die richtige Firma für meinen Firmenumzug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Vergleichen Sie Angebote regionaler Umzugsfirmen in Ihrer Nähe für einen professionellen Firmenumzug. Über unsere Plattform erhalten Sie schnell passende Offerten von geprüften Partnern. Achten Sie auf Versicherungen, positive Bewertungen und Spezialisierung auf Geschäftsumzüge."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie lange dauert ein Geschäftsumzug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Dauer hängt von der Unternehmensgrösse und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, grössere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was übernehmen professionelle Umzugsfirmen?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Professionelle Umzugsfirmen übernehmen die komplette Planung, Demontage und Montage von Büromöbeln, den sicheren Transport von IT-Equipment, Verpackungsservice, Zwischenlagerung, Entsorgung von Altmobiliar und die Koordination mit Handwerkern am neuen Standort."
-      }
-    }
-  ]
-
-  // Schema Data
+  // Schema Data - Single JSON-LD Service schema
   const schema = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://online-offerten.ch/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Büroumzug & Firmenumzug – Angebote vergleichen",
-            "item": `https://online-offerten.ch${canonicalUrl}`
-          }
-        ]
-      },
-      {
-        "@type": "Service",
-        "name": "Büroumzug & Firmenumzug – Angebote vergleichen",
-        "serviceType": "Geschäftsumzug",
-        "description": metaDescription,
-        "provider": {
-          "@type": "Organization",
-          "name": "Online-Offerten.ch",
-          "url": "https://online-offerten.ch"
-        },
-        "areaServed": [
-          {
-            "@type": "City",
-            "name": "Zürich"
-          },
-          {
-            "@type": "City",
-            "name": "Bern"
-          },
-          {
-            "@type": "City",
-            "name": "Basel"
-          },
-          {
-            "@type": "City",
-            "name": "Luzern"
-          },
-          {
-            "@type": "Country",
-            "name": "Switzerland"
-          }
-        ],
-        "offers": {
-          "@type": "Offer",
-            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug",
-          "priceCurrency": "CHF",
-          "price": "0",
-          "name": "Kostenlose Offerte anfordern"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": faqItemsForSchema
-      },
-      {
-        "@type": "LocalBusiness",
-        "name": "Online-Offerten.ch",
-        "description": "Vergleichen Sie kostenlos Offerten von geprüften Umzugsfirmen für Geschäftsumzüge in der Schweiz",
-        "url": "https://online-offerten.ch",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "CH"
-        },
-        "areaServed": [
-          {
-            "@type": "City",
-            "name": "Zürich"
-          },
-          {
-            "@type": "City",
-            "name": "Bern"
-          },
-          {
-            "@type": "City",
-            "name": "Basel"
-          },
-          {
-            "@type": "City",
-            "name": "Luzern"
-          }
-        ],
-        "serviceType": "Geschäftsumzug, Büroumzug, Firmenumzug"
-      }
-    ]
+    "@type": "Service",
+    "name": metaTitle,
+    "serviceType": "Umzugsvermittlung",
+    "description": metaDescription,
+    "provider": {
+      "@type": "Organization",
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Switzerland"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug",
+      "priceCurrency": "CHF",
+      "price": "0",
+      "name": "Kostenlose Offerte anfordern"
+    }
   }
 
   const handleCtaClick = () => {
@@ -173,6 +65,10 @@ const GeschaeftsumzugPageClient = () => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-100">
         {/* Hero Section */}
         <section className="relative w-full overflow-hidden">

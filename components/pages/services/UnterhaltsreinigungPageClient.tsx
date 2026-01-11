@@ -107,159 +107,37 @@ const UnterhaltsreinigungPageClient = () => {
     fetchReviewStats();
   }, []);
 
-  const faqItemsForSchema = faqItems.map(item => ({
-    "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.a
-    }
-  }));
-
-  // Dynamic schema with review stats
+  // Single JSON-LD Service schema
   const schema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Unterhaltsreinigung",
-    "name": "Regelmässige Unterhaltsreinigung",
+    "name": metaTitle,
+    "serviceType": "Reinigungsvermittlung",
     "description": metaDescription,
     "provider": {
       "@type": "Organization",
       "name": "Online-Offerten.ch",
       "url": "https://online-offerten.ch"
     },
-    ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": Number(reviewStats.averageRating.toFixed(1)),
-        "reviewCount": reviewStats.reviewCount,
-        "bestRating": 5,
-        "worstRating": 1
-      }
-    } : {}),
     "areaServed": {
       "@type": "Country",
-      "name": "Switzerland",
-      "identifier": "CH"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Unterhaltsreinigungsdienstleistungen",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Wöchentliche Unterhaltsreinigung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Zweiwöchentliche Unterhaltsreinigung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Monatliche Unterhaltsreinigung"
-          }
-        }
-      ]
+      "name": "Switzerland"
     },
     "offers": {
       "@type": "Offer",
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
       "priceCurrency": "CHF",
       "price": "0",
-      "availability": "https://schema.org/InStock",
       "name": "Kostenlose Offerte für Unterhaltsreinigung"
-    },
-    "mainEntity": {
-      "@type": "FAQPage",
-      "mainEntity": faqItemsForSchema
     }
-  }), [metaDescription, reviewStats, faqItemsForSchema]);
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://online-offerten.ch"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Reinigung",
-        "item": "https://online-offerten.ch/reinigung"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Unterhaltsreinigung",
-        "item": canonicalUrl
-      }
-    ]
-  };
-
-  // HowTo Schema for Ablauf section
-  const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "Ablauf unserer Unterhaltsreinigung – Schritt für Schritt",
-    "description": "So funktioniert eine professionelle Unterhaltsreinigung",
-    "step": [
-      {
-        "@type": "HowToStep",
-        "name": "Besichtigung und Offerte",
-        "text": "Wir besichtigen Ihre Wohnung, besprechen die Reinigungsfrequenz und erstellen eine genaue Offerte."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Reinigungsplan erstellen",
-        "text": "Nach der Auftragsbestätigung erstellen wir einen Reinigungsplan, der zu Ihren Bedürfnissen passt."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Professionelle Reinigung",
-        "text": "Unser professionelles Team reinigt Ihre Wohnung gründlich mit den richtigen Methoden und Geräten."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Qualitätskontrolle",
-        "text": "Nach Abschluss der Reinigung erfolgt eine kurze Qualitätskontrolle für perfekte Ergebnisse."
-      }
-    ]
-  };
-
-  // Combine schemas using @graph format for multiple schemas
-  const combinedSchema = useMemo(() => ({
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        ...schema,
-        "@context": "https://schema.org"
-      },
-      {
-        ...breadcrumbSchema,
-        "@context": "https://schema.org"
-      },
-      {
-        ...howToSchema,
-        "@context": "https://schema.org"
-      }
-    ]
-  }), [schema, breadcrumbSchema, howToSchema]);
+  }), [metaTitle, metaDescription]);
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-slate-50">
         {/* Hero Section */}
         <motion.section

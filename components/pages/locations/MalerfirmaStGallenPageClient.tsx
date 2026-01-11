@@ -46,33 +46,10 @@ const MalerfirmaStGallenPageClient = () => {
           ]
         },
         {
-          "@type": "LocalBusiness",
-          "name": `Malerfirmen in $St. Gallen`,
-          "description": `Geprüfte Malerfirmen und Malerbetriebe in $St. Gallen vergleichen. Kostenlose Offerten von professionellen Maleranbietern für Innenanstrich, Aussenanstrich und Fassadenanstrich.`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": city,
-            "addressRegion": "SG",
-            "addressCountry": "CH"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "47.4245",
-            "longitude": "9.3767"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": city
-          },
-          "serviceType": ["PaintingService", "InteriorPainting", "ExteriorPainting"],
-          "url": canonicalUrl,
-          "priceRange": "$$"
-        },
-        {
           "@type": "Service",
-          "name": `Malerfirma in $St. Gallen finden`,
-          "serviceType": "Malerarbeiten",
-          "description": `Finden Sie die besten Malerbetriebe in $St. Gallen. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Maleranbietern in $St. Gallen für Innenanstrich, Aussenanstrich, Fassadenanstrich und mehr.`,
+          "serviceType": "Maler-Vermittlung",
+          "name": `Malerfirma in ${city} finden`,
+          "description": `Finden Sie die besten Malerbetriebe in ${city}. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Maleranbietern in ${city} für Innenanstrich, Aussenanstrich, Fassadenanstrich und mehr.`,
           "provider": {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
@@ -80,7 +57,11 @@ const MalerfirmaStGallenPageClient = () => {
           },
           "areaServed": {
             "@type": "City",
-            "name": city
+            "name": city,
+            "containedInPlace": {
+              "@type": "Country",
+              "name": "Switzerland"
+            }
           },
           "offers": {
             "@type": "Offer",

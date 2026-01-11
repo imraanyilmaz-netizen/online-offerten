@@ -97,6 +97,16 @@ const ReviewCard = ({ review, index }: ReviewCardProps) => {
                 {serviceName}
               </Badge>
             )}
+            {partner && partner.slug ? (
+              <p className="text-xs text-gray-500">
+                Für Firma:{' '}
+                <Button asChild variant="link" className="p-0 h-auto text-xs">
+                  <Link href={`/partner/${partner.slug}`} className="text-green-600 hover:underline">
+                    {partner_name || partner.company_name}
+                  </Link>
+                </Button>
+              </p>
+            ) : null}
         </div>
       </CardContent>
     </Card>
@@ -220,7 +230,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             .eq('approval_status', 'approved')
             .eq('show_on_homepage', true)
             .not('partner_id', 'is', null)
-            .order('review_date', { ascending: false });
+            .order('review_date', { ascending: false })
+            .limit(9);
           
           if (reviewsError) {
             console.error('Error fetching reviews:', reviewsError);

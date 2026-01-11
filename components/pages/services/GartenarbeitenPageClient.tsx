@@ -17,28 +17,33 @@ const GartenarbeitenPageClient = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Gartenarbeiten",
     "name": "Gartenarbeiten & Landschaftsbau in der Schweiz",
+    "serviceType": "Gartenarbeiten",
     "description": "Gartenarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Gärtnereien und Landschaftsbauern. Gartenpflege, Terrassenverlegung, Pool-Service & mehr – professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!",
     "provider": {
       "@type": "Organization",
-      "name": "Online-Offerten.ch"
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
     },
     "areaServed": {
       "@type": "Country",
-      "name": "CH"
+      "name": "Switzerland"
     },
     "offers": {
       "@type": "Offer",
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=garten&step=2",
       "priceCurrency": "CHF",
+      "price": "0",
       "name": "Kostenlose Offerte für Gartenarbeiten"
     }
   }
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-slate-50">
         <motion.section
           initial={{ opacity: 0 }}

@@ -46,33 +46,10 @@ const MalerfirmaLuzernPageClient = () => {
           ]
         },
         {
-          "@type": "LocalBusiness",
-          "name": `Malerfirmen in $Luzern`,
-          "description": `Geprüfte Malerfirmen und Malerbetriebe in $Luzern vergleichen. Kostenlose Offerten von professionellen Maleranbietern für Innenanstrich, Aussenanstrich und Fassadenanstrich.`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": city,
-            "addressRegion": "LU",
-            "addressCountry": "CH"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "47.0502",
-            "longitude": "8.3093"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": city
-          },
-          "serviceType": ["PaintingService", "InteriorPainting", "ExteriorPainting"],
-          "url": canonicalUrl,
-          "priceRange": "$$"
-        },
-        {
           "@type": "Service",
-          "name": `Malerfirma in $Luzern finden`,
-          "serviceType": "Malerarbeiten",
-          "description": `Finden Sie die besten Malerbetriebe in $Luzern. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Maleranbietern in $Luzern für Innenanstrich, Aussenanstrich, Fassadenanstrich und mehr.`,
+          "serviceType": "Maler-Vermittlung",
+          "name": `Malerfirma in ${city} finden`,
+          "description": `Finden Sie die besten Malerbetriebe in ${city}. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Maleranbietern in ${city} für Innenanstrich, Aussenanstrich, Fassadenanstrich und mehr.`,
           "provider": {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
@@ -80,7 +57,11 @@ const MalerfirmaLuzernPageClient = () => {
           },
           "areaServed": {
             "@type": "City",
-            "name": city
+            "name": city,
+            "containedInPlace": {
+              "@type": "Country",
+              "name": "Switzerland"
+            }
           },
           "offers": {
             "@type": "Offer",
@@ -88,35 +69,6 @@ const MalerfirmaLuzernPageClient = () => {
             "priceCurrency": "CHF",
             "price": "0"
           }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": `Was kostet eine Malerfirma in $Luzern?`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `Die Kosten für einen Malerservice in $Luzern hängen von verschiedenen Faktoren ab: Art der Malerarbeiten (Innenanstrich, Aussenanstrich, Fassadenanstrich), Grösse der zu streichenden Fläche, Anzahl der Stockwerke, benötigte Vorarbeiten und verwendete Materialien. Ein durchschnittlicher Innenanstrich in $Luzern kostet zwischen 15 und 35 CHF pro Quadratmeter. Eine 3.5-Zimmer-Wohnung (95 m²) kostet für einen Innenanstrich durchschnittlich CHF 1.300–3.000. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Malerbetrieben in $Luzern.`
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Wie viele Offerten erhalte ich?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Sie erhalten bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Malerbetrieben aus Ihrer Region. Die Anbieter nehmen direkt Kontakt mit Ihnen auf und erstellen individuelle Offerten basierend auf Ihren spezifischen Anforderungen."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": `Sind die Malerfirmen in $Luzern versichert?`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `Ja, alle Malerbetriebe in $Luzern, die über unser Portal vermittelt werden, sind geprüft und verfügen über die notwendigen Versicherungen. Wir stellen sicher, dass nur qualifizierte und versicherte regionale Malerunternehmen in unserem Netzwerk sind, um Ihnen Sicherheit und Qualität zu gewährleisten.`
-              }
-            }
-          ]
         }
       ]
     }

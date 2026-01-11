@@ -18,12 +18,10 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       className="relative w-full bg-gray-100 py-12 md:py-16"
-      itemScope
-      itemType="https://schema.org/Service"
     >
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 items-center">
-          <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl" itemProp="description">
+          <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -102,7 +100,6 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
                 fetchPriority="high"
                 width="600"
                 height="400"
-                itemProp="image"
               />
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-bl-full pointer-events-none z-30"></div>
               <figcaption className="sr-only">Professioneller Klaviertransport - Kostenlose Offerten vergleichen</figcaption>
@@ -521,32 +518,33 @@ const KlaviertransportPageClient = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Klaviertransport",
+    "name": metaTitle,
+    "serviceType": "Umzugsvermittlung",
+    "description": metaDescription,
     "provider": {
       "@type": "Organization",
-      "name": "Online-Offerten.ch"
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
     },
     "areaServed": {
       "@type": "Country",
-      "name": "CH"
+      "name": "Switzerland"
     },
-    "name": "Professioneller Klaviertransport in der Schweiz",
-    "description": metaDescription,
-    "mainEntity": {
-      "@type": "FAQPage",
-      "mainEntity": faqData.questions.map((item: any) => ({
-        "@type": "Question",
-        "name": item.q,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": item.a
-        }
-      }))
+    "offers": {
+      "@type": "Offer",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport&special_transport_type=klaviertransport",
+      "priceCurrency": "CHF",
+      "price": "0",
+      "name": "Kostenlose Offerte für Klaviertransport"
     }
   }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-white">
         <Hero quoteUrl={quoteUrl} />
         <div className="container mx-auto max-w-navbar px-4 md:px-6">

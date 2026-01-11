@@ -21,7 +21,6 @@ const UmzugTypesSidebar = dynamic(() => import('@/components/UmzugPageParts/Umzu
 const PricingTable = dynamic(() => import('@/components/SEO/PricingTable'));
 const HowItWorks = dynamic(() => import('@/components/SEO/HowItWorks'));
 const WhyChooseUs = dynamic(() => import('@/components/SEO/WhyChooseUs'));
-const StructuredData = dynamic(() => import('@/components/SEO/StructuredData'));
 
 const PrivateUmzugPageClient = () => {
   const router = useRouter();
@@ -33,68 +32,29 @@ const PrivateUmzugPageClient = () => {
   const canonicalUrl = "https://online-offerten.ch/privatumzug";
   const ogImageUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/31d61ce9d2ebb52fb5f267adfccd6051.png";
 
-  // FAQ Data for Schema
-  const faqItemsForSchema = [
-    {"q": "Was kostet ein Privatumzug in der Schweiz?", "a": "Die Kosten variieren stark je nach Wohnungsgrösse und Distanz. Ein kleiner Umzug kann bei 600 CHF starten, ein grosser bei über 2.200 CHF. Ein Offertenvergleich ist essenziell."},
-    {"q": "Wie lange im Voraus sollte ich eine Umzugsfirma buchen?", "a": "Wir empfehlen, mindestens 1-2 Monate im Voraus zu buchen, besonders in den Sommermonaten und zum Monatsende, da dies die geschäftigsten Zeiten sind."},
-    {"q": "Ist mein Umzugsgut versichert?", "a": "Ja, bei professionellen Umzugsfirmen ist eine Transport- und Betriebshaftpflichtversicherung standardmässig enthalten. Klären Sie die Deckungssumme vorab."},
-    {"q": "Bieten die Firmen auch eine Endreinigung an?", "a": "Viele Umzugsunternehmen bieten eine Umzugsreinigung mit Abnahmegarantie als Zusatzleistung an. Dies können Sie direkt in Ihrer Anfrage vermerken."}
-  ];
-
-  // Schema Data
+  // Schema Data - Single JSON-LD Service schema
   const schemaData = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://online-offerten.ch/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Privatumzug Offerten kostenlos vergleichen",
-            "item": canonicalUrl
-          }
-        ]
-      },
-      {
-        "@type": "Service",
-        "name": "Privatumzug Offerten kostenlos vergleichen",
-        "serviceType": "Privatumzug",
-        "description": metaDescription,
-        "provider": {
-          "@type": "Organization",
-          "name": "Online-Offerten.ch",
-          "url": "https://online-offerten.ch"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "Switzerland"
-        },
-        "offers": {
-          "@type": "Offer",
-            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug",
-          "priceCurrency": "CHF",
-          "name": "Kostenlose Offerte für Privatumzug"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": faqItemsForSchema.map(item => ({
-          "@type": "Question",
-          "name": item.q,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": item.a
-          }
-        }))
-      }
-    ]
+    "@type": "Service",
+    "name": metaTitle,
+    "serviceType": "Umzugsvermittlung",
+    "description": metaDescription,
+    "provider": {
+      "@type": "Organization",
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Switzerland"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug",
+      "priceCurrency": "CHF",
+      "price": "0",
+      "name": "Kostenlose Offerte für Privatumzug"
+    }
   };
 
   const handleCtaClick = () => {
@@ -123,33 +83,19 @@ const PrivateUmzugPageClient = () => {
 
   return (
     <>
-      <StructuredData
-        breadcrumbs={[
-          { name: 'Home', item: 'https://online-offerten.ch/' },
-          { name: 'Privatumzug', item: 'https://online-offerten.ch/privatumzug' }
-        ]}
-        service={{
-          name: 'Privatumzug Offerten vergleichen',
-          serviceType: 'Privatumzug',
-          description: metaDescription,
-          url: 'https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug'
-        }}
-        faq={faqItemsForSchema.map(item => ({
-          question: item.q,
-          answer: item.a
-        }))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       <div className="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-100">
         
         {/* Hero Section */}
         <section
           className="relative w-full bg-gray-100 py-12 md:py-16"
-          itemScope
-          itemType="https://schema.org/Service"
         >
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
-              <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl" itemProp="description">
+              <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
                 <div>
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
                     Privatumzug Offerten kostenlos vergleichen
@@ -202,7 +148,6 @@ const PrivateUmzugPageClient = () => {
                   priority
                   width={600}
                   height={400}
-                    itemProp="image"
                   sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   

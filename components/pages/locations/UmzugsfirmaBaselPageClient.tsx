@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -10,7 +10,6 @@ import LocationPageNavigation from '@/components/locations/LocationPageNavigatio
 import LocationSidebar from '@/components/locations/LocationSidebar';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 import { faqs } from '@/data/locationFaqs';
-import { supabase } from '@/lib/supabaseClient';
 
 const AdvantageItem = ({ text, delay }: any) => {
   return (
@@ -72,183 +71,53 @@ const UmzugsfirmaBaselPageClient = () => {
     "Lokale Expertise für einen reibungslosen Ablauf in Basel."
   ];
 
-  // Review stats state - hem toplam hem şehre özel veriler için
-  const [reviewStats, setReviewStats] = useState({ 
-    totalReviewCount: 0,        // ✅ TÜM yorumların sayısı (Google için)
-    totalAverageRating: 0,      // ✅ TÜM yorumların ortalaması (Google için)
-    cityReviews: [] as any[],   // ✅ O şehre özel son 10 yorum (sayfa ve structured data için)
-    cityReviewCount: 0          // ✅ O şehre özel yorum sayısı (sayfa gösterimi için - opsiyonel)
-  });
-
-  // Fetch review stats dynamically
-  useEffect(() => {
-    const fetchReviewStats = async () => {
-      try {
-        // 1. TÜM onaylanmış yorumları say ve average hesapla (Google aggregateRating için)
-        const { count: totalReviewCount, error: countError } = await supabase
-          .from('customer_reviews')
-          .select('*', { count: 'exact', head: true })
-          .eq('approval_status', 'approved');
-
-        if (countError) {
-          console.error('Error fetching total review count:', countError);
-        }
-
-        // TÜM onaylanmış yorumların rating'lerini al
-        const { data: allReviews, error: reviewsError } = await supabase
-          .from('customer_reviews')
-          .select('rating')
-          .eq('approval_status', 'approved');
-
-        if (reviewsError) {
-          console.error('Error fetching reviews for average:', reviewsError);
-        }
-
-        // TÜM yorumların average rating'i hesapla
-        let totalAverageRating = 0;
-        if (allReviews && allReviews.length > 0) {
-          const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0);
-          totalAverageRating = totalRating / allReviews.length;
-        }
-
-        // 2. O şehre özel SON 10 yorumu al (sayfa gösterimi ve structured data review array için)
-        const { data: cityReviewsData, error: cityReviewsError } = await supabase
-          .from('customer_reviews')
-          .select('id, customer_name, rating, review_text, review_date, service_type, city')
-          .eq('approval_status', 'approved')
-          .ilike('city', `%${city}%`)
-          .order('review_date', { ascending: false })
-          .limit(10);
-
-        if (cityReviewsError) {
-          console.error('Error fetching city reviews:', cityReviewsError);
-        }
-
-        // O şehre özel yorum sayısı (opsiyonel - sayfa gösterimi için)
-        const { count: cityReviewCount, error: cityCountError } = await supabase
-          .from('customer_reviews')
-          .select('*', { count: 'exact', head: true })
-          .eq('approval_status', 'approved')
-          .ilike('city', `%${city}%`);
-
-        if (cityCountError) {
-          console.error('Error fetching city review count:', cityCountError);
-        }
-
-        setReviewStats({
-          totalReviewCount: totalReviewCount || 0,
-          totalAverageRating: totalAverageRating,
-          cityReviews: cityReviewsData || [],
-          cityReviewCount: cityReviewCount || 0
-        });
-      } catch (error) {
-        console.error('Error in fetchReviewStats:', error);
-        setReviewStats({ 
-          totalReviewCount: 0, 
-          totalAverageRating: 0, 
-          cityReviews: [],
-          cityReviewCount: 0
-        });
-      }
-    };
-    
-    fetchReviewStats();
-  }, [city]);
-
-  const faqItemsForSchema = faqs.move.concat(faqs.clean);
-  const cityData = cityServiceData[city];
-  
-  // Service Schema with areaServed and review stats (dynamic)
-  const serviceSchema = useMemo(() => {
-    // Review structured data'ları oluştur - O şehre özel son 10 yorumdan
-    const reviewSchemas = (reviewStats.cityReviews || []).map((review: any) => ({
-      "@type": "Review",
-      "author": {
-        "@type": "Person",
-        "name": review.customer_name || "Anonymous"
-      },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": review.rating || 0,
-        "bestRating": 5,
-        "worstRating": 1
-      },
-      "reviewBody": review.review_text || "",
-      "datePublished": review.review_date || new Date().toISOString()
-    }));
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": cityData.displayName,
-      "description": `Geprüfte Umzugsfirmen und Zügelfirmen in ${city} vergleichen. Kostenlose Offerten von professionellen Umzugsunternehmen.`,
-      "serviceType": ["MovingCompany", "Moving and Storage", "CleaningService"],
-      "provider": {
-        "@type": "Organization",
-        "name": "Online-Offerten.ch",
-        "url": "https://online-offerten.ch"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": city,
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": cityData.addressLocality,
-          "addressRegion": cityData.addressRegion,
-          "addressCountry": "CH"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": cityData.latitude,
-          "longitude": cityData.longitude
-        }
-      },
-      "url": `https://online-offerten.ch${canonicalUrl}`,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "CHF",
-        "name": "Kostenlose Umzugsofferten"
-      },
-      // ✅ Google için: TÜM yorumların toplamı ve ortalaması
-      ...(reviewStats.totalReviewCount > 0 && reviewStats.totalAverageRating > 0 ? {
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": reviewStats.totalAverageRating.toFixed(1),
-          "reviewCount": reviewStats.totalReviewCount.toString(),
-          "bestRating": "5",
-          "worstRating": "1"
-        }
-      } : {}),
-      // ✅ Google için: O şehre özel son 10 yorum (structured data review array)
-      ...(reviewSchemas.length > 0 ? {
-        "review": reviewSchemas
-      } : {})
-    };
-  }, [city, cityData, canonicalUrl, reviewStats]);
-
-  // FAQ Schema
-  const faqSchema = useMemo(() => ({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqItemsForSchema.map(item => ({
-      "@type": "Question",
-      "name": ((item.question as any).de || item.question as any).replace('{city}', city),
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.answer.map((ans: any) => typeof ans === 'string' ? ans : (ans.de || ans)).join(' ').replace(/{city}/g, city)
-      }
-    }))
-  }), [city, faqItemsForSchema]);
-
-  // Combined Schema
-  const schemaData = useMemo(() => ({
+  const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
-      serviceSchema,
-      faqSchema
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://online-offerten.ch/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": `Umzugsfirma ${city}`,
+            "item": `https://online-offerten.ch${canonicalUrl}`
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "serviceType": "Umzugsvermittlung",
+        "name": `Umzugsfirma ${city} vergleichen`,
+        "description": metaDescription,
+        "provider": {
+          "@type": "Organization",
+          "name": "Online-Offerten.ch",
+          "url": "https://online-offerten.ch"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": city,
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Switzerland"
+          }
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2&city=" + city,
+          "priceCurrency": "CHF",
+          "price": "0"
+        }
+      }
     ]
-  }), [serviceSchema, faqSchema]);
+  };
 
   return (
     <>

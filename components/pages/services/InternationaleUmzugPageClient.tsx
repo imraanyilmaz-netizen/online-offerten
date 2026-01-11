@@ -235,49 +235,6 @@ const InternationaleUmzugPageClient = () => {
     }
   ]
 
-  const faqItemsForSchema = [
-    {
-      "@type": "Question",
-      "name": "Was kostet ein internationaler Umzug von der Schweiz aus?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Kosten variieren stark. Ein Umzug mit einer 2-Zimmer-Wohnung nach Süddeutschland kann bei ca. 2.500 CHF beginnen, während derselbe Umzug nach Spanien oder Portugal eher 5.000 - 8.000 CHF kostet. Entscheidend sind Volumen, Distanz und Service-Level. Nutzen Sie unseren Kostenrechner für eine erste Schätzung."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie lange dauert ein internationaler Umzug?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die reine Transportzeit innerhalb Europas beträgt je nach Destination 1-5 Tage. Inklusive Packen, Zollabwicklung und Ausladen sollten Sie mit einer Gesamtdauer von 3-10 Tagen rechnen. Übersee-Umzüge per Schiff dauern mehrere Wochen."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Muss ich mein Umzugsgut verzollen (Stichwort: Übersiedlungsgut)?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ja, bei einem Umzug von der Schweiz in ein EU-Land muss das Umzugsgut als 'Übersiedlungsgut' deklariert werden. Wenn Sie Ihren Wohnsitz nachweislich verlegen und die Güter seit mindestens 6 Monaten in Ihrem Besitz sind, ist die Einfuhr zoll- und mehrwertsteuerfrei. Eine professionelle Umzugsfirma kümmert sich um die korrekte Deklaration."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Welche Dokumente sind für die Zollabwicklung nötig?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Typischerweise benötigen Sie: Eine Kopie Ihres Passes, eine Abmeldebestätigung aus der Schweiz, eine Anmeldebestätigung im neuen Land (oder Arbeitsvertrag/Mietvertrag), sowie eine detaillierte Inventarliste Ihres Umzugsguts. Die Spedition stellt Ihnen die nötigen Formulare zur Verfügung."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Kann ich die Endreinigung meiner alten Wohnung in der Schweiz dazubuchen?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolut. Viele internationale Speditionen arbeiten mit lokalen Reinigungsinstituten zusammen oder bieten diesen Service selbst an. Ein Kombi-Paket für Umzug und Reinigung mit Abnahmegarantie ist die bequemste Lösung für eine reibungslose Wohnungsübergabe."
-      }
-    }
-  ]
-
   const metaTitle = "Internationale Umzüge: Kostenlose Offerten vergleichen"
   const metaDescription = "Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa."
   const canonicalUrl = "/internationale-umzuege"
@@ -285,8 +242,8 @@ const InternationaleUmzugPageClient = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": metaTitle,
     "name": metaTitle,
+    "serviceType": "Umzugsvermittlung",
     "description": metaDescription,
     "provider": {
       "@type": "Organization",
@@ -295,35 +252,30 @@ const InternationaleUmzugPageClient = () => {
     },
     "areaServed": {
       "@type": "Country",
-      "name": "CH"
-    },
-    "brand": {
-      "@type": "Brand",
-      "name": "Online-Offerten.ch"
+      "name": "Switzerland"
     },
     "offers": {
       "@type": "Offer",
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=international",
       "priceCurrency": "CHF",
+      "price": "0",
       "name": "Kostenlose Offerten anfordern"
-    },
-    "mainEntity": {
-      "@type": "FAQPage",
-      "mainEntity": faqItemsForSchema
     }
   }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-gradient-to-b from-slate-50 to-white">
         <section
           className="relative w-full bg-gray-100 py-12 md:py-16"
-          itemScope
-          itemType="https://schema.org/Service"
         >
           <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
-              <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl" itemProp="description">
+              <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
                 <div>
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
                     Umzugsfirmen vergleichen für Auslandsumzug
@@ -376,7 +328,6 @@ const InternationaleUmzugPageClient = () => {
                     fetchPriority="high"
                     width="600"
                     height="400"
-                    itemProp="image"
                   />
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-bl-full pointer-events-none z-30"></div>
                   <figcaption className="sr-only">Internationaler Umzug mit professioneller Umzugsfirma - Vergleichen Sie mehrere Firmen online</figcaption>

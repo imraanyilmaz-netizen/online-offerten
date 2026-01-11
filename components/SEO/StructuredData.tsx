@@ -38,10 +38,6 @@ interface StructuredDataProps {
       areaServed: string
     }
   }
-  faq?: Array<{
-    question: string
-    answer: string
-  }>
 }
 
 export default function StructuredData({
@@ -49,7 +45,6 @@ export default function StructuredData({
   service,
   localBusiness,
   organization,
-  faq,
 }: StructuredDataProps) {
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return
@@ -97,20 +92,6 @@ export default function StructuredData({
           price: '0',
           availability: 'https://schema.org/InStock',
         },
-      }
-
-      if (faq && faq.length > 0) {
-        serviceSchema.mainEntity = {
-          '@type': 'FAQPage',
-          mainEntity: faq.map((item) => ({
-            '@type': 'Question',
-            name: item.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: item.answer,
-            },
-          })),
-        }
       }
 
       schemaData['@graph'].push(serviceSchema)
@@ -201,7 +182,7 @@ export default function StructuredData({
       const scriptToRemove = document.getElementById('structured-data-schema')
       if (scriptToRemove) scriptToRemove.remove()
     }
-  }, [breadcrumbs, service, localBusiness, organization, faq])
+  }, [breadcrumbs, service, localBusiness, organization])
 
   return null
 }

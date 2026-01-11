@@ -61,70 +61,11 @@ const RaeumungEntsorgungPageClient = () => {
     { volume: "ab 30 m³ (z.B. Hausräumung)", price: "Auf Anfrage" }
   ]
 
-  const faqItemsForSchema = [
-    {
-      "@type": "Question",
-      "name": "Was kostet eine Räumung und Entsorgung?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Kosten für Räumung und Entsorgung hängen von verschiedenen Faktoren ab: Volumen der zu entsorgenden Gegenstände, Art der Materialien, Zugänglichkeit der Räumlichkeiten und Entsorgungsart. Über unsere Plattform können Sie Räumungsofferten online vergleichen und bis zu 40% sparen."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was wird bei einer Wohnungsräumung entsorgt?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Bei einer Wohnungsräumung werden alle nicht mehr benötigten Gegenstände entsorgt: Möbel, Elektrogeräte, Textilien, Haushaltsgegenstände, Altpapier und andere Materialien. Professionelle Entsorgungsfirmen sorgen für eine umweltgerechte Entsorgung und Trennung der Materialien."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie lange dauert eine Räumung?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Die Dauer einer Räumung hängt vom Umfang ab. Eine durchschnittliche Wohnungsräumung dauert in der Regel 1-3 Tage. Grössere Räumungen wie Haushaltsauflösungen können 3-7 Tage in Anspruch nehmen. Professionelle Firmen erstellen vorab einen detaillierten Zeitplan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Werden die Gegenstände recycelt?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ja, seriöse Entsorgungsfirmen trennen die Materialien und führen eine umweltgerechte Entsorgung durch. Wertvolle Gegenstände werden wenn möglich weiterverkauft oder gespendet, recyclebare Materialien werden dem Recycling zugeführt."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Brauche ich eine Genehmigung für die Entsorgung?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Für die meisten Entsorgungen ist keine spezielle Genehmigung erforderlich. Professionelle Entsorgungsfirmen kennen die örtlichen Vorschriften und sorgen für eine rechtskonforme Entsorgung. Bei grösseren Mengen oder speziellen Materialien informieren die Firmen Sie über eventuelle Genehmigungen."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was ist der Unterschied zwischen Räumung und Entrümpelung?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Umgangssprachlich werden die Begriffe oft synonym verwendet. 'Räumung' oder 'Haushaltsauflösung' bezieht sich meist auf die komplette Leerung eines Objekts (z.B. nach Umzug oder Todesfall). 'Entrümpelung' beschreibt eher das Ausmisten von Teilbereichen wie Keller, Dachboden oder Garage, um wieder Platz zu schaffen."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was ist eine 'Räumung' genau?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Eine 'Räumung' geht über das blosse Entrümpeln hinaus. Es bezeichnet die komplette und oft endgültige Leerung eines Objekts. Dies ist häufig der Fall bei Gewerbeauflösungen, Haushaltsauflösungen oder Messi-Wohnungen. Bei einer solchen Räumung wird auf Wunsch des Auftraggebers alles entfernt – nicht nur Möbel, sondern auch Einbauten wie Küchenzeilen, Bodenbeläge (Teppich, Parkett), Wandverkleidungen und sogar nicht-tragende Wände. Das Ziel ist es, das Objekt in einen 'Rohbauzustand' zurückzuversetzen, bereit für eine Sanierung oder eine komplett neue Nutzung."
-      }
-    }
-  ]
-
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Räumung und Entsorgung",
     "name": "Räumung & Entsorgung Schweiz finden & vergleichen » Kostenlose Offerten | Professionell & Günstig",
+    "serviceType": "Räumung- & Entsorgungs-Vermittlung",
     "description": "Räumung & Entsorgung Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Entsorgungsfirmen. Wohnungsräumung, Haushaltsauflösung, Kellerräumung & umweltgerechte Entsorgung – professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!",
     "provider": {
       "@type": "Organization",
@@ -133,26 +74,23 @@ const RaeumungEntsorgungPageClient = () => {
     },
     "areaServed": {
       "@type": "Country",
-      "name": "Switzerland",
-      "identifier": "CH"
+      "name": "Switzerland"
     },
     "offers": {
       "@type": "Offer",
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=raeumung&step=2",
       "priceCurrency": "CHF",
       "price": "0",
-      "availability": "https://schema.org/InStock",
       "name": "Kostenlose Offerte für Räumung & Entsorgung"
-    },
-    "mainEntity": {
-      "@type": "FAQPage",
-      "mainEntity": faqItemsForSchema
     }
   }
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-slate-50">
         <motion.section
           initial={{ opacity: 0 }}

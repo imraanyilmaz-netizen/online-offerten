@@ -107,170 +107,37 @@ const WohnungsreinigungPageClient = () => {
     fetchReviewStats();
   }, []);
 
-  const faqItemsForSchema = faqItems.map(item => ({
-    "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.a
-    }
-  }));
-
-  // Dynamic schema with review stats
+  // Single JSON-LD Service schema
   const schema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Wohnungsreinigung mit Abnahmegarantie",
-    "name": "Professionelle Wohnungsreinigung mit Abnahmegarantie",
+    "name": metaTitle,
+    "serviceType": "Reinigungsvermittlung",
     "description": metaDescription,
     "provider": {
       "@type": "Organization",
       "name": "Online-Offerten.ch",
       "url": "https://online-offerten.ch"
     },
-    ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": Number(reviewStats.averageRating.toFixed(1)),
-        "reviewCount": reviewStats.reviewCount,
-        "bestRating": 5,
-        "worstRating": 1
-      }
-    } : {}),
     "areaServed": {
       "@type": "Country",
-      "name": "Switzerland",
-      "identifier": "CH"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Wohnungsreinigungsdienstleistungen",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Umfassende Wohnungsreinigung mit Abnahmegarantie"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Küchen- und Badezimmerreinigung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Fenster- und Oberflächenreinigung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Reinigung für Haushalte mit Haustieren"
-          }
-        }
-      ]
+      "name": "Switzerland"
     },
     "offers": {
       "@type": "Offer",
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
       "priceCurrency": "CHF",
       "price": "0",
-      "availability": "https://schema.org/InStock",
-      "name": "Kostenlose Offerte für Wohnungsreinigung mit Abnahmegarantie"
-    },
-    "mainEntity": {
-      "@type": "FAQPage",
-      "mainEntity": faqItemsForSchema
+      "name": "Kostenlose Offerte für Wohnungsreinigung"
     }
-  }), [reviewStats, metaDescription, faqItemsForSchema]);
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://online-offerten.ch"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Reinigung",
-        "item": "https://online-offerten.ch/reinigung"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Wohnungsreinigung",
-        "item": canonicalUrl
-      }
-    ]
-  };
-
-  const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "Ablauf unserer Wohnungsreinigung",
-    "description": "Schritt-für-Schritt Anleitung für professionelle Wohnungsreinigung mit Abnahmegarantie",
-    "step": [
-      {
-        "@type": "HowToStep",
-        "name": "Kostenlose Offerte anfordern",
-        "text": "Reinigungsofferten online anfordern und vergleichen."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Besichtigung und Offerte erhalten",
-        "text": "Die Reinigungsfirma besichtigt die Wohnung und erstellt eine detaillierte Offerte."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Termin vereinbaren",
-        "text": "Vereinbaren Sie einen Termin, der zu Ihren Bedürfnissen passt."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Professionelle Reinigung durchführen",
-        "text": "Das professionelle Reinigungsteam führt die Reinigung systematisch durch."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Qualitätskontrolle und Abnahme",
-        "text": "Nach Abschluss erfolgt eine Qualitätskontrolle und Sie erhalten eine Abnahmegarantie."
-      }
-    ]
-  };
-
-  // Combine schemas using @graph format for multiple schemas
-  const combinedSchema = useMemo(() => ({
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        ...schema,
-        "@context": "https://schema.org"
-      },
-      {
-        ...breadcrumbSchema,
-        "@context": "https://schema.org"
-      },
-      {
-        ...howToSchema,
-        "@context": "https://schema.org"
-      }
-    ]
-  }), [schema, breadcrumbSchema, howToSchema]);
+  }), [metaTitle, metaDescription]);
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-slate-50">
         {/* Hero Section */}
         <motion.section

@@ -46,33 +46,10 @@ const MalerfirmaLausannePageClient = () => {
           ]
         },
         {
-          "@type": "LocalBusiness",
-          "name": `Malerfirmen in $Lausanne`,
-          "description": `Geprüfte Malerfirmen und Malerbetriebe in $Lausanne vergleichen. Kostenlose Offerten von professionellen Maleranbietern für Innenanstrich, Aussenanstrich und Fassadenanstrich.`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": city,
-            "addressRegion": "VD",
-            "addressCountry": "CH"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "46.5197",
-            "longitude": "6.6323"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": city
-          },
-          "serviceType": ["PaintingService", "InteriorPainting", "ExteriorPainting"],
-          "url": canonicalUrl,
-          "priceRange": "$$"
-        },
-        {
           "@type": "Service",
-          "name": `Malerfirma in $Lausanne finden`,
-          "serviceType": "Malerarbeiten",
-          "description": `Finden Sie die besten Malerbetriebe in $Lausanne. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Maleranbietern in $Lausanne für Innenanstrich, Aussenanstrich, Fassadenanstrich und mehr.`,
+          "serviceType": "Maler-Vermittlung",
+          "name": `Malerfirma in ${city} finden`,
+          "description": `Finden Sie die besten Malerbetriebe in ${city}. Vergleichen Sie bis zu 6 kostenlose Offerten von geprüften Maleranbietern in ${city} für Innenanstrich, Aussenanstrich, Fassadenanstrich und mehr.`,
           "provider": {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
@@ -80,7 +57,11 @@ const MalerfirmaLausannePageClient = () => {
           },
           "areaServed": {
             "@type": "City",
-            "name": city
+            "name": city,
+            "containedInPlace": {
+              "@type": "Country",
+              "name": "Switzerland"
+            }
           },
           "offers": {
             "@type": "Offer",
@@ -88,35 +69,6 @@ const MalerfirmaLausannePageClient = () => {
             "priceCurrency": "CHF",
             "price": "0"
           }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": `Was kostet eine Malerfirma in $Lausanne?`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `Die Kosten für einen Malerservice in $Lausanne hängen von verschiedenen Faktoren ab: Art der Malerarbeiten (Innenanstrich, Aussenanstrich, Fassadenanstrich), Grösse der zu streichenden Fläche, Anzahl der Stockwerke, benötigte Vorarbeiten und verwendete Materialien. Ein durchschnittlicher Innenanstrich in $Lausanne kostet zwischen 15 und 35 CHF pro Quadratmeter. Eine 3.5-Zimmer-Wohnung (95 m²) kostet für einen Innenanstrich durchschnittlich CHF 1.350–3.100. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Malerbetrieben in $Lausanne.`
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Wie viele Offerten erhalte ich?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Sie erhalten bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Malerbetrieben aus Ihrer Region. Die Anbieter nehmen direkt Kontakt mit Ihnen auf und erstellen individuelle Offerten basierend auf Ihren spezifischen Anforderungen."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": `Sind die Malerfirmen in $Lausanne versichert?`,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `Ja, alle Malerbetriebe in $Lausanne, die über unser Portal vermittelt werden, sind geprüft und verfügen über die notwendigen Versicherungen. Wir stellen sicher, dass nur qualifizierte und versicherte regionale Malerunternehmen in unserem Netzwerk sind, um Ihnen Sicherheit und Qualität zu gewährleisten.`
-              }
-            }
-          ]
         }
       ]
     }

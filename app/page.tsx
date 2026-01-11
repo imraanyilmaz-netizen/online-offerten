@@ -71,7 +71,8 @@ async function getHomePageData() {
       .eq('approval_status', 'approved')
       .eq('show_on_homepage', true)
       .not('partner_id', 'is', null)
-      .order('review_date', { ascending: false }),
+      .order('review_date', { ascending: false })
+      .limit(9),
     supabase
       .from('posts')
       .select('id, title, slug, meta_description, featured_image_url, category, tags')

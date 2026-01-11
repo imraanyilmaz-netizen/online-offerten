@@ -107,179 +107,37 @@ const HofreinigungPageClient = () => {
     fetchReviewStats();
   }, []);
 
-  const faqItemsForSchema = faqItems.map(item => ({
-    "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.a
-    }
-  }));
-
-  // Dynamic schema with review stats
+  // Single JSON-LD Service schema
   const schema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Hofreinigung",
     "name": "Professionelle Hofreinigung",
+    "serviceType": "Reinigungsvermittlung",
     "description": metaDescription,
     "provider": {
       "@type": "Organization",
       "name": "Online-Offerten.ch",
       "url": "https://online-offerten.ch"
     },
-    ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": Number(reviewStats.averageRating.toFixed(1)),
-        "reviewCount": reviewStats.reviewCount,
-        "bestRating": 5,
-        "worstRating": 1
-      }
-    } : {}),
     "areaServed": {
       "@type": "Country",
-      "name": "Switzerland",
-      "identifier": "CH"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Hofreinigungsdienstleistungen",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Einfahrts- und Terrassenreinigung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Hochdruckreinigung von Aussenbereichen"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Moos- und Algenentfernung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Wege- und Parkplatzreinigung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Kalkentfernung"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Ölfleckenentfernung"
-          }
-        }
-      ]
+      "name": "Switzerland"
     },
     "offers": {
       "@type": "Offer",
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
       "priceCurrency": "CHF",
       "price": "0",
-      "availability": "https://schema.org/InStock",
       "name": "Kostenlose Offerte für Hofreinigung"
-    },
-    "mainEntity": {
-      "@type": "FAQPage",
-      "mainEntity": faqItemsForSchema
     }
-  }), [metaDescription, reviewStats, faqItemsForSchema]);
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://online-offerten.ch"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Reinigung",
-        "item": "https://online-offerten.ch/reinigung"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Hofreinigung",
-        "item": canonicalUrl
-      }
-    ]
-  };
-
-  const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "Ablauf unserer Hofreinigung – Schritt für Schritt",
-    "description": "So funktioniert eine professionelle Hofreinigung",
-    "step": [
-      {
-        "@type": "HowToStep",
-        "name": "Besichtigung und Offerte",
-        "text": "Wir besichtigen Ihre Aussenbereiche, beurteilen den Verschmutzungsgrad und erstellen eine genaue Offerte."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Terminvereinbarung",
-        "text": "Nach der Auftragsbestätigung vereinbaren wir einen Termin, der zu Ihren Bedürfnissen passt."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Professionelle Hofreinigung",
-        "text": "Unser professionelles Team reinigt Ihre Aussenbereiche gründlich mit speziellen Methoden und Geräten."
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Qualitätskontrolle",
-        "text": "Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle für perfekte Ergebnisse."
-      }
-    ]
-  };
-
-  // Combine schemas using @graph format for multiple schemas
-  const combinedSchema = useMemo(() => ({
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        ...schema,
-        "@context": "https://schema.org"
-      },
-      {
-        ...breadcrumbSchema,
-        "@context": "https://schema.org"
-      },
-      {
-        ...howToSchema,
-        "@context": "https://schema.org"
-      }
-    ]
-  }), [schema, breadcrumbSchema, howToSchema]);
+  }), [metaDescription]);
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="bg-slate-50">
         {/* Hero Section */}
         <motion.section

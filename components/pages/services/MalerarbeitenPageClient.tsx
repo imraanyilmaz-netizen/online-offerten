@@ -10,48 +10,6 @@ import Faq from '@/components/MalerPageParts/Faq'
 import HowItWorks from '@/components/MalerPageParts/HowItWorks'
 
 
-const faqItemsForSchema = [
-  {
-    "@type": "Question",
-    "name": "Wie erhalte ich Maler Offerten?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Füllen Sie einfach unser Online-Formular aus. Ihre Anfrage wird anonym an geprüfte Malerfirmen in Ihrer Nähe weitergeleitet. Sie erhalten unverbindliche Offerten direkt von den Anbietern."
-    }
-  },
-  {
-    "@type": "Question",
-    "name": "Was kostet eine Maler offerten?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Unser Service ist für Sie zu 100% kostenlos und unverbindlich. Sie zahlen nichts für die Vermittlung oder den Erhalt der Offerten."
-    }
-  },
-  {
-    "@type": "Question",
-    "name": "Wie viele Offerten erhalte ich?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Sie erhalten je nach Verfügbarkeit und Region verschiedene Offerten von qualifizierten Malerbetrieben."
-    }
-  },
-  {
-    "@type": "Question",
-    "name": "Was ist der Vorteil, Offerten zu vergleichen?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Durch den direkten Vergleich von Preisen und Leistungen können Sie erhebliche Kosten sparen – oft bis zu 40%. Zudem finden Sie schnell und einfach einen qualifizierten und verfügbaren Maler für Ihr Projekt."
-    }
-  },
-  {
-    "@type": "Question",
-    "name": "Sind die Malerfirmen geprüft?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Ja, wir arbeiten nur mit qualifizierten und erfahrenen Malerfirmen zusammen, die über die notwendigen Versicherungen und Qualifikationen verfügen. Viele unserer Partner sind seit Jahren im Geschäft und haben positive Kundenbewertungen."
-    }
-  },
-]
 
 const MalerarbeitenPageClient = () => {
   const pageVariants = {
@@ -62,54 +20,34 @@ const MalerarbeitenPageClient = () => {
 
   const schema = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://online-offerten.ch/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Malerarbeiten",
-            "item": "https://online-offerten.ch/malerarbeiten"
-          }
-        ]
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Malerarbeiten",
-        "provider": {
-          "@type": "Organization",
-          "name": "Online-Offerten.ch"
-        },
-        "name": "Malerarbeiten in der Schweiz",
-        "description": "Malerarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Malerfirmen. Innenanstrich, Aussenanstrich, Fassadenanstrich & Renovierung – sicher, professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!",
-        "areaServed": {
-          "@type": "Country",
-          "name": "Switzerland"
-        },
-        "offers": {
-          "@type": "Offer",
-          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler&step=2",
-          "priceCurrency": "CHF",
-          "name": "Kostenlose Maler Offerten"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": faqItemsForSchema
-      }
-    ]
+    "@type": "Service",
+    "name": "Malerarbeiten in der Schweiz",
+    "serviceType": "Maler-Vermittlung",
+    "description": "Malerarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Malerfirmen. Innenanstrich, Aussenanstrich, Fassadenanstrich & Renovierung – sicher, professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!",
+    "provider": {
+      "@type": "Organization",
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Switzerland"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=maler&step=2",
+      "priceCurrency": "CHF",
+      "price": "0",
+      "name": "Kostenlose Maler Offerten"
+    }
   }
 
   return (
     <>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <motion.div
         initial="initial"
         animate="in"
