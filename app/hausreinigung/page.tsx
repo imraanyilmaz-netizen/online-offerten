@@ -98,97 +98,26 @@ export default async function HausreinigungPage() {
   // ✅ Server-side schema - Google için (her sayfa yüklendiğinde güncel)
   const serverSchema = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://online-offerten.ch"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Reinigung",
-            "item": "https://online-offerten.ch/reinigung"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Hausreinigung",
-            "item": canonicalUrl
-          }
-        ]
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Hausreinigung mit Abnahmegarantie",
-        "name": "Professionelle Hausreinigung mit Abnahmegarantie",
-        "description": metaDescription,
-        "provider": {
-          "@type": "Organization",
-          "name": "Online-Offerten.ch",
-          "url": "https://online-offerten.ch"
-        },
-        // Sadece gerçek yorumlar varsa göster
-        ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": reviewStats.averageRating.toFixed(1),
-            "reviewCount": reviewStats.reviewCount.toString(),
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        } : {}),
-        "areaServed": {
-          "@type": "Country",
-          "name": "Switzerland",
-          "identifier": "CH"
-        },
-        "offers": {
-          "@type": "Offer",
-          "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
-          "priceCurrency": "CHF",
-          "price": "0",
-          "availability": "https://schema.org/InStock",
-          "name": "Kostenlose Offerte für Hausreinigung"
-        }
-      },
-      {
-        "@type": "HowTo",
-        "name": "Hausreinigung mit Abnahmegarantie",
-        "description": "Schritt-für-Schritt Anleitung für professionelle Hausreinigung mit Abnahmegarantie",
-        "step": [
-          {
-            "@type": "HowToStep",
-            "name": "Kostenlose Offerte anfordern",
-            "text": "Reinigungsofferten online anfordern und vergleichen."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Besichtigung des Hauses und Offerte erhalten",
-            "text": "Die Reinigungsfirma besichtigt das Haus und erstellt eine detaillierte Offerte."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Termin vereinbaren",
-            "text": "Vereinbaren Sie einen Termin, der zu Ihren Bedürfnissen passt."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Professionelle Reinigung durchführen",
-            "text": "Das professionelle Reinigungsteam führt die Reinigung systematisch durch."
-          },
-          {
-            "@type": "HowToStep",
-            "name": "Qualitätskontrolle und Abnahme",
-            "text": "Nach Abschluss erfolgt eine Qualitätskontrolle und Sie erhalten eine Abnahmegarantie."
-          }
-        ]
-      }
-    ]
+    "@type": "Service",
+    "name": metaTitle,
+    "serviceType": "Reinigungsvermittlung",
+    "description": metaDescription,
+    "provider": {
+      "@type": "Organization",
+      "name": "Online-Offerten.ch",
+      "url": "https://online-offerten.ch"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Switzerland"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
+      "priceCurrency": "CHF",
+      "price": "0",
+      "name": "Kostenlose Offerte für Hausreinigung"
+    }
   };
 
   return (
