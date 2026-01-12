@@ -11,6 +11,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { motion } from 'framer-motion';
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
+import PostSidebar from '@/src/components/tools/PostSidebar';
 
 const PostPageClient = () => {
     const params = useParams();
@@ -45,13 +46,14 @@ const PostPageClient = () => {
                 .from('posts')
                 .select('title, slug, featured_image_url')
                 .eq('status', 'published')
+                .neq('slug', slug)
                 .order('published_at', { ascending: false })
                 .limit(5);
 
             if (recentError) {
                 console.error('Error fetching recent posts:', recentError);
             } else {
-                setRecentPosts(recentData);
+                setRecentPosts(recentData || []);
             }
 
             setLoading(false);
@@ -100,8 +102,9 @@ const PostPageClient = () => {
                 </nav>
 
                 <div className="min-w-0">
-                    <main className="min-w-0 overflow-x-visible max-w-4xl mx-auto">
-                        <article className="bg-white p-6 md:p-8 rounded-2xl shadow-lg overflow-visible min-w-0 max-w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <main className="lg:col-span-2 min-w-0 overflow-x-visible">
+                            <article className="bg-white p-6 md:p-8 rounded-2xl shadow-lg overflow-visible min-w-0 max-w-full">
                             {post.featured_image_url && (
                                 <ImageWithFallback
                                     src={post.featured_image_url}
@@ -183,6 +186,17 @@ const PostPageClient = () => {
                             </Button>
                         </article>
                     </main>
+                    
+                    {/* Sidebar */}
+                    <aside className="lg:col-span-1">
+                        <PostSidebar 
+                            category={post.category}
+                            tags={post.tags}
+                            recentPosts={recentPosts}
+                            ratgeberBasePath={ratgeberBasePath}
+                        />
+                    </aside>
+                    </div>
                 </div>
             </div>
         </>

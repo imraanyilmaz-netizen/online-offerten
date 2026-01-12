@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tag, Folder, Clock, Sparkles, Calculator, ListChecks, ArrowRight, BookOpen } from 'lucide-react';
+import { Tag, Folder, Clock, Sparkles, Calculator, ListChecks, ArrowRight } from 'lucide-react';
 
 const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgeber' }) => {
   return (
@@ -36,6 +36,12 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
         </CardHeader>
         <CardContent className="space-y-3">
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
+            <Link href="/umzugskosten-rechner">
+              <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <span className="flex-grow">Umzugskosten-Rechner</span>
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
             <Link href="/reinigungskosten-rechner">
               <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
               <span className="flex-grow">Reinigungskosten-Rechner</span>
@@ -45,24 +51,6 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
             <Link href="/checklisten">
               <ListChecks className="w-5 h-5 text-green-600 flex-shrink-0" />
               <span className="flex-grow">Checklisten</span>
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
-
-      {/* Ratgeber & Tipps */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-green-600" />
-            Ratgeber & Tipps
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Button asChild variant="outline" className="w-full bg-green-50 hover:bg-green-100 border-green-200 text-green-700 font-semibold">
-            <Link href={ratgeberBasePath}>
-              Alle Ratgeber ansehen
-              <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </CardContent>

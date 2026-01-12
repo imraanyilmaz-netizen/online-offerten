@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Sparkles, Calculator, ListChecks, ArrowRight, BookOpen, Clock } from 'lucide-react';
+import { Sparkles, Calculator, ListChecks, ArrowRight, Clock } from 'lucide-react';
 
 const RatgeberSidebar = ({ recentPosts }) => {
   return (
@@ -50,24 +50,6 @@ const RatgeberSidebar = ({ recentPosts }) => {
             <Link href="/checklisten">
               <ListChecks className="w-5 h-5 text-green-600 flex-shrink-0" />
               <span className="flex-grow">Checklisten</span>
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
-
-      {/* Ratgeber & Tipps */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-green-600" />
-            Ratgeber & Tipps
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Button asChild variant="outline" className="w-full bg-green-50 hover:bg-green-100 border-green-200 text-green-700 font-semibold">
-            <Link href="/ratgeber">
-              Alle Ratgeber ansehen
-              <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </CardContent>
