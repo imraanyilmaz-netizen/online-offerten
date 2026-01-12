@@ -123,8 +123,9 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
               alt={`Firmenlogo von ${partner.company_name}`}
               className="w-20 h-20 rounded-md object-contain border bg-gray-50"
               onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/image/logo-icon.avif';
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = '/image/logo-icon.avif';
               }}
             />
           </Link>
