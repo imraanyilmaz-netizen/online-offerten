@@ -156,10 +156,14 @@ const PartnerPanel = ({ setCompanyName }) => {
           <div className="flex items-center gap-4">
             <Link href="/partner/einstellungen" className="relative group cursor-pointer">
                 <img
-                    src={partnerData.logo_url || 'https://via.placeholder.com/100'}
+                    src={partnerData.logo_url || '/image/logo-icon.avif'}
                     alt="Firmenlogo"
                     loading="lazy"
                   className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-contain border-2 border-gray-200 bg-white shadow-md hover:shadow-lg transition-shadow"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/image/logo-icon.avif';
+                  }}
                 />
             </Link>
             <div>

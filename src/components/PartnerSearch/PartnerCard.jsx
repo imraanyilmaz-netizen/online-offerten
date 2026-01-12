@@ -25,19 +25,27 @@ const PartnerCard = ({ partner }) => {
       <div className="relative">
         <Link href={`/partner/${partnerSlug}`} className="block">
           <img
-            src={partner.hero_image_url || 'https://horizons-cdn.hostinger.com/debf3bb6-240b-49e1-ac20-d04a2d77b10a/81069b02dbfff94bcdd6ba59576e64f5.png'}
+            src={partner.hero_image_url || '/image/umzugsservice-Schweiz/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.webp'}
             alt={`${partner.company_name} hero image`}
             className="w-full h-48 object-cover"
             loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/image/umzugsservice-Schweiz/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.webp';
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </Link>
         
         <div className="absolute bottom-3 left-3">
           <img
-            src={partner.logo_url || 'https://horizons-cdn.hostinger.com/debf3bb6-240b-49e1-ac20-d04a2d77b10a/9e713d57f8497b69b03139caff8f03d2.jpg'}
+            src={partner.logo_url || '/image/logo-icon.avif'}
             alt={`${partner.company_name} logo`}
             className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/image/logo-icon.avif';
+            }}
           />
         </div>
 

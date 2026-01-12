@@ -8,7 +8,7 @@ import StarRating from './StarRating';
 
 const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   // Removed useTranslation
-  const heroImageUrl = partner.hero_image_url || 'https://horizons-cdn.hostinger.com/debf3bb6-240b-49e1-ac20-d04a2d77b10a/81069b02dbfff94bcdd6ba59576e64f5.png';
+  const heroImageUrl = partner.hero_image_url || '/image/umzugsservice-Schweiz/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.webp';
   
   // Gerçek yorum sayısı ve rating'i kullan (prop'tan gelen veya partner objesinden)
   const displayRating = averageRating !== undefined ? averageRating : (partner.average_rating || 0);
@@ -53,11 +53,15 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
               className="flex-shrink-0 bg-white/90 rounded-2xl shadow-lg p-3 flex items-center justify-center mb-6 w-fit"
             >
               <img 
-                src={partner.logo_url || 'https://horizons-cdn.hostinger.com/debf3bb6-240b-49e1-ac20-d04a2d77b10a/9e713d57f8497b69b03139caff8f03d2.jpg'}
+                src={partner.logo_url || '/image/logo-icon.avif'}
                 alt={`${partner.company_name} Logo`} 
                 className="max-w-40 max-h-40 md:max-w-48 md:max-h-48 w-auto h-auto object-contain"
                 loading="lazy"
                 decoding="async"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/image/logo-icon.avif';
+                }}
               />
             </motion.div>
             

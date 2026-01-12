@@ -14,20 +14,22 @@ const PartnerHeader = ({ partner, averageRating, reviewCount, onGetOffer }) => {
     <div className="mb-8">
       <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
         <div className="flex items-center gap-4">
-          {partner.logo_url && (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="rounded-lg bg-green-100 flex items-center justify-center shadow-md border border-green-200 p-2"
-            >
-              <img 
-                alt={`${partner.name} Logo`} 
-                className="max-w-24 max-h-24 md:max-w-28 md:max-h-28 w-auto h-auto object-contain" 
-                src={partner.logo_url} 
-              />
-            </motion.div>
-          )}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="rounded-lg bg-green-100 flex items-center justify-center shadow-md border border-green-200 p-2"
+          >
+            <img 
+              alt={`${partner.name} Logo`} 
+              className="max-w-24 max-h-24 md:max-w-28 md:max-h-28 w-auto h-auto object-contain" 
+              src={partner.logo_url || '/image/logo-icon.avif'} 
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/image/logo-icon.avif';
+              }}
+            />
+          </motion.div>
           <div className="flex-grow">
             <motion.h1
               initial={{ opacity: 0, x: -20 }}
