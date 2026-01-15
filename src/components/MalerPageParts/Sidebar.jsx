@@ -43,7 +43,7 @@ const Sidebar = () => {
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Finden Sie den besten Maler
         </h3>
-        <img alt="Lächelnder Maler mit Farbrolle" className="w-full h-56 object-cover rounded-lg shadow-md mb-4" src="https://horizons-cdn.hostinger.com/debf3bb6-240b-49e1-ac20-d04a2d77b10a/6e35e708-ec29-4efb-801c-0b7d58c1d1e4-aAZai.png" loading="lazy" decoding="async" />
+        <img alt="Lächelnder Maler mit Farbrolle" className="w-full h-56 object-cover rounded-lg shadow-md mb-4" src="/image/malerarbeit.webp" loading="lazy" decoding="async" />
         <p className="text-gray-600 mb-5">Starten Sie jetzt Ihren Vergleich und verschönern Sie Ihr Zuhause.</p>
         <Button asChild size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white group">
           <Link href="/kostenlose-offerte-anfordern?service=maler&step=2">

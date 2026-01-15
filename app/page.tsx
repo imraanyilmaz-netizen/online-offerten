@@ -233,17 +233,54 @@ export default async function HomePage() {
         <main className="flex-grow">
           {/* Hero Section - SEO Optimized - SERVER RENDERED */}
           <section 
-            className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden" 
+            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden" 
             aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
           >
+            {/* Background Image - Right Side */}
+            <div 
+              className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 h-full bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('/image/online-offerten.webp')`,
+                maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
+              }}
+            ></div>
+            
+            {/* Gradient Overlay - White from left to right with shadow effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+            
+            {/* White shadow/glow effect towards the image */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/20 pointer-events-none"></div>
+            <div 
+              className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 pointer-events-none"
+              style={{
+                boxShadow: 'inset -100px 0 100px -50px rgba(255, 255, 255, 0.8)'
+              }}
+            ></div>
+            
             <div className="container mx-auto max-w-navbar px-4 sm:px-6 relative z-10">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 lg:items-start">
                 {/* Left Column - Content */}
                 <div className="order-1 lg:order-1 text-center lg:text-left space-y-6 sm:space-y-8">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+                  <h1 className="text-[38px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight text-left">
                     <span className="text-green-600">Offerten vergleichen</span> & den passenden Anbieter finden
                   </h1>
-                  <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                  
+                  {/* Mobile Image - Only visible on mobile */}
+                  <div className="flex items-center justify-center mb-6 sm:mb-8 lg:hidden">
+                    <NextImage 
+                      src="/image/online-offerten.webp" 
+                      alt="Online Offerten" 
+                      width={600}
+                      height={400}
+                      className="w-full h-auto max-w-full rounded-xl shadow-lg"
+                      priority
+                      quality={85}
+                      sizes="(max-width: 768px) 100vw, 600px"
+                    />
+                  </div>
+                  
+                  <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0 text-left">
                     Finden Sie qualifizierte Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Unsere Plattform ist speziell auf die Bedürfnisse des Schweizer Marktes und die dortigen Standards ausgerichtet. Endlich stressfrei: Vertrauenswürdige Partner finden & vergleichen
                   </p>
                   
@@ -273,7 +310,7 @@ export default async function HomePage() {
                   </div>
                   
                   {/* Trust Badge */}
-                  <p className="text-sm sm:text-base text-gray-500 font-medium">
+                  <p className="text-sm sm:text-base text-gray-500 font-medium text-left">
                     Die Anfrage ist kostenlos und unverbindlich.
                   </p>
                   
@@ -285,29 +322,17 @@ export default async function HomePage() {
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm sm:text-base text-gray-700">Für mehr Sicherheit werden alle Anbieter sorgfältig geprüft und durchlaufen einen Background-Check, um Risiken für unsere Kunden zu minimieren.</span>
+                      <span className="text-sm sm:text-base text-gray-700 text-left">Für mehr Sicherheit werden alle Anbieter sorgfältig geprüft und durchlaufen einen Background-Check, um Risiken für unsere Kunden zu minimieren.</span>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-3" id="unverbindliche-anfrage">
                       <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
                       <span className="text-sm sm:text-base text-gray-700">Unverbindliche Anfrage – keine Verpflichtung</span>
                     </div>
                   </div>
                 </div>
                 
-                {/* Right Column - Image & Benefits Card */}
-                <div className="relative order-2 lg:order-last">
-                  <div className="flex items-center justify-center mb-6 sm:mb-8">
-                    <NextImage 
-                      src="/image/online-offerten.webp" 
-                      alt="Online Offerten" 
-                      width={600}
-                      height={400}
-                      className="w-full h-auto max-w-full sm:max-w-md rounded-xl shadow-lg"
-                      priority
-                      quality={85}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                    />
-                  </div>
+                {/* Right Column - Benefits Card */}
+                <div className="relative order-2 lg:order-last lg:mt-[24rem] lg:ml-4">
                   <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 sm:border-4 border-green-200">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
                       Ihre Vorteile auf einen Blick

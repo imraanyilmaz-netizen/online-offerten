@@ -383,7 +383,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 <p className="inline-block text-xs font-bold text-green-300 uppercase tracking-widest mb-3 px-3 py-1.5 bg-green-800/50 backdrop-blur-sm rounded-full border border-green-700/50">
                   WIE ES FUNKTIONIERT
                 </p>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-3 tracking-tight leading-tight">
+                <h2 className="text-[30px] md:text-3xl font-extrabold text-white mb-3 tracking-tight leading-tight">
                   So funktioniert's
                 </h2>
                 <p className="text-base md:text-lg text-green-100 max-w-2xl mx-auto leading-relaxed">
