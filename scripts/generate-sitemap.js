@@ -133,7 +133,7 @@ async function generateSitemap() {
   // Location pages (umzugsfirma-* pages)
   const locationPagePrefixes = [
     '/umzugsfirma-aargau', '/umzugsfirma-basel', '/umzugsfirma-bern',
-    '/umzugsfirma-biel-bienne', '/umzugsfirma-freiburg', '/umzugsfirma-genf',
+    '/umzugsfirma-biel-bienne', '/umzugsfirma-genf',
     '/umzugsfirma-lausanne', '/umzugsfirma-lugano', '/umzugsfirma-luzern',
     '/umzugsfirma-st-gallen', '/umzugsfirma-thun',
     '/umzugsfirma-zuerich'

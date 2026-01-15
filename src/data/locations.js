@@ -10,5 +10,4 @@ export const locations = [
   { name: 'Thun', slug: 'umzugsfirma-thun', canton: 'BE', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-thun-kostenlose-offerte.webp' },
   { name: 'Biel/Bienne', slug: 'umzugsfirma-biel-bienne', canton: 'BE', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-biel-bienne-offerten.webp' },
   { name: 'Lugano', slug: 'umzugsfirma-lugano', canton: 'TI', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-lugano-kostenlose-offerte.webp' },
-  { name: 'Freiburg', slug: 'umzugsfirma-freiburg', canton: 'FR', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-freiburg-offerten.webp' },
 ];

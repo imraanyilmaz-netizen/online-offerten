@@ -89,15 +89,6 @@ export const cityServiceData: Record<string, {
     longitude: '7.6217',
     canonicalUrl: '/umzugsfirma-thun'
   },
-  'Freiburg': {
-    name: 'Freiburg',
-    displayName: 'Umzugsofferten Freiburg – Online-Offerten.ch',
-    addressLocality: 'Freiburg',
-    addressRegion: 'FR',
-    latitude: '46.8017',
-    longitude: '7.1510',
-    canonicalUrl: '/umzugsfirma-freiburg'
-  },
   'Biel-Bienne': {
     name: 'Biel/Bienne',
     displayName: 'Umzugsofferten Biel/Bienne – Online-Offerten.ch',
