@@ -156,7 +156,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style paint' }}>
+    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style paint', zIndex: 1500 }}>
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
         <div className="flex items-center justify-between h-16" style={{ minHeight: '64px' }}>
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">
