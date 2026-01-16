@@ -71,7 +71,7 @@ const Footer = React.memo(() => {
 
   return (
     <footer 
-      className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-20 pb-12 flex-shrink-0 footer-fixed-height relative overflow-hidden"
+      className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-12 pb-12 flex-shrink-0 footer-fixed-height relative overflow-hidden"
       style={{ contain: 'layout style paint' }}
     >
       {/* Decorative background elements */}

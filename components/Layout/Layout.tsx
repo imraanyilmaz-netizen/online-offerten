@@ -4,6 +4,7 @@ import React, { Suspense } from 'react'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Layout/Navbar'
 import Footer from '@/components/Layout/Footer'
+import FooterCTABanner from '@/components/Layout/FooterCTABanner'
 import { Loader2 } from 'lucide-react'
 
 const FullPageLoader = () => (
@@ -21,6 +22,56 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   ]
   const isFormPage = formPages.includes(pathname || '')
   const hideAll = pathname === '/bewertung-abgeben' || pathname?.startsWith('/anfrage-status')
+  
+  // Seiten, auf denen der FooterCTABanner angezeigt werden soll
+  const allowedCTABannerPages = [
+    // Hauptseite
+    '/',
+    // Umzug Services
+    '/privatumzug',
+    '/geschaeftsumzug',
+    '/internationale-umzuege',
+    '/spezialtransporte',
+    '/klaviertransport',
+    // Weitere Services
+    '/malerarbeiten',
+    '/gartenarbeiten',
+    '/raeumung-entsorgung',
+    // Kosten & Tools
+    '/umzugskosten-rechner',
+    '/reinigungskosten-rechner',
+    '/guenstig-umziehen',
+    '/umzugsfirma-vergleichen',
+    // Reinigungsdienstleistungen
+    '/wohnungsreinigung',
+    '/hausreinigung',
+    '/bueroreinigung',
+    '/umzugsreinigung',
+    '/unterhaltsreinigung',
+    '/grundreinigung',
+    '/baureinigung',
+    '/fensterreinigung',
+    '/bodenreinigung',
+    '/fassadenreinigung',
+    '/hofreinigung',
+    // Stadtseiten - Umzugsfirma
+    '/umzugsfirma-zuerich',
+    '/umzugsfirma-bern',
+    '/umzugsfirma-basel',
+    '/umzugsfirma-luzern',
+    '/umzugsfirma-st-gallen',
+    '/umzugsfirma-genf',
+    '/umzugsfirma-lausanne',
+    '/umzugsfirma-lugano',
+    '/umzugsfirma-aargau',
+    '/umzugsfirma-thun',
+    '/umzugsfirma-biel-bienne',
+    // Info-Seiten
+    '/umzugsfirma',
+    '/reinigung',
+    '/malerfirma',
+  ]
+  const shouldShowCTABanner = !isFormPage && allowedCTABannerPages.includes(pathname || '')
 
   if (hideAll) {
     return (
@@ -40,7 +91,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </Suspense>
       </main>
-      {!isFormPage && <Footer />}
+      {!isFormPage && (
+        <>
+          {shouldShowCTABanner && <FooterCTABanner />}
+          <Footer />
+        </>
+      )}
     </div>
   )
 }

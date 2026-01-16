@@ -65,7 +65,38 @@ const ServiceGrid = ({ city }: ServiceGridProps) => {
     if (!selectedService) return '#'
     const service = services.find(s => s.id === selectedService)
     if (!service) return '#'
-    return `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=${service.umzugArt}&city=${city}`
+    
+    // Privatumzug: step=2
+    if (service.id === 'privatumzug') {
+      return `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug`
+    }
+    
+    // Geschäftsumzug: step=3
+    if (service.id === 'geschaeftsumzug') {
+      return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug`
+    }
+    
+    // Internationaler Umzug: step=3
+    if (service.id === 'international') {
+      return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international`
+    }
+    
+    // Spezialtransport: step=3 mit special_transport_type
+    if (service.id === 'spezialtransport') {
+      return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport`
+    }
+    
+    // Kleintransport: step=3
+    if (service.id === 'kleintransport') {
+      return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport`
+    }
+    
+    // Möbellift: step=3
+    if (service.id === 'moebellift') {
+      return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=moebellift`
+    }
+    
+    return `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=${service.umzugArt}`
   }
 
   return (

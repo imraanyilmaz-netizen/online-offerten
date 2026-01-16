@@ -11,12 +11,6 @@ import { logoUrl } from '@/assets/logoConstants'
 // Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
 import dynamic from 'next/dynamic'
 
-// Lazy load FloatingReviewSummary
-const FloatingReviewSummary = dynamic(
-  () => import('@/components/HomePageSections/FloatingReviewSummary'),
-  { ssr: false }
-)
-
 // Lazy load Google Analytics
 const TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"
 let ReactGA: any = null
@@ -295,14 +289,6 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }
   }, [globalSchema])
 
-  const shouldShowFloatingReview = 
-    !pathname?.startsWith('/admin-dashboard') && 
-    pathname !== '/partner-werden' && 
-    pathname !== '/kostenlose-offerte-anfordern' &&
-    pathname !== '/free-quote-request' &&
-    pathname !== '/checklisten' &&
-    !pathname?.startsWith('/anfrage-status')
-
   return (
     <HelmetProvider>
       <I18nextProvider i18n={i18n}>
@@ -318,11 +304,6 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
             {children}
           </Suspense>
         </Layout>
-        {shouldShowFloatingReview && (
-          <Suspense fallback={null}>
-            <FloatingReviewSummary />
-          </Suspense>
-        )}
       </I18nextProvider>
     </HelmetProvider>
   )

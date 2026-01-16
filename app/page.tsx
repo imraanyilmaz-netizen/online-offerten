@@ -344,9 +344,9 @@ export default async function HomePage() {
                    </div>
                    
                    <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 sm:border-4 border-green-200 h-full">
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
                       Ihre Vorteile auf einen Blick
-                    </h3>
+                    </h2>
                     <div className="space-y-3 sm:space-y-4">
                       <div className="flex items-start gap-3">
                         <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
@@ -382,98 +382,136 @@ export default async function HomePage() {
           {/* Why Choose Us Section - SERVER RENDERED with long content */}
           <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 via-white to-green-50/30 overflow-hidden">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
-                  Kosten sparen mit dem richtigen Anbieter – Offerten einfach vergleichen
-                </h2>
-                <div className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed space-y-4">
-                  <p>
-                    Mit nur einer kostenlosen Anfrage erhalten Sie mehrere transparente Offerten von geprüften Partnern. Durch den Vergleich stellen Sie sicher, dass die Qualität der Dienstleister durch verifizierte Referenzen, Zertifikate und Kundenbewertungen gewährleistet ist. Sparen Sie Zeit und Geld und finden Sie den passenden Partner für Ihr Projekt.
-                  </p>
-                  <p>
-                    Viele Kunden haben durch den Offertenvergleich bereits erfolgreich Zeit und Geld gespart und sind mit dem Service sehr zufrieden.
-                  </p>
-                </div>
-              </div>
-
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 md:mb-12 text-center">
+                Unsere Dienstleistungen im Überblick
+              </h2>
               <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
                 {/* Umzugsfirma */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-                      <Truck className="w-8 h-8 text-white" />
+                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                  {/* Background Gradient Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/0 via-blue-50/0 to-blue-50/30 group-hover:from-blue-50/30 group-hover:via-blue-50/20 group-hover:to-blue-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-5 mb-6">
+                      <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                        <Truck className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Umzugsfirma</h4>
+                        <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+                      </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">Umzugsfirma</h3>
+                    <div className="space-y-4 mb-8">
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Ein Umzug muss nicht anstrengend sein – mit den passenden <Link href="https://online-offerten.ch/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsfirmen</Link> an Ihrer Seite wird er schnell und unkompliziert. Unsere erfahrenen Partner kümmern sich um jeden Schritt des Umzugs, von der detaillierten Planung bis zur reibungslosen Umsetzung.
+                      </p>
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Lehnen Sie sich entspannt zurück, während qualifizierte Umzugsexperten Ihre Möbel und Haushaltsgegenstände sicher, sorgfältig und termingerecht an Ihren neuen Wohnort transportieren. Ein Umzugsunternehmen aus der eigenen Region kann dabei besonders flexibel auf Ihre individuellen Bedürfnisse eingehen.
+                      </p>
+                    </div>
+                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                      <Link href="https://online-offerten.ch/umzugsfirma-in-der-naehe" className="inline-flex items-center">
+                        Umzugsfirma finden
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
                   </div>
-                  <p className="text-gray-600 leading-relaxed mb-4">
-                    Ein Umzug muss nicht anstrengend sein – mit den passenden <Link href="https://online-offerten.ch/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirmen</Link> an Ihrer Seite wird er schnell und unkompliziert. Unsere erfahrenen Partner kümmern sich um jeden Schritt des Umzugs, von der detaillierten Planung bis zur reibungslosen Umsetzung. Lehnen Sie sich entspannt zurück, während qualifizierte Umzugsexperten Ihre Möbel und Haushaltsgegenstände sicher, sorgfältig und termingerecht an Ihren neuen Wohnort transportieren.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Ein Umzugsunternehmen aus der eigenen Region oder in der Nähe kann dabei besonders flexibel und schnell auf Ihre individuellen Bedürfnisse eingehen und sorgt für eine reibungslose Durchführung am gewünschten Ort.
-                  </p>
-                  <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
-                    <Link href="https://online-offerten.ch/umzugsfirma-in-der-naehe">
-                      Umzugsfirma finden
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
                 </div>
 
                 {/* Reinigungsfirma */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-                      <Sparkles className="w-8 h-8 text-white" />
+                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                  {/* Background Gradient Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50/0 via-orange-50/0 to-orange-50/30 group-hover:from-orange-50/30 group-hover:via-orange-50/20 group-hover:to-orange-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-5 mb-6">
+                      <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                        <Sparkles className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">Reinigungsfirma</h4>
+                        <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+                      </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">Reinigungsfirma</h3>
+                    <div className="space-y-4 mb-8">
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Ob nach einem Umzug, einer Renovation oder für die regelmässige Reinigung – unsere professionellen Reinigungsunternehmen garantieren höchste Sauberkeit mit umweltfreundlichen Reinigungsmitteln und höchster Qualität.
+                      </p>
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Zu den wichtigsten Dienstleistungen zählen die <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Endreinigung</Link> und <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsreinigung</Link> für die Wohnungsübergabe sowie die professionelle <Link href="/bueroreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Büroreinigung</Link> für Geschäftskunden. Ein erfahrenes Team sorgt mit fachmännischer Arbeit für einen positiven Eindruck.
+                      </p>
+                    </div>
+                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                      <Link href="https://online-offerten.ch/reinigungsfirma-in-der-naehe" className="inline-flex items-center">
+                        Reinigungsfirma finden
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
                   </div>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Ob nach einem Umzug, einer Renovation oder für die regelmässige Reinigung – unsere professionellen Reinigungsunternehmen garantieren höchste Sauberkeit und setzen dabei auf umweltfreundliche Reinigungsmittel sowie höchste Qualität. Sie bieten flexible und zuverlässige Reinigungsdienstleistungen für Wohnungen, Büros und weitere Immobilien, die individuell auf die Bedürfnisse der Kunden abgestimmt werden. Zu den wichtigsten Dienstleistungen zählen die <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline">Endreinigung</Link> und <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsreinigung</Link>, die besonders für die Wohnungsübergabe und die Rückgabe der Mietkaution entscheidend sind. Für Geschäftskunden wird zudem eine professionelle <Link href="/bueroreinigung" className="text-green-600 hover:text-green-700 font-semibold underline">Büroreinigung</Link> angeboten, die für ein sauberes Arbeitsumfeld sorgt. Ein erfahrenes Team sorgt mit fachmännischer Arbeit für einen positiven Eindruck bei Kunden und Gästen.
-                  </p>
-                  <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
-                    <Link href="https://online-offerten.ch/reinigungsfirma-in-der-naehe">
-                      Reinigungsfirma finden
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
                 </div>
 
                 {/* Maler */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-                      <Paintbrush className="w-8 h-8 text-white" />
+                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                  {/* Background Gradient Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 via-purple-50/0 to-purple-50/30 group-hover:from-purple-50/30 group-hover:via-purple-50/20 group-hover:to-purple-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-5 mb-6">
+                      <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                        <Paintbrush className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Maler</h4>
+                        <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"></div>
+                      </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">Maler</h3>
+                    <div className="space-y-4 mb-8">
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Qualifizierte Malerbetriebe bieten Ihnen professionelle <Link href="https://online-offerten.ch/malerarbeiten" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Malerarbeiten</Link> für Innen- und Aussenbereiche. Sie übernehmen dabei auch das fachgerechte Streichen und Lackieren von Decken, sodass alle Flächen optimal geschützt und gestaltet werden.
+                      </p>
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Ob Renovation von Wohnräumen oder fachgerechte Fassadengestaltung – unsere erfahrenen Maler sorgen für frische Farben und ein makelloses Ergebnis. Mit modernen Arbeitstechniken und hochwertigen Materialien verleihen sie Ihrem Zuhause ein neues, stilvolles Erscheinungsbild.
+                      </p>
+                    </div>
+                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                      <Link href="https://online-offerten.ch/malerarbeiten" className="inline-flex items-center">
+                        Maler finden
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
                   </div>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Qualifizierte Malerbetriebe bieten Ihnen professionelle <Link href="https://online-offerten.ch/malerarbeiten" className="text-green-600 hover:text-green-700 font-semibold underline">Malerarbeiten</Link> für Innen- und Aussenbereiche. Sie übernehmen dabei auch das fachgerechte Streichen und Lackieren von Decken, sodass alle Flächen optimal geschützt und gestaltet werden. Ob Renovation von Wohnräumen oder fachgerechte Fassadengestaltung – unsere erfahrenen Maler sorgen für frische Farben und ein makelloses Ergebnis. Mit modernen Arbeitstechniken und hochwertigen Materialien verleihen sie Ihrem Zuhause ein neues, stilvolles Erscheinungsbild.
-                  </p>
-                  <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
-                    <Link href="https://online-offerten.ch/malerarbeiten">
-                      Maler finden
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
                 </div>
 
                 {/* Räumung & Entsorgung */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-700 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-                      <Trash2 className="w-8 h-8 text-white" />
+                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                  {/* Background Gradient Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-50/0 via-gray-50/0 to-gray-50/30 group-hover:from-gray-50/30 group-hover:via-gray-50/20 group-hover:to-gray-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-5 mb-6">
+                      <div className="w-14 h-14 bg-gradient-to-br from-gray-600 to-gray-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                        <Trash2 className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">Räumung & Entsorgung</h4>
+                        <div className="h-1 w-12 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full"></div>
+                      </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">Räumung & Entsorgung</h3>
+                    <div className="space-y-4 mb-8">
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Bei Umzügen oder Renovationsarbeiten entstehen häufig grosse Mengen an Abfall und Sperrgut. Auch Keller werden im Rahmen der Entrümpelung und Entsorgung professionell geleert, um Platz für den Umzug zu schaffen.
+                      </p>
+                      <p className="text-gray-700 leading-relaxed text-base">
+                        Unsere Entsorgungs-Partner übernehmen den fachgerechten Abtransport sowie die umweltgerechte Entsorgung sämtlicher Materialien. Ob alte Möbel, Elektrogeräte oder Baustellenabfälle – wir vermitteln Ihnen den passenden Entsorgungsdienst, der zuverlässig, sauber und gesetzeskonform arbeitet.
+                      </p>
+                    </div>
+                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                      <Link href="https://online-offerten.ch/raeumung-entsorgung" className="inline-flex items-center">
+                        Entsorgungsofferten
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
                   </div>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Bei Umzügen oder Renovationsarbeiten entstehen häufig grosse Mengen an Abfall und Sperrgut. Auch Keller werden im Rahmen der Entrümpelung und Entsorgung professionell geleert, um Platz für den Umzug zu schaffen. Unsere Entsorgungs-Partner übernehmen den fachgerechten Abtransport sowie die umweltgerechte Entsorgung sämtlicher Materialien. Ob alte Möbel, Elektrogeräte oder Baustellenabfälle – wir vermitteln Ihnen den passenden Entsorgungsdienst, der zuverlässig, sauber und gesetzeskonform arbeitet.
-                  </p>
-                  <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
-                    <Link href="https://online-offerten.ch/raeumung-entsorgung">
-                      Entsorgungsofferten
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
                 </div>
               </div>
             </div>

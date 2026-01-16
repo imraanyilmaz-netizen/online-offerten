@@ -219,11 +219,11 @@ export default function UmzugsfirmaZurichPage() {
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
-                  <span className="block">Umzugsfirma Zürich</span>
-                  <span className="block text-green-600 mt-2">Top Umzugsunternehmen vergleichen & sparen</span>
+                  <span className="block">Umzugsfirmen Zürich</span>
+                  <span className="block text-green-600 mt-2">Top Zügelfirmen vergleichen & sparen</span>
                 </h1>
                 
-                <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed max-w-2xl">
+                <p className="text-base text-gray-700 mb-8 leading-relaxed max-w-2xl">
                   Unsere Umzugsfirma Zürich bietet Ihnen einen umfassenden Full Service Umzug, der keine Wünsche offenlässt. Wir übernehmen alles rund um Ihren Umzug – von Transport, Montage, Reinigung bis hin zu Einlagerungen – damit Sie sich um nichts kümmern müssen. Als zuverlässige Firma stehen wir Ihnen als starker Partner zur Seite und sorgen dafür, dass Ihr Umzug reibungslos und stressfrei abläuft.
                 </p>
                 

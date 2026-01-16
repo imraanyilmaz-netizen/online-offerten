@@ -14,14 +14,6 @@ const HeroSection = () => {
   return (
     <div className="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       <div className="container mx-auto max-w-navbar px-4 md:px-6 py-20 md:py-32 text-center">
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="flex justify-center mb-6"
-        >
-          <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/fa7a3b21862e4bfea7280ee726140c80.png" alt="Partner Icon" className="h-20 w-20" />
-        </motion.div>
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
