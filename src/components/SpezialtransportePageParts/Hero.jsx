@@ -2,105 +2,104 @@ import Link from 'next/link';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp, Calculator } from 'lucide-react';
+import Image from 'next/image';
 
 const Hero = () => {
-  const imageUrl = "https://horizons-cdn.hostinger.com/debf3bb6-240b-49e1-ac20-d04a2d77b10a/8ab4aa15ebb385ce78049a8b9b8c691e.jpg";
+  const imageUrl = "/image/b87025c3-7292-44e6-8a2c-7c1105b554bc.webp";
 
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative w-full bg-gray-100 py-12 md:py-16"
+      className="relative w-full bg-white py-16 md:py-20 lg:py-24 overflow-hidden"
       itemScope
       itemType="https://schema.org/Service"
     >
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
-            <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
-          <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl" itemProp="description">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
-                Klaviertransport, Tresortransport & Maschinen Transport Schweiz
-              </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-2">
-                Professionelle Spezialtransporte vergleichen & bis zu 40% sparen
-              </p>
-            </motion.div>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium"
-            >
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, gray 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
+      
+      {/* Decorative Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20 translate-y-1/2 -translate-x-1/2"></div>
+      
+      <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+        <div className="grid lg:grid-cols-5 gap-12 items-center">
+          {/* Left Content */}
+          <div className="text-gray-900 lg:col-span-3">
+            <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
+              <span className="text-sm font-medium text-gray-700">Spezialtransporte</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
+              <span className="block">Spezialtransporte in der Schweiz</span>
+              <span className="block text-green-600 mt-2">Klavier, Tresor & Maschinen Transport</span>
+            </h1>
+            
+            <p className="text-base text-gray-700 mb-8 leading-relaxed max-w-2xl">
               Vergleichen Sie mehrere geprüfte Spezialtransport-Firmen für Klavier Transport, Tresor Transport und Maschinen & Geräte Transport. Erhalten Sie kostenlose Offerten von zertifizierten Transportunternehmen, die auf den sicheren Transport von wertvollen Gütern spezialisiert sind. Sicher, versichert und professionell.
-            </motion.p>
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="mb-6"
-            >
-              <Button
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <Button 
                 asChild
-                size="lg"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold group px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                size="lg" 
+                className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
               >
                 <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport">
-                  Mehrere Firmen vergleichen & Offerten anfordern
+                  Kostenlose Offerten anfordern
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-            </motion.div>
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6"
-            >
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
+              <Button 
+                asChild
+                variant="outline"
+                size="lg" 
+                className="bg-white hover:bg-gray-50 text-gray-700 border-gray-300 px-8 py-6 text-lg rounded-lg shadow-sm hover:shadow-md"
+              >
+                <Link href="/umzugskosten-rechner">
+                  <Calculator className="w-5 h-5 mr-2" />
+                  Kosten berechnen
+                </Link>
+              </Button>
+            </div>
+            
+            {/* Trust Badges */}
+            <div className="flex flex-wrap gap-6 text-sm">
+              <div className="flex items-center gap-2 text-gray-700">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <span className="font-medium">100% kostenlos</span>
               </div>
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                <span className="text-sm md:text-base text-gray-700 font-medium">Mehrere Spezialtransport-Firmen vergleichen</span>
+              <div className="flex items-center gap-2 text-gray-700">
+                <ShieldCheck className="w-5 h-5 text-green-600" />
+                <span className="font-medium">Geprüfte Partner</span>
               </div>
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                <span className="text-sm md:text-base text-gray-700 font-medium">Kostenlos & unverbindlich</span>
+              <div className="flex items-center gap-2 text-gray-700">
+                <TrendingUp className="w-5 h-5 text-green-600" />
+                <span className="font-medium">Bis zu 40% sparen</span>
               </div>
-            </motion.div>
-          </article>
-          <aside className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden md:pl-4" aria-label="Spezialtransport Dienstleistung Illustration">
-            <figure className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-              {/* Gradient Overlay for better text readability and modern look */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-green-900/20 via-transparent to-transparent z-10 pointer-events-none"></div>
-              
-              {/* Subtle border/shadow effect */}
-              <div className="absolute inset-0 rounded-2xl ring-4 ring-green-500/10 pointer-events-none z-20"></div>
-              
-            <img
+            </div>
+          </div>
+          
+          {/* Right Image */}
+          <div className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 lg:col-span-2">
+            <Image
               src={imageUrl}
-                alt="Professionelle Spezialtransporte für Klaviertransport, Tresortransport und Maschinen & Geräte Transport in der Schweiz"
-                className="w-full h-full object-cover rounded-2xl"
-              loading="eager"
-              fetchPriority="high"
-                width="600"
-                height="400"
-                itemProp="image"
-              />
-              
-              {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-bl-full pointer-events-none z-30"></div>
-              
-              <figcaption className="sr-only">Spezialtransporte für Klavier, Tresor und Maschinen Transport - Mehrere Firmen vergleichen</figcaption>
-            </figure>
-          </aside>
+              alt="Professionelle Spezialtransporte für Klaviertransport, Tresortransport und Maschinen & Geräte Transport in der Schweiz"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+              unoptimized
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent"></div>
+          </div>
         </div>
       </div>
     </motion.section>

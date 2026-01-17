@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Online-Offerten.ch',
     images: [
       {
-        url: 'https://online-offerten.ch/image/services-professionals.png',
+        url: 'https://online-offerten.ch/image/umzugsservice-Schweiz/lnternatIonale-umzuege.png',
         width: 1200,
         height: 630,
         alt: 'Internationale Umzüge',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Internationale Umzüge: Kostenlose Offerten vergleichen',
     description: 'Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%.',
-    images: ['https://online-offerten.ch/image/services-professionals.png'],
+    images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/lnternatIonale-umzuege.png'],
   },
   robots: {
     index: true,

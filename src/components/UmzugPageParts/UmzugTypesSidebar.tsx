@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Home, Building2, Globe, Truck, Box, Wind, ArrowRight, LucideIcon } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Home, Building2, Globe, Truck, Box, Wind, ArrowRight, LucideIcon, Sparkles, Calculator, ListChecks } from 'lucide-react';
 
 interface UmzugType {
   id: string;
@@ -65,54 +66,64 @@ const UmzugTypeItem: React.FC<UmzugTypeItemProps> = ({ type, isActive = false })
   const Icon = type.icon;
   
   return (
-    <Link href={type.link} className="group">
-      <motion.div
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={`p-5 rounded-lg border-2 transition-all duration-200 cursor-pointer ${
-          isActive
-            ? 'bg-green-50 border-green-500 shadow-md'
-            : 'bg-white border-gray-200 hover:border-green-400 hover:shadow-sm'
-        }`}
-      >
-        <div className="flex items-start gap-4">
-          <div className={`p-3 rounded-md flex-shrink-0 ${isActive ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'}`}>
-            <Icon className="w-6 h-6" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h4 className={`font-semibold text-lg mb-1.5 ${isActive ? 'text-green-800' : 'text-gray-800'}`}>
-              {type.title}
-            </h4>
-            <p className={`text-sm leading-relaxed ${isActive ? 'text-green-700' : 'text-gray-600'}`}>
-              {type.description}
-            </p>
-          </div>
-          <ArrowRight className={`w-5 h-5 mt-1 flex-shrink-0 transition-opacity ${isActive ? 'opacity-100 text-green-600' : 'opacity-0 group-hover:opacity-100 text-gray-400'}`} />
-        </div>
-      </motion.div>
-    </Link>
+    <Button asChild variant="outline" className={`w-full justify-start gap-3 text-left h-auto py-2 ${isActive ? 'border-green-500 bg-green-50' : ''}`}>
+      <Link href={type.link}>
+        <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-green-600' : 'text-green-600'}`} />
+        <span className="flex-grow">
+          <span className={`block font-semibold ${isActive ? 'text-green-800' : 'text-gray-800'}`}>{type.title}</span>
+          <span className={`block text-xs mt-0.5 ${isActive ? 'text-green-700' : 'text-gray-600'}`}>{type.description}</span>
+        </span>
+      </Link>
+    </Button>
   );
 };
 
 interface UmzugTypesSidebarProps {
   activeType?: string | null;
+  hiddenTypes?: string[];
 }
 
-const UmzugTypesSidebar: React.FC<UmzugTypesSidebarProps> = ({ activeType = null }) => {
+const UmzugTypesSidebar: React.FC<UmzugTypesSidebarProps> = ({ activeType = null, hiddenTypes = [] }) => {
+  const filteredTypes = umzugTypes.filter(type => !hiddenTypes.includes(type.id));
+  
   return (
-    <div className="bg-white p-7 rounded-2xl shadow-xl">
-      <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-        Umzugstypen
-      </h3>
-      <nav className="space-y-3">
-        {umzugTypes.map((type) => (
-          <UmzugTypeItem
-            key={type.id}
-            type={type}
-            isActive={activeType === type.id}
-          />
-        ))}
-      </nav>
+    <div className="space-y-8">
+      {/* Umzugstypen Card */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Umzugstypen</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {filteredTypes.map((type) => (
+            <UmzugTypeItem
+              key={type.id}
+              type={type}
+              isActive={activeType === type.id}
+            />
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Helpful Tools */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Hilfreiche Tools</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
+            <Link href="/umzugskosten-rechner">
+              <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <span className="flex-grow">Umzugskosten-Rechner</span>
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
+            <Link href="/checklisten">
+              <ListChecks className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <span className="flex-grow">Checklisten</span>
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
 };

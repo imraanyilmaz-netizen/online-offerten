@@ -10,7 +10,7 @@ import {
   ArrowRight, CheckCircle, PackagePlus, ClipboardList, Users, ShieldCheck, 
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
   Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box,
-  TrendingUp
+  TrendingUp, FileText, Search, Mail, CheckCircle2
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
@@ -30,7 +30,7 @@ const PrivateUmzugPageClient = () => {
   const metaTitle = "Privatumzug Offerten kostenlos vergleichen » Bis zu 40% sparen";
   const metaDescription = "Privatumzug Offerten kostenlos vergleichen ✓ Offerten von geprüften Umzugsfirmen vergleichen. Wohnungsumzug, Hausumzug – sicher, stressfrei und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!";
   const canonicalUrl = "https://online-offerten.ch/privatumzug";
-  const ogImageUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/31d61ce9d2ebb52fb5f267adfccd6051.png";
+  const ogImageUrl = "https://online-offerten.ch/image/umzugsservice-Schweiz/privatumzug-offerten-kostenlos-vergleichen.png";
 
   // Schema Data - Single JSON-LD Service schema
   const schemaData = {
@@ -90,110 +90,93 @@ const PrivateUmzugPageClient = () => {
       <div className="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-100">
         
         {/* Hero Section */}
-        <section
-          className="relative w-full bg-gray-100 py-12 md:py-16"
-        >
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
-            <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
-              <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
-                <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
-                    Privatumzug Offerten kostenlos vergleichen
-                  </h1>
-                  <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-4">
-                    Finden Sie die beste Umzugsfirma für Ihren Wohnungswechsel
-                  </h2>
+        <section className="relative w-full bg-white py-16 md:py-20 lg:py-24 overflow-hidden">
+          {/* Subtle Background Pattern */}
+          <div className="absolute inset-0 opacity-[0.03]">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, gray 1px, transparent 0)`,
+              backgroundSize: '40px 40px'
+            }}></div>
+          </div>
+          
+          {/* Decorative Elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20 translate-y-1/2 -translate-x-1/2"></div>
+          
+          <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+            <div className="grid lg:grid-cols-5 gap-12 items-center">
+              {/* Left Content */}
+              <div className="text-gray-900 lg:col-span-3">
+                <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
+                  <span className="text-sm font-medium text-gray-700">Privatumzug</span>
                 </div>
-                <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium">
-                  Erhalten Sie unverbindliche Angebote von zertifizierten Zügelfirmen in der ganzen Schweiz. Für Ihren Wohnungsumzug oder Hausumzug vermitteln wir Ihnen vertrauenswürdige Partner aus Ihrer Region – schnell, einfach und ohne versteckte Kosten.
+                
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
+                  <span className="block">Privatumzug in der Schweiz</span>
+                  <span className="block text-green-600 mt-2">Angebote vergleichen & stressfrei umziehen</span>
+                </h1>
+                
+                <p className="text-base text-gray-700 mb-8 leading-relaxed max-w-2xl">
+                  Ein Privatumzug ist mehr als nur der Transport von Möbeln von A nach B – er betrifft das ganze Leben einer Familie. Ob Sie in Zürich, Bern, Basel, Aargau, Luzern oder St. Gallen wohnen: Die Wohnungsabgabe, neue Kita- oder Schulwege, veränderte Arbeitswege und die gesamte Organisation rund um den Wohnungswechsel erfordern eine frühzeitige Planung. Gerade in der Schweiz konzentrieren sich viele Privatumzüge auf bestimmte Stichtage - Ende März, Ende Juni und Ende September sind typische Mietzinswechsel-Termine, an denen die Nachfrage nach Umzugsfirmen besonders hoch ist.
                 </p>
-                <div className="mb-6">
-                  <Button
-                    size="lg"
-                    onClick={handleCtaClick}
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold group px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                  <Button 
+                    asChild
+                    size="lg" 
+                    className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
                   >
-                    Unverbindliche Offerten anfordern
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug">
+                      Kostenlose Offerten anfordern
+                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                  <Button 
+                    asChild
+                    variant="outline"
+                    size="lg" 
+                    className="bg-white hover:bg-gray-50 text-gray-700 border-gray-300 px-8 py-6 text-lg rounded-lg shadow-sm hover:shadow-md"
+                  >
+                    <Link href="/umzugskosten-rechner">
+                      <Calculator className="w-5 h-5 mr-2" />
+                      Kosten berechnen
+                    </Link>
                   </Button>
                 </div>
-                <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6">
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
+                
+                {/* Trust Badges */}
+                <div className="flex flex-wrap gap-6 text-sm">
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">100% kostenlos</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Zertifizierte Partnerunternehmen</span>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <ShieldCheck className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">Geprüfte Partner</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Kostenfrei & ohne Verpflichtung</span>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <TrendingUp className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">Bis zu 40% sparen</span>
                   </div>
                 </div>
-              </article>
-              <aside className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden md:pl-4" aria-label="Privatumzug Dienstleistung Illustration">
-                <figure className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-                  {/* Gradient Overlay for better text readability and modern look */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-green-900/20 via-transparent to-transparent z-10 pointer-events-none"></div>
-                  
-                  {/* Subtle border/shadow effect */}
-                  <div className="absolute inset-0 rounded-2xl ring-4 ring-green-500/10 pointer-events-none z-20"></div>
-                  
+              </div>
+              
+              {/* Right Image */}
+              <div className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 lg:col-span-2">
                 <Image
                   src={imageUrl}
-                    alt="Zufriedene Familie nach erfolgreichem Privatumzug in der Schweiz - Professionelle Umzugsfirma bei der Arbeit"
-                    className="w-full h-full object-cover rounded-2xl"
-                  loading="eager"
+                  alt="Zufriedene Familie nach erfolgreichem Privatumzug in der Schweiz - Professionelle Umzugsfirma bei der Arbeit"
+                  fill
+                  className="object-cover"
                   priority
-                  width={600}
-                  height={400}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  
-                  {/* Decorative corner accent */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-bl-full pointer-events-none z-30"></div>
-                  
-                  <figcaption className="sr-only">Familie nach erfolgreichem Wohnungsumzug mit professioneller Umzugsfirma</figcaption>
-                </figure>
-              </aside>
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent"></div>
+              </div>
             </div>
           </div>
         </section>
-
-        {/* How It Works Section */}
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
-          <HowItWorks
-            title="So einfach ist es"
-            ctaText="Jetzt kostenlose Privatumzug-Offerten anfordern"
-            ctaLink="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug"
-          />
-        </div>
-
-        {/* Why Choose Us Section */}
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 pb-12 md:pb-16">
-          <WhyChooseUs
-            title="Warum Online-Offerten.ch?"
-            subtitle="Ihre Vorteile beim Vergleich von Privatumzug-Offerten"
-            advantages={[
-              {
-                icon: <ShieldCheck className="h-8 w-8" />,
-                title: "Geprüfte Umzugsfirmen",
-                description: "Alle unsere Partner werden sorgfältig geprüft. Sie erhalten nur Offerten von vertrauenswürdigen, zertifizierten Zügelfirmen."
-              },
-              {
-                icon: <TrendingUp className="h-8 w-8" />,
-                title: "Bis zu 40% sparen",
-                description: "Durch den Vergleich mehrerer Privatumzug-Offerten finden Sie das beste Preis-Leistungs-Verhältnis und sparen erheblich."
-              },
-              {
-                icon: <Users className="h-8 w-8" />,
-                title: "100% kostenlos",
-                description: "Die Anfrage ist vollständig kostenlos und unverbindlich. Keine versteckten Kosten, keine Verpflichtungen."
-              }
-            ]}
-          />
-        </div>
 
         <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
@@ -203,179 +186,554 @@ const PrivateUmzugPageClient = () => {
             >
               {/* Article Section 1 */}
               <section>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Privatumzug in Zürich, Bern, Basel & ganze Schweiz
+                </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Ein Wohnungsumzug oder Hausumzug ist mehr als nur der Transport von Möbeln von A nach B. Es ist der Beginn eines neuen Kapitels. Ob Sie in eine grössere Wohnung ziehen, mit Ihrem Partner zusammenziehen oder einfach einen Tapetenwechsel brauchen – ein gut geplanter privater Umzug ist der Schlüssel zu einem reibungslosen Start. Eine professionelle Umzugsfirma kann Ihnen dabei helfen, den Prozess stressfrei und effizient zu gestalten.
+                  Genau hier setzt Online-Offerten.ch an: Als digitale Plattform ermöglicht sie es Ihnen, Ihren geplanten Umzug unkompliziert zu beschreiben und anschliessend mehrere Offerten von geprüften Umzugsfirmen aus Ihrer Region zu erhalten. Sie entscheiden selbst, welches Unternehmen am besten zu Ihrem Bedarf passt – ob im Raum Zürichsee, Limmattal, der Agglomeration Bern oder anderswo in der Schweiz.
                 </p>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Alle Offerten sind kostenlos und unverbindlich. Das bedeutet: Sie gehen kein Risiko ein und behalten die volle Kontrolle über Ihre Entscheidung. Die Partner von Online-Offerten.ch sind regionale Spezialisten, die auf Privatumzüge spezialisiert sind und wissen, worauf es bei einem reibungslosen Wohnungswechsel ankommt.
+                </p>
+                <Image
+                  src="/image/15ea36f2-ae78-403b-9348-4ec683047a94.webp"
+                  alt="Ein Umzugswagen steht vor einem typischen Schweizer Mehrfamilienhaus, während Umzugskartons auf dem Gehweg gestapelt sind. Diese Szene zeigt den Beginn eines Privatumzugs, bei dem Möbel und Hausrat sorgfältig transportiert werden."
+                  width={800}
+                  height={450}
+                  className="w-full h-auto rounded-lg shadow-lg mt-4"
+                  loading="lazy"
+                />
+              </section>
+
+              {/* So funktioniert Section */}
+              <section className="pt-6 border-t border-gray-200">
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                  So funktioniert der Privatumzug mit Online-Offerten.ch
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  In wenigen Minuten gelangen Sie über Online-Offerten.ch zu passenden Umzugsfirmen in der Schweiz. Der gesamte Prozess ist so gestaltet, dass Sie mit minimalem Aufwand maximale Transparenz erhalten.
+                </p>
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-6 mt-6">
+                  Schritt für Schritt zur passenden Umzugsfirma
+                </h3>
+                <div className="space-y-8 mb-6">
+                  {/* Step 1 */}
+                  <div className="relative flex gap-6">
+                    <div className="flex flex-col items-center flex-shrink-0">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg relative z-10">
+                        <div className="text-white font-bold text-2xl">1</div>
+                      </div>
+                      <div className="w-0.5 h-full bg-gradient-to-b from-green-300 to-green-100 mt-4 flex-grow min-h-[80px]"></div>
+                    </div>
+                    <div className="flex-1 pb-6">
+                      <div className="bg-white border-2 border-green-100 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4">
+                          <div className="p-3 bg-green-50 rounded-lg flex-shrink-0">
+                            <FileText className="w-6 h-6 text-green-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Online-Formular ausfüllen</h4>
+                            <p className="text-gray-700 leading-relaxed">
+                              Geben Sie Ihre alte und neue Adresse ein, Etage, ob ein Lift vorhanden ist, Ihr Wunschdatum, den Umfang in Zimmern sowie besondere Güter wie Klavier, Aquarium oder schwere Gerätschaften.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="relative flex gap-6">
+                    <div className="flex flex-col items-center flex-shrink-0">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg relative z-10">
+                        <div className="text-white font-bold text-2xl">2</div>
+                      </div>
+                      <div className="w-0.5 h-full bg-gradient-to-b from-green-300 to-green-100 mt-4 flex-grow min-h-[80px]"></div>
+                    </div>
+                    <div className="flex-1 pb-6">
+                      <div className="bg-white border-2 border-green-100 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4">
+                          <div className="p-3 bg-green-50 rounded-lg flex-shrink-0">
+                            <Search className="w-6 h-6 text-green-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Anfrage wird geprüft</h4>
+                            <p className="text-gray-700 leading-relaxed">
+                              Online-Offerten.ch prüft Ihre Anfrage und leitet sie an passende, regionale Umzugsfirmen weiter – beispielsweise aus Zürich, Winterthur, Baden, Thun oder Chur.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="relative flex gap-6">
+                    <div className="flex flex-col items-center flex-shrink-0">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg relative z-10">
+                        <div className="text-white font-bold text-2xl">3</div>
+                      </div>
+                      <div className="w-0.5 h-full bg-gradient-to-b from-green-300 to-green-100 mt-4 flex-grow min-h-[80px]"></div>
+                    </div>
+                    <div className="flex-1 pb-6">
+                      <div className="bg-white border-2 border-green-100 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4">
+                          <div className="p-3 bg-green-50 rounded-lg flex-shrink-0">
+                            <Mail className="w-6 h-6 text-green-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Offerten erhalten</h4>
+                            <p className="text-gray-700 leading-relaxed">
+                              Innerhalb von 24–48 Stunden erhalten Sie mehrere Angebote per E-Mail oder Telefon, inklusive detaillierter Leistungsbeschreibung.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="relative flex gap-6">
+                    <div className="flex flex-col items-center flex-shrink-0">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg relative z-10">
+                        <CheckCircle2 className="w-8 h-8 text-white" />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="bg-white border-2 border-green-100 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4">
+                          <div className="p-3 bg-green-50 rounded-lg flex-shrink-0">
+                            <CheckCircle className="w-6 h-6 text-green-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Vergleichen und entscheiden</h4>
+                            <p className="text-gray-700 leading-relaxed">
+                              Prüfen Sie die Offerten in Ruhe: Preis, inkludierte Services (Transport, Verpackung, Montage, Reinigung), Erfahrung und Kundenbewertungen.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <p className="text-gray-700 leading-relaxed">
-                  Von der ersten Besichtigung über das sichere Verpacken Ihres Hab und Guts bis hin zum Transport und der Möbelmontage am neuen Ort – erfahrene Umzugsunternehmen bieten einen Rundum-Service, der genau auf Ihre Bedürfnisse zugeschnitten ist. Egal ob Wohnungsumzug in Zürich, Hausumzug in Bern oder Privatumzug in Basel – wir finden die passende Firma für Sie.
-                </p>
-                <p className="text-gray-700 leading-relaxed mt-4">
-                  In der Schweiz gibt es eine Vielzahl von Anbietern für Wohnungsumzüge. Doch wie finden Sie die richtige Zügelfirma, die zuverlässig arbeitet und ein faires Preis-Leistungs-Verhältnis bietet? Vergleichen Sie Offerten kostenlos und finden Sie die beste Offerte für Ihren Umzug.
+                  Es besteht kein Abschlusszwang. Wenn Ihnen ein Angebot zusagt, schliessen Sie den Auftrag direkt mit dem ausgewählten Unternehmen ab. Die Plattform übernimmt lediglich die Vermittlung – die Zusammenarbeit erfolgt direkt zwischen Ihnen und der Umzugsfirma Ihrer Wahl.
                 </p>
               </section>
 
               {/* Article Section 2 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <ClipboardList size={28} className="mr-3 text-blue-500" />
-                  Die richtige Planung ist die halbe Miete
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                  Welche Leistungen umfasst ein moderner Privatumzug?
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Eine sorgfältige Planung ist das A und O für einen erfolgreichen Wohnungsumzug. Je früher Sie beginnen, desto entspannter wird der Umzugstag. Unsere Experten empfehlen, mindestens zwei bis drei Monate vor dem geplanten Datum mit der Organisation zu beginnen.
+                  Schweizer Umzugsfirmen bieten heute weit mehr als den reinen Möbeltransport. Ein professioneller Umzugsservice kann den gesamten Prozess von A bis Z übernehmen und Ihnen so erheblichen Stress ersparen.
                 </p>
-                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                  <h3 className="font-bold text-lg text-gray-700 mb-2">Was gehört in einen Umzugsplan?</h3>
-                  <p className="text-gray-700 leading-relaxed mb-4">
-                    Ein guter Plan umfasst die Kündigung des alten Mietvertrags, das Beantragen von Sonderurlaub, das Organisieren von Umzugskartons, das Ummelden bei Behörden und natürlich die Suche nach der passenden Umzugsfirma.
-                  </p>
-                  <h3 className="font-bold text-lg text-gray-700 mt-4 mb-2">Nutzen Sie unsere kostenlosen Umzugs-Checklisten!</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Damit Sie nichts Wichtiges vergessen, haben wir detaillierte Checklisten für jede Phase Ihres Umzugs erstellt. Laden Sie sie kostenlos herunter und behalten Sie den Überblick.
-                  </p>
-                  <Button asChild className="mt-4 bg-green-600 hover:bg-green-700 text-white group">
-                    <Link href="/checklisten">
-                      Zu den Checklisten
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
+                <p className="text-gray-700 leading-relaxed mb-3">Typische Leistungen, die in Offerten auftauchen können:</p>
+                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
+                  <li><strong>Verpackungsservice</strong>: Das Team der Umzugsfirma verpackt Ihren gesamten Hausrat fachgerecht in Umzugskartons</li>
+                  <li><strong>Bereitstellung von Verpackungsmaterial</strong>: Kartons, Kleiderboxen, Luftpolsterfolie, Decken</li>
+                  <li><strong>Demontage und Montage</strong>: Aufbau und Abbau von Möbeln, Küchen, Lampen</li>
+                  <li><strong>Möbellift</strong>: Für grosse Gegenstände oder bei engen Treppenhäusern</li>
+                  <li><strong>Entsorgung</strong>: Alte Möbel und Haushaltsgegenstände werden fachgerecht entsorgt</li>
+                  <li><strong>Zwischenlagerung</strong>: Lagerraum für Mobiliar, wenn der Einzugstermin später liegt</li>
+                  <li><strong>Umzugsreinigung</strong>: Professionelle Räumung und Reinigung mit Abgabegarantie</li>
+                </ul>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Viele Firmen in Zürich, Basel, Lausanne oder Genf bieten auch die Abgabereinigung Ihrer alten Wohnung an – oft mit Garantie, dass die Wohnungsabgabe reibungslos klappt.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Bei der Anfrage auf Online-Offerten.ch sollten Sie gezielt angeben, welche Leistungen Sie wünschen. So können die Anbieter passende Pakete kalkulieren – ob Sie nur den reinen Transport benötigen oder einen Full-Service-Umzug mit Auspackservice und allem Drum und Dran.
+                </p>
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="text-gray-700 leading-relaxed"><strong>Tipp</strong>: Bei grösseren Wohnungen ab 3,5 Zimmern empfiehlt sich ein Besichtigungstermin (vor Ort oder per Video), damit die Offerte realistisch kalkuliert werden kann.</p>
                 </div>
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  Typische Zusatzservices beim Privatumzug
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  Die Unterschiede zwischen einzelnen Offerten können erheblich sein, je nachdem welche Extras enthalten sind. Hier einige Beispiele für Zusatzservices, die Sie delegieren können:
+                </p>
+                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
+                  <li><strong>Möbellift-Einsatz</strong>: Besonders bei Altbauten mit engen Treppenhäusern oder für den Transport schwerer Gegenstände wie Klaviere, Tresore oder Fitnessgeräte unverzichtbar</li>
+                  <li><strong>Kleiderboxen</strong>: Kleidung kann direkt am Bügel transportiert werden – spart Zeit beim Ein- und Auspacken</li>
+                  <li><strong>Ein- und Auspackservice</strong>: Profis übernehmen das komplette Auspacken und Einräumen am Zielort</li>
+                  <li><strong>Parkplatzreservation</strong>: Einige Firmen organisieren Halteverbotszonen bei der Gemeinde (etwa Stadt Zürich oder Stadt Bern)</li>
+                  <li><strong>Entsorgung über Recyclinghöfe</strong>: Alte Möbel werden über regionale Anlagen wie Hagenholz in Zürich oder Rhenus in Basel entsorgt</li>
+                  <li><strong>Handwerkerleistungen</strong>: Anschluss von Waschmaschinen, Montage von Lampen oder Aufhängen von Bildern</li>
+                </ul>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Bei Online-Offerten.ch können Sie diese Optionen direkt in Ihrer Anfrage markieren. So erhalten Sie von den Umzugsfirmen passgenaue Angebote, die Ihre individuellen Bedürfnisse berücksichtigen.
+                </p>
+                <Image
+                  src="/image/4e73e4b7-ab5b-4e20-9412-394b5b526cf0.webp"
+                  alt="Professionelle Umzugshelfer tragen sorgfältig einen großen Schrank durch ein Treppenhaus, während sie sich um die Sicherheit der Möbel kümmern. Diese Umzugsfirma zeigt ihre Erfahrung und Qualität im Möbeltransport, um den Privatumzug stressfrei zu gestalten."
+                  width={800}
+                  height={450}
+                  className="w-full h-auto rounded-lg shadow-lg mt-4"
+                  loading="lazy"
+                />
               </section>
 
               {/* Article Section 3 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <Users size={28} className="mr-3 text-purple-500" />
-                  Wann lohnt sich eine professionelle Umzugsfirma?
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                  Kosten eines Privatumzugs: Wovon der Preis in der Schweiz abhängt
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Viele Menschen überlegen, den Umzug mit Freunden und Familie selbst zu organisieren, um Kosten zu sparen. Doch eine professionelle Zügelfirma bietet entscheidende Vorteile, die sich oft auszahlen:
+                  Die Kosten für einen Privatumzug variieren in der Schweiz stark – je nach Stadt, Distanz, Umfang und gewünschten Dienstleistungen. Genau deshalb ist der Vergleich mehrerer Offerten so wichtig: Nur so erhalten Sie ein realistisches Bild davon, was Ihr Umzug tatsächlich kosten wird.
                 </p>
-                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
-                  <li>Zeitersparnis: Profis arbeiten schnell und effizient.</li>
-                  <li>Sicherheit: Ihr Eigentum ist während des Transports versichert.</li>
-                  <li>Ausrüstung: Umzugsfirmen verfügen über professionelles Equipment wie Möbel-Lifte und spezielle Verpackungsmaterialien.</li>
-                  <li>Kein Stress: Sie müssen sich nicht um die körperlich anstrengende Arbeit kümmern.</li>
-                </ul>
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3">
+                  Zentrale Preisfaktoren im Überblick
+                </h3>
+                <div className="overflow-x-auto mb-4">
+                  <table className="w-full border-collapse border border-gray-300 bg-white">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Faktor</th>
+                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Einfluss auf den Preis</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Wohnungsgrösse</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">2,5-Zimmer vs. 4,5-Zimmer – mehr Volumen bedeutet mehr Aufwand</td>
+                      </tr>
+                      <tr className="bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Stockwerk & Lift</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Ohne Lift im 4. Stock kostet mehr als Parterre mit Lift</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Distanz</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Umzug innerhalb von Zürich vs. Bern nach Basel</td>
+                      </tr>
+                      <tr className="bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Anzahl Mitarbeiter</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Je nach Umzugsvolumen 2–5 Umzugshelfer</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Fahrzeuggrösse</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Kleintransporter vs. grosser Umzugs-LKW</td>
+                      </tr>
+                      <tr className="bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Möbellift-Einsatz</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Zusätzliche Kosten, aber oft günstiger als stundenlanges Treppensteigen</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Zusatzleistungen</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Montage, Verpackung, Reinigung, Entsorgung</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  <strong>Timing ist Geld</strong>: Wochenend- oder Monatsend-Umzüge (30. Juni, 30. September) sind oft teurer als Termine unter der Woche in der Monatsmitte. Wenn Sie flexibel sind, können Sie bares Geld sparen.
+                </p>
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
+                  <p className="text-gray-700 leading-relaxed"><strong>Empfehlung</strong>: Reichen Sie Ihre Anfrage möglichst 4–6 Wochen vor Ihrem Wunschtermin ein. So haben die Firmen noch gute Verfügbarkeit, und Sie erhalten bessere Preise.</p>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Online-Offerten.ch fördert Transparenz: Sie erhalten mehrere konkrete Preisangebote und sehen sofort, welche Leistungen im Pauschalpreis enthalten sind. Achten Sie beim Vergleich auch auf mögliche versteckte Zusatzkosten wie Kilometerentschädigung, Versicherungszuschläge oder Parkgebühren.
+                </p>
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  Beispiele für typische Umzugspreise
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Die folgenden Preisrahmen sind als grobe Orientierung zu verstehen – die tatsächlichen Kosten hängen von vielen Faktoren ab und können nur durch eine konkrete Offerte ermittelt werden.
+                </p>
+                <div className="space-y-4 mb-4">
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Beispiel 1: Kleiner Stadtumzug in Zürich</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm mb-2">
+                      <li>• 2,5-Zimmer-Wohnung, Kreis 3 nach Kreis 6, ca. 10 km</li>
+                      <li>• Lift in beiden Häusern vorhanden</li>
+                      <li>• Nur Transport und Standardmontage</li>
+                    </ul>
+                    <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 800 – 1'400</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Beispiel 2: Kantonswechsel mit Full-Service</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm mb-2">
+                      <li>• 4,5-Zimmer-Wohnung von Bern nach Luzern, ca. 100 km</li>
+                      <li>• Inkl. Demontage, Montage und Möbellift an einem Standort</li>
+                      <li>• Verpackung durch Kunden</li>
+                    </ul>
+                    <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 2'500 – 4'500</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Beispiel 3: Budget-Umzug für Singles</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm mb-2">
+                      <li>• 1–1,5-Zimmer-Wohnung innerhalb derselben Stadt</li>
+                      <li>• Minimaler Service, nur Transport</li>
+                    </ul>
+                    <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 400 – 800</p>
+                  </div>
+                </div>
                 <p className="text-gray-700 leading-relaxed">
-                  Ein professionelles Umzugsunternehmen ist besonders dann sinnvoll, wenn Sie viele Möbel, schwere Gegenstände oder eine grosse Wohnung haben. <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-600 hover:underline font-semibold">Holen Sie sich unverbindliche Offerten</Link> und vergleichen Sie die Kosten mit dem Aufwand eines Umzugs in Eigenregie.
+                  Diese Angaben sind Richtwerte. Für genaue Preise nutzen Sie das Anfrageformular auf Online-Offerten.ch und erhalten Sie verbindliche Offerten von Umzugsfirmen aus Ihrer Umgebung.
                 </p>
               </section>
 
               {/* Article Section 4 */}
               <section className="pt-6 border-t border-gray-200">
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
-                  Was kostet ein Privatumzug in der Schweiz?
+                  Privatumzug planen: Checkliste von der Kündigung bis zur Schlüsselübergabe
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Die Kosten für einen Wohnungsumzug oder Hausumzug hängen von verschiedenen Faktoren ab: der Wohnungsgrösse, der Distanz zwischen den Wohnorten, dem Stockwerk und dem Umfang der gewünschten Dienstleistungen (z.B. Ein- und Auspackservice, Möbelmontage).
+                  Gute Planung reduziert Stress erheblich – besonders in Städten mit angespanntem Wohnungsmarkt wie Zürich, Genf oder Basel. Eine klare zeitliche Struktur hilft Ihnen, nichts Wichtiges zu vergessen.
                 </p>
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  Zeitlicher Ablauf für Ihren Umzug
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">2–3 Monate vor dem Umzug:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Mietvertrag kündigen unter Einhaltung der vertraglichen Fristen</li>
+                      <li>Falls nötig: Nachmieter suchen</li>
+                      <li>Neue Wohnung vertraglich sichern</li>
+                      <li>Erste Anfrage auf Online-Offerten.ch stellen</li>
+                    </ul>
+                  </div>
+                  <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">4–6 Wochen vorher:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Offerten vergleichen und Umzugsfirma beauftragen</li>
+                      <li>Adressänderungen vorbereiten: Einwohnerkontrolle, Postnachsendung, Versicherungen, Banken, Krankenkasse, Arbeitgeber, Schulen</li>
+                      <li>Aussortieren und Entsorgung organisieren</li>
+                      <li>Bei Bedarf Lagerung reservieren</li>
+                    </ul>
+                  </div>
+                  <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">1–2 Wochen vorher:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Verpackungsmaterial besorgen oder vom Umzugsunternehmen liefern lassen</li>
+                      <li>Mit dem Packen beginnen</li>
+                      <li>Parkplatzreservation für Umzugstag organisieren</li>
+                      <li>Nachbarn informieren</li>
+                    </ul>
+                  </div>
+                  <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Umzugswoche:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Letzte Kartons packen</li>
+                      <li>Kühlschrank abtauen</li>
+                      <li>Wohnung reinigen oder Reinigungsfirma beauftragen</li>
+                      <li>Zählerstände notieren</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Nach dem Umzug:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Anmeldung am neuen Ort (in den meisten Schweizer Gemeinden innerhalb von 14 Tagen Pflicht)</li>
+                      <li>Wohnungsübergabe alte Wohnung mit Protokoll</li>
+                      <li>Adressänderungen abschliessen</li>
+                    </ul>
+                  </div>
+                </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Als grobe Richtlinie können Sie mit folgenden Preisen rechnen: Für eine 2.5-Zimmer-Wohnung beginnen die Kosten bei ca. 800 CHF, während ein Umzug einer 4.5-Zimmer-Wohnung zwischen 1'500 und 2'500 CHF kosten kann.
+                  Viele Umzugsfirmen bieten eigene Checklisten an. Über Online-Offerten.ch können Sie Anbieter wählen, die bei der Planung aktiv mithelfen und Sie durch den gesamten Prozess begleiten.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Für eine genauere Schätzung empfehlen wir die Nutzung unseres <Link href="/umzugskosten-rechner" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechners</Link>. Damit erhalten Sie eine detaillierte Kostenschätzung für Ihr individuelles Projekt.
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  Praktische Tipps für den Umzugstag
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  Mit guter Vorbereitung verläuft der Umzugstag selbst deutlich entspannter. Hier einige bewährte Tipps aus der Praxis:
                 </p>
+                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
+                  <li><strong>Wertsachen separat transportieren</strong>: Dokumente, Schmuck, Medikamente und wichtige Unterlagen gehören in eine Tasche, die Sie persönlich mitnehmen</li>
+                  <li><strong>Parkplätze freihalten</strong>: Sorgen Sie dafür, dass der Umzugswagen direkt vor dem Haus stehen kann</li>
+                  <li><strong>Nachbarn rechtzeitig informieren</strong>: Ein kurzer Hinweis verhindert Ärger wegen blockierter Zugänge oder Lärm</li>
+                  <li><strong>Kinder und Haustiere organisieren</strong>: Bringen Sie sie während des eigentlichen Umzugs bei Freunden, Familie oder in einer Tagesbetreuung unter</li>
+                  <li><strong>Kartons sinnvoll beschriften</strong>: Zimmer, Inhalt und Priorität notieren – das erleichtert das Einräumen am Zielort enorm</li>
+                  <li><strong>Möbelplan erstellen</strong>: Ein einfacher Grundriss der neuen Wohnung hilft dem Team, alles gleich an den richtigen Ort zu stellen</li>
+                </ul>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Am Ende des Umzugs empfiehlt sich eine kurze Kontrolle gemeinsam mit der Umzugsfirma: Sind alle Gegenstände angekommen? Gibt es Schäden? Haben Sie in der alten Wohnung nichts vergessen? Notieren Sie die Zählerstände für Strom, Wasser und Gas.
+                </p>
+                <Image
+                  src="/image/7946a949-0354-4f72-aff6-a406d89f84db.webp"
+                  alt="Eine Familie mit Kindern steht in einer leeren Wohnung, umgeben von Umzugskartons, während sie sich auf ihren bevorstehenden Privatumzug vorbereitet. Die Atmosphäre ist geschäftig und voller Vorfreude auf das neue Zuhause, während die Eltern die Organisation und Planung des Umzugs koordinieren."
+                  width={800}
+                  height={450}
+                  className="w-full h-auto rounded-lg shadow-lg mt-4"
+                  loading="lazy"
+                />
               </section>
 
               {/* Article Section 5 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <ShieldCheck size={28} className="mr-3 text-red-500" />
-                  Versicherung: Auf Nummer sicher gehen
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                  Privatumzug innerhalb der Schweiz, ins Ausland oder aus dem Ausland
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Ein entscheidender Vorteil einer professionellen Umzugsfirma ist der Versicherungsschutz. Sollte während des Transports etwas zu Bruch gehen, sind Sie abgesichert.
+                  Über Online-Offerten.ch können Sie nicht nur regionale Umzüge anfragen, sondern auch grössere Distanzen in der Schweiz sowie internationale Umzüge. Die Art des Umzugs bestimmt, worauf Sie besonders achten sollten.
                 </p>
-                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                  <h3 className="font-bold text-lg text-gray-700 mb-2">Transportversicherung</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Diese ist bei seriösen Umzugsunternehmen standardmässig inbegriffen und deckt Schäden, die während des Transports durch die Firma verursacht werden.
-                  </p>
-                  <h3 className="font-bold text-lg text-gray-700 mt-4 mb-2">Betriebshaftpflichtversicherung</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Diese Versicherung deckt Schäden, die im Treppenhaus oder an der Immobilie selbst entstehen. Fragen Sie bei der Auswahl der Firma immer nach den inkludierten Versicherungsleistungen.
-                  </p>
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  Unterschiedliche Umzugstypen
+                </h3>
+                <div className="space-y-4 mb-4">
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Lokal-Umzug (z. B. innerhalb Zürich):</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Kurze Wege, oft innerhalb weniger Stunden abgeschlossen</li>
+                      <li>Fokus auf Effizienz und reibungslose Durchführung</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Kantonswechsel (z. B. von Aargau nach Zug):</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Längere Fahrzeit, eventuell Verkehrsengpässe (Gotthard, Seelisberg)</li>
+                      <li>Bei sehr langen Strecken: Möglicherweise Übernachtung des Teams nötig</li>
+                      <li>Administrative Schritte: Abmeldung und Anmeldung in unterschiedlichen Kantonen</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Auslandsumzug (z. B. Schweiz–Deutschland, Schweiz–Frankreich):</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Zollbestimmungen beachten</li>
+                      <li>Inventarlisten erstellen</li>
+                      <li>Einfuhrbeschränkungen je nach Zielland prüfen (EU vs. Nicht-EU)</li>
+                      <li>Spezielle Dokumentation für Eigentum und Hausrat</li>
+                    </ul>
+                  </div>
                 </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Auf Online-Offerten.ch finden Sie auch Umzugsfirmen mit Erfahrung in Zollabwicklung und internationalen Transporten. Bei komplexen Umzügen lohnt sich ein ausführliches Beratungsgespräch mit der gewählten Firma – fragen Sie gezielt nach Referenzen und Erfahrung mit Ihrem Zielort.
+                </p>
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  Besondere Umzüge: Senioren, Familien, WG & Erstwohnung
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  Nicht jeder Privatumzug ist gleich. Unterschiedliche Lebenssituationen bringen unterschiedliche Bedürfnisse mit sich.
+                </p>
+                <div className="space-y-4 mb-4">
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Seniorenumzug:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Entlastung beim Sortieren, Packen und Entsorgen</li>
+                      <li>Behutsamer Umgang mit Erinnerungsstücken und persönlichem Eigentum</li>
+                      <li>Koordination mit Heimen oder Altersresidenzen</li>
+                      <li>Besondere Rücksicht auf körperliche Einschränkungen</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Familienumzug:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Planung rund um Schulwechsel und Kita-Plätze</li>
+                      <li>Arbeitswege beider Partner berücksichtigen</li>
+                      <li>Ideale Umzugstermine: Schulferien (Sommer, Sport, Herbst)</li>
+                      <li>Kinderzimmer als erstes einrichten für Normalität</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">WG-Umzug oder Erstwohnung:</h4>
+                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
+                      <li>Oft kleineres Budget</li>
+                      <li>Weniger Möbel, dafür vielleicht schwierige Zugänge in Altbauwohnungen</li>
+                      <li>Möglichkeit, Eigenleistung mit Profiservice zu kombinieren</li>
+                      <li>Flexibilität bei Terminen nutzen</li>
+                    </ul>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  Bei Ihrer Anfrage auf Online-Offerten.ch können Sie diese Situation kurz beschreiben. So können die Anbieter gezielt auf Ihre Bedürfnisse eingehen und eine passende Lösung vorschlagen.
+                </p>
               </section>
 
               {/* Article Section 6 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <Wrench size={28} className="mr-3 text-indigo-500" />
-                  Zusatzleistungen, die den Unterschied machen
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                  Warum Offerten für Ihren Privatumzug vergleichen? Ihre Vorteile mit Online-Offerten.ch
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Moderne Zügelfirmen bieten weit mehr als nur den reinen Transport. Diese Zusatzleistungen können Ihnen viel Zeit und Mühe sparen:
+                  In der Schweiz gibt es zahlreiche Umzugsfirmen mit sehr unterschiedlichen Preis- und Leistungsstrukturen. Ohne Vergleich laufen Sie Gefahr, entweder zu viel zu bezahlen oder Leistungen zu buchen, die Sie gar nicht benötigen.
                 </p>
-                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
-                  <li>Ein- und Auspackservice: Ihr gesamtes Hab und Gut wird fachgerecht verpackt und am neuen Ort wieder ausgepackt.</li>
-                  <li>Möbelmontage: Kleiderschränke, Betten und Regale werden von Profis ab- und wieder aufgebaut.</li>
-                  <li>Endreinigung mit Abnahmegarantie: Die alte Wohnung wird besenrein oder sogar komplett für die Übergabe gereinigt.</li>
-                </ul>
-              </section>
-
-              {/* Article Section 7 */}
-              <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <HeartHandshake size={28} className="mr-3 text-pink-500" />
-                  Vertrauen und Qualität: Die richtige Firma finden
-                </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  Der Umzugsmarkt ist gross. Achten Sie bei der Wahl Ihrer Zügelfirma auf Qualitätssiegel, Kundenbewertungen und transparente Offerten. Ein persönlicher Besichtigungstermin vor Ort ist oft ein Zeichen von Seriosität.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Über unsere Plattform können Sie Offerten kostenlos vergleichen. Sie erhalten ausschliesslich Offerten von geprüften und bewerteten Umzugsunternehmen aus Ihrer Region. So können Sie sicher sein, einen vertrauenswürdigen Partner für Ihren Wohnungsumzug zu finden.
-                </p>
-              </section>
-
-              {/* Article Section 8 */}
-              <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <MapPin size={28} className="mr-3 text-cyan-500" />
-                  Lokale Expertise für Ihren Umzug
-                </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  Ob Sie einen Wohnungsumzug innerhalb einer Stadt planen oder in einen anderen Kanton umziehen – eine Firma mit lokaler Expertise kennt die Gegebenheiten vor Ort, wie z.B. Parkregelungen oder Zufahrtsbeschränkungen. Das spart Zeit und Nerven am Umzugstag. Egal ob Wohnungsumzug in Zürich, Hausumzug in Bern oder Privatumzug in Basel – lokale Umzugsfirmen kennen die Besonderheiten Ihrer Region.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Wir vermitteln Ihnen Umzugsfirmen in der ganzen Schweiz. Finden Sie den passenden Partner für Ihren Wohnungsumzug in <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma-bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma-basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma-luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
-                </p>
-              </section>
-
-              {/* Conclusion */}
-              <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <Home size={28} className="mr-3 text-teal-500" />
-                  Starten Sie jetzt Ihren stressfreien Privatumzug
-                </h2>
-                <p className="text-gray-700 leading-relaxed">
-                  Ein Wohnungsumzug oder Hausumzug muss nicht kompliziert sein. Mit der richtigen Vorbereitung und einem zuverlässigen Partner an Ihrer Seite wird der Start in Ihr neues Zuhause zu einem positiven Erlebnis. <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-600 hover:underline font-semibold">Fordern Sie jetzt Ihre kostenlosen und unverbindlichen Offerten an</Link> und machen Sie den ersten Schritt in Richtung eines entspannten Umzugs.
-                </p>
-              </section>
-
-              {/* Advantages Section */}
-              <section className="pt-6 border-t border-gray-200">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-5 flex items-center">
-                  <Star size={28} className="mr-3 text-yellow-500" />
-                  Ihre Vorteile auf einen Blick
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  Die vier grossen Vorteile
                 </h3>
-                <ul className="space-y-3">
-                  {[
-                    "Kostenlos & Unverbindlich: Sie erhalten Offerten von geprüften Umzugsfirmen, ohne jegliche Verpflichtung.",
-                    "Geprüfte Qualität: Wir arbeiten nur mit bewerteten und qualifizierten Umzugsfirmen zusammen.",
-                    "Bis zu 40% sparen: Durch den direkten Preis- und Leistungsvergleich finden Sie die beste Offerte.",
-                    "Zeitersparnis: Statt mühsam selbst zu suchen, erhalten Sie passende Offerten direkt in Ihr Postfach.",
-                    "Regionale Partner: Wir finden für Sie die besten Umzugsprofis direkt aus Ihrer Nähe."
-                  ].map((advantage, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start py-2"
-                    >
-                      <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700">{advantage}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="overflow-x-auto mb-4">
+                  <table className="w-full border-collapse border border-gray-300 bg-white">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Vorteil</th>
+                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Was das für Sie bedeutet</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Zeitersparnis</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Statt jede Firma einzeln zu kontaktieren, stellen Sie einmal eine Anfrage und erhalten mehrere Angebote</td>
+                      </tr>
+                      <tr className="bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Kostenkontrolle</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Direkte Vergleichbarkeit der Preise und Leistungen, Identifikation von versteckten Zusatzkosten</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Qualität</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Anbieterprofile mit Kundenbewertungen, Referenzen und Spezialisierungen helfen bei der Auswahl</td>
+                      </tr>
+                      <tr className="bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Sicherheit</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Ausschliesslich professionelle Umzugsfirmen aus der Schweiz, keine anonymen Kleinanzeigen</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Der Service von Online-Offerten.ch ist für private Umziehende vollständig kostenlos und unverbindlich. Sie profitieren von der Arbeit, die bereits geleistet wurde: Die Plattform hat geprüfte Partner aus der ganzen Schweiz, sodass Sie dank deren Erfahrung schnell zu seriösen Angeboten kommen.
+                </p>
+                
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                  So wählen Sie die passende Umzugsfirma aus Ihren Offerten
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  Der günstigste Preis ist nicht immer der beste. Um die richtige Entscheidung zu treffen, sollten Sie die Offerten anhand von vier Kriterien prüfen:
+                </p>
+                <ol className="space-y-2 list-decimal list-inside mb-4 text-gray-700">
+                  <li><strong>Preis</strong>: Wie ist das Verhältnis von Kosten zu Leistung?</li>
+                  <li><strong>Leistungsumfang</strong>: Sind Möbellift, Verpackungsmaterial, Demontage/Montage, Reinigung explizit erwähnt?</li>
+                  <li><strong>Versicherungsdeckung</strong>: Welche Transport- und Haftpflichtversicherung hat die Firma?</li>
+                  <li><strong>Kundenbewertungen</strong>: Was sagen andere Kunden über Pünktlichkeit, Sorgfalt und Kommunikation?</li>
+                </ol>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Achten Sie auf klare Beschreibungen in der Offerte. Wenn etwas unklar ist, klären Sie offene Fragen vor der Auftragserteilung per Telefon oder E-Mail – etwa zu Parkplätzen, Zugang oder Spezialtransporten.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Am Ende sollten Sie sich für die Firma entscheiden, bei der Kommunikation, Transparenz und Ihr Bauchgefühl stimmen. Erfahrung zeigt: Ein guter erster Kontakt ist oft ein Zeichen für eine professionelle Zusammenarbeit. Online-Offerten.ch übernimmt nur die Kontaktanbahnung – der Vertrag wird direkt mit der Umzugsfirma Ihrer Wahl geschlossen.
+                </p>
+                <Image
+                  src="/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp"
+                  alt="Ein lächelnder Umzugshelfer übergibt den Schlüssel an zufriedene Kunden, die vor ihrem neuen Zuhause stehen. Diese Szene symbolisiert den erfolgreichen Abschluss eines Privatumzugs, bei dem die Umzugsfirma ihre Dienstleistungen und die Qualität ihrer Arbeit unter Beweis stellt."
+                  width={800}
+                  height={450}
+                  className="w-full h-auto rounded-lg shadow-lg mt-4"
+                  loading="lazy"
+                />
+              </section>
+
+              {/* Article Section 7 - CTA */}
+              <section className="pt-6 border-t border-gray-200">
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                  Jetzt Ihren Privatumzug online anfragen
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Planen Sie in den nächsten Wochen oder Monaten einen Umzug? Ob innerhalb Ihrer Stadt, in einen anderen Kanton oder sogar ins Ausland – der erste Schritt zu einem entspannten Umzug ist einfacher als gedacht.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  Füllen Sie jetzt das Anfrageformular auf <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug" className="text-green-600 hover:underline font-semibold">Kostenlose Offerten anfordern</Link> aus und erhalten Sie schnell mehrere Offerten von Umzugsfirmen aus Ihrer Region. Der Service ist kostenlos, unverbindlich und bringt Ihnen innerhalb von 24–48 Stunden konkrete Angebote direkt in Ihr Postfach.
+                </p>
+                <p className="text-gray-700 leading-relaxed mt-4">
+                  Vergleichen Sie in Ruhe, stellen Sie Fragen und entscheiden Sie sich für die Lösung, die am besten zu Ihrem Privatumzug passt. So starten Sie entspannt in Ihr neues Zuhause – mit Profis an Ihrer Seite, die wissen, worauf es ankommt.
+                </p>
               </section>
 
               {/* Related Services Section */}
@@ -710,25 +1068,7 @@ const PrivateUmzugPageClient = () => {
               className="lg:col-span-1 space-y-8 self-start sticky top-28"
             >
               {/* Umzug Types Sidebar */}
-              <UmzugTypesSidebar activeType="privatumzug" />
-
-              {/* Professional Team */}
-              <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                  <Users size={24} className="mr-2 text-blue-500" />
-                  Professionelles Team
-                </h3>
-                <Image  
-                  alt="Ein professionelles Umzugsteam, das Möbel transportiert" 
-                  className="w-full h-56 object-cover rounded-lg shadow-md mb-3"
-                  src="https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/021faa27c88d2aec378906ffc232e35c.png"
-                  width={400}
-                  height={224}
-                  loading="lazy"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                />
-                <p className="text-sm text-gray-600 mt-2">Unsere Teams sind erfahren und zuverlässig.</p>
-              </div>
+              <UmzugTypesSidebar activeType="privatumzug" hiddenTypes={['geschaeftsumzug']} />
 
               {/* Testimonial */}
               <div className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200 transform hover:scale-105 transition-transform duration-300">

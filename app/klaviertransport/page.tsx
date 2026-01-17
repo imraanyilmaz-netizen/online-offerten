@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Online-Offerten.ch',
     images: [
       {
-        url: 'https://online-offerten.ch/image/services-professionals.png',
+        url: 'https://online-offerten.ch/bilder/klaviertransport.avif',
         width: 1200,
         height: 630,
         alt: 'Klaviertransport',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Klaviertransport: Kostenlose Offerten vergleichen',
     description: 'Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen. Flügeltransport, Piano-Transport & mehr.',
-    images: ['https://online-offerten.ch/image/services-professionals.png'],
+    images: ['https://online-offerten.ch/bilder/klaviertransport.avif'],
   },
   robots: {
     index: true,

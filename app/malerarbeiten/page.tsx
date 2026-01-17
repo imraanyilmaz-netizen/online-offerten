@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Online-Offerten.ch',
     images: [
       {
-        url: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/1633bb6a22ddc3924f0c0576a88ab9a8.png',
+        url: 'https://online-offerten.ch/bilder/malerarbeiten-600-400.webp',
         width: 1200,
         height: 630,
         alt: 'Malerarbeiten Schweiz',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Malerarbeiten Schweiz finden & vergleichen',
     description: 'Vergleichen Sie kostenlos Offerten von geprüften Malerfirmen. Innenanstrich, Aussenanstrich, Fassadenanstrich & Renovierung.',
-    images: ['https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/1633bb6a22ddc3924f0c0576a88ab9a8.png'],
+    images: ['https://online-offerten.ch/bilder/malerarbeiten-600-400.webp'],
   },
   robots: {
     index: true,

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Online-Offerten.ch',
     images: [
       {
-        url: 'https://online-offerten.ch/image/services-professionals.png',
+        url: 'https://online-offerten.ch/image/b87025c3-7292-44e6-8a2c-7c1105b554bc.webp',
         width: 1200,
         height: 630,
         alt: 'Spezialtransporte',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
     description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport.',
-    images: ['https://online-offerten.ch/image/services-professionals.png'],
+    images: ['https://online-offerten.ch/image/b87025c3-7292-44e6-8a2c-7c1105b554bc.webp'],
   },
   robots: {
     index: true,

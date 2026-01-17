@@ -75,11 +75,11 @@ const FooterCTABanner = () => {
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
 
   return (
-    <div className="sticky bottom-0 bg-green-600 w-full py-4 px-4 md:px-6 z-[999]">
-      <div className="container mx-auto max-w-navbar">
-        <div className="flex flex-row items-center justify-between gap-3 md:flex-row md:gap-6">
+    <div className="sticky bottom-0 bg-green-600 w-full py-4 px-2 md:px-6 z-[2000] overflow-hidden">
+      <div className="container mx-auto max-w-navbar px-2 md:px-0">
+        <div className="flex flex-row items-center justify-between gap-2 md:gap-6 min-w-0">
           {/* Left Section - Text (Index 0) - Nur Desktop */}
-          <div className="hidden md:flex items-center gap-4 order-1 md:order-1">
+          <div className="hidden md:flex items-center gap-4 order-1 md:order-1 flex-shrink-0">
             <div className="h-12 w-px bg-white/30"></div>
             <div className="text-white text-base md:text-lg font-bold leading-tight tracking-tight whitespace-nowrap h-8">
               Jetzt kostenlos Offerten einholen
@@ -87,24 +87,24 @@ const FooterCTABanner = () => {
           </div>
 
           {/* Middle Section - Rating (Yeni tasarım) */}
-          <div className="bg-green-600 rounded-lg px-3 py-2 md:px-5 md:py-3 flex items-center gap-2 order-1 md:order-2 md:ml-4 flex-shrink-0">
-            <div className="flex items-center gap-1">
+          <div className="bg-green-600 rounded-lg px-2 py-2 md:px-5 md:py-3 flex items-center gap-1.5 md:gap-2 order-1 md:order-2 md:ml-4 flex-shrink-0 min-w-0">
+            <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
               {[...Array(fullStars)].map((_, i) => (
-                <Star key={`full-${i}`} size={16} className="text-yellow-400 fill-yellow-400" />
+                <Star key={`full-${i}`} size={14} className="md:w-4 md:h-4 text-yellow-400 fill-yellow-400" />
               ))}
               {hasHalfStar && (
-                <div className="relative">
-                  <Star size={16} className="text-gray-300" />
+                <div className="relative flex-shrink-0">
+                  <Star size={14} className="md:w-4 md:h-4 text-gray-300" />
                   <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                    <Star size={16} className="text-yellow-400 fill-yellow-400" />
+                    <Star size={14} className="md:w-4 md:h-4 text-yellow-400 fill-yellow-400" />
                   </div>
                 </div>
               )}
               {[...Array(emptyStars)].map((_, i) => (
-                <Star key={`empty-${i}`} size={16} className="text-gray-300" />
+                <Star key={`empty-${i}`} size={14} className="md:w-4 md:h-4 text-gray-300" />
               ))}
             </div>
-            <span className="text-xs font-bold text-white whitespace-nowrap">
+            <span className="text-[10px] md:text-xs font-bold text-white whitespace-nowrap min-w-0">
               <span className="md:hidden">Ø {stats.average_rating.toFixed(1)}/5 ({stats.review_count})</span>
               <span className="hidden md:inline">Ø {stats.average_rating.toFixed(1)}/5 ({stats.review_count} Kundenbewertungen)</span>
             </span>
@@ -114,11 +114,12 @@ const FooterCTABanner = () => {
           <div className="order-2 md:order-3 flex-shrink-0">
             <Button
               asChild
-              className="bg-white text-blue-600 hover:bg-gray-50 hover:text-blue-700 font-bold px-4 py-2 md:px-6 md:py-3 rounded-lg whitespace-nowrap shadow-md transition-all duration-200 hover:shadow-lg group text-sm md:text-base"
+              className="bg-white text-blue-600 hover:bg-gray-50 hover:text-blue-700 font-bold px-3 py-2 md:px-6 md:py-3 rounded-lg whitespace-nowrap shadow-md transition-all duration-200 hover:shadow-lg group text-[10px] md:text-base leading-tight"
             >
-              <Link href="/kostenlose-offerte-anfordern">
-                ANFRAGE STARTEN
-                <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" />
+              <Link href="/kostenlose-offerte-anfordern" className="flex items-center">
+                <span className="hidden sm:inline">ANFRAGE STARTEN</span>
+                <span className="sm:hidden">ANFRAGE STARTEN</span>
+                <ArrowRight className="ml-1 md:ml-2 w-3 h-3 md:w-5 md:h-5 transition-transform group-hover:translate-x-1 flex-shrink-0" />
               </Link>
             </Button>
           </div>
