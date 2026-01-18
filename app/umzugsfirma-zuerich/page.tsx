@@ -197,7 +197,7 @@ export default function UmzugsfirmaZurichPage() {
       
       <div className="bg-white overflow-x-hidden">
         {/* Modern Hero Section */}
-        <section className="relative w-full bg-white py-16 md:py-20 lg:py-24 overflow-hidden">
+        <section className="relative w-full bg-gray-50 pt-[5px] pb-16 md:pb-20 lg:pb-24 overflow-hidden">
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 opacity-[0.03]">
             <div className="absolute inset-0" style={{
@@ -206,21 +206,33 @@ export default function UmzugsfirmaZurichPage() {
             }}></div>
           </div>
           
+          {/* Background Image - Right Side */}
+          <div 
+            className="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 h-full bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('${imageUrl}')`,
+              maskImage: 'linear-gradient(to left, transparent 0%, black 10%, black 100%)',
+              WebkitMaskImage: 'linear-gradient(to left, transparent 0%, black 10%, black 100%)'
+            }}
+          ></div>
+          
+          {/* Gradient Overlay */}
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-50 via-gray-50/90 to-transparent"></div>
+          
           {/* Decorative Elements */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20 translate-y-1/2 -translate-x-1/2"></div>
           
           <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
-            <div className="grid lg:grid-cols-5 gap-12 items-center">
-              {/* Left Content */}
-              <div className="text-gray-900 lg:col-span-3">
+            <div className="flex justify-start">
+              {/* Content */}
+              <div className="text-gray-900 w-full lg:w-1/2 pt-[60px] pb-[60px]">
                 <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
                   <span className="text-sm font-medium text-gray-700">Kanton Zürich</span>
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
                   <span className="block">Umzugsfirmen Zürich</span>
-                  <span className="block text-green-600 mt-2">Top Zügelfirmen vergleichen & sparen</span>
                 </h1>
                 
                 <p className="text-base text-gray-700 mb-8 leading-relaxed max-w-2xl">
@@ -267,20 +279,19 @@ export default function UmzugsfirmaZurichPage() {
                   </div>
                 </div>
               </div>
-              
-              {/* Right Image */}
-              <div className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 lg:col-span-2">
-                <Image
-                  src={imageUrl}
-                  alt="Professionelle Zügelfirma in Zürich - Umzugsunternehmen bei der Arbeit"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent"></div>
-              </div>
+            </div>
+            
+            {/* Image for Mobile/Tablet (below text) */}
+            <div className="block lg:hidden mt-6">
+              <Image
+                src={imageUrl}
+                alt="Professionelle Zügelfirma in Zürich - Umzugsunternehmen bei der Arbeit"
+                width={600}
+                height={400}
+                className="w-full h-auto object-cover rounded-2xl shadow-lg"
+                priority
+                unoptimized
+              />
             </div>
           </div>
         </section>
@@ -512,40 +523,40 @@ export default function UmzugsfirmaZurichPage() {
                 </div>
               </article>
 
-              {/* Umzug in Winterthur Section */}
+              {/* Umzug in Zürich Section */}
               <article className="bg-gradient-to-br from-slate-50 to-gray-100 rounded-2xl p-8 md:p-10 border border-gray-200">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  Umzug in Winterthur – Günstige Umzugsfirmen vergleichen & sparen
+                  Umzug in Zürich – Günstige Umzugsfirmen vergleichen & sparen
                 </h2>
                 
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  Planen Sie einen Umzug in Winterthur oder Umgebung? Auf <strong>online-offerten.ch</strong> können Sie schnell und unkompliziert mehrere kostenlose Offerten von geprüften <strong>Umzugsfirmen in Winterthur</strong> anfordern. Vergleichen Sie Preise und Leistungen und finden Sie das passende <strong>Zügelunternehmen</strong> – egal ob für einen Privatumzug, Firmenumzug oder Seniorenumzug.
+                  Planen Sie einen Umzug in Zürich oder Umgebung? Auf <strong>online-offerten.ch</strong> können Sie schnell und unkompliziert mehrere kostenlose Offerten von geprüften <strong>Umzugsfirmen in Zürich</strong> anfordern. Vergleichen Sie Preise und Leistungen und finden Sie das passende <strong>Zügelunternehmen</strong> – egal ob für einen Privatumzug, Firmenumzug oder Seniorenumzug.
                 </p>
                 
                 <div className="bg-white rounded-xl p-6 mb-6 shadow-md border border-gray-200">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Stressfreier Umzug in Winterthur – Einfach & digital organisiert
+                    Stressfreier Umzug in Zürich – Einfach & digital organisiert
                   </h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Mit unserem modernen Vergleichsportal wird die Umzugsplanung in Winterthur besonders einfach. Beschreiben Sie Ihr Umzugsprojekt in wenigen Minuten und erhalten Sie daraufhin passende Angebote von erfahrenen <strong>Umzugsunternehmen aus der Region Winterthur</strong>. Transparent, zeitsparend und ohne Verpflichtung.
+                    Mit unserem modernen Vergleichsportal wird die Umzugsplanung in Zürich besonders einfach. Beschreiben Sie Ihr Umzugsprojekt in wenigen Minuten und erhalten Sie daraufhin passende Angebote von erfahrenen <strong>Umzugsunternehmen aus der Region Zürich</strong>. Transparent, zeitsparend und ohne Verpflichtung.
                   </p>
                 </div>
 
                 <div className="bg-white rounded-xl p-6 mb-6 shadow-md border border-gray-200">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Warum sich ein Vergleich von Umzugsfirmen in Winterthur lohnt
+                    Warum sich ein Vergleich von Umzugsfirmen in Zürich lohnt
                   </h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Ein professioneller Umzug in Winterthur sorgt für Sicherheit, Effizienz und einen reibungslosen Ablauf. Durch den direkten Vergleich mehrerer Offerten vermeiden Sie unnötige Mehrkosten und profitieren von fairen Preisen lokaler Anbieter. So lassen sich <strong>bis zu 40 % der Umzugskosten sparen</strong>.
+                    Ein professioneller Umzug in Zürich sorgt für Sicherheit, Effizienz und einen reibungslosen Ablauf. Durch den direkten Vergleich mehrerer Offerten vermeiden Sie unnötige Mehrkosten und profitieren von fairen Preisen lokaler Anbieter. So lassen sich <strong>bis zu 40 % der Umzugskosten sparen</strong>.
                   </p>
                 </div>
 
                 <div className="bg-white rounded-xl p-6 mb-6 shadow-md border border-gray-200">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Umzugsservice in Winterthur – Flexible Leistungen nach Bedarf
+                    Umzugsservice in Zürich – Flexible Leistungen nach Bedarf
                   </h3>
                   <p className="text-gray-700 leading-relaxed mb-4">
-                    <strong>Umzugsfirmen in Winterthur</strong> bieten individuelle Lösungen für jedes Umzugsprojekt:
+                    <strong>Umzugsfirmen in Zürich</strong> bieten individuelle Lösungen für jedes Umzugsprojekt:
                   </p>
                   <ul className="space-y-3 text-gray-700 list-disc list-inside ml-4">
                     <li><strong>Full-Service-Umzug:</strong> Verpacken, Transport, Möbelmontage</li>
@@ -555,7 +566,7 @@ export default function UmzugsfirmaZurichPage() {
                     <li><strong>Versicherungsschutz:</strong> Absicherung Ihres gesamten Umzugsguts</li>
                   </ul>
                   <p className="text-gray-700 leading-relaxed mt-4">
-                    Sie entscheiden selbst, welche Leistungen Sie für Ihren <strong>Umzug in Winterthur</strong> benötigen.
+                    Sie entscheiden selbst, welche Leistungen Sie für Ihren <strong>Umzug in Zürich</strong> benötigen.
                   </p>
                 </div>
 
@@ -570,7 +581,7 @@ export default function UmzugsfirmaZurichPage() {
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700"><strong>Geprüfte Umzugsfirmen aus Winterthur</strong> und Umgebung</span>
+                      <span className="text-gray-700"><strong>Geprüfte Umzugsfirmen aus Zürich</strong> und Umgebung</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
@@ -589,20 +600,20 @@ export default function UmzugsfirmaZurichPage() {
 
                 <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-8 text-white text-center">
                   <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                    Jetzt Umzugsofferten für Winterthur erhalten
+                    Jetzt Umzugsofferten für Zürich erhalten
                   </h3>
                   <p className="text-lg text-green-50 mb-6 max-w-2xl mx-auto">
-                    Füllen Sie unser einfaches Online-Formular aus und erhalten Sie passende Offerten von zuverlässigen <strong>Umzugsfirmen in Winterthur</strong>. Unser Service ist kostenlos – Kosten entstehen erst, wenn Sie sich für ein Angebot entscheiden. Ob innerhalb von Winterthur, in einen anderen Kanton oder ins Ausland: Wir finden den richtigen Umzugspartner für Sie.
+                    Füllen Sie unser einfaches Online-Formular aus und erhalten Sie passende Offerten von zuverlässigen <strong>Umzugsfirmen in Zürich</strong>. Unser Service ist kostenlos – Kosten entstehen erst, wenn Sie sich für ein Angebot entscheiden. Ob innerhalb von Zürich, in einen anderen Kanton oder ins Ausland: Wir finden den richtigen Umzugspartner für Sie.
                   </p>
                   <div className="flex justify-center">
                     <Button 
                       asChild
                       size="lg" 
-                      className="bg-white text-green-600 hover:bg-gray-100 font-bold px-8 py-6 text-lg rounded-lg shadow-xl"
+                      className="bg-white text-green-600 hover:bg-gray-100 font-bold px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-lg shadow-xl w-full sm:w-auto"
                     >
-                      <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Winterthur" className="inline-flex items-center">
-                        Kostenlose Winterthur-Offerten anfordern
-                        <ArrowRight className="w-5 h-5 ml-2" />
+                      <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Zürich" className="inline-flex items-center justify-center whitespace-nowrap">
+                        Kostenlose Offerten anfordern
+                        <ArrowRight className="w-5 h-5 ml-2 flex-shrink-0" />
                       </Link>
                     </Button>
                   </div>

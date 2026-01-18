@@ -34,11 +34,11 @@ const ArticleSection = () => {
   ]
 
   return (
-    <div className="prose prose-lg lg:prose-xl max-w-none text-slate-700 leading-relaxed">
+    <div className="prose prose-lg lg:prose-xl max-w-none text-slate-700 leading-relaxed text-left">
       {/* Warum Offerten vergleichen */}
       <section className="mb-12">
         <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 md:p-8 rounded-xl mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4">Die wichtigsten Gründe, warum Sie internationale Umzugsofferten vergleichen sollten</h2>
+          <h2 className="text-2xl md:text-[26px] font-bold text-slate-800 mb-4">Die wichtigsten Gründe, warum Sie internationale Umzugsofferten vergleichen sollten</h2>
           <ul className="space-y-3 list-none pl-0">
             <li className="flex items-start">
               <CheckCircle className="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
@@ -74,7 +74,7 @@ const ArticleSection = () => {
 
       {/* Planung */}
       <section className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Internationale Umzüge planen: Von der ersten Idee bis zur Ankunft im Zielland</h2>
+        <h2 className="text-[28px] md:text-[28px] font-bold text-slate-800 mb-6">Internationale Umzüge planen: Von der ersten Idee bis zur Ankunft im Zielland</h2>
         <p className="mb-6 text-lg">Die Durchführung eines internationalen Umzugs ist ein Prozess, der idealerweise Monate im Voraus beginnt. Je früher Sie mit den Vorbereitungen starten, desto entspannter wird der Ablauf – und desto besser können Sie Kosten und Aufwand kontrollieren.</p>
         
         <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -519,37 +519,45 @@ const InternationaleUmzugPageClient = () => {
       />
       <div className="bg-gradient-to-b from-slate-50 to-white">
         <section
-          className="relative w-full bg-gray-100 py-12 md:py-16"
+          className="relative w-full bg-gray-100 pt-[5px] pb-12 md:pb-16 overflow-hidden"
         >
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
-            <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
-              <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
+          {/* Background Image - Right Side (Desktop only) */}
+          <div 
+            className="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 h-full bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('${imageUrl}')`,
+              maskImage: 'linear-gradient(to left, transparent 0%, black 10%, black 100%)',
+              WebkitMaskImage: 'linear-gradient(to left, transparent 0%, black 10%, black 100%)'
+            }}
+          ></div>
+          
+          {/* Gradient Overlay (Desktop only) */}
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent"></div>
+          
+          <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+            <div className="flex justify-start">
+              <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
-                    Internationale Umzug vergleichen – Offerte für Ihren Auslandsumzug ab Schweiz
+                  <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold mb-6 text-gray-900 leading-tight">
+                    Internationale Umzug
                   </h1>
-                  <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
-                    Internationale Umzüge ab der Schweiz – warum Offerten vergleichen so wichtig ist
-                  </h2>
+                  <p className="text-base md:text-lg text-gray-700 mb-4">
+                  Erhalten Sie in nur 5 Minuten bis zu 6 Angebote
+                  </p>
                 </div>
-                <p
-                  className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium"
-                >
-                  Ein internationaler Umzug von der Schweiz nach Europa ist weit mehr als ein einfacher Wohnungswechsel. Ob Sie als Familie nach Deutschland ziehen, eine neue Arbeitsstelle in den Niederlanden antreten oder Ihren Ruhestand in Portugal verbringen möchten – die Planung eines Auslandsumzugs bringt Herausforderungen mit sich, die bei einem Inlandsumzug schlicht nicht existieren. Von der Zollabwicklung über längere Transportwege bis hin zu unterschiedlichen Einreisebestimmungen je nach Zielland: Die Anforderungen sind vielfältig und die Kosten können je nach Route, Umzugsvolumen und gewählten Leistungen erheblich variieren.
-                </p>
                 <div className="mb-6">
                   <Button
                     asChild
                     size="lg"
                     className="bg-green-600 hover:bg-green-700 text-white font-bold group px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                   >
-                    <Link href="/kostenlose-offerte-anfordern?service=international">
-                      Mehrere Firmen vergleichen & Offerten anfordern
+                    <Link href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international">
+                      Umzugsunternehmen vergleichen
                       <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
                 </div>
-                <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6">
+                <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-col gap-4 md:gap-6 max-w-md">
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
@@ -564,35 +572,45 @@ const InternationaleUmzugPageClient = () => {
                   </div>
                 </div>
               </article>
-              <aside className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden md:pl-4" aria-label="Auslandsumzug Dienstleistung Illustration">
-                <figure className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-green-900/20 via-transparent to-transparent z-10 pointer-events-none"></div>
-                  <div className="absolute inset-0 rounded-2xl ring-4 ring-green-500/10 pointer-events-none z-20"></div>
-                  <img
-                    src={imageUrl}
-                    alt="Professionelle Umzugsfirma bei internationalem Umzug - Mehrere Umzugsfirmen vergleichen für Auslandsumzug"
-                    className="w-full h-full object-cover rounded-2xl"
-                    loading="eager"
-                    fetchPriority="high"
-                    width="600"
-                    height="400"
-                  />
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-bl-full pointer-events-none z-30"></div>
-                  <figcaption className="sr-only">Internationaler Umzug mit professioneller Umzugsfirma - Vergleichen Sie mehrere Firmen online</figcaption>
-                </figure>
-              </aside>
+            </div>
+            
+            {/* Image for Mobile/Tablet (below text) */}
+            <div className="block lg:hidden mt-6">
+              <img
+                src={imageUrl}
+                alt="Professionelle Umzugsfirma bei internationalem Umzug - Mehrere Umzugsfirmen vergleichen für Auslandsumzug"
+                className="w-full h-auto object-cover rounded-2xl shadow-lg"
+                loading="eager"
+                width="600"
+                height="400"
+              />
             </div>
           </div>
         </section>
-        
-        <section className="py-12 md:py-20 bg-slate-50">
+
+        <section className="py-12 md:py-20 bg-white">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
-                <InternationalCostCalculator />
+              <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+                <div className="bg-white rounded-2xl p-[1px]">
+                  <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-gray-900 mb-6 leading-tight">
+                    Offerte für Ihren Auslandsumzug ab Schweiz
+                  </h1>
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                    Internationale Umzüge ab der Schweiz – warum Offerten vergleichen so wichtig ist
+                  </h2>
+                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                    Ein internationaler Umzug von der Schweiz nach Europa ist weit mehr als ein einfacher Wohnungswechsel. Ob Sie als Familie nach Deutschland ziehen, eine neue Arbeitsstelle in den Niederlanden antreten oder Ihren Ruhestand in Portugal verbringen möchten – die Planung eines Auslandsumzugs bringt Herausforderungen mit sich, die bei einem Inlandsumzug schlicht nicht existieren. Von der Zollabwicklung über längere Transportwege bis hin zu unterschiedlichen Einreisebestimmungen je nach Zielland: Die Anforderungen sind vielfältig und die Kosten können je nach Route, Umzugsvolumen und gewählten Leistungen erheblich variieren.
+                  </p>
+                </div>
+                <div>
+                  <InternationalCostCalculator />
+                </div>
+              </div>
             </div>
         </section>
 
         <section className="py-12 md:py-20 bg-white">
-          <div className="container mx-auto max-w-4xl px-4 md:px-6">
+          <div className="container mx-auto max-w-navbar px-4 md:px-6">
             <ArticleSection />
           </div>
         </section>

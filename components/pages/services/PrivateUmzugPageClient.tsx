@@ -97,7 +97,7 @@ const PrivateUmzugPageClient = () => {
               backgroundImage: `radial-gradient(circle at 2px 2px, gray 1px, transparent 0)`,
               backgroundSize: '40px 40px'
             }}></div>
-          </div>
+                </div>
           
           {/* Decorative Elements */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
@@ -121,14 +121,14 @@ const PrivateUmzugPageClient = () => {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Button 
+                  <Button
                     asChild
-                    size="lg" 
+                    size="lg"
                     className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
                   >
                     <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug">
                       Kostenlose Offerten anfordern
-                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
                   <Button 
@@ -165,7 +165,7 @@ const PrivateUmzugPageClient = () => {
               <div className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 lg:col-span-2">
                 <Image
                   src={imageUrl}
-                  alt="Zufriedene Familie nach erfolgreichem Privatumzug in der Schweiz - Professionelle Umzugsfirma bei der Arbeit"
+                    alt="Zufriedene Familie nach erfolgreichem Privatumzug in der Schweiz - Professionelle Umzugsfirma bei der Arbeit"
                   fill
                   className="object-cover"
                   priority
@@ -233,7 +233,7 @@ const PrivateUmzugPageClient = () => {
                           </div>
                           <div className="flex-1">
                             <h4 className="text-xl font-semibold text-gray-800 mb-2">Online-Formular ausfüllen</h4>
-                            <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed">
                               Geben Sie Ihre alte und neue Adresse ein, Etage, ob ein Lift vorhanden ist, Ihr Wunschdatum, den Umfang in Zimmern sowie besondere Güter wie Klavier, Aquarium oder schwere Gerätschaften.
                             </p>
                           </div>
@@ -339,12 +339,12 @@ const PrivateUmzugPageClient = () => {
                   <li><strong>Zwischenlagerung</strong>: Lagerraum für Mobiliar, wenn der Einzugstermin später liegt</li>
                   <li><strong>Umzugsreinigung</strong>: Professionelle Räumung und Reinigung mit Abgabegarantie</li>
                 </ul>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                  <p className="text-gray-700 leading-relaxed mb-4">
                   Viele Firmen in Zürich, Basel, Lausanne oder Genf bieten auch die Abgabereinigung Ihrer alten Wohnung an – oft mit Garantie, dass die Wohnungsabgabe reibungslos klappt.
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Bei der Anfrage auf Online-Offerten.ch sollten Sie gezielt angeben, welche Leistungen Sie wünschen. So können die Anbieter passende Pakete kalkulieren – ob Sie nur den reinen Transport benötigen oder einen Full-Service-Umzug mit Auspackservice und allem Drum und Dran.
-                </p>
+                  </p>
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                   <p className="text-gray-700 leading-relaxed"><strong>Tipp</strong>: Bei grösseren Wohnungen ab 3,5 Zimmern empfiehlt sich ein Besichtigungstermin (vor Ort oder per Video), damit die Offerte realistisch kalkuliert werden kann.</p>
                 </div>
@@ -451,7 +451,7 @@ const PrivateUmzugPageClient = () => {
                       <li>• 2,5-Zimmer-Wohnung, Kreis 3 nach Kreis 6, ca. 10 km</li>
                       <li>• Lift in beiden Häusern vorhanden</li>
                       <li>• Nur Transport und Standardmontage</li>
-                    </ul>
+                </ul>
                     <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 800 – 1'400</p>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
@@ -606,7 +606,7 @@ const PrivateUmzugPageClient = () => {
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Auf Online-Offerten.ch finden Sie auch Umzugsfirmen mit Erfahrung in Zollabwicklung und internationalen Transporten. Bei komplexen Umzügen lohnt sich ein ausführliches Beratungsgespräch mit der gewählten Firma – fragen Sie gezielt nach Referenzen und Erfahrung mit Ihrem Zielort.
-                </p>
+                  </p>
                 
                 <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
                   Besondere Umzüge: Senioren, Familien, WG & Erstwohnung
@@ -623,7 +623,7 @@ const PrivateUmzugPageClient = () => {
                       <li>Koordination mit Heimen oder Altersresidenzen</li>
                       <li>Besondere Rücksicht auf körperliche Einschränkungen</li>
                     </ul>
-                  </div>
+                </div>
                   <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
                     <h4 className="font-semibold text-lg text-gray-800 mb-2">Familienumzug:</h4>
                     <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
