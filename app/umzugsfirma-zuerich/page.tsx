@@ -277,21 +277,21 @@ export default function UmzugsfirmaZurichPage() {
                     <TrendingUp className="w-5 h-5 text-green-600" />
                     <span className="font-medium">Bis zu 40% sparen</span>
                   </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            
+              
             {/* Image for Mobile/Tablet (below text) */}
             <div className="block lg:hidden mt-6">
-              <Image
-                src={imageUrl}
-                alt="Professionelle Zügelfirma in Zürich - Umzugsunternehmen bei der Arbeit"
+                <Image
+                  src={imageUrl}
+                  alt="Professionelle Zügelfirma in Zürich - Umzugsunternehmen bei der Arbeit"
                 width={600}
                 height={400}
                 className="w-full h-auto object-cover rounded-2xl shadow-lg"
-                priority
-                unoptimized
-              />
+                  priority
+                  unoptimized
+                />
             </div>
           </div>
         </section>

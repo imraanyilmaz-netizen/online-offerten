@@ -17,45 +17,39 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative w-full bg-gray-100 py-12 md:py-16"
+      className="relative w-full bg-gray-100 pt-[5px] pb-12 md:pb-16 overflow-hidden"
     >
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 items-center">
-          <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
+      {/* Background Image - Right Side (Desktop only) */}
+      <div 
+        className="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 h-full bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('${heroImageUrl}')`,
+          maskImage: 'linear-gradient(to left, transparent 0%, black 10%, black 100%)',
+          WebkitMaskImage: 'linear-gradient(to left, transparent 0%, black 10%, black 100%)'
+        }}
+      ></div>
+      
+      {/* Gradient Overlay (Desktop only) */}
+      <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent"></div>
+      
+      <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+        <div className="flex justify-start">
+          <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
+            <div>
+              <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold mb-6 text-gray-900 leading-tight">
                 Klaviertransporte: Kostenlose Offerten vergleichen
               </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-2">
-                Mehrere Firmen vergleichen & bis zu 40% sparen
+              <p className="text-base md:text-lg text-gray-700 mb-4">
+                Erhalten Sie in nur 5 Minuten bis zu 6 Angebote
               </p>
-            </motion.div>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium"
-            >
+            </div>
+            <p className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed">
               Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen und die beste Firma für Ihren Transport finden. Unsere Partner sind auf den sicheren Transport von Klavieren, Flügeln und Pianos spezialisiert. Professionell, versichert und bis zu 40% günstiger.
-            </motion.p>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.45, duration: 0.6 }}
-              className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed"
-            >
+            </p>
+            <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
               Sie erhalten ein kostenloses und unverbindliches Angebot für Ihren Klaviertransport bequem per Email. Alle Angebote werden als Festpreis erstellt, sodass Sie volle Kostentransparenz geniessen.
-            </motion.p>
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="mb-6"
-            >
+            </p>
+            <div className="mb-6">
               <Button
                 asChild
                 size="lg"
@@ -66,14 +60,8 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <p className="text-sm text-gray-600 mt-2">Das Ausfüllen des Formulars ist gratis.</p>
-            </motion.div>
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6"
-            >
+            </div>
+            <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-col gap-4 md:gap-6 max-w-md">
               <div className="flex items-center">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                 <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
@@ -86,25 +74,20 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                 <span className="text-sm md:text-base text-gray-700 font-medium">Kostenlos & unverbindlich</span>
               </div>
-            </motion.div>
+            </div>
           </article>
-          <aside className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden md:pl-4" aria-label="Klaviertransport Dienstleistung Illustration">
-            <figure className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-              <div className="absolute inset-0 bg-gradient-to-tr from-green-900/20 via-transparent to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute inset-0 rounded-2xl ring-4 ring-green-500/10 pointer-events-none z-20"></div>
-              <img
-                src={heroImageUrl}
-                alt="Professioneller Klaviertransport in der Schweiz - Kostenlose Offerten vergleichen"
-                className="w-full h-full object-cover rounded-2xl"
-                loading="eager"
-                fetchPriority="high"
-                width="600"
-                height="400"
-              />
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-bl-full pointer-events-none z-30"></div>
-              <figcaption className="sr-only">Professioneller Klaviertransport - Kostenlose Offerten vergleichen</figcaption>
-            </figure>
-          </aside>
+        </div>
+        
+        {/* Image for Mobile/Tablet (below text) */}
+        <div className="block lg:hidden mt-6">
+          <img
+            src={heroImageUrl}
+            alt="Professioneller Klaviertransport in der Schweiz - Kostenlose Offerten vergleichen"
+            className="w-full h-auto object-cover rounded-2xl shadow-lg"
+            loading="eager"
+            width="600"
+            height="400"
+          />
         </div>
       </div>
     </motion.section>
@@ -144,47 +127,42 @@ const ContentSection = ({ sectionData }: { sectionData: any }) => {
     >
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-            {icons[sectionData.key]}
-          </div>
+        <div className="text-left mb-6">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{sectionData.title}</h2>
           {sectionData.subtitle && (
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
               {sectionData.subtitle}
             </p>
           )}
         </div>
 
-        {/* Content Card */}
-        <Card className="border-0 shadow-lg bg-white">
-          <CardContent className="p-8 md:p-10">
-            <div className="space-y-6 text-gray-700 leading-relaxed text-base md:text-lg">
-              {sectionData.paragraphs.map((p: string, i: number) => (
-                <p key={i} dangerouslySetInnerHTML={{ __html: p }} className="mb-4" />
-              ))}
-            </div>
+        {/* Content */}
+        <div>
+          <div className="space-y-6 text-gray-700 leading-relaxed text-base md:text-lg">
+            {sectionData.paragraphs.map((p: string, i: number) => (
+              <p key={i} dangerouslySetInnerHTML={{ __html: p }} className="mb-4" />
+            ))}
+          </div>
 
-            {/* Points Grid */}
+          {/* Points Grid */}
           {sectionData.points && (
-              <div className="mt-10 pt-8 border-t border-gray-200">
-                <div className="grid md:grid-cols-2 gap-6">
-              {sectionData.points.map((point: any, i: number) => (
-                    <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <div className="flex-shrink-0 mt-1">
-                        <CheckCircle className="w-6 h-6 text-green-600" />
-                      </div>
-                  <div>
-                        <h3 className="font-semibold text-gray-900 mb-2 text-lg">{point.title}</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">{point.description}</p>
-                      </div>
+            <div className="mt-10 pt-8 border-t border-gray-200">
+              <div className="grid md:grid-cols-2 gap-6">
+                {sectionData.points.map((point: any, i: number) => (
+                  <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="flex-shrink-0 mt-1">
+                      <CheckCircle className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2 text-lg">{point.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{point.description}</p>
+                    </div>
                   </div>
-              ))}
-                </div>
+                ))}
               </div>
+            </div>
           )}
-          </CardContent>
-        </Card>
+        </div>
       </div>
     </motion.section>
   )
@@ -200,12 +178,9 @@ const FaqSection = ({ faqData }: { faqData: any }) => {
       className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white"
     >
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-            <HelpCircle className="w-8 h-8 text-green-600" />
-          </div>
+        <div className="text-left mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{faqData.title}</h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">{faqData.subtitle}</p>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl">{faqData.subtitle}</p>
         </div>
         <Card className="border-0 shadow-lg bg-white">
           <CardContent className="p-6 md:p-8">

@@ -576,14 +576,14 @@ const InternationaleUmzugPageClient = () => {
             
             {/* Image for Mobile/Tablet (below text) */}
             <div className="block lg:hidden mt-6">
-              <img
-                src={imageUrl}
-                alt="Professionelle Umzugsfirma bei internationalem Umzug - Mehrere Umzugsfirmen vergleichen für Auslandsumzug"
+                  <img
+                    src={imageUrl}
+                    alt="Professionelle Umzugsfirma bei internationalem Umzug - Mehrere Umzugsfirmen vergleichen für Auslandsumzug"
                 className="w-full h-auto object-cover rounded-2xl shadow-lg"
-                loading="eager"
-                width="600"
-                height="400"
-              />
+                    loading="eager"
+                    width="600"
+                    height="400"
+                  />
             </div>
           </div>
         </section>
