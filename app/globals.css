@@ -69,6 +69,45 @@
       font-size: 16px !important;
     }
   }
+ /* Tüm başlık ve paragraf yazılarını küçült - tüm sayfalarda geçerli */
+h2 {
+  font-size: 1.55em !important;
+}
+h3 {
+  font-size: 1.25em !important;
+}
+h4 {
+  font-size: 1.15em !important;
+}
+h5 {
+  font-size: 0.95em !important;
+}
+h6 {
+  font-size: 0.95em !important;
+}
+p {
+  font-size: 0.95em !important;
+}
+}
+
+/* Global yazı boyutu küçültme - tüm sayfalarda geçerli */
+h2 {
+  font-size: 1.55em !important;
+}
+h3 {
+  font-size: 1.25em !important;
+}
+h4 {
+  font-size: 1.15em !important;
+}
+h5 {
+  font-size: 0.95em !important;
+}
+h6 {
+  font-size: 0.95em !important;
+}
+p {
+  font-size: 0.95em !important;
 }
 
 /* Scrollbar Stilleri */
