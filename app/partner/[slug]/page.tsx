@@ -21,6 +21,34 @@ async function getPartnerData(slug: string) {
   return partnerData
 }
 
+async function getPartnerReviewStats(partnerId: string) {
+  const supabase = await createClient()
+  
+  // Alle genehmigten Reviews für diesen Partner zählen (für Schema.org und Google)
+  // Nur genehmigte Reviews werden gezählt, da diese im Admin-Bereich freigegeben wurden
+  const { data: reviews, error } = await supabase
+    .from('customer_reviews')
+    .select('rating')
+    .eq('partner_id', partnerId)
+    .eq('approval_status', 'approved')
+
+  if (error || !reviews || reviews.length === 0) {
+    return {
+      reviewCount: 0,
+      averageRating: 0
+    }
+  }
+
+  const reviewCount = reviews.length
+  const totalRating = reviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
+  const averageRating = totalRating / reviewCount
+
+  return {
+    reviewCount,
+    averageRating: Math.round(averageRating * 10) / 10 // Auf 1 Dezimalstelle runden
+  }
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const partner = await getPartnerData(params.slug)
   
@@ -67,10 +95,55 @@ export default async function PartnerProfilePage({ params }: { params: { slug: s
     notFound()
   }
 
+  // Review-Statistiken für Schema.org laden
+  const reviewStats = await getPartnerReviewStats(partner.id)
+
+  // Schema.org LocalBusiness mit AggregateRating generieren
+  const partnerSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": partner.company_name,
+    "url": `https://online-offerten.ch/partner/${partner.slug}`,
+    "description": partner.description || `Bewertungen und Informationen zu ${partner.company_name}`,
+    ...(partner.logo_url && {
+      "logo": partner.logo_url
+    }),
+    ...(partner.address_street && partner.address_city && {
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": partner.address_street,
+        "addressLocality": partner.address_city,
+        "postalCode": partner.address_zip || "",
+        "addressCountry": "CH"
+      }
+    }),
+    ...(partner.phone && {
+      "telephone": partner.phone
+    }),
+    ...(partner.email && {
+      "email": partner.email
+    }),
+    ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 && {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": reviewStats.averageRating.toString(),
+        "reviewCount": reviewStats.reviewCount.toString(),
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    })
+  }
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <PartnerProfilePageClient initialPartner={partner} />
-    </Suspense>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(partnerSchema) }}
+      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PartnerProfilePageClient initialPartner={partner} />
+      </Suspense>
+    </>
   )
 }
 

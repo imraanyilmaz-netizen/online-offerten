@@ -91,7 +91,7 @@ async function getHomePageData() {
   let reviewCount = 0
   
   if (ratingStatsResult.data && ratingStatsResult.data.length > 0) {
-    const totalRating = ratingStatsResult.data.reduce((sum: number, review) => sum + (review.rating || 0), 0)
+    const totalRating = ratingStatsResult.data.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
     averageRating = totalRating / ratingStatsResult.data.length
     reviewCount = ratingStatsResult.data.length + 142 // Add 142 as requested
   } else {
