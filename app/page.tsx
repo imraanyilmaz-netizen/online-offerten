@@ -10,7 +10,7 @@ import {
   GitCompareArrows, Award,
   MapPin, Calculator,
   ArrowRight,
-  ShieldCheck, Search, Truck, Trash2
+  ShieldCheck, Search, Truck, Trash2, Sprout
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -262,8 +262,8 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 lg:items-start">
                 {/* Left Column - Content */}
                 <div className="order-1 lg:order-1 text-center lg:text-left space-y-6 sm:space-y-8">
-                  <h1 className="text-[38px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight text-left">
-                    <span className="text-green-600">Offerten vergleichen</span> & den passenden Anbieter finden
+                  <h1 className="text-[40px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight text-left" style={{ fontFamily: '"Roboto", -apple-system, BlinkMacSystemFont, sans-serif' }}>
+                    <span className="text-gray-800">Offerten vergleichen</span> & den passenden Anbieter finden
                   </h1>
                   
                   <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto md:mx-0 lg:mx-0 text-left">
@@ -382,15 +382,9 @@ export default async function HomePage() {
           {/* Why Choose Us Section - SERVER RENDERED with long content */}
           <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 via-white to-green-50/30 overflow-hidden">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 md:mb-12 text-center">
-                Unsere Dienstleistungen im Überblick
-              </h2>
               <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
                 {/* Umzugsfirma */}
                 <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
-                  {/* Background Gradient Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/0 via-blue-50/0 to-blue-50/30 group-hover:from-blue-50/30 group-hover:via-blue-50/20 group-hover:to-blue-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                  
                   <div className="relative z-10">
                     <div className="flex items-start gap-5 mb-6">
                       <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
@@ -420,9 +414,6 @@ export default async function HomePage() {
 
                 {/* Reinigungsfirma */}
                 <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
-                  {/* Background Gradient Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50/0 via-orange-50/0 to-orange-50/30 group-hover:from-orange-50/30 group-hover:via-orange-50/20 group-hover:to-orange-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                  
                   <div className="relative z-10">
                     <div className="flex items-start gap-5 mb-6">
                       <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
@@ -452,16 +443,13 @@ export default async function HomePage() {
 
                 {/* Maler */}
                 <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
-                  {/* Background Gradient Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 via-purple-50/0 to-purple-50/30 group-hover:from-purple-50/30 group-hover:via-purple-50/20 group-hover:to-purple-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                  
                   <div className="relative z-10">
                     <div className="flex items-start gap-5 mb-6">
                       <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
                         <Paintbrush className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Maler</h4>
+                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Malerarbeiten</h4>
                         <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"></div>
                       </div>
                     </div>
@@ -482,32 +470,29 @@ export default async function HomePage() {
                   </div>
                 </div>
 
-                {/* Räumung & Entsorgung */}
+                {/* Gartenarbeit */}
                 <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
-                  {/* Background Gradient Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-50/0 via-gray-50/0 to-gray-50/30 group-hover:from-gray-50/30 group-hover:via-gray-50/20 group-hover:to-gray-50/50 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                  
                   <div className="relative z-10">
                     <div className="flex items-start gap-5 mb-6">
-                      <div className="w-14 h-14 bg-gradient-to-br from-gray-600 to-gray-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                        <Trash2 className="w-7 h-7 text-white" />
+                      <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                        <Sprout className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">Räumung & Entsorgung</h4>
-                        <div className="h-1 w-12 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full"></div>
+                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">Gartenarbeit</h4>
+                        <div className="h-1 w-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full"></div>
                       </div>
                     </div>
                     <div className="space-y-4 mb-8">
                       <p className="text-gray-700 leading-relaxed text-base">
-                        Bei Umzügen oder Renovationsarbeiten entstehen häufig grosse Mengen an Abfall und Sperrgut. Auch Keller werden im Rahmen der Entrümpelung und Entsorgung professionell geleert, um Platz für den Umzug zu schaffen.
+                        Ein gepflegter Garten steigert nicht nur den Wohnkomfort, sondern auch den Wert Ihrer Immobilie. Unsere erfahrenen Garten-Partner unterstützen Sie bei sämtlichen Gartenarbeiten – von der regelmässigen Pflege bis zur fachgerechten Umgestaltung Ihres Aussenbereichs.
                       </p>
                       <p className="text-gray-700 leading-relaxed text-base">
-                        Unsere Entsorgungs-Partner übernehmen den fachgerechten Abtransport sowie die umweltgerechte Entsorgung sämtlicher Materialien. Ob alte Möbel, Elektrogeräte oder Baustellenabfälle – wir vermitteln Ihnen den passenden Entsorgungsdienst, der zuverlässig, sauber und gesetzeskonform arbeitet.
+                        Zu den angebotenen Dienstleistungen zählen unter anderem Rasenpflege, Heckenschnitt, Baumschnitt sowie die saisonale Gartenpflege. Ob kleiner Privatgarten oder grössere Grünflächen – wir vermitteln Ihnen zuverlässige Gartenprofis, die sauber, effizient und termingerecht arbeiten.
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="https://online-offerten.ch/raeumung-entsorgung" className="inline-flex items-center">
-                        Entsorgungsofferten
+                      <Link href="https://online-offerten.ch/gartenarbeit" className="inline-flex items-center">
+                        Gartenarbeit finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
                     </Button>

@@ -287,12 +287,6 @@ const Footer = React.memo(() => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/partner-suche" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                      Partner-Suche
-                    </Link>
-                  </li>
-                  <li>
                     <Link href="/partner-werden" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
                       <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
                       Partner werden

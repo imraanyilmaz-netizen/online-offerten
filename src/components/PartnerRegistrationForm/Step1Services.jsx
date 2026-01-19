@@ -32,10 +32,10 @@ const mainCategories = [
     { id: 'raeumung_service', label: 'Räumung' },
     { id: 'entsorgung_service', label: 'Entsorgung' },
   ]},
-  { id: 'maler', label: 'Maler', icon: Paintbrush, services: [
+  { id: 'maler', label: 'Malerarbeiten', icon: Paintbrush, services: [
     { id: 'maler_service', label: 'Malerarbeiten' },
   ]},
-   { id: 'garten', label: 'Garten', icon: Sprout, services: [
+   { id: 'garten', label: 'Gartenpflege', icon: Sprout, services: [
     { id: 'landschaftsbau', label: 'Landschaftsbau' },
     { id: 'gartenpflege', label: 'Gartenpflege' },
     { id: 'terrassenverlegung', label: 'Terrassenverlegung' },

@@ -928,13 +928,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     ))}
                   </div>
                 )}
-                <div className="text-center mt-12">
-                  <Button asChild size="lg" className="bg-green-700 hover:bg-green-800 text-white">
-                    <Link href="/ratgeber">
-                      Alle Artikel ansehen <ArrowRight className="ml-2 w-5 h-5" />
-                    </Link>
-                  </Button>
-                </div>
               </div>
             </section>
           ) : null}
