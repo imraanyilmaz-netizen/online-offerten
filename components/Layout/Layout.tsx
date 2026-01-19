@@ -23,6 +23,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const isFormPage = formPages.includes(pathname || '')
   const hideAll = pathname === '/bewertung-abgeben' || pathname?.startsWith('/anfrage-status')
   
+  // Admin ve Partner panel path'lerini kontrol et
+  const isAdminPanel = pathname?.startsWith('/admin')
+  const isPartnerPanel = pathname?.startsWith('/partner')
+  const shouldScaleContent = !isAdminPanel && !isPartnerPanel
+  
   // Seiten, auf denen der FooterCTABanner angezeigt werden soll
   const allowedCTABannerPages = [
     // Hauptseite
@@ -75,7 +80,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   if (hideAll) {
     return (
-      <main className="flex-grow">
+      <main className={`flex-grow ${shouldScaleContent ? 'md:scale-100 scale-[0.92] md:origin-center origin-top md:w-auto w-[108.70%] md:ml-0 -ml-[4.35%]' : ''}`}>
         <Suspense fallback={<FullPageLoader />}>
           {children}
         </Suspense>
@@ -86,7 +91,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen flex flex-col bg-background" style={{ contain: 'layout style' }}>
       {!isFormPage && <Navbar />}
-      <main className="flex-grow flex flex-col" style={{ minHeight: 'calc(100vh - 200px)', flex: '1 0 auto' }}>
+      <main 
+        className={`flex-grow flex flex-col ${shouldScaleContent ? 'md:scale-100 scale-[0.92] md:origin-center origin-top md:w-auto w-[108.70%] md:ml-0 -ml-[4.35%]' : ''}`}
+        style={{ 
+          minHeight: 'calc(100vh - 200px)', 
+          flex: '1 0 auto'
+        }}
+      >
         <Suspense fallback={<FullPageLoader />}>
           {children}
         </Suspense>

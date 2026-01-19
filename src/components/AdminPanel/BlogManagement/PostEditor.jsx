@@ -646,6 +646,12 @@ const PostEditor = ({ post, onBack }) => {
                   <SelectItem value="Räumung">Räumung</SelectItem>
                   <SelectItem value="Entsorgen">Entsorgen</SelectItem>
                   <SelectItem value="Allgemein">Allgemein</SelectItem>
+                  <SelectItem value="Wissenswertes">Wissenswertes</SelectItem>
+                  <SelectItem value="Checklists">Checklists</SelectItem>
+                  <SelectItem value="Ratgeber">Ratgeber</SelectItem>
+                  <SelectItem value="Tipps">Tipps</SelectItem>
+                  <SelectItem value="Checkliste">Checkliste</SelectItem>
+                  <SelectItem value="Umzugskosten">Umzugskosten</SelectItem>
                 </SelectContent>
               </Select>
             </div>

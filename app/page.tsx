@@ -10,7 +10,7 @@ import {
   GitCompareArrows, Award,
   MapPin, Calculator,
   ArrowRight,
-  ShieldCheck, Search, Truck, Trash2, Sprout
+  ShieldCheck, Search, Truck, Trash2, Sprout, Star
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -57,8 +57,8 @@ export const metadata: Metadata = {
 async function getHomePageData() {
   const supabase = await createClient()
   
-  // Fetch reviews and posts in parallel
-  const [reviewsResult, postsResult] = await Promise.all([
+  // Fetch reviews, posts, and rating stats in parallel
+  const [reviewsResult, postsResult, ratingStatsResult] = await Promise.all([
     supabase
       .from('customer_reviews')
       .select(`
@@ -78,12 +78,33 @@ async function getHomePageData() {
       .select('id, title, slug, meta_description, featured_image_url, category, tags')
       .eq('status', 'published')
       .order('published_at', { ascending: false })
-      .limit(9)
+      .limit(9),
+    // Fetch all approved reviews for rating calculation
+    supabase
+      .from('customer_reviews')
+      .select('rating')
+      .eq('approval_status', 'approved')
   ])
+
+  // Calculate average rating and total count
+  let averageRating = 0
+  let reviewCount = 0
+  
+  if (ratingStatsResult.data && ratingStatsResult.data.length > 0) {
+    const totalRating = ratingStatsResult.data.reduce((sum, review) => sum + (review.rating || 0), 0)
+    averageRating = totalRating / ratingStatsResult.data.length
+    reviewCount = ratingStatsResult.data.length + 142 // Add 142 as requested
+  } else {
+    reviewCount = 142 // Default count if no reviews
+  }
 
   return {
     reviews: reviewsResult.data || [],
     posts: postsResult.data || [],
+    ratingStats: {
+      averageRating: Math.round(averageRating * 10) / 10, // Round to 1 decimal
+      reviewCount
+    }
   }
 }
 
@@ -211,7 +232,7 @@ const structuredData = {
 }
 
 export default async function HomePage() {
-  const { reviews, posts } = await getHomePageData()
+  const { reviews, posts, ratingStats } = await getHomePageData()
 
   return (
     <>
@@ -263,7 +284,7 @@ export default async function HomePage() {
                 {/* Left Column - Content */}
                 <div className="order-1 lg:order-1 text-center lg:text-left space-y-6 sm:space-y-8">
                   <h1 className="text-[40px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight text-left" style={{ fontFamily: '"Roboto", -apple-system, BlinkMacSystemFont, sans-serif' }}>
-                    <span className="text-gray-800">Offerten vergleichen</span> & den passenden Anbieter finden
+                    <span className="text-gray-900">Offerten vergleichen</span> & den passenden Anbieter finden
                   </h1>
                   
                   <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto md:mx-0 lg:mx-0 text-left">
@@ -305,8 +326,58 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Left Column - Trust Badge & Features List */}
                 <div className="space-y-6 lg:-mt-8">
+                  {/* Rating Card */}
+                  <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100 flex items-start gap-4 hover:shadow-xl transition-all duration-300">
+                    <div className="flex-shrink-0 relative">
+                      <div className="relative w-14 h-14 sm:w-16 sm:h-16">
+                        {/* Main 3D Star */}
+                        <div className="absolute inset-0">
+                          <Star className="w-14 h-14 sm:w-16 sm:h-16 text-yellow-400 fill-yellow-400 absolute inset-0" 
+                            style={{ 
+                              filter: 'drop-shadow(0 4px 8px rgba(234, 179, 8, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
+                              transform: 'perspective(100px) rotateY(-5deg) rotateX(5deg)'
+                            }} 
+                          />
+                          {/* Inner smaller star for 3D effect */}
+                          <Star className="w-9 h-9 sm:w-10 sm:h-10 text-yellow-500 fill-yellow-500 absolute top-1 right-1" 
+                            style={{ 
+                              filter: 'drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3))',
+                              transform: 'perspective(100px) rotateY(-3deg) rotateX(3deg)'
+                            }} 
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
+                          {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
+                            <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
+                          ))}
+                          {ratingStats.averageRating % 1 !== 0 && (
+                            <div className="relative flex-shrink-0">
+                              <Star size={16} className="md:w-5 md:h-5 text-gray-300" />
+                              <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
+                                <Star size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
+                              </div>
+                            </div>
+                          )}
+                          {[...Array(5 - Math.floor(ratingStats.averageRating) - (ratingStats.averageRating % 1 !== 0 ? 1 : 0))].map((_, i) => (
+                            <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
+                          ))}
+                        </div>
+                        <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight">
+                          Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount} Bewertungen)
+                        </span>
+                      </div>
+                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                        Unsere Partnerfirmen aus den Bereichen Umzug, Reinigung, Malerarbeiten und Gartenarbeit wurden von bisherigen Kundinnen und Kunden mit durchschnittlich <span className="font-semibold text-gray-900">Ø {ratingStats.averageRating.toFixed(1)}/5 Sternen</span> bewertet.
+                      </p>
+                    </div>
+                  </div>
+
                   {/* Trust Badge */}
-                  <p className="text-sm sm:text-base text-gray-500 font-medium text-left">
+                  <p className="text-sm sm:text-base text-gray-900 font-bold text-left">
                     Die Anfrage ist kostenlos und unverbindlich.
                   </p>
                   
@@ -504,6 +575,164 @@ export default async function HomePage() {
 
           {/* Client Components - Interactive parts */}
       <HomePageClient initialReviews={reviews} initialPosts={posts} />
+
+          {/* SEO Content Section */}
+          <section className="py-12 md:py-16 bg-white">
+            <div className="container mx-auto max-w-navbar px-4 md:px-6">
+              <div className="max-w-4xl mx-auto prose prose-lg">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Umzugsfirmen, Reinigungsfirmen, Malerarbeiten & Gartenarbeit vergleichen
+                </h2>
+                <p className="text-lg text-gray-700 mb-8">
+                  Mehrere Offerten erhalten und passende Anbieter auswählen
+                </p>
+                <p className="text-base text-gray-700 mb-8 leading-relaxed">
+                  Mit Online-offerten.ch findest du zuverlässige Anbieter für Umzüge, Reinigungen, Malerarbeiten und Gartenarbeit. Vergleiche mehrere Offerten aus deiner Region und wähle den Dienstleister, der am besten zu deinem Projekt passt.
+                </p>
+
+                {/* Ana Hizmet Blokları */}
+                <div className="space-y-12 mb-16">
+                  <div>
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                      Umzugsfirma finden – einfach und unkompliziert
+                    </h2>
+                    <p className="text-lg text-gray-700 mb-6">
+                      Geprüfte Anbieter für Privatumzüge, Firmenumzüge und internationale Umzüge
+                    </p>
+
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Ein Umzug erfordert Planung und Vertrauen. Über Online-offerten.ch erhältst du Offerten von geprüften Umzugsfirmen für Privatumzüge, Firmenumzüge sowie internationale Umzüge. So kannst du Preise und Leistungen vergleichen und schnell die passende Umzugsfirma finden.
+                    </p>
+
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                      Transparente Offerten und seriöse Umzugsfirmen
+                    </h3>
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Alle vermittelten Umzugsfirmen erstellen klare und transparente Offerten. Durch den Vergleich mehrerer Angebote sparst du Zeit und Kosten und triffst eine fundierte Entscheidung für dein Umzugsprojekt.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                      Reinigungsfirma für Endreinigung und Umzugsreinigung vergleichen
+                    </h2>
+                    <p className="text-lg text-gray-700 mb-6">
+                      Professionelle Reinigungsfirmen für Wohnung und Büro
+                    </p>
+
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Ob Endreinigung nach dem Umzug, Umzugsreinigung oder Büroreinigung – über Online-offerten.ch findest du erfahrene Reinigungsfirmen. Vergleiche Offerten, prüfe Preise und Leistungen und wähle die Reinigungsfirma, die optimal zu deinem Bedarf passt.
+                    </p>
+
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                      Zuverlässige Endreinigung für eine reibungslose Wohnungsabgabe
+                    </h3>
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Unsere Partnerfirmen führen Endreinigungen zuverlässig gemäss den Vorgaben für die Wohnungsübergabe durch. So kannst du deine Wohnung stressfrei abgeben und sicher sein, dass alle Anforderungen erfüllt sind.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                      Malerarbeiten vergleichen und erfahrene Malerbetriebe finden
+                    </h2>
+                    <p className="text-lg text-gray-700 mb-6">
+                      Professionelle Malerarbeiten für Innen- und Aussenbereiche
+                    </p>
+
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Für Renovationen im Innen- und Aussenbereich vermitteln wir qualifizierte Anbieter für Malerarbeiten. Vergleiche Offerten für Streichen, Lackieren oder Fassadenarbeiten und finde den passenden Malerbetrieb für dein Projekt.
+                    </p>
+
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Hochwertige Materialien und moderne Arbeitstechniken sorgen für saubere, langlebige und optisch überzeugende Ergebnisse.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                      Gartenarbeit einfach vergleichen und passende Gartenprofis finden
+                    </h2>
+                    <p className="text-lg text-gray-700 mb-6">
+                      Gartenarbeit und Gartenpflege aus einer Hand
+                    </p>
+
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Ob regelmässige Gartenarbeit oder einmalige Gartenpflege – Online-offerten.ch bringt dich mit geprüften Anbietern für sämtliche Gartenarbeiten zusammen. Vergleiche Offerten für Rasenpflege, Heckenschnitt, Baumschnitt oder saisonale Gartenarbeit.
+                    </p>
+
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      Unsere Garten-Partner arbeiten effizient, zuverlässig und termingerecht – für gepflegte Grünflächen und einen ansprechenden Aussenbereich.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Warum Online-offerten.ch */}
+                <div className="space-y-8 mb-16">
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-8">
+                    Warum Online-offerten.ch die richtige Wahl ist
+                  </h2>
+
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                    Kostenlose und unverbindliche Offerten
+                  </h3>
+                  <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    Du erhältst mehrere Offerten kostenlos und unverbindlich. So kannst du Anbieter vergleichen, ohne Zeit zu verlieren oder Verpflichtungen einzugehen.
+                  </p>
+
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                    Zeit- und Kostenersparnis durch direkten Vergleich
+                  </h3>
+                  <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    Der Vergleich verschiedener Anbieter hilft dir, Preise und Leistungen transparent gegenüberzustellen und die beste Entscheidung für dein Projekt zu treffen.
+                  </p>
+                </div>
+
+                {/* So funktioniert Online-offerten.ch */}
+                <div className="space-y-8 mb-12">
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-8">
+                    So funktioniert Online-offerten.ch
+                  </h2>
+
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                        1. Anfrage ausfüllen
+                      </h3>
+                      <p className="text-base text-gray-700 mb-4 leading-relaxed">
+                        Beschreibe dein Projekt in wenigen Schritten und sende deine Anfrage ab.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                        2. Offerten erhalten und vergleichen
+                      </h3>
+                      <p className="text-base text-gray-700 mb-4 leading-relaxed">
+                        Erhalte mehrere Offerten von passenden Anbietern und vergleiche Preise, Leistungen und Bewertungen direkt online.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                        3. Anbieter auswählen
+                      </h3>
+                      <p className="text-base text-gray-700 mb-4 leading-relaxed">
+                        Wähle den Dienstleister, der dein Projekt zuverlässig, effizient und kostengünstig umsetzt.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="text-left mt-12">
+                  <p className="text-lg font-semibold text-gray-900">
+                    Jetzt Offerten vergleichen und passende Dienstleister finden
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
         </main>
       </div>
     </>
