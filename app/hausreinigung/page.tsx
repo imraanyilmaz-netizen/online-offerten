@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import HausreinigungPageClient from '@/components/pages/services/HausreinigungPageClient'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 async function getReviewStats() {
   try {
     const supabase = await createClient();
@@ -127,8 +129,8 @@ export default async function HausreinigungPage() {
   return (
     <>
       {/* Hreflang tags */}
-      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/hausreinigung" />
-      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/hausreinigung" />
+      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/hausreinigung" />
+      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/hausreinigung" />
       {/* ✅ Server-side schema - Google bot ilk taramada görür */}
       <script
         type="application/ld+json"

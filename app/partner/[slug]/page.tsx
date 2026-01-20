@@ -140,9 +140,9 @@ export default async function PartnerProfilePage({ params }: { params: { slug: s
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(partnerSchema) }}
       />
-      <Suspense fallback={<div>Loading...</div>}>
-        <PartnerProfilePageClient initialPartner={partner} />
-      </Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
+      <PartnerProfilePageClient initialPartner={partner} />
+    </Suspense>
     </>
   )
 }

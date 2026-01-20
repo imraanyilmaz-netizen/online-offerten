@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import BodenreinigungPageClient from '@/components/pages/services/BodenreinigungPageClient'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Bodenreinigung – Kostenlose Offerten vergleichen',
   description: 'Bodenreinigung für Parkett, Stein oder Teppich: Erhalten Sie kostenlose Offerten und vergleichen Sie qualifizierte Reinigungsfirmen in Ihrer Region.',

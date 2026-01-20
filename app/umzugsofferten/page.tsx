@@ -4,6 +4,8 @@ import Script from 'next/script'
 import UmzugsoffertenPageClient from '@/components/pages/info/UmzugsoffertenPageClient'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 async function getReviewStats() {
   try {
     const supabase = await createClient();

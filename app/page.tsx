@@ -237,8 +237,8 @@ export default async function HomePage() {
   return (
     <>
       {/* Hreflang tags */}
-      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/" />
-      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/" />
+      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/" />
+      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/" />
       
       {/* Preload hero image for faster LCP */}
       <link
@@ -287,12 +287,16 @@ export default async function HomePage() {
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 lg:items-start">
                 {/* Left Column - Content */}
                 <div className="order-1 lg:order-1 text-center lg:text-left space-y-6 sm:space-y-8">
-                  <h1 className="text-[40px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight text-left" style={{ fontFamily: '"Roboto", -apple-system, BlinkMacSystemFont, sans-serif' }}>
+                  <h1 className="homepage-hero-title text-[36px] md:text-4xl lg:text-[43px] font-black text-gray-900 leading-tight tracking-tight text-left" style={{ fontFamily: '"Roboto", -apple-system, BlinkMacSystemFont, sans-serif', fontWeight: 900 }}>
                     <span className="text-gray-900">Offerten vergleichen</span> & den passenden Anbieter finden
                   </h1>
                   
-                  <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto md:mx-0 lg:mx-0 text-left">
-                    Finden Sie qualifizierte Umzugs-, Reinigungs-, Maler- & Gärtnerfirmen in Ihrer Region – verglichen, geprüft & bis zu 40% günstiger. Unsere Plattform ist speziell auf die Bedürfnisse des Schweizer Marktes und die dortigen Standards ausgerichtet. Endlich stressfrei: Vertrauenswürdige Partner finden & vergleichen
+                  <h2 className="text-[16px] font-bold text-gray-800 leading-tight text-left mb-[4px]">
+                    Der intelligente Weg zu den besten Offerten in der Schweiz
+                  </h2>
+                  
+                  <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[16px] text-gray-700 leading-relaxed max-w-2xl mx-auto md:mx-0 lg:mx-0 text-left" style={{ marginTop: '10px' }}>
+                    Finden und vergleichen Sie geprüfte Umzugs-, Reinigungs-, Maler- und Gartenfirmen in Ihrer Region – transparent, zuverlässig und schweizweit.
                   </p>
                   
                   {/* CTA Buttons */}
@@ -419,7 +423,7 @@ export default async function HomePage() {
                    </div>
                    
                    <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 sm:border-4 border-green-200 h-full">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
+                    <h2 className="text-[18px] sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
                       Ihre Vorteile auf einen Blick
                     </h2>
                     <div className="space-y-3 sm:space-y-4">
@@ -455,8 +459,18 @@ export default async function HomePage() {
           </section>
 
           {/* Why Choose Us Section - SERVER RENDERED with long content */}
-          <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 via-white to-green-50/30 overflow-hidden">
-            <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <section 
+            className="py-16 md:py-24 bg-gradient-to-br from-gray-50 via-white to-green-50/30 overflow-hidden relative"
+            style={{
+              backgroundImage: 'url(https://online-offerten.ch/image/7946a949-0354-4f72-aff6-a406d89f84db.webp)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            {/* Overlay for better text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white/85 to-green-50/40 pointer-events-none"></div>
+            <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
                 {/* Umzugsfirma */}
                 <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
@@ -466,7 +480,7 @@ export default async function HomePage() {
                         <Truck className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Umzugsfirma</h4>
+                        <h4 className="text-[26px] md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Umzugsfirma</h4>
                         <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
                       </div>
                     </div>

@@ -49,8 +49,8 @@ export const metadata: Metadata = {
 export default function GeschaeftsumzugPage() {
   return (
     <>
-      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/geschaeftsumzug" />
-      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/geschaeftsumzug" />
+      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/geschaeftsumzug" />
+      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/geschaeftsumzug" />
       <GeschaeftsumzugPageClient />
     </>
   )

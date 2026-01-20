@@ -89,8 +89,8 @@ export default function RootLayout({
   return (
     <html lang="de-CH" className={inter.variable}>
       <head>
-        <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch" />
-        <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch" />
+        <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch" />
+        <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Google tag (gtag.js) */}

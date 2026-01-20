@@ -49,8 +49,8 @@ export const metadata: Metadata = {
 export default function UmzugsfirmaBernPage() {
   return (
     <>
-      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/umzugsfirma-bern" />
-      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/umzugsfirma-bern" />
+      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/umzugsfirma-bern" />
+      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/umzugsfirma-bern" />
       <UmzugsfirmaBernPageClient />
     </>
   )

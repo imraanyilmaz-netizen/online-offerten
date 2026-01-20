@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import UmzugsreinigungPageClient from '@/components/pages/services/UmzugsreinigungPageClient'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Umzugsreinigung mit Abnahmegarantie – Offerten vergleichen',
   description: 'Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
@@ -161,8 +163,8 @@ export default async function UmzugsreinigungPage() {
   return (
     <>
       {/* Hreflang tags */}
-      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/umzugsreinigung" />
-      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/umzugsreinigung" />
+      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/umzugsreinigung" />
+      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/umzugsreinigung" />
       {/* Server-side schema - Google bot için */}
       <script
         type="application/ld+json"

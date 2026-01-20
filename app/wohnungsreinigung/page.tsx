@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import WohnungsreinigungPageClient from '@/components/pages/services/WohnungsreinigungPageClient'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Wohnungsreinigung mit Abnahmegarantie – Offerten vergleichen',
   description: 'Professionelle Wohnungsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',

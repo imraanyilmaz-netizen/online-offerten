@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import UmzugskostenRechnerPageClient from '@/components/pages/tools/UmzugskostenRechnerPageClient'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Umzugskosten berechnen: Kostenlos & schnell',
   description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Umzugskosten-Rechner für die Schweiz. In 2 Minuten wissen, was Ihr Umzug kostet! Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.',

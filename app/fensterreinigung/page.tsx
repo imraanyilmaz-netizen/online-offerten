@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import FensterreinigungPageClient from '@/components/pages/services/FensterreinigungPageClient'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Fensterreinigung – Kostenlose Offerten vergleichen',
   description: 'Fensterreinigung vom Profi: Fordern Sie kostenlose Offerten an und vergleichen Sie Reinigungsfirmen für streifenfreie und professionelle Ergebnisse.',
