@@ -148,6 +148,10 @@ export const metadata: Metadata = {
   description: 'Umzugsfirma Zürich finden ✓ Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen. Kostenlose Offerten für Privat- & Geschäftsumzug.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-zuerich',
+    languages: {
+      'de-CH': 'https://online-offerten.ch/umzugsfirma-zuerich',
+      'x-default': 'https://online-offerten.ch/umzugsfirma-zuerich',
+    },
   },
   openGraph: {
     title: 'Umzugsfirma Zürich » Top Umzugsunternehmen vergleichen & sparen',
@@ -187,6 +191,9 @@ export const metadata: Metadata = {
 export default function UmzugsfirmaZurichPage() {
   return (
     <>
+      {/* Hreflang tags */}
+      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/umzugsfirma-zuerich" />
+      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/umzugsfirma-zuerich" />
       {/* Schema.org Structured Data - Server-side rendered for SEO */}
       <script
         type="application/ld+json"

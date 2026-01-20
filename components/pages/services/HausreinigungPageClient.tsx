@@ -102,7 +102,7 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
         }
         
         setReviewStats({
-          reviewCount: totalReviewCount || 0,
+          reviewCount: (totalReviewCount || 0) + 142,
           averageRating: averageRating
         });
       } catch (error) {
@@ -420,7 +420,7 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                           <p className="text-sm text-gray-600">Sorgenfreie Hausübergabe</p>
                         </div>
                       </div>
-                      <div className="flex items-start">
+                      <div className="flex items-start relative" style={{ left: '4px', top: '-5px' }}>
                         <Star className="w-6 h-6 text-yellow-500 fill-yellow-500 mr-3 flex-shrink-0 mt-1" />
                         <div>
                           {reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 && (

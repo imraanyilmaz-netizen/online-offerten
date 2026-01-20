@@ -431,7 +431,7 @@ const BueroreinigungPageClient = () => {
                           <p className="text-sm text-gray-600">Professionelle Qualität</p>
                         </div>
                       </div>
-                      <div className="flex items-start">
+                      <div className="flex items-start relative" style={{ left: '4px', top: '-5px' }}>
                         <Star className="w-6 h-6 text-yellow-500 fill-yellow-500 mr-3 flex-shrink-0 mt-1" />
                         <div>
                           <p className="font-bold text-gray-900 text-base">{reviewStats.averageRating.toFixed(1)}/5 Sterne Bewertung</p>

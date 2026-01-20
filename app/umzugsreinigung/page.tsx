@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   description: 'Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsreinigung',
+    languages: {
+      'de-CH': 'https://online-offerten.ch/umzugsreinigung',
+      'x-default': 'https://online-offerten.ch/umzugsreinigung',
+    },
   },
   openGraph: {
     title: 'Umzugsreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen',
@@ -156,6 +160,9 @@ export default async function UmzugsreinigungPage() {
 
   return (
     <>
+      {/* Hreflang tags */}
+      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/umzugsreinigung" />
+      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/umzugsreinigung" />
       {/* Server-side schema - Google bot için */}
       <script
         type="application/ld+json"

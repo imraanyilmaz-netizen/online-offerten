@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'Umzugsfirma Bern: Vergleichen Sie mehrere Zügelfirmen Bern und Umzugsunternemen Bern. Umzugsfirma vergleichen Bern - Kostenlos und unverbindlich Offerten von geprüften Umzugsfirmen vergleichen. Privatumzug, Geschäftsumzug, Reinigung & mehr. Bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-bern',
+    languages: {
+      'de-CH': 'https://online-offerten.ch/umzugsfirma-bern',
+      'x-default': 'https://online-offerten.ch/umzugsfirma-bern',
+    },
   },
   openGraph: {
     title: 'Umzugsfirma Bern: Zügelfirmen vergleichen & Umzugsunternemen finden',
@@ -43,5 +47,11 @@ export const metadata: Metadata = {
 }
 
 export default function UmzugsfirmaBernPage() {
-  return <UmzugsfirmaBernPageClient />
+  return (
+    <>
+      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/umzugsfirma-bern" />
+      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/umzugsfirma-bern" />
+      <UmzugsfirmaBernPageClient />
+    </>
+  )
 }

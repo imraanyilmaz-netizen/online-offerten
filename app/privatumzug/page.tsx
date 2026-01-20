@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'Privatumzug Offerten kostenlos vergleichen ✓ Offerten von geprüften Umzugsfirmen vergleichen. Wohnungsumzug, Hausumzug – sicher, stressfrei und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/privatumzug',
+    languages: {
+      'de-CH': 'https://online-offerten.ch/privatumzug',
+      'x-default': 'https://online-offerten.ch/privatumzug',
+    },
   },
   openGraph: {
     title: 'Privatumzug Offerten vergleichen – Bis zu 40% sparen',
@@ -43,6 +47,12 @@ export const metadata: Metadata = {
 }
 
 export default function PrivateUmzugPage() {
-  return <PrivateUmzugPageClient />
+  return (
+    <>
+      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/privatumzug" />
+      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/privatumzug" />
+      <PrivateUmzugPageClient />
+    </>
+  )
 }
 

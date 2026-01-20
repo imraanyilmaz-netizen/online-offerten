@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://online-offerten.ch'),
   alternates: {
     canonical: 'https://online-offerten.ch',
+    languages: {
+      'de-CH': 'https://online-offerten.ch',
+      'x-default': 'https://online-offerten.ch',
+    },
   },
   openGraph: {
     type: 'website',
@@ -83,8 +87,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de" className={inter.variable}>
+    <html lang="de-CH" className={inter.variable}>
       <head>
+        <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch" />
+        <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Google tag (gtag.js) */}

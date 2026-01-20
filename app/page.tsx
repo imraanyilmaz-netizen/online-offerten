@@ -236,6 +236,10 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* Hreflang tags */}
+      <link rel="alternate" hreflang="de-CH" href="https://online-offerten.ch/" />
+      <link rel="alternate" hreflang="x-default" href="https://online-offerten.ch/" />
+      
       {/* Preload hero image for faster LCP */}
       <link
         rel="preload"
@@ -327,7 +331,7 @@ export default async function HomePage() {
                 {/* Left Column - Trust Badge & Features List */}
                 <div className="space-y-6 lg:-mt-8">
                   {/* Rating Card */}
-                  <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100 flex items-start gap-4 hover:shadow-xl transition-all duration-300">
+                  <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100 flex flex-col md:flex-row md:items-start items-start gap-4 hover:shadow-xl transition-all duration-300">
                     <div className="flex-shrink-0 relative">
                       <div className="relative w-14 h-14 sm:w-16 sm:h-16">
                         {/* Main 3D Star */}
@@ -348,8 +352,8 @@ export default async function HomePage() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 pt-1">
-                      <div className="flex items-center gap-2 mb-2">
+                    <div className="flex-1 pt-1 w-full md:w-auto">
+                      <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
                         <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
                           {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
                             <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
@@ -366,11 +370,11 @@ export default async function HomePage() {
                             <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
                           ))}
                         </div>
-                        <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight">
+                        <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
                           Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount} Bewertungen)
                         </span>
                       </div>
-                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                      <p className="text-sm sm:text-base text-gray-900 font-bold leading-relaxed text-left">
                         Unsere Partnerfirmen aus den Bereichen Umzug, Reinigung, Malerarbeiten und Gartenarbeit wurden von bisherigen Kundinnen und Kunden mit durchschnittlich <span className="font-semibold text-gray-900">Ø {ratingStats.averageRating.toFixed(1)}/5 Sternen</span> bewertet.
                       </p>
                     </div>
@@ -562,7 +566,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="https://online-offerten.ch/gartenarbeit" className="inline-flex items-center">
+                      <Link href="https://online-offerten.ch/gartenarbeiten" className="inline-flex items-center">
                         Gartenarbeit finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
