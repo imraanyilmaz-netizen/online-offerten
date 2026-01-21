@@ -475,7 +475,24 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     if (formData.service === 'raeumung' && formData.umzugArt === 'raeumung' && raeumungScopeFromUrl && raeumungScopeFromUrl !== formData.raeumung_scope) {
       handleRadioGroupChange('raeumung_scope', raeumungScopeFromUrl);
     }
-  }, [searchParamsString, formData.service, formData.umzugArt, formData.raeumung_scope, handleRadioGroupChange]); 
+  }, [searchParamsString, formData.service, formData.umzugArt, formData.raeumung_scope, handleRadioGroupChange]);
+
+  // URL'den from_plz ve from_city parametrelerini oku ve ilk adres alanlarına otomatik doldur
+  useEffect(() => {
+    const params = new URLSearchParams(searchParamsString);
+    const fromPlzFromUrl = params.get('from_plz');
+    const fromCityFromUrl = params.get('from_city');
+    
+    // Eğer URL'de from_plz varsa ve formData'da henüz set edilmemişse, set et
+    if (fromPlzFromUrl && fromPlzFromUrl !== formData.from_zip) {
+      handleChange({ target: { name: 'from_zip', value: fromPlzFromUrl } });
+    }
+    
+    // Eğer URL'de from_city varsa ve formData'da henüz set edilmemişse, set et
+    if (fromCityFromUrl && fromCityFromUrl !== formData.from_city) {
+      handleChange({ target: { name: 'from_city', value: fromCityFromUrl } });
+    }
+  }, [searchParamsString, formData.from_zip, formData.from_city, handleChange]); 
 
   // Check if Step 1 is completed whenever formData changes - memoized for performance
   // Step 1: Nur Hauptservice-Auswahl

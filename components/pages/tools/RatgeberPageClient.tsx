@@ -111,7 +111,7 @@ const RatgeberPageClient = () => {
       <div className="bg-gray-50/70">
         <div className="container mx-auto max-w-navbar px-4 py-12 md:py-16">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-[36px] font-extrabold text-gray-900 mb-4 leading-tight">
               Unser Ratgeber
             </h1>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">

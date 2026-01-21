@@ -157,7 +157,7 @@ const Navbar = () => {
 
   return (
     <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style paint', zIndex: 1500 }}>
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between h-16" style={{ minHeight: '64px' }}>
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">
             <img 
@@ -194,7 +194,10 @@ const Navbar = () => {
           >
             {/* Removed language switcher - DE-only now */}
 
-            <div className="hidden md:block" style={{ minWidth: '80px', minHeight: '36px' }}>
+            <div className="hidden md:flex items-center gap-3" style={{ minHeight: '36px' }}>
+              <Button asChild size="sm" variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+                <Link href="/partner-werden">Partner werden</Link>
+              </Button>
               {!mounted || loading ? (
                 <div className="w-9 h-9 bg-gray-200 rounded-full animate-pulse" style={{ minWidth: '36px', minHeight: '36px' }}></div>
               ) : user ? (
@@ -230,7 +233,7 @@ const Navbar = () => {
             exit="exit"
             className="md:hidden bg-white border-t"
           >
-            <div className="container mx-auto max-w-navbar px-4 md:px-6">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
               <nav className="pt-2 pb-4 space-y-1">
                 <NavItem to="/" onClick={() => setMobileMenuOpen(false)}>
                   <Home size={18} /> Startseite
@@ -273,6 +276,9 @@ const Navbar = () => {
                 </NavItem>
 
                 <div className="border-t pt-4 mt-4">
+                  <NavItem to="/partner-werden" onClick={() => setMobileMenuOpen(false)}>
+                    Partner werden
+                  </NavItem>
                   {loading ? (
                     <div className="h-10 bg-gray-200 rounded-md animate-pulse"></div>
                   ) : user ? (

@@ -128,9 +128,6 @@ export default async function HausreinigungPage() {
 
   return (
     <>
-      {/* Hreflang tags */}
-      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/hausreinigung" />
-      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/hausreinigung" />
       {/* ✅ Server-side schema - Google bot ilk taramada görür */}
       <script
         type="application/ld+json"

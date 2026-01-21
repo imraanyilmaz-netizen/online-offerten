@@ -49,8 +49,6 @@ export const metadata: Metadata = {
 export default function PrivateUmzugPage() {
   return (
     <>
-      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/privatumzug" />
-      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/privatumzug" />
       <PrivateUmzugPageClient />
     </>
   )

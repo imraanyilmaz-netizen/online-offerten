@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import HomePageClient from '@/components/pages/HomePageClient'
+import HomeHeroForm from '@/components/HomeHeroForm'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import NextImage from 'next/image'
@@ -10,7 +11,8 @@ import {
   GitCompareArrows, Award,
   MapPin, Calculator,
   ArrowRight,
-  ShieldCheck, Search, Truck, Trash2, Sprout, Star
+  ShieldCheck, Search, Truck, Trash2, Sprout, Star,
+  FileText, Users, CheckCircle
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -236,10 +238,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hreflang tags */}
-      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/" />
-      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/" />
-      
       {/* Preload hero image for faster LCP */}
       <link
         rel="preload"
@@ -258,21 +256,22 @@ export default async function HomePage() {
         <main className="flex-grow">
           {/* Hero Section - SEO Optimized - SERVER RENDERED */}
           <section 
-            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden" 
+            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-[#E6F6EA] lg:bg-[#dbeadf] z-20" 
             aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
           >
             {/* Background Image - Right Side - Desktop Only */}
             <div 
-              className="hidden lg:block absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full bg-cover lg:bg-right bg-no-repeat"
+              className="hidden lg:block absolute -right-60 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full bg-cover bg-no-repeat"
               style={{
                 backgroundImage: `url('/image/online-offerten.webp')`,
+                backgroundPosition: 'right center',
                 maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
                 WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
               }}
             ></div>
             
             {/* Gradient Overlay - White from left to right with shadow effect - Desktop Only */}
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/75 to-transparent"></div>
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent" style={{ width: '60%' }}></div>
             
             {/* White shadow/glow effect towards the image - Desktop Only */}
             <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/8 pointer-events-none"></div>
@@ -283,45 +282,488 @@ export default async function HomePage() {
               }}
             ></div>
             
-            <div className="container mx-auto max-w-navbar px-4 sm:px-6 relative z-10">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 lg:items-start">
-                {/* Left Column - Content */}
-                <div className="order-1 lg:order-1 text-center lg:text-left space-y-6 sm:space-y-8">
-                  <h1 className="homepage-hero-title text-[36px] md:text-4xl lg:text-[43px] font-black text-gray-900 leading-tight tracking-tight text-left" style={{ fontFamily: '"Roboto", -apple-system, BlinkMacSystemFont, sans-serif', fontWeight: 900 }}>
-                    <span className="text-gray-900">Offerten vergleichen</span> & den passenden Anbieter finden
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+              {/* Mobile Image - Above H1 on mobile */}
+              <div className="flex items-center justify-center mb-6 lg:hidden -mx-4 sm:-mx-6">
+                <NextImage 
+                  src="/image/online-offerten.webp" 
+                  alt="Online Offerten" 
+                  width={600}
+                  height={400}
+                  className="w-full h-auto rounded-xl"
+                  priority
+                  quality={85}
+                  sizes="(max-width: 1024px) 100vw, 600px"
+                />
+              </div>
+              
+              <div className="max-w-3xl text-left">
+                <h1 
+                  className="text-[32px] md:text-[40px] leading-[42.56px] md:leading-[53.2px] font-bold mb-6 text-left"
+                  style={{
+                    fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                    fontWeight: 700,
+                    color: '#000000',
+                    textAlign: 'start',
+                    letterSpacing: 'normal',
+                    wordSpacing: '0px',
+                    fontStyle: 'normal',
+                    textTransform: 'none',
+                    textDecoration: 'none',
+                    textIndent: '0px'
+                  }}
+                >
+                  Finden Sie die passende Anbieter für Ihr Projekt
                   </h1>
                   
-                  <h2 className="text-[16px] font-bold text-gray-800 leading-tight text-left mb-[4px]">
-                    Der intelligente Weg zu den besten Offerten in der Schweiz
+                {/* Search Form */}
+                <HomeHeroForm />
+                
+                {/* Rating Card */}
+                <div 
+                  className="bg-white rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-start items-start gap-4 transition-all duration-300 mt-6"
+                  style={{
+                    boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
+                  }}
+                >
+                  <div className="flex-shrink-0 relative">
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16">
+                      {/* Main 3D Star */}
+                      <div className="absolute inset-0">
+                        <Star className="w-14 h-14 sm:w-16 sm:h-16 text-yellow-400 fill-yellow-400 absolute inset-0" 
+                          style={{ 
+                            filter: 'drop-shadow(0 4px 8px rgba(234, 179, 8, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
+                            transform: 'perspective(100px) rotateY(-5deg) rotateX(5deg)'
+                          }} 
+                        />
+                        {/* Inner smaller star for 3D effect */}
+                        <Star className="w-9 h-9 sm:w-10 sm:h-10 text-yellow-500 fill-yellow-500 absolute top-1 right-1" 
+                          style={{ 
+                            filter: 'drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3))',
+                            transform: 'perspective(100px) rotateY(-3deg) rotateX(3deg)'
+                          }} 
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex-1 pt-1 w-full md:w-auto">
+                    <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
+                      <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
+                        {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
+                          <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
+                        ))}
+                        {ratingStats.averageRating % 1 !== 0 && (
+                          <div className="relative flex-shrink-0">
+                            <Star size={16} className="md:w-5 md:h-5 text-gray-300" />
+                            <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
+                              <Star size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
+                            </div>
+                          </div>
+                        )}
+                        {[...Array(5 - Math.floor(ratingStats.averageRating) - (ratingStats.averageRating % 1 !== 0 ? 1 : 0))].map((_, i) => (
+                          <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
+                        ))}
+                      </div>
+                      <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
+                        Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount} Bewertungen)
+                      </span>
+                    </div>
+                    <p className="text-sm sm:text-base text-gray-900 font-bold leading-relaxed text-left">
+                      Unsere Partnerfirmen aus den Bereichen Umzug, Reinigung, Malerarbeiten und Gartenarbeit wurden von bisherigen Kundinnen und Kunden mit durchschnittlich <span className="font-semibold text-gray-900">Ø {ratingStats.averageRating.toFixed(1)}/5 Sternen</span> bewertet.
+                    </p>
+                    {/* Trust Badges */}
+                    <div className="flex flex-wrap justify-start items-center gap-4 mt-4 pt-4 border-t border-gray-200">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-5 w-5 text-green-600" />
+                        <span className="text-sm text-gray-600">Kostenlos & unverbindlich</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <ShieldCheck className="h-5 w-5 text-green-600" />
+                        <span className="text-sm text-gray-600">Nur geprüfte Firmen</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Award className="h-5 w-5 text-green-600" />
+                        <span className="text-sm text-gray-600">Bis zu 40% sparen</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* So einfach geht's Section */}
+          <section className="py-12 md:py-16 lg:py-20 bg-white relative z-10">
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+                <h2 
+                  className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-8 md:mb-12 text-left"
+                  style={{
+                    fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                    fontWeight: 700,
+                    color: '#1c1d16',
+                    textAlign: 'start',
+                    letterSpacing: 'normal',
+                    wordSpacing: '0px',
+                    fontStyle: 'normal',
+                    textTransform: 'none',
+                    textDecoration: 'none',
+                    textIndent: '0px'
+                  }}
+                >
+                So einfach geht's:
                   </h2>
                   
-                  <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[16px] text-gray-700 leading-relaxed max-w-2xl mx-auto md:mx-0 lg:mx-0 text-left" style={{ marginTop: '10px' }}>
-                    Finden und vergleichen Sie geprüfte Umzugs-, Reinigungs-, Maler- und Gartenfirmen in Ihrer Region – transparent, zuverlässig und schweizweit.
-                  </p>
-                  
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                    <Button
-                      asChild
-                      size="lg"
-                      className="bg-green-600 hover:bg-green-700 text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+              {/* Steps - Scrollable on mobile */}
+              <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible">
+                <div className="flex md:grid md:grid-cols-3 gap-6 min-w-max md:min-w-0">
+                  {/* Step 1 */}
+                  <div className="bg-green-50 rounded-2xl p-6 md:p-8 flex-shrink-0 w-[280px] md:w-auto shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div className="bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold w-fit mb-6">
+                      Schritt 1
+                    </div>
+                    <div className="flex justify-center mb-6">
+                      <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center">
+                        <FileText className="w-8 h-8 text-white" />
+                      </div>
+                    </div>
+                    <h4 
+                      className="text-[18px] md:text-[20px] leading-[26.6px] mb-3 text-center"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'center',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
                     >
-                      <Link href="/kostenlose-offerte-anfordern">
-                        <Search className="mr-2 h-5 w-5" />
-                        Jetzt Offerten vergleichen
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="lg"
-                      className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 border-2 hover:bg-gray-50 w-full sm:w-auto"
+                      Formular ausfüllen
+                    </h4>
+                    <p 
+                      className="text-center"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '14px',
+                        lineHeight: '17.5px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'center',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
                     >
-                      <Link href="#kosten-berechnen">
-                        <Calculator className="mr-2 h-5 w-5" />
-                        Kosten berechnen
-                      </Link>
-                    </Button>
+                      Beschreiben Sie Ihr Projekt in unserem intelligenten Formular. Geben Sie dabei auch das Datum der Angebotserstellung an, um die Aktualität Ihres Anliegens zu dokumentieren. Je detaillierter Ihre Angaben, desto genauer die Offerten.
+                    </p>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="bg-green-50 rounded-2xl p-6 md:p-8 flex-shrink-0 w-[280px] md:w-auto shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div className="bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold w-fit mb-6">
+                      Schritt 2
+                    </div>
+                    <div className="flex justify-center mb-6">
+                      <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center">
+                        <GitCompareArrows className="w-8 h-8 text-white" />
+                      </div>
+                    </div>
+                    <h4 
+                      className="text-[18px] md:text-[20px] leading-[26.6px] mb-3 text-center"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'center',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
+                      Offerten vergleichen
+                    </h4>
+                    <p 
+                      className="text-center"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '14px',
+                        lineHeight: '17.5px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'center',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
+                      Sie erhalten bis zu 6 kostenlose Offerten von qualifizierten Partnern – schnell und unverbindlich. Die Offerten werden direkt an den Empfänger gesendet.
+                    </p>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="bg-green-50 rounded-2xl p-6 md:p-8 flex-shrink-0 w-[280px] md:w-auto shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div className="bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold w-fit mb-6">
+                      Schritt 3
+                    </div>
+                    <div className="flex justify-center mb-6">
+                      <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center">
+                        <Users className="w-8 h-8 text-white" />
+                      </div>
+                    </div>
+                    <h4 
+                      className="text-[18px] md:text-[20px] leading-[26.6px] mb-3 text-center"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'center',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
+                      Anbieter wählen
+                    </h4>
+                    <p 
+                      className="text-center"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '14px',
+                        lineHeight: '17.5px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'center',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
+                      Vergleichen Sie Preise und Leistungen und wählen Sie den besten Partner – einfach, sicher und transparent. Kundenbewertungen helfen Ihnen dabei, die Qualität der Dienstleister besser einzuschätzen und eine fundierte Entscheidung zu treffen.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Warum Aroundhome? Section */}
+          <section className="py-12 md:py-16 lg:py-20 bg-white">
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* Left Side - Image */}
+                <div className="relative order-2 lg:order-1">
+                  <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                    <NextImage
+                      src="/bilder/umzug-reinigung-maler-gaertner-6-offerten-vergleichen-600-400.webp"
+                      alt="Zufriedene Kunden"
+                      width={600}
+                      height={400}
+                      className="w-full h-auto object-cover"
+                    />
+                    {/* Yellow L-shaped accent */}
+                    <div className="absolute top-0 left-0 w-24 h-24 bg-yellow-400 opacity-90 rounded-br-3xl"></div>
+                  </div>
+                </div>
+
+                {/* Right Side - Text Content */}
+                <div className="space-y-6 order-1 lg:order-2">
+                  <div>
+                    <h2 
+                      className="text-[14px] md:text-[18px] leading-[18.62px] md:leading-[23.94px] mb-3 text-center px-4 py-2 rounded-lg"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'center',
+                        backgroundColor: 'rgba(230, 246, 234, 1)',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
+                      Warum Online-offerten.ch
+                    </h2>
+                    <h3 
+                      className="text-[22px] md:text-[28px] leading-[29.26px] md:leading-[37.24px] mb-6"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 600,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
+                      Ihre Vorteile mit unserer Vermittlung
+                    </h3>
+                  </div>
+
+                  <div className="space-y-6">
+                    {/* Reason 1 */}
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 mt-1">
+                        <CheckCircle className="h-6 w-6 text-green-600" />
+                      </div>
+                      <div>
+                        <div 
+                          className="mb-2"
+                          style={{
+                            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '20px',
+                            lineHeight: '26.6px',
+                            fontWeight: 700,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          100 % kostenlos
+                        </div>
+                        <p 
+                          className="leading-relaxed"
+                          style={{
+                            fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '16px',
+                            lineHeight: '24px',
+                            fontWeight: 400,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Unser Service ist für Sie völlig kostenfrei. Die Finanzierung erfolgt über die teilnehmenden Fachanbieter.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Reason 2 */}
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 mt-1">
+                        <CheckCircle className="h-6 w-6 text-green-600" />
+                      </div>
+                      <div>
+                        <div 
+                          className="mb-2"
+                          style={{
+                            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '20px',
+                            lineHeight: '26.6px',
+                            fontWeight: 700,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Unverbindlich & risikofrei
+                        </div>
+                        <p 
+                          className="leading-relaxed"
+                          style={{
+                            fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '16px',
+                            lineHeight: '24px',
+                            fontWeight: 400,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Das Einholen und Vergleichen von Angeboten ist für Sie jederzeit unverbindlich – ohne Verpflichtungen.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Reason 3 */}
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 mt-1">
+                        <CheckCircle className="h-6 w-6 text-green-600" />
+                      </div>
+                      <div>
+                        <div 
+                          className="mb-2"
+                          style={{
+                            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '20px',
+                            lineHeight: '26.6px',
+                            fontWeight: 700,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Passende Anbieter für Ihr Projekt
+                        </div>
+                        <p 
+                          className="leading-relaxed"
+                          style={{
+                            fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontSize: '16px',
+                            lineHeight: '24px',
+                            fontWeight: 400,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Sie erhalten ausschliesslich Vorschläge von Anbietern, die fachlich und inhaltlich zu Ihrem Projekt passen.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -332,128 +774,10 @@ export default async function HomePage() {
           <section className="py-8 md:py-12 lg:py-16 bg-white">
             <div className="container mx-auto max-w-navbar px-4 sm:px-6">
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-                {/* Left Column - Trust Badge & Features List */}
+                {/* Left Column - Features List */}
                 <div className="space-y-6 lg:-mt-8">
-                  {/* Rating Card */}
-                  <div className="bg-white rounded-xl p-5 sm:p-6 shadow-lg border border-gray-100 flex flex-col md:flex-row md:items-start items-start gap-4 hover:shadow-xl transition-all duration-300">
-                    <div className="flex-shrink-0 relative">
-                      <div className="relative w-14 h-14 sm:w-16 sm:h-16">
-                        {/* Main 3D Star */}
-                        <div className="absolute inset-0">
-                          <Star className="w-14 h-14 sm:w-16 sm:h-16 text-yellow-400 fill-yellow-400 absolute inset-0" 
-                            style={{ 
-                              filter: 'drop-shadow(0 4px 8px rgba(234, 179, 8, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
-                              transform: 'perspective(100px) rotateY(-5deg) rotateX(5deg)'
-                            }} 
-                          />
-                          {/* Inner smaller star for 3D effect */}
-                          <Star className="w-9 h-9 sm:w-10 sm:h-10 text-yellow-500 fill-yellow-500 absolute top-1 right-1" 
-                            style={{ 
-                              filter: 'drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3))',
-                              transform: 'perspective(100px) rotateY(-3deg) rotateX(3deg)'
-                            }} 
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex-1 pt-1 w-full md:w-auto">
-                      <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
-                        <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
-                          {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
-                            <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                          ))}
-                          {ratingStats.averageRating % 1 !== 0 && (
-                            <div className="relative flex-shrink-0">
-                              <Star size={16} className="md:w-5 md:h-5 text-gray-300" />
-                              <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                                <Star size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                              </div>
-                            </div>
-                          )}
-                          {[...Array(5 - Math.floor(ratingStats.averageRating) - (ratingStats.averageRating % 1 !== 0 ? 1 : 0))].map((_, i) => (
-                            <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
-                          ))}
-                        </div>
-                        <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
-                          Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount} Bewertungen)
-                        </span>
-                      </div>
-                      <p className="text-sm sm:text-base text-gray-900 font-bold leading-relaxed text-left">
-                        Unsere Partnerfirmen aus den Bereichen Umzug, Reinigung, Malerarbeiten und Gartenarbeit wurden von bisherigen Kundinnen und Kunden mit durchschnittlich <span className="font-semibold text-gray-900">Ø {ratingStats.averageRating.toFixed(1)}/5 Sternen</span> bewertet.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Trust Badge */}
-                  <p className="text-sm sm:text-base text-gray-900 font-bold text-left">
-                    Die Anfrage ist kostenlos und unverbindlich.
-                  </p>
-                  
-                  {/* Features List */}
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm sm:text-base text-gray-700">Geprüfte Anbieter aus Ihrer Region</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm sm:text-base text-gray-700 text-left">Für mehr Sicherheit werden alle Anbieter sorgfältig geprüft und durchlaufen einen Background-Check, um Risiken für unsere Kunden zu minimieren.</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm sm:text-base text-gray-700">Unverbindliche Anfrage – keine Verpflichtung</span>
-                    </div>
-                  </div>
                 </div>
                 
-                 {/* Right Column - Mobile/Tablet Image & Benefits Card */}
-                 <div className="space-y-6 lg:-mt-36 relative" style={{ zIndex: 1000 }}>
-                   {/* Mobile & Tablet Image - Only visible on mobile and tablet, above benefits card */}
-                   <div className="flex items-center justify-center lg:hidden">
-                     <NextImage 
-                       src="/image/online-offerten.webp" 
-                       alt="Online Offerten" 
-                       width={600}
-                       height={400}
-                       className="w-full h-auto max-w-full rounded-xl shadow-lg"
-                       priority
-                       quality={85}
-                       sizes="(max-width: 1024px) 100vw, 600px"
-                     />
-                   </div>
-                   
-                   <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 sm:border-4 border-green-200 h-full">
-                    <h2 className="text-[18px] sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
-                      Ihre Vorteile auf einen Blick
-                    </h2>
-                    <div className="space-y-3 sm:space-y-4">
-                      <div className="flex items-start gap-3">
-                        <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Lokale Partner in Ihrer Nähe</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Unverbindliche Anfrage</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <GitCompareArrows className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Mehrere Offerten vergleichen</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <Award className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900 text-sm sm:text-base">Transparente Preise & individuelle Offerten</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
@@ -480,15 +804,63 @@ export default async function HomePage() {
                         <Truck className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-[26px] md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Umzugsfirma</h4>
+                        <h4 
+                          className="text-[18px] md:text-[20px] leading-[26.6px] mb-2 group-hover:text-blue-600 transition-colors"
+                          style={{
+                            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontWeight: 700,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Umzugsfirma
+                        </h4>
                         <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
                       </div>
                     </div>
                     <div className="space-y-4 mb-8">
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed mb-4"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Ein Umzug muss nicht anstrengend sein – mit den passenden <Link href="https://online-offerten.ch/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsfirmen</Link> an Ihrer Seite wird er schnell und unkompliziert. Unsere erfahrenen Partner kümmern sich um jeden Schritt des Umzugs, von der detaillierten Planung bis zur reibungslosen Umsetzung.
                       </p>
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Lehnen Sie sich entspannt zurück, während qualifizierte Umzugsexperten Ihre Möbel und Haushaltsgegenstände sicher, sorgfältig und termingerecht an Ihren neuen Wohnort transportieren. Ein Umzugsunternehmen aus der eigenen Region kann dabei besonders flexibel auf Ihre individuellen Bedürfnisse eingehen.
                       </p>
                     </div>
@@ -509,15 +881,63 @@ export default async function HomePage() {
                         <Sparkles className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">Reinigungsfirma</h4>
+                        <h4 
+                          className="text-[18px] md:text-[20px] leading-[26.6px] mb-2 group-hover:text-orange-600 transition-colors"
+                          style={{
+                            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontWeight: 700,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Reinigungsfirma
+                        </h4>
                         <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
                       </div>
                     </div>
                     <div className="space-y-4 mb-8">
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed mb-4"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Ob nach einem Umzug, einer Renovation oder für die regelmässige Reinigung – unsere professionellen Reinigungsunternehmen garantieren höchste Sauberkeit mit umweltfreundlichen Reinigungsmitteln und höchster Qualität.
                       </p>
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Zu den wichtigsten Dienstleistungen zählen die <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Endreinigung</Link> und <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsreinigung</Link> für die Wohnungsübergabe sowie die professionelle <Link href="/bueroreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Büroreinigung</Link> für Geschäftskunden. Ein erfahrenes Team sorgt mit fachmännischer Arbeit für einen positiven Eindruck.
                       </p>
                     </div>
@@ -538,15 +958,63 @@ export default async function HomePage() {
                         <Paintbrush className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Malerarbeiten</h4>
+                        <h4 
+                          className="text-[18px] md:text-[20px] leading-[26.6px] mb-2 group-hover:text-purple-600 transition-colors"
+                          style={{
+                            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontWeight: 700,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Malerarbeiten
+                        </h4>
                         <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"></div>
                       </div>
                     </div>
                     <div className="space-y-4 mb-8">
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed mb-4"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Qualifizierte Malerbetriebe bieten Ihnen professionelle <Link href="https://online-offerten.ch/malerarbeiten" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Malerarbeiten</Link> für Innen- und Aussenbereiche. Sie übernehmen dabei auch das fachgerechte Streichen und Lackieren von Decken, sodass alle Flächen optimal geschützt und gestaltet werden.
                       </p>
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Ob Renovation von Wohnräumen oder fachgerechte Fassadengestaltung – unsere erfahrenen Maler sorgen für frische Farben und ein makelloses Ergebnis. Mit modernen Arbeitstechniken und hochwertigen Materialien verleihen sie Ihrem Zuhause ein neues, stilvolles Erscheinungsbild.
                       </p>
                     </div>
@@ -567,15 +1035,63 @@ export default async function HomePage() {
                         <Sprout className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">Gartenarbeit</h4>
+                        <h4 
+                          className="text-[18px] md:text-[20px] leading-[26.6px] mb-2 group-hover:text-green-600 transition-colors"
+                          style={{
+                            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                            fontWeight: 700,
+                            color: '#1c1d16',
+                            textAlign: 'start',
+                            letterSpacing: 'normal',
+                            wordSpacing: '0px',
+                            fontStyle: 'normal',
+                            textTransform: 'none',
+                            textDecoration: 'none',
+                            textIndent: '0px'
+                          }}
+                        >
+                          Gartenarbeit
+                        </h4>
                         <div className="h-1 w-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full"></div>
                       </div>
                     </div>
                     <div className="space-y-4 mb-8">
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed mb-4"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Ein gepflegter Garten steigert nicht nur den Wohnkomfort, sondern auch den Wert Ihrer Immobilie. Unsere erfahrenen Garten-Partner unterstützen Sie bei sämtlichen Gartenarbeiten – von der regelmässigen Pflege bis zur fachgerechten Umgestaltung Ihres Aussenbereichs.
                       </p>
-                      <p className="text-gray-700 leading-relaxed text-base">
+                      <p 
+                        className="leading-relaxed"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Zu den angebotenen Dienstleistungen zählen unter anderem Rasenpflege, Heckenschnitt, Baumschnitt sowie die saisonale Gartenpflege. Ob kleiner Privatgarten oder grössere Grünflächen – wir vermitteln Ihnen zuverlässige Gartenprofis, die sauber, effizient und termingerecht arbeiten.
                       </p>
                     </div>
@@ -598,88 +1114,410 @@ export default async function HomePage() {
           <section className="py-12 md:py-16 bg-white">
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <div className="max-w-4xl mx-auto prose prose-lg">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                <h2 
+                  className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                  style={{
+                    fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                    fontWeight: 700,
+                    color: '#1c1d16',
+                    textAlign: 'start',
+                    letterSpacing: 'normal',
+                    wordSpacing: '0px',
+                    fontStyle: 'normal',
+                    textTransform: 'none',
+                    textDecoration: 'none',
+                    textIndent: '0px'
+                  }}
+                >
                   Umzugsfirmen, Reinigungsfirmen, Malerarbeiten & Gartenarbeit vergleichen
                 </h2>
-                <p className="text-lg text-gray-700 mb-8">
+                <p 
+                  className="mb-8"
+                  style={{
+                    fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    fontWeight: 400,
+                    color: '#1c1d16',
+                    textAlign: 'start',
+                    letterSpacing: 'normal',
+                    wordSpacing: '0px',
+                    fontStyle: 'normal',
+                    textTransform: 'none',
+                    textDecoration: 'none',
+                    textIndent: '0px'
+                  }}
+                >
                   Mehrere Offerten erhalten und passende Anbieter auswählen
                 </p>
-                <p className="text-base text-gray-700 mb-8 leading-relaxed">
+                <p 
+                  className="mb-8 leading-relaxed"
+                  style={{
+                    fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    fontWeight: 400,
+                    color: '#1c1d16',
+                    textAlign: 'start',
+                    letterSpacing: 'normal',
+                    wordSpacing: '0px',
+                    fontStyle: 'normal',
+                    textTransform: 'none',
+                    textDecoration: 'none',
+                    textIndent: '0px'
+                  }}
+                >
                   Mit Online-offerten.ch findest du zuverlässige Anbieter für Umzüge, Reinigungen, Malerarbeiten und Gartenarbeit. Vergleiche mehrere Offerten aus deiner Region und wähle den Dienstleister, der am besten zu deinem Projekt passt.
                 </p>
 
                 {/* Ana Hizmet Blokları */}
                 <div className="space-y-12 mb-16">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                    <h2 
+                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Umzugsfirma finden – einfach und unkompliziert
                     </h2>
-                    <p className="text-lg text-gray-700 mb-6">
+                    <p 
+                      className="mb-6"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Geprüfte Anbieter für Privatumzüge, Firmenumzüge und internationale Umzüge
                     </p>
 
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Ein Umzug erfordert Planung und Vertrauen. Über Online-offerten.ch erhältst du Offerten von geprüften Umzugsfirmen für Privatumzüge, Firmenumzüge sowie internationale Umzüge. So kannst du Preise und Leistungen vergleichen und schnell die passende Umzugsfirma finden.
                     </p>
 
-                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                    <h3 
+                      className="text-[22px] md:text-[28px] leading-[29.26px] md:leading-[37.24px] mb-4"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 600,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Transparente Offerten und seriöse Umzugsfirmen
                     </h3>
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Alle vermittelten Umzugsfirmen erstellen klare und transparente Offerten. Durch den Vergleich mehrerer Angebote sparst du Zeit und Kosten und triffst eine fundierte Entscheidung für dein Umzugsprojekt.
                     </p>
                   </div>
 
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                    <h2 
+                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Reinigungsfirma für Endreinigung und Umzugsreinigung vergleichen
                     </h2>
-                    <p className="text-lg text-gray-700 mb-6">
+                    <p 
+                      className="mb-6"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Professionelle Reinigungsfirmen für Wohnung und Büro
                     </p>
 
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Ob Endreinigung nach dem Umzug, Umzugsreinigung oder Büroreinigung – über Online-offerten.ch findest du erfahrene Reinigungsfirmen. Vergleiche Offerten, prüfe Preise und Leistungen und wähle die Reinigungsfirma, die optimal zu deinem Bedarf passt.
                     </p>
 
-                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                    <h3 
+                      className="text-[22px] md:text-[28px] leading-[29.26px] md:leading-[37.24px] mb-4"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 600,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Zuverlässige Endreinigung für eine reibungslose Wohnungsabgabe
                     </h3>
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Unsere Partnerfirmen führen Endreinigungen zuverlässig gemäss den Vorgaben für die Wohnungsübergabe durch. So kannst du deine Wohnung stressfrei abgeben und sicher sein, dass alle Anforderungen erfüllt sind.
                     </p>
                   </div>
 
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                    <h2 
+                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Malerarbeiten vergleichen und erfahrene Malerbetriebe finden
                     </h2>
-                    <p className="text-lg text-gray-700 mb-6">
+                    <p 
+                      className="mb-6"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Professionelle Malerarbeiten für Innen- und Aussenbereiche
                     </p>
 
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Für Renovationen im Innen- und Aussenbereich vermitteln wir qualifizierte Anbieter für Malerarbeiten. Vergleiche Offerten für Streichen, Lackieren oder Fassadenarbeiten und finde den passenden Malerbetrieb für dein Projekt.
                     </p>
 
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Hochwertige Materialien und moderne Arbeitstechniken sorgen für saubere, langlebige und optisch überzeugende Ergebnisse.
                     </p>
                   </div>
 
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                    <h2 
+                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Gartenarbeit einfach vergleichen und passende Gartenprofis finden
                     </h2>
-                    <p className="text-lg text-gray-700 mb-6">
+                    <p 
+                      className="mb-6"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Gartenarbeit und Gartenpflege aus einer Hand
                     </p>
 
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Ob regelmässige Gartenarbeit oder einmalige Gartenpflege – Online-offerten.ch bringt dich mit geprüften Anbietern für sämtliche Gartenarbeiten zusammen. Vergleiche Offerten für Rasenpflege, Heckenschnitt, Baumschnitt oder saisonale Gartenarbeit.
                     </p>
 
-                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: '#1c1d16',
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
                       Unsere Garten-Partner arbeiten effizient, zuverlässig und termingerecht – für gepflegte Grünflächen und einen ansprechenden Aussenbereich.
                     </p>
                   </div>
@@ -687,46 +1525,194 @@ export default async function HomePage() {
 
                 {/* Warum Online-offerten.ch */}
                 <div className="space-y-8 mb-16">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-8">
+                  <h2 
+                    className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-8"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 700,
+                      color: '#1c1d16',
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
                     Warum Online-offerten.ch die richtige Wahl ist
                   </h2>
 
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                  <h3 
+                    className="text-[22px] md:text-[28px] leading-[29.26px] md:leading-[37.24px] mb-4"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 600,
+                      color: '#1c1d16',
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
                     Kostenlose und unverbindliche Offerten
                   </h3>
-                  <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                  <p 
+                    className="mb-6 leading-relaxed"
+                    style={{
+                      fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontSize: '16px',
+                      lineHeight: '24px',
+                      fontWeight: 400,
+                      color: '#1c1d16',
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
                     Du erhältst mehrere Offerten kostenlos und unverbindlich. So kannst du Anbieter vergleichen, ohne Zeit zu verlieren oder Verpflichtungen einzugehen.
                   </p>
 
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                  <h3 
+                    className="text-[22px] md:text-[28px] leading-[29.26px] md:leading-[37.24px] mb-4"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 600,
+                      color: '#1c1d16',
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
                     Zeit- und Kostenersparnis durch direkten Vergleich
                   </h3>
-                  <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                  <p 
+                    className="mb-6 leading-relaxed"
+                    style={{
+                      fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontSize: '16px',
+                      lineHeight: '24px',
+                      fontWeight: 400,
+                      color: '#1c1d16',
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
                     Der Vergleich verschiedener Anbieter hilft dir, Preise und Leistungen transparent gegenüberzustellen und die beste Entscheidung für dein Projekt zu treffen.
                   </p>
                 </div>
 
                 {/* So funktioniert Online-offerten.ch */}
                 <div className="space-y-8 mb-12">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-8">
+                  <h2 
+                    className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-8"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 700,
+                      color: '#1c1d16',
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
                     So funktioniert Online-offerten.ch
                   </h2>
 
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                      <h3 
+                        className="text-[22px] md:text-[28px] leading-[29.26px] md:leading-[37.24px] mb-3"
+                        style={{
+                          fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontWeight: 600,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         1. Anfrage ausfüllen
                       </h3>
-                      <p className="text-base text-gray-700 mb-4 leading-relaxed">
+                      <p 
+                        className="mb-4 leading-relaxed"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Beschreibe dein Projekt in wenigen Schritten und sende deine Anfrage ab.
                       </p>
                     </div>
 
                     <div>
-                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                      <h3 
+                        className="text-[22px] md:text-[28px] leading-[29.26px] md:leading-[37.24px] mb-3"
+                        style={{
+                          fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontWeight: 600,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         2. Offerten erhalten und vergleichen
                       </h3>
-                      <p className="text-base text-gray-700 mb-4 leading-relaxed">
+                      <p 
+                        className="mb-4 leading-relaxed"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Erhalte mehrere Offerten von passenden Anbietern und vergleiche Preise, Leistungen und Bewertungen direkt online.
                       </p>
                     </div>
@@ -735,7 +1721,23 @@ export default async function HomePage() {
                       <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
                         3. Anbieter auswählen
                       </h3>
-                      <p className="text-base text-gray-700 mb-4 leading-relaxed">
+                      <p 
+                        className="mb-4 leading-relaxed"
+                        style={{
+                          fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '16px',
+                          lineHeight: '24px',
+                          fontWeight: 400,
+                          color: '#1c1d16',
+                          textAlign: 'start',
+                          letterSpacing: 'normal',
+                          wordSpacing: '0px',
+                          fontStyle: 'normal',
+                          textTransform: 'none',
+                          textDecoration: 'none',
+                          textIndent: '0px'
+                        }}
+                      >
                         Wähle den Dienstleister, der dein Projekt zuverlässig, effizient und kostengünstig umsetzt.
                       </p>
                     </div>

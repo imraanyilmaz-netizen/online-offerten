@@ -191,9 +191,6 @@ export const metadata: Metadata = {
 export default function UmzugsfirmaZurichPage() {
   return (
     <>
-      {/* Hreflang tags */}
-      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/umzugsfirma-zuerich" />
-      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/umzugsfirma-zuerich" />
       {/* Schema.org Structured Data - Server-side rendered for SEO */}
       <script
         type="application/ld+json"

@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster'
 import AppClient from '@/components/AppClient'
 import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import HreflangTags from '@/components/HreflangTags'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -89,8 +90,9 @@ export default function RootLayout({
   return (
     <html lang="de-CH" className={inter.variable}>
       <head>
-        <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch" />
-        <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch" />
+        <Suspense fallback={null}>
+          <HreflangTags />
+        </Suspense>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Google tag (gtag.js) */}

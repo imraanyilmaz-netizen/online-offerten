@@ -162,9 +162,6 @@ export default async function UmzugsreinigungPage() {
 
   return (
     <>
-      {/* Hreflang tags */}
-      <link rel="alternate" hrefLang="de-CH" href="https://online-offerten.ch/umzugsreinigung" />
-      <link rel="alternate" hrefLang="x-default" href="https://online-offerten.ch/umzugsreinigung" />
       {/* Server-side schema - Google bot için */}
       <script
         type="application/ld+json"

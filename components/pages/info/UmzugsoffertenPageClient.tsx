@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -266,77 +267,55 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 py-12 md:py-20 overflow-hidden">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="grid md:grid-cols-5 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="md:col-span-3"
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                <span className="text-green-600">Umzugsofferten</span> kostenlos vergleichen » Bis zu 40% sparen
-              </h1>
-              <p className="text-lg md:text-xl text-gray-700 mb-4 leading-relaxed">
-                Ihr Wegweiser zum besten Preis für Ihren Umzug in der Schweiz.
-              </p>
-              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                Umzugsofferten sind der Schlüssel zu einem erfolgreichen und kostengünstigen Umzug in der Schweiz. Wenn Sie <strong>Preise von Umzugsfirmen</strong> vergleichen, erhalten Sie nicht nur die besten Konditionen, sondern auch einen umfassenden Überblick über die verfügbaren Dienstleistungen verschiedener Umzugsunternehmen. Mit nur einer einzigen Anfrage können Sie mehrere Angebote gleichzeitig einholen und diese bequem vergleichen. Bei <strong>Online-Offerten.ch</strong> können Sie <strong>kostenlose Preisvorschläge</strong> von bis zu 6 geprüften Umzugsfirmen in Ihrer Region anfordern und diese in Ruhe vergleichen – der gesamte Prozess ist online mit nur wenigen Klicks erledigt.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  onClick={handleCtaClick}
-                  size="lg"
-                  className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
-                >
-                  <Search className="mr-2 h-5 w-5" />
-                  Kostenlose Umzugsofferten erhalten
-                </Button>
-                <Button
-                  onClick={() => router.push('/umzugskosten-rechner')}
-                  variant="outline"
-                  size="lg"
-                  className="text-lg px-8 py-6"
-                >
-                  <Calculator className="mr-2 h-5 w-5" />
-                  Kosten berechnen
-                </Button>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-600">
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                  <span>Bis zu 6 Offerten</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                  <span>100% kostenlos</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                  <span>Nur geprüfte Firmen</span>
-                </div>
-              </div>
-            </motion.div>
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Image - Mobile: order-1 (first), Desktop: order-2 (right) */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative md:col-span-2"
+              className="relative order-1 md:order-2"
             >
-              <div className="bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl p-8 shadow-2xl">
-                <div className="bg-white rounded-xl p-6 shadow-lg">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Ihre Vorteile</h3>
-                  <ul className="space-y-3">
-                    {features.slice(0, 4).map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <feature.icon className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900">{feature.title}</p>
-                          <p className="text-sm text-gray-600">{feature.description}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="relative w-full h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center">
+                <NextImage
+                  src="/umzug/48569125erth8.webp"
+                  alt="Umzug Illustration"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto rounded-2xl shadow-lg object-cover"
+                  priority
+                />
+              </div>
+            </motion.div>
+
+            {/* Left Column - Text and Form - Mobile: order-2 (second), Desktop: order-1 (left) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6 order-2 md:order-1"
+            >
+              <h1 className="text-[32px] md:text-[40px]" style={{
+                fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                lineHeight: '53.2px',
+                fontWeight: 700,
+                color: '#000000',
+                textAlign: 'start'
+              }}>
+                Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen
+              </h1>
+              <p className="text-lg md:text-xl text-gray-600">
+                Fordern Sie bis zu 6 Angebote in 5 Minuten an
+              </p>
+              
+              <div className="mt-6">
+                <Button
+                  onClick={handleCtaClick}
+                  size="lg"
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
+                >
+                  Kostenlose Angebote
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </div>
             </motion.div>
           </div>

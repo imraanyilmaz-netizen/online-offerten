@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import MovingCostCalculator from '@/components/UmzugskostenRechnerSections/MovingCostCalculator';
 import CleaningCostCalculator from '@/components/ReinigungskostenRechnerSections/CleaningCostCalculator';
+import HomeHeroForm from '@/components/HomeHeroForm';
 import { motion } from 'framer-motion';
 // Supabase lazy loaded to reduce initial bundle size
 import { formatDate, cn } from '@/lib/utils';
@@ -183,6 +184,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   const [canScrollLeftPosts, setCanScrollLeftPosts] = useState(false);
   const [canScrollRightPosts, setCanScrollRightPosts] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<string>('Alle');
 
 
   // Scroll handlers - optimized with useCallback (defined before useEffects that use them)
@@ -370,320 +372,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   return (
     <>
         
-          {/* How It Works Section */}
-          <section className="py-12 md:py-16 bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 relative overflow-hidden">
-            {/* Decorative background elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-20 right-10 w-72 h-72 bg-green-700/30 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-20 left-10 w-96 h-96 bg-emerald-700/30 rounded-full blur-3xl"></div>
-            </div>
-            
-            <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-              <div className="text-center mb-8 md:mb-10">
-                <p className="inline-block text-xs font-bold text-green-300 uppercase tracking-widest mb-3 px-3 py-1.5 bg-green-800/50 backdrop-blur-sm rounded-full border border-green-700/50">
-                  WIE ES FUNKTIONIERT
-                </p>
-                <h2 className="text-[30px] md:text-3xl font-extrabold text-white mb-3 tracking-tight leading-tight">
-                  So funktioniert's
-                </h2>
-                <p className="text-base md:text-lg text-green-100 max-w-2xl mx-auto leading-relaxed">
-                  In nur 3 Schritten erhalten Sie passende Offerten von geprüften Partnern. Ein spezielles Programm vereinfacht dabei die Erstellung und Verwaltung Ihrer Offerten, sorgt für eine klare Struktur und ermöglicht eine unkomplizierte Kommunikation.
-                  </p>
-                </div>
-
-              <div className="grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto mb-8">
-                {[
-                  { 
-                    id: 1, 
-                    title: "Formular ausfüllen", 
-                    desc: "Beschreiben Sie Ihr Projekt in unserem intelligenten Formular. Geben Sie dabei auch das Datum der Angebotserstellung an, um die Aktualität Ihres Anliegens zu dokumentieren. Je detaillierter Ihre Angaben, desto genauer die Offerten.", 
-                    icon: FileText,
-                    gradient: "from-green-500 to-emerald-600",
-                    bgGradient: "from-green-50 to-emerald-50",
-                    delay: 0.1
-                  },
-                  { 
-                    id: 2, 
-                    title: "Offerten vergleichen", 
-                    desc: "Sie erhalten bis zu 6 kostenlose Offerten von qualifizierten Partnern – schnell und unverbindlich. Die Offerten werden direkt an den Empfänger gesendet.", 
-                    icon: GitCompareArrows,
-                    gradient: "from-blue-500 to-cyan-600",
-                    bgGradient: "from-blue-50 to-cyan-50",
-                    delay: 0.2
-                  },
-                  { 
-                    id: 3, 
-                    title: "Anbieter wählen", 
-                    desc: "Vergleichen Sie Preise und Leistungen und wählen Sie den besten Partner – einfach, sicher und transparent. Kundenbewertungen helfen Ihnen dabei, die Qualität der Dienstleister besser einzuschätzen und eine fundierte Entscheidung zu treffen.", 
-                    icon: UsersRound,
-                    gradient: "from-purple-500 to-pink-600",
-                    bgGradient: "from-purple-50 to-pink-50",
-                    delay: 0.3
-                  }
-                ].map((step) => {
-                  const IconComponent = step.icon;
-                  return (
-                  <div 
-                    key={step.id} 
-                      className="group relative"
-                  >
-                      {/* Card */}
-                      <div className={`relative h-full bg-gradient-to-br ${step.bgGradient} rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 backdrop-blur-sm hover:-translate-y-1`}>
-                        {/* Step number badge */}
-                        <div className={`absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br ${step.gradient} rounded-full flex items-center justify-center text-white font-bold text-base shadow-lg ring-2 ring-green-900`}>
-                        {step.id}
-                      </div>
-                        
-                        {/* Icon container */}
-                        <div className={`mb-4 w-14 h-14 bg-gradient-to-br ${step.gradient} rounded-xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300`}>
-                          <IconComponent className="w-7 h-7 text-white" strokeWidth={2.5} />
-                    </div>
-
-                        {/* Content */}
-                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight">
-                        {step.title}
-                      </h3>
-                        <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                        {step.desc}
-                      </p>
-                        
-                        {/* Arrow decoration */}
-                        {step.id < 3 && (
-                          <div className="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                            <ChevronRight className="w-6 h-6 text-green-700/50 group-hover:text-green-400 transition-colors" />
-                    </div>
-                        )}
-                  </div>
-                    </div>
-                  );
-                })}
-              </div>
-              
-              {/* Trust badge */}
-              <div className="max-w-xl mx-auto">
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 md:p-5 shadow-lg border border-white/20">
-                  <div className="flex items-center justify-center gap-3 md:gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-md">
-                        <Award className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-base md:text-lg font-semibold text-white mb-1">
-                        Geprüft und versichert
-                      </p>
-                      <p className="text-green-100 text-sm md:text-base">
-                        Alle unsere Partner sind geprüft und versichert.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Cost Calculators Section */}
-          <section id="kosten-berechnen" className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
-            <div className="container mx-auto max-w-navbar px-4 md:px-6">
-              <div className="text-center mb-8 md:mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  Kosten schnell berechnen
-                </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Wählen Sie eine Kategorie und erhalten Sie sofort eine Kostenschätzung
-                </p>
-              </div>
-
-              {/* Category Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 md:mb-12">
-                <Button
-                  onClick={() => setSelectedCalculator(selectedCalculator === 'umzug' ? null : 'umzug')}
-                  size="lg"
-                  className={`w-full sm:w-auto px-8 py-6 text-lg font-semibold rounded-xl transition-all duration-300 ${
-                    selectedCalculator === 'umzug'
-                      ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg'
-                      : 'bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-green-500'
-                  }`}
-                >
-                  <Calculator className="w-5 h-5 mr-2" />
-                  Umzugskosten berechnen
-                </Button>
-                <Button
-                  onClick={() => setSelectedCalculator(selectedCalculator === 'reinigung' ? null : 'reinigung')}
-                  size="lg"
-                  className={`w-full sm:w-auto px-8 py-6 text-lg font-semibold rounded-xl transition-all duration-300 ${
-                    selectedCalculator === 'reinigung'
-                      ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg'
-                      : 'bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-blue-500'
-                  }`}
-                >
-                  <Sparkles className="w-5 h-5 mr-2" />
-                  Reinigungskosten berechnen
-                </Button>
-              </div>
-
-              {/* Calculator Display */}
-              <div className="max-w-4xl mx-auto">
-                {selectedCalculator === 'umzug' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <MovingCostCalculator 
-                      onRequestQuote={() => {
-                        router.push('/kostenlose-offerte-anfordern?service=umzug&step=2');
-                      }}
-                      onFormOpened={() => {}}
-                    />
-                  </motion.div>
-                )}
-                {selectedCalculator === 'reinigung' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <CleaningCostCalculator />
-                  </motion.div>
-                )}
-              </div>
-            </div>
-          </section>
-
-          {/* Services Overview Section */}
-          <section className="py-12 md:py-16 bg-gradient-to-b from-slate-50 via-gray-100 to-slate-100">
-            <div className="container mx-auto max-w-navbar px-4 md:px-6">
-              <div className="text-center mb-8 md:mb-10">
-                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3 leading-tight">
-                  Beliebte Dienstleistungen
-                </h2>
-                <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-                  Von Privatumzug bis Gartenarbeiten – finden Sie den passenden Partner für Ihr Projekt. Vergleichen Sie verschiedene Dienstleister für zahlreiche Dienstleistungen und wählen Sie schnell und einfach den passenden Anbieter aus.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                {/* Umzug */}
-                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-teal-500 p-6 md:p-7">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 rounded-lg bg-teal-50">
-                      <Home className="w-6 h-6 text-teal-600" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-teal-600">Umzug</h3>
-                  </div>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    Vergleichen Sie Umzug Offerten von professionellen Umzugsfirmen. Für spezielle Umzugsanforderungen, wie etwa den Einbau, Ausbau oder die Anpassung von Möbeln, stehen Ihnen geprüfte Handwerker zur Verfügung, die über die Plattform einfach und unabhängig vermittelt werden.
-                  </p>
-                  <ul className="space-y-3">
-                    {[
-                      { to: '/privatumzug', title: 'Privatumzug' },
-                      { to: '/geschaeftsumzug', title: 'Geschäftsumzug' },
-                      { to: '/internationale-umzuege', title: 'Internationale Umzüge' },
-                      { to: '/spezialtransporte', title: 'Spezialtransporte' },
-                      { to: '/klaviertransport', title: 'Klaviertransport' }
-                    ].map((service) => (
-                      <li key={service.to}>
-                        <Link href={service.to}
-                          className="group flex items-center text-gray-700 hover:text-teal-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-teal-50"
-                        >
-                          <ArrowRight className="w-5 h-5 mr-2.5 text-teal-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline font-semibold">{service.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Reinigung */}
-                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-yellow-500 p-6 md:p-7">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 rounded-lg bg-yellow-50">
-                      <Sparkles className="w-6 h-6 text-yellow-600" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-yellow-600">Reinigung</h3>
-                  </div>
-                  <p className="text-gray-600 mb-4 text-base leading-relaxed">
-                    Vergleichen Sie Reinigung Offerten von professionellen Reinigungsfirmen.
-                  </p>
-                  <ul className="space-y-3">
-                    {[
-                      { to: '/wohnungsreinigung', title: 'Wohnungsreinigung' },
-                      { to: '/hausreinigung', title: 'Hausreinigung' },
-                      { to: '/bueroreinigung', title: 'Büroreinigung' },
-                      { to: '/umzugsreinigung', title: 'Umzugsreinigung' },
-                      { to: '/unterhaltsreinigung', title: 'Unterhaltsreinigung' },
-                      { to: '/grundreinigung', title: 'Grundreinigung' },
-                      { to: '/baureinigung', title: 'Baureinigung' },
-                      { to: '/fensterreinigung', title: 'Fensterreinigung' }
-                    ].map((service) => (
-                      <li key={service.to}>
-                        <Link href={service.to}
-                          className="group flex items-center text-gray-700 hover:text-yellow-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-yellow-50"
-                        >
-                          <ArrowRight className="w-5 h-5 mr-2.5 text-yellow-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline font-semibold">{service.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Malerarbeiten & Gartenarbeiten */}
-                <div className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-l-4 border-blue-500 p-6 md:p-7">
-                  {/* Malerarbeiten */}
-                  <div className="mb-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-lg bg-blue-50">
-                        <Paintbrush className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold text-blue-600">Malerarbeiten</h3>
-                    </div>
-                    <p className="text-gray-600 mb-3 text-base leading-relaxed">
-                      Vergleichen Sie Maler Offerten von professionellen Malerfirmen. Dabei übernehmen spezialisierte Unternehmen die fachgerechte Ausführung der Malerarbeiten.
-                    </p>
-                    <ul className="space-y-3">
-                      <li>
-                        <Link href="/malerarbeiten"
-                          className="group flex items-center text-gray-700 hover:text-blue-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-blue-50"
-                        >
-                          <ArrowRight className="w-5 h-5 mr-2.5 text-blue-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline font-semibold">Malerarbeiten</span>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Gartenarbeiten */}
-                  <div className="border-t border-gray-200 pt-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2.5 rounded-lg bg-green-50">
-                        <Sprout className="w-6 h-6 text-green-600" />
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold text-green-600">Gartenarbeiten</h3>
-                    </div>
-                    <p className="text-gray-600 mb-3 text-base leading-relaxed">
-                      Vergleichen Sie Gartenarbeiten Offerten von professionellen Gartenfirmen. Für grössere Gartenprojekte sind auch Ausschreibungen möglich, um gezielt passende Offerten online einzuholen.
-                    </p>
-                    <ul className="space-y-3">
-                      <li>
-                        <Link href="/gartenarbeiten"
-                          className="group flex items-center text-gray-700 hover:text-green-600 transition-colors text-base md:text-lg py-2 px-2 rounded-md hover:bg-green-50"
-                        >
-                          <ArrowRight className="w-5 h-5 mr-2.5 text-green-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-                          <span className="group-hover:underline font-semibold">Gartenarbeiten</span>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-
           {/* Customer Reviews Section */}
           {reviewsLoading && reviews.length === 0 ? (
             <section className="py-20 bg-gray-50">
@@ -757,6 +445,48 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             </section>
           ) : null}
 
+          {/* Partner werden Section */}
+          <section className="py-16 md:py-24 bg-white">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* Left Side - Text Content */}
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">
+                      Werden Sie Online-offerten.ch-Partner
+                    </p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                      Sind Sie eine Anbieter?
+                    </h2>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      Wir bringen Sie mit potenziellen Kunden in Kontakt, die umziehen, und helfen Ihnen, für Ihr Unternehmen zu werben.
+                    </p>
+                  </div>
+                  <Button asChild size="lg" className="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 px-8 py-6 text-lg font-semibold">
+                    <Link href="/partner-werden" className="inline-flex items-center">
+                      Jetzt Partner werden
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+
+                {/* Right Side - Image Collage */}
+                <div className="relative">
+                  <div className="relative w-full aspect-square max-w-md mx-auto">
+                    <NextImage
+                      src="/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp"
+                      alt="Partner werden"
+                      width={600}
+                      height={600}
+                      className="w-full h-full object-cover rounded-2xl"
+                      priority={false}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Nationwide Presence Section */}
           <section className="py-16 md:py-24 bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 overflow-hidden relative">
             {/* Decorative background elements */}
@@ -811,123 +541,214 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           </section>
 
           {/* Useful Tools Section */}
-          <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-gray-100">
-            <div className="container mx-auto max-w-navbar px-4">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nützliche Helfer für Ihren Umzug</h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">Planen Sie Ihren Umzug effizient mit unseren praktischen Tools und hilfreichen Ratgebern. Moderne Software-Lösungen ermöglichen es Ihnen, Offerten online schnell und flexibel zu erstellen, Prozesse zu automatisieren und die gesamte Umzugsplanung bequem zu verwalten.</p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                {[
-                  { icon: <Calculator />, title: 'Umzugskosten-Rechner', description: 'Erhalten Sie in wenigen Schritten eine unverbindliche Schätzung Ihrer Umzugskosten. Die Ergebnisse des Rechners können Sie auch bequem per E-Mail versenden.', linkTo: '/umzugskosten-rechner', button: 'Jetzt berechnen' },
-                  { icon: <Sparkles />, title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung. Unser Reinigungskosten-Rechner steht Ihnen jederzeit zur Verfügung.', linkTo: '/reinigungskosten-rechner', button: 'Kosten berechnen' },
-                  { icon: <ListChecks />, title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten. Unsere Checklisten beantworten zudem häufig gestellte Fragen rund um die Umzugsplanung.', linkTo: '/checklisten', button: 'Checkliste ansehen' },
-                  { icon: <BookOpen />, title: 'Ratgeber & Tipps', description: 'Profitieren Sie von unserem Expertenwissen rund um Umzug und Reinigung. Unsere Tipps stammen von erfahrenen Fachleuten, die Ihnen mit ihrem Know-how gezielte Unterstützung bieten.', linkTo: '/ratgeber', button: 'Jetzt informieren' }
-                ].map((tool) => (
-                  <div key={tool.title} className="h-full">
-                    <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 border-transparent hover:border-green-500 bg-white rounded-xl overflow-hidden">
-                      <div className="p-6 pb-4">
-                        <div className="flex items-center mb-3">
-                          <div className="p-3 bg-green-100 text-green-600 rounded-lg mr-4">
-                            {React.cloneElement(tool.icon, { size: 28 })}
-                          </div>
-                          <h3 className="text-xl font-semibold text-gray-800">{tool.title}</h3>
-                        </div>
-                        <p className="text-gray-600 text-sm leading-relaxed min-h-[40px]">{tool.description}</p>
-                      </div>
-                      <div className="p-6 pt-0 mt-auto">
-                        <Button asChild variant="ghost" className="w-full text-green-600 hover:bg-green-50 hover:text-green-700 group">
-                          <Link href={tool.linkTo}>
-                            {tool.button}
-                            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                          </Link>
-                        </Button>
-                      </div>
-                    </Card>
+          <section className="py-16 md:py-24 bg-white">
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                {/* Left Side - Text Content */}
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-sm font-semibold text-green-600 mb-2">Nützliche Helfer für Ihren Umzug</p>
+                    <h2 
+                      className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                      }}
+                    >
+                      Planen Sie Ihren Umzug effizient mit unseren praktischen Tools und hilfreichen Ratgebern
+                    </h2>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      Moderne Software-Lösungen ermöglichen es Ihnen, Offerten online schnell und flexibel zu erstellen, Prozesse zu automatisieren und die gesamte Umzugsplanung bequem zu verwalten.
+                    </p>
                   </div>
-                ))}
+                  <Button asChild size="lg" className="bg-[#0d4d2c] hover:bg-[#0a3d23] text-white px-8 py-6 text-lg font-semibold">
+                    <Link href="/ratgeber" className="inline-flex items-center">
+                      Alle Erfahrungsberichte
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+
+                {/* Right Side - Tool Cards (3 cards stacked) */}
+                <div className="space-y-6">
+                  {[
+                    { title: 'Umzugskosten-Rechner', description: 'Erhalten Sie in wenigen Schritten eine unverbindliche Schätzung Ihrer Umzugskosten.', linkTo: '/umzugskosten-rechner', button: 'Jetzt berechnen' },
+                    { title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung.', linkTo: '/reinigungskosten-rechner', button: 'Kosten berechnen' },
+                    { title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten. Unsere Checklisten beantworten zudem häufig gestellte Fragen rund um die Umzugsplanung.', linkTo: '/checklisten', button: 'Checkliste ansehen' }
+                  ].map((tool) => (
+                    <Link key={tool.title} href={tool.linkTo} className="block group">
+                      <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-green-500 bg-white rounded-xl overflow-hidden">
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors">
+                            {tool.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                            {tool.description}
+                          </p>
+                          <Button variant="outline" className="w-full border-green-600 text-green-600 hover:bg-green-50 group-hover:bg-green-50">
+                            {tool.button}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
 
+          {/* Umzugsfirma Hero Section */}
+          <section 
+            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-white z-20" 
+            aria-label="Umzugsfirma finden - Kostenlose Offerten"
+          >
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+              <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                <div className="flex flex-col lg:flex-row">
+                  {/* Left Side - Image (40% on desktop) */}
+                  <div className="w-full lg:w-[40%] relative">
+                    <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full lg:min-h-[500px]">
+                      <NextImage 
+                        src="/image/umzugsfirma-kartons.webp" 
+                        alt="Umzugsfirma finden" 
+                        fill
+                        className="object-cover"
+                        priority={false}
+                        quality={85}
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right Side - Green Content Area (60% on desktop) */}
+                  <div className="w-full lg:w-[60%] bg-[#0d4d2c] relative px-6 sm:px-8 md:px-12 py-8 sm:py-10 md:py-12 lg:py-16">
+                    {/* Yellow Badge - Top Right */}
+                    <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-yellow-400 rounded-full px-4 py-2 shadow-lg z-10">
+                      <p className="text-black text-xs sm:text-sm font-bold text-center leading-tight">
+                        Kostenlos &<br />unverbindlich
+                      </p>
+                    </div>
+
+                    {/* Heading */}
+                    <h2 
+                      className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-white pr-20 sm:pr-24"
+                      style={{
+                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontWeight: 700,
+                        textAlign: 'start',
+                        letterSpacing: 'normal',
+                        wordSpacing: '0px',
+                        fontStyle: 'normal',
+                        textTransform: 'none',
+                        textDecoration: 'none',
+                        textIndent: '0px'
+                      }}
+                    >
+                      Finden Sie die passende Anbieter.
+                    </h2>
+                      
+                    {/* Search Form - Custom styled for green background */}
+                    <div className="relative z-20 [&_button[type='submit']]:bg-yellow-400 [&_button[type='submit']]:hover:bg-yellow-500 [&_button[type='submit']]:text-black [&_button[type='submit']]:border-yellow-400">
+                      <HomeHeroForm />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           {/* Ratgeber Section */}
           {postsLoading ? (
-            <div className="py-12 md:py-24 bg-gray-50 flex justify-center items-center">
+            <div className="py-12 md:py-24 bg-white flex justify-center items-center">
               <Loader2 className="w-8 h-8 animate-spin text-green-600" />
             </div>
           ) : posts.length > 0 ? (
-            <section className="py-12 md:py-24 bg-gray-50">
-              <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3">
-                    <BookOpen className="w-8 h-8 text-green-600" />
+            <section className="py-12 md:py-24 bg-white">
+              <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+                {/* Header */}
+                <div className="mb-8">
+                  <p className="text-sm font-semibold text-green-600 mb-2">Tipps, Tricks und wertvolle Informationen</p>
+                  <h2 
+                    className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 700,
+                    }}
+                  >
                     Unser Ratgeber
                   </h2>
-                  <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                    Tipps, Tricks und wertvolle Informationen rund um Umzug, Reinigung und mehr.
-                  </p>
                 </div>
 
-                <div className="relative">
-                  <div
-                    ref={postsScrollRef}
-                    className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 -mb-8 gap-6 md:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-                  >
-                    {posts.map((post) => (
-                      <div
-                        key={post.id}
-                        className="flex-shrink-0 snap-start w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.34rem)]"
-                      >
-                        <PostCard post={post} />
+                {/* Category Filter */}
+                {(() => {
+                  // Extract unique categories from posts and format them
+                  const uniqueCategories = Array.from(new Set(posts.map((p: any) => p.category).filter(Boolean)));
+                  const formatCategory = (cat: string) => {
+                    if (!cat) return '';
+                    return cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase();
+                  };
+                  const categories = ['Alle', ...uniqueCategories.map(formatCategory)];
+                  const filteredPosts = selectedCategory === 'Alle' 
+                    ? posts 
+                    : posts.filter((p: any) => formatCategory(p.category) === selectedCategory);
+
+                  return (
+                    <>
+                      <div className="flex flex-wrap gap-3 mb-8">
+                        {categories.map((category) => (
+                          <button
+                            key={category}
+                            onClick={() => setSelectedCategory(category)}
+                            className={cn(
+                              "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                              selectedCategory === category
+                                ? "bg-[#0d4d2c] text-white"
+                                : "bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
+                            )}
+                          >
+                            {category}
+                          </button>
+                        ))}
                       </div>
-                    ))}
-                  </div>
 
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className={cn(
-                      "absolute top-1/2 -translate-y-1/2 -left-2 md:-left-4 z-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white flex transition-opacity duration-300",
-                      canScrollLeftPosts ? "opacity-100" : "opacity-0 pointer-events-none"
-                    )}
-                    onClick={() => scrollPosts('left')}
-                    aria-label="Scroll left"
-                  >
-                    <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className={cn(
-                      "absolute top-1/2 -translate-y-1/2 -right-2 md:-right-4 z-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white flex transition-opacity duration-300",
-                      canScrollRightPosts ? "opacity-100" : "opacity-0 pointer-events-none"
-                    )}
-                    onClick={() => scrollPosts('right')}
-                    aria-label="Scroll right"
-                  >
-                    <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
-                  </Button>
-                </div>
-
-                {isMounted && totalPages > 1 && (
-                  <div className="flex justify-center items-center gap-2 mt-6 md:hidden">
-                    {Array.from({ length: totalPages }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => scrollToIndex(index)}
-                        className={cn(
-                          "transition-all duration-300 rounded-full",
-                          index === currentIndex
-                            ? "w-3 h-3 bg-green-600"
-                            : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
-                        )}
-                        aria-label={`Go to page ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                )}
+                      {/* Articles Grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {filteredPosts.slice(0, 6).map((post: any) => {
+                          const postUrl = `/ratgeber/${post.slug}`;
+                          const isOverview = post.category?.toLowerCase().includes('übersicht') || post.title?.toLowerCase().includes('übersicht');
+                          
+                          return (
+                            <Link key={post.id} href={postUrl} className="group">
+                              <Card className="flex flex-row h-full overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-green-500">
+                                <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
+                                  <NextImage
+                                    src={post.featured_image_url || "https://images.unsplash.com/photo-1504983875-d3b163aba9e6"}
+                                    alt={post.title}
+                                    fill
+                                    className="object-cover"
+                                    loading="lazy"
+                                  />
+                                </div>
+                                <CardContent className="p-4 sm:p-6 flex flex-col justify-center flex-1">
+                                  <Badge 
+                                    variant="secondary" 
+                                    className="mb-2 self-start bg-blue-600 text-white hover:bg-blue-700 w-fit"
+                                  >
+                                    {isOverview ? 'Übersicht' : 'Artikel'}
+                                  </Badge>
+                                  <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-green-600 transition-colors line-clamp-2">
+                                    {post.title}
+                                  </h3>
+                                </CardContent>
+                              </Card>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
             </section>
           ) : null}
