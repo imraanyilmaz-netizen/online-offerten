@@ -333,7 +333,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               <Label htmlFor={`${prefix}_floor`} className="font-medium text-slate-700 text-xs">{t('step2.floorLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
                 <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={t('step2.floorPlaceholder')} />
+                  <SelectValue placeholder={t('step2.floorLabel')} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
                   {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
@@ -353,7 +353,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               <Label htmlFor={`${prefix}_rooms`} className="font-medium text-slate-700 text-xs">{t('step2.roomsLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
                 <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={t('step2.roomsPlaceholder')} />
+                  <SelectValue placeholder="Zimmer" />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
                   {roomCountOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
@@ -373,7 +373,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               <Label htmlFor={`${prefix}_object_type`} className="font-medium text-slate-700 text-xs">{t('step2.objectTypeLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <Select name={`${prefix}_object_type`} value={formData[`${prefix}_object_type`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_object_type`, value)}>
                 <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={t('step2.objectTypePlaceholder')} />
+                  <SelectValue placeholder={t('step2.objectTypeLabel')} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
                   {objectTypeOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}

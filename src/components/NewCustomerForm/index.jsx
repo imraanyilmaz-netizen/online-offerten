@@ -111,6 +111,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const formRef = useRef(null);
   const hasInitializedServiceFromUrl = useRef(false);
   const userManuallySelectedService = useRef(false);
+  const hasInitializedAdditionalCleaningFromUrl = useRef(false);
+  const userManuallyChangedAdditionalCleaning = useRef(false);
   
   // Memoize searchParams string to prevent unnecessary re-renders
   const searchParamsString = useMemo(() => searchParams?.toString() || '', [searchParams]);
@@ -449,6 +451,18 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   }, [searchParamsString, formData.service, formData.umzugArt, memoizedHandleUmzugArtChange, getServiceArtParamName]);
 
+  // umzugArt değiştiğinde additional_cleaning flag'lerini sıfırla
+  useEffect(() => {
+    // umzugArt değiştiğinde, yeni seçim için additional_cleaning flag'lerini sıfırla
+    hasInitializedAdditionalCleaningFromUrl.current = false;
+    // Eğer yeni umzugArt privatumzug veya geschaeftsumzug değilse, kullanıcı manuel değiştirmiş sayılabilir
+    if (formData.umzugArt && 
+        formData.umzugArt !== 'privatumzug' && 
+        formData.umzugArt !== 'geschaeftsumzug') {
+      userManuallyChangedAdditionalCleaning.current = false;
+    }
+  }, [formData.umzugArt]);
+
   // Service değiştiğinde umzugArt URL okuma flag'ini sıfırla
   useEffect(() => {
     // Service değiştiğinde, yeni servis için URL'den umzugArt okunabilmesi için flag'i sıfırla
@@ -476,6 +490,49 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       handleRadioGroupChange('raeumung_scope', raeumungScopeFromUrl);
     }
   }, [searchParamsString, formData.service, formData.umzugArt, formData.raeumung_scope, handleRadioGroupChange]);
+
+  // URL'den additional_cleaning parametresini oku ve otomatik setzen
+  useEffect(() => {
+    // Eğer kullanıcı zaten manuel değişiklik yaptıysa, URL'den okuma yapma
+    if (userManuallyChangedAdditionalCleaning.current) {
+      return;
+    }
+    
+    // Sadece ilk yüklemede ve daha önce URL'den okuma yapılmadıysa çalış
+    if (hasInitializedAdditionalCleaningFromUrl.current) {
+      return;
+    }
+    
+    const params = new URLSearchParams(searchParamsString);
+    const additionalCleaningFromUrl = params.get('additional_cleaning');
+    
+    // Nur wenn service=umzug, umzugArt=privatumzug veya geschaeftsumzug ise ve additional_cleaning=true ise
+    if (formData.service === 'umzug' && 
+        (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug') && 
+        additionalCleaningFromUrl === 'true' && 
+        !formData.additional_cleaning) {
+      handleCheckboxChange('additional_cleaning', true);
+      hasInitializedAdditionalCleaningFromUrl.current = true;
+    }
+    // Eğer umzugArt privatumzug veya geschaeftsumzug değilse ve additional_cleaning true ise, false yap
+    else if (formData.service === 'umzug' && 
+             formData.umzugArt && 
+             formData.umzugArt !== 'privatumzug' && 
+             formData.umzugArt !== 'geschaeftsumzug' && 
+             formData.additional_cleaning) {
+      handleCheckboxChange('additional_cleaning', false);
+      hasInitializedAdditionalCleaningFromUrl.current = true;
+    } else if (!additionalCleaningFromUrl) {
+      // URL'de parametre yoksa bile flag'i true yap, tekrar kontrol etme
+      hasInitializedAdditionalCleaningFromUrl.current = true;
+    }
+  }, [searchParamsString, formData.service, formData.umzugArt, formData.additional_cleaning, handleCheckboxChange]);
+
+  // Additional cleaning checkbox'ı manuel değiştirildiğinde flag'i set et
+  const handleAdditionalCleaningChange = useCallback((checked) => {
+    userManuallyChangedAdditionalCleaning.current = true;
+    handleCheckboxChange('additional_cleaning', checked);
+  }, [handleCheckboxChange]);
 
   // URL'den from_plz ve from_city parametrelerini oku ve ilk adres alanlarına otomatik doldur
   useEffect(() => {
@@ -781,8 +838,10 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       }
     }
     
-    // Additional cleaning service (if selected)
-    if (formData.service === 'umzug' && formData.additionalCleaning) {
+    // Additional cleaning service (if selected) - only for privatumzug and geschaeftsumzug
+    if (formData.service === 'umzug' && 
+        formData.additional_cleaning && 
+        (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug')) {
       services.push(t('step1.mainServiceCleaning')); // "Reinigung" instead of "Umzugsreinigung"
     }
     
@@ -825,6 +884,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
               handleRadioGroupChange={handleRadioGroupChange}
               handleChange={handleChange}
               handleCheckboxChange={handleCheckboxChange}
+              handleAdditionalCleaningChange={handleAdditionalCleaningChange}
               handleSelectChange={handleSelectChange}
               errors={formData.errors} 
               umzugArtSectionRef={umzugArtSectionRef}

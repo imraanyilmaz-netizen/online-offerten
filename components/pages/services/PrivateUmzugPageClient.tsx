@@ -9,9 +9,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { 
   ArrowRight, CheckCircle, PackagePlus, ClipboardList, Users, ShieldCheck, 
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
-  Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box,
+  Building, Globe, Sparkles, Trash2, Brush as PaintBrush, Box,
   TrendingUp, FileText, Search, Mail, CheckCircle2, ChevronRight
 } from 'lucide-react';
+import { PiPianoKeysFill } from 'react-icons/pi';
 import dynamic from 'next/dynamic';
 
 // Lazy load components for better performance
@@ -67,7 +68,7 @@ const PrivateUmzugPageClient = () => {
     { name: 'Geschäftsumzug', icon: Building, path: '/umzugsfirma/geschaeftsumzug' },
     { name: 'Internationale Umzüge', icon: Globe, path: '/umzugsfirma/internationale-umzuege' },
     { name: 'Spezialtransporte', icon: Box, path: '/umzugsfirma/spezialtransporte' },
-    { name: 'Klaviertransport', icon: Piano, path: '/umzugsfirma/klaviertransport' },
+    { name: 'Klaviertransport', icon: PiPianoKeysFill, path: '/umzugsfirma/klaviertransport' },
     { name: 'Reinigung', icon: Sparkles, path: '/reinigung' },
     { name: 'Räumung & Entsorgung', icon: Trash2, path: '/raeumung-entsorgung' },
     { name: 'Malerarbeiten', icon: PaintBrush, path: '/malerarbeitenkosten' },

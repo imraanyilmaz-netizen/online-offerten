@@ -18,6 +18,7 @@ const serviceOptions: ServiceOption[] = [
   { id: 'privatumzug', label: 'Privatumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug', category: 'Umzug' },
   { id: 'privatumzug_reinigung', label: 'Privatumzug und Reinigung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug&additional_cleaning=true', category: 'Umzug' },
   { id: 'geschaeftsumzug', label: 'Geschäftsumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug', category: 'Umzug' },
+  { id: 'geschaeftsumzug_reinigung', label: 'Geschäftsumzug und Reinigung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug&additional_cleaning=true', category: 'Umzug' },
   { id: 'international', label: 'Auslandumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international', category: 'Umzug' },
   { id: 'spezialtransport_klavier', label: 'Klavier / Flügel', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport', category: 'Umzug' },
   { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=tresortransport', category: 'Umzug' },
@@ -56,7 +57,7 @@ const serviceOptions: ServiceOption[] = [
 ]
 
 const categoryKeywords: Record<string, string[]> = {
-  'Umzug': ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung'],
+  'Umzug': ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung'],
   'Reinigung': ['reinigung', 'reinigen', 'reinigungs', 'wohnungsreinigung', 'hausreinigung', 'büroreinigung', 'umzugsreinigung', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung'],
   'Malerarbeiten': ['maler', 'malerarbeiten', 'streichen', 'anstrich', 'fassade'],
   'Gartenarbeiten': ['garten', 'gartenarbeiten', 'gartenpflege', 'terrassenverlegung', 'pool', 'sporteinrichtungsbau', 'gartenhausbau', 'saunabau'],
@@ -248,14 +249,22 @@ const HomeHeroForm = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
-          inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      if (
+        dropdownRef.current && 
+        !dropdownRef.current.contains(target) &&
+        inputRef.current && 
+        !inputRef.current.contains(target)
+      ) {
         setShowDropdown(false)
       }
     }
 
+    // Use mousedown instead of click for better UX
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }, [])
 
   // Stats useEffect
@@ -308,10 +317,14 @@ const HomeHeroForm = () => {
     }
   }, [])
 
-  const handleServiceSelect = (option: ServiceOption) => {
+  const handleServiceSelect = (option: ServiceOption, e?: React.MouseEvent) => {
+    e?.preventDefault()
+    e?.stopPropagation()
     setSelectedOption(option)
     setServiceInput(option.label)
     setShowDropdown(false)
+    // Input focus'unu kaldır
+    inputRef.current?.blur()
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -362,9 +375,18 @@ const HomeHeroForm = () => {
               value={serviceInput}
               onChange={(e) => setServiceInput(e.target.value)}
               onFocus={() => {
-                if (filteredOptions.length > 0) {
+                if (filteredOptions.length > 0 || serviceInput.trim()) {
                   setShowDropdown(true)
                 }
+              }}
+              onBlur={(e) => {
+                // Delay to allow click event to fire first
+                setTimeout(() => {
+                  // Check if focus moved to dropdown
+                  if (dropdownRef.current && !dropdownRef.current.contains(document.activeElement)) {
+                    setShowDropdown(false)
+                  }
+                }, 200)
               }}
               placeholder="z.B. Umzug, Reinigung, Malerarbeiten"
               className="w-full px-4 py-3 pr-10 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none text-gray-900"
@@ -402,7 +424,8 @@ const HomeHeroForm = () => {
                       <button
                         key={option.id}
                         type="button"
-                        onClick={() => handleServiceSelect(option)}
+                        onClick={(e) => handleServiceSelect(option, e)}
+                        onMouseDown={(e) => e.preventDefault()} // Prevent input blur before click
                         className="w-full text-left px-3 py-2 hover:bg-green-50 rounded-md transition-colors flex items-center justify-between group"
                       >
                         <span className="text-gray-900">{option.label}</span>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
-import { Truck, Sparkles, Paintbrush, Sprout, Wind } from 'lucide-react';
+import { Truck, Sparkles, Paintbrush, Sprout, ArrowUpDown } from 'lucide-react';
 
 const mainCategories = [
   { id: 'umzug', label: 'Umzug', icon: Truck, services: [
@@ -12,7 +12,7 @@ const mainCategories = [
     { id: 'auslandumzug', label: 'Auslandumzug', desc: 'Umzüge ins oder aus dem Ausland' },
     { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
     { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
-    { id: 'moebellift_service', label: 'Möbellift mieten', desc: 'Bis 400 kg, max. 27m Länge', icon: Wind },
+    { id: 'moebellift_service', label: 'Möbellift mieten', desc: 'Bis 400 kg, max. 27m Länge', icon: ArrowUpDown },
     { id: 'umzugsreinigung_opt', label: 'Umzugsreinigung' },
     { id: 'raeumung_service', label: 'Räumung' },
     { id: 'entsorgung_service', label: 'Entsorgung' },

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, Wind, Leaf } from 'lucide-react'; 
+import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, Wind, Leaf, Package, ArrowUpDown, ArrowRight } from 'lucide-react';
+import { PiPianoKeysFill } from 'react-icons/pi'; 
 import { useTranslation } from 'react-i18next';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -9,27 +10,107 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) => {
   const { t } = useTranslation('newCustomerForm');
+  
+  // Her servis için renk ve icon ayarları
+  const serviceConfig = {
+    privatumzug: {
+      iconBg: 'bg-blue-100',
+      iconBgSelected: 'bg-blue-500',
+      iconColor: 'text-blue-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-blue-500',
+      bgColor: 'bg-blue-50'
+    },
+    geschaeftsumzug: {
+      iconBg: 'bg-purple-100',
+      iconBgSelected: 'bg-purple-500',
+      iconColor: 'text-purple-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-purple-500',
+      bgColor: 'bg-purple-50'
+    },
+    international: {
+      iconBg: 'bg-emerald-100',
+      iconBgSelected: 'bg-emerald-500',
+      iconColor: 'text-emerald-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-emerald-500',
+      bgColor: 'bg-emerald-50'
+    },
+    spezialtransport: {
+      iconBg: 'bg-amber-100',
+      iconBgSelected: 'bg-amber-500',
+      iconColor: 'text-amber-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-amber-500',
+      bgColor: 'bg-amber-50'
+    },
+    kleintransport: {
+      iconBg: 'bg-indigo-100',
+      iconBgSelected: 'bg-indigo-500',
+      iconColor: 'text-indigo-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-indigo-500',
+      bgColor: 'bg-indigo-50'
+    },
+    moebellift: {
+      iconBg: 'bg-rose-100',
+      iconBgSelected: 'bg-rose-500',
+      iconColor: 'text-rose-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-rose-500',
+      bgColor: 'bg-rose-50'
+    }
+  };
+  
+  const config = serviceConfig[id] || {
+    iconBg: 'bg-gray-100',
+    iconBgSelected: 'bg-gray-500',
+    iconColor: 'text-gray-600',
+    iconColorSelected: 'text-white',
+    borderColor: 'border-gray-500',
+    bgColor: 'bg-gray-50'
+  };
+  
   return (
     <motion.button
       type="button"
       onClick={() => onClick(id)}
-      className={`w-full p-2.5 sm:p-3 border-2 rounded-lg text-left transition-all duration-200 ease-in-out transform hover:-translate-y-0.5
+      className={`w-full flex items-center gap-3 p-4 border-2 rounded-xl transition-all duration-300
         ${selected 
-          ? 'bg-teal-50 border-teal-500 shadow-md ring-1 ring-teal-500' 
-          : 'bg-white border-gray-200 hover:border-teal-400'
+          ? `${config.bgColor} ${config.borderColor} shadow-lg` 
+          : 'bg-white border-gray-200 hover:border-green-400 hover:bg-green-50'
         }`}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: selected ? 1 : 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="flex items-center mb-0.5 sm:mb-1">
-        {icon && (
-          <span className={`mr-1.5 sm:mr-2 p-1 sm:p-1.5 rounded-md ${selected ? 'bg-teal-100 text-teal-600' : 'bg-gray-100 text-gray-500'}`}>
-            {icon}
-          </span>
-        )}
-        <span className={`font-medium text-sm md:text-base ${selected ? 'text-teal-700' : 'text-gray-700'}`}>{t(labelKey)}</span>
+      {/* Icon Container */}
+      <div className={`
+        w-12 h-12 rounded-xl flex items-center justify-center transition-colors flex-shrink-0
+        ${selected ? config.iconBgSelected : config.iconBg}
+      `}>
+        {icon && React.cloneElement(icon, {
+          className: `w-6 h-6 ${selected ? config.iconColorSelected : config.iconColor}`
+        })}
       </div>
-      <p className={`text-xs sm:text-sm ${selected ? 'text-teal-600' : 'text-gray-500'}`}>{t(subLabelKey)}</p>
+      
+      {/* Content */}
+      <div className="flex-1 text-left">
+        <p className={`
+          font-semibold text-base transition-colors
+          ${selected ? 'text-gray-900' : 'text-gray-900'}
+        `}>
+          {t(labelKey)}
+        </p>
+        <p className="text-xs text-gray-600 mt-0.5">{t(subLabelKey)}</p>
+      </div>
+      
+      {/* Selected Indicator */}
+      {selected ? (
+        <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+      ) : (
+        <ArrowRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+      )}
     </motion.button>
   );
 };
@@ -641,7 +722,7 @@ const GardenWorkSection = ({ formData, handleRadioGroupChange, handleChange, err
 };
 
 
-const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroupChange, handleChange, handleCheckboxChange, handleSelectChange, errors, umzugArtSectionRef }) => {
+const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroupChange, handleChange, handleCheckboxChange, handleAdditionalCleaningChange, handleSelectChange, errors, umzugArtSectionRef }) => {
   const { t } = useTranslation('newCustomerForm');
   const subQuestionsRef = useRef(null);
 
@@ -654,12 +735,12 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
   }, [formData.umzugArt]);
 
   const umzugSubTypes = [
-    { id: 'privatumzug', labelKey: 'step1.privateMoveLabel', subLabelKey: 'step1.privateMoveDescription', icon: <Home size={16} /> },
-    { id: 'geschaeftsumzug', labelKey: 'step1.businessMoveLabel', subLabelKey: 'step1.businessMoveDescription', icon: <Briefcase size={16} /> },
-    { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe size={16} /> },
-    { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
-    { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck size={16} /> },
-    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <Wind size={16} /> }
+    { id: 'privatumzug', labelKey: 'step1.privateMoveLabel', subLabelKey: 'step1.privateMoveDescription', icon: <Home /> },
+    { id: 'geschaeftsumzug', labelKey: 'step1.businessMoveLabel', subLabelKey: 'step1.businessMoveDescription', icon: <Building2 /> },
+    { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe /> },
+    { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Package /> },
+    { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck /> },
+    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <ArrowUpDown /> }
   ];
 
   const malerSubTypes = [
@@ -668,7 +749,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
   ];
 
   const specialTransportOptions = [
-    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <Piano size={16} className="mr-2 text-gray-600" /> },
+    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600" /> },
     { value: 'tresortransport', labelKey: 'step1.specialTransportTypeSafe', icon: <ShieldQuestion size={16} className="mr-2 text-gray-600" /> },
     { value: 'maschinen_geraete', labelKey: 'step1.specialTransportTypeMachine', icon: <Weight size={16} className="mr-2 text-gray-600" /> },
     { value: 'sonstiges', labelKey: 'step1.specialTransportTypeOther', icon: <VenetianMask size={16} className="mr-2 text-gray-600" /> },
@@ -859,8 +940,8 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
           >
             <div>
               <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.moveTypeSelectionTitle')} <span className="text-red-500">*</span></h3>
-              <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.moveTypeSelectionSubtitle')}</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-5">{t('step1.moveTypeSelectionSubtitle')}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {umzugSubTypes.map((subType) => (
                   <UmzugArtButton
                     key={subType.id}
@@ -889,7 +970,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                             id="additional_cleaning" 
                             name="additional_cleaning" 
                             checked={formData.additional_cleaning || false} 
-                            onCheckedChange={(checked) => handleCheckboxChange('additional_cleaning', checked)}
+                            onCheckedChange={(checked) => handleAdditionalCleaningChange ? handleAdditionalCleaningChange(checked) : handleCheckboxChange('additional_cleaning', checked)}
                             className="h-5 w-5 mr-3"
                         />
                         <Label htmlFor="additional_cleaning" className="flex-grow cursor-pointer">

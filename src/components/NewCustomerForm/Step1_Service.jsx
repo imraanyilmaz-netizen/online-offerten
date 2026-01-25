@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, Wind, Leaf } from 'lucide-react'; 
+import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, ArrowUpDown, Leaf, ArrowRight } from 'lucide-react';
+import { PiPianoKeysFill } from 'react-icons/pi'; 
 import { useTranslation } from 'react-i18next';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -9,27 +10,99 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const ServiceButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) => {
   const { t } = useTranslation('newCustomerForm');
+  
+  // Her servis için renk ve icon ayarları
+  const serviceConfig = {
+    umzug: {
+      iconBg: 'bg-blue-100',
+      iconBgSelected: 'bg-blue-500',
+      iconColor: 'text-blue-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-blue-500',
+      bgColor: 'bg-blue-50'
+    },
+    reinigung: {
+      iconBg: 'bg-purple-100',
+      iconBgSelected: 'bg-purple-500',
+      iconColor: 'text-purple-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-purple-500',
+      bgColor: 'bg-purple-50'
+    },
+    maler: {
+      iconBg: 'bg-amber-100',
+      iconBgSelected: 'bg-amber-500',
+      iconColor: 'text-amber-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-amber-500',
+      bgColor: 'bg-amber-50'
+    },
+    raeumung: {
+      iconBg: 'bg-emerald-100',
+      iconBgSelected: 'bg-emerald-500',
+      iconColor: 'text-emerald-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-emerald-500',
+      bgColor: 'bg-emerald-50'
+    },
+    garten: {
+      iconBg: 'bg-green-100',
+      iconBgSelected: 'bg-green-500',
+      iconColor: 'text-green-600',
+      iconColorSelected: 'text-white',
+      borderColor: 'border-green-500',
+      bgColor: 'bg-green-50'
+    }
+  };
+  
+  const config = serviceConfig[id] || {
+    iconBg: 'bg-gray-100',
+    iconBgSelected: 'bg-gray-500',
+    iconColor: 'text-gray-600',
+    iconColorSelected: 'text-white',
+    borderColor: 'border-gray-500',
+    bgColor: 'bg-gray-50'
+  };
+  
   return (
     <motion.button
       type="button"
       onClick={() => onClick(id)}
-      className={`w-full p-3 sm:p-4 border-2 rounded-lg text-left transition-all duration-200 ease-in-out transform hover:-translate-y-0.5
+      className={`w-full flex items-center gap-4 p-4 sm:p-5 border-2 rounded-xl transition-all duration-300
         ${selected 
-          ? 'bg-green-50 border-green-500 shadow-lg ring-2 ring-green-500 ring-offset-1' 
-          : 'bg-white border-gray-200 hover:border-green-400 hover:shadow-md'
+          ? `${config.bgColor} ${config.borderColor} shadow-lg` 
+          : 'bg-white border-gray-200 hover:border-green-400 hover:bg-green-50'
         }`}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: selected ? 1 : 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="flex items-center mb-1">
-        {icon && (
-          <span className={`mr-2 sm:mr-3 p-1.5 sm:p-2 rounded-md ${selected ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'}`}>
-            {icon}
-          </span>
-        )}
-        <span className={`font-semibold text-base md:text-lg ${selected ? 'text-green-700' : 'text-gray-800'}`}>{t(labelKey)}</span>
+      {/* Icon Container */}
+      <div className={`
+        w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center transition-colors flex-shrink-0
+        ${selected ? config.iconBgSelected : config.iconBg}
+      `}>
+        {icon && React.cloneElement(icon, {
+          className: `w-7 h-7 sm:w-8 sm:h-8 ${selected ? config.iconColorSelected : config.iconColor}`
+        })}
       </div>
-      <p className={`text-xs md:text-sm ${selected ? 'text-green-600' : 'text-gray-500'}`}>{t(subLabelKey)}</p>
+      
+      {/* Content */}
+      <div className="flex-1 text-left">
+        <p className={`
+          font-semibold text-base sm:text-lg transition-colors
+          ${selected ? 'text-gray-900' : 'text-gray-900'}
+        `}>
+          {t(labelKey)}
+        </p>
+        <p className="text-xs sm:text-sm text-gray-600 mt-1">{t(subLabelKey)}</p>
+      </div>
+      
+      {/* Selected Indicator */}
+      {selected ? (
+        <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />
+      ) : (
+        <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+      )}
     </motion.button>
   );
 };
@@ -682,11 +755,11 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
   }, [formData.umzugArt]);
 
   const mainServices = [
-    { id: 'umzug', labelKey: 'step1.mainServiceMove', subLabelKey: 'step1.mainServiceMoveSublabel', icon: <Home size={20} /> },
-    { id: 'reinigung', labelKey: 'step1.mainServiceCleaning', subLabelKey: 'step1.mainServiceCleaningSublabel', icon: <Sparkles size={20} /> },
-    { id: 'maler', labelKey: 'step1.mainServicePainter', subLabelKey: 'step1.mainServicePainterSublabel', icon: <Paintbrush size={20} /> },
-    { id: 'raeumung', labelKey: 'step1.mainServiceDisposal', subLabelKey: 'step1.mainServiceDisposalSublabel', icon: <Recycle size={20} /> },
-    { id: 'garten', labelKey: 'step1.mainServiceGarden', subLabelKey: 'step1.mainServiceGardenSublabel', icon: <Leaf size={20} /> },
+    { id: 'umzug', labelKey: 'step1.mainServiceMove', subLabelKey: 'step1.mainServiceMoveSublabel', icon: <Truck /> },
+    { id: 'reinigung', labelKey: 'step1.mainServiceCleaning', subLabelKey: 'step1.mainServiceCleaningSublabel', icon: <Sparkles /> },
+    { id: 'maler', labelKey: 'step1.mainServicePainter', subLabelKey: 'step1.mainServicePainterSublabel', icon: <Paintbrush /> },
+    { id: 'raeumung', labelKey: 'step1.mainServiceDisposal', subLabelKey: 'step1.mainServiceDisposalSublabel', icon: <Recycle /> },
+    { id: 'garten', labelKey: 'step1.mainServiceGarden', subLabelKey: 'step1.mainServiceGardenSublabel', icon: <Leaf /> },
   ];
 
   const umzugSubTypes = [
@@ -695,7 +768,7 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
     { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe size={16} /> },
     { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
     { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck size={16} /> },
-    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <Wind size={16} /> } // Added Möbellift
+    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <ArrowUpDown /> } // Added Möbellift
   ];
 
   const malerSubTypes = [
@@ -704,7 +777,7 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
   ];
 
   const specialTransportOptions = [
-    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <Piano size={16} className="mr-2 text-gray-600" /> },
+    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600" /> },
     { value: 'tresortransport', labelKey: 'step1.specialTransportTypeSafe', icon: <ShieldQuestion size={16} className="mr-2 text-gray-600" /> },
     { value: 'maschinen_geraete', labelKey: 'step1.specialTransportTypeMachine', icon: <Weight size={16} className="mr-2 text-gray-600" /> },
     { value: 'sonstiges', labelKey: 'step1.specialTransportTypeOther', icon: <VenetianMask size={16} className="mr-2 text-gray-600" /> },
@@ -724,7 +797,7 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
       <div>
         <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1.5 sm:mb-2">{t('step1.mainServiceQuestion')} <span className="text-red-500">*</span></h2>
         <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{t('step1.mainServiceDescription')}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {mainServices.map((service) => (
             <ServiceButton 
               key={service.id}
