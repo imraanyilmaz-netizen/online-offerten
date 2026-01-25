@@ -187,7 +187,7 @@ const GuenstigUmziehenPageClient = () => {
                               </CardTitle>
                           </CardHeader>
                             <CardContent className="pt-0">
-                              <p className="typography-p text-center text-gray-600 leading-relaxed">
+                              <p className="typography-p text-center text-gray-600 leading-relaxed" style={{ textAlign: 'center' }}>
                                 {step.description}
                               </p>
                           </CardContent>
@@ -583,7 +583,7 @@ const GuenstigUmziehenPageClient = () => {
                 </p>
                 <div className="mb-6 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
                   <div className="text-center mb-6">
-                    <p className="text-green-100 mb-4 typography-p text-lg" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)' }}>
+                    <p className="text-green-100 mb-4 typography-p text-lg" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)', fontSize: '22px' }}>
                       🔹 <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> 🔹
                     </p>
                     <p className="text-green-50 mb-6 typography-p" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)' }}>

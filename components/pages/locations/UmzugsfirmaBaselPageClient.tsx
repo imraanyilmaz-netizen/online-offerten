@@ -4,12 +4,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Award, ShieldCheck, Package, Sparkles, MapPin, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle, Award, ShieldCheck, Package, Sparkles, MapPin, Building, Globe, Users, Truck, Home, ChevronRight, Calculator, TrendingUp, FileText, Mail, BarChart3 } from 'lucide-react';
+import Image from 'next/image';
+import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
-import LocationSidebar from '@/components/locations/LocationSidebar';
+import BaselSidebar from '@/components/locations/BaselSidebar';
 import { cityServiceData } from '@/data/cityLocalBusinessData';
 import { faqs } from '@/data/locationFaqs';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const AdvantageItem = ({ text, delay }: any) => {
   return (
@@ -138,6 +141,30 @@ const UmzugsfirmaBaselPageClient = () => {
     ]
   };
 
+  // FAQ Schema - Basel spezifische FAQs
+  const baselFAQs = [
+    {
+      question: "Wie finde ich eine zuverlässige Umzugsfirma in Basel?",
+      answer: "Am besten vergleichen Sie mehrere geprüfte Umzugsfirmen aus Basel. Achten Sie auf: Lokale Erfahrung: Kenntnisse mit Basler Altstadtgassen und Parkregelungen. Bewertungen: Echte Kundenfeedback auf unabhängigen Plattformen. Versicherung: Betriebshaftpflicht und Transportversicherung gemäss OR. Transparenz: Detaillierte Offerten ohne versteckte Kosten. Zertifizierungen: Mitgliedschaft bei Schweizer Umzugsverbänden."
+    },
+    {
+      question: "Brauche ich eine Parkbewilligung für meinen Umzug in Basel?",
+      answer: "Ja, in den meisten Fällen. In der Basler Altstadt und in vielen Quartieren benötigen Umzugsfirmen eine Halteverbotszone. Professionelle Umzugsunternehmen beantragen diese bei der Stadtpolizei Basel rechtzeitig (meist 1-2 Wochen im Voraus). Die Kosten hierfür sind meist in der Offerte enthalten und garantieren einen reservierten Parkplatz direkt vor Ihrer Haustür."
+    },
+    {
+      question: "Wie lange im Voraus sollte ich eine Umzugsfirma in Basel buchen?",
+      answer: "Für einen reibungslosen Ablauf empfehlen wir eine Buchung 4-6 Wochen im Voraus, besonders: Für Umzüge in der Altstadt (begrenzte Halteverbotszonen), an Monatsenden (Hauptumzugszeit), an Wochenenden (höhere Nachfrage), während der Sommermonate (Juni-September). Bei kurzfristigen Umzügen (unter 2 Wochen) ist die Auswahl an verfügbaren Terminen und Firmen eingeschränkter."
+    },
+    {
+      question: "Welche Besonderheiten gibt es bei Umzügen in der Basler Altstadt?",
+      answer: "Umzüge in der Basler Altstadt erfordern spezielle Planung: Enge Gassen: Spezielle kleinere Umzugswagen erforderlich. Steile Treppen: Viele Altbauhäuser ohne Aufzug. Eingeschränkte Parkmöglichkeiten: Halteverbotszonen obligatorisch. Lärmbeschränkungen: Bestimmte Uhrzeiten für laute Arbeiten. Historische Gebäude: Besondere Sorgfalt beim Schutz von Treppen und Türen. Erfahrene Basler Umzugsfirmen kennen diese Herausforderungen und planen entsprechend."
+    },
+    {
+      question: "Was ist im Full Service Umzug in Basel enthalten?",
+      answer: "Ein Full Service Umzug in Basel umfasst typischerweise: Vor-Ort-Besichtigung: Kostenlose Einschätzung und Beratung. Professionelle Verpackung: Hochwertiges Material und fachgerechte Packtechnik. Schonender Transport: Geschulte Teams und geeignete Fahrzeuge. Möbelmontage/Demontage: Fachgerechte Handhabung aller Möbel. Auf- und Abbau: Betten, Schränke, Tische etc. Optionale Zusatzleistungen: Umzugsreinigung mit Abnahmegarantie, Entsorgung von Verpackungsmaterial, Zwischenlagerung in sicheren Lagern, Spezialtransporte (Klavier, Tresor, Kunst). Alle Leistungen werden in einem transparenten Fixpreis angeboten, ohne versteckte Kosten."
+    }
+  ];
+
   return (
     <>
       <script
@@ -145,10 +172,117 @@ const UmzugsfirmaBaselPageClient = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       
-      <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 md:py-16">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          {/* Breadcrumb Navigation */}
-          <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+      <div className="bg-white overflow-x-hidden">
+        {/* Hero Section - Ana Sayfa Stili */}
+        <section 
+          className="relative w-full py-12 md:py-16 overflow-hidden bg-white z-20" 
+          aria-label="Umzugsfirma Basel - Kostenlose Offerten"
+          itemScope
+          itemType="https://schema.org/Service"
+        >
+          <div className="container mx-auto max-w-7xl px-0 sm:px-4 md:px-6">
+            <div className="bg-white rounded-none sm:rounded-2xl overflow-hidden shadow-none sm:shadow-xl">
+              <div className="flex flex-col lg:flex-row-reverse">
+                {/* Right Side - Image (40% on desktop) */}
+                <div className="w-full lg:w-[40%] relative">
+                  <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full lg:min-h-[500px]">
+                    <Image 
+                      src={(locationData as any)?.image || '/image/default-umzug.jpg'}
+                      alt="Professionelle Zügelfirma in Basel - Umzugsunternehmen bei der Arbeit"
+                      fill
+                      className="object-cover"
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                  </div>
+                </div>
+
+                {/* Left Side - Green Content Area (60% on desktop) */}
+                <div className="w-full lg:w-[60%] bg-[#0d4d2c] relative px-4 sm:px-8 md:px-12 py-6 sm:py-10 md:py-12 lg:py-16">
+                  {/* Yellow Badge - Top Right */}
+                  <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-yellow-400 rounded-full px-4 py-2 shadow-lg z-10">
+                    <p className="text-black text-xs sm:text-sm font-bold text-center leading-tight">
+                      Kostenlos &<br />unverbindlich
+                    </p>
+                  </div>
+
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-white/10 rounded-full border border-white/20">
+                    <span className="text-sm font-medium text-white">Kanton Basel</span>
+                  </div>
+
+                  {/* Heading */}
+                  <h1 
+                    className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-white pr-20 sm:pr-24"
+                    itemProp="name"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 700,
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
+                    Umzugsfirma{' '}
+                    <span className="text-yellow-400">Basel</span>{' '}
+                    für einen stressfreien Umzug.
+                  </h1>
+                    
+                  {/* Description */}
+                  <p className="text-base sm:text-lg text-white/90 mb-8 leading-relaxed" itemProp="description">
+                    Einfach und professionell umziehen. Finden Sie hier die besten Umzugs- und Reinigungsfirmen für Ihren Umzug in und um Basel.
+                  </p>
+                  
+                  {/* Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                    <Button 
+                      asChild
+                      size="lg" 
+                      className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+                    >
+                      <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Basel">
+                        Kostenlose Offerten anfordern
+                        <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                    <Button 
+                      asChild
+                      variant="outline"
+                      size="lg" 
+                      className="bg-white/10 hover:bg-white/20 text-white border-white/30 px-8 py-6 text-lg rounded-lg shadow-sm hover:shadow-md"
+                    >
+                      <Link href="/umzugsfirma/umzugskosten">
+                        <Calculator className="w-5 h-5 mr-2" />
+                        Kosten berechnen
+                      </Link>
+                    </Button>
+                  </div>
+                  
+                  {/* Trust Badges */}
+                  <div className="flex flex-wrap gap-6 text-sm">
+                    <div className="flex items-center gap-2 text-white">
+                      <CheckCircle className="w-5 h-5 text-yellow-400" />
+                      <span className="font-medium">100% kostenlos</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white">
+                      <ShieldCheck className="w-5 h-5 text-yellow-400" />
+                      <span className="font-medium">Geprüfte Partner</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white">
+                      <TrendingUp className="w-5 h-5 text-yellow-400" />
+                      <span className="font-medium">Bis zu 40% sparen</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Breadcrumb Navigation - Hero Altında */}
+            <nav className="mt-4 sm:mt-6 pt-4 px-4 sm:px-0" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
               <li>
                 <Link href="/" className="hover:text-green-600 transition-colors">
@@ -171,46 +305,105 @@ const UmzugsfirmaBaselPageClient = () => {
               </li>
             </ol>
           </nav>
-          
-          <motion.header 
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 md:mb-16 pt-8"
-          >
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 text-shadow-md">
-              Umzugsfirma <span className="text-green-600 underline decoration-green-500 decoration-2 underline-offset-4">Basel</span> für einen stressfreien Umzug.
-            </h1>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
-              Einfach und professionell umziehen. Finden Sie hier die besten Umzugs- und Reinigungsfirmen für Ihren Umzug in und um Basel.
-            </p>
-          </motion.header>
-
-          <div className="grid lg:grid-cols-5 gap-8 md:gap-12 items-start">
-            <motion.main 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="lg:col-span-3 bg-white p-6 md:p-8 rounded-xl shadow-2xl space-y-10"
-            >
-              <article>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Professionell umziehen in der Kulturstadt Basel</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">Ein Umzug in Basel, dem dynamischen Zentrum am Rhein, erfordert Präzision und einen verlässlichen Partner. Egal, ob es sich um einen Umzug innerhalb der Grossbasler Altstadt, nach Kleinbasel oder aus einem anderen Kanton handelt – wir verbinden Sie mit den führenden Umzugsfirmen der Region. So stellen Sie sicher, dass Ihr Umzug effizient, sicher und stressfrei verläuft.</p>
-                <p className="text-gray-700 leading-relaxed mb-4">Unser Portal ermöglicht es Ihnen, mit nur einer Anfrage bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Umzugs- und Reinigungsunternehmen aus Basel zu vergleichen. Sparen Sie wertvolle Zeit und bis zu 40% der Kosten.</p>
-              </article>
-
-              <div className="mt-8 text-center bg-indigo-50 p-6 rounded-lg border-l-4 border-indigo-500">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Startklar für Ihren Umzug in Basel?</h3>
-                <p className="text-gray-700 mb-5">Vergleichen Sie jetzt Offerten und sichern Sie sich die beste Offerte für Ihren Umzug.</p>
-                <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white group shadow-lg">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Basel">
-                    Jetzt Offerten für Basel erhalten
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
+          </div>
+        </section>
+        
+        {/* Two Column Layout: Content Left, Services Right */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+              {/* Left Column - Content */}
+              <div className="lg:col-span-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                  Umzugsfirma finden Basel – Kostenlos Offerten vergleichen & bis zu 40% sparen
+                </h2>
+                <div className="text-gray-700 mb-8 leading-relaxed space-y-6">
+                  <p>
+                    Die Organisation Ihres Umzugs nach Basel war noch nie so einfach: Mit unserem Service erhalten Sie kostenlose Offerten für Ihren Umzug und/oder die Endreinigung Ihrer Wohnung in Basel – professionell, zuverlässig und ohne versteckte Kosten.
+                  </p>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                      Ihr Umzug nach Basel mit unseren Partnerfirmen – professionell & zuverlässig:
+                    </h3>
+                    <p>
+                      Basel stellt einzigartige Anforderungen an Umzugsfirmen: Historische Altstadtgassen, Rhein-Überquerungen zwischen Gross- und Kleinbasel, grenzüberschreitende Logistik nach Deutschland und Frankreich. Unsere geprüften Partnerfirmen in Basel beherrschen das gesamte Basler Umzugs-ABC – von Parkbewilligungen bei der Stadtpolizei Basel bis zur sensiblen Handhabung denkmalgeschützter Gebäude. Sie erhalten lokale Experten, die Basel kennen wie ihre Westentasche.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                      Unsere Umzugsfirmen in Basel – Ihre Experten für Transport & Reinigung:
+                    </h3>
+                    <p>
+                      Die Wahl der richtigen Umzugsfirma in Basel entscheidet über Erfolg oder Stress. Unsere sorgfältig ausgewählten Partnerunternehmen in Basel-Stadt und Basel-Landschaft bieten komplette Umzugsdienstleistungen: professionelle Transporte innerhalb Basels, grenzüberschreitende Umzüge im Dreiländereck und rechtsverbindliche Endreinigungen mit Abnahmegarantie. Mit einer Anfrage vergleichen Sie mehrere geprüfte Anbieter und finden das beste Preis-Leistungs-Verhältnis für Ihren Basler Umzug.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <article className="pt-8 border-t border-gray-200 space-y-6">
+              {/* Right Column - Services - Basel Özel */}
+              <div className="lg:col-span-4">
+                <div className="sticky top-24">
+                  <BaselSidebar />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-gray-100">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                🔍 Umzugsfirma finden Basel leicht gemacht:
+              </h2>
+              <p className="text-lg text-gray-700 font-medium">
+                🚀 Jetzt starten: Umzugsfirma Basel finden und Offerten vergleichen – 100% kostenlos, unverbindlich und ohne Registrierung.
+              </p>
+            </div>
+            
+            <div className="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-4 md:mx-0 px-4 md:px-0 scrollbar-hide">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-[85vw] md:w-auto snap-start md:snap-none">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                  <FileText className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Anfrage stellen</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Geben Sie Umzugsdatum, Wohnungsgrösse, Start- und Zielort an. Je genauer Ihre Angaben, desto präziser sind die Offerten.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-[85vw] md:w-auto snap-start md:snap-none">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                  <Mail className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Offerten vergleichen</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Erhalten Sie bis zu 6 Offerten von Umzugsunternehmen Basel. Die Anbieter nehmen direkt Kontakt mit Ihnen auf und erstellen individuelle Offerten.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-[85vw] md:w-auto snap-start md:snap-none">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                  <BarChart3 className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Beste Firma wählen</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Vergleichen Sie Preise, Leistungen und Bewertungen. Wählen Sie den besten Umzugsanbieter in Basel für Ihren Umzug aus.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Content Section */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <main className="space-y-12">
+
+              <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
                   <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Basel?</h2>
                   <p className="typography-p mb-4">
                     Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Basel richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
@@ -277,111 +470,59 @@ const UmzugsfirmaBaselPageClient = () => {
                     </p>
                   </div>
               </article>
-
-              <article className="pt-8 border-t border-gray-200 space-y-6">
-                <h2 className="text-2xl font-bold text-gray-800">Schritt für Schritt zum erfolgreichen Umzug</h2>
-                <p>Eine gute Vorbereitung ist alles. Mit unserer Checkliste behalten Sie den Überblick.</p>
-                <h3 className="text-xl font-semibold text-gray-800 pt-4">1. Planung & Organisation</h3>
-                <p>Beginnen Sie frühzeitig mit der Planung. Legen Sie ein Umzugsdatum fest und erstellen Sie eine Inventarliste. Dies hilft den Umzugsfirmen, eine genaue Offerte zu erstellen.</p>
-                <h3 className="text-xl font-semibold text-gray-800 pt-4">2. Offerten vergleichen & Firma buchen</h3>
-                <p>Nutzen Sie unser Formular, um Offerten einzuholen. Achten Sie beim Vergleich nicht nur auf den Preis, sondern auch auf inkludierte Leistungen wie Versicherung und Verpackungsmaterial.</p>
-                <div className="grid md:grid-cols-3 gap-4 text-center mt-4">
-                    <div className="p-4 bg-gray-50 rounded-lg border"><ShieldCheck className="mx-auto h-8 w-8 text-green-600 mb-2"/><h4 className="font-semibold">Versicherungsschutz</h4><p className="text-sm text-gray-600">Für einen sicheren Transport Ihres Hab und Guts.</p></div>
-                    <div className="p-4 bg-gray-50 rounded-lg border"><Award className="mx-auto h-8 w-8 text-yellow-600 mb-2"/><h4 className="font-semibold">Geprüfte Qualität</h4><p className="text-sm text-gray-600">Nur Firmen mit positiven Bewertungen.</p></div>
-                    <div className="p-4 bg-gray-50 rounded-lg border"><h4 className="font-semibold">Transparente Preise</h4><p className="text-sm text-gray-600">Keine versteckten Gebühren.</p></div>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-800 pt-4">3. Umzugstag & Übergabe</h3>
-                <p>Koordinieren Sie den Umzugstag mit der Firma. Stellen Sie sicher, dass Parkplätze reserviert sind. Bei einer Umzugsreinigung ist eine Abnahmegarantie entscheidend.</p>
-              </article>
               
-              <article className="pt-8 border-t border-gray-200 space-y-6">
-                <h2 className="text-2xl font-bold text-gray-800">Geld sparen beim Zügeln in Basel</h2>
-                <p>Mit einigen cleveren Massnahmen können Sie Ihr Umzugsbudget schonen:</p>
-                <ul className="list-decimal list-inside space-y-3 text-gray-700 pl-4 marker:font-bold">
-                    {savingsTips.map((tip, index) => (
-                        <li key={index}>{tip}</li>
-                    ))}
-                </ul>
-              </article>
-              
-              <article className="pt-8 border-t border-gray-200 space-y-6">
-                  <h2 className="text-2xl font-bold text-gray-800">Zusatzleistungen für einen komfortablen Umzug</h2>
-                  <p>Viele Firmen bieten mehr als nur den reinen Transport:</p>
-                  <ul className="space-y-4">
-                    {extraServices.map((service, index) => {
-                      const Icon = service.icon;
-                      return (
-                        <li key={index} className="flex items-start">
-                          <Icon className="w-6 h-6 text-indigo-500 mr-3 mt-1 flex-shrink-0" />
-                          <span><strong>{service.title}:</strong> {service.text}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-              </article>
-              
-               <article className="pt-8 border-t border-gray-200 space-y-6">
-                  <h2 className="text-2xl font-bold text-gray-800">Professionelle Umzugsreinigung in Basel</h2>
-                   <p>Buchen Sie Ihre Umzugsreinigung mit Abnahmegarantie direkt mit. Die Reinigungsfirmen kümmern sich um eine blitzsaubere Wohnung, damit die Übergabe an den Vermieter reibungslos verläuft.</p>
-              </article>
-              
-              <article className="pt-8 border-t border-gray-200 space-y-6">
-                <h2 className="text-2xl font-bold text-gray-800">Spezialtransporte für heikle Güter</h2>
-                <p>Für den Transport von Klavieren, Kunstwerken oder anderen wertvollen Gegenständen sind spezialisierte Firmen mit dem nötigen Know-how und Equipment die richtige Wahl. Geben Sie dies in Ihrer Anfrage an.</p>
-              </article>
-              
-              <article className="pt-8 border-t border-gray-200 space-y-6">
+              <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
                 <h2 className="text-2xl font-bold text-gray-800">Warum über Online-Offerten.ch?</h2>
-                <p>Profitieren Sie von einem einfachen und transparenten Prozess:</p>
+                <p className="typography-p">Profitieren Sie von einem einfachen und transparenten Prozess:</p>
                 <ul className="space-y-4 mt-4">
                     {platformAdvantages.map((item, index) => (
                         <AdvantageItem key={index} text={item} delay={index + 1} />
                     ))}
                 </ul>
               </article>
-            </motion.main>
-
-            <LocationSidebar 
-              city={city} 
-              districts={{
-                title: "Quartiere in Basel",
-                text: "Unsere Partner sind in ganz Basel-Stadt für Sie da:",
-                list: [
-                  "Grossbasel Altstadt",
-                  "Kleinbasel Altstadt",
-                  "St. Alban",
-                  "Gundeldingen",
-                  "Bruderholz",
-                  "Bachletten",
-                  "Gotthelf",
-                  "Iselin",
-                  "St. Johann",
-                  "Matthäus",
-                  "Klybeck",
-                  "Rosental",
-                  "Wettstein",
-                  "Hirzbrunnen",
-                  "Riehen",
-                  "Bettingen"
-                ]
-              }}
-              searches={{
-                title: "Beliebte Suchen",
-                list: [
-                  "Günstig umziehen Basel",
-                  "Reinigungsfirma Basel",
-                  "Klaviertransport Basel",
-                  "Möbellift mieten",
-                  "Zügelfirma mit Einpackservice",
-                  "Umzug und Reinigung"
-                ]
-              }}
-            />
+            </main>
           </div>
-          
+        </section>
 
-          <LocationPageNavigation allLocations={locations} currentCity={city} />
-        </div>
+        {/* FAQ Section - Basel spezifisch */}
+        <section className="py-12 md:py-16 bg-gray-50">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Häufige Fragen zu Umzügen in Basel
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Antworten auf die wichtigsten Fragen rund um Umzüge in Basel
+              </p>
+            </div>
+            
+            <div className="max-w-4xl mx-auto">
+              <Accordion type="single" collapsible className="w-full space-y-4">
+                {baselFAQs.map((faq, index) => (
+                  <AccordionItem 
+                    key={index} 
+                    value={`item-${index}`}
+                    className="bg-white rounded-xl border border-gray-200 shadow-sm px-6 py-2 mb-4"
+                  >
+                    <AccordionTrigger className="text-xl font-semibold text-gray-900 hover:no-underline py-4">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-700 leading-relaxed pb-4">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation Section */}
+        <section className="py-12 md:py-16 bg-white border-t border-gray-200">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <LocationPageNavigation allLocations={locations} currentCity={city} />
+          </div>
+        </section>
       </div>
     </>
   );

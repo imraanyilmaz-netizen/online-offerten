@@ -1044,6 +1044,9 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
             <p className="typography-p mb-6 font-bold">
               Jetzt kostenlose und unverbindliche Umzugsofferten vergleichen und den passenden Umzugspartner für Ihren Umzug in der Schweiz finden.
             </p>
+
+            {/* FAQ Section - Moved here after Fazit */}
+            <UmzugsoffertenFAQSection faqItems={faqItems} />
             </div>
           </div>
         </div>
@@ -1122,53 +1125,9 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
                   boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                <div className="flex-shrink-0 relative">
-                  <div className="relative w-14 h-14 sm:w-16 sm:h-16">
-                    {/* Main 3D Star */}
-                    <div className="absolute inset-0">
-                      <Star className="w-14 h-14 sm:w-16 sm:h-16 text-yellow-400 fill-yellow-400 absolute inset-0" 
-                        style={{ 
-                          filter: 'drop-shadow(0 4px 8px rgba(234, 179, 8, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
-                          transform: 'perspective(100px) rotateY(-5deg) rotateX(5deg)'
-                        }} 
-                      />
-                      {/* Inner smaller star for 3D effect */}
-                      <Star className="w-9 h-9 sm:w-10 sm:h-10 text-yellow-500 fill-yellow-500 absolute top-1 right-1" 
-                        style={{ 
-                          filter: 'drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3))',
-                          transform: 'perspective(100px) rotateY(-3deg) rotateX(3deg)'
-                        }} 
-                      />
-                    </div>
-                  </div>
-                </div>
                 <div className="flex-1 pt-1 w-full md:w-auto">
-                  <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
-                    <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
-                      {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
-                        <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                      ))}
-                      {ratingStats.averageRating % 1 !== 0 && (
-                        <div className="relative flex-shrink-0">
-                          <Star size={16} className="md:w-5 md:h-5 text-gray-300" />
-                          <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                            <Star size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                          </div>
-                        </div>
-                      )}
-                      {[...Array(5 - Math.floor(ratingStats.averageRating) - (ratingStats.averageRating % 1 !== 0 ? 1 : 0))].map((_, i) => (
-                        <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
-                      ))}
-                    </div>
-                    <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
-                      Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount} Bewertungen)
-                    </span>
-                  </div>
-                  <p className="text-sm sm:text-base text-gray-900 font-bold leading-relaxed text-left">
-                    Unsere Partnerfirmen aus den Bereichen Umzug, Reinigung, Malerarbeiten und Gartenarbeit wurden von bisherigen Kundinnen und Kunden mit durchschnittlich <span className="font-semibold text-gray-900">Ø {ratingStats.averageRating.toFixed(1)}/5 Sternen</span> bewertet.
-                  </p>
                   {/* Trust Badges */}
-                  <div className="flex flex-wrap justify-start items-center gap-4 mt-4 pt-4 border-t border-gray-200">
+                  <div className="flex flex-wrap justify-start items-center gap-4">
                     <div className="flex items-center gap-2">
                       <CheckCircle className="h-5 w-5 text-green-600" />
                       <span className="text-sm text-gray-600">Kostenlos & unverbindlich</span>
@@ -1188,9 +1147,6 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
           </div>
         </div>
       </section>
-
-      {/* FAQ Section - Lazy Loaded */}
-      <UmzugsoffertenFAQSection faqItems={faqItems} />
     </>
   )
 }
