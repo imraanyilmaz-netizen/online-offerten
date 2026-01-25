@@ -9,7 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { 
   ArrowRight, CheckCircle, Users, ShieldCheck, Clock, TrendingUp, 
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
-  Building, Globe, PackagePlus, Sparkles, Trash2, Brush as PaintBrush, Box
+  Building, Globe, PackagePlus, Sparkles, Trash2, Brush as PaintBrush, Box, ChevronRight
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
@@ -28,7 +28,7 @@ const UmzugshilfePageClient = () => {
   // SEO Data
   const metaTitle = "Umzugshilfe finden & vergleichen » Kostenlose Offerten";
   const metaDescription = "Umzugshilfe finden ✓ Bis zu 6 kostenlose Offerten von geprüften Umzugshelfern und Umzugsfirmen. Professionelle Umzugshilfe für Privatumzug, Geschäftsumzug – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!";
-  const canonicalUrl = "https://online-offerten.ch/umzugshilfe";
+  const canonicalUrl = "https://online-offerten.ch/umzugsfirma/umzugshilfe";
   const ogImageUrl = "https://online-offerten.ch/image/umzugsservice-Schweiz/umzugshilfe-finden-vergleichen.webp";
 
   // FAQ Data for Schema
@@ -70,15 +70,15 @@ const UmzugshilfePageClient = () => {
 
   // Services for Sidebar
   const services = [
-    { name: 'Umzugshilfe', icon: Users, path: '/umzugshilfe', active: true },
-    { name: 'Privatumzug', icon: Home, path: '/privatumzug' },
-    { name: 'Geschäftsumzug', icon: Building, path: '/geschaeftsumzug' },
-    { name: 'Internationale Umzüge', icon: Globe, path: '/internationale-umzuege' },
-    { name: 'Spezialtransporte', icon: Box, path: '/spezialtransporte' },
-    { name: 'Klaviertransport', icon: PackagePlus, path: '/klaviertransport' },
+    { name: 'Umzugshilfe', icon: Users, path: '/umzugsfirma/umzugshilfe', active: true },
+    { name: 'Privatumzug', icon: Home, path: '/umzugsfirma/privatumzug' },
+    { name: 'Geschäftsumzug', icon: Building, path: '/umzugsfirma/geschaeftsumzug' },
+    { name: 'Internationale Umzüge', icon: Globe, path: '/umzugsfirma/internationale-umzuege' },
+    { name: 'Spezialtransporte', icon: Box, path: '/umzugsfirma/spezialtransporte' },
+    { name: 'Klaviertransport', icon: PackagePlus, path: '/umzugsfirma/klaviertransport' },
     { name: 'Reinigung', icon: Sparkles, path: '/reinigung' },
     { name: 'Räumung & Entsorgung', icon: Trash2, path: '/raeumung-entsorgung' },
-    { name: 'Malerarbeiten', icon: PaintBrush, path: '/malerarbeiten' },
+    { name: 'Malerarbeiten', icon: PaintBrush, path: '/malerarbeitenkosten' },
   ];
 
   // Cost Table Data
@@ -100,7 +100,32 @@ const UmzugshilfePageClient = () => {
         <section
           className="relative w-full bg-gray-100 py-12 md:py-16"
         >
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            {/* Breadcrumb Navigation */}
+            <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+                <li>
+                  <Link href="/" className="hover:text-green-600 transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li>
+                  <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
+                    Umzugsfirma
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li className="text-gray-900 font-medium" aria-current="page">
+                  Umzugshilfe
+                </li>
+              </ol>
+            </nav>
+            
             <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
               <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
                 <div>
@@ -165,7 +190,7 @@ const UmzugshilfePageClient = () => {
         </section>
 
         {/* How It Works Section */}
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <HowItWorks
             title="So einfach ist es"
             ctaText="Jetzt kostenlose Umzugshilfe-Offerten anfordern"
@@ -174,7 +199,7 @@ const UmzugshilfePageClient = () => {
         </div>
 
         {/* Why Choose Us Section */}
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 pb-12 md:pb-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 pb-12 md:pb-16">
           <WhyChooseUs
             title="Warum Online-Offerten.ch?"
             subtitle="Ihre Vorteile beim Vergleich von Umzugshilfe-Offerten"
@@ -198,7 +223,7 @@ const UmzugshilfePageClient = () => {
           />
         </div>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             
             <main 
@@ -280,7 +305,7 @@ const UmzugshilfePageClient = () => {
                   />
                 </div>
                 <p className="text-gray-700 leading-relaxed mt-4">
-                  Für eine genauere Schätzung empfehlen wir die Nutzung unseres <Link href="/umzugskosten-rechner" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechners</Link>. Damit erhalten Sie eine detaillierte Kostenschätzung für Ihr individuelles Projekt.
+                  Für eine genauere Schätzung empfehlen wir die Nutzung unseres <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechners</Link>. Damit erhalten Sie eine detaillierte Kostenschätzung für Ihr individuelles Projekt.
                 </p>
               </section>
 
@@ -354,7 +379,7 @@ const UmzugshilfePageClient = () => {
                   Lokale Umzugshelfer und Umzugsfirmen kennen die Gegebenheiten vor Ort, wie z.B. Parkregelungen oder Zufahrtsbeschränkungen. Das spart Zeit und Nerven am Umzugstag.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Wir vermitteln Ihnen Umzugshilfe in der ganzen Schweiz. Finden Sie den passenden Partner in <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma-bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma-basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma-luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
+                  Wir vermitteln Ihnen Umzugshilfe in der ganzen Schweiz. Finden Sie den passenden Partner in <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma-in-der-naehe/basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
                 </p>
               </section>
 
@@ -403,7 +428,7 @@ const UmzugshilfePageClient = () => {
                   </h3>
                   <ul className="space-y-3 text-gray-700">
                     <li>
-                      <Link href="/privatumzug" className="text-green-600 hover:underline font-medium flex items-center">
+                      <Link href="/umzugsfirma/privatumzug" className="text-green-600 hover:underline font-medium flex items-center">
                         <ArrowRight className="w-4 h-4 mr-2" />
                         Privatumzug Offerten vergleichen
                       </Link>
@@ -415,7 +440,7 @@ const UmzugshilfePageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/geschaeftsumzug" className="text-green-600 hover:underline font-medium flex items-center">
+                      <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-600 hover:underline font-medium flex items-center">
                         <ArrowRight className="w-4 h-4 mr-2" />
                         Geschäftsumzug Offerten vergleichen
                       </Link>
@@ -500,7 +525,7 @@ const UmzugshilfePageClient = () => {
                               <p className="text-sm text-green-700 flex-grow">Nutzen Sie unseren Rechner für eine detaillierte Analyse Ihrer Umzugskosten.</p>
                             </div>
                             <Button asChild size="sm" className="mt-3 w-full md:w-auto bg-green-600 hover:bg-green-700 text-white group">
-                              <Link href="/umzugskosten-rechner">
+                              <Link href="/umzugsfirma/umzugskosten">
                                 Jetzt Kosten berechnen
                                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                               </Link>

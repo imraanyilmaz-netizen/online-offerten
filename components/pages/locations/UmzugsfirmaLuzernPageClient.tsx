@@ -35,13 +35,26 @@ const UmzugsfirmaLuzernPageClient = () => {
 
   const metaTitle = "Umzugsfirma Luzern vergleichen: Kostenlose Offerten";
   const metaDescription = "Umzugsfirma Luzern vergleichen: Kostenlose Offerten von geprüften Umzugsfirmen in Luzern. Privatumzug, Geschäftsumzug & mehr. Bis zu 40% sparen!";
-  const canonicalUrl = '/umzugsfirma-luzern';
+  const canonicalUrl = '/umzugsfirma-in-der-naehe/luzern';
 
+  // Cost table data - Hourly rates
+  const hourlyRates = [
+    { service: "1 Umzugswagen + 1 Zügelmann", price: "CHF 110.-" },
+    { service: "1 Umzugswagen + 2 Zügelmänner", price: "CHF 170.-" },
+    { service: "1 Umzugswagen + 3 Zügelmänner", price: "CHF 210.-" },
+    { service: "2 Umzugswagen + 4 Zügelmänner", price: "CHF 270.-" },
+    { service: "2 Umzugswagen + 5 Zügelmänner", price: "CHF 325.-" },
+    { service: "2 Umzugswagen + 6 Zügelmänner", price: "CHF 395.-" }
+  ];
+
+  // Cost table data - By room size
   const costTableRows = [
-    { size: "1.5 - 2 Zimmer", staff: "2 Zügelmänner, 1 LKW", cost: "800 – 1'500" },
-    { size: "2.5 - 3 Zimmer", staff: "3 Zügelmänner, 1 LKW", cost: "1'200 – 2'000" },
-    { size: "3.5 - 4.5 Zimmer", staff: "3-4 Zügelmänner, 1-2 LKW", cost: "1'600 – 2'800" },
-    { size: "5.5+ Zimmer / Haus", staff: "4-5 Zügelmänner, 2 LKW", cost: "2'500 – 5'000+" }
+    { size: "1.5-Zimmer-Wohnung", cost: "CHF 620 - 660" },
+    { size: "2.5-Zimmer-Wohnung", cost: "CHF 660 - 980" },
+    { size: "3.5-Zimmer-Wohnung", cost: "CHF 1'080 - 1'250" },
+    { size: "4.5-Zimmer-Wohnung", cost: "CHF 1'420 - 1'890" },
+    { size: "5.5-Zimmer-Wohnung", cost: "CHF 1'980 - 2'490" },
+    { size: "6.5-Zimmer-Wohnung", cost: "CHF 2'490 - 3'150" }
   ];
 
   const savingsTips = [
@@ -184,7 +197,7 @@ const UmzugsfirmaLuzernPageClient = () => {
             }}
           ></div>
           
-          <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10 overflow-x-hidden w-full max-w-full">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10 overflow-x-hidden w-full max-w-full">
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center min-h-[400px] md:min-h-[500px] w-full">
               {/* Left Side - Content Card */}
               <motion.div
@@ -263,7 +276,7 @@ const UmzugsfirmaLuzernPageClient = () => {
         </motion.section>
 
         {/* Main Content Section */}
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16 lg:py-20 w-full max-w-full overflow-x-hidden">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16 lg:py-20 w-full max-w-full overflow-x-hidden">
           <div className="grid lg:grid-cols-4 gap-8 md:gap-12 items-start w-full">
             {/* Main Content - 3 columns */}
             <motion.main 
@@ -330,31 +343,72 @@ const UmzugsfirmaLuzernPageClient = () => {
 
               {/* Cost Overview Section */}
               <article className="bg-white rounded-xl shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100 w-full min-w-0 overflow-x-hidden">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 md:mb-6 break-words overflow-wrap-anywhere">Umzugskosten in Luzern: Ihr Überblick</h2>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6 break-words overflow-wrap-anywhere">
-                  Die Kosten für einen Umzug in Luzern hängen von verschiedenen Faktoren ab. Die Grösse Ihrer Wohnung, die Entfernung zwischen altem und neuem Zuhause, die Anzahl der Stockwerke, das Umzugsdatum und gewünschte Zusatzleistungen beeinflussen den Gesamtpreis. Als grobe Orientierungshilfe können Sie mit folgenden Richtwerten rechnen:
+                <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Luzern?</h2>
+                <p className="typography-p mb-4">
+                  Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Luzern richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
                 </p>
-                <div className="overflow-x-auto mt-6 w-full max-w-full">
-                  <table className="w-full max-w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm" style={{ minWidth: '100%' }}>
-                    <thead className="bg-green-600 text-white">
-                      <tr>
-                        <th className="px-4 py-3 text-left font-semibold">Wohnungsgrösse</th>
-                        <th className="px-4 py-3 text-left font-semibold">Personal & Equipment</th>
-                        <th className="px-4 py-3 text-left font-semibold">Kosten (CHF)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {costTableRows.map((row, index) => (
-                        <tr key={index} className="hover:bg-green-50 transition-colors">
-                          <td className="px-4 py-3 font-medium text-gray-800">{row.size}</td>
-                          <td className="px-4 py-3 text-gray-600">{row.staff}</td>
-                          <td className="px-4 py-3 font-semibold text-green-600">{row.cost}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                <p className="typography-p mb-6">
+                  Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Luzern und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
+                </p>
+                
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  {/* Hourly Rates Table */}
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                      <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                    </div>
+                    <div className="overflow-x-auto flex-1">
+                      <table className="w-full table-fixed">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {hourlyRates.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Room Size Costs Table */}
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                      <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                    </div>
+                    <div className="overflow-x-auto flex-1">
+                      <table className="w-full table-fixed">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {costTableRows.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-600 italic mt-4">
+                
+                <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200 mb-4">
+                  <p className="typography-p text-gray-600 italic">
+                    Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
+                  </p>
+                </div>
+                <p className="text-sm text-gray-600 italic">
                   * Diese Preise sind Richtwerte für einen Umzug innerhalb von Luzern. Die tatsächlichen Kosten können je nach Distanz, Stockwerk, Umzugsdatum und gewünschten Zusatzleistungen variieren. Eine kostenlose Besichtigung vor Ort ermöglicht eine präzise Offerte.
                 </p>
               </article>

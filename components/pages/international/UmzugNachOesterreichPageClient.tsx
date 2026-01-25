@@ -38,7 +38,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 );
 
 const UmzugNachOesterreichPageClient = () => {
-  const canonicalPath = '/umzug-nach-oesterreich';
+  const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-oesterreich';
 
   const metaTitle = "Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2025";
   const metaDescription = "Ihr kompletter Leitfaden für den Umzug von der Schweiz nach Österreich. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Firmen für Transport und Reinigung.";
@@ -124,7 +124,7 @@ const UmzugNachOesterreichPageClient = () => {
              <img alt="Hero image of Vienna, Austria" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1700396050407-1cadaf4c9a5c" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
-          <div className="relative z-10 container mx-auto max-w-navbar px-4 md:px-6 text-center py-28 md:py-40">
+          <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-28 md:py-40">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -136,7 +136,7 @@ const UmzugNachOesterreichPageClient = () => {
           </div>
         </motion.section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-10">
               <Section className="border-t-0 pt-0">

@@ -4,14 +4,14 @@ import CountryCard from './CountryCard';
 
 const InternationalPageNavigation = ({ currentCountrySlug }) => {
   const popularDestinations = [
-    { name: "Deutschland", slug: "umzug-nach-deutschland", path: "/umzug-nach-deutschland", code: "DE" },
-    { name: "Frankreich", slug: "umzug-nach-frankreich", path: "/umzug-nach-frankreich", code: "FR" },
-    { name: "Italien", slug: "umzug-nach-italien", path: "/umzug-nach-italien", code: "IT" },
-    { name: "Österreich", slug: "umzug-nach-oesterreich", path: "/umzug-nach-oesterreich", code: "AT" },
-    { name: "Spanien", slug: "umzug-nach-spanien", path: "/umzug-nach-spanien", code: "ES" },
-    { name: "Portugal", slug: "umzug-nach-portugal", path: "/umzug-nach-portugal", code: "PT" },
-    { name: "Belgien", slug: "umzug-nach-belgien", path: "/umzug-nach-belgien", code: "BE" },
-    { name: "Dänemark", slug: "umzug-nach-daenemark", path: "/umzug-nach-daenemark", code: "DK" },
+    { name: "Deutschland", slug: "umzug-nach-deutschland", path: "/umzugsfirma/internationale-umzuege/umzug-nach-deutschland", code: "DE" },
+    { name: "Frankreich", slug: "umzug-nach-frankreich", path: "/umzugsfirma/internationale-umzuege/umzug-nach-frankreich", code: "FR" },
+    { name: "Italien", slug: "umzug-nach-italien", path: "/umzugsfirma/internationale-umzuege/umzug-nach-italien", code: "IT" },
+    { name: "Österreich", slug: "umzug-nach-oesterreich", path: "/umzugsfirma/internationale-umzuege/umzug-nach-oesterreich", code: "AT" },
+    { name: "Spanien", slug: "umzug-nach-spanien", path: "/umzugsfirma/internationale-umzuege/umzug-nach-spanien", code: "ES" },
+    { name: "Portugal", slug: "umzug-nach-portugal", path: "/umzugsfirma/internationale-umzuege/umzug-nach-portugal", code: "PT" },
+    { name: "Belgien", slug: "umzug-nach-belgien", path: "/umzugsfirma/internationale-umzuege/umzug-nach-belgien", code: "BE" },
+    { name: "Dänemark", slug: "umzug-nach-daenemark", path: "/umzugsfirma/internationale-umzuege/umzug-nach-daenemark", code: "DK" },
   ];
 
   const countriesToShow = Array.isArray(popularDestinations) 

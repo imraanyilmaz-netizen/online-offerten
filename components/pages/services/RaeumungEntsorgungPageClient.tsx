@@ -98,7 +98,7 @@ const RaeumungEntsorgungPageClient = () => {
           transition={{ duration: 0.8 }}
           className="relative w-full bg-gray-100 py-12 md:py-16"
         >
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-0 items-center">
               <div className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12">
                 <motion.div
@@ -166,7 +166,7 @@ const RaeumungEntsorgungPageClient = () => {
           </div>
         </motion.section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
           <section className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ x: -50, opacity: 0 }}

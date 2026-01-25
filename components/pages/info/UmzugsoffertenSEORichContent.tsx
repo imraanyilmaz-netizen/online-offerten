@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 const UmzugsoffertenSEORichContent: React.FC = () => {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="max-w-4xl mx-auto prose prose-lg">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -84,7 +84,7 @@ const UmzugsoffertenSEORichContent: React.FC = () => {
                 Jeder Umzug stellt eine eigene Herausforderung dar und erfordert eine sorgfältige Planung. Ein professionelles Zügelunternehmen erfasst Ihr Inventar genau, um ein passgenaues Angebot zu erstellen. Beim Zügeln und Umziehen ist die Auswahl der richtigen Zügelfirma und die Zusammenarbeit mit erfahrenen Unternehmen entscheidend für einen reibungslosen Ablauf. Viele Offerten beinhalten auch Reinigungsdienstleistungen – der Vergleich von Reinigungsfirmen und Reinigungsfirma-Angeboten kann dabei helfen, Kosten zu sparen und die passende Reinigung zu finden. Die Wahl eines vertrauenswürdigen Unternehmens ist sowohl für Ihr Geschäft als auch für Ihren Umzug von grosser Bedeutung.
               </p>
 
-              <div className="bg-green-50 border-l-4 border-green-600 p-6 my-8">
+              <div className="bg-green-50 border-l-4 border-green-600 p-6 my-8 hidden">
                 <h4 className="text-xl font-bold text-gray-900 mb-3">
                   💡 Pro-Tipp: Angebote richtig vergleichen
                 </h4>

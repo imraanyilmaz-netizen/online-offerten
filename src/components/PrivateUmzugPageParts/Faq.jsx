@@ -87,7 +87,7 @@ const Faq = () => {
               i18nKey="faq.a1_intro_linked" 
               ns="privateUmzugPage"
               components={{
-                0: <Link href="/umzugskosten-rechner" className="text-green-600 hover:underline font-semibold" />
+                0: <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold" />
               }}
             />
           </p>
@@ -99,7 +99,7 @@ const Faq = () => {
               <p className="text-sm text-green-700 flex-grow">{t('faq.a1_calculator_cta_text')}</p>
             </div>
             <Button asChild size="sm" className="mt-3 w-full md:w-auto bg-green-600 hover:bg-green-700 text-white group">
-              <Link href="/umzugskosten-rechner">
+              <Link href="/umzugsfirma/umzugskosten">
                 {t('faq.a1_calculator_cta_button')}
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </Link>
@@ -128,7 +128,7 @@ const Faq = () => {
               i18nKey="faq.a3_intro_linked" 
               ns="privateUmzugPage"
               components={{
-                0: <Link href="/checklisten" className="text-green-600 hover:underline font-semibold" />
+                0: <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold" />
               }}
             />
           </p>
@@ -156,7 +156,7 @@ const Faq = () => {
               i18nKey="faq.a5_recommendation_linked" 
               ns="privateUmzugPage"
               components={{
-                0: <Link href="/checklisten" className="text-green-600 hover:underline font-semibold" />
+                0: <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold" />
               }}
             />
           </p>

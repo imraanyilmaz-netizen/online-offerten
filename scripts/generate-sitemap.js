@@ -122,49 +122,66 @@ async function generateSitemap() {
 
   // Service pages that should have higher priority
   const servicePages = [
-    '/privatumzug', '/geschaeftsumzug', '/umzugshilfe', '/internationale-umzuege', '/spezialtransporte', 
-    '/klaviertransport', '/reinigung', '/wohnungsreinigung', '/hausreinigung', 
-    '/bueroreinigung', '/umzugsreinigung', '/unterhaltsreinigung', '/grundreinigung', 
-    '/baureinigung', '/fensterreinigung', '/bodenreinigung', '/fassadenreinigung', 
-    '/hofreinigung', '/raeumung-entsorgung', '/malerarbeiten', '/gartenarbeiten',
-    '/umzugsfirma', '/umzugsfirma-in-der-naehe', '/umzugsfirma-vergleichen'
+    '/umzugsfirma/privatumzug', '/umzugsfirma/geschaeftsumzug', '/umzugsfirma/umzugshilfe', '/umzugsfirma/internationale-umzuege', '/umzugsfirma/spezialtransporte', 
+    '/umzugsfirma/klaviertransport', '/umzugsfirma/checklists', '/reinigung', '/reinigung/wohnungsreinigung', '/reinigung/hausreinigung', 
+    '/reinigung/bueroreinigung', '/reinigung/umzugsreinigung', '/reinigung/unterhaltsreinigung', '/reinigung/grundreinigung', 
+    '/reinigung/baureinigung', '/reinigung/fensterreinigung', '/reinigung/bodenreinigung', '/reinigung/fassadenreinigung', 
+    '/reinigung/hofreinigung', '/raeumung-entsorgung', '/malerarbeitenkosten', '/gartenarbeiten',
+    '/umzugsfirma', '/umzugsfirma-in-der-naehe', '/umzugsfirma-vergleichen', '/malerfirma-in-der-naehe'
   ];
 
-  // Location pages (umzugsfirma-* pages)
+  // Location pages (umzugsfirma-* pages) - New structure under /umzugsfirma-in-der-naehe
   const locationPagePrefixes = [
-    '/umzugsfirma-aargau', '/umzugsfirma-basel', '/umzugsfirma-bern',
-    '/umzugsfirma-biel-bienne', '/umzugsfirma-genf',
-    '/umzugsfirma-lausanne', '/umzugsfirma-lugano', '/umzugsfirma-luzern',
-    '/umzugsfirma-st-gallen', '/umzugsfirma-thun',
-    '/umzugsfirma-zuerich'
+    '/umzugsfirma-in-der-naehe/aargau',
+    '/umzugsfirma-in-der-naehe/basel',
+    '/umzugsfirma-in-der-naehe/bern',
+    '/umzugsfirma-in-der-naehe/biel-bienne',
+    '/umzugsfirma-in-der-naehe/genf',
+    '/umzugsfirma-in-der-naehe/lausanne',
+    '/umzugsfirma-in-der-naehe/lugano',
+    '/umzugsfirma-in-der-naehe/luzern',
+    '/umzugsfirma-in-der-naehe/st-gallen',
+    '/umzugsfirma-in-der-naehe/thun',
+    '/umzugsfirma-in-der-naehe/zuerich'
   ];
 
-  // Aargau city pages (dynamic routes)
+  // Aargau city pages (dynamic routes) - New structure
   const aargauCityPages = [
-    '/umzugsfirma-aargau/aarau',
-    '/umzugsfirma-aargau/baden',
-    '/umzugsfirma-aargau/zofingen',
-    '/umzugsfirma-aargau/brugg',
-    '/umzugsfirma-aargau/wettingen'
+    '/umzugsfirma-in-der-naehe/aargau/aarau',
+    '/umzugsfirma-in-der-naehe/aargau/baden',
+    '/umzugsfirma-in-der-naehe/aargau/zofingen',
+    '/umzugsfirma-in-der-naehe/aargau/brugg',
+    '/umzugsfirma-in-der-naehe/aargau/wettingen'
+  ];
+
+  // Zürich city pages (dynamic routes)
+  const zurichCityPages = [
+    '/umzugsfirma-in-der-naehe/zuerich/winterthur',
+    '/umzugsfirma-in-der-naehe/zuerich/uster',
+    '/umzugsfirma-in-der-naehe/zuerich/dietikon',
+    '/umzugsfirma-in-der-naehe/zuerich/duebendorf',
+    '/umzugsfirma-in-der-naehe/zuerich/schlieren'
   ];
 
   // Cost pages
   const costPages = [
-    '/umzugskosten-aargau'
+    '/umzugsfirma/umzugskosten', '/umzugsfirma/umzugsofferten', '/guenstig-umziehen',
+    '/umzugsfirma-in-der-naehe/zuerich/umzugsofferten-zuerich',
+    '/umzugskosten-aargau', '/reinigung/reinigungskosten'
   ];
 
-  // Reinigungsfirma location pages (reinigungsfirma-* pages)
+  // Reinigungsfirma location pages (reinigungsfirma-* pages) - New structure
   const reinigungsfirmaLocationPages = [
-    '/reinigungsfirma-zuerich', '/reinigungsfirma-basel', '/reinigungsfirma-bern',
-    '/reinigungsfirma-genf', '/reinigungsfirma-lausanne', '/reinigungsfirma-luzern',
-    '/reinigungsfirma-st-gallen', '/reinigungsfirma-winterthur'
+    '/reinigungsfirma-in-der-naehe/zuerich', '/reinigungsfirma-in-der-naehe/basel', '/reinigungsfirma-in-der-naehe/bern',
+    '/reinigungsfirma-in-der-naehe/genf', '/reinigungsfirma-in-der-naehe/lausanne', '/reinigungsfirma-in-der-naehe/luzern',
+    '/reinigungsfirma-in-der-naehe/st-gallen', '/reinigungsfirma-in-der-naehe/winterthur'
   ];
 
-  // Malerfirma location pages (malerfirma-* pages)
+  // Malerfirma location pages (malerfirma-in-der-naehe/* pages)
   const malerfirmaLocationPages = [
-    '/malerfirma-zuerich', '/malerfirma-basel', '/malerfirma-bern',
-    '/malerfirma-genf', '/malerfirma-lausanne', '/malerfirma-luzern',
-    '/malerfirma-st-gallen', '/malerfirma-winterthur'
+    '/malerfirma-in-der-naehe/zuerich', '/malerfirma-in-der-naehe/basel', '/malerfirma-in-der-naehe/bern',
+    '/malerfirma-in-der-naehe/genf', '/malerfirma-in-der-naehe/lausanne', '/malerfirma-in-der-naehe/luzern',
+    '/malerfirma-in-der-naehe/st-gallen', '/malerfirma-in-der-naehe/winterthur'
   ];
 
   // Private and admin routes that should NOT be in sitemap
@@ -209,6 +226,10 @@ async function generateSitemap() {
       if (aargauCityPages.includes(route)) {
         return false;
       }
+      // Exclude Zürich city pages (handled separately)
+      if (zurichCityPages.includes(route)) {
+        return false;
+      }
       // Exclude cost pages (handled separately)
       if (costPages.includes(route)) {
         return false;
@@ -237,7 +258,7 @@ async function generateSitemap() {
   const locationPages = locationPagePrefixes
     .filter(route => allStaticRoutes.includes(route))
     .map(route => {
-      if (route === '/umzugsfirma-aargau') {
+      if (route === '/umzugsfirma-in-der-naehe/aargau') {
         return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '1.0');
       }
       const priority = route === '/standorte' ? '0.95' : '0.9';
@@ -247,6 +268,11 @@ async function generateSitemap() {
   // 3. Aargau city pages (dynamic routes)
   // City pages are important for SEO, so we use weekly changefreq and 0.8 priority
   const aargauCityPagesEntries = aargauCityPages
+    .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.8'));
+
+  // 3b. Zürich city pages (dynamic routes)
+  // City pages are important for SEO, so we use weekly changefreq and 0.8 priority
+  const zurichCityPagesEntries = zurichCityPages
     .map(route => createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '0.8'));
 
   // 4. Cost pages
@@ -291,6 +317,7 @@ async function generateSitemap() {
     ...sortedStaticPages, // Homepage will be first (priority 1.0)
     ...locationPages,
     ...aargauCityPagesEntries,
+    ...zurichCityPagesEntries,
     ...costPagesEntries,
     ...reinigungsfirmaPages,
     ...malerfirmaPages,

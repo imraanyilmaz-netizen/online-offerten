@@ -257,37 +257,37 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
       title: "Wohnungsreinigung",
       description: "Professionelle Reinigung für Ihre Wohnung. Gründlich, zuverlässig und individuell auf Ihre Bedürfnisse abgestimmt.",
       icon: Home,
-      link: "/wohnungsreinigung"
+      link: "/reinigung/wohnungsreinigung"
     },
     {
       title: "Hausreinigung",
       description: "Umfassende Reinigung für Ihr gesamtes Haus. Von Küche bis Bad – wir sorgen für makellose Sauberkeit.",
       icon: Home,
-      link: "/hausreinigung"
+      link: "/reinigung/hausreinigung"
     },
     {
       title: "Büroreinigung",
       description: "Professionelle Büro- und Gewerbereinigung für ein sauberes Arbeitsumfeld. Regelmässig oder einmalig.",
       icon: Building,
-      link: "/bueroreinigung"
+      link: "/reinigung/bueroreinigung"
     },
     {
       title: "Umzugsreinigung",
       description: "Professionelle Endreinigung für Wohnungsübergabe. Mit Abnahmegarantie für sorgenfreien Auszug.",
       icon: Sparkles,
-      link: "/umzugsreinigung"
+      link: "/reinigung/umzugsreinigung"
     },
     {
       title: "Unterhaltsreinigung",
       description: "Regelmässige Reinigung für Privathaushalte und Firmen. Individuell auf Ihre Bedürfnisse zugeschnitten.",
       icon: Clock,
-      link: "/unterhaltsreinigung"
+      link: "/reinigung/unterhaltsreinigung"
     },
     {
       title: "Grundreinigung",
       description: "Intensive Tiefenreinigung für einen sauberen Start. Ideal für den Einzug oder nach Renovationen.",
       icon: Droplets,
-      link: "/grundreinigung"
+      link: "/reinigung/grundreinigung"
     }
   ]
 
@@ -301,7 +301,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
             backgroundSize: '60px 60px'
           }}></div>
         </div>
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -332,7 +332,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
                   Jetzt vergleichen
                 </Button>
                 <Button
-                  onClick={() => router.push('/reinigungskosten-rechner')}
+                  onClick={() => router.push('/reinigung/reinigungskosten')}
                   variant="outline"
                   size="lg"
                   className="text-lg px-8 py-6"
@@ -390,7 +390,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
 
       {/* Why Local Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -436,7 +436,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -488,7 +488,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
 
       {/* How It Works Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -560,7 +560,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
 
       {/* Detailed Content Section - SEO Rich Content */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto prose prose-lg">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -614,7 +614,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -649,7 +649,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -673,7 +673,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
                 Jetzt Anfrage senden
               </Button>
               <Button
-                onClick={() => router.push('/reinigungskosten-rechner')}
+                onClick={() => router.push('/reinigung/reinigungskosten')}
                 size="lg"
                 className="bg-blue-500 hover:bg-blue-400 text-white border-2 border-white text-lg px-8 py-6 shadow-lg"
               >

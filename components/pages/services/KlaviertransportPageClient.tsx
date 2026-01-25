@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, CheckCircle, AlertTriangle, Shield, Users, HelpCircle, Star, Package, MapPin, Clock, Calculator, Sparkles, BookOpen } from 'lucide-react'
+import { ArrowRight, CheckCircle, AlertTriangle, Shield, Users, HelpCircle, Star, Package, MapPin, Clock, Calculator, Sparkles, BookOpen, ChevronRight } from 'lucide-react'
 import { PiPianoKeysFill } from 'react-icons/pi'
 
 const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
@@ -32,7 +32,32 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
       {/* Gradient Overlay (Desktop only) */}
       <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent"></div>
       
-      <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+        {/* Breadcrumb Navigation */}
+        <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2 text-sm text-gray-600">
+            <li>
+              <Link href="/" className="hover:text-green-600 transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+            </li>
+            <li>
+              <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
+                Umzugsfirma
+              </Link>
+            </li>
+            <li>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+            </li>
+            <li className="text-gray-900 font-medium" aria-current="page">
+              Klaviertransport
+            </li>
+          </ol>
+        </nav>
+        
         <div className="flex justify-start">
           <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
             <div>
@@ -125,7 +150,7 @@ const ContentSection = ({ sectionData }: { sectionData: any }) => {
       transition={{ duration: 0.6 }}
       className={`py-16 md:py-20 ${bgColors[sectionData.key] || 'bg-white'}`}
     >
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
         {/* Header */}
         <div className="text-left mb-6">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{sectionData.title}</h2>
@@ -177,7 +202,7 @@ const FaqSection = ({ faqData }: { faqData: any }) => {
       transition={{ duration: 0.7 }}
       className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white"
     >
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="text-left mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{faqData.title}</h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl">{faqData.subtitle}</p>
@@ -262,7 +287,7 @@ const Cta = ({ quoteUrl }: { quoteUrl: string }) => (
     transition={{ duration: 0.7 }}
     className="bg-gradient-to-r from-green-600 to-green-800"
   >
-    <div className="container mx-auto max-w-navbar px-4 md:px-6 py-16 md:py-20 text-center text-white">
+    <div className="container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-20 text-center text-white">
       <Star className="w-16 h-16 text-white/50 mx-auto mb-6" />
       <h2 className="text-3xl md:text-4xl font-bold mb-4">Kostenlose Offerten für Klaviertransport Zürich anfordern</h2>
       <p className="text-lg md:text-xl text-green-200 max-w-3xl mx-auto mb-8">
@@ -283,7 +308,7 @@ const Cta = ({ quoteUrl }: { quoteUrl: string }) => (
 )
 
 const KlaviertransportPageClient = () => {
-  const canonicalUrl = "/klaviertransport"
+  const canonicalUrl = "/umzugsfirma/klaviertransport"
   const quoteUrl = "/kostenlose-offerte-anfordern"
 
   const whyData = {
@@ -522,7 +547,7 @@ const KlaviertransportPageClient = () => {
       />
       <div className="bg-white">
         <Hero quoteUrl={quoteUrl} />
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-8">
             <div className="lg:col-span-8">
         <ContentSection sectionData={whyData} />

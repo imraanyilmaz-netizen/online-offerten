@@ -15,7 +15,7 @@ import {
 
 const UmzugsoffertenZuerichPageClient = () => {
   const router = useRouter()
-  const canonicalUrl = 'https://online-offerten.ch/umzugsofferten-zuerich'
+  const canonicalUrl = 'https://online-offerten.ch/umzugsfirma-in-der-naehe/zuerich/umzugsofferten-zuerich'
 
   // Inject structured data
   useEffect(() => {
@@ -207,7 +207,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                   Jetzt kostenlose Offerten anfordern
                 </Button>
                 <Button
-                  onClick={() => router.push('/umzugskosten-rechner')}
+                  onClick={() => router.push('/umzugsfirma/umzugskosten')}
                   variant="outline"
                   size="lg"
                   className="text-lg px-8 py-6"

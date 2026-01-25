@@ -10,7 +10,7 @@ import {
   ArrowRight, CheckCircle, PackagePlus, ClipboardList, Users, ShieldCheck, 
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
   Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box,
-  TrendingUp, FileText, Search, Mail, CheckCircle2
+  TrendingUp, FileText, Search, Mail, CheckCircle2, ChevronRight
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
@@ -29,7 +29,7 @@ const PrivateUmzugPageClient = () => {
   // SEO Data
   const metaTitle = "Privatumzug Offerten kostenlos vergleichen » Bis zu 40% sparen";
   const metaDescription = "Privatumzug Offerten kostenlos vergleichen ✓ Offerten von geprüften Umzugsfirmen vergleichen. Wohnungsumzug, Hausumzug – sicher, stressfrei und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!";
-  const canonicalUrl = "https://online-offerten.ch/privatumzug";
+  const canonicalUrl = "https://online-offerten.ch/umzugsfirma/privatumzug";
   const ogImageUrl = "https://online-offerten.ch/image/umzugsservice-Schweiz/privatumzug-offerten-kostenlos-vergleichen.png";
 
   // Schema Data - Single JSON-LD Service schema
@@ -63,14 +63,14 @@ const PrivateUmzugPageClient = () => {
 
   // Services for Sidebar
   const services = [
-    { name: 'Privatumzug', icon: Home, path: '/privatumzug', active: true },
-    { name: 'Geschäftsumzug', icon: Building, path: '/geschaeftsumzug' },
-    { name: 'Internationale Umzüge', icon: Globe, path: '/internationale-umzuege' },
-    { name: 'Spezialtransporte', icon: Box, path: '/spezialtransporte' },
-    { name: 'Klaviertransport', icon: Piano, path: '/klaviertransport' },
+    { name: 'Privatumzug', icon: Home, path: '/umzugsfirma/privatumzug', active: true },
+    { name: 'Geschäftsumzug', icon: Building, path: '/umzugsfirma/geschaeftsumzug' },
+    { name: 'Internationale Umzüge', icon: Globe, path: '/umzugsfirma/internationale-umzuege' },
+    { name: 'Spezialtransporte', icon: Box, path: '/umzugsfirma/spezialtransporte' },
+    { name: 'Klaviertransport', icon: Piano, path: '/umzugsfirma/klaviertransport' },
     { name: 'Reinigung', icon: Sparkles, path: '/reinigung' },
     { name: 'Räumung & Entsorgung', icon: Trash2, path: '/raeumung-entsorgung' },
-    { name: 'Malerarbeiten', icon: PaintBrush, path: '/malerarbeiten' },
+    { name: 'Malerarbeiten', icon: PaintBrush, path: '/malerarbeitenkosten' },
   ];
 
   // Cost Table Data
@@ -104,7 +104,32 @@ const PrivateUmzugPageClient = () => {
           {/* Gradient Overlay (Desktop only) */}
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent"></div>
           
-          <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+            {/* Breadcrumb Navigation */}
+            <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+                <li>
+                  <Link href="/" className="hover:text-green-600 transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li>
+                  <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
+                    Umzugsfirma
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li className="text-gray-900 font-medium" aria-current="page">
+                  Privatumzug
+                </li>
+              </ol>
+            </nav>
+            
             <div className="flex justify-start">
               <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
                 <div>
@@ -158,7 +183,7 @@ const PrivateUmzugPageClient = () => {
           </div>
         </section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             
             <main 
@@ -734,19 +759,19 @@ const PrivateUmzugPageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/geschaeftsumzug" className="text-green-600 hover:underline font-medium flex items-center">
+                      <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-600 hover:underline font-medium flex items-center">
                         <ArrowRight className="w-4 h-4 mr-2" />
                         Geschäftsumzug Offerten vergleichen
                       </Link>
                     </li>
                     <li>
-                      <Link href="/internationale-umzuege" className="text-green-600 hover:underline font-medium flex items-center">
+                      <Link href="/umzugsfirma/internationale-umzuege" className="text-green-600 hover:underline font-medium flex items-center">
                         <ArrowRight className="w-4 h-4 mr-2" />
                         Internationale Umzüge
                       </Link>
                     </li>
                     <li>
-                      <Link href="/malerarbeiten" className="text-green-600 hover:underline font-medium flex items-center">
+                      <Link href="/malerarbeitenkosten" className="text-green-600 hover:underline font-medium flex items-center">
                         <ArrowRight className="w-4 h-4 mr-2" />
                         Malerarbeiten Offerten vergleichen
                       </Link>
@@ -787,7 +812,7 @@ const PrivateUmzugPageClient = () => {
                           <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
                           <div>
                             <p>
-                              Die Kosten hängen stark von der Wohnungsgrösse und dem Umzugsvolumen ab. Unser <Link href="/umzugskosten-rechner" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechner</Link> gibt Ihnen eine gute erste Schätzung. Hier ist eine grobe Übersicht:
+                              Die Kosten hängen stark von der Wohnungsgrösse und dem Umzugsvolumen ab. Unser <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechner</Link> gibt Ihnen eine gute erste Schätzung. Hier ist eine grobe Übersicht:
                             </p>
                             <div className="my-4">
                               <PricingTable
@@ -811,7 +836,7 @@ const PrivateUmzugPageClient = () => {
                                 <p className="text-sm text-green-700 flex-grow">Nutzen Sie unseren Rechner für eine detaillierte Analyse Ihrer Umzugskosten.</p>
                               </div>
                               <Button asChild size="sm" className="mt-3 w-full md:w-auto bg-green-600 hover:bg-green-700 text-white group">
-                                <Link href="/umzugskosten-rechner">
+                                <Link href="/umzugsfirma/umzugskosten">
                                   Jetzt Kosten berechnen
                                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                                 </Link>
@@ -881,7 +906,7 @@ const PrivateUmzugPageClient = () => {
                               </ul>
                             </div>
                             <p className="mt-2">
-                              Nutzen Sie unsere <Link href="/checklisten" className="text-green-600 hover:underline font-semibold">detaillierte Umzugs-Checkliste</Link> für eine vollständige Übersicht.
+                              Nutzen Sie unsere <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold">detaillierte Umzugs-Checkliste</Link> für eine vollständige Übersicht.
                             </p>
                           </div>
                         </div>
@@ -932,7 +957,7 @@ const PrivateUmzugPageClient = () => {
                           <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
                           <div>
                             <p className="mb-2">
-                              Je früher, desto besser! Wir empfehlen, unserer <Link href="/checklisten" className="text-green-600 hover:underline font-semibold">detaillierten Zeitachse</Link> zu folgen:
+                              Je früher, desto besser! Wir empfehlen, unserer <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold">detaillierten Zeitachse</Link> zu folgen:
                             </p>
                             <div className="my-2">
                               <h4 className="font-semibold text-gray-700 mb-1">2-3 Monate vorher:</h4>

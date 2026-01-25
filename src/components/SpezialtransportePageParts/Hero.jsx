@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp } from 'lucide-react';
+import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
 const Hero = () => {
@@ -31,6 +31,31 @@ const Hero = () => {
       <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent"></div>
       
       <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+        {/* Breadcrumb Navigation */}
+        <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2 text-sm text-gray-600">
+            <li>
+              <Link href="/" className="hover:text-green-600 transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+            </li>
+            <li>
+              <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
+                Umzugsfirma
+              </Link>
+            </li>
+            <li>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+            </li>
+            <li className="text-gray-900 font-medium" aria-current="page">
+              Spezialtransporte
+            </li>
+          </ol>
+        </nav>
+        
         <div className="flex justify-start">
           <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
             <div>

@@ -37,7 +37,7 @@ const ListItem = ({ children }: any) => (
 );
 
 const UmzugNachDeutschlandPageClient = () => {
-  const canonicalPath = '/umzug-nach-deutschland';
+  const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-deutschland';
 
   const metaTitle = "Umzug nach Deutschland | Umzugsfirmen aus der Schweiz vergleichen";
   const metaDescription = "Planen Sie Ihren Umzug von der Schweiz nach Deutschland? Vergleichen Sie hier professionelle Umzugsfirmen für Privatumzug, Geschäftsumzug, Reinigung und Entsorgung. Holen Sie sich jetzt kostenlose Offerten.";
@@ -122,7 +122,7 @@ const UmzugNachDeutschlandPageClient = () => {
              <img alt="Hero image of Berlin" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1569085938838-68ca30b9c10e" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
-          <div className="relative z-10 container mx-auto max-w-navbar px-4 md:px-6 text-center py-24 md:py-32">
+          <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-24 md:py-32">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -134,7 +134,7 @@ const UmzugNachDeutschlandPageClient = () => {
           </div>
         </motion.section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
               <Section className="border-t-0 pt-0">

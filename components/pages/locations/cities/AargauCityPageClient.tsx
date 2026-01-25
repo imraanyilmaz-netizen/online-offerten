@@ -19,7 +19,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
   }
 
   const cityName = cityData.name
-  const canonicalUrl = `/umzugsfirma-aargau/${city}`
+  const canonicalUrl = `/umzugsfirma-in-der-naehe/aargau/${city}`
 
   // Service Schema - Correct structure for location pages
   const serviceSchema = {
@@ -76,10 +76,10 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
   }
 
   const services = [
-    { name: 'Privatumzug', icon: Home, link: '/privatumzug' },
-    { name: 'Geschäftsumzug', icon: Building, link: '/geschaeftsumzug' },
-    { name: 'Internationaler Umzug', icon: Globe, link: '/internationale-umzuege' },
-    { name: 'Spezialtransport', icon: Package, link: '/spezialtransporte' }
+    { name: 'Privatumzug', icon: Home, link: '/umzugsfirma/privatumzug' },
+    { name: 'Geschäftsumzug', icon: Building, link: '/umzugsfirma/geschaeftsumzug' },
+    { name: 'Internationaler Umzug', icon: Globe, link: '/umzugsfirma/internationale-umzuege' },
+    { name: 'Spezialtransport', icon: Package, link: '/umzugsfirma/spezialtransporte' }
   ]
 
   const benefits = [
@@ -98,7 +98,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
       <div className="bg-white overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-green-50 via-white to-blue-50">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="max-w-4xl">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
                 Umzugsfirma {cityName} – Geprüfte Anbieter vergleichen
@@ -120,11 +120,11 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
 
         {/* Breadcrumb */}
         <section className="bg-gray-50 py-4 border-b border-gray-200">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <nav className="flex items-center space-x-2 text-sm">
               <Link href="/" className="text-gray-600 hover:text-green-600">Start</Link>
               <span className="text-gray-400">/</span>
-              <Link href="/umzugsfirma-aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
+              <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 font-medium">{cityName}</span>
             </nav>
@@ -133,7 +133,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
 
         {/* Main Content */}
         <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             {/* Portal-focused Introduction - First paragraph per plan */}
             <article className="mb-12 bg-green-50 rounded-xl p-8 md:p-10 border border-green-200">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
@@ -281,7 +281,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Erfahren Sie mehr über <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Aargau-Übersicht</Link>, <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Aargau</Link> oder <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>. Informieren Sie sich auch über die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten in {cityName} berechnen</Link>, die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Preise für Umzüge in {cityName}</Link> oder <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Was kostet ein Umzug nach {cityName}?</Link>.
+                  Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Aargau-Übersicht</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Aargau</Link> oder <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>. Informieren Sie sich auch über die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten in {cityName} berechnen</Link>, die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Preise für Umzüge in {cityName}</Link> oder <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Was kostet ein Umzug nach {cityName}?</Link>.
                 </p>
               </div>
             </article>

@@ -17,7 +17,27 @@ const UmzugsfirmaThunPageClient = () => {
   const metaTitle = "Umzugsfirma Thun | Ihr Umzugspartner am Thunersee";
   const metaDescription = "Professionelle Umzugsfirma in Thun für private und geschäftliche Umzüge. Vergleichen Sie Offerten und sparen Sie bis zu 40% bei Ihrem Umzug.";
   const metaKeywords = "umzugsfirma thun, umzug thun, zügelfirma thun, umzugsunternehmen thunersee, günstig umziehen thun";
-  const canonicalUrl = '/umzugsfirma-thun';
+  const canonicalUrl = '/umzugsfirma-in-der-naehe/thun';
+
+  // Cost table data - Hourly rates
+  const hourlyRates = [
+    { service: "1 Umzugswagen + 1 Zügelmann", price: "CHF 107.-" },
+    { service: "1 Umzugswagen + 2 Zügelmänner", price: "CHF 167.-" },
+    { service: "1 Umzugswagen + 3 Zügelmänner", price: "CHF 207.-" },
+    { service: "2 Umzugswagen + 4 Zügelmänner", price: "CHF 267.-" },
+    { service: "2 Umzugswagen + 5 Zügelmänner", price: "CHF 322.-" },
+    { service: "2 Umzugswagen + 6 Zügelmänner", price: "CHF 390.-" }
+  ];
+
+  // Cost table data - By room size
+  const costTableRows = [
+    { size: "1.5-Zimmer-Wohnung", cost: "CHF 615 - 655" },
+    { size: "2.5-Zimmer-Wohnung", cost: "CHF 655 - 975" },
+    { size: "3.5-Zimmer-Wohnung", cost: "CHF 1'075 - 1'245" },
+    { size: "4.5-Zimmer-Wohnung", cost: "CHF 1'415 - 1'885" },
+    { size: "5.5-Zimmer-Wohnung", cost: "CHF 1'975 - 2'485" },
+    { size: "6.5-Zimmer-Wohnung", cost: "CHF 2'485 - 3'145" }
+  ];
 
   const advantages = [
     "Ortskenntnis, um auch enge Gassen in der Altstadt zu meistern.",
@@ -81,7 +101,7 @@ const UmzugsfirmaThunPageClient = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       <div className="bg-gray-50 py-12 md:py-16">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           
           <motion.header 
             initial={{ opacity: 0, y: -30 }}
@@ -107,6 +127,74 @@ const UmzugsfirmaThunPageClient = () => {
               <article>
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Sorgenfrei umziehen in der Alpenstadt Thun</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">Thun, idyllisch am Thunersee gelegen und umgeben von einer atemberaubenden Bergkulisse, bietet hohe Lebensqualität. Damit Ihr Umzug in oder aus Thun genauso reibungslos verläuft, verbinden wir Sie mit den besten lokalen Umzugsunternehmen. Holen Sie sich jetzt Ihre unverbindlichen Offerten.</p>
+              </article>
+
+              <article className="pt-8 border-t border-gray-200 space-y-6">
+                <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Thun?</h2>
+                <p className="typography-p mb-4">
+                  Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Thun richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
+                </p>
+                <p className="typography-p mb-6">
+                  Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Thun und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
+                </p>
+                
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  {/* Hourly Rates Table */}
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                      <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                    </div>
+                    <div className="overflow-x-auto flex-1">
+                      <table className="w-full table-fixed">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {hourlyRates.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Room Size Costs Table */}
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                      <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                    </div>
+                    <div className="overflow-x-auto flex-1">
+                      <table className="w-full table-fixed">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {costTableRows.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
+                  <p className="typography-p text-gray-600 italic">
+                    Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
+                  </p>
+                </div>
               </article>
 
               <div className="text-center bg-gray-100 p-6 rounded-lg border-l-4 border-blue-500">

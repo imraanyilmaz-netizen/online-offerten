@@ -6,14 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Home, Building, Globe, Pencil as Piano, Sparkles, Trash2, Brush as PaintBrush, Box, ArrowRight } from 'lucide-react';
 
 const services = [
-  { nameKey: 'privatumzug', icon: Home, path: '/privatumzug', active: true },
-  { nameKey: 'geschaeftsumzug', icon: Building, path: '/geschaeftsumzug' },
-  { nameKey: 'internationale', icon: Globe, path: '/internationale-umzuege' },
-  { nameKey: 'spezialtransporte', icon: Box, path: '/spezialtransporte' },
-  { nameKey: 'klaviertransport', icon: Piano, path: '/klaviertransport' },
+  { nameKey: 'privatumzug', icon: Home, path: '/umzugsfirma/privatumzug', active: true },
+  { nameKey: 'geschaeftsumzug', icon: Building, path: '/umzugsfirma/geschaeftsumzug' },
+  { nameKey: 'internationale', icon: Globe, path: '/umzugsfirma/internationale-umzuege' },
+  { nameKey: 'spezialtransporte', icon: Box, path: '/umzugsfirma/spezialtransporte' },
+  { nameKey: 'klaviertransport', icon: Piano, path: '/umzugsfirma/klaviertransport' },
   { nameKey: 'reinigung', icon: Sparkles, path: '/reinigung' },
   { nameKey: 'raeumung', icon: Trash2, path: '/raeumung-entsorgung' },
-  { nameKey: 'malerarbeiten', icon: PaintBrush, path: '/malerarbeiten' },
+  { nameKey: 'malerarbeiten', icon: PaintBrush, path: '/malerarbeitenkosten' },
 ];
 
 const ServiceItem = ({ nameKey, icon: Icon, path, active }) => {

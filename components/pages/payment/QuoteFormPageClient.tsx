@@ -80,7 +80,7 @@ const QuoteFormPageClient = () => {
 
         {/* Desktop: Sticky centered form */}
         <div className="hidden md:block min-h-screen py-4">
-          <div className="max-w-2xl mx-auto px-4">
+          <div className="max-w-5xl mx-auto px-4">
             <div className="sticky top-4 bg-white">
               {/* Header */}
               <div className="text-center border-b border-gray-200 pb-3 mb-4">

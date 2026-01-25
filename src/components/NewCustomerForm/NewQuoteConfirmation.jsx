@@ -10,7 +10,7 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
   const { t, i18n } = useTranslation('newCustomerForm');
 
   // Use existing paths (these pages currently exist only in German)
-  const checklistenLink = '/checklisten';
+  const checklistenLink = '/umzugsfirma/checklists';
   const ratgeberLink = '/ratgeber';
 
   const helpfulResources = [

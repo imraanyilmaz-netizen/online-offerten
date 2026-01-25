@@ -38,7 +38,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 );
 
 const UmzugNachItalienPageClient = () => {
-  const canonicalPath = '/umzug-nach-italien';
+  const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-italien';
 
   const metaTitle = "Umzug nach Italien: Ihr Guide für Kosten & Planung 2025";
   const metaDescription = "Alles für Ihren Umzug von der Schweiz nach Italien. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Umzugsfirmen für einen stressfreien Start in 'La Dolce Vita'.";
@@ -126,7 +126,7 @@ const UmzugNachItalienPageClient = () => {
              <img alt="Hero image of Rome with Colosseum" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1552832230-c0197dd311b5" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
-          <div className="relative z-10 container mx-auto max-w-navbar px-4 md:px-6 text-center py-28 md:py-40">
+          <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-28 md:py-40">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -138,7 +138,7 @@ const UmzugNachItalienPageClient = () => {
           </div>
         </motion.section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-10">
               <Section className="border-t-0 pt-0">

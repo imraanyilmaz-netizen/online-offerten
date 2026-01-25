@@ -11,7 +11,7 @@ import {
   ArrowRight, CheckCircle, ShieldCheck, Clock, TrendingUp, Users, Award, 
   Star, Calculator, MapPin, Home, Building, Globe, Package, Sparkles,
   HelpCircle, Info, FileText, Search, HeartHandshake, Zap, Target, 
-  Truck, Box, Wrench, Shield, Phone, Mail, Calendar
+  Truck, Box, Wrench, Shield, Phone, Mail, Calendar, ChevronRight
 } from 'lucide-react'
 
 const UmzugsfirmaPageClient = () => {
@@ -285,37 +285,37 @@ const UmzugsfirmaPageClient = () => {
     {
       title: "Privatumzug",
       description: "Wohnungsumzüge und Hausumzüge für Privatpersonen mit vollständiger Betreuung von der Planung bis zur Übergabe.",
-      link: "/privatumzug",
+      link: "/umzugsfirma/privatumzug",
       icon: Home
     },
     {
       title: "Geschäftsumzug",
       description: "Professionelle Büroumzüge mit minimaler Geschäftsunterbrechung und spezieller Logistik für Büroausstattung.",
-      link: "/geschaeftsumzug",
+      link: "/umzugsfirma/geschaeftsumzug",
       icon: Building
     },
     {
       title: "Umzugsreinigung",
       description: "Gründliche Reinigung der alten und neuen Wohnung, damit Sie sofort einziehen können.",
-      link: "/umzugsreinigung",
+      link: "/reinigung/umzugsreinigung",
       icon: Sparkles
     },
     {
       title: "Auslandumzug",
       description: "Umzüge ins Ausland mit Zolldokumentation und internationaler Logistik.",
-      link: "/internationale-umzuege",
+      link: "/umzugsfirma/internationale-umzuege",
       icon: Globe
     },
     {
       title: "Spezialtransporte",
       description: "Transport von Klavieren, Antiquitäten, Kunstwerken und anderen wertvollen Gegenständen.",
-      link: "/spezialtransporte",
+      link: "/umzugsfirma/spezialtransporte",
       icon: Package
     },
     {
       title: "Klaviertransport",
       description: "Professioneller Transport von Klavieren und Flügeln durch spezialisierte Umzugsfirmen.",
-      link: "/klaviertransport",
+      link: "/umzugsfirma/klaviertransport",
       icon: Box
     }
   ]
@@ -354,20 +354,36 @@ const UmzugsfirmaPageClient = () => {
   ]
 
   const locations = [
-    { name: "Umzugsfirma Zürich", link: "/umzugsfirma-zuerich" },
-    { name: "Umzugsfirma Basel", link: "/umzugsfirma-basel" },
-    { name: "Umzugsfirma Bern", link: "/umzugsfirma-bern" },
-    { name: "Umzugsfirma Genf", link: "/umzugsfirma-genf" },
-    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma-lausanne" },
-    { name: "Umzugsfirma Luzern", link: "/umzugsfirma-luzern" },
-    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-st-gallen" }
+    { name: "Umzugsfirma Zürich", link: "/umzugsfirma-in-der-naehe/zuerich" },
+    { name: "Umzugsfirma Basel", link: "/umzugsfirma-in-der-naehe/basel" },
+    { name: "Umzugsfirma Bern", link: "/umzugsfirma-in-der-naehe/bern" },
+    { name: "Umzugsfirma Genf", link: "/umzugsfirma-in-der-naehe/genf" },
+    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma-in-der-naehe/lausanne" },
+    { name: "Umzugsfirma Luzern", link: "/umzugsfirma-in-der-naehe/luzern" },
+    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-in-der-naehe/st-gallen" }
   ]
 
   return (
     <>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 py-12 md:py-20 overflow-hidden">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
+          {/* Breadcrumb Navigation */}
+          <nav className="mb-6 pt-4" aria-label="Breadcrumb">
+            <ol className="flex items-center space-x-2 text-sm text-gray-600">
+              <li>
+                <Link href="/" className="hover:text-green-600 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Umzugsfirma
+              </li>
+            </ol>
+          </nav>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -394,7 +410,7 @@ const UmzugsfirmaPageClient = () => {
                   Jetzt Umzugsfirma finden
                 </Button>
                 <Button
-                  onClick={() => router.push('/umzugskosten-rechner')}
+                  onClick={() => router.push('/umzugsfirma/umzugskosten')}
                   variant="outline"
                   size="lg"
                   className="text-lg px-8 py-6"
@@ -451,7 +467,7 @@ const UmzugsfirmaPageClient = () => {
 
       {/* Why Compare Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -497,7 +513,7 @@ const UmzugsfirmaPageClient = () => {
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -509,7 +525,7 @@ const UmzugsfirmaPageClient = () => {
               Welche Umzugsfirma brauchen Sie?
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Verschiedene <strong>Umzugsunternehmen</strong> spezialisieren sich auf unterschiedliche Umzugstypen. Finden Sie die richtige <strong>Umzugsfirma</strong> oder <strong>Zügelfirma</strong> für Ihren spezifischen Bedarf. Von <Link href="/privatumzug" className="text-green-600 hover:text-green-700 font-semibold underline">Privatumzug</Link> bis <Link href="/geschaeftsumzug" className="text-green-600 hover:text-green-700 font-semibold underline">Geschäftsumzug</Link> – wir helfen Ihnen, die passende <strong>Umzugsfirma</strong> zu finden.
+              Verschiedene <strong>Umzugsunternehmen</strong> spezialisieren sich auf unterschiedliche Umzugstypen. Finden Sie die richtige <strong>Umzugsfirma</strong> oder <strong>Zügelfirma</strong> für Ihren spezifischen Bedarf. Von <Link href="/umzugsfirma/privatumzug" className="text-green-600 hover:text-green-700 font-semibold underline">Privatumzug</Link> bis <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-600 hover:text-green-700 font-semibold underline">Geschäftsumzug</Link> – wir helfen Ihnen, die passende <strong>Umzugsfirma</strong> zu finden.
             </p>
           </motion.div>
 
@@ -549,7 +565,7 @@ const UmzugsfirmaPageClient = () => {
 
       {/* Selection Criteria Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -595,7 +611,7 @@ const UmzugsfirmaPageClient = () => {
 
       {/* Location Links Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -639,7 +655,7 @@ const UmzugsfirmaPageClient = () => {
 
       {/* Detailed Content Section - SEO Rich Content */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto prose prose-lg">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -667,7 +683,7 @@ const UmzugsfirmaPageClient = () => {
                   Umzugsfirma finden: So gehen Sie vor
                 </h3>
                 <p>
-                  Um die richtige <strong>Umzugsfirma</strong> zu finden, sollten Sie systematisch vorgehen. Zunächst definieren Sie Ihre Anforderungen: Umzugsdatum, Umzugsstrecke, Wohnungsgrösse und gewünschte Leistungen. Eine gute <strong>Umzugsplanung</strong> ist der erste Schritt zu einem erfolgreichen Umzug. Dann fordern Sie mehrere Offerten von verschiedenen <strong>Umzugsunternehmen</strong> an – am besten über ein Vergleichsportal wie Online-Offerten.ch. Vergleichen Sie die Offerten nicht nur nach Preis, sondern auch nach enthaltenen Leistungen, Versicherungen und Bewertungen. Eine <strong>Umzugsfirma in der Nähe</strong> kann Vorteile haben, aber auch weiter entfernte <strong>Zügelfirmen</strong> können gute Angebote machen. Für internationale Umzüge finden Sie passende <Link href="/internationale-umzuege" className="text-green-600 hover:text-green-700 font-semibold underline">internationale Umzugsunternehmen</Link> in unserem Netzwerk.
+                  Um die richtige <strong>Umzugsfirma</strong> zu finden, sollten Sie systematisch vorgehen. Zunächst definieren Sie Ihre Anforderungen: Umzugsdatum, Umzugsstrecke, Wohnungsgrösse und gewünschte Leistungen. Eine gute <strong>Umzugsplanung</strong> ist der erste Schritt zu einem erfolgreichen Umzug. Dann fordern Sie mehrere Offerten von verschiedenen <strong>Umzugsunternehmen</strong> an – am besten über ein Vergleichsportal wie Online-Offerten.ch. Vergleichen Sie die Offerten nicht nur nach Preis, sondern auch nach enthaltenen Leistungen, Versicherungen und Bewertungen. Eine <strong>Umzugsfirma in der Nähe</strong> kann Vorteile haben, aber auch weiter entfernte <strong>Zügelfirmen</strong> können gute Angebote machen. Für internationale Umzüge finden Sie passende <Link href="/umzugsfirma/internationale-umzuege" className="text-green-600 hover:text-green-700 font-semibold underline">internationale Umzugsunternehmen</Link> in unserem Netzwerk.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
@@ -695,14 +711,14 @@ const UmzugsfirmaPageClient = () => {
                   Umzugsfirma Schweiz: Regionale Unterschiede
                 </h3>
                 <p>
-                  Die Preise und Verfügbarkeit von <strong>Umzugsfirmen</strong> können je nach Region in der Schweiz variieren. In Ballungsgebieten wie Zürich, Basel oder Genf gibt es mehr <strong>Umzugsunternehmen</strong> zur Auswahl, aber die Preise sind oft höher. Eine <Link href="/umzugsfirma-bern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Bern</Link> oder <Link href="/umzugsfirma-luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Luzern</Link> hat oft höhere Lohnkosten als eine <strong>Zügelfirma</strong> in ländlicheren Regionen. Dennoch lohnt es sich, auch <strong>Umzugsfirmen</strong> aus anderen Regionen zu kontaktieren, da diese oft günstigere Preise anbieten können. In ländlicheren Regionen sind die <strong>Umzugskosten</strong> oft niedriger, aber die Auswahl an <strong>Umzugsunternehmen</strong> ist begrenzter.
+                  Die Preise und Verfügbarkeit von <strong>Umzugsfirmen</strong> können je nach Region in der Schweiz variieren. In Ballungsgebieten wie Zürich, Basel oder Genf gibt es mehr <strong>Umzugsunternehmen</strong> zur Auswahl, aber die Preise sind oft höher. Eine <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Bern</Link> oder <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Luzern</Link> hat oft höhere Lohnkosten als eine <strong>Zügelfirma</strong> in ländlicheren Regionen. Dennoch lohnt es sich, auch <strong>Umzugsfirmen</strong> aus anderen Regionen zu kontaktieren, da diese oft günstigere Preise anbieten können. In ländlicheren Regionen sind die <strong>Umzugskosten</strong> oft niedriger, aber die Auswahl an <strong>Umzugsunternehmen</strong> ist begrenzter.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
                   Umzugsfirma buchen: Tipps für die richtige Wahl
                 </h3>
                 <p>
-                  Wenn Sie eine <strong>Umzugsfirma buchen</strong>, sollten Sie frühzeitig planen. Die beste Zeit für die <strong>Umzugsplanung</strong> ist 1-2 Monate vor dem Umzugsdatum, besonders in den Sommermonaten und zum Monatsende. Frühzeitige Buchung gibt Ihnen mehr Auswahl bei der <strong>Umzugsfirma</strong> und oft auch bessere Preise. Bevor Sie eine <strong>Zügelfirma buchen</strong>, sollten Sie mehrere Offerten vergleichen und eine schriftliche Offerte anfordern. Prüfen Sie die Versicherungen, Bewertungen und Referenzen der <strong>Umzugsunternehmen</strong>. Eine professionelle <strong>Umzugsfirma</strong> bietet eine kostenlose Besichtigung vor Ort, um eine realistische Offerte zu erstellen. Nach dem Umzug können Sie auch eine <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsreinigung</Link> buchen, um Ihre neue Wohnung professionell reinigen zu lassen.
+                  Wenn Sie eine <strong>Umzugsfirma buchen</strong>, sollten Sie frühzeitig planen. Die beste Zeit für die <strong>Umzugsplanung</strong> ist 1-2 Monate vor dem Umzugsdatum, besonders in den Sommermonaten und zum Monatsende. Frühzeitige Buchung gibt Ihnen mehr Auswahl bei der <strong>Umzugsfirma</strong> und oft auch bessere Preise. Bevor Sie eine <strong>Zügelfirma buchen</strong>, sollten Sie mehrere Offerten vergleichen und eine schriftliche Offerte anfordern. Prüfen Sie die Versicherungen, Bewertungen und Referenzen der <strong>Umzugsunternehmen</strong>. Eine professionelle <strong>Umzugsfirma</strong> bietet eine kostenlose Besichtigung vor Ort, um eine realistische Offerte zu erstellen. Nach dem Umzug können Sie auch eine <Link href="/reinigung/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsreinigung</Link> buchen, um Ihre neue Wohnung professionell reinigen zu lassen.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
@@ -745,7 +761,7 @@ const UmzugsfirmaPageClient = () => {
                     💡 Pro-Tipp: Umzugsfirma richtig auswählen
                   </h4>
                   <p className="text-gray-700">
-                    Beim Vergleich von <strong>Umzugsunternehmen</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Eine etwas teurere <strong>Umzugsfirma</strong> kann durch bessere Leistungen, Versicherungen und Erfahrung das bessere Angebot sein. Für Spezialtransporte wie <Link href="/klaviertransport" className="text-blue-700 hover:text-blue-800 font-semibold underline">Klaviertransport</Link> oder <Link href="/spezialtransporte" className="text-blue-700 hover:text-blue-800 font-semibold underline">Spezialtransporte</Link> benötigen Sie spezialisierte <strong>Umzugsunternehmen</strong> mit entsprechender Erfahrung. Eine gute <strong>Umzugsplanung</strong> ist der Schlüssel zu einem erfolgreichen Umzug.
+                    Beim Vergleich von <strong>Umzugsunternehmen</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Eine etwas teurere <strong>Umzugsfirma</strong> kann durch bessere Leistungen, Versicherungen und Erfahrung das bessere Angebot sein. Für Spezialtransporte wie <Link href="/umzugsfirma/klaviertransport" className="text-blue-700 hover:text-blue-800 font-semibold underline">Klaviertransport</Link> oder <Link href="/umzugsfirma/spezialtransporte" className="text-blue-700 hover:text-blue-800 font-semibold underline">Spezialtransporte</Link> benötigen Sie spezialisierte <strong>Umzugsunternehmen</strong> mit entsprechender Erfahrung. Eine gute <strong>Umzugsplanung</strong> ist der Schlüssel zu einem erfolgreichen Umzug.
                   </p>
         </div>
       </div>
@@ -756,7 +772,7 @@ const UmzugsfirmaPageClient = () => {
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -791,7 +807,7 @@ const UmzugsfirmaPageClient = () => {
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-green-600 to-green-700 text-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -815,7 +831,7 @@ const UmzugsfirmaPageClient = () => {
                 Jetzt Umzugsfirma finden
               </Button>
               <Button
-                onClick={() => router.push('/umzugskosten-rechner')}
+                onClick={() => router.push('/umzugsfirma/umzugskosten')}
                 size="lg"
                 className="bg-green-500 hover:bg-green-400 text-white border-2 border-white text-lg px-8 py-6 shadow-lg"
               >

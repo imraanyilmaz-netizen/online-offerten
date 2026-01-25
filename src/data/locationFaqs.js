@@ -29,7 +29,7 @@ export const faqs = {
           },
           {
             type: 'calculator_link',
-            link: '/tools/umzugskosten-rechner',
+            link: '/tools/umzugskosten',
             text: {
               de: "Berechnen Sie Ihre Umzugskosten präzise.",
               en: "Calculate your moving costs precisely."
@@ -107,7 +107,7 @@ export const faqs = {
           },
            {
             type: 'calculator_link',
-            link: '/tools/reinigungskosten-rechner',
+            link: '/tools/reinigungskosten',
             text: {
               de: "Berechnen Sie Ihre Reinigungskosten im Detail.",
               en: "Calculate your cleaning costs in detail."

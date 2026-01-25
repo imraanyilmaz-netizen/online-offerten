@@ -9,7 +9,7 @@ import Cta from '@/components/SpezialtransportePageParts/Cta'
 const SpezialtransportePageClient = () => {
   const metaTitle = "Spezialtransporte: Kostenlose Offerten vergleichen"
   const metaDescription = "Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!"
-  const canonicalUrl = "/spezialtransporte"
+  const canonicalUrl = "/umzugsfirma/spezialtransporte"
 
   const transportTypes = [
     { title: "Klaviertransport: Professioneller Transport für Ihr Klavier" },

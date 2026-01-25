@@ -4,7 +4,7 @@ import React from 'react'
 
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Globe2 } from 'lucide-react'
+import { ArrowRight, CheckCircle, Globe2, ChevronRight } from 'lucide-react'
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import InternationalCostCalculator from '@/components/international/InternationalCostCalculator'
@@ -485,7 +485,7 @@ const InternationaleUmzugPageClient = () => {
 
   const metaTitle = "Internationale Umzüge: Kostenlose Offerten vergleichen"
   const metaDescription = "Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa."
-  const canonicalUrl = "/internationale-umzuege"
+  const canonicalUrl = "/umzugsfirma/internationale-umzuege"
 
   const schema = {
     "@context": "https://schema.org",
@@ -534,7 +534,32 @@ const InternationaleUmzugPageClient = () => {
           {/* Gradient Overlay (Desktop only) */}
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent"></div>
           
-          <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+            {/* Breadcrumb Navigation */}
+            <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+                <li>
+                  <Link href="/" className="hover:text-green-600 transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li>
+                  <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
+                    Umzugsfirma
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li className="text-gray-900 font-medium" aria-current="page">
+                  Internationale Umzüge
+                </li>
+              </ol>
+            </nav>
+            
             <div className="flex justify-start">
               <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
                 <div>
@@ -589,7 +614,7 @@ const InternationaleUmzugPageClient = () => {
         </section>
 
         <section className="py-12 md:py-20 bg-white">
-            <div className="container mx-auto max-w-navbar px-4 md:px-6">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
               <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
                 <div className="bg-white rounded-2xl p-[1px]">
                   <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-gray-900 mb-6 leading-tight">
@@ -610,17 +635,17 @@ const InternationaleUmzugPageClient = () => {
         </section>
 
         <section className="py-12 md:py-20 bg-white">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <ArticleSection />
           </div>
         </section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <InternationalPageNavigation currentCountrySlug="internationale-umzuege" />
         </div>
 
         <section className="py-12 md:py-20 bg-slate-100 mt-12 md:mt-16">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6 text-center">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 text-center">
             <div>
               <Globe2 className="mx-auto text-green-500 h-16 w-16 mb-4" />
               <h2 className="text-3xl font-bold text-slate-800 mb-4">Bereit für Ihr neues Zuhause im Ausland?</h2>

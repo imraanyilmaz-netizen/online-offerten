@@ -220,7 +220,7 @@ const OffertenPortalPageClient = () => {
         
       <section className="relative bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url(${heroImageUrl})` }}>
           <div className="absolute inset-0 bg-black/60"></div>
-          <div className="relative container mx-auto max-w-navbar px-4 md:px-6 py-20 md:py-28 z-10">
+          <div className="relative container mx-auto max-w-7xl px-4 md:px-6 py-20 md:py-28 z-10">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               <motion.div initial="hidden" animate="visible" variants={fadeIn}>
                 <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Offerten von Umzugsfirma & Reinigungsfirma vergleichen</h1>
@@ -285,7 +285,7 @@ const OffertenPortalPageClient = () => {
           </div>
         </section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-16 md:py-24 space-y-20 md:space-y-28">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24 space-y-20 md:space-y-28">
 
             <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-12 text-center">So einfach funktioniert's</h2>

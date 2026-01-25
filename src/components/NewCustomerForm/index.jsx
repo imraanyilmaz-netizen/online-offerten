@@ -895,7 +895,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           </div>
       </div>
       
-      <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6" noValidate>
+      <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 border border-gray-200 rounded-xl shadow-lg bg-white" noValidate>
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStep}

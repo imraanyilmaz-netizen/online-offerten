@@ -65,7 +65,7 @@ const ServicesPageClient = () => {
         "Versicherte Transportoptionen",
         "Möbellift verfügbar"
       ],
-      linkTo: "/privatumzug"
+      linkTo: "/umzugsfirma/privatumzug"
     },
     {
       icon: <Briefcase size={32} />,
@@ -77,7 +77,7 @@ const ServicesPageClient = () => {
         "Sorgfältiger Umgang mit Archiven und Akten",
         "Umzüge am Wochenende oder ausserhalb der Geschäftszeiten"
       ],
-      linkTo: "/geschaeftsumzug" 
+      linkTo: "/umzugsfirma/geschaeftsumzug" 
     },
     {
       icon: <Globe size={32} />,
@@ -89,7 +89,7 @@ const ServicesPageClient = () => {
         "Internationale Versicherung",
         "Tür-zu-Tür-Lieferung"
       ],
-      linkTo: "/internationale-umzuege" 
+      linkTo: "/umzugsfirma/internationale-umzuege" 
     },
     {
       icon: <Palette size={32} />,
@@ -125,7 +125,7 @@ const ServicesPageClient = () => {
         "Kunstwerk- und Antiquitätentransport",
         "Einsatz von Spezialausrüstung und -fahrzeugen"
       ],
-      linkTo: "/spezialtransporte" 
+      linkTo: "/umzugsfirma/spezialtransporte" 
     },
     {
       icon: <PiPianoKeysFill size={32} />,
@@ -137,7 +137,7 @@ const ServicesPageClient = () => {
         "Erfahrene Klaviermover",
         "Versicherter Transport"
       ],
-      linkTo: "/klaviertransport"
+      linkTo: "/umzugsfirma/klaviertransport"
     },
     {
       icon: <Archive size={32} />,

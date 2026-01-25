@@ -26,7 +26,7 @@ const Faq = () => {
               i18nKey="faq.a2_tip_full"
               ns="reinigungPage"
               components={{
-                1: <Link href="/reinigungskosten-rechner" className="text-blue-600 hover:underline font-semibold" />,
+                1: <Link href="/reinigung/reinigungskosten" className="text-blue-600 hover:underline font-semibold" />,
                 2: <a href="#cta" className="text-blue-600 hover:underline font-semibold" />
               }}
             />

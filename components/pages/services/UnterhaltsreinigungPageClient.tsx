@@ -29,7 +29,7 @@ const UnterhaltsreinigungPageClient = () => {
   const metaTitle = "Unterhaltsreinigung – Kostenlose Offerten vergleichen";
   const metaDescription = "Unterhaltsreinigung für Büro, Haus oder Wohnung: Fordern Sie kostenlose Offerten an und vergleichen Sie professionelle Reinigungsservices bequem online.";
   // Meta keywords removed - Google no longer uses this tag (since 2009)
-  const canonicalUrl = '/unterhaltsreinigung';
+  const canonicalUrl = '/reinigung/unterhaltsreinigung';
 
   // FAQ Data
   const faqItems = [
@@ -457,19 +457,19 @@ const UnterhaltsreinigungPageClient = () => {
                   <div className="mt-8 md:mt-12">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Weitere Reinigungsdienstleistungen</h2>
                     <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-                      <Link href="/wohnungsreinigung"
+                      <Link href="/reinigung/wohnungsreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
                         <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Wohnungsreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Professionelle Wohnungsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
                       </Link>
-                      <Link href="/fensterreinigung"
+                      <Link href="/reinigung/fensterreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
                         <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Fensterreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
-                      <Link href="/baureinigung"
+                      <Link href="/reinigung/baureinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
                         <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Baureinigung</h3>

@@ -488,7 +488,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           </section>
 
           {/* Nationwide Presence Section */}
-          <section className="py-16 md:py-24 bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 overflow-hidden relative">
+          <section className="py-[50px] bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 overflow-hidden relative">
             {/* Decorative background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-20 right-10 w-72 h-72 bg-green-700/20 rounded-full blur-3xl"></div>
@@ -572,9 +572,9 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 {/* Right Side - Tool Cards (3 cards stacked) */}
                 <div className="space-y-6">
                   {[
-                    { title: 'Umzugskosten-Rechner', description: 'Erhalten Sie in wenigen Schritten eine unverbindliche Schätzung Ihrer Umzugskosten.', linkTo: '/umzugskosten-rechner', button: 'Jetzt berechnen' },
-                    { title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung.', linkTo: '/reinigungskosten-rechner', button: 'Kosten berechnen' },
-                    { title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten. Unsere Checklisten beantworten zudem häufig gestellte Fragen rund um die Umzugsplanung.', linkTo: '/checklisten', button: 'Checkliste ansehen' }
+                    { title: 'Umzugskosten-Rechner', description: 'Erhalten Sie in wenigen Schritten eine unverbindliche Schätzung Ihrer Umzugskosten.', linkTo: '/umzugsfirma/umzugskosten', button: 'Jetzt berechnen' },
+                    { title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung.', linkTo: '/reinigung/reinigungskosten', button: 'Kosten berechnen' },
+                    { title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten. Unsere Checklisten beantworten zudem häufig gestellte Fragen rund um die Umzugsplanung.', linkTo: '/umzugsfirma/checklists', button: 'Checkliste ansehen' }
                   ].map((tool) => (
                     <Link key={tool.title} href={tool.linkTo} className="block group">
                       <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-green-500 bg-white rounded-xl overflow-hidden">

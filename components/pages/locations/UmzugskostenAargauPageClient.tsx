@@ -101,7 +101,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
       answer: 'Ja, Sie können unsere kostenlosen Tools nutzen: Den Umzugskosten-Rechner für eine erste Schätzung oder mehrere kostenlose Offerten von geprüften Umzugsfirmen anfordern, um genaue Preise zu erhalten.',
       hasLink: true,
       linkText: 'Umzugskosten-Rechner',
-      linkUrl: '/umzugskosten-rechner'
+      linkUrl: '/umzugsfirma/umzugskosten'
     },
     {
       question: 'Gibt es regionale Besonderheiten, die die Umzugskosten im Aargau beeinflussen?',
@@ -203,7 +203,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
       <div className="bg-white overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-green-50 via-white to-blue-50">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="max-w-4xl">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
                 Umzugskosten Aargau – Preise & Kostenfaktoren 2025
@@ -217,11 +217,11 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
         {/* Breadcrumb */}
         <section className="bg-gray-50 py-4 border-b border-gray-200">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <nav className="flex items-center space-x-2 text-sm">
               <Link href="/" className="text-gray-600 hover:text-green-600">Start</Link>
               <span className="text-gray-400">/</span>
-              <Link href="/umzugsfirma-aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
+              <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 font-medium">Umzugskosten</span>
             </nav>
@@ -230,7 +230,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
         {/* Main Content */}
         <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             {/* Introduction */}
             <article className="mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Umzugskosten im Aargau – Eine Übersicht</h2>
@@ -277,7 +277,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
                 </div>
                 <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
                   <p className="text-sm text-gray-600 italic">
-                    Hinweis: Diese Preise sind Durchschnittswerte für Umzüge innerhalb des Aargaus. Faktoren wie Stockwerk, Liftverfügbarkeit, Distanz und Zusatzleistungen beeinflussen den Endpreis erheblich. Für eine exakte Kalkulation nutzen Sie unseren <Link href="/umzugskosten-rechner" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten-Rechner</Link> oder fordern Sie mehrere kostenlose Offerten an.
+                    Hinweis: Diese Preise sind Durchschnittswerte für Umzüge innerhalb des Aargaus. Faktoren wie Stockwerk, Liftverfügbarkeit, Distanz und Zusatzleistungen beeinflussen den Endpreis erheblich. Für eine exakte Kalkulation nutzen Sie unseren <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten-Rechner</Link> oder fordern Sie mehrere kostenlose Offerten an.
                   </p>
                 </div>
               </div>
@@ -486,7 +486,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Erfahren Sie mehr über <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirmen im Aargau vergleichen</Link>, <Link href="/umzugsfirma-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen Aargau finden</Link> oder informieren Sie sich über <Link href="/umzugsfirma-aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma-aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma Baden</Link> und <Link href="/umzugsfirma-aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Anbieter im Kanton Aargau</Link>.
+                  Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirmen im Aargau vergleichen</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen Aargau finden</Link> oder informieren Sie sich über <Link href="/umzugsfirma-in-der-naehe/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma Baden</Link> und <Link href="/umzugsfirma-in-der-naehe/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Anbieter im Kanton Aargau</Link>.
                 </p>
               </div>
             </article>
@@ -504,7 +504,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </Link>
-                <Link href="/umzugskosten-rechner">
+                <Link href="/umzugsfirma/umzugskosten">
                   <Button className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold">
                     Kosten-Rechner nutzen
                     <Calculator className="ml-2 w-5 h-5" />

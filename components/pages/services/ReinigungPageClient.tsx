@@ -51,7 +51,7 @@ const ReinigungPageClient = () => {
   }
 
   const handleCalculatorClick = () => {
-    router.push('/reinigungskosten-rechner')
+    router.push('/reinigung/reinigungskosten')
   }
 
   const benefits = [
@@ -95,12 +95,12 @@ const ReinigungPageClient = () => {
   ]
 
   const reinigungServices = [
-    { path: '/wohnungsreinigung', title: 'Wohnungsreinigung' },
-    { path: '/hausreinigung', title: 'Hausreinigung' },
-    { path: '/bueroreinigung', title: 'Büroreinigung' },
-    { path: '/umzugsreinigung', title: 'Umzugsreinigung' },
-    { path: '/unterhaltsreinigung', title: 'Unterhaltsreinigung' },
-    { path: '/grundreinigung', title: 'Grundreinigung' },
+    { path: '/reinigung/wohnungsreinigung', title: 'Wohnungsreinigung' },
+    { path: '/reinigung/hausreinigung', title: 'Hausreinigung' },
+    { path: '/reinigung/bueroreinigung', title: 'Büroreinigung' },
+    { path: '/reinigung/umzugsreinigung', title: 'Umzugsreinigung' },
+    { path: '/reinigung/unterhaltsreinigung', title: 'Unterhaltsreinigung' },
+    { path: '/reinigung/grundreinigung', title: 'Grundreinigung' },
   ]
 
   return (
@@ -116,7 +116,7 @@ const ReinigungPageClient = () => {
           transition={{ duration: 0.8 }}
           className="relative w-full bg-gray-100 py-12 md:py-16"
         >
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-0 items-center">
               <div className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12">
                 <motion.div
@@ -185,7 +185,7 @@ const ReinigungPageClient = () => {
         </motion.section>
 
         {/* How It Works Section */}
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <HowItWorks
             title="So einfach ist es"
             ctaText="Jetzt kostenlose Reinigungs-Offerten anfordern"
@@ -194,7 +194,7 @@ const ReinigungPageClient = () => {
         </div>
 
         {/* Why Choose Us Section */}
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 pb-12 md:pb-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 pb-12 md:pb-16">
           <WhyChooseUs
             title="Warum Online-Offerten.ch?"
             subtitle="Ihre Vorteile beim Vergleich von Reinigungs-Offerten"
@@ -218,7 +218,7 @@ const ReinigungPageClient = () => {
           />
         </div>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
           <section className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ x: -50, opacity: 0 }}
@@ -228,7 +228,7 @@ const ReinigungPageClient = () => {
             >
               <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Warum eine professionelle Umzugsreinigung?</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
-                Eine Wohnungsübergabe kann stressig sein. Vermieter haben hohe Ansprüche an die Sauberkeit. Mit einer professionellen Reinigungsfirma an Ihrer Seite sparen Sie nicht nur Zeit und Nerven, sondern sichern sich auch dank der Abnahmegarantie gegen teure Nachreinigungen ab. Die perfekte Lösung nach jedem Privatumzug. Vergleichen Sie kostenlose Reinigungsofferten von mehreren geprüften Firmen und finden Sie das beste Angebot. Erfahren Sie mehr über unsere <Link href="/privatumzug" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Privatumzug</Link> Dienstleistungen und wie wir Ihnen bei Ihrem Umzug helfen können.
+                Eine Wohnungsübergabe kann stressig sein. Vermieter haben hohe Ansprüche an die Sauberkeit. Mit einer professionellen Reinigungsfirma an Ihrer Seite sparen Sie nicht nur Zeit und Nerven, sondern sichern sich auch dank der Abnahmegarantie gegen teure Nachreinigungen ab. Die perfekte Lösung nach jedem Privatumzug. Vergleichen Sie kostenlose Reinigungsofferten von mehreren geprüften Firmen und finden Sie das beste Angebot. Erfahren Sie mehr über unsere <Link href="/umzugsfirma/privatumzug" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Privatumzug</Link> Dienstleistungen und wie wir Ihnen bei Ihrem Umzug helfen können.
               </p>
             </motion.div>
             <motion.div
@@ -384,7 +384,7 @@ const ReinigungPageClient = () => {
               <HelpCircle className="w-8 h-8 mr-4 text-blue-500" />
               Häufig gestellte Fragen zur Umzugsreinigung
             </h2>
-            <Accordion type="single" collapsible className="w-full max-w-navbar mx-auto">
+            <Accordion type="single" collapsible className="w-full max-w-7xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -415,7 +415,7 @@ const ReinigungPageClient = () => {
                         ))}
                       </ul>
                       <p>
-                        Diese Preise sind Schätzungen. Für eine genaue Kostenübersicht nutzen Sie am besten unseren <Link href="/reinigungskosten-rechner" className="text-blue-600 hover:underline font-semibold">Reinigungskosten-Rechner</Link> oder fordern Sie direkt <a href="#cta" className="text-blue-600 hover:underline font-semibold">unverbindliche Offerten</a> an.
+                        Diese Preise sind Schätzungen. Für eine genaue Kostenübersicht nutzen Sie am besten unseren <Link href="/reinigung/reinigungskosten" className="text-blue-600 hover:underline font-semibold">Reinigungskosten-Rechner</Link> oder fordern Sie direkt <a href="#cta" className="text-blue-600 hover:underline font-semibold">unverbindliche Offerten</a> an.
                       </p>
                     </div>
                   </AccordionContent>
@@ -492,22 +492,22 @@ const ReinigungPageClient = () => {
                 <h4 className="font-semibold text-gray-900 mb-3">Reinigungsarten</h4>
                 <ul className="space-y-2">
                   <li>
-                    <Link href="/umzugsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                    <Link href="/reinigung/umzugsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
                       Umzugsreinigung mit Abnahmegarantie
                     </Link>
                   </li>
                   <li>
-                    <Link href="/wohnungsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                    <Link href="/reinigung/wohnungsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
                       Wohnungsreinigung Offerten
                     </Link>
                   </li>
                   <li>
-                    <Link href="/bueroreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                    <Link href="/reinigung/bueroreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
                       Büroreinigung vergleichen
                     </Link>
                   </li>
                   <li>
-                    <Link href="/grundreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                    <Link href="/reinigung/grundreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
                       Grundreinigung buchen
                     </Link>
                   </li>
@@ -522,7 +522,7 @@ const ReinigungPageClient = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/malerfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                    <Link href="/malerfirma-in-der-naehe" className="text-blue-600 hover:text-blue-700 font-medium underline">
                       Malerfirmen vergleichen
                     </Link>
                   </li>
@@ -532,7 +532,7 @@ const ReinigungPageClient = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/reinigungskosten-rechner" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                    <Link href="/reinigung/reinigungskosten" className="text-blue-600 hover:text-blue-700 font-medium underline">
                       Reinigungskosten berechnen
                     </Link>
                   </li>

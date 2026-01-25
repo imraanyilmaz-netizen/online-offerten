@@ -30,7 +30,7 @@ const BueroreinigungPageClient = () => {
   const metaTitle = "Büroreinigung – Kostenlose Offerten vergleichen";
   const metaDescription = "Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Büroreinigung garantiert.";
   // Meta keywords removed - Google no longer uses this tag (since 2009)
-  const canonicalUrl = '/bueroreinigung';
+  const canonicalUrl = '/reinigung/bueroreinigung';
 
   // FAQ Data
   const faqItems = [
@@ -97,7 +97,7 @@ const BueroreinigungPageClient = () => {
         
         const realCount = totalReviewCount || 0;
         setReviewStats({
-          totalReviews: realCount + 142,
+          totalReviews: realCount + 142, // UI display only (not used in JSON-LD)
           reviewCount: realCount,
           averageRating: averageRating
         });
@@ -484,15 +484,15 @@ const BueroreinigungPageClient = () => {
                   <div className="mt-8 md:mt-12">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 md:mb-6">Weitere Reinigungsdienstleistungen</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                      <Link href="/umzugsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                      <Link href="/reinigung/umzugsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                         <h4 className="font-bold text-gray-900 mb-2 text-lg">Umzugsreinigung</h4>
                         <p className="text-sm text-gray-600">Professionelle Umzugsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
                       </Link>
-                      <Link href="/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                      <Link href="/reinigung/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                         <h4 className="font-bold text-gray-900 mb-2 text-lg">Fensterreinigung</h4>
                         <p className="text-sm text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
-                      <Link href="/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                      <Link href="/reinigung/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                         <h4 className="font-bold text-gray-900 mb-2 text-lg">Baureinigung</h4>
                         <p className="text-sm text-gray-600">Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate.</p>
                       </Link>

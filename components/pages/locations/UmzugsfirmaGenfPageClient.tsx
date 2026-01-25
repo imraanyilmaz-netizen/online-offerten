@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, Globe } from 'lucide-react';
+import { ArrowRight, Globe, ChevronRight } from 'lucide-react';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import LocationSidebar from '@/components/locations/LocationSidebar';
@@ -17,7 +17,27 @@ const UmzugsfirmaGenfPageClient = () => {
   const metaTitle = "Umzugsfirma Genf | Top Umzugsunternehmen | Günstige Offerten";
   const metaDescription = "Ihre professionelle Umzugsfirma in Genf. Erhalten Sie kostenlose & unverbindliche Offerten von geprüften Umzugsunternehmen für Ihren Umzug in Genf.";
   const metaKeywords = "umzugsfirma genf, umzug genf, zügelfirma genf, umzugsunternehmen genf, internationaler umzug genf, umzugsofferte genf";
-  const canonicalUrl = '/umzugsfirma-genf';
+  const canonicalUrl = '/umzugsfirma-in-der-naehe/genf';
+
+  // Cost table data - Hourly rates
+  const hourlyRates = [
+    { service: "1 Umzugswagen + 1 Zügelmann", price: "CHF 120.-" },
+    { service: "1 Umzugswagen + 2 Zügelmänner", price: "CHF 180.-" },
+    { service: "1 Umzugswagen + 3 Zügelmänner", price: "CHF 220.-" },
+    { service: "2 Umzugswagen + 4 Zügelmänner", price: "CHF 280.-" },
+    { service: "2 Umzugswagen + 5 Zügelmänner", price: "CHF 340.-" },
+    { service: "2 Umzugswagen + 6 Zügelmänner", price: "CHF 410.-" }
+  ];
+
+  // Cost table data - By room size
+  const costTableRows = [
+    { size: "1.5-Zimmer-Wohnung", cost: "CHF 650 - 700" },
+    { size: "2.5-Zimmer-Wohnung", cost: "CHF 700 - 1'020" },
+    { size: "3.5-Zimmer-Wohnung", cost: "CHF 1'120 - 1'300" },
+    { size: "4.5-Zimmer-Wohnung", cost: "CHF 1'480 - 1'950" },
+    { size: "5.5-Zimmer-Wohnung", cost: "CHF 2'050 - 2'580" },
+    { size: "6.5-Zimmer-Wohnung", cost: "CHF 2'580 - 3'280" }
+  ];
 
   const services = [
     "Privat- und Geschäftsumzüge in und um Genf.",
@@ -42,6 +62,12 @@ const UmzugsfirmaGenfPageClient = () => {
           {
             "@type": "ListItem",
             "position": 2,
+            "name": "Umzugsfirma in der Nähe",
+            "item": "https://online-offerten.ch/umzugsfirma-in-der-naehe"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
             "name": `Umzugsfirma ${city}`,
             "item": `https://online-offerten.ch${canonicalUrl}`
           }
@@ -82,7 +108,31 @@ const UmzugsfirmaGenfPageClient = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       <div className="bg-gray-50 py-12 md:py-16">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
+          {/* Breadcrumb Navigation */}
+          <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+            <ol className="flex items-center space-x-2 text-sm text-gray-600">
+              <li>
+                <Link href="/" className="hover:text-green-600 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </li>
+              <li>
+                <Link href="/umzugsfirma-in-der-naehe" className="hover:text-green-600 transition-colors">
+                  Umzugsfirma in der Nähe
+                </Link>
+              </li>
+              <li>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Umzugsfirma Genf
+              </li>
+            </ol>
+          </nav>
           
           <motion.header 
             initial={{ opacity: 0, y: -30 }}
@@ -108,6 +158,74 @@ const UmzugsfirmaGenfPageClient = () => {
               <article>
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Professionell umziehen in der internationalen Metropole</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">Genf, als Sitz vieler internationaler Organisationen, ist ein einzigartiger Ort für einen Umzug. Ob Sie aus dem Ausland zuziehen oder innerhalb der Stadt umziehen, unsere Partnerfirmen bieten massgeschneiderte Lösungen. Vergleichen Sie Offerten, um den besten Service für Ihre Bedürfnisse in Genf zu finden.</p>
+              </article>
+
+              <article className="pt-8 border-t border-gray-200 space-y-6">
+                <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Genf?</h2>
+                <p className="typography-p mb-4">
+                  Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Genf richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
+                </p>
+                <p className="typography-p mb-6">
+                  Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Genf und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
+                </p>
+                
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  {/* Hourly Rates Table */}
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                      <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                    </div>
+                    <div className="overflow-x-auto flex-1">
+                      <table className="w-full table-fixed">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {hourlyRates.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Room Size Costs Table */}
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                      <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                    </div>
+                    <div className="overflow-x-auto flex-1">
+                      <table className="w-full table-fixed">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {costTableRows.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
+                  <p className="typography-p text-gray-600 italic">
+                    Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
+                  </p>
+                </div>
               </article>
 
               <div className="text-center bg-gray-100 p-6 rounded-lg border-l-4 border-red-500">

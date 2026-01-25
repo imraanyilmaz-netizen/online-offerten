@@ -378,13 +378,17 @@ const UmzugsfirmaInDerNaehePageClient = () => {
   ]
 
   const locations = [
-    { name: "Umzugsfirma Zürich", link: "/umzugsfirma-zuerich" },
-    { name: "Umzugsfirma Basel", link: "/umzugsfirma-basel" },
-    { name: "Umzugsfirma Bern", link: "/umzugsfirma-bern" },
-    { name: "Umzugsfirma Genf", link: "/umzugsfirma-genf" },
-    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma-lausanne" },
-    { name: "Umzugsfirma Luzern", link: "/umzugsfirma-luzern" },
-    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-st-gallen" }
+    { name: "Umzugsfirma Zürich", link: "/umzugsfirma-in-der-naehe/zuerich" },
+    { name: "Umzugsfirma Basel", link: "/umzugsfirma-in-der-naehe/basel" },
+    { name: "Umzugsfirma Bern", link: "/umzugsfirma-in-der-naehe/bern" },
+    { name: "Umzugsfirma Genf", link: "/umzugsfirma-in-der-naehe/genf" },
+    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma-in-der-naehe/lausanne" },
+    { name: "Umzugsfirma Luzern", link: "/umzugsfirma-in-der-naehe/luzern" },
+    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-in-der-naehe/st-gallen" },
+    { name: "Umzugsfirma Thun", link: "/umzugsfirma-in-der-naehe/thun" },
+    { name: "Umzugsfirma Biel-Bienne", link: "/umzugsfirma-in-der-naehe/biel-bienne" },
+    { name: "Umzugsfirma Lugano", link: "/umzugsfirma-in-der-naehe/lugano" },
+    { name: "Umzugsfirma Aargau", link: "/umzugsfirma-in-der-naehe/aargau" }
   ]
 
   return (
@@ -420,7 +424,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                   Jetzt Umzugsfirma in der Nähe finden
                 </Button>
                 <Button
-                  onClick={() => router.push('/umzugskosten-rechner')}
+                  onClick={() => router.push('/umzugsfirma/umzugskosten')}
                   variant="outline"
                   size="lg"
                   className="text-lg px-8 py-6"
@@ -489,7 +493,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 
       {/* Why Local Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -535,7 +539,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 
       {/* How It Works Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -607,7 +611,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 
       {/* Location Links Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -651,7 +655,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 
       {/* Detailed Content Section - SEO Rich Content */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto prose prose-lg">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -712,7 +716,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -747,7 +751,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-green-600 to-green-700 text-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -771,7 +775,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                 Jetzt Umzugsfirma in der Nähe finden
               </Button>
               <Button
-                onClick={() => router.push('/umzugskosten-rechner')}
+                onClick={() => router.push('/umzugsfirma/umzugskosten')}
                 size="lg"
                 className="bg-green-500 hover:bg-green-400 text-white border-2 border-white text-lg px-8 py-6 shadow-lg"
               >

@@ -35,19 +35,19 @@ const RatgeberSidebar = ({ recentPosts }) => {
         </CardHeader>
         <CardContent className="space-y-3">
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
-            <Link href="/umzugskosten-rechner">
+            <Link href="/umzugsfirma/umzugskosten">
               <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
               <span className="flex-grow">Umzugskosten-Rechner</span>
             </Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
-            <Link href="/reinigungskosten-rechner">
+            <Link href="/reinigung/reinigungskosten">
               <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
               <span className="flex-grow">Reinigungskosten-Rechner</span>
             </Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
-            <Link href="/checklisten">
+            <Link href="/umzugsfirma/checklists">
               <ListChecks className="w-5 h-5 text-green-600 flex-shrink-0" />
               <span className="flex-grow">Checklisten</span>
             </Link>

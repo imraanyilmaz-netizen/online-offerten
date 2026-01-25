@@ -33,7 +33,7 @@ const Article = () => {
             {t('article.section2.sub2_p1')}
           </p>
           <Button asChild className="mt-4 bg-green-600 hover:bg-green-700 text-white group">
-            <Link href="/checklisten">
+            <Link href="/umzugsfirma/checklists">
               {t('article.section2.sub2_button')}
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
@@ -75,7 +75,7 @@ const Article = () => {
                 i18nKey="article.section4.p3_linked" 
                 ns="privateUmzugPage"
                 components={{
-                0: <Link href="/umzugskosten-rechner" className="text-green-600 hover:underline font-semibold" />
+                0: <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold" />
                 }}
             />
         </p>
@@ -128,10 +128,10 @@ const Article = () => {
             i18nKey="article.section8.p2_linked" 
             ns="privateUmzugPage"
             components={{
-              0: <Link href="/umzugsfirma-zuerich" className="text-green-600 hover:underline font-semibold" />,
-              1: <Link href="/umzugsfirma-bern" className="text-green-600 hover:underline font-semibold" />,
-              2: <Link href="/umzugsfirma-basel" className="text-green-600 hover:underline font-semibold" />,
-              3: <Link href="/umzugsfirma-luzern" className="text-green-600 hover:underline font-semibold" />,
+              0: <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:underline font-semibold" />,
+              1: <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:underline font-semibold" />,
+              2: <Link href="/umzugsfirma-in-der-naehe/basel" className="text-green-600 hover:underline font-semibold" />,
+              3: <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:underline font-semibold" />,
               4: <Link href="/standorte" className="text-green-600 hover:underline font-semibold" />
             }}
           />

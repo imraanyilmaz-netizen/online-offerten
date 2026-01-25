@@ -103,8 +103,9 @@ const Navbar = () => {
   // Removed language switching - DE-only now
 
   const kostenLinks = [
-    { to: '/umzugskosten-rechner', text: 'Umzugskosten Rechner' },
-    { to: '/reinigungskosten-rechner', text: 'Reinigungskosten Rechner' },
+    { to: '/umzugsfirma/umzugskosten', text: 'Umzugskosten Rechner' },
+    { to: '/reinigung/reinigungskosten', text: 'Reinigungskosten Rechner' },
+    { to: '/umzugsfirma/umzugsofferten', text: 'Umzugsofferte' },
     { to: '/guenstig-umziehen', text: 'Günstig umziehen' },
     { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirma vergleichen' },
   ];
@@ -156,7 +157,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style paint', zIndex: 1500 }}>
+    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style paint', zIndex: 3000 }}>
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between h-16" style={{ minHeight: '64px' }}>
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">

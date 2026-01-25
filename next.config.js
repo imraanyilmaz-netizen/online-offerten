@@ -56,8 +56,13 @@ const nextConfig = {
     return [
       {
         source: '/checklisten',
-        destination: '/checklists',
+        destination: '/umzugsfirma/checklists',
         permanent: true, // 308 redirect
+      },
+      {
+        source: '/checklists',
+        destination: '/umzugsfirma/checklists',
+        permanent: true, // 301 redirect
       },
       {
         source: '/umzugsfirma-zurich',
@@ -68,6 +73,408 @@ const nextConfig = {
         source: '/floor-cleaning',
         destination: '/bodenreinigung',
         permanent: true, // 308 redirect
+      },
+      // Umzugsfirma kanton sayfaları → yeni URL yapısına
+      {
+        source: '/umzugsfirma-zuerich',
+        destination: '/umzugsfirma-in-der-naehe/zuerich',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-zuerich/:city*',
+        destination: '/umzugsfirma-in-der-naehe/zuerich/:city*',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-zuerich',
+        destination: '/umzugsfirma-in-der-naehe/zuerich',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-zuerich/:city*',
+        destination: '/umzugsfirma-in-der-naehe/zuerich/:city*',
+        permanent: true,
+      },
+      // Basel
+      {
+        source: '/umzugsfirma-basel',
+        destination: '/umzugsfirma-in-der-naehe/basel',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-basel',
+        destination: '/umzugsfirma-in-der-naehe/basel',
+        permanent: true,
+      },
+      // Bern
+      {
+        source: '/umzugsfirma-bern',
+        destination: '/umzugsfirma-in-der-naehe/bern',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-bern',
+        destination: '/umzugsfirma-in-der-naehe/bern',
+        permanent: true,
+      },
+      // Genf
+      {
+        source: '/umzugsfirma-genf',
+        destination: '/umzugsfirma-in-der-naehe/genf',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-genf',
+        destination: '/umzugsfirma-in-der-naehe/genf',
+        permanent: true,
+      },
+      // Lausanne
+      {
+        source: '/umzugsfirma-lausanne',
+        destination: '/umzugsfirma-in-der-naehe/lausanne',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-lausanne',
+        destination: '/umzugsfirma-in-der-naehe/lausanne',
+        permanent: true,
+      },
+      // Luzern
+      {
+        source: '/umzugsfirma-luzern',
+        destination: '/umzugsfirma-in-der-naehe/luzern',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-luzern',
+        destination: '/umzugsfirma-in-der-naehe/luzern',
+        permanent: true,
+      },
+      // St. Gallen
+      {
+        source: '/umzugsfirma-st-gallen',
+        destination: '/umzugsfirma-in-der-naehe/st-gallen',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-st-gallen',
+        destination: '/umzugsfirma-in-der-naehe/st-gallen',
+        permanent: true,
+      },
+      // Thun
+      {
+        source: '/umzugsfirma-thun',
+        destination: '/umzugsfirma-in-der-naehe/thun',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-thun',
+        destination: '/umzugsfirma-in-der-naehe/thun',
+        permanent: true,
+      },
+      // Biel/Bienne
+      {
+        source: '/umzugsfirma-biel-bienne',
+        destination: '/umzugsfirma-in-der-naehe/biel-bienne',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-biel-bienne',
+        destination: '/umzugsfirma-in-der-naehe/biel-bienne',
+        permanent: true,
+      },
+      // Lugano
+      {
+        source: '/umzugsfirma-lugano',
+        destination: '/umzugsfirma-in-der-naehe/lugano',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-lugano',
+        destination: '/umzugsfirma-in-der-naehe/lugano',
+        permanent: true,
+      },
+      // Aargau
+      {
+        source: '/umzugsfirma-aargau',
+        destination: '/umzugsfirma-in-der-naehe/aargau',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-aargau/:city*',
+        destination: '/umzugsfirma-in-der-naehe/aargau/:city*',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-aargau',
+        destination: '/umzugsfirma-in-der-naehe/aargau',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma-in-der-naehe/umzugsfirma-aargau/:city*',
+        destination: '/umzugsfirma-in-der-naehe/aargau/:city*',
+        permanent: true,
+      },
+      // Malerfirma kanton sayfaları → yeni URL yapısına
+      {
+        source: '/malerfirma-zuerich',
+        destination: '/malerfirma-in-der-naehe/zuerich',
+        permanent: true,
+      },
+      {
+        source: '/malerfirma-basel',
+        destination: '/malerfirma-in-der-naehe/basel',
+        permanent: true,
+      },
+      {
+        source: '/malerfirma-bern',
+        destination: '/malerfirma-in-der-naehe/bern',
+        permanent: true,
+      },
+      {
+        source: '/malerfirma-winterthur',
+        destination: '/malerfirma-in-der-naehe/winterthur',
+        permanent: true,
+      },
+      {
+        source: '/malerfirma-luzern',
+        destination: '/malerfirma-in-der-naehe/luzern',
+        permanent: true,
+      },
+      {
+        source: '/malerfirma-st-gallen',
+        destination: '/malerfirma-in-der-naehe/st-gallen',
+        permanent: true,
+      },
+      {
+        source: '/malerfirma-genf',
+        destination: '/malerfirma-in-der-naehe/genf',
+        permanent: true,
+      },
+      {
+        source: '/malerfirma-lausanne',
+        destination: '/malerfirma-in-der-naehe/lausanne',
+        permanent: true,
+      },
+      // Malerfirma → Malerfirma in der Nähe (konsolidieren)
+      {
+        source: '/malerfirma',
+        destination: '/malerfirma-in-der-naehe',
+        permanent: true,
+      },
+      // Malerarbeiten → Malerarbeitenkosten
+      {
+        source: '/malerarbeiten',
+        destination: '/malerarbeitenkosten',
+        permanent: true,
+      },
+      // Umzugskosten-Rechner → Umzugskosten
+      {
+        source: '/umzugskosten-rechner',
+        destination: '/umzugskosten',
+        permanent: true, // 301 redirect (SEO için önemli)
+      },
+      // Reinigungskosten-Rechner → Reinigungskosten
+      {
+        source: '/reinigungskosten-rechner',
+        destination: '/reinigung/reinigungskosten',
+        permanent: true, // 301 redirect (SEO için önemli)
+      },
+      // Reinigungskosten → /reinigung/reinigungskosten
+      {
+        source: '/reinigungskosten',
+        destination: '/reinigung/reinigungskosten',
+        permanent: true,
+      },
+      // Reinigung alt sayfaları → /reinigung/ altına
+      {
+        source: '/wohnungsreinigung',
+        destination: '/reinigung/wohnungsreinigung',
+        permanent: true,
+      },
+      {
+        source: '/hausreinigung',
+        destination: '/reinigung/hausreinigung',
+        permanent: true,
+      },
+      {
+        source: '/bueroreinigung',
+        destination: '/reinigung/bueroreinigung',
+        permanent: true,
+      },
+      {
+        source: '/umzugsreinigung',
+        destination: '/reinigung/umzugsreinigung',
+        permanent: true,
+      },
+      {
+        source: '/unterhaltsreinigung',
+        destination: '/reinigung/unterhaltsreinigung',
+        permanent: true,
+      },
+      {
+        source: '/grundreinigung',
+        destination: '/reinigung/grundreinigung',
+        permanent: true,
+      },
+      {
+        source: '/baureinigung',
+        destination: '/reinigung/baureinigung',
+        permanent: true,
+      },
+      {
+        source: '/fensterreinigung',
+        destination: '/reinigung/fensterreinigung',
+        permanent: true,
+      },
+      {
+        source: '/bodenreinigung',
+        destination: '/reinigung/bodenreinigung',
+        permanent: true,
+      },
+      {
+        source: '/fassadenreinigung',
+        destination: '/reinigung/fassadenreinigung',
+        permanent: true,
+      },
+      {
+        source: '/hofreinigung',
+        destination: '/reinigung/hofreinigung',
+        permanent: true,
+      },
+      // Service sayfaları → /umzugsfirma/ altına
+      {
+        source: '/privatumzug',
+        destination: '/umzugsfirma/privatumzug',
+        permanent: true,
+      },
+      {
+        source: '/geschaeftsumzug',
+        destination: '/umzugsfirma/geschaeftsumzug',
+        permanent: true,
+      },
+      {
+        source: '/internationale-umzuege',
+        destination: '/umzugsfirma/internationale-umzuege',
+        permanent: true,
+      },
+      {
+        source: '/spezialtransporte',
+        destination: '/umzugsfirma/spezialtransporte',
+        permanent: true,
+      },
+      {
+        source: '/klaviertransport',
+        destination: '/umzugsfirma/klaviertransport',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma/guenstig-umziehen',
+        destination: '/guenstig-umziehen',
+        permanent: true,
+      },
+      {
+        source: '/umzugsofferten',
+        destination: '/umzugsfirma/umzugsofferten',
+        permanent: true,
+      },
+      {
+        source: '/umzugshilfe',
+        destination: '/umzugsfirma/umzugshilfe',
+        permanent: true,
+      },
+      {
+        source: '/umzugskosten',
+        destination: '/umzugsfirma/umzugskosten',
+        permanent: true,
+      },
+      // Uluslararası sayfalar → /umzugsfirma/internationale-umzuege/ altına
+      {
+        source: '/umzug-nach-belgien',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-belgien',
+        permanent: true,
+      },
+      {
+        source: '/umzug-nach-daenemark',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-daenemark',
+        permanent: true,
+      },
+      {
+        source: '/umzug-nach-deutschland',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-deutschland',
+        permanent: true,
+      },
+      {
+        source: '/umzug-nach-frankreich',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-frankreich',
+        permanent: true,
+      },
+      {
+        source: '/umzug-nach-italien',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-italien',
+        permanent: true,
+      },
+      {
+        source: '/umzug-nach-oesterreich',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-oesterreich',
+        permanent: true,
+      },
+      {
+        source: '/umzug-nach-portugal',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-portugal',
+        permanent: true,
+      },
+      {
+        source: '/umzug-nach-spanien',
+        destination: '/umzugsfirma/internationale-umzuege/umzug-nach-spanien',
+        permanent: true,
+      },
+      // Şehir bazlı sayfa
+      {
+        source: '/umzugsofferten-zuerich',
+        destination: '/umzugsfirma-in-der-naehe/zuerich/umzugsofferten-zuerich',
+        permanent: true,
+      },
+      // Reinigungsfirma sayfaları → yeni URL yapısına
+      {
+        source: '/reinigungsfirma-zuerich',
+        destination: '/reinigungsfirma-in-der-naehe/zuerich',
+        permanent: true,
+      },
+      {
+        source: '/reinigungsfirma-basel',
+        destination: '/reinigungsfirma-in-der-naehe/basel',
+        permanent: true,
+      },
+      {
+        source: '/reinigungsfirma-bern',
+        destination: '/reinigungsfirma-in-der-naehe/bern',
+        permanent: true,
+      },
+      {
+        source: '/reinigungsfirma-genf',
+        destination: '/reinigungsfirma-in-der-naehe/genf',
+        permanent: true,
+      },
+      {
+        source: '/reinigungsfirma-lausanne',
+        destination: '/reinigungsfirma-in-der-naehe/lausanne',
+        permanent: true,
+      },
+      {
+        source: '/reinigungsfirma-luzern',
+        destination: '/reinigungsfirma-in-der-naehe/luzern',
+        permanent: true,
+      },
+      {
+        source: '/reinigungsfirma-st-gallen',
+        destination: '/reinigungsfirma-in-der-naehe/st-gallen',
+        permanent: true,
+      },
+      {
+        source: '/reinigungsfirma-winterthur',
+        destination: '/reinigungsfirma-in-der-naehe/winterthur',
+        permanent: true,
       },
     ];
   },

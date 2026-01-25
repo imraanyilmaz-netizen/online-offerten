@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import GuenstigUmziehenPageClient from '@/components/pages/info/GuenstigUmziehenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Günstige Umzugsfirma: Der komplette Guide 2025 zum Sparen beim Umziehen',
+  title: 'Günstig umziehen in der Schweiz: So sparen Sie mit cleverer Planung und Offertenvergleich',
   description: 'Günstig umziehen in der Schweiz? Entdecken Sie bewährte Strategien, clevere Tricks und wie Sie durch den Vergleich von Umzugsfirmen Ihr Budget schonen. Bis zu 40% sparen mit unserem umfassenden Guide.',
   alternates: {
     canonical: 'https://online-offerten.ch/guenstig-umziehen',
   },
   openGraph: {
-    title: 'Günstige Umzugsfirma: Der komplette Guide 2025 zum Sparen beim Umziehen',
+    title: 'Günstig umziehen in der Schweiz: So sparen Sie mit cleverer Planung und Offertenvergleich',
     description: 'Günstig umziehen in der Schweiz? Entdecken Sie bewährte Strategien, clevere Tricks und wie Sie durch den Vergleich von Umzugsfirmen Ihr Budget schonen. Bis zu 40% sparen mit unserem umfassenden Guide.',
     url: 'https://online-offerten.ch/guenstig-umziehen',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Günstige Umzugsfirma: Der komplette Guide 2025 zum Sparen beim Umziehen',
+    title: 'Günstig umziehen in der Schweiz: So sparen Sie mit cleverer Planung und Offertenvergleich',
     description: 'Günstig umziehen in der Schweiz? Entdecken Sie bewährte Strategien, clevere Tricks und wie Sie durch den Vergleich von Umzugsfirmen Ihr Budget schonen. Bis zu 40% sparen mit unserem umfassenden Guide.',
     images: ['https://online-offerten.ch/image/services-professionals.png'],
   },
@@ -45,3 +45,4 @@ export const metadata: Metadata = {
 export default function GuenstigUmziehenPage() {
   return <GuenstigUmziehenPageClient />
 }
+

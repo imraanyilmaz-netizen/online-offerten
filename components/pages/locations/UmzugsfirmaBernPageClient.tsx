@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Globe, Users, Truck, Home } from 'lucide-react';
+import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Globe, Users, Truck, Home, ChevronRight } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
@@ -33,7 +33,27 @@ const UmzugsfirmaBernPageClient = () => {
 
   const metaTitle = "Umzugsfirma Bern: Zügelfirmen vergleichen & Umzugsunternemen finden » Mehrere Firmen vergleichen & bis zu 40% sparen";
   const metaDescription = "Umzugsfirma Bern: Vergleichen Sie mehrere Zügelfirmen Bern und Umzugsunternemen Bern. Umzugsfirma vergleichen Bern - Kostenlos und unverbindlich Offerten von geprüften Umzugsfirmen vergleichen. Privatumzug, Geschäftsumzug, Reinigung & mehr. Bis zu 40% sparen!";
-  const canonicalUrl = '/umzugsfirma-bern';
+  const canonicalUrl = '/umzugsfirma-in-der-naehe/bern';
+
+  // Cost table data - Hourly rates
+  const hourlyRates = [
+    { service: "1 Umzugswagen + 1 Zügelmann", price: "CHF 115.-" },
+    { service: "1 Umzugswagen + 2 Zügelmänner", price: "CHF 175.-" },
+    { service: "1 Umzugswagen + 3 Zügelmänner", price: "CHF 215.-" },
+    { service: "2 Umzugswagen + 4 Zügelmänner", price: "CHF 275.-" },
+    { service: "2 Umzugswagen + 5 Zügelmänner", price: "CHF 330.-" },
+    { service: "2 Umzugswagen + 6 Zügelmänner", price: "CHF 400.-" }
+  ];
+
+  // Cost table data - By room size
+  const costTableRows = [
+    { size: "1.5-Zimmer-Wohnung", cost: "CHF 630 - 680" },
+    { size: "2.5-Zimmer-Wohnung", cost: "CHF 680 - 1'000" },
+    { size: "3.5-Zimmer-Wohnung", cost: "CHF 1'100 - 1'280" },
+    { size: "4.5-Zimmer-Wohnung", cost: "CHF 1'450 - 1'920" },
+    { size: "5.5-Zimmer-Wohnung", cost: "CHF 2'000 - 2'520" },
+    { size: "6.5-Zimmer-Wohnung", cost: "CHF 2'520 - 3'200" }
+  ];
 
   const advantages = [
     "Bis zu 40% sparen durch den Vergleich mehrerer Offerten.",
@@ -79,6 +99,12 @@ const UmzugsfirmaBernPageClient = () => {
           {
             "@type": "ListItem",
             "position": 2,
+            "name": "Umzugsfirma in der Nähe",
+            "item": "https://online-offerten.ch/umzugsfirma-in-der-naehe"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
             "name": `Umzugsfirma ${city}`,
             "item": `https://online-offerten.ch${canonicalUrl}`
           }
@@ -150,7 +176,32 @@ const UmzugsfirmaBernPageClient = () => {
             }}
           ></div>
           
-          <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10 overflow-x-hidden">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10 overflow-x-hidden">
+            {/* Breadcrumb Navigation */}
+            <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+                <li>
+                  <Link href="/" className="hover:text-green-600 transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li>
+                  <Link href="/umzugsfirma-in-der-naehe" className="hover:text-green-600 transition-colors">
+                    Umzugsfirma in der Nähe
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li className="text-gray-900 font-medium" aria-current="page">
+                  Umzugsfirma Bern
+                </li>
+              </ol>
+            </nav>
+
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center min-h-[400px] md:min-h-[500px]">
               {/* Left Side - Content Card */}
               <motion.div
@@ -247,7 +298,7 @@ const UmzugsfirmaBernPageClient = () => {
         </motion.section>
         
         <div className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-50 py-8 md:py-12 overflow-x-hidden">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6 overflow-x-hidden">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 overflow-x-hidden">
           <div className="grid lg:grid-cols-5 gap-8 md:gap-12 items-start">
             <motion.main 
               initial={{ opacity: 0, x: -20 }}
@@ -273,8 +324,71 @@ const UmzugsfirmaBernPageClient = () => {
               </div>
 
               <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
-                  <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugsfirma Bern: Umzugskosten im Überblick</h2>
-                  <p className="font-medium break-words w-full">Die Umzugskosten in Bern gehören zu den höchsten der Schweiz, lassen sich aber mit der richtigen Planung optimieren. Umzugsfirma vergleichen Bern: Durch den Vergleich mehrerer Zügelfirmen Bern und Umzugsunternemen Bern finden Sie das beste Angebot und sparen bis zu 40%. Die Kosten hängen von vielen Variablen ab.</p>
+                  <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Bern?</h2>
+                  <p className="typography-p mb-4">
+                    Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Bern richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
+                  </p>
+                  <p className="typography-p mb-6">
+                    Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Bern und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
+                  </p>
+                  
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    {/* Hourly Rates Table */}
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                      <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                        <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                      </div>
+                      <div className="overflow-x-auto flex-1">
+                        <table className="w-full table-fixed">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                              <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {hourlyRates.map((row, index) => (
+                              <tr key={index} className="hover:bg-gray-50 transition-colors">
+                                <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
+                                <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    {/* Room Size Costs Table */}
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
+                      <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
+                        <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                      </div>
+                      <div className="overflow-x-auto flex-1">
+                        <table className="w-full table-fixed">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                              <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {costTableRows.map((row, index) => (
+                              <tr key={index} className="hover:bg-gray-50 transition-colors">
+                                <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
+                                <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
+                    <p className="typography-p text-gray-600 italic">
+                      Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
+                    </p>
+                  </div>
                 </article>
 
                 <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
@@ -312,35 +426,35 @@ const UmzugsfirmaBernPageClient = () => {
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2 break-words">
                         <Package className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/privatumzug" className="text-green-600 hover:text-green-800 hover:underline break-words">Privatumzug</Link>
+                        <Link href="/umzugsfirma/privatumzug" className="text-green-600 hover:text-green-800 hover:underline break-words">Privatumzug</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Der klassische Wohnungswechsel, individuell auf Ihre Bedürfnisse zugeschnitten. Finden Sie die beste Umzugsfirma Bern für Ihren Privatumzug.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Building className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/geschaeftsumzug" className="text-green-600 hover:text-green-800 hover:underline break-words">Geschäftsumzug</Link>
+                        <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-600 hover:text-green-800 hover:underline break-words">Geschäftsumzug</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Minimale Ausfallzeiten und sorgfältige Planung für Büros und Firmen. Professioneller Umzug für Unternehmen in Bern.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Globe className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/internationale-umzuege" className="text-green-600 hover:text-green-800 hover:underline break-words">Internationale Umzüge</Link>
+                        <Link href="/umzugsfirma/internationale-umzuege" className="text-green-600 hover:text-green-800 hover:underline break-words">Internationale Umzüge</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Komplette Abwicklung inklusive Zollformalitäten. Umzug ins Ausland mit professioneller Unterstützung.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Package className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/spezialtransporte" className="text-green-600 hover:text-green-800 hover:underline break-words">Spezialtransporte</Link>
+                        <Link href="/umzugsfirma/spezialtransporte" className="text-green-600 hover:text-green-800 hover:underline break-words">Spezialtransporte</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Transport für Klaviere, Tresore, Maschinen & Geräte. Professionelle Spezialtransporte in Bern.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <PiPianoKeysFill className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/klaviertransport" className="text-green-600 hover:text-green-800 hover:underline break-words">Klaviertransport</Link>
+                        <Link href="/umzugsfirma/klaviertransport" className="text-green-600 hover:text-green-800 hover:underline break-words">Klaviertransport</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Professioneller Transport für Klaviere und Flügel. Spezialisierte Zügelfirmen für Klaviertransport in Bern.</p>
                     </div>
@@ -354,35 +468,35 @@ const UmzugsfirmaBernPageClient = () => {
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Sparkles className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Umzugsreinigung</Link>
+                        <Link href="/reinigung/umzugsreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Umzugsreinigung</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Mit Abnahmegarantie für eine stressfreie Wohnungsübergabe. Professionelle Endreinigung nach dem Umzug.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Sparkles className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/wohnungsreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Wohnungsreinigung</Link>
+                        <Link href="/reinigung/wohnungsreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Wohnungsreinigung</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Gründliche Reinigung Ihrer Wohnung. Professionelle Wohnungsreinigung in Bern.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Sparkles className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/hausreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Hausreinigung</Link>
+                        <Link href="/reinigung/hausreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Hausreinigung</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Umfassende Reinigung für Ihr Haus. Professionelle Hausreinigung in Bern.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Sparkles className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/fensterreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Fensterreinigung</Link>
+                        <Link href="/reinigung/fensterreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Fensterreinigung</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Professionelle Fensterreinigung für strahlend saubere Fenster. Fensterreinigung in Bern.</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
                       <h4 className="font-semibold text-lg flex items-center mb-2">
                         <Sparkles className="mr-2 text-green-500 flex-shrink-0" /> 
-                        <Link href="/fassadenreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Fassadenreinigung</Link>
+                        <Link href="/reinigung/fassadenreinigung" className="text-green-600 hover:text-green-800 hover:underline break-words">Fassadenreinigung</Link>
                       </h4>
                       <p className="text-gray-600 break-words">Professionelle Reinigung Ihrer Fassade. Fassadenreinigung in Bern für ein gepflegtes Äusseres.</p>
                     </div>

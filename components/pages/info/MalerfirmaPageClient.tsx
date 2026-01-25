@@ -378,7 +378,7 @@ const MalerfirmaPageClient = () => {
     <>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 md:py-20 overflow-hidden">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -464,7 +464,7 @@ const MalerfirmaPageClient = () => {
 
       {/* Why Compare Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -510,7 +510,7 @@ const MalerfirmaPageClient = () => {
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -556,7 +556,7 @@ const MalerfirmaPageClient = () => {
 
       {/* Selection Criteria Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -602,7 +602,7 @@ const MalerfirmaPageClient = () => {
 
       {/* Cost Factors Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -646,7 +646,7 @@ const MalerfirmaPageClient = () => {
 
       {/* Detailed Content Section - SEO Rich Content */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto prose prose-lg">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -728,7 +728,7 @@ const MalerfirmaPageClient = () => {
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -763,7 +763,7 @@ const MalerfirmaPageClient = () => {
 
       {/* Internal Links Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -780,7 +780,7 @@ const MalerfirmaPageClient = () => {
                   <h4 className="font-semibold text-gray-900 mb-3">Malerarbeiten</h4>
                   <ul className="space-y-2">
                     <li>
-                      <Link href="/malerarbeiten" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      <Link href="/malerarbeitenkosten" className="text-blue-600 hover:text-blue-700 font-medium underline">
                         Malerarbeiten Offerten vergleichen
                       </Link>
                     </li>
@@ -790,12 +790,12 @@ const MalerfirmaPageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/malerfirma-zuerich" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      <Link href="/malerfirma-in-der-naehe/zuerich" className="text-blue-600 hover:text-blue-700 font-medium underline">
                         Malerfirma Zürich
                       </Link>
                     </li>
                     <li>
-                      <Link href="/malerfirma-basel" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      <Link href="/malerfirma-in-der-naehe/basel" className="text-blue-600 hover:text-blue-700 font-medium underline">
                         Malerfirma Basel
                       </Link>
                     </li>
@@ -834,7 +834,7 @@ const MalerfirmaPageClient = () => {
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

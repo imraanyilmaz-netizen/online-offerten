@@ -51,7 +51,7 @@ const GartenarbeitenPageClient = () => {
           transition={{ duration: 0.8 }}
           className="relative w-full bg-gradient-to-br from-green-600 via-green-500 to-emerald-600 text-white py-20 md:py-32"
         >
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
@@ -99,7 +99,7 @@ const GartenarbeitenPageClient = () => {
         </motion.section>
 
         <section className="py-16 md:py-24">
-          <div className="container mx-auto max-w-navbar px-4 md:px-6">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="grid lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2">
                 <motion.article

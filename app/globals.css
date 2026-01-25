@@ -71,6 +71,204 @@
   }
 }
 
+/* Zentrale Typografie-Stile für alle Seiten - Merkezi Tipografi Stilleri */
+@layer components {
+  /* H1 Stil - Ana Başlıklar */
+  h1.typography-h1,
+  .typography-h1 {
+    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 32px;
+    line-height: 42.56px;
+    font-weight: 700;
+    color: #000000;
+    text-align: start;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+  }
+
+  @media (min-width: 768px) {
+    h1.typography-h1,
+    .typography-h1 {
+      font-size: 40px;
+      line-height: 53.2px;
+    }
+  }
+
+  /* H2 Stil - Alt Başlıklar */
+  h2.typography-h2,
+  .typography-h2 {
+    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 24px;
+    line-height: 31.92px;
+    font-weight: 700;
+    color: #1c1d16;
+    text-align: start;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+  }
+
+  @media (min-width: 768px) {
+    h2.typography-h2,
+    .typography-h2 {
+      font-size: 32px;
+      line-height: 42.56px;
+    }
+  }
+
+  /* H3 Stil - Bölüm Başlıkları */
+  h3.typography-h3,
+  .typography-h3 {
+    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 20px;
+    line-height: 26.6px;
+    font-weight: 700;
+    color: #1c1d16;
+    text-align: start;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+  }
+
+  @media (min-width: 768px) {
+    h3.typography-h3,
+    .typography-h3 {
+      font-size: 24px;
+      line-height: 31.92px;
+    }
+  }
+
+  /* H4 Stil - Kart Başlıkları */
+  h4.typography-h4,
+  .typography-h4 {
+    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 18px;
+    line-height: 23.94px;
+    font-weight: 700;
+    color: #1c1d16;
+    text-align: center;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+    font-variant: no-common-ligatures;
+  }
+
+  @media (min-width: 768px) {
+    h4.typography-h4,
+    .typography-h4 {
+      font-size: 20px;
+      line-height: 26.6px;
+    }
+  }
+
+  /* H5 Stil */
+  h5.typography-h5,
+  .typography-h5 {
+    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 16px;
+    line-height: 21.28px;
+    font-weight: 700;
+    color: #1c1d16;
+    text-align: start;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+  }
+
+  @media (min-width: 768px) {
+    h5.typography-h5,
+    .typography-h5 {
+      font-size: 18px;
+      line-height: 23.94px;
+    }
+  }
+
+  /* H6 Stil */
+  h6.typography-h6,
+  .typography-h6 {
+    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 14px;
+    line-height: 18.62px;
+    font-weight: 700;
+    color: #1c1d16;
+    text-align: start;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+  }
+
+  @media (min-width: 768px) {
+    h6.typography-h6,
+    .typography-h6 {
+      font-size: 16px;
+      line-height: 21.28px;
+    }
+  }
+
+  /* P Stil - Paragraf Metni */
+  p.typography-p,
+  .typography-p {
+    font-family: Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #1c1d16;
+    text-align: start;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+  }
+
+  /* Span Stil - Inline Metin (FAQ soruları için) */
+  span.typography-span,
+  .typography-span {
+    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 18px;
+    line-height: 23.94px;
+    font-weight: 700;
+    color: #1c1d16;
+    text-align: start;
+    letter-spacing: normal;
+    word-spacing: 0px;
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    text-indent: 0px;
+    font-variant: no-common-ligatures;
+  }
+
+  @media (min-width: 768px) {
+    span.typography-span,
+    .typography-span {
+      font-size: 20px;
+      line-height: 26.6px;
+    }
+  }
+}
+
 /* Scrollbar Stilleri */
 @layer utilities {
   ::-webkit-scrollbar {
@@ -105,6 +303,15 @@
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #059669 0%, #047857 100%);
+  }
+
+  /* Scrollbar Hide - Scrollbar'ı gizle ama scroll çalışsın */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
   }
 }
 

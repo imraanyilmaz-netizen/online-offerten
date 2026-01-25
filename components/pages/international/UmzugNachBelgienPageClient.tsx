@@ -53,7 +53,7 @@ const ListItem = ({ children }: ListItemProps) => (
 );
 
 const UmzugNachBelgienPageClient = () => {
-  const canonicalPath = '/umzug-nach-belgien';
+  const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-belgien';
 
   const metaTitle = "Umzug nach Belgien | Günstige Umzugsfirmen aus der Schweiz";
   const metaDescription = "Planen Sie Ihren Umzug von der Schweiz nach Belgien? Vergleichen Sie hier professionelle und geprüfte Umzugsfirmen. Kostenlose Offerten für Privatumzug, Geschäftsumzug, Reinigung und Entsorgung.";
@@ -132,7 +132,7 @@ const UmzugNachBelgienPageClient = () => {
              <img alt="Hero image of Brussels Grand Place" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1482959568443-5c8818cae8f6" loading="eager" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
-          <div className="relative z-10 container mx-auto max-w-navbar px-4 md:px-6 text-center py-24 md:py-32">
+          <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-24 md:py-32">
             <div className="animate-fade-in-up-delay">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-shadow-lg">Umzug nach Belgien: Ihr Leitfaden für einen reibungslosen Start</h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">Stressfrei von der Schweiz ins Herz Europas. Vergleichen Sie jetzt die besten Umzugsunternehmen für Ihren Umzug nach Belgien und sparen Sie bares Geld.</p>
@@ -140,7 +140,7 @@ const UmzugNachBelgienPageClient = () => {
           </div>
         </section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
               <Section className="border-t-0 pt-0">

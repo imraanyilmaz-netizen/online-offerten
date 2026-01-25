@@ -38,7 +38,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 );
 
 const UmzugNachFrankreichPageClient = () => {
-  const canonicalPath = '/umzug-nach-frankreich';
+  const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-frankreich';
 
   const metaTitle = "Umzug nach Frankreich: Umfassender Guide & Kosten 2025";
   const metaDescription = "Ihr kompletter Ratgeber für den Umzug von der Schweiz nach Frankreich. Erfahren Sie alles über Kosten, Zoll, Planung und finden Sie die besten Umzugsfirmen. Inklusive FAQ und Checkliste.";
@@ -133,7 +133,7 @@ const UmzugNachFrankreichPageClient = () => {
              <img alt="Hero image of Paris with Eiffel Tower" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1502602898657-3e91760c0337" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
-          <div className="relative z-10 container mx-auto max-w-navbar px-4 md:px-6 text-center py-28 md:py-40">
+          <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-28 md:py-40">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -145,7 +145,7 @@ const UmzugNachFrankreichPageClient = () => {
           </div>
         </motion.section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-10">
               <Section className="border-t-0 pt-0">

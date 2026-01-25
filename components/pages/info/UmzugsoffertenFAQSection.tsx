@@ -16,28 +16,74 @@ interface UmzugsoffertenFAQSectionProps {
 const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faqItems }) => {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-left mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 
+            className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] font-bold mb-4"
+            style={{
+              fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+              fontWeight: 700,
+              color: '#1c1d16',
+              textAlign: 'left',
+              letterSpacing: 'normal',
+              wordSpacing: '0px',
+              fontStyle: 'normal',
+              textTransform: 'none',
+              textDecoration: 'none',
+              textIndent: '0px'
+            }}
+          >
             Häufige Fragen zu Umzugsofferten
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+          <p 
+            className="text-base leading-6 max-w-3xl mx-auto hidden"
+            style={{
+              fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+              fontSize: '16px',
+              lineHeight: '24px',
+              fontWeight: 400,
+              color: '#1c1d16',
+              textAlign: 'left',
+              letterSpacing: 'normal',
+              wordSpacing: '0px',
+              fontStyle: 'normal',
+              textTransform: 'none',
+              textDecoration: 'none',
+              textIndent: '0px',
+              visibility: 'hidden'
+            }}
+          >
             Alles, was Sie über <strong>Umzugsangebote</strong> wissen müssen – beantwortet von unseren Experten.
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="w-full">
           <Accordion type="single" collapsible className="w-full">
             {faqItems.slice(0, 7).map((item, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-b">
-                <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-green-600">
-                  {item.q}
+                <AccordionTrigger 
+                  className="text-[18px] md:text-[20px] leading-[23.94px] md:leading-[26.6px] text-left py-4 transition-all hover:no-underline"
+                  style={{
+                    fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                    fontWeight: 700,
+                    color: '#1c1d16',
+                    textAlign: 'start',
+                    letterSpacing: 'normal',
+                    wordSpacing: '0px',
+                    fontStyle: 'normal',
+                    textTransform: 'none',
+                    textDecoration: 'none',
+                    textIndent: '0px',
+                    fontVariant: 'no-common-ligatures'
+                  }}
+                >
+                  <span>{item.q}</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 leading-relaxed">
                   <div 

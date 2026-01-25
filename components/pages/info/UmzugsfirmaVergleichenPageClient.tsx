@@ -4,9 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Check, ArrowRight, Star, ShieldCheck, TrendingUp, FileText, Mail, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Check, Shield, Star, TrendingUp, FileText, ShieldCheck, MessageSquare, Award, Search, Truck, PiggyBank, Calendar, AlertTriangle, ArrowRight, Rocket, ClipboardCheck, Users, ThumbsUp } from 'lucide-react';
 
 const UmzugsfirmaVergleichenPageClient = () => {
   const fadeIn = {
@@ -24,16 +23,6 @@ const UmzugsfirmaVergleichenPageClient = () => {
     }
   };
 
-  const howItWorksIcons = [ClipboardCheck, Rocket, Users, ThumbsUp];
-  const checklistIcons = [FileText, ShieldCheck, MessageSquare, Award, Search, Truck, FileText];
-  const costFactorIcons = [Truck, ArrowRight, PiggyBank, FileText, Calendar, Award];
-
-  // SEO Data
-  const metaTitle = "Umzugsfirma vergleichen: Kostenlose Offerten & bis zu 40% sparen";
-  const metaDescription = "Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz für Ihren Privatumzug oder die Reinigung. Sparen Sie Zeit und Geld mit nur einer Anfrage! Bis zu 6 Offerten im Vergleich.";
-  // Meta keywords removed - Google no longer uses this tag (since 2009)
-  const canonicalUrl = '/umzugsfirma-vergleichen';
-
   // Data
   const heroStats = [
     { label: "Kostenlos & Unverbindlich" },
@@ -41,142 +30,59 @@ const UmzugsfirmaVergleichenPageClient = () => {
     { label: "Bis zu 6 Offerten" }
   ];
 
+  const whyChooseUs = [
+    {
+      title: "Kostenlos & unverbindlich",
+      description: "Bis zu 6 Angebote ohne versteckte Kosten. Kein Risiko, keine Verpflichtung.",
+      icon: ShieldCheck
+    },
+    {
+      title: "Geprüfte Umzugsfirmen",
+      description: "Nur seriöse Anbieter mit positiven Kundenbewertungen aus Ihrer Nähe. Jedes Zügelunternehmen wird auf Qualität und Zuverlässigkeit geprüft.",
+      icon: Check
+    },
+    {
+      title: "Bis zu 40% sparen",
+      description: "Der transparente Umzugspreisvergleich zeigt Ihnen sofort, welche Zügelfirma das beste Preis-Leistungs-Verhältnis bietet.",
+      icon: TrendingUp
+    }
+  ];
+
   const howItWorksSteps = [
     {
-      title: "Anfrage ausfüllen",
-      description: "Beschreiben Sie Ihren Umzug in unserem intelligenten Formular. Je mehr Details, desto genauer die Offerten."
+      number: "1",
+      title: "Umzugsdetails eingeben",
+      description: "Grösse der Wohnung, Umzugstermin und gewünschte Dienstleistungen (z.B. Endreinigung, Entsorgung) in nur 2 Minuten angeben.",
+      icon: FileText
     },
     {
+      number: "2",
       title: "Offerten erhalten",
-      description: "Wir leiten Ihre Anfrage an bis zu 6 passende, geprüfte Umzugsfirmen aus Ihrer Region weiter."
+      description: "Bis zu 6 kostenlose Angebote von qualitätsgeprüften Umzugsfirmen aus Ihrer Region landen direkt in Ihrem Postfach.",
+      icon: Mail
     },
     {
-      title: "Vergleichen & Wählen",
-      description: "Sie erhalten die Offerten direkt per E-Mail. Vergleichen Sie Preise, Leistungen und Bewertungen in aller Ruhe."
-    },
-    {
-      title: "Sparen & Umziehen",
-      description: "Wählen Sie die beste Firma für sich aus und freuen Sie sich auf einen reibungslosen und günstigen Umzug."
+      number: "3",
+      title: "Vergleichen & sparen",
+      description: "Preise und Bewertungen prüfen, die beste Wahl treffen und entspannt in die neue Wohnung zügeln.",
+      icon: Star
     }
   ];
 
-  const checklistItems = [
+  const testimonials = [
     {
-      title: "Transparente Preisgestaltung",
-      content: "Eine seriöse Offerte ist ein detailliertes Dokument, kein schneller Kostenvoranschlag. Alle Posten müssen klar aufgeschlüsselt sein: Arbeitsstunden, Anzahl der Mitarbeiter, Fahrzeugkosten, Kilometerpauschale und Material. Achten Sie auf einen verbindlichen Festpreis oder klar definierte Stundensätze. Fragen Sie proaktiv nach potenziellen Zusatzkosten für Parkverbotszonen, Möbellifte oder den Transport von schweren Gegenständen wie Klavieren."
+      quote: "Ich habe innerhalb von Stunden 5 Offerten erhalten und konnte 1'200 CHF sparen. Der Umzugsvergleich war kinderleicht – und die empfohlene Firma hat alles perfekt erledigt!",
+      author: "Michael R.",
+      location: "Zürich",
+      rating: 5
     },
     {
-      title: "Umfassender Versicherungsschutz",
-      content: "Ein Missgeschick kann immer passieren. Entscheidend ist, wie damit umgegangen wird. Eine professionelle Firma muss eine Transportversicherung (deckt Schäden während des Transports) und eine Betriebshaftpflichtversicherung (deckt Schäden in der Wohnung) vorweisen können. Lassen Sie sich die Versicherungspolicen zeigen und prüfen Sie die Deckungssummen. Sind diese zu niedrig, bleiben Sie im schlimmsten Fall auf dem Schaden sitzen."
-    },
-    {
-      title: "Echte Kundenbewertungen",
-      content: "Authentische Bewertungen auf unabhängigen Portalen (wie Google, oder spezialisierte Plattformen) sind ein unschätzbarer Indikator für die Zuverlässigkeit einer Firma. Lesen Sie nicht nur die Sternebewertungen, sondern auch die Kommentare. Wie geht die Firma mit Kritik um? Wiederholen sich bestimmte Lobeshymnen oder Beschwerden? Das gibt Ihnen ein realistisches Bild vom Service."
-    },
-    {
-      title: "Klar definierter Leistungsumfang",
-      content: "Die günstigste Offerte ist nicht immer die beste. Prüfen Sie, ob Äpfel mit Äpfeln verglichen werden. Ist der Ein- und Auspackservice enthalten? Werden Möbel fachgerecht demontiert und wieder montiert? Ist die Endreinigung mit Abnahmegarantie Teil des Pakets? Eine detaillierte Leistungsbeschreibung im Vertrag verhindert Missverständnisse am Umzugstag."
-    },
-    {
-      title: "Erfahrung und lokales Know-how",
-      content: "Ein etabliertes Unternehmen mit langjähriger Erfahrung kennt die Tücken des Geschäfts und die lokalen Gegebenheiten (z.B. Verkehrssituation, Parkregelungen). Ein professioneller Webauftritt, ein Eintrag im Handelsregister (prüfbar auf zefix.ch) und ein fester Ansprechpartner sind Zeichen von Seriosität und Stabilität."
-    },
-    {
-      title: "Kostenlose Besichtigung",
-      content: "Bei Umzügen, die über eine 1-Zimmer-Wohnung hinausgehen, ist eine kostenlose und unverbindliche Besichtigung vor Ort ein Muss. Nur so kann das Umzugsvolumen exakt bestimmt und eine verbindliche offerten erstellt werden. Firmen, die nur am Telefon einen Pauschalpreis nennen, sind oft unprofessionell und es drohen Nachforderungen."
-    },
-    {
-      title: "Schriftlicher Vertrag",
-      content: "Verlassen Sie sich niemals auf mündliche Absprachen. Ein detaillierter, schriftlicher Umzugsvertrag ist unerlässlich. Er sollte alle vereinbarten Leistungen, den Festpreis oder die Stundensätze, den Umzugstermin und die Versicherungsdetails enthalten. Beide Parteien sollten den Vertrag vor dem Umzugstag unterzeichnen."
+      quote: "Endlich eine Plattform, die hält was sie verspricht. Die vermittelten Profis waren pünktlich, freundlich und haben sogar beim Kisten packen geholfen. Stressfrei von Anfang bis Ende!",
+      author: "Sandra K.",
+      location: "Basel",
+      rating: 5
     }
   ];
-
-  const redFlagsItems = [
-    "Kein Impressum, keine Handelsregisternummer oder nur eine Handynummer als Kontakt.",
-    "Aggressive Werbung mit unrealistischen 'ab CHF 199'-Preisen.",
-    "Forderung nach hohen Vorauszahlungen, insbesondere in bar.",
-    "Druck am Telefon, sich sofort zu entscheiden ('Diese Offerte gilt nur heute!').",
-    "Keine Bereitschaft zu einer kostenlosen Besichtigung vor Ort.",
-    "Unklare oder ausweichende Antworten auf Fragen zur Versicherung.",
-    "Schlechte oder gefälscht wirkende Bewertungen im Internet.",
-    "Das Unternehmen besteht auf einem mündlichen Vertrag."
-  ];
-
-  const costFactors = [
-    {
-      title: "Umzugsvolumen (in m³)",
-      content: "Dies ist der grösste Hebel. Die Menge Ihres Hausrats bestimmt die Grösse des benötigten LKW und die Anzahl der Zügelmänner. Als Faustregel gilt: Pro Zimmer rechnet man mit ca. 10-15 m³. Ein Umzugsrechner kann hier eine genauere Schätzung liefern."
-    },
-    {
-      title: "Distanz & Transportweg",
-      content: "Die Entfernung zwischen dem alten und neuen Zuhause beeinflusst direkt die Transportkosten und die Arbeitszeit. Aber auch die Route spielt eine Rolle: Stadtverkehr ist zeitaufwändiger als eine freie Autobahnfahrt."
-    },
-    {
-      title: "Zugänglichkeit & Stockwerke",
-      content: "Ein Umzug aus dem 5. Stock ohne Lift ist deutlich aufwändiger als aus dem Erdgeschoss. Lange Laufwege vom LKW zur Haustür, enge Treppenhäuser oder die Notwendigkeit eines Möbellifts treiben den Preis in die Höhe."
-    },
-    {
-      title: "Gewünschte Zusatzleistungen",
-      content: "Der reine Transport ist nur die Basis. Benötigen Sie Hilfe beim Ein- und Auspacken? Sollen schwere Designermöbel fachgerecht demontiert und montiert werden? Brauchen Sie eine Endreinigung mit Abnahmegarantie oder die Entsorgung von Sperrmüll? Jede Zusatzleistung hat ihren Preis."
-    },
-    {
-      title: "Umzugsdatum & Flexibilität",
-      content: "Die Nachfrage bestimmt den Preis. Umzüge an offiziellen Zügelterminen (oft Monatsende/-anfang), an Wochenenden oder in den Sommermonaten sind am teuersten. Wer flexibel ist und unter der Woche umziehen kann, kann erheblich sparen."
-    },
-    {
-      title: "Wert des Umzugsguts",
-      content: "Wenn Sie wertvolle Antiquitäten, Kunstwerke oder ein teures Klavier transportieren lassen, ist eine höhere Versicherungsdeckung (Zusatzversicherung) notwendig. Dies schlägt sich im Gesamtpreis nieder, ist aber eine unverzichtbare Absicherung."
-    }
-  ];
-
-  const faqItems = [
-    {
-      question: "Wie viele Offerten sind ideal für einen Preisvergleich?",
-      answer: "Drei bis sechs Offerten sind der 'Sweet Spot'. Weniger als drei gibt Ihnen keine solide Vergleichsbasis. Mehr als sechs kann schnell unübersichtlich und überwältigend werden. Unser System zielt darauf ab, Ihnen genau diese optimale Anzahl an passenden Angeboten zu liefern."
-    },
-    {
-      question: "Was bedeutet 'Abnahmegarantie' bei der Umzugsreinigung wirklich?",
-      answer: "Die Abnahmegarantie ist Ihr Rundum-sorglos-Paket. Die Reinigungsfirma verpflichtet sich, bei der Wohnungsübergabe an den Vermieter anwesend zu sein. Sollte der Vermieter einen Bereich beanstanden, führt die Firma die Nachreinigung sofort und ohne zusätzliche Kosten durch. So ist die Rückgabe Ihres Mietzinsdepots gesichert."
-    },
-    {
-      question: "Pauschalpreis oder Stundensatz – was ist besser für mich?",
-      answer: "Für die meisten Umzüge bietet ein Pauschalpreis (Festpreis) die grösste Sicherheit. Sie wissen von Anfang an genau, welche Kosten auf Sie zukommen. Ein Stundensatz kann bei sehr kleinen, perfekt vorbereiteten Umzügen mit kurzen Wegen günstiger sein, birgt aber das Risiko, dass unvorhergesehene Verzögerungen (z.B. Stau, defekter Lift) die Kosten in die Höhe treiben."
-    },
-    {
-      question: "Wie lange im Voraus sollte ich eine Zügelfirma buchen?",
-      answer: "Beginnen Sie idealerweise 6-8 Wochen vor dem geplanten Umzugstermin mit der Suche. Gute und faire Unternehmen sind besonders zu den beliebten Zügelterminen (Ende/Anfang des Monats) schnell ausgebucht. Eine frühzeitige Planung gibt Ihnen mehr Auswahl und bessere Preise."
-    },
-    {
-      question: "Muss ich für die Offerten bezahlen?",
-      answer: "Nein, absolut nicht. Alle Offerten, die Sie über unsere Plattform erhalten, sind zu 100% kostenlos und unverbindlich. Sie gehen keinerlei Verpflichtung ein. Sie entscheiden in aller Ruhe, ob und welche Offerte Sie annehmen möchten."
-    }
-  ];
-
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": canonicalUrl
-    },
-    "headline": metaTitle,
-    "description": metaDescription,
-    "image": "https://online-offerten.ch/og-image-umzugsfirma-vergleichen.jpg",
-    "author": {
-      "@type": "Organization",
-      "name": "Online-Offerten.ch"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Online-Offerten.ch",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://online-offerten.ch/android-chrome-512x512.png"
-      }
-    },
-    "datePublished": "2025-07-08",
-    "dateModified": "2025-07-08"
-  };
 
   return (
     <>
@@ -185,7 +91,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
         
         <section className="relative bg-white overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-white"></div>
-          <div className="relative container mx-auto max-w-navbar px-4 md:px-6 py-20 md:py-28 text-center z-10">
+          <div className="relative container mx-auto max-w-7xl px-4 md:px-6 py-20 md:py-28 text-center z-10">
             <motion.div initial="hidden" animate="visible" variants={fadeIn}>
               <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 tracking-tight">Umzugsfirmen clever vergleichen und bis zu 40% sparen</h1>
               <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">Der definitive Leitfaden für Ihren stressfreien Umzug in der Schweiz. Holen Sie mehrere Offerten von Umzugsfirmen ein und finden Sie geprüfte Profis für Privatumzug und Reinigung. Erhalten Sie transparente Angebote und treffen Sie die beste Wahl für Ihr Budget und Ihre Nerven.</p>
@@ -212,53 +118,59 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </div>
         </section>
 
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-16 md:py-24 space-y-20 md:space-y-28">
+        {/* Main Content Section */}
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24 space-y-20 md:space-y-28">
           
-          <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-12 text-center">So einfach funktioniert der Vergleich</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-              {howItWorksSteps.map((step, index) => {
-                const Icon = howItWorksIcons[index];
-                return (
-                  <motion.div key={index} variants={fadeIn} className="relative flex flex-col items-center">
-                    <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4 border-4 border-white shadow-lg">
-                      <Icon className="w-10 h-10 text-green-600" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-slate-800 mb-2">{step.title}</h3>
-                    <p className="text-slate-600">{step.description}</p>
-                    {index < 3 && <div className="hidden md:block absolute top-10 left-1/2 w-full border-t-2 border-dashed border-gray-300 mt-0 ml-10"></div>}
-                  </motion.div>
-                );
-              })}
-            </div>
+          {/* Intro Text */}
+          <motion.section
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+              Sparen Sie bis zu 40% bei Ihrem Umzug in der Schweiz
+            </h2>
+            <p className="text-lg text-gray-600 mb-4 leading-relaxed">
+              Ein Wohnungswechsel kostet Geld, Zeit und Nerven. Die Suche nach der passenden Umzugsfirma macht den Stress oft noch grösser. Preise variieren stark – bei identischen Leistungen können die Kosten um mehrere hundert Franken abweichen.
+            </p>
+            <p className="text-lg text-gray-700 font-semibold mb-4">
+              <strong>Online-Offerten.ch macht Umzugsfirmen vergleichen einfach und kostenlos.</strong>
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Mit wenigen Klicks erhalten Sie bis zu 6 unverbindliche Offerten von geprüften Umzugsunternehmen aus Ihrer Region. So finden Sie den besten Umzugsservice zum fairsten Preis – ohne Aufwand und ohne Verpflichtung.
+            </p>
           </motion.section>
 
-          <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <Card className="bg-white shadow-xl p-6 md:p-10 border-t-4 border-green-500">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">So finden Sie die beste Umzugsfirma: Ihr Leitfaden zum Preisvergleich</h2>
-              <div className="prose max-w-none text-slate-600 leading-relaxed space-y-4">
-                <p>Ein Umzug ist mehr als nur der Transport von Kisten von A nach B; er ist ein bedeutender Schritt in einen neuen Lebensabschnitt. Die Wahl der richtigen Umzugsfirma ist dabei der entscheidende Faktor, der über einen stressfreien Start oder ein kostspieliges Chaos entscheidet. Viele machen den Fehler, sich von der erstbesten oder vermeintlich günstigsten Offerte locken zu lassen, ohne die Details zu prüfen. Doch ein gründlicher Preisvergleich mehrerer Anbieter ist unerlässlich, um versteckte Kosten, unzureichenden Versicherungsschutz oder unprofessionelle Dienstleistungen zu vermeiden. Eine seriöse Zügelfirma bietet Transparenz, Verlässlichkeit und die Sicherheit, dass Ihr Hab und Gut in besten Händen ist. Es geht darum, einen Partner zu finden, dem Sie vertrauen können – einen Partner, der die Komplexität Ihres Umzugs versteht und Ihnen mit Rat und Tat zur Seite steht. Ein systematischer Vergleich mehrerer Offerten schützt Sie nicht nur vor finanziellen Überraschungen, sondern sichert auch die Qualität und Sorgfalt, die Ihr Eigentum verdient. Nehmen Sie sich die Zeit, Angebote detailliert zu prüfen, denn diese Investition zahlt sich in Form von gespartem Geld, Zeit und Nerven um ein Vielfaches aus.</p>
-                <p>Der Prozess, verschiedene Umzugsfirmen miteinander zu vergleichen, kann auf den ersten Blick überwältigend wirken. Unzählige Anbieter werben mit verlockenden Preisen, doch wie trennt man die Spreu vom Weizen? Genau hier setzt unsere Plattform an. Anstatt stundenlang im Internet zu recherchieren, unzählige Telefonate zu führen und auf Rückmeldungen zu warten, bündeln wir den Prozess für Sie. Mit nur einer einzigen, kostenlosen Anfrage erreichen Sie ein Netzwerk von sorgfältig geprüften und qualifizierten Umzugsunternehmen in Ihrer Region. Diese Firmen wissen, dass sie im direkten Wettbewerb zueinander stehen, was sie dazu motiviert, Ihnen nicht nur wettbewerbsfähige, sondern auch faire und transparente Offerten zu unterbreiten. Sie erhalten bis zu sechs Angebote direkt in Ihr Postfach. So können Sie in aller Ruhe Preise, den detaillierten Leistungsumfang, Kundenbewertungen und die angebotenen Versicherungsleistungen nebeneinanderlegen. Dieser strukturierte Ansatz ermöglicht es Ihnen, eine fundierte Entscheidung zu treffen, die nicht allein auf dem Preis basiert, sondern das beste Gesamtpaket aus Kosten, Service und Vertrauenswürdigkeit berücksichtigt. Starten Sie jetzt Ihre Offertensuche und machen Sie den ersten Schritt zu einem reibungslosen und erfolgreichen Umzug.</p>
-              </div>
-            </Card>
-          </motion.section>
-
-          <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-12 text-center">Die ultimative Checkliste: 7 Kriterien für die beste Umzugsfirma</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {checklistItems.map((item, index) => {
-                const Icon = checklistIcons[index % checklistIcons.length];
+          {/* Warum Online-Offerten.ch wählen? - 3 Column Cards */}
+          <motion.section
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">
+              Warum Online-Offerten.ch wählen?
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {whyChooseUs.map((item, index) => {
+                const Icon = item.icon;
                 return (
                   <motion.div key={index} variants={fadeIn}>
-                    <Card className="bg-white shadow-lg hover:shadow-2xl h-full transition-shadow duration-300">
-                      <CardHeader className="flex flex-row items-start gap-4">
-                        <div className="p-3 bg-green-100 rounded-full mt-1">
-                          <Icon className="w-6 h-6 text-green-600" />
+                    <Card className="h-full bg-white shadow-lg hover:shadow-xl transition-shadow border-2 border-gray-100 hover:border-green-200">
+                      <CardHeader>
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="p-2 bg-green-100 rounded-lg">
+                            <Icon className="w-6 h-6 text-green-600" />
+                          </div>
+                          <CardTitle className="text-xl font-bold text-gray-800">
+                            {item.title}
+                          </CardTitle>
                         </div>
-                        <CardTitle className="text-xl font-bold text-slate-800">{item.title}</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-slate-600">{item.content}</p>
+                        <p className="text-gray-600 leading-relaxed">{item.description}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -267,70 +179,139 @@ const UmzugsfirmaVergleichenPageClient = () => {
             </div>
           </motion.section>
 
-          <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <Card className="bg-red-50 border-l-8 border-red-500 p-6 md:p-8 shadow-lg">
-              <div className="flex items-center gap-4 mb-4">
-                <AlertTriangle className="w-10 h-10 text-red-600 flex-shrink-0" />
-                <h2 className="text-2xl md:text-3xl font-bold text-red-800">Rote Flaggen: Bei diesen Anzeichen ist Vorsicht geboten</h2>
-              </div>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                {redFlagsItems.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3 text-red-700">
-                    <AlertTriangle className="w-5 h-5 mt-1 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </motion.section>
-
-          <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3 text-center">Was kostet ein Umzug? Die 6 wichtigsten Kostenfaktoren im Detail</h2>
-            <p className="text-lg text-slate-600 mb-12 text-center max-w-3xl mx-auto">Die Kosten für einen Umzug sind so individuell wie der Umzug selbst. Um mehrere Anbieter miteinander zu vergleichen und Offerten fair bewerten zu können, müssen Sie die entscheidenden Preistreiber kennen:</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {costFactors.map((factor, index) => {
-                const Icon = costFactorIcons[index % costFactorIcons.length];
+          {/* So einfach funktioniert's - Horizontal Steps */}
+          <motion.section
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 md:p-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12 text-center">
+              So einfach funktioniert's
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+              {/* Connection Line for Desktop */}
+              <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-green-300 z-0" style={{ top: '48px' }}></div>
+              
+              {howItWorksSteps.map((step, index) => {
+                const Icon = step.icon;
                 return (
-                  <motion.div key={index} variants={fadeIn} className="bg-white p-6 rounded-lg shadow-lg border-t-2 border-green-400">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="p-3 bg-green-100 rounded-full">
-                        <Icon className="w-6 h-6 text-green-600" />
+                  <motion.div
+                    key={index}
+                    variants={fadeIn}
+                    className="relative z-10 flex flex-col items-center text-center"
+                  >
+                    <div className="relative mb-6">
+                      <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg border-4 border-white">
+                        {step.number}
                       </div>
-                      <h3 className="text-lg font-bold text-slate-800">{factor.title}</h3>
+                      <div className="absolute -bottom-2 -right-2 bg-yellow-400 rounded-full p-2 shadow-md">
+                        <Icon className="w-6 h-6 text-yellow-900" />
+                      </div>
                     </div>
-                    <p className="text-slate-600">{factor.content}</p>
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {step.description}
+                    </p>
                   </motion.div>
                 );
               })}
             </div>
           </motion.section>
 
-          <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Häufig gestellte Fragen zum Preisvergleich von Umzugsfirmen</h2>
-            <Accordion type="single" collapsible className="w-full max-w-navbar mx-auto bg-white p-4 rounded-lg shadow-xl">
-              {faqItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-slate-800">{item.question}</AccordionTrigger>
-                  <AccordionContent className="text-base text-slate-600 leading-relaxed pt-2 pb-4">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
+          {/* Das sagen unsere Kunden - 2 Testimonials */}
+          <motion.section
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12 text-center">
+              Das sagen unsere Kunden
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <motion.div key={index} variants={fadeIn}>
+                  <Card className="h-full bg-white shadow-lg hover:shadow-xl transition-shadow border-l-4 border-green-500">
+                    <CardContent className="p-6">
+                      <div className="flex gap-1 mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 italic mb-4 leading-relaxed">
+                        "{testimonial.quote}"
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-5 h-5 text-green-600" />
+                        <div>
+                          <p className="font-semibold text-gray-800">{testimonial.author}</p>
+                          <p className="text-sm text-gray-600">{testimonial.location}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
-            </Accordion>
+            </div>
           </motion.section>
 
-          <motion.section 
-            className="text-center py-16 md:py-20 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl shadow-2xl"
-            variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          {/* Jetzt kostenlos Umzugsfirmen vergleichen - Large CTA */}
+          <motion.section
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl p-8 md:p-12 shadow-2xl"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Starten Sie jetzt Ihre Offertensuche</h2>
-            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto px-4">Verschwenden Sie keine Zeit mehr mit mühsamer Recherche. Füllen Sie unser Formular in wenigen Minuten aus und lassen Sie die besten Umzugsfirmen um Sie werben. Einfach, schnell und effizient.</p>
-            <Button asChild size="lg" className="bg-white text-green-700 hover:bg-gray-100 font-bold group px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
-              <Link href="/kostenlose-offerte-anfordern">
-                Jetzt kostenlos Offerten anfordern
-                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Jetzt kostenlos Umzugsfirmen vergleichen
+              </h2>
+              <p className="text-lg md:text-xl mb-6 opacity-95">
+                <strong>In 2 Minuten zum besten Preis für Ihren Umzug in der Schweiz.</strong>
+              </p>
+              <p className="text-base md:text-lg mb-8 opacity-90">
+                Tausende Kundinnen und Kunden haben bereits mit unserem Offerten Portal Geld gespart. Starten Sie jetzt Ihre Anfrage – völlig kostenlos und unverbindlich.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-white text-green-700 hover:bg-gray-100 font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                >
+                  <Link href="/kostenlose-offerte-anfordern">
+                    Jetzt kostenlose Offerten anfordern
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+              </div>
+              <p className="text-sm opacity-80 mb-6">
+                Kein Aufwand. Keine Verpflichtung. Nur Ersparnis.
+              </p>
+              <div className="border-t border-white/30 pt-6 mt-6">
+                <p className="text-base font-semibold mb-4">
+                  <strong>Noch unsicher?</strong>
+                </p>
+                <p className="text-sm opacity-90 mb-4">
+                  Unser Service ist 100% gratis. Sie erhalten Angebote von geprüften Dienstleistern mit Versicherung und Haftpflichtversicherung. Vergleichen Sie in Ruhe – die Wahl liegt bei Ihnen.
+                </p>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold px-6 py-3 rounded-lg"
+                >
+                  <Link href="/kostenlose-offerte-anfordern">
+                    Kostenlos vergleichen & sofort sparen
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </motion.section>
 
         </div>

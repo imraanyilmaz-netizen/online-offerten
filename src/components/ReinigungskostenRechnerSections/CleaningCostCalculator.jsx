@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Sparkles, ArrowRight, Loader2, ExternalLink } from 'lucide-react';
@@ -7,14 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from '@/components/ui/use-toast';
-
-const NewCustomerForm = lazy(() => import('@/components/NewCustomerForm/index'));
-
-const FormLoadingSpinner = () => (
-    <div className="flex justify-center items-center h-full w-full p-10">
-      <Loader2 className="h-10 w-10 text-blue-600 animate-spin" />
-    </div>
-);
 
 const CleaningCostCalculator = () => {
   const [propertyType, setPropertyType] = useState("apartment");
@@ -30,8 +22,6 @@ const CleaningCostCalculator = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   
-  const [showInlineForm, setShowInlineForm] = useState(false);
-  const [initialFormDataForForm, setInitialFormDataForForm] = useState({});
 
   const roomOptions = [
     { value: "1.5", label: "1.5 Zimmer" },
@@ -142,28 +132,22 @@ const CleaningCostCalculator = () => {
       fromRoomsValue = `${roomNumber}_zimmer_einfamilienhaus`;
     }
     
-    // Setze die initialen Formulardaten mit service=reinigung und step=2
-    setInitialFormDataForForm({
-        service: 'reinigung',
-        from_rooms: fromRoomsValue,
-        // Setze einen speziellen Parameter, um direkt zu Schritt 2 zu springen
-        _initialStep: 2,
+    // Weiterleitung zur Formularseite mit Parametern
+    const params = new URLSearchParams({
+      service: 'reinigung',
+      step: '2',
+      from_rooms: fromRoomsValue,
     });
-
-    // Öffne das Inline-Formular
-    setShowInlineForm(true);
     
-    // Scroll zum Formular und aktualisiere die URL für Schritt 2
-    setTimeout(() => {
-        const formElement = document.getElementById('calculator-inline-form-cleaning');
-        formElement?.scrollIntoView({ behavior: 'smooth' });
-        
-        // Aktualisiere die URL, damit das Formular zu Schritt 2 springt
-        const params = new URLSearchParams(window.location.search);
-        params.set('service', 'reinigung');
-        params.set('step', '2');
-        window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
-    }, 100);
+    // Zusätzliche Parameter hinzufügen, falls vorhanden
+    if (windows) params.set('windows', windows);
+    if (bathrooms) params.set('bathrooms', bathrooms);
+    if (kitchenCleaning) params.set('kitchen_cleaning', kitchenCleaning);
+    if (balconyTerrace) params.set('balcony_terrace', balconyTerrace);
+    if (blinds) params.set('blinds', blinds);
+    if (condition) params.set('condition', condition);
+    
+    window.location.href = `/kostenlose-offerte-anfordern?${params.toString()}`;
   };
 
   return (
@@ -279,23 +263,6 @@ const CleaningCostCalculator = () => {
         </CardContent>
       </Card>
 
-      {showInlineForm && (
-        <motion.div
-          id="calculator-inline-form-cleaning"
-          initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-          animate={{ opacity: 1, scaleY: 1 }}
-          exit={{ opacity: 0, scaleY: 0 }}
-          transition={{ duration: 0.3 }}
-          className="mt-8 p-6 bg-white rounded-lg border-2 border-gray-200 shadow-lg"
-        >
-           <Suspense fallback={<FormLoadingSpinner />}>
-             <NewCustomerForm 
-                key={`form-${showInlineForm}-${initialFormDataForForm.service || 'default'}`}
-                initialDataFromProps={initialFormDataForForm}
-              />
-           </Suspense>
-        </motion.div>
-      )}
     </>
   );
 };

@@ -31,7 +31,7 @@ const UmzugsreinigungPageClient = () => {
   const metaTitle = "Umzugsreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen"
   const metaDescription = "Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert."
   // Meta keywords removed - Google no longer uses this tag (since 2009)
-  const canonicalUrl = "/umzugsreinigung"
+  const canonicalUrl = "/reinigung/umzugsreinigung"
 
   // FAQ Data
   const faqItems = [
@@ -72,11 +72,11 @@ const UmzugsreinigungPageClient = () => {
       
       if (statsError) {
         console.error('Error fetching review stats:', statsError)
-        setReviewStats({ totalReviews: 142, realReviewCount: 0, averageRating: 4.9 })
+        setReviewStats({ totalReviews: 142, realReviewCount: 0, averageRating: 4.9 }) // UI only
       } else if (statsData) {
         const realCount = statsData.review_count || 0
         setReviewStats({
-          totalReviews: realCount + 142,
+          totalReviews: realCount + 142, // UI display only (not used in JSON-LD)
           realReviewCount: realCount,
           averageRating: statsData.average_rating || 4.9
         })
@@ -483,15 +483,15 @@ const UmzugsreinigungPageClient = () => {
                   <div className="mt-8 md:mt-12">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 md:mb-6">Weitere Reinigungsdienstleistungen</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                      <Link href="/wohnungsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                      <Link href="/reinigung/wohnungsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                         <h4 className="font-bold text-gray-900 mb-2 text-lg">Wohnungsreinigung</h4>
                         <p className="text-sm text-gray-600">Gründliche Wohnungsreinigung mit 100% Abnahmegarantie für alle Räume.</p>
                       </Link>
-                      <Link href="/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                      <Link href="/reinigung/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                         <h4 className="font-bold text-gray-900 mb-2 text-lg">Fensterreinigung</h4>
                         <p className="text-sm text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
-                      <Link href="/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                      <Link href="/reinigung/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                         <h4 className="font-bold text-gray-900 mb-2 text-lg">Baureinigung</h4>
                         <p className="text-sm text-gray-600">Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate.</p>
                       </Link>

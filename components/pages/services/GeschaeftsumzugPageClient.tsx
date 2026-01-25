@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { 
   ArrowRight, CheckCircle, Building2, Shield, TrendingDown, Clock, Users, Award,
-  MessageSquare
+  MessageSquare, ChevronRight
 } from 'lucide-react'
 import UmzugTypesSidebar from '@/components/UmzugPageParts/UmzugTypesSidebar'
 
@@ -19,7 +19,7 @@ const GeschaeftsumzugPageClient = () => {
   const metaTitle = "Geschäftsumzug: Kostenlose Offerten vergleichen"
   const metaDescription = "Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen. Schnell, transparent und regional."
   // Meta keywords removed - Google no longer uses this tag (since 2009)
-  const canonicalUrl = "/geschaeftsumzug"
+  const canonicalUrl = "/umzugsfirma/geschaeftsumzug"
 
   // Schema Data - Single JSON-LD Service schema
   const schema = {
@@ -77,6 +77,31 @@ const GeschaeftsumzugPageClient = () => {
           </div>
 
           <div className="relative container mx-auto max-w-navbar px-4 md:px-6 py-16 md:py-24">
+            {/* Breadcrumb Navigation */}
+            <nav className="mb-6 pt-4" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-2 text-sm text-gray-300">
+                <li>
+                  <Link href="/" className="hover:text-green-400 transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li>
+                  <Link href="/umzugsfirma" className="hover:text-green-400 transition-colors">
+                    Umzugsfirma
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li className="text-white font-medium" aria-current="page">
+                  Geschäftsumzug
+                </li>
+              </ol>
+            </nav>
+            
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-white space-y-8">
                 <motion.div
@@ -339,7 +364,7 @@ const GeschaeftsumzugPageClient = () => {
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">Weitere Services</h3>
                   <ul className="space-y-3 text-gray-700">
                     <li>
-                      <Link href="/privatumzug" className="text-green-600 hover:underline font-medium">
+                      <Link href="/umzugsfirma/privatumzug" className="text-green-600 hover:underline font-medium">
                         Privatumzug Angebote vergleichen
                       </Link>
                     </li>
@@ -349,7 +374,7 @@ const GeschaeftsumzugPageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/fensterreinigung" className="text-green-600 hover:underline font-medium">
+                      <Link href="/reinigung/fensterreinigung" className="text-green-600 hover:underline font-medium">
                         Fensterreinigung beauftragen
                       </Link>
                     </li>
@@ -359,12 +384,12 @@ const GeschaeftsumzugPageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/grundreinigung" className="text-green-600 hover:underline font-medium">
+                      <Link href="/reinigung/grundreinigung" className="text-green-600 hover:underline font-medium">
                         Grundreinigung buchen
                       </Link>
                     </li>
                     <li>
-                      <Link href="/bueroreinigung" className="text-green-600 hover:underline font-medium">
+                      <Link href="/reinigung/bueroreinigung" className="text-green-600 hover:underline font-medium">
                         Büroreinigung anfragen
                       </Link>
                     </li>

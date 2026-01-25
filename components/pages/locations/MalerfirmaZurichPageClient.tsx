@@ -16,7 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 const MalerfirmaZurichPageClient = () => {
   const router = useRouter()
   const city = 'Zürich'
-  const canonicalUrl = 'https://online-offerten.ch/malerfirma-zuerich'
+  const canonicalUrl = 'https://online-offerten.ch/malerfirma-in-der-naehe/zuerich'
 
   // Inject structured data
   useEffect(() => {
@@ -149,16 +149,16 @@ const MalerfirmaZurichPageClient = () => {
   ]
 
   const neighboringCities = [
-    { name: "Malerfirma Basel", link: "/malerfirma-basel" },
-    { name: "Malerfirma Bern", link: "/malerfirma-bern" },
-    { name: "Malerfirma Winterthur", link: "/malerfirma-winterthur" }
+    { name: "Malerfirma Basel", link: "/malerfirma-in-der-naehe/basel" },
+    { name: "Malerfirma Bern", link: "/malerfirma-in-der-naehe/bern" },
+    { name: "Malerfirma Winterthur", link: "/malerfirma-in-der-naehe/winterthur" }
   ]
 
   return (
     <>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-purple-50 via-white to-blue-50 py-16 md:py-24 overflow-hidden">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -188,7 +188,7 @@ const MalerfirmaZurichPageClient = () => {
                   Jetzt vergleichen
                 </Button>
                 <Button
-                  onClick={() => router.push('/malerarbeiten')}
+                  onClick={() => router.push('/malerarbeitenkosten')}
                   variant="outline"
                   size="lg"
                   className="text-lg px-8 py-6"
@@ -269,7 +269,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* City-Specific Introduction */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -301,7 +301,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -347,7 +347,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* Local Advantages */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -393,7 +393,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* Pricing Examples */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -435,7 +435,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* How It Works */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -507,7 +507,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -551,7 +551,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* Internal Linking */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -570,7 +570,7 @@ const MalerfirmaZurichPageClient = () => {
                   </Link> – Finden Sie Malerbetriebe in Ihrer Region.
                 </p>
                 <p>
-                  Auch in <Link href="/malerfirma-basel" className="text-purple-600 hover:text-purple-700 font-semibold underline">Basel</Link> finden Sie lokale Malerbetriebe. Weitere regionale Malerunternehmen finden Sie in <Link href="/malerfirma-bern" className="text-purple-600 hover:text-purple-700 font-semibold underline">Bern</Link> und <Link href="/malerfirma-winterthur" className="text-purple-600 hover:text-purple-700 font-semibold underline">Winterthur</Link>.
+                  Auch in <Link href="/malerfirma-in-der-naehe/basel" className="text-purple-600 hover:text-purple-700 font-semibold underline">Basel</Link> finden Sie lokale Malerbetriebe. Weitere regionale Malerunternehmen finden Sie in <Link href="/malerfirma-in-der-naehe/bern" className="text-purple-600 hover:text-purple-700 font-semibold underline">Bern</Link> und <Link href="/malerfirma-in-der-naehe/winterthur" className="text-purple-600 hover:text-purple-700 font-semibold underline">Winterthur</Link>.
                 </p>
               </div>
             </motion.div>
@@ -580,7 +580,7 @@ const MalerfirmaZurichPageClient = () => {
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-purple-600 to-purple-700 text-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -604,7 +604,7 @@ const MalerfirmaZurichPageClient = () => {
                 Jetzt vergleichen
               </Button>
               <Button
-                onClick={() => router.push('/malerarbeiten')}
+                onClick={() => router.push('/malerarbeitenkosten')}
                 size="lg"
                 className="bg-purple-500 hover:bg-purple-400 text-white border-2 border-white text-lg px-8 py-6 shadow-lg"
               >

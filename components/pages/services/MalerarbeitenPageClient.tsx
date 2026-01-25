@@ -58,7 +58,7 @@ const MalerarbeitenPageClient = () => {
       >
         <Hero />
         
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-5 gap-8 md:gap-12 items-start">
             <MainContent />
             <Sidebar />

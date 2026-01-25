@@ -9,62 +9,64 @@ const Footer = React.memo(() => {
 
   // Hauptstädte und wichtige Städte
   const hauptstaedte = [
-    { to: '/umzugsfirma-zuerich', text: 'Zürich' },
-    { to: '/umzugsfirma-bern', text: 'Bern' },
-    { to: '/umzugsfirma-basel', text: 'Basel' },
-    { to: '/umzugsfirma-luzern', text: 'Luzern' },
-    { to: '/umzugsfirma-st-gallen', text: 'St. Gallen' },
-    { to: '/umzugsfirma-genf', text: 'Genf' },
-    { to: '/umzugsfirma-lausanne', text: 'Lausanne' },
-    { to: '/umzugsfirma-lugano', text: 'Lugano' },
+    { to: '/umzugsfirma-in-der-naehe/zuerich', text: 'Zürich' },
+    { to: '/umzugsfirma-in-der-naehe/bern', text: 'Bern' },
+    { to: '/umzugsfirma-in-der-naehe/basel', text: 'Basel' },
+    { to: '/umzugsfirma-in-der-naehe/luzern', text: 'Luzern' },
+    { to: '/umzugsfirma-in-der-naehe/st-gallen', text: 'St. Gallen' },
+    { to: '/umzugsfirma-in-der-naehe/genf', text: 'Genf' },
+    { to: '/umzugsfirma-in-der-naehe/lausanne', text: 'Lausanne' },
+    { to: '/umzugsfirma-in-der-naehe/lugano', text: 'Lugano' },
   ];
 
   // Weitere wichtige Städte
   const weitereStaedte = [
-    { to: '/umzugsfirma-aargau', text: 'Aargau' },
-    { to: '/umzugsfirma-thun', text: 'Thun' },
-    { to: '/umzugsfirma-biel-bienne', text: 'Biel/Bienne' },
+    { to: '/umzugsfirma-in-der-naehe/aargau', text: 'Aargau' },
+    { to: '/umzugsfirma-in-der-naehe/thun', text: 'Thun' },
+    { to: '/umzugsfirma-in-der-naehe/biel-bienne', text: 'Biel/Bienne' },
   ];
 
   // Umzug Services
   const umzugServices = [
-    { to: '/privatumzug', text: 'Privatumzug' },
-    { to: '/geschaeftsumzug', text: 'Geschäftsumzug' },
-    { to: '/internationale-umzuege', text: 'Internationale Umzüge' },
-    { to: '/spezialtransporte', text: 'Spezialtransporte' },
-    { to: '/klaviertransport', text: 'Klaviertransport' },
+    { to: '/umzugsfirma/privatumzug', text: 'Privatumzug' },
+    { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug' },
+    { to: '/umzugsfirma/internationale-umzuege', text: 'Internationale Umzüge' },
+    { to: '/umzugsfirma/spezialtransporte', text: 'Spezialtransporte' },
+    { to: '/umzugsfirma/klaviertransport', text: 'Klaviertransport' },
   ];
 
   // Haupt Reinigungsdienstleistungen
   const hauptReinigung = [
-    { to: '/wohnungsreinigung', text: 'Wohnungsreinigung' },
-    { to: '/hausreinigung', text: 'Hausreinigung' },
-    { to: '/bueroreinigung', text: 'Büroreinigung' },
-    { to: '/umzugsreinigung', text: 'Umzugsreinigung' },
-    { to: '/unterhaltsreinigung', text: 'Unterhaltsreinigung' },
-    { to: '/grundreinigung', text: 'Grundreinigung' },
+    { to: '/reinigung/wohnungsreinigung', text: 'Wohnungsreinigung' },
+    { to: '/reinigung/hausreinigung', text: 'Hausreinigung' },
+    { to: '/reinigung/bueroreinigung', text: 'Büroreinigung' },
+    { to: '/reinigung/umzugsreinigung', text: 'Umzugsreinigung' },
+    { to: '/reinigung/unterhaltsreinigung', text: 'Unterhaltsreinigung' },
+    { to: '/reinigung/grundreinigung', text: 'Grundreinigung' },
   ];
 
   // Weitere Reinigungsdienstleistungen
   const weitereReinigung = [
-    { to: '/baureinigung', text: 'Baureinigung' },
-    { to: '/fensterreinigung', text: 'Fensterreinigung' },
-    { to: '/bodenreinigung', text: 'Bodenreinigung' },
-    { to: '/fassadenreinigung', text: 'Fassadenreinigung' },
-    { to: '/hofreinigung', text: 'Hofreinigung' },
+    { to: '/reinigung/baureinigung', text: 'Baureinigung' },
+    { to: '/reinigung/fensterreinigung', text: 'Fensterreinigung' },
+    { to: '/reinigung/bodenreinigung', text: 'Bodenreinigung' },
+    { to: '/reinigung/fassadenreinigung', text: 'Fassadenreinigung' },
+    { to: '/reinigung/hofreinigung', text: 'Hofreinigung' },
   ];
 
   // Weitere Services
   const weitereServices = [
-    { to: '/malerarbeiten', text: 'Malerarbeiten' },
+    { to: '/malerarbeitenkosten', text: 'Malerarbeiten' },
     { to: '/gartenarbeiten', text: 'Gartenarbeiten' },
     { to: '/raeumung-entsorgung', text: 'Räumung & Entsorgung' },
   ];
 
   // Kosten & Tools
   const kostenTools = [
-    { to: '/umzugskosten-rechner', text: 'Umzugskosten Rechner' },
-    { to: '/reinigungskosten-rechner', text: 'Reinigungskosten Rechner' },
+    { to: '/umzugsfirma/umzugskosten', text: 'Umzugskosten Rechner' },
+    { to: '/reinigung/reinigungskosten', text: 'Reinigungskosten Rechner' },
+    { to: '/malerarbeitenkosten', text: 'Malerarbeiten kosten' },
+    { to: '/umzugsfirma/umzugsofferten', text: 'Umzugsofferte' },
     { to: '/guenstig-umziehen', text: 'Günstig umziehen' },
     { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirma vergleichen' },
   ];

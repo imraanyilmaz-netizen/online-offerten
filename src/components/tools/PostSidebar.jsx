@@ -3,11 +3,91 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tag, Folder, Clock, Sparkles, Calculator, ListChecks, ArrowRight } from 'lucide-react';
+import { Tag, Folder, Clock, Sparkles, ArrowRight, List } from 'lucide-react';
 
-const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgeber' }) => {
+const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgeber', tableOfContents = [] }) => {
+  const [activeSection, setActiveSection] = React.useState('');
+
+  React.useEffect(() => {
+    if (!tableOfContents || tableOfContents.length === 0) return;
+
+    const handleScroll = () => {
+      const sections = tableOfContents.map(item => document.getElementById(item.id)).filter(Boolean);
+      
+      // Find the current section
+      let current = '';
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          current = section.id;
+          break;
+        }
+      }
+
+      // If no section is in view, find the closest one
+      if (!current) {
+        for (const section of sections) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top > 150) {
+            current = section.id;
+            break;
+          }
+        }
+      }
+
+      if (current && current !== activeSection) {
+        setActiveSection(current);
+      }
+    };
+
+    handleScroll(); // Initial check
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [tableOfContents, activeSection]);
+
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -100; // Offset for sticky header
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      setActiveSection(id);
+    }
+  };
+
   return (
     <aside className="sticky top-24 space-y-8">
+      {/* Table of Contents */}
+      {tableOfContents && tableOfContents.length > 0 && (
+        <Card className="bg-gray-50 border-gray-200">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <List className="w-5 h-5 text-gray-700" />
+              Inhalt
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <nav className="space-y-1">
+              {tableOfContents.map((item, index) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`block py-2 px-3 rounded-md text-sm transition-colors ${
+                    activeSection === item.id
+                      ? 'bg-green-100 text-green-700 font-semibold'
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                  }`}
+                >
+                  {item.title}
+                </a>
+              ))}
+            </nav>
+          </CardContent>
+        </Card>
+      )}
+
       {/* CTA Card */}
       <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg">
         <CardHeader>
@@ -24,33 +104,6 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
             <Link href="/kostenlose-offerte-anfordern" rel="noopener noreferrer">
               Kostenlose Offerten anfordern
               <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
-
-      {/* Helpful Tools */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Hilfreiche Tools</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
-            <Link href="/umzugskosten-rechner">
-              <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
-              <span className="flex-grow">Umzugskosten-Rechner</span>
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
-            <Link href="/reinigungskosten-rechner">
-              <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
-              <span className="flex-grow">Reinigungskosten-Rechner</span>
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
-            <Link href="/checklisten">
-              <ListChecks className="w-5 h-5 text-green-600 flex-shrink-0" />
-              <span className="flex-grow">Checklisten</span>
             </Link>
           </Button>
         </CardContent>

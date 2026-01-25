@@ -91,13 +91,16 @@ async function getHomePageData() {
   // Calculate average rating and total count
   let averageRating = 0
   let reviewCount = 0
+  let uiReviewCount = 0 // Separate count for UI display only
   
   if (ratingStatsResult.data && ratingStatsResult.data.length > 0) {
     const totalRating = ratingStatsResult.data.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
     averageRating = totalRating / ratingStatsResult.data.length
-    reviewCount = ratingStatsResult.data.length + 142 // Add 142 as requested
+    reviewCount = ratingStatsResult.data.length // Real review count for JSON-LD
+    uiReviewCount = ratingStatsResult.data.length + 142 // UI display count (with legacy adjustment)
   } else {
-    reviewCount = 142 // Default count if no reviews
+    reviewCount = 0 // Real count for JSON-LD
+    uiReviewCount = 142 // Default UI count if no reviews
   }
 
   return {
@@ -105,7 +108,8 @@ async function getHomePageData() {
     posts: postsResult.data || [],
     ratingStats: {
       averageRating: Math.round(averageRating * 10) / 10, // Round to 1 decimal
-      reviewCount
+      reviewCount, // Real count for JSON-LD (if needed)
+      uiReviewCount // Display count for UI
     }
   }
 }
@@ -256,14 +260,14 @@ export default async function HomePage() {
         <main className="flex-grow">
           {/* Hero Section - SEO Optimized - SERVER RENDERED */}
           <section 
-            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-[#E6F6EA] lg:bg-[#dbeadf] z-20" 
+            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-[#effcf1] lg:bg-[#dbeadf] z-20" 
             aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
           >
             {/* Background Image - Right Side - Desktop Only */}
             <div 
               className="hidden lg:block absolute -right-60 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full bg-cover bg-no-repeat"
               style={{
-                backgroundImage: `url('/image/online-offerten.webp')`,
+                backgroundImage: `url('/fotos/3b38703d-321c-4732-86ce-557415232adb.webp')`,
                 backgroundPosition: 'right center',
                 maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
                 WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
@@ -286,7 +290,7 @@ export default async function HomePage() {
               {/* Mobile Image - Above H1 on mobile */}
               <div className="flex items-center justify-center mb-6 lg:hidden -mx-4 sm:-mx-6">
                 <NextImage 
-                  src="/image/online-offerten.webp" 
+                  src="/fotos/3b38703d-321c-4732-86ce-557415232adb.webp" 
                   alt="Online Offerten" 
                   width={600}
                   height={400}
@@ -313,7 +317,7 @@ export default async function HomePage() {
                     textIndent: '0px'
                   }}
                 >
-                  Finden Sie die passende Anbieter für Ihr Projekt
+                  Offerten vergleichen & die passenden Anbieter für Ihr Projekt in der Schweiz finden
                   </h1>
                   
                 {/* Search Form */}
@@ -365,7 +369,7 @@ export default async function HomePage() {
                         ))}
                       </div>
                       <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
-                        Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount} Bewertungen)
+                        Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.uiReviewCount} Bewertungen)
                       </span>
                     </div>
                     <p className="text-sm sm:text-base text-gray-900 font-bold leading-relaxed text-left">
@@ -396,7 +400,7 @@ export default async function HomePage() {
           <section className="py-12 md:py-16 lg:py-20 bg-white relative z-10">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6">
                 <h2 
-                  className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-8 md:mb-12 text-left"
+                  className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-8 md:mb-12 text-left"
                   style={{
                     fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                     fontWeight: 700,
@@ -842,7 +846,7 @@ export default async function HomePage() {
                           textIndent: '0px'
                         }}
                       >
-                        Ein Umzug muss nicht anstrengend sein – mit den passenden <Link href="https://online-offerten.ch/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsfirmen</Link> an Ihrer Seite wird er schnell und unkompliziert. Unsere erfahrenen Partner kümmern sich um jeden Schritt des Umzugs, von der detaillierten Planung bis zur reibungslosen Umsetzung.
+                        Ein Umzug muss nicht anstrengend sein – mit den passenden <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsfirmen</Link> an Ihrer Seite wird er schnell und unkompliziert. Unsere erfahrenen Partner kümmern sich um jeden Schritt des Umzugs, von der detaillierten Planung bis zur reibungslosen Umsetzung.
                       </p>
                       <p 
                         className="leading-relaxed"
@@ -865,7 +869,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="https://online-offerten.ch/umzugsfirma-in-der-naehe" className="inline-flex items-center">
+                      <Link href="/umzugsfirma-in-der-naehe" className="inline-flex items-center">
                         Umzugsfirma finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
@@ -938,11 +942,11 @@ export default async function HomePage() {
                           textIndent: '0px'
                         }}
                       >
-                        Zu den wichtigsten Dienstleistungen zählen die <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Endreinigung</Link> und <Link href="/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsreinigung</Link> für die Wohnungsübergabe sowie die professionelle <Link href="/bueroreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Büroreinigung</Link> für Geschäftskunden. Ein erfahrenes Team sorgt mit fachmännischer Arbeit für einen positiven Eindruck.
+                        Zu den wichtigsten Dienstleistungen zählen die <Link href="/reinigung/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Endreinigung</Link> und <Link href="/reinigung/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Umzugsreinigung</Link> für die Wohnungsübergabe sowie die professionelle <Link href="/reinigung/bueroreinigung" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Büroreinigung</Link> für Geschäftskunden. Ein erfahrenes Team sorgt mit fachmännischer Arbeit für einen positiven Eindruck.
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="https://online-offerten.ch/reinigungsfirma-in-der-naehe" className="inline-flex items-center">
+                      <Link href="/reinigungsfirma-in-der-naehe" className="inline-flex items-center">
                         Reinigungsfirma finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
@@ -996,7 +1000,7 @@ export default async function HomePage() {
                           textIndent: '0px'
                         }}
                       >
-                        Qualifizierte Malerbetriebe bieten Ihnen professionelle <Link href="https://online-offerten.ch/malerarbeiten" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Malerarbeiten</Link> für Innen- und Aussenbereiche. Sie übernehmen dabei auch das fachgerechte Streichen und Lackieren von Decken, sodass alle Flächen optimal geschützt und gestaltet werden.
+                        Qualifizierte Malerbetriebe bieten Ihnen professionelle <Link href="/malerarbeitenkosten" className="text-green-600 hover:text-green-700 font-semibold underline transition-colors">Malerarbeiten</Link> für Innen- und Aussenbereiche. Sie übernehmen dabei auch das fachgerechte Streichen und Lackieren von Decken, sodass alle Flächen optimal geschützt und gestaltet werden.
                       </p>
                       <p 
                         className="leading-relaxed"
@@ -1019,7 +1023,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="https://online-offerten.ch/malerarbeiten" className="inline-flex items-center">
+                      <Link href="/malerfirma-in-der-naehe" className="inline-flex items-center">
                         Maler finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
@@ -1096,7 +1100,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="https://online-offerten.ch/gartenarbeiten" className="inline-flex items-center">
+                      <Link href="/gartenarbeiten" className="inline-flex items-center">
                         Gartenarbeit finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
@@ -1115,7 +1119,7 @@ export default async function HomePage() {
             <div className="container mx-auto max-w-navbar px-4 md:px-6">
               <div className="max-w-4xl mx-auto prose prose-lg">
                 <h2 
-                  className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                  className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-4"
                   style={{
                     fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                     fontWeight: 700,
@@ -1174,7 +1178,7 @@ export default async function HomePage() {
                 <div className="space-y-12 mb-16">
                   <div>
                     <h2 
-                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-4"
                       style={{
                         fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                         fontWeight: 700,
@@ -1270,7 +1274,7 @@ export default async function HomePage() {
 
                   <div>
                     <h2 
-                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-4"
                       style={{
                         fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                         fontWeight: 700,
@@ -1366,7 +1370,7 @@ export default async function HomePage() {
 
                   <div>
                     <h2 
-                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-4"
                       style={{
                         fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                         fontWeight: 700,
@@ -1445,7 +1449,7 @@ export default async function HomePage() {
 
                   <div>
                     <h2 
-                      className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-4"
+                      className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-4"
                       style={{
                         fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                         fontWeight: 700,
@@ -1526,7 +1530,7 @@ export default async function HomePage() {
                 {/* Warum Online-offerten.ch */}
                 <div className="space-y-8 mb-16">
                   <h2 
-                    className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-8"
+                    className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-8"
                     style={{
                       fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                       fontWeight: 700,
@@ -1621,7 +1625,7 @@ export default async function HomePage() {
                 {/* So funktioniert Online-offerten.ch */}
                 <div className="space-y-8 mb-12">
                   <h2 
-                    className="text-[28px] md:text-[36px] leading-[37.24px] md:leading-[47.88px] mb-8"
+                    className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] mb-8"
                     style={{
                       fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                       fontWeight: 700,

@@ -99,23 +99,31 @@ const ChecklistSection = ({ section, checkedItems, onToggleItem }: ChecklistSect
 };
 
 const ChecklistsPageClient = () => {
-  const [checkedItems, setCheckedItems] = useState(() => {
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  const [isClient, setIsClient] = useState(false);
+
+  // Load from localStorage only on client side
+  useEffect(() => {
+    setIsClient(true);
     try {
       const savedItems = localStorage.getItem('checklistCheckedItems');
-      return savedItems ? JSON.parse(savedItems) : {};
+      if (savedItems) {
+        setCheckedItems(JSON.parse(savedItems));
+      }
     } catch (error) {
       console.error("Could not parse checklist items from localStorage", error);
-      return {};
     }
-  });
+  }, []);
 
   useEffect(() => {
-    try {
-      localStorage.setItem('checklistCheckedItems', JSON.stringify(checkedItems));
-    } catch (error) {
-      console.error("Could not save checklist items to localStorage", error);
+    if (isClient) {
+      try {
+        localStorage.setItem('checklistCheckedItems', JSON.stringify(checkedItems));
+      } catch (error) {
+        console.error("Could not save checklist items to localStorage", error);
+      }
     }
-  }, [checkedItems]);
+  }, [checkedItems, isClient]);
 
   const checklistsData = useMemo(() => [
     { 
@@ -236,7 +244,7 @@ const ChecklistsPageClient = () => {
   const completedTasks = Object.values(checkedItems).filter(Boolean).length;
   const totalProgress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
 
-  const canonicalUrl = '/checklisten';
+  const canonicalUrl = '/umzugsfirma/checklists';
   const metaTitle = "Umzugs-Checklisten | Umzug planen leicht gemacht";
   const metaDescription = "Umfassende Checklisten für jede Phase Ihres Umzugs. Vom Kistenpacken bis zur Adressänderung – mit unseren Tipps stressfrei umziehen.";
   const mainTitle = "Ihre Umzugs-Checklisten: Perfekt organisiert umziehen";

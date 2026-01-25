@@ -310,49 +310,49 @@ const MalerfirmaInDerNaehePageClient = () => {
       title: "Innenanstrich",
       description: "Professioneller Innenanstrich für Ihre Wohnung oder Ihr Haus. Von der Vorbereitung bis zum Finish – wir sorgen für ein perfektes Ergebnis.",
       icon: Home,
-      link: "/malerarbeiten"
+      link: "/malerarbeitenkosten"
     },
     {
       title: "Aussenanstrich",
       description: "Wetterfester Aussenanstrich für Fassaden, Balkone und Aussenbereiche. Schutz und Ästhetik in einem.",
       icon: Building,
-      link: "/malerarbeiten"
+      link: "/malerarbeitenkosten"
     },
     {
       title: "Fassadenanstrich",
       description: "Professionelle Fassadenrenovation und -anstrich. Wir geben Ihrem Gebäude ein neues, gepflegtes Erscheinungsbild.",
       icon: Layers,
-      link: "/malerarbeiten"
+      link: "/malerarbeitenkosten"
     },
     {
       title: "Tapezierarbeiten",
       description: "Professionelle Tapezierarbeiten für Ihre Wände. Von der Auswahl bis zur Montage – wir sorgen für perfekte Ergebnisse.",
       icon: Palette,
-      link: "/malerarbeiten"
+      link: "/malerarbeitenkosten"
     },
     {
       title: "Spachtelarbeiten",
       description: "Professionelle Spachtel- und Vorbereitungsarbeiten für einen makellosen Anstrich. Wir bereiten Ihre Wände perfekt vor.",
       icon: Wrench,
-      link: "/malerarbeiten"
+      link: "/malerarbeitenkosten"
     },
     {
       title: "Renovationsarbeiten",
       description: "Komplette Renovationsarbeiten inklusive Malerarbeiten. Von der Planung bis zur Umsetzung – alles aus einer Hand.",
       icon: Sparkles,
-      link: "/malerarbeiten"
+      link: "/malerarbeitenkosten"
     }
   ]
 
   const locations = [
-    { name: "Malerfirma Zürich", link: "/malerfirma-zuerich" },
-    { name: "Malerfirma Basel", link: "/malerfirma-basel" },
-    { name: "Malerfirma Bern", link: "/malerfirma-bern" },
-    { name: "Malerfirma Genf", link: "/malerfirma-genf" },
-    { name: "Malerfirma Lausanne", link: "/malerfirma-lausanne" },
-    { name: "Malerfirma Luzern", link: "/malerfirma-luzern" },
-    { name: "Malerfirma St. Gallen", link: "/malerfirma-st-gallen" },
-    { name: "Malerfirma Winterthur", link: "/malerfirma-winterthur" }
+    { name: "Malerfirma Zürich", link: "/malerfirma-in-der-naehe/zuerich" },
+    { name: "Malerfirma Basel", link: "/malerfirma-in-der-naehe/basel" },
+    { name: "Malerfirma Bern", link: "/malerfirma-in-der-naehe/bern" },
+    { name: "Malerfirma Winterthur", link: "/malerfirma-in-der-naehe/winterthur" },
+    { name: "Malerfirma Luzern", link: "/malerfirma-in-der-naehe/luzern" },
+    { name: "Malerfirma St. Gallen", link: "/malerfirma-in-der-naehe/st-gallen" },
+    { name: "Malerfirma Genf", link: "/malerfirma-in-der-naehe/genf" },
+    { name: "Malerfirma Lausanne", link: "/malerfirma-in-der-naehe/lausanne" }
   ]
 
   return (
@@ -365,7 +365,7 @@ const MalerfirmaInDerNaehePageClient = () => {
             backgroundSize: '60px 60px'
           }}></div>
         </div>
-        <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -396,7 +396,7 @@ const MalerfirmaInDerNaehePageClient = () => {
                   Anfrage starten
                 </Button>
                 <Button
-                  onClick={() => router.push('/malerarbeiten')}
+                  onClick={() => router.push('/malerarbeitenkosten')}
                   variant="outline"
                   size="lg"
                   className="text-lg px-8 py-6"
@@ -458,7 +458,7 @@ const MalerfirmaInDerNaehePageClient = () => {
 
       {/* Why Local Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -504,7 +504,7 @@ const MalerfirmaInDerNaehePageClient = () => {
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -556,7 +556,7 @@ const MalerfirmaInDerNaehePageClient = () => {
 
       {/* How It Works Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -628,7 +628,7 @@ const MalerfirmaInDerNaehePageClient = () => {
 
       {/* Location Links Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -672,7 +672,7 @@ const MalerfirmaInDerNaehePageClient = () => {
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -707,7 +707,7 @@ const MalerfirmaInDerNaehePageClient = () => {
 
         {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-purple-600 to-purple-700 text-white">
-        <div className="container mx-auto max-w-navbar px-4 md:px-6">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -731,7 +731,7 @@ const MalerfirmaInDerNaehePageClient = () => {
                 Jetzt vergleichen
               </Button>
               <Button
-                onClick={() => router.push('/malerarbeiten')}
+                onClick={() => router.push('/malerarbeitenkosten')}
                 size="lg"
                 className="bg-purple-500 hover:bg-purple-400 text-white border-2 border-white text-lg px-8 py-6 shadow-lg"
               >
