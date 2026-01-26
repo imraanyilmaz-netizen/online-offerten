@@ -57,8 +57,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung/hausreinigung',
     languages: {
-      'de-CH': 'https://online-offerten.ch/hausreinigung',
-      'x-default': 'https://online-offerten.ch/hausreinigung',
+      'de-CH': 'https://online-offerten.ch/reinigung/hausreinigung',
+      'x-default': 'https://online-offerten.ch/reinigung/hausreinigung',
     },
   },
   openGraph: {

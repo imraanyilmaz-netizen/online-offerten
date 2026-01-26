@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung/umzugsreinigung',
     languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsreinigung',
-      'x-default': 'https://online-offerten.ch/umzugsreinigung',
+      'de-CH': 'https://online-offerten.ch/reinigung/umzugsreinigung',
+      'x-default': 'https://online-offerten.ch/reinigung/umzugsreinigung',
     },
   },
   openGraph: {
