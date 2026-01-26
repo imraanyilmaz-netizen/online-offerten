@@ -384,7 +384,7 @@ const UmzugsfirmaBaselPageClient = () => {
                   Erhalten Sie bis zu 6 Offerten von Umzugsunternehmen Basel. Die Anbieter nehmen direkt Kontakt mit Ihnen auf und erstellen individuelle Offerten.
                 </p>
               </div>
-              
+
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-[85vw] md:w-auto snap-start md:snap-none">
                 <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
                   <BarChart3 className="w-8 h-8 text-green-600" />
@@ -470,7 +470,7 @@ const UmzugsfirmaBaselPageClient = () => {
                     </p>
                   </div>
               </article>
-              
+
               <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
                 <h2 className="text-2xl font-bold text-gray-800">Warum über Online-Offerten.ch?</h2>
                 <p className="typography-p">Profitieren Sie von einem einfachen und transparenten Prozess:</p>
@@ -516,12 +516,12 @@ const UmzugsfirmaBaselPageClient = () => {
             </div>
           </div>
         </section>
-
+          
         {/* Navigation Section */}
         <section className="py-12 md:py-16 bg-white border-t border-gray-200">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <LocationPageNavigation allLocations={locations} currentCity={city} />
-          </div>
+          <LocationPageNavigation allLocations={locations} currentCity={city} />
+        </div>
         </section>
       </div>
     </>

@@ -86,50 +86,50 @@ const HomeHeroForm = () => {
       return []
     }
     
-    const searchTerm = serviceInput.toLowerCase()
-    
-    // Check for combination searches first (e.g., "privatumzug und reinigung")
-    const isCombinationSearch = searchTerm.includes('und') || searchTerm.includes('&')
-    
-    // Find matching category first
-    let matchedCategory: string | null = null
-    let matchedCategories: string[] = []
-    
-    for (const [category, keywords] of Object.entries(categoryKeywords)) {
-      if (keywords.some(keyword => searchTerm.includes(keyword))) {
-        if (isCombinationSearch) {
-          matchedCategories.push(category)
-        } else {
-          matchedCategory = category
-          break
+      const searchTerm = serviceInput.toLowerCase()
+      
+      // Check for combination searches first (e.g., "privatumzug und reinigung")
+      const isCombinationSearch = searchTerm.includes('und') || searchTerm.includes('&')
+      
+      // Find matching category first
+      let matchedCategory: string | null = null
+      let matchedCategories: string[] = []
+      
+      for (const [category, keywords] of Object.entries(categoryKeywords)) {
+        if (keywords.some(keyword => searchTerm.includes(keyword))) {
+          if (isCombinationSearch) {
+            matchedCategories.push(category)
+          } else {
+            matchedCategory = category
+            break
+          }
         }
       }
-    }
-    
-    // Filter options based on category or direct match
-    return serviceOptions.filter(option => {
-      // Direct label match (highest priority)
-      if (option.label.toLowerCase().includes(searchTerm)) {
-        return true
-      }
       
-      // Combination search (e.g., "privatumzug und reinigung")
-      if (isCombinationSearch && matchedCategories.length > 0) {
-        // Show combination options or options from matched categories
-        if (option.id.includes('_reinigung') || option.id.includes('_und_')) {
+      // Filter options based on category or direct match
+    return serviceOptions.filter(option => {
+        // Direct label match (highest priority)
+        if (option.label.toLowerCase().includes(searchTerm)) {
           return true
         }
-        return matchedCategories.some(cat => option.category === cat)
-      }
-      
-      // Single category match
-      if (matchedCategory) {
-        return option.category === matchedCategory
-      }
-      
-      // Fallback: category name match
-      return option.category.toLowerCase().includes(searchTerm)
-    })
+        
+        // Combination search (e.g., "privatumzug und reinigung")
+        if (isCombinationSearch && matchedCategories.length > 0) {
+          // Show combination options or options from matched categories
+          if (option.id.includes('_reinigung') || option.id.includes('_und_')) {
+            return true
+          }
+          return matchedCategories.some(cat => option.category === cat)
+        }
+        
+        // Single category match
+        if (matchedCategory) {
+          return option.category === matchedCategory
+        }
+        
+        // Fallback: category name match
+        return option.category.toLowerCase().includes(searchTerm)
+      })
   }, [serviceInput])
 
   useEffect(() => {
@@ -355,6 +355,24 @@ const HomeHeroForm = () => {
       
       {/* İçerik - relative z-index ile overlay'in üstünde */}
       <div className="relative z-10" style={{ zIndex: 2 }}>
+        {/* H1 Title */}
+        <h1 
+          className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-gray-900 break-words"
+          style={{
+            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+            fontWeight: 700,
+            textAlign: 'start',
+            letterSpacing: 'normal',
+            wordSpacing: '0px',
+            fontStyle: 'normal',
+            textTransform: 'none',
+            textDecoration: 'none',
+            textIndent: '0px'
+          }}
+        >
+          Offerten vergleichen & passende Anbieter in der Schweiz finden
+        </h1>
+        
       <div className="flex flex-col md:flex-row gap-4 bg-white/95 lg:bg-transparent rounded-xl p-4 lg:p-0 backdrop-blur-sm">
         <div className="flex-1 relative z-50">
           <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Was steht an?</label>

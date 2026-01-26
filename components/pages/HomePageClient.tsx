@@ -598,65 +598,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             </div>
           </section>
 
-          {/* Umzugsfirma Hero Section */}
-          <section 
-            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-white z-20" 
-            aria-label="Umzugsfirma finden - Kostenlose Offerten"
-          >
-            <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-              <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-                <div className="flex flex-col lg:flex-row">
-                  {/* Left Side - Image (40% on desktop) */}
-                  <div className="w-full lg:w-[40%] relative">
-                    <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full lg:min-h-[500px]">
-                      <NextImage 
-                        src="/image/umzugsfirma-kartons.webp" 
-                        alt="Umzugsfirma finden" 
-                        fill
-                        className="object-cover"
-                        priority={false}
-                        quality={85}
-                        sizes="(max-width: 1024px) 100vw, 40vw"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Right Side - Green Content Area (60% on desktop) */}
-                  <div className="w-full lg:w-[60%] bg-[#0d4d2c] relative px-6 sm:px-8 md:px-12 py-8 sm:py-10 md:py-12 lg:py-16">
-                    {/* Yellow Badge - Top Right */}
-                    <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-yellow-400 rounded-full px-4 py-2 shadow-lg z-10">
-                      <p className="text-black text-xs sm:text-sm font-bold text-center leading-tight">
-                        Kostenlos &<br />unverbindlich
-                      </p>
-                    </div>
-
-                    {/* Heading */}
-                    <h2 
-                      className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-white pr-20 sm:pr-24"
-                      style={{
-                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                        fontWeight: 700,
-                        textAlign: 'start',
-                        letterSpacing: 'normal',
-                        wordSpacing: '0px',
-                        fontStyle: 'normal',
-                        textTransform: 'none',
-                        textDecoration: 'none',
-                        textIndent: '0px'
-                      }}
-                    >
-                      Finden Sie die passende Anbieter.
-                    </h2>
-                      
-                    {/* Search Form - Custom styled for green background */}
-                    <div className="relative z-20 [&_button[type='submit']]:bg-yellow-400 [&_button[type='submit']]:hover:bg-yellow-500 [&_button[type='submit']]:text-black [&_button[type='submit']]:border-yellow-400">
-                      <HomeHeroForm />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
           {/* Ratgeber Section */}
           {postsLoading ? (

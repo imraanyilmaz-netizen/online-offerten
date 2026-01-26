@@ -456,7 +456,7 @@ const BodenreinigungPageClient = () => {
                         <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 mr-2"></div>
                         <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center leading-tight">
                           Bodenreinigung – Kostenlose Offerten anfordern und bis zu 40% sparen
-                        </h3>
+                    </h3>
                         <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 ml-2"></div>
                       </div>
                       
@@ -478,13 +478,13 @@ const BodenreinigungPageClient = () => {
                       
                       {/* CTA Button */}
                       <div className="flex justify-center">
-                        <Button
-                          onClick={handleCtaClick}
+                    <Button 
+                      onClick={handleCtaClick} 
                           className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 flex items-center gap-2"
-                        >
-                          Kostenlose Offerten anfordern
+                    >
+                      Kostenlose Offerten anfordern
                           <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-                        </Button>
+                    </Button>
                       </div>
                     </div>
                   </div>

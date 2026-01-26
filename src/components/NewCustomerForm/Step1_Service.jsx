@@ -697,10 +697,10 @@ const GardenWorkSection = ({ formData, handleCheckboxChange, handleChange, error
             <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.whatToGardenSubtitle')}</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 {gardenOptions.map(option => (
-                    <div key={option}>
+                     <div key={option}>
                         <Label 
                             htmlFor={`what_to_garden_${option}`}
-                            className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 h-full
+                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 h-full
                                 ${formData.what_to_garden?.[option] ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-400'}`
                             }
                         >

@@ -436,7 +436,7 @@ const WohnungsreinigungPageClient = () => {
                         <div className="flex items-center">
                           <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
                           <span className="text-white text-base md:text-lg font-medium">Geprüfte Partner mit Abnahmegarantie</span>
-                        </div>
+                      </div>
                         <div className="flex items-center">
                           <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
                           <span className="text-white text-base md:text-lg font-medium">Transparente Preise ohne Verpflichtung</span>
@@ -469,8 +469,8 @@ const WohnungsreinigungPageClient = () => {
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                       <AccordionTrigger className="text-xl font-semibold text-left hover:no-underline text-gray-900 px-2 sm:px-4 py-4">
-                        {item.q}
-                      </AccordionTrigger>
+                            {item.q}
+                          </AccordionTrigger>
                       <AccordionContent className="typography-p pt-2 pb-4 px-2 sm:px-4">
                             {item.a}
                           </AccordionContent>
