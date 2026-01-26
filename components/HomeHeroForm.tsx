@@ -341,18 +341,6 @@ const HomeHeroForm = () => {
       onSubmit={handleSubmit} 
       className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 relative z-30"
     >
-      {/* Mobilde arka plan resmi - sadece mobilde görünür, tam renk */}
-      <div 
-        className="lg:hidden absolute inset-0 rounded-2xl"
-        style={{
-          backgroundImage: 'url(/fotos/3b38703d-321c-4732-86ce-557415232adb.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 0,
-        }}
-      ></div>
-      
       {/* İçerik - relative z-index ile overlay'in üstünde */}
       <div className="relative z-10" style={{ zIndex: 2 }}>
         {/* H1 Title */}
