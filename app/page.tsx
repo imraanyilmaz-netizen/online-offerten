@@ -1,7 +1,13 @@
 import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import { createStaticClient } from '@/lib/supabase/server'
-import HomePageClient from '@/components/pages/HomePageClient'
 import HomeHeroForm from '@/components/HomeHeroForm'
+
+// Lazy load HomePageClient to improve initial page load performance
+const HomePageClient = dynamic(() => import('@/components/pages/HomePageClient'), {
+  ssr: true,
+  loading: () => <div className="min-h-[400px]" /> // Placeholder to prevent layout shift
+})
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import NextImage from 'next/image'
@@ -64,7 +70,8 @@ export const revalidate = 3600 // 1 saat
 async function getHomePageData() {
   const supabase = createStaticClient()
   
-  // Fetch reviews, posts, and rating stats in parallel
+  // Fetch reviews, posts, and rating stats in parallel with optimized queries
+  // Using select with specific fields to reduce data transfer
   const [reviewsResult, postsResult, ratingStatsResult] = await Promise.all([
     supabase
       .from('customer_reviews')
@@ -247,12 +254,17 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Preload hero image for faster LCP */}
+      {/* Preload critical resources for faster LCP */}
       <link
         rel="preload"
         as="image"
-        href="/image/online-offerten.webp"
+        href="/fotos/3b38703d-321c-4732-86ce-557415232adb.webp"
         fetchPriority="high"
+        type="image/webp"
+      />
+      <link
+        rel="dns-prefetch"
+        href="https://online-offerten.ch"
       />
       
       {/* Structured Data for SEO */}
@@ -268,16 +280,22 @@ export default async function HomePage() {
             className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-[#effcf1] lg:bg-[#dbeadf] z-20" 
             aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
           >
-            {/* Background Image - Right Side - Desktop Only */}
-            <div 
-              className="hidden lg:block absolute -right-60 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full bg-cover bg-no-repeat"
-              style={{
-                backgroundImage: `url('/fotos/3b38703d-321c-4732-86ce-557415232adb.webp')`,
-                backgroundPosition: 'right center',
-                maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
-                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
-              }}
-            ></div>
+            {/* Background Image - Right Side - Desktop Only - Optimized with Next.js Image */}
+            <div className="hidden lg:block absolute -right-60 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full overflow-hidden">
+              <NextImage
+                src="/fotos/3b38703d-321c-4732-86ce-557415232adb.webp"
+                alt=""
+                fill
+                priority
+                quality={85}
+                className="object-cover object-right"
+                style={{
+                  maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
+                  WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
+                }}
+                sizes="55vw"
+              />
+            </div>
             
             {/* Gradient Overlay - White from left to right with shadow effect - Desktop Only */}
             <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent" style={{ width: '60%' }}></div>

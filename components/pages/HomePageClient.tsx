@@ -314,30 +314,88 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     }
   }, [posts.length, getVisibleCardsCount]);
 
+  // Use refs to store RAF IDs for scroll handlers (better performance)
+  const scrollRafRef = useRef<number | null>(null);
+  const postsScrollRafRef = useRef<number | null>(null);
+  const resizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const postsResizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Optimized scroll handler using requestAnimationFrame for better INP
+  const optimizedScrollHandler = useCallback(() => {
+    if (scrollRafRef.current !== null) {
+      cancelAnimationFrame(scrollRafRef.current);
+    }
+    scrollRafRef.current = requestAnimationFrame(() => {
+      checkScrollability();
+    });
+  }, [checkScrollability]);
+
+  // Optimized resize handler with debouncing
+  const optimizedResizeHandler = useCallback(() => {
+    if (resizeTimeoutRef.current !== null) {
+      clearTimeout(resizeTimeoutRef.current);
+    }
+    resizeTimeoutRef.current = setTimeout(() => {
+      checkScrollability();
+    }, 150);
+  }, [checkScrollability]);
+
+  // Optimized posts scroll handler
+  const optimizedPostsScrollHandler = useCallback(() => {
+    if (postsScrollRafRef.current !== null) {
+      cancelAnimationFrame(postsScrollRafRef.current);
+    }
+    postsScrollRafRef.current = requestAnimationFrame(() => {
+      checkPostsScrollability();
+    });
+  }, [checkPostsScrollability]);
+
+  // Optimized posts resize handler
+  const optimizedPostsResizeHandler = useCallback(() => {
+    if (postsResizeTimeoutRef.current !== null) {
+      clearTimeout(postsResizeTimeoutRef.current);
+    }
+    postsResizeTimeoutRef.current = setTimeout(() => {
+      checkPostsScrollability();
+    }, 150);
+  }, [checkPostsScrollability]);
+
   useEffect(() => {
     const el = scrollContainerRef.current;
     if (el) {
-      window.addEventListener('resize', checkScrollability);
-      el.addEventListener('scroll', checkScrollability, { passive: true });
+      window.addEventListener('resize', optimizedResizeHandler, { passive: true });
+      el.addEventListener('scroll', optimizedScrollHandler, { passive: true });
       return () => {
-        window.removeEventListener('resize', checkScrollability);
-        el.removeEventListener('scroll', checkScrollability);
+        window.removeEventListener('resize', optimizedResizeHandler);
+        el.removeEventListener('scroll', optimizedScrollHandler);
+        if (scrollRafRef.current !== null) {
+          cancelAnimationFrame(scrollRafRef.current);
+        }
+        if (resizeTimeoutRef.current !== null) {
+          clearTimeout(resizeTimeoutRef.current);
+        }
       };
     }
-  }, [checkScrollability]);
+  }, [optimizedScrollHandler, optimizedResizeHandler]);
 
   useEffect(() => {
     const el = postsScrollRef.current;
     if (el && posts.length > 0) {
       checkPostsScrollability();
-      el.addEventListener('scroll', checkPostsScrollability, { passive: true });
-      window.addEventListener('resize', checkPostsScrollability);
+      el.addEventListener('scroll', optimizedPostsScrollHandler, { passive: true });
+      window.addEventListener('resize', optimizedPostsResizeHandler, { passive: true });
       return () => {
-        el.removeEventListener('scroll', checkPostsScrollability);
-        window.removeEventListener('resize', checkPostsScrollability);
+        el.removeEventListener('scroll', optimizedPostsScrollHandler);
+        window.removeEventListener('resize', optimizedPostsResizeHandler);
+        if (postsScrollRafRef.current !== null) {
+          cancelAnimationFrame(postsScrollRafRef.current);
+        }
+        if (postsResizeTimeoutRef.current !== null) {
+          clearTimeout(postsResizeTimeoutRef.current);
+        }
       };
     }
-  }, [posts.length, checkPostsScrollability]);
+  }, [posts.length, checkPostsScrollability, optimizedPostsScrollHandler, optimizedPostsResizeHandler]);
 
   const scroll = useCallback((direction: 'left' | 'right') => {
     const el = scrollContainerRef.current;

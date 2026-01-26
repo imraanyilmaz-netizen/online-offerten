@@ -273,17 +273,20 @@ const HomeHeroForm = () => {
     }
   }, [])
 
-  // Stats useEffect
+  // Stats useEffect - optimized to reduce re-renders
   useEffect(() => {
-    // Rastgele dakika değeri (2-15 arası)
+    // Initial random minutes value (2-15)
     const randomMinutes = Math.floor(Math.random() * 14) + 2
     setMinutesAgo(randomMinutes)
 
-    // Her dakika dakika sayısını güncelle (2-15 arası rastgele)
+    // Update every minute with random value (2-15)
     const minutesInterval = setInterval(() => {
-      const randomMinutes = Math.floor(Math.random() * 14) + 2
-      setMinutesAgo(randomMinutes)
-    }, 60000) // Her 1 dakikada bir
+      setMinutesAgo(prev => {
+        const newValue = Math.floor(Math.random() * 14) + 2
+        // Only update if value changed to prevent unnecessary re-renders
+        return newValue !== prev ? newValue : prev
+      })
+    }, 60000) // Every 1 minute
 
     return () => {
       clearInterval(minutesInterval)
