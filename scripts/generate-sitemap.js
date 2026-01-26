@@ -185,6 +185,7 @@ async function generateSitemap() {
   ];
 
   // Private and admin routes that should NOT be in sitemap
+  // Also exclude old URLs that have 301 redirects to new URLs
   const excludedRoutes = [
     '/forgot-password',
     '/update-password',
@@ -201,6 +202,21 @@ async function generateSitemap() {
     '/bewertung', // Private route
     '/post', // Internal route
     '/email-confirmed', // Email confirmation page (noindex, nofollow)
+    // Old URLs with 301 redirects - should not be in sitemap
+    '/baureinigung', // → /reinigung/baureinigung
+    '/bodenreinigung', // → /reinigung/bodenreinigung
+    '/bueroreinigung', // → /reinigung/bueroreinigung
+    '/fassadenreinigung', // → /reinigung/fassadenreinigung
+    '/fensterreinigung', // → /reinigung/fensterreinigung
+    '/grundreinigung', // → /reinigung/grundreinigung
+    '/hausreinigung', // → /reinigung/hausreinigung
+    '/hofreinigung', // → /reinigung/hofreinigung
+    '/umzugsreinigung', // → /reinigung/umzugsreinigung
+    '/unterhaltsreinigung', // → /reinigung/unterhaltsreinigung
+    '/wohnungsreinigung', // → /reinigung/wohnungsreinigung
+    '/reinigungskosten', // → /reinigung/reinigungskosten
+    '/umzugsofferten', // → /umzugsfirma/umzugsofferten
+    '/free-quote-request', // Noindex page (robots: { index: false })
   ];
 
   // Get all static routes from app directory

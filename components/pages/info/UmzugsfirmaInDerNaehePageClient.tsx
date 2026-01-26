@@ -548,13 +548,13 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                     <div className="flex items-center gap-2">
                       <ShieldCheck className="h-5 w-5 text-green-600" />
                       <span className="text-sm text-gray-600">Nur geprüfte Firmen</span>
-                    </div>
+            </div>
                     <div className="flex items-center gap-2">
                       <Award className="h-5 w-5 text-green-600" />
                       <span className="text-sm text-gray-600">Bis zu 40% sparen</span>
-                    </div>
-                  </div>
-                </div>
+              </div>
+              </div>
+              </div>
               </div>
             )}
             </div>

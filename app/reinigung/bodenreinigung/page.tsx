@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import BodenreinigungPageClient from '@/components/pages/services/BodenreinigungPageClient'
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
 
-export const dynamic = 'force-dynamic'
+// ISR: Sayfa 24 saatte bir otomatik yenilenecek (86400 saniye)
+// Bu sayfa statik olarak build edilir, ancak 24 saatte bir arka planda yenilenir
+// SEO için daha hızlı yükleme ve daha iyi performans sağlar
+export const revalidate = 86400 // 24 saat
 
 export const metadata: Metadata = {
   title: 'Bodenreinigung – Kostenlose Offerten vergleichen',
@@ -47,7 +50,7 @@ export const metadata: Metadata = {
 
 async function getReviewStats() {
   try {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     
     // Tüm onaylanmış yorumları say (sınırsız)
     const { count: totalReviewCount, error: countError } = await supabase

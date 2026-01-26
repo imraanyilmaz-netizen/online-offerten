@@ -46,3 +46,5 @@ export default function UmzugsfirmaStGallenPage() {
   return <UmzugsfirmaStGallenPageClient />
 }
 
+
+

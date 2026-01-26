@@ -2,13 +2,16 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Script from 'next/script'
 import UmzugsoffertenPageClient from '@/components/pages/info/UmzugsoffertenPageClient'
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
 
-export const dynamic = 'force-dynamic'
+// ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
+// Bu sayfa statik olarak build edilir, ancak 1 saatte bir arka planda yenilenir
+// SEO için daha hızlı yükleme ve daha iyi performans sağlar
+export const revalidate = 3600 // 1 saat
 
 async function getReviewStats() {
   try {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     
     // Tüm onaylanmış yorumları say (sınırsız)
     const { count: totalReviewCount, error: countError } = await supabase

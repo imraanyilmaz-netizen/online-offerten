@@ -46,3 +46,5 @@ export default function UmzugsfirmaLausannePage() {
   return <UmzugsfirmaLausannePageClient />
 }
 
+
+

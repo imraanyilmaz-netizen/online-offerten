@@ -1,11 +1,14 @@
 import { Suspense } from 'react'
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
 import PartnerProfilePageClient from '@/components/pages/PartnerProfilePageClient'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+// ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
+export const revalidate = 3600
+
 async function getPartnerData(slug: string) {
-  const supabase = await createClient()
+  const supabase = createStaticClient()
   
   // Partner inaktif olsa bile verileri getir - yorumlar herzaman gösterilsin
   const { data: partnerData, error: partnerError } = await supabase
@@ -22,7 +25,7 @@ async function getPartnerData(slug: string) {
 }
 
 async function getPartnerReviewStats(partnerId: string) {
-  const supabase = await createClient()
+  const supabase = createStaticClient()
   
   // Alle genehmigten Reviews für diesen Partner zählen (für Schema.org und Google)
   // Nur genehmigte Reviews werden gezählt, da diese im Admin-Bereich freigegeben wurden

@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import UmzugskostenRechnerPageClient from '@/components/pages/tools/UmzugskostenRechnerPageClient'
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
 
-export const dynamic = 'force-dynamic'
+// ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
+// Bu sayfa statik olarak build edilir, ancak 1 saatte bir arka planda yenilenir
+// SEO için daha hızlı yükleme ve daha iyi performans sağlar
+export const revalidate = 3600 // 1 saat
 
 export const metadata: Metadata = {
   title: 'Umzugskosten berechnen: Kostenlos & schnell',
@@ -47,7 +50,7 @@ export const metadata: Metadata = {
 
 async function getReviewStats() {
   try {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     
     // Tüm onaylanmış yorumları say (sınırsız)
     const { count: totalReviewCount, error: countError } = await supabase

@@ -4,11 +4,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Globe, Users, Truck, Home, ShieldCheck, Clock, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Globe, Users, Truck, Home, ShieldCheck, Clock, Star, ChevronRight, Calculator, TrendingUp } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import LocationSidebar from '@/components/locations/LocationSidebar';
+import Image from 'next/image';
 import { faqs } from '@/data/locationFaqs';
 
 const AdvantageItem = ({ icon: Icon, title, text, delay }: any) => {
@@ -166,190 +167,207 @@ const UmzugsfirmaLuzernPageClient = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-      <div className="bg-white overflow-x-hidden w-full max-w-full">
-        {/* Hero Section - Split Layout */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative w-full max-w-full py-12 md:py-16 lg:py-20 overflow-hidden"
+      <div className="bg-white overflow-x-hidden">
+        {/* Hero Section - Ana Sayfa Stili */}
+        <section 
+          className="relative w-full py-12 md:py-16 overflow-hidden bg-white z-20" 
+          aria-label="Umzugsfirma Luzern - Kostenlose Offerten"
           itemScope
           itemType="https://schema.org/Service"
         >
-          {/* Background Image - Right Side */}
-          <div 
-            className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 h-full bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('${(locationData as any)?.image || 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-luzern-kostenlose-offerte.webp'}')`,
-              maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
-            }}
-          ></div>
-          
-          {/* Gradient Overlay - White from left to right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent"></div>
-          
-          {/* White shadow/glow effect towards the image */}
-          <div 
-            className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 pointer-events-none"
-            style={{
-              boxShadow: 'inset -100px 0 100px -50px rgba(255, 255, 255, 0.8)'
-            }}
-          ></div>
-          
-          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10 overflow-x-hidden w-full max-w-full">
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center min-h-[400px] md:min-h-[500px] w-full">
-              {/* Left Side - Content Card */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="bg-white rounded-xl shadow-xl p-5 md:p-6 lg:p-7 w-full max-w-full overflow-x-hidden overflow-wrap break-words"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-sm font-semibold text-green-600">Luzern & Zentralschweiz</span>
+          <div className="container mx-auto max-w-7xl px-0 sm:px-4 md:px-6">
+            <div className="bg-white rounded-none sm:rounded-2xl overflow-hidden shadow-none sm:shadow-xl">
+              <div className="flex flex-col lg:flex-row-reverse">
+                {/* Right Side - Image (40% on desktop) */}
+                <div className="w-full lg:w-[40%] relative">
+                  <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full lg:min-h-[500px]">
+                    <Image 
+                      src={(locationData as any)?.image || '/image/default-umzug.jpg'}
+                      alt="Professionelle Zügelfirma in Luzern - Umzugsunternehmen bei der Arbeit"
+                      fill
+                      className="object-cover"
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                  </div>
                 </div>
-                <h1 
-                  className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 leading-tight break-words"
-                  itemProp="name"
-                >
-                  Umzugsfirma{' '}
-                  <span className="text-green-600 underline decoration-green-500 decoration-2 underline-offset-4">Luzern</span>{' '}
-                  vergleichen: Kostenlose Offerten
-                </h1>
-                
-                <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed font-medium break-words overflow-wrap-anywhere" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }} itemProp="description">
-                  Umzugsfirma Luzern vergleichen: Kostenlose Offerten von geprüften Umzugsfirmen in{' '}
-                  <span className="font-semibold text-green-600 underline decoration-green-400 decoration-1">Luzern</span>{' '}
-                  und der Zentralschweiz. Professionelle Zügelfirmen in Luzern bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Qualitativ hochwertige Umzugsunternehmen mit Reinigung, Räumung, Entsorgung und Lagerung. Mehrere Anbieter vergleichen und bis zu 40% sparen!
-                </p>
-                
-                <div className="mb-4">
-                  <p className="text-base md:text-lg font-bold text-gray-900 mb-1">
-                    <span className="text-green-600 underline decoration-green-500 decoration-2 underline-offset-4">
-                      Jetzt unverbindliche Offerte erhalten!
-                    </span>
+
+                {/* Left Side - Green Content Area (60% on desktop) */}
+                <div className="w-full lg:w-[60%] bg-[#0d4d2c] relative px-4 sm:px-8 md:px-12 py-6 sm:py-10 md:py-12 lg:py-16">
+                  {/* Yellow Badge - Top Right */}
+                  <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-yellow-400 rounded-full px-4 py-2 shadow-lg z-10">
+                    <p className="text-black text-xs sm:text-sm font-bold text-center leading-tight">
+                      Kostenlos &<br />unverbindlich
+                    </p>
+                  </div>
+
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-white/10 rounded-full border border-white/20">
+                    <span className="text-sm font-medium text-white">Luzern & Zentralschweiz</span>
+                  </div>
+
+                  {/* Heading */}
+                  <h1 
+                    className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-white pr-20 sm:pr-24"
+                    itemProp="name"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 700,
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
+                    Umzugsfirma{' '}
+                    <span className="text-yellow-400">Luzern</span>{' '}
+                    vergleichen: Kostenlose Offerten
+                  </h1>
+                    
+                  {/* Description */}
+                  <p className="text-base sm:text-lg text-white/90 mb-8 leading-relaxed" itemProp="description">
+                    Umzugsfirma Luzern vergleichen: Kostenlose Offerten von geprüften Umzugsfirmen in Luzern und der Zentralschweiz. Professionelle Zügelfirmen in Luzern bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Qualitativ hochwertige Umzugsunternehmen mit Reinigung, Räumung, Entsorgung und Lagerung. Mehrere Anbieter vergleichen und bis zu 40% sparen!
+                  </p>
+                  
+                  {/* Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                    <Button 
+                      asChild
+                      size="lg" 
+                      className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
+                    >
+                      <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Luzern">
+                        Kostenlose Offerten anfordern
+                        <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                    <Button 
+                      asChild
+                      variant="outline"
+                      size="lg" 
+                      className="bg-white/10 hover:bg-white/20 text-white border-white/30 px-8 py-6 text-lg rounded-lg shadow-sm hover:shadow-md"
+                    >
+                      <Link href="/umzugsfirma/umzugskosten">
+                        <Calculator className="w-5 h-5 mr-2" />
+                        Kosten berechnen
+                      </Link>
+                    </Button>
+                  </div>
+                  
+                  {/* Trust Badges */}
+                  <div className="flex flex-wrap gap-6 text-sm">
+                    <div className="flex items-center gap-2 text-white">
+                      <CheckCircle className="w-5 h-5 text-yellow-400" />
+                      <span className="font-medium">100% kostenlos</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white">
+                      <ShieldCheck className="w-5 h-5 text-yellow-400" />
+                      <span className="font-medium">Geprüfte Partner</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white">
+                      <TrendingUp className="w-5 h-5 text-yellow-400" />
+                      <span className="font-medium">Bis zu 40% sparen</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Breadcrumb Navigation - Hero Altında */}
+            <nav className="mt-4 sm:mt-6 pt-4 px-4 sm:px-0" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+                <li>
+                  <Link href="/" className="hover:text-green-600 transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li>
+                  <Link href="/umzugsfirma-in-der-naehe" className="hover:text-green-600 transition-colors">
+                    Umzugsfirma in der Nähe
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li className="text-gray-900 font-medium" aria-current="page">
+                  Umzugsfirma Luzern
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </section>
+
+        {/* Two Column Layout: Content Left, Services Right */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+              {/* Left Column - Content */}
+              <div className="lg:col-span-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                  Umzugsfirma Luzern: Full Service Umzug für einen stressfreien Umzug in der Zentralschweiz
+                </h2>
+                <div className="text-gray-700 mb-8 leading-relaxed space-y-4">
+                  <p>
+                    Planen Sie einen Umzug in Luzern und suchen eine zuverlässige Umzugsfirma? Unser Full Service Umzug in Luzern bietet Ihnen eine komplett sorgenfreie Lösung – von der ersten Planung bis zum letzten ausgepackten Karton. Als erfahrene Umzugsfirma Luzern übernehmen wir nicht nur den Transport, sondern das gesamte Umzugsprojekt: professionelle Verpackung mit hochwertigem Material, schonender Transport durch speziell geschulte Teams, fachgerechte Möbelmontage und auf Wunsch auch gründliche Umzugsreinigung mit Abnahmegarantie.
+                  </p>
+                  <p>
+                    Unsere Zügelfirma Luzern kennt die Besonderheiten der Zentralschweiz: die engen Gassen der Altstadt, die Parkregelungen in den verschiedenen Quartieren und die effizientesten Routen für einen reibungslosen Ablauf. Wir beantragen die notwendigen Halteverbotszonen bei der Stadt Luzern und planen jeden Umzug individuell nach Ihren Bedürfnissen – egal ob Privatumzug innerhalb Luzerns, Geschäftsumzug mit minimalen Ausfallzeiten oder spezieller Transport für Klavier, Tresor oder Kunstgegenstände.
+                  </p>
+                  <p>
+                    Mit unserer Full Service Lösung müssen Sie sich um nichts kümmern. Unsere geprüften Umzugsunternehmen in Luzern sind versichert, zertifiziert und verfügen über langjährige Erfahrung in der Region. Transparente Fixpreise ohne versteckte Kosten und persönliche Betreuung gehören zu unserem Standard. <strong>Vergleichen Sie jetzt kostenlos mehrere Offerten von Top-Umzugsfirmen in Luzern und sparen Sie bis zu 40% bei Ihrem Umzug.</strong>
                   </p>
                 </div>
-                
-                {/* Service Grid */}
-                <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=Luzern"
-                    className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
-                  >
-                    <Home className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                    <span className="text-sm font-semibold text-gray-800 text-center mb-0.5 break-words w-full">Privatumzug</span>
-                    <span className="text-xs text-gray-600 text-center break-words w-full px-1">Wohnung, Haus, WG-Zimmer</span>
-                    <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
-                  </Link>
-                  
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=geschaeftsumzug&city=Luzern"
-                    className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
-                  >
-                    <Building className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                    <span className="text-sm font-semibold text-gray-800 text-center mb-0.5 break-words w-full">Geschäftsumzug</span>
-                    <span className="text-xs text-gray-600 text-center break-words w-full px-1">Büro, Ladenlokal, Werkstatt</span>
-                    <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
-                  </Link>
-                  
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international&city=Luzern"
-                    className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
-                  >
-                    <Globe className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                    <span className="text-sm font-semibold text-gray-800 text-center mb-0.5 break-words w-full">Internationaler Umzug</span>
-                    <span className="text-xs text-gray-600 text-center break-words w-full px-1">Umzüge ins oder aus dem Ausland</span>
-                    <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
-                  </Link>
-                  
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport&city=Luzern"
-                    className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-all transform hover:scale-105 group overflow-hidden w-full"
-                  >
-                    <Package className="w-6 h-6 text-green-600 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
-                    <span className="text-sm font-semibold text-gray-800 text-center mb-0.5 break-words w-full">Spezialtransport</span>
-                    <span className="text-xs text-gray-600 text-center break-words w-full px-1">Klavier, Tresor, Kunst & mehr</span>
-                    <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
-                  </Link>
+              </div>
+              
+              {/* Right Column - Services - Luzern Özel */}
+              <div className="lg:col-span-4">
+                <div className="sticky top-24">
+                  <LocationSidebar 
+                    city={city} 
+                    districts={{
+                      title: "Stadtteile in Luzern",
+                      text: "Unsere Partner sind in allen Quartieren von Luzern für Sie im Einsatz:",
+                      list: [
+                        "Altstadt",
+                        "Neustadt",
+                        "Wesemlin",
+                        "Tribschen",
+                        "Bramberg",
+                        "Hirschmatt",
+                        "Maihof",
+                        "Biregg",
+                        "Littau",
+                        "Reussbühl",
+                        "Würzenbach",
+                        "Stadtteil Nord"
+                      ]
+                    }}
+                    searches={undefined as any}
+                  />
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
-        </motion.section>
+        </section>
 
         {/* Main Content Section */}
-        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16 lg:py-20 w-full max-w-full overflow-x-hidden">
-          <div className="grid lg:grid-cols-4 gap-8 md:gap-12 items-start w-full">
-            {/* Main Content - 3 columns */}
-            <motion.main 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-3 space-y-12 w-full min-w-0 overflow-x-hidden"
-            >
-              {/* Why Compare Section */}
-              <article className="bg-white rounded-xl shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100 w-full min-w-0 overflow-x-hidden">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 md:mb-6 break-words overflow-wrap-anywhere">Warum Umzugsfirmen in Luzern vergleichen?</h2>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6 break-words overflow-wrap-anywhere">
-                  Ein Umzug in Luzern, der wunderschönen Stadt am Vierwaldstättersee, erfordert sorgfältige Planung und eine zuverlässige Umzugsfirma an Ihrer Seite. Ob Sie innerhalb der malerischen Altstadt, in einen modernen Vorort oder aus einem anderen Kanton nach Luzern ziehen – der Vergleich mehrerer Anbieter ist der Schlüssel zu einem erfolgreichen und kostengünstigen Umzug.
-                </p>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6 break-words overflow-wrap-anywhere">
-                  Die Preise für Umzugsdienstleistungen in Luzern können erheblich variieren. Während einige Umzugsfirmen sehr günstige Pauschalpreise anbieten, können andere bei ähnlichen Leistungen deutlich höhere Kosten verlangen. Ein systematischer Vergleich hilft Ihnen nicht nur, das beste Preis-Leistungs-Verhältnis zu finden, sondern auch sicherzustellen, dass Sie mit einem seriösen und zuverlässigen Unternehmen zusammenarbeiten.
-                </p>
-                <div className="grid md:grid-cols-2 gap-6 mt-8">
-                  {advantages.map((advantage, index) => (
-                    <AdvantageItem
-                      key={index}
-                      icon={advantage.icon}
-                      title={advantage.title}
-                      text={advantage.text}
-                      delay={index}
-                    />
-                  ))}
-                </div>
-              </article>
-
-              {/* Services Section */}
-              <article className="bg-white rounded-xl shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100 w-full min-w-0 overflow-x-hidden">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 md:mb-6 break-words overflow-wrap-anywhere">Umzugsleistungen in Luzern: Von A bis Z</h2>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6 break-words overflow-wrap-anywhere">
-                  Professionelle Umzugsfirmen in Luzern bieten ein breites Spektrum an Dienstleistungen, um Ihren Umzug so reibungslos wie möglich zu gestalten. Egal, ob Sie einen einfachen Wohnungsumzug, einen komplexen Geschäftsumzug oder einen speziellen Transport benötigen – die richtige Firma hat die Erfahrung und das Equipment, um Ihre Anforderungen zu erfüllen.
-                </p>
-                <div className="grid md:grid-cols-2 gap-6 mt-8">
-                  {services.map((service, index) => {
-                    const Icon = service.icon;
-                    return (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-green-300 transition-colors"
-                      >
-                        <div className="flex items-start gap-3 md:gap-4">
-                          <div className="p-2 md:p-3 bg-green-100 rounded-lg flex-shrink-0">
-                            <Icon className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2 break-words">{service.title}</h3>
-                            <p className="text-sm md:text-base text-gray-600 leading-relaxed break-words overflow-wrap-anywhere">{service.text}</p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </article>
-
-              {/* Cost Overview Section */}
-              <article className="bg-white rounded-xl shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100 w-full min-w-0 overflow-x-hidden">
-                <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Luzern?</h2>
-                <p className="typography-p mb-4">
-                  Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Luzern richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
-                </p>
-                <p className="typography-p mb-6">
-                  Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Luzern und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
-                </p>
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <main className="space-y-12">
+              <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
+                  <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Luzern?</h2>
+                  <p className="typography-p mb-4">
+                    Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Luzern richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
+                  </p>
+                  <p className="typography-p mb-6">
+                    Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Luzern und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
+                  </p>
                 
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   {/* Hourly Rates Table */}
@@ -402,106 +420,120 @@ const UmzugsfirmaLuzernPageClient = () => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200 mb-4">
-                  <p className="typography-p text-gray-600 italic">
-                    Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
-                  </p>
+                  
+                  <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
+                    <p className="typography-p text-gray-600 italic">
+                      Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
+                  <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugsfirma vergleichen Luzern: Ihre Vorteile</h2>
+                  <p className="font-medium mb-4 break-words w-full">Umzugsfirma vergleichen Luzern: Vergleichen Sie mehrere Zügelfirmen Luzern und Umzugsunternemen Luzern und profitieren Sie von folgenden Vorteilen:</p>
+                  <div className="space-y-4">
+                    <div className="flex items-start w-full min-w-0">
+                      <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold text-gray-800 break-words">Erhebliche Kosten sparen</h4>
+                        <p className="text-gray-600 leading-relaxed break-words">Umzugsfirma Luzern vergleichen: Durch den direkten Vergleich mehrerer Zügelfirmen Luzern und Umzugsunternemen Luzern finden Sie mühelos das beste Preis-Leistungs-Verhältnis und können erheblich sparen. Bis zu 40% Ersparnis möglich!</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start w-full min-w-0">
+                      <Award className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold text-gray-800 break-words">Geprüfte Qualität und Vertrauen</h4>
+                        <p className="text-gray-600 leading-relaxed break-words">Wir vermitteln Ihnen ausschliesslich geprüfte, versicherte und top bewertete Umzugsfirmen aus der Region Luzern. Alle Partner sind zertifiziert und versichert.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start w-full min-w-0">
+                      <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold text-gray-800 break-words">100% Kostenlos und unverbindlich</h4>
+                        <p className="text-gray-600 leading-relaxed break-words">Ihre Anfrage generiert kostenlose Offerten. Sie entscheiden in Ruhe, ob und welche Offerte Sie annehmen. Keine versteckten Kosten.</p>
+                      </div>
+                    </div>
+                  </div>
+              </article>
+              
+              <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
+                  <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugsfirma Luzern: Alle Dienstleistungen im Überblick</h2>
+                  <p className="font-medium break-words w-full">Eine moderne Umzugsfirma in Luzern bietet viel mehr als nur den Transport. Stellen Sie sich Ihr individuelles Servicepaket zusammen. Unsere Partner bieten folgende Dienstleistungen an:</p>
+                  <div className="grid md:grid-cols-2 gap-6 mt-6 w-full">
+                    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
+                      <h4 className="font-semibold text-lg flex items-center mb-2 break-words">
+                        <Package className="mr-2 text-green-500 flex-shrink-0" /> 
+                        <Link href="/umzugsfirma/privatumzug" className="text-green-600 hover:text-green-800 hover:underline break-words">Privatumzug</Link>
+                      </h4>
+                      <p className="text-gray-600 break-words">Der klassische Wohnungswechsel, individuell auf Ihre Bedürfnisse zugeschnitten. Finden Sie die beste Umzugsfirma Luzern für Ihren Privatumzug.</p>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
+                      <h4 className="font-semibold text-lg flex items-center mb-2">
+                        <Building className="mr-2 text-green-500 flex-shrink-0" /> 
+                        <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-600 hover:text-green-800 hover:underline break-words">Geschäftsumzug</Link>
+                      </h4>
+                      <p className="text-gray-600 break-words">Minimale Ausfallzeiten und sorgfältige Planung für Büros und Firmen. Professioneller Umzug für Unternehmen in Luzern.</p>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
+                      <h4 className="font-semibold text-lg flex items-center mb-2">
+                        <Globe className="mr-2 text-green-500 flex-shrink-0" /> 
+                        <Link href="/umzugsfirma/internationale-umzuege" className="text-green-600 hover:text-green-800 hover:underline break-words">Internationale Umzüge</Link>
+                      </h4>
+                      <p className="text-gray-600 break-words">Komplette Abwicklung inklusive Zollformalitäten. Umzug ins Ausland mit professioneller Unterstützung.</p>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
+                      <h4 className="font-semibold text-lg flex items-center mb-2">
+                        <Package className="mr-2 text-green-500 flex-shrink-0" /> 
+                        <Link href="/umzugsfirma/spezialtransporte" className="text-green-600 hover:text-green-800 hover:underline break-words">Spezialtransporte</Link>
+                      </h4>
+                      <p className="text-gray-600 break-words">Transport für Klaviere, Tresore, Maschinen & Geräte. Professionelle Spezialtransporte in Luzern.</p>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
+                      <h4 className="font-semibold text-lg flex items-center mb-2">
+                        <PiPianoKeysFill className="mr-2 text-green-500 flex-shrink-0" /> 
+                        <Link href="/umzugsfirma/klaviertransport" className="text-green-600 hover:text-green-800 hover:underline break-words">Klaviertransport</Link>
+                      </h4>
+                      <p className="text-gray-600 break-words">Professioneller Transport für Klaviere und Flügel. Spezialisierte Zügelfirmen für Klaviertransport in Luzern.</p>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
+                      <h4 className="font-semibold text-lg flex items-center mb-2">
+                        <MapPin className="mr-2 text-green-500 flex-shrink-0" /> <span className="break-words">Möbellagerung</span></h4>
+                      <p className="text-gray-600 break-words">Sichere Zwischenlagerung Ihrer Möbel, kurz- oder langfristig. Möbellagerung in Luzern.</p>
+                    </div>
                 </div>
-                <p className="text-sm text-gray-600 italic">
-                  * Diese Preise sind Richtwerte für einen Umzug innerhalb von Luzern. Die tatsächlichen Kosten können je nach Distanz, Stockwerk, Umzugsdatum und gewünschten Zusatzleistungen variieren. Eine kostenlose Besichtigung vor Ort ermöglicht eine präzise Offerte.
-                </p>
               </article>
-
-              {/* Savings Tips Section */}
-              <article className="bg-white rounded-xl shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100 w-full min-w-0 overflow-x-hidden">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 md:mb-6 break-words overflow-wrap-anywhere">Clevere Spartipps für Ihren Umzug in Luzern</h2>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6 break-words overflow-wrap-anywhere">
-                  Mit ein paar strategischen Massnahmen können Sie die Kosten für Ihren Umzug in Luzern erheblich reduzieren. Die folgenden Tipps helfen Ihnen dabei, Geld zu sparen, ohne dabei auf Qualität oder Sicherheit verzichten zu müssen.
-                </p>
-                <div className="grid md:grid-cols-2 gap-6 mt-8">
-                  {savingsTips.map((tip, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 md:p-6 border border-green-200"
-                    >
-                      <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2 md:mb-3 flex items-center gap-2 break-words">
-                        <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0" />
-                        <span className="break-words overflow-wrap-anywhere">{tip.title}</span>
-                      </h3>
-                      <p className="text-sm md:text-base text-gray-700 leading-relaxed break-words overflow-wrap-anywhere">{tip.description}</p>
-                    </motion.div>
-                  ))}
+              
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <div className="text-center bg-green-50 p-8 rounded-lg border-l-4 border-green-500 shadow-md w-full min-w-0 overflow-x-hidden">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4 break-words">Umzugsfirma vergleichen Luzern: Jetzt starten!</h3>
+                  <p className="text-gray-700 mb-6 font-medium break-words w-full">Umzugsfirma Luzern: Mit nur einer Anfrage erhalten Sie bis zu fünf kostenlose und unverbindliche Offerten von Top-Umzugsfirmen aus Luzern. Vergleichen Sie mehrere Zügelfirmen Luzern und Umzugsunternemen Luzern und sparen Sie bis zu 40%.</p>
+                  <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group shadow-lg transform hover:scale-105 transition-transform">
+                    <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Luzern">
+                      Umzugsfirmen vergleichen Luzern & Offerten anfordern
+                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
                 </div>
+              </motion.div>
+              
+                <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
+                  <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugsfirma Luzern: Parkbewilligungen und Logistik</h2>
+                  <p className="font-medium break-words w-full">Die Parkplatzsituation in Luzern kann herausfordernd sein. Eine professionelle Umzugsfirma Luzern nimmt Ihnen diesen Stress ab. Erfahrene Zügelfirmen Luzern und Umzugsunternemen Luzern beantragen bei der Stadt Luzern die nötigen Halteverbotszonen für den Umzugstag. Umzugsfirma vergleichen Luzern: Vergleichen Sie mehrere Anbieter, um die beste Logistik-Lösung zu finden. Das garantiert nicht nur einen Parkplatz direkt vor der Tür, sondern verkürzt auch die Laufwege und damit die Arbeitszeit und Ihre Kosten.</p>
               </article>
-
-              {/* Location Specific Section */}
-              <article className="bg-white rounded-xl shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100 w-full min-w-0 overflow-x-hidden">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 md:mb-6 break-words overflow-wrap-anywhere">Umzugslogistik in Luzern: Besonderheiten und Herausforderungen</h2>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6 break-words overflow-wrap-anywhere">
-                  Luzern als Stadt am Vierwaldstättersee mit seiner historischen Altstadt und den engen Gassen stellt besondere Anforderungen an Umzugsfirmen. Erfahrene Zügelfirmen in Luzern kennen die örtlichen Gegebenheiten und wissen, wie man mit den Herausforderungen umgeht.
-                </p>
-                <h3 className="text-2xl font-bold text-gray-800 mt-8 mb-4">Parkbewilligungen und Verkehrssituation</h3>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  In der Luzerner Altstadt und in vielen zentralen Quartieren ist die Parksituation besonders angespannt. Eine professionelle Umzugsfirma beantragt bei der Stadt Luzern die notwendigen Halteverbotszonen für den Umzugstag. Dies garantiert nicht nur einen Parkplatz direkt vor Ihrer Haustür, sondern verkürzt auch die Laufwege und damit die Arbeitszeit und Ihre Kosten.
-                </p>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mt-6 md:mt-8 mb-3 md:mb-4 break-words overflow-wrap-anywhere">Altstadt und enge Gassen</h3>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-3 md:mb-4 break-words overflow-wrap-anywhere">
-                  Die malerische Altstadt von Luzern mit ihren engen Gassen und verwinkelten Strassen erfordert spezielles Equipment und viel Erfahrung. Lokale Umzugsfirmen kennen die Zugänge, wissen, welche Fahrzeuge passen und können auch schwierige Umzugssituationen professionell meistern. Bei Altbauwohnungen mit engen Treppenhäusern oder ohne Lift ist Erfahrung besonders wichtig.
-                </p>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mt-6 md:mt-8 mb-3 md:mb-4 break-words overflow-wrap-anywhere">Regionale Expertise</h3>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed break-words overflow-wrap-anywhere">
-                  Umzugsfirmen aus Luzern und der Zentralschweiz kennen nicht nur die Stadt selbst, sondern auch die umliegenden Gemeinden wie Kriens, Emmen, Ebikon oder Horw. Diese regionale Expertise ermöglicht es ihnen, Umzüge innerhalb der Region besonders effizient und kostengünstig durchzuführen.
-                </p>
-              </article>
-
-              {/* CTA Section */}
-              <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl shadow-2xl p-6 md:p-8 lg:p-12 text-center text-white w-full min-w-0 overflow-x-hidden">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 break-words overflow-wrap-anywhere px-2">Starten Sie jetzt Ihren Vergleich!</h2>
-                <p className="text-base md:text-lg lg:text-xl text-green-100 mb-6 md:mb-8 max-w-2xl mx-auto break-words overflow-wrap-anywhere px-2">
-                  Vergleichen Sie kostenlos mehrere Umzugsfirmen in Luzern und finden Sie das beste Angebot für Ihren Umzug. Einfach, schnell und völlig unverbindlich.
-                </p>
-                <Button asChild size="lg" className="bg-white text-green-600 hover:bg-gray-100 font-bold text-lg px-8 py-6 shadow-xl">
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug&city=Luzern">
-                    Jetzt kostenlose Offerten anfordern
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </motion.main>
-
-            {/* Sidebar */}
-            <LocationSidebar 
-              city={city} 
-              districts={{
-                title: "Stadtteile in Luzern",
-                text: "Unsere Partner sind in allen Quartieren von Luzern für Sie im Einsatz:",
-                list: [
-                  "Altstadt",
-                  "Neustadt",
-                  "Wesemlin",
-                  "Tribschen",
-                  "Bramberg",
-                  "Hirschmatt",
-                  "Maihof",
-                  "Biregg",
-                  "Littau",
-                  "Reussbühl",
-                  "Würzenbach",
-                  "Stadtteil Nord"
-                ]
-              }}
-              searches={undefined as any}
-            />
+            </main>
           </div>
-          
+        </section>
 
-          <LocationPageNavigation allLocations={locations} currentCity={city} />
-        </div>
+        {/* Navigation Section */}
+        <section className="py-12 md:py-16 bg-white border-t border-gray-200">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <LocationPageNavigation allLocations={locations} currentCity={city} />
+          </div>
+        </section>
       </div>
     </>
   );

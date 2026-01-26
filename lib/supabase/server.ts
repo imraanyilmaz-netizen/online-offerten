@@ -41,3 +41,23 @@ export async function createClient() {
   })
 }
 
+/**
+ * Creates a Supabase client without cookies for static rendering (ISR)
+ * Use this for public data fetching that doesn't require authentication
+ * This client can be used in static pages without triggering dynamic rendering
+ */
+export function createStaticClient() {
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+      storage: {
+        getItem: () => null,
+        setItem: () => {},
+        removeItem: () => {},
+      },
+    },
+  })
+}
+

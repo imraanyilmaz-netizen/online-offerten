@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
 import HomePageClient from '@/components/pages/HomePageClient'
 import HomeHeroForm from '@/components/HomeHeroForm'
 import type { Metadata } from 'next'
@@ -56,8 +56,13 @@ export const metadata: Metadata = {
   },
 }
 
+// ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
+// Bu sayfa statik olarak build edilir, ancak 1 saatte bir arka planda yenilenir
+// SEO için daha hızlı yükleme ve daha iyi performans sağlar
+export const revalidate = 3600 // 1 saat
+
 async function getHomePageData() {
-  const supabase = await createClient()
+  const supabase = createStaticClient()
   
   // Fetch reviews, posts, and rating stats in parallel
   const [reviewsResult, postsResult, ratingStatsResult] = await Promise.all([

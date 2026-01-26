@@ -543,21 +543,21 @@ export default function UmzugsfirmaZurichPage() {
                   
                   {/* Right Side - Cities List */}
                   <div className="flex md:grid md:grid-cols-2 gap-4 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-4 md:mx-0 px-4 md:px-0 scrollbar-hide">
-                    {zurichCities.map((cityItem, index) => (
-                      <Link
-                        key={index}
-                        href={cityItem.link}
-                        className="group bg-white border-2 border-gray-200 hover:border-green-500 rounded-xl p-5 transition-all hover:shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-start md:snap-none"
-                      >
-                        <div className="flex items-center gap-3 mb-2">
-                          <MapPin className="w-5 h-5 text-green-600 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                          <h4 className="font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
-                            {cityItem.name}
-                          </h4>
-                        </div>
-                        <p className="text-sm text-gray-600">{cityItem.description}</p>
-                      </Link>
-                    ))}
+                  {zurichCities.map((cityItem, index) => (
+                    <Link
+                      key={index}
+                      href={cityItem.link}
+                      className="group bg-white border-2 border-gray-200 hover:border-green-500 rounded-xl p-5 transition-all hover:shadow-lg flex-shrink-0 w-[75vw] md:w-auto snap-start md:snap-none"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <MapPin className="w-5 h-5 text-green-600 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                        <h4 className="font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
+                          {cityItem.name}
+                        </h4>
+                      </div>
+                      <p className="text-sm text-gray-600">{cityItem.description}</p>
+                    </Link>
+                  ))}
                   </div>
                 </div>
               </article>
