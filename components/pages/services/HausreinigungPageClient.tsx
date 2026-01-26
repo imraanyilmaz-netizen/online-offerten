@@ -185,7 +185,20 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   transition={{ delay: 0.2, duration: 0.6 }}
                   className="w-full min-w-0"
                 >
-                  <h1 className="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 text-gray-900 break-words">
+                  <h1 
+                    className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-gray-900 break-words"
+                    style={{
+                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                      fontWeight: 700,
+                      textAlign: 'start',
+                      letterSpacing: 'normal',
+                      wordSpacing: '0px',
+                      fontStyle: 'normal',
+                      textTransform: 'none',
+                      textDecoration: 'none',
+                      textIndent: '0px'
+                    }}
+                  >
                     Professionelle Hausreinigung mit Abnahmegarantie
                   </h1>
                 </motion.div>
@@ -194,7 +207,7 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full"
+                  className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed break-words w-full"
                 >
                   Gr�ndliche Hausreinigung mit 100% Abnahmegarantie f�r eine sorgenfreie �bergabe. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
@@ -253,14 +266,14 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8 w-full min-w-0 overflow-x-hidden"
                 >
                   {/* H2: Warum eine professionelle Hausreinigung sinnvoll ist */}
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6 break-words">Warum eine professionelle Hausreinigung sinnvoll ist</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full">
+                  <h2 className="typography-h2 mb-6 break-words">Warum eine professionelle Hausreinigung sinnvoll ist</h2>
+                  <p className="typography-p mb-6 break-words w-full">
                     Eine professionelle Hausreinigung bietet zahlreiche Vorteile, die �ber die reine Sauberkeit hinausgehen. Sie spart wertvolle Zeit, die Sie f�r Familie, Beruf oder Hobbys nutzen k�nnen. Professionelle Reinigungskr�fte verf�gen �ber das Fachwissen und die richtigen Ger�te, um auch schwer zug�ngliche Stellen gr�ndlich zu reinigen. Zudem tr�gt eine regelm�ssige professionelle Reinigung zur Gesundheit bei, indem sie Allergene, Bakterien und Viren effektiv entfernt. Besonders bei der Haus�bergabe ist eine professionelle Reinigung mit Abnahmegarantie unerl�sslich, um sicherzustellen, dass alle Anforderungen des Käufers erf�llt werden.
                   </p>
 
                   {/* H2: Unsere Leistungen im Bereich Hausreinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full">
+                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
+                  <p className="typography-p mb-6 break-words w-full">
                     Unser Netzwerk gepr�fter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum f�r die professionelle Reinigung. Dazu geh�ren die gr�ndliche Reinigung aller R�ume, inklusive K�che, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Fassadenreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein k�nnen, dass die Haus den Anforderungen entspricht.
                   </p>
 
@@ -275,7 +288,7 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   </div>
 
                   {/* Bullet Points - Leistungen */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
                     <li>Gr�ndliche Reinigung aller R�ume</li>
                     <li>K�chen- und Badezimmerreinigung</li>
                     <li>Fenster- und Oberfl�chenreinigung</li>
@@ -306,8 +319,8 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   </div>
 
                   {/* H2: Vorteile unserer Reinigung mit Abnahmegarantie */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6 break-words">Vorteile unserer Reinigung mit Abnahmegarantie</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full">
+                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer Reinigung mit Abnahmegarantie</h2>
+                  <p className="typography-p mb-6 break-words w-full">
                     Die Abnahmegarantie ist ein entscheidender Vorteil bei der professionellen Reinigung. Sie bedeutet, dass die Reinigungsfirma garantiert, dass die Haus den Anforderungen f�r die �bergabe entspricht. Sollte der Käufer oder neue Eigent�mer M�ngel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis die Haus den Anforderungen entspricht. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zus�tzlich profitieren Sie von unserer �ber 12-j�hrigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk gepr�fter, versicherter Reinigungsfirmen.
                   </p>
 
@@ -322,7 +335,7 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   </div>
 
                   {/* Bullet Points - Vorteile */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
                     <li>100% Abnahmegarantie f�r sorgenfreie �bergabe</li>
                     <li>Nur gepr�fte, versicherte Reinigungsfirmen</li>
                     <li>Umweltfreundliche Reinigungsmittel</li>
@@ -353,8 +366,8 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmittel */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6 break-words">Moderne und umweltfreundliche Reinigungsmittel</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed break-words w-full">
+                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmittel</h2>
+                  <p className="typography-p mb-6 break-words w-full">
                     Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmittel. Diese sind nicht nur besser f�r die Umwelt, sondern auch f�r Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders f�r Haushalte mit Kindern, Allergikern oder Haustieren empfehlenswert. Sie sind effektiv gegen Schmutz und Bakterien, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine sch�dlichen Chemikalien in Ihrer Haus zur�ckbleiben.
                   </p>
 
@@ -398,8 +411,8 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   </div>
 
                   {/* H2: Was kostet eine professionelle Hausreinigung? */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was kostet eine professionelle Hausreinigung?</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Was kostet eine professionelle Hausreinigung?</h2>
+                  <p className="typography-p mb-6 break-words w-full">
                     Die Kosten f�r Hausreinigung variieren je nach Gr�sse der Haus, Umfang der Reinigung und Region. In der Regel werden Preise zwischen 25 und 50 CHF pro Stunde berechnet. Eine durchschnittliche 3-Zimmer-Haus ben�tigt etwa 3-4 Stunden, was Kosten von 75-200 CHF bedeutet. Gr�ssere Hausen oder besonders verschmutzte Bereiche k�nnen h�here Kosten verursachen. Durch den Vergleich mehrerer Offerten �ber unsere Plattform k�nnen Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen mit Abnahmegarantie erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
@@ -409,9 +422,46 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                     Wir sind der vertrauensw�rdige Partner f�r Ihre Hausreinigung. Unser Netzwerk umfasst nur gepr�fte, versicherte Reinigungsfirmen, die h�chste Qualit�tsstandards erf�llen. Alle Partnerfirmen bieten eine 100% Abnahmegarantie und verwenden moderne, umweltfreundliche Reinigungsmittel. Wir haben bereits �ber 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich � Sie zahlen nur f�r die Reinigung selbst, nicht f�r unsere Vermittlung. Zudem k�nnen Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
-                  {/* Trust & Erfahrung Section */}
-                  <div className="mt-6 md:mt-8 p-4 md:p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 mb-6 md:mb-8">
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Vertrauen & Erfahrung</h3>
+                  {/* CTA Banner Section */}
+                  <div className="mt-6 md:mt-8 mb-6 md:mb-8">
+                    <div className="bg-gradient-to-br from-green-700 via-green-600 to-emerald-700 rounded-xl p-6 md:p-8 lg:p-10 shadow-xl">
+                      {/* Header with icons */}
+                      <div className="flex items-center justify-center mb-4 md:mb-6">
+                        <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 mr-2"></div>
+                        <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center leading-tight">
+                          Hausreinigung mit Abnahmegarantie – Kostenlose Offerten anfordern und bis zu 40% sparen
+                        </h3>
+                        <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 ml-2"></div>
+                      </div>
+                      
+                      {/* Features with checkmarks */}
+                      <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                        <div className="flex items-center">
+                          <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
+                          <span className="text-white text-base md:text-lg font-medium">100% kostenlos und unverbindlich</span>
+                        </div>
+                        <div className="flex items-center">
+                          <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
+                          <span className="text-white text-base md:text-lg font-medium">Geprüfte Partner mit Abnahmegarantie</span>
+                        </div>
+                        <div className="flex items-center">
+                          <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
+                          <span className="text-white text-base md:text-lg font-medium">Transparente Preise ohne Verpflichtung</span>
+                        </div>
+                      </div>
+                      
+                      {/* CTA Button */}
+                      <div className="flex justify-center">
+                        <Button
+                          onClick={handleCtaClick}
+                          className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 flex items-center gap-2"
+                        >
+                          Kostenlose Offerten anfordern
+                          <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="flex items-start">
                         <ShieldCheck className="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
@@ -446,10 +496,10 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
-                          <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-gray-800 px-2 sm:px-4">
+                          <AccordionTrigger className="text-xl font-semibold text-left hover:no-underline text-gray-900 px-2 sm:px-4 py-4">
                             {item.q}
                           </AccordionTrigger>
-                          <AccordionContent className="text-base text-gray-600 leading-relaxed pt-2 pb-4 px-2 sm:px-4">
+                          <AccordionContent className="typography-p pt-2 pb-4 px-2 sm:px-4">
                             {item.a}
                           </AccordionContent>
                         </AccordionItem>
@@ -459,8 +509,8 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
 
                   {/* H2: Jetzt unverbindliche Reinigungs-Offerte anfordern */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
-                    <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                    <h2 className="typography-h2 mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
+                    <p className="typography-p mb-6">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen. Alle Offerten beinhalten eine 100% Abnahmegarantie. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma f�r Ihre Haus.
                     </p>
                     <Button 
@@ -475,18 +525,18 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
 
                   {/* Internal Links */}
                   <div className="mt-8 md:mt-12">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 md:mb-6">Weitere Reinigungsdienstleistungen</h3>
+                    <h3 className="typography-h3 mb-6">Weitere Reinigungsdienstleistungen</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                       <Link href="/reinigung/umzugsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="font-bold text-gray-900 mb-2 text-lg">Umzugsreinigung</h4>
+                        <h4 className="typography-h4 mb-2">Umzugsreinigung</h4>
                         <p className="text-sm text-gray-600">Professionelle Umzugsreinigung mit Abnahmegarantie f�r eine sorgenfreie Haus�bergabe.</p>
                       </Link>
                       <Link href="/reinigung/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="font-bold text-gray-900 mb-2 text-lg">Fensterreinigung</h4>
+                        <h4 className="typography-h4 mb-2">Fensterreinigung</h4>
                         <p className="text-sm text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
                       <Link href="/reinigung/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="font-bold text-gray-900 mb-2 text-lg">Baureinigung</h4>
+                        <h4 className="typography-h4 mb-2">Baureinigung</h4>
                         <p className="text-sm text-gray-600">Gr�ndliche Baureinigung nach Neubau oder Renovation f�r perfekte Resultate.</p>
                       </Link>
                     </div>
@@ -509,7 +559,7 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                 {/* Sticky CTA Section - Outside aside for proper sticky behavior */}
                 <div className="mt-4 md:mt-6 lg:sticky lg:top-24 lg:self-start">
                   <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 md:p-6 border border-blue-100">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Jetzt Offerten anfordern</h3>
+                    <h3 className="typography-h3 mb-4">Jetzt Offerten anfordern</h3>
                     <p className="text-gray-700 mb-3 md:mb-4 text-base">
                       Kostenlos und unverbindlich Reinigungsofferten online vergleichen.
                     </p>

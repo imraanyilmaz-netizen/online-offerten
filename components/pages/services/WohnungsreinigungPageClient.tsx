@@ -422,7 +422,7 @@ const WohnungsreinigungPageClient = () => {
                       <div className="flex items-center justify-center mb-4 md:mb-6">
                         <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 mr-2"></div>
                         <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center leading-tight">
-                          Wohnungsreinigung mit Abnahmegarantie – Kostenlose Offerten anfordern und bis zu 40% sparen
+                          Kostenlose Offerten anfordern und bis zu 40% sparen
                         </h3>
                         <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 ml-2"></div>
                       </div>

@@ -292,40 +292,8 @@ export default async function HomePage() {
             ></div>
             
             <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
-              {/* Mobile Image - Above H1 on mobile */}
-              <div className="flex items-center justify-center mb-6 lg:hidden -mx-4 sm:-mx-6">
-                <NextImage 
-                  src="/fotos/3b38703d-321c-4732-86ce-557415232adb.webp" 
-                  alt="Online Offerten" 
-                  width={600}
-                  height={400}
-                  className="w-full h-auto rounded-xl"
-                  priority
-                  quality={85}
-                  sizes="(max-width: 1024px) 100vw, 600px"
-                />
-              </div>
-              
               <div className="max-w-3xl text-left">
-                <h1 
-                  className="text-[32px] md:text-[40px] leading-[42.56px] md:leading-[53.2px] font-bold mb-6 text-left"
-                  style={{
-                    fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                    fontWeight: 700,
-                    color: '#000000',
-                    textAlign: 'start',
-                    letterSpacing: 'normal',
-                    wordSpacing: '0px',
-                    fontStyle: 'normal',
-                    textTransform: 'none',
-                    textDecoration: 'none',
-                    textIndent: '0px'
-                  }}
-                >
-                  Offerten vergleichen & die passenden Anbieter für Ihr Projekt in der Schweiz finden
-                  </h1>
-                  
-                {/* Search Form */}
+                {/* Search Form - H1 başlık formun içinde - Mobilde arka plan resmi ile */}
                 <HomeHeroForm />
                 
                 {/* Rating Card */}
@@ -377,9 +345,6 @@ export default async function HomePage() {
                         Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.uiReviewCount} Bewertungen)
                       </span>
                     </div>
-                    <p className="text-sm sm:text-base text-gray-900 font-bold leading-relaxed text-left">
-                      Unsere Partnerfirmen aus den Bereichen Umzug, Reinigung, Malerarbeiten und Gartenarbeit wurden von bisherigen Kundinnen und Kunden mit durchschnittlich <span className="font-semibold text-gray-900">Ø {ratingStats.averageRating.toFixed(1)}/5 Sternen</span> bewertet.
-                    </p>
                     {/* Trust Badges */}
                     <div className="flex flex-wrap justify-start items-center gap-4 mt-4 pt-4 border-t border-gray-200">
                       <div className="flex items-center gap-2">

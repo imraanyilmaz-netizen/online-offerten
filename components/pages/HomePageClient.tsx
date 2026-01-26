@@ -453,13 +453,13 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 <div className="space-y-6">
                   <div>
                     <p className="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">
-                      Werden Sie Online-offerten.ch-Partner
+                      Werden Sie Partner bei Online-Offerten.ch
                     </p>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                      Sind Sie eine Anbieter?
+                      Sind Sie Dienstleister?
                     </h2>
                     <p className="text-lg text-gray-600 leading-relaxed">
-                      Wir bringen Sie mit potenziellen Kunden in Kontakt, die umziehen, und helfen Ihnen, für Ihr Unternehmen zu werben.
+                      Wir verbinden Sie mit potenziellen Kunden in Ihrer Region, die genau Ihre Dienstleistungen suchen. Erweitern Sie Ihre Reichweite und gewinnen Sie neue Aufträge
                     </p>
                   </div>
                   <Button asChild size="lg" className="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 px-8 py-6 text-lg font-semibold">

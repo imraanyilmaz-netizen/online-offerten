@@ -239,18 +239,21 @@
   /* P Stil - Paragraf Metni */
   p.typography-p,
   .typography-p {
-    font-family: Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 16px;
-    line-height: 24px;
+    line-height: 26px;
     font-weight: 400;
-    color: #1c1d16;
+    color: #374151;
+    background-color: transparent;
     text-align: start;
     letter-spacing: normal;
     word-spacing: 0px;
     font-style: normal;
+    font-variant: normal;
     text-transform: none;
     text-decoration: none;
     text-indent: 0px;
+    vertical-align: baseline;
   }
 
   /* Span Stil - Inline Metin (FAQ soruları için) */

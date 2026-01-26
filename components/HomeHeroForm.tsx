@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Search, ChevronDown, X, Loader2, Clock, FileText } from 'lucide-react'
+import { Search, ChevronDown, X, Loader2, Clock } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
 
 interface ServiceOption {
@@ -79,62 +79,68 @@ const HomeHeroForm = () => {
   
   // Stats state
   const [minutesAgo, setMinutesAgo] = useState(6)
-  const [todayCount, setTodayCount] = useState(50)
 
-  useEffect(() => {
-    if (serviceInput.trim()) {
-      const searchTerm = serviceInput.toLowerCase()
-      
-      // Check for combination searches first (e.g., "privatumzug und reinigung")
-      const isCombinationSearch = searchTerm.includes('und') || searchTerm.includes('&')
-      
-      // Find matching category first
-      let matchedCategory: string | null = null
-      let matchedCategories: string[] = []
-      
-      for (const [category, keywords] of Object.entries(categoryKeywords)) {
-        if (keywords.some(keyword => searchTerm.includes(keyword))) {
-          if (isCombinationSearch) {
-            matchedCategories.push(category)
-          } else {
-            matchedCategory = category
-            break
-          }
+  // Memoize filtered options to prevent unnecessary recalculations
+  const filteredOptionsMemo = useMemo(() => {
+    if (!serviceInput.trim()) {
+      return []
+    }
+    
+    const searchTerm = serviceInput.toLowerCase()
+    
+    // Check for combination searches first (e.g., "privatumzug und reinigung")
+    const isCombinationSearch = searchTerm.includes('und') || searchTerm.includes('&')
+    
+    // Find matching category first
+    let matchedCategory: string | null = null
+    let matchedCategories: string[] = []
+    
+    for (const [category, keywords] of Object.entries(categoryKeywords)) {
+      if (keywords.some(keyword => searchTerm.includes(keyword))) {
+        if (isCombinationSearch) {
+          matchedCategories.push(category)
+        } else {
+          matchedCategory = category
+          break
         }
       }
+    }
+    
+    // Filter options based on category or direct match
+    return serviceOptions.filter(option => {
+      // Direct label match (highest priority)
+      if (option.label.toLowerCase().includes(searchTerm)) {
+        return true
+      }
       
-      // Filter options based on category or direct match
-      const filtered = serviceOptions.filter(option => {
-        // Direct label match (highest priority)
-        if (option.label.toLowerCase().includes(searchTerm)) {
+      // Combination search (e.g., "privatumzug und reinigung")
+      if (isCombinationSearch && matchedCategories.length > 0) {
+        // Show combination options or options from matched categories
+        if (option.id.includes('_reinigung') || option.id.includes('_und_')) {
           return true
         }
-        
-        // Combination search (e.g., "privatumzug und reinigung")
-        if (isCombinationSearch && matchedCategories.length > 0) {
-          // Show combination options or options from matched categories
-          if (option.id.includes('_reinigung') || option.id.includes('_und_')) {
-            return true
-          }
-          return matchedCategories.some(cat => option.category === cat)
-        }
-        
-        // Single category match
-        if (matchedCategory) {
-          return option.category === matchedCategory
-        }
-        
-        // Fallback: category name match
-        return option.category.toLowerCase().includes(searchTerm)
-      })
+        return matchedCategories.some(cat => option.category === cat)
+      }
       
-      setFilteredOptions(filtered)
-      setShowDropdown(filtered.length > 0)
+      // Single category match
+      if (matchedCategory) {
+        return option.category === matchedCategory
+      }
+      
+      // Fallback: category name match
+      return option.category.toLowerCase().includes(searchTerm)
+    })
+  }, [serviceInput])
+
+  useEffect(() => {
+    if (filteredOptionsMemo.length > 0) {
+      setFilteredOptions(filteredOptionsMemo)
+      setShowDropdown(true)
     } else {
       setFilteredOptions([])
       setShowDropdown(false)
     }
-  }, [serviceInput])
+  }, [filteredOptionsMemo])
 
   // PLZ to City mapping for known incorrect cases (fallback)
   const plzCityMapping: Record<string, string> = {
@@ -273,51 +279,18 @@ const HomeHeroForm = () => {
     const randomMinutes = Math.floor(Math.random() * 14) + 2
     setMinutesAgo(randomMinutes)
 
-    // Saat başına 10 ekleme mantığı
-    const calculateTodayCount = () => {
-      const now = new Date()
-      const currentHour = now.getHours()
-      
-      // Sabah 12'den (12:00) başla, akşam 12'ye (23:59) kadar
-      // Saat 12'de başlangıç: 50
-      // Her saat başına +10
-      let startHour = 12
-      let baseCount = 50
-      
-      if (currentHour >= 12) {
-        // Öğleden sonra: 12'den itibaren geçen saatler
-        const hoursPassed = currentHour - startHour
-        const count = baseCount + (hoursPassed * 10)
-        setTodayCount(count)
-      } else {
-        // Gece yarısından sabah 12'ye kadar: önceki günün devamı
-        // Gece 0-11 arası için: 12 saat * 10 = 120 ekle
-        const hoursPassed = currentHour + (24 - startHour)
-        const count = baseCount + (hoursPassed * 10)
-        setTodayCount(count)
-      }
-    }
-
-    calculateTodayCount()
-
     // Her dakika dakika sayısını güncelle (2-15 arası rastgele)
     const minutesInterval = setInterval(() => {
       const randomMinutes = Math.floor(Math.random() * 14) + 2
       setMinutesAgo(randomMinutes)
     }, 60000) // Her 1 dakikada bir
 
-    // Her saat başı sayıyı güncelle
-    const hourInterval = setInterval(() => {
-      calculateTodayCount()
-    }, 3600000) // Her 1 saatte bir
-
     return () => {
       clearInterval(minutesInterval)
-      clearInterval(hourInterval)
     }
   }, [])
 
-  const handleServiceSelect = (option: ServiceOption, e?: React.MouseEvent) => {
+  const handleServiceSelect = useCallback((option: ServiceOption, e?: React.MouseEvent) => {
     e?.preventDefault()
     e?.stopPropagation()
     setSelectedOption(option)
@@ -325,9 +298,9 @@ const HomeHeroForm = () => {
     setShowDropdown(false)
     // Input focus'unu kaldır
     inputRef.current?.blur()
-  }
+  }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
     
     if (selectedOption) {
@@ -353,22 +326,39 @@ const HomeHeroForm = () => {
     } else {
       router.push('/kostenlose-offerte-anfordern')
     }
-  }
+  }, [selectedOption, postalCode, city, serviceInput, router])
 
-  const clearService = () => {
+  const clearService = useCallback(() => {
     setServiceInput('')
     setSelectedOption(null)
     setFilteredOptions([])
     setShowDropdown(false)
     inputRef.current?.focus()
-  }
+  }, [])
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 relative z-30">
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="flex-1 relative">
+    <form 
+      onSubmit={handleSubmit} 
+      className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 relative z-30"
+    >
+      {/* Mobilde arka plan resmi - sadece mobilde görünür, tam renk */}
+      <div 
+        className="lg:hidden absolute inset-0 rounded-2xl"
+        style={{
+          backgroundImage: 'url(/fotos/3b38703d-321c-4732-86ce-557415232adb.webp)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 0,
+        }}
+      ></div>
+      
+      {/* İçerik - relative z-index ile overlay'in üstünde */}
+      <div className="relative z-10" style={{ zIndex: 2 }}>
+      <div className="flex flex-col md:flex-row gap-4 bg-white/95 lg:bg-transparent rounded-xl p-4 lg:p-0 backdrop-blur-sm">
+        <div className="flex-1 relative z-50">
           <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Was steht an?</label>
-          <div className="relative">
+          <div className="relative z-50">
             <input
               ref={inputRef}
               type="text"
@@ -389,7 +379,7 @@ const HomeHeroForm = () => {
                 }, 200)
               }}
               placeholder="z.B. Umzug, Reinigung, Malerarbeiten"
-              className="w-full px-4 py-3 pr-10 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none text-gray-900"
+              className="w-full px-5 py-4 pr-12 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-500/30 text-gray-900 transition-all duration-300 shadow-md hover:shadow-lg bg-white"
             />
             {serviceInput && (
               <button
@@ -405,7 +395,8 @@ const HomeHeroForm = () => {
             {showDropdown && filteredOptions.length > 0 && (
               <div
                 ref={dropdownRef}
-                className="absolute z-[500] w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-xl max-h-96 overflow-y-auto"
+                className="absolute z-[9999] w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-2xl max-h-96 overflow-y-auto"
+                style={{ position: 'absolute', top: '100%', left: 0, right: 0 }}
               >
                 {Object.entries(
                   filteredOptions.reduce((acc, option) => {
@@ -447,7 +438,7 @@ const HomeHeroForm = () => {
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
               placeholder="Postleitzahl oder Ort"
-              className="w-full px-4 py-3 pr-10 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none text-gray-900"
+              className="w-full px-5 py-4 pr-12 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-500/30 text-gray-900 transition-all duration-300 shadow-md hover:shadow-lg bg-white"
             />
             {isFetchingCity && (
               <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -466,7 +457,7 @@ const HomeHeroForm = () => {
           <Button
             type="submit"
             size="lg"
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 h-auto rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 w-full md:w-auto"
+            className="bg-green-600 hover:bg-green-700 text-white px-10 py-4 h-auto rounded-3xl shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 w-full md:w-auto font-semibold text-base"
           >
             <Search className="mr-2 h-5 w-5" />
             Finden
@@ -475,7 +466,7 @@ const HomeHeroForm = () => {
       </div>
       
       {/* Stats inside form */}
-      <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
+      <div className="mt-4 pt-4 border-t border-gray-200 space-y-2 bg-white rounded-xl p-4 -mx-4 md:-mx-6 lg:-mx-8">
         <p 
           className="flex items-center gap-2"
           style={{
@@ -496,31 +487,12 @@ const HomeHeroForm = () => {
           <Clock className="h-4 w-4 text-gray-500 flex-shrink-0" />
           Die letzte Anfrage wurde vor <span className="font-semibold">{minutesAgo}</span> Minuten gestellt
         </p>
-        <p 
-          className="flex items-center gap-2"
-          style={{
-            fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-            fontSize: '16px',
-            lineHeight: '24px',
-            fontWeight: 400,
-            color: '#1c1d16',
-            textAlign: 'start',
-            letterSpacing: 'normal',
-            wordSpacing: '0px',
-            fontStyle: 'normal',
-            textTransform: 'none',
-            textDecoration: 'none',
-            textIndent: '0px'
-          }}
-        >
-          <FileText className="h-4 w-4 text-gray-500 flex-shrink-0" />
-          Es wurden heute <span className="font-bold text-green-600">{todayCount}</span>{' '}
-          <span className="font-bold text-green-600">Anfragen</span> gestellt
-        </p>
       </div>
+      </div>
+      {/* Kapanış div - içerik wrapper */}
     </form>
   )
 }
 
-export default HomeHeroForm
+export default React.memo(HomeHeroForm)
 

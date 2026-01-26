@@ -681,7 +681,7 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
     );
 };
 
-const GardenWorkSection = ({ formData, handleRadioGroupChange, handleChange, errors }) => {
+const GardenWorkSection = ({ formData, handleCheckboxChange, handleChange, errors }) => {
     const { t } = useTranslation('newCustomerForm');
     const gardenOptions = ['landschaftsbau', 'gartenpflege', 'terrassenverlegung', 'pool', 'sporteinrichtungsbau', 'gartenhausbau', 'saunabau', 'andere'];
 
@@ -695,32 +695,33 @@ const GardenWorkSection = ({ formData, handleRadioGroupChange, handleChange, err
         >
             <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.whatToGardenTitle')} <span className="text-red-500">*</span></h3>
             <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.whatToGardenSubtitle')}</p>
-             <RadioGroup
-                name="what_to_garden"
-                value={formData.what_to_garden || ''}
-                onValueChange={(value) => handleRadioGroupChange('what_to_garden', value)}
-                className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3"
-            >
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 {gardenOptions.map(option => (
-                     <div key={option}>
+                    <div key={option}>
                         <Label 
                             htmlFor={`what_to_garden_${option}`}
-                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 h-full
-                                ${formData.what_to_garden === option ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-400'}`
+                            className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 h-full
+                                ${formData.what_to_garden?.[option] ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-400'}`
                             }
                         >
-                            <RadioGroupItem value={option} id={`what_to_garden_${option}`} className="h-5 w-5 shrink-0" />
+                            <Checkbox
+                                id={`what_to_garden_${option}`}
+                                name={`what_to_garden.${option}`}
+                                checked={formData.what_to_garden?.[option] || false}
+                                onCheckedChange={(checked) => handleCheckboxChange(`what_to_garden.${option}`, checked)}
+                                className="h-5 w-5 shrink-0"
+                            />
                             <span className="font-normal text-sm sm:text-base text-gray-800">
                                 {t(`step1.whatToGarden.${option}`)}
                             </span>
                         </Label>
-                        
                         <AnimatePresence>
-                        {option === 'andere' && formData.what_to_garden === 'andere' && (
+                        {option === 'andere' && formData.what_to_garden?.andere && (
                             <motion.div
                                 initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
                                 animate={{ opacity: 1, scaleY: 1 }}
                                 exit={{ opacity: 0, scaleY: 0 }}
+                                transition={{ duration: 0.3, ease: 'easeInOut' }}
                             >
                                 <Input
                                     type="text"
@@ -735,7 +736,7 @@ const GardenWorkSection = ({ formData, handleRadioGroupChange, handleChange, err
                         </AnimatePresence>
                     </div>
                 ))}
-            </RadioGroup>
+            </div>
             {errors && errors.what_to_garden && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.what_to_garden}</p>}
         </motion.div>
     );
