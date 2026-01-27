@@ -114,7 +114,7 @@ const RaeumungEntsorgungPageClient = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed"
+                  className="text-base md:text-body mb-6 leading-relaxed"
                 >
                   Schaffen Sie Platz für Neues. Wir organisieren Ihre komplette Räumung – von der Entrümpelung bis zur besenreinen Übergabe. Effizient, zuverlässig und umweltgerecht.
                 </motion.p>
@@ -141,15 +141,15 @@ const RaeumungEntsorgungPageClient = () => {
                 >
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% sparen</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Nur geprüfte Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">100% kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
                 </motion.div>
               </div>
@@ -174,7 +174,7 @@ const RaeumungEntsorgungPageClient = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Warum eine professionelle Räumungsfirma beauftragen?</h2>
+              <h2 className="heading-2">Warum eine professionelle Räumungsfirma beauftragen?</h2>
               <p className="text-lg text-slate-600 leading-relaxed">Eine Räumung ist oft mehr als nur das Ausmisten alter Gegenstände. Sie erfordert Organisation, körperlichen Einsatz und Wissen über die fachgerechte Entsorgung. Eine professionelle Firma nimmt Ihnen diese Last ab, kümmert sich um die umweltfreundliche Trennung von Wertstoffen und Abfall und garantiert eine schnelle und diskrete Abwicklung.</p>
             </motion.div>
             <motion.div
@@ -193,7 +193,7 @@ const RaeumungEntsorgungPageClient = () => {
           </section>
 
           <section>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 text-center mb-12">Ihre Vorteile auf einen Blick</h2>
+            <h2 className="heading-2 text-center">Ihre Vorteile auf einen Blick</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {benefits.map((benefit, index) => {
                 const Icon = iconMap[benefit.icon]
@@ -218,7 +218,7 @@ const RaeumungEntsorgungPageClient = () => {
           </section>
 
           <section className="bg-white p-8 md:p-12 rounded-2xl shadow-xl">
-             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Was kostet eine Räumung und Entsorgung?</h2>
+             <h2 className="heading-2">Was kostet eine Räumung und Entsorgung?</h2>
              <p className="text-slate-600 mb-8 max-w-4xl">Die Kosten für eine Räumung und Entsorgung in der Schweiz basieren hauptsächlich auf dem Volumen (in Kubikmetern, m³) des zu entsorgenden Guts.</p>
              <div className="grid md:grid-cols-2 gap-10">
                 <div>
@@ -272,7 +272,7 @@ const RaeumungEntsorgungPageClient = () => {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-3xl md:text-4xl font-bold mb-4"
+              className="heading-2"
             >
               Bereit, Platz für Neues zu schaffen?
             </motion.h2>

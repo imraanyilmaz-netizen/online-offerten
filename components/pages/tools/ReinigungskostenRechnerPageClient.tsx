@@ -234,7 +234,7 @@ const ReinigungskostenRechnerPageClient = () => {
                     In nur 1 Minute eine verlässliche Schätzung
                   </span>
                 </h1>
-                <p className="typography-p mb-6">
+                <p className="text-body mb-6">
                   Erhalten Sie eine <strong>kostenlose Preis-Schätzung</strong> für Ihre Reinigung in der gesamten Schweiz. Unser <strong>Reinigungskosten-Rechner</strong> hilft Ihnen, die <strong>Kosten Reinigungsfirmen</strong> zu berechnen und zeigt Ihnen eine <strong>Reinigungskosten Tabelle</strong>. <strong>100% kostenlos und unverbindlich</strong>.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-600">
@@ -283,13 +283,13 @@ const ReinigungskostenRechnerPageClient = () => {
             <h2 className="heading-2">
               Der komplette Schweizer Kostenguide für stressfreie Wohnungsübergabe
             </h2>
-            <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+            <p className="text-body mb-4 leading-relaxed">
               Die Mietkaution zurückzubekommen gehört für viele Schweizer Mieter zu den stressigsten Momenten beim Umzug. Studien zeigen, dass rund <strong>40% aller Kautionsabzüge</strong> direkt mit mangelhafter Endreinigung zusammenhängen. Das bedeutet: Tausende Franken bleiben jährlich bei Verwaltungen hängen, weil die Wohnungsübergabe nicht besenrein erfolgte.
             </p>
-            <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+            <p className="text-body mb-4 leading-relaxed">
               Noch problematischer: <strong>73% der Mieter zahlen zu viel</strong> für ihre professionelle Endreinigung, weil sie weder die marktüblichen Preise kennen noch wissen, worauf bei der Offerte zu achten ist. Zwischen dem günstigsten und teuersten Anbieter liegen bei einer 3.5 Zimmer Wohnung schnell <strong>300-500 CHF Unterschied</strong> – bei identischer Leistung.
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="text-body leading-relaxed">
               Dieser ultimative Guide liefert Ihnen alles, was Sie über Endreinigung Wohnung Kosten in der Schweiz wissen müssen: von detaillierten Preistabellen für jede Wohnungsgrösse über regionale Unterschiede zwischen Zürich, Genf und ländlichen Gebieten bis hin zu 10 bewährten Spartipps, die wirklich funktionieren. Nach diesem Artikel brauchen Sie keine weiteren Quellen mehr.
             </p>
           </motion.section>
@@ -430,7 +430,7 @@ const ReinigungskostenRechnerPageClient = () => {
             </div>
 
             {/* Regionen-Vergleich */}
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 mt-12">
+            <h3 className="heading-3 mb-6 mt-12">
               Regionen-Vergleich: Städte vs. Land
             </h3>
             <div className="overflow-x-auto">
@@ -605,7 +605,7 @@ const ReinigungskostenRechnerPageClient = () => {
             <h2 className="heading-2">
               Der grosse Vergleich: Selbst machen vs. Profis beauftragen
             </h2>
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Echte Kostenrechnung für 3.5 Zimmer Wohnung</h3>
+              <h3 className="heading-3 mb-6">Echte Kostenrechnung für 3.5 Zimmer Wohnung</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <Card className="bg-red-50 border-2 border-red-200">
@@ -639,7 +639,7 @@ const ReinigungskostenRechnerPageClient = () => {
             </div>
 
             <div className="bg-blue-50 p-6 rounded-lg mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Qualitätsvergleich und Abnahme-Erfolgsquoten</h3>
+              <h3 className="heading-3 mb-4">Qualitätsvergleich und Abnahme-Erfolgsquoten</h3>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Professionelle Reinigungsfirmen erreichen <strong>95%+ Abnahme-Erfolg</strong> beim ersten Versuch. Bei Selbstreinigung liegt die Quote bei etwa <strong>70-75%</strong> – jede dritte bis vierte Wohnung erfordert Nacharbeiten.
               </p>
@@ -759,7 +759,7 @@ const ReinigungskostenRechnerPageClient = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Pflichtleistungen laut Schweizer Mietrecht</h3>
+                <h3 className="heading-3 mb-4">Pflichtleistungen laut Schweizer Mietrecht</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
                     <Check className="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
@@ -788,7 +788,7 @@ const ReinigungskostenRechnerPageClient = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Optionale Zusätze die sich wirklich lohnen</h3>
+                <h3 className="heading-3 mb-4">Optionale Zusätze die sich wirklich lohnen</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
                     <Package className="w-5 h-5 text-blue-600 mr-3 mt-1 flex-shrink-0" />
@@ -838,7 +838,7 @@ const ReinigungskostenRechnerPageClient = () => {
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Wie teuer ist Endreinigung für 2.5 Zimmer Wohnung?
+                  <h4 className="faq-question">Wie teuer ist Endreinigung für 2.5 Zimmer Wohnung?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Eine professionelle Wohnungsreinigung für 2.5 Zimmer kostet in der Schweiz zwischen 390 und 580 CHF, abhängig von Zustand und Region.
@@ -846,7 +846,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-2">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Wer haftet bei Beschädigungen durch Reinigungsfirma?
+                  <h4 className="faq-question">Wer haftet bei Beschädigungen durch Reinigungsfirma?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Seriöse Reinigungsfirmen verfügen über eine Betriebshaftpflichtversicherung. Schäden werden durch diese abgedeckt – fragen Sie vor allem nach der Deckungssumme.
@@ -854,7 +854,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-3">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Muss ich Endreinigung beim Vermieter anmelden?
+                  <h4 className="faq-question">Muss ich Endreinigung beim Vermieter anmelden?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Nein, aber informieren Sie die Verwaltung über den Termin. Bei der Abgabe sollte die Reinigungsfirma idealerweise anwesend sein.
@@ -862,7 +862,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-4">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Kann ich Endreinigung von Steuer absetzen?
+                  <h4 className="faq-question">Kann ich Endreinigung von Steuer absetzen?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   In der Schweiz sind Reinigungskosten bei Auszug grundsätzlich nicht steuerlich absetzbar, da sie als einmalige Privatausgabe gelten.
@@ -870,7 +870,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-5">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Wie lange dauert professionelle Endreinigung?
+                  <h4 className="faq-question">Wie lange dauert professionelle Endreinigung?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Eine 3.5 Zimmer Wohnung: 4-6 Stunden mit 2-3 Reinigungskräften. Eine 5.5 Zimmer Wohnung: 6-8 Stunden.
@@ -878,7 +878,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Was passiert wenn Vermieter Reinigung ablehnt?
+                  <h4 className="faq-question">Was passiert wenn Vermieter Reinigung ablehnt?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Bei Abnahmegarantie: Die Firma bessert kostenlos nach. Ohne Garantie: Sie tragen die Kosten für Nacharbeiten oder Kautionsabzug.
@@ -886,7 +886,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-7">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Unterschied zwischen Grundreinigung und Endreinigung?
+                  <h4 className="faq-question">Unterschied zwischen Grundreinigung und Endreinigung?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Endreinigung ist eine spezialisierte Grundreinigung mit erhöhten Anforderungen gemäss Schweizer Mietrecht – besenreiner Zustand für die Übergabe.
@@ -894,7 +894,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-8">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Welche Versicherungen braucht Reinigungsfirma?
+                  <h4 className="faq-question">Welche Versicherungen braucht Reinigungsfirma?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Betriebshaftpflicht (Minimum 2 Mio. CHF Deckung) und idealerweise Arbeitsunfallversicherung für alle Mitarbeitenden.
@@ -902,7 +902,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-9">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Kann ich kurzfristig stornieren?
+                  <h4 className="faq-question">Kann ich kurzfristig stornieren?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Die meisten Firmen erlauben kostenlose Stornierung bis 48h vorher. Danach fallen oft 50% der Kosten an.
@@ -910,7 +910,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-10">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Zahlung: Vorauskasse oder nach Abnahme?
+                  <h4 className="faq-question">Zahlung: Vorauskasse oder nach Abnahme?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Standard: 50% Anzahlung, Rest nach erfolgreicher Abnahme durch Vermieter/Verwaltung.
@@ -918,7 +918,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-11">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Umweltfreundliche Reinigungsmittel: Aufpreis?
+                  <h4 className="faq-question">Umweltfreundliche Reinigungsmittel: Aufpreis?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Ja, üblicherweise 10-15% Aufpreis. Sinnvoll bei Allergien, Kindern oder wenn Sie Wert auf Nachhaltigkeit legen.
@@ -926,7 +926,7 @@ const ReinigungskostenRechnerPageClient = () => {
               </AccordionItem>
               <AccordionItem value="item-12">
                 <AccordionTrigger className="text-left font-semibold text-gray-800">
-                  Was wenn Wohnung stark verschmutzt ist?
+                  <h4 className="faq-question">Was wenn Wohnung stark verschmutzt ist?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700">
                   Seriöse Firmen bieten kostenlose Vor-Ort-Besichtigung bei unklarem Zustand. Rechnen Sie mit 50-80% höheren Kosten gegenüber Normalzustand.

@@ -22,7 +22,7 @@ const Section = ({ children, className = '' }: any) => (
 const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
-    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 flex items-center">
+    <h2 className="heading-2 flex items-center">
       {Icon && <Icon size={32} className="mr-4 text-green-600" />}
       {title}
     </h2>
@@ -123,7 +123,7 @@ const UmzugNachDaenemarkPageClient = () => {
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
               <Section className="border-t-0 pt-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">🇩🇰 Velkommen til Danmark!</h2>
+                <h2 className="heading-2 mb-4">🇩🇰 Velkommen til Danmark!</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">Ein Umzug nach Dänemark ist der Beginn eines neuen Lebensgefühls: Hygge. Es ist die dänische Kunst, Glück in den kleinen, gemütlichen Dingen des Alltags zu finden. Ob Sie das urbane Leben in Kopenhagen, die Küstenlandschaften Jütlands oder den Charme der vielen Inseln suchen – Dänemark begrüsst Sie mit einer einzigartigen Mischung aus modernem Design, progressiver Gesellschaft und einer tiefen Verbundenheit zur Natur. Dieser Guide ist Ihr Kompass für einen perfekt organisierten Umzug von der Schweiz nach Dänemark.</p>
               </Section>
 
@@ -167,15 +167,15 @@ const UmzugNachDaenemarkPageClient = () => {
                 <SectionTitle icon={FileText} title="Checkliste für einen gelungenen Start in Dänemark" />
                 <div className="space-y-6">
                   <div>
-                    <h4 className="font-bold text-lg text-gray-700 mb-3">2-3 Monate vor dem Umzug</h4>
+                    <h4 className="font-bold text-body mb-3">2-3 Monate vor dem Umzug</h4>
                     <ul className="space-y-2">{checklistMonths.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-gray-700 mb-3">2-4 Wochen vor dem Umzug</h4>
+                    <h4 className="font-bold text-body mb-3">2-4 Wochen vor dem Umzug</h4>
                     <ul className="space-y-2">{checklistWeeks.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-gray-700 mb-3">Die letzten Tage vor dem Umzug</h4>
+                    <h4 className="font-bold text-body mb-3">Die letzten Tage vor dem Umzug</h4>
                     <ul className="space-y-2">{checklistDays.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ const Section = ({ children, className = '' }: any) => (
 const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
-    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 flex items-center">
+    <h2 className="heading-2 flex items-center">
       {Icon && <Icon size={36} className="mr-4 text-green-600" />}
       {title}
     </h2>
@@ -217,7 +217,9 @@ const UmzugNachItalienPageClient = () => {
                 <Accordion type="single" collapsible className="w-full">
                   {faqs.map((faq, index) => (
                     <AccordionItem value={`item-${index}`} key={index}>
-                      <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">{faq.question}</AccordionTrigger>
+                      <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
+                        <h4 className="faq-question">{faq.question}</h4>
+                      </AccordionTrigger>
                       <AccordionContent className="text-gray-700 leading-relaxed">
                         <p dangerouslySetInnerHTML={{ __html: faq.answer }}></p>
                       </AccordionContent>

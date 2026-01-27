@@ -22,7 +22,7 @@ const Section = ({ children, className = '' }: any) => (
 const SectionTitle = ({ icon, title }: any) => {
   const Icon = icon;
   return (
-    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 flex items-center">
+    <h2 className="heading-2 flex items-center">
       {Icon && <Icon size={32} className="mr-4 text-green-600" />}
       {title}
     </h2>
@@ -138,7 +138,7 @@ const UmzugNachDeutschlandPageClient = () => {
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
               <Section className="border-t-0 pt-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Von der Schweiz nach Deutschland: Sicher und effizient umziehen</h2>
+                <h2 className="heading-2">Von der Schweiz nach Deutschland: Sicher und effizient umziehen</h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">Ein Umzug von der Schweiz nach Deutschland ist ein grosser Schritt, der eine sorgfältige Planung erfordert. Ob es ein Privatumzug in eine neue Stadt oder ein kompletter Geschäftsumzug ist, die Komplexität eines internationalen Umzugs sollte nicht unterschätzt werden. Zollformalitäten, Transportlogistik und die Suche nach einem vertrauenswürdigen Partner sind entscheidend. Hier erfahren Sie alles, was Sie für einen erfolgreichen Umzug wissen müssen und wie Sie durch den Vergleich von professionellen Umzugsfirmen Zeit und Geld sparen können.</p>
                 <p className="text-gray-700 leading-relaxed">Unser Portal hilft Ihnen, schnell und unkompliziert geprüfte Unternehmen zu finden, die auf internationale Umzüge spezialisiert sind. So können Sie sich auf das Wesentliche konzentrieren: Ihr neues Leben in Deutschland.</p>
               </Section>

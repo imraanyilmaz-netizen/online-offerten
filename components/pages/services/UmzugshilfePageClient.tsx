@@ -132,11 +132,11 @@ const UmzugshilfePageClient = () => {
                   <h1 className="heading-1">
                     Umzugshilfe finden & vergleichen
                   </h1>
-                  <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-4">
+                  <h2 className="heading-2">
                     Professionelle Unterstützung für Ihren Umzug
                   </h2>
                 </div>
-                <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed font-medium">
+                <p className="text-base md:text-body mb-6 leading-relaxed font-medium">
                   Benötigen Sie Unterstützung beim Umzug? Finden Sie geprüfte Umzugshelfer und Umzugsfirmen in Ihrer Region. Von flexibler Umzugshilfe bis hin zum vollständigen Umzugsservice – vergleichen Sie kostenlos mehrere Offerten und sparen Sie bis zu 40%.
                 </p>
                 <div className="mb-6">
@@ -152,15 +152,15 @@ const UmzugshilfePageClient = () => {
                 <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6">
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Flexible Umzugshilfe</span>
+                    <span className="text-sm md:text-body font-medium">Flexible Umzugshilfe</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Geprüfte Helfer & Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Geprüfte Helfer & Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Kostenfrei & ohne Verpflichtung</span>
+                    <span className="text-sm md:text-body font-medium">Kostenfrei & ohne Verpflichtung</span>
                   </div>
                 </div>
               </article>
@@ -231,24 +231,24 @@ const UmzugshilfePageClient = () => {
             >
               {/* Article Section 1 */}
               <section>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Ein Umzug kann körperlich anstrengend und zeitaufwändig sein. Ob Sie nur Unterstützung beim Tragen schwerer Möbel benötigen, Hilfe beim Verpacken Ihrer Habseligkeiten suchen oder einen vollständigen Umzugsservice wünschen – professionelle Umzugshilfe macht den Unterschied.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Umzugshilfe umfasst verschiedene Formen der Unterstützung: Von flexiblen Umzugshelfern, die stundenweise arbeiten, bis hin zu vollständigen Umzugsfirmen, die den gesamten Umzug übernehmen. Egal ob Sie nur ein paar starke Hände für den Umzugstag brauchen oder eine komplette Lösung suchen – wir finden die passende Unterstützung für Sie.
                 </p>
-                <p className="text-gray-700 leading-relaxed mt-4">
+                <p className="text-body leading-relaxed mt-4">
                   In der Schweiz gibt es viele Anbieter für Umzugshilfe. Doch wie finden Sie zuverlässige Umzugshelfer oder Umzugsfirmen, die ein faires Preis-Leistungs-Verhältnis bieten? Vergleichen Sie Offerten kostenlos und finden Sie die beste Lösung für Ihren Umzug.
                 </p>
               </section>
 
               {/* Article Section 2 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h2 className="heading-2 flex items-center">
                   <Users size={28} className="mr-3 text-blue-500" />
                   Was ist Umzugshilfe?
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Umzugshilfe bezeichnet professionelle Unterstützung beim Umzug. Dies kann verschiedene Formen annehmen:
                 </p>
                 <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
@@ -256,18 +256,18 @@ const UmzugshilfePageClient = () => {
                   <li><strong>Teilservice:</strong> Unterstützung bei bestimmten Aufgaben wie Verpacken, Tragen oder Möbelmontage.</li>
                   <li><strong>Vollservice:</strong> Komplette Übernahme des Umzugs durch eine professionelle Umzugsfirma.</li>
                 </ul>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Je nach Ihren Bedürfnissen können Sie die passende Form der Umzugshilfe wählen. Ein Vergleich mehrerer Offerten hilft Ihnen, die beste Lösung zu finden.
                 </p>
               </section>
 
               {/* Article Section 3 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h2 className="heading-2 flex items-center">
                   <Clock size={28} className="mr-3 text-purple-500" />
                   Wann brauche ich Umzugshilfe?
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Umzugshilfe ist in verschiedenen Situationen sinnvoll:
                 </p>
                 <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
@@ -277,17 +277,17 @@ const UmzugshilfePageClient = () => {
                   <li>Sie benötigen Hilfe beim Verpacken oder Organisieren</li>
                   <li>Sie wünschen einen stressfreien Umzug ohne körperliche Belastung</li>
                 </ul>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Professionelle Umzugshilfe spart nicht nur Zeit, sondern reduziert auch das Verletzungsrisiko und sorgt für einen reibungslosen Ablauf.
                 </p>
               </section>
 
               {/* Article Section 4 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   Was kostet Umzugshilfe in der Schweiz?
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Die Kosten für Umzugshilfe variieren je nach Grösse der Wohnung oder des Hauses. Ein kleiner Umzug (1 Zimmer) startet ab 600 CHF, während ein mittlerer Umzug (3 Zimmer) zwischen 1.200-2.000 CHF kostet. Für grössere Umzüge (Haus) beginnen die Preise ab 2.500 CHF.
                 </p>
                 <div className="my-4">
@@ -304,27 +304,27 @@ const UmzugshilfePageClient = () => {
                     serviceType="umzug"
                   />
                 </div>
-                <p className="text-gray-700 leading-relaxed mt-4">
+                <p className="text-body leading-relaxed mt-4">
                   Für eine genauere Schätzung empfehlen wir die Nutzung unseres <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechners</Link>. Damit erhalten Sie eine detaillierte Kostenschätzung für Ihr individuelles Projekt.
                 </p>
               </section>
 
               {/* Article Section 5 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h2 className="heading-2 flex items-center">
                   <ShieldCheck size={28} className="mr-3 text-red-500" />
                   Sicherheit und Versicherung
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Bei professioneller Umzugshilfe sind Sie abgesichert. Seriöse Umzugshelfer und Umzugsfirmen verfügen über die notwendigen Versicherungen.
                 </p>
                 <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                  <h3 className="font-bold text-lg text-gray-700 mb-2">Transportversicherung</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h3 className="font-bold text-body mb-2">Transportversicherung</h3>
+                  <p className="text-body leading-relaxed">
                     Diese ist bei seriösen Anbietern standardmässig inbegriffen und deckt Schäden, die während des Umzugs entstehen.
                   </p>
-                  <h3 className="font-bold text-lg text-gray-700 mt-4 mb-2">Haftpflichtversicherung</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <h3 className="font-bold text-body mt-4 mb-2">Haftpflichtversicherung</h3>
+                  <p className="text-body leading-relaxed">
                     Diese Versicherung deckt Schäden, die im Treppenhaus oder an der Immobilie selbst entstehen. Fragen Sie bei der Auswahl immer nach den inkludierten Versicherungsleistungen.
                   </p>
                 </div>
@@ -332,11 +332,11 @@ const UmzugshilfePageClient = () => {
 
               {/* Article Section 6 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h2 className="heading-2 flex items-center">
                   <Wrench size={28} className="mr-3 text-indigo-500" />
                   Arten von Umzugshilfe
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Es gibt verschiedene Arten von Umzugshilfe, die Sie je nach Bedarf kombinieren können:
                 </p>
                 <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
@@ -350,11 +350,11 @@ const UmzugshilfePageClient = () => {
 
               {/* Article Section 7 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h2 className="heading-2 flex items-center">
                   <HeartHandshake size={28} className="mr-3 text-pink-500" />
                   So finden Sie zuverlässige Umzugshilfe
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Bei der Auswahl von Umzugshilfe sollten Sie auf folgende Punkte achten:
                 </p>
                 <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
@@ -364,39 +364,39 @@ const UmzugshilfePageClient = () => {
                   <li>Offizielle Registrierung im Handelsregister</li>
                   <li>Professionelles Auftreten und Kommunikation</li>
                 </ul>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Über unsere Plattform können Sie Offerten kostenlos vergleichen. Sie erhalten ausschliesslich Offerten von geprüften und bewerteten Umzugshelfern und Umzugsfirmen aus Ihrer Region.
                 </p>
               </section>
 
               {/* Article Section 8 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h2 className="heading-2 flex items-center">
                   <MapPin size={28} className="mr-3 text-cyan-500" />
                   Lokale Umzugshilfe in Ihrer Region
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Lokale Umzugshelfer und Umzugsfirmen kennen die Gegebenheiten vor Ort, wie z.B. Parkregelungen oder Zufahrtsbeschränkungen. Das spart Zeit und Nerven am Umzugstag.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Wir vermitteln Ihnen Umzugshilfe in der ganzen Schweiz. Finden Sie den passenden Partner in <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma-in-der-naehe/basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
                 </p>
               </section>
 
               {/* Conclusion */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h2 className="heading-2 flex items-center">
                   <Home size={28} className="mr-3 text-teal-500" />
                   Starten Sie jetzt mit professioneller Umzugshilfe
                 </h2>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Ein Umzug muss nicht kompliziert sein. Mit der richtigen Umzugshilfe wird der Umzug zu einem stressfreien Erlebnis. <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-600 hover:underline font-semibold">Fordern Sie jetzt Ihre kostenlosen und unverbindlichen Offerten an</Link> und finden Sie die passende Unterstützung für Ihren Umzug.
                 </p>
               </section>
 
               {/* Advantages Section */}
               <section className="pt-6 border-t border-gray-200">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-5 flex items-center">
+                <h3 className="heading-3 flex items-center">
                   <Star size={28} className="mr-3 text-yellow-500" />
                   Ihre Vorteile auf einen Blick
                 </h3>
@@ -422,7 +422,7 @@ const UmzugshilfePageClient = () => {
               {/* Related Services Section */}
               <section className="pt-8 border-t border-gray-200">
                 <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                  <h3 className="heading-3 flex items-center">
                     <Sparkles className="w-5 h-5 mr-2 text-green-600" />
                     Weitere Services
                   </h3>
@@ -463,7 +463,7 @@ const UmzugshilfePageClient = () => {
 
               {/* FAQ Section */}
               <section className="pt-6 border-t border-gray-200">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                <h3 className="heading-3 flex items-center">
                   <HelpCircle size={28} className="mr-3 text-purple-500" />
                   Häufige Fragen zur Umzugshilfe
                 </h3>
@@ -541,7 +541,7 @@ const UmzugshilfePageClient = () => {
                     <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                       <div className="flex items-center">
                         <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                        Was ist der Unterschied zwischen Umzugshilfe und einer Umzugsfirma?
+                        <h4 className="faq-question">Was ist der Unterschied zwischen Umzugshilfe und einer Umzugsfirma?</h4>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -566,7 +566,7 @@ const UmzugshilfePageClient = () => {
                     <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                       <div className="flex items-center">
                         <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                        Wie finde ich zuverlässige Umzugshelfer?
+                        <h4 className="faq-question">Wie finde ich zuverlässige Umzugshelfer?</h4>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -592,7 +592,7 @@ const UmzugshilfePageClient = () => {
                     <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                       <div className="flex items-center">
                         <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                        Kann ich Umzugshilfe nur für bestimmte Aufgaben buchen?
+                        <h4 className="faq-question">Kann ich Umzugshilfe nur für bestimmte Aufgaben buchen?</h4>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">

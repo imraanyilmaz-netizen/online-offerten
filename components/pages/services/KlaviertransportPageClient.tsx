@@ -61,17 +61,17 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
         <div className="flex justify-start">
           <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold mb-6 text-gray-900 leading-tight">
+              <h1 className="heading-1">
                 Klaviertransporte: Kostenlose Offerten vergleichen
               </h1>
-              <p className="text-base md:text-lg text-gray-700 mb-4">
+              <p className="text-base md:text-body mb-4">
                 Erhalten Sie in nur 5 Minuten bis zu 6 Angebote
               </p>
             </div>
-            <p className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed">
+            <p className="text-base md:text-body mb-4 leading-relaxed">
               Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen und die beste Firma für Ihren Transport finden. Unsere Partner sind auf den sicheren Transport von Klavieren, Flügeln und Pianos spezialisiert. Professionell, versichert und bis zu 40% günstiger.
             </p>
-            <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+            <p className="text-base md:text-body mb-6 leading-relaxed">
               Sie erhalten ein kostenloses und unverbindliches Angebot für Ihren Klaviertransport bequem per Email. Alle Angebote werden als Festpreis erstellt, sodass Sie volle Kostentransparenz geniessen.
             </p>
             <div className="mb-6">
@@ -89,15 +89,15 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
             <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-col gap-4 md:gap-6 max-w-md">
               <div className="flex items-center">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
+                <span className="text-sm md:text-body font-medium">Bis zu 40% Ersparnis möglich</span>
               </div>
               <div className="flex items-center">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                <span className="text-sm md:text-base text-gray-700 font-medium">Mehrere Zügelfirmen vergleichen</span>
+                <span className="text-sm md:text-body font-medium">Mehrere Zügelfirmen vergleichen</span>
               </div>
               <div className="flex items-center">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                <span className="text-sm md:text-base text-gray-700 font-medium">Kostenlos & unverbindlich</span>
+                <span className="text-sm md:text-body font-medium">Kostenlos & unverbindlich</span>
               </div>
             </div>
           </article>
@@ -153,7 +153,7 @@ const ContentSection = ({ sectionData }: { sectionData: any }) => {
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         {/* Header */}
         <div className="text-left mb-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{sectionData.title}</h2>
+          <h2 className="heading-2">{sectionData.title}</h2>
           {sectionData.subtitle && (
             <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
               {sectionData.subtitle}
@@ -163,7 +163,7 @@ const ContentSection = ({ sectionData }: { sectionData: any }) => {
 
         {/* Content */}
         <div>
-          <div className="space-y-6 text-gray-700 leading-relaxed text-base md:text-lg">
+          <div className="space-y-6 text-body leading-relaxed text-base md:text-lg">
             {sectionData.paragraphs.map((p: string, i: number) => (
               <p key={i} dangerouslySetInnerHTML={{ __html: p }} className="mb-4" />
             ))}
@@ -204,7 +204,7 @@ const FaqSection = ({ faqData }: { faqData: any }) => {
     >
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="text-left mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{faqData.title}</h2>
+          <h2 className="heading-2">{faqData.title}</h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl">{faqData.subtitle}</p>
         </div>
         <Card className="border-0 shadow-lg bg-white">
@@ -216,11 +216,11 @@ const FaqSection = ({ faqData }: { faqData: any }) => {
                   value={`item-${index}`} 
                   className="border-b border-gray-200 last:border-0 px-4 py-2"
                 >
-                  <AccordionTrigger className="font-semibold text-left text-base md:text-lg hover:no-underline py-4 text-gray-900">
-                {item.q}
+                  <AccordionTrigger className="font-semibold text-left hover:no-underline py-4 text-gray-900">
+                <h4 className="faq-question text-left">{item.q}</h4>
               </AccordionTrigger>
                   <AccordionContent className="pt-2 pb-4">
-                    <p className="text-gray-700 leading-relaxed">{item.a}</p>
+                    <p className="text-body leading-relaxed">{item.a}</p>
               </AccordionContent>
             </AccordionItem>
           ))}

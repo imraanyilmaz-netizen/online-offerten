@@ -156,16 +156,16 @@ const UmzugsfirmaGenfPageClient = () => {
               className="lg:col-span-3 bg-white p-6 md:p-8 rounded-xl shadow-xl space-y-8"
             >
               <article>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Professionell umziehen in der internationalen Metropole</h2>
+                <h2 className="heading-2">Professionell umziehen in der internationalen Metropole</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">Genf, als Sitz vieler internationaler Organisationen, ist ein einzigartiger Ort für einen Umzug. Ob Sie aus dem Ausland zuziehen oder innerhalb der Stadt umziehen, unsere Partnerfirmen bieten massgeschneiderte Lösungen. Vergleichen Sie Offerten, um den besten Service für Ihre Bedürfnisse in Genf zu finden.</p>
               </article>
 
               <article className="pt-8 border-t border-gray-200 space-y-6">
-                <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Genf?</h2>
-                <p className="typography-p mb-4">
+                <h2 className="heading-2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Genf?</h2>
+                <p className="text-body mb-4">
                   Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Genf richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
                 </p>
-                <p className="typography-p mb-6">
+                <p className="text-body mb-6">
                   Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Genf und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
                 </p>
                 
@@ -173,21 +173,21 @@ const UmzugsfirmaGenfPageClient = () => {
                   {/* Hourly Rates Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                      <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                      <h3 className="heading-3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
                     </div>
                     <div className="overflow-x-auto flex-1">
                       <table className="w-full table-fixed">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
-                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                            <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Preis</th>
                           </tr>
                         </thead>
                         <tbody>
                           {hourlyRates.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 transition-colors">
-                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
-                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-body">{row.service}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right text-body font-semibold text-green-600">{row.price}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -198,21 +198,21 @@ const UmzugsfirmaGenfPageClient = () => {
                   {/* Room Size Costs Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                      <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                      <h3 className="heading-3 !text-white">Umzugskosten nach Zimmergrössen</h3>
                     </div>
                     <div className="overflow-x-auto flex-1">
                       <table className="w-full table-fixed">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
-                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                            <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                            <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
                           </tr>
                         </thead>
                         <tbody>
                           {costTableRows.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 transition-colors">
-                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
-                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-body">{row.size}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right text-body font-semibold text-green-600">{row.cost}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -222,7 +222,7 @@ const UmzugsfirmaGenfPageClient = () => {
                 </div>
                 
                 <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
-                  <p className="typography-p text-gray-600 italic">
+                  <p className="text-body text-gray-600 italic">
                     Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
                   </p>
                 </div>

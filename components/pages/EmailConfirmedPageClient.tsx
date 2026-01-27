@@ -69,7 +69,7 @@ const EmailConfirmedPageClient = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            className="heading-2 mb-4"
           >
             E-Mail bestätigt!
           </motion.h1>
@@ -78,7 +78,7 @@ const EmailConfirmedPageClient = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-lg text-gray-600 mb-8"
+            className="text-body mb-8"
           >
             Ihre E-Mail-Adresse wurde erfolgreich bestätigt. Sie werden in{' '}
             <span className="font-bold text-green-600 text-xl">{countdown}</span> Sekunden

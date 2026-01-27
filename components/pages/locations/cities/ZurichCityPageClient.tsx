@@ -148,7 +148,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
         {/* Service Selection Cards */}
         <section className="py-12 md:py-16 bg-gradient-to-br from-green-50 to-emerald-50 border-b border-gray-200">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="heading-2 text-center mb-8">
               Wählen Sie Ihre gewünschte Dienstleistung
             </h2>
             <ServiceGrid city={cityName} />
@@ -160,7 +160,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             {/* Portal-focused Introduction */}
             <article className="mb-12 bg-green-50 rounded-xl p-8 md:p-10 border border-green-200">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              <h2 className="heading-2">
                 Umzugsfirma {cityName} vergleichen – Kostenlose Offerten geprüfter Anbieter
               </h2>
               {cityData.portalIntro && (
@@ -180,21 +180,21 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* Local Facts */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Lokale Besonderheiten in {cityName}</h2>
+              <h2 className="heading-2">Lokale Besonderheiten in {cityName}</h2>
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="bg-gray-50 rounded-xl p-6">
                   <MapPin className="w-10 h-10 text-green-600 mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Infrastruktur</h3>
+                  <h3 className="heading-3">Infrastruktur</h3>
                   <p className="text-gray-700 leading-relaxed">{cityData.infrastructure}</p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6">
                   <Building className="w-10 h-10 text-blue-600 mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Wohnungstypen</h3>
+                  <h3 className="heading-3">Wohnungstypen</h3>
                   <p className="text-gray-700 leading-relaxed">{cityData.housingTypes}</p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6">
                   <Truck className="w-10 h-10 text-purple-600 mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Logistische Herausforderungen</h3>
+                  <h3 className="heading-3">Logistische Herausforderungen</h3>
                   <p className="text-gray-700 leading-relaxed">{cityData.logisticsChallenges}</p>
                 </div>
               </div>
@@ -202,7 +202,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* Services */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Leistungen der Umzugsfirmen in {cityName}</h2>
+              <h2 className="heading-2">Leistungen der Umzugsfirmen in {cityName}</h2>
               <p className="text-gray-700 leading-relaxed mb-6">
                 {cityData.services}
               </p>
@@ -232,7 +232,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
                         className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-green-500 transition-all"
                       >
                         <Icon className="w-8 h-8 text-green-600 mb-3" />
-                        <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                        <h3 className="heading-3">
                           {serviceDetail.name}
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
@@ -251,7 +251,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* Umzugskosten */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in {cityName}?</h2>
+              <h2 className="heading-2">Was kostet ein Umzug mit einer Umzugsfirma in {cityName}?</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in {cityName} richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
               </p>
@@ -262,7 +262,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
               {/* Hourly Rates Table */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 mb-6">
                 <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4">
-                  <h3 className="text-xl font-bold text-white">Umzugspreise - Kosten pro Stunde</h3>
+                  <h3 className="heading-3 text-white">Umzugspreise - Kosten pro Stunde</h3>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full">
@@ -287,7 +287,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
               {/* Room Size Costs Table */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 mb-6">
                 <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4">
-                  <h3 className="text-xl font-bold text-white">Umzugskosten nach Zimmergrössen</h3>
+                  <h3 className="heading-3 text-white">Umzugskosten nach Zimmergrössen</h3>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full">
@@ -317,7 +317,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* Local Features */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Umzugs-Herausforderungen in {cityName}</h2>
+              <h2 className="heading-2">Umzugs-Herausforderungen in {cityName}</h2>
               <p className="text-gray-700 leading-relaxed">
                 {cityData.localFeatures}
               </p>
@@ -325,7 +325,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* Advantages - Shortened */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Vorteile eines Umzugs nach {cityName}</h2>
+              <h2 className="heading-2">Vorteile eines Umzugs nach {cityName}</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 {cityData.advantages}
               </p>
@@ -333,12 +333,12 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* Benefits */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Ihre Vorteile mit online-offerten.ch</h2>
+              <h2 className="heading-2">Ihre Vorteile mit online-offerten.ch</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="bg-white border-2 border-gray-200 rounded-xl p-6">
                     <benefit.icon className="w-10 h-10 text-green-600 mb-4" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{benefit.title}</h3>
+                    <h3 className="heading-3">{benefit.title}</h3>
                     <p className="text-gray-700 leading-relaxed">{benefit.text}</p>
                   </div>
                 ))}
@@ -347,11 +347,11 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* FAQ */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Häufige Fragen zu Umzügen in {cityName}</h2>
+              <h2 className="heading-2">Häufige Fragen zu Umzügen in {cityName}</h2>
               <div className="space-y-4">
                 {cityData.faqs.map((faq, index) => (
                   <div key={index} className="bg-gray-50 rounded-xl p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                    <h3 className="heading-3">{faq.question}</h3>
                     <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
                   </div>
                 ))}
@@ -360,7 +360,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 
             {/* Internal Links */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Weitere Informationen</h2>
+              <h2 className="heading-2">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Zürich-Übersicht</Link>, <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Kanton Zürich</Link> oder <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>.

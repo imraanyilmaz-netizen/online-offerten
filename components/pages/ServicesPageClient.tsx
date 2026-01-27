@@ -27,7 +27,7 @@ const ServiceItem = ({ icon, title, description, features, delay, linkTo }: {
         <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 text-white rounded-full mx-auto mb-6 shadow-lg">
           {icon}
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 text-center mb-4">{title}</h3>
+        <h3 className="heading-3 text-center mb-4">{title}</h3>
         <p className="text-gray-600 text-center mb-6 h-24 overflow-y-auto">{description}</p>
         
         <ul className="space-y-2 mb-6 text-sm text-gray-600">
@@ -201,7 +201,7 @@ const ServicesPageClient = () => {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="py-16 bg-green-600 text-white rounded-xl shadow-2xl text-center hero-pattern"
         >
-          <h2 className="text-3xl font-bold mb-6">Warum uns wählen?</h2>
+          <h2 className="heading-2 mb-6">Warum uns wählen?</h2>
           <div className="flex flex-col md:flex-row justify-around items-center gap-8 px-4 md:px-6">
             <div className="flex flex-col items-center">
               <ShieldCheck size={40} className="mb-2" />

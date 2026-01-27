@@ -339,7 +339,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             <h2 className="heading-2">
               Warum eine lokale Umzugsfirma wählen?
             </h2>
-            <p className="typography-p mb-6">
+            <p className="text-body mb-6">
               Eine Umzugsfirma aus Ihrer Nähe kennt die regionalen Besonderheiten: Verkehrssituationen, Parkregelungen, Gebäudezugänge und lokale Vorschriften. Das spart nicht nur Zeit, sondern auch Geld durch kürzere Anfahrtswege. Lokale Anbieter sind flexibler bei kurzfristigen Änderungen und können schneller auf Ihre individuellen Bedürfnisse eingehen. Zusätzlich unterstützen Sie mit Ihrer Wahl die regionale Wirtschaft und erhalten oft persönlicheren Service.
             </p>
             
@@ -347,7 +347,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
               <h3 className="heading-3">
                 Ihre Vorteile mit einer lokalen Umzugsfirma:
               </h3>
-              <ul className="space-y-3 typography-p">
+              <ul className="space-y-3 text-body">
                 <li className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
                   <span><strong>Kürzere Anfahrtswege = niedrigere Kosten</strong></span>
@@ -371,7 +371,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 So finden Sie die beste Umzugsfirma in Ihrer Nähe
               </h3>
-              <p className="typography-p">
+              <p className="text-body">
                 Der Vergleich mehrerer Anbieter ist der Schlüssel zum Erfolg. Studien zeigen, dass Umzugskosten für identische Leistungen um bis zu 40% variieren können. Mit unserem Service erhalten Sie mit nur einer Anfrage bis zu 6 detaillierte Offerten von geprüften Umzugsunternehmen aus Ihrer Region.
               </p>
             </div>

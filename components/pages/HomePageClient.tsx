@@ -412,7 +412,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <h2 className="heading-2">
                     Das sagen unsere Kundinnen & Kunden
                   </h2>
-                  <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                  <p className="mt-4 text-body max-w-2xl mx-auto">
                     100 % echte Stimmen – Erfahrungen von Menschen, die bereits mit uns umgezogen sind.
                   </p>
                 </div>
@@ -472,7 +472,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     <h2 className="heading-2">
                       Sind Sie Dienstleister?
                     </h2>
-                    <p className="text-lg text-gray-600 leading-relaxed">
+                    <p className="text-body leading-relaxed">
                       Wir verbinden Sie mit potenziellen Kunden in Ihrer Region, die genau Ihre Dienstleistungen suchen. Erweitern Sie Ihre Reichweite und gewinnen Sie neue Aufträge
                     </p>
                   </div>
@@ -573,7 +573,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     >
                       Planen Sie Ihren Umzug effizient mit unseren praktischen Tools und hilfreichen Ratgebern
                     </h2>
-                    <p className="text-lg text-gray-600 leading-relaxed">
+                    <p className="text-body leading-relaxed">
                       Moderne Software-Lösungen ermöglichen es Ihnen, Offerten online schnell und flexibel zu erstellen, Prozesse zu automatisieren und die gesamte Umzugsplanung bequem zu verwalten.
                     </p>
                   </div>
@@ -627,7 +627,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 <div className="mb-8">
                   <p className="text-sm font-semibold text-green-600 mb-2">Tipps, Tricks und wertvolle Informationen</p>
                   <h2 
-                    className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+                    className="heading-2 mb-4"
                     style={{
                       fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                       fontWeight: 700,

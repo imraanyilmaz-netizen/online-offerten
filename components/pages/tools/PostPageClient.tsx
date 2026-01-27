@@ -163,7 +163,7 @@ const PostPageClient = () => {
                                                             className="border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden"
                                                     >
                                                             <AccordionTrigger className="text-left hover:no-underline py-5 px-6 hover:bg-gray-50 transition-colors">
-                                                                <span className="text-lg font-semibold text-gray-900 pr-8">{faq.question.trim()}</span>
+                                                                <h4 className="faq-question pr-8">{faq.question.trim()}</h4>
                                                         </AccordionTrigger>
                                                             <AccordionContent className="px-6 pb-6 pt-0">
                                                                 <div className="pt-2 border-t border-gray-100">

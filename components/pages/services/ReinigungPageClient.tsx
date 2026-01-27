@@ -132,7 +132,7 @@ const ReinigungPageClient = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed"
+                  className="text-base md:text-body mb-6 leading-relaxed"
                 >
                   Sorgenfrei zur Wohnungsübergabe. Unsere geprüften Partner sorgen für eine blitzblanke Sauberkeit, damit Sie sich auf Ihr neues Zuhause konzentrieren können. Ideal nach einem Privatumzug.
                 </motion.p>
@@ -159,15 +159,15 @@ const ReinigungPageClient = () => {
                 >
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% sparen</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Nur geprüfte Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">100% kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
                 </motion.div>
               </div>
@@ -226,7 +226,7 @@ const ReinigungPageClient = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Warum eine professionelle Umzugsreinigung?</h2>
+              <h2 className="heading-2">Warum eine professionelle Umzugsreinigung?</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
                 Eine Wohnungsübergabe kann stressig sein. Vermieter haben hohe Ansprüche an die Sauberkeit. Mit einer professionellen Reinigungsfirma an Ihrer Seite sparen Sie nicht nur Zeit und Nerven, sondern sichern sich auch dank der Abnahmegarantie gegen teure Nachreinigungen ab. Die perfekte Lösung nach jedem Privatumzug. Vergleichen Sie kostenlose Reinigungsofferten von mehreren geprüften Firmen und finden Sie das beste Angebot. Erfahren Sie mehr über unsere <Link href="/umzugsfirma/privatumzug" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Privatumzug</Link> Dienstleistungen und wie wir Ihnen bei Ihrem Umzug helfen können.
               </p>
@@ -247,7 +247,7 @@ const ReinigungPageClient = () => {
           </section>
 
           <section>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 text-center mb-12">Ihre Vorteile auf einen Blick</h2>
+            <h2 className="heading-2 text-center">Ihre Vorteile auf einen Blick</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon
@@ -279,7 +279,7 @@ const ReinigungPageClient = () => {
               transition={{ duration: 0.7, ease: 'easeOut' }}
               className="order-2 md:order-1"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Was ist in einer Umzugsreinigung enthalten?</h2>
+              <h2 className="heading-2">Was ist in einer Umzugsreinigung enthalten?</h2>
               <p className="text-slate-600 mb-6">Eine Standard-Umzugsreinigung mit Abnahmegarantie umfasst alle notwendigen Arbeiten für eine erfolgreiche Wohnungsübergabe. Vergleichen Sie Reinigungsofferten von verschiedenen Anbietern, um das beste Angebot zu finden:</p>
               <ul className="space-y-3">
                 {includedServices.map((service, index) => (
@@ -319,7 +319,7 @@ const ReinigungPageClient = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="bg-white p-8 md:p-12 rounded-2xl shadow-xl"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6 flex items-center">
+            <h2 className="heading-2 flex items-center">
               <BookOpen className="w-8 h-8 mr-4 text-blue-500" />
               Ihr Leitfaden für die perfekte Umzugsreinigung: Vertrauen, Qualität und cleveres Vergleichen
             </h2>
@@ -380,7 +380,7 @@ const ReinigungPageClient = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="bg-slate-100 p-8 md:p-12 rounded-2xl"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 text-center mb-10 flex items-center justify-center">
+            <h2 className="heading-2 text-center flex items-center justify-center">
               <HelpCircle className="w-8 h-8 mr-4 text-blue-500" />
               Häufig gestellte Fragen zur Umzugsreinigung
             </h2>
@@ -392,7 +392,9 @@ const ReinigungPageClient = () => {
                 transition={{ delay: 0.1, duration: 0.5 }}
               >
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>Was genau bedeutet die 'Abnahmegarantie'?</AccordionTrigger>
+                  <AccordionTrigger>
+                    <h4 className="faq-question">Was genau bedeutet die 'Abnahmegarantie'?</h4>
+                  </AccordionTrigger>
                   <AccordionContent>
                     <p>Die Abnahmegarantie ist Ihre Versicherung für eine erfolgreiche Wohnungsübergabe. Das bedeutet konkret: Ein Mitarbeiter der Reinigungsfirma ist bei der Übergabe anwesend. Beanstandet der Vermieter einen Punkt bezüglich der Sauberkeit, wird dieser sofort und ohne Mehrkosten nachgereinigt. Die Garantie gilt, bis der Vermieter die Reinigung im Übergabeprotokoll als einwandfrei akzeptiert.</p>
                   </AccordionContent>
@@ -405,7 +407,9 @@ const ReinigungPageClient = () => {
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
                 <AccordionItem value="item-2">
-                  <AccordionTrigger>Wie viel kostet eine Umzugsreinigung?</AccordionTrigger>
+                  <AccordionTrigger>
+                    <h4 className="faq-question">Wie viel kostet eine Umzugsreinigung?</h4>
+                  </AccordionTrigger>
                   <AccordionContent>
                     <div>
                       <p>Die Kosten variieren je nach Grösse der Wohnung, Verschmutzungsgrad und inkludierten Zusatzleistungen (z.B. sehr hohe Fenster). Als grobe Richtlinie können Sie mit folgenden Preisen rechnen:</p>
@@ -428,7 +432,9 @@ const ReinigungPageClient = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
                 <AccordionItem value="item-3">
-                  <AccordionTrigger>Was muss ich vor der Ankunft des Reinigungsteams tun?</AccordionTrigger>
+                  <AccordionTrigger>
+                    <h4 className="faq-question">Was muss ich vor der Ankunft des Reinigungsteams tun?</h4>
+                  </AccordionTrigger>
                   <AccordionContent>
                     <p>Für einen reibungslosen Ablauf sollte die Wohnung komplett leer und geräumt sein. Alle persönlichen Gegenstände und Möbel müssen entfernt sein, damit das Team alle Flächen, Ecken und Schränke uneingeschränkt erreichen und reinigen kann. Stellen Sie zudem sicher, dass Strom und Wasser funktionieren.</p>
                   </AccordionContent>
@@ -441,7 +447,9 @@ const ReinigungPageClient = () => {
                 transition={{ delay: 0.4, duration: 0.5 }}
               >
                 <AccordionItem value="item-4">
-                  <AccordionTrigger>Wie lange dauert eine professionelle Umzugsreinigung?</AccordionTrigger>
+                  <AccordionTrigger>
+                    <h4 className="faq-question">Wie lange dauert eine professionelle Umzugsreinigung?</h4>
+                  </AccordionTrigger>
                   <AccordionContent>
                     <p>Die Dauer hängt stark von der Grösse und dem Zustand der Wohnung ab. In der Regel benötigt ein Team von 2-3 Personen für eine durchschnittlich grosse 3.5-Zimmer-Wohnung zwischen 6 und 9 Stunden. Planen Sie am besten einen ganzen Tag für die Reinigung ein.</p>
                   </AccordionContent>
@@ -547,7 +555,7 @@ const ReinigungPageClient = () => {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-3xl md:text-4xl font-bold mb-4"
+              className="heading-2"
             >
               Bereit für eine makellose Übergabe?
             </motion.h2>

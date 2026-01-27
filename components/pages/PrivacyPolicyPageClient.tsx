@@ -73,7 +73,7 @@ const PrivacyPolicyPageClient = () => {
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="text-3xl md:text-4xl font-bold text-slate-800">
+            <CardTitle className="heading-2">
               {pageTitle}
             </CardTitle>
             <p className="text-sm text-slate-500">{lastUpdated}</p>

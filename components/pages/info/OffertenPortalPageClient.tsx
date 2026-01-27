@@ -431,7 +431,9 @@ const OffertenPortalPageClient = () => {
                 <Accordion type="single" collapsible className="w-full bg-white p-4 rounded-lg shadow-xl">
                     {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
-                        <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-slate-800">{item.q}</AccordionTrigger>
+                        <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-slate-800">
+                          <h4 className="faq-question">{item.q}</h4>
+                        </AccordionTrigger>
                         <AccordionContent className="text-base text-slate-600 leading-relaxed pt-2 pb-4">
                             {item.a}
                         </AccordionContent>

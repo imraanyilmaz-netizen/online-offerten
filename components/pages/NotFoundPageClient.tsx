@@ -16,10 +16,10 @@ const NotFoundPageClient = () => {
         <div className="relative inline-block mb-4">
           <h1 className="text-9xl font-black text-gray-200 select-none">404</h1>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
-            <h2 className="text-4xl font-bold text-gray-800">{pageSubtitle}</h2>
+            <h2 className="heading-2">{pageSubtitle}</h2>
           </div>
         </div>
-        <p className="text-gray-600 mt-4 mb-8 text-lg">
+        <p className="text-body mt-4 mb-8">
           {pageDescription}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

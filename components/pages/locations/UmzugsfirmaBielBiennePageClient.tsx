@@ -113,7 +113,7 @@ const UmzugsfirmaBielBiennePageClient = () => {
             <h1 className="heading-1">
               Umzugsfirma <span className="text-green-600 underline decoration-green-500 decoration-2 underline-offset-4">Biel/Bienne</span> für einen stressfreien Umzug.
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+            <p className="text-body text-gray-700 max-w-3xl mx-auto">
               Ihr Partner für einen reibungslosen Umzug in der grössten zweisprachigen Stadt der Schweiz.
             </p>
           </motion.header>
@@ -126,16 +126,16 @@ const UmzugsfirmaBielBiennePageClient = () => {
               className="lg:col-span-3 bg-white p-6 md:p-8 rounded-xl shadow-2xl space-y-10"
             >
               <article>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Willkommen in Biel/Bienne – Umziehen leicht gemacht</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">Ein Umzug in der Uhrenmetropole Biel/Bienne, wo deutsche und französische Kultur aufeinandertreffen, ist eine besondere Erfahrung. Unsere lokalen Partnerfirmen sind auf die Gegebenheiten der Stadt spezialisiert und unterstützen Sie kompetent bei jedem Schritt. Vergleichen Sie jetzt und finden Sie das perfekte Umzugsunternehmen.</p>
+                <h2 className="heading-2">Willkommen in Biel/Bienne – Umziehen leicht gemacht</h2>
+                <p className="text-body text-gray-700 leading-relaxed mb-4">Ein Umzug in der Uhrenmetropole Biel/Bienne, wo deutsche und französische Kultur aufeinandertreffen, ist eine besondere Erfahrung. Unsere lokalen Partnerfirmen sind auf die Gegebenheiten der Stadt spezialisiert und unterstützen Sie kompetent bei jedem Schritt. Vergleichen Sie jetzt und finden Sie das perfekte Umzugsunternehmen.</p>
               </article>
 
               <article className="pt-8 border-t border-gray-200 space-y-6">
-                <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Biel/Bienne?</h2>
-                <p className="typography-p mb-4">
+                <h2 className="heading-2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Biel/Bienne?</h2>
+                <p className="text-body text-gray-700 mb-4 leading-relaxed">
                   Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Biel/Bienne richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
                 </p>
-                <p className="typography-p mb-6">
+                <p className="text-body text-gray-700 mb-6 leading-relaxed">
                   Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Biel/Bienne und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
                 </p>
                 
@@ -143,21 +143,21 @@ const UmzugsfirmaBielBiennePageClient = () => {
                   {/* Hourly Rates Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                      <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                      <h3 className="heading-3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
                     </div>
                     <div className="overflow-x-auto flex-1">
                       <table className="w-full table-fixed">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
-                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                            <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Preis</th>
                           </tr>
                         </thead>
                         <tbody>
                           {hourlyRates.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 transition-colors">
-                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
-                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-gray-700">{row.service}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right font-semibold text-green-600">{row.price}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -168,21 +168,21 @@ const UmzugsfirmaBielBiennePageClient = () => {
                   {/* Room Size Costs Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                      <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                      <h3 className="heading-3 !text-white">Umzugskosten nach Zimmergrössen</h3>
                     </div>
                     <div className="overflow-x-auto flex-1">
                       <table className="w-full table-fixed">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
-                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                            <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                            <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
                           </tr>
                         </thead>
                         <tbody>
                           {costTableRows.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 transition-colors">
-                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
-                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-gray-700">{row.size}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right font-semibold text-green-600">{row.cost}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -192,14 +192,14 @@ const UmzugsfirmaBielBiennePageClient = () => {
                 </div>
                 
                 <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
-                  <p className="typography-p text-gray-600 italic">
+                  <p className="text-body text-gray-600 italic leading-relaxed">
                     Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
                   </p>
                 </div>
               </article>
 
               <div className="mt-8 text-center bg-teal-50 p-6 rounded-lg border-l-4 border-teal-500">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Bereit für Ihren Umzug?</h3>
+                <h3 className="heading-3">Bereit für Ihren Umzug?</h3>
                 <Button asChild size="lg" className="bg-teal-600 hover:bg-teal-700 text-white group shadow-lg">
                   <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Biel-Bienne">
                     Kostenlose Offerten für Biel/Bienne anfordern
@@ -209,17 +209,17 @@ const UmzugsfirmaBielBiennePageClient = () => {
               </div>
 
               <article className="pt-8 border-t border-gray-200 space-y-6">
-                  <h2 className="text-2xl font-bold text-gray-800">Zweisprachigkeit als Vorteil</h2>
-                  <p>Die Kommunikation ist der Schlüssel zu einem erfolgreichen Umzug. In Biel/Bienne, wo Deutsch und Französisch gleichermassen gesprochen werden, bieten unsere Partnerfirmen oft zweisprachige Teams an. So werden alle Ihre Wünsche verstanden und Missverständnisse vermieden.</p>
+                  <h2 className="heading-2">Zweisprachigkeit als Vorteil</h2>
+                  <p className="text-body text-gray-700 leading-relaxed">Die Kommunikation ist der Schlüssel zu einem erfolgreichen Umzug. In Biel/Bienne, wo Deutsch und Französisch gleichermassen gesprochen werden, bieten unsere Partnerfirmen oft zweisprachige Teams an. So werden alle Ihre Wünsche verstanden und Missverständnisse vermieden.</p>
                   <div className="p-4 bg-gray-50 rounded-lg border flex items-center">
                       <Users className="mx-auto h-8 w-8 text-teal-600 mr-4"/>
-                      <p className="text-gray-700">Profitieren Sie von lokalen, zweisprachigen Umzugsteams, die Ihre Sprache sprechen.</p>
+                      <p className="text-body text-gray-700">Profitieren Sie von lokalen, zweisprachigen Umzugsteams, die Ihre Sprache sprechen.</p>
                   </div>
               </article>
               
               <article className="pt-8 border-t border-gray-200 space-y-6">
-                <h2 className="text-2xl font-bold text-gray-800">Umfassende Dienstleistungen für Ihren Umzug</h2>
-                <p>Unsere Partner bieten mehr als nur den Transport. Stellen Sie sich Ihr individuelles Servicepaket zusammen:</p>
+                <h2 className="heading-2">Umfassende Dienstleistungen für Ihren Umzug</h2>
+                <p className="text-body text-gray-700 leading-relaxed">Unsere Partner bieten mehr als nur den Transport. Stellen Sie sich Ihr individuelles Servicepaket zusammen:</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 pl-4">
                   {services.map((item, index) => (
                     <li key={index}>{item}</li>

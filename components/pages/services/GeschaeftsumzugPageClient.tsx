@@ -246,17 +246,17 @@ const GeschaeftsumzugPageClient = () => {
             >
               {/* Intro */}
               <section>
-                <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                <p className="text-body leading-relaxed text-lg mb-6">
                   Ein Geschäftsumzug ist mehr als nur der Transport von Möbeln – es ist ein strategisches Projekt, das die Zukunft Ihres Unternehmens massgeblich beeinflussen kann. Ob Büroumzug, Firmenumzug oder Unternehmensumzug: Professionelle Planung und Durchführung sind entscheidend, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Übergang zu gewährleisten. Wir unterstützen Sie beim Firmenumzug in Zürich, Bern, Basel, Luzern und der ganzen Schweiz mit geprüften regionalen Umzugsfirmen in Ihrer Nähe.
                 </p>
               </section>
 
               {/* H2 Section 0 */}
               <section className="pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="heading-2">
                   Geschäftsumzug – Professionelle Lösungen für Unternehmen
                 </h2>
-                <div className="text-gray-700 leading-relaxed text-lg space-y-4">
+                <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>
                     Ein Geschäftsumzug erfordert präzise Planung und professionelle Durchführung, um Ausfallzeiten zu minimieren und einen nahtlosen Übergang zu gewährleisten. Unsere spezialisierten Partnerfirmen verstehen die Komplexität von Firmenumzügen und bieten massgeschneiderte Lösungen für Unternehmen jeder Grösse. Von der detaillierten Inventarisierung über den sicheren Transport von Büromöbeln und IT-Equipment bis hin zur termingerechten Einrichtung am neuen Standort – wir koordinieren jeden Schritt Ihres Geschäftsumzugs sorgfältig.
                   </p>
@@ -265,10 +265,10 @@ const GeschaeftsumzugPageClient = () => {
 
               {/* H2 Section 1 */}
               <section className="pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="heading-2">
                   Geschäftsumzug – Was kostet ein Firmenumzug?
                 </h2>
-                <div className="text-gray-700 leading-relaxed text-lg space-y-4">
+                <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>
                     Die Kosten für einen Geschäftsumzug variieren stark je nach Umfang, Distanz und Aufwand. Ein kleiner Büroumzug kann bereits ab 2.000 CHF beginnen, während grössere Firmenumzüge schnell 10.000 CHF oder mehr kosten können. Die wichtigsten Faktoren sind das Volumen des Umzugsguts, die Entfernung zwischen den Standorten, der Bedarf an Spezialtransporten für IT-Equipment oder schwere Maschinen sowie zusätzliche Dienstleistungen wie Verpackung, Möbelmontage oder Zwischenlagerung. Um die besten Preise zu finden, sollten Sie mehrere Offerten von geprüften Umzugsfirmen vergleichen. Durch einen detaillierten Vergleich können Sie bis zu 40% der Kosten sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
                   </p>
@@ -277,10 +277,10 @@ const GeschaeftsumzugPageClient = () => {
 
               {/* H2 Section 2 */}
               <section className="pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="heading-2">
                   Büroumzug in der Nähe – So finden Sie die richtige Umzugsfirma
                 </h2>
-                <div className="text-gray-700 leading-relaxed text-lg space-y-4">
+                <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>
                     Bei der Suche nach einer Umzugsfirma für Ihren Büroumzug ist es wichtig, regionale Umzugsfirmen in Ihrer Nähe zu bevorzugen, die die örtlichen Gegebenheiten kennen. Eine lokale Umzugsfirma kennt sich mit Parkregelungen, Zufahrtsbeschränkungen und den Besonderheiten Ihrer Region aus. Über unsere Plattform können Sie schnell und einfach geprüfte Umzugsfirmen in Ihrer Nähe finden. Beschreiben Sie Ihren Bedarf einmal und erhalten Sie passende Offerten von qualifizierten Partnern. Achten Sie bei der Auswahl auf Versicherungen, positive Kundenbewertungen und eine Spezialisierung auf Geschäftsumzüge. Ein professionelles Unternehmen bietet immer eine kostenlose Vor-Ort-Besichtigung an, um eine genaue Offerte zu erstellen.
                   </p>
@@ -289,10 +289,10 @@ const GeschaeftsumzugPageClient = () => {
 
               {/* H2 Section 3 */}
               <section className="pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="heading-2">
                   Firmenumzug planen – Checkliste für Unternehmen
                 </h2>
-                <div className="text-gray-700 leading-relaxed text-lg space-y-4">
+                <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>
                     Ein erfolgreicher Firmenumzug erfordert sorgfältige Planung. Beginnen Sie mindestens 3-6 Monate vor dem Umzugstermin mit der strategischen Planung. Wichtige Schritte umfassen die Bildung eines Projektteams, die Erstellung eines detaillierten Budgets und die Definition der Anforderungen an den neuen Standort. 2-3 Monate vor dem Umzug sollten Sie eine professionelle Umzugsfirma beauftragen, die Mitarbeiterkommunikation starten und den IT-Umzug im Detail planen. In den letzten Wochen vor dem Umzug geht es um praktische Vorbereitungen wie Ausmisten, Beschriftungssysteme und Adressänderungen. Am Umzugstag selbst ist eine gute Koordination entscheidend, und nach dem Umzug sollten Sie die technische Funktionalität sicherstellen.
                   </p>
@@ -301,10 +301,10 @@ const GeschaeftsumzugPageClient = () => {
 
               {/* H2 Section 4 */}
               <section className="pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="heading-2">
                   Umzugsfirmen vergleichen – Warum Offerten wichtig sind
                 </h2>
-                <div className="text-gray-700 leading-relaxed text-lg space-y-4">
+                <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>
                     Ein detaillierter Vergleich von Offerten verschiedener Umzugsfirmen ist unerlässlich, um das beste Preis-Leistungs-Verhältnis zu finden. Durch den Vergleich können Sie nicht nur bis zu 40% der Kosten sparen, sondern auch sicherstellen, dass alle wichtigen Leistungen abgedeckt sind. Achten Sie dabei auf transparente Kostenvoranschläge, die alle Leistungen klar auflisten. Fragen Sie gezielt nach möglichen Zusatzkosten für Parkgenehmigungen, Aussenaufzüge oder Wochenendzuschläge. Ein seriöses Unternehmen wird alle Kosten transparent kommunizieren. Vergleichen Sie nicht nur die Preise, sondern auch Versicherungen, Referenzen und die Erfahrung mit Geschäftsumzügen. 👉 Jetzt Firmenumzug-Offerten vergleichen (100% kostenlos)
                   </p>
@@ -314,7 +314,7 @@ const GeschaeftsumzugPageClient = () => {
               {/* CTA in Middle */}
               <section className="pt-8 border-t border-gray-200">
                 <div className="bg-gradient-to-r from-green-50 to-green-100 border-2 border-green-500 rounded-xl p-8 text-center">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">👉 Jetzt Firmenumzug-Offerten vergleichen (100% kostenlos)</h3>
+                  <h3 className="heading-3">👉 Jetzt Firmenumzug-Offerten vergleichen (100% kostenlos)</h3>
                   <p className="text-gray-700 mb-6 text-lg">Vergleichen Sie kostenlos Offerten von geprüften Umzugsfirmen für Ihren Büroumzug oder Firmenumzug. Bis zu 40% sparen, schnell und unverbindlich.</p>
                   <Button
                     onClick={handleCtaClick}
@@ -336,10 +336,10 @@ const GeschaeftsumzugPageClient = () => {
 
               {/* H2 Section 5 */}
               <section className="pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="heading-2">
                   Wie lange dauert ein Geschäftsumzug?
                 </h2>
-                <div className="text-gray-700 leading-relaxed text-lg space-y-4">
+                <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>
                     Die Dauer eines Geschäftsumzugs hängt von verschiedenen Faktoren ab: der Grösse des Unternehmens, der Menge des zu transportierenden Inventars und der Entfernung zwischen den Standorten. Kleinere Büros können oft an einem Wochenende umziehen, während grössere Unternehmen mehrere Tage oder sogar Wochen benötigen können. Ein typischer Büroumzug für ein mittelgrosses Unternehmen dauert in der Regel 1-3 Tage. Die genaue Zeitplanung wird nach einer Vor-Ort-Besichtigung durch die Umzugsfirma erstellt. Wichtig ist, dass Sie ausreichend Zeit für die Planung einplanen, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Ablauf zu gewährleisten.
                   </p>
@@ -348,10 +348,10 @@ const GeschaeftsumzugPageClient = () => {
 
               {/* H2 Section 6 */}
               <section className="pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                <h2 className="heading-2">
                   Tipps für einen erfolgreichen Büro- und Firmenumzug
                 </h2>
-                <div className="text-gray-700 leading-relaxed text-lg space-y-4">
+                <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>
                     Für einen erfolgreichen Büroumzug oder Firmenumzug gibt es einige wichtige Tipps zu beachten. Planen Sie frühzeitig und beginnen Sie mindestens 3-6 Monate vor dem Umzugstermin. Bilden Sie ein internes Projektteam und klären Sie Verantwortlichkeiten. Nutzen Sie die Gelegenheit zum Ausmisten und Entrümpeln, um Umzugskosten zu sparen. Entwickeln Sie ein klares Beschriftungssystem für Kartons und Möbel. Planen Sie den IT-Umzug besonders sorgfältig, da dies das Herzstück der meisten Unternehmen ist. Kommunizieren Sie transparent mit Ihren Mitarbeitern über den bevorstehenden Umzug. Und schliesslich: Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen, um das beste Preis-Leistungs-Verhältnis zu finden.
                   </p>
@@ -361,7 +361,7 @@ const GeschaeftsumzugPageClient = () => {
               {/* Internal Links */}
               <section className="pt-8 border-t border-gray-200">
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Weitere Services</h3>
+                  <h3 className="heading-3">Weitere Services</h3>
                   <ul className="space-y-3 text-gray-700">
                     <li>
                       <Link href="/umzugsfirma/privatumzug" className="text-green-600 hover:underline font-medium">
@@ -399,29 +399,29 @@ const GeschaeftsumzugPageClient = () => {
 
               {/* FAQ Section */}
               <section className="pt-8 border-t-2 border-gray-300">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8">Häufig gestellte Fragen zum Geschäftsumzug</h3>
+                <h3 className="heading-3">Häufig gestellte Fragen zum Geschäftsumzug</h3>
                 <div className="space-y-6">
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="text-xl font-semibold text-gray-800 mb-3">Was kostet ein Büroumzug?</h4>
-                    <p className="text-gray-700 leading-relaxed text-base">
+                    <h4 className="heading-4">Was kostet ein Büroumzug?</h4>
+                    <p className="text-body leading-relaxed text-base">
                       Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, grössere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen.
                     </p>
                   </div>
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="text-xl font-semibold text-gray-800 mb-3">Wie finde ich die richtige Firma für meinen Firmenumzug?</h4>
-                    <p className="text-gray-700 leading-relaxed text-base">
+                    <h4 className="heading-4">Wie finde ich die richtige Firma für meinen Firmenumzug?</h4>
+                    <p className="text-body leading-relaxed text-base">
                       Vergleichen Sie Angebote regionaler Umzugsfirmen in Ihrer Nähe für einen professionellen Firmenumzug. Über unsere Plattform erhalten Sie schnell passende Offerten von geprüften Partnern. Achten Sie auf Versicherungen, positive Bewertungen und Spezialisierung auf Geschäftsumzüge.
                     </p>
                   </div>
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="text-xl font-semibold text-gray-800 mb-3">Wie lange dauert ein Geschäftsumzug?</h4>
-                    <p className="text-gray-700 leading-relaxed text-base">
+                    <h4 className="heading-4">Wie lange dauert ein Geschäftsumzug?</h4>
+                    <p className="text-body leading-relaxed text-base">
                       Die Dauer hängt von der Unternehmensgrösse und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, grössere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung.
                     </p>
                   </div>
                   <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="text-xl font-semibold text-gray-800 mb-3">Was übernehmen professionelle Umzugsfirmen?</h4>
-                    <p className="text-gray-700 leading-relaxed text-base">
+                    <h4 className="heading-4">Was übernehmen professionelle Umzugsfirmen?</h4>
+                    <p className="text-body leading-relaxed text-base">
                       Professionelle Umzugsfirmen übernehmen die komplette Planung, Demontage und Montage von Büromöbeln, den sicheren Transport von IT-Equipment, Verpackungsservice, Zwischenlagerung, Entsorgung von Altmobiliar und die Koordination mit Handwerkern am neuen Standort.
                     </p>
                   </div>
@@ -440,7 +440,7 @@ const GeschaeftsumzugPageClient = () => {
               <UmzugTypesSidebar activeType="geschaeftsumzug" />
               
               <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <h3 className="heading-3 flex items-center">
                   <MessageSquare className="w-6 h-6 mr-2 text-green-600" />
                   Jetzt kostenlose Offerten für Ihren Geschäftsumzug anfordern
                 </h3>

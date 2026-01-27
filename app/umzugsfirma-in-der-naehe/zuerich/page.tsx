@@ -735,7 +735,7 @@ export default function UmzugsfirmaZurichPage() {
                     className="bg-white rounded-xl border border-gray-200 shadow-sm px-6 py-2 mb-4"
                   >
                     <AccordionTrigger className="text-xl font-semibold text-gray-900 hover:no-underline py-4">
-                      {faq.question}
+                      <h4 className="faq-question">{faq.question}</h4>
                     </AccordionTrigger>
                     <AccordionContent className="text-gray-700 leading-relaxed pb-4">
                       {faq.answer}

@@ -24,7 +24,7 @@ const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faq
           className="text-left mb-12"
         >
           <h2 
-          className="typography-h2 mb-4"
+          className="heading-2 mb-4"
             style={{
               fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
               fontWeight: 700,
@@ -82,7 +82,7 @@ const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faq
                     fontVariant: 'no-common-ligatures'
                   }}
                 >
-                  <span>{item.q}</span>
+                  <h4 className="faq-question">{item.q}</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 leading-relaxed">
                   <div 

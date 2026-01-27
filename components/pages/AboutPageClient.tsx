@@ -95,12 +95,12 @@ const AboutPageClient = () => {
           <div className="container mx-auto px-4 max-w-navbar">
             <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
               <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">Unsere Mission</h2>
+                <h2 className="heading-2 mb-4">Unsere Mission</h2>
                 <p className="text-gray-600 leading-relaxed">Unsere Mission ist es, den Prozess der Suche nach Dienstleistern zu revolutionieren. Wir möchten Ihnen ermöglichen, schnell und unkompliziert die besten Offerten von qualifizierten und geprüften Firmen zu erhalten. Wir setzen auf Transparenz, Qualität und Kundenzufriedenheit, um Ihnen Zeit, Geld und Nerven zu sparen.</p>
               </motion.div>
               <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-green-50 p-8 rounded-lg">
                 <Target className="w-12 h-12 text-green-600 mb-4"/>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Unsere Vision</h3>
+                <h3 className="heading-3 mb-2">Unsere Vision</h3>
                 <p className="text-gray-600">Wir streben danach, die führende Anlaufstelle in der Schweiz für alle zu sein, die hochwertige Dienstleistungen für ihr Zuhause oder ihr Unternehmen suchen. Durch stetige Innovation und den Ausbau unseres Partnernetzwerks wollen wir den höchsten Standard in der Branche setzen.</p>
               </motion.div>
             </div>
@@ -110,8 +110,8 @@ const AboutPageClient = () => {
         <div className="bg-gray-50 py-16 md:py-24">
           <div className="container mx-auto px-4 max-w-navbar">
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Wie es funktioniert</h2>
-              <p className="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">In nur drei einfachen Schritten erhalten Sie massgeschneiderte Offerten von geprüften Firmen aus Ihrer Region.</p>
+              <h2 className="heading-2">Wie es funktioniert</h2>
+              <p className="mt-3 text-body max-w-3xl mx-auto">In nur drei einfachen Schritten erhalten Sie massgeschneiderte Offerten von geprüften Firmen aus Ihrer Region.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               {howItWorksSteps.map((step, index) => (
@@ -140,8 +140,8 @@ const AboutPageClient = () => {
         <div className="bg-gray-800 text-white py-16 md:py-24">
           <div className="container mx-auto px-4 max-w-navbar">
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold">Unsere Werte</h2>
-              <p className="mt-3 text-lg text-gray-300 max-w-2xl mx-auto">Unsere Arbeit basiert auf festen Prinzipien, die unser Handeln leiten und das Vertrauen unserer Kunden und Partner sichern.</p>
+              <h2 className="heading-2">Unsere Werte</h2>
+              <p className="mt-3 text-body max-w-2xl mx-auto text-gray-300">Unsere Arbeit basiert auf festen Prinzipien, die unser Handeln leiten und das Vertrauen unserer Kunden und Partner sichern.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {valueItems.map((item, index) => (
@@ -168,8 +168,8 @@ const AboutPageClient = () => {
         <div className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 max-w-navbar">
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Unsere Dienstleistungen im Überblick</h2>
-              <p className="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Ob für Privatpersonen oder Unternehmen, wir decken ein breites Spektrum an Dienstleistungen ab, um Ihr Leben einfacher zu machen.</p>
+              <h2 className="heading-2">Unsere Dienstleistungen im Überblick</h2>
+              <p className="mt-3 text-body max-w-3xl mx-auto">Ob für Privatpersonen oder Unternehmen, wir decken ein breites Spektrum an Dienstleistungen ab, um Ihr Leben einfacher zu machen.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {servicesItems.map((service, index) => (
@@ -197,10 +197,10 @@ const AboutPageClient = () => {
 
         <div className="bg-green-600">
           <div className="container mx-auto max-w-navbar py-16 px-4 text-center">
-            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-3xl font-bold text-white mb-4">
+            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="heading-2 text-white mb-4">
               Sagen Sie uns einfach, was Sie brauchen
             </motion.h2>
-            <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-green-100 text-lg mb-8">
+            <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-green-100 text-body mb-8">
               Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie in Kürze die besten Dienstleister für Ihr Vorhaben. Unverbindlich und unkompliziert.
             </motion.p>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.4 }}>

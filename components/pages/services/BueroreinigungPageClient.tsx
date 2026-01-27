@@ -202,7 +202,7 @@ const BueroreinigungPageClient = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed"
+                  className="text-base sm:text-body mb-8 leading-relaxed"
                 >
                   Gründliche Büroreinigung für ein sauberes und produktives Arbeitsumfeld. Büroreinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
@@ -232,15 +232,15 @@ const BueroreinigungPageClient = () => {
                 >
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% sparen</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Nur geprüfte Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">100% kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
                 </motion.div>
               </div>
@@ -261,14 +261,14 @@ const BueroreinigungPageClient = () => {
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8"
                 >
                   {/* H2: Warum eine professionelle Büroreinigung sinnvoll ist */}
-                  <h2 className="typography-h2 mb-6 break-words">Warum eine professionelle Büroreinigung sinnvoll ist</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mb-6 break-words">Warum eine professionelle Büroreinigung sinnvoll ist</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine professionelle Geschäftsreinigung bietet zahlreiche Vorteile, die über die reine Sauberkeit hinausgehen. Sie spart wertvolle Zeit, die Ihre Mitarbeiter für ihre Kernaufgaben nutzen können, anstatt sich um Reinigungsarbeiten zu kümmern. Professionelle Reinigungskräfte verfügen über das Fachwissen und die richtigen Geräte, um auch schwer zugängliche Stellen wie unter Schreibtischen, in Serverräumen oder in hohen Deckenbereichen gründlich zu reinigen. Zudem trägt eine regelmässige professionelle Reinigung erheblich zur Gesundheit der Mitarbeiter bei, indem sie Allergene, Bakterien und Viren effektiv entfernt. Studien zeigen, dass ein sauberes Arbeitsumfeld die Produktivität steigert, Krankheitstage reduziert und das allgemeine Wohlbefinden der Mitarbeiter verbessert. Besonders in Büros mit vielen Mitarbeitern ist eine professionelle Reinigung unerlässlich, um sicherzustellen, dass alle Bereiche optimal gereinigt werden und ein gesundes Arbeitsklima gewährleistet ist.
                   </p>
                   
                   {/* H2: Unsere Leistungen im Bereich Büroreinigung */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die professionelle Reinigung. Dazu gehören die gründliche Reinigung aller Büroräume, inklusive Einzelbüros, Grossraumbüros, Besprechungszimmer, Empfangsbereiche, Küchen, Sanitäranlagen, Flure und Pausenräume. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Teppichreinigung, Fassadenreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln, die speziell für Büroumgebungen entwickelt wurden. Für Umzugsreinigungen oder Endreinigungen bieten unsere Partnerfirmen auch eine Abnahmegarantie an, sodass Sie sicher sein können, dass Ihr Büro den höchsten Qualitätsstandards entspricht und Ihre Mitarbeiter in einem optimalen Arbeitsumfeld tätig sein können.
                   </p>
 
@@ -283,7 +283,7 @@ const BueroreinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Leistungen */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Gründliche Reinigung aller Büroräume</li>
                     <li>Reinigung von Besprechungszimmern und Empfangsbereichen</li>
                     <li>Küchen- und Sanitärreinigung</li>
@@ -302,7 +302,7 @@ const BueroreinigungPageClient = () => {
                         : 'Professionelle Büroreinigung buchen'
                       }
                     </h3>
-                    <p className="text-base text-gray-700 mb-3 md:mb-4">
+                    <p className="text-body mb-3 md:mb-4">
                       Büroreinigungsofferten online vergleichen und bis zu 40% sparen.
                     </p>
                     <Button 
@@ -316,8 +316,8 @@ const BueroreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Vorteile unserer professionellen Büroreinigung */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer professionellen Büroreinigung</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer professionellen Büroreinigung</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine professionelle Reinigung bietet zahlreiche Vorteile für Ihr Unternehmen. Professionelle Reinigungskräfte garantieren, dass alle Bereiche Ihres Büros gründlich und professionell gereinigt werden. Sollten Sie oder Ihre Mitarbeiter Mängel feststellen, wird die Reinigungsfirma diese umgehend beheben. Bei Umzugsreinigungen oder Endreinigungen bieten unsere Partnerfirmen auch eine Abnahmegarantie an. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zusätzlich profitieren Sie von unserer über 12-jährigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk geprüfter, versicherter Reinigungsfirmen, die speziell auf Geschäftsräume und Büroumgebungen spezialisiert sind. Unsere Partnerfirmen verstehen die besonderen Anforderungen von Büros, wie den Schutz vertraulicher Dokumente, die schonende Reinigung von IT-Geräten und die flexible Terminplanung ausserhalb der Geschäftszeiten.
                   </p>
 
@@ -332,7 +332,7 @@ const BueroreinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Vorteile */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Qualitätsgarantie für sorgenfreie Reinigung</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Umweltfreundliche Reinigungsmittel</li>
@@ -343,14 +343,14 @@ const BueroreinigungPageClient = () => {
                   </ul>
 
                   {/* H2: Was bei einer gründlichen Büroreinigung gereinigt wird */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Was bei einer gründlichen Büroreinigung gereinigt wird</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was bei einer gründlichen Büroreinigung gereinigt wird</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine umfassende Reinigung beinhaltet die Reinigung aller Büroräume und Bereiche. Dazu gehören das Staubwischen aller Oberflächen, inklusive Schreibtische, Regale, Schränke, Fensterbänke, Heizkörper, Lichtschalter und Steckdosen. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten sowie unter Möbeln. In den Küchen werden Herd, Mikrowelle, Kühlschrank, Spüle und Arbeitsflächen gereinigt. Alle Sanitäranlagen werden komplett gereinigt, inklusive Toiletten, Waschbecken, Spiegel und Fliesen. Fenster werden innen gereinigt, und alle häufig berührten Oberflächen wie Türgriffe, Lichtschalter, Tastaturen und Telefone werden desinfiziert. Abfalleimer werden geleert und ersetzt, und eine professionelle Reinigung geht weit über das normale Putzen hinaus, um ein hygienisch sauberes Arbeitsumfeld zu gewährleisten.
                   </p>
 
                   {/* H2: Büroreinigung für moderne Arbeitsplätze */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Büroreinigung für moderne Arbeitsplätze</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Büroreinigung für moderne Arbeitsplätze</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Moderne Arbeitsplätze haben besondere Anforderungen bei der Reinigung. Open-Space-Büros, Co-Working-Spaces und flexible Arbeitsbereiche erfordern spezielle Reinigungsmethoden und -techniken. Professionelle Büroreinigungsfirmen kennen die Herausforderungen moderner Büroumgebungen und haben entsprechende Protokolle entwickelt. Sie verwenden leise Reinigungsgeräte, um den Arbeitsablauf nicht zu stören, und achten besonders auf die Reinigung von Bereichen, die von vielen Mitarbeitern genutzt werden. Zudem berücksichtigen sie die besonderen Anforderungen von IT-Geräten, die schonend gereinigt werden müssen, ohne die empfindliche Technik zu beschädigen. Eine regelmässige professionelle Reinigung ist besonders wichtig für moderne Arbeitsplätze, um ein produktives und gesundes Arbeitsumfeld zu gewährleisten und die Zufriedenheit der Mitarbeiter zu steigern.
                   </p>
 
@@ -365,14 +365,14 @@ const BueroreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Hygiene und Gesundheit im Büro */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Hygiene und Gesundheit im Büro</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Hygiene und Gesundheit im Büro</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Besonders in Büros mit vielen Mitarbeitern ist Hygiene von entscheidender Bedeutung. Regelmässige Desinfektion von häufig berührten Oberflächen reduziert die Verbreitung von Keimen und Viren erheblich. Professionelle Büroreinigungsfirmen verwenden geeignete Desinfektionsmittel und kennen die kritischen Bereiche, die besondere Aufmerksamkeit benötigen, wie Türgriffe, Lichtschalter, Tastaturen, Mäuse, Telefone und Armaturen in Sanitäranlagen. Dies ist besonders wichtig in Zeiten erhöhter Gesundheitsrisiken, um die Gesundheit der Mitarbeiter zu schützen und Krankheitsausfälle zu minimieren. Eine professionelle Büroreinigung trägt massgeblich dazu bei, ein gesundes Arbeitsumfeld zu schaffen, in dem sich Mitarbeiter wohlfühlen und produktiv arbeiten können.
                   </p>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmittel */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmittel</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmittel</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Moderne Büroreinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmittel. Diese sind nicht nur besser für die Umwelt, sondern auch für die Gesundheit Ihrer Mitarbeiter. Biologische Reinigungsmittel sind besonders für Büros mit vielen Mitarbeitern empfehlenswert, da sie keine schädlichen Dämpfe oder Rückstände hinterlassen. Sie sind effektiv gegen Schmutz und Bakterien, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine schädlichen Chemikalien in Ihrem Büro zurückbleiben. Dies passt perfekt zu Corporate Social Responsibility-Initiativen und schont gleichzeitig die Gesundheit Ihrer Mitarbeiter.
                   </p>
 
@@ -387,8 +387,8 @@ const BueroreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Ablauf unserer Büroreinigung – Schritt für Schritt */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Ablauf unserer Büroreinigung – Schritt für Schritt</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Ablauf unserer Büroreinigung – Schritt für Schritt</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Der Ablauf einer professionellen Büroreinigung ist strukturiert und effizient. Zunächst erfolgt eine Besichtigung der Büroräume, um den Umfang der Reinigung zu bestimmen, besondere Anforderungen zu identifizieren und eine genaue Offerte zu erstellen. Nach der Auftragsbestätigung wird ein Reinigungsplan erstellt, der zu Ihren Geschäftszeiten passt. Viele Reinigungen finden ausserhalb der Geschäftszeiten statt, beispielsweise abends oder am Wochenende, um den Betriebsablauf nicht zu stören. Am Reinigungstag erscheint das professionelle Reinigungsteam pünktlich mit allen notwendigen Geräten und Reinigungsmitteln. Die Reinigung erfolgt systematisch Raum für Raum, beginnend mit den am stärksten verschmutzten Bereichen. Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle. Bei Umzugsreinigungen oder Endreinigungen erhalten Sie eine Abnahmegarantie. Sollten Sie mit dem Ergebnis nicht zufrieden sein, wird kostenlos nachgebessert.
                   </p>
 
@@ -416,20 +416,20 @@ const BueroreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Was kostet eine professionelle Büroreinigung? */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Was kostet eine professionelle Büroreinigung?</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was kostet eine professionelle Büroreinigung?</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Die Kosten für Büroreinigung variieren je nach Grösse des Büros, Anzahl der Räume, Reinigungsfrequenz, Umfang der Reinigung und Region. In der Regel werden Preise zwischen 30 und 65 CHF pro Stunde berechnet. Ein durchschnittliches Büro benötigt etwa 2-4 Stunden pro Reinigung, was Kosten von 60-260 CHF bedeutet. Grössere Büros mit vielen Räumen, mehreren Etagen oder speziellen Anforderungen können höhere Kosten verursachen. Regelmässige Reinigungen sind oft günstiger als einmalige Reinigungen, da die Reinigungsfirma die Räume kennt und effizienter arbeiten kann. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Regelmässige vs. einmalige Büroreinigung */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Regelmässige vs. einmalige Büroreinigung</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Regelmässige vs. einmalige Büroreinigung</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Viele Unternehmen entscheiden sich für eine regelmässige Büroreinigung, beispielsweise täglich, wöchentlich oder mehrmals pro Woche. Dies sorgt für kontinuierliche Sauberkeit und reduziert den Aufwand für einzelne Reinigungen. Regelmässige Reinigung ist besonders wichtig für grössere Büros mit vielen Mitarbeitern, um die Sauberkeit aufrechtzuerhalten und ein gesundes Arbeitsumfeld zu gewährleisten. Andere nutzen professionelle Reinigung für einmalige, besonders gründliche Reinigungen, beispielsweise nach Renovierungen, beim Umzug in neue Büroräume, für eine umfassende Grundreinigung oder vor besonderen Anlässen. Beide Optionen sind möglich und können auch kombiniert werden, beispielsweise regelmässige Unterhaltsreinigung mit periodischen Grundreinigungen für eine besonders gründliche Reinigung.
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Büroreinigung sind */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Wir sind der vertrauenswürdige Partner für Ihre Geschäftsreinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und speziell auf Geschäftsräume und Büroumgebungen spezialisiert sind. Unsere Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und verstehen die besonderen Anforderungen von Büros, wie den Schutz vertraulicher Dokumente, die schonende Reinigung von IT-Geräten und die flexible Terminplanung. Für Umzugsreinigungen oder Endreinigungen bieten unsere Partnerfirmen auch eine Abnahmegarantie an. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
@@ -479,17 +479,17 @@ const BueroreinigungPageClient = () => {
 
                   {/* H2: Häufig gestellte Fragen zur Büroreinigung */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="typography-h2 mb-6">Häufig gestellte Fragen zur Reinigung</h2>
-                    <p className="typography-p mb-6 md:mb-8">
+                    <h2 className="heading-2 mb-6">Häufig gestellte Fragen zur Reinigung</h2>
+                    <p className="text-body mb-6 md:mb-8">
                       Häufig gestellte Fragen zur professionellen Reinigung: Was kostet eine professionelle Reinigung? Was beinhaltet eine umfassende Reinigung? Wie oft sollte eine Reinigung durchgeführt werden? Wann wird eine Abnahmegarantie angeboten? Kann die Reinigung ausserhalb der Geschäftszeiten erfolgen? Sind die Reinigungskräfte versichert? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Büroreinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                           <AccordionTrigger className="text-xl font-semibold text-left hover:no-underline text-gray-900 px-2 sm:px-4 py-4">
-                            {item.q}
+                            <h4 className="faq-question">{item.q}</h4>
                           </AccordionTrigger>
-                          <AccordionContent className="typography-p pt-2 pb-4 px-2 sm:px-4">
+                          <AccordionContent className="text-body pt-2 pb-4 px-2 sm:px-4">
                             {item.a}
                           </AccordionContent>
                         </AccordionItem>
@@ -499,8 +499,8 @@ const BueroreinigungPageClient = () => {
 
                   {/* H2: Jetzt unverbindliche Reinigungs-Offerte anfordern */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="typography-h2 mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
-                    <p className="typography-p mb-6">
+                    <h2 className="heading-2 mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
+                    <p className="text-body mb-6">
                       Büroreinigungsofferten online vergleichen und bis zu 40% sparen. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma für Ihr Büro.
                     </p>
                     <Button 
@@ -515,18 +515,18 @@ const BueroreinigungPageClient = () => {
 
                   {/* Internal Links */}
                   <div className="mt-8 md:mt-12">
-                    <h3 className="typography-h3 mb-6">Weitere Reinigungsdienstleistungen</h3>
+                    <h3 className="heading-3 mb-6">Weitere Reinigungsdienstleistungen</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                       <Link href="/reinigung/umzugsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="typography-h4 mb-2">Umzugsreinigung</h4>
+                        <h4 className="heading-4 mb-2">Umzugsreinigung</h4>
                         <p className="text-sm text-gray-600">Professionelle Umzugsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
                       </Link>
                       <Link href="/reinigung/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="typography-h4 mb-2">Fensterreinigung</h4>
+                        <h4 className="heading-4 mb-2">Fensterreinigung</h4>
                         <p className="text-sm text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
                       <Link href="/reinigung/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="typography-h4 mb-2">Baureinigung</h4>
+                        <h4 className="heading-4 mb-2">Baureinigung</h4>
                         <p className="text-sm text-gray-600">Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate.</p>
                       </Link>
                     </div>
@@ -549,8 +549,8 @@ const BueroreinigungPageClient = () => {
                 {/* Sticky CTA Section - Outside aside for proper sticky behavior */}
                 <div className="mt-4 md:mt-6 lg:sticky lg:top-24 lg:self-start">
                   <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 md:p-6 border border-blue-100">
-                    <h3 className="typography-h3 mb-4">Jetzt Offerten anfordern</h3>
-                    <p className="text-gray-700 mb-3 md:mb-4 text-base">
+                    <h3 className="heading-3 mb-4">Jetzt Offerten anfordern</h3>
+                    <p className="text-body mb-3 md:mb-4">
                       Kostenlos und unverbindlich Büroreinigungsofferten online vergleichen.
                     </p>
                     <Button 

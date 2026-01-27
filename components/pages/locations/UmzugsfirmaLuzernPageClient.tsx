@@ -309,7 +309,7 @@ const UmzugsfirmaLuzernPageClient = () => {
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
               {/* Left Column - Content */}
               <div className="lg:col-span-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                <h2 className="heading-2">
                   Umzugsfirma Luzern: Full Service Umzug für einen stressfreien Umzug in der Zentralschweiz
                 </h2>
                 <div className="text-gray-700 mb-8 leading-relaxed space-y-4">
@@ -361,11 +361,11 @@ const UmzugsfirmaLuzernPageClient = () => {
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <main className="space-y-12">
               <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
-                <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Luzern?</h2>
-                <p className="typography-p mb-4">
+                <h2 className="heading-2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Luzern?</h2>
+                <p className="text-body mb-4">
                   Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Luzern richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
                 </p>
-                <p className="typography-p mb-6">
+                <p className="text-body mb-6">
                   Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Luzern und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
                 </p>
                 
@@ -373,21 +373,21 @@ const UmzugsfirmaLuzernPageClient = () => {
                   {/* Hourly Rates Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                      <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                      <h3 className="heading-3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
                     </div>
                     <div className="overflow-x-auto flex-1">
                       <table className="w-full table-fixed">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
-                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                            <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Preis</th>
                           </tr>
                         </thead>
                         <tbody>
                           {hourlyRates.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 transition-colors">
-                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
-                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-body">{row.service}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right text-body font-semibold text-green-600">{row.price}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -398,21 +398,21 @@ const UmzugsfirmaLuzernPageClient = () => {
                   {/* Room Size Costs Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                      <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                      <h3 className="heading-3 !text-white">Umzugskosten nach Zimmergrössen</h3>
                     </div>
                     <div className="overflow-x-auto flex-1">
                       <table className="w-full table-fixed">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
-                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                            <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                            <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
                           </tr>
                         </thead>
                         <tbody>
                           {costTableRows.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 transition-colors">
-                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
-                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-body">{row.size}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right text-body font-semibold text-green-600">{row.cost}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -422,14 +422,14 @@ const UmzugsfirmaLuzernPageClient = () => {
                 </div>
                 
                   <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
-                  <p className="typography-p text-gray-600 italic">
+                  <p className="text-body text-gray-600 italic">
                     Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
                   </p>
                 </div>
                 </article>
 
                 <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
-                  <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugsfirma vergleichen Luzern: Ihre Vorteile</h2>
+                  <h2 className="heading-2 break-words">Umzugsfirma vergleichen Luzern: Ihre Vorteile</h2>
                   <p className="font-medium mb-4 break-words w-full">Umzugsfirma vergleichen Luzern: Vergleichen Sie mehrere Zügelfirmen Luzern und Umzugsunternemen Luzern und profitieren Sie von folgenden Vorteilen:</p>
                   <div className="space-y-4">
                     <div className="flex items-start w-full min-w-0">
@@ -457,7 +457,7 @@ const UmzugsfirmaLuzernPageClient = () => {
               </article>
 
               <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
-                  <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugsfirma Luzern: Alle Dienstleistungen im Überblick</h2>
+                  <h2 className="heading-2 break-words">Umzugsfirma Luzern: Alle Dienstleistungen im Überblick</h2>
                   <p className="font-medium break-words w-full">Eine moderne Umzugsfirma in Luzern bietet viel mehr als nur den Transport. Stellen Sie sich Ihr individuelles Servicepaket zusammen. Unsere Partner bieten folgende Dienstleistungen an:</p>
                   <div className="grid md:grid-cols-2 gap-6 mt-6 w-full">
                     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-400 transition-colors w-full min-w-0 overflow-hidden">
@@ -509,7 +509,7 @@ const UmzugsfirmaLuzernPageClient = () => {
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
                 <div className="text-center bg-green-50 p-8 rounded-lg border-l-4 border-green-500 shadow-md w-full min-w-0 overflow-x-hidden">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4 break-words">Umzugsfirma vergleichen Luzern: Jetzt starten!</h3>
+                  <h3 className="heading-3 break-words">Umzugsfirma vergleichen Luzern: Jetzt starten!</h3>
                   <p className="text-gray-700 mb-6 font-medium break-words w-full">Umzugsfirma Luzern: Mit nur einer Anfrage erhalten Sie bis zu fünf kostenlose und unverbindliche Offerten von Top-Umzugsfirmen aus Luzern. Vergleichen Sie mehrere Zügelfirmen Luzern und Umzugsunternemen Luzern und sparen Sie bis zu 40%.</p>
                   <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group shadow-lg transform hover:scale-105 transition-transform">
                     <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Luzern">
@@ -521,7 +521,7 @@ const UmzugsfirmaLuzernPageClient = () => {
               </motion.div>
               
                 <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
-                  <h2 className="text-3xl font-bold text-gray-800 break-words">Umzugsfirma Luzern: Parkbewilligungen und Logistik</h2>
+                  <h2 className="heading-2 break-words">Umzugsfirma Luzern: Parkbewilligungen und Logistik</h2>
                   <p className="font-medium break-words w-full">Die Parkplatzsituation in Luzern kann herausfordernd sein. Eine professionelle Umzugsfirma Luzern nimmt Ihnen diesen Stress ab. Erfahrene Zügelfirmen Luzern und Umzugsunternemen Luzern beantragen bei der Stadt Luzern die nötigen Halteverbotszonen für den Umzugstag. Umzugsfirma vergleichen Luzern: Vergleichen Sie mehrere Anbieter, um die beste Logistik-Lösung zu finden. Das garantiert nicht nur einen Parkplatz direkt vor der Tür, sondern verkürzt auch die Laufwege und damit die Arbeitszeit und Ihre Kosten.</p>
               </article>
             </main>

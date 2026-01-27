@@ -247,7 +247,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                     <Truck className="h-12 w-12 text-green-600" />
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                <h3 className="heading-3 text-center">
                   Die wichtigsten Vorteile
                 </h3>
                 <ul className="space-y-3">
@@ -322,7 +322,7 @@ const UmzugsoffertenZuerichPageClient = () => {
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-green-600">1</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Umzugsdetails angeben</h3>
+              <h3 className="heading-3">Umzugsdetails angeben</h3>
               <p className="text-gray-600">
                 Tragen Sie Ihre wichtigsten Informationen ein: Umzugsdatum, alte und neue Adresse (PLZ 8000–8099 und Umgebung), Anzahl der Zimmer sowie besondere Anforderungen wie Klaviertransport oder Möbellift.
               </p>
@@ -338,7 +338,7 @@ const UmzugsoffertenZuerichPageClient = () => {
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-green-600">2</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Angebote von 3–6 Zürcher Umzugsfirmen erhalten</h3>
+              <h3 className="heading-3">Angebote von 3–6 Zürcher Umzugsfirmen erhalten</h3>
               <p className="text-gray-600">
                 Basierend auf Ihren Angaben erhalten Sie innerhalb weniger Stunden mehrere Offerten. Die meisten Antworten treffen zwischen 2 und 24 Stunden ein.
               </p>
@@ -354,7 +354,7 @@ const UmzugsoffertenZuerichPageClient = () => {
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-green-600">3</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Offerten vergleichen und Firma wählen</h3>
+              <h3 className="heading-3">Offerten vergleichen und Firma wählen</h3>
               <p className="text-gray-600">
                 Vergleichen Sie die Preise, Leistungen und Bewertungen der Anbieter. Wählen Sie die Zügelfirma, die am besten zu Ihrem Budget und Ihren Anforderungen passt.
               </p>
@@ -385,7 +385,7 @@ const UmzugsoffertenZuerichPageClient = () => {
             <h2 className="heading-2 text-center">
               Umzugskosten in Zürich realistisch einschätzen
             </h2>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            <p className="text-body mb-8 leading-relaxed">
               Zürich gehört schweizweit zu den teuersten Regionen für einen Umzug. Das liegt an den hohen Löhnen, den Mietpreisen und der anspruchsvollen Verkehrssituation in der Innenstadt. Wer sein Budget realistisch planen möchte, sollte mit folgenden Richtwerten rechnen:
             </p>
 
@@ -424,7 +424,7 @@ const UmzugsoffertenZuerichPageClient = () => {
             </p>
 
             <div className="bg-green-50 rounded-xl p-6 mb-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Diese Kostenbestandteile sollten in jeder Umzugsofferte aufgeführt sein:</h3>
+              <h3 className="heading-3">Diese Kostenbestandteile sollten in jeder Umzugsofferte aufgeführt sein:</h3>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
@@ -459,7 +459,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
             {/* Beispielpakete */}
             <div className="mt-12">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Typische Beispielpakete für Umzugsofferten in Zürich</h3>
+              <h3 className="heading-3">Typische Beispielpakete für Umzugsofferten in Zürich</h3>
               <p className="text-gray-700 mb-6">
                 Um Ihnen eine bessere Orientierung zu geben, hier drei realistische Beispielpakete, wie sie 2025 in Zürich üblich sind:
               </p>
@@ -553,10 +553,10 @@ const UmzugsoffertenZuerichPageClient = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="heading-2 mb-6">
               Geprüfte Umzugsfirmen in Zürich vergleichen
             </h2>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            <p className="text-body mb-8 leading-relaxed">
               Der Zürcher Markt bietet eine breite Auswahl an Umzugsunternehmen – von lokalen Spezialisten bis hin zu schweizweit tätigen Anbietern. Im Folgenden geben wir Ihnen eine Orientierung zu den verschiedenen Firmentypen, ohne Anspruch auf Vollständigkeit.
             </p>
 
@@ -671,10 +671,10 @@ const UmzugsoffertenZuerichPageClient = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="heading-2 mb-6">
               Leistungen der Zürcher Umzugsfirmen im Überblick
             </h2>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            <p className="text-body mb-8 leading-relaxed">
               Moderne Zügelfirmen bieten weit mehr als nur den reinen Möbeltransport. Die meisten Umzugsofferten enthalten modulare Bausteine, die Sie nach Bedarf kombinieren können.
             </p>
 
@@ -788,10 +788,10 @@ const UmzugsoffertenZuerichPageClient = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="heading-2 mb-6">
               Tipps für einen günstigen und stressfreien Umzug in Zürich
             </h2>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            <p className="text-body mb-8 leading-relaxed">
               Mit der richtigen Planung und einem systematischen Offertenvergleich können Sie mehrere hundert Franken sparen – und gleichzeitig den Stress am Zügeltag erheblich reduzieren.
             </p>
 
@@ -872,10 +872,10 @@ const UmzugsoffertenZuerichPageClient = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="heading-2 mb-6">
               Nach dem Umzug in Zürich: Formalitäten & Organisation
             </h2>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            <p className="text-body mb-8 leading-relaxed">
               Der Umzugstag ist geschafft – aber ein paar organisatorische Aufgaben stehen noch an. Hier eine kompakte Liste der wichtigsten To-dos:
             </p>
 
@@ -995,7 +995,7 @@ const UmzugsoffertenZuerichPageClient = () => {
             <Accordion type="single" collapsible className="w-full space-y-4">
               <AccordionItem value="item-1" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Wie viele Offerten sollte ich in Zürich einholen?
+                  <h4 className="faq-question">Wie viele Offerten sollte ich in Zürich einholen?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Experten empfehlen, 3–5 Offerten zu vergleichen. Die Preise können bei identischen Aufträgen um bis zu 30 % variieren.
@@ -1004,7 +1004,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
               <AccordionItem value="item-2" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Wie lange im Voraus sollte ich buchen?
+                  <h4 className="faq-question">Wie lange im Voraus sollte ich buchen?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Idealerweise 4–8 Wochen vor dem Umzugstermin. In der Hochsaison (Mai–September) ist eine noch frühere Beratung sinnvoll.
@@ -1013,7 +1013,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
               <AccordionItem value="item-3" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Wann zahlt man die Umzugsfirma?
+                  <h4 className="faq-question">Wann zahlt man die Umzugsfirma?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Üblich ist eine Anzahlung von 10–30 % bei Auftragsbestätigung. Der Rest wird nach erfolgreichem Umzug bezahlt.
@@ -1022,7 +1022,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
               <AccordionItem value="item-4" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Kann ich auch nur Teil-Leistungen anfragen?
+                  <h4 className="faq-question">Kann ich auch nur Teil-Leistungen anfragen?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Ja, die meisten Firmen bieten modulare Umzugsservices an. Sie können beispielsweise nur den Transport buchen und das Zügeln der Kartons selbst übernehmen.
@@ -1031,7 +1031,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
               <AccordionItem value="item-5" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Sind die Offerten wirklich gratis?
+                  <h4 className="faq-question">Sind die Offerten wirklich gratis?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Ja, das Einholen von Umzugsofferten über Vergleichsplattformen oder spezialisierte Partner ist für Sie kostenlos und unverbindlich.
@@ -1040,7 +1040,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
               <AccordionItem value="item-6" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Wie sehen die Stornobedingungen aus?
+                  <h4 className="faq-question">Wie sehen die Stornobedingungen aus?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Bei vielen Zürcher Anbietern ist eine kostenlose Stornierung bis 7–14 Tage vor dem Termin möglich. Prüfen Sie die genauen Bedingungen in Ihrer Offerte.
@@ -1049,7 +1049,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
               <AccordionItem value="item-7" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Was passiert, wenn am Umzugstag etwas beschädigt wird?
+                  <h4 className="faq-question">Was passiert, wenn am Umzugstag etwas beschädigt wird?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Seriöse Umzugsunternehmen haben eine Transportversicherung. Die Deckung liegt meist bei CHF 200–500 pro CHF 10'000 Versicherungssumme. Dokumentieren Sie den Zustand Ihrer Möbel vorab mit Fotos.
@@ -1058,7 +1058,7 @@ const UmzugsoffertenZuerichPageClient = () => {
 
               <AccordionItem value="item-8" className="bg-white rounded-lg border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
-                  Ist eine Besichtigung vor dem Umzug nötig?
+                  <h4 className="faq-question">Ist eine Besichtigung vor dem Umzug nötig?</h4>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2">
                   Für Umzüge ab 2.5 Zimmern ist eine Besichtigung vor Ort oder per Video-Rundgang empfehlenswert. So kann das Geschäft das Umzugsvolumen genau einschätzen und Sie erhalten eine präzisere Offerte.

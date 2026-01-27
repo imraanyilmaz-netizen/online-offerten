@@ -34,7 +34,7 @@ interface SectionTitleProps {
 const SectionTitle = ({ icon, title }: SectionTitleProps) => {
   const Icon = icon;
   return (
-    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 flex items-center">
+    <h2 className="heading-2 flex items-center">
       {Icon && <Icon size={32} className="mr-4 text-green-600" />}
       {title}
     </h2>

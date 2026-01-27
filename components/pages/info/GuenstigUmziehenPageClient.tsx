@@ -23,10 +23,10 @@ const GuenstigUmziehenPageClient = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <h1 className="typography-h1 mb-6">
+                <h1 className="heading-1 mb-6">
                   Günstig umziehen in der Schweiz: So sparen Sie mit cleverer Planung und Offertenvergleich
                 </h1>
-                <p className="typography-p mb-8">
+                <p className="text-body mb-8">
                   Entdecken Sie bewährte Strategien, clevere Tricks und wie Sie durch den Vergleich von Umzugsfirmen Ihr Budget schonen und stressfrei ins neue Zuhause starten.
                 </p>
                 <Button 
@@ -45,7 +45,7 @@ const GuenstigUmziehenPageClient = () => {
                   ].map((stat, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <stat.icon className="w-5 h-5 text-green-600" />
-                      <span className="typography-p font-medium">{stat.label}</span>
+                      <span className="text-body font-medium">{stat.label}</span>
                     </div>
                   ))}
                 </div>
@@ -75,17 +75,17 @@ const GuenstigUmziehenPageClient = () => {
             <div className="max-w-4xl">
               {/* Main Content - Full Width */}
               <div className="lg:col-span-12">
-                <h2 className="typography-h2 mb-4">
+                <h2 className="heading-2 mb-4">
                   Mehrere Umzugsofferten vergleichen und den besten Preis-Leistungs-Verhältnis finden
                 </h2>
-                <p className="typography-p mb-4">
+                <p className="text-body mb-4">
                   Ein Umzug in der Schweiz kostet durchschnittlich zwischen 2'500 und 5'000 CHF – doch rund 40% der Schweizer zahlen mehr als nötig, weil sie das erste Umzugsunternehmen wählen, ohne Preise zu vergleichen. Das Problem: Ohne feste Tarife variieren die Kosten für identische Umzüge um bis zu 40% zwischen verschiedenen Umzugsfirmen.
                 </p>
-                <p className="typography-p mb-6">
+                <p className="text-body mb-6">
                   Die Lösung ist einfach: Mehrere kostenlose Offerten einholen und transparent vergleichen. So finden Sie den optimalen Service für Ihr Budget – ohne Kompromisse bei Qualität und Zuverlässigkeit.
                 </p>
 
-                <h3 className="typography-h3 mb-6">Warum Umzugsofferten vergleichen?</h3>
+                <h3 className="heading-3 mb-6">Warum Umzugsofferten vergleichen?</h3>
                 <div className="space-y-4 mb-8">
                   {[
                     {
@@ -109,8 +109,8 @@ const GuenstigUmziehenPageClient = () => {
                         <feature.icon className="h-5 w-5 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="typography-h4 mb-2" style={{ textAlign: 'left' }}>{feature.title}</h4>
-                        <p className="typography-p">{feature.description}</p>
+                        <h4 className="heading-4 mb-2" style={{ textAlign: 'left' }}>{feature.title}</h4>
+                        <p className="text-body">{feature.description}</p>
                       </div>
                     </div>
                   ))}
@@ -127,7 +127,7 @@ const GuenstigUmziehenPageClient = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-12"
                   >
-                    <h2 className="typography-h2 mb-4">
+                    <h2 className="heading-2 mb-4">
                       So funktioniert der Offertenvergleich
                     </h2>
                   </motion.div>
@@ -182,12 +182,12 @@ const GuenstigUmziehenPageClient = () => {
                                 </div>
                               </div>
                               
-                              <CardTitle className="typography-h4 mb-2 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
+                              <CardTitle className="heading-4 mb-2 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
                                 {step.title}
                               </CardTitle>
                           </CardHeader>
                             <CardContent className="pt-0">
-                              <p className="typography-p text-center text-gray-600 leading-relaxed" style={{ textAlign: 'center' }}>
+                              <p className="text-body text-center text-gray-600 leading-relaxed" style={{ textAlign: 'center' }}>
                                 {step.description}
                               </p>
                           </CardContent>
@@ -209,7 +209,7 @@ const GuenstigUmziehenPageClient = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-12"
                   >
-                    <h2 className="typography-h2 mb-4">
+                    <h2 className="heading-2 mb-4">
                       Das sagen unsere Kunden
                     </h2>
                   </motion.div>
@@ -250,13 +250,13 @@ const GuenstigUmziehenPageClient = () => {
                                   <User className="w-5 h-5 text-green-600" />
                                 </div>
                                 <div>
-                                  <p className="font-bold text-gray-800 typography-p">{review.name}</p>
-                                  <p className="text-sm text-gray-500 typography-p">{review.city}</p>
+                                  <p className="font-bold text-gray-800 text-body">{review.name}</p>
+                                  <p className="text-sm text-gray-500 text-body">{review.city}</p>
                                 </div>
                               </div>
                               <div className="flex items-center gap-1">
                                 <Star size={18} className="text-yellow-400 fill-yellow-400" />
-                                <span className="font-bold text-base text-gray-800 typography-p">{review.rating}.0</span>
+                                <span className="font-bold text-base text-gray-800 text-body">{review.rating}.0</span>
                               </div>
                             </div>
                             
@@ -266,7 +266,7 @@ const GuenstigUmziehenPageClient = () => {
                               ))}
                             </div>
 
-                            <p className="text-gray-700 italic flex-grow typography-p">
+                            <p className="text-gray-700 italic flex-grow text-body">
                               „{review.text}"
                             </p>
                           </CardContent>
@@ -296,10 +296,10 @@ const GuenstigUmziehenPageClient = () => {
                     className="mb-8"
                   >
                     <div className="text-center mb-8">
-                      <h2 className="typography-h2 mb-4">
+                      <h2 className="heading-2 mb-4">
                         10 bewährte Tipps für günstiges Umziehen in der Schweiz
                       </h2>
-                      <p className="typography-p text-gray-600 max-w-3xl mx-auto">
+                      <p className="text-body text-gray-600 max-w-3xl mx-auto">
                         Sparen Sie bis zu 40% bei Ihren Umzugskosten mit diesen bewährten Strategien und Insider-Tipps
                       </p>
                     </div>
@@ -318,7 +318,7 @@ const GuenstigUmziehenPageClient = () => {
                         <div className="bg-blue-600 p-3 rounded-xl">
                           <Calendar className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="typography-h3 text-gray-900 mb-0">Richtige Umzugsplanung</h3>
+                        <h3 className="heading-3 text-gray-900 mb-0">Richtige Umzugsplanung</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -342,7 +342,7 @@ const GuenstigUmziehenPageClient = () => {
                               </div>
                               <div className="flex-1">
                                 <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="typography-p text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -362,7 +362,7 @@ const GuenstigUmziehenPageClient = () => {
                         <div className="bg-purple-600 p-3 rounded-xl">
                           <Package className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="typography-h3 text-gray-900 mb-0">Umzugsvolumen reduzieren</h3>
+                        <h3 className="heading-3 text-gray-900 mb-0">Umzugsvolumen reduzieren</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -386,7 +386,7 @@ const GuenstigUmziehenPageClient = () => {
                               </div>
                               <div className="flex-1">
                                 <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="typography-p text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -406,7 +406,7 @@ const GuenstigUmziehenPageClient = () => {
                         <div className="bg-green-600 p-3 rounded-xl">
                           <Users className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="typography-h3 text-gray-900 mb-0">Eigenleistung vs. Vollservice</h3>
+                        <h3 className="heading-3 text-gray-900 mb-0">Eigenleistung vs. Vollservice</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -430,7 +430,7 @@ const GuenstigUmziehenPageClient = () => {
                               </div>
                               <div className="flex-1">
                                 <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="typography-p text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -450,7 +450,7 @@ const GuenstigUmziehenPageClient = () => {
                         <div className="bg-orange-600 p-3 rounded-xl">
                           <TrendingDown className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="typography-h3 text-gray-900 mb-0">Schweiz-spezifische Spartipps</h3>
+                        <h3 className="heading-3 text-gray-900 mb-0">Schweiz-spezifische Spartipps</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -474,7 +474,7 @@ const GuenstigUmziehenPageClient = () => {
                               </div>
                               <div className="flex-1">
                                 <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="typography-p text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -486,69 +486,69 @@ const GuenstigUmziehenPageClient = () => {
 
                 <hr className="my-8 border-gray-300" />
 
-                <h2 className="typography-h2 mb-4">Umzugskosten in der Schweiz: Übersicht und Einsparpotenzial</h2>
+                <h2 className="heading-2 mb-4">Umzugskosten in der Schweiz: Übersicht und Einsparpotenzial</h2>
                 <div className="overflow-x-auto mb-4">
                   <table className="min-w-full border-collapse border border-gray-300">
                     <thead>
                       <tr className="bg-gray-100">
-                        <th className="border border-gray-300 px-4 py-3 text-left typography-h4">Wohnungsgrösse</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left typography-h4">Innerstädtisch</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left typography-h4">Zwischen Kantonen</th>
+                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Wohnungsgrösse</th>
+                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Innerstädtisch</th>
+                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Zwischen Kantonen</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">2-3 Zimmer</td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">1'200-2'500 CHF</td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">2'500-3'500 CHF</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">2-3 Zimmer</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">1'200-2'500 CHF</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">2'500-3'500 CHF</td>
                       </tr>
                       <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 typography-p">3-4 Zimmer</td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">2'000-3'500 CHF</td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">3'500-5'000 CHF</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">3-4 Zimmer</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">2'000-3'500 CHF</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">3'500-5'000 CHF</td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">Haus</td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">3'500-6'000 CHF</td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">5'000-8'000 CHF</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">Haus</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">3'500-6'000 CHF</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">5'000-8'000 CHF</td>
                       </tr>
                     </tbody>
                   </table>
               </div>
-                <p className="typography-p mb-4">
+                <p className="text-body mb-4">
                   <strong>Preisunterschiede nach Region</strong>: Genf und Zürich liegen 20-30% über dem Schweizer Durchschnitt, ländliche Kantone bieten günstigere Konditionen.
                 </p>
-                <p className="typography-p mb-6">
+                <p className="text-body mb-6">
                   <strong>Versteckte Kosten erkennen</strong>: Achten Sie bei Offerten auf Faktoren wie Möbellift-Einsatz (200-500 CHF), Aufzugnutzung, Entsorgung von Umzugskartons und Umzugsmaterial sowie die Endreinigung der alten Wohnung.
                 </p>
 
                 <hr className="my-8 border-gray-300" />
 
-                <h2 className="typography-h2 mb-4">Checkliste für den günstigen Umzug</h2>
+                <h2 className="heading-2 mb-4">Checkliste für den günstigen Umzug</h2>
                 <div className="overflow-x-auto mb-6">
                   <table className="min-w-full border-collapse border border-gray-300">
                     <thead>
                       <tr className="bg-gray-100">
-                        <th className="border border-gray-300 px-4 py-3 text-left typography-h4">Zeitpunkt</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left typography-h4">Aufgabe</th>
+                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Zeitpunkt</th>
+                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Aufgabe</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 typography-p"><strong>6-8 Wochen vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">Offerten anfordern, vergleichen und Budget festlegen</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>6-8 Wochen vorher</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">Offerten anfordern, vergleichen und Budget festlegen</td>
                       </tr>
                       <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 typography-p"><strong>4 Wochen vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">Umzugsunternehmen beauftragen, Halteverbot beantragen, Kündigungsfristen prüfen</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>4 Wochen vorher</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">Umzugsunternehmen beauftragen, Halteverbot beantragen, Kündigungsfristen prüfen</td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 typography-p"><strong>2 Wochen vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">Kartons und Kisten besorgen, Adressänderungen vorbereiten, Lagerung organisieren</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>2 Wochen vorher</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">Kartons und Kisten besorgen, Adressänderungen vorbereiten, Lagerung organisieren</td>
                       </tr>
                       <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 typography-p"><strong>1 Woche vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 typography-p">Packen beginnen, Organisation finalisieren, letzte Details mit der Firma klären</td>
+                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>1 Woche vorher</strong></td>
+                        <td className="border border-gray-300 px-4 py-3 text-body">Packen beginnen, Organisation finalisieren, letzte Details mit der Firma klären</td>
                       </tr>
                     </tbody>
                   </table>
@@ -556,37 +556,37 @@ const GuenstigUmziehenPageClient = () => {
 
                 <hr className="my-8 border-gray-300" />
 
-                <h2 className="typography-h2 mb-4">Häufige Fragen zum günstigen Umziehen</h2>
+                <h2 className="heading-2 mb-4">Häufige Fragen zum günstigen Umziehen</h2>
                 <div className="space-y-4 mb-6">
-                  <p className="typography-p">
+                  <p className="text-body">
                     <strong>Wie viele Offerten sollte man einholen?</strong> Idealerweise 3-5 Umzugsofferten, um einen realistischen Überblick über Preise und Dienstleistungen zu erhalten.
                   </p>
-                  <p className="typography-p">
+                  <p className="text-body">
                     <strong>Was ist bei Umzugsofferten zu beachten?</strong> Prüfen Sie Festpreis vs. Stundensatz, inkludierte Versicherung, Zusatzkosten für Montage und ob alle gewünschten Leistungen enthalten sind.
                   </p>
-                  <p className="typography-p">
+                  <p className="text-body">
                     <strong>Welche Versicherung braucht man beim Umzug?</strong> Seriöse Schweizer Umzugsfirmen bieten Haftpflichtversicherung bis 500 CHF/m³ – bei Wertgegenständen Zusatzschutz vereinbaren.
                   </p>
-                  <p className="typography-p">
+                  <p className="text-body">
                     <strong>Wie kann man kurzfristig noch Geld sparen?</strong> Selbst packen, Umzugskartons kostenlos bei Migros oder Coop besorgen und flexible Umzugstermine unter der Woche wählen.
                   </p>
-                  <p className="typography-p">
+                  <p className="text-body">
                     <strong>Was kostet ein Umzug in der Schweiz durchschnittlich?</strong> Je nach Zimmeranzahl und Entfernung zwischen 2'500 und 5'000 CHF – durch Vergleich lassen sich 500-2'000 CHF sparen.
                   </p>
                   </div>
 
                 <hr className="my-8 border-gray-300" />
 
-                <h2 className="typography-h2 mb-4">Jetzt kostenlos Umzugsofferten vergleichen</h2>
-                <p className="typography-p mb-4">
+                <h2 className="heading-2 mb-4">Jetzt kostenlos Umzugsofferten vergleichen</h2>
+                <p className="text-body mb-4">
                   Der Schlüssel zum günstigen Umziehen liegt im transparenten Vergleich: Sparen Sie bis zu 40% bei Ihren Umzugskosten, ohne Kompromisse bei Qualität und Zuverlässigkeit. Unser neutrales Vergleichsportal verbindet Sie mit geprüften Schweizer Umzugsunternehmen – kostenlos und unverbindlich.
                 </p>
                 <div className="mb-6 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
                   <div className="text-center mb-6">
-                    <p className="text-green-100 mb-4 typography-p text-lg" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)', fontSize: '22px' }}>
+                    <p className="text-green-100 mb-4 text-body text-lg" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)', fontSize: '22px' }}>
                       🔹 <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> 🔹
                     </p>
-                    <p className="text-green-50 mb-6 typography-p" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)' }}>
+                    <p className="text-green-50 mb-6 text-body" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)' }}>
                       ✓ 100% kostenlos und unverbindlich ✓ Geprüfte Partner mit Erfahrung ✓ Transparente Preise ohne Verpflichtung
                     </p>
                   </div>
@@ -612,7 +612,7 @@ const GuenstigUmziehenPageClient = () => {
                     </Button>
               </div>
             </div>
-                <p className="typography-p">
+                <p className="text-body">
                   Über 92% unserer Kunden empfehlen den Offertenvergleich weiter – starten Sie jetzt Ihre Suche nach dem besten Preis-Leistungsverhältnis für Ihren Umzug in der Schweiz.
                 </p>
               </div>

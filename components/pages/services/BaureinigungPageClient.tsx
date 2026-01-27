@@ -186,7 +186,7 @@ const BaureinigungPageClient = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed"
+                  className="text-base md:text-body mb-4 md:mb-6 leading-relaxed"
                 >
                   Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate. Entfernung von Bauschutt, Staub und Rückständen. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
@@ -216,15 +216,15 @@ const BaureinigungPageClient = () => {
                 >
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% sparen</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Nur geprüfte Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">100% kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
                 </motion.div>
               </div>
@@ -245,14 +245,14 @@ const BaureinigungPageClient = () => {
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8"
                 >
                   {/* H2: Warum eine professionelle Baureinigung sinnvoll ist */}
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Warum eine professionelle Baureinigung sinnvoll ist</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Warum eine professionelle Baureinigung sinnvoll ist</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Eine professionelle Reinigung nach Bauarbeiten ist nach Renovierungs- oder Bauarbeiten unerlässlich, um wieder ein sauberes und gesundes Zuhause zu haben. Nach Bauarbeiten bleiben oft Bauschutt, Staub, Farbrückstände, Klebebandreste und andere Rückstände zurück, die bei normaler Reinigung nicht entfernt werden können. Professionelle Reinigungsfirmen verfügen über spezielle Methoden und Geräte, um hartnäckige Verschmutzungen zu entfernen. Zudem trägt eine gründliche Reinigung nach Bauarbeiten zur Gesundheit bei, indem sie Feinstaub und schädliche Partikel entfernt, die nach Bauarbeiten in der Luft und auf Oberflächen verbleiben können. Eine professionelle Reinigung stellt sicher, dass alle Bereiche wieder bewohnbar und sicher sind.
                   </p>
                   
                   {/* H2: Unsere Leistungen im Bereich Baureinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Reinigung</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Unsere Leistungen im Bereich Reinigung</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Reinigung nach Bauarbeiten. Dazu gehören die gründliche Reinigung nach Renovierungsarbeiten, Neubau oder Umbau. Wir bieten die Entfernung von Bauschutt und Bauabfällen, gründliche Staubentfernung von allen Oberflächen, Entfernung von Farbrückständen und Klebeband, Reinigung von Fenstern und Rahmen, sowie die fachgerechte Entsorgung von Bauabfällen. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken, speziellen Geräten für Feinstaubentfernung und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk haben Erfahrung mit Reinigung nach Bauarbeiten und kennen die besonderen Herausforderungen nach Bauarbeiten.
                   </p>
 
@@ -267,7 +267,7 @@ const BaureinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Leistungen */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Reinigung nach Renovierungsarbeiten</li>
                     <li>Reinigung nach Neubau oder Umbau</li>
                     <li>Entfernung von Bauschutt und Bauabfällen</li>
@@ -280,13 +280,13 @@ const BaureinigungPageClient = () => {
 
                   {/* CTA 1 - After Leistungen */}
                   <div className="mt-6 md:mt-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200 mb-6 md:mb-8">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">
+                    <h3 className="heading-3">
                       {city && !locationLoading 
                         ? `Professionelle Baureinigung in ${city}`
                         : 'Professionelle Baureinigung buchen'
                       }
                     </h3>
-                    <p className="text-base text-gray-700 mb-3 md:mb-4">
+                    <p className="text-body mb-3 md:mb-4">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen.
                     </p>
                     <Button 
@@ -300,8 +300,8 @@ const BaureinigungPageClient = () => {
                   </div>
 
                   {/* H2: Vorteile unserer gründlichen Baureinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Vorteile unserer gründlichen Baureinigung</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Vorteile unserer gründlichen Baureinigung</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Eine gründliche Reinigung nach Bauarbeiten bietet zahlreiche Vorteile gegenüber der eigenen Reinigung. Sie entfernt hartnäckige Verschmutzungen wie Bauschutt, Feinstaub und Farbreste, die bei normaler Reinigung nicht erreicht werden. Professionelle Reinigungsfirmen haben spezielle Geräte wie Feinstaubfilter und Hochleistungssauger, die auch feinste Partikel entfernen. Sie kennen die richtigen Methoden für verschiedene Materialien und Oberflächen und können empfindliche Bereiche schützen. Zudem übernehmen sie die fachgerechte Entsorgung von Bauschutt, was Ihnen Zeit und Mühe spart. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
                   </p>
 
@@ -316,7 +316,7 @@ const BaureinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Vorteile */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Entfernung von hartnäckigen Verschmutzungen wie Bauschutt und Feinstaub</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Spezielle Geräte für Feinstaubentfernung</li>
@@ -326,14 +326,14 @@ const BaureinigungPageClient = () => {
                   </ul>
 
                   {/* H2: Was bei einer umfassenden Baureinigung gereinigt wird */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was bei einer umfassenden Baureinigung gereinigt wird</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Was bei einer umfassenden Baureinigung gereinigt wird</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Eine umfassende Reinigung nach Bauarbeiten beinhaltet die intensive Reinigung aller Bereiche nach Bauarbeiten. Dazu gehört die Entfernung von Bauschutt und grossen Rückständen, die gründliche Staubentfernung von allen Oberflächen inklusive schwer zugänglicher Stellen, die Entfernung von Farbrückständen, Klebeband und Schutzfolien, die Reinigung aller Böden inklusive Ecken und Kanten, die Reinigung von Fenstern innen und aussen inklusive Rahmen, die Reinigung von Heizkörpern, Lüftungsgittern und Lampen, sowie die Entfernung von Spachtelmasse- und Kleberesten. Professionelle Reinigungsfirmen verwenden spezielle Methoden und Geräte, um auch hartnäckigste Verschmutzungen gründlich zu entfernen.
                   </p>
 
                   {/* H2: Baureinigung nach verschiedenen Bauarbeiten (Renovation, Neubau, Umbau) */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Baureinigung nach verschiedenen Bauarbeiten (Renovation, Neubau, Umbau)</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Baureinigung nach verschiedenen Bauarbeiten (Renovation, Neubau, Umbau)</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Professionelle Reinigung nach Bauarbeiten wird für verschiedene Arten von Bauarbeiten angeboten, die alle spezielle Reinigungsanforderungen haben. Reinigung nach Renovierungsarbeiten entfernt Staub, Farbreste und Rückstände von Renovierungen. Reinigung nach Neubau umfasst die gründliche Reinigung eines komplett neuen Gebäudes, inklusive Entfernung von Bauschutt und Bauabfällen. Reinigung nach Umbau beinhaltet die Reinigung nach strukturellen Änderungen. Jede Art von Bauarbeit hinterlässt unterschiedliche Verschmutzungen, und professionelle Reinigungsfirmen passen ihre Methoden entsprechend an. Unabhängig von der Art der Bauarbeiten, alle Reinigungsfirmen in unserem Netzwerk haben Erfahrung mit Reinigung nach Bauarbeiten und verwenden die richtigen Methoden für jeden Fall.
                   </p>
 
@@ -348,8 +348,8 @@ const BaureinigungPageClient = () => {
                   </div>
 
                   {/* H2: Herausforderungen bei der Baureinigung (Bauschutt, Staub, Farbreste) */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Herausforderungen bei der Baureinigung (Bauschutt, Staub, Farbreste)</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Herausforderungen bei der Baureinigung (Bauschutt, Staub, Farbreste)</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Reinigung nach Bauarbeiten hat besondere Herausforderungen, die spezielle Methoden und Geräte erfordern. Feinstaub kann in alle Ritzen und schwer zugängliche Stellen eindringen und erfordert spezielle Filter und Sauger. Bauschutt muss fachgerecht entsorgt werden, was Kenntnisse der Entsorgungsvorschriften erfordert. Farbrückstände und Klebereste sind hartnäckig und erfordern spezielle Reinigungsmittel und Techniken. Zudem müssen empfindliche Oberflächen wie neue Böden oder Fenster geschützt werden. Professionelle Reinigungsfirmen haben die richtigen Geräte, Methoden und Erfahrung für alle diese Herausforderungen. Sie verwenden Feinstaubfilter, Hochleistungssauger, spezielle Reinigungsmittel und kennen die richtigen Techniken für jedes Material.
                   </p>
 
@@ -364,8 +364,8 @@ const BaureinigungPageClient = () => {
                   </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmethoden */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Moderne und umweltfreundliche Reinigungsmethoden</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Moderne und umweltfreundliche Reinigungsmethoden</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmethoden, auch bei intensiven Reinigungen nach Bauarbeiten. Diese sind nicht nur besser für die Umwelt, sondern auch für Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders für Haushalte mit Kindern, Allergikern oder Haustieren empfehlenswert. Sie sind effektiv gegen hartnäckige Verschmutzungen wie Farbreste und Klebereste, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine schädlichen Chemikalien in Ihrer Wohnung zurückbleiben. Dies ist besonders wichtig bei Reinigung nach Bauarbeiten, da intensive Reinigungsmittel verwendet werden und die Wohnung nach der Reinigung wieder bewohnbar sein muss.
                   </p>
 
@@ -380,14 +380,14 @@ const BaureinigungPageClient = () => {
                   </div>
 
                   {/* H2: Ablauf unserer Baureinigung – Schritt für Schritt */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Ablauf unserer Baureinigung – Schritt für Schritt</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Ablauf unserer Baureinigung – Schritt für Schritt</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Der Ablauf einer professionellen Baureinigung ist strukturiert und gründlich. Zunächst erfolgt eine Besichtigung der Baustelle, um den Umfang der Reinigung zu bestimmen, den Verschmutzungsgrad zu beurteilen und eine genaue Offerte zu erstellen. Nach der Auftragsbestätigung wird ein Termin vereinbart, der zu Ihrem Bauplan passt. Am Reinigungstag erscheint das professionelle Reinigungsteam pünktlich mit allen notwendigen Geräten, speziellen Reinigungsmitteln und Ausrüstung für Baureinigung. Die Reinigung erfolgt systematisch in mehreren Phasen: Grobreinigung zur Entfernung von Bauschutt, Feinstaubentfernung, Reinigung aller Oberflächen, und abschliessende Feinreinigung. Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle, und Sie erhalten ein sauberes, bewohnbares Zuhause.
                   </p>
 
                   {/* Ablauf Steps */}
                   <div className="my-6 md:my-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 p-6 md:p-8">
-                    <ul className="list-disc list-inside space-y-3 text-lg text-gray-700">
+                    <ul className="list-disc list-inside space-y-3 text-body">
                       <li><strong>Besichtigung und Offerte:</strong> Wir besichtigen die Baustelle, beurteilen den Verschmutzungsgrad und erstellen eine genaue Offerte.</li>
                       <li><strong>Terminvereinbarung:</strong> Nach der Auftragsbestätigung vereinbaren wir einen Termin, der zu Ihrem Bauplan passt.</li>
                       <li><strong>Professionelle Baureinigung:</strong> Unser professionelles Team reinigt Ihre Baustelle gründlich mit speziellen Methoden und Geräten.</li>
@@ -396,26 +396,26 @@ const BaureinigungPageClient = () => {
                   </div>
 
                   {/* H2: Was kostet eine professionelle Baureinigung? */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was kostet eine professionelle Baureinigung?</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Was kostet eine professionelle Baureinigung?</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Die Kosten für Reinigung nach Bauarbeiten hängen stark vom Umfang der Bauarbeiten, der Grösse des Projekts und dem Verschmutzungsgrad ab. Eine durchschnittliche Renovierung benötigt etwa 8-15 Stunden Reinigung, was Kosten von 500-3000 CHF bedeutet. Grössere Bauprojekte, stark verschmutzte Bereiche oder zusätzliche Leistungen wie Bauschuttentsorgung können höhere Kosten verursachen. Die genauen Kosten hängen von der Art der Bauarbeiten, dem Umfang der Reinigung und dem Zustand ab. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Baureinigung sind */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Wir sind der vertrauenswürdige Partner für Ihre Reinigung nach Bauarbeiten. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und Erfahrung mit Reinigung nach Bauarbeiten haben. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für Reinigung nach Bauarbeiten, wie Feinstaubfilter und Hochleistungssauger. Sie kennen die besonderen Herausforderungen nach Bauarbeiten und verwenden die richtigen Methoden für Bauschutt, Staub und Farbreste. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* CTA 2 - After Richtiger Partner */}
                   <div className="mt-6 md:mt-8 p-4 md:p-6 bg-blue-50 rounded-lg border border-blue-200 mb-6 md:mb-8">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">
+                    <h3 className="heading-3">
                       {city && !locationLoading 
                         ? `Professionelle Baureinigung in ${city}`
                         : 'Jetzt kostenlose Offerten anfordern'
                       }
                     </h3>
-                    <p className="text-base text-gray-700 mb-3 md:mb-4">
+                    <p className="text-body mb-3 md:mb-4">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen. Ohne Aufpreis, ohne Verpflichtung.
                     </p>
                     <Button 
@@ -435,15 +435,15 @@ const BaureinigungPageClient = () => {
 
                   {/* FAQ Section */}
                   <div className="mt-6 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Reinigung</h2>
-                    <p className="text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
+                    <h2 className="heading-2">Häufig gestellte Fragen zur Reinigung</h2>
+                    <p className="text-body mb-6 md:mb-8 leading-relaxed">
                       Häufig gestellte Fragen zur professionellen Reinigung nach Bauarbeiten: Was kostet eine Reinigung nach Bauarbeiten? Wann sollte die Reinigung durchgeführt werden? Was beinhaltet eine umfassende Reinigung? Wie lange dauert eine Reinigung nach Bauarbeiten? Ist eine Reinigung gesetzlich vorgeschrieben? Welche Reinigungsmethoden werden verwendet? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                           <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-gray-800 px-2 sm:px-4">
-                            {item.q}
+                            <h4 className="faq-question">{item.q}</h4>
                           </AccordionTrigger>
                           <AccordionContent className="text-base text-gray-600 leading-relaxed pt-2 pb-4 px-2 sm:px-4">
                             {item.a}
@@ -455,24 +455,24 @@ const BaureinigungPageClient = () => {
 
                   {/* Internal Links */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Weitere Reinigungsdienstleistungen</h2>
+                    <h2 className="heading-2">Weitere Reinigungsdienstleistungen</h2>
                     <div className="grid md:grid-cols-3 gap-4 md:gap-6">
                       <Link href="/reinigung/wohnungsreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Wohnungsreinigung</h3>
+                        <h3 className="heading-3">Wohnungsreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Professionelle Wohnungsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
                       </Link>
                       <Link href="/reinigung/fensterreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Fensterreinigung</h3>
+                        <h3 className="heading-3">Fensterreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
                       <Link href="/reinigung/grundreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Grundreinigung</h3>
+                        <h3 className="heading-3">Grundreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Gründliche Grundreinigung vom Profi für ein tiefenreines Zuhause.</p>
                       </Link>
                     </div>
@@ -480,13 +480,13 @@ const BaureinigungPageClient = () => {
 
                   {/* CTA 3 - Final */}
                   <div className="mt-8 md:mt-12 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">
+                    <h3 className="heading-3">
                       {city && !locationLoading 
                         ? `Professionelle Baureinigung in ${city}`
                         : 'Jetzt unverbindliche Baureinigungs-Offerte anfordern'
                       }
                     </h3>
-                    <p className="text-base text-gray-700 mb-3 md:mb-4">
+                    <p className="text-body mb-3 md:mb-4">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen. Alle Offerten beinhalten professionelle Baureinigung mit speziellen Methoden. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma für Ihre Bedürfnisse.
                     </p>
                     <Button 
@@ -511,7 +511,7 @@ const BaureinigungPageClient = () => {
                 {/* Sticky CTA Section - Outside aside for proper sticky behavior */}
                 <div className="mt-4 md:mt-6 lg:sticky lg:top-24 lg:self-start">
                   <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 md:p-6 border border-blue-100">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Jetzt Offerten anfordern</h3>
+                    <h3 className="heading-3">Jetzt Offerten anfordern</h3>
                     <p className="text-gray-700 mb-3 md:mb-4 text-base">Kostenlos und unverbindlich Reinigungsofferten online vergleichen.</p>
                     <Button 
                       onClick={handleCtaClick} 

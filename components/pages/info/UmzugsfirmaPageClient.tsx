@@ -793,7 +793,7 @@ const UmzugsfirmaPageClient = () => {
               {faqItems.map((item, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border-b">
                   <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-green-600">
-                    {item.q}
+                    <h4 className="faq-question">{item.q}</h4>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700 leading-relaxed">
                     {item.a}

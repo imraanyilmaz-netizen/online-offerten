@@ -134,10 +134,10 @@ const PrivateUmzugPageClient = () => {
             <div className="flex justify-start">
               <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold mb-6 text-gray-900 leading-tight">
+                  <h1 className="heading-1">
                     Privatumzug in der Schweiz
                   </h1>
-                  <p className="text-base md:text-lg text-gray-700 mb-4">
+                  <p className="text-base md:text-body mb-4">
                     Erhalten Sie in nur 5 Minuten bis zu 6 Offerten
                   </p>
                 </div>
@@ -156,15 +156,15 @@ const PrivateUmzugPageClient = () => {
                 <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-col gap-4 md:gap-6 max-w-md">
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% Ersparnis möglich</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Mehrere Firmen online vergleichen</span>
+                    <span className="text-sm md:text-body font-medium">Mehrere Firmen online vergleichen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">Kostenlos & unverbindlich</span>
                   </div>
                 </div>
               </article>
@@ -192,16 +192,16 @@ const PrivateUmzugPageClient = () => {
             >
               {/* Article Section 1 */}
               <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="heading-2">
                   Privatumzug in Zürich, Bern, Basel & ganze Schweiz
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Ein Privatumzug ist mehr als nur der Transport von Möbeln von A nach B – er betrifft das ganze Leben einer Familie. Ob Sie in Zürich, Bern, Basel, Aargau, Luzern oder St. Gallen wohnen: Die Wohnungsabgabe, neue Kita- oder Schulwege, veränderte Arbeitswege und die gesamte Organisation rund um den Wohnungswechsel erfordern eine frühzeitige Planung. Gerade in der Schweiz konzentrieren sich viele Privatumzüge auf bestimmte Stichtage - Ende März, Ende Juni und Ende September sind typische Mietzinswechsel-Termine, an denen die Nachfrage nach Umzugsfirmen besonders hoch ist.
                 </p>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Genau hier setzt Online-Offerten.ch an: Als digitale Plattform ermöglicht sie es Ihnen, Ihren geplanten Umzug unkompliziert zu beschreiben und anschliessend mehrere Offerten von geprüften Umzugsfirmen aus Ihrer Region zu erhalten. Sie entscheiden selbst, welches Unternehmen am besten zu Ihrem Bedarf passt – ob im Raum Zürichsee, Limmattal, der Agglomeration Bern oder anderswo in der Schweiz.
                 </p>
-                <p className="text-gray-700 leading-relaxed mb-6">
+                <p className="text-body leading-relaxed mb-6">
                   Alle Offerten sind kostenlos und unverbindlich. Das bedeutet: Sie gehen kein Risiko ein und behalten die volle Kontrolle über Ihre Entscheidung. Die Partner von Online-Offerten.ch sind regionale Spezialisten, die auf Privatumzüge spezialisiert sind und wissen, worauf es bei einem reibungslosen Wohnungswechsel ankommt.
                 </p>
                 <Image
@@ -216,13 +216,13 @@ const PrivateUmzugPageClient = () => {
 
               {/* So funktioniert Section */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   So funktioniert der Privatumzug mit Online-Offerten.ch
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   In wenigen Minuten gelangen Sie über Online-Offerten.ch zu passenden Umzugsfirmen in der Schweiz. Der gesamte Prozess ist so gestaltet, dass Sie mit minimalem Aufwand maximale Transparenz erhalten.
                 </p>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-6 mt-6">
+                <h3 className="heading-3">
                   Schritt für Schritt zur passenden Umzugsfirma
                 </h3>
                 <div className="space-y-8 mb-6">
@@ -241,8 +241,8 @@ const PrivateUmzugPageClient = () => {
                             <FileText className="w-6 h-6 text-green-600" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Online-Formular ausfüllen</h4>
-                <p className="text-gray-700 leading-relaxed">
+                            <h4 className="heading-4">Online-Formular ausfüllen</h4>
+                <p className="text-body leading-relaxed">
                               Geben Sie Ihre alte und neue Adresse ein, Etage, ob ein Lift vorhanden ist, Ihr Wunschdatum, den Umfang in Zimmern sowie besondere Güter wie Klavier, Aquarium oder schwere Gerätschaften.
                             </p>
                           </div>
@@ -266,8 +266,8 @@ const PrivateUmzugPageClient = () => {
                             <Search className="w-6 h-6 text-green-600" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Anfrage wird geprüft</h4>
-                            <p className="text-gray-700 leading-relaxed">
+                            <h4 className="heading-4">Anfrage wird geprüft</h4>
+                            <p className="text-body leading-relaxed">
                               Online-Offerten.ch prüft Ihre Anfrage und leitet sie an passende, regionale Umzugsfirmen weiter – beispielsweise aus Zürich, Winterthur, Baden, Thun oder Chur.
                             </p>
                           </div>
@@ -291,8 +291,8 @@ const PrivateUmzugPageClient = () => {
                             <Mail className="w-6 h-6 text-green-600" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Offerten erhalten</h4>
-                            <p className="text-gray-700 leading-relaxed">
+                            <h4 className="heading-4">Offerten erhalten</h4>
+                            <p className="text-body leading-relaxed">
                               Innerhalb von 24–48 Stunden erhalten Sie mehrere Angebote per E-Mail oder Telefon, inklusive detaillierter Leistungsbeschreibung.
                             </p>
                           </div>
@@ -315,8 +315,8 @@ const PrivateUmzugPageClient = () => {
                             <CheckCircle className="w-6 h-6 text-green-600" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-xl font-semibold text-gray-800 mb-2">Vergleichen und entscheiden</h4>
-                            <p className="text-gray-700 leading-relaxed">
+                            <h4 className="heading-4">Vergleichen und entscheiden</h4>
+                            <p className="text-body leading-relaxed">
                               Prüfen Sie die Offerten in Ruhe: Preis, inkludierte Services (Transport, Verpackung, Montage, Reinigung), Erfahrung und Kundenbewertungen.
                             </p>
                           </div>
@@ -325,20 +325,20 @@ const PrivateUmzugPageClient = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Es besteht kein Abschlusszwang. Wenn Ihnen ein Angebot zusagt, schliessen Sie den Auftrag direkt mit dem ausgewählten Unternehmen ab. Die Plattform übernimmt lediglich die Vermittlung – die Zusammenarbeit erfolgt direkt zwischen Ihnen und der Umzugsfirma Ihrer Wahl.
                 </p>
               </section>
 
               {/* Article Section 2 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   Welche Leistungen umfasst ein moderner Privatumzug?
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Schweizer Umzugsfirmen bieten heute weit mehr als den reinen Möbeltransport. Ein professioneller Umzugsservice kann den gesamten Prozess von A bis Z übernehmen und Ihnen so erheblichen Stress ersparen.
                 </p>
-                <p className="text-gray-700 leading-relaxed mb-3">Typische Leistungen, die in Offerten auftauchen können:</p>
+                <p className="text-body leading-relaxed mb-3">Typische Leistungen, die in Offerten auftauchen können:</p>
                 <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
                   <li><strong>Verpackungsservice</strong>: Das Team der Umzugsfirma verpackt Ihren gesamten Hausrat fachgerecht in Umzugskartons</li>
                   <li><strong>Bereitstellung von Verpackungsmaterial</strong>: Kartons, Kleiderboxen, Luftpolsterfolie, Decken</li>
@@ -348,20 +348,20 @@ const PrivateUmzugPageClient = () => {
                   <li><strong>Zwischenlagerung</strong>: Lagerraum für Mobiliar, wenn der Einzugstermin später liegt</li>
                   <li><strong>Umzugsreinigung</strong>: Professionelle Räumung und Reinigung mit Abgabegarantie</li>
                 </ul>
-                  <p className="text-gray-700 leading-relaxed mb-4">
+                  <p className="text-body leading-relaxed mb-4">
                   Viele Firmen in Zürich, Basel, Lausanne oder Genf bieten auch die Abgabereinigung Ihrer alten Wohnung an – oft mit Garantie, dass die Wohnungsabgabe reibungslos klappt.
                 </p>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Bei der Anfrage auf Online-Offerten.ch sollten Sie gezielt angeben, welche Leistungen Sie wünschen. So können die Anbieter passende Pakete kalkulieren – ob Sie nur den reinen Transport benötigen oder einen Full-Service-Umzug mit Auspackservice und allem Drum und Dran.
                   </p>
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                  <p className="text-gray-700 leading-relaxed"><strong>Tipp</strong>: Bei grösseren Wohnungen ab 3,5 Zimmern empfiehlt sich ein Besichtigungstermin (vor Ort oder per Video), damit die Offerte realistisch kalkuliert werden kann.</p>
+                  <p className="text-body leading-relaxed"><strong>Tipp</strong>: Bei grösseren Wohnungen ab 3,5 Zimmern empfiehlt sich ein Besichtigungstermin (vor Ort oder per Video), damit die Offerte realistisch kalkuliert werden kann.</p>
                 </div>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   Typische Zusatzservices beim Privatumzug
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="text-body leading-relaxed mb-3">
                   Die Unterschiede zwischen einzelnen Offerten können erheblich sein, je nachdem welche Extras enthalten sind. Hier einige Beispiele für Zusatzservices, die Sie delegieren können:
                 </p>
                 <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
@@ -372,7 +372,7 @@ const PrivateUmzugPageClient = () => {
                   <li><strong>Entsorgung über Recyclinghöfe</strong>: Alte Möbel werden über regionale Anlagen wie Hagenholz in Zürich oder Rhenus in Basel entsorgt</li>
                   <li><strong>Handwerkerleistungen</strong>: Anschluss von Waschmaschinen, Montage von Lampen oder Aufhängen von Bildern</li>
                 </ul>
-                <p className="text-gray-700 leading-relaxed mb-6">
+                <p className="text-body leading-relaxed mb-6">
                   Bei Online-Offerten.ch können Sie diese Optionen direkt in Ihrer Anfrage markieren. So erhalten Sie von den Umzugsfirmen passgenaue Angebote, die Ihre individuellen Bedürfnisse berücksichtigen.
                 </p>
                 <Image
@@ -387,14 +387,14 @@ const PrivateUmzugPageClient = () => {
 
               {/* Article Section 3 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   Kosten eines Privatumzugs: Wovon der Preis in der Schweiz abhängt
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Die Kosten für einen Privatumzug variieren in der Schweiz stark – je nach Stadt, Distanz, Umfang und gewünschten Dienstleistungen. Genau deshalb ist der Vergleich mehrerer Offerten so wichtig: Nur so erhalten Sie ein realistisches Bild davon, was Ihr Umzug tatsächlich kosten wird.
                 </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3">
+                <h3 className="heading-3">
                   Zentrale Preisfaktoren im Überblick
                 </h3>
                 <div className="overflow-x-auto mb-4">
@@ -437,20 +437,20 @@ const PrivateUmzugPageClient = () => {
                     </tbody>
                   </table>
                 </div>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="text-body leading-relaxed mb-3">
                   <strong>Timing ist Geld</strong>: Wochenend- oder Monatsend-Umzüge (30. Juni, 30. September) sind oft teurer als Termine unter der Woche in der Monatsmitte. Wenn Sie flexibel sind, können Sie bares Geld sparen.
                 </p>
                 <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
-                  <p className="text-gray-700 leading-relaxed"><strong>Empfehlung</strong>: Reichen Sie Ihre Anfrage möglichst 4–6 Wochen vor Ihrem Wunschtermin ein. So haben die Firmen noch gute Verfügbarkeit, und Sie erhalten bessere Preise.</p>
+                  <p className="text-body leading-relaxed"><strong>Empfehlung</strong>: Reichen Sie Ihre Anfrage möglichst 4–6 Wochen vor Ihrem Wunschtermin ein. So haben die Firmen noch gute Verfügbarkeit, und Sie erhalten bessere Preise.</p>
                 </div>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Online-Offerten.ch fördert Transparenz: Sie erhalten mehrere konkrete Preisangebote und sehen sofort, welche Leistungen im Pauschalpreis enthalten sind. Achten Sie beim Vergleich auch auf mögliche versteckte Zusatzkosten wie Kilometerentschädigung, Versicherungszuschläge oder Parkgebühren.
                 </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   Beispiele für typische Umzugspreise
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Die folgenden Preisrahmen sind als grobe Orientierung zu verstehen – die tatsächlichen Kosten hängen von vielen Faktoren ab und können nur durch eine konkrete Offerte ermittelt werden.
                 </p>
                 <div className="space-y-4 mb-4">
@@ -481,21 +481,21 @@ const PrivateUmzugPageClient = () => {
                     <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 400 – 800</p>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Diese Angaben sind Richtwerte. Für genaue Preise nutzen Sie das Anfrageformular auf Online-Offerten.ch und erhalten Sie verbindliche Offerten von Umzugsfirmen aus Ihrer Umgebung.
                 </p>
               </section>
 
               {/* Article Section 4 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   Privatumzug planen: Checkliste von der Kündigung bis zur Schlüsselübergabe
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Gute Planung reduziert Stress erheblich – besonders in Städten mit angespanntem Wohnungsmarkt wie Zürich, Genf oder Basel. Eine klare zeitliche Struktur hilft Ihnen, nichts Wichtiges zu vergessen.
                 </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   Zeitlicher Ablauf für Ihren Umzug
                 </h3>
                 <div className="space-y-4 mb-6">
@@ -544,14 +544,14 @@ const PrivateUmzugPageClient = () => {
                     </ul>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Viele Umzugsfirmen bieten eigene Checklisten an. Über Online-Offerten.ch können Sie Anbieter wählen, die bei der Planung aktiv mithelfen und Sie durch den gesamten Prozess begleiten.
                 </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   Praktische Tipps für den Umzugstag
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="text-body leading-relaxed mb-3">
                   Mit guter Vorbereitung verläuft der Umzugstag selbst deutlich entspannter. Hier einige bewährte Tipps aus der Praxis:
                 </p>
                 <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
@@ -562,7 +562,7 @@ const PrivateUmzugPageClient = () => {
                   <li><strong>Kartons sinnvoll beschriften</strong>: Zimmer, Inhalt und Priorität notieren – das erleichtert das Einräumen am Zielort enorm</li>
                   <li><strong>Möbelplan erstellen</strong>: Ein einfacher Grundriss der neuen Wohnung hilft dem Team, alles gleich an den richtigen Ort zu stellen</li>
                 </ul>
-                <p className="text-gray-700 leading-relaxed mb-6">
+                <p className="text-body leading-relaxed mb-6">
                   Am Ende des Umzugs empfiehlt sich eine kurze Kontrolle gemeinsam mit der Umzugsfirma: Sind alle Gegenstände angekommen? Gibt es Schäden? Haben Sie in der alten Wohnung nichts vergessen? Notieren Sie die Zählerstände für Strom, Wasser und Gas.
                 </p>
                 <Image
@@ -577,14 +577,14 @@ const PrivateUmzugPageClient = () => {
 
               {/* Article Section 5 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   Privatumzug innerhalb der Schweiz, ins Ausland oder aus dem Ausland
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Über Online-Offerten.ch können Sie nicht nur regionale Umzüge anfragen, sondern auch grössere Distanzen in der Schweiz sowie internationale Umzüge. Die Art des Umzugs bestimmt, worauf Sie besonders achten sollten.
                 </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   Unterschiedliche Umzugstypen
                 </h3>
                 <div className="space-y-4 mb-4">
@@ -613,14 +613,14 @@ const PrivateUmzugPageClient = () => {
                     </ul>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Auf Online-Offerten.ch finden Sie auch Umzugsfirmen mit Erfahrung in Zollabwicklung und internationalen Transporten. Bei komplexen Umzügen lohnt sich ein ausführliches Beratungsgespräch mit der gewählten Firma – fragen Sie gezielt nach Referenzen und Erfahrung mit Ihrem Zielort.
                   </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   Besondere Umzüge: Senioren, Familien, WG & Erstwohnung
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="text-body leading-relaxed mb-3">
                   Nicht jeder Privatumzug ist gleich. Unterschiedliche Lebenssituationen bringen unterschiedliche Bedürfnisse mit sich.
                 </p>
                 <div className="space-y-4 mb-4">
@@ -652,21 +652,21 @@ const PrivateUmzugPageClient = () => {
                     </ul>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Bei Ihrer Anfrage auf Online-Offerten.ch können Sie diese Situation kurz beschreiben. So können die Anbieter gezielt auf Ihre Bedürfnisse eingehen und eine passende Lösung vorschlagen.
                 </p>
               </section>
 
               {/* Article Section 6 */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   Warum Offerten für Ihren Privatumzug vergleichen? Ihre Vorteile mit Online-Offerten.ch
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   In der Schweiz gibt es zahlreiche Umzugsfirmen mit sehr unterschiedlichen Preis- und Leistungsstrukturen. Ohne Vergleich laufen Sie Gefahr, entweder zu viel zu bezahlen oder Leistungen zu buchen, die Sie gar nicht benötigen.
                 </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   Die vier grossen Vorteile
                 </h3>
                 <div className="overflow-x-auto mb-4">
@@ -697,14 +697,14 @@ const PrivateUmzugPageClient = () => {
                     </tbody>
                   </table>
                 </div>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Der Service von Online-Offerten.ch ist für private Umziehende vollständig kostenlos und unverbindlich. Sie profitieren von der Arbeit, die bereits geleistet wurde: Die Plattform hat geprüfte Partner aus der ganzen Schweiz, sodass Sie dank deren Erfahrung schnell zu seriösen Angeboten kommen.
                 </p>
                 
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 mt-6">
+                <h3 className="heading-3">
                   So wählen Sie die passende Umzugsfirma aus Ihren Offerten
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="text-body leading-relaxed mb-3">
                   Der günstigste Preis ist nicht immer der beste. Um die richtige Entscheidung zu treffen, sollten Sie die Offerten anhand von vier Kriterien prüfen:
                 </p>
                 <ol className="space-y-2 list-decimal list-inside mb-4 text-gray-700">
@@ -713,10 +713,10 @@ const PrivateUmzugPageClient = () => {
                   <li><strong>Versicherungsdeckung</strong>: Welche Transport- und Haftpflichtversicherung hat die Firma?</li>
                   <li><strong>Kundenbewertungen</strong>: Was sagen andere Kunden über Pünktlichkeit, Sorgfalt und Kommunikation?</li>
                 </ol>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Achten Sie auf klare Beschreibungen in der Offerte. Wenn etwas unklar ist, klären Sie offene Fragen vor der Auftragserteilung per Telefon oder E-Mail – etwa zu Parkplätzen, Zugang oder Spezialtransporten.
                 </p>
-                <p className="text-gray-700 leading-relaxed mb-6">
+                <p className="text-body leading-relaxed mb-6">
                   Am Ende sollten Sie sich für die Firma entscheiden, bei der Kommunikation, Transparenz und Ihr Bauchgefühl stimmen. Erfahrung zeigt: Ein guter erster Kontakt ist oft ein Zeichen für eine professionelle Zusammenarbeit. Online-Offerten.ch übernimmt nur die Kontaktanbahnung – der Vertrag wird direkt mit der Umzugsfirma Ihrer Wahl geschlossen.
                 </p>
                 <Image
@@ -731,16 +731,16 @@ const PrivateUmzugPageClient = () => {
 
               {/* Article Section 7 - CTA */}
               <section className="pt-6 border-t border-gray-200">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="heading-2">
                   Jetzt Ihren Privatumzug online anfragen
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-body leading-relaxed mb-4">
                   Planen Sie in den nächsten Wochen oder Monaten einen Umzug? Ob innerhalb Ihrer Stadt, in einen anderen Kanton oder sogar ins Ausland – der erste Schritt zu einem entspannten Umzug ist einfacher als gedacht.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-body leading-relaxed">
                   Füllen Sie jetzt das Anfrageformular auf <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug" className="text-green-600 hover:underline font-semibold">Kostenlose Offerten anfordern</Link> aus und erhalten Sie schnell mehrere Offerten von Umzugsfirmen aus Ihrer Region. Der Service ist kostenlos, unverbindlich und bringt Ihnen innerhalb von 24–48 Stunden konkrete Angebote direkt in Ihr Postfach.
                 </p>
-                <p className="text-gray-700 leading-relaxed mt-4">
+                <p className="text-body leading-relaxed mt-4">
                   Vergleichen Sie in Ruhe, stellen Sie Fragen und entscheiden Sie sich für die Lösung, die am besten zu Ihrem Privatumzug passt. So starten Sie entspannt in Ihr neues Zuhause – mit Profis an Ihrer Seite, die wissen, worauf es ankommt.
                 </p>
               </section>
@@ -748,7 +748,7 @@ const PrivateUmzugPageClient = () => {
               {/* Related Services Section */}
               <section className="pt-8 border-t border-gray-200">
                 <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                  <h3 className="heading-3 flex items-center">
                     <Sparkles className="w-5 h-5 mr-2 text-green-600" />
                     Weitere Services
                   </h3>
@@ -795,7 +795,7 @@ const PrivateUmzugPageClient = () => {
 
               {/* FAQ Section */}
               <section className="pt-6 border-t border-gray-200">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                <h3 className="heading-3 flex items-center">
                   <HelpCircle size={28} className="mr-3 text-purple-500" />
                   Häufige Fragen zum Privatumzug
                 </h3>
@@ -805,7 +805,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Was kostet ein Privatumzug in der Schweiz?
+                          <h4 className="faq-question">Was kostet ein Privatumzug in der Schweiz?</h4>
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -853,7 +853,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Welche Leistungen sind bei einem Standard-Wohnungsumzug inklusive?
+                          <h4 className="faq-question">Welche Leistungen sind bei einem Standard-Wohnungsumzug inklusive?</h4>
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -883,7 +883,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Wie bereite ich mich am besten auf den Umzugstag vor?
+                          <h4 className="faq-question">Wie bereite ich mich am besten auf den Umzugstag vor?</h4>
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -919,7 +919,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Was sollte ich bei der Auswahl der Umzugsfirma beachten?
+                          <h4 className="faq-question">Was sollte ich bei der Auswahl der Umzugsfirma beachten?</h4>
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -950,7 +950,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Wann sollte ich mit der Planung meines Wohnungsumzugs beginnen?
+                          <h4 className="faq-question">Wann sollte ich mit der Planung meines Wohnungsumzugs beginnen?</h4>
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -1030,7 +1030,7 @@ const PrivateUmzugPageClient = () => {
                       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          Lohnt sich ein Ein- und Auspackservice?
+                          <h4 className="faq-question">Lohnt sich ein Ein- und Auspackservice?</h4>
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
@@ -1081,7 +1081,7 @@ const PrivateUmzugPageClient = () => {
 
               {/* Testimonial */}
               <div className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200 transform hover:scale-105 transition-transform duration-300">
-                <h3 className="text-xl font-semibold text-green-700 mb-3 flex items-center">
+                <h3 className="heading-3 text-green-700 flex items-center">
                   <Users size={24} className="mr-2" />
                   Das sagen unsere Kunden
                 </h3>

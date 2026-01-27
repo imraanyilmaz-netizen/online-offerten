@@ -233,7 +233,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             {/* Introduction */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Umzugskosten im Aargau – Eine Übersicht</h2>
+              <h2 className="heading-2">Umzugskosten im Aargau – Eine Übersicht</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Die Umzugskosten im Aargau sind im Vergleich zu den grossen Metropolen wie Zürich oder Basel oft deutlich günstiger. Dies liegt an mehreren Faktoren: Geringere Lebenshaltungskosten, weniger Verkehrsdichte, kürzere Anfahrtswege und eine weniger hohe Nachfrage nach Umzugsdienstleistungen. Dennoch variieren die Preise erheblich je nach Wohnungsgrösse, Distanz, Umzugstag und gewählten Zusatzleistungen.
               </p>
@@ -253,7 +253,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* Price Table */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Durchschnittliche Umzugskosten nach Wohnungsgrösse</h2>
+              <h2 className="heading-2">Durchschnittliche Umzugskosten nach Wohnungsgrösse</h2>
               <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden shadow-lg">
                 <div className="overflow-x-auto">
                   <table className="w-full">
@@ -285,7 +285,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* Cost Factors */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Kostenfaktoren für Umzüge im Aargau</h2>
+              <h2 className="heading-2">Kostenfaktoren für Umzüge im Aargau</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Verschiedene Faktoren beeinflussen die Umzugskosten erheblich. Verstehen Sie diese Faktoren, um realistische Erwartungen zu haben und die besten Entscheidungen zu treffen.
               </p>
@@ -296,7 +296,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
                 {costFactors.map((factor, index) => (
                   <div key={index} className="bg-gray-50 rounded-xl p-6 border-2 border-gray-200">
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-xl font-semibold text-gray-900">{factor.factor}</h3>
+                      <h3 className="heading-3">{factor.factor}</h3>
                       <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
                         factor.impact === 'Hoch' ? 'bg-red-100 text-red-700' :
                         factor.impact === 'Mittel' ? 'bg-yellow-100 text-yellow-700' :
@@ -313,7 +313,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* Regional Comparison */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Regionale Preisunterschiede im Aargau</h2>
+              <h2 className="heading-2">Regionale Preisunterschiede im Aargau</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Die Umzugskosten variieren leicht zwischen den verschiedenen Städten im Aargau. Hier finden Sie eine Übersicht der durchschnittlichen Preise für eine 2.5-3-Zimmer-Wohnung:
               </p>
@@ -359,7 +359,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* Hidden Costs */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Versteckte Kosten bei Umzügen im Aargau</h2>
+              <h2 className="heading-2">Versteckte Kosten bei Umzügen im Aargau</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Neben den Grundkosten für den Umzug fallen oft zusätzliche Kosten an, die nicht immer im ersten Angebot enthalten sind. Diese versteckten Kosten können die Gesamtkosten erheblich erhöhen:
               </p>
@@ -373,7 +373,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
                       <AlertCircle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" />
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-xl font-semibold text-gray-900">{cost.cost}</h3>
+                          <h3 className="heading-3">{cost.cost}</h3>
                           <span className="text-lg font-bold text-yellow-700">{cost.amount}</span>
                         </div>
                         <p className="text-gray-700 leading-relaxed">{cost.description}</p>
@@ -392,7 +392,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* Savings Tips */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Spartipps für Umzüge im Aargau</h2>
+              <h2 className="heading-2">Spartipps für Umzüge im Aargau</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Mit den richtigen Strategien können Sie erheblich bei Ihrem Umzug sparen. Hier sind die effektivsten Spartipps, die speziell für Umzüge im Aargau relevant sind:
               </p>
@@ -406,7 +406,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
                       <TrendingUp className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-xl font-semibold text-gray-900">{tip.tip}</h3>
+                          <h3 className="heading-3">{tip.tip}</h3>
                           <span className="text-lg font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full">
                             {tip.savings}
                           </span>
@@ -421,7 +421,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* Seasonal Variations */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Saisonale Preisvariationen</h2>
+              <h2 className="heading-2">Saisonale Preisvariationen</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Die Saison hat einen erheblichen Einfluss auf die Umzugskosten. Planen Sie Ihren Umzug wenn möglich in der Nebensaison, um zu sparen:
               </p>
@@ -437,7 +437,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
                     'bg-yellow-50 border-yellow-200'
                   }`}>
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-xl font-semibold text-gray-900">{season.season}</h3>
+                      <h3 className="heading-3">{season.season}</h3>
                       <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
                         season.factor === 'Basispreis' ? 'bg-green-100 text-green-700' :
                         season.factor.includes('+20') ? 'bg-red-100 text-red-700' :
@@ -455,14 +455,14 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* FAQ */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Häufige Fragen zu Umzugskosten im Aargau</h2>
+              <h2 className="heading-2">Häufige Fragen zu Umzugskosten im Aargau</h2>
               <p className="text-gray-700 leading-relaxed mb-6">
                 Hier finden Sie Antworten auf die häufigsten Fragen zu Umzugskosten im Aargau. Diese Informationen helfen Ihnen, die Kosten besser zu verstehen und fundierte Entscheidungen zu treffen.
               </p>
               <div className="space-y-4">
                 {faqs.map((faq, index) => (
                   <div key={index} className="bg-gray-50 rounded-xl p-6 border-2 border-gray-200">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                    <h3 className="heading-3">{faq.question}</h3>
                     <p className="text-gray-700 leading-relaxed">
                       {faq.hasLink ? (
                         <>
@@ -483,7 +483,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* Internal Links - Varied anchor texts per plan */}
             <article className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Weitere Informationen</h2>
+              <h2 className="heading-2">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirmen im Aargau vergleichen</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen Aargau finden</Link> oder informieren Sie sich über <Link href="/umzugsfirma-in-der-naehe/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma Baden</Link> und <Link href="/umzugsfirma-in-der-naehe/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Anbieter im Kanton Aargau</Link>.
@@ -493,7 +493,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
 
             {/* CTA */}
             <article className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-8 md:p-12 text-center text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Jetzt kostenlose Offerten für Ihren Umzug im Aargau anfordern</h2>
+              <h2 className="heading-2">Jetzt kostenlose Offerten für Ihren Umzug im Aargau anfordern</h2>
               <p className="text-lg md:text-xl mb-6 opacity-90">
                 Vergleichen Sie mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%
               </p>

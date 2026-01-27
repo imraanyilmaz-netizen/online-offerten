@@ -38,7 +38,7 @@ const ArticleSection = () => {
       {/* Warum Offerten vergleichen */}
       <section className="mb-12">
         <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 md:p-8 rounded-xl mb-8">
-          <h2 className="text-2xl md:text-[26px] font-bold text-slate-800 mb-4">Die wichtigsten Gründe, warum Sie internationale Umzugsofferten vergleichen sollten</h2>
+          <h2 className="heading-2">Die wichtigsten Gründe, warum Sie internationale Umzugsofferten vergleichen sollten</h2>
           <ul className="space-y-3 list-none pl-0">
             <li className="flex items-start">
               <CheckCircle className="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
@@ -74,32 +74,32 @@ const ArticleSection = () => {
 
       {/* Planung */}
       <section className="mb-12">
-        <h2 className="text-[28px] md:text-[28px] font-bold text-slate-800 mb-6">Internationale Umzüge planen: Von der ersten Idee bis zur Ankunft im Zielland</h2>
-        <p className="mb-6 text-lg">Die Durchführung eines internationalen Umzugs ist ein Prozess, der idealerweise Monate im Voraus beginnt. Je früher Sie mit den Vorbereitungen starten, desto entspannter wird der Ablauf – und desto besser können Sie Kosten und Aufwand kontrollieren.</p>
+        <h2 className="heading-2 mb-6">Internationale Umzüge planen: Von der ersten Idee bis zur Ankunft im Zielland</h2>
+        <p className="mb-6 text-body">Die Durchführung eines internationalen Umzugs ist ein Prozess, der idealerweise Monate im Voraus beginnt. Je früher Sie mit den Vorbereitungen starten, desto entspannter wird der Ablauf – und desto besser können Sie Kosten und Aufwand kontrollieren.</p>
         
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
-            <h3 className="text-xl font-semibold text-slate-800 mb-3">6 Monate vor dem Umzug</h3>
+            <h3 className="heading-3">6 Monate vor dem Umzug</h3>
             <p>Beginnen Sie mit der groben Planung. Klären Sie Ihre Aufenthaltsbewilligung im Zielland, informieren Sie sich über Kündigungsfristen Ihrer Wohnung in der Schweiz und recherchieren Sie Schulen oder Betreuungseinrichtungen für Kinder. Jetzt ist auch der richtige Zeitpunkt, erste internationale Umzugsofferten einzuholen, um ein Gefühl für das Budget zu bekommen.</p>
           </div>
           <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
-            <h3 className="text-xl font-semibold text-slate-800 mb-3">3 Monate vor dem Umzug</h3>
+            <h3 className="heading-3">3 Monate vor dem Umzug</h3>
             <p>Konkretisieren Sie Ihre Pläne. Kündigen Sie Ihre Wohnung fristgerecht, melden Sie sich bei Ihrer Gemeinde ab und informieren Sie Versicherungen sowie Banken über Ihren Wegzug. Erfassen Sie Ihr Umzugsvolumen möglichst genau – dies ist die Basis für präzise Offerten. Beginnen Sie mit dem Entrümpeln: Jeder Kubikmeter weniger spart Transportkosten.</p>
           </div>
         </div>
 
         <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
-          <h3 className="text-xl font-semibold text-blue-800 mb-3">1 Monat vor dem Umzug</h3>
+          <h3 className="heading-3 text-blue-800">1 Monat vor dem Umzug</h3>
           <p className="mb-4">Finalisieren Sie den Vertrag mit Ihrer gewählten Umzugsfirma. Bereiten Sie alle Dokumente für den Zoll vor: Eine detaillierte Inventarliste Ihres Umzugsguts ist in den meisten Fällen Pflicht. Bei Umzügen in EU-Länder gelten vereinfachte Regeln für Übersiedlungsgut, dennoch sind Nachweise wie Wohnsitzbestätigung und Ausfuhrformulare nötig. Beachten Sie Einfuhrbeschränkungen für bestimmte Güter wie Alkohol, Waffen oder Haustiere.</p>
         </div>
 
         <div className="mb-6">
-          <h3 className="text-xl font-semibold text-slate-800 mb-3">Transportwege im Überblick</h3>
+          <h3 className="heading-3">Transportwege im Überblick</h3>
           <p>Für Europäumzüge ab der Schweiz ist der Strassentransport per Lkw die gängigste Lösung. Je nach Ziel – etwa Skandinavien oder die iberische Halbinsel – können Fahrten mehrere Tage dauern. Bei sehr grossen Distanzen oder Umzügen auf Inseln (z.B. Balearen) kommt eine Kombination aus Landtransport und Seefracht oder Fähre in Frage. Luftfracht ist nur selten notwendig und primär für Überseeumzüge relevant.</p>
         </div>
 
         <div className="bg-green-50 p-6 rounded-lg border border-green-200">
-          <h3 className="text-xl font-semibold text-green-800 mb-3">Praktische Tipps für Ihre Planung</h3>
+          <h3 className="heading-3 text-green-800">Praktische Tipps für Ihre Planung</h3>
           <ul className="space-y-2 list-none pl-0">
             <li className="flex items-start">
               <CheckCircle className="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
@@ -133,7 +133,7 @@ const ArticleSection = () => {
           alt="Internationale Umzüge - Professionelle Umzugsfirma" 
           className="rounded-xl shadow-lg w-full h-auto object-cover mb-4"
         />
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Umzug und Logistik bei internationalen Umzügen</h2>
+        <h2 className="heading-2">Umzug und Logistik bei internationalen Umzügen</h2>
         <p className="mb-4">Ein internationaler Umzug stellt ganz besondere Anforderungen an die Logistik und Organisation. Damit Ihr Umzugsgut sicher und pünktlich am Zielort ankommt, ist eine präzise Planung und professionelle Durchführung unerlässlich. Unsere Umzugsfirma arbeitet mit einem weltweiten Netzwerk aus erfahrenen Partnern und Spezialisten zusammen, die sich auf internationale Umzüge ab der Schweiz spezialisiert haben.</p>
         <p className="mb-4">So profitieren Sie von einer umfassenden Lösung, die alle Aspekte Ihres Auslandsumzugs abdeckt – von der ersten Beratung über die Verpackung bis hin zur termingerechten Lieferung am neuen Wohnort.</p>
         <p className="mb-4">Unsere Umzugsunternehmen bieten Ihnen ein breites Spektrum an Dienstleistungen: Wir übernehmen die fachgerechte Verpackung Ihrer Möbel und persönlichen Gegenstände, organisieren den sicheren Transport über Land, See oder Luft und kümmern uns bei Bedarf um die Lagerung Ihres Umzugsguts. Auch die professionelle Zollabfertigung gehört zu unserem Service, damit Ihr Umzug reibungslos und ohne Verzögerungen abläuft.</p>
@@ -142,7 +142,7 @@ const ArticleSection = () => {
 
       {/* Umzug und Sicherheit */}
       <section className="mb-12 bg-slate-50 p-6 md:p-8 rounded-xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Umzug und Sicherheit: Worauf Sie beim Auslandsumzug achten sollten</h2>
+        <h2 className="heading-2">Umzug und Sicherheit: Worauf Sie beim Auslandsumzug achten sollten</h2>
         <p className="mb-4">Die Sicherheit Ihrer Güter und das Wohl Ihrer Familie stehen bei einem Auslandsumzug an oberster Stelle. Als erfahrene Umzugsfirma wissen wir, wie wichtig es ist, dass Ihre wertvollen Gegenstände während des gesamten Umzugsprozesses optimal geschützt sind. Deshalb bieten wir Ihnen einen umfassenden Versicherungsschutz, der Ihr Umzugsgut gegen Verlust, Beschädigung oder Diebstahl absichert – egal, ob Sie innerhalb Europas oder in ein weiter entferntes Land umziehen.</p>
         <p className="mb-4">Unser spezieller Verpackungsservice ist auf die Anforderungen internationaler Umzüge zugeschnitten. Wir verwenden hochwertige Materialien und moderne Techniken, um Möbel, Elektrogeräte und empfindliche Gegenstände sicher zu verpacken und für den Transport vorzubereiten. So minimieren wir das Risiko von Transportschäden und sorgen dafür, dass alles unversehrt an Ihrem neuen Zuhause ankommt.</p>
         <p>Jeder Umzug ist einzigartig und bringt individuelle Herausforderungen mit sich. Deshalb legen wir grossen Wert auf eine persönliche Beratung und eine sorgfältige Planung, die auf Ihre Bedürfnisse und Wünsche abgestimmt ist. Unser Team aus erfahrenen Profis begleitet Sie bei jedem Schritt und steht Ihnen mit Know-how und Engagement zur Seite – von der ersten Kontaktaufnahme bis zur erfolgreichen Durchführung Ihres Umzugs.</p>
@@ -150,7 +150,7 @@ const ArticleSection = () => {
 
       {/* Zollabwicklung */}
       <section className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Zollabwicklung bei internationalen Umzügen</h2>
+        <h2 className="heading-2">Zollabwicklung bei internationalen Umzügen</h2>
         <p className="mb-4">Ein internationaler Umzug bringt nicht nur logistische Herausforderungen mit sich, sondern stellt auch hohe Anforderungen an die Zollabwicklung. Damit Ihr Umzugsgut sicher und ohne Verzögerungen an Ihrem neuen Zielort ankommt, ist eine professionelle und sorgfältige Zollabfertigung unerlässlich. Unsere Umzugsfirma aus der Schweiz verfügt über erfahrene Spezialisten, die sich bestens mit den aktuellen Vorschriften und Abläufen auskennen.</p>
         <p className="mb-4">Von der ersten Beratung bis zur finalen Übergabe Ihres Umzugsguts am Zielort begleiten wir Sie bei jedem Schritt der Zollabwicklung. Unsere Experten unterstützen Sie bei der Zusammenstellung und Erstellung aller notwendigen Dokumente, wie Inventarlisten, Ausfuhr- und Einfuhrpapiere sowie spezielle Nachweise, die je nach Land erforderlich sind.</p>
         <p>Durch unsere langjährige Erfahrung und die enge Zusammenarbeit mit Partnern in der Schweiz und weltweit stellen wir sicher, dass sämtliche Anforderungen der Zollbehörden erfüllt werden. Mit unserem umfassenden Service zur Zollabfertigung profitieren Sie von einem reibungslosen Ablauf: Wir übernehmen die Organisation, prüfen alle Unterlagen auf Vollständigkeit und sorgen dafür, dass Ihr Umzugsgut pünktlich und ohne unerwartete Komplikationen am neuen Wohnort eintrifft.</p>
@@ -158,11 +158,11 @@ const ArticleSection = () => {
 
       {/* Länder-spezifische Umzüge - Bu bölüm çok uzun, devam edeceğim */}
       <section className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8">Umzüge in verschiedene Länder</h2>
+        <h2 className="heading-2">Umzüge in verschiedene Länder</h2>
         
         {/* Deutschland */}
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Deutschland</h3>
+          <h3 className="heading-3">Umzug Schweiz – Deutschland</h3>
           <p className="mb-4">Deutschland ist eines der häufigsten Zielländer für Auswanderer und Grenzgänger aus der Schweiz. Regionen wie Baden-Württemberg, Bayern oder die Metropolregion Berlin ziehen jährlich zahlreiche Schweizerinnen und Schweizer an – sei es für eine neue Arbeitsstelle, ein Studium oder um näher bei der Familie zu sein.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -180,7 +180,7 @@ const ArticleSection = () => {
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
           <div className="flex flex-col md:flex-row gap-6 mb-4">
             <div className="flex-1">
-              <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Italien</h3>
+              <h3 className="heading-3">Umzug Schweiz – Italien</h3>
               <p className="mb-4">Italien lockt mit Dolce Vita, mediterranem Klima und kulturellem Reichtum. Beliebte Ziele für Schweizer Auswanderer sind Mailand, die Region Como, die Toskana oder Rom – sei es für den Ruhestand, eine Zweitwohnung oder einen beruflichen Einsatz.</p>
               <div className="mb-4">
                 <h4 className="font-semibold text-slate-800 mb-2">Herausforderungen der Route</h4>
@@ -208,7 +208,7 @@ const ArticleSection = () => {
 
         {/* Diğer ülkeler - kısa tutacağım */}
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Österreich</h3>
+          <h3 className="heading-3">Umzug Schweiz – Österreich</h3>
           <p className="mb-4">Österreich ist für viele Schweizer Familien und Berufstätige ein attraktives Ziel. Städte wie Wien, Graz, Innsbruck oder die Vorarlberger Region (Bregenz, Dornbirn) bieten Lebensqualität, kulturelle Nähe und gute Karrieremöglichkeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -226,7 +226,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Spanien</h3>
+          <h3 className="heading-3">Umzug Schweiz – Spanien</h3>
           <p className="mb-4">Spanien zählt zu den beliebtesten Auswanderungszielen überhaupt. Barcelona, Madrid, Valencia, die Costa Brava, die Costa del Sol oder die Balearen (Mallorca, Ibiza) locken mit Sonne, Meer und einem entspannten Lebensstil.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -245,7 +245,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Portugal</h3>
+          <h3 className="heading-3">Umzug Schweiz – Portugal</h3>
           <p className="mb-4">Portugal erfreut sich wachsender Beliebtheit bei Auswanderern und Remote-Workern aus der Schweiz. Lissabon, Porto und die Algarve bieten ein mildes Klima, vergleichsweise günstige Lebenshaltungskosten und eine hohe Lebensqualität.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -263,7 +263,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Holland</h3>
+          <h3 className="heading-3">Umzug Schweiz – Holland</h3>
           <p className="mb-4">Die Niederlande sind ein Magnet für internationale Fachkräfte und Studierende. Amsterdam, Den Haag, Rotterdam und Utrecht bieten ein kosmopolitisches Umfeld und zahlreiche Karrieremöglichkeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -281,7 +281,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Belgien</h3>
+          <h3 className="heading-3">Umzug Schweiz – Belgien</h3>
           <p className="mb-4">Belgien – insbesondere Brüssel, Antwerpen, Gent und Brügge – zieht viele Schweizer an, die bei EU-Institutionen oder internationalen Unternehmen arbeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -296,7 +296,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Dänemark</h3>
+          <h3 className="heading-3">Umzug Schweiz – Dänemark</h3>
           <p className="mb-4">Dänemark – mit Kopenhagen, Aarhus und Odense – ist für Familien und Fachkräfte attraktiv, erfordert aber eine längere Anreise ab der Schweiz.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -314,7 +314,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-800 mb-4">Umzug Schweiz – Schweden</h3>
+          <h3 className="heading-3">Umzug Schweiz – Schweden</h3>
           <p className="mb-4">Schweden lockt mit hoher Lebensqualität, intakter Natur und attraktiven Arbeitsmöglichkeiten. Stockholm, Göteborg, Malmö und Uppsala gehören zu den beliebtesten Zielen.</p>
           <div className="mb-4">
             <h4 className="font-semibold text-slate-800 mb-2">Lange Distanz, komplexe Route</h4>
@@ -332,11 +332,11 @@ const ArticleSection = () => {
 
       {/* Kostenfaktoren */}
       <section className="mb-12 bg-gradient-to-br from-slate-50 to-blue-50 p-6 md:p-8 rounded-xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6 mt-6">Kostenfaktoren bei internationalen Umzügen mit einem Umzugsunternehmen</h2>
+        <h2 className="heading-2">Kostenfaktoren bei internationalen Umzügen mit einem Umzugsunternehmen</h2>
         <p className="mb-6">Internationale Umzugskosten variieren stark. Eine seriöse Kalkulation ist die Grundlage für Ihre Budgetplanung und hilft, böse Überraschungen zu vermeiden. Die sorgfältige Planung und der sichere Transport der Umzugsgüter sind entscheidend für einen erfolgreichen internationalen Umzug.</p>
         
         <div className="bg-white p-6 rounded-lg mb-6">
-          <h3 className="text-xl font-semibold text-slate-800 mb-4">Die wichtigsten Kostenfaktoren</h3>
+          <h3 className="heading-3">Die wichtigsten Kostenfaktoren</h3>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
@@ -393,7 +393,7 @@ const ArticleSection = () => {
 
       {/* Vorteile */}
       <section className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Vorteile, internationale Umzugsofferten zu vergleichen</h2>
+        <h2 className="heading-2">Vorteile, internationale Umzugsofferten zu vergleichen</h2>
         <p className="mb-6">Warum lohnt es sich, nicht einfach die erstbeste Umzugsfirma zu wählen, sondern mehrere Angebote zu vergleichen?</p>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <div className="bg-green-50 p-4 rounded-lg border border-green-200">
@@ -427,7 +427,7 @@ const ArticleSection = () => {
 
       {/* So funktioniert es */}
       <section className="mb-12 bg-blue-50 p-6 md:p-8 rounded-xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">So funktioniert der Vergleich von internationalen Umzugsofferten auf Online-Offerten.ch</h2>
+        <h2 className="heading-2">So funktioniert der Vergleich von internationalen Umzugsofferten auf Online-Offerten.ch</h2>
         <p className="mb-6">Der Prozess ist einfach und für Nutzer aus der ganzen Schweiz verfügbar:</p>
         <div className="space-y-4">
           <div className="bg-white p-4 rounded-lg border border-blue-200">
@@ -467,7 +467,9 @@ const ArticleSection = () => {
       <Accordion type="single" collapsible className="w-full">
         {faqItems.map((item, index) => (
           <AccordionItem value={`item-${index}`} key={index}>
-            <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">{item.q}</AccordionTrigger>
+            <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
+              <h4 className="faq-question">{item.q}</h4>
+            </AccordionTrigger>
             <AccordionContent className="text-base text-slate-600">
               {item.a}
             </AccordionContent>
@@ -563,10 +565,10 @@ const InternationaleUmzugPageClient = () => {
             <div className="flex justify-start">
               <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold mb-6 text-gray-900 leading-tight">
+                  <h1 className="heading-1">
                     Internationale Umzug
                   </h1>
-                  <p className="text-base md:text-lg text-gray-700 mb-4">
+                  <p className="text-body mb-4">
                   Erhalten Sie in nur 5 Minuten bis zu 6 Angebote
                   </p>
                 </div>
@@ -585,15 +587,15 @@ const InternationaleUmzugPageClient = () => {
                 <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-col gap-4 md:gap-6 max-w-md">
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% Ersparnis möglich</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% Ersparnis möglich</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Mehrere Firmen online vergleichen</span>
+                    <span className="text-sm md:text-body font-medium">Mehrere Firmen online vergleichen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">Kostenlos & unverbindlich</span>
                   </div>
                 </div>
               </article>
@@ -620,10 +622,10 @@ const InternationaleUmzugPageClient = () => {
                   <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-gray-900 mb-6 leading-tight">
                     Offerte für Ihren Auslandsumzug ab Schweiz
                   </h1>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                  <h2 className="heading-2">
                     Internationale Umzüge ab der Schweiz – warum Offerten vergleichen so wichtig ist
                   </h2>
-                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  <p className="text-sm md:text-body leading-relaxed">
                     Ein internationaler Umzug von der Schweiz nach Europa ist weit mehr als ein einfacher Wohnungswechsel. Ob Sie als Familie nach Deutschland ziehen, eine neue Arbeitsstelle in den Niederlanden antreten oder Ihren Ruhestand in Portugal verbringen möchten – die Planung eines Auslandsumzugs bringt Herausforderungen mit sich, die bei einem Inlandsumzug schlicht nicht existieren. Von der Zollabwicklung über längere Transportwege bis hin zu unterschiedlichen Einreisebestimmungen je nach Zielland: Die Anforderungen sind vielfältig und die Kosten können je nach Route, Umzugsvolumen und gewählten Leistungen erheblich variieren.
                   </p>
                 </div>
@@ -648,7 +650,7 @@ const InternationaleUmzugPageClient = () => {
           <div className="container mx-auto max-w-7xl px-4 md:px-6 text-center">
             <div>
               <Globe2 className="mx-auto text-green-500 h-16 w-16 mb-4" />
-              <h2 className="text-3xl font-bold text-slate-800 mb-4">Bereit für Ihr neues Zuhause im Ausland?</h2>
+              <h2 className="heading-2">Bereit für Ihr neues Zuhause im Ausland?</h2>
               <p className="text-slate-600 max-w-xl mx-auto mb-8">
                 Starten Sie jetzt Ihre Anfrage und erhalten Sie unverbindliche Offerten von den besten internationalen Umzugsprofis.
               </p>

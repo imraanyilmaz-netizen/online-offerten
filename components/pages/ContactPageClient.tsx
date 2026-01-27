@@ -115,7 +115,7 @@ const ContactPageClient = () => {
                     className="bg-green-50 p-8 rounded-lg shadow-lg text-center space-y-6"
                   >
                     <CheckCircle className="mx-auto h-16 w-16 text-green-600" />
-                    <h2 className="text-2xl font-bold text-gray-800">Nachricht erfolgreich gesendet!</h2>
+                    <h2 className="heading-2">Nachricht erfolgreich gesendet!</h2>
                     <p className="text-gray-600">Vielen Dank für Ihre Nachricht.</p>
                     <Button onClick={handleSendNewMessage} className="bg-green-600 hover:bg-green-700">
                       Neue Nachricht senden
@@ -123,7 +123,7 @@ const ContactPageClient = () => {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg space-y-6">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6">Senden Sie uns eine Nachricht</h2>
+                    <h2 className="heading-2 mb-6">Senden Sie uns eine Nachricht</h2>
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-gray-700">Ihr Name</label>
                       <Input id="name" placeholder="Max Mustermann" value={formData.name} onChange={handleInputChange} required />

@@ -200,7 +200,7 @@ const WohnungsreinigungPageClient = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed break-words w-full"
+                  className="text-body text-gray-700 mb-8 leading-relaxed break-words w-full"
                 >
                   Gründliche Wohnungsreinigung mit 100% Abnahmegarantie für eine sorgenfreie Übergabe. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
@@ -259,14 +259,14 @@ const WohnungsreinigungPageClient = () => {
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8 w-full min-w-0 overflow-x-hidden"
                 >
                   {/* H2: Warum eine professionelle Wohnungsreinigung sinnvoll ist */}
-                  <h2 className="typography-h2 mb-6 break-words">Warum eine professionelle Wohnungsreinigung sinnvoll ist</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mb-6 break-words">Warum eine professionelle Wohnungsreinigung sinnvoll ist</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine professionelle Wohnungsreinigung bietet zahlreiche Vorteile, die über die reine Sauberkeit hinausgehen. Sie spart wertvolle Zeit, die Sie für Familie, Beruf oder Hobbys nutzen können. Professionelle Reinigungskräfte verfügen über das Fachwissen und die richtigen Geräte, um auch schwer zugängliche Stellen gründlich zu reinigen. Zudem trägt eine regelmässige professionelle Reinigung zur Gesundheit bei, indem sie Allergene, Bakterien und Viren effektiv entfernt. Besonders bei der Wohnungsübergabe ist eine professionelle Reinigung mit Abnahmegarantie unerlässlich, um sicherzustellen, dass alle Anforderungen des Vermieters erfüllt werden.
                   </p>
 
                   {/* H2: Unsere Leistungen im Bereich Wohnungsreinigung */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die professionelle Reinigung. Dazu gehören die gründliche Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Fassadenreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass die Wohnung den Anforderungen entspricht.
                   </p>
 
@@ -281,7 +281,7 @@ const WohnungsreinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Leistungen */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Gründliche Reinigung aller Räume</li>
                     <li>Küchen- und Badezimmerreinigung</li>
                     <li>Fenster- und Oberflächenreinigung</li>
@@ -292,13 +292,13 @@ const WohnungsreinigungPageClient = () => {
 
                   {/* CTA 1 - After Leistungen */}
                   <div className="mt-6 md:mt-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200 mb-6 md:mb-8">
-                    <h3 className="typography-h3 mb-4">
+                    <h3 className="heading-3 mb-4">
                       {city && !locationLoading 
                         ? `Professionelle Wohnungsreinigung in ${city}`
                         : 'Professionelle Wohnungsreinigung buchen'
                       }
                     </h3>
-                    <p className="typography-p mb-4">
+                    <p className="text-body mb-4">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen.
                     </p>
                     <Button 
@@ -312,8 +312,8 @@ const WohnungsreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Vorteile unserer Reinigung mit Abnahmegarantie */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer Reinigung mit Abnahmegarantie</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer Reinigung mit Abnahmegarantie</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Die Abnahmegarantie ist ein entscheidender Vorteil bei der professionellen Reinigung. Sie bedeutet, dass die Reinigungsfirma garantiert, dass die Wohnung den Anforderungen für die Übergabe entspricht. Sollte der Vermieter oder neue Eigentümer Mängel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis die Wohnung den Anforderungen entspricht. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zusätzlich profitieren Sie von unserer über 12-jährigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk geprüfter, versicherter Reinigungsfirmen.
                   </p>
 
@@ -328,7 +328,7 @@ const WohnungsreinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Vorteile */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>100% Abnahmegarantie für sorgenfreie Übergabe</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Umweltfreundliche Reinigungsmittel</li>
@@ -337,14 +337,14 @@ const WohnungsreinigungPageClient = () => {
                   </ul>
 
                   {/* H2: Was bei einer gründlichen Wohnungsreinigung gereinigt wird */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Was bei einer gründlichen Wohnungsreinigung gereinigt wird</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was bei einer gründlichen Wohnungsreinigung gereinigt wird</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine umfassende Reinigung beinhaltet die Reinigung aller Räume und Bereiche. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke und Heizkörper. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Backofen, Kühlschrank, Spüle und Arbeitsflächen gereinigt. Das Badezimmer wird komplett gereinigt, inklusive Toilette, Dusche, Badewanne, Waschbecken und Fliesen. Fenster werden innen und aussen gereinigt, und alle Oberflächen werden desinfiziert. Eine professionelle Reinigung geht weit über das normale Putzen hinaus und sorgt für ein hygienisch sauberes Zuhause.
                   </p>
 
                   {/* H2: Reinigung für Haushalte mit Haustieren */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Reinigung für Haushalte mit Haustieren</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Reinigung für Haushalte mit Haustieren</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Haushalte mit Haustieren haben besondere Anforderungen bei der Reinigung. Haare, Gerüche und Flecken erfordern spezielle Reinigungsmethoden und -mittel. Professionelle Reinigungsfirmen kennen die besten Techniken zur Entfernung von Tierhaaren, zur Neutralisierung von Gerüchen und zur Behandlung von Flecken. Sie verwenden tierfreundliche Reinigungsmittel, die für Haustiere unbedenklich sind, und achten besonders auf die Reinigung von Bereichen, in denen sich Haustiere häufig aufhalten. Eine regelmässige professionelle Reinigung ist besonders wichtig für Haushalte mit Haustieren, um Allergene zu reduzieren und ein gesundes Wohnumfeld zu gewährleisten.
                   </p>
 
@@ -359,8 +359,8 @@ const WohnungsreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmittel */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmittel</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmittel</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmittel. Diese sind nicht nur besser für die Umwelt, sondern auch für Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders für Haushalte mit Kindern, Allergikern oder Haustieren empfehlenswert. Sie sind effektiv gegen Schmutz und Bakterien, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine schädlichen Chemikalien in Ihrer Wohnung zurückbleiben.
                   </p>
 
@@ -375,8 +375,8 @@ const WohnungsreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Ablauf unserer Wohnungsreinigung – Schritt für Schritt */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Ablauf unserer Wohnungsreinigung – Schritt für Schritt</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Ablauf unserer Wohnungsreinigung – Schritt für Schritt</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Der Ablauf einer professionellen Wohnungsreinigung ist strukturiert und effizient. Zunächst erfolgt eine Besichtigung der Wohnung, um den Umfang der Reinigung zu bestimmen und eine genaue Offerte zu erstellen. Nach der Auftragsbestätigung wird ein Termin vereinbart, der zu Ihren Bedürfnissen passt. Am Reinigungstag erscheint das professionelle Reinigungsteam pünktlich mit allen notwendigen Geräten und Reinigungsmitteln. Die Reinigung erfolgt systematisch Raum für Raum, beginnend mit den am stärksten verschmutzten Bereichen. Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle, und Sie erhalten eine Abnahmegarantie. Sollten Sie mit dem Ergebnis nicht zufrieden sein, wird kostenlos nachgebessert.
                   </p>
 
@@ -404,14 +404,14 @@ const WohnungsreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Was kostet eine professionelle Wohnungsreinigung? */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6">Was kostet eine professionelle Wohnungsreinigung?</h2>
-                  <p className="typography-p mb-6">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6">Was kostet eine professionelle Wohnungsreinigung?</h2>
+                  <p className="text-body mb-6">
                     Die Kosten für Wohnungsreinigung variieren je nach Grösse der Wohnung, Umfang der Reinigung und Region. In der Regel werden Preise zwischen 25 und 50 CHF pro Stunde berechnet. Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 3-4 Stunden, was Kosten von 75-200 CHF bedeutet. Grössere Wohnungen oder besonders verschmutzte Bereiche können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen mit Abnahmegarantie erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Reinigung sind */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Warum wir der richtige Partner für Ihre Reinigung sind</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Wir sind der vertrauenswürdige Partner für Ihre Wohnungsreinigung. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen bieten eine 100% Abnahmegarantie und verwenden moderne, umweltfreundliche Reinigungsmittel. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
@@ -461,17 +461,17 @@ const WohnungsreinigungPageClient = () => {
 
                   {/* H2: Häufig gestellte Fragen zur Wohnungsreinigung */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="typography-h2 mb-6">Häufig gestellte Fragen zur Reinigung</h2>
-                    <p className="typography-p mb-6 md:mb-8">
+                    <h2 className="heading-2 mb-6">Häufig gestellte Fragen zur Reinigung</h2>
+                    <p className="text-body mb-6 md:mb-8">
                       Häufig gestellte Fragen zur professionellen Reinigung mit Abnahmegarantie: Was kostet eine professionelle Reinigung? Was beinhaltet eine umfassende Reinigung? Wie lange dauert eine Reinigung? Was bedeutet Abnahmegarantie? Sind die Reinigungskräfte versichert? Kann ich die Reinigung flexibel planen? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                       <AccordionTrigger className="text-xl font-semibold text-left hover:no-underline text-gray-900 px-2 sm:px-4 py-4">
-                            {item.q}
+                            <h4 className="faq-question">{item.q}</h4>
                           </AccordionTrigger>
-                      <AccordionContent className="typography-p pt-2 pb-4 px-2 sm:px-4">
+                      <AccordionContent className="text-body pt-2 pb-4 px-2 sm:px-4">
                             {item.a}
                           </AccordionContent>
                         </AccordionItem>
@@ -481,8 +481,8 @@ const WohnungsreinigungPageClient = () => {
 
                   {/* H2: Jetzt unverbindliche Reinigungs-Offerte anfordern */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="typography-h2 mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
-                    <p className="typography-p mb-6">
+                    <h2 className="heading-2 mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
+                    <p className="text-body mb-6">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen. Alle Offerten beinhalten eine 100% Abnahmegarantie. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma für Ihre Wohnung.
                     </p>
                     <Button 
@@ -497,19 +497,19 @@ const WohnungsreinigungPageClient = () => {
 
                   {/* Internal Links */}
                   <div className="mt-8 md:mt-12">
-                    <h3 className="typography-h3 mb-6">Weitere Reinigungsdienstleistungen</h3>
+                    <h3 className="heading-3 mb-6">Weitere Reinigungsdienstleistungen</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                       <Link href="/reinigung/umzugsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="typography-h4 mb-2">Umzugsreinigung</h4>
-                        <p className="typography-p text-sm">Professionelle Umzugsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
+                        <h4 className="heading-4 mb-2">Umzugsreinigung</h4>
+                        <p className="text-body text-sm">Professionelle Umzugsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
                       </Link>
                       <Link href="/reinigung/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="typography-h4 mb-2">Fensterreinigung</h4>
-                        <p className="typography-p text-sm">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
+                        <h4 className="heading-4 mb-2">Fensterreinigung</h4>
+                        <p className="text-body text-sm">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
                       <Link href="/reinigung/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="typography-h4 mb-2">Baureinigung</h4>
-                        <p className="typography-p text-sm">Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate.</p>
+                        <h4 className="heading-4 mb-2">Baureinigung</h4>
+                        <p className="text-body text-sm">Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate.</p>
                       </Link>
                     </div>
                   </div>
@@ -531,8 +531,8 @@ const WohnungsreinigungPageClient = () => {
                 {/* Sticky CTA Section - Outside aside for proper sticky behavior */}
                 <div className="mt-4 md:mt-6 lg:sticky lg:top-24 lg:self-start">
                   <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 md:p-6 border border-blue-100">
-                    <h3 className="typography-h3 mb-4">Jetzt Offerten anfordern</h3>
-                    <p className="typography-p mb-4">
+                    <h3 className="heading-3 mb-4">Jetzt Offerten anfordern</h3>
+                    <p className="text-body mb-4">
                       Kostenlos und unverbindlich Reinigungsofferten online vergleichen.
                     </p>
                     <Button 

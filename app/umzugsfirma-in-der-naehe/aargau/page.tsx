@@ -822,8 +822,8 @@ export default function UmzugsfirmaAargauPage() {
             <div className="w-full">
               <Accordion type="single" collapsible className="w-full space-y-4">
                 <AccordionItem value="item-1" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="typography-h3 text-left hover:no-underline py-4">
-                    Wie finde ich eine seriöse Umzugsfirma im Aargau?
+                  <AccordionTrigger className="text-left hover:no-underline py-4">
+                    <h4 className="faq-question">Wie finde ich eine seriöse Umzugsfirma im Aargau?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">
                     <p className="typography-p">
@@ -833,8 +833,8 @@ export default function UmzugsfirmaAargauPage() {
                 </AccordionItem>
                 
                 <AccordionItem value="item-2" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="typography-h3 text-left hover:no-underline py-4">
-                    Was kostet ein Umzug innerhalb des Aargaus?
+                  <AccordionTrigger className="text-left hover:no-underline py-4">
+                    <h4 className="faq-question">Was kostet ein Umzug innerhalb des Aargaus?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">
                     <p className="typography-p">
@@ -844,8 +844,8 @@ export default function UmzugsfirmaAargauPage() {
                 </AccordionItem>
                 
                 <AccordionItem value="item-3" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="typography-h3 text-left hover:no-underline py-4">
-                    Gibt es Besonderheiten bei Umzügen in Aargauer Altstädte?
+                  <AccordionTrigger className="text-left hover:no-underline py-4">
+                    <h4 className="faq-question">Gibt es Besonderheiten bei Umzügen in Aargauer Altstädte?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">
                     <p className="typography-p">
@@ -855,8 +855,8 @@ export default function UmzugsfirmaAargauPage() {
                 </AccordionItem>
                 
                 <AccordionItem value="item-4" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="typography-h3 text-left hover:no-underline py-4">
-                    Wie lange im Voraus sollte ich eine Umzugsfirma im Aargau buchen?
+                  <AccordionTrigger className="text-left hover:no-underline py-4">
+                    <h4 className="faq-question">Wie lange im Voraus sollte ich eine Umzugsfirma im Aargau buchen?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">
                     <p className="typography-p">
@@ -866,8 +866,8 @@ export default function UmzugsfirmaAargauPage() {
                 </AccordionItem>
                 
                 <AccordionItem value="item-5" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="typography-h3 text-left hover:no-underline py-4">
-                    Kann ich auch einen Umzug von Aarau nach Baden organisieren?
+                  <AccordionTrigger className="text-left hover:no-underline py-4">
+                    <h4 className="faq-question">Kann ich auch einen Umzug von Aarau nach Baden organisieren?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">
                     <p className="typography-p">
@@ -877,8 +877,8 @@ export default function UmzugsfirmaAargauPage() {
                 </AccordionItem>
                 
                 <AccordionItem value="item-6" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="typography-h3 text-left hover:no-underline py-4">
-                    Welche Vorteile bietet ein Umzug in den Aargau?
+                  <AccordionTrigger className="text-left hover:no-underline py-4">
+                    <h4 className="faq-question">Welche Vorteile bietet ein Umzug in den Aargau?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">
                     <p className="typography-p">

@@ -521,7 +521,7 @@ const MalerfirmaZurichPageClient = () => {
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
                   <AccordionTrigger className="text-left">
-                    Was kostet eine Malerfirma in {city}?
+                    <h4 className="faq-question">Was kostet eine Malerfirma in {city}?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700">
                     Die Kosten für einen Malerservice in Zürich hängen von verschiedenen Faktoren ab: Art der Malerarbeiten (Innenanstrich, Aussenanstrich, Fassadenanstrich), Grösse der zu streichenden Fläche, Anzahl der Stockwerke, benötigte Vorarbeiten und verwendete Materialien. Ein durchschnittlicher Innenanstrich in Zürich kostet zwischen 15 und 35 CHF pro Quadratmeter. Eine 3.5-Zimmer-Wohnung (95 m²) kostet für einen Innenanstrich durchschnittlich CHF 1.400–3.300. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Malerbetrieben in Zürich.
@@ -529,7 +529,7 @@ const MalerfirmaZurichPageClient = () => {
                 </AccordionItem>
                 <AccordionItem value="item-2">
                   <AccordionTrigger className="text-left">
-                    Wie viele Offerten erhalte ich?
+                    <h4 className="faq-question">Wie viele Offerten erhalte ich?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700">
                     Sie erhalten bis zu 6 kostenlose und unverbindliche Offerten von qualitätsgeprüften Malerbetrieben aus Ihrer Region. Die Anbieter nehmen direkt Kontakt mit Ihnen auf und erstellen individuelle Offerten basierend auf Ihren spezifischen Anforderungen.
@@ -537,7 +537,7 @@ const MalerfirmaZurichPageClient = () => {
                 </AccordionItem>
                 <AccordionItem value="item-3">
                   <AccordionTrigger className="text-left">
-                    Sind die Malerfirmen in {city} versichert?
+                    <h4 className="faq-question">Sind die Malerfirmen in {city} versichert?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700">
                     Ja, alle Malerbetriebe in Zürich, die über unser Portal vermittelt werden, sind geprüft und verfügen über die notwendigen Versicherungen. Wir stellen sicher, dass nur qualifizierte und versicherte regionale Malerunternehmen in unserem Netzwerk sind, um Ihnen Sicherheit und Qualität zu gewährleisten.

@@ -199,7 +199,7 @@ const BodenreinigungPageClient = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed"
+                  className="text-base sm:text-body mb-8 leading-relaxed"
                 >
                   Professionelle Bodenreinigung für alle Bodenbeläge. Teppich, Parkett, Fliesen, Laminat, Vinyl, Stein. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
@@ -229,15 +229,15 @@ const BodenreinigungPageClient = () => {
                 >
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% sparen</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Nur geprüfte Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">100% kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
                 </motion.div>
               </div>
@@ -258,14 +258,14 @@ const BodenreinigungPageClient = () => {
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8"
                 >
                   {/* H2: Warum eine professionelle Bodenreinigung sinnvoll ist */}
-                  <h2 className="typography-h2 mb-6 break-words">Warum eine professionelle Bodenreinigung sinnvoll ist</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mb-6 break-words">Warum eine professionelle Bodenreinigung sinnvoll ist</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine professionelle Reinigung der Böden ist essentiell für die Pflege und Langlebigkeit Ihrer Böden. Böden sind täglich Belastungen ausgesetzt: Schmutz, Staub, Feuchtigkeit, Abnutzung und Flecken. Während regelmässiges Staubsaugen und Wischen die Oberfläche sauber hält, entfernt eine professionelle Reinigung tief sitzende Verschmutzungen, Allergene und Bakterien, die bei normaler Reinigung nicht erreicht werden. Verschiedene Bodenbeläge erfordern unterschiedliche Reinigungsmethoden und -mittel, die professionelle Reinigungsfirmen kennen. Eine regelmässige professionelle Reinigung verlängert die Lebensdauer Ihrer Böden erheblich und verbessert die Raumluftqualität, besonders bei Teppichböden, die Allergene und Staub speichern können.
                   </p>
 
                   {/* H2: Unsere Leistungen im Bereich Bodenreinigung */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Böden</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Böden</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Reinigung aller Arten von Bodenbelägen. Dazu gehören professionelle Teppichreinigung mit Dampfreinigung oder Trockenreinigung, schonende Parkettreinigung und -pflege, intensive Fliesenreinigung mit Fugenreinigung, Laminatreinigung ohne zu viel Feuchtigkeit, Vinylreinigung mit speziellen Methoden, Steinbodenreinigung und -versiegelung, sowie Grundreinigung für alle Bodenbeläge. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken, speziellen Geräten für verschiedene Beläge und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk haben Erfahrung mit verschiedenen Bodenbelägen und kennen die richtigen Methoden für jeden Belagstyp.
                   </p>
 
@@ -280,7 +280,7 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Leistungen */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Professionelle Teppichreinigung (Dampfreinigung oder Trockenreinigung)</li>
                     <li>Schonende Parkettreinigung und -pflege</li>
                     <li>Intensive Fliesenreinigung mit Fugenreinigung</li>
@@ -293,13 +293,13 @@ const BodenreinigungPageClient = () => {
 
                   {/* CTA 1 - After Leistungen */}
                   <div className="mt-6 md:mt-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200 mb-6 md:mb-8">
-                    <h3 className="typography-h3 mb-4">
+                    <h3 className="heading-3 mb-4">
                       {city && !locationLoading 
                         ? `Professionelle Reinigung der Böden in ${city}`
                         : 'Professionelle Reinigung der Böden buchen'
                       }
                     </h3>
-                    <p className="text-base text-gray-700 mb-3 md:mb-4">
+                    <p className="text-body mb-3 md:mb-4">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen.
                     </p>
                     <Button 
@@ -313,8 +313,8 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Vorteile unserer professionellen Bodenreinigung */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer professionellen Bodenreinigung</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer professionellen Bodenreinigung</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine professionelle Reinigung der Böden bietet zahlreiche Vorteile gegenüber der eigenen Reinigung. Sie entfernt tief sitzende Verschmutzungen, Allergene und Flecken, die bei normaler Reinigung nicht erreicht werden. Professionelle Reinigungsfirmen haben spezielle Geräte wie Dampfreiniger, Teppichreinigungsmaschinen und Hochdruckreiniger, die für verschiedene Bodenbeläge entwickelt wurden. Sie kennen die richtigen Methoden und Reinigungsmittel für jeden Belagstyp und können empfindliche Böden wie Parkett oder Laminat schonend reinigen. Zudem verlängert eine regelmässige professionelle Reinigung die Lebensdauer Ihrer Böden erheblich und verbessert die Raumluftqualität. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
                   </p>
 
@@ -329,7 +329,7 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Vorteile */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 typography-p">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Entfernung von tief sitzenden Verschmutzungen und Allergenen</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Spezielle Geräte für verschiedene Bodenbeläge</li>
@@ -339,20 +339,20 @@ const BodenreinigungPageClient = () => {
                   </ul>
 
                   {/* H2: Was bei einer gründlichen Bodenreinigung gereinigt wird */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Was bei einer gründlichen Bodenreinigung gereinigt wird</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was bei einer gründlichen Bodenreinigung gereinigt wird</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Eine gründliche Bodenreinigung beinhaltet die intensive Reinigung aller Bodenflächen inklusive schwer zugänglicher Stellen. Bei Teppichböden wird tief sitzender Schmutz, Staub und Allergene entfernt, Flecken werden behandelt und der Teppich wird gründlich gereinigt. Bei Parkett werden alle Oberflächen schonend gereinigt, Kratzer können poliert werden und bei Bedarf wird das Parkett geölt oder versiegelt. Bei Fliesen werden alle Oberflächen gereinigt, Fugen werden intensiv gereinigt, Kalkablagerungen werden entfernt und Verfärbungen werden behandelt. Bei Laminat wird vorsichtig gereinigt ohne zu viel Feuchtigkeit, Kratzer können behandelt werden. Bei Vinyl und Steinböden werden spezielle Methoden angewendet, um optimale Ergebnisse zu erzielen. Professionelle Reinigungsfirmen verwenden die richtigen Methoden für jeden Belagstyp.
                   </p>
 
                   {/* H2: Bodenreinigung für verschiedene Bodenbeläge (Teppich, Parkett, Fliesen, Laminat, Vinyl, Stein) */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Bodenreinigung für verschiedene Bodenbeläge (Teppich, Parkett, Fliesen, Laminat, Vinyl, Stein)</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Bodenreinigung für verschiedene Bodenbeläge (Teppich, Parkett, Fliesen, Laminat, Vinyl, Stein)</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Professionelle Bodenreinigung wird für alle Arten von Bodenbelägen angeboten, wobei jeder Belag spezielle Reinigungsanforderungen hat. Teppichböden benötigen Dampfreinigung oder Trockenreinigung, um tief sitzenden Schmutz und Allergene zu entfernen. Parkett erfordert schonende Reinigung ohne zu viel Feuchtigkeit, um das Holz nicht zu schädigen. Fliesen können mit stärkeren Reinigungsmitteln gereinigt werden, wobei die Fugenreinigung besonders wichtig ist. Laminat benötigt vorsichtige Reinigung ohne zu viel Feuchtigkeit, um Schäden zu vermeiden. Vinyl und Steinböden haben ihre eigenen Anforderungen. Professionelle Reinigungsfirmen kennen die richtigen Methoden für jeden Belagstyp und verwenden die passenden Reinigungsmittel und Geräte. Unabhängig von Ihrem Bodenbelag, alle Reinigungsfirmen in unserem Netzwerk haben Erfahrung mit verschiedenen Belägen.
                   </p>
 
                   {/* H2: Teppichreinigung - Spezielle Methoden und Vorteile */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Teppichreinigung - Spezielle Methoden und Vorteile</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Teppichreinigung - Spezielle Methoden und Vorteile</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Teppichböden sammeln über Zeit Staub, Allergene, Flecken und tief sitzenden Schmutz, der bei normalem Staubsaugen nicht entfernt wird. Professionelle Teppichreinigung verwendet spezielle Methoden wie Dampfreinigung oder Trockenreinigung, um tief sitzenden Schmutz zu entfernen, Flecken zu behandeln und die Raumluftqualität zu verbessern. Dampfreinigung entfernt Bakterien und Allergene gründlich, während Trockenreinigung schneller trocknet und für empfindliche Teppiche geeignet ist. Regelmässige professionelle Teppichreinigung (alle 6-12 Monate) verlängert die Lebensdauer erheblich, hält Teppiche hygienisch sauber und verbessert die Raumluftqualität, besonders für Allergiker. Professionelle Reinigungsfirmen haben die richtigen Geräte und Methoden für alle Arten von Teppichen.
                   </p>
 
@@ -367,8 +367,8 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Parkettreinigung und -pflege - Schonende Reinigung für Holz */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Parkettreinigung und -pflege - Schonende Reinigung für Holz</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Parkettreinigung und -pflege - Schonende Reinigung für Holz</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Parkett ist ein empfindlicher Bodenbelag, der schonende Reinigung erfordert. Zu viel Feuchtigkeit kann das Holz schädigen, quellen lassen oder Verfärbungen verursachen. Professionelle Parkettreinigung verwendet spezielle Reinigungsmittel und Methoden, die das Holz schonen und gleichzeitig gründlich reinigen. Zusätzlich kann Parkettpflege wie Ölen, Versiegeln oder Polieren die Lebensdauer verlängern und das Parkett schützen. Professionelle Reinigungskräfte kennen die richtigen Methoden für verschiedene Holzarten und Oberflächenbehandlungen. Regelmässige schonende Reinigung hält Parkett in optimalem Zustand und verhindert langfristige Schäden. Professionelle Reinigungsfirmen haben Erfahrung mit Parkett und verwenden die richtigen Methoden und Mittel für jeden Parketttyp.
                   </p>
 
@@ -383,8 +383,8 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Fliesenreinigung - Fugenreinigung und Kalkentfernung */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Fliesenreinigung - Fugenreinigung und Kalkentfernung</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Fliesenreinigung - Fugenreinigung und Kalkentfernung</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Fliesen sind robust, aber Fugen können problematisch sein, da sich hier Bakterien, Schmutz und Verfärbungen ansammeln können. Professionelle Fliesenreinigung entfernt Schmutz, Kalkablagerungen und Verfärbungen von allen Oberflächen. Fugenreinigung ist besonders wichtig, da sich hier Bakterien ansammeln können und die Fugen oft verfärbt werden. Professionelle Reinigungskräfte verwenden geeignete Mittel und Bürsten für optimale Ergebnisse, entfernen Kalkablagerungen gründlich und behandeln Verfärbungen. Regelmässige professionelle Fliesenreinigung hält Fliesen hygienisch sauber und verhindert langfristige Schäden. Professionelle Reinigungsfirmen haben die richtigen Methoden und Mittel für alle Arten von Fliesen und Fugenmaterialien.
                   </p>
 
@@ -399,8 +399,8 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmethoden */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmethoden</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmethoden</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmethoden, auch bei intensiven Bodenreinigungen. Diese sind nicht nur besser für die Umwelt, sondern auch für Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders für Haushalte mit Kindern, Allergikern oder Haustieren empfehlenswert. Sie sind effektiv gegen Schmutz, Flecken und Bakterien, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine schädlichen Chemikalien auf Ihren Böden zurückbleiben. Dies ist besonders wichtig bei Bodenreinigung, da die Böden täglich betreten werden und in direktem Kontakt mit Ihrer Familie stehen.
                   </p>
 
@@ -415,14 +415,14 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Ablauf unserer Bodenreinigung – Schritt für Schritt */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Ablauf unserer Bodenreinigung – Schritt für Schritt</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Ablauf unserer Bodenreinigung – Schritt für Schritt</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Der Ablauf einer professionellen Bodenreinigung ist strukturiert und gründlich. Zunächst erfolgt eine Besichtigung der Böden, um den Belagstyp zu bestimmen, den Zustand zu beurteilen und eine genaue Offerte zu erstellen. Nach der Auftragsbestätigung wird ein Termin vereinbart, der zu Ihren Bedürfnissen passt. Am Reinigungstag erscheint das professionelle Reinigungsteam pünktlich mit allen notwendigen Geräten, speziellen Reinigungsmitteln und Ausrüstung für Ihren spezifischen Belagstyp. Die Reinigung erfolgt systematisch: Vorreinigung zur Entfernung von grobem Schmutz, Hauptreinigung mit speziellen Methoden für Ihren Belagstyp, Behandlung von Flecken und problematischen Stellen, und abschliessende Pflege. Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle, und Sie erhalten saubere, gepflegte Böden.
                   </p>
 
                   {/* Ablauf Steps */}
                   <div className="my-6 md:my-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 p-6 md:p-8">
-                    <ul className="list-disc list-inside space-y-3 typography-p">
+                    <ul className="list-disc list-inside space-y-3 text-body">
                       <li><strong>Besichtigung und Offerte:</strong> Wir besichtigen Ihre Böden, bestimmen den Belagstyp, beurteilen den Zustand und erstellen eine genaue Offerte.</li>
                       <li><strong>Terminvereinbarung:</strong> Nach der Auftragsbestätigung vereinbaren wir einen Termin, der zu Ihren Bedürfnissen passt.</li>
                       <li><strong>Professionelle Bodenreinigung:</strong> Unser professionelles Team reinigt Ihre Böden gründlich mit speziellen Methoden und Geräten für Ihren Belagstyp.</li>
@@ -431,20 +431,20 @@ const BodenreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Was kostet eine professionelle Bodenreinigung? */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Was kostet eine professionelle Bodenreinigung?</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was kostet eine professionelle Bodenreinigung?</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Die Kosten für Bodenreinigung hängen von der Art des Belags, der Grösse der Fläche und der Art der Reinigung ab. Teppichreinigung kostet etwa 8-15 CHF pro m², Parkettreinigung etwa 10-20 CHF pro m². Fliesenreinigung kostet etwa 5-12 CHF pro m², abhängig vom Zustand und der Fugenreinigung. Laminat- und Vinylreinigung kostet etwa 6-12 CHF pro m². Die genauen Kosten hängen vom Belagstyp, dem Zustand, dem Umfang der Reinigung und zusätzlichen Leistungen wie Fugenreinigung oder Parkettpflege ab. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Wie oft sollte eine Bodenreinigung durchgeführt werden? */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Wie oft sollte eine Bodenreinigung durchgeführt werden?</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Wie oft sollte eine Bodenreinigung durchgeführt werden?</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Die optimale Reinigungsfrequenz hängt vom Belagstyp und der Nutzung ab. Teppiche sollten etwa alle 6-12 Monate professionell gereinigt werden, abhängig von der Nutzung und dem Verschmutzungsgrad. Parkett benötigt regelmässige, schonende Reinigung, etwa alle 3-6 Monate, abhängig von der Nutzung. Fliesen können häufiger gereinigt werden, etwa alle 2-4 Monate, besonders wenn Fugenreinigung erforderlich ist. Laminat und Vinyl benötigen regelmässige Reinigung, etwa alle 3-6 Monate. Professionelle Reinigungsfirmen beraten Sie gerne bei der optimalen Frequenz für Ihre spezifischen Böden und berücksichtigen dabei Faktoren wie Nutzung, Verschmutzungsgrad und Belagstyp.
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Bodenreinigung sind */}
-                  <h2 className="typography-h2 mt-8 md:mt-12 mb-6 break-words">Warum wir der richtige Partner für Ihre Böden sind</h2>
-                  <p className="typography-p mb-6 break-words w-full">
+                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Warum wir der richtige Partner für Ihre Böden sind</h2>
+                  <p className="text-body mb-6 break-words w-full">
                     Wir sind der vertrauenswürdige Partner für Ihre Böden. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und Erfahrung mit verschiedenen Bodenbelägen haben. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für verschiedene Belagstypen, wie Dampfreiniger, Teppichreinigungsmaschinen und spezielle Reinigungsmittel. Sie kennen die richtigen Methoden für jeden Belagstyp und können empfindliche Böden wie Parkett oder Laminat schonend reinigen. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Böden zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
@@ -496,17 +496,17 @@ const BodenreinigungPageClient = () => {
 
                   {/* FAQ Section */}
                   <div className="mt-6 md:mt-12">
-                    <h2 className="typography-h2 mb-6">Häufig gestellte Fragen zur Reinigung</h2>
-                    <p className="typography-p mb-6 md:mb-8">
+                    <h2 className="heading-2 mb-6">Häufig gestellte Fragen zur Reinigung</h2>
+                    <p className="text-body mb-6 md:mb-8">
                       Häufig gestellte Fragen zur professionellen Reinigung der Böden: Was kostet eine Bodenreinigung? Wie oft sollte ich meine Böden professionell reinigen lassen? Welche Bodenbeläge können gereinigt werden? Wie lange dauert eine Bodenreinigung? Kann ich nach der Reinigung sofort wieder betreten? Welche Reinigungsmethoden werden verwendet? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                           <AccordionTrigger className="text-xl font-semibold text-left hover:no-underline text-gray-900 px-2 sm:px-4 py-4">
-                            {item.q}
+                            <h4 className="faq-question">{item.q}</h4>
                           </AccordionTrigger>
-                          <AccordionContent className="typography-p pt-2 pb-4 px-2 sm:px-4">
+                          <AccordionContent className="text-body pt-2 pb-4 px-2 sm:px-4">
                             {item.a}
                           </AccordionContent>
                         </AccordionItem>
@@ -516,24 +516,24 @@ const BodenreinigungPageClient = () => {
 
                   {/* Internal Links */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="typography-h2 mb-6">Weitere Reinigungsdienstleistungen</h2>
+                    <h2 className="heading-2 mb-6">Weitere Reinigungsdienstleistungen</h2>
                     <div className="grid md:grid-cols-3 gap-4 md:gap-6">
                       <Link href="/reinigung/wohnungsreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="typography-h3 mb-2">Wohnungsreinigung</h3>
+                        <h3 className="heading-3 mb-2">Wohnungsreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Professionelle Wohnungsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
                       </Link>
                       <Link href="/reinigung/fensterreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="typography-h3 mb-2">Fensterreinigung</h3>
+                        <h3 className="heading-3 mb-2">Fensterreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
                       </Link>
                       <Link href="/reinigung/grundreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="typography-h3 mb-2">Grundreinigung</h3>
+                        <h3 className="heading-3 mb-2">Grundreinigung</h3>
                         <p className="text-sm md:text-base text-gray-600">Gründliche Grundreinigung vom Profi für ein tiefenreines Zuhause.</p>
                       </Link>
                     </div>
@@ -541,13 +541,13 @@ const BodenreinigungPageClient = () => {
 
                   {/* CTA 3 - Final */}
                   <div className="mt-8 md:mt-12 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200">
-                    <h3 className="typography-h3 mb-4">
+                    <h3 className="heading-3 mb-4">
                       {city && !locationLoading 
                         ? `Professionelle Reinigung der Böden in ${city}`
                         : 'Jetzt unverbindliche Reinigungs-Offerte anfordern'
                       }
                     </h3>
-                    <p className="text-base text-gray-700 mb-3 md:mb-4">
+                    <p className="text-body mb-3 md:mb-4">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen. Alle Offerten beinhalten professionelle Bodenreinigung mit speziellen Methoden für Ihren Belagstyp. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma für Ihre Bedürfnisse.
                     </p>
                     <Button 
@@ -572,8 +572,8 @@ const BodenreinigungPageClient = () => {
                 {/* Sticky CTA Section - Outside aside for proper sticky behavior */}
                 <div className="mt-4 md:mt-6 lg:sticky lg:top-24 lg:self-start">
                   <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 md:p-6 border border-blue-100">
-                    <h3 className="typography-h3 mb-4">Jetzt Offerten anfordern</h3>
-                    <p className="text-gray-700 mb-3 md:mb-4 text-base">Kostenlos und unverbindlich Reinigungsofferten online vergleichen.</p>
+                    <h3 className="heading-3 mb-4">Jetzt Offerten anfordern</h3>
+                    <p className="text-body mb-3 md:mb-4">Kostenlos und unverbindlich Reinigungsofferten online vergleichen.</p>
                     <Button 
                       onClick={handleCtaClick} 
                       className="w-full bg-blue-700 hover:bg-blue-800 text-white text-base font-semibold"

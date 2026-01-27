@@ -233,7 +233,7 @@ const UmzugsfirmaBaselPageClient = () => {
                   </h1>
                     
                   {/* Description */}
-                  <p className="text-base sm:text-lg text-white/90 mb-8 leading-relaxed" itemProp="description">
+                  <p className="text-base text-white/90 mb-8 leading-relaxed" itemProp="description">
                     Einfach und professionell umziehen. Finden Sie hier die besten Umzugs- und Reinigungsfirmen für Ihren Umzug in und um Basel.
                   </p>
                   
@@ -314,7 +314,7 @@ const UmzugsfirmaBaselPageClient = () => {
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
               {/* Left Column - Content */}
               <div className="lg:col-span-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                <h2 className="heading-2">
                   Umzugsfirma finden Basel – Kostenlos Offerten vergleichen & bis zu 40% sparen
                 </h2>
                 <div className="text-gray-700 mb-8 leading-relaxed space-y-6">
@@ -323,7 +323,7 @@ const UmzugsfirmaBaselPageClient = () => {
                   </p>
                   
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    <h3 className="heading-3">
                       Ihr Umzug nach Basel mit unseren Partnerfirmen – professionell & zuverlässig:
                     </h3>
                     <p>
@@ -332,7 +332,7 @@ const UmzugsfirmaBaselPageClient = () => {
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    <h3 className="heading-3">
                       Unsere Umzugsfirmen in Basel – Ihre Experten für Transport & Reinigung:
                     </h3>
                     <p>
@@ -356,11 +356,11 @@ const UmzugsfirmaBaselPageClient = () => {
         <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-gray-100">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                🔍 Umzugsfirma finden Basel leicht gemacht:
+              <h2 className="heading-2">
+                Umzugsfirma finden Basel leicht gemacht:
               </h2>
-              <p className="text-lg text-gray-700 font-medium">
-                🚀 Jetzt starten: Umzugsfirma Basel finden und Offerten vergleichen – 100% kostenlos, unverbindlich und ohne Registrierung.
+              <p className="text-body font-medium">
+                Jetzt starten: Umzugsfirma Basel finden und Offerten vergleichen – 100% kostenlos, unverbindlich und ohne Registrierung.
               </p>
             </div>
             
@@ -369,7 +369,7 @@ const UmzugsfirmaBaselPageClient = () => {
                 <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
                   <FileText className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Anfrage stellen</h3>
+                <h3 className="heading-3">Anfrage stellen</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Geben Sie Umzugsdatum, Wohnungsgrösse, Start- und Zielort an. Je genauer Ihre Angaben, desto präziser sind die Offerten.
                 </p>
@@ -379,7 +379,7 @@ const UmzugsfirmaBaselPageClient = () => {
                 <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
                   <Mail className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Offerten vergleichen</h3>
+                <h3 className="heading-3">Offerten vergleichen</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Erhalten Sie bis zu 6 Offerten von Umzugsunternehmen Basel. Die Anbieter nehmen direkt Kontakt mit Ihnen auf und erstellen individuelle Offerten.
                 </p>
@@ -389,7 +389,7 @@ const UmzugsfirmaBaselPageClient = () => {
                 <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
                   <BarChart3 className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Beste Firma wählen</h3>
+                <h3 className="heading-3">Beste Firma wählen</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Vergleichen Sie Preise, Leistungen und Bewertungen. Wählen Sie den besten Umzugsanbieter in Basel für Ihren Umzug aus.
                 </p>
@@ -404,11 +404,11 @@ const UmzugsfirmaBaselPageClient = () => {
             <main className="space-y-12">
 
               <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
-                  <h2 className="typography-h2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Basel?</h2>
-                  <p className="typography-p mb-4">
+                  <h2 className="heading-2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Basel?</h2>
+                  <p className="text-body mb-4 leading-relaxed">
                     Die Umzugskosten für einen Umzug mit einer professionellen Umzugsfirma in Basel richten sich nach dem individuellen Aufwand. Massgeblich sind dabei Faktoren wie die Distanz zwischen Start- und Zieladresse, die Anzahl der Stockwerke, die Verfügbarkeit eines Lifts, das Umzugsvolumen sowie gewünschte Zusatzleistungen.
                   </p>
-                  <p className="typography-p mb-6">
+                  <p className="text-body mb-6 leading-relaxed">
                     Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Basel und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
                   </p>
                   
@@ -416,21 +416,21 @@ const UmzugsfirmaBaselPageClient = () => {
                     {/* Hourly Rates Table */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                       <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                        <h3 className="typography-h3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
+                        <h3 className="heading-3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
                       </div>
                       <div className="overflow-x-auto flex-1">
                         <table className="w-full table-fixed">
                           <thead className="bg-gray-50">
                             <tr>
-                              <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
-                              <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
+                              <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                              <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Preis</th>
                             </tr>
                           </thead>
                           <tbody>
                             {hourlyRates.map((row, index) => (
                               <tr key={index} className="hover:bg-gray-50 transition-colors">
-                                <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
-                                <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                                <td className="px-4 py-3 border-b border-gray-100 text-gray-700">{row.service}</td>
+                                <td className="px-4 py-3 border-b border-gray-100 text-right font-semibold text-green-600">{row.price}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -441,21 +441,21 @@ const UmzugsfirmaBaselPageClient = () => {
                     {/* Room Size Costs Table */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                       <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
-                        <h3 className="typography-h3 !text-white">Umzugskosten nach Zimmergrössen</h3>
+                        <h3 className="heading-3 !text-white">Umzugskosten nach Zimmergrössen</h3>
                       </div>
                       <div className="overflow-x-auto flex-1">
                         <table className="w-full table-fixed">
                           <thead className="bg-gray-50">
                             <tr>
-                              <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
-                              <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
+                              <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Anzahl Zimmer</th>
+                              <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Umzugskosten durchschnittlich (CHF)</th>
                             </tr>
                           </thead>
                           <tbody>
                             {costTableRows.map((row, index) => (
                               <tr key={index} className="hover:bg-gray-50 transition-colors">
-                                <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
-                                <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                                <td className="px-4 py-3 border-b border-gray-100 text-gray-700">{row.size}</td>
+                                <td className="px-4 py-3 border-b border-gray-100 text-right font-semibold text-green-600">{row.cost}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -465,15 +465,15 @@ const UmzugsfirmaBaselPageClient = () => {
                   </div>
                   
                   <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
-                    <p className="typography-p text-gray-600 italic">
+                    <p className="text-body italic leading-relaxed">
                       Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
                     </p>
                   </div>
               </article>
 
               <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
-                <h2 className="text-2xl font-bold text-gray-800">Warum über Online-Offerten.ch?</h2>
-                <p className="typography-p">Profitieren Sie von einem einfachen und transparenten Prozess:</p>
+                <h2 className="heading-2">Warum über Online-Offerten.ch?</h2>
+                <p className="text-body leading-relaxed">Profitieren Sie von einem einfachen und transparenten Prozess:</p>
                 <ul className="space-y-4 mt-4">
                     {platformAdvantages.map((item, index) => (
                         <AdvantageItem key={index} text={item} delay={index + 1} />
@@ -488,10 +488,10 @@ const UmzugsfirmaBaselPageClient = () => {
         <section className="py-12 md:py-16 bg-gray-50">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="heading-2">
                 Häufige Fragen zu Umzügen in Basel
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-body max-w-2xl mx-auto">
                 Antworten auf die wichtigsten Fragen rund um Umzüge in Basel
               </p>
             </div>
@@ -505,7 +505,7 @@ const UmzugsfirmaBaselPageClient = () => {
                     className="bg-white rounded-xl border border-gray-200 shadow-sm px-6 py-2 mb-4"
                   >
                     <AccordionTrigger className="text-xl font-semibold text-gray-900 hover:no-underline py-4">
-                      {faq.question}
+                      <h4 className="faq-question">{faq.question}</h4>
                     </AccordionTrigger>
                     <AccordionContent className="text-gray-700 leading-relaxed pb-4">
                       {faq.answer}

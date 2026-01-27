@@ -186,7 +186,7 @@ const HofreinigungPageClient = () => {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed"
+                  className="text-base md:text-body mb-4 md:mb-6 leading-relaxed"
                 >
                   Professionelle Reinigung von Höfen, Einfahrten, Terrassen und Aussenbereichen. Gründliche Reinigung für ein gepflegtes Äusseres. Reinigungsofferten online vergleichen und bis zu 40% sparen.
                 </motion.p>
@@ -216,15 +216,15 @@ const HofreinigungPageClient = () => {
                 >
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Bis zu 40% sparen</span>
+                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">Nur geprüfte Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700 font-medium">100% kostenlos & unverbindlich</span>
+                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
                 </motion.div>
               </div>
@@ -245,14 +245,14 @@ const HofreinigungPageClient = () => {
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8"
                 >
                   {/* H2: Warum eine professionelle Hofreinigung sinnvoll ist */}
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Warum eine professionelle Hofreinigung sinnvoll ist</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Warum eine professionelle Hofreinigung sinnvoll ist</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Eine professionelle Reinigung der Höfe ist essentiell für die Pflege und das Erscheinungsbild Ihrer Aussenbereiche. Höfe, Einfahrten, Terrassen und andere Aussenbereiche sind täglich Witterungseinflüssen, Schmutz, Verschmutzungen und organischen Rückständen ausgesetzt. Während regelmässiges Kehren und einfaches Wischen die Oberfläche sauber hält, entfernt eine professionelle Reinigung hartnäckige Verschmutzungen wie Ölflecken, Moos, Algen, Kalkablagerungen und eingetrockneten Schmutz, die bei normaler Reinigung nicht erreicht werden. Ein sauberer Hof verbessert das Erscheinungsbild erheblich, schafft einen positiven ersten Eindruck und erhöht den Wert Ihrer Immobilie. Zudem trägt regelmässige Reinigung zur Sicherheit bei, indem sie rutschige Oberflächen entfernt und Unfälle verhindert.
                   </p>
 
                   {/* H2: Unsere Leistungen im Bereich Hofreinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Unsere Leistungen im Bereich Höfe</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Unsere Leistungen im Bereich Höfe</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Reinigung aller Arten von Aussenbereichen. Dazu gehören professionelle Einfahrtsreinigung, Terrassenreinigung, Wege- und Parkplatzreinigung, Hochdruckreinigung für hartnäckige Verschmutzungen, Moos- und Algenentfernung, Kalkentfernung, Ölfleckenentfernung, sowie Grundreinigung für alle Aussenbereiche. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken, leistungsstarken Hochdruckreinigern und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk haben Erfahrung mit verschiedenen Oberflächen und kennen die richtigen Methoden für Beton, Naturstein, Pflastersteine, Kies und Holz.
                   </p>
 
@@ -267,7 +267,7 @@ const HofreinigungPageClient = () => {
                   </div>
 
                   {/* Bullet Points - Leistungen */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Einfahrtsreinigung und Zufahrtsreinigung</li>
                     <li>Terrassenreinigung und Balkonreinigung</li>
                     <li>Wege- und Parkplatzreinigung</li>
@@ -286,7 +286,7 @@ const HofreinigungPageClient = () => {
                         : 'Professionelle Reinigung der Höfe buchen'
                       }
                     </h3>
-                    <p className="text-base text-gray-700 mb-3 md:mb-4">
+                    <p className="text-body mb-3 md:mb-4">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen.
                     </p>
                     <Button 
@@ -300,13 +300,13 @@ const HofreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Vorteile unserer professionellen Hofreinigung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Vorteile unserer professionellen Hofreinigung</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Vorteile unserer professionellen Hofreinigung</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Eine professionelle Reinigung der Höfe bietet zahlreiche Vorteile gegenüber der eigenen Reinigung. Sie entfernt hartnäckige Verschmutzungen wie Ölflecken, Moos, Algen und Kalkablagerungen, die bei normaler Reinigung nicht erreicht werden. Professionelle Reinigungsfirmen haben spezielle Geräte wie Hochdruckreiniger, die für verschiedene Oberflächen entwickelt wurden und optimale Ergebnisse liefern. Sie kennen die richtigen Methoden und Reinigungsmittel für jeden Oberflächentyp und können empfindliche Materialien wie Naturstein oder Holz schonend reinigen. Zudem verlängert eine regelmässige professionelle Reinigung die Lebensdauer Ihrer Aussenbereiche erheblich und verbessert das Erscheinungsbild. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten.
                   </p>
 
                   {/* Bullet Points - Vorteile */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-lg text-gray-700">
+                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Entfernung von hartnäckigen Verschmutzungen wie Ölflecken, Moos und Algen</li>
                     <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
                     <li>Spezielle Geräte wie Hochdruckreiniger für optimale Ergebnisse</li>
@@ -316,20 +316,20 @@ const HofreinigungPageClient = () => {
                   </ul>
 
                   {/* H2: Was bei einer gründlichen Hofreinigung gereinigt wird */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was bei einer gründlichen Hofreinigung gereinigt wird</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Was bei einer gründlichen Hofreinigung gereinigt wird</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Eine gründliche Reinigung der Höfe beinhaltet die intensive Reinigung aller Aussenbereiche inklusive schwer zugänglicher Stellen. Dazu gehört die Reinigung von Einfahrten und Zufahrten, Terrassen und Balkonen, Wegen und Gehwegen, Parkplätzen und Stellplätzen, Garageneinfahrten, Aussentreppen und Podesten, sowie gegebenenfalls auch Aussenwänden und Fassaden. Professionelle Reinigungsfirmen entfernen Schmutz, Laub, Moos, Algen, Ölflecken, Kalkablagerungen, Verfärbungen und andere hartnäckige Verschmutzungen. Sie verwenden spezielle Methoden wie Hochdruckreinigung für optimale Ergebnisse und passen die Reinigungsmethode an den spezifischen Oberflächentyp an.
                   </p>
 
                   {/* H2: Hofreinigung für verschiedene Aussenbereiche (Einfahrt, Terrasse, Wege, Parkplätze) */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Hofreinigung für verschiedene Aussenbereiche (Einfahrt, Terrasse, Wege, Parkplätze)</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Hofreinigung für verschiedene Aussenbereiche (Einfahrt, Terrasse, Wege, Parkplätze)</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Professionelle Hofreinigung wird für alle Arten von Aussenbereichen angeboten, wobei jeder Bereich spezielle Reinigungsanforderungen hat. Einfahrtsreinigung entfernt Ölflecken, Schmutz und Verschmutzungen von Zufahrten und Garageneinfahrten. Terrassenreinigung entfernt Moos, Algen, Kalkablagerungen und Verfärbungen von Terrassen und Balkonen. Wege- und Parkplatzreinigung beinhaltet die Reinigung von Gehwegen, Parkplätzen und Stellplätzen. Jeder Aussenbereich hat unterschiedliche Verschmutzungen und erfordert spezielle Methoden. Professionelle Reinigungsfirmen kennen die richtigen Methoden für jeden Bereich und verwenden die passenden Reinigungsmittel und Geräte. Unabhängig von Ihrem Aussenbereich, alle Reinigungsfirmen in unserem Netzwerk haben Erfahrung mit verschiedenen Bereichen.
                   </p>
 
                   {/* H2: Hochdruckreinigung für Aussenbereiche - Effektive Methode für hartnäckige Verschmutzungen */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Hochdruckreinigung für Aussenbereiche - Effektive Methode für hartnäckige Verschmutzungen</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Hochdruckreinigung für Aussenbereiche - Effektive Methode für hartnäckige Verschmutzungen</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Hochdruckreinigung ist eine besonders effektive Methode für Aussenbereiche, die hartnäckige Verschmutzungen wie Ölflecken, Moos, Algen, Kalkablagerungen oder eingetrockneten Schmutz entfernt. Professionelle Reinigungsfirmen haben leistungsstarke Hochdruckreiniger und kennen die richtigen Techniken für verschiedene Oberflächen. Wichtig ist, dass der Druck an das Material angepasst wird, um Schäden zu vermeiden. Beton kann mit stärkerem Druck gereinigt werden, während Naturstein oder Holz schonender behandelt werden müssen. Hochdruckreinigung erreicht auch schwer zugängliche Stellen und entfernt tief sitzende Verschmutzungen gründlich. Professionelle Reinigungsfirmen verwenden die richtigen Druckeinstellungen und Reinigungsmittel für optimale Ergebnisse.
                   </p>
 
@@ -344,8 +344,8 @@ const HofreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Reinigung verschiedener Oberflächen (Beton, Naturstein, Pflastersteine, Kies, Holz) */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Reinigung verschiedener Oberflächen (Beton, Naturstein, Pflastersteine, Kies, Holz)</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Reinigung verschiedener Oberflächen (Beton, Naturstein, Pflastersteine, Kies, Holz)</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Aussenbereiche haben verschiedene Oberflächen, die unterschiedliche Reinigungsmethoden erfordern. Beton kann mit stärkerem Druck gereinigt werden und verträgt aggressive Reinigungsmittel. Naturstein benötigt schonende Reinigung ohne zu viel Druck, um das Material nicht zu beschädigen. Pflastersteine können mit Hochdruckreinigung gereinigt werden, wobei die Fugenreinigung besonders wichtig ist. Kiesflächen benötigen spezielle Methoden zur Entfernung von Unkraut und Verschmutzungen. Holzterrassen erfordern vorsichtige Reinigung ohne zu viel Feuchtigkeit, um das Holz nicht zu schädigen. Professionelle Reinigungsfirmen kennen die richtigen Methoden für jeden Oberflächentyp und verwenden die passenden Reinigungsmittel und Geräte.
                   </p>
 
@@ -360,8 +360,8 @@ const HofreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Moos- und Algenentfernung - Vorbeugung und Entfernung */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Moos- und Algenentfernung - Vorbeugung und Entfernung</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Moos- und Algenentfernung - Vorbeugung und Entfernung</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Moos und Algen sind häufige Probleme in Aussenbereichen, besonders in feuchten oder schattigen Bereichen. Sie können rutschige Oberflächen verursachen und das Erscheinungsbild beeinträchtigen. Professionelle Moos- und Algenentfernung verwendet spezielle Reinigungsmittel und Methoden, um Moos und Algen gründlich zu entfernen. Zusätzlich können vorbeugende Massnahmen ergriffen werden, um das erneute Wachstum zu verhindern. Professionelle Reinigungsfirmen haben Erfahrung mit verschiedenen Arten von Moos und Algen und verwenden die richtigen Methoden für jeden Fall. Regelmässige Reinigung verhindert die Ansammlung von Moos und Algen und hält Aussenbereiche in optimalem Zustand.
                   </p>
 
@@ -376,8 +376,8 @@ const HofreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmethoden */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Moderne und umweltfreundliche Reinigungsmethoden</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Moderne und umweltfreundliche Reinigungsmethoden</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmethoden, auch bei intensiven Hofreinigungen. Diese sind nicht nur besser für die Umwelt, sondern auch für Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders für Haushalte mit Kindern, Haustieren oder in sensiblen Gebieten empfehlenswert. Sie sind effektiv gegen Moos, Algen, Kalk und andere Verschmutzungen, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass Reinigungswasser nicht unkontrolliert in die Kanalisation oder die Umwelt gelangt. Dies ist besonders wichtig in sensiblen Gebieten und für den Schutz der Umwelt.
                   </p>
 
@@ -392,8 +392,8 @@ const HofreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Ablauf unserer Hofreinigung – Schritt für Schritt */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Ablauf unserer Hofreinigung – Schritt für Schritt</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Ablauf unserer Hofreinigung – Schritt für Schritt</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Der Ablauf einer professionellen Hofreinigung ist strukturiert und gründlich. Zunächst erfolgt eine Besichtigung der Aussenbereiche, um den Umfang der Reinigung zu bestimmen, den Verschmutzungsgrad zu beurteilen und eine genaue Offerte zu erstellen. Nach der Auftragsbestätigung wird ein Termin vereinbart, der zu Ihren Bedürfnissen passt. Am Reinigungstag erscheint das professionelle Reinigungsteam pünktlich mit allen notwendigen Geräten, speziellen Reinigungsmitteln und Ausrüstung für Hofreinigung. Die Reinigung erfolgt systematisch: Vorreinigung zur Entfernung von grobem Schmutz und Laub, Hauptreinigung mit Hochdruckreinigung oder anderen speziellen Methoden, Behandlung von problematischen Stellen wie Moos oder Ölflecken, und abschliessende Nachreinigung. Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle, und Sie erhalten saubere, gepflegte Aussenbereiche.
                   </p>
 
@@ -421,20 +421,20 @@ const HofreinigungPageClient = () => {
                   </div>
 
                   {/* H2: Was kostet eine professionelle Hofreinigung? */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Was kostet eine professionelle Hofreinigung?</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Was kostet eine professionelle Hofreinigung?</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Die Kosten für Hofreinigung hängen von der Grösse der Fläche, dem Verschmutzungsgrad, der Art der Oberfläche und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 5 und 15 CHF pro m². Ein durchschnittlicher Hof mit 50 m² kostet etwa 250-750 CHF. Grössere Flächen, stark verschmutzte Bereiche oder zusätzliche Leistungen wie Moos- und Algenentfernung können höhere Kosten verursachen. Die genauen Kosten hängen von der Grösse der Fläche, dem Zustand, dem Umfang der Reinigung und zusätzlichen Leistungen ab. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Wie oft sollte eine Hofreinigung durchgeführt werden? */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Wie oft sollte eine Hofreinigung durchgeführt werden?</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Wie oft sollte eine Hofreinigung durchgeführt werden?</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Die optimale Reinigungsfrequenz hängt von verschiedenen Faktoren ab: Nutzung, Witterung, Lage und individuelle Präferenzen. Viele Hausbesitzer lassen ihre Höfe ein- bis zweimal jährlich professionell reinigen, typischerweise im Frühjahr und Herbst. Bei starker Verschmutzung, in Gebieten mit viel Regen oder Schatten, oder vor besonderen Anlässen kann öfter gereinigt werden. Regelmässige Reinigung verhindert die Ansammlung von hartnäckigen Verschmutzungen wie Moos oder Algen und hält Aussenbereiche in optimalem Zustand. Professionelle Reinigungsfirmen beraten Sie gerne bei der optimalen Frequenz für Ihre spezifischen Aussenbereiche und berücksichtigen dabei Faktoren wie Nutzung, Witterung und Oberflächentyp.
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Hofreinigung sind */}
-                  <h2 className="text-3xl font-bold text-gray-900 mt-8 md:mt-12 mb-4 md:mb-6">Warum wir der richtige Partner für Ihre Höfe sind</h2>
-                  <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                  <h2 className="heading-2">Warum wir der richtige Partner für Ihre Höfe sind</h2>
+                  <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Wir sind der vertrauenswürdige Partner für Ihre Höfe. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen und Erfahrung mit Aussenbereichen haben. Alle Partnerfirmen verwenden moderne, umweltfreundliche Reinigungsmittel und haben die richtige Ausrüstung für Reinigung der Höfe, wie leistungsstarke Hochdruckreiniger und spezielle Reinigungsmittel. Sie kennen die richtigen Methoden für verschiedene Oberflächen und können empfindliche Materialien wie Naturstein oder Holz schonend reinigen. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Höfe zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
@@ -443,15 +443,15 @@ const HofreinigungPageClient = () => {
 
                   {/* H2: Häufig gestellte Fragen zur Hofreinigung */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Häufig gestellte Fragen zur Reinigung</h2>
-                    <p className="text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
+                    <h2 className="heading-2">Häufig gestellte Fragen zur Reinigung</h2>
+                    <p className="text-body mb-6 md:mb-8 leading-relaxed">
                       Häufig gestellte Fragen zur professionellen Reinigung der Höfe: Was kostet eine Hofreinigung? Welche Bereiche werden bei einer Hofreinigung gereinigt? Wie oft sollte eine Hofreinigung durchgeführt werden? Ist Hochdruckreinigung für alle Oberflächen geeignet? Wie lange dauert eine Hofreinigung? Welche Reinigungsmethoden werden verwendet? Werden umweltfreundliche Reinigungsmittel verwendet? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                           <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-gray-800 px-2 sm:px-4">
-                            {item.q}
+                            <h4 className="faq-question">{item.q}</h4>
                           </AccordionTrigger>
                           <AccordionContent className="text-base text-gray-600 leading-relaxed pt-2 pb-4 px-2 sm:px-4">
                             {item.a}
@@ -463,8 +463,8 @@ const HofreinigungPageClient = () => {
 
                   {/* H2: Jetzt unverbindliche Hofreinigungs-Offerte anfordern */}
                   <div className="mt-8 md:mt-12">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 md:mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
-                    <p className="text-lg text-gray-700 mb-4 md:mb-6 leading-relaxed">
+                    <h2 className="heading-2">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
+                    <p className="text-body mb-4 md:mb-6 leading-relaxed">
                       Reinigungsofferten online vergleichen und bis zu 40% sparen. Alle Offerten beinhalten professionelle Hofreinigung mit speziellen Methoden für Ihre Aussenbereiche. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma für Ihre Bedürfnisse.
                     </p>
                     <Button 
@@ -479,7 +479,7 @@ const HofreinigungPageClient = () => {
 
                   {/* Internal Links */}
                   <div className="mt-8 md:mt-12">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 md:mb-6">Weitere Reinigungsdienstleistungen</h3>
+                    <h3 className="heading-3">Weitere Reinigungsdienstleistungen</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                       <Link href="/reinigung/wohnungsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                         <h4 className="font-bold text-gray-900 mb-2 text-lg">Wohnungsreinigung</h4>
@@ -513,7 +513,7 @@ const HofreinigungPageClient = () => {
                 {/* Sticky CTA Section - Outside aside for proper sticky behavior */}
                 <div className="mt-4 md:mt-6 lg:sticky lg:top-24 lg:self-start">
                   <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 md:p-6 border border-blue-100">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Jetzt Offerten anfordern</h3>
+                    <h3 className="heading-3">Jetzt Offerten anfordern</h3>
                     <p className="text-gray-700 mb-3 md:mb-4 text-base">
                       Kostenlos und unverbindlich Reinigungsofferten online vergleichen.
                     </p>
