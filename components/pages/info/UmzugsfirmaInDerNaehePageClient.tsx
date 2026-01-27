@@ -233,23 +233,10 @@ const UmzugsfirmaInDerNaehePageClient = () => {
   return (
     <>
       {/* Hero Section - Unique Design for Local Search */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
-        {/* Map Background */}
-        <div className="absolute inset-0 z-0">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21627.123456789!2d8.5417!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479aa0a74e8932d9%3A0xcf89328f11302e94!2sSchweiz!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch"
-            width="100%"
-            height="100%"
-            style={{ border: 0, filter: 'grayscale(0.3) brightness(0.7)' }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="w-full h-full"
-          />
-        </div>
-        {/* Overlay for better readability */}
+      <section className="relative py-12 md:py-16 overflow-hidden bg-gradient-to-r from-green-600 via-green-600 to-green-800">
+        {/* Background gradient overlay */}
         <div className="absolute inset-0 z-[1]">
-          <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 via-green-600/80 to-black/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-green-600/90 to-green-800/90"></div>
         </div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-5 gap-12 items-center">
@@ -263,7 +250,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                 <MapPin className="h-4 w-4 mr-2" />
                 Umzugsfirmen vergleichen
               </div>
-              <h1 className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold text-white mb-6 leading-tight drop-shadow-lg">
+              <h1 className="heading-1-white drop-shadow-lg">
                 Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen
               </h1>
               <p className="text-base sm:text-lg text-white/95 mb-8 leading-relaxed drop-shadow-md">
@@ -319,7 +306,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                     <Navigation className="h-12 w-12 text-green-600" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+                <h3 className="heading-3 text-center">
                   Finden Sie Ihre Umzugsfirma
                 </h3>
                 <div className="space-y-4">
@@ -349,7 +336,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            <h2 className="heading-2">
               Warum eine lokale Umzugsfirma wählen?
             </h2>
             <p className="typography-p mb-6">
@@ -357,7 +344,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             </p>
             
             <div className="mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <h3 className="heading-3">
                 Ihre Vorteile mit einer lokalen Umzugsfirma:
               </h3>
               <ul className="space-y-3 typography-p">
@@ -402,7 +389,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               So funktioniert's
             </h2>
           </motion.div>
@@ -471,7 +458,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               Umzugsfirmen in Ihrer Region
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -509,21 +496,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
       <section className="py-12 md:py-16 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl text-left">
-            <h2 
-              className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] font-bold mb-6 text-left"
-              style={{
-                fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                fontWeight: 700,
-                color: '#1c1d16',
-                textAlign: 'start',
-                letterSpacing: 'normal',
-                wordSpacing: '0px',
-                fontStyle: 'normal',
-                textTransform: 'none',
-                textDecoration: 'none',
-                textIndent: '0px'
-              }}
-            >
+            <h2 className="heading-2">
               Lokale Umzugsfirma finden
             </h2>
           

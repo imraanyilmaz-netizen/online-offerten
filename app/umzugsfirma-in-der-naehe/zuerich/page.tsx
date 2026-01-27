@@ -523,25 +523,8 @@ export default function UmzugsfirmaZurichPage() {
                 <p className="text-gray-700 leading-relaxed mb-6">
                   Der Kanton Zürich bietet eine vielfältige Landschaft mit historischen Städten, idyllischen Dörfern und modernen Wirtschaftszentren. Unsere Partner sind in der ganzen Region aktiv und verfügen über umfassende Erfahrung.
                 </p>
-                <div className="grid lg:grid-cols-2 gap-6">
-                  {/* Left Side - Google Maps */}
-                  <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-                    <div className="w-full h-[300px] md:h-[400px]">
-                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21627.123456789!2d8.5417!3d47.3769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479aa0a74e8932d9%3A0xcf89328f11302e94!2sZ%C3%BCrich%2C%20Schweiz!5e0!3m2!1sde!2sch!4v1234567890123!5m2!1sde!2sch"
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0 }}
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title="Umzugsfirma Zürich Standort"
-                        className="w-full h-full"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Right Side - Cities List */}
+                <div className="grid lg:grid-cols-1 gap-6">
+                  {/* Cities List - Full Width */}
                   <div className="flex md:grid md:grid-cols-2 gap-4 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-4 md:mx-0 px-4 md:px-0 scrollbar-hide">
                   {zurichCities.map((cityItem, index) => (
                     <Link

@@ -227,10 +227,10 @@ const ReinigungskostenRechnerPageClient = () => {
                   <Calculator className="h-4 w-4 mr-2" />
                   Kostenloser Reinigungskosten-Rechner
                 </div>
-                <h1 className="typography-h1 text-[32px] md:text-[40px] leading-[42.56px] md:leading-[53.2px] mb-6">
+                <h1 className="heading-1">
                   <span className="block">Reinigungskosten</span>
                   <span className="block text-blue-600 mt-2">kostenlos berechnen</span>
-                  <span className="block text-[20px] md:text-[24px] text-gray-700 font-bold mt-4">
+                  <span className="block heading-4 text-gray-700 mt-4">
                     In nur 1 Minute eine verlässliche Schätzung
                   </span>
                 </h1>
@@ -280,7 +280,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+            <h2 className="heading-2">
               Der komplette Schweizer Kostenguide für stressfreie Wohnungsübergabe
             </h2>
             <p className="text-lg text-gray-700 mb-4 leading-relaxed">
@@ -302,7 +302,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-gradient-to-br from-blue-50 to-green-50 p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
+            <h2 className="heading-2 text-center">
               Warum Online-Offerten.ch für Ihre Endreinigung wählen?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -353,10 +353,10 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+            <h2 className="heading-2">
               Die komplette Preisübersicht 2024 für die Schweiz
             </h2>
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+            <h3 className="heading-3">
               Detaillierte Kostentabelle nach Wohnungsgrösse
             </h3>
             
@@ -484,7 +484,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-gradient-to-br from-green-50 to-blue-50 p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
+            <h2 className="heading-2 text-center">
               So funktioniert die Offertanfrage
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -517,24 +517,24 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
+            <h2 className="heading-2">
               7 Faktoren die Ihre Kosten wirklich bestimmen
             </h2>
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">1. Verschmutzungsgrad</h3>
+                <h3 className="heading-3">1. Verschmutzungsgrad</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Der wichtigste Kostenfaktor überhaupt. Eine leicht verschmutzte Wohnung kostet eine professionelle Endreinigung bei 3.5 Zimmer etwa <strong>530 CHF</strong>, bei starken Verschmutzungen (Nikotin, Fett, Kalk) schnell <strong>850-950 CHF</strong>. Preisunterschied: bis zu 80%.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">2. Zeitdruck und Express-Zuschläge</h3>
+                <h3 className="heading-3">2. Zeitdruck und Express-Zuschläge</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Wochenend-Reinigungen: <strong>+25% Aufschlag</strong>. Kurzfristige Buchungen (unter 3 Tage): <strong>+15-30%</strong>. Planen Sie Ihre Umzugsreinigung mindestens 2-3 Wochen im Voraus.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">3. Sonderwünsche: Desinfektion, Entkalkung, Teppichreinigung</h3>
+                <h3 className="heading-3">3. Sonderwünsche: Desinfektion, Entkalkung, Teppichreinigung</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
                   <li>Backofen-Intensivreinigung: 80-120 CHF</li>
                   <li>Kühlschrank-Desinfektion: 40-60 CHF</li>
@@ -543,31 +543,31 @@ const ReinigungskostenRechnerPageClient = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">4. Material-Qualität und Umweltfreundlichkeit</h3>
+                <h3 className="heading-3">4. Material-Qualität und Umweltfreundlichkeit</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Ökologische Reinigungsmittel kosten <strong>10-15% mehr</strong>, hinterlassen aber keine chemischen Rückstände und sind bei Allergikern oder Familien mit Kindern empfehlenswert.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">5. Stockwerk und Erreichbarkeit</h3>
+                <h3 className="heading-3">5. Stockwerk und Erreichbarkeit</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Wohnungen ab dem 4. Stock ohne Lift: <strong>+50-80 CHF</strong> für erhöhten Aufwand beim Material-Transport. Fehlende Parkmöglichkeiten in der Nähe können ebenfalls Zusatzkosten verursachen.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">6. Saisonale Schwankungen</h3>
+                <h3 className="heading-3">6. Saisonale Schwankungen</h3>
                 <p className="text-gray-700 leading-relaxed">
                   <strong>März bis Juni</strong> (Hauptumzugssaison): Höchste Preise, längste Wartezeiten. <strong>November bis Februar</strong>: Bis zu 15% günstiger, bessere Verfügbarkeit.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">7. Firmenzertifizierungen und Versicherungen</h3>
+                <h3 className="heading-3">7. Firmenzertifizierungen und Versicherungen</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Zertifizierte Reinigungsfirmen mit Betriebshaftpflicht und Abnahmegarantie kosten typischerweise <strong>10-20% mehr</strong> als Gelegenheitsreiniger – bieten aber Rechtssicherheit und Nachbesserungsgarantie.
                 </p>
               </div>
               <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">Kostenfaktor Küche: Der teuerste Bereich</h3>
+                <h3 className="heading-3">Kostenfaktor Küche: Der teuerste Bereich</h3>
                 <p className="text-gray-700 mb-4 leading-relaxed">
                   Die Küche macht bei den meisten Endreinigungen <strong>30-40% der Gesamtkosten</strong> aus. Gründe:
                 </p>
@@ -581,7 +581,7 @@ const ReinigungskostenRechnerPageClient = () => {
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">Kostenfaktor Fenster und Storen</h3>
+                <h3 className="heading-3">Kostenfaktor Fenster und Storen</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
                   <li><strong>Einfache Fenster (innen/aussen)</strong>: 15-25 CHF pro Fenster</li>
                   <li><strong>Fenster mit Rollläden</strong>: 25-35 CHF pro Fenster</li>
@@ -602,7 +602,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
+            <h2 className="heading-2">
               Der grosse Vergleich: Selbst machen vs. Profis beauftragen
             </h2>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Echte Kostenrechnung für 3.5 Zimmer Wohnung</h3>
@@ -675,7 +675,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-gradient-to-br from-green-50 to-yellow-50 p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
+            <h2 className="heading-2">
               10 bewährte Spartipps mit konkretem Sparpotential
             </h2>
             <ol className="space-y-4 list-decimal list-inside text-gray-700">
@@ -700,7 +700,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
+            <h2 className="heading-2 text-center">
               Was Kunden über unsere Partner sagen
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -754,7 +754,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-6 md:p-10 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
+            <h2 className="heading-2">
               Checkliste: Was inklusive sein muss
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -832,7 +832,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-blue-500"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
+            <h2 className="heading-2">
               12 häufige Fragen mit Detailantworten
             </h2>
             <Accordion type="single" collapsible className="w-full">
@@ -943,7 +943,7 @@ const ReinigungskostenRechnerPageClient = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="text-center py-12 md:py-16 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl shadow-2xl"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="heading-2">
               Jetzt Geld sparen: Kostenlose Offerten anfordern
             </h2>
             <p className="text-lg md:text-xl mb-6 max-w-3xl mx-auto opacity-95">

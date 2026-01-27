@@ -1,23 +1,23 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import Link from 'next/link';
 import NextImage from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+// Sadece kullanılan ikonları import et
 import { 
-  CheckCircle2, Home, Sparkles, ChevronRight, Paintbrush, Sprout,
-  FileText, GitCompareArrows, Award, KeyRound as UsersRound,
-  MapPin, Calculator, ListChecks, BookOpen, ArrowRight,
-  Star, User, ChevronLeft, Send, Loader2,
-  ShieldCheck, TrendingUp, Users, Search, Clock
+  Star, 
+  User, 
+  ChevronLeft, 
+  ChevronRight, 
+  ArrowRight, 
+  MapPin, 
+  Loader2
 } from 'lucide-react';
-import MovingCostCalculator from '@/components/UmzugskostenRechnerSections/MovingCostCalculator';
-import CleaningCostCalculator from '@/components/ReinigungskostenRechnerSections/CleaningCostCalculator';
-import HomeHeroForm from '@/components/HomeHeroForm';
-import { motion } from 'framer-motion';
+// Framer Motion kaldırıldı - kullanılmıyor
 // Supabase lazy loaded to reduce initial bundle size
 import { formatDate, cn } from '@/lib/utils';
 import { getGermanServiceName } from '@/lib/dataMapping';
@@ -29,7 +29,7 @@ interface ReviewCardProps {
   index: number;
 }
 
-const ReviewCard = ({ review, index }: ReviewCardProps) => {
+const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
   const { 
     customer_name, 
     city,
@@ -113,14 +113,16 @@ const ReviewCard = ({ review, index }: ReviewCardProps) => {
     </Card>
     </div>
   );
-};
+});
+
+ReviewCard.displayName = 'ReviewCard';
 
 // Post Card Component
 interface PostCardProps {
   post: any;
 }
 
-const PostCard = ({ post }: PostCardProps) => {
+const PostCard = memo(({ post }: PostCardProps) => {
   if (!post?.slug) return null;
   
   const excerpt = post.meta_description || "Lesen Sie mehr...";
@@ -138,7 +140,15 @@ const PostCard = ({ post }: PostCardProps) => {
     <Card className="flex flex-col h-full overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
       <Link href={postUrl} className="block group">
         <div className="aspect-video overflow-hidden">
-          <img src={post.featured_image_url || "https://images.unsplash.com/photo-1504983875-d3b163aba9e6"} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" decoding="async" width="400" height="225" />
+          <img 
+            src={post.featured_image_url || "https://images.unsplash.com/photo-1504983875-d3b163aba9e6"} 
+            alt={post.title} 
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+            loading="lazy" 
+            decoding="async" 
+            width="400" 
+            height="225" 
+          />
         </div>
       </Link>
       <CardContent className="p-6 flex flex-col flex-grow">
@@ -157,7 +167,9 @@ const PostCard = ({ post }: PostCardProps) => {
       </CardContent>
     </Card>
   );
-};
+});
+
+PostCard.displayName = 'PostCard';
 
 interface HomePageClientProps {
   initialReviews?: any[];
@@ -166,25 +178,29 @@ interface HomePageClientProps {
 
 const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClientProps) => {
   const router = useRouter();
-  const [selectedCalculator, setSelectedCalculator] = useState<string | null>('umzug');
-  const [isMounted, setIsMounted] = useState(false);
-  
-  // Prevent hydration mismatch by only showing conditional content after mount
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-  const [reviews, setReviews] = useState(initialReviews);
-  const [reviewsLoading, setReviewsLoading] = useState(false);
-  const [posts, setPosts] = useState(initialPosts);
-  const [postsLoading, setPostsLoading] = useState(false);
+  // State'leri birleştir - daha az re-render
+  const [state, setState] = useState({
+    selectedCalculator: null as string | null,
+    isMounted: false,
+    reviews: initialReviews,
+    reviewsLoading: false,
+    posts: initialPosts,
+    postsLoading: false,
+    canScrollLeft: false,
+    canScrollRight: true,
+    canScrollLeftPosts: false,
+    canScrollRightPosts: false,
+    currentIndex: 0,
+    selectedCategory: 'Alle' as string
+  });
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const postsScrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  const [canScrollLeftPosts, setCanScrollLeftPosts] = useState(false);
-  const [canScrollRightPosts, setCanScrollRightPosts] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState<string>('Alle');
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setState(prev => ({ ...prev, isMounted: true }));
+  }, []);
 
 
   // Scroll handlers - optimized with useCallback (defined before useEffects that use them)
@@ -196,29 +212,27 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     return 1;
   }, []);
 
-  const checkScrollability = useCallback(() => {
+  // Basitleştirilmiş scroll handler
+  const handleScroll = useCallback(() => {
     const el = scrollContainerRef.current;
-    if (el) {
-      const hasOverflow = el.scrollWidth > el.clientWidth;
-      setCanScrollLeft(el.scrollLeft > 0);
-      setCanScrollRight(hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
-    }
+    if (!el) return;
+    setState(prev => ({
+      ...prev,
+      canScrollLeft: el.scrollLeft > 0,
+      canScrollRight: el.scrollLeft < el.scrollWidth - el.clientWidth - 1
+    }));
   }, []);
 
-  // Fetch Reviews - lazy load Supabase to reduce initial bundle
-  // Delay fetch to prioritize hero rendering
+  // Fetch Reviews - lazy load Supabase
   useEffect(() => {
-    // If initial reviews are provided, skip fetch
     if (initialReviews && initialReviews.length > 0) {
       return;
     }
     
-    // Delay fetch to allow hero to render first
     const timeoutId = setTimeout(() => {
       const fetchReviews = async () => {
-        setReviewsLoading(true);
+        setState(prev => ({ ...prev, reviewsLoading: true }));
         try {
-          // Lazy load Supabase client only when needed
           const { supabase } = await import('@/lib/supabaseClient');
           const { data: reviewsData, error: reviewsError } = await supabase
             .from('customer_reviews')
@@ -238,38 +252,26 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           if (reviewsError) {
             console.error('Error fetching reviews:', reviewsError);
           } else {
-            setReviews(reviewsData || []);
+            setState(prev => ({ ...prev, reviews: reviewsData || [], reviewsLoading: false }));
+            setTimeout(() => handleScroll(), 50);
           }
         } catch (error) {
           console.error('Error loading Supabase:', error);
-        } finally {
-          setReviewsLoading(false);
-          // Call checkScrollability after a small delay to ensure DOM is ready
-          setTimeout(() => {
-            const el = scrollContainerRef.current;
-            if (el) {
-              const hasOverflow = el.scrollWidth > el.clientWidth;
-              setCanScrollLeft(el.scrollLeft > 0);
-              setCanScrollRight(hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
-            }
-          }, 50);
+          setState(prev => ({ ...prev, reviewsLoading: false }));
         }
       };
 
       fetchReviews();
-    }, 100); // Small delay to prioritize hero rendering
+    }, 100);
 
     return () => clearTimeout(timeoutId);
-  }, [initialReviews]);
+  }, [initialReviews, handleScroll]);
 
-  // Fetch Posts - lazy load Supabase to reduce initial bundle
-  // Delay fetch to prioritize hero rendering
+  // Fetch Posts - lazy load Supabase
   useEffect(() => {
-    // Delay fetch to allow hero to render first
     const timeoutId = setTimeout(() => {
       const fetchPosts = async () => {
         try {
-          // Lazy load Supabase client only when needed
           const { supabase } = await import('@/lib/supabaseClient');
           const { data, error } = await supabase
             .from('posts')
@@ -281,121 +283,56 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           if (error) {
             console.error('Error fetching posts:', error);
           } else {
-            setPosts(data || []);
+            setState(prev => ({ ...prev, posts: data || [], postsLoading: false }));
           }
         } catch (error) {
           console.error('Error loading Supabase:', error);
-        } finally {
-          setPostsLoading(false);
+          setState(prev => ({ ...prev, postsLoading: false }));
         }
       };
       fetchPosts();
-    }, 200); // Delay to prioritize hero rendering
+    }, 200);
 
     return () => clearTimeout(timeoutId);
   }, [initialPosts]);
 
-  const checkPostsScrollability = useCallback(() => {
+  // Basitleştirilmiş posts scroll handler
+  const handlePostsScroll = useCallback(() => {
     const el = postsScrollRef.current;
-    if (el) {
-      const hasOverflow = el.scrollWidth > el.clientWidth;
-      setCanScrollLeftPosts(el.scrollLeft > 0);
-      setCanScrollRightPosts(hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
-      
-      const containerWidth = el.clientWidth;
-      const scrollLeft = el.scrollLeft;
-      const gap = 24;
-      const visibleCards = getVisibleCardsCount();
-      const cardWidth = containerWidth / visibleCards;
-      const cardWidthWithGap = cardWidth + gap;
-      const pageIndex = Math.round(scrollLeft / cardWidthWithGap);
-      const totalPages = Math.ceil(posts.length / visibleCards);
-      setCurrentIndex(Math.min(Math.max(0, pageIndex), totalPages - 1));
-    }
-  }, [posts.length, getVisibleCardsCount]);
+    if (!el) return;
+    const hasOverflow = el.scrollWidth > el.clientWidth;
+    setState(prev => ({
+      ...prev,
+      canScrollLeftPosts: el.scrollLeft > 0,
+      canScrollRightPosts: hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1
+    }));
+  }, []);
 
-  // Use refs to store RAF IDs for scroll handlers (better performance)
-  const scrollRafRef = useRef<number | null>(null);
-  const postsScrollRafRef = useRef<number | null>(null);
-  const resizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const postsResizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Optimized scroll handler using requestAnimationFrame for better INP
-  const optimizedScrollHandler = useCallback(() => {
-    if (scrollRafRef.current !== null) {
-      cancelAnimationFrame(scrollRafRef.current);
-    }
-    scrollRafRef.current = requestAnimationFrame(() => {
-      checkScrollability();
-    });
-  }, [checkScrollability]);
-
-  // Optimized resize handler with debouncing
-  const optimizedResizeHandler = useCallback(() => {
-    if (resizeTimeoutRef.current !== null) {
-      clearTimeout(resizeTimeoutRef.current);
-    }
-    resizeTimeoutRef.current = setTimeout(() => {
-      checkScrollability();
-    }, 150);
-  }, [checkScrollability]);
-
-  // Optimized posts scroll handler
-  const optimizedPostsScrollHandler = useCallback(() => {
-    if (postsScrollRafRef.current !== null) {
-      cancelAnimationFrame(postsScrollRafRef.current);
-    }
-    postsScrollRafRef.current = requestAnimationFrame(() => {
-      checkPostsScrollability();
-    });
-  }, [checkPostsScrollability]);
-
-  // Optimized posts resize handler
-  const optimizedPostsResizeHandler = useCallback(() => {
-    if (postsResizeTimeoutRef.current !== null) {
-      clearTimeout(postsResizeTimeoutRef.current);
-    }
-    postsResizeTimeoutRef.current = setTimeout(() => {
-      checkPostsScrollability();
-    }, 150);
-  }, [checkPostsScrollability]);
-
+  // Basitleştirilmiş scroll event listeners
   useEffect(() => {
     const el = scrollContainerRef.current;
     if (el) {
-      window.addEventListener('resize', optimizedResizeHandler, { passive: true });
-      el.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+      el.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('resize', handleScroll, { passive: true });
       return () => {
-        window.removeEventListener('resize', optimizedResizeHandler);
-        el.removeEventListener('scroll', optimizedScrollHandler);
-        if (scrollRafRef.current !== null) {
-          cancelAnimationFrame(scrollRafRef.current);
-        }
-        if (resizeTimeoutRef.current !== null) {
-          clearTimeout(resizeTimeoutRef.current);
-        }
+        el.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', handleScroll);
       };
     }
-  }, [optimizedScrollHandler, optimizedResizeHandler]);
+  }, [handleScroll]);
 
   useEffect(() => {
     const el = postsScrollRef.current;
-    if (el && posts.length > 0) {
-      checkPostsScrollability();
-      el.addEventListener('scroll', optimizedPostsScrollHandler, { passive: true });
-      window.addEventListener('resize', optimizedPostsResizeHandler, { passive: true });
+    if (el && state.posts.length > 0) {
+      handlePostsScroll();
+      el.addEventListener('scroll', handlePostsScroll, { passive: true });
+      window.addEventListener('resize', handlePostsScroll, { passive: true });
       return () => {
-        el.removeEventListener('scroll', optimizedPostsScrollHandler);
-        window.removeEventListener('resize', optimizedPostsResizeHandler);
-        if (postsScrollRafRef.current !== null) {
-          cancelAnimationFrame(postsScrollRafRef.current);
-        }
-        if (postsResizeTimeoutRef.current !== null) {
-          clearTimeout(postsResizeTimeoutRef.current);
-        }
+        el.removeEventListener('scroll', handlePostsScroll);
+        window.removeEventListener('resize', handlePostsScroll);
       };
     }
-  }, [posts.length, checkPostsScrollability, optimizedPostsScrollHandler, optimizedPostsResizeHandler]);
+  }, [state.posts.length, handlePostsScroll]);
 
   const scroll = useCallback((direction: 'left' | 'right') => {
     const el = scrollContainerRef.current;
@@ -414,7 +351,26 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   }, []);
 
   const visibleCards = useMemo(() => getVisibleCardsCount(), [getVisibleCardsCount]);
-  const totalPages = useMemo(() => Math.ceil(posts.length / visibleCards), [posts.length, visibleCards]);
+  const totalPages = useMemo(() => Math.ceil(state.posts.length / visibleCards), [state.posts.length, visibleCards]);
+
+  // useMemo ile filtered posts
+  const filteredPosts = useMemo(() => {
+    if (state.selectedCategory === 'Alle') return state.posts;
+    const formatCategory = (cat: string) => {
+      if (!cat) return '';
+      return cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase();
+    };
+    return state.posts.filter((p: any) => formatCategory(p.category) === state.selectedCategory);
+  }, [state.posts, state.selectedCategory]);
+
+  const uniqueCategories = useMemo(() => {
+    const cats = Array.from(new Set(state.posts.map((p: any) => p.category).filter(Boolean)));
+    const formatCategory = (cat: string) => {
+      if (!cat) return '';
+      return cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase();
+    };
+    return ['Alle', ...cats.map(formatCategory)];
+  }, [state.posts]);
 
   const scrollToIndex = useCallback((index: number) => {
     const el = postsScrollRef.current;
@@ -431,7 +387,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     <>
         
           {/* Customer Reviews Section */}
-          {reviewsLoading && reviews.length === 0 ? (
+          {state.reviewsLoading && state.reviews.length === 0 ? (
             <section className="py-20 bg-gray-50">
               <div className="container mx-auto px-4 text-center">
                 <div className="animate-pulse">
@@ -449,11 +405,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 </div>
               </div>
             </section>
-          ) : reviews.length > 0 ? (
+          ) : state.reviews.length > 0 ? (
             <section className="py-16 md:py-24 bg-slate-50">
               <div className="container mx-auto max-w-navbar px-4 md:px-6">
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  <h2 className="heading-2">
                     Das sagen unsere Kundinnen & Kunden
                   </h2>
                   <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -466,7 +422,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     ref={scrollContainerRef}
                     className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 -mb-8 gap-6 md:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                   >
-                    {reviews.map((review, index) => (
+                    {state.reviews.map((review, index) => (
                       <div key={review.id || index} className="flex-shrink-0 snap-start w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.34rem)]">
                         <ReviewCard review={review} index={index} />
                       </div>
@@ -478,7 +434,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     size="icon" 
                     className={cn(
                       "absolute top-1/2 -translate-y-1/2 -left-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300",
-                      canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"
+                      state.canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"
                     )}
                     onClick={() => scroll('left')}
                     aria-label="Scroll left"
@@ -491,7 +447,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     size="icon" 
                     className={cn(
                       "absolute top-1/2 -translate-y-1/2 -right-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300",
-                      canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"
+                      state.canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"
                     )}
                     onClick={() => scroll('right')}
                     aria-label="Scroll right"
@@ -513,7 +469,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     <p className="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">
                       Werden Sie Partner bei Online-Offerten.ch
                     </p>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <h2 className="heading-2">
                       Sind Sie Dienstleister?
                     </h2>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -538,6 +494,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       height={600}
                       className="w-full h-full object-cover rounded-2xl"
                       priority={false}
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
                 </div>
@@ -558,7 +516,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 <div className="mb-8">
                   <div className="flex items-center justify-center mb-4 text-green-300">
                     <MapPin className="w-8 h-8 md:w-10 md:h-10 mr-3" />
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-white">
+                    <h2 className="heading-2 text-white">
                       In der ganzen Schweiz für Sie da
                     </h2>
                   </div>
@@ -607,7 +565,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <div>
                     <p className="text-sm font-semibold text-green-600 mb-2">Nützliche Helfer für Ihren Umzug</p>
                     <h2 
-                      className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+                      className="heading-2"
                       style={{
                         fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                         fontWeight: 700,
@@ -658,11 +616,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
 
           {/* Ratgeber Section */}
-          {postsLoading ? (
+          {state.postsLoading ? (
             <div className="py-12 md:py-24 bg-white flex justify-center items-center">
               <Loader2 className="w-8 h-8 animate-spin text-green-600" />
             </div>
-          ) : posts.length > 0 ? (
+          ) : state.posts.length > 0 ? (
             <section className="py-12 md:py-24 bg-white">
               <div className="container mx-auto max-w-7xl px-4 sm:px-6">
                 {/* Header */}
@@ -681,27 +639,18 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
                 {/* Category Filter */}
                 {(() => {
-                  // Extract unique categories from posts and format them
-                  const uniqueCategories = Array.from(new Set(posts.map((p: any) => p.category).filter(Boolean)));
-                  const formatCategory = (cat: string) => {
-                    if (!cat) return '';
-                    return cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase();
-                  };
-                  const categories = ['Alle', ...uniqueCategories.map(formatCategory)];
-                  const filteredPosts = selectedCategory === 'Alle' 
-                    ? posts 
-                    : posts.filter((p: any) => formatCategory(p.category) === selectedCategory);
+                  // uniqueCategories ve filteredPosts artık useMemo ile hesaplanıyor
 
                   return (
                     <>
                       <div className="flex flex-wrap gap-3 mb-8">
-                        {categories.map((category) => (
+                        {uniqueCategories.map((category) => (
                           <button
                             key={category}
-                            onClick={() => setSelectedCategory(category)}
+                            onClick={() => setState(prev => ({ ...prev, selectedCategory: category }))}
                             className={cn(
                               "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
-                              selectedCategory === category
+                              state.selectedCategory === category
                                 ? "bg-[#0d4d2c] text-white"
                                 : "bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
                             )}
@@ -727,6 +676,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                                     fill
                                     className="object-cover"
                                     loading="lazy"
+                                    sizes="(max-width: 768px) 50vw, 25vw"
+                                    priority={false}
                                   />
                                 </div>
                                 <CardContent className="p-4 sm:p-6 flex flex-col justify-center flex-1">

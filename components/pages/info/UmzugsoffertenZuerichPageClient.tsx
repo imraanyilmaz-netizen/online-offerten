@@ -303,7 +303,7 @@ const UmzugsoffertenZuerichPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               So funktioniert das Einholen von Umzugsofferten in Zürich
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -382,7 +382,7 @@ const UmzugsoffertenZuerichPageClient = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center">
+            <h2 className="heading-2 text-center">
               Umzugskosten in Zürich realistisch einschätzen
             </h2>
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">

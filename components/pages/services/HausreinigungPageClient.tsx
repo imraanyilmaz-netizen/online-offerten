@@ -182,7 +182,7 @@ const HausreinigungPageClient: React.FC<HausreinigungPageClientProps> = ({ initi
                   className="w-full min-w-0"
                 >
                   <h1 
-                    className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-gray-900 break-words"
+                    className="heading-1 break-words"
                     style={{
                       fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                       fontWeight: 700,

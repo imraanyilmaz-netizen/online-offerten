@@ -475,7 +475,7 @@ const UmzugsfirmaPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               Warum mehrere Umzugsfirmen vergleichen?
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -521,7 +521,7 @@ const UmzugsfirmaPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               Welche Umzugsfirma brauchen Sie?
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -573,7 +573,7 @@ const UmzugsfirmaPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               Worauf sollten Sie bei der Auswahl einer Umzugsfirma achten?
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -619,7 +619,7 @@ const UmzugsfirmaPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               Umzugsfirmen nach Region
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -780,7 +780,7 @@ const UmzugsfirmaPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="heading-2">
               Häufige Fragen zu Umzugsfirmen
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -815,7 +815,7 @@ const UmzugsfirmaPageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="heading-2">
               Bereit, Ihre Umzugsfirma zu finden?
             </h2>
             <p className="text-xl mb-8 text-green-50">

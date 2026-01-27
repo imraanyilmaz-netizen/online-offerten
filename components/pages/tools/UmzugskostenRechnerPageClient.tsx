@@ -176,10 +176,10 @@ const UmzugskostenRechnerPageClient: React.FC<UmzugskostenRechnerPageClientProps
                   <Calculator className="h-4 w-4 mr-2" />
                   Kostenloser Umzugskosten-Rechner
                 </div>
-                <h1 className="typography-h1 text-[32px] md:text-[40px] leading-[42.56px] md:leading-[53.2px] mb-6">
+                <h1 className="heading-1">
                   <span className="block">Umzugskosten</span>
                   <span className="block text-green-600 mt-2">kostenlos berechnen</span>
-                  <span className="block text-[20px] md:text-[24px] text-gray-700 font-bold mt-4">
+                  <span className="block heading-4 text-gray-700 mt-4">
                     In nur 2 Minuten eine verlässliche Schätzung
                   </span>
                 </h1>

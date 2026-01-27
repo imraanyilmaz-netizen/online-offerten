@@ -110,7 +110,7 @@ const UmzugsfirmaBielBiennePageClient = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 md:mb-16 pt-8"
           >
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 text-shadow-md">
+            <h1 className="heading-1">
               Umzugsfirma <span className="text-green-600 underline decoration-green-500 decoration-2 underline-offset-4">Biel/Bienne</span> für einen stressfreien Umzug.
             </h1>
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">

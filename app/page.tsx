@@ -13,12 +13,10 @@ import Link from 'next/link'
 import NextImage from 'next/image'
 import { Button } from '@/components/ui/button'
 import { 
-  CheckCircle2, Home, Sparkles, Paintbrush,
-  GitCompareArrows, Award,
-  MapPin, Calculator,
-  ArrowRight,
-  ShieldCheck, Search, Truck, Trash2, Sprout, Star,
-  FileText, Users, CheckCircle
+  Star, ArrowRight, MapPin, CheckCircle, 
+  FileText, Users, GitCompareArrows, 
+  Truck, Sparkles, Paintbrush, Sprout, 
+  ShieldCheck, Award
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -287,13 +285,13 @@ export default async function HomePage() {
                 alt=""
                 fill
                 priority
-                quality={85}
+                quality={75}
                 className="object-cover object-right"
                 style={{
                   maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
                   WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
                 }}
-                sizes="55vw"
+                sizes="(max-width: 1024px) 100vw, 55vw"
               />
             </div>
             
@@ -569,6 +567,8 @@ export default async function HomePage() {
                       width={600}
                       height={400}
                       className="w-full h-auto object-cover"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     {/* Yellow L-shaped accent */}
                     <div className="absolute top-0 left-0 w-24 h-24 bg-yellow-400 opacity-90 rounded-br-3xl"></div>

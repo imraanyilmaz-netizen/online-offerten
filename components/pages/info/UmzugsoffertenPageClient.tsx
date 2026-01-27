@@ -455,7 +455,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
               transition={{ duration: 0.8 }}
               className="space-y-6 order-2 md:order-1"
             >
-              <h1 className="typography-h1 text-[32px] md:text-[40px] leading-[42.56px] md:leading-[53.2px] mb-6">
+              <h1 className="heading-1">
                 Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen
               </h1>
               <p className="typography-p">
@@ -1096,21 +1096,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
           </div>
           
             <div className="max-w-3xl text-left">
-              <h2 
-                className="text-[24px] md:text-[32px] leading-[31.92px] md:leading-[42.56px] font-bold mb-6 text-left"
-                style={{
-                  fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                  fontWeight: 700,
-                  color: '#1c1d16',
-                  textAlign: 'start',
-                  letterSpacing: 'normal',
-                  wordSpacing: '0px',
-                  fontStyle: 'normal',
-                  textTransform: 'none',
-                  textDecoration: 'none',
-                  textIndent: '0px'
-                }}
-              >
+              <h2 className="heading-2">
                 Jetzt Umzugsofferten einholen
               </h2>
             

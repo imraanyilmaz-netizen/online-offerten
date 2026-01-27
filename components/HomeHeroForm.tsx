@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Search, ChevronDown, X, Loader2, Clock } from 'lucide-react'
-import { supabase } from '@/lib/supabaseClient'
+// Supabase lazy load - sadece gerektiğinde yükle
+// import { supabase } from '@/lib/supabaseClient' // KALDIRILDI - lazy load yapılacak
 
 interface ServiceOption {
   id: string
@@ -64,7 +65,7 @@ const categoryKeywords: Record<string, string[]> = {
   'Räumung': ['räumung', 'entsorgung', 'entrümpelung']
 }
 
-const HomeHeroForm = () => {
+const HomeHeroForm = memo(() => {
   const router = useRouter()
   const [serviceInput, setServiceInput] = useState('')
   const [postalCode, setPostalCode] = useState('')
@@ -142,7 +143,7 @@ const HomeHeroForm = () => {
     }
   }, [filteredOptionsMemo])
 
-  // PLZ to City mapping for known incorrect cases (fallback)
+  // PLZ to City mapping for known incorrect cases (fallback) - genişletilmiş
   const plzCityMapping: Record<string, string> = {
     '8953': 'Dietikon',
     '8952': 'Schlieren',
@@ -150,6 +151,7 @@ const HomeHeroForm = () => {
     '8955': 'Oetwil am See',
     '8956': 'Killwangen',
     '8957': 'Spreitenbach',
+    // Daha fazla yaygın PLZ buraya eklenebilir
   }
 
   // Fetch city from PLZ
@@ -159,20 +161,24 @@ const HomeHeroForm = () => {
     }
 
     if (postalCode.trim().length >= 4) {
+      // Debounce süresini artır (500ms -> 800ms) - daha az API çağrısı
       postalCodeTimeoutRef.current = setTimeout(async () => {
         setIsFetchingCity(true)
         setCity('') // Clear previous city while fetching
         
         const plzTrimmed = postalCode.trim()
         
-        // Check fallback mapping first
+        // Önce fallback mapping kontrol et (daha hızlı!)
         if (plzCityMapping[plzTrimmed]) {
           setCity(plzCityMapping[plzTrimmed])
           setIsFetchingCity(false)
           return
         }
         
+        // Sadece mapping'de yoksa Supabase Function çağır (LAZY LOAD)
         try {
+          // LAZY LOAD Supabase - sadece gerektiğinde yükle
+          const { supabase } = await import('@/lib/supabaseClient')
           const { data, error } = await supabase.functions.invoke('fetch-city-by-zip', {
             body: { zipCode: plzTrimmed },
           })
@@ -188,8 +194,7 @@ const HomeHeroForm = () => {
             return
           }
 
-          // Debug: Log the response
-          console.log('PLZ Response for', plzTrimmed, ':', data)
+          // Debug log kaldırıldı - production'da gereksiz
 
           // Handle response - function should return the correct city/village name
           if (data) {
@@ -241,7 +246,7 @@ const HomeHeroForm = () => {
         } finally {
           setIsFetchingCity(false)
         }
-      }, 500)
+      }, 800) // Debounce süresini artırdık - daha az API çağrısı
     } else {
       setCity('')
     }
@@ -347,20 +352,7 @@ const HomeHeroForm = () => {
       {/* İçerik - relative z-index ile overlay'in üstünde */}
       <div className="relative z-10" style={{ zIndex: 2 }}>
         {/* H1 Title */}
-        <h1 
-          className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-gray-900 break-words"
-          style={{
-            fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-            fontWeight: 700,
-            textAlign: 'start',
-            letterSpacing: 'normal',
-            wordSpacing: '0px',
-            fontStyle: 'normal',
-            textTransform: 'none',
-            textDecoration: 'none',
-            textIndent: '0px'
-          }}
-        >
+        <h1 className="heading-1 break-words">
           Offerten vergleichen & passende Anbieter in der Schweiz finden
         </h1>
         
@@ -477,21 +469,7 @@ const HomeHeroForm = () => {
       {/* Stats inside form */}
       <div className="mt-4 pt-4 border-t border-gray-200 space-y-2 bg-white rounded-xl p-4 -mx-4 md:-mx-6 lg:-mx-8">
         <p 
-          className="flex items-center gap-2"
-          style={{
-            fontFamily: 'Roboto, "Roboto Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-            fontSize: '16px',
-            lineHeight: '24px',
-            fontWeight: 400,
-            color: '#1c1d16',
-            textAlign: 'start',
-            letterSpacing: 'normal',
-            wordSpacing: '0px',
-            fontStyle: 'normal',
-            textTransform: 'none',
-            textDecoration: 'none',
-            textIndent: '0px'
-          }}
+          className="flex items-center gap-2 text-body"
         >
           <Clock className="h-4 w-4 text-gray-500 flex-shrink-0" />
           Die letzte Anfrage wurde vor <span className="font-semibold">{minutesAgo}</span> Minuten gestellt
@@ -501,7 +479,9 @@ const HomeHeroForm = () => {
       {/* Kapanış div - içerik wrapper */}
     </form>
   )
-}
+})
 
-export default React.memo(HomeHeroForm)
+HomeHeroForm.displayName = 'HomeHeroForm'
+
+export default HomeHeroForm
 

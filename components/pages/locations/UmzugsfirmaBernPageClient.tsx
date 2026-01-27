@@ -212,7 +212,7 @@ const UmzugsfirmaBernPageClient = () => {
 
                   {/* Heading */}
                   <h1 
-                    className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-white pr-20 sm:pr-24"
+                    className="heading-1-white pr-20 sm:pr-24"
                     itemProp="name"
                     style={{
                       fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',

@@ -177,7 +177,7 @@ const UnterhaltsreinigungPageClient = () => {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  <h1 className="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 text-gray-900">
+                  <h1 className="heading-1">
                     Professionelle Unterhaltsreinigung
                   </h1>
                 </motion.div>

@@ -100,7 +100,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
         <section className="relative w-full py-12 md:py-16 lg:py-20 bg-gradient-to-br from-green-50 via-white to-blue-50">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="max-w-4xl">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+              <h1 className="heading-1">
                 Umzugsfirma {cityName} – Geprüfte Anbieter vergleichen
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
@@ -288,7 +288,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
 
             {/* CTA */}
             <article className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-8 md:p-12 text-center text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Jetzt kostenlose Offerte für {cityName} anfordern</h2>
+              <h2 className="heading-2">Jetzt kostenlose Offerte für {cityName} anfordern</h2>
               <p className="text-lg md:text-xl mb-6 opacity-90">
                 Vergleichen Sie mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%
               </p>

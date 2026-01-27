@@ -129,7 +129,7 @@ const UmzugshilfePageClient = () => {
             <div className="grid md:grid-cols-3 gap-6 md:gap-0 items-center">
               <article className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl">
                 <div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
+                  <h1 className="heading-1">
                     Umzugshilfe finden & vergleichen
                   </h1>
                   <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mb-4">
