@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Kostenlose Offerten anfordern für Umzug, Reinigung, Maler & mehr",
-    "description": "Fordern Sie jetzt kostenlos und unverbindlich Offerten für Umzug, Reinigung, Malerarbeiten, Gartenarbeiten oder Räumung an. Mit nur einer Anfrage mehrere Offerten vergleichen und bis zu 40 % sparen."
+    "description": "Fordern Sie jetzt kostenlos und unverbindlich Offerten für Umzug, Reinigung, Malerarbeiten oder Räumung an. Mit nur einer Anfrage mehrere Offerten vergleichen und bis zu 40 % sparen."
   },
   "mainHeader": "Kostenlose Offerten anfordern",
   "stepProgress": "Schritt {{currentStep}} von {{totalSteps}}",
@@ -27,8 +27,6 @@
     "mainServiceDisposalSublabel": "Wohnungsräumung, Entrümpelung & mehr",
     "mainServicePainter": "Malerarbeiten",
     "mainServicePainterSublabel": "Innen-, Aussenanstrich, Fassaden & mehr",
-    "mainServiceGarden": "Gartenarbeiten",
-    "mainServiceGardenSublabel": "Pflege, Landschaftsbau, Pool & mehr",
     "moveTypeSelectionTitle": "Welche Art von Umzug planen Sie?",
     "moveTypeSelectionSubtitle": "Dies hilft uns, die passenden Spezialisten für Sie zu finden.",
     "privateMoveLabel": "Privatumzug",
@@ -199,18 +197,6 @@
       "neubau": "Neubau (Erstbezug)",
       "vorgestrichen": "Gut/Vorgestrichen",
       "renovierungsbeduerftig": "Renovierungsbedürftig"
-    },
-    "whatToGardenTitle": "Bitte wählen Sie die gewünschten Gartenarbeiten aus:",
-    "whatToGardenSubtitle": "Mehrfachauswahl ist möglich.",
-    "whatToGarden": {
-      "landschaftsbau": "Garten- und Landschaftsbau",
-      "gartenpflege": "Gartenpflege",
-      "terrassenverlegung": "Terrassenverlegung",
-      "pool": "Pool",
-      "sporteinrichtungsbau": "Sporteinrichtungsbau",
-      "gartenhausbau": "Gartenhausbau",
-      "saunabau": "Saunabau",
-      "andere": "Andere"
     }
   },
   "step2": {
@@ -401,7 +387,6 @@
     "whatToCleanMissing": "Bitte wählen Sie mindestens einen zu reinigenden Bereich aus.",
     "floorTypesMissing": "Bitte wählen Sie mindestens eine Bodenart aus.",
     "whatToPaintMissing": "Bitte wählen Sie mindestens einen Bereich zum Streichen aus.",
-    "whatToGardenMissing": "Bitte wählen Sie mindestens eine Gartenarbeit aus.",
     "malerDetailsMissing": "Bitte geben Sie mehr Details an (mind. 10 Zeichen).",
     "countryRequired": "Bitte wählen Sie ein Land aus.",
     "fromToCountryMustBeDifferent": "Start- und Zielland müssen unterschiedlich sein.",

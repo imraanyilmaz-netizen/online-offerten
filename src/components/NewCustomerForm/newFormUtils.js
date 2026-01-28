@@ -188,16 +188,6 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
         const conditionLabel = tAdmin(`step1.malerCurrentConditionOptions.${formData.maler_current_condition}`);
         serviceSpecificDetails.push(`${tAdmin('step1.malerCurrentConditionLabel')}: ${conditionLabel}`);
     }
-  } else if (formData.service === 'garten') {
-    const gardenWork = formData.what_to_garden;
-    if (gardenWork) {
-      finalServiceType = tAdmin(`step1.whatToGarden.${gardenWork}`);
-      if (gardenWork === 'andere' && formData.garden_details_other) {
-        serviceSpecificDetails.push(`${tAdmin('step1.whatToPaint.otherPlaceholder')}: ${formData.garden_details_other}`);
-      }
-    } else {
-      finalServiceType = 'Gartenarbeiten';
-    }
   }
 
   // Möbel De-/Montage bilgisini ekle (sadece Privatumzug und Auslandumzug için)

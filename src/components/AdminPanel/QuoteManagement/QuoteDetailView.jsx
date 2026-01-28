@@ -9,8 +9,7 @@ import { getServiceTypeLabel, formatDate } from '@/lib/utils';
 import { countries } from '@/data/countries';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
-import GardeningDetails from '@/components/common/GardeningDetails';
-import { getServiceCategory, isMovingService, isCleaningService, isPaintingService, isGardeningService } from '@/lib/serviceCategorizer';
+import { getServiceCategory, isMovingService, isCleaningService, isPaintingService } from '@/lib/serviceCategorizer';
 
 const DetailSection = ({ title, icon: Icon, children }) => (
     <div className="bg-white p-4 rounded-lg border shadow-sm">
@@ -118,7 +117,6 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
           case 'moving': return Truck;
           case 'cleaning': return Sparkles;
           case 'painting': return Paintbrush;
-          case 'gardening': return Leaf;
           default: return File;
       }
   };
@@ -172,7 +170,6 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
 
             {isCleaningService(quote.servicetype) && <CleaningDetails details={quote} />}
             {isPaintingService(quote.servicetype) && <PaintingDetails details={quote} />}
-            {isGardeningService(quote.servicetype) && <GardeningDetails details={quote} />}
         </DetailSection>
 
         <DetailSection title={isMovingService(quote.servicetype) ? "Umzugsadressen" : "Objektadresse"} icon={MapPin}>

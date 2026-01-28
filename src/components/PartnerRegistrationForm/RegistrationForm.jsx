@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
+import { supabase as customSupabase } from '@/lib/customSupabaseClient';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Card } from '@/components/ui/card';
@@ -10,6 +11,7 @@ import Step1Services from './Step1Services';
 import Step2Regions from './Step2Regions';
 import Step3CompanyData from './Step3CompanyData';
 import SuccessMessage from './SuccessMessage';
+import LogoUpload from './LogoUpload';
 import { CheckCircle2, Edit3 } from 'lucide-react';
 
 const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
@@ -33,6 +35,8 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
     employee_count: '',
     liability_insurance: null,
     commercial_register_number: '',
+    company_description: '',
+    logoFile: null,
     agreedToTerms: false
   });
   const [loading, setLoading] = useState(false);
@@ -216,6 +220,16 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         newErrors.confirmPassword = "Die Passwörter stimmen nicht überein.";
       }
       
+      // Liability Insurance validation (Haftpflichtversicherung)
+      if (formData.liability_insurance === null || formData.liability_insurance === undefined) {
+        newErrors.liability_insurance = "Haftpflichtversicherung ist ein Pflichtfeld.";
+      }
+      
+      // Commercial Register Number validation (Handelsregisternummer)
+      if (!formData.commercial_register_number || formData.commercial_register_number.trim() === '') {
+        newErrors.commercial_register_number = "Handelsregisternummer ist ein Pflichtfeld.";
+      }
+      
       // Terms validation
       if (!formData.agreedToTerms) {
         newErrors.agreedToTerms = "Bitte akzeptieren Sie die Allgemeinen Geschäftsbedingungen.";
@@ -267,6 +281,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         employee_count: formData.employee_count,
         liability_insurance: formData.liability_insurance,
         commercial_register_number: formData.commercial_register_number,
+        company_description: formData.company_description,
         agreed_to_terms: formData.agreedToTerms,
       };
 
@@ -289,7 +304,35 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         } else {
           throw error;
         }
-      } else if (data.user) {
+      } else if (data?.user) {
+        // Upload logo if provided
+        if (formData.logoFile && data.user.id) {
+          try {
+            const fileExt = formData.logoFile.name.split('.').pop();
+            const fileName = `${data.user.id}/${Date.now()}.${fileExt}`;
+            
+            const { error: uploadError } = await customSupabase.storage
+              .from('partner-logos')
+              .upload(fileName, formData.logoFile);
+            
+            if (!uploadError) {
+              const { data: publicUrlData } = customSupabase.storage
+                .from('partner-logos')
+                .getPublicUrl(fileName);
+              
+              const logoUrl = publicUrlData.publicUrl;
+              
+              // Update user metadata with logo URL
+              await customSupabase.auth.updateUser({
+                data: { ...partnerMetaData, logo_url: logoUrl }
+              });
+            }
+          } catch (logoError) {
+            console.error('Error uploading logo:', logoError);
+            // Don't fail registration if logo upload fails
+          }
+        }
+        
         setSubmitted(true);
         toast({
           title: "Registrierung erfolgreich!",
@@ -434,7 +477,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                 >
                   {step === 1 && <Step1Services formData={formData} onMainCategoryChange={handleMainCategoryChange} onServiceChange={handleServiceChange} errors={errors} />}
                   {step === 2 && <Step2Regions formData={formData} onRegionChange={handleRegionChange} errors={errors} />}
-                  {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} errors={errors} />}
+                  {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} onLogoChange={(file) => setFormData(prev => ({ ...prev, logoFile: file }))} errors={errors} />}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -568,7 +611,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                   >
                     {step === 1 && <Step1Services formData={formData} onMainCategoryChange={handleMainCategoryChange} onServiceChange={handleServiceChange} errors={errors} />}
                     {step === 2 && <Step2Regions formData={formData} onRegionChange={handleRegionChange} errors={errors} />}
-                    {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} errors={errors} />}
+                    {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} onLogoChange={(file) => setFormData(prev => ({ ...prev, logoFile: file }))} errors={errors} />}
                   </motion.div>
                 )}
               </AnimatePresence>

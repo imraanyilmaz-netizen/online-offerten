@@ -68,7 +68,6 @@
   select {
     font-size: 16px !important;
     min-height: 44px;
-    border-radius: 0 !important;
     -webkit-appearance: none;
     appearance: none;
   }

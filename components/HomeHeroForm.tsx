@@ -47,21 +47,12 @@ const serviceOptions: ServiceOption[] = [
   // MALER Services
   { id: 'maler_privat', label: 'Malerarbeiten (Privat)', url: '/kostenlose-offerte-anfordern?service=maler&step=2&malerArt=maler_privat', category: 'Malerarbeiten' },
   { id: 'maler_gewerbe', label: 'Malerarbeiten (Gewerbe)', url: '/kostenlose-offerte-anfordern?service=maler&step=2&malerArt=maler_gewerbe', category: 'Malerarbeiten' },
-  
-  // GARTEN Services
-  { id: 'gartenpflege', label: 'Gartenpflege', url: '/kostenlose-offerte-anfordern?service=garten&step=2', category: 'Gartenarbeiten' },
-  { id: 'terrassenverlegung', label: 'Terrassenverlegung', url: '/kostenlose-offerte-anfordern?service=garten&step=2', category: 'Gartenarbeiten' },
-  { id: 'pool', label: 'Pool', url: '/kostenlose-offerte-anfordern?service=garten&step=2', category: 'Gartenarbeiten' },
-  { id: 'sporteinrichtungsbau', label: 'Sporteinrichtungsbau', url: '/kostenlose-offerte-anfordern?service=garten&step=2', category: 'Gartenarbeiten' },
-  { id: 'gartenhausbau', label: 'Gartenhausbau', url: '/kostenlose-offerte-anfordern?service=garten&step=2', category: 'Gartenarbeiten' },
-  { id: 'saunabau', label: 'Saunabau', url: '/kostenlose-offerte-anfordern?service=garten&step=2', category: 'Gartenarbeiten' },
 ]
 
 const categoryKeywords: Record<string, string[]> = {
   'Umzug': ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung'],
   'Reinigung': ['reinigung', 'reinigen', 'reinigungs', 'wohnungsreinigung', 'hausreinigung', 'büroreinigung', 'umzugsreinigung', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung'],
   'Malerarbeiten': ['maler', 'malerarbeiten', 'streichen', 'anstrich', 'fassade'],
-  'Gartenarbeiten': ['garten', 'gartenarbeiten', 'gartenpflege', 'terrassenverlegung', 'pool', 'sporteinrichtungsbau', 'gartenhausbau', 'saunabau'],
   'Räumung': ['räumung', 'entsorgung', 'entrümpelung']
 }
 
@@ -72,14 +63,13 @@ const HomeHeroForm = memo(() => {
   const [city, setCity] = useState('')
   const [isFetchingCity, setIsFetchingCity] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
-  const [filteredOptions, setFilteredOptions] = useState<ServiceOption[]>([])
   const [selectedOption, setSelectedOption] = useState<ServiceOption | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const postalCodeTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   
-  // Stats state
-  const [minutesAgo, setMinutesAgo] = useState(6)
+  // Stats - statik değer (gereksiz re-render'ları önlemek için)
+  const minutesAgo = 6
 
   // Memoize filtered options to prevent unnecessary recalculations
   const filteredOptionsMemo = useMemo(() => {
@@ -133,12 +123,11 @@ const HomeHeroForm = memo(() => {
       })
   }, [serviceInput])
 
+  // Dropdown'u filteredOptionsMemo'ya göre kontrol et
   useEffect(() => {
     if (filteredOptionsMemo.length > 0) {
-      setFilteredOptions(filteredOptionsMemo)
       setShowDropdown(true)
     } else {
-      setFilteredOptions([])
       setShowDropdown(false)
     }
   }, [filteredOptionsMemo])
@@ -278,26 +267,6 @@ const HomeHeroForm = memo(() => {
     }
   }, [])
 
-  // Stats useEffect - optimized to reduce re-renders
-  useEffect(() => {
-    // Initial random minutes value (2-15)
-    const randomMinutes = Math.floor(Math.random() * 14) + 2
-    setMinutesAgo(randomMinutes)
-
-    // Update every minute with random value (2-15)
-    const minutesInterval = setInterval(() => {
-      setMinutesAgo(prev => {
-        const newValue = Math.floor(Math.random() * 14) + 2
-        // Only update if value changed to prevent unnecessary re-renders
-        return newValue !== prev ? newValue : prev
-      })
-    }, 60000) // Every 1 minute
-
-    return () => {
-      clearInterval(minutesInterval)
-    }
-  }, [])
-
   const handleServiceSelect = useCallback((option: ServiceOption, e?: React.MouseEvent) => {
     e?.preventDefault()
     e?.stopPropagation()
@@ -314,32 +283,18 @@ const HomeHeroForm = memo(() => {
     if (selectedOption) {
       let url = selectedOption.url
       
-      // Add PLZ and city to URL if provided (for form auto-fill)
-      if (postalCode.trim()) {
-        const separator = url.includes('?') ? '&' : '?'
-        url += `${separator}from_plz=${encodeURIComponent(postalCode.trim())}`
-        if (city.trim()) {
-          url += `&from_city=${encodeURIComponent(city.trim())}`
-        }
-      }
-      
       router.push(url)
-    } else if (serviceInput.trim() && postalCode.trim()) {
-      // Fallback: go to general form with service, PLZ and city
-      let url = `/kostenlose-offerte-anfordern?service=${encodeURIComponent(serviceInput)}&from_plz=${encodeURIComponent(postalCode.trim())}`
-      if (city.trim()) {
-        url += `&from_city=${encodeURIComponent(city.trim())}`
-      }
-      router.push(url)
+    } else if (serviceInput.trim()) {
+      // Fallback: go to general form with service
+      router.push(`/kostenlose-offerte-anfordern?service=${encodeURIComponent(serviceInput)}`)
     } else {
       router.push('/kostenlose-offerte-anfordern')
     }
-  }, [selectedOption, postalCode, city, serviceInput, router])
+  }, [selectedOption, serviceInput, router])
 
   const clearService = useCallback(() => {
     setServiceInput('')
     setSelectedOption(null)
-    setFilteredOptions([])
     setShowDropdown(false)
     inputRef.current?.focus()
   }, [])
@@ -347,26 +302,24 @@ const HomeHeroForm = memo(() => {
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 relative z-30"
+      className="bg-white rounded-2xl p-6 md:p-8 mb-8"
     >
-      {/* İçerik - relative z-index ile overlay'in üstünde */}
-      <div className="relative z-10" style={{ zIndex: 2 }}>
-        {/* H1 Title */}
+      <div>
         <h1 className="heading-1 break-words">
           Offerten vergleichen & passende Anbieter in der Schweiz finden
         </h1>
         
-      <div className="flex flex-col md:flex-row gap-4 bg-white/95 lg:bg-transparent rounded-xl p-4 lg:p-0 backdrop-blur-sm">
-        <div className="flex-1 relative z-50">
+      <div className="flex flex-col md:flex-row gap-4 rounded-xl p-4 lg:p-0">
+        <div className="flex-1 min-w-0">
           <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Was steht an?</label>
-          <div className="relative z-50">
+          <div className="relative">
             <input
               ref={inputRef}
               type="text"
               value={serviceInput}
               onChange={(e) => setServiceInput(e.target.value)}
               onFocus={() => {
-                if (filteredOptions.length > 0 || serviceInput.trim()) {
+                if (filteredOptionsMemo.length > 0 || serviceInput.trim()) {
                   setShowDropdown(true)
                 }
               }}
@@ -380,27 +333,35 @@ const HomeHeroForm = memo(() => {
                 }, 200)
               }}
               placeholder="z.B. Umzug, Reinigung, Malerarbeiten"
-              className="w-full px-5 py-4 pr-12 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-500/30 text-gray-900 transition-all duration-300 shadow-md hover:shadow-lg bg-white"
+              className="w-full px-5 py-4 pr-40 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none text-gray-900 bg-white"
+              style={{ borderRadius: '0.65rem' }}
             />
             {serviceInput && (
               <button
                 type="button"
                 onClick={clearService}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-32 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
               >
                 <X className="h-5 w-5" />
               </button>
             )}
+            <Button
+              type="submit"
+              size={undefined}
+              className="absolute right-1 top-1/2 -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
+              style={{ borderRadius: '0.65rem' }}
+            >
+              Kostenlos anfragen
+            </Button>
             
             {/* Dropdown */}
-            {showDropdown && filteredOptions.length > 0 && (
+            {showDropdown && filteredOptionsMemo.length > 0 && (
               <div
                 ref={dropdownRef}
-                className="absolute z-[9999] w-full mt-2 bg-white border-2 border-gray-200 rounded-lg shadow-2xl max-h-96 overflow-y-auto"
-                style={{ position: 'absolute', top: '100%', left: 0, right: 0 }}
+                className="absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg max-h-64 overflow-y-auto"
               >
                 {Object.entries(
-                  filteredOptions.reduce((acc, option) => {
+                  filteredOptionsMemo.reduce((acc, option) => {
                     if (!acc[option.category]) {
                       acc[option.category] = []
                     }
@@ -408,8 +369,8 @@ const HomeHeroForm = memo(() => {
                     return acc
                   }, {} as Record<string, ServiceOption[]>)
                 ).map(([category, options]) => (
-                  <div key={category} className="p-2">
-                    <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  <div key={category} className="py-1">
+                    <div className="px-4 py-2.5 text-xs font-bold text-green-700 uppercase tracking-wider bg-green-50 border-b border-green-100">
                       {category}
                     </div>
                     {options.map((option) => (
@@ -417,11 +378,11 @@ const HomeHeroForm = memo(() => {
                         key={option.id}
                         type="button"
                         onClick={(e) => handleServiceSelect(option, e)}
-                        onMouseDown={(e) => e.preventDefault()} // Prevent input blur before click
-                        className="w-full text-left px-3 py-2 hover:bg-green-50 rounded-md transition-colors flex items-center justify-between group"
+                        onMouseDown={(e) => e.preventDefault()}
+                        className="w-full text-left px-4 py-3 hover:bg-green-50 transition-colors flex items-center justify-between group border-b border-gray-50 last:border-b-0"
                       >
-                        <span className="text-gray-900">{option.label}</span>
-                        <ChevronDown className="h-4 w-4 text-gray-400 group-hover:text-green-600 transform rotate-[-90deg] transition-colors" />
+                        <span className="text-gray-800 font-medium group-hover:text-green-700">{option.label}</span>
+                        <ChevronDown className="h-4 w-4 text-gray-400 group-hover:text-green-600 rotate-[-90deg] transition-colors" />
                       </button>
                     ))}
                   </div>
@@ -430,53 +391,15 @@ const HomeHeroForm = memo(() => {
             )}
           </div>
         </div>
-        
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Wo?</label>
-          <div className="relative">
-            <input
-              type="text"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
-              placeholder="Postleitzahl oder Ort"
-              className="w-full px-5 py-4 pr-12 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-500/30 text-gray-900 transition-all duration-300 shadow-md hover:shadow-lg bg-white"
-            />
-            {isFetchingCity && (
-              <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                <Loader2 className="h-5 w-5 text-green-600 animate-spin" />
-              </div>
-            )}
-            {!isFetchingCity && city && (
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-green-600 font-medium pointer-events-none">
-                {city}
-              </div>
-            )}
-          </div>
-        </div>
-        
-        <div className="flex items-end">
-          <Button
-            type="submit"
-            size="lg"
-            className="bg-green-600 hover:bg-green-700 text-white px-10 py-4 h-auto rounded-3xl shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 w-full md:w-auto font-semibold text-base"
-          >
-            <Search className="mr-2 h-5 w-5" />
-            Finden
-          </Button>
-        </div>
       </div>
       
-      {/* Stats inside form */}
-      <div className="mt-4 pt-4 border-t border-gray-200 space-y-2 bg-white rounded-xl p-4 -mx-4 md:-mx-6 lg:-mx-8">
-        <p 
-          className="flex items-center gap-2 text-body"
-        >
-          <Clock className="h-4 w-4 text-gray-500 flex-shrink-0" />
+      <div className="mt-4 pt-4 border-t border-gray-200 p-4">
+        <p className="flex items-center gap-2 text-body">
+          <Clock className="h-4 w-4 text-gray-500" />
           Die letzte Anfrage wurde vor <span className="font-semibold">{minutesAgo}</span> Minuten gestellt
         </p>
       </div>
       </div>
-      {/* Kapanış div - içerik wrapper */}
     </form>
   )
 })

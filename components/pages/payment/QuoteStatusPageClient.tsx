@@ -17,7 +17,7 @@ import ReviewModal from '@/components/ReviewModal';
 import { getGermanServiceName } from '@/lib/dataMapping';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
-import { isCleaningService, isPaintingService, isGardeningService, isDisposalService } from '@/lib/serviceCategorizer';
+import { isCleaningService, isPaintingService, isDisposalService } from '@/lib/serviceCategorizer';
 
 const StatusTimeline = ({ status }: { status: string }) => {
   const steps = [
@@ -215,7 +215,6 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
     const getDynamicLabels = () => {
       const cleaningService = isCleaningService(serviceType);
       const paintingService = isPaintingService(serviceType);
-      const gardeningService = isGardeningService(serviceType);
       const disposalService = isDisposalService(serviceType);
 
       if (cleaningService) {
@@ -234,7 +233,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
           fromLocationIcon: <Paintbrush />,
         };
       }
-      if (gardeningService) {
+      if (false) {
         return {
           dateLabel: 'Ausführungsdatum',
           fromLocationLabel: 'Objektadresse',

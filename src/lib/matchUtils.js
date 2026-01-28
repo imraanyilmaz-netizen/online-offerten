@@ -30,13 +30,6 @@ const serviceKeyMap = {
   'malerarbeiten': 'maler_service',
   'malerarbeiten privat': 'maler_service',
   'malerarbeiten gewerbe': 'maler_service',
-  'garten- und landschaftsbau': 'landschaftsbau',
-  'gartenpflege': 'gartenpflege',
-  'terrassenverlegung': 'terrassenverlegung',
-  'poolbau': 'pool',
-  'sporteinrichtungsbau': 'sporteinrichtungsbau',
-  'gartenhausbau': 'gartenhausbau',
-  'saunabau': 'saunabau',
   'möbellift': 'moebellift_service',
   'moebellift_service': 'moebellift_service',
   // Add partner-side keys if they differ

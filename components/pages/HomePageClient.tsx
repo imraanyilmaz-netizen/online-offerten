@@ -180,7 +180,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   const router = useRouter();
   // State'leri birleştir - daha az re-render
   const [state, setState] = useState({
-    selectedCalculator: null as string | null,
     isMounted: false,
     reviews: initialReviews,
     reviewsLoading: false,
@@ -190,7 +189,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     canScrollRight: true,
     canScrollLeftPosts: false,
     canScrollRightPosts: false,
-    currentIndex: 0,
     selectedCategory: 'Alle' as string
   });
 
@@ -351,7 +349,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
   }, []);
 
   const visibleCards = useMemo(() => getVisibleCardsCount(), [getVisibleCardsCount]);
-  const totalPages = useMemo(() => Math.ceil(state.posts.length / visibleCards), [state.posts.length, visibleCards]);
 
   // useMemo ile filtered posts
   const filteredPosts = useMemo(() => {
@@ -371,17 +368,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     };
     return ['Alle', ...cats.map(formatCategory)];
   }, [state.posts]);
-
-  const scrollToIndex = useCallback((index: number) => {
-    const el = postsScrollRef.current;
-    if (el) {
-      const containerWidth = el.clientWidth;
-      const gap = 24;
-      const cardWidth = containerWidth / visibleCards;
-      const cardWidthWithGap = cardWidth + gap;
-      el.scrollTo({ left: index * cardWidthWithGap, behavior: 'smooth' });
-    }
-  }, [visibleCards]);
 
   return (
     <>

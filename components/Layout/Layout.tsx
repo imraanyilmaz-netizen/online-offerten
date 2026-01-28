@@ -35,7 +35,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     '/umzugsfirma/klaviertransport',
     // Weitere Services
     '/malerarbeitenkosten',
-    '/gartenarbeiten',
     '/raeumung-entsorgung',
     // Kosten & Tools
     '/umzugsfirma/umzugskosten',

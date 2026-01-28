@@ -10,7 +10,7 @@ const BenefitsSection = () => {
     { 
       icon: Users, 
       title: "Zugang zu neuen Kunden ohne Marketingkosten", 
-      desc: "Als Umzugsfirma, Reinigungsfirma, Malerbetrieb oder Gartenbau-Unternehmen erweitern Sie Ihren Kundenstamm ohne teure Marketingausgaben. Wir bringen qualifizierte Kunden aus Ihrer Region direkt zu Ihnen – Sie sparen Zeit und Geld." 
+      desc: "Als Umzugsfirma, Reinigungsfirma oder Malerbetrieb erweitern Sie Ihren Kundenstamm ohne teure Marketingausgaben. Wir bringen qualifizierte Kunden aus Ihrer Region direkt zu Ihnen – Sie sparen Zeit und Geld." 
     },
     { 
       icon: TrendingUp, 
@@ -30,7 +30,7 @@ const BenefitsSection = () => {
     { 
       icon: Eye, 
       title: "Erhöhte Sichtbarkeit für Ihr Unternehmen", 
-      desc: "Profitieren Sie von unserer starken Reichweite und präsentieren Sie Ihr Umzugs-, Reinigungs-, Maler- oder Gartenbau-Unternehmen einer breiten Zielgruppe. Mehr Sichtbarkeit bedeutet mehr potenzielle Kunden." 
+      desc: "Profitieren Sie von unserer starken Reichweite und präsentieren Sie Ihr Umzugs-, Reinigungs- oder Maler-Unternehmen einer breiten Zielgruppe. Mehr Sichtbarkeit bedeutet mehr potenzielle Kunden." 
     },
     { 
       icon: Settings2, 

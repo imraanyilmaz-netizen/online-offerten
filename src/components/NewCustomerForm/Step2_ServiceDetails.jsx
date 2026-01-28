@@ -661,65 +661,6 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
     );
 };
 
-const GardenWorkSection = ({ formData, handleRadioGroupChange, handleChange, errors }) => {
-    const { t } = useTranslation('newCustomerForm');
-    const gardenOptions = ['landschaftsbau', 'gartenpflege', 'terrassenverlegung', 'pool', 'sporteinrichtungsbau', 'gartenhausbau', 'saunabau', 'andere'];
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-gray-200 mt-4 sm:mt-6"
-        >
-            <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.whatToGardenTitle')} <span className="text-red-500">*</span></h3>
-            <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.whatToGardenSubtitle')}</p>
-             <RadioGroup
-                name="what_to_garden"
-                value={formData.what_to_garden || ''}
-                onValueChange={(value) => handleRadioGroupChange('what_to_garden', value)}
-                className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3"
-            >
-                {gardenOptions.map(option => (
-                     <div key={option}>
-                        <Label 
-                            htmlFor={`what_to_garden_${option}`}
-                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 h-full
-                                ${formData.what_to_garden === option ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-400'}`
-                            }
-                        >
-                            <RadioGroupItem value={option} id={`what_to_garden_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm sm:text-base text-gray-800">
-                                {t(`step1.whatToGarden.${option}`)}
-                            </span>
-                        </Label>
-                        
-                        <AnimatePresence>
-                        {option === 'andere' && formData.what_to_garden === 'andere' && (
-                            <motion.div
-                                initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-                                animate={{ opacity: 1, scaleY: 1 }}
-                                exit={{ opacity: 0, scaleY: 0 }}
-                            >
-                                <Input
-                                    type="text"
-                                    name="garden_details_other"
-                                    value={formData.garden_details_other || ''}
-                                    onChange={handleChange}
-                                    placeholder={t('step1.whatToPaint.otherPlaceholder')}
-                                    className="bg-slate-50 border-slate-300 focus:bg-white text-sm"
-                                />
-                            </motion.div>
-                        )}
-                        </AnimatePresence>
-                    </div>
-                ))}
-            </RadioGroup>
-            {errors && errors.what_to_garden && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.what_to_garden}</p>}
-        </motion.div>
-    );
-};
 
 
 const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroupChange, handleChange, handleCheckboxChange, handleAdditionalCleaningChange, handleSelectChange, errors, umzugArtSectionRef }) => {
@@ -776,17 +717,6 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
   
   return (
     <div className="space-y-6 sm:space-y-8">
-      <AnimatePresence>
-        {formData.service === 'garten' && (
-          <GardenWorkSection 
-            formData={formData}
-            handleRadioGroupChange={handleRadioGroupChange}
-            handleChange={handleChange}
-            errors={errors}
-          />
-        )}
-      </AnimatePresence>
-
       <AnimatePresence>
         {formData.service === 'reinigung' && (
           <>

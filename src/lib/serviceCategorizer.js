@@ -11,9 +11,6 @@ export const getServiceCategory = (servicetype) => {
     if (lowerServiceType.includes('maler')) {
         return 'painting';
     }
-    if (lowerServiceType.includes('garten')) {
-        return 'gardening';
-    }
     if (lowerServiceType.includes('räumung') || lowerServiceType.includes('entsorgung')) {
         return 'disposal';
     }
@@ -23,5 +20,4 @@ export const getServiceCategory = (servicetype) => {
 export const isMovingService = (servicetype) => getServiceCategory(servicetype) === 'moving';
 export const isCleaningService = (servicetype) => getServiceCategory(servicetype) === 'cleaning';
 export const isPaintingService = (servicetype) => getServiceCategory(servicetype) === 'painting';
-export const isGardeningService = (servicetype) => getServiceCategory(servicetype) === 'gardening';
 export const isDisposalService = (servicetype) => getServiceCategory(servicetype) === 'disposal';

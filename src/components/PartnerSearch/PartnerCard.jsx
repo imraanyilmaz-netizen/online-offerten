@@ -20,21 +20,57 @@ const PartnerCard = ({ partner }) => {
   const reviewCount = partner.review_count || 0;
   const partnerSlug = partner.slug || partner.id;
 
+  // Partner kategorilerini kontrol et
+  const mainCategories = partner.main_categories || [];
+  const hasUmzug = mainCategories.includes('umzug');
+  const hasReinigung = mainCategories.includes('reinigung');
+  const isOnlyReinigung = hasReinigung && !hasUmzug && mainCategories.length === 1;
+
+  // Varsayılan resim seçimi
+  const getDefaultImage = () => {
+    if (isOnlyReinigung) {
+      return '/reinigungsfirma/hausreinigung_mit_wohnraum.webp';
+    } else if (hasUmzug || hasReinigung) {
+      return '/bilder/6bb8eb00-0fb6-4ebd-ba5c-f5c1726ee18a.webp';
+    }
+    return null;
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5 border border-gray-200/80 overflow-hidden flex flex-col">
       <div className="relative">
         <Link href={`/partner/${partnerSlug}`} className="block">
-          <img
-            src={partner.hero_image_url || '/image/umzugsservice-Schweiz/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.webp'}
-            alt={`${partner.company_name} hero image`}
-            className="w-full h-48 object-cover"
-            loading="lazy"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = '/image/umzugsservice-Schweiz/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.webp';
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          {partner.hero_image_url ? (
+            <>
+              <img
+                src={partner.hero_image_url}
+                alt={`${partner.company_name} hero image`}
+                className="w-full h-48 object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.classList.add('bg-white');
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </>
+          ) : getDefaultImage() ? (
+            <>
+              <img
+                src={getDefaultImage()}
+                alt={`${partner.company_name} hero image`}
+                className="w-full h-48 object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.classList.add('bg-white');
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </>
+          ) : (
+            <div className="w-full h-48 bg-white"></div>
+          )}
         </Link>
         
         <div className="absolute bottom-3 left-3">
@@ -87,7 +123,14 @@ const PartnerCard = ({ partner }) => {
 
         <div className="flex-grow mb-4">
           <ul className="space-y-1.5">
-            {(partner.main_categories || partner.offered_services || []).slice(0, 2).map((service) => {
+            {(partner.main_categories || partner.offered_services || [])
+              .filter((service) => {
+                // Garten servislerini filtrele
+                const serviceLower = (service || '').toLowerCase();
+                return !serviceLower.includes('garten') && serviceLower !== 'garten';
+              })
+              .slice(0, 2)
+              .map((service) => {
               // Servis türüne göre emoji ve isim belirleme
               const getServiceInfo = (serviceKey) => {
                 const serviceLower = (serviceKey || '').toLowerCase();
@@ -96,8 +139,6 @@ const PartnerCard = ({ partner }) => {
                   return { emoji: '🚚', name: 'Umzugsfirma' };
                 } else if (serviceLower.includes('reinigung') || serviceLower === 'reinigung') {
                   return { emoji: '🧹', name: 'Reinigungsfirma' };
-                } else if (serviceLower.includes('garten') || serviceLower.includes('gärtner') || serviceLower === 'garten') {
-                  return { emoji: '🌳', name: 'Gärtnerfirma' };
                 } else if (serviceLower.includes('maler') || serviceLower === 'maler') {
                   return { emoji: '🎨', name: 'Malerfirmen' };
                 }

@@ -126,7 +126,7 @@ async function generateSitemap() {
     '/umzugsfirma/klaviertransport', '/umzugsfirma/checklists', '/reinigung', '/reinigung/wohnungsreinigung', '/reinigung/hausreinigung', 
     '/reinigung/bueroreinigung', '/reinigung/umzugsreinigung', '/reinigung/unterhaltsreinigung', '/reinigung/grundreinigung', 
     '/reinigung/baureinigung', '/reinigung/fensterreinigung', '/reinigung/bodenreinigung', '/reinigung/fassadenreinigung', 
-    '/reinigung/hofreinigung', '/raeumung-entsorgung', '/malerarbeitenkosten', '/gartenarbeiten',
+    '/reinigung/hofreinigung', '/raeumung-entsorgung', '/malerarbeitenkosten',
     '/umzugsfirma', '/umzugsfirma-in-der-naehe', '/umzugsfirma-vergleichen', '/malerfirma-in-der-naehe'
   ];
 

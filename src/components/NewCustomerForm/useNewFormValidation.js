@@ -42,10 +42,6 @@ const useNewFormValidation = (formData) => {
       } else if (formData.service === 'maler') {
         if (!formData.umzugArt) step1Errors.umzugArt = t('errors.umzugArtMissing');
         if (!Object.values(formData.what_to_paint || {}).some(v => v)) step1Errors.what_to_paint = t('errors.whatToPaintMissing');
-      } else if (formData.service === 'garten') {
-        if (!formData.what_to_garden) {
-            step1Errors.what_to_garden = t('errors.whatToGardenMissing');
-        }
       }
       return step1Errors;
     };
@@ -61,9 +57,8 @@ const useNewFormValidation = (formData) => {
             if (!formData[`${prefix}_zip`]) step2errors[`${prefix}_zip`] = t('errors.zipRequired');
             if (!formData[`${prefix}_city`]) step2errors[`${prefix}_city`] = t('errors.cityRequired');
             
-            const isGarten = formData.service === 'garten';
             const isFenster = formData.service === 'reinigung' && formData.umzugArt === 'fensterreinigung';
-            const skipFloor = isGarten || isFenster;
+            const skipFloor = isFenster;
             const skipObjectType = isFenster; 
 
             if (!skipFloor && !formData[`${prefix}_floor`]) {
@@ -86,8 +81,7 @@ const useNewFormValidation = (formData) => {
               (formData.service === 'umzug' && ['privatumzug', 'international', 'geschaeftsumzug'].includes(formData.umzugArt)) ||
               (formData.service === 'reinigung' && !['fensterreinigung', 'hofreinigung'].includes(formData.umzugArt)) ||
               (formData.service === 'raeumung') ||
-              (formData.service === 'maler') ||
-              (formData.service === 'garten');
+              (formData.service === 'maler');
 
             if (showObjectTypeField && !skipObjectType && !formData[`${prefix}_object_type`]) {
               step2errors[`${prefix}_object_type`] = t('errors.objectTypeRequired');

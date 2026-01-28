@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Request free quotes for moving, cleaning, painting & more",
-    "description": "Request free and non-binding quotes for moving, cleaning, painting, gardening or clearance services. Compare multiple offers with a single request and save up to 40%."
+    "description": "Request free and non-binding quotes for moving, cleaning, painting or clearance services. Compare multiple offers with a single request and save up to 40%."
   },
   "mainHeader": "Request a Free Quote",
   "stepProgress": "Step {{currentStep}} of {{totalSteps}}",
@@ -27,8 +27,6 @@
     "mainServiceDisposalSublabel": "Apartment clearing, junk removal & more",
     "mainServicePainter": "Painting",
     "mainServicePainterSublabel": "Interior, exterior, facades & more",
-    "mainServiceGarden": "Gardening",
-    "mainServiceGardenSublabel": "Maintenance, Landscaping, Pool & more",
     "moveTypeSelectionTitle": "What type of move are you planning?",
     "moveTypeSelectionSubtitle": "This helps us find the right specialists for you.",
     "privateMoveLabel": "Private Move",
@@ -199,18 +197,6 @@
       "neubau": "New building (first use)",
       "vorgestrichen": "Good/Pre-painted",
       "renovierungsbeduerftig": "Needs renovation"
-    },
-    "whatToGardenTitle": "Please select the desired gardening services:",
-    "whatToGardenSubtitle": "Multiple selections are possible.",
-    "whatToGarden": {
-      "landschaftsbau": "Gardening and Landscaping",
-      "gartenpflege": "Garden Maintenance",
-      "terrassenverlegung": "Terrace Construction",
-      "pool": "Pool",
-      "sporteinrichtungsbau": "Sports Facility Construction",
-      "gartenhausbau": "Garden House Construction",
-      "saunabau": "Sauna Construction",
-      "andere": "Other"
     }
   },
   "step2": {
@@ -401,7 +387,6 @@
     "whatToCleanMissing": "Please select at least one area to clean.",
     "floorTypesMissing": "Please select at least one floor type.",
     "whatToPaintMissing": "Please select at least one area to paint.",
-    "whatToGardenMissing": "Please select at least one gardening service.",
     "malerDetailsMissing": "Please provide more details (min. 10 characters).",
     "countryRequired": "Please select a country.",
     "fromToCountryMustBeDifferent": "Start and destination countries must be different.",

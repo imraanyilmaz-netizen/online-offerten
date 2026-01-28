@@ -1,15 +1,17 @@
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import AddressInput from './AddressInput';
+import LogoUpload from './LogoUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building, MapPin, Briefcase, ShieldCheck, Lock, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} }) => {
+const Step3CompanyData = ({ formData, onInputChange, onValueChange, onLogoChange, errors = {} }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const employeeCountOptions = [
@@ -315,12 +317,12 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
               </div>
               <div className="space-y-2">
                 <Label className="text-sm font-semibold text-slate-700">
-                  Haftpflichtversicherung
+                  Haftpflichtversicherung <span className="text-red-500">*</span>
                 </Label>
                 <RadioGroup
                   onValueChange={(value) => onValueChange('liability_insurance', value === 'true')}
                   value={formData.liability_insurance === null ? '' : String(formData.liability_insurance)}
-                  className="flex items-center space-x-6 h-11"
+                  className={`flex items-center space-x-6 h-11 ${errors.liability_insurance ? 'border-red-500' : ''}`}
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="true" id="liability_yes" />
@@ -331,19 +333,50 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     <Label htmlFor="liability_no" className="font-normal cursor-pointer text-slate-700">Nein</Label>
                   </div>
                 </RadioGroup>
+                {errors.liability_insurance && (
+                  <p className="text-sm text-red-600 mt-1">{errors.liability_insurance}</p>
+                )}
               </div>
               <div className="md:col-span-2 space-y-2">
                 <Label htmlFor="commercial_register_number" className="text-sm font-semibold text-slate-700">
-                  Handelsregisternummer
+                  Handelsregisternummer <span className="text-red-500">*</span>
                 </Label>
                 <Input 
                   id="commercial_register_number" 
                   value={formData.commercial_register_number} 
                   onChange={onInputChange} 
                   placeholder="z.B. CHE-123.456.789"
-                  className="h-11 border-slate-300 focus-visible:ring-green-500"
+                  className={`h-11 border-slate-300 focus-visible:ring-green-500 ${errors.commercial_register_number ? 'border-red-500' : ''}`}
                 />
+                {errors.commercial_register_number && (
+                  <p className="text-sm text-red-600 mt-1">{errors.commercial_register_number}</p>
+                )}
               </div>
+            </div>
+            
+            <div className="md:col-span-2 space-y-2 mt-4">
+              <LogoUpload 
+                logoFile={formData.logoFile}
+                onLogoChange={onLogoChange}
+                errors={errors}
+              />
+            </div>
+            
+            <div className="md:col-span-2 space-y-2 mt-4">
+              <Label htmlFor="company_description" className="text-sm font-semibold text-slate-700">
+                Firmenbeschreibung
+              </Label>
+              <Textarea
+                id="company_description"
+                value={formData.company_description}
+                onChange={onInputChange}
+                placeholder="Beschreiben Sie Ihr Unternehmen, Ihre Dienstleistungen und Ihre Erfahrung..."
+                className="min-h-[120px] border-slate-300 focus-visible:ring-green-500 resize-y"
+                rows={5}
+              />
+              <p className="text-xs text-slate-500 mt-1">
+                Diese Beschreibung wird nach der Registrierung und nach der Genehmigung Ihres Partner-Kontos in Ihrem öffentlichen Profil angezeigt.
+              </p>
             </div>
           </CardContent>
         </Card>

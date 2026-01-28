@@ -238,7 +238,7 @@ const structuredData = {
           "name": "Für welche Dienstleistungen kann ich Offerten anfordern?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sie können Offerten für Umzüge (Privatumzug, Geschäftsumzug, Auslandumzug, Spezialtransporte), Reinigungsdienstleistungen (Wohnungsreinigung, Büroreinigung, Umzugsreinigung, Grundreinigung), Malerarbeiten (Innen- und Aussenanstriche) sowie Gartenpflege anfordern."
+            "text": "Sie können Offerten für Umzüge (Privatumzug, Geschäftsumzug, Auslandumzug, Spezialtransporte), Reinigungsdienstleistungen (Wohnungsreinigung, Büroreinigung, Umzugsreinigung, Grundreinigung) und Malerarbeiten (Innen- und Aussenanstriche) anfordern."
           }
         }
       ]
@@ -457,7 +457,7 @@ export default async function HomePage() {
                 <div className="relative order-2 lg:order-1">
                   <div className="relative rounded-2xl overflow-hidden shadow-xl">
                     <NextImage
-                      src="/bilder/umzug-reinigung-maler-gaertner-6-offerten-vergleichen-600-400.webp"
+                      src="/bilder/83ae5b64-b499-4641-969f-9cc07997a27.webp"
                       alt="Zufriedene Kunden"
                       width={600}
                       height={400}

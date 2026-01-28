@@ -34,7 +34,7 @@ const PartnerSettingsPageClient = () => {
     address_street: '',
     address_zip: '',
     address_city: '',
-    message: '',
+    company_description: '',
   });
   const [passwordData, setPasswordData] = useState({
     newPassword: '',
@@ -93,7 +93,7 @@ const PartnerSettingsPageClient = () => {
         address_street: data.address_street || '',
         address_zip: data.address_zip || '',
         address_city: data.address_city || '',
-        message: data.message || '',
+        company_description: data.company_description || '',
       });
 
       const { data: reviewsData, error: reviewsError } = await supabase
@@ -150,10 +150,10 @@ const PartnerSettingsPageClient = () => {
     if (!user) return;
     setSaving(true);
     try {
-      const { phone, website, message } = formData;
+      const { phone, website, company_description } = formData;
       const { error } = await supabase
         .from('partners')
-        .update({ phone, website, message })
+        .update({ phone, website, company_description })
         .eq('id', user.id);
       if (error) throw error;
       toast({ title: 'Erfolg', description: 'Profil erfolgreich aktualisiert.' });
@@ -266,8 +266,8 @@ const PartnerSettingsPageClient = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="message">Firmenbeschreibung</Label>
-                      <Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} rows={5} placeholder="Beschreiben Sie Ihr Unternehmen..." />
+                      <Label htmlFor="company_description">Firmenbeschreibung</Label>
+                      <Textarea id="company_description" name="company_description" value={formData.company_description} onChange={handleInputChange} rows={5} placeholder="Beschreiben Sie Ihr Unternehmen..." />
                     </div>
                     <div className="flex justify-end">
                       <Button type="submit" disabled={saving}>

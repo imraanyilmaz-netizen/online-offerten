@@ -11,7 +11,7 @@ const TermsAndConditionsPageClient = () => {
     {
       title: "1. Geltungsbereich",
       content: [
-        "Diese Allgemeinen Geschäftsbedingungen (AGB) regeln die vertraglichen Beziehungen zwischen Online-Offerten.ch (nachfolgend \"Plattform\") und den auf der Plattform registrierten Partnerfirmen (nachfolgend \"Partner\") für die Vermittlung von Kundenanfragen (Leads) im Bereich Umzug, Reinigung, Maler- und Gartenservices in der Schweiz."
+        "Diese Allgemeinen Geschäftsbedingungen (AGB) regeln die vertraglichen Beziehungen zwischen Online-Offerten.ch (nachfolgend \"Plattform\") und den auf der Plattform registrierten Partnerfirmen (nachfolgend \"Partner\") für die Vermittlung von Kundenanfragen (Leads) im Bereich Umzug, Reinigung, Maler- und Räumungsservices in der Schweiz."
       ]
     },
     {

@@ -39,15 +39,6 @@ const mainCategories = [
   { id: 'maler', label: 'Maler', icon: Paintbrush, services: [
     { id: 'maler_service', label: 'Malerarbeiten' },
   ]},
-  { id: 'garten', label: 'Garten', icon: Sprout, services: [
-    { id: 'landschaftsbau', label: 'Landschaftsbau' },
-    { id: 'gartenpflege', label: 'Gartenpflege' },
-    { id: 'terrassenverlegung', label: 'Terrassenverlegung' },
-    { id: 'pool', label: 'Pool' },
-    { id: 'sporteinrichtungsbau', label: 'Sporteinrichtungsbau' },
-    { id: 'gartenhausbau', label: 'Gartenhausbau' },
-    { id: 'saunabau', label: 'Saunabau' },
-  ]},
 ];
 
 const ServicesTab = ({ formData, handleMainCategoryChange, handleServiceChange, newRegion, setNewRegion, addRegion, removeRegion }) => {

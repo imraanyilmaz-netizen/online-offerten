@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush, Sprout } from 'lucide-react';
+import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PartnerDetailView from './PartnerDetailView';
 import PartnerEditModal from './PartnerEditModal';
@@ -27,7 +27,6 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
     umzug: { icon: Truck, label: 'Umzug' },
     reinigung: { icon: Sparkles, label: 'Reinigung' },
     maler: { icon: Paintbrush, label: 'Maler' },
-    garten: { icon: Sprout, label: 'Gärtner' },
   };
 
   const handleUpdateStatus = async (partnerId, newStatus) => {

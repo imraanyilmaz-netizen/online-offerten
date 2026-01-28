@@ -104,8 +104,7 @@ export const usePartnerSearch = () => {
       const serviceCategoryMap = {
         'Umzugsfirma': 'umzug',
         'Reinigungfirma': 'reinigung',
-        'Malerfirma': 'maler',
-        'Gärtnerfirma': 'garten'
+        'Malerfirma': 'maler'
       };
       
       const categoryValue = serviceCategoryMap[selectedService] || selectedService;
@@ -121,8 +120,7 @@ export const usePartnerSearch = () => {
           const categoryServiceMap = {
             'umzug': ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'moebellift_service', 'raeumung_service', 'entsorgung_service'],
             'reinigung': ['wohnungsreinigung', 'hausreinigung', 'buero_reinigung', 'unterhaltsreinigung', 'baureinigung', 'grundreinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung', 'umzugsreinigung'],
-            'maler': ['maler_service'],
-            'garten': ['landschaftsbau', 'gartenpflege', 'gartenhausbau', 'terrassenverlegung', 'pool', 'sporteinrichtungsbau', 'saunabau']
+            'maler': ['maler_service']
           };
           
           const categoryServices = categoryServiceMap[categoryValue] || [];

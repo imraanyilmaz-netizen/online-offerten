@@ -31,8 +31,7 @@ const SearchFilters = ({
   const services = [
     'Umzugsfirma',
     'Reinigungfirma',
-    'Malerfirma',
-    'Gärtnerfirma'
+    'Malerfirma'
   ];
 
   return (

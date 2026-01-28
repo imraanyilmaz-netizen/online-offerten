@@ -9,7 +9,7 @@ const HowItWorksSection = () => {
     { 
       icon: UserPlus, 
       title: "Registrieren & Profil erstellen", 
-      desc: "Als Umzugsfirma, Reinigungsfirma, Malerbetrieb oder Gartenbau-Unternehmen registrieren Sie sich kostenlos und erstellen Ihr professionelles Firmenprofil in nur wenigen Minuten – ohne versteckte Kosten oder Verpflichtungen." 
+      desc: "Als Umzugsfirma, Reinigungsfirma oder Malerbetrieb registrieren Sie sich kostenlos und erstellen Ihr professionelles Firmenprofil in nur wenigen Minuten – ohne versteckte Kosten oder Verpflichtungen." 
     },
     { 
       icon: ListChecks, 
@@ -24,7 +24,7 @@ const HowItWorksSection = () => {
     { 
       icon: Award, 
       title: "Erfolg feiern & wachsen", 
-      desc: "Gewinnen Sie regelmässig neue Aufträge und bauen Sie Ihr Umzugs-, Reinigungs-, Maler- oder Gartenbau-Unternehmen erfolgreich aus. Mit qualifizierten Kundenanfragen aus Ihrer Region wächst Ihr Geschäft kontinuierlich." 
+      desc: "Gewinnen Sie regelmässig neue Aufträge und bauen Sie Ihr Umzugs-, Reinigungs- oder Maler-Unternehmen erfolgreich aus. Mit qualifizierten Kundenanfragen aus Ihrer Region wächst Ihr Geschäft kontinuierlich." 
     },
   ];
 

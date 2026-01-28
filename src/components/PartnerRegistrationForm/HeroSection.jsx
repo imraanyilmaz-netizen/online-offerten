@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   const heroTitle = "Mehr Umsatz. Weniger Aufwand.";
-  const heroSubtitle = "Als Umzugsfirma, Reinigungsfirma, Malerbetrieb oder Gartenbau-Unternehmen erhalten Sie qualifizierte Kundenanfragen aus Ihrer Region – einfach, fair und ohne Risiko. Starten Sie noch heute und gewinnen Sie neue Aufträge!";
+  const heroSubtitle = "Als Umzugsfirma, Reinigungsfirma oder Malerbetrieb erhalten Sie qualifizierte Kundenanfragen aus Ihrer Region – einfach, fair und ohne Risiko. Starten Sie noch heute und gewinnen Sie neue Aufträge!";
   const heroButton = "Jetzt kostenlos Partner werden";
   const features = [
     "Keine Grundgebühren",

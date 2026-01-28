@@ -93,14 +93,6 @@ export const serviceMap = {
   'malerarbeiten gewerbe': 'Malerarbeiten',
 
 
-  // Garten servisleri
-  'landschaftsbau': 'Garten- und Landschaftsbau',
-  'gartenpflege': 'Gartenpflege',
-  'terrassenverlegung': 'Terrassenverlegung',
-  'pool': 'Poolbau',
-  'sporteinrichtungsbau': 'Sporteinrichtungsbau',
-  'gartenhausbau': 'Gartenhausbau',
-  'saunabau': 'Saunabau',
 
   // Diğer yaygın anahtarlar
   'lagerung': 'Einlagerung',
@@ -134,13 +126,6 @@ export const serviceMap = {
   'Bodenreinigung': 'Bodenreinigung',
   'Fassadenreinigung': 'Fassadenreinigung',
   'Hofreinigung': 'Hofreinigung',
-  'Garten- und Landschaftsbau': 'Garten- und Landschaftsbau',
-  'Gartenpflege': 'Gartenpflege',
-  'Terrassenverlegung': 'Terrassenverlegung',
-  'Poolbau': 'Poolbau',
-  'Sporteinrichtungsbau': 'Sporteinrichtungsbau',
-  'Gartenhausbau': 'Gartenhausbau',
-  'Saunabau': 'Saunabau',
   'Möbellift': 'Möbellift'
 };
 
@@ -168,7 +153,6 @@ export const getGermanServiceName = (key) => {
     const lowerKey = key.toLowerCase();
     
     // Check if the key itself is a combined service that shouldn't be split.
-    // e.g. "Garten- und Landschaftsbau"
     if (serviceMap[lowerKey]) {
         return serviceMap[lowerKey];
     }

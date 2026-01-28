@@ -9,8 +9,6 @@ const initialFormData = {
   what_to_paint: {},
   maler_details_other: '',
   maler_current_condition: '',
-  what_to_garden: '',
-  garden_details_other: '',
   from_street: '',
   from_zip: '',
   from_city: '',
@@ -122,9 +120,9 @@ const useNewCustomerForm = (initialData = {}) => {
           cleaning_frequency: '', what_to_clean: {}, estimated_area: '',
           floor_types: {}, floor_area: '', fassadenreinigung_flaeche: '',
           fassadenreinigung_erreichbarkeit: '', fassadenreinigung_verschmutzung: {},
-          raeumung_scope: '', fensterreinigung_anzahl: '', fensterreinigung_scope: '',
+          raeumung_scope: '',           fensterreinigung_anzahl: '', fensterreinigung_scope: '',
           fensterreinigung_zugang: '', what_to_paint: {}, maler_details_other: '',
-          maler_current_condition: '', what_to_garden: '', garden_details_other: '',
+          maler_current_condition: '',
           moebellift: false, // Reset moebellift state when service changes
         };
       }

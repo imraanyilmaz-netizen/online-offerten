@@ -77,7 +77,7 @@ const SEO = ({ title, description, ogImageUrl, schemaMarkup, keywords, ogType = 
   // Use canonical URL for OG/Twitter URLs (without query params for cleaner sharing)
   const fullUrl = canonicalUrl;
   
-  // Default OG image if not provided - 4 professionals illustration (Umzug, Reinigung, Maler, Gärtner)
+  // Default OG image if not provided - 3 professionals illustration (Umzug, Reinigung, Maler)
   const defaultOgImage = ogImageUrl || 'https://online-offerten.ch/image/services-professionals.png';
   
   // DE-only - no alternate URLs

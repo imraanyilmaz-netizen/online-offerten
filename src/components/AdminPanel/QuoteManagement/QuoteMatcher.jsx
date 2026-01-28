@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { X, Plus, Save, Loader2, Users, MapPin, Package, Briefcase, CheckCircle, Wand2, Building2, Star, Sparkles, Truck, Paintbrush, Sprout, ChevronDown, ChevronUp } from 'lucide-react';
+import { X, Plus, Save, Loader2, Users, MapPin, Package, Briefcase, CheckCircle, Wand2, Building2, Star, Sparkles, Truck, Paintbrush, ChevronDown, ChevronUp } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
@@ -18,7 +18,6 @@ const mainCategoryConfig = {
   umzug: { icon: Truck, label: 'Umzugsfirma', color: 'text-blue-600' },
   reinigung: { icon: Sparkles, label: 'Reinigungsfirma', color: 'text-purple-600' },
   maler: { icon: Paintbrush, label: 'Malerfirma', color: 'text-orange-600' },
-  garten: { icon: Sprout, label: 'Gärtnerfirma', color: 'text-green-600' },
 };
 
 const PartnerItem = ({ partner, isMatched, isSelected, onSelectionChange }) => {

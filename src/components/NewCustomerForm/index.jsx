@@ -315,8 +315,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         return 'malerArt';
       case 'raeumung':
         return 'raeumungArt';
-      case 'garten':
-        return null; // Garten doesn't need this parameter
       default:
         return 'umzugArt'; // Default fallback
     }
@@ -433,7 +431,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     const params = new URLSearchParams(searchParamsString);
     const paramName = getServiceArtParamName(formData.service);
     
-    // Garten servisi için parametre gerekmez
     if (!paramName) {
       hasInitializedUmzugArtFromUrl.current = true;
       return;
@@ -585,7 +582,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     formData.fensterreinigung_zugang, 
     formData.raeumung_scope, 
     formData.what_to_paint, 
-    formData.what_to_garden,
     validate
   ]);
 
@@ -736,8 +732,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
                     return t('step1.painterTypeSelectionTitle');
                 case 'raeumung':
                     return t('step1.entsorgungTypeSelectionTitle');
-                case 'garten':
-                    return t('step1.whatToGardenTitle');
                 default:
                     return t('step1.moveTypeSelectionTitle') || 'Welche Art planen Sie?';
             }
@@ -827,8 +821,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       } else {
         services.push(t('step1.mainServiceDisposal'));
       }
-    } else if (formData.service === 'garten') {
-      services.push(t('step1.mainServiceGarden'));
     } else if (formData.service) {
       // Fallback to main service name
       const mainServiceKey = `step1.mainService${formData.service.charAt(0).toUpperCase() + formData.service.slice(1)}`;

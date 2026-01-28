@@ -93,14 +93,6 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       { value: 'einfamilienhaus', label: t('step2.objectTypeOptions.privat.einfamilienhaus') },
       { value: 'mehrfamilienhaus', label: t('step2.objectTypeOptions.privat.mehrfamilienhaus') },
     ];
-    
-    if (formData.service === 'garten') {
-        return [
-             { value: 'einfamilienhaus', label: t('step2.objectTypeOptions.privat.einfamilienhaus') },
-             { value: 'mehrfamilienhaus', label: t('step2.objectTypeOptions.privat.mehrfamilienhaus') },
-             { value: 'gewerbeimmobilie', label: t('step2.objectTypeOptions.gewerbe.gewerbeimmobilie') },
-        ];
-    }
 
     const isGewerbeService =
         (formData.service === 'umzug' && formData.umzugArt === 'geschaeftsumzug') ||
@@ -149,8 +141,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       (formData.service === 'umzug' && ['privatumzug', 'international', 'geschaeftsumzug', 'moebellift'].includes(formData.umzugArt)) || // Added moebellift here
       (formData.service === 'reinigung' && !['fensterreinigung', 'hofreinigung'].includes(formData.umzugArt)) ||
       (formData.service === 'raeumung') ||
-      (formData.service === 'maler') ||
-      (formData.service === 'garten');
+      (formData.service === 'maler');
 
   const showLiftField = 
       formData.service === 'umzug' ||
@@ -158,7 +149,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       (formData.service === 'maler' && ['waende', 'zimmerdecke', 'innenanstrich', 'tueren'].some(option => formData.what_to_paint?.[option])) ||
       (formData.service === 'raeumung');
 
-  const showFloorField = formData.service !== 'garten';
+  const showFloorField = true;
 
 
   const floorOptions = [

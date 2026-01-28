@@ -48,10 +48,6 @@ const AboutPageClient = () => {
       title: "Malerarbeiten",
       description: "Professionelle Maler für Innen- und Aussenanstriche. Wir finden den passenden Experten für Ihr Zuhause oder Geschäft."
     },
-    {
-      title: "Gartenpflege",
-      description: "Von der Rasenpflege bis zur kompletten Gartenumgestaltung – finden Sie qualifizierte Gärtner für Ihre individuellen Bedürfnisse."
-    }
   ]
   
   const serviceIcons = [
