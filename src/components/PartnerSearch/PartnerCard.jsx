@@ -42,7 +42,7 @@ const PartnerCard = ({ partner }) => {
         <Link href={`/partner/${partnerSlug}`} className="block">
           {partner.hero_image_url ? (
             <>
-              <img
+          <img
                 src={partner.hero_image_url}
                 alt={`${partner.company_name} hero image`}
                 className="w-full h-48 object-cover"
@@ -58,15 +58,15 @@ const PartnerCard = ({ partner }) => {
             <>
               <img
                 src={getDefaultImage()}
-                alt={`${partner.company_name} hero image`}
-                className="w-full h-48 object-cover"
-                loading="lazy"
-                onError={(e) => {
+            alt={`${partner.company_name} hero image`}
+            className="w-full h-48 object-cover"
+            loading="lazy"
+            onError={(e) => {
                   e.target.style.display = 'none';
                   e.target.parentElement.classList.add('bg-white');
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </>
           ) : (
             <div className="w-full h-48 bg-white"></div>

@@ -4,23 +4,25 @@ import PartnerProfilePageClient from '@/components/pages/PartnerProfilePageClien
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-// ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
-export const revalidate = 3600
+// ISR: Sayfa 5 dakikada bir otomatik yenilenecek (300 saniye) - silinen partner'ların daha hızlı kaybolması için
+export const revalidate = 300
 
 async function getPartnerData(slug: string) {
   const supabase = createStaticClient()
   
-  // Partner inaktif olsa bile verileri getir - yorumlar herzaman gösterilsin
+  // Partner verilerini getir - sadece aktif partner'ları göster
   const { data: partnerData, error: partnerError } = await supabase
     .from('partners')
     .select('*')
     .eq('slug', slug)
+    .eq('status', 'active')
     .single()
 
   if (partnerError || !partnerData) {
     return null
   }
 
+  // Partner silinmişse veya aktif değilse null döndür (notFound() tetiklenecek)
   return partnerData
 }
 

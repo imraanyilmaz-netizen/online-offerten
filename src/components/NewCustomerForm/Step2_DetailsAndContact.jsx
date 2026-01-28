@@ -93,7 +93,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       { value: 'einfamilienhaus', label: t('step2.objectTypeOptions.privat.einfamilienhaus') },
       { value: 'mehrfamilienhaus', label: t('step2.objectTypeOptions.privat.mehrfamilienhaus') },
     ];
-
+    
     const isGewerbeService =
         (formData.service === 'umzug' && formData.umzugArt === 'geschaeftsumzug') ||
         (formData.service === 'reinigung' && formData.umzugArt === 'buero') || // Büroreinigung uses full gewerbe list

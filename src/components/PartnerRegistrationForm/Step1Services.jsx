@@ -79,7 +79,7 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
 
   return (
     <div className="space-y-6">
-      <div>
+    <div>
         <h3 className="text-2xl font-bold mb-3 text-slate-900">Wählen Sie Ihre Leistungen</h3>
         <p className="text-slate-600 text-base">Bitte wählen Sie die Hauptkategorien und detaillierten Dienstleistungen aus, die Sie anbieten.</p>
       </div>
@@ -115,46 +115,46 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
               </AccordionTrigger>
               <AccordionContent className="p-4 bg-slate-50 rounded-b-md">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                  {category.services.map(service => {
-                    const isServiceSelected = formData.selectedServices.includes(service.id);
-                    return (
+                      {category.services.map(service => {
+                        const isServiceSelected = formData.selectedServices.includes(service.id);
+                        return (
                       <div
                         key={service.id}
                         className={`flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
-                          isServiceSelected
-                            ? 'bg-green-50 border-green-300 shadow-sm'
+                              isServiceSelected
+                                ? 'bg-green-50 border-green-300 shadow-sm'
                             : 'bg-white hover:bg-slate-50 border-slate-200 hover:border-slate-300'
-                        }`}
+                            }`}
                         onClick={() => handleServiceChange(service.id)}
                       >
                         <Checkbox
                           id={service.id}
-                          checked={isServiceSelected}
+                              checked={isServiceSelected}
                           onCheckedChange={() => handleServiceChange(service.id)}
-                          className="mt-0.5"
+                              className="mt-0.5"
                         />
-                        <div className="grid gap-1 flex-1">
-                          <Label 
+                            <div className="grid gap-1 flex-1">
+                              <Label 
                             htmlFor={service.id} 
-                            className={`font-semibold cursor-pointer flex items-center ${
-                              isServiceSelected ? 'text-green-800' : 'text-slate-800'
-                            }`}
-                          >
+                                className={`font-semibold cursor-pointer flex items-center ${
+                                  isServiceSelected ? 'text-green-800' : 'text-slate-800'
+                                }`}
+                              >
                             {service.icon && (
                               <service.icon className={`w-4 h-4 mr-2 ${isServiceSelected ? 'text-green-600' : 'text-slate-500'}`} />
                             )}
                             {service.label}
                           </Label>
-                          {service.desc && (
-                            <p className={`text-xs ${isServiceSelected ? 'text-green-700' : 'text-slate-500'}`}>
-                              {service.desc}
-                            </p>
-                          )}
+                              {service.desc && (
+                                <p className={`text-xs ${isServiceSelected ? 'text-green-700' : 'text-slate-500'}`}>
+                                  {service.desc}
+                                </p>
+                              )}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                        );
+                      })}
+                    </div>
               </AccordionContent>
             </AccordionItem>
           );
@@ -180,10 +180,10 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
                   <X className="h-3 w-3" />
                 </button>
               </Badge>
-            ))}
-          </div>
+              ))}
+            </div>
         </div>
-      )}
+        )}
       
       {errors.selectedServices && formData.mainCategories.length > 0 && (
         <div className="mt-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg shadow-sm">

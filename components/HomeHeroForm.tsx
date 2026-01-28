@@ -309,7 +309,7 @@ const HomeHeroForm = memo(() => {
           Offerten vergleichen & passende Anbieter in der Schweiz finden
         </h1>
         
-      <div className="flex flex-col md:flex-row gap-4 rounded-xl p-4 lg:p-0">
+      <div className="flex flex-col md:flex-row gap-4 rounded-xl mt-4 md:p-4 lg:p-0">
         <div className="flex-1 min-w-0">
           <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Was steht an?</label>
           <div className="relative">
@@ -333,14 +333,23 @@ const HomeHeroForm = memo(() => {
                 }, 200)
               }}
               placeholder="z.B. Umzug, Reinigung, Malerarbeiten"
-              className="w-full px-5 py-4 pr-40 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none text-gray-900 bg-white"
+              className="w-full px-5 py-4 pr-12 md:pr-40 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none text-gray-900 bg-white"
               style={{ borderRadius: '0.65rem' }}
             />
             {serviceInput && (
               <button
                 type="button"
                 onClick={clearService}
-                className="absolute right-32 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-32 md:right-32 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden md:block"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
+            {serviceInput && (
+              <button
+                type="button"
+                onClick={clearService}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 md:hidden"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -348,7 +357,7 @@ const HomeHeroForm = memo(() => {
             <Button
               type="submit"
               size={undefined}
-              className="absolute right-1 top-1/2 -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
+              className="hidden md:block absolute right-1 top-1/2 -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
               style={{ borderRadius: '0.65rem' }}
             >
               Kostenlos anfragen
@@ -390,13 +399,24 @@ const HomeHeroForm = memo(() => {
               </div>
             )}
           </div>
+          {/* Mobilde buton input'un altında */}
+          <Button
+            type="submit"
+            size={undefined}
+            className="md:hidden w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
+            style={{ borderRadius: '0.65rem' }}
+          >
+            Kostenlos anfragen
+          </Button>
         </div>
       </div>
       
-      <div className="mt-4 pt-4 border-t border-gray-200 p-4">
-        <p className="flex items-center gap-2 text-body">
-          <Clock className="h-4 w-4 text-gray-500" />
-          Die letzte Anfrage wurde vor <span className="font-semibold">{minutesAgo}</span> Minuten gestellt
+      <div className="mt-4 pt-4 border-t border-gray-200">
+        <p className="flex flex-wrap items-center gap-1.5 text-sm md:text-base text-gray-600 leading-relaxed">
+          <Clock className="h-4 w-4 text-gray-500 flex-shrink-0" />
+          <span>Die letzte Anfrage wurde vor</span>
+          <span className="font-semibold text-gray-800">{minutesAgo} Minuten</span>
+          <span>gestellt</span>
         </p>
       </div>
       </div>
