@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://online-offerten.ch/sitemap.xml
+
+# Disallow admin and private routes
+Disallow: /admin-dashboard
+Disallow: /partner/dashboard
+Disallow: /partner/settings
+Disallow: /partner/credit-top-up
+Disallow: /partner/guthaben-aufladen
+Disallow: /partner/payment-status
+Disallow: /payment/success
+Disallow: /payment/cancel
+Disallow: /login
+Disallow: /forgot-password
+Disallow: /update-password
+
+# Allow important pages
+Allow: /partner-suche
+Allow: /ratgeber/
