@@ -11,7 +11,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 86400, // 24 saat – görseller sık değişmez
     remotePatterns: [
       {
         protocol: 'https',
@@ -34,10 +34,20 @@ const nextConfig = {
     optimizePackageImports: [
       'framer-motion',
       'lucide-react',
+      'react-icons',
+      'date-fns',
       '@radix-ui/react-accordion',
+      '@radix-ui/react-alert-dialog',
       '@radix-ui/react-dialog',
       '@radix-ui/react-dropdown-menu',
       '@radix-ui/react-select',
+      '@radix-ui/react-tabs',
+      '@radix-ui/react-toast',
+      '@radix-ui/react-checkbox',
+      '@radix-ui/react-radio-group',
+      '@radix-ui/react-scroll-area',
+      '@radix-ui/react-separator',
+      '@radix-ui/react-slider',
     ],
     // Turbo mode for faster builds
     turbo: {
@@ -642,14 +652,39 @@ const nextConfig = {
       config.resolve.alias = {};
     }
     
-    // Performance: Optimize webpack for development
+    // Performance: Optimize webpack
     if (!isServer) {
-      config.optimization = {
-        ...config.optimization,
-        removeAvailableModules: false,
-        removeEmptyChunks: false,
-        splitChunks: false,
-      };
+      // Production: Enable proper code splitting for smaller bundles
+      // Development: Faster rebuilds with relaxed optimization
+      if (process.env.NODE_ENV === 'production') {
+        config.optimization = {
+          ...config.optimization,
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              // Separate heavy vendor libraries into their own chunks
+              vendor: {
+                test: /[\\/]node_modules[\\/](framer-motion|date-fns|@radix-ui|lucide-react|react-icons)[\\/]/,
+                name: 'vendor-heavy',
+                chunks: 'all',
+                priority: 20,
+              },
+              // Common shared modules
+              common: {
+                minChunks: 2,
+                priority: 10,
+                reuseExistingChunk: true,
+              },
+            },
+          },
+        };
+      } else {
+        config.optimization = {
+          ...config.optimization,
+          removeAvailableModules: false,
+          removeEmptyChunks: false,
+        };
+      }
       
       // Modern JavaScript: Target modern browsers (ES2020+)
       // This helps Google Speed Test recognize modern JavaScript
