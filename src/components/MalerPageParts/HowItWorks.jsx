@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { FileText, Mail, BarChart3 } from 'lucide-react';
 
 const steps = [
@@ -22,11 +22,7 @@ const steps = [
 
 const StepCard = ({ icon, title, text, index }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.15 + 0.2 }}
+    <div
       className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center flex flex-col items-center"
     >
       <div className="bg-green-100 text-green-600 rounded-full p-4 mb-5">
@@ -34,17 +30,13 @@ const StepCard = ({ icon, title, text, index }) => {
       </div>
       <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
       <p className="text-gray-600 leading-relaxed">{text}</p>
-    </motion.div>
+    </div>
   );
 };
 
 const HowItWorks = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.3, duration: 0.6 }}
+    <section
       className="mt-16 py-16 bg-slate-100 rounded-2xl"
     >
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
@@ -63,7 +55,7 @@ const HowItWorks = () => {
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

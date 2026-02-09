@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, ArrowRight, TrendingDown, ShieldCheck, FileText, Mail, Star, User, Award, Calendar, Package, Users } from 'lucide-react';
@@ -18,10 +18,7 @@ const GuenstigUmziehenPageClient = () => {
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           <div className="relative container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
+              <div
               >
                 <h1 className="heading-1 mb-6">
                   Günstig umziehen in der Schweiz: So sparen Sie mit cleverer Planung und Offertenvergleich
@@ -49,11 +46,8 @@ const GuenstigUmziehenPageClient = () => {
                     </div>
                   ))}
                 </div>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+              </div>
+              <div
                 className="relative h-[300px] md:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden"
               >
                 <div 
@@ -64,7 +58,7 @@ const GuenstigUmziehenPageClient = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
@@ -120,17 +114,13 @@ const GuenstigUmziehenPageClient = () => {
 
                 {/* So funktioniert der Offertenvergleich - Card Design */}
                 <section className="mb-12">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                  <div
                     className="text-center mb-12"
                   >
                     <h2 className="heading-2 mb-4">
                       So funktioniert der Offertenvergleich
                     </h2>
-                  </motion.div>
+                  </div>
 
                   <div className="relative">
                     <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -154,12 +144,8 @@ const GuenstigUmziehenPageClient = () => {
                         icon: Star
                       }
                     ].map((step, index) => (
-                      <motion.div
+                      <div
                         key={index}
-                          initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                          transition={{ duration: 0.6, delay: index * 0.15 }}
                           className="relative group"
                       >
                           {/* Verbindungslinie zwischen den Karten */}
@@ -192,7 +178,7 @@ const GuenstigUmziehenPageClient = () => {
                               </p>
                           </CardContent>
                         </Card>
-                      </motion.div>
+                      </div>
                     ))}
                     </div>
                   </div>
@@ -202,17 +188,13 @@ const GuenstigUmziehenPageClient = () => {
 
                 {/* Das sagen unsere Kunden - Professional Card Design */}
                 <section className="mb-12">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                  <div
                     className="text-center mb-12"
                   >
                     <h2 className="heading-2 mb-4">
                       Das sagen unsere Kunden
                     </h2>
-                  </motion.div>
+                  </div>
 
                   <div className="grid md:grid-cols-3 gap-6">
                     {[
@@ -235,12 +217,8 @@ const GuenstigUmziehenPageClient = () => {
                         text: "Der Vergleich hat mir nicht nur Geld gespart, sondern auch viel Stress erspart. Klare Empfehlung für alle, die günstig umziehen wollen."
                       }
                     ].map((review, index) => (
-                      <motion.div
+                      <div
                         key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: index * 0.1 }}
                       >
                         <Card className="h-full bg-white shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
                           <CardContent className="p-6 flex flex-col h-full">
@@ -271,7 +249,7 @@ const GuenstigUmziehenPageClient = () => {
                             </p>
                           </CardContent>
                         </Card>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </section>
@@ -288,11 +266,7 @@ const GuenstigUmziehenPageClient = () => {
 
                 {/* 10 bewährte Tipps für günstiges Umziehen */}
                 <section className="mb-12">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                  <div
                     className="mb-8"
                   >
                     <div className="text-center mb-8">
@@ -303,15 +277,11 @@ const GuenstigUmziehenPageClient = () => {
                         Sparen Sie bis zu 40% bei Ihren Umzugskosten mit diesen bewährten Strategien und Insider-Tipps
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div className="space-y-8">
                     {/* Kategorie 1: Richtige Umzugsplanung */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.1 }}
+                    <div
                       className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 md:p-8 border-2 border-blue-200"
                     >
                       <div className="flex items-center gap-4 mb-6">
@@ -348,14 +318,10 @@ const GuenstigUmziehenPageClient = () => {
                           </div>
                         ))}
                       </div>
-                    </motion.div>
+                    </div>
 
                     {/* Kategorie 2: Umzugsvolumen reduzieren */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
+                    <div
                       className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 md:p-8 border-2 border-purple-200"
                     >
                       <div className="flex items-center gap-4 mb-6">
@@ -392,14 +358,10 @@ const GuenstigUmziehenPageClient = () => {
                           </div>
                         ))}
                       </div>
-                    </motion.div>
+                    </div>
 
                     {/* Kategorie 3: Eigenleistung vs. Vollservice */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.3 }}
+                    <div
                       className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border-2 border-green-200"
                     >
                       <div className="flex items-center gap-4 mb-6">
@@ -436,14 +398,10 @@ const GuenstigUmziehenPageClient = () => {
                           </div>
                         ))}
                       </div>
-                    </motion.div>
+                    </div>
 
                     {/* Kategorie 4: Schweiz-spezifische Spartipps */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.4 }}
+                    <div
                       className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 md:p-8 border-2 border-orange-200"
                     >
                       <div className="flex items-center gap-4 mb-6">
@@ -480,7 +438,7 @@ const GuenstigUmziehenPageClient = () => {
                           </div>
                         ))}
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </section>
 

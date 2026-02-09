@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -178,10 +178,7 @@ const UmzugsoffertenZuerichPageClient = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-5 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+            <div
               className="md:col-span-3"
             >
               <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-6">
@@ -234,11 +231,8 @@ const UmzugsoffertenZuerichPageClient = () => {
                   <span>Transparente Offerten</span>
                 </div>
               </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            </div>
+            <div
               className="relative md:col-span-2"
             >
               <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
@@ -273,7 +267,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                   </li>
                 </ul>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -296,11 +290,7 @@ const UmzugsoffertenZuerichPageClient = () => {
       {/* So funktioniert's Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="heading-2">
@@ -309,14 +299,10 @@ const UmzugsoffertenZuerichPageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Der Prozess, um Umzugsangebote in Zürich einzuholen, ist denkbar einfach. Sie müssen nicht dutzende Telefonate führen oder stundenlang Websites durchforsten.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+            <div
               className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
             >
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
@@ -326,13 +312,9 @@ const UmzugsoffertenZuerichPageClient = () => {
               <p className="text-gray-600">
                 Tragen Sie Ihre wichtigsten Informationen ein: Umzugsdatum, alte und neue Adresse (PLZ 8000–8099 und Umgebung), Anzahl der Zimmer sowie besondere Anforderungen wie Klaviertransport oder Möbellift.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            <div
               className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
             >
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
@@ -342,13 +324,9 @@ const UmzugsoffertenZuerichPageClient = () => {
               <p className="text-gray-600">
                 Basierend auf Ihren Angaben erhalten Sie innerhalb weniger Stunden mehrere Offerten. Die meisten Antworten treffen zwischen 2 und 24 Stunden ein.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <div
               className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
             >
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
@@ -358,7 +336,7 @@ const UmzugsoffertenZuerichPageClient = () => {
               <p className="text-gray-600">
                 Vergleichen Sie die Preise, Leistungen und Bewertungen der Anbieter. Wählen Sie die Zügelfirma, die am besten zu Ihrem Budget und Ihren Anforderungen passt.
               </p>
-            </motion.div>
+            </div>
           </div>
 
           <div className="mt-12 max-w-3xl mx-auto">
@@ -375,11 +353,7 @@ const UmzugsoffertenZuerichPageClient = () => {
       {/* Umzugskosten Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="max-w-4xl mx-auto"
           >
             <h2 className="heading-2 text-center">
@@ -524,7 +498,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                 Beachten Sie: Konkrete Offerten werden immer individuell kalkuliert. Faktoren wie das Datum (Monatsende ist teurer), Etage, Lift-Verfügbarkeit und Distanz zwischen alter und neuer Adresse beeinflussen den finalen Preis erheblich.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -546,11 +520,7 @@ const UmzugsoffertenZuerichPageClient = () => {
       {/* Geprüfte Umzugsfirmen Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="max-w-4xl mx-auto"
           >
             <h2 className="heading-2 mb-6">
@@ -657,18 +627,14 @@ const UmzugsoffertenZuerichPageClient = () => {
                 Diese Checkliste hilft Ihnen, unseriöse Anbieter schnell zu erkennen und böse Überraschungen zu vermeiden.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Leistungen Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="max-w-4xl mx-auto"
           >
             <h2 className="heading-2 mb-6">
@@ -759,7 +725,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                 Laden Sie bei der Offertanfrage Fotos von besonders grossen Möbeln hoch – etwa einem 2,40 m hohen Schrank oder einem Boxspringbett. So kann die Firma von Anfang an richtig kalkulieren.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -781,11 +747,7 @@ const UmzugsoffertenZuerichPageClient = () => {
       {/* Tipps Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="max-w-4xl mx-auto"
           >
             <h2 className="heading-2 mb-6">
@@ -858,18 +820,14 @@ const UmzugsoffertenZuerichPageClient = () => {
                 Pauschalpreise mit klar definiertem Leistungsumfang sind oft besser kalkulierbar als reine Stundenofferten. Bei einem Kostendach wissen Sie vorab genau, was der Umzug maximal kostet – das schafft Vertrauen und Planungssicherheit.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Nach dem Umzug Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="max-w-4xl mx-auto"
           >
             <h2 className="heading-2 mb-6">
@@ -960,7 +918,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                 </li>
               </ul>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -982,11 +940,7 @@ const UmzugsoffertenZuerichPageClient = () => {
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-4xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
               FAQ zu Umzugsofferten in Zürich
@@ -1065,18 +1019,14 @@ const UmzugsoffertenZuerichPageClient = () => {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Final CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-green-600 to-emerald-600 text-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -1097,7 +1047,7 @@ const UmzugsoffertenZuerichPageClient = () => {
               Jetzt kostenlose Offerten anfordern
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

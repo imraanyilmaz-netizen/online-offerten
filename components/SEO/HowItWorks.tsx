@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { FileText, GitCompareArrows, CheckCircle2, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -45,11 +45,7 @@ export default function HowItWorks({
   className = ""
 }: HowItWorksProps) {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7 }}
+    <section
       className={`bg-gradient-to-br from-white via-green-50 to-emerald-50 rounded-2xl p-8 md:p-12 shadow-xl border border-green-200 ${className}`}
     >
       <div className="text-center mb-12">
@@ -61,12 +57,8 @@ export default function HowItWorks({
 
       <div className="grid md:grid-cols-3 gap-8 mb-8">
         {steps.map((step, index) => (
-          <motion.div
+          <div
             key={step.number}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
             className="relative"
           >
             {/* Connection Line (only between steps) */}
@@ -93,7 +85,7 @@ export default function HowItWorks({
               <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
               <p className="text-gray-600 leading-relaxed">{step.description}</p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -111,7 +103,7 @@ export default function HowItWorks({
           </Button>
         </div>
       )}
-    </motion.section>
+    </section>
   )
 }
 

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import React, { useState, useCallback, useEffect } from 'react';
 // Removed useTranslation
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -199,14 +199,14 @@ const PartnerCreditTopUpPageClient = () => {
   return (
     <>
       
-      <AnimatePresence>
+      
         {clientSecret && (
           <PaymentModal
             clientSecret={clientSecret}
             onClose={handleModalClose}
           />
         )}
-      </AnimatePresence>
+      
       <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8 flex items-center justify-center">
         <div className="w-full max-w-md">
           <div className="mb-4">
@@ -218,14 +218,10 @@ const PartnerCreditTopUpPageClient = () => {
             </Button>
           </div>
 
-          <AnimatePresence>
+          
             {paymentCanceled && (
-              <motion.div
+              <div
                 key="canceled"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3 }}
                 className="mb-4"
               >
                 <Card className="bg-amber-50 border-amber-400">
@@ -237,9 +233,9 @@ const PartnerCreditTopUpPageClient = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
+          
           
           <Card className="shadow-lg animate-fade-in">
             <CardHeader className="text-center">
@@ -264,19 +260,16 @@ const PartnerCreditTopUpPageClient = () => {
                       className="pl-14 text-2xl h-14 font-bold text-center"
                     />
                   </div>
-                  <AnimatePresence>
+                  
                     {error && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
+                      <p
                         className="text-sm font-medium text-red-600 flex items-center pt-1"
                       >
                         <AlertCircle className="w-4 h-4 mr-1.5" />
                         {error}
-                      </motion.p>
+                      </p>
                     )}
-                  </AnimatePresence>
+                  
                 </div>
 
                 <div className="flex justify-center items-center gap-3">
@@ -294,11 +287,8 @@ const PartnerCreditTopUpPageClient = () => {
                 </div>
               </div>
 
-              <motion.div
+              <div
                 className="mt-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
               >
                 <Button
                   onClick={handleTopUp}
@@ -306,33 +296,27 @@ const PartnerCreditTopUpPageClient = () => {
                   size="lg"
                   disabled={isLoading || !!error}
                 >
-                  <AnimatePresence mode="wait">
+                  
                     {isLoading ? (
-                      <motion.div
+                      <div
                         key="loader"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
                         className="flex items-center"
                       >
                         <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                         Wird verarbeitet...
-                      </motion.div>
+                      </div>
                     ) : (
-                      <motion.div
+                      <div
                         key="pay"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
                         className="flex items-center"
                       >
                         <CreditCard className="mr-2 h-5 w-5" />
                         Betrag zahlen
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
+                  
                 </Button>
-              </motion.div>
+              </div>
             </CardContent>
           </Card>
         </div>

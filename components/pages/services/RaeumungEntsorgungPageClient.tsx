@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, Trash2, Clock, Sparkles, Package, CheckCircle, Scale } from 'lucide-react'
@@ -92,36 +92,24 @@ const RaeumungEntsorgungPageClient = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <div className="bg-slate-50">
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        <section
           className="relative w-full bg-gray-100 py-12 md:py-16"
         >
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-0 items-center">
               <div className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                <div
                 >
                   <h1 className="heading-1">
                     Professionelle Räumung & Entsorgung
                   </h1>
-                </motion.div>
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
+                </div>
+                <p
                   className="text-base md:text-body mb-6 leading-relaxed"
                 >
                   Schaffen Sie Platz für Neues. Wir organisieren Ihre komplette Räumung – von der Entrümpelung bis zur besenreinen Übergabe. Effizient, zuverlässig und umweltgerecht.
-                </motion.p>
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
+                </p>
+                <div
                   className="mb-6"
                 >
                   <Button
@@ -132,11 +120,8 @@ const RaeumungEntsorgungPageClient = () => {
                     Jetzt kostenlose Offerten anfordern →
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </motion.div>
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
+                </div>
+                <div
                   className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6"
                 >
                   <div className="flex items-center">
@@ -151,7 +136,7 @@ const RaeumungEntsorgungPageClient = () => {
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
               <div className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden">
                 <img
@@ -164,24 +149,16 @@ const RaeumungEntsorgungPageClient = () => {
               </div>
             </div>
           </div>
-        </motion.section>
+        </section>
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
           <section className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
+            <div
             >
               <h2 className="heading-2">Warum eine professionelle Räumungsfirma beauftragen?</h2>
               <p className="text-lg text-slate-600 leading-relaxed">Eine Räumung ist oft mehr als nur das Ausmisten alter Gegenstände. Sie erfordert Organisation, körperlichen Einsatz und Wissen über die fachgerechte Entsorgung. Eine professionelle Firma nimmt Ihnen diese Last ab, kümmert sich um die umweltfreundliche Trennung von Wertstoffen und Abfall und garantiert eine schnelle und diskrete Abwicklung.</p>
-            </motion.div>
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
+            </div>
+            <div
               className="relative h-80 rounded-2xl overflow-hidden shadow-2xl"
             >
               <img
@@ -189,7 +166,7 @@ const RaeumungEntsorgungPageClient = () => {
                 alt="Professionelles Team bei einer Wohnungsräumung"
                 src="https://images.unsplash.com/photo-1615895233623-731367f50a8b" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-            </motion.div>
+            </div>
           </section>
 
           <section>
@@ -198,12 +175,8 @@ const RaeumungEntsorgungPageClient = () => {
               {benefits.map((benefit, index) => {
                 const Icon = iconMap[benefit.icon]
                 return (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ y: 50, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.15 }}
                     className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center"
                   >
                     <div className="inline-block p-4 bg-green-100 rounded-full mb-4">
@@ -211,7 +184,7 @@ const RaeumungEntsorgungPageClient = () => {
                     </div>
                     <h3 className="text-xl font-semibold text-slate-800 mb-2">{benefit.title}</h3>
                     <p className="text-slate-600">{benefit.text}</p>
-                  </motion.div>
+                  </div>
                 )
               })}
             </div>
@@ -225,17 +198,13 @@ const RaeumungEntsorgungPageClient = () => {
                   <h3 className="text-2xl font-semibold text-slate-700 mb-4">Kostenfaktoren im Überblick:</h3>
                    <ul className="space-y-3">
                     {costFactors.map((factor, index) => (
-                      <motion.li
+                      <li
                         key={index}
-                        initial={{ x: -20, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
                         className="flex items-start"
                       >
                         <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
                         <span className="text-slate-700" dangerouslySetInnerHTML={{ __html: factor }} />
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -267,35 +236,23 @@ const RaeumungEntsorgungPageClient = () => {
           <Faq />
 
           <section id="cta" className="text-center bg-gradient-to-r from-green-600 to-green-800 text-white py-16 px-6 rounded-2xl shadow-2xl">
-            <motion.h2
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <h2
               className="heading-2"
             >
               Bereit, Platz für Neues zu schaffen?
-            </motion.h2>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            </h2>
+            <p
               className="max-w-2xl mx-auto text-green-200 mb-8"
             >
               Erhalten Sie mit nur einer Anfrage kostenlose und unverbindliche Offerten von geprüften Räumungsfirmen aus Ihrer Region.
-            </motion.p>
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+            </p>
+            <div
             >
               <Button onClick={handleCtaClick} size="lg" className="bg-white text-green-700 hover:bg-green-100 group w-full sm:w-auto px-8 py-4 text-base">
                 Kostenlose Offerten anfordern
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
-            </motion.div>
+            </div>
           </section>
         </div>
       </div>

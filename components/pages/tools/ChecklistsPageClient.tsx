@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ListChecks, CalendarDays, Package, Truck, Home, MapPin, Sparkles, KeyRound, Download, FileText } from 'lucide-react';
@@ -20,11 +20,7 @@ interface ChecklistItemProps {
 
 const ChecklistItem = ({ id, text, isChecked, onToggle }: ChecklistItemProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.3 }}
+    <div
       className="flex items-center space-x-3 py-3"
     >
       {/* @ts-ignore - Radix UI Checkbox types */}
@@ -32,7 +28,7 @@ const ChecklistItem = ({ id, text, isChecked, onToggle }: ChecklistItemProps) =>
       <Label htmlFor={id} className={`flex-1 text-slate-700 transition-colors ${isChecked ? 'line-through text-slate-400' : ''}`}>
         {text}
       </Label>
-    </motion.div>
+    </div>
   );
 };
 
@@ -48,11 +44,7 @@ const ChecklistSection = ({ section, checkedItems, onToggleItem }: ChecklistSect
   const progress = totalItems > 0 ? (completedItems / totalItems) * 100 : 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="relative pl-12 pb-12"
     >
       <div className="absolute left-[22px] top-5 h-full w-0.5 bg-slate-200"></div>
@@ -83,18 +75,16 @@ const ChecklistSection = ({ section, checkedItems, onToggleItem }: ChecklistSect
                 <span>{completedItems} / {totalItems}</span>
               </div>
               <div className="w-full bg-slate-200 rounded-full h-2.5">
-                <motion.div
-                  className="bg-green-500 h-2.5 rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                <div
+                  className="bg-green-500 h-2.5 rounded-full transition-all duration-500"
+                  style={{ width: `${progress}%` }}
                 />
               </div>
             </div>
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 
@@ -289,15 +279,15 @@ const ChecklistsPageClient = () => {
         <section className="relative bg-white overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-white"></div>
           <div className="relative container mx-auto max-w-navbar px-4 md:px-6 py-20 md:py-28 text-center z-10">
-            <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5 }} className="inline-block p-4 bg-green-500/10 rounded-full shadow-lg mb-6">
+            <div className="inline-block p-4 bg-green-500/10 rounded-full shadow-lg mb-6">
               <ListChecks className="w-12 h-12 md:w-16 md:h-16 text-green-600" />
-            </motion.div>
-            <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 mb-4 tracking-tight">
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 mb-4 tracking-tight">
               {mainTitle}
-            </motion.h1>
-            <motion.p initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }} className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+            </h1>
+            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
               {mainSubtitle}
-            </motion.p>
+            </p>
           </div>
         </section>
 
@@ -314,11 +304,9 @@ const ChecklistsPageClient = () => {
                   <div className="space-y-4">
                     <div>
                        <div className="w-full bg-slate-200 rounded-full h-2.5 mb-1">
-                         <motion.div
+                         <div
                            className="bg-gradient-to-r from-green-400 to-emerald-500 h-2.5 rounded-full"
-                           initial={{ width: 0 }}
-                           animate={{ width: `${totalProgress}%` }}
-                           transition={{ duration: 0.5, ease: "easeInOut" }}
+                           style={{ width: `${totalProgress}%` }}
                          />
                        </div>
                        <div className="text-xs text-center text-slate-500">
@@ -344,11 +332,9 @@ const ChecklistsPageClient = () => {
                   <div className="space-y-4">
                     <div>
                        <div className="w-full bg-slate-200 rounded-full h-2.5 mb-1">
-                         <motion.div
+                         <div
                            className="bg-gradient-to-r from-green-400 to-emerald-500 h-2.5 rounded-full"
-                           initial={{ width: 0 }}
-                           animate={{ width: `${totalProgress}%` }}
-                           transition={{ duration: 0.5, ease: "easeInOut" }}
+                           style={{ width: `${totalProgress}%` }}
                          />
                        </div>
                        <div className="text-sm text-center text-slate-500">

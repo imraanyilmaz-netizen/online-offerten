@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Loader2, MailCheck, AlertCircle, MonitorSmartphone } from 'lucide-react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import useMediaQuery from '@/hooks/useMediaQuery'
 
 const ForgotPasswordPageClient = () => {
@@ -64,10 +64,7 @@ const ForgotPasswordPageClient = () => {
   )
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 py-4 px-4"
     >
       <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
@@ -123,7 +120,7 @@ const ForgotPasswordPageClient = () => {
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -20,11 +20,8 @@ const Lightbox = ({ images, selectedIndex, onClose }) => {
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="p-0 m-0 bg-transparent border-0 max-w-none w-screen h-screen flex items-center justify-center">
-        <motion.div 
+        <div 
           className="relative w-full h-full flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
         >
           <div className="absolute inset-0 bg-black/80" onClick={onClose} />
           
@@ -43,23 +40,19 @@ const Lightbox = ({ images, selectedIndex, onClose }) => {
             </>
           )}
 
-          <AnimatePresence mode="wait">
-            <motion.img
+          
+            <img
               key={currentIndex}
               src={images[currentIndex]}
               alt={`Quote image ${currentIndex + 1}`}
               className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl z-40"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
             />
-          </AnimatePresence>
+          
 
           <div className="absolute bottom-4 text-white text-lg z-50 bg-black/50 px-3 py-1 rounded-full">
             {currentIndex + 1} / {images.length}
           </div>
-        </motion.div>
+        </div>
       </DialogContent>
     </Dialog>
   );
@@ -92,12 +85,10 @@ const QuoteImages = ({ imageUrls }) => {
             </h3>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
               {images.map((url, index) => (
-                <motion.div
+                <div
                   key={index}
                   className="relative aspect-square w-full bg-gray-200 rounded-md overflow-hidden cursor-pointer group"
                   onClick={() => openLightbox(index)}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <img 
                     src={url} 
@@ -110,13 +101,13 @@ const QuoteImages = ({ imageUrls }) => {
                     style={{ display: 'block' }}
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center" />
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-      <AnimatePresence>
+      
         {lightboxOpen && (
           <Lightbox
             images={images}
@@ -124,7 +115,7 @@ const QuoteImages = ({ imageUrls }) => {
             onClose={() => setLightboxOpen(false)}
           />
         )}
-      </AnimatePresence>
+      
     </>
   );
 };

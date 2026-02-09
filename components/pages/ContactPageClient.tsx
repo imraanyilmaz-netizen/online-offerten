@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -63,21 +63,15 @@ const ContactPageClient = () => {
       <main>
         <div className="pt-16 pb-20">
           <div className="container mx-auto px-4 max-w-5xl">
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <div
               className="text-center mb-12"
             >
               <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">Kontaktieren Sie uns</h1>
               <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Haben Sie Fragen, Anregungen oder benötigen Sie Hilfe? Unser Team ist nur eine Nachricht entfernt. Wir freuen uns, von Ihnen zu hören!</p>
-            </motion.div>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+              <div
                 className="space-y-8"
               >
                 {contactDetails.map((item, index) => (
@@ -101,17 +95,12 @@ const ContactPageClient = () => {
                     <p className="text-gray-600">An Wochenenden und Feiertagen geschlossen</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+              <div
               >
                 {isSentSuccessfully ? (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                  <div
                     className="bg-green-50 p-8 rounded-lg shadow-lg text-center space-y-6"
                   >
                     <CheckCircle className="mx-auto h-16 w-16 text-green-600" />
@@ -120,7 +109,7 @@ const ContactPageClient = () => {
                     <Button onClick={handleSendNewMessage} className="bg-green-600 hover:bg-green-700">
                       Neue Nachricht senden
                     </Button>
-                  </motion.div>
+                  </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg space-y-6">
                     <h2 className="heading-2 mb-6">Senden Sie uns eine Nachricht</h2>
@@ -149,7 +138,7 @@ const ContactPageClient = () => {
                     </Button>
                   </form>
                 )}
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

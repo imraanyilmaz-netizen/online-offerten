@@ -1,13 +1,10 @@
 import React from 'react';
 import { CheckCircle, Mail, ShieldCheck } from 'lucide-react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 
 const SuccessMessage = ({ formData }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="w-full max-w-lg text-center"
     >
       <CheckCircle className="h-16 w-16 md:h-20 md:w-20 text-green-500 mx-auto mb-6" />
@@ -29,7 +26,7 @@ const SuccessMessage = ({ formData }) => {
         <ShieldCheck className="h-4 w-4 mr-2" />
         <span>Sichere Registrierung</span>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

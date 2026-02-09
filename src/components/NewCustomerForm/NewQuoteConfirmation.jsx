@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS transitions for better INP
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { MailCheck, CheckCircle2 as CheckCircle, ArrowLeft, PartyPopper, Link2, ListChecks, BookOpen, ArrowRight } from 'lucide-react';
@@ -31,43 +31,28 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-12 md:py-20"
     >
       <div className="container mx-auto px-4 max-w-3xl text-center">
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, type: 'spring', stiffness: 120 }}
+        <div
           className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-teal-600 shadow-xl"
         >
           <PartyPopper className="h-12 w-12 text-white" />
-        </motion.div>
+        </div>
 
-        <motion.h1 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+        <h1
           className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
         >
           {t('quoteConfirmation.title')}
-        </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+        </h1>
+        <p
           className="text-lg text-gray-700 mb-6"
         >
           {t('quoteConfirmation.subtitle')}
-        </motion.p>
+        </p>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+        <div
           className="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left space-y-3 mb-8"
         >
            <div className="flex items-start">
@@ -92,31 +77,22 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
            <p className="font-semibold text-gray-700 text-center">
             {t('quoteConfirmation.checkSpam')}
           </p>
-        </motion.div>
+        </div>
         
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+        <div
           className="flex items-center justify-center gap-2 text-green-700 mb-8 p-3 bg-green-100 rounded-md"
         >
           <CheckCircle size={20} />
           <p className="text-sm">{t('quoteConfirmation.contactSoon')}</p>
-        </motion.div>
+        </div>
 
-        <motion.p 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
+        <p
           className="text-gray-600 mb-12"
         >
           {t('quoteConfirmation.thanksForTrust')}
-        </motion.p>
+        </p>
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
+        <div
           className="mb-12"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
@@ -143,12 +119,9 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
               </Link>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0 }}
+        <div
         >
           <Button 
             onClick={onResetForm} 
@@ -158,9 +131,9 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
             <ArrowLeft size={20} className="mr-2 transition-transform group-hover:-translate-x-1" />
             {t('quoteConfirmation.newQuoteButton')}
           </Button>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

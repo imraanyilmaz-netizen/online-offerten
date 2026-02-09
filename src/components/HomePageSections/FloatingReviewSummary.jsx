@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
-import { motion } from 'framer-motion';
+// framer-motion removed – using CSS animation for better INP
 import { logoUrl } from '@/assets/logoConstants';
 // Supabase will be lazy loaded
 
@@ -94,14 +94,12 @@ const FloatingReviewSummary = () => {
   }
 
   return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.7, duration: 0.5 }}
-      className="fixed bottom-4 left-0 right-0 z-[99999] flex justify-center"
+    <div
+      className="fixed bottom-4 left-0 right-0 z-[99999] flex justify-center animate-slide-up"
       style={{ 
         position: 'fixed',
-        pointerEvents: 'auto'
+        pointerEvents: 'auto',
+        animation: 'slideUp 0.5s ease-out 0.7s both'
       }}
     >
       <div className="w-full max-w-navbar mx-auto px-4">
@@ -135,7 +133,7 @@ const FloatingReviewSummary = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

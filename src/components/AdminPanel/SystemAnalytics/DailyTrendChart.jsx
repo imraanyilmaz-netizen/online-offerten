@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 
 const DailyTrendChart = ({ data }) => {
   if (!data || data.length === 0) return <p className="text-center text-gray-500 py-8">Veri yok</p>;
@@ -14,10 +14,8 @@ const DailyTrendChart = ({ data }) => {
           const height = maxCount > 0 ? (day.count / maxCount) * 100 : 0;
           return (
             <div key={index} className="relative h-full flex items-end justify-center group">
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: `${Math.max(height, 5)}%` }}
-                transition={{ delay: index * 0.1, type: 'spring', stiffness: 100 }}
+              <div
+                style={{ height: `${Math.max(height, 5)}%` }}
                 className="w-full bg-blue-500 rounded-t"
               />
               <div className="absolute -top-6 text-xs font-bold text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity">

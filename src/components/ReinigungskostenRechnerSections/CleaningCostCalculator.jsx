@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Sparkles, ArrowRight, Loader2, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -242,9 +242,7 @@ const CleaningCostCalculator = () => {
           {error && <p className="text-red-600 text-sm text-center py-2 bg-red-50 rounded-md">{error}</p>}
 
           {calculatedCost !== null && (
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+            <div
               className="mt-6 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-md shadow"
             >
               <h3 className="text-xl font-semibold text-blue-800 mb-3">Geschätzte Reinigungskosten</h3>
@@ -258,7 +256,7 @@ const CleaningCostCalculator = () => {
                 Detaillierte Offerten anfordern
                 <ExternalLink className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
-            </motion.div>
+            </div>
           )}
         </CardContent>
       </Card>

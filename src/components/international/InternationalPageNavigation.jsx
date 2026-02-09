@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import CountryCard from './CountryCard';
 
 const InternationalPageNavigation = ({ currentCountrySlug }) => {
@@ -24,35 +24,19 @@ const InternationalPageNavigation = ({ currentCountrySlug }) => {
 
   return (
     <div className="border-t border-slate-200 pt-10 mt-12 md:mt-16">
-      <motion.h2 
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+      <h2
         className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center"
       >
         Beliebte Ziele für Ihren Umzug in Europa
-      </motion.h2>
+      </h2>
       
-      <motion.div 
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        transition={{ staggerChildren: 0.05 }}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {countriesToShow.map((country) => (
-           <motion.div
-            key={country.slug}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
-            }}
-          >
+          <div key={country.slug}>
             <CountryCard country={country} />
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

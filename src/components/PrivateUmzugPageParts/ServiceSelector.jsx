@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Home, Building, Globe, Sparkles, Trash2, Brush as PaintBrush, Box, ArrowRight } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi';
@@ -21,8 +21,7 @@ const ServiceItem = ({ nameKey, icon: Icon, path, active }) => {
   const { t } = useTranslation('privateUmzugPage');
   return (
     <Link href={path}>
-      <motion.div
-        whileHover={{ scale: 1.05 }}
+      <div
         className={`flex items-center p-3 my-1.5 rounded-lg transition-colors duration-200 ${
           active
             ? 'bg-green-100 text-green-800 font-bold border-l-4 border-green-500'
@@ -32,7 +31,7 @@ const ServiceItem = ({ nameKey, icon: Icon, path, active }) => {
         <Icon className="w-5 h-5 mr-4" />
         <span className="flex-1">{t(`services.${nameKey}`)}</span>
         <ArrowRight className={`w-4 h-4 transition-opacity ${active ? 'opacity-100' : 'opacity-0'}`} />
-      </motion.div>
+      </div>
     </Link>
   );
 };

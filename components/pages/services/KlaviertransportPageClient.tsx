@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -174,11 +174,7 @@ const ContentSection = ({ sectionData }: { sectionData: any }) => {
   }
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.6 }}
+    <section
       className={`py-16 md:py-20 ${bgColors[sectionData.key] || 'bg-white'}`}
     >
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -220,17 +216,13 @@ const ContentSection = ({ sectionData }: { sectionData: any }) => {
           )}
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
 
 const FaqSection = ({ faqData }: { faqData: any }) => {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7 }}
+    <section
       className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white"
     >
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -259,17 +251,13 @@ const FaqSection = ({ faqData }: { faqData: any }) => {
           </CardContent>
         </Card>
       </div>
-    </motion.section>
+    </section>
   )
 }
 
 
 const Cta = ({ quoteUrl }: { quoteUrl: string }) => (
-  <motion.section
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true, amount: 0.5 }}
-    transition={{ duration: 0.7 }}
+  <section
     className="bg-gradient-to-r from-green-600 to-green-800"
   >
     <div className="container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-20 text-center text-white">
@@ -289,7 +277,7 @@ const Cta = ({ quoteUrl }: { quoteUrl: string }) => (
         </Link>
       </Button>
     </div>
-  </motion.section>
+  </section>
 )
 
 const KlaviertransportPageClient = () => {

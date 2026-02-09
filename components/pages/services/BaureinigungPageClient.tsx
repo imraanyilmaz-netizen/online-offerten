@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useMemo } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -91,10 +91,7 @@ const BaureinigungPageClient = () => {
       />
       <div className="bg-slate-50">
         {/* Hero Section */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        <section
           className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden"
         >
           {/* Background Image - Right Side */}
@@ -123,29 +120,20 @@ const BaureinigungPageClient = () => {
             <div className="max-w-full">
               {/* Text Section */}
               <div className="px-0 sm:px-4 py-4 sm:py-6 md:py-8 lg:py-12">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                <div
                 >
                   <h1 className="heading-1">
                     Professionelle Baureinigung
                   </h1>
-                </motion.div>
+                </div>
                 
-                <motion.p 
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
+                <p
                   className="text-base md:text-body mb-4 md:mb-6 leading-relaxed"
                 >
                   Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate. Entfernung von Bauschutt, Staub und Rückständen. Reinigungsofferten online vergleichen und bis zu 40% sparen.
-                </motion.p>
+                </p>
                 
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
+                <div
                   className="mb-4 md:mb-6"
                 >
                   <Button 
@@ -156,13 +144,10 @@ const BaureinigungPageClient = () => {
                     Jetzt kostenlose Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </motion.div>
+                </div>
 
                 {/* Additional Trust Elements */}
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 1.0, duration: 0.6 }}
+                <div
                   className="bg-blue-50 rounded-lg p-3 md:p-4 lg:p-6 flex flex-wrap gap-3 md:gap-4 lg:gap-6"
                 >
                   <div className="flex items-center">
@@ -177,11 +162,11 @@ const BaureinigungPageClient = () => {
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
-        </motion.section>
+        </section>
 
         {/* Main Content */}
         <section className="py-8 md:py-12 lg:py-16 xl:py-24">
@@ -189,10 +174,7 @@ const BaureinigungPageClient = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {/* Main Article */}
               <div className="lg:col-span-2">
-                <motion.article
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
+                <article
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8"
                 >
                   {/* H2: Warum eine professionelle Baureinigung sinnvoll ist */}
@@ -448,7 +430,7 @@ const BaureinigungPageClient = () => {
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
-                </motion.article>
+                </article>
               </div>
 
               {/* Sidebar */}

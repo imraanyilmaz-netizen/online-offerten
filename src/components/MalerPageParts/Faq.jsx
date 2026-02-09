@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HelpCircle, ChevronRight } from 'lucide-react';
 
@@ -33,23 +33,15 @@ const faqItems = [
 
 const Faq = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.3, duration: 0.6 }}
+    <section
       className="mt-16"
     >
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10 text-center">Häufige Fragen (FAQ)</h2>
         <Accordion type="single" collapsible className="w-full space-y-3">
           {faqItems.map((item, index) => (
-            <motion.div
+            <div
               key={item.value}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 + 0.2 }}
             >
               <AccordionItem value={item.value} className="border-b bg-white rounded-lg mb-3 shadow-sm hover:shadow-md transition-shadow">
                 <AccordionTrigger className="text-left hover:no-underline py-5 px-6 text-base md:text-lg font-semibold text-gray-700 hover:text-green-600 transition-colors">
@@ -65,11 +57,11 @@ const Faq = () => {
                   </div>
                 </AccordionContent>
               </AccordionItem>
-            </motion.div>
+            </div>
           ))}
         </Accordion>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

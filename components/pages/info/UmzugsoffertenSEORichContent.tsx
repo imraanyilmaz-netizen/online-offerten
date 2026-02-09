@@ -1,18 +1,14 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 
 const UmzugsoffertenSEORichContent: React.FC = () => {
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="max-w-4xl mx-auto prose prose-lg">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
           >
             <div className="text-gray-700 leading-relaxed space-y-6">
               <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4">
@@ -128,7 +124,7 @@ const UmzugsoffertenSEORichContent: React.FC = () => {
                 Der Umzugsabschluss markiert das erfolgreiche Ende Ihres Umzugs und sollte mit genauso viel Sorgfalt geplant werden wie der Start. Überprüfen Sie, ob alle Möbel und Gegenstände unversehrt in Ihrem neuen Zuhause angekommen sind und ob alle vereinbarten Leistungen der Umzugsfirma erbracht wurden. Vergessen Sie nicht die Endreinigung der alten Wohnung – viele Umzugsfirmen bieten diesen Service gleich mit an, sodass Sie sich um nichts mehr kümmern müssen. Eine gründliche Planung und die Auswahl eines zuverlässigen Dienstleisters sorgen dafür, dass Sie entspannt in Ihr neues Zuhause einziehen und sich von Anfang an wohlfühlen.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

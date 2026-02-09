@@ -1,21 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { CheckCircle, Star } from 'lucide-react';
 
 const AdvantageItem = ({ textKey, delay }) => {
   const { t } = useTranslation('privateUmzugPage');
   return (
-    <motion.li
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: delay * 0.1 + 0.5 }}
+    <li
       className="flex items-start py-2"
     >
       <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
       <span className="text-gray-700">{t(textKey)}</span>
-    </motion.li>
+    </li>
   );
 };
 

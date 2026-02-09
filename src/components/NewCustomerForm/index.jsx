@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect, useCallback, useRef, useMemo, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed – using CSS transitions for better INP
 import { useTranslation } from 'react-i18next'; // i18n geri eklendi - müşteri formu için
 import { Button } from '@/components/ui/button';
 import Step1_Service from '@/components/NewCustomerForm/Step1_Service';
@@ -1060,11 +1060,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
 
 
   return (
-    <motion.div 
+    <div 
       id={formId}
       ref={formRef}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
       className="w-full max-w-6xl mx-auto py-3 sm:py-4 md:py-5 px-2 sm:px-0"
     >
       <div className="px-4 sm:px-6 md:px-8 mb-3">
@@ -1083,28 +1081,20 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
               <span className="text-xs text-gray-500">{t('stepProgress', { currentStep, totalSteps: TOTAL_FORM_STEPS })}</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
-              <motion.div 
-              className="bg-green-500 h-full rounded-full"
-              initial={{ width: '50%' }}
-              animate={{ width: `${progressPercentage}%` }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              <div 
+              className="bg-green-500 h-full rounded-full transition-all duration-500 ease-in-out"
+              style={{ width: `${progressPercentage}%` }}
               />
           </div>
       </div>
       
       <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 border border-gray-200 rounded-xl shadow-lg bg-white" noValidate>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep}
-            initial={{ opacity: 0, x: currentStep > (currentStep-1) ? 30 : -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: currentStep > (currentStep+1) ? -30 : 30 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={(currentStep === 2 && !isStep1Completed) || (currentStep === 3 && (!isStep1Completed || !isStep2Completed)) ? 'pointer-events-none opacity-50' : ''}
-          >
-            {renderStepContent()}
-          </motion.div>
-        </AnimatePresence>
+        <div
+          key={currentStep}
+          className={`transition-opacity duration-300 ease-in-out ${(currentStep === 2 && !isStep1Completed) || (currentStep === 3 && (!isStep1Completed || !isStep2Completed)) ? 'pointer-events-none opacity-50' : ''}`}
+        >
+          {renderStepContent()}
+        </div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center pt-4 sm:pt-6 border-t border-gray-200 gap-3 sm:gap-4">
           {currentStep > 1 ? (
@@ -1181,29 +1171,23 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           </div>
         </div>
         <div className="relative h-14 sm:h-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={tickerIndex}
-              initial={{ x: 60, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -60, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="absolute inset-0 flex items-center px-4 sm:px-8"
-            >
-              <div className="flex items-center justify-between w-full max-w-4xl mx-auto bg-white rounded-lg border border-gray-100 px-4 py-2.5 shadow-sm">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-gray-800 truncate">{recentRequests[tickerIndex]?.type}</p>
-                    <p className="text-xs text-gray-500 truncate">{recentRequests[tickerIndex]?.location}</p>
-                  </div>
+          <div
+            key={tickerIndex}
+            className="absolute inset-0 flex items-center px-4 sm:px-8 transition-opacity duration-300 ease-in-out"
+          >
+            <div className="flex items-center justify-between w-full max-w-4xl mx-auto bg-white rounded-lg border border-gray-100 px-4 py-2.5 shadow-sm">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 h-4 text-green-600" />
                 </div>
-                <span className="text-xs text-gray-400 flex-shrink-0 ml-3">{recentRequests[tickerIndex]?.timeLabel}</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-800 truncate">{recentRequests[tickerIndex]?.type}</p>
+                  <p className="text-xs text-gray-500 truncate">{recentRequests[tickerIndex]?.location}</p>
+                </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+              <span className="text-xs text-gray-400 flex-shrink-0 ml-3">{recentRequests[tickerIndex]?.timeLabel}</span>
+            </div>
+          </div>
         </div>
         </>
         )}
@@ -1241,7 +1225,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </motion.div>
+    </div>
   );
 };
 

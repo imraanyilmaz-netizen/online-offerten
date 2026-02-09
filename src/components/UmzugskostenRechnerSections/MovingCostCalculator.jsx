@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowRight, Loader2, ExternalLink, MapPin } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -389,9 +389,7 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
           {error && <p className="text-red-600 text-sm text-center py-2 bg-red-50 rounded-md">{error}</p>}
 
           {calculatedCost !== null && (
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+            <div
               className="mt-6 p-6 bg-green-50 border-l-4 border-green-500 rounded-md shadow"
             >
               <h3 className="text-xl font-semibold text-green-800 mb-3">Ihre Kostenschätzung</h3>
@@ -410,19 +408,15 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
                 Detaillierte Offerten anfordern
                 <ExternalLink className="w-5 h-5 ml-2 transition-transform group-hover:scale-110" />
               </Button>
-            </motion.div>
+            </div>
           )}
         </CardContent>
       </Card>
       )}
 
       {showInlineForm && !hideInlineForm && (
-        <motion.div
+        <div
           id="calculator-inline-form"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4 }}
           className="mt-8 p-6 bg-white rounded-lg border-2 border-gray-200 shadow-lg"
         >
           <Suspense fallback={<FormLoadingSpinner />}>
@@ -431,7 +425,7 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
               initialDataFromProps={initialFormDataForForm}
             />
           </Suspense>
-        </motion.div>
+        </div>
       )}
     </>
   );

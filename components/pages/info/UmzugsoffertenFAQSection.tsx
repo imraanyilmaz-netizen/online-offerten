@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 interface FAQItem {
@@ -16,11 +16,7 @@ interface UmzugsoffertenFAQSectionProps {
 const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faqItems }) => {
   return (
     <div style={{ paddingTop: '50px', paddingBottom: '50px' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-left mb-12"
         >
           <h2 
@@ -60,7 +56,7 @@ const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faq
           >
             Alles, was Sie über <strong>Umzugsangebote</strong> wissen müssen – beantwortet von unseren Experten.
           </p>
-        </motion.div>
+        </div>
 
         <div className="w-full">
           <Accordion type="single" collapsible className="w-full">

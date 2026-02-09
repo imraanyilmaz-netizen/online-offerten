@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush } from 'lucide-react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import PartnerDetailView from './PartnerDetailView';
 import PartnerEditModal from './PartnerEditModal';
 import PartnerDeleteModal from './PartnerDeleteModal';
@@ -137,11 +137,8 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
       {filteredPartners.length > 0 ? (
         <div className="space-y-4">
           {filteredPartners.map((partner, index) => (
-            <motion.div 
-              key={partner.id} 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: index * 0.03, duration: 0.3 }}
+            <div 
+              key={partner.id}
             >
               <Card className={`transition-all duration-300 hover:shadow-xl border-l-4 ${
                 partner.status === 'active' 
@@ -286,7 +283,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                    </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
       ) : (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { UserPlus, ListChecks, Send, Award } from 'lucide-react';
 
 const HowItWorksSection = () => {
@@ -34,12 +34,8 @@ const HowItWorksSection = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-12">{sectionTitle}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
               className="text-center p-6"
             >
               <div className="flex justify-center items-center mb-4">
@@ -49,7 +45,7 @@ const HowItWorksSection = () => {
               </div>
               <h3 className="text-xl font-semibold text-slate-800 mb-2">{step.title}</h3>
               <p className="text-slate-600">{step.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

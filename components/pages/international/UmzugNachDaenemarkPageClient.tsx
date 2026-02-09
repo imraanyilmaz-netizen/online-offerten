@@ -2,21 +2,17 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, FileText, Heart, Info, ShieldCheck, Sparkles, Star, Truck } from 'lucide-react';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
 const Section = ({ children, className = '' }: any) => (
-  <motion.section
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.6 }}
+  <section
     className={`py-8 border-t border-gray-200 ${className}`}
   >
     {children}
-  </motion.section>
+  </section>
 );
 
 const SectionTitle = ({ icon, title }: any) => {
@@ -97,10 +93,7 @@ const UmzugNachDaenemarkPageClient = () => {
   return (
     <>
       <div className="bg-gradient-to-b from-slate-50 via-gray-50 to-white">
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        <section
           className="relative w-full bg-cover bg-center text-white"
         >
           <div className="absolute inset-0">
@@ -108,16 +101,13 @@ const UmzugNachDaenemarkPageClient = () => {
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
           <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-24 md:py-32">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <div
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-shadow-lg">Ihr Umzug nach Dänemark: Finden Sie Ihr Hygge</h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">Ihr kompletter Leitfaden für einen reibungslosen Umzug in das Land des Designs, der Lebensfreude und der Gemütlichkeit.</p>
-            </motion.div>
+            </div>
           </div>
-        </motion.section>
+        </section>
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
@@ -209,11 +199,7 @@ const UmzugNachDaenemarkPageClient = () => {
             </main>
 
             <aside className="lg:col-span-1 space-y-8 self-start sticky top-28">
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+              <div
                 className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
               >
                 <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
@@ -222,12 +208,8 @@ const UmzugNachDaenemarkPageClient = () => {
                 </h3>
                 <img  alt="Ein Lastenrad steht in einer typisch dänischen Strasse" className="w-full h-56 object-cover rounded-lg shadow-md mb-3" src="https://images.unsplash.com/photo-1504846257989-a76209d9d2ac" />
                 <p className="text-sm text-gray-600 mt-2">Unsere Partner garantieren eine fachgerechte Verpackung und einen sicheren Transport.</p>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.6 }}
+              </div>
+              <div
                 className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200"
               >
                 <h3 className="text-xl font-semibold text-green-800 mb-3 flex items-center">
@@ -235,7 +217,7 @@ const UmzugNachDaenemarkPageClient = () => {
                   Wussten Sie schon?
                 </h3>
                 <p className="text-green-700">In Dänemark gibt es kein Wort für 'bitte', aber Höflichkeit wird durch einen freundlichen Tonfall und viele 'Tak' (Danke) ausgedrückt. Ausserdem hat das Land mehr Fahrräder als Einwohner.</p>
-              </motion.div>
+              </div>
             </aside>
           </div>
           <InternationalPageNavigation currentCountrySlug="umzug-nach-daenemark" />

@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
 import { createClient } from '@/lib/supabase/client'
 
@@ -279,22 +279,13 @@ const LoginPageClient = () => {
     <div 
       className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4 transition-all duration-500"
     >
-      <motion.div
-        layout
-        variants={cardVariants}
-        animate={view}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className={`w-full ${view === 'login' ? 'max-w-md' : 'max-w-navbar'} shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden`}
+      <div
+        className={`w-full ${view === 'login' ? 'max-w-md' : 'max-w-navbar'} shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden transition-all duration-300`}
       >
-        <AnimatePresence mode="wait">
+        
           {view === 'login' ? (
-            <motion.div
+            <div
               key="login"
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={formVariants}
-              transition={{ duration: 0.5 }}
             >
               <Card className="w-full border-none bg-transparent shadow-none">
                 <CardHeader className="text-center p-8">
@@ -358,21 +349,16 @@ const LoginPageClient = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ) : (
-            <motion.div
+            <div
               key="register"
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={formVariants}
-              transition={{ duration: 0.5 }}
             >
               <RegistrationForm embedded={true} onBackToLogin={() => setView('login')} />
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
-      </motion.div>
+        
+      </div>
     </div>
   )
 }

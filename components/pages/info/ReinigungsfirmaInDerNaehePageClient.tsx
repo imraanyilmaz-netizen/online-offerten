@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -397,10 +397,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
         </div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+            <div
             >
               <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-6">
                 <MapPin className="h-4 w-4 mr-2" />
@@ -453,11 +450,8 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   <span>Bis zu 40% sparen</span>
                 </div>
               </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            </div>
+            <div
               className="relative"
             >
               <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-blue-200">
@@ -481,7 +475,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -489,11 +483,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       {/* Why Local Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -502,16 +492,12 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Regionale Reinigungsunternehmen bieten zahlreiche Vorteile, die oft übersehen werden. Erfahren Sie, warum ein <strong>Reinigungsservice vor Ort</strong> die beste Wahl für Ihre Reinigung sein kann.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="h-full border-2 hover:border-blue-500 transition-colors">
                   <CardHeader>
@@ -526,7 +512,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                     <p className="text-gray-600">{benefit.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -535,11 +521,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -548,16 +530,12 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Verschiedene Reinigungsbetriebe spezialisieren sich auf unterschiedliche Arten von Reinigungsarbeiten. Finden Sie den richtigen Fachbetrieb für Ihren spezifischen Bedarf.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Link href={service.link}>
                   <Card className="h-full hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer">
@@ -578,7 +556,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                     </CardContent>
                   </Card>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -587,11 +565,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       {/* How It Works Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -600,7 +574,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               In nur 3 einfachen Schritten finden Sie die perfekten Reinigungsunternehmen in Ihrer Region.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -623,12 +597,8 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 icon: Star
               }
             ].map((step, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative"
               >
                 {index < 2 && (
@@ -650,7 +620,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                     <p className="text-sm text-gray-600 text-center">{step.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -659,11 +629,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       {/* Location Links Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -672,16 +638,12 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Finden Sie Reinigungsfirmen in den grössten Städten der Schweiz. Wir vermitteln Ihnen geprüfte Partner aus Ihrer Region.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {locations.map((location, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
               >
                 <Link href={location.link}>
                   <Card className="h-full hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer">
@@ -694,7 +656,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                     </CardContent>
                   </Card>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -704,11 +666,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto prose prose-lg">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <div
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                 Lokale Reinigungsunternehmen finden: Ihr kompletter Ratgeber
@@ -806,7 +764,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -814,11 +772,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -827,7 +781,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Alles, was Sie über lokale Reinigungsunternehmen wissen müssen – beantwortet von unseren Experten.
             </p>
-          </motion.div>
+          </div>
 
           <div className="max-w-4xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
@@ -849,11 +803,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -898,7 +848,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 <span>Bis zu 40% sparen</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

@@ -356,6 +356,17 @@ footer.footer-fixed-height {
 }
 
 /* Lightweight CSS animations to replace Framer Motion */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

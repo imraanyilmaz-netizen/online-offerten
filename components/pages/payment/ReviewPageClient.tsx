@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { AnimatePresence, motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 
 // Combined StarRating component (Input and Display)
 const StarRating = ({ rating, setRating, interactive = true }: { rating: number; setRating?: (rating: number) => void; interactive?: boolean }) => {
@@ -137,7 +137,7 @@ const PartnerReviewForm = ({ partner, quote, onBack, onComplete }: { partner: an
     };
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <div>
             <CardHeader>
                 <CardTitle>Bewerten Sie: {partner.company_name}</CardTitle>
                 <CardDescription>Ihre Erfahrung hilft anderen Kunden.</CardDescription>
@@ -174,7 +174,7 @@ const PartnerReviewForm = ({ partner, quote, onBack, onComplete }: { partner: an
                     </div>
                 </form>
             </CardContent>
-        </motion.div>
+        </div>
     );
 };
 
@@ -214,7 +214,7 @@ const PlatformReviewForm = ({ quote, onComplete }: { quote: any; onComplete: () 
         }
     };
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <div>
              <CardHeader>
                 <CardTitle>Bewerten Sie Online-Offerten.ch</CardTitle>
                 <CardDescription>Wie war Ihre Erfahrung mit unserer Plattform?</CardDescription>
@@ -236,7 +236,7 @@ const PlatformReviewForm = ({ quote, onComplete }: { quote: any; onComplete: () 
                     </div>
                 </form>
             </CardContent>
-        </motion.div>
+        </div>
     )
 };
 
@@ -320,8 +320,8 @@ const ReviewPageClient = () => {
         if (!quote) return null;
 
         return (
-             <AnimatePresence mode="wait">
-                <motion.div key={view}>
+             
+                <div key={view}>
                     {view === 'selection' && (
                         <>
                              <CardHeader>
@@ -363,8 +363,8 @@ const ReviewPageClient = () => {
                              </Button>
                          </div>
                     )}
-                </motion.div>
-             </AnimatePresence>
+                </div>
+             
         )
     };
 

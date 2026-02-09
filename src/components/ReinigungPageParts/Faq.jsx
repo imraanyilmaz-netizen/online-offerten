@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HelpCircle } from 'lucide-react';
 
@@ -39,11 +39,7 @@ const Faq = () => {
   ];
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: 0.4 }}
+    <section
       className="bg-slate-100 p-8 md:p-12 rounded-2xl"
     >
       <h2 className="text-3xl md:text-4xl font-bold text-slate-800 text-center mb-10 flex items-center justify-center">
@@ -52,12 +48,8 @@ const Faq = () => {
       </h2>
       <Accordion type="single" collapsible className="w-full max-w-navbar mx-auto">
         {faqItems.map((item, index) => (
-          <motion.div
+          <div
             key={item.value}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
           >
             <AccordionItem value={item.value}>
               <AccordionTrigger>{t(item.qKey)}</AccordionTrigger>
@@ -65,10 +57,10 @@ const Faq = () => {
                 {item.content ? item.content : <p>{t(item.aKey)}</p>}
               </AccordionContent>
             </AccordionItem>
-          </motion.div>
+          </div>
         ))}
       </Accordion>
-    </motion.section>
+    </section>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Home, Building } from 'lucide-react';
 import CostTable from './CostTable';
 
@@ -24,11 +24,7 @@ const renovationItems = [
 
 const MainContent = () => {
   return (
-    <motion.main
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.2, duration: 0.6 }}
+    <main
       className="lg:col-span-3 bg-white p-6 md:p-10 rounded-2xl shadow-2xl space-y-12"
     >
       <section>
@@ -52,7 +48,7 @@ const MainContent = () => {
         <CostTable costKey="renovation" items={renovationItems} />
       </section>
 
-    </motion.main>
+    </main>
   );
 };
 

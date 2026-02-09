@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 
 const TopPartnersList = ({ partners }) => {
   if (!partners || partners.length === 0) {
@@ -9,11 +9,8 @@ const TopPartnersList = ({ partners }) => {
   return (
     <div className="space-y-4">
       {partners.map((partner, index) => (
-        <motion.div
+        <div
           key={partner.id}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1 }}
           className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border"
         >
           <div className="flex items-center gap-3">
@@ -29,7 +26,7 @@ const TopPartnersList = ({ partners }) => {
             <p className="font-bold text-green-600">CHF {(partner.total_revenue || 0).toLocaleString()}</p>
             <p className="text-sm text-gray-500">Gesamtumsatz</p>
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

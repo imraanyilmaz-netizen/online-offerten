@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Link from 'next/link'
 import { Award, Users, HeartHandshake as Handshake, Target, ClipboardList, Layers, Star, Truck, Sparkles, Trash2, Paintbrush, Leaf, ChevronLeft, ChevronRight, ArrowRight, User, MapPin, CheckCircle, Building2, ShieldCheck, Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -208,22 +208,16 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         {/* Hero Section - SEO H1 */}
         <div className="bg-gradient-to-b from-gray-50 to-white pt-16 pb-20">
           <div className="container mx-auto px-4 max-w-7xl">
-            <motion.h1
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+            <h1
               className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight text-center mb-6"
             >
               Über uns – Online-Offerten.ch
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+            </h1>
+            <p
               className="text-lg md:text-xl text-gray-700 text-center max-w-4xl mx-auto leading-relaxed"
             >
               <strong>Online-Offerten.ch ist eine unabhängige Schweizer Vermittlungsplattform für Umzugs-, Reinigungs- und Malerofferten.</strong> Wir verbinden Privat- und Geschäftskunden mit geprüften, regionalen Partnerfirmen in der ganzen Schweiz.
-            </motion.p>
+            </p>
           </div>
         </div>
 
@@ -231,7 +225,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="max-w-4xl mx-auto">
-              <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Was wir tun</h2>
                 <div className="prose prose-lg max-w-none text-gray-700 space-y-4 leading-relaxed">
                   <p>
@@ -244,7 +238,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                     Wir sparen Ihnen Zeit, Geld und Nerven, indem wir Ihnen helfen, die richtige Firma schnell und einfach zu finden. Unsere geprüften Partnerfirmen sind in der ganzen Schweiz tätig und decken alle wichtigen Regionen ab – von Zürich und Bern über Basel und Luzern bis hin zu Genf, Lausanne und vielen weiteren Städten.
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
@@ -252,12 +246,12 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         {/* Warum Online-Offerten.ch - Vorteile */}
         <section className="py-16 md:py-24 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
+            <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Warum Online-Offerten.ch?</h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Wir machen die Suche nach dem richtigen Dienstleister einfach, schnell und kostenlos.
               </p>
-            </motion.div>
+            </div>
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
@@ -276,19 +270,14 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   description: "Unser Service ist vollständig kostenlos und unverbindlich. Sie zahlen nichts für die Vermittlung und sind zu nichts verpflichtet."
                 }
               ].map((item, index) => (
-                <motion.div 
+                <div 
                   key={index}
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ delay: index * 0.1 }}
                   className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="mb-4">{item.icon}</div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -297,12 +286,12 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         {/* Wie es funktioniert */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 max-w-7xl">
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
+            <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Wie es funktioniert</h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 In nur drei einfachen Schritten erhalten Sie passende Offerten von geprüften Firmen.
               </p>
-            </motion.div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
@@ -321,13 +310,8 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   description: "Vergleichen Sie die Offerten in Ruhe. Die Entscheidung liegt vollständig bei Ihnen – 100% kostenlos und unverbindlich."
                 }
               ].map((step, index) => (
-                <motion.div 
+                <div 
                   key={index}
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ delay: index * 0.1 }}
                   className="text-center p-6"
                 >
                   <div className="flex justify-center items-center h-16 w-16 rounded-full bg-green-100 mx-auto mb-4 border-2 border-green-200">
@@ -335,7 +319,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   </div>
                   <h3 className="text-xl font-semibold mb-2 text-gray-800">{step.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -344,12 +328,12 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         {/* Unsere Dienstleistungen */}
         <section className="py-16 md:py-24 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
+            <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Unsere Dienstleistungen</h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Wir vermitteln geprüfte Partnerfirmen für verschiedene Dienstleistungen in der ganzen Schweiz.
               </p>
-            </motion.div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
@@ -373,19 +357,14 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   description: "Professionelle Räumung und umweltgerechte Entsorgung von Möbeln und Abfällen."
                 }
               ].map((service, index) => (
-                <motion.div
+                <div
                   key={index}
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ delay: index * 0.1 }}
                   className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="mb-4">{service.icon}</div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -394,12 +373,12 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         {/* Standorte - Regionale Abdeckung */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 max-w-7xl">
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
+            <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Unsere Standorte</h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Wir vermitteln Partnerfirmen in der ganzen Schweiz – von den grossen Städten bis in die ländlichen Regionen.
               </p>
-            </motion.div>
+            </div>
             <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
               {mainCities.map((city) => (
                 <Link 
@@ -426,7 +405,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         {/* Partner werden */}
         <section className="py-16 md:py-24 bg-green-600">
           <div className="container mx-auto px-4 max-w-7xl">
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center max-w-4xl mx-auto">
+            <div className="text-center max-w-4xl mx-auto">
               <Building2 className="w-16 h-16 text-white mx-auto mb-6" />
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Sind Sie Dienstleister?</h2>
               <p className="text-lg text-green-100 mb-8 leading-relaxed">
@@ -442,7 +421,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -517,13 +496,13 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         {/* CTA Section */}
         <section className="bg-green-600 py-16 md:py-24">
           <div className="container mx-auto max-w-7xl px-4 text-center">
-            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Starten Sie jetzt Ihre kostenlose Anfrage
-            </motion.h2>
-            <motion.p variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
+            </h2>
+            <p className="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
               Finden Sie in Kürze die besten Dienstleister für Ihr Vorhaben. Unverbindlich und unkompliziert – 100% kostenlos.
-            </motion.p>
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.4 }}>
+            </p>
+            <div>
               <Button
                 size="lg"
                 className="bg-white text-green-700 hover:bg-gray-100 font-bold text-lg px-8 py-6"
@@ -531,7 +510,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
               >
                 Jetzt kostenlose Offerten anfordern
               </Button>
-            </motion.div>
+            </div>
           </div>
         </section>
       </main>

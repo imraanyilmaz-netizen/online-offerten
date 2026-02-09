@@ -2,21 +2,17 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, FileText, Briefcase, ShieldCheck, Home, Landmark, CreditCard, Heart } from 'lucide-react';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
 const Section = ({ children, className = '' }: any) => (
-  <motion.section
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.6 }}
+  <section
     className={`py-8 md:py-12 border-t border-gray-100 ${className}`}
   >
     {children}
-  </motion.section>
+  </section>
 );
 
 const SectionTitle = ({ icon, title }: any) => {
@@ -83,10 +79,7 @@ const UmzugNachDeutschlandPageClient = () => {
     <>
       
       <div className="bg-gradient-to-b from-slate-50 via-gray-50 to-white">
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        <section
           className="relative w-full bg-cover bg-center text-white"
         >
           <div className="absolute inset-0">
@@ -94,16 +87,13 @@ const UmzugNachDeutschlandPageClient = () => {
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
           <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-24 md:py-32">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <div
             >
               <h1 className="heading-1-white mb-4">Umzug nach Deutschland aus der Schweiz – Kostenlos bis zu 5 Offerten von geprüften Umzugsunternehmen erhalten</h1>
               <p className="text-body-white max-w-3xl mx-auto">Von der Planung über die Kosten bis zur Durchführung – vergleichen Sie die besten Umzugsfirmen für Ihren reibungslosen Start in Deutschland.</p>
-            </motion.div>
+            </div>
           </div>
-        </motion.section>
+        </section>
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="items-start">

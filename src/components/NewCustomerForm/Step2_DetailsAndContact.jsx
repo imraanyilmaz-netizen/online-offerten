@@ -13,7 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS transitions for better INP
 
 
 const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors, t, isMoveService }) => {
@@ -315,11 +315,9 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       </div>
       
       <div className="grid grid-cols-2 gap-3 items-start pt-1">
-        <AnimatePresence>
+        
           {showFloorField && (
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }} animate={{ opacity: 1, scaleY: 1 }} exit={{ opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.3 }} className="space-y-1"
+            <div className="space-y-1"
             >
               <Label htmlFor={`${prefix}_floor`} className="font-medium text-slate-700 text-xs">{t('step2.floorLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
@@ -331,15 +329,13 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                 </SelectContent>
               </Select>
               {errors && errors[`${prefix}_floor`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        
 
-        <AnimatePresence>
+        
           {showRoomsField && (
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }} animate={{ opacity: 1, scaleY: 1 }} exit={{ opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.3 }} className="space-y-1"
+            <div className="space-y-1"
             >
               <Label htmlFor={`${prefix}_rooms`} className="font-medium text-slate-700 text-xs">{t('step2.roomsLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
@@ -351,15 +347,13 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                 </SelectContent>
               </Select>
               {errors && errors[`${prefix}_rooms`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_rooms`]}</p>}
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
         
-        <AnimatePresence>
+        
+        
           {showObjectTypeField && (
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }} animate={{ opacity: 1, scaleY: 1 }} exit={{ opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.3, delay: 0.05 }} className="space-y-1"
+            <div className="space-y-1"
             >
               <Label htmlFor={`${prefix}_object_type`} className="font-medium text-slate-700 text-xs">{t('step2.objectTypeLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <Select name={`${prefix}_object_type`} value={formData[`${prefix}_object_type`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_object_type`, value)}>
@@ -371,17 +365,13 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                 </SelectContent>
               </Select>
               {errors && errors[`${prefix}_object_type`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_object_type`]}</p>}
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        
 
-        <AnimatePresence>
+        
           {showLiftField && (
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              exit={{ opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.3 }}
+            <div
               className="space-y-1"
             >
               <Label className="font-medium text-slate-700 text-xs">{t('step2.liftLabel')}</Label>
@@ -395,9 +385,9 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                   <Label htmlFor={`${prefix}_lift_no`} className="font-normal text-xs">{t('step2.liftOptionNo')}</Label>
                 </div>
               </RadioGroup>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        
       </div>
       
     </div>
@@ -567,20 +557,16 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
               {errors && errors.salutation && <p className="text-xs text-red-500 mt-1">{errors.salutation}</p>}
             </div>
             
-            <AnimatePresence>
+            
               {showCompanyNameField && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
+                <div
                   className="space-y-1 md:col-span-2"
                 >
                   <Label htmlFor="companyName" className="font-medium text-slate-700 text-sm">{t('step3.companyNameLabel')}</Label>
                   <Input id="companyName" name="companyName" value={formData.companyName || ''} onChange={handleChange} placeholder={t('step3.companyNamePlaceholder')} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"/>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
+            
 
             <div className="space-y-1">
               <Label htmlFor="firstName" className="font-medium text-slate-700 text-sm">{t('step3.firstNameLabel')} <span className="text-red-500 ml-1">*</span></Label>

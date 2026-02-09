@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { CheckCircle } from 'lucide-react';
 import {
   Accordion,
@@ -31,11 +31,8 @@ const FactorsList = () => {
   return (
     <Accordion type="single" collapsible className="w-full space-y-3">
       {factors.map((factor, index) => (
-        <motion.div
+        <div
           key={index}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1 }}
         >
           <AccordionItem value={`item-${index}`} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
             <AccordionTrigger className="px-6 py-4 text-left text-base font-semibold text-gray-700 hover:text-green-600">
@@ -48,7 +45,7 @@ const FactorsList = () => {
               <p>{factor.description}</p>
             </AccordionContent>
           </AccordionItem>
-        </motion.div>
+        </div>
       ))}
     </Accordion>
   );

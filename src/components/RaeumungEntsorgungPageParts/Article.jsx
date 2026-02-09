@@ -1,14 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { BookOpen, Award } from 'lucide-react';
 
 const Article = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: 0.2 }}
+    <section
       className="bg-white p-8 md:p-12 rounded-2xl shadow-xl"
     >
       <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6 flex items-center">
@@ -31,7 +27,7 @@ const Article = () => {
         <p>Die Schweiz ist Weltmeisterin im Recycling, und das aus gutem Grund. Die Entsorgung ist streng reglementiert. Eine professionelle Räumungsfirma kennt die kommunalen Vorschriften und sorgt für eine umweltgerechte Trennung und Entsorgung. Das Gut wird in verschiedene Fraktionen sortiert: Wiederverwertbares wie Möbel oder Kleider für Brockenhäuser oder karitative Einrichtungen, Wertstoffe wie Holz, Metall, Glas und Papier für das Recycling, Elektroschrott, der speziellen Wegen zugeführt werden muss, und schliesslich der Rest- und Sperrmüll. Besonders wichtig ist der Umgang mit Sondermüll wie Farben, Lacken, Batterien oder Chemikalien, der auf keinen Fall in den normalen Kehricht gehört. Ein Fachbetrieb garantiert, dass alles seinen richtigen Weg findet. Das schont nicht nur die Umwelt, sondern bewahrt Sie auch vor möglichen Bussen bei unsachgemässer Entsorgung.</p>
         <p>Der Abschluss einer Räumung ist die 'besenreine' Übergabe. Das bedeutet, alle geräumten Bereiche – von der Wohnung über den Keller bis zur Garage – werden sauber ausgefegt an Sie übergeben. Viele Firmen bieten als Zusatzleistung auch eine komplette Endreinigung mit Abnahmegarantie an, was besonders bei einem Umzug praktisch ist. Letztendlich ist die Entscheidung für einen Profi eine Entscheidung für Effizienz, Sicherheit und Nachhaltigkeit. Indem Sie über Online-Offerten.ch vergleichen, stellen Sie sicher, dass Sie für diese wertvolle Dienstleistung einen fairen Preis zahlen und den richtigen Partner für Ihr Vorhaben finden. So wird aus einer belastenden Aufgabe ein befreiender Schritt in einen neuen Lebensabschnitt.</p>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

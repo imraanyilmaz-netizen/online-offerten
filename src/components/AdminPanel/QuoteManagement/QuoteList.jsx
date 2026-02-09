@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 
 const QuoteItem = ({ quote, onAction, actionLabel, actionIcon, renderActions }) => {
   const formatDate = (dateString) => {
@@ -14,12 +14,8 @@ const QuoteItem = ({ quote, onAction, actionLabel, actionIcon, renderActions }) 
   const service = `${quote.servicetype || ''} ${quote.umzugart ? `(${quote.umzugart})` : ''}`.trim() || 'N/A';
 
   return (
-    <motion.div
+    <div
       layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
       className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 hover:bg-slate-50 rounded-lg transition-colors"
     >
       <div className="flex-grow mb-3 sm:mb-0">
@@ -42,7 +38,7 @@ const QuoteItem = ({ quote, onAction, actionLabel, actionIcon, renderActions }) 
           </Button>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -59,7 +55,7 @@ const QuoteList = ({ title, quotes, onAction, actionLabel, actionIcon, icon, ico
           {title} ({quotes.length})
         </h3>
         <div className="divide-y divide-gray-100">
-          <AnimatePresence>
+          
             {quotes.map(quote => (
               <QuoteItem
                 key={quote.id}
@@ -70,7 +66,7 @@ const QuoteList = ({ title, quotes, onAction, actionLabel, actionIcon, icon, ico
                 renderActions={renderActions}
               />
             ))}
-          </AnimatePresence>
+          
         </div>
       </CardContent>
     </Card>

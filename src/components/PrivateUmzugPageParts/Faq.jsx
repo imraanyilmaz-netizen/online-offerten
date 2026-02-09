@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from '@/components/ui/button';
 import { HelpCircle, Info, Calculator, ArrowRight } from 'lucide-react';
@@ -188,17 +188,13 @@ const Faq = () => {
       </h3>
       <Accordion type="single" collapsible className="w-full bg-slate-50 rounded-lg shadow">
         {faqItems.map((item, index) => (
-           <motion.div
+           <div
               key={item.value}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 + 0.3 }}
             >
             <FaqItem qKey={item.qKey} value={item.value}>
               {item.content}
             </FaqItem>
-          </motion.div>
+          </div>
         ))}
       </Accordion>
     </section>

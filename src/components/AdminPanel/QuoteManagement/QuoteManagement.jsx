@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
-import { AnimatePresence, motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Loader2, Settings, Send, Edit, SlidersHorizontal, CheckCircle, Clock, Archive } from 'lucide-react';
 import { format } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { de } from 'date-fns/locale/de';
 import { Badge } from '@/components/ui/badge';
 import QuoteMatcher from '@/components/AdminPanel/QuoteManagement/QuoteMatcher.jsx';
 import QuoteDetailModal from './QuoteDetailModal';
@@ -29,12 +29,8 @@ const QuoteCard = ({ quote, onToggleMatch, onSend, onOpenDetails, isMatching, ch
   };
 
   return (
-    <motion.div
+    <div
       layout
-      initial={{ opacity: 0, y: 20, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -20, scale: 0.98 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
     >
       <div className="p-4">
@@ -70,7 +66,7 @@ const QuoteCard = ({ quote, onToggleMatch, onSend, onOpenDetails, isMatching, ch
         </div>
       </div>
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -168,7 +164,7 @@ const QuoteManagement = () => {
     
     return (
       <div className="space-y-3">
-        <AnimatePresence>
+        
           {list.map(quote => (
             <QuoteCard 
               key={quote.id} 
@@ -178,7 +174,7 @@ const QuoteManagement = () => {
               onOpenDetails={setDetailQuote}
               isMatching={matchingQuoteId === quote.id}
             >
-              <AnimatePresence>
+              
                 {matchingQuoteId === quote.id && (
                   <QuoteMatcher
                     quote={quote}
@@ -188,10 +184,10 @@ const QuoteManagement = () => {
                     onClose={() => setMatchingQuoteId(null)}
                   />
                 )}
-              </AnimatePresence>
+              
             </QuoteCard>
           ))}
-        </AnimatePresence>
+        
       </div>
     );
   };

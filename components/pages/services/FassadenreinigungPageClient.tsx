@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useMemo } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -20,8 +20,8 @@ const FassadenreinigungPageClient = () => {
   };
 
   // SEO Data
-  const metaTitle = "Fassadenreinigung – Kostenlose Offerten vergleichen";
-  const metaDescription = "Fassadenreinigung für Haus oder Gebäude: Erhalten Sie kostenlose Offerten und vergleichen Sie erfahrene Reinigungsfirmen für nachhaltige Sauberkeit.";
+  const metaTitle = "Fassadenreinigung â€“ Kostenlose Offerten vergleichen";
+  const metaDescription = "Fassadenreinigung fÃ¼r Haus oder GebÃ¤ude: Erhalten Sie kostenlose Offerten und vergleichen Sie erfahrene Reinigungsfirmen fÃ¼r nachhaltige Sauberkeit.";
   // Meta keywords removed - Google no longer uses this tag (since 2009)
   const canonicalUrl = '/reinigung/fassadenreinigung';
 
@@ -29,15 +29,15 @@ const FassadenreinigungPageClient = () => {
   const faqItems = [
     {
       q: "Was kostet eine professionelle Fassadenreinigung?",
-      a: "Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro m². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
+      a: "Die Kosten fÃ¼r Fassadenreinigung hÃ¤ngen von der GrÃ¶sse der Fassade, der HÃ¶he, dem Material, dem Verschmutzungsgrad und der ZugÃ¤nglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro mÂ². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Durch den Vergleich mehrerer Offerten kÃ¶nnen Sie bis zu 40% sparen."
     },
     {
       q: "Wie oft sollte ich meine Fassade reinigen lassen?",
-      a: "Die optimale Reinigungsfrequenz hängt von verschiedenen Faktoren ab: Lage (städtisch vs. ländlich), Witterung, Material und individuelle Präferenzen. Viele Hausbesitzer lassen ihre Fassade alle 2-5 Jahre professionell reinigen. Regelmässige Fassadenreinigung hält die Fassade in optimalem Zustand und verhindert langfristige Schäden."
+      a: "Die optimale Reinigungsfrequenz hÃ¤ngt von verschiedenen Faktoren ab: Lage (stÃ¤dtisch vs. lÃ¤ndlich), Witterung, Material und individuelle PrÃ¤ferenzen. Viele Hausbesitzer lassen ihre Fassade alle 2-5 Jahre professionell reinigen. RegelmÃ¤ssige Fassadenreinigung hÃ¤lt die Fassade in optimalem Zustand und verhindert langfristige SchÃ¤den."
     },
     {
       q: "Welche Reinigungsmethoden werden verwendet?",
-      a: "Verschiedene Fassadenmaterialien erfordern unterschiedliche Reinigungsmethoden: Putzfassaden können mit Hochdruckreinigung oder schonender Reinigung behandelt werden. Klinker oder Naturstein benötigen spezielle Methoden. Holzfassaden erfordern besonders schonende Reinigung. Professionelle Fassadenreinigungsfirmen kennen die richtigen Methoden für jedes Material."
+      a: "Verschiedene Fassadenmaterialien erfordern unterschiedliche Reinigungsmethoden: Putzfassaden kÃ¶nnen mit Hochdruckreinigung oder schonender Reinigung behandelt werden. Klinker oder Naturstein benÃ¶tigen spezielle Methoden. Holzfassaden erfordern besonders schonende Reinigung. Professionelle Fassadenreinigungsfirmen kennen die richtigen Methoden fÃ¼r jedes Material."
     },
     {
       q: "Ist Fassadenreinigung umweltschonend?",
@@ -45,15 +45,15 @@ const FassadenreinigungPageClient = () => {
     },
     {
       q: "Wie lange dauert eine Fassadenreinigung?",
-      a: "Die Dauer hängt von der Grösse der Fassade, der Höhe und dem Verschmutzungsgrad ab. Ein durchschnittliches Einfamilienhaus benötigt etwa 1-2 Tage. Grössere Gebäude oder stark verschmutzte Fassaden können länger dauern."
+      a: "Die Dauer hÃ¤ngt von der GrÃ¶sse der Fassade, der HÃ¶he und dem Verschmutzungsgrad ab. Ein durchschnittliches Einfamilienhaus benÃ¶tigt etwa 1-2 Tage. GrÃ¶ssere GebÃ¤ude oder stark verschmutzte Fassaden kÃ¶nnen lÃ¤nger dauern."
     },
     {
-      q: "Sind die Reinigungskräfte versichert?",
-      a: "Ja, alle Reinigungsfirmen in unserem Netzwerk sind vollständig versichert. Ihre Mitarbeiter sind geschult für Höhensicherheit und haben die notwendigen Zertifikate. Sicherheit hat oberste Priorität bei Fassadenreinigung."
+      q: "Sind die ReinigungskrÃ¤fte versichert?",
+      a: "Ja, alle Reinigungsfirmen in unserem Netzwerk sind vollstÃ¤ndig versichert. Ihre Mitarbeiter sind geschult fÃ¼r HÃ¶hensicherheit und haben die notwendigen Zertifikate. Sicherheit hat oberste PrioritÃ¤t bei Fassadenreinigung."
     },
     {
-      q: "Welche Materialien können gereinigt werden?",
-      a: "Professionelle Fassadenreinigung kann für alle gängigen Fassadenmaterialien durchgeführt werden: Putz, Klinker, Naturstein, Holz, Metall und mehr. Jedes Material erfordert spezielle Methoden und Reinigungsmittel, die professionelle Firmen kennen und anwenden."
+      q: "Welche Materialien kÃ¶nnen gereinigt werden?",
+      a: "Professionelle Fassadenreinigung kann fÃ¼r alle gÃ¤ngigen Fassadenmaterialien durchgefÃ¼hrt werden: Putz, Klinker, Naturstein, Holz, Metall und mehr. Jedes Material erfordert spezielle Methoden und Reinigungsmittel, die professionelle Firmen kennen und anwenden."
     }
   ];
 
@@ -79,7 +79,7 @@ const FassadenreinigungPageClient = () => {
       "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=reinigung",
       "priceCurrency": "CHF",
       "price": "0",
-      "name": "Kostenlose Offerte für Fassadenreinigung"
+      "name": "Kostenlose Offerte fÃ¼r Fassadenreinigung"
     }
   }), [metaTitle, metaDescription]);
 
@@ -91,10 +91,7 @@ const FassadenreinigungPageClient = () => {
       />
       <div className="bg-slate-50">
         {/* Hero Section */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        <section
           className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden"
         >
           {/* Background Image - Right Side */}
@@ -123,29 +120,20 @@ const FassadenreinigungPageClient = () => {
             <div className="max-w-full">
               {/* Text Section */}
               <div className="px-0 sm:px-4 py-4 sm:py-6 md:py-8 lg:py-12">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                <div
                 >
                   <h1 className="heading-1">
                     Professionelle Fassadenreinigung
                   </h1>
-                </motion.div>
+                </div>
                 
-                <motion.p 
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
+                <p
                   className="text-base md:text-body mb-4 md:mb-6 leading-relaxed"
                 >
-                  Professionelle Fassadenreinigung für ein gepflegtes Äusseres. Entfernung von Algen, Moos und Verschmutzungen. Reinigungsofferten online vergleichen und bis zu 40% sparen.
-                </motion.p>
+                  Professionelle Fassadenreinigung fÃ¼r ein gepflegtes Ã„usseres. Entfernung von Algen, Moos und Verschmutzungen. Reinigungsofferten online vergleichen und bis zu 40% sparen.
+                </p>
                 
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
+                <div
                   className="mb-4 md:mb-6"
                 >
                   <Button 
@@ -156,13 +144,10 @@ const FassadenreinigungPageClient = () => {
                     Jetzt kostenlose Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
-                </motion.div>
+                </div>
 
                 {/* Additional Trust Elements */}
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 1.0, duration: 0.6 }}
+                <div
                   className="bg-blue-50 rounded-lg p-3 md:p-4 lg:p-6 flex flex-wrap gap-3 md:gap-4 lg:gap-6"
                 >
                   <div className="flex items-center">
@@ -171,17 +156,17 @@ const FassadenreinigungPageClient = () => {
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
+                    <span className="text-sm md:text-body font-medium">Nur geprÃ¼fte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
-        </motion.section>
+        </section>
 
         {/* Main Content */}
         <section className="py-8 md:py-12 lg:py-16 xl:py-24">
@@ -189,34 +174,31 @@ const FassadenreinigungPageClient = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {/* Main Article */}
               <div className="lg:col-span-2">
-                <motion.article
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
+                <article
                   className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8"
                 >
                   {/* H2: Warum eine professionelle Fassadenreinigung sinnvoll ist */}
                   <h2 className="heading-2">Warum eine professionelle Fassadenreinigung sinnvoll ist</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Eine professionelle Reinigung der Fassade bietet zahlreiche Vorteile, die über die reine Sauberkeit hinausgehen. Die Fassade ist das Aushängeschild Ihres Hauses und prägt den ersten Eindruck erheblich. Mit der Zeit sammeln sich Verschmutzungen, Algen, Moos, Staub und Witterungsspuren an, die nicht nur das Erscheinungsbild beeinträchtigen, sondern auch langfristige Schäden verursachen können. Professionelle Reinigung entfernt all diese Rückstände und gibt Ihrer Fassade wieder ein frisches, gepflegtes Aussehen. Zudem schützt regelmässige Reinigung vor langfristigen Schäden und verlängert die Lebensdauer der Fassade. Professionelle Reinigungsfirmen verfügen über das Fachwissen, die richtigen Geräte und umweltschonende Methoden, um auch schwer zugängliche Bereiche gründlich zu reinigen.
+                    Eine professionelle Reinigung der Fassade bietet zahlreiche Vorteile, die Ã¼ber die reine Sauberkeit hinausgehen. Die Fassade ist das AushÃ¤ngeschild Ihres Hauses und prÃ¤gt den ersten Eindruck erheblich. Mit der Zeit sammeln sich Verschmutzungen, Algen, Moos, Staub und Witterungsspuren an, die nicht nur das Erscheinungsbild beeintrÃ¤chtigen, sondern auch langfristige SchÃ¤den verursachen kÃ¶nnen. Professionelle Reinigung entfernt all diese RÃ¼ckstÃ¤nde und gibt Ihrer Fassade wieder ein frisches, gepflegtes Aussehen. Zudem schÃ¼tzt regelmÃ¤ssige Reinigung vor langfristigen SchÃ¤den und verlÃ¤ngert die Lebensdauer der Fassade. Professionelle Reinigungsfirmen verfÃ¼gen Ã¼ber das Fachwissen, die richtigen GerÃ¤te und umweltschonende Methoden, um auch schwer zugÃ¤ngliche Bereiche grÃ¼ndlich zu reinigen.
                   </p>
 
                   {/* H2: Unsere Leistungen im Bereich Fassadenreinigung */}
                   <h2 className="heading-2">Unsere Leistungen im Bereich Fassade</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die Reinigung der Fassade. Dazu gehören die gründliche Reinigung aller Fassadenmaterialien wie Putz, Klinker, Naturstein, Holz oder Metall. Wir bieten Hochdruckreinigung für robuste Materialien, schonende Reinigung für empfindliche Oberflächen, Algen- und Moosentfernung, Graffiti-Entfernung, sowie die Reinigung von Vordächern, Balkonen und Terrassen. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert, haben die richtige Ausrüstung für Höhenarbeit und ihre Mitarbeiter sind geschult für Sicherheit bei der Höhenarbeit.
+                    Unser Netzwerk geprÃ¼fter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum fÃ¼r die Reinigung der Fassade. Dazu gehÃ¶ren die grÃ¼ndliche Reinigung aller Fassadenmaterialien wie Putz, Klinker, Naturstein, Holz oder Metall. Wir bieten Hochdruckreinigung fÃ¼r robuste Materialien, schonende Reinigung fÃ¼r empfindliche OberflÃ¤chen, Algen- und Moosentfernung, Graffiti-Entfernung, sowie die Reinigung von VordÃ¤chern, Balkonen und Terrassen. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert, haben die richtige AusrÃ¼stung fÃ¼r HÃ¶henarbeit und ihre Mitarbeiter sind geschult fÃ¼r Sicherheit bei der HÃ¶henarbeit.
                   </p>
 
                   {/* Bullet Points - Leistungen */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Hochdruckreinigung von Fassaden</li>
-                    <li>Schonende Reinigung für empfindliche Materialien</li>
+                    <li>Schonende Reinigung fÃ¼r empfindliche Materialien</li>
                     <li>Algen- und Moosentfernung</li>
                     <li>Graffiti-Entfernung</li>
                     <li>Reinigung von Putz-, Klinker- und Natursteinfassaden</li>
                     <li>Reinigung von Holz- und Metallfassaden</li>
-                    <li>Reinigung von Vordächern, Balkonen und Terrassen</li>
-                    <li>Höhenarbeit mit professioneller Ausrüstung</li>
+                    <li>Reinigung von VordÃ¤chern, Balkonen und Terrassen</li>
+                    <li>HÃ¶henarbeit mit professioneller AusrÃ¼stung</li>
                   </ul>
 
                   {/* CTA 1 - After Leistungen */}
@@ -243,7 +225,7 @@ const FassadenreinigungPageClient = () => {
                   {/* H2: Vorteile unserer professionellen Fassadenreinigung */}
                   <h2 className="heading-2">Vorteile unserer professionellen Fassadenreinigung</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Professionelle Reinigung der Fassade bietet zahlreiche Vorteile gegenüber der eigenen Reinigung. Sie spart wertvolle Zeit und Mühe, da Fassadenreinigung oft Höhenarbeit erfordert und spezielle Ausrüstung benötigt. Professionelle Reinigungsfirmen haben die richtige Ausrüstung: Gerüste, Hubarbeitsbühnen oder Seilzugtechniken. Sie sind versichert und ihre Mitarbeiter sind geschult in Höhensicherheit. Zudem kennen sie die richtigen Methoden für jedes Fassadenmaterial und verwenden umweltschonende Reinigungsmittel. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Regelmässige professionelle Reinigung schützt vor langfristigen Schäden und erhält den Wert Ihrer Immobilie.
+                    Professionelle Reinigung der Fassade bietet zahlreiche Vorteile gegenÃ¼ber der eigenen Reinigung. Sie spart wertvolle Zeit und MÃ¼he, da Fassadenreinigung oft HÃ¶henarbeit erfordert und spezielle AusrÃ¼stung benÃ¶tigt. Professionelle Reinigungsfirmen haben die richtige AusrÃ¼stung: GerÃ¼ste, HubarbeitsbÃ¼hnen oder Seilzugtechniken. Sie sind versichert und ihre Mitarbeiter sind geschult in HÃ¶hensicherheit. Zudem kennen sie die richtigen Methoden fÃ¼r jedes Fassadenmaterial und verwenden umweltschonende Reinigungsmittel. Durch den Vergleich mehrerer Offerten Ã¼ber unsere Plattform kÃ¶nnen Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. RegelmÃ¤ssige professionelle Reinigung schÃ¼tzt vor langfristigen SchÃ¤den und erhÃ¤lt den Wert Ihrer Immobilie.
                   </p>
 
                   {/* Vorteile Image */}
@@ -259,46 +241,46 @@ const FassadenreinigungPageClient = () => {
                   {/* Bullet Points - Vorteile */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Professionelle Reinigung mit umweltschonenden Methoden</li>
-                    <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
-                    <li>Richtige Ausrüstung für Höhenarbeit</li>
+                    <li>Nur geprÃ¼fte, versicherte Reinigungsfirmen</li>
+                    <li>Richtige AusrÃ¼stung fÃ¼r HÃ¶henarbeit</li>
                     <li>Geschulte Mitarbeiter mit Sicherheitszertifikaten</li>
                     <li>Flexible Terminplanung</li>
-                    <li>Schutz vor langfristigen Schäden</li>
+                    <li>Schutz vor langfristigen SchÃ¤den</li>
                   </ul>
 
-                  {/* H2: Was bei einer gründlichen Fassadenreinigung gereinigt wird */}
-                  <h2 className="heading-2">Was bei einer gründlichen Fassadenreinigung gereinigt wird</h2>
+                  {/* H2: Was bei einer grÃ¼ndlichen Fassadenreinigung gereinigt wird */}
+                  <h2 className="heading-2">Was bei einer grÃ¼ndlichen Fassadenreinigung gereinigt wird</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Eine umfassende Fassadenreinigung beinhaltet die Reinigung aller Aussenwände eines Gebäudes. Dazu gehört die Entfernung von Algen, Moos, Staub, Vogelkot, Verschmutzungen durch Regen und Witterung, sowie gegebenenfalls Graffiti oder Farbrückstände. Die Reinigung umfasst alle Fassadenbereiche, inklusive schwer zugänglicher Stellen wie unter Vordächern, Balkonen oder Terrassen. Professionelle Reinigungskräfte verwenden spezielle Methoden und Geräte, um auch hartnäckige Rückstände gründlich zu entfernen. Zusätzlich werden oft auch Vordächer, Balkone, Terrassen und Einfahrten mitgereinigt. Eine professionelle Reinigung geht weit über das normale Abspritzen hinaus und sorgt für eine gründlich gereinigte, gepflegte Fassade, die den Wert Ihrer Immobilie erhält.
+                    Eine umfassende Fassadenreinigung beinhaltet die Reinigung aller AussenwÃ¤nde eines GebÃ¤udes. Dazu gehÃ¶rt die Entfernung von Algen, Moos, Staub, Vogelkot, Verschmutzungen durch Regen und Witterung, sowie gegebenenfalls Graffiti oder FarbrÃ¼ckstÃ¤nde. Die Reinigung umfasst alle Fassadenbereiche, inklusive schwer zugÃ¤nglicher Stellen wie unter VordÃ¤chern, Balkonen oder Terrassen. Professionelle ReinigungskrÃ¤fte verwenden spezielle Methoden und GerÃ¤te, um auch hartnÃ¤ckige RÃ¼ckstÃ¤nde grÃ¼ndlich zu entfernen. ZusÃ¤tzlich werden oft auch VordÃ¤cher, Balkone, Terrassen und Einfahrten mitgereinigt. Eine professionelle Reinigung geht weit Ã¼ber das normale Abspritzen hinaus und sorgt fÃ¼r eine grÃ¼ndlich gereinigte, gepflegte Fassade, die den Wert Ihrer Immobilie erhÃ¤lt.
                   </p>
 
-                  {/* H2: Fassadenreinigung für verschiedene Materialien */}
-                  <h2 className="heading-2">Fassadenreinigung für verschiedene Materialien</h2>
+                  {/* H2: Fassadenreinigung fÃ¼r verschiedene Materialien */}
+                  <h2 className="heading-2">Fassadenreinigung fÃ¼r verschiedene Materialien</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Verschiedene Fassadenmaterialien erfordern unterschiedliche Reinigungsmethoden und -mittel. Putzfassaden können mit Hochdruckreinigung oder schonender Reinigung behandelt werden, je nach Zustand und Alter. Klinker oder Naturstein benötigen spezielle Methoden, um die Oberfläche nicht zu beschädigen. Holzfassaden erfordern besonders schonende Reinigung, um das Material nicht zu schädigen. Metallfassaden benötigen spezielle Behandlung, um Korrosion zu vermeiden. Professionelle Fassadenreinigungsfirmen kennen die richtigen Methoden für jedes Material und passen ihre Technik entsprechend an. Sie verwenden die richtigen Reinigungsmittel und -methoden, um die Fassade gründlich zu reinigen, ohne sie zu beschädigen.
+                    Verschiedene Fassadenmaterialien erfordern unterschiedliche Reinigungsmethoden und -mittel. Putzfassaden kÃ¶nnen mit Hochdruckreinigung oder schonender Reinigung behandelt werden, je nach Zustand und Alter. Klinker oder Naturstein benÃ¶tigen spezielle Methoden, um die OberflÃ¤che nicht zu beschÃ¤digen. Holzfassaden erfordern besonders schonende Reinigung, um das Material nicht zu schÃ¤digen. Metallfassaden benÃ¶tigen spezielle Behandlung, um Korrosion zu vermeiden. Professionelle Fassadenreinigungsfirmen kennen die richtigen Methoden fÃ¼r jedes Material und passen ihre Technik entsprechend an. Sie verwenden die richtigen Reinigungsmittel und -methoden, um die Fassade grÃ¼ndlich zu reinigen, ohne sie zu beschÃ¤digen.
                   </p>
 
                   {/* Materialien Image */}
                   <div className="my-6 md:my-8 rounded-lg overflow-hidden">
                     <img
                       src="https://online-offerten.ch/reinigungsfirma/fassadenreinigung_materialien.png"
-                      alt="Fassadenreinigung für verschiedene Materialien - Putz, Klinker, Naturstein, Holz"
+                      alt="Fassadenreinigung fÃ¼r verschiedene Materialien - Putz, Klinker, Naturstein, Holz"
                       className="w-full h-auto object-cover"
                       loading="lazy"
                     />
                   </div>
 
-                  {/* H2: Höhenarbeit und Sicherheit bei der Fassadenreinigung */}
-                  <h2 className="heading-2">Höhenarbeit und Sicherheit bei der Fassadenreinigung</h2>
+                  {/* H2: HÃ¶henarbeit und Sicherheit bei der Fassadenreinigung */}
+                  <h2 className="heading-2">HÃ¶henarbeit und Sicherheit bei der Fassadenreinigung</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Fassadenreinigung erfordert oft Höhenarbeit, was besondere Sicherheitsmassnahmen erfordert. Professionelle Reinigungsfirmen haben die richtige Ausrüstung: Gerüste, Hubarbeitsbühnen oder Seilzugtechniken. Sie sind versichert und ihre Mitarbeiter sind geschult in Höhensicherheit und haben die notwendigen Zertifikate. Dies ist besonders wichtig bei mehrstöckigen Gebäuden, Bürogebäuden oder schwer zugänglichen Fassaden. Sicherheit hat oberste Priorität bei Fassadenreinigung, und professionelle Firmen halten alle Sicherheitsvorschriften ein. Sie verwenden die richtige persönliche Schutzausrüstung und sichern ihre Arbeitsplätze entsprechend ab. Dies gibt Ihnen Sicherheit und schützt sowohl die Reinigungskräfte als auch Ihr Eigentum.
+                    Fassadenreinigung erfordert oft HÃ¶henarbeit, was besondere Sicherheitsmassnahmen erfordert. Professionelle Reinigungsfirmen haben die richtige AusrÃ¼stung: GerÃ¼ste, HubarbeitsbÃ¼hnen oder Seilzugtechniken. Sie sind versichert und ihre Mitarbeiter sind geschult in HÃ¶hensicherheit und haben die notwendigen Zertifikate. Dies ist besonders wichtig bei mehrstÃ¶ckigen GebÃ¤uden, BÃ¼rogebÃ¤uden oder schwer zugÃ¤nglichen Fassaden. Sicherheit hat oberste PrioritÃ¤t bei Fassadenreinigung, und professionelle Firmen halten alle Sicherheitsvorschriften ein. Sie verwenden die richtige persÃ¶nliche SchutzausrÃ¼stung und sichern ihre ArbeitsplÃ¤tze entsprechend ab. Dies gibt Ihnen Sicherheit und schÃ¼tzt sowohl die ReinigungskrÃ¤fte als auch Ihr Eigentum.
                   </p>
 
-                  {/* Höhenarbeit Image */}
+                  {/* HÃ¶henarbeit Image */}
                   <div className="my-6 md:my-8 rounded-lg overflow-hidden">
                     <img
                       src="https://online-offerten.ch/reinigungsfirma/fassadenreinigung_hoehenarbeit.png"
-                      alt="Höhenarbeit und Sicherheit bei der Fassadenreinigung - Professionelle Ausrüstung"
+                      alt="HÃ¶henarbeit und Sicherheit bei der Fassadenreinigung - Professionelle AusrÃ¼stung"
                       className="w-full h-auto object-cover"
                       loading="lazy"
                     />
@@ -307,45 +289,45 @@ const FassadenreinigungPageClient = () => {
                   {/* H2: Moderne und umweltfreundliche Reinigungsmethoden */}
                   <h2 className="heading-2">Moderne und umweltfreundliche Reinigungsmethoden</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Moderne Fassadenreinigungsfirmen setzen zunehmend auf umweltschonende Methoden und Reinigungsmittel. Biologische Reinigungsmittel sind effektiv gegen Algen und Moos, schonen aber die Umwelt. Zudem wird darauf geachtet, dass Reinigungswasser nicht unkontrolliert in die Umwelt gelangt. Dies ist besonders wichtig in sensiblen Gebieten, in der Nähe von Gewässern oder in Naturschutzgebieten. Professionelle Reinigungsfirmen verwenden umweltschonende Methoden, die effektiv sind, aber gleichzeitig die Umwelt und die Gesundheit schützen. Sie achten darauf, dass keine schädlichen Chemikalien in die Umwelt gelangen und verwenden biologisch abbaubare Reinigungsmittel, wo immer möglich.
+                    Moderne Fassadenreinigungsfirmen setzen zunehmend auf umweltschonende Methoden und Reinigungsmittel. Biologische Reinigungsmittel sind effektiv gegen Algen und Moos, schonen aber die Umwelt. Zudem wird darauf geachtet, dass Reinigungswasser nicht unkontrolliert in die Umwelt gelangt. Dies ist besonders wichtig in sensiblen Gebieten, in der NÃ¤he von GewÃ¤ssern oder in Naturschutzgebieten. Professionelle Reinigungsfirmen verwenden umweltschonende Methoden, die effektiv sind, aber gleichzeitig die Umwelt und die Gesundheit schÃ¼tzen. Sie achten darauf, dass keine schÃ¤dlichen Chemikalien in die Umwelt gelangen und verwenden biologisch abbaubare Reinigungsmittel, wo immer mÃ¶glich.
                   </p>
 
                   {/* Umweltfreundlich Image */}
                   <div className="my-6 md:my-8 rounded-lg overflow-hidden">
                     <img
                       src="https://online-offerten.ch/reinigungsfirma/umweltfreundliche_reinigungsmittel_modern.webp"
-                      alt="Moderne und umweltfreundliche Reinigungsmethoden für Fassadenreinigung"
+                      alt="Moderne und umweltfreundliche Reinigungsmethoden fÃ¼r Fassadenreinigung"
                       className="w-full h-auto object-cover"
                       loading="lazy"
                     />
                   </div>
 
-                  {/* H2: Ablauf unserer Fassadenreinigung – Schritt für Schritt */}
-                  <h2 className="heading-2">Ablauf unserer Fassadenreinigung – Schritt für Schritt</h2>
+                  {/* H2: Ablauf unserer Fassadenreinigung â€“ Schritt fÃ¼r Schritt */}
+                  <h2 className="heading-2">Ablauf unserer Fassadenreinigung â€“ Schritt fÃ¼r Schritt</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Der Ablauf einer professionellen Fassadenreinigung ist strukturiert und effizient. Zunächst erfolgt eine Besichtigung der Fassade, um den Umfang der Reinigung zu bestimmen, das Material zu identifizieren und eine genaue Offerte zu erstellen. Nach der Auftragsbestätigung wird ein Termin vereinbart, der zu Ihren Bedürfnissen passt. Am Reinigungstag erscheint das professionelle Reinigungsteam pünktlich mit allen notwendigen Geräten, Reinigungsmitteln und Sicherheitsausrüstung. Die Reinigung erfolgt systematisch Bereich für Bereich, beginnend mit den am stärksten verschmutzten Bereichen. Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle, und Sie erhalten eine gründlich gereinigte, gepflegte Fassade.
+                    Der Ablauf einer professionellen Fassadenreinigung ist strukturiert und effizient. ZunÃ¤chst erfolgt eine Besichtigung der Fassade, um den Umfang der Reinigung zu bestimmen, das Material zu identifizieren und eine genaue Offerte zu erstellen. Nach der AuftragsbestÃ¤tigung wird ein Termin vereinbart, der zu Ihren BedÃ¼rfnissen passt. Am Reinigungstag erscheint das professionelle Reinigungsteam pÃ¼nktlich mit allen notwendigen GerÃ¤ten, Reinigungsmitteln und SicherheitsausrÃ¼stung. Die Reinigung erfolgt systematisch Bereich fÃ¼r Bereich, beginnend mit den am stÃ¤rksten verschmutzten Bereichen. Nach Abschluss der Reinigung erfolgt eine QualitÃ¤tskontrolle, und Sie erhalten eine grÃ¼ndlich gereinigte, gepflegte Fassade.
                   </p>
 
                   {/* Ablauf Steps */}
                   <div className="my-6 md:my-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 p-6 md:p-8">
                     <ul className="list-disc list-inside space-y-3 text-body">
                       <li><strong>Besichtigung und Offerte:</strong> Wir besichtigen Ihre Fassade, identifizieren das Material und erstellen eine genaue Offerte.</li>
-                      <li><strong>Terminvereinbarung:</strong> Nach der Auftragsbestätigung vereinbaren wir einen Termin, der zu Ihren Bedürfnissen passt.</li>
-                      <li><strong>Professionelle Reinigung:</strong> Unser professionelles Team reinigt Ihre Fassade gründlich mit den richtigen Methoden und Geräten.</li>
-                      <li><strong>Qualitätskontrolle:</strong> Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle für perfekte Ergebnisse.</li>
+                      <li><strong>Terminvereinbarung:</strong> Nach der AuftragsbestÃ¤tigung vereinbaren wir einen Termin, der zu Ihren BedÃ¼rfnissen passt.</li>
+                      <li><strong>Professionelle Reinigung:</strong> Unser professionelles Team reinigt Ihre Fassade grÃ¼ndlich mit den richtigen Methoden und GerÃ¤ten.</li>
+                      <li><strong>QualitÃ¤tskontrolle:</strong> Nach Abschluss der Reinigung erfolgt eine QualitÃ¤tskontrolle fÃ¼r perfekte Ergebnisse.</li>
                     </ul>
                   </div>
 
                   {/* H2: Was kostet eine professionelle Fassadenreinigung? */}
                   <h2 className="heading-2">Was kostet eine professionelle Fassadenreinigung?</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro m². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Grössere Gebäude, höhere Fassaden oder besonders verschmutzte Bereiche können höhere Kosten verursachen. Die Reinigungsmethode (Hochdruckreinigung vs. schonende Reinigung) und das Material beeinflussen ebenfalls die Kosten. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
+                    Die Kosten fÃ¼r Fassadenreinigung hÃ¤ngen von der GrÃ¶sse der Fassade, der HÃ¶he, dem Material, dem Verschmutzungsgrad und der ZugÃ¤nglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro mÂ². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. GrÃ¶ssere GebÃ¤ude, hÃ¶here Fassaden oder besonders verschmutzte Bereiche kÃ¶nnen hÃ¶here Kosten verursachen. Die Reinigungsmethode (Hochdruckreinigung vs. schonende Reinigung) und das Material beeinflussen ebenfalls die Kosten. Durch den Vergleich mehrerer Offerten Ã¼ber unsere Plattform kÃ¶nnen Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
-                  {/* H2: Warum wir der richtige Partner für Ihre Fassadenreinigung sind */}
-                  <h2 className="heading-2">Warum wir der richtige Partner für Ihre Fassade sind</h2>
+                  {/* H2: Warum wir der richtige Partner fÃ¼r Ihre Fassadenreinigung sind */}
+                  <h2 className="heading-2">Warum wir der richtige Partner fÃ¼r Ihre Fassade sind</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Wir sind der vertrauenswürdige Partner für Ihre Fassade. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen haben die richtige Ausrüstung für Höhenarbeit, sind versichert und ihre Mitarbeiter sind geschult für Sicherheit. Sie verwenden moderne, umweltfreundliche Reinigungsmittel und kennen die richtigen Methoden für jedes Fassadenmaterial. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma für Fassaden zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
+                    Wir sind der vertrauenswÃ¼rdige Partner fÃ¼r Ihre Fassade. Unser Netzwerk umfasst nur geprÃ¼fte, versicherte Reinigungsfirmen, die hÃ¶chste QualitÃ¤tsstandards erfÃ¼llen. Alle Partnerfirmen haben die richtige AusrÃ¼stung fÃ¼r HÃ¶henarbeit, sind versichert und ihre Mitarbeiter sind geschult fÃ¼r Sicherheit. Sie verwenden moderne, umweltfreundliche Reinigungsmittel und kennen die richtigen Methoden fÃ¼r jedes Fassadenmaterial. Wir haben bereits Ã¼ber 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma fÃ¼r Fassaden zu finden. Unser Service ist komplett kostenlos und unverbindlich â€“ Sie zahlen nur fÃ¼r die Reinigung selbst, nicht fÃ¼r unsere Vermittlung. Zudem kÃ¶nnen Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
                   </p>
 
                   {/* CTA 2 - After Richtiger Partner */}
@@ -375,9 +357,9 @@ const FassadenreinigungPageClient = () => {
 
                   {/* FAQ Section */}
                   <div className="mt-6 md:mt-12">
-                    <h2 className="heading-2">Häufig gestellte Fragen zur Reinigung</h2>
+                    <h2 className="heading-2">HÃ¤ufig gestellte Fragen zur Reinigung</h2>
                     <p className="text-body mb-6 md:mb-8 leading-relaxed">
-                      Häufig gestellte Fragen zur professionellen Reinigung der Fassade: Was kostet eine professionelle Fassadenreinigung? Wie oft sollte ich meine Fassade reinigen lassen? Welche Reinigungsmethoden werden verwendet? Ist Fassadenreinigung umweltschonend? Wie lange dauert eine Fassadenreinigung? Sind die Reinigungskräfte versichert? Welche Materialien können gereinigt werden? Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
+                      HÃ¤ufig gestellte Fragen zur professionellen Reinigung der Fassade: Was kostet eine professionelle Fassadenreinigung? Wie oft sollte ich meine Fassade reinigen lassen? Welche Reinigungsmethoden werden verwendet? Ist Fassadenreinigung umweltschonend? Wie lange dauert eine Fassadenreinigung? Sind die ReinigungskrÃ¤fte versichert? Welche Materialien kÃ¶nnen gereinigt werden? Diese und weitere Fragen beantworten wir Ihnen gerne. Ãœber unsere Plattform kÃ¶nnen Sie Reinigungsofferten online vergleichen und dabei bis zu 40% sparen.
                     </p>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
@@ -401,7 +383,7 @@ const FassadenreinigungPageClient = () => {
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
                         <h3 className="heading-3">Wohnungsreinigung</h3>
-                        <p className="text-sm md:text-base text-gray-600">Professionelle Wohnungsreinigung mit Abnahmegarantie für eine sorgenfreie Wohnungsübergabe.</p>
+                        <p className="text-sm md:text-base text-gray-600">Professionelle Wohnungsreinigung mit Abnahmegarantie fÃ¼r eine sorgenfreie WohnungsÃ¼bergabe.</p>
                       </Link>
                       <Link href="/reinigung/fensterreinigung"
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
@@ -413,7 +395,7 @@ const FassadenreinigungPageClient = () => {
                         className="block p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
                       >
                         <h3 className="heading-3">Baureinigung</h3>
-                        <p className="text-sm md:text-base text-gray-600">Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate.</p>
+                        <p className="text-sm md:text-base text-gray-600">GrÃ¼ndliche Baureinigung nach Neubau oder Renovation fÃ¼r perfekte Resultate.</p>
                       </Link>
                     </div>
                   </div>
@@ -427,7 +409,7 @@ const FassadenreinigungPageClient = () => {
                       }
                     </h3>
                     <p className="text-body mb-3 md:mb-4">
-                      Reinigungsofferten online vergleichen und bis zu 40% sparen. Alle Offerten beinhalten professionelle Reinigung mit umweltschonenden Methoden. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Fassadenreinigungsfirma für Ihre Bedürfnisse.
+                      Reinigungsofferten online vergleichen und bis zu 40% sparen. Alle Offerten beinhalten professionelle Reinigung mit umweltschonenden Methoden. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Fassadenreinigungsfirma fÃ¼r Ihre BedÃ¼rfnisse.
                     </p>
                     <Button 
                       onClick={handleCtaClick} 
@@ -438,7 +420,7 @@ const FassadenreinigungPageClient = () => {
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
-                </motion.article>
+                </article>
               </div>
 
               {/* Sidebar */}

@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { FileText, CheckCircle, Clock, Users, Send, Archive } from 'lucide-react';
 import { format } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { de } from 'date-fns/locale/de';
 
 const statusConfig = {
   new_quote: {
@@ -43,11 +43,7 @@ const QuoteStatusView = ({ quote }) => {
   const currentStatusIndex = statusTimeline.indexOf(quote.status);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-      animate={{ opacity: 1, scaleY: 1 }}
-      exit={{ opacity: 0, scaleY: 0 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    <div
       className="bg-slate-100 border-t border-slate-200 overflow-hidden"
     >
       <div className="p-4 sm:p-6">
@@ -81,7 +77,7 @@ const QuoteStatusView = ({ quote }) => {
           })}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Star, User } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 import { Card, CardContent } from '@/components/ui/card';
@@ -91,11 +91,8 @@ const CleaningServiceReviews = () => {
       <div className="overflow-x-auto -mx-4 px-4 pb-4 md:overflow-visible md:mx-0 md:px-0">
         <div className="flex gap-6 min-w-max md:grid md:grid-cols-2 md:min-w-0 md:gap-6">
           {reviews.map((review, index) => (
-            <motion.div
+            <div
               key={review.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-auto md:flex-shrink"
             >
               <Card className="h-full bg-white shadow-lg rounded-xl border border-gray-100 hover:shadow-xl transition-shadow w-full">
@@ -127,7 +124,7 @@ const CleaningServiceReviews = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp, ChevronRight, MapPin, Users } from 'lucide-react';
 import Image from 'next/image';
@@ -9,10 +9,7 @@ const Hero = () => {
   const imageUrl = "/image/b87025c3-7292-44e6-8a2c-7c1105b554bc.webp";
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+    <section
       className="relative w-full bg-white pt-[5px] pb-12 md:pb-16 overflow-hidden"
       itemScope
       itemType="https://schema.org/Service"
@@ -96,7 +93,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

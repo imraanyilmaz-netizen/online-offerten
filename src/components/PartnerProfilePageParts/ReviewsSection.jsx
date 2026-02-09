@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import ReviewCard from '@/components/PartnerProfilePageParts/ReviewCard';
 // Removed useTranslation
@@ -19,21 +19,15 @@ const ReviewsSection = ({ reviews, reviewCount, formatDate, onShowAllReviews }) 
         <CardTitle className="text-xl font-bold text-gray-800">Kundenbewertungen</CardTitle>
       </CardHeader>
       <CardContent className="p-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
+        <div
         >
           <div className="space-y-5">
             {reviews.map((review, index) => (
-              <motion.div
+              <div
                 key={review.id}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + index * 0.1, duration: 0.4 }}
               >
                 <ReviewCard review={review} formatDate={formatDate} />
-              </motion.div>
+              </div>
             ))}
           </div>
           {reviewCount > reviews.length && (
@@ -43,7 +37,7 @@ const ReviewsSection = ({ reviews, reviewCount, formatDate, onShowAllReviews }) 
               </Button>
             </div>
           )}
-        </motion.div>
+        </div>
       </CardContent>
     </Card>
   );

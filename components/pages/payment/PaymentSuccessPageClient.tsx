@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 // Removed useTranslation
 import { Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
@@ -110,23 +110,18 @@ const PaymentSuccessPageClient = () => {
     <>
       
       <div className="flex h-screen w-full items-center justify-center bg-gray-100">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
+      <div
         className="w-full max-w-md rounded-xl bg-white p-8 text-center shadow-lg"
       >
-        <motion.div
+        <div
           key={status}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.2 }}
         >
           <StatusIcon />
-        </motion.div>
+        </div>
         <h1 className="mt-6 text-2xl font-bold text-gray-800">{message}</h1>
         {status === 'verifying' && <p className="mt-2 text-gray-600">Bitte warten Sie, während wir Ihre Zahlung verarbeiten...</p>}
         {status !== 'verifying' && <p className="mt-2 text-gray-600">Sie werden zum Dashboard weitergeleitet...</p>}
-      </motion.div>
+      </div>
     </div>
     </>
   );

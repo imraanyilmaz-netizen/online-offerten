@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { supabase } from '@/lib/supabaseClient';
 import { supabase as customSupabase } from '@/lib/customSupabaseClient';
 import { Button } from '@/components/ui/button';
@@ -470,10 +470,8 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                           )}
                         </div>
                         {isActive && (
-                          <motion.div
+                          <div
                             className="absolute inset-0 rounded-full bg-green-500 opacity-20"
-                            animate={{ scale: [1, 1.3, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
                           />
                         )}
                       </div>
@@ -502,26 +500,22 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         </div>
         <div className="min-h-[600px]">
           <div className="p-8 md:p-12 bg-white flex flex-col">
-            <AnimatePresence mode="wait">
+            
               {submitted ? (
                 <div className="flex-grow flex items-center justify-center">
                   <SuccessMessage formData={formData} />
                 </div>
               ) : (
-                <motion.div
+                <div
                   key={step}
                   className="flex-grow"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
                 >
                   {step === 1 && <Step1Services formData={formData} onMainCategoryChange={handleMainCategoryChange} onServiceChange={handleServiceChange} errors={errors} />}
                   {step === 2 && <Step2Regions formData={formData} onRegionChange={handleRegionChange} errors={errors} />}
                   {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} onLogoChange={(file) => setFormData(prev => ({ ...prev, logoFile: file }))} errors={errors} />}
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
+            
             <div className="flex justify-between mt-8 pt-8 border-t border-slate-200">
               <div>
                 {submitted ? (
@@ -604,10 +598,8 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                             )}
                           </div>
                           {isActive && (
-                            <motion.div
+                            <div
                               className="absolute inset-0 rounded-full bg-green-500 opacity-20"
-                              animate={{ scale: [1, 1.3, 1] }}
-                              transition={{ duration: 2, repeat: Infinity }}
                             />
                           )}
                         </div>
@@ -636,26 +628,22 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
           </div>
           <div className="min-h-[600px]">
             <div className="p-8 md:p-12 bg-white flex flex-col">
-              <AnimatePresence mode="wait">
+              
                 {submitted ? (
                   <div className="flex-grow flex items-center justify-center">
                     <SuccessMessage formData={formData} />
                   </div>
                 ) : (
-                  <motion.div
+                  <div
                     key={step}
                     className="flex-grow"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4 }}
                   >
                     {step === 1 && <Step1Services formData={formData} onMainCategoryChange={handleMainCategoryChange} onServiceChange={handleServiceChange} errors={errors} />}
                     {step === 2 && <Step2Regions formData={formData} onRegionChange={handleRegionChange} errors={errors} />}
                     {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} onLogoChange={(file) => setFormData(prev => ({ ...prev, logoFile: file }))} errors={errors} />}
-                  </motion.div>
+                  </div>
                 )}
-              </AnimatePresence>
+              
               {!submitted && (
                 <div className="flex justify-between mt-8 pt-8 border-t border-slate-200">
                   <div>

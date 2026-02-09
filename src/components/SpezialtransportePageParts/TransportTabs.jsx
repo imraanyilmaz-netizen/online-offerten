@@ -1,16 +1,12 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CheckSquare, Shield, Cog, FileText, HelpCircle, Wrench } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi';
 
 const Section = ({ title, icon, children, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: delay * 0.15, duration: 0.5 }}
+  <div
     className="pt-8"
   >
     <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
@@ -18,7 +14,7 @@ const Section = ({ title, icon, children, delay = 0 }) => (
       {title}
     </h3>
     <div className="prose max-w-none">{children}</div>
-  </motion.div>
+  </div>
 );
 
 const PriceTable = ({ prices }) => {

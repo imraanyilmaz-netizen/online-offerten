@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Sparkles, Building, Globe, Package } from 'lucide-react'
@@ -10,11 +10,7 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
   return (
     <section className="py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -23,7 +19,7 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Neben Umzugsofferten bieten wir auch Offerten für weitere Services rund um Ihren Umzug an.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {[
@@ -32,12 +28,8 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
             { name: "Internationale Umzüge", link: "/umzugsfirma/internationale-umzuege", icon: Globe },
             { name: "Spezialtransporte", link: "/umzugsfirma/spezialtransporte", icon: Package }
           ].map((service, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <Link href={service.link}>
                 <Card className="h-full hover:border-green-500 hover:shadow-lg transition-all cursor-pointer">
@@ -47,16 +39,12 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
                   </CardContent>
                 </Card>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Additional Internal Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <div
           className="bg-green-50 border-l-4 border-green-600 p-6 rounded-lg max-w-4xl mx-auto"
         >
           <h3 className="text-xl font-bold text-gray-900 mb-4">
@@ -114,7 +102,7 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
               </ul>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

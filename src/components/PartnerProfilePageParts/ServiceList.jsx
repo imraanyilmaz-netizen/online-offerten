@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Check } from 'lucide-react';
 import { getGermanServiceName } from '@/lib/dataMapping';
 // Removed useTranslation
@@ -54,16 +54,13 @@ const ServiceList = ({ services, mainCategories, className }) => {
                         <h3 className="text-lg font-semibold text-gray-700 mb-3 border-b pb-2">{category.label}</h3>
                         <ul className="space-y-2">
                         {category.services.map((service, index) => (
-                            <motion.li
+                            <li
                             key={`${service}-${index}`}
                             className="flex items-center text-gray-600"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.3, delay: index * 0.05 }}
                             >
                             <Check className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
                             <span>{getGermanServiceName(service)}</span>
-                            </motion.li>
+                            </li>
                         ))}
                         </ul>
                     </div>

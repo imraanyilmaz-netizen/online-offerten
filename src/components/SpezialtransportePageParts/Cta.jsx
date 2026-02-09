@@ -1,16 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Truck } from 'lucide-react';
 
 const Cta = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.7 }}
+    <section
       className="bg-gradient-to-r from-green-600 to-green-800"
     >
       <div className="container mx-auto max-w-navbar px-4 md:px-6 py-16 md:py-20 text-center text-white">
@@ -32,7 +28,7 @@ const Cta = () => {
           </Link>
         </Button>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

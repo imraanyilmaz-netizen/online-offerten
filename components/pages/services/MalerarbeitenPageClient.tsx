@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Hero from '@/components/MalerPageParts/Hero'
 import MainContent from '@/components/MalerPageParts/MainContent'
 import Sidebar from '@/components/MalerPageParts/Sidebar'
@@ -48,12 +48,7 @@ const MalerarbeitenPageClient = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <motion.div
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={{ duration: 0.5 }}
+      <div
         className="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-100"
       >
         <Hero />
@@ -68,7 +63,7 @@ const MalerarbeitenPageClient = () => {
           <Faq />
           <Cta />
         </div>
-      </motion.div>
+      </div>
     </>
   )
 }

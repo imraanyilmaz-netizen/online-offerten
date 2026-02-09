@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, ExternalLink } from 'lucide-react';
@@ -21,11 +21,8 @@ const RegionalDifferences = () => {
         if (!city.link) return null;
 
         return (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.05 }}
           >
             <Button 
               asChild
@@ -41,7 +38,7 @@ const RegionalDifferences = () => {
                 </Badge>
               </Link>
             </Button>
-          </motion.div>
+          </div>
         );
       })}
     </div>

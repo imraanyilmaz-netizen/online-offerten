@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle, Award, Package, Sparkles, MapPin, Building, Globe, Users, Truck, Home, ChevronRight, Calculator, ShieldCheck, TrendingUp, Star } from 'lucide-react';
@@ -14,16 +14,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 
 const AdvantageItem = ({ text, delay }: any) => {
   return (
-    <motion.li
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: delay * 0.1 + 0.5 }}
+    <li
       className="flex items-start"
     >
       <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
       <span className="text-gray-700 leading-relaxed">{text}</span>
-    </motion.li>
+    </li>
   );
 };
 
@@ -425,10 +421,7 @@ const UmzugsfirmaBernPageClient = ({ bernPartners = [] }: UmzugsfirmaBernPageCli
                 </div>
               </article>
               
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+              <div
               >
                 <div className="text-center bg-green-50 p-8 rounded-lg border-l-4 border-green-500 shadow-md w-full min-w-0 overflow-x-hidden">
                   <h3 className="heading-3 break-words">Umzugsfirma vergleichen Bern: Jetzt starten!</h3>
@@ -440,7 +433,7 @@ const UmzugsfirmaBernPageClient = ({ bernPartners = [] }: UmzugsfirmaBernPageCli
                     </Link>
                   </Button>
                 </div>
-              </motion.div>
+              </div>
               
                 <article className="pt-8 border-t border-gray-200 space-y-6 w-full min-w-0">
                   <h2 className="heading-2 break-words">Umzugsfirma Bern: Parkbewilligungen und Logistik</h2>

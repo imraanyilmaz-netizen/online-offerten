@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { ShieldCheck, TrendingUp, Users, Award, Clock, CheckCircle2 } from 'lucide-react'
 
 interface WhyChooseUsProps {
@@ -37,11 +37,7 @@ export default function WhyChooseUs({
   className = ""
 }: WhyChooseUsProps) {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7 }}
+    <section
       className={`bg-white rounded-2xl p-8 md:p-12 shadow-xl border border-gray-200 ${className}`}
     >
       <div className="text-center mb-12">
@@ -53,12 +49,8 @@ export default function WhyChooseUs({
 
       <div className="grid md:grid-cols-3 gap-8">
         {advantages.map((advantage, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.15 }}
             className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 hover:shadow-lg transition-shadow"
           >
             <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4 text-green-600 mx-auto">
@@ -66,10 +58,10 @@ export default function WhyChooseUs({
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">{advantage.title}</h3>
             <p className="text-gray-600 text-center leading-relaxed">{advantage.description}</p>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.section>
+    </section>
   )
 }
 

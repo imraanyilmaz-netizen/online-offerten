@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 
@@ -57,11 +57,7 @@ const CostTable = ({ costKey, items }) => {
   if (!data.title) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+    <div
       className="my-8"
     >
       <h3 className="text-2xl font-semibold text-gray-800 mb-4">{data.title}</h3>
@@ -92,7 +88,7 @@ const CostTable = ({ costKey, items }) => {
       {data.disclaimer && (
         <p className="text-xs text-gray-500 mt-4 italic">{data.disclaimer}</p>
       )}
-    </motion.div>
+    </div>
   );
 };
 

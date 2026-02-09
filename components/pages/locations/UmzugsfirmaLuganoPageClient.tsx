@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle, ChevronRight } from 'lucide-react';
@@ -56,10 +56,7 @@ const UmzugsfirmaLuganoPageClient = () => {
             </ol>
           </nav>
 
-          <motion.header 
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+          <header
             className="text-center mb-12 md:mb-16 pt-8"
           >
             <h1 className="heading-1">
@@ -68,13 +65,10 @@ const UmzugsfirmaLuganoPageClient = () => {
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
               Vom See bis zum Berg – Ihr Umzug in Lugano mit den besten Profis im Tessin.
             </p>
-          </motion.header>
+          </header>
 
           <div className="grid lg:grid-cols-5 gap-8 md:gap-12 items-start">
-            <motion.main 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+            <main
               className="lg:col-span-3 bg-white p-6 md:p-8 rounded-xl shadow-xl space-y-8"
             >
               <article>
@@ -168,7 +162,7 @@ const UmzugsfirmaLuganoPageClient = () => {
                     ))}
                   </ul>
               </article>
-            </motion.main>
+            </main>
 
             <LocationSidebar city={city} districts={undefined as any} searches={undefined as any} />
           </div>

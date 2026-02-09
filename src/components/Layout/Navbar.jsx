@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed – using CSS transitions for better INP
 // Removed useTranslation
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 // logoUrl removed - using inline SVG icon instead
@@ -110,11 +110,7 @@ const Navbar = () => {
     { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirma vergleichen' },
   ];
 
-  const mobileMenuVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.2 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
-  };
+  // CSS transitions used instead of framer-motion for better performance
 
   const NavItem = ({ to, children, onClick }) => {
     const isActive = pathname === to;
@@ -221,94 +217,84 @@ const Navbar = () => {
         </div>
       </div>
 
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            variants={mobileMenuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="md:hidden bg-white border-t"
-          >
-            <div className="container mx-auto max-w-7xl px-4 md:px-6">
-              <nav className="pt-2 pb-4 space-y-1">
-                <NavItem to="/" onClick={() => setMobileMenuOpen(false)}>
-                  <Home size={18} /> Startseite
-                </NavItem>
-                
-                <NavItem to="/kostenlose-offerte-anfordern" onClick={() => setMobileMenuOpen(false)}>
-                  OFFERTEN
-                </NavItem>
-                <NavItem to="/ratgeber" onClick={() => setMobileMenuOpen(false)}>
-                  RATGEBER
-                </NavItem>
+      {/* Mobile menu – CSS transition instead of framer-motion for better INP */}
+      <div
+        className={`md:hidden bg-white border-t overflow-hidden transition-all duration-200 ease-in-out ${
+          mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
+          <nav className="pt-2 pb-4 space-y-1">
+            <NavItem to="/" onClick={() => setMobileMenuOpen(false)}>
+              <Home size={18} /> Startseite
+            </NavItem>
+            
+            <NavItem to="/kostenlose-offerte-anfordern" onClick={() => setMobileMenuOpen(false)}>
+              OFFERTEN
+            </NavItem>
+            <NavItem to="/ratgeber" onClick={() => setMobileMenuOpen(false)}>
+              RATGEBER
+            </NavItem>
 
-                <div className="pt-1">
-                  <button onClick={() => toggleMobileSection('kosten')} className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
-                      <span>KOSTEN & TOOLS</span>
-                      <ChevronDown size={16} className={`transition-transform duration-200 ${openMobileSections['kosten'] ? 'rotate-180' : ''}`} />
-                  </button>
-                  <AnimatePresence>
-                      {openMobileSections['kosten'] && (
-                          <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden"
-                          >
-                              <div className="pl-6 pt-1 space-y-1">
-                                  {kostenLinks.map((link) => (
-                                      <NavItem key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}>
-                                          {link.text}
-                                      </NavItem>
-                                  ))}
-                              </div>
-                          </motion.div>
-                      )}
-                  </AnimatePresence>
-                </div>
-
-                <NavItem to="/kontakt" onClick={() => setMobileMenuOpen(false)}>
-                  <Mail size={18} /> Kontakt
-                </NavItem>
-
-                <div className="border-t pt-4 mt-4">
-                  {!loading && !user && (
-                    <NavItem to="/partner-werden" onClick={() => setMobileMenuOpen(false)}>
-                      Partner werden
-                    </NavItem>
-                  )}
-                  {loading ? (
-                    <div className="h-10 bg-gray-200 rounded-md animate-pulse"></div>
-                  ) : user ? (
-                    <>
-                      <p className="px-3 py-2 text-sm font-semibold text-gray-500 truncate">{user.email}</p>
-                      <NavItem to={user?.user_metadata?.role === 'admin' ? '/admin-dashboard' : '/partner/dashboard'} onClick={() => setMobileMenuOpen(false)}>
-                        <LayoutDashboard size={18} /> Dashboard
-                      </NavItem>
-                      {user?.user_metadata?.role === 'partner' && (
-                        <NavItem to={settingsPath} onClick={() => setMobileMenuOpen(false)}>
-                          <Settings size={18} /> Einstellungen
+            <div className="pt-1">
+              <button onClick={() => toggleMobileSection('kosten')} className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
+                  <span>KOSTEN & TOOLS</span>
+                  <ChevronDown size={16} className={`transition-transform duration-200 ${openMobileSections['kosten'] ? 'rotate-180' : ''}`} />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                  openMobileSections['kosten'] ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="pl-6 pt-1 space-y-1">
+                    {kostenLinks.map((link) => (
+                        <NavItem key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}>
+                            {link.text}
                         </NavItem>
-                      )}
-                      <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                      >
-                        <LogOut size={18} /> Abmelden
-                      </button>
-                    </>
-                  ) : (
-                    <NavItem to="/login" onClick={() => setMobileMenuOpen(false)}>
-                      <User size={18} /> Anmelden
+                    ))}
+                </div>
+              </div>
+            </div>
+
+            <NavItem to="/kontakt" onClick={() => setMobileMenuOpen(false)}>
+              <Mail size={18} /> Kontakt
+            </NavItem>
+
+            <div className="border-t pt-4 mt-4">
+              {!loading && !user && (
+                <NavItem to="/partner-werden" onClick={() => setMobileMenuOpen(false)}>
+                  Partner werden
+                </NavItem>
+              )}
+              {loading ? (
+                <div className="h-10 bg-gray-200 rounded-md animate-pulse"></div>
+              ) : user ? (
+                <>
+                  <p className="px-3 py-2 text-sm font-semibold text-gray-500 truncate">{user.email}</p>
+                  <NavItem to={user?.user_metadata?.role === 'admin' ? '/admin-dashboard' : '/partner/dashboard'} onClick={() => setMobileMenuOpen(false)}>
+                    <LayoutDashboard size={18} /> Dashboard
+                  </NavItem>
+                  {user?.user_metadata?.role === 'partner' && (
+                    <NavItem to={settingsPath} onClick={() => setMobileMenuOpen(false)}>
+                      <Settings size={18} /> Einstellungen
                     </NavItem>
                   )}
-                </div>
-              </nav>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    <LogOut size={18} /> Abmelden
+                  </button>
+                </>
+              ) : (
+                <NavItem to="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <User size={18} /> Anmelden
+                </NavItem>
+              )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </nav>
+        </div>
+      </div>
     </header>
   );
 };

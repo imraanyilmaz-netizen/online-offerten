@@ -6,7 +6,7 @@
     import { Button } from '@/components/ui/button';
     import { Loader2, Upload, Trash2, X } from 'lucide-react';
     import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-    import { AnimatePresence, motion } from 'framer-motion';
+    // framer-motion removed - CSS for better INP
 
     const GalleryImageManager = ({ partnerId, initialImages = [], onUpdate }) => {
       const [images, setImages] = useState(initialImages);
@@ -159,15 +159,11 @@
               <div className="mt-6">
                 <h4 className="font-semibold mb-3">Hochgeladene Bilder</h4>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  <AnimatePresence>
+                  
                     {images.map((imgUrl) => (
-                      <motion.div
+                      <div
                         key={imgUrl}
                         layout
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.2 }}
                         className="relative group aspect-square"
                       >
                         <img 
@@ -194,9 +190,9 @@
                             )}
                           </Button>
                         </div>
-                      </motion.div>
+                      </div>
                     ))}
-                  </AnimatePresence>
+                  
                 </div>
               </div>
             )}

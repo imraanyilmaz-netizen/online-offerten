@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button'
 import { Loader2, Search, Shield, Star, ArrowRight } from 'lucide-react'
 import SearchFilters from '@/components/PartnerSearch/SearchFilters'
@@ -151,10 +151,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       <div className="container mx-auto max-w-navbar px-4 md:px-6 py-8 md:py-12">
         {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+        <div
           className="text-center mb-8 md:mb-12"
         >
           <h1 className="heading-1 text-center">
@@ -163,7 +160,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
           <p className="text-body max-w-3xl mx-auto text-center">
             Finden Sie geprüfte Umzugsfirmen, Reinigungsfirmen und Malerfirmen in Ihrer Nähe. Bewertungen lesen, Preise vergleichen und kostenlos Offerten anfordern.
           </p>
-        </motion.div>
+        </div>
 
         {/* Search & Filter */}
         <SearchFilters
@@ -186,9 +183,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
             <Loader2 className="h-8 w-8 animate-spin text-green-600" />
           </div>
         ) : filteredPartners.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <div
             className="text-center py-20"
           >
             <Search className="mx-auto h-16 w-16 text-gray-400 mb-4" />
@@ -205,7 +200,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
             <Button onClick={clearFilters} variant="outline">
               Filter zurücksetzen
             </Button>
-          </motion.div>
+          </div>
         ) : (
           <>
             <div className="mb-6 flex items-center justify-between">
@@ -215,14 +210,11 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {filteredPartners.map((partner: any, index: number) => (
-                <motion.div
+                <div
                   key={partner.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: Math.min(index * 0.05, 0.5) }}
                 >
                   <PartnerCard partner={partner} />
-                </motion.div>
+                </div>
               ))}
             </div>
           </>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { CheckCircle, ShieldCheck, Users, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -14,11 +14,7 @@ const benefits = [
 
 const Sidebar = () => {
   return (
-    <motion.aside
-      initial={{ opacity: 0, x: 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.4, duration: 0.6 }}
+    <aside
       className="lg:col-span-2 space-y-8"
     >
       <div className="bg-green-50 p-6 md:p-8 rounded-2xl shadow-xl border border-green-200">
@@ -52,7 +48,7 @@ const Sidebar = () => {
           </Link>
         </Button>
       </div>
-    </motion.aside>
+    </aside>
   );
 };
 

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { MapPin, Search, ArrowRight, Home, Sparkles, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -74,10 +74,7 @@ const LocationSidebar = ({ city, districts, searches }) => {
   ];
 
   return (
-    <motion.aside 
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.4, duration: 0.5 }}
+    <aside
       className="lg:col-span-2 space-y-8 sticky top-28 w-full min-w-0 overflow-x-hidden"
     >
       <div className="bg-white p-6 rounded-xl shadow-xl border border-gray-100 w-full min-w-0 overflow-x-hidden">
@@ -131,7 +128,7 @@ const LocationSidebar = ({ city, districts, searches }) => {
           </ul>
         </div>
       )}
-    </motion.aside>
+    </aside>
   );
 };
 

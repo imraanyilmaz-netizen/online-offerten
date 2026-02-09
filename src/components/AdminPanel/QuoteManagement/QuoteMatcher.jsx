@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,10 +30,7 @@ const PartnerItem = ({ partner, isMatched, isSelected, onSelectionChange }) => {
   const visibleServices = expandedServices ? partner.offered_services : partner.offered_services?.slice(0, 6);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 5 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
+    <div
     >
       <Card 
         className={`cursor-pointer transition-all duration-200 ${
@@ -109,14 +106,10 @@ const PartnerItem = ({ partner, isMatched, isSelected, onSelectionChange }) => {
                   <div className="flex flex-wrap gap-1.5 items-center">
                     <MapPin className={`w-4 h-4 flex-shrink-0 ${isSelected ? 'text-green-600' : 'text-gray-500'}`} />
                     <div className="flex flex-wrap gap-1.5">
-                      <AnimatePresence mode="popLayout">
+                      
                         {visibleRegions.map((region, index) => (
-                          <motion.div
+                          <div
                             key={region}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.2, delay: index * 0.02 }}
                           >
                             <Badge 
                               variant="secondary" 
@@ -128,9 +121,9 @@ const PartnerItem = ({ partner, isMatched, isSelected, onSelectionChange }) => {
                             >
                               {getFullCantonName(region)}
                             </Badge>
-                          </motion.div>
+                          </div>
                         ))}
-                      </AnimatePresence>
+                      
                       {hasMoreRegions && (
                         <Badge 
                           variant="secondary" 
@@ -165,14 +158,10 @@ const PartnerItem = ({ partner, isMatched, isSelected, onSelectionChange }) => {
                   <div className="flex flex-wrap gap-1.5 items-center">
                     <CheckCircle className={`w-4 h-4 flex-shrink-0 ${isSelected ? 'text-green-600' : 'text-gray-500'}`} />
                     <div className="flex flex-wrap gap-1.5">
-                      <AnimatePresence mode="popLayout">
+                      
                         {visibleServices.map((service, index) => (
-                          <motion.div
+                          <div
                             key={service}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.2, delay: index * 0.02 }}
                           >
                             <Badge 
                               variant="outline" 
@@ -184,9 +173,9 @@ const PartnerItem = ({ partner, isMatched, isSelected, onSelectionChange }) => {
                             >
                               {getGermanServiceName(service)}
                             </Badge>
-                          </motion.div>
+                          </div>
                         ))}
-                      </AnimatePresence>
+                      
                       {hasMoreServices && (
                         <Badge 
                           variant="outline" 
@@ -221,7 +210,7 @@ const PartnerItem = ({ partner, isMatched, isSelected, onSelectionChange }) => {
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 
@@ -391,11 +380,7 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-      animate={{ opacity: 1, scaleY: 1 }}
-      exit={{ opacity: 0, scaleY: 0 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    <div
       className="bg-slate-50 border-t-2 border-green-500 overflow-hidden"
     >
       <div className="p-4 sm:p-6 space-y-6">
@@ -568,7 +553,7 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
           </Button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

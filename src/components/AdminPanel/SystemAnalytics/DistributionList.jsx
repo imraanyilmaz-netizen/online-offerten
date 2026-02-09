@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Badge } from '@/components/ui/badge';
 
 const DistributionList = ({ data, type }) => {
@@ -12,11 +12,8 @@ const DistributionList = ({ data, type }) => {
       {data.map((item, index) => {
         const percentage = total > 0 ? (item.value / total) * 100 : 0;
         return (
-          <motion.div
+          <div
             key={`${type}-${item.name}`}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
             className="flex items-center justify-between"
           >
             <div className="flex items-center gap-3 flex-1">
@@ -27,7 +24,7 @@ const DistributionList = ({ data, type }) => {
               <span className="text-sm text-gray-600">{item.value}</span>
               <Badge variant="outline" className="text-xs">{percentage.toFixed(1)}%</Badge>
             </div>
-          </motion.div>
+          </div>
         );
       })}
     </div>

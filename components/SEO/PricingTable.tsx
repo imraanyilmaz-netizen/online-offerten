@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { Calculator, TrendingDown, CheckCircle2 } from 'lucide-react'
 
 interface PricingRow {
@@ -46,11 +46,7 @@ export default function PricingTable({
   const locationText = city ? ` in ${city}` : canton ? ` im Kanton ${canton}` : ''
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+    <section
       className={`bg-gradient-to-br from-white to-green-50 rounded-2xl p-6 md:p-8 shadow-xl border border-green-200 ${className}`}
     >
       <div className="flex items-center gap-3 mb-6">
@@ -138,7 +134,7 @@ export default function PricingTable({
           <span>Geprüfte Partner</span>
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
 

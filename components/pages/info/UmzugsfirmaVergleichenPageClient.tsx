@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Check, ArrowRight, Star, ShieldCheck, TrendingUp, FileText, Mail, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -92,7 +92,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
         <section className="relative bg-white overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-white"></div>
           <div className="relative container mx-auto max-w-7xl px-4 md:px-6 py-20 md:py-28 text-center z-10">
-            <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <div>
               <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 tracking-tight">Umzugsfirmen clever vergleichen und bis zu 40% sparen</h1>
               <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">Der definitive Leitfaden für Ihren stressfreien Umzug in der Schweiz. Holen Sie mehrere Offerten von Umzugsfirmen ein und finden Sie geprüfte Profis für Privatumzug und Reinigung. Erhalten Sie transparente Angebote und treffen Sie die beste Wahl für Ihr Budget und Ihre Nerven.</p>
               <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white font-bold group px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
@@ -101,20 +101,17 @@ const UmzugsfirmaVergleichenPageClient = () => {
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <motion.div 
+              <div 
                 className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6"
-                variants={staggerContainer}
-                initial="hidden"
-                animate="visible"
               >
                 {heroStats.map((stat, index) => (
-                  <motion.div key={index} variants={fadeIn} className="bg-white/60 backdrop-blur-sm p-4 rounded-lg shadow-md border border-gray-200/50 flex items-center justify-center gap-3">
+                  <div key={index} className="bg-white/60 backdrop-blur-sm p-4 rounded-lg shadow-md border border-gray-200/50 flex items-center justify-center gap-3">
                     <Check className="w-5 h-5 text-green-600" />
                     <span className="font-semibold text-gray-700">{stat.label}</span>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -122,11 +119,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24 space-y-20 md:space-y-28">
           
           {/* Intro Text */}
-          <motion.section
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <section
             className="text-center max-w-4xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
@@ -141,14 +134,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
             <p className="text-lg text-gray-600 leading-relaxed">
               Mit wenigen Klicks erhalten Sie bis zu 5 unverbindliche Offerten von geprüften Umzugsunternehmen aus Ihrer Region. So finden Sie den besten Umzugsservice zum fairsten Preis – ohne Aufwand und ohne Verpflichtung.
             </p>
-          </motion.section>
+          </section>
 
           {/* Warum Online-Offerten.ch wählen? - 3 Column Cards */}
-          <motion.section
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <section
           >
             <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">
               Warum Online-Offerten.ch wählen?
@@ -157,7 +146,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
               {whyChooseUs.map((item, index) => {
                 const Icon = item.icon;
                 return (
-                  <motion.div key={index} variants={fadeIn}>
+                  <div key={index}>
                     <Card className="h-full bg-white shadow-lg hover:shadow-xl transition-shadow border-2 border-gray-100 hover:border-green-200">
                       <CardHeader>
                         <div className="flex items-center gap-3 mb-2">
@@ -173,18 +162,14 @@ const UmzugsfirmaVergleichenPageClient = () => {
                         <p className="text-gray-600 leading-relaxed">{item.description}</p>
                       </CardContent>
                     </Card>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
-          </motion.section>
+          </section>
 
           {/* So einfach funktioniert's - Horizontal Steps */}
-          <motion.section
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <section
             className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 md:p-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12 text-center">
@@ -197,9 +182,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
               {howItWorksSteps.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <motion.div
+                  <div
                     key={index}
-                    variants={fadeIn}
                     className="relative z-10 flex flex-col items-center text-center"
                   >
                     <div className="relative mb-6">
@@ -216,25 +200,21 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     <p className="text-gray-600 leading-relaxed">
                       {step.description}
                     </p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
-          </motion.section>
+          </section>
 
           {/* Das sagen unsere Kunden - 2 Testimonials */}
-          <motion.section
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <section
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12 text-center">
               Das sagen unsere Kunden
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {testimonials.map((testimonial, index) => (
-                <motion.div key={index} variants={fadeIn}>
+                <div key={index}>
                   <Card className="h-full bg-white shadow-lg hover:shadow-xl transition-shadow border-l-4 border-green-500">
                     <CardContent className="p-6">
                       <div className="flex gap-1 mb-4">
@@ -254,17 +234,13 @@ const UmzugsfirmaVergleichenPageClient = () => {
                       </div>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.section>
+          </section>
 
           {/* Jetzt kostenlos Umzugsfirmen vergleichen - Large CTA */}
-          <motion.section
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <section
             className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl p-8 md:p-12 shadow-2xl"
           >
             <div className="text-center max-w-3xl mx-auto">
@@ -312,7 +288,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 </Button>
               </div>
             </div>
-          </motion.section>
+          </section>
 
         </div>
       </div>

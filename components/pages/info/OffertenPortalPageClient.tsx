@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -20,9 +20,7 @@ interface ServiceSelectionButtonProps {
 
 const ServiceSelectionButton = ({ serviceId, label, subLabel, icon, onClick, isSelected, colors }: ServiceSelectionButtonProps) => {
   return (
-    <motion.div
-      whileHover={{ scale: 1.02, y: -2 }}
-      whileTap={{ scale: 0.98 }}
+    <div
       className="w-full cursor-pointer"
       onClick={() => onClick(serviceId)}
     >
@@ -46,7 +44,7 @@ const ServiceSelectionButton = ({ serviceId, label, subLabel, icon, onClick, isS
           <ChevronRight className="w-6 h-6 ml-auto text-gray-400 group-hover:text-gray-500 transition-colors" />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -222,28 +220,22 @@ const OffertenPortalPageClient = () => {
           <div className="absolute inset-0 bg-black/60"></div>
           <div className="relative container mx-auto max-w-7xl px-4 md:px-6 py-20 md:py-28 z-10">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-              <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+              <div>
                 <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Offerten von Umzugsfirma & Reinigungsfirma vergleichen</h1>
                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto md:mx-0 mb-10">Jetzt Offertenanfrage starten und das beste Angebot für Ihren Umzug oder Ihre Reinigung in der Schweiz finden. Unser <strong>Offertenportal</strong> verbindet Sie mit geprüften Firmen aus Ihrer Region.</p>
                 <ul className="space-y-3">
                   {features.map((feature, index) => (
-                    <motion.li 
+                    <li 
                       key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 * index + 0.5, ease: "easeOut" }}
                       className="flex items-center text-white text-base"
                     >
                       <CheckCircle2 className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
                       <span>{feature}</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              </div>
+              <div
                 className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-gray-200"
               >
                   <div className="space-y-3 mb-6">
@@ -260,13 +252,9 @@ const OffertenPortalPageClient = () => {
                       />
                     ))}
                   </div>
-                  <AnimatePresence>
+                  
                     {selectedService && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scaleY: 0, transformOrigin: 'top' }}
-                        animate={{ opacity: 1, y: 0, scaleY: 1 }}
-                        exit={{ opacity: 0, y: 10, scaleY: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      <div
                         className="mb-4"
                       >
                         <Button 
@@ -276,21 +264,21 @@ const OffertenPortalPageClient = () => {
                         >
                           Anfrage jetzt starten
                         </Button>
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
+                  
                    <p className="text-center text-xs text-gray-600 px-2">Kostenlos Offerten vergleichen und bis zu 40% sparen.</p>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24 space-y-20 md:space-y-28">
 
-            <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-12 text-center">So einfach funktioniert's</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                    <motion.div variants={fadeIn}>
+                    <div>
                         <div className="flex flex-col items-center">
                             <div className="flex items-center justify-center w-24 h-24 bg-green-100 rounded-full mb-4 border-4 border-white shadow-lg">
                                 <FileText className="w-12 h-12 text-green-600" />
@@ -298,8 +286,8 @@ const OffertenPortalPageClient = () => {
                             <h3 className="text-xl font-semibold text-slate-800 mb-2">Anfrage ausfüllen</h3>
                             <p className="text-slate-600">Beschreiben Sie Ihren Auftrag in wenigen Minuten. Je genauer Ihre Angaben, desto präziser die Offerten.</p>
                         </div>
-                    </motion.div>
-                    <motion.div variants={fadeIn}>
+                    </div>
+                    <div>
                         <div className="flex flex-col items-center">
                             <div className="flex items-center justify-center w-24 h-24 bg-green-100 rounded-full mb-4 border-4 border-white shadow-lg">
                                 <Users className="w-12 h-12 text-green-600" />
@@ -307,8 +295,8 @@ const OffertenPortalPageClient = () => {
                             <h3 className="text-xl font-semibold text-slate-800 mb-2">Offerten erhalten</h3>
                             <p className="text-slate-600">Sie erhalten bis zu 5 massgeschneiderte Offerten von qualitätsgeprüften Firmen aus Ihrer Region.</p>
                         </div>
-                    </motion.div>
-                    <motion.div variants={fadeIn}>
+                    </div>
+                    <div>
                         <div className="flex flex-col items-center">
                             <div className="flex items-center justify-center w-24 h-24 bg-green-100 rounded-full mb-4 border-4 border-white shadow-lg">
                                 <ThumbsUp className="w-12 h-12 text-green-600" />
@@ -316,11 +304,11 @@ const OffertenPortalPageClient = () => {
                             <h3 className="text-xl font-semibold text-slate-800 mb-2">Auftrag vergeben</h3>
                             <p className="text-slate-600">Vergleichen Sie die Offerten in Ruhe und wählen Sie die Firma, die am besten zu Ihnen passt.</p>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
-            </motion.section>
+            </section>
 
-            <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <section>
                 <Card className="bg-white shadow-xl p-6 md:p-10 border-t-4 border-green-500">
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Willkommen auf dem Offertenportal Schweiz</h2>
                 <div className="prose max-w-none text-slate-600 leading-relaxed space-y-4">
@@ -328,9 +316,9 @@ const OffertenPortalPageClient = () => {
                     <p>Egal ob Sie einen Privatumzug planen, eine professionelle Endreinigung benötigen oder Ihre Wände neu streichen lassen möchten – unser <strong>Offertenportal</strong> ist darauf ausgelegt, Ihnen Zeit, Geld und Nerven zu sparen. Mit nur einer Anfrage erreichen Sie mehrere Anbieter und können deren Offerten bequem online vergleichen.</p>
                 </div>
                 </Card>
-            </motion.section>
+            </section>
             
-            <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Alles rund um Ihren Umzug</h2>
                 <div className="prose max-w-none text-slate-600 leading-relaxed space-y-4">
                     <p>Ein Umzug muss nicht stressig sein. Mit der richtigen Planung und den passenden Partnern wird Ihr Wohnungswechsel zum Kinderspiel. Auf unserem Portal finden Sie spezialisierte Umzugsfirmen für jede Art von Umzug.</p>
@@ -353,9 +341,9 @@ const OffertenPortalPageClient = () => {
                     </ul>
                     <p>Durch den Vergleich mehrerer Offerten können Sie sicherstellen, dass Sie einen fairen Preis für die gewünschten Leistungen erhalten.</p>
                 </div>
-            </motion.section>
+            </section>
 
-            <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Professionelle Reinigung mit Abnahmegarantie</h2>
                 <div className="prose max-w-none text-slate-600 leading-relaxed space-y-4">
                     <p>Eine besenreine Wohnung ist bei der Übergabe Pflicht. Sparen Sie sich den Putzstress und überlassen Sie die Arbeit den Profis. Unsere Partner für Reinigungen garantieren eine reibungslose Wohnungsabgabe.</p>
@@ -378,9 +366,9 @@ const OffertenPortalPageClient = () => {
                     </ul>
                     <p>Geben Sie bei Ihrer Anfrage einfach an, was alles gereinigt werden muss, und Sie erhalten eine pauschale offerten.</p>
                 </div>
-            </motion.section>
+            </section>
 
-            <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Professionelle Malerarbeiten für Ihr Zuhause</h2>
                 <div className="prose max-w-none text-slate-600 leading-relaxed space-y-4">
                     <p>Neue Farbe bringt frischen Wind in Ihre Räume. Ob Innenanstrich, Fassadenrenovierung oder spezielle Malertechniken – unsere qualifizierten Malerpartner sorgen für ein perfektes Ergebnis, das lange Freude bereitet.</p>
@@ -394,9 +382,9 @@ const OffertenPortalPageClient = () => {
                     </ul>
                     <p>Unsere Maler beraten Sie gerne bei der Farbauswahl und finden die optimale Lösung für Ihr Projekt.</p>
                 </div>
-            </motion.section>
+            </section>
             
-            <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Ihre Vorteile auf einen Blick</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <Card className="bg-white shadow-md">
@@ -424,9 +412,9 @@ const OffertenPortalPageClient = () => {
                         </CardContent>
                     </Card>
                 </div>
-            </motion.section>
+            </section>
 
-            <motion.section variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8 text-center">Häufig gestellte Fragen</h2>
                 <Accordion type="single" collapsible className="w-full bg-white p-4 rounded-lg shadow-xl">
                     {faqItems.map((item, index) => (
@@ -440,11 +428,10 @@ const OffertenPortalPageClient = () => {
                         </AccordionItem>
                     ))}
                 </Accordion>
-            </motion.section>
+            </section>
 
-            <motion.section 
+            <section 
                 className="text-center py-16 md:py-20 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl shadow-2xl"
-                variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}
             >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Bereit, die beste Firma für Ihr Vorhaben zu finden?</h2>
                 <p className="text-lg opacity-90 mb-8 max-w-3xl mx-auto px-4">Starten Sie jetzt Ihre kostenlose Anfrage und erhalten Sie in Kürze die ersten Offerten.</p>
@@ -452,7 +439,7 @@ const OffertenPortalPageClient = () => {
                     Jetzt kostenlos Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                 </Button>
-            </motion.section>
+            </section>
 
         </div>
       </div>

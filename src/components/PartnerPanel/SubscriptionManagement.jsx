@@ -6,7 +6,7 @@ import { Star, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { format } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { de } from 'date-fns/locale/de';
 
 const SubscriptionManagement = ({ partnerData, onSubscriptionSuccess }) => {
   const { toast } = useToast();

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -150,10 +150,7 @@ const UmzugsfirmaAargauPageClient = () => {
           <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
             <div className="grid lg:grid-cols-5 gap-12 items-center">
               {/* Left Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+              <div
                 className="text-gray-900 lg:col-span-3"
           >
                 <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
@@ -208,13 +205,10 @@ const UmzugsfirmaAargauPageClient = () => {
                     <span className="font-medium">Bis zu 40% sparen</span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
               
               {/* Right Image */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+              <div
                 className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 lg:col-span-2"
               >
                 <Image
@@ -226,7 +220,7 @@ const UmzugsfirmaAargauPageClient = () => {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent"></div>
-              </motion.div>
+              </div>
             </div>
           </div>
               </section>
@@ -280,11 +274,7 @@ const UmzugsfirmaAargauPageClient = () => {
         {/* How It Works Section */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-gray-100">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <div
               className="text-center mb-12"
             >
               <h2 className="heading-2">
@@ -293,18 +283,14 @@ const UmzugsfirmaAargauPageClient = () => {
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 In nur drei einfachen Schritten erhalten Sie mehrere Offerten von geprüften <strong>Umzugsfirmen im Aargau</strong> und <strong>Zügelfirmen</strong> aus dem Aargau
               </p>
-            </motion.div>
+            </div>
             
             <div className="grid md:grid-cols-3 gap-8">
               {howItWorksSteps.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15, duration: 0.6 }}
                     className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
                   >
                     <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
@@ -312,7 +298,7 @@ const UmzugsfirmaAargauPageClient = () => {
                     </div>
                     <h3 className="heading-3">{step.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{step.text}</p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>

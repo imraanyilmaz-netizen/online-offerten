@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS transitions for better INP
 import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, Wind, Leaf, Package, ArrowUpDown, ArrowRight } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi'; 
 import { useTranslation } from 'react-i18next';
@@ -73,7 +73,7 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
   };
   
   return (
-    <motion.button
+    <button
       type="button"
       onClick={() => onClick(id)}
       className={`w-full flex items-center gap-3 p-4 border-2 rounded-xl transition-all duration-300
@@ -81,8 +81,6 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
           ? `${config.bgColor} ${config.borderColor} shadow-lg` 
           : 'bg-white border-gray-200 hover:border-green-400 hover:bg-green-50'
         }`}
-      whileHover={{ scale: selected ? 1 : 1.02 }}
-      whileTap={{ scale: 0.98 }}
     >
       {/* Icon Container */}
       <div className={`
@@ -111,7 +109,7 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
       ) : (
         <ArrowRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
       )}
-    </motion.button>
+    </button>
   );
 };
 
@@ -370,12 +368,8 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
     if (!showContainer) return null;
 
     return (
-        <motion.div
+        <div
             ref={subQuestionsRef}
-            initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-            animate={{ opacity: 1, scaleY: 1 }}
-            exit={{ opacity: 0, scaleY: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
             className="p-4 sm:p-5 border-2 border-green-200 rounded-lg bg-green-50/70 shadow-md"
         >
             <div className="flex items-center mb-3">
@@ -385,14 +379,10 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                 </h4>
             </div>
 
-            <AnimatePresence mode="wait">
+            
                 {showFrequencyDetails && (
-                    <motion.div
+                    <div
                         key="frequency"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
-                        transition={{ duration: 0.3 }}
                     >
                         <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.cleaningFrequency.title')} <span className="text-red-500">*</span></h5>
                         <RadioGroup
@@ -415,16 +405,12 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                             ))}
                         </RadioGroup>
                         {errors && errors.cleaning_frequency && <p className="text-sm text-red-500 mt-2">{errors.cleaning_frequency}</p>}
-                    </motion.div>
+                    </div>
                 )}
 
                 {showGeneralCleaningDetails && (
-                    <motion.div
+                    <div
                         key="general"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
-                        transition={{ duration: 0.3 }}
                     >
                         <GeneralCleaningDetails 
                             formData={formData}
@@ -432,16 +418,12 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                             handleRadioGroupChange={handleRadioGroupChange}
                             errors={errors}
                         />
-                    </motion.div>
+                    </div>
                 )}
                 
                 {showFloorCleaningDetails && (
-                    <motion.div
+                    <div
                         key="floor"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
-                        transition={{ duration: 0.3 }}
                     >
                         <FloorCleaningDetails 
                             formData={formData}
@@ -449,16 +431,12 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                             handleRadioGroupChange={handleRadioGroupChange}
                             errors={errors}
                         />
-                    </motion.div>
+                    </div>
                 )}
 
                 {showFassadenreinigungDetails && (
-                    <motion.div
+                    <div
                         key="fassade"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
-                        transition={{ duration: 0.3 }}
                     >
                         <FassadenreinigungDetails 
                             formData={formData}
@@ -466,26 +444,22 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                             handleRadioGroupChange={handleRadioGroupChange}
                             errors={errors}
                         />
-                    </motion.div>
+                    </div>
                 )}
 
                 {showFensterreinigungDetails && (
-                    <motion.div
+                    <div
                         key="fenster"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
-                        transition={{ duration: 0.3 }}
                     >
                         <FensterreinigungDetails 
                             formData={formData}
                             handleRadioGroupChange={handleRadioGroupChange}
                             errors={errors}
                         />
-                    </motion.div>
+                    </div>
                 )}
-            </AnimatePresence>
-        </motion.div>
+            
+        </div>
     );
 };
 
@@ -500,11 +474,7 @@ const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
-      animate={{ opacity: 1, scaleY: 1, y: 0 }}
-      exit={{ opacity: 0, scaleY: 0, y: -10 }}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
+    <div
       className="mt-4 sm:mt-6 p-4 sm:p-5 border-2 border-green-400 rounded-lg bg-green-50 shadow-md"
     >
       <div className="flex items-center mb-2 sm:mb-3">
@@ -545,7 +515,7 @@ const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
         ))}
       </RadioGroup>
       {errors && errors.umzugArt && <p className="text-sm text-red-500 mt-2">{errors.umzugArt}</p>}
-    </motion.div>
+    </div>
   );
 };
 
@@ -562,11 +532,7 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
     const currentOptions = paintOptions[malerType] || [];
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+        <div
             className="space-y-3 sm:space-y-4 pt-4 sm:pt-4 border-t border-gray-100"
         >
             <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.whatToPaintTitle')} <span className="text-red-500">*</span></h3>
@@ -588,13 +554,9 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
                                 </Label>
                             </div>
                         </div>
-                        <AnimatePresence>
+                        
                         {option === 'anderes' && formData.what_to_paint?.anderes && (
-                            <motion.div
-                                initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-                                animate={{ opacity: 1, scaleY: 1 }}
-                                exit={{ opacity: 0, scaleY: 0 }}
-                                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            <div
                             >
                                 <Input
                                     type="text"
@@ -604,14 +566,14 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
                                     placeholder={t('step1.whatToPaint.otherPlaceholder')}
                                     className="bg-slate-50 border-slate-300 focus:bg-white text-sm"
                                 />
-                            </motion.div>
+                            </div>
                         )}
-                        </AnimatePresence>
+                        
                     </div>
                 ))}
             </div>
             {errors && errors.what_to_paint && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.what_to_paint}</p>}
-        </motion.div>
+        </div>
     );
 };
 
@@ -624,11 +586,7 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
     ];
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+        <div
             className="space-y-4 pt-4 border-t border-gray-100"
         >
             <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.malerOptionalDetailsTitle')}</h3>
@@ -657,7 +615,7 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
                 </RadioGroup>
                 {errors && errors.maler_current_condition && <p className="text-sm text-red-500 mt-1">{errors.maler_current_condition}</p>}
             </div>
-        </motion.div>
+        </div>
     );
 };
 
@@ -717,7 +675,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
   
   return (
     <div className="space-y-6 sm:space-y-8">
-      <AnimatePresence>
+      
         {formData.service === 'reinigung' && (
           <>
             <CleaningInfoBox 
@@ -734,15 +692,11 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
             />
           </>
         )}
-      </AnimatePresence>
+      
 
-      <AnimatePresence>
+      
         {formData.service === 'maler' && (
-          <motion.div
-            initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
-            animate={{ opacity: 1, scaleY: 1, y: 0 }}
-            exit={{ opacity: 0, scaleY: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+          <div
             className="space-y-4 sm:space-y-6 pt-4 sm:pt-6 border-t border-gray-200"
           >
             <div>
@@ -761,9 +715,9 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
               {errors && errors.umzugArt && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.umzugArt}</p>}
             </div>
             
-            <AnimatePresence>
+            
                 {formData.umzugArt && (
-                    <motion.div className="space-y-4">
+                    <div className="space-y-4">
                         <WhatToPaintSection 
                             formData={formData}
                             handleCheckboxChange={handleCheckboxChange}
@@ -775,20 +729,16 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                             handleRadioGroupChange={handleRadioGroupChange}
                             errors={errors}
                         />
-                    </motion.div>
+                    </div>
                 )}
-            </AnimatePresence>
-          </motion.div>
+            
+          </div>
         )}
-      </AnimatePresence>
+      
 
-      <AnimatePresence>
+      
         {formData.service === 'raeumung' && (
-          <motion.div
-            initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
-            animate={{ opacity: 1, scaleY: 1, y: 0 }}
-            exit={{ opacity: 0, scaleY: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+          <div
             className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-gray-200"
           >
             <div>
@@ -819,13 +769,9 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
               {errors && errors.umzugArt && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.umzugArt}</p>}
             </div>
 
-            <AnimatePresence>
+            
               {formData.umzugArt === 'raeumung' && (
-                <motion.div
-                  initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
-                  animate={{ opacity: 1, scaleY: 1, y: 0 }}
-                  exit={{ opacity: 0, scaleY: 0, y: -10 }}
-                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                <div
                   className="space-y-3 sm:space-y-4"
                 >
                   <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.raeumungScope.title')} <span className="text-red-500">*</span></h3>
@@ -849,23 +795,19 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                     ))}
                   </RadioGroup>
                   {errors && errors.raeumung_scope && <p className="text-sm text-red-500 mt-2">{errors.raeumung_scope}</p>}
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
+            
 
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
 
-      <AnimatePresence>
+      
         {formData.service === 'umzug' && (
-          <motion.div
+          <div
             ref={umzugArtSectionRef}
             id="umzugArtSection"
-            initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
-            animate={{ opacity: 1, scaleY: 1, y: 0 }}
-            exit={{ opacity: 0, scaleY: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
             className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-gray-200"
           >
             <div>
@@ -884,13 +826,9 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
               {errors && errors.umzugArt && <p className="text-sm text-red-500 mt-1.5 sm:mt-2">{errors.umzugArt}</p>}
             </div>
 
-            <AnimatePresence>
+            
               {(formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug') && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                <div
                   className="space-y-3 sm:space-y-4 pt-4 sm:pt-4 border-t border-gray-100"
                 >
                   <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.additionalCleaningTitle')}</h3>
@@ -914,17 +852,13 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                         </Label>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
+            
 
-            <AnimatePresence>
+            
               {formData.umzugArt === 'spezialtransport' && (
-                <motion.div
-                  initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
-                  animate={{ opacity: 1, scaleY: 1, y: 0 }}
-                  exit={{ opacity: 0, scaleY: 0, y: -10 }}
-                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                <div
                   className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-gray-100"
                 >
                   <h3 className="text-sm md:text-base font-semibold text-gray-700">{t('step1.specialTransportTypeQuestion')} <span className="text-red-500">*</span></h3>
@@ -946,13 +880,9 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                   </RadioGroup>
                   {errors && errors.special_transport_type && <p className="text-sm text-red-500 mt-1 sm:mt-1.5">{errors.special_transport_type}</p>}
 
-                  <AnimatePresence>
+                  
                     {formData.special_transport_type === 'sonstiges' && (
-                      <motion.div
-                        initial={{ opacity: 0, scaleY: 0, y: -10, transformOrigin: 'top' }}
-                        animate={{ opacity: 1, scaleY: 1, y: 0 }}
-                        exit={{ opacity: 0, scaleY: 0, y: -10 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      <div
                         className="pt-1.5 sm:pt-2"
                       >
                         <Label htmlFor="special_transport_other_details" className="font-medium text-sm sm:text-base text-gray-700">
@@ -967,15 +897,15 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                           className="mt-1 bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
                         />
                         {errors && errors.special_transport_other_details && <p className="text-sm text-red-500 mt-1 sm:mt-1.5">{errors.special_transport_other_details}</p>}
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
-                </motion.div>
+                  
+                </div>
               )}
-            </AnimatePresence>
-          </motion.div>
+            
+          </div>
         )}
-      </AnimatePresence>
+      
     </div>
   );
 };

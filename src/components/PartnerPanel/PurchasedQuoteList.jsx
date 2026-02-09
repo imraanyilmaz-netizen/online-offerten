@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -121,11 +121,8 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
         const isMoving = serviceCategory === 'moving';
 
         return (
-        <motion.div
+        <div
           key={quote.purchase_info?.purchase_id || quote.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.05 }}
         >
           <AccordionItem value={`item-${index}`} className="border rounded-lg bg-green-50">
             <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg data-[state=open]:bg-green-100">
@@ -221,7 +218,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
               </div>
             </AccordionContent>
           </AccordionItem>
-        </motion.div>
+        </div>
         );
       })}
       </Accordion>

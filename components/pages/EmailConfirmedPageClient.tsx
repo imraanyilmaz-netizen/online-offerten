@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { CheckCircle, MailCheck, ArrowRight } from 'lucide-react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
@@ -37,23 +37,12 @@ const EmailConfirmedPageClient = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+      <div
         className="w-full max-w-md"
       >
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10 text-center">
           {/* Success Icon with Animation */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ 
-              type: 'spring', 
-              stiffness: 200, 
-              damping: 15,
-              delay: 0.2 
-            }}
+          <div
             className="mb-6 flex justify-center"
           >
             <div className="relative">
@@ -62,44 +51,32 @@ const EmailConfirmedPageClient = () => {
                 <CheckCircle className="w-16 h-16 text-green-600" />
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Success Message */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
+          <h1
             className="heading-2 mb-4"
           >
             E-Mail bestätigt!
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+          <p
             className="text-body mb-8"
           >
             Ihre E-Mail-Adresse wurde erfolgreich bestätigt. Sie werden in{' '}
             <span className="font-bold text-green-600 text-xl">{countdown}</span> Sekunden
             automatisch zur Anmeldeseite weitergeleitet.
-          </motion.p>
+          </p>
 
           {/* Mail Icon */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+          <div
             className="mb-8 flex justify-center"
           >
             <MailCheck className="w-12 h-12 text-green-500" />
-          </motion.div>
+          </div>
 
           {/* Manual Redirect Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
+          <div
           >
             <Button
               onClick={handleManualRedirect}
@@ -116,19 +93,16 @@ const EmailConfirmedPageClient = () => {
                 </>
               )}
             </Button>
-          </motion.div>
+          </div>
 
           {/* Info Text */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
+          <p
             className="mt-6 text-sm text-gray-500"
           >
             Falls die automatische Weiterleitung nicht funktioniert, klicken Sie auf den Button oben.
-          </motion.p>
+          </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

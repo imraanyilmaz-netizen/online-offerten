@@ -8,9 +8,9 @@ import { Loader2, CheckCircle, Send, FileText as FileTextIcon, Package, AlertCir
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { format, isPast } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { de } from 'date-fns/locale/de';
 import QuoteImages from '@/components/PartnerPanel/QuoteImages';
 import QuoteFiles from '@/components/PartnerPanel/QuoteFiles';
 import ReviewModal from '@/components/ReviewModal';
@@ -109,10 +109,7 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
   const partnerHref = `/partner/${partner.slug}`;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+    <div
       className="bg-white rounded-lg shadow-md border overflow-hidden flex flex-col"
     >
       <div className="p-4 flex-grow">
@@ -172,7 +169,7 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
           Bewertung abgeben
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -425,10 +422,7 @@ const QuoteStatusPageClient = () => {
       
       <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+          <div
           >
             <Card className="shadow-lg overflow-hidden">
               <CardHeader>
@@ -440,20 +434,20 @@ const QuoteStatusPageClient = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <AnimatePresence mode="wait">
+                
                   {loading && (
-                    <motion.div key="loader" exit={{ opacity: 0 }} className="flex justify-center items-center py-20">
+                    <div key="loader" className="flex justify-center items-center py-20">
                       <Loader2 className="w-12 h-12 animate-spin text-blue-500" />
-                    </motion.div>
+                    </div>
                   )}
                   {error && (
-                    <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20 text-red-600">
+                    <div key="error" className="text-center py-20 text-red-600">
                       <AlertCircle className="w-12 h-12 mx-auto mb-4" />
                       <p className="font-semibold">{error}</p>
-                    </motion.div>
+                    </div>
                   )}
                   {quote && (
-                    <motion.div key="content" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <div key="content">
                       <div className="grid md:grid-cols-2 gap-x-8 gap-y-12">
                           <div>
                               <h3 className="text-lg font-semibold mb-4 text-gray-700">Timeline</h3>
@@ -494,12 +488,12 @@ const QuoteStatusPageClient = () => {
                           </div>
                         )}
                       </div>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
+                
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
       </div>
       {selectedPartnerForReview && quote && (

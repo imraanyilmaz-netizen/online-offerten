@@ -32,7 +32,6 @@ const nextConfig = {
       bodySizeLimit: '2mb',
     },
     optimizePackageImports: [
-      'framer-motion',
       'lucide-react',
       'react-icons',
       'date-fns',
@@ -664,7 +663,7 @@ const nextConfig = {
             cacheGroups: {
               // Separate heavy vendor libraries into their own chunks
               vendor: {
-                test: /[\\/]node_modules[\\/](framer-motion|date-fns|@radix-ui|lucide-react|react-icons)[\\/]/,
+                test: /[\\/]node_modules[\\/](date-fns|@radix-ui|lucide-react|react-icons)[\\/]/,
                 name: 'vendor-heavy',
                 chunks: 'all',
                 priority: 20,

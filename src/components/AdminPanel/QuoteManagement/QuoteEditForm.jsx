@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -108,11 +108,7 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-      animate={{ opacity: 1, scaleY: 1 }}
-      exit={{ opacity: 0, scaleY: 0 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    <div
       className="bg-slate-50 border-t border-slate-200 overflow-hidden"
     >
       <form onSubmit={handleSave} className="p-4 sm:p-6 space-y-6">
@@ -187,7 +183,7 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
           <Button type="submit" disabled={isProcessing}>{isProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}Speichern</Button>
         </div>
       </form>
-    </motion.div>
+    </div>
   );
 };
 

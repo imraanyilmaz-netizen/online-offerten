@@ -2,15 +2,12 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Package, ShoppingCart, Wallet, PlusCircle, Gift, Star, Clock } from 'lucide-react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { format } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { de } from 'date-fns/locale/de';
 
 const StatCard = ({ title, value, icon: Icon, colorClass, delay, children, className }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }} 
-    animate={{ opacity: 1, y: 0 }} 
-    transition={{ delay }} 
+  <div 
     className={`h-full ${className}`}
   >
     <Card className="hover:shadow-xl transition-all duration-200 h-full flex flex-col justify-between bg-white border border-gray-200 rounded-xl">
@@ -25,16 +22,13 @@ const StatCard = ({ title, value, icon: Icon, colorClass, delay, children, class
         {children}
       </CardContent>
     </Card>
-  </motion.div>
+  </div>
 );
 
 const SubscriptionStat = ({ endDate, delay }) => {
     const formattedDate = format(new Date(endDate), 'dd. MMMM yyyy', { locale: de });
     return (
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ delay }} 
+        <div 
             className="md:col-span-2 lg:col-span-1"
         >
             <Card className="h-full bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 text-black shadow-xl border-2 border-amber-500 rounded-xl">
@@ -51,7 +45,7 @@ const SubscriptionStat = ({ endDate, delay }) => {
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 };
 

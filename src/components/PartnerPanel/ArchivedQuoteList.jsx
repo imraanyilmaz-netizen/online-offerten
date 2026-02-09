@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -55,11 +55,8 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
     <div className="space-y-4">
       <Accordion type="multiple" className="w-full space-y-4">
         {paginatedQuotes.map((quote, index) => (
-        <motion.div
+        <div
           key={quote.purchase_info?.purchase_id || quote.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.05 }}
         >
           <AccordionItem value={`item-${index}`} className="border rounded-lg bg-gray-50">
             <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg data-[state=open]:bg-gray-100">
@@ -110,7 +107,7 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
                 </div>
             </AccordionContent>
           </AccordionItem>
-        </motion.div>
+        </div>
       ))}
       </Accordion>
 

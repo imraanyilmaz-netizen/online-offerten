@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Loader2, SlidersHorizontal, CheckCircle, Archive, Send } from 'lucide-react';
 import QuoteMatcher from '@/components/AdminPanel/QuoteManagement/QuoteMatcher.jsx';
@@ -40,7 +40,7 @@ const QuoteManagement = () => {
     
     return (
       <div className="space-y-4">
-        <AnimatePresence>
+        
           {list.map(quote => {
             const isExpanded = expandedQuote.id === quote.id;
             const expandedView = isExpanded ? expandedQuote.view : null;
@@ -59,7 +59,7 @@ const QuoteManagement = () => {
                 onUpdateQuote={handleUpdateQuote}
                 isProcessing={isProcessing}
               >
-                <AnimatePresence>
+                
                   {expandedView === 'matcher' && (
                     <QuoteMatcher
                       quote={quote}
@@ -80,11 +80,11 @@ const QuoteManagement = () => {
                       isProcessing={isProcessing}
                     />
                   )}
-                </AnimatePresence>
+                
               </QuoteCard>
             );
           })}
-        </AnimatePresence>
+        
       </div>
     );
   };

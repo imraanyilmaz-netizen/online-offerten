@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle, ShieldCheck, Package, Sparkles, MapPin, ChevronRight, Calculator, TrendingUp, FileText, Mail, BarChart3, Star } from 'lucide-react';
@@ -13,16 +13,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 
 const AdvantageItem = ({ text, delay }: any) => {
   return (
-    <motion.li
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: delay * 0.1 + 0.5 }}
+    <li
       className="flex items-start"
     >
       <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
       <span className="text-gray-700 leading-relaxed">{text}</span>
-    </motion.li>
+    </li>
   );
 };
 

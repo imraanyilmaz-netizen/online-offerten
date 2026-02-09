@@ -7,7 +7,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
-// logoUrl import kaldırıldı - Organization schema'sı sadece ana sayfada
+// logoUrl import kaldÄ±rÄ±ldÄ± - Organization schema'sÄ± sadece ana sayfada
 // Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
 import dynamic from 'next/dynamic'
 
@@ -161,20 +161,20 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }
   }, [searchParams, pathname, router, isNavigating])
 
-  // reviewStats ve fetchRating kaldırıldı - AggregateRating sadece ana sayfada (app/page.tsx)
+  // reviewStats ve fetchRating kaldÄ±rÄ±ldÄ± - AggregateRating sadece ana sayfada (app/page.tsx)
 
   const globalSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@graph": [
-      // Organization schema'sı sadece ana sayfada (app/page.tsx) olmalı
-      // AppClient'ta Organization schema'sı olmamalı - duplicate schema hatası önlenir
+      // Organization schema'sÄ± sadece ana sayfada (app/page.tsx) olmalÄ±
+      // AppClient'ta Organization schema'sÄ± olmamalÄ± - duplicate schema hatasÄ± Ã¶nlenir
       {
         "@type": "WebSite",
         "@id": "https://online-offerten.ch/#website",
         "url": "https://online-offerten.ch/",
         "name": "Online-Offerten.ch",
-        "description": "Vergleichen Sie kostenlose Offerten von geprüften Umzugsfirmen und Reinigungsfirmen. Zeit und Geld sparen – schnell, sicher und unverbindlich.",
-        // publisher referansı kaldırıldı - Organization schema'sı sadece ana sayfada
+        "description": "Vergleichen Sie kostenlose Offerten von geprÃ¼ften Umzugsfirmen und Reinigungsfirmen. Zeit und Geld sparen â€“ schnell, sicher und unverbindlich.",
+        // publisher referansÄ± kaldÄ±rÄ±ldÄ± - Organization schema'sÄ± sadece ana sayfada
         "potentialAction": {
           "@type": "SearchAction",
           "target": {
@@ -185,7 +185,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
         }
       }
     ]
-  }), []) // Organization schema'sı sadece ana sayfada - duplicate önlenir
+  }), []) // Organization schema'sÄ± sadece ana sayfada - duplicate Ã¶nlenir
 
   // Inject schema markup (client-side only)
   useEffect(() => {

@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Settings, Send, Edit, Info, Archive, Undo2, ShoppingCart, Users, MapPin, CheckCircle, Pencil, X, Loader2, ExternalLink, Mail, Star } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { format, isAfter, subDays } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { de } from 'date-fns/locale/de';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
 
@@ -120,12 +120,8 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   };
 
   return (
-    <motion.div
+    <div
       layout
-      initial={{ opacity: 0, y: 20, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -20, scale: 0.98 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
     >
       <div className="p-5 md:p-6">
@@ -302,7 +298,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
         </div>
       )}
       {children}
-    </motion.div>
+    </div>
   );
 };
 

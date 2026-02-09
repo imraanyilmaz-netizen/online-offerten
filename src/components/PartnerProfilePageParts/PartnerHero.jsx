@@ -1,6 +1,6 @@
 import React from 'react';
 // Removed useTranslation
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Star, ShieldCheck, Send } from 'lucide-react';
 import QualityBadge from './QualityBadge';
@@ -15,10 +15,7 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   const displayReviewCount = reviewCount !== undefined ? reviewCount : (partner.review_count || 0);
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+    <section
       className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden bg-slate-50"
     >
       {/* Background Image - Right Side */}
@@ -46,10 +43,7 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
       <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
         <div className="max-w-3xl">
           <div className="px-4 md:px-8 lg:px-10 py-6 md:py-8 lg:py-12">
-            <motion.div
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, type: 'spring', stiffness: 260, damping: 20 }}
+            <div
               className="flex-shrink-0 bg-white/90 rounded-2xl shadow-lg p-3 flex items-center justify-center mb-6 w-fit"
             >
               <img 
@@ -63,12 +57,9 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
                   e.target.src = '/image/logo-icon.avif';
                 }}
               />
-            </motion.div>
+            </div>
             
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+            <div
               className="mb-6"
             >
               <h1 className="heading-1 mb-2">
@@ -87,14 +78,11 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
                 )}
                 {partner.badge_tier && <QualityBadge tier={partner.badge_tier} />}
               </div>
-            </motion.div>
+            </div>
             
             {/* "Angebot anfordern" butonu sadece aktif partner'lar için göster */}
             {partner.is_active && (
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+              <div
                 className="mb-6"
               >
                 <Button 
@@ -105,12 +93,12 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
                   <Send className="mr-2 h-5 w-5" />
                   Angebot anfordern
                 </Button>
-              </motion.div>
+              </div>
             )}
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

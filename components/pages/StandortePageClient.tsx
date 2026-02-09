@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Link from 'next/link'
 import { locations } from '@/data/locations'
 import { ArrowRight, Map } from 'lucide-react'
@@ -12,11 +12,7 @@ const LocationCard = ({ location, delay }: { location: any; delay: number }) => 
   const locationHref = `/${location.slug}`;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: delay * 0.05 }}
+    <div
       className="h-full"
     >
       <Link href={locationHref} className="group block bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 h-full flex flex-col">
@@ -32,7 +28,7 @@ const LocationCard = ({ location, delay }: { location: any; delay: number }) => 
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   )
 }
 
@@ -40,10 +36,7 @@ const StandortePageClient = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       <div className="container mx-auto max-w-navbar px-4 md:px-6 py-12 md:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+        <div
           className="text-center mb-12 md:mb-16"
         >
           <div className="flex items-center justify-center mb-4">
@@ -55,7 +48,7 @@ const StandortePageClient = () => {
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
             Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Schweizer Städten. Von Zürich bis Genf, von Basel bis Bern - wir haben Partner in Ihrer Nähe.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {locations.map((location, index) => (

@@ -1,13 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Tag } from 'lucide-react';
 
 const AveragePriceBox = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="bg-gradient-to-br from-green-500 to-teal-600 p-6 md:p-8 rounded-xl shadow-2xl text-white my-8 md:my-12"
     >
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -21,7 +18,7 @@ const AveragePriceBox = () => {
         </div>
         <p className="text-sm md:text-base text-green-100 max-w-xs text-center md:text-left">Durchschnittspreis für einen Standardumzug innerhalb derselben Stadt.</p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

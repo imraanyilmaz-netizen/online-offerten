@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar, Tag, Folder, Home, ChevronRight, Loader2, ArrowLeft, HelpCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import PostSidebar from '@/src/components/tools/PostSidebar';
@@ -131,11 +131,7 @@ const PostPageClient = () => {
 
                             {/* FAQ Section */}
                             {post.faq && Array.isArray(post.faq) && post.faq.length > 0 && post.faq.some((faq: any) => faq.question?.trim() && faq.answer?.trim()) && (
-                                <motion.div 
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5 }}
+                                <div
                                     className="mt-16 pt-12 border-t border-gray-200"
                                 >
                                     <div className="text-left mb-12">
@@ -151,12 +147,8 @@ const PostPageClient = () => {
                                         {post.faq
                                             .filter((faq: any) => faq.question?.trim() && faq.answer?.trim())
                                             .map((faq: any, index: number) => (
-                                                <motion.div
+                                                <div
                                                     key={index}
-                                                    initial={{ opacity: 0, y: 15 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true }}
-                                                        transition={{ delay: index * 0.05, duration: 0.3 }}
                                                 >
                                                     <AccordionItem 
                                                         value={`item-${index}`} 
@@ -171,11 +163,11 @@ const PostPageClient = () => {
                                                             </div>
                                                         </AccordionContent>
                                                     </AccordionItem>
-                                                </motion.div>
+                                                </div>
                                             ))}
                                     </Accordion>
                                     </div>
-                                </motion.div>
+                                </div>
                             )}
 
                              <Button asChild variant="outline" className="mt-8">

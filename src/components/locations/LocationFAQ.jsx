@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Calculator, ArrowLeftRight as ArrowsHorizontal, HelpCircle, Truck, Sparkles } from 'lucide-react';
@@ -78,11 +78,7 @@ const FaqItem = ({ faq, locationName }) => {
 };
 
 const FaqCategory = ({ title, icon, faqs, locationName, delay }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: delay }}
+    <div
     >
         <div className="flex items-center mb-6">
             {icon}
@@ -93,7 +89,7 @@ const FaqCategory = ({ title, icon, faqs, locationName, delay }) => (
                 <FaqItem key={index} faq={faq} locationName={locationName} />
             ))}
         </Accordion>
-    </motion.div>
+    </div>
 );
 
 const LocationFAQ = ({ faqs, city }) => {
@@ -105,12 +101,8 @@ const LocationFAQ = ({ faqs, city }) => {
 
   return (
     <div className="py-12 md:py-20">
-      <motion.div 
+      <div 
         className="text-center mb-12"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
       >
         <div className="inline-block p-3 bg-green-100 rounded-full mb-4">
           <HelpCircle className="w-8 h-8 text-green-600" />
@@ -121,7 +113,7 @@ const LocationFAQ = ({ faqs, city }) => {
         <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
           Finden Sie Antworten auf die wichtigsten Fragen rund um unsere Dienstleistungen in {locationName}.
         </p>
-      </motion.div>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
           {faqs.move && faqs.move.length > 0 && (
               <FaqCategory 

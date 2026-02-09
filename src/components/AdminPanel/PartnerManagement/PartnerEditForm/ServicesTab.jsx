@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
@@ -51,7 +51,7 @@ const ServicesTab = ({ formData, handleMainCategoryChange, handleServiceChange, 
             {mainCategories.map(category => {
             const isSelected = formData.mainCategories.includes(category.id);
             return (
-                <motion.div
+                <div
                 key={category.id}
                 onClick={() => handleMainCategoryChange(category.id)}
                 className={`relative flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${isSelected ? 'bg-green-50 border-green-500 shadow-sm' : 'bg-white hover:bg-slate-50 hover:border-slate-300 border-slate-200'}`}
@@ -59,21 +59,17 @@ const ServicesTab = ({ formData, handleMainCategoryChange, handleServiceChange, 
                 <category.icon className={`w-6 h-6 mr-4 transition-colors ${isSelected ? 'text-green-600' : 'text-slate-500'}`} />
                 <span className={`font-semibold transition-colors ${isSelected ? 'text-green-700' : 'text-slate-700'} flex-grow`}>{category.label}</span>
                 <div className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all ${isSelected ? 'bg-green-600 border-white text-white' : 'bg-white border-slate-300'}`}>
-                    {isSelected && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-xs">✓</motion.div>}
+                    {isSelected && <div className="text-xs">✓</div>}
                 </div>
-                </motion.div>
+                </div>
             );
             })}
         </div>
       </div>
       
-      <AnimatePresence>
+      
         {formData.mainCategories.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+          <div
             className="border-t pt-6"
           >
             <Label className="font-semibold text-base mb-4 block">Detaillierte Leistungen</Label>
@@ -112,9 +108,9 @@ const ServicesTab = ({ formData, handleMainCategoryChange, handleServiceChange, 
                 </Card>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
 
       <div className="border-t pt-6">
         <Label className="font-semibold text-base">Einsatzregionen</Label>

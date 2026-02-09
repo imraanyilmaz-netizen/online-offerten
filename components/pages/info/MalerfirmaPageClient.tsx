@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { motion } from 'framer-motion'
+// framer-motion removed - CSS for better INP
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -380,10 +380,7 @@ const MalerfirmaPageClient = () => {
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 md:py-20 overflow-hidden">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+            <div
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
                 <span className="block">Malerfirma</span>
@@ -431,11 +428,8 @@ const MalerfirmaPageClient = () => {
                   <span>Bis zu 40% sparen</span>
                 </div>
               </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            </div>
+            <div
               className="relative"
             >
               <div className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-8 shadow-2xl">
@@ -457,7 +451,7 @@ const MalerfirmaPageClient = () => {
                   </ul>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -465,11 +459,7 @@ const MalerfirmaPageClient = () => {
       {/* Why Compare Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -478,16 +468,12 @@ const MalerfirmaPageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Der Vergleich mehrerer Malerbetriebe ist der effektivste Weg, um faire Preise zu finden und bei Ihren Malerarbeiten Geld zu sparen. Studien zeigen, dass Kunden durch den Vergleich mehrerer Anbieter durchschnittlich <strong>30-40% der Kosten einsparen</strong> können.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="h-full border-2 hover:border-blue-500 transition-colors">
                   <CardHeader>
@@ -502,7 +488,7 @@ const MalerfirmaPageClient = () => {
                     <p className="text-gray-600">{feature.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -511,11 +497,7 @@ const MalerfirmaPageClient = () => {
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -524,16 +506,12 @@ const MalerfirmaPageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Verschiedene Malerfirmen spezialisieren sich auf unterschiedliche Arten von Malerarbeiten. Finden Sie die richtige Malerfirma für Ihren spezifischen Bedarf.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="h-full hover:border-blue-500 hover:shadow-lg transition-all">
                   <CardHeader>
@@ -548,7 +526,7 @@ const MalerfirmaPageClient = () => {
                     <p className="text-gray-600">{service.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -557,11 +535,7 @@ const MalerfirmaPageClient = () => {
       {/* Selection Criteria Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -570,16 +544,12 @@ const MalerfirmaPageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Nicht alle Anbieter sind gleich. Diese Kriterien helfen Ihnen, den besten Fachbetrieb für Ihre Malerarbeiten zu finden.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {selectionCriteria.map((criterion, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="h-full">
                   <CardHeader>
@@ -594,7 +564,7 @@ const MalerfirmaPageClient = () => {
                     <p className="text-gray-600">{criterion.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -603,11 +573,7 @@ const MalerfirmaPageClient = () => {
       {/* Cost Factors Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -616,16 +582,12 @@ const MalerfirmaPageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Die Preise von Malerbetrieben variieren je nach verschiedenen Faktoren. Verstehen Sie, was die Kosten beeinflusst, um die beste Offerte zu finden.
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {costFactors.map((item, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card className="h-full">
                   <CardHeader>
@@ -638,7 +600,7 @@ const MalerfirmaPageClient = () => {
                     <p className="text-gray-600">{item.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -648,11 +610,7 @@ const MalerfirmaPageClient = () => {
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto prose prose-lg">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <div
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                 Professionelle Malerarbeiten in der Schweiz: Ihr kompletter Ratgeber
@@ -721,7 +679,7 @@ const MalerfirmaPageClient = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -729,11 +687,7 @@ const MalerfirmaPageClient = () => {
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -742,7 +696,7 @@ const MalerfirmaPageClient = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Alles, was Sie über Malerbetriebe und Malerarbeiten wissen müssen – beantwortet von unseren Experten.
             </p>
-          </motion.div>
+          </div>
 
           <div className="max-w-4xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
@@ -764,11 +718,7 @@ const MalerfirmaPageClient = () => {
       {/* Internal Links Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="max-w-4xl mx-auto"
           >
             <div className="bg-blue-50 border-l-4 border-blue-600 p-6 md:p-8 rounded-lg">
@@ -828,18 +778,14 @@ const MalerfirmaPageClient = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -883,7 +829,7 @@ const MalerfirmaPageClient = () => {
                 <span>Bis zu 40% sparen</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

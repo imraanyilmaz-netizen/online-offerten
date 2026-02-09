@@ -2,22 +2,18 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, FileText, Sparkles, ShieldCheck, Home, Info, Truck, HelpCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation';
 
 const Section = ({ children, className = '' }: any) => (
-  <motion.section
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.6 }}
+  <section
     className={`py-10 md:py-14 border-t border-gray-100 ${className}`}
   >
     {children}
-  </motion.section>
+  </section>
 );
 
 const SectionTitle = ({ icon, title }: any) => {
@@ -116,10 +112,7 @@ const UmzugNachItalienPageClient = () => {
   return (
     <>
       <div className="bg-gradient-to-b from-slate-50 via-gray-50 to-white">
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        <section
           className="relative w-full bg-cover bg-center text-white"
         >
           <div className="absolute inset-0">
@@ -127,16 +120,13 @@ const UmzugNachItalienPageClient = () => {
              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           </div>
           <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-28 md:py-40">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <div
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-shadow-lg">Benvenuti in Italia: Ihr Umzug ins Land des Genusses</h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">Träumen Sie vom Leben unter der italienischen Sonne? Wir begleiten Sie auf Ihrem Weg von der Schweiz nach Italien – mit allem, was Sie für einen reibungslosen Umzug wissen müssen.</p>
-            </motion.div>
+            </div>
           </div>
-        </motion.section>
+        </section>
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
@@ -239,11 +229,7 @@ const UmzugNachItalienPageClient = () => {
             </main>
 
             <aside className="lg:col-span-1 space-y-8 self-start sticky top-28">
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+              <div
                 className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
               >
                 <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
@@ -252,12 +238,8 @@ const UmzugNachItalienPageClient = () => {
                 </h3>
                 <img alt="Ein Umzugswagen in einer malerischen italienischen Gasse" className="w-full h-56 object-cover rounded-lg shadow-md mb-3" src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9" />
                 <p className="text-sm text-gray-600 mt-2">Vergleichen Sie Firmen, die sich mit den Besonderheiten von Umzügen nach Italien auskennen – von der Maut bis zur Bürokratie.</p>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.6 }}
+              </div>
+              <div
                 className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200"
               >
                 <h3 className="text-xl font-semibold text-green-800 mb-3 flex items-center">
@@ -265,7 +247,7 @@ const UmzugNachItalienPageClient = () => {
                   Wichtiger Tipp: Codice Fiscale
                 </h3>
                 <p className="text-green-700">Beantragen Sie Ihren 'Codice Fiscale' so früh wie möglich beim italienischen Konsulat. Ohne diese Steuernummer sind viele grundlegende Schritte in Italien blockiert.</p>
-              </motion.div>
+              </div>
             </aside>
           </div>
           <InternationalPageNavigation currentCountrySlug="umzug-nach-italien" />

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 
 const CostTable = () => {
@@ -51,11 +51,8 @@ const CostTable = () => {
         </thead>
         <tbody>
           {tableData.map((row, index) => (
-            <motion.tr
+            <tr
               key={index}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
               className="bg-white border-b hover:bg-gray-50"
             >
               <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{row.size}</td>
@@ -69,7 +66,7 @@ const CostTable = () => {
                   </Link>
                 </Button>
               </td>
-            </motion.tr>
+            </tr>
           ))}
         </tbody>
       </table>

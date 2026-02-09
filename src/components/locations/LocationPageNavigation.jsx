@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -59,15 +59,11 @@ const LocationPageNavigation = ({ allLocations, currentCity }) => {
   return (
     <div className="border-t border-slate-200 pt-10 mt-12 md:mt-16">
       <div className="flex justify-between items-center mb-8">
-        <motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+        <h2
           className="text-2xl md:text-3xl font-bold text-gray-800"
         >
           Weitere Standorte entdecken
-        </motion.h2>
+        </h2>
         <div className="hidden md:flex items-center gap-2">
            <Button variant="outline" size="icon" onClick={() => scroll('left')} aria-label="Vorherige Standorte">
             <ChevronLeft className="h-4 w-4" />
@@ -84,16 +80,12 @@ const LocationPageNavigation = ({ allLocations, currentCity }) => {
           className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
         >
           {otherLocations.map((location) => (
-             <motion.div
+             <div
               key={location.slug}
               className="snap-start flex-shrink-0 w-[85%] sm:w-72"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5 }}
             >
               <LocationCard location={location} />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

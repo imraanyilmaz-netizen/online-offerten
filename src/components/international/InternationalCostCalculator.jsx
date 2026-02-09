@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useLayoutEffect, useMemo, lazy, Suspense } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
@@ -204,10 +204,7 @@ const InternationalCostCalculator = () => {
 
   return (
     <>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+      <div
         className="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100"
       >
         <div className="flex items-center mb-6">
@@ -216,7 +213,7 @@ const InternationalCostCalculator = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <motion.div variants={itemVariants}>
+          <div>
             <Label htmlFor="from-country" className="font-semibold text-slate-700">Von</Label>
             <Select value={fromCountry} onValueChange={(val) => handleCountryChange('from', val)}>
               <SelectTrigger id="from-country" className="mt-1 bg-slate-50">
@@ -224,9 +221,9 @@ const InternationalCostCalculator = () => {
               </SelectTrigger>
               <SelectContent>{countries.filter(c => c.code !== toCountry).map(renderCountryOption)}</SelectContent>
             </Select>
-          </motion.div>
+          </div>
 
-          <motion.div variants={itemVariants}>
+          <div>
             <Label htmlFor="to-country" className="font-semibold text-slate-700">Nach</Label>
             <Select value={toCountry} onValueChange={(val) => handleCountryChange('to', val)}>
               <SelectTrigger id="to-country" className="mt-1 bg-slate-50">
@@ -234,44 +231,41 @@ const InternationalCostCalculator = () => {
               </SelectTrigger>
               <SelectContent>{countries.filter(c => c.code !== fromCountry).map(renderCountryOption)}</SelectContent>
             </Select>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div variants={itemVariants} className="mb-6">
+        <div className="mb-6">
           <Label className="font-semibold text-slate-700">Umzugsart</Label>
           <div className="grid grid-cols-2 gap-2 mt-2">
             <Button variant={moveType === 'private' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('private')} className={`transition-all ${moveType === 'private' ? 'bg-green-600 text-white' : ''}`}>Privat</Button>
             <Button variant={moveType === 'business' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('business')} className={`transition-all ${moveType === 'business' ? 'bg-green-600 text-white' : ''}`}>Geschäftlich</Button>
           </div>
-        </motion.div>
+        </div>
 
-        <AnimatePresence mode="wait">
+        
           {moveType === 'private' ? (
-            <motion.div key="private-rooms" variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="mb-6">
+            <div key="private-rooms" className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <Label htmlFor="rooms-slider" className="font-semibold text-slate-700">Anzahl Zimmer</Label>
                 <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{rooms} Zimmer</span>
               </div>
               <Slider id="rooms-slider" value={[rooms]} onValueChange={(val) => setRooms(val[0])} min={1} max={10} step={0.5} />
-            </motion.div>
+            </div>
           ) : (
-            <motion.div key="business-area" variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="mb-6">
+            <div key="business-area" className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <Label htmlFor="area-slider" className="font-semibold text-slate-700">Fläche (m²)</Label>
                 <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{area} m²</span>
               </div>
               <Slider id="area-slider" value={[area]} onValueChange={(val) => setArea(val[0])} min={20} max={500} step={10} />
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        
 
-        <AnimatePresence>
+        
           {moveType === 'private' && (
-            <motion.div 
+            <div 
               key="private-options" 
-              initial={{ opacity: 0, y: -10 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -10 }} 
               className="space-y-4 mb-8"
             >
               <div className="flex items-center space-x-2">
@@ -282,24 +276,21 @@ const InternationalCostCalculator = () => {
                 <Checkbox id="cleaning" checked={includeCleaning} onCheckedChange={setIncludeCleaning} />
                 <Label htmlFor="cleaning" className="text-slate-600 cursor-pointer">Umzugsreinigung inklusive</Label>
               </div>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        
 
 
-        <motion.div variants={itemVariants}>
+        <div>
           <Button onClick={calculateCost} size="lg" className="w-full bg-green-500 hover:bg-green-600 text-white group">
             Kosten berechnen
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
-        </motion.div>
+        </div>
 
-        <AnimatePresence>
+        
           {estimatedCost && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
+            <div
               className="mt-8 p-6 bg-slate-50 rounded-lg text-center border-t-4 border-green-400"
             >
               <h3 className="text-lg font-semibold text-slate-600 mb-2">Geschätzte Kosten</h3>
@@ -312,26 +303,23 @@ const InternationalCostCalculator = () => {
                 Offerten anfordern
                 <ChevronsDown className="w-5 h-5 ml-2 transition-transform group-hover:translate-y-1" />
               </Button>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
-      </motion.div>
+        
+      </div>
 
-      <AnimatePresence>
+      
         {showForm && (
-          <motion.div
+          <div
             id="international-quote-form"
             className="mt-16"
-            initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
-            animate={{ opacity: 1, scaleY: 1, transition: { duration: 0.7, ease: 'easeInOut' } }}
-            exit={{ opacity: 0, scaleY: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
           >
             <Suspense fallback={<FullPageLoader />}>
               <NewCustomerForm initialDataFromProps={initialFormDataForQuote} formId="international-form" />
             </Suspense>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// framer-motion removed - CSS for better INP
 import { Accordion, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Package as PackageIcon, ArrowRight, AlertTriangle, XCircle, Clock, ShoppingCart } from 'lucide-react';
@@ -38,11 +38,8 @@ const MissedQuoteList = ({ quotes }) => {
       {quotes.map((quote, index) => {
         const reasonDetails = getReasonDetails(quote.missed_reason);
         return (
-          <motion.div
+          <div
             key={quote.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
           >
             <AccordionItem value={`item-${index}`} className="border rounded-lg bg-gray-50/70">
               <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-lg data-[state=open]:bg-gray-200">
@@ -72,7 +69,7 @@ const MissedQuoteList = ({ quotes }) => {
                 </div>
               </AccordionTrigger>
             </AccordionItem>
-          </motion.div>
+          </div>
         );
       })}
     </Accordion>
