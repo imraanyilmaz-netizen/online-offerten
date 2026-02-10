@@ -295,17 +295,17 @@ export default async function HomePage() {
             aria-label="Kostenlose Offerten für Umzug, Reinigung und Malerarbeiten vergleichen"
           >
             {/* Background Image - Right Side - Desktop Only - Optimized with Next.js Image */}
-            <div className="hidden lg:block absolute -right-60 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full overflow-hidden">
+            <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full overflow-hidden">
               <NextImage
-                src="/fotos/umzug-reinigung-maler-offerten-schweiz.webp"
+                src="/fotos/umzug-reinigung-maler-offerten.webp"
                 alt="Umzug, Reinigung und Renovierung Services in der Schweiz"
                 fill
                 priority
                 quality={75}
                 className="object-cover object-right"
                 style={{
-                  maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
-                  WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
+                  maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)',
+                  WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)'
                 }}
                 sizes="(max-width: 1024px) 0vw, 55vw"
               />

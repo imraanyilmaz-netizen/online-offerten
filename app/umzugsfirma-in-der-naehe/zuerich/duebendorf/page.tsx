@@ -213,7 +213,7 @@ export default function UmzugsfirmaDuebendorfPage() {
                 </div>
 
                 {/* Left Side - Green Content Area */}
-                <div className="w-full lg:w-[60%] bg-[#0d4d2c] relative px-4 sm:px-8 md:px-12 py-6 sm:py-10 md:py-12 lg:py-16">
+                <div className="w-full lg:w-[60%] bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 relative px-4 sm:px-8 md:px-12 py-6 sm:py-10 md:py-12 lg:py-16">
                   {/* Yellow Badge */}
                   <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-yellow-400 rounded-full px-4 py-2 shadow-lg z-10">
                     <p className="text-black text-xs sm:text-sm font-bold text-center leading-tight">

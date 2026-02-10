@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import Link from 'next/link';
@@ -449,7 +449,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           </section>
 
           {/* Nationwide Presence Section */}
-          <section className="py-[50px] bg-gradient-to-br from-green-900 via-emerald-900 to-green-800 overflow-hidden relative">
+          <section className="py-[50px] bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 overflow-hidden relative">
             {/* Decorative background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-20 right-10 w-72 h-72 bg-green-700/20 rounded-full blur-3xl"></div>
@@ -597,7 +597,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                             className={cn(
                               "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
                               state.selectedCategory === category
-                                ? "bg-[#0d4d2c] text-white"
+                                ? "bg-green-700 text-white"
                                 : "bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
                             )}
                           >
