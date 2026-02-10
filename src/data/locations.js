@@ -1,4 +1,4 @@
-export const locations = [
+﻿export const locations = [
   { name: 'Zürich', slug: 'umzugsfirma-in-der-naehe/zuerich', canton: 'ZH', showInNav: true, showOnHome: true, image: '/image/umzugsservice-Schweiz/umzugsfirma-zurich-standort.webp' },
   { name: 'Bern', slug: 'umzugsfirma-in-der-naehe/bern', canton: 'BE', showInNav: true, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-bern-kostenlose-offerte.webp' },
   { name: 'Basel', slug: 'umzugsfirma-in-der-naehe/basel', canton: 'BS', showInNav: true, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-basel-kostenlose-offerte.webp' },

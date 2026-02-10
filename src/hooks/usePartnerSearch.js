@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+﻿import { useState, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { cantonMap } from '@/lib/dataMapping';
 

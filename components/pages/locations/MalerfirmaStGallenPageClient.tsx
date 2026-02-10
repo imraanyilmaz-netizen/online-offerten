@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -370,20 +370,20 @@ const MalerfirmaStGallenPageClient = () => {
               </h2>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  💰 Preisbeispiele für St. Gallen
+                  ğŸ’° Preisbeispiele für St. Gallen
                 </h3>
                 <div className="space-y-4 text-gray-700">
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Innenanstrich</p>
-                    <p><strong>Beispiel:</strong> Eine 3.5-Zimmer-Wohnung (95 m²) in St. Gallen kostet für einen Innenanstrich durchschnittlich <strong>CHF 1.250–2.900</strong>. Eine 4-Zimmer-Wohnung (120 m²) kostet <strong>CHF 1.650–3.800</strong>.</p>
+                    <p><strong>Beispiel:</strong> Eine 3.5-Zimmer-Wohnung (95 mÂ²) in St. Gallen kostet für einen Innenanstrich durchschnittlich <strong>CHF 1.250–2.900</strong>. Eine 4-Zimmer-Wohnung (120 mÂ²) kostet <strong>CHF 1.650–3.800</strong>.</p>
                   </div>
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Fassadenanstrich</p>
-                    <p><strong>Beispiel:</strong> Ein Einfamilienhaus (200 m² Fassadenfläche) in St. Gallen kostet für einen Fassadenanstrich durchschnittlich <strong>CHF 5.300–14.500</strong>. Die Preise variieren je nach Gebäudetyp und Zugänglichkeit.</p>
+                    <p><strong>Beispiel:</strong> Ein Einfamilienhaus (200 mÂ² Fassadenfläche) in St. Gallen kostet für einen Fassadenanstrich durchschnittlich <strong>CHF 5.300–14.500</strong>. Die Preise variieren je nach Gebäudetyp und Zugänglichkeit.</p>
                   </div>
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Aussenanstrich</p>
-                    <p><strong>Beispiel:</strong> Eine Wohnung (80 m² Aussenfläche) in St. Gallen kostet für einen Aussenanstrich durchschnittlich <strong>CHF 2.100–5.800</strong>. Besonders bei Altbauten können zusätzliche Vorarbeiten anfallen.</p>
+                    <p><strong>Beispiel:</strong> Eine Wohnung (80 mÂ² Aussenfläche) in St. Gallen kostet für einen Aussenanstrich durchschnittlich <strong>CHF 2.100–5.800</strong>. Besonders bei Altbauten können zusätzliche Vorarbeiten anfallen.</p>
                   </div>
                   <div className="mt-4 pt-4 border-t border-gray-300">
                     <p className="text-sm text-gray-600 italic">
@@ -476,7 +476,7 @@ const MalerfirmaStGallenPageClient = () => {
                     <h4 className="faq-question">Was kostet eine Malerfirma in St. Gallen?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700">
-                    Die Kosten für einen Malerservice in St. Gallen hängen von verschiedenen Faktoren ab: Art der Malerarbeiten (Innenanstrich, Aussenanstrich, Fassadenanstrich), Grösse der zu streichenden Fläche, Anzahl der Stockwerke, benötigte Vorarbeiten und verwendete Materialien. Ein durchschnittlicher Innenanstrich in St. Gallen kostet zwischen 15 und 35 CHF pro Quadratmeter. Eine 3.5-Zimmer-Wohnung (95 m²) kostet für einen Innenanstrich durchschnittlich CHF 1.250–2.900. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Malerbetrieben in St. Gallen.
+                    Die Kosten für einen Malerservice in St. Gallen hängen von verschiedenen Faktoren ab: Art der Malerarbeiten (Innenanstrich, Aussenanstrich, Fassadenanstrich), Grösse der zu streichenden Fläche, Anzahl der Stockwerke, benötigte Vorarbeiten und verwendete Materialien. Ein durchschnittlicher Innenanstrich in St. Gallen kostet zwischen 15 und 35 CHF pro Quadratmeter. Eine 3.5-Zimmer-Wohnung (95 mÂ²) kostet für einen Innenanstrich durchschnittlich CHF 1.250–2.900. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Malerbetrieben in St. Gallen.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
@@ -582,3 +582,5 @@ const MalerfirmaStGallenPageClient = () => {
 }
 
 export default MalerfirmaStGallenPageClient
+
+

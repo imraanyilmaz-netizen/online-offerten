@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useEffect } from 'react'
 
@@ -46,4 +46,6 @@ const HeroStats = () => {
 }
 
 export default React.memo(HeroStats)
+
+
 

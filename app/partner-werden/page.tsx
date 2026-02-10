@@ -46,3 +46,5 @@ export default function PartnerRegistrationPage() {
   return <PartnerRegistrationPageClient />
 }
 
+
+

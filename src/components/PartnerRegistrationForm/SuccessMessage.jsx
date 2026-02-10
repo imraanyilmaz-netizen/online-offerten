@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { CheckCircle, Mail, ShieldCheck } from 'lucide-react';
 // framer-motion removed - CSS for better INP
 

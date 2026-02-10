@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
@@ -88,5 +88,6 @@ export default function ClientRouteProtection() {
     }
   }, [user, loading, pathname, router])
 
-  return null // Bu component sadece redirect için, UI render etmiyor
+  return null // Bu component sadece redirect iÃ§in, UI render etmiyor
 }
+

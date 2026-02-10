@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 // framer-motion removed - CSS for better INP
 import { ShieldCheck, TrendingUp, Users, Award, Clock, CheckCircle2 } from 'lucide-react'
@@ -64,6 +64,10 @@ export default function WhyChooseUs({
     </section>
   )
 }
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import Link from 'next/link'
@@ -135,7 +135,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
     setSortBy('rating_desc')
   }, [])
 
-  // Form için initial data
+  // Form iÃ§in initial data
   const getInitialFormData = () => {
     const initialData: any = {}
     if (selectedService && selectedService !== 'all') {
@@ -281,3 +281,5 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
 }
 
 export default PartnerSearchPageClient
+
+

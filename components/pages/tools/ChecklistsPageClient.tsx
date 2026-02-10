@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useMemo, useEffect } from 'react';
 // framer-motion removed - CSS for better INP
@@ -387,3 +387,5 @@ const ChecklistsPageClient = () => {
 };
 
 export default ChecklistsPageClient;
+
+

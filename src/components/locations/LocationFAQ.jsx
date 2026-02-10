@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+﻿import { useRouter } from 'next/navigation';
 import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 // framer-motion removed - CSS for better INP
 import { Star, UserCircle2, Globe, MessageSquare } from 'lucide-react';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // framer-motion removed - CSS for better INP
 import { Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';

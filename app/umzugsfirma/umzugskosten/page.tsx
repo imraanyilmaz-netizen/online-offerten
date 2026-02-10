@@ -4,7 +4,7 @@ import { createStaticClient } from '@/lib/supabase/server'
 
 // ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
 // Bu sayfa statik olarak build edilir, ancak 1 saatte bir arka planda yenilenir
-// SEO için daha hızlı yükleme ve daha iyi performans sağlar
+// SEO iÃ§in daha hızlı yükleme ve daha iyi performans sağlar
 export const revalidate = 3600 // 1 saat
 
 export const metadata: Metadata = {
@@ -62,7 +62,7 @@ async function getReviewStats() {
       console.error('Error fetching review count:', countError);
     }
     
-    // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
+    // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak iÃ§in)
     const { data: allReviews, error: reviewsError } = await supabase
       .from('customer_reviews')
       .select('rating')
@@ -92,7 +92,7 @@ async function getReviewStats() {
 export default async function UmzugskostenPage() {
   const reviewStats = await getReviewStats();
   
-  // Server-side schema oluştur (Google için)
+  // Server-side schema oluştur (Google iÃ§in)
   const metaTitle = "Umzugskosten-Rechner: Kostenlose Schätzung in 2 Minuten";
   const metaDescription = "In 2 Minuten wissen, was Ihr Umzug kostet! Kostenloser Umzugskosten-Rechner mit sofortiger Preis-Schätzung. Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.";
   
@@ -275,7 +275,7 @@ export default async function UmzugskostenPage() {
 
   return (
     <>
-      {/* Server-side schema - Google için */}
+      {/* Server-side schema - Google iÃ§in */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serverSchema) }}
@@ -284,4 +284,6 @@ export default async function UmzugskostenPage() {
     </>
   );
 }
+
+
 

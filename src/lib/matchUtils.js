@@ -1,4 +1,4 @@
-import { getGermanServiceName } from './dataMapping';
+﻿import { getGermanServiceName } from './dataMapping';
 
 const serviceKeyMap = {
   'privatumzug': 'privatumzug',

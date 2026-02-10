@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect, useState } from 'react';
 import CustomerForm from '@/components/NewCustomerForm';
@@ -13,7 +13,7 @@ const QuoteFormPageClient = () => {
     setMounted(true);
   }, []);
 
-  // Loading state - hydration mismatch'i önlemek için
+  // Loading state - hydration mismatch'i önlemek iÃ§in
   if (!mounted || !ready) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 relative overflow-hidden flex items-center justify-center">
@@ -61,3 +61,5 @@ const QuoteFormPageClient = () => {
 };
 
 export default QuoteFormPageClient;
+
+

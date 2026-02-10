@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import Link from 'next/link';
@@ -41,10 +41,10 @@ const UmzugNachOesterreichPageClient = () => {
   const metaKeywords = "umzug nach österreich, umzug schweiz österreich, umzugsfirma schweiz österreich, internationaler umzug österreich, umzug nach wien, umzug nach salzburg, umzug nach graz, umzugsfirma international, zügelfirma schweiz österreich, umzug schweiz nach österreich, umzugskosten schweiz österreich, umzugsfirma vergleichen österreich, günstiger umzug österreich, umzug nach österreich preise, umzug nach österreich kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge österreich";
 
   const costTable = [
-    { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "1.800 – 3.200 CHF" },
-    { size: "2.5-Zimmer-Wohnung (ca. 25-35 m³)", cost: "3.000 – 5.500 CHF" },
-    { size: "4.5-Zimmer-Wohnung (ca. 40-55 m³)", cost: "5.000 – 8.000 CHF" },
-    { size: "Haus / > 6 Zimmer (> 60 m³)", cost: "ab 7.500 CHF" }
+    { size: "1-Zimmer-Wohnung (ca. 15-20 mÂ³)", cost: "1.800 – 3.200 CHF" },
+    { size: "2.5-Zimmer-Wohnung (ca. 25-35 mÂ³)", cost: "3.000 – 5.500 CHF" },
+    { size: "4.5-Zimmer-Wohnung (ca. 40-55 mÂ³)", cost: "5.000 – 8.000 CHF" },
+    { size: "Haus / > 6 Zimmer (> 60 mÂ³)", cost: "ab 7.500 CHF" }
   ];
 
   const costFactors = [
@@ -256,3 +256,5 @@ const UmzugNachOesterreichPageClient = () => {
 };
 
 export default UmzugNachOesterreichPageClient;
+
+

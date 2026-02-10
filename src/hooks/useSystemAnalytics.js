@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+﻿import { useState, useEffect, useMemo } from 'react';
 
 const useSystemAnalytics = (timeRange, quotes, partners) => {
   const analyticsData = useMemo(() => {

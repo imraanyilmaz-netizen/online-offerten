@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import React from 'react';
 import { Mail, MapPin, Building2, Sparkles, FileText, Send } from 'lucide-react';
 

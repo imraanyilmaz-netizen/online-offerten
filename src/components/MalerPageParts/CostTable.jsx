@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";

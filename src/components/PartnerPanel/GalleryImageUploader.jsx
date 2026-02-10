@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+﻿import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Loader2, UploadCloud, XCircle, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';

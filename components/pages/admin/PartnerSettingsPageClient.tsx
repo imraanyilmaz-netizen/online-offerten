@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
@@ -366,3 +366,4 @@ const PartnerSettingsPageClient = () => {
 };
 
 export default PartnerSettingsPageClient;
+

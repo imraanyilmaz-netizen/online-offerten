@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -523,7 +523,7 @@ const GuenstigUmziehenPageClient = () => {
                     <strong>Was ist bei Umzugsofferten zu beachten?</strong> Prüfen Sie Festpreis vs. Stundensatz, inkludierte Versicherung, Zusatzkosten für Montage und ob alle gewünschten Leistungen enthalten sind.
                   </p>
                   <p className="text-body">
-                    <strong>Welche Versicherung braucht man beim Umzug?</strong> Seriöse Schweizer Umzugsfirmen bieten Haftpflichtversicherung bis 500 CHF/m³ – bei Wertgegenständen Zusatzschutz vereinbaren.
+                    <strong>Welche Versicherung braucht man beim Umzug?</strong> Seriöse Schweizer Umzugsfirmen bieten Haftpflichtversicherung bis 500 CHF/mÂ³ – bei Wertgegenständen Zusatzschutz vereinbaren.
                   </p>
                   <p className="text-body">
                     <strong>Wie kann man kurzfristig noch Geld sparen?</strong> Selbst packen, Umzugskartons kostenlos bei Migros oder Coop besorgen und flexible Umzugstermine unter der Woche wählen.
@@ -542,7 +542,7 @@ const GuenstigUmziehenPageClient = () => {
                 <div className="mb-6 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
                   <div className="text-center mb-6">
                     <p className="text-green-100 mb-4 text-body text-lg" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)', fontSize: '22px' }}>
-                      🔹 <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> 🔹
+                      ğŸ”¹ <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> ğŸ”¹
                     </p>
                     <p className="text-green-50 mb-6 text-body" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)' }}>
                       ✓ 100% kostenlos und unverbindlich ✓ Geprüfte Partner mit Erfahrung ✓ Transparente Preise ohne Verpflichtung
@@ -583,3 +583,5 @@ const GuenstigUmziehenPageClient = () => {
 };
 
 export default GuenstigUmziehenPageClient;
+
+

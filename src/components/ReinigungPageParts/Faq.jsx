@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 // framer-motion removed - CSS for better INP

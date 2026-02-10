@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 // framer-motion removed - CSS for better INP
 import { FileText, GitCompareArrows, CheckCircle2, ArrowRight } from 'lucide-react'
@@ -106,6 +106,10 @@ export default function HowItWorks({
     </section>
   )
 }
+
+
+
+
 
 
 

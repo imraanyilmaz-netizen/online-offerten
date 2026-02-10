@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import Link from 'next/link';
@@ -60,9 +60,9 @@ const UmzugNachBelgienPageClient = () => {
   const metaKeywords = "umzug nach belgien, umzug schweiz belgien, umzugsfirma schweiz belgien, internationaler umzug belgien, umzug nach brüssel, umzug nach antwerpen, umzug nach gent, umzugsfirma international, zügelfirma schweiz belgien, umzug schweiz nach belgien, umzugskosten schweiz belgien, umzugsfirma vergleichen belgien, günstiger umzug belgien, umzug nach belgien preise, umzug nach belgien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge belgien";
 
   const costTable = [
-    { size: "1-2 Zimmer (ca. 15-25 m³)", cost: "1.700 – 3.000 CHF" },
-    { size: "3 Zimmer (ca. 30-40 m³)", cost: "2.800 – 5.200 CHF" },
-    { size: "4-5 Zimmer (ca. 45-60 m³)", cost: "4.500 – 7.000 CHF" }
+    { size: "1-2 Zimmer (ca. 15-25 mÂ³)", cost: "1.700 – 3.000 CHF" },
+    { size: "3 Zimmer (ca. 30-40 mÂ³)", cost: "2.800 – 5.200 CHF" },
+    { size: "4-5 Zimmer (ca. 45-60 mÂ³)", cost: "4.500 – 7.000 CHF" }
   ];
 
   const costFactors = [
@@ -181,7 +181,7 @@ const UmzugNachBelgienPageClient = () => {
 
               <Section>
                 <SectionTitle title="Welche Kosten entstehen bei einem Umzug nach Belgien?" />
-                <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Belgien sind von mehreren Faktoren abhängig. Entscheidend sind das Ladevolumen (in m³), die genaue Distanz (z.B. von Zürich nach Brüssel), der gewünschte Serviceumfang (z.B. mit oder ohne Verpackungsservice) und die Gegebenheiten vor Ort wie Stockwerk und Lift.</p>
+                <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Belgien sind von mehreren Faktoren abhängig. Entscheidend sind das Ladevolumen (in mÂ³), die genaue Distanz (z.B. von Zürich nach Brüssel), der gewünschte Serviceumfang (z.B. mit oder ohne Verpackungsservice) und die Gegebenheiten vor Ort wie Stockwerk und Lift.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">Durchschnittliche Kosten (Schätzungen)</h3>
@@ -268,3 +268,5 @@ const UmzugNachBelgienPageClient = () => {
 };
 
 export default UmzugNachBelgienPageClient;
+
+

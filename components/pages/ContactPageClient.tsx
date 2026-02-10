@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState } from 'react'
 // framer-motion removed - CSS for better INP
@@ -148,4 +148,6 @@ const ContactPageClient = () => {
 }
 
 export default ContactPageClient
+
+
 

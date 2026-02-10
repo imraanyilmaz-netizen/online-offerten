@@ -3,7 +3,7 @@ import WohnungsreinigungPageClient from '@/components/pages/services/Wohnungsrei
 
 // ISR: Sayfa 24 saatte bir otomatik yenilenecek (86400 saniye)
 // Bu sayfa statik olarak build edilir, ancak 24 saatte bir arka planda yenilenir
-// SEO için daha hızlı yükleme ve daha iyi performans sağlar
+// SEO iÃ§in daha hızlı yükleme ve daha iyi performans sağlar
 export const revalidate = 86400 // 24 saat
 
 export const metadata: Metadata = {
@@ -53,7 +53,7 @@ export default async function WohnungsreinigungPage() {
   const metaDescription = "Professionelle Wohnungsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.";
   const canonicalUrl = 'https://online-offerten.ch/reinigung/wohnungsreinigung';
   
-  // Server-side schema - Google için gerçek yorum sayısı
+  // Server-side schema - Google iÃ§in gerÃ§ek yorum sayısı
   const serverSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -109,7 +109,7 @@ export default async function WohnungsreinigungPage() {
 
   return (
     <>
-      {/* Server-side schema - Google bot için */}
+      {/* Server-side schema - Google bot iÃ§in */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serverSchema) }}
@@ -118,4 +118,6 @@ export default async function WohnungsreinigungPage() {
     </>
   );
 }
+
+
 

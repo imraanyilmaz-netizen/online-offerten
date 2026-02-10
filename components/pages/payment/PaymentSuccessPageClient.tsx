@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -35,7 +35,7 @@ const PaymentSuccessPageClient = () => {
       try {
         console.log("Verifying payment for session:", checkoutSessionId, `(Retry ${currentRetry})`);
         
-        // ✅ SADECE sessionId gönder - partnerId KALDIRILDI
+        // âœ… SADECE sessionId gönder - partnerId KALDIRILDI
         const { data, error } = await supabase.functions.invoke('verify-stripe-session', {
           body: { 
             sessionId: checkoutSessionId
@@ -60,7 +60,7 @@ const PaymentSuccessPageClient = () => {
             description: 'Ihr Guthaben wurde erfolgreich aufgeladen.',
           });
           
-          // ✅ Session'ı yenile (TWINT için önemli)
+          // âœ… Session'ı yenile (TWINT iÃ§in önemli)
           try {
             await supabase.auth.refreshSession();
           } catch (refreshError) {
@@ -95,7 +95,7 @@ const PaymentSuccessPageClient = () => {
       }
     };
 
-    // ✅ DOĞRUDAN ÇAĞIR - session kontrolü YOK
+    // âœ… DOÄRUDAN Ã‡AÄIR - session kontrolü YOK
     verifyPayment(0);
   }, [searchParams, router, toast]); // Removed t dependency
 
@@ -128,3 +128,4 @@ const PaymentSuccessPageClient = () => {
 };
 
 export default PaymentSuccessPageClient;
+

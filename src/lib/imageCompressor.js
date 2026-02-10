@@ -1,4 +1,4 @@
-export const compressImage = (file, options = {}) => {
+﻿export const compressImage = (file, options = {}) => {
   return new Promise((resolve, reject) => {
     const { quality = 0.8, maxWidth = 1920, maxHeight = 1080 } = options;
     const reader = new FileReader();

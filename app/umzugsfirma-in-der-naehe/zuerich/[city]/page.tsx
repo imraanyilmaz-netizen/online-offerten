@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import ZurichCityPageClient from '@/components/pages/locations/cities/ZurichCityPageClient'
 
 const cities = ['winterthur', 'uster', 'dietikon', 'duebendorf', 'schlieren'] as const

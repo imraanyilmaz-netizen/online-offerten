@@ -1,4 +1,4 @@
-import { usePathname } from 'next/navigation';
+﻿import { usePathname } from 'next/navigation';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 // Removed useTranslation and URL mapping - DE-only

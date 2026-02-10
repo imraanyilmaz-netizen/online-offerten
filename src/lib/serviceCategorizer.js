@@ -1,4 +1,4 @@
-export const getServiceCategory = (servicetype) => {
+﻿export const getServiceCategory = (servicetype) => {
     if (!servicetype) return 'other';
     const lowerServiceType = servicetype.toLowerCase();
 

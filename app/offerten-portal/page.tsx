@@ -45,3 +45,5 @@ export const metadata: Metadata = {
 export default function OffertenPortalPage() {
   return <OffertenPortalPageClient />
 }
+
+

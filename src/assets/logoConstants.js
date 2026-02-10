@@ -1,1 +1,1 @@
-export const logoUrl = 'https://online-offerten.ch/image/logo-icon.avif';
+﻿export const logoUrl = 'https://online-offerten.ch/image/logo-icon.avif';

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const AnalyticsCard = ({ title, icon, children }) => {

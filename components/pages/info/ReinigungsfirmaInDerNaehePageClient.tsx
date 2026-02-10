@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -707,24 +707,24 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
 
                 <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
                   <h4 className="text-xl font-bold text-gray-900 mb-4">
-                    💰 Preisbeispiele: Was kostet eine Reinigung konkret?
+                    ğŸ’° Preisbeispiele: Was kostet eine Reinigung konkret?
                   </h4>
                   <div className="space-y-4 text-gray-700">
                     <div className="border-l-4 border-blue-600 pl-4">
                       <p className="font-semibold text-gray-900 mb-1">Umzugsreinigung</p>
-                      <p><strong>Beispiel:</strong> Eine 3-Zimmer-Wohnung (80 m²) kostet für eine Umzugsreinigung in Zürich durchschnittlich <strong>CHF 650–950</strong>. In Basel oder Bern liegen die Preise bei <strong>CHF 600–900</strong>.</p>
+                      <p><strong>Beispiel:</strong> Eine 3-Zimmer-Wohnung (80 mÂ²) kostet für eine Umzugsreinigung in Zürich durchschnittlich <strong>CHF 650–950</strong>. In Basel oder Bern liegen die Preise bei <strong>CHF 600–900</strong>.</p>
                     </div>
                     <div className="border-l-4 border-blue-600 pl-4">
                       <p className="font-semibold text-gray-900 mb-1">Wohnungsreinigung</p>
-                      <p><strong>Beispiel:</strong> Eine 3.5-Zimmer-Wohnung (95 m²) kostet für eine Grundreinigung in Zürich durchschnittlich <strong>CHF 800–1.100</strong>. Eine 2.5-Zimmer-Wohnung (65 m²) kostet <strong>CHF 500–750</strong>.</p>
+                      <p><strong>Beispiel:</strong> Eine 3.5-Zimmer-Wohnung (95 mÂ²) kostet für eine Grundreinigung in Zürich durchschnittlich <strong>CHF 800–1.100</strong>. Eine 2.5-Zimmer-Wohnung (65 mÂ²) kostet <strong>CHF 500–750</strong>.</p>
                     </div>
                     <div className="border-l-4 border-blue-600 pl-4">
                       <p className="font-semibold text-gray-900 mb-1">Büroreinigung</p>
-                      <p><strong>Beispiel:</strong> Ein Büro mit 150 m² kostet für eine regelmässige Reinigung in Zürich durchschnittlich <strong>CHF 400–600</strong> pro Reinigung. Ein kleineres Büro (50 m²) kostet <strong>CHF 200–350</strong>.</p>
+                      <p><strong>Beispiel:</strong> Ein Büro mit 150 mÂ² kostet für eine regelmässige Reinigung in Zürich durchschnittlich <strong>CHF 400–600</strong> pro Reinigung. Ein kleineres Büro (50 mÂ²) kostet <strong>CHF 200–350</strong>.</p>
                     </div>
                     <div className="border-l-4 border-blue-600 pl-4">
                       <p className="font-semibold text-gray-900 mb-1">Unterhaltsreinigung</p>
-                      <p><strong>Beispiel:</strong> Eine 4-Zimmer-Wohnung (110 m²) kostet für eine wöchentliche Unterhaltsreinigung in Zürich durchschnittlich <strong>CHF 120–180</strong> pro Reinigung. Monatlich sind das <strong>CHF 480–720</strong>.</p>
+                      <p><strong>Beispiel:</strong> Eine 4-Zimmer-Wohnung (110 mÂ²) kostet für eine wöchentliche Unterhaltsreinigung in Zürich durchschnittlich <strong>CHF 120–180</strong> pro Reinigung. Monatlich sind das <strong>CHF 480–720</strong>.</p>
                     </div>
                     <div className="mt-4 pt-4 border-t border-gray-300">
                       <p className="text-sm text-gray-600 italic">
@@ -757,7 +757,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
 
                 <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
                   <h4 className="text-xl font-bold text-gray-900 mb-3">
-                    💡 Pro-Tipp: Lokale Reinigungsunternehmen richtig auswählen
+                    ğŸ’¡ Pro-Tipp: Lokale Reinigungsunternehmen richtig auswählen
                   </h4>
                   <p className="text-gray-700">
                     Beim Vergleich von <strong>Reinigungsanbietern in Ihrer Region</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, verwendeten Reinigungsmittel, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein <strong>Reinigungsservice vor Ort</strong> mit lokaler Expertise kann trotz etwas höherem Preis das bessere Angebot sein, da er die örtlichen Gegebenheiten besser kennt.
@@ -856,3 +856,5 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
 }
 
 export default ReinigungsfirmaInDerNaehePageClient
+
+

@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+﻿import { Suspense } from 'react'
 import { createStaticClient } from '@/lib/supabase/server'
 import PartnerProfilePageClient from '@/components/pages/PartnerProfilePageClient'
 import type { Metadata } from 'next'

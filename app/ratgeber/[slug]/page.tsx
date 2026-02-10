@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import PostPageClient from '@/components/pages/tools/PostPageClient'
 import { createClient } from '@/lib/supabase/server'

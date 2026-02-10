@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Package, ShoppingCart, Wallet, PlusCircle, Gift, Star, Clock } from 'lucide-react';

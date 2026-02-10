@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -789,27 +789,27 @@ const UmzugsoffertenZuerichPageClient = () => {
               <p className="text-gray-700 mb-4">Nicht alle Kosten sind auf den ersten Blick erkennbar. Achten Sie besonders auf diese Positionen:</p>
               <ul className="space-y-3">
                 <li className="flex items-start">
-                  <span className="text-red-600 mr-2 font-bold">⚠</span>
+                  <span className="text-red-600 mr-2 font-bold">âš </span>
                   <span className="text-gray-700"><strong>Zuschläge für schwere Gegenstände:</strong> Klaviere, Tresore oder Waschmaschinen können extra kosten</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-600 mr-2 font-bold">⚠</span>
+                  <span className="text-red-600 mr-2 font-bold">âš </span>
                   <span className="text-gray-700"><strong>Lange Tragewege:</strong> Ist die Distanz vom Parkplatz zur Wohnungstür ungewöhnlich lang?</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-600 mr-2 font-bold">⚠</span>
+                  <span className="text-red-600 mr-2 font-bold">âš </span>
                   <span className="text-gray-700"><strong>Fehlender Lift:</strong> Etagen-Zuschläge bei Altbauten ohne Aufzug</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-600 mr-2 font-bold">⚠</span>
+                  <span className="text-red-600 mr-2 font-bold">âš </span>
                   <span className="text-gray-700"><strong>Abend- oder Wochenendzuschlag:</strong> Meist 20–30 % Aufpreis</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-600 mr-2 font-bold">⚠</span>
+                  <span className="text-red-600 mr-2 font-bold">âš </span>
                   <span className="text-gray-700"><strong>Endreinigung:</strong> Ist die Abnahme durch die Verwaltung wirklich inklusive?</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-600 mr-2 font-bold">⚠</span>
+                  <span className="text-red-600 mr-2 font-bold">âš </span>
                   <span className="text-gray-700"><strong>Entsorgungsfahrten:</strong> Werden diese separat berechnet?</span>
                 </li>
               </ul>
@@ -1055,4 +1055,6 @@ const UmzugsoffertenZuerichPageClient = () => {
 }
 
 export default UmzugsoffertenZuerichPageClient
+
+
 

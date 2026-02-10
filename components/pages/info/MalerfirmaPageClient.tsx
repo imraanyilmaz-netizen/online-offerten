@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -672,7 +672,7 @@ const MalerfirmaPageClient = () => {
 
                 <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
                   <h4 className="text-xl font-bold text-gray-900 mb-3">
-                    💡 Pro-Tipp: Den richtigen Anbieter auswählen
+                    ğŸ’¡ Pro-Tipp: Den richtigen Anbieter auswählen
                   </h4>
                   <p className="text-gray-700">
                     Beim Vergleich von <strong>Malerbetrieben</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, verwendeten Materialien, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein etwas teurerer <strong>Anbieter</strong> kann durch bessere Materialien, Versicherungen und Erfahrung das bessere Angebot sein. Fragen Sie nach Referenzen und besichtigen Sie wenn möglich bereits durchgeführte Projekte des <strong>Handwerksbetriebs</strong>.
@@ -837,4 +837,6 @@ const MalerfirmaPageClient = () => {
 }
 
 export default MalerfirmaPageClient
+
+
 

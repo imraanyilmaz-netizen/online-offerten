@@ -131,3 +131,5 @@ export function createClient() {
 // Export singleton instance for backward compatibility
 export const supabase = createClient()
 
+
+

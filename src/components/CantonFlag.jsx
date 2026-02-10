@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 const cantonFlagUrls = {
   ZH: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/ccec475b86b24c863888233151bea0a4.png',

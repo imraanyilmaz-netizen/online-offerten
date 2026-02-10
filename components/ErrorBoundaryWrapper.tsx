@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import ErrorBoundary from '@/src/components/ErrorBoundary'
 import type { ReactNode } from 'react'
@@ -10,4 +10,6 @@ interface ErrorBoundaryWrapperProps {
 export default function ErrorBoundaryWrapper({ children }: ErrorBoundaryWrapperProps) {
   return <ErrorBoundary>{children}</ErrorBoundary>
 }
+
+
 

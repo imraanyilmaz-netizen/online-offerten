@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Star, Building, Mail, Phone, MapPin, Globe, Calendar, Users, FileText, Shield, Check, X, ExternalLink } from 'lucide-react';

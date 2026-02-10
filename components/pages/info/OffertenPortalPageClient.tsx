@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -448,3 +448,5 @@ const OffertenPortalPageClient = () => {
 };
 
 export default OffertenPortalPageClient;
+
+

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Star } from 'lucide-react';
 
 const StarRating = ({ rating, reviewCount, starSize = 20, textSize = 'text-sm', showNumeric = false }) => {

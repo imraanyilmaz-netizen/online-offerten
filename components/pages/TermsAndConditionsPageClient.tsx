@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -104,4 +104,6 @@ const TermsAndConditionsPageClient = () => {
 }
 
 export default TermsAndConditionsPageClient
+
+
 

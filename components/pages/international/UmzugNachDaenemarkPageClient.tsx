@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import Link from 'next/link';
@@ -40,9 +40,9 @@ const UmzugNachDaenemarkPageClient = () => {
   const metaKeywords = "umzug nach dänemark, umzug schweiz dänemark, umzugsfirma schweiz dänemark, internationaler umzug dänemark, umzug nach kopenhagen, umzug nach aarhus, umzug nach odense, umzugsfirma international, zügelfirma schweiz dänemark, umzug schweiz nach dänemark, umzugskosten schweiz dänemark, umzugsfirma vergleichen dänemark, günstiger umzug dänemark, umzug nach dänemark preise, umzug nach dänemark kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge dänemark";
 
   const costTable = [
-    { size: "1-2 Zimmer (ca. 20-30 m³)", cost: "3.000 – 5.000 CHF" },
-    { size: "3-4 Zimmer (ca. 40-60 m³)", cost: "5.000 – 7.500 CHF" },
-    { size: "5+ Zimmer / Haus (ca. 70+ m³)", cost: "7.000 – 11.000+ CHF" }
+    { size: "1-2 Zimmer (ca. 20-30 mÂ³)", cost: "3.000 – 5.000 CHF" },
+    { size: "3-4 Zimmer (ca. 40-60 mÂ³)", cost: "5.000 – 7.500 CHF" },
+    { size: "5+ Zimmer / Haus (ca. 70+ mÂ³)", cost: "7.000 – 11.000+ CHF" }
   ];
 
   const costFactors = [
@@ -113,7 +113,7 @@ const UmzugNachDaenemarkPageClient = () => {
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
             <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
               <Section className="border-t-0 pt-0">
-                <h2 className="heading-2 mb-4">🇩🇰 Velkommen til Danmark!</h2>
+                <h2 className="heading-2 mb-4">ğŸ‡©ğŸ‡° Velkommen til Danmark!</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">Ein Umzug nach Dänemark ist der Beginn eines neuen Lebensgefühls: Hygge. Es ist die dänische Kunst, Glück in den kleinen, gemütlichen Dingen des Alltags zu finden. Ob Sie das urbane Leben in Kopenhagen, die Küstenlandschaften Jütlands oder den Charme der vielen Inseln suchen – Dänemark begrüsst Sie mit einer einzigartigen Mischung aus modernem Design, progressiver Gesellschaft und einer tiefen Verbundenheit zur Natur. Dieser Guide ist Ihr Kompass für einen perfekt organisierten Umzug von der Schweiz nach Dänemark.</p>
               </Section>
 
@@ -228,3 +228,5 @@ const UmzugNachDaenemarkPageClient = () => {
 };
 
 export default UmzugNachDaenemarkPageClient;
+
+

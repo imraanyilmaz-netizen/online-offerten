@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -180,3 +180,5 @@ const RatgeberPageClient = () => {
 };
 
 export default RatgeberPageClient;
+
+

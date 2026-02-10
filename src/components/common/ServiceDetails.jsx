@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
 
 const ServiceDetails = ({ details }) => {

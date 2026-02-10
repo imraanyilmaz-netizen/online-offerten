@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+﻿import React, { useRef, useEffect } from 'react';
 // framer-motion removed - CSS transitions for better INP
 import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, Wind, Leaf, Package, ArrowUpDown, ArrowRight } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi'; 

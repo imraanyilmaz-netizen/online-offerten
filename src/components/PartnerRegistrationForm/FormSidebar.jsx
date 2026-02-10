@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { CheckCircle, Circle, Edit3 } from 'lucide-react';
 // framer-motion removed - CSS for better INP
 

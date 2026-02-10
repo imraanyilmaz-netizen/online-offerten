@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 export const QuoteDetail = ({ label, value, icon: Icon, className = "" }) => {
   if (!value && typeof value !== 'boolean' && value !== 0) return null;

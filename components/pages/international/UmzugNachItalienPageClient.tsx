@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import Link from 'next/link';
@@ -41,10 +41,10 @@ const UmzugNachItalienPageClient = () => {
   const metaKeywords = "umzug nach italien, umzug schweiz italien, umzugsfirma schweiz italien, internationaler umzug italien, umzug nach rom, umzug nach mailand, umzug nach neapel, umzugsfirma international, zügelfirma schweiz italien, umzug schweiz nach italien, umzugskosten schweiz italien, umzugsfirma vergleichen italien, günstiger umzug italien, umzug nach italien preise, umzug nach italien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge italien";
 
   const costTable = [
-    { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "2.200 – 3.800 CHF" },
-    { size: "2.5-Zimmer-Wohnung (ca. 25-35 m³)", cost: "3.500 – 6.000 CHF" },
-    { size: "4.5-Zimmer-Wohnung (ca. 40-55 m³)", cost: "5.800 – 9.000 CHF" },
-    { size: "Haus / > 6 Zimmer (> 60 m³)", cost: "ab 8.500 CHF" }
+    { size: "1-Zimmer-Wohnung (ca. 15-20 mÂ³)", cost: "2.200 – 3.800 CHF" },
+    { size: "2.5-Zimmer-Wohnung (ca. 25-35 mÂ³)", cost: "3.500 – 6.000 CHF" },
+    { size: "4.5-Zimmer-Wohnung (ca. 40-55 mÂ³)", cost: "5.800 – 9.000 CHF" },
+    { size: "Haus / > 6 Zimmer (> 60 mÂ³)", cost: "ab 8.500 CHF" }
   ];
 
   const costFactors = [
@@ -258,3 +258,5 @@ const UmzugNachItalienPageClient = () => {
 };
 
 export default UmzugNachItalienPageClient;
+
+

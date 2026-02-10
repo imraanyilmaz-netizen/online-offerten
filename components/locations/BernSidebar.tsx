@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState } from 'react'
 import Link from 'next/link'
@@ -136,7 +136,7 @@ const BernSidebar = () => {
         })}
       </div>
       
-      {/* CTA Button - Sadece seçili servis varsa göster */}
+      {/* CTA Button - Sadece seÃ§ili servis varsa göster */}
       {selectedService && selectedServiceData && (
         <div className="px-4 pb-4 transition-all duration-300">
           <Button 
@@ -155,6 +155,10 @@ const BernSidebar = () => {
 }
 
 export default BernSidebar
+
+
+
+
 
 
 

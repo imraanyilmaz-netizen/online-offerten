@@ -1,4 +1,4 @@
-// Lazy load jsPDF - only load when PDF generation is needed
+﻿// Lazy load jsPDF - only load when PDF generation is needed
 export const generateChecklistPdf = async (checklistData, t, checkedItems) => {
   try {
     // Import jsPDF first

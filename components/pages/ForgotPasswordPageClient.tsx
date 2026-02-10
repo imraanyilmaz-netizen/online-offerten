@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
@@ -125,4 +125,6 @@ const ForgotPasswordPageClient = () => {
 }
 
 export default ForgotPasswordPageClient
+
+
 

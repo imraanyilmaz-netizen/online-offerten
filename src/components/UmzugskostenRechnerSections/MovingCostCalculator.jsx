@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
+﻿import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowRight, Loader2, ExternalLink, MapPin } from 'lucide-react';

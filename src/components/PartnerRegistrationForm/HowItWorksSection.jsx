@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 // framer-motion removed - CSS for better INP
 import { UserPlus, ListChecks, Send, Award } from 'lucide-react';
 

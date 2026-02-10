@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 
 // İsviçre'nin büyük şehirleri listesi
 const MAJOR_CITIES = [

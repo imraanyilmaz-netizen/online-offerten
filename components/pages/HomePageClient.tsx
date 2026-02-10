@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import Link from 'next/link';
@@ -42,7 +42,7 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
 
   const serviceName = getGermanServiceName(service_type);
 
-  // Dinamik yıldız hesaplama - Platform yorumları için sadece rating değeri kullanılır
+  // Dinamik yıldız hesaplama - Platform yorumları iÃ§in sadece rating değeri kullanılır
   // Veritabanından gelen rating değerine göre yıldızlar dinamik hesaplanır
   const displayRating = rating || 0
   const fullStars = Math.floor(displayRating)
@@ -653,4 +653,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 };
 
 export default HomePageClient;
+
+
 

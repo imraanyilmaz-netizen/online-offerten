@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import Link from 'next/link';
@@ -41,10 +41,10 @@ const UmzugNachFrankreichPageClient = () => {
   const metaKeywords = "umzug nach frankreich, umzug schweiz frankreich, umzugsfirma schweiz frankreich, internationaler umzug frankreich, umzug nach paris, umzug nach lyon, umzug nach marseille, umzugsfirma international, zügelfirma schweiz frankreich, umzug schweiz nach frankreich, umzugskosten schweiz frankreich, umzugsfirma vergleichen frankreich, günstiger umzug frankreich, umzug nach frankreich preise, umzug nach frankreich kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge frankreich";
 
   const costTable = [
-    { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "2.000 – 3.500 CHF" },
-    { size: "2.5-Zimmer-Wohnung (ca. 25-35 m³)", cost: "3.200 – 5.800 CHF" },
-    { size: "4.5-Zimmer-Wohnung (ca. 40-55 m³)", cost: "5.500 – 8.500 CHF" },
-    { size: "Haus / > 6 Zimmer (> 60 m³)", cost: "ab 8.000 CHF" }
+    { size: "1-Zimmer-Wohnung (ca. 15-20 mÂ³)", cost: "2.000 – 3.500 CHF" },
+    { size: "2.5-Zimmer-Wohnung (ca. 25-35 mÂ³)", cost: "3.200 – 5.800 CHF" },
+    { size: "4.5-Zimmer-Wohnung (ca. 40-55 mÂ³)", cost: "5.500 – 8.500 CHF" },
+    { size: "Haus / > 6 Zimmer (> 60 mÂ³)", cost: "ab 8.000 CHF" }
   ];
 
   const costFactors = [
@@ -272,3 +272,5 @@ const UmzugNachFrankreichPageClient = () => {
 };
 
 export default UmzugNachFrankreichPageClient;
+
+

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Phone, Mail, ExternalLink, MapPin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

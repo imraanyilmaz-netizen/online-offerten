@@ -700,6 +700,9 @@ const nextConfig = {
         dynamicImport: true,
         forOf: true,
         module: true,
+        optionalChaining: true,
+        templateLiteral: true,
+        globalThis: true,
       };
       
       // Suppress source map warnings for third-party libraries

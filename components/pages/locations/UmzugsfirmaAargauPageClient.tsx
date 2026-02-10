@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 // framer-motion removed - CSS for better INP
@@ -699,3 +699,5 @@ const UmzugsfirmaAargauPageClient = () => {
 };
 
 export default UmzugsfirmaAargauPageClient;
+
+

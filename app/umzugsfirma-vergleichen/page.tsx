@@ -45,3 +45,5 @@ export const metadata: Metadata = {
 export default function UmzugsfirmaVergleichenPage() {
   return <UmzugsfirmaVergleichenPageClient />
 }
+
+

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { useRouter } from 'next/navigation'
@@ -235,4 +235,6 @@ const UmzugsoffertenHeroForm = memo(() => {
 UmzugsoffertenHeroForm.displayName = 'UmzugsoffertenHeroForm'
 
 export default UmzugsoffertenHeroForm
+
+
 

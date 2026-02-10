@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect, Suspense, useState, useMemo } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -7,7 +7,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
-// logoUrl import kaldÄ±rÄ±ldÄ± - Organization schema'sÄ± sadece ana sayfada
+// logoUrl import kaldÄÂ±rÄÂ±ldÄÂ± - Organization schema'sÄÂ± sadece ana sayfada
 // Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
 import dynamic from 'next/dynamic'
 
@@ -161,20 +161,20 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }
   }, [searchParams, pathname, router, isNavigating])
 
-  // reviewStats ve fetchRating kaldÄ±rÄ±ldÄ± - AggregateRating sadece ana sayfada (app/page.tsx)
+  // reviewStats ve fetchRating kaldÄÂ±rÄÂ±ldÄÂ± - AggregateRating sadece ana sayfada (app/page.tsx)
 
   const globalSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@graph": [
-      // Organization schema'sÄ± sadece ana sayfada (app/page.tsx) olmalÄ±
-      // AppClient'ta Organization schema'sÄ± olmamalÄ± - duplicate schema hatasÄ± Ã¶nlenir
+      // Organization schema'sÄÂ± sadece ana sayfada (app/page.tsx) olmalÄÂ±
+      // AppClient'ta Organization schema'sÄÂ± olmamalÄÂ± - duplicate schema hatasÄÂ± önlenir
       {
         "@type": "WebSite",
         "@id": "https://online-offerten.ch/#website",
         "url": "https://online-offerten.ch/",
         "name": "Online-Offerten.ch",
-        "description": "Vergleichen Sie kostenlose Offerten von geprÃ¼ften Umzugsfirmen und Reinigungsfirmen. Zeit und Geld sparen â€“ schnell, sicher und unverbindlich.",
-        // publisher referansÄ± kaldÄ±rÄ±ldÄ± - Organization schema'sÄ± sadece ana sayfada
+        "description": "Vergleichen Sie kostenlose Offerten von geprüften Umzugsfirmen und Reinigungsfirmen. Zeit und Geld sparen – schnell, sicher und unverbindlich.",
+        // publisher referansÄÂ± kaldÄÂ±rÄÂ±ldÄÂ± - Organization schema'sÄÂ± sadece ana sayfada
         "potentialAction": {
           "@type": "SearchAction",
           "target": {
@@ -185,7 +185,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
         }
       }
     ]
-  }), []) // Organization schema'sÄ± sadece ana sayfada - duplicate Ã¶nlenir
+  }), []) // Organization schema'sÄÂ± sadece ana sayfada - duplicate önlenir
 
   // Inject schema markup (client-side only)
   useEffect(() => {
@@ -227,3 +227,5 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     </HelmetProvider>
   )
 }
+
+

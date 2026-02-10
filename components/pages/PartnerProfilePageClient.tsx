@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
@@ -39,7 +39,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
 
     try {
       // Sadece bu partner'a ait onaylı partner yorumlarını al
-      // review_type = 'partner' olmalı - platform yorumları hariç
+      // review_type = 'partner' olmalı - platform yorumları hariÃ§
       const { count: totalReviewCount, error: countError } = await supabase
         .from('customer_reviews')
         .select('*', { count: 'exact', head: true })
@@ -51,7 +51,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
         console.error('Error fetching review count:', countError)
       }
 
-      // Tüm yorumları al (average rating hesaplamak için)
+      // Tüm yorumları al (average rating hesaplamak iÃ§in)
       // Sadece partner yorumları
       const { data: allReviewsData, error: allReviewsError } = await supabase
         .from('customer_reviews')
@@ -64,7 +64,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
         console.error('Error fetching all reviews:', allReviewsError)
       }
 
-      // Son 20 yorumu gösterilmek için al
+      // Son 20 yorumu gösterilmek iÃ§in al
       // Sadece partner yorumları
       const { data: reviewsData, error: reviewsError } = await supabase
         .from('customer_reviews')
@@ -80,7 +80,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
       } else {
         setReviews(reviewsData || [])
         
-        // Gerçek toplam yorum sayısını kullan
+        // GerÃ§ek toplam yorum sayısını kullan
         const realReviewCount = totalReviewCount || 0
         setReviewCount(realReviewCount)
         
@@ -207,4 +207,6 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
 }
 
 export default PartnerProfilePageClient
+
+
 

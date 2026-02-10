@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -370,20 +370,20 @@ const MalerfirmaBernPageClient = () => {
               </h2>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  💰 Preisbeispiele für {city}
+                  ğŸ’° Preisbeispiele für {city}
                 </h3>
                 <div className="space-y-4 text-gray-700">
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Innenanstrich</p>
-                    <p><strong>Beispiel:</strong> Eine 4-Zimmer-Wohnung in Bern mit normalem Zustand kostet für einen Innenanstrich durchschnittlich <strong>CHF 1.800–4.200</strong>. Eine 3.5-Zimmer-Wohnung (95 m²) kostet <strong>CHF 1.300–3.000</strong>.</p>
+                    <p><strong>Beispiel:</strong> Eine 4-Zimmer-Wohnung in Bern mit normalem Zustand kostet für einen Innenanstrich durchschnittlich <strong>CHF 1.800–4.200</strong>. Eine 3.5-Zimmer-Wohnung (95 mÂ²) kostet <strong>CHF 1.300–3.000</strong>.</p>
                   </div>
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Fassadenanstrich</p>
-                    <p><strong>Beispiel:</strong> Ein Einfamilienhaus (200 m² Fassadenfläche) in Bern kostet für einen Fassadenanstrich durchschnittlich <strong>CHF 5.500–15.000</strong>. Die Preise variieren je nach Gebäudetyp und Zugänglichkeit.</p>
+                    <p><strong>Beispiel:</strong> Ein Einfamilienhaus (200 mÂ² Fassadenfläche) in Bern kostet für einen Fassadenanstrich durchschnittlich <strong>CHF 5.500–15.000</strong>. Die Preise variieren je nach Gebäudetyp und Zugänglichkeit.</p>
                   </div>
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Aussenanstrich</p>
-                    <p><strong>Beispiel:</strong> Eine Wohnung (80 m² Aussenfläche) in Bern kostet für einen Aussenanstrich durchschnittlich <strong>CHF 2.200–6.000</strong>. Besonders bei historischen Altbauten in der Altstadt können zusätzliche Vorarbeiten anfallen.</p>
+                    <p><strong>Beispiel:</strong> Eine Wohnung (80 mÂ² Aussenfläche) in Bern kostet für einen Aussenanstrich durchschnittlich <strong>CHF 2.200–6.000</strong>. Besonders bei historischen Altbauten in der Altstadt können zusätzliche Vorarbeiten anfallen.</p>
                   </div>
                   <div className="mt-4 pt-4 border-t border-gray-300">
                     <p className="text-sm text-gray-600 italic">
@@ -582,3 +582,5 @@ const MalerfirmaBernPageClient = () => {
 }
 
 export default MalerfirmaBernPageClient
+
+

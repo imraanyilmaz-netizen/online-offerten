@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+﻿import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Loader2, SlidersHorizontal, CheckCircle, Archive, Send } from 'lucide-react';

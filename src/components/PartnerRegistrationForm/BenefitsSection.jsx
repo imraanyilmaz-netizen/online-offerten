@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, TrendingUp, ToggleRight, ShieldCheck, Eye, Settings2 } from 'lucide-react';

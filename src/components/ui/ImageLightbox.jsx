@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+﻿import React, { useEffect, useCallback } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 // framer-motion removed - CSS for better INP
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';

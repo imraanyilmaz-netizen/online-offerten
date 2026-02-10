@@ -792,7 +792,7 @@ export default async function UmzugsfirmaAargauPage() {
                     <table className="w-full">
                       <thead className="bg-gray-50">
                         <tr>
-                          <th className="px-6 py-4 text-left typography-h4 border-b border-gray-200">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                          <th className="px-6 py-4 text-left typography-h4 border-b border-gray-200">Umzugswagen und Zügelmänner (ca. 25 mÂ³)</th>
                           <th className="px-6 py-4 text-right typography-h4 border-b border-gray-200">Preis</th>
                         </tr>
                       </thead>
@@ -1194,3 +1194,5 @@ export default async function UmzugsfirmaAargauPage() {
     </>
   )
 }
+
+

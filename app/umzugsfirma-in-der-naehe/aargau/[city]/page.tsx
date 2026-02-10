@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import AargauCityPageClient from '@/components/pages/locations/cities/AargauCityPageClient'
 
 const cities = ['aarau', 'baden', 'zofingen', 'brugg', 'wettingen'] as const

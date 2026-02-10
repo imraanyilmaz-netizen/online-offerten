@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import React from 'react';
 // framer-motion removed - CSS for better INP
 import { CheckCircle, ShieldCheck, Users, ArrowRight } from 'lucide-react';

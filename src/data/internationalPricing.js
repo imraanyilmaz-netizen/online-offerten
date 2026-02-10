@@ -1,4 +1,4 @@
-export const pricingData = {
+﻿export const pricingData = {
   private: {
     base: 1500, // Base cost for a private move
     perRoom: 400, // Cost per room

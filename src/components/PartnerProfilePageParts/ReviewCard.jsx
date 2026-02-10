@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
     import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
     import StarRating from '@/components/PartnerProfilePageParts/StarRating';
     import { useTranslation } from 'react-i18next';

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect, useState } from 'react'
 // Framer Motion removed for better performance
@@ -717,3 +717,5 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 }
 
 export default UmzugsfirmaInDerNaehePageClient
+
+

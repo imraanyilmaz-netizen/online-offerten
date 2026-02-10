@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 export const cantonRegisterLinks = [
   { canton: "AG", name: "Aargau", url: "https://ag.chregister.ch/cr-portal/suche/suche.xhtml" },

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { Suspense } from 'react'
 import { usePathname } from 'next/navigation'
@@ -120,4 +120,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default Layout
+
+
 

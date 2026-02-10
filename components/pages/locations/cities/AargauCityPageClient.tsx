@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -317,4 +317,6 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
 }
 
 export default AargauCityPageClient
+
+
 

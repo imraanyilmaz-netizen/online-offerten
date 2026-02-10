@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useTranslation } from 'react-i18next';
 // framer-motion removed - CSS for better INP
 import { Paperclip, File as FileIcon, Download, Image as ImageIcon } from 'lucide-react';

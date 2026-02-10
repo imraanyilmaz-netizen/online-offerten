@@ -689,7 +689,7 @@ export default async function UmzugsfirmaZurichPage() {
                                 href={`/partner/${partnerSlug}`}
                                 className="text-green-600 hover:text-green-700 text-xs font-medium mt-1 inline-block"
                               >
-                                Mehr erfahren →
+                                Mehr erfahren â†’
                               </Link>
                             )}
                           </div>
@@ -836,7 +836,7 @@ export default async function UmzugsfirmaZurichPage() {
                       <table className="w-full table-fixed">
                         <thead className="bg-gray-50">
                           <tr>
-                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 mÂ³)</th>
                             <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200 w-1/3">Preis</th>
                           </tr>
                         </thead>
@@ -1119,4 +1119,6 @@ export default async function UmzugsfirmaZurichPage() {
     </>
   )
 }
+
+
 

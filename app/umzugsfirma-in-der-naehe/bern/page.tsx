@@ -334,3 +334,5 @@ export default async function UmzugsfirmaBernPage() {
     </>
   )
 }
+
+

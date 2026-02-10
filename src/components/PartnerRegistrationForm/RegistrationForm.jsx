@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 // framer-motion removed - CSS for better INP
 import { supabase } from '@/lib/supabaseClient';
 import { supabase as customSupabase } from '@/lib/customSupabaseClient';

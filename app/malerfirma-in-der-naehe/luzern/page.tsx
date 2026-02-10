@@ -13,7 +13,7 @@ const luzernFAQs = [
   },
   {
     question: "Was kostet ein Innenanstrich in Luzern?",
-    answer: "Die Kosten variieren je nach Wohnungsgrösse, Anzahl der Räume, Stockwerk und Zugänglichkeit. Ein Innenanstrich für eine 3.5-Zimmer-Wohnung (95 m²) in Luzern kostet typischerweise zwischen 1.400 und 3.300 CHF. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden."
+    answer: "Die Kosten variieren je nach Wohnungsgrösse, Anzahl der Räume, Stockwerk und Zugänglichkeit. Ein Innenanstrich für eine 3.5-Zimmer-Wohnung (95 mÂ²) in Luzern kostet typischerweise zwischen 1.400 und 3.300 CHF. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden."
   }
 ]
 
@@ -168,4 +168,6 @@ export default function MalerfirmaLuzernPage() {
     </>
   )
 }
+
+
 

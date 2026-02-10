@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -370,20 +370,20 @@ const MalerfirmaLausannePageClient = () => {
               </h2>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  💰 Preisbeispiele für Lausanne
+                  ğŸ’° Preisbeispiele für Lausanne
                 </h3>
                 <div className="space-y-4 text-gray-700">
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Innenanstrich</p>
-                    <p><strong>Beispiel:</strong> Eine 3.5-Zimmer-Wohnung (95 m²) in Lausanne kostet für einen Innenanstrich durchschnittlich <strong>CHF 1.350–3.100</strong>. Eine 4-Zimmer-Wohnung (120 m²) kostet <strong>CHF 1.750–4.000</strong>.</p>
+                    <p><strong>Beispiel:</strong> Eine 3.5-Zimmer-Wohnung (95 mÂ²) in Lausanne kostet für einen Innenanstrich durchschnittlich <strong>CHF 1.350–3.100</strong>. Eine 4-Zimmer-Wohnung (120 mÂ²) kostet <strong>CHF 1.750–4.000</strong>.</p>
                   </div>
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Fassadenanstrich</p>
-                    <p><strong>Beispiel:</strong> Ein Einfamilienhaus (200 m² Fassadenfläche) in Lausanne kostet für einen Fassadenanstrich durchschnittlich <strong>CHF 5.800–15.500</strong>. Die Preise variieren je nach Gebäudetyp und Zugänglichkeit.</p>
+                    <p><strong>Beispiel:</strong> Ein Einfamilienhaus (200 mÂ² Fassadenfläche) in Lausanne kostet für einen Fassadenanstrich durchschnittlich <strong>CHF 5.800–15.500</strong>. Die Preise variieren je nach Gebäudetyp und Zugänglichkeit.</p>
                   </div>
                   <div className="border-l-4 border-purple-600 pl-4">
                     <p className="font-semibold text-gray-900 mb-1">Aussenanstrich</p>
-                    <p><strong>Beispiel:</strong> Eine Wohnung (80 m² Aussenfläche) in Lausanne kostet für einen Aussenanstrich durchschnittlich <strong>CHF 2.300–6.200</strong>. Besonders bei Gebäuden in Seelage können zusätzliche Vorarbeiten anfallen.</p>
+                    <p><strong>Beispiel:</strong> Eine Wohnung (80 mÂ² Aussenfläche) in Lausanne kostet für einen Aussenanstrich durchschnittlich <strong>CHF 2.300–6.200</strong>. Besonders bei Gebäuden in Seelage können zusätzliche Vorarbeiten anfallen.</p>
                   </div>
                   <div className="mt-4 pt-4 border-t border-gray-300">
                     <p className="text-sm text-gray-600 italic">
@@ -476,7 +476,7 @@ const MalerfirmaLausannePageClient = () => {
                     <h4 className="faq-question">Was kostet eine Malerfirma in Lausanne?</h4>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700">
-                    Die Kosten für einen Malerservice in Lausanne hängen von verschiedenen Faktoren ab: Art der Malerarbeiten (Innenanstrich, Aussenanstrich, Fassadenanstrich), Grösse der zu streichenden Fläche, Anzahl der Stockwerke, benötigte Vorarbeiten und verwendete Materialien. Ein durchschnittlicher Innenanstrich in Lausanne kostet zwischen 15 und 35 CHF pro Quadratmeter. Eine 3.5-Zimmer-Wohnung (95 m²) kostet für einen Innenanstrich durchschnittlich CHF 1.350–3.100. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Malerbetrieben in Lausanne.
+                    Die Kosten für einen Malerservice in Lausanne hängen von verschiedenen Faktoren ab: Art der Malerarbeiten (Innenanstrich, Aussenanstrich, Fassadenanstrich), Grösse der zu streichenden Fläche, Anzahl der Stockwerke, benötigte Vorarbeiten und verwendete Materialien. Ein durchschnittlicher Innenanstrich in Lausanne kostet zwischen 15 und 35 CHF pro Quadratmeter. Eine 3.5-Zimmer-Wohnung (95 mÂ²) kostet für einen Innenanstrich durchschnittlich CHF 1.350–3.100. Der beste Weg, um faire Preise zu finden, ist der Vergleich mehrerer Offerten von verschiedenen lokalen Malerbetrieben in Lausanne.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
@@ -582,3 +582,5 @@ const MalerfirmaLausannePageClient = () => {
 }
 
 export default MalerfirmaLausannePageClient
+
+

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -268,7 +268,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
                   <table className="w-full">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                        <th className="px-6 py-4 text-left font-semibold text-gray-900 border-b border-gray-200">Umzugswagen und Zügelmänner (ca. 25 mÂ³)</th>
                         <th className="px-6 py-4 text-right font-semibold text-gray-900 border-b border-gray-200">Preis</th>
                       </tr>
                     </thead>
@@ -399,4 +399,6 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
 }
 
 export default ZurichCityPageClient
+
+
 

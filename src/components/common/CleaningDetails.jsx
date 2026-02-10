@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Check, X } from 'lucide-react';
 
 const DetailItem = ({ label, value }) => {

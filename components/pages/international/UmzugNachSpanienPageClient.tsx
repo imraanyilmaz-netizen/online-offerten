@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import Link from 'next/link';
@@ -41,10 +41,10 @@ const UmzugNachSpanienPageClient = () => {
   const metaKeywords = "umzug nach spanien, umzug schweiz spanien, umzugsfirma schweiz spanien, internationaler umzug spanien, umzug nach madrid, umzug nach barcelona, umzug nach valencia, umzugsfirma international, zügelfirma schweiz spanien, umzug schweiz nach spanien, umzugskosten schweiz spanien, umzugsfirma vergleichen spanien, günstiger umzug spanien, umzug nach spanien preise, umzug nach spanien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge spanien";
 
   const costTable = [
-    { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "2.800 – 4.500 CHF" },
-    { size: "2.5-Zimmer-Wohnung (ca. 25-35 m³)", cost: "4.200 – 7.000 CHF" },
-    { size: "4.5-Zimmer-Wohnung (ca. 40-55 m³)", cost: "6.500 – 11.000 CHF" },
-    { size: "Haus / > 6 Zimmer (> 60 m³)", cost: "ab 10.000 CHF" }
+    { size: "1-Zimmer-Wohnung (ca. 15-20 mÂ³)", cost: "2.800 – 4.500 CHF" },
+    { size: "2.5-Zimmer-Wohnung (ca. 25-35 mÂ³)", cost: "4.200 – 7.000 CHF" },
+    { size: "4.5-Zimmer-Wohnung (ca. 40-55 mÂ³)", cost: "6.500 – 11.000 CHF" },
+    { size: "Haus / > 6 Zimmer (> 60 mÂ³)", cost: "ab 10.000 CHF" }
   ];
 
   const costFactors = [
@@ -57,7 +57,7 @@ const UmzugNachSpanienPageClient = () => {
   ];
 
   const movingChecklist = [
-    "**3-4 Monate vorher:** Offerten von internationalen Umzugsfirmen einholen. Die NIE-Nummer (Número de Identificación de Extranjero) beim spanischen Konsulat beantragen.",
+    "**3-4 Monate vorher:** Offerten von internationalen Umzugsfirmen einholen. Die NIE-Nummer (NÃºmero de IdentificaciÃ³n de Extranjero) beim spanischen Konsulat beantragen.",
     "**2 Monate vorher:** Umzugsfirma definitiv buchen. Arbeits- oder Mietvertrag in Spanien sichern.",
     "**1 Monat vorher:** Verträge in der Schweiz kündigen (Internet, Krankenkasse, etc.). Post-Nachsendeauftrag einrichten. Umzugsgut ausmisten und eine detaillierte Inventarliste (auf Spanisch) erstellen.",
     "**2 Wochen vorher:** Mit dem Packen beginnen. Kartons klar mit Zielraum und Inhalt beschriften. Termin für Wohnungsübergabe und Endreinigung in der Schweiz fixieren.",
@@ -95,11 +95,11 @@ const UmzugNachSpanienPageClient = () => {
     },
     {
       question: "Was ist der Unterschied zwischen NIE und 'Empadronamiento'?",
-      answer: "Die **NIE** ('Número de Identificación de Extranjero') ist Ihre persönliche Identifikationsnummer als Ausländer in Spanien und für alle rechtlichen und finanziellen Angelegenheiten (z.B. Kontoeröffnung, Arbeitsvertrag) unerlässlich. Das **'Empadronamiento'** ist die Anmeldung Ihres Wohnsitzes bei der Gemeinde ('Ayuntamiento'), ähnlich der Anmeldung in der Schweiz. Sie benötigen es unter anderem für die Anmeldung im Gesundheitssystem oder für die Schule Ihrer Kinder."
+      answer: "Die **NIE** ('NÃºmero de IdentificaciÃ³n de Extranjero') ist Ihre persönliche Identifikationsnummer als Ausländer in Spanien und für alle rechtlichen und finanziellen Angelegenheiten (z.B. Kontoeröffnung, Arbeitsvertrag) unerlässlich. Das **'Empadronamiento'** ist die Anmeldung Ihres Wohnsitzes bei der Gemeinde ('Ayuntamiento'), ähnlich der Anmeldung in der Schweiz. Sie benötigen es unter anderem für die Anmeldung im Gesundheitssystem oder für die Schule Ihrer Kinder."
     },
     {
       question: "Kann ich mein Schweizer Auto in Spanien weiterfahren?",
-      answer: "Für eine begrenzte Zeit ja. Wenn Sie Ihren Hauptwohnsitz nach Spanien verlegen, müssen Sie Ihr Auto jedoch ummelden. Dies muss in der Regel innerhalb von 6 Monaten geschehen. Der Prozess ('matriculación') beinhaltet technische Prüfungen und die Zahlung von Steuern. Es ist oft einfacher, dies über eine lokale Agentur ('gestoría') abzuwickeln."
+      answer: "Für eine begrenzte Zeit ja. Wenn Sie Ihren Hauptwohnsitz nach Spanien verlegen, müssen Sie Ihr Auto jedoch ummelden. Dies muss in der Regel innerhalb von 6 Monaten geschehen. Der Prozess ('matriculaciÃ³n') beinhaltet technische Prüfungen und die Zahlung von Steuern. Es ist oft einfacher, dies über eine lokale Agentur ('gestorÃ­a') abzuwickeln."
     },
     {
       question: "Wie finde ich eine Wohnung in Spanien?",
@@ -120,7 +120,7 @@ const UmzugNachSpanienPageClient = () => {
           <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-28 md:py-40">
             <div
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-shadow-lg">¡Hola España! Ihr Umzug unter die Sonne</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-shadow-lg">Â¡Hola EspaÃ±a! Ihr Umzug unter die Sonne</h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">Träumen Sie von Tapas, Fiestas und Meeresrauschen? Wir organisieren Ihren Umzug von der Schweiz nach Spanien – einfach, sicher und stressfrei.</p>
             </div>
           </div>
@@ -171,7 +171,7 @@ const UmzugNachSpanienPageClient = () => {
 
               <Section>
                 <SectionTitle title="Kostenkalkulation: Was kostet ein Umzug nach Spanien?" />
-                <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Spanien hängen stark vom Volumen, der Distanz (z.B. Genf-Barcelona vs. Zürich-Málaga) und dem Servicelevel ab. Die folgende Tabelle bietet eine grobe Orientierung.</p>
+                <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Spanien hängen stark vom Volumen, der Distanz (z.B. Genf-Barcelona vs. Zürich-MÃ¡laga) und dem Servicelevel ab. Die folgende Tabelle bietet eine grobe Orientierung.</p>
                 
                 <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">Richtpreise für einen Umzug nach Spanien</h3>
@@ -256,3 +256,5 @@ const UmzugNachSpanienPageClient = () => {
 };
 
 export default UmzugNachSpanienPageClient;
+
+

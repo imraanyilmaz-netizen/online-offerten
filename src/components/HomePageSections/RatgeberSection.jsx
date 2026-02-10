@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 // Supabase lazy loaded to reduce initial bundle size
 import { Card, CardContent } from '@/components/ui/card';

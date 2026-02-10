@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useLayoutEffect, useMemo, lazy, Suspense } from 'react';
 // framer-motion removed - CSS for better INP

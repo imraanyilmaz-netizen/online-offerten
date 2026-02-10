@@ -3,7 +3,7 @@ import HausreinigungPageClient from '@/components/pages/services/HausreinigungPa
 
 // ISR: Sayfa 24 saatte bir otomatik yenilenecek (86400 saniye)
 // Bu sayfa statik olarak build edilir, ancak 24 saatte bir arka planda yenilenir
-// SEO için daha hızlı yükleme ve daha iyi performans sağlar
+// SEO iÃ§in daha hızlı yükleme ve daha iyi performans sağlar
 export const revalidate = 86400 // 24 saat
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default async function HausreinigungPage() {
   const metaDescription = "Professionelle Hausreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Hausreinigung garantiert.";
   const canonicalUrl = 'https://online-offerten.ch/reinigung/hausreinigung';
   
-  // Server-side schema - Google için
+  // Server-side schema - Google iÃ§in
   const serverSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -92,4 +92,6 @@ export default async function HausreinigungPage() {
     </>
   );
 }
+
+
 

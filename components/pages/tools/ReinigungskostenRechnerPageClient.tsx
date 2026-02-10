@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -331,7 +331,7 @@ const ReinigungskostenRechnerPageClient = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* 1.5 Zimmer */}
               <div className="border-l-4 border-blue-500 pl-6 bg-gray-50 p-4 rounded-r-lg">
-                <h4 className="text-xl font-bold text-gray-800 mb-4">1.5 Zimmer Wohnung (30-45 m²)</h4>
+                <h4 className="text-xl font-bold text-gray-800 mb-4">1.5 Zimmer Wohnung (30-45 mÂ²)</h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>Grundreinigung: 180-280 CHF</li>
                   <li>Küchensonderreinigung: +70-90 CHF</li>
@@ -342,7 +342,7 @@ const ReinigungskostenRechnerPageClient = () => {
 
               {/* 2.5 Zimmer */}
               <div className="border-l-4 border-green-500 pl-6 bg-gray-50 p-4 rounded-r-lg">
-                <h4 className="text-xl font-bold text-gray-800 mb-4">2.5 Zimmer Wohnung (45-65 m²)</h4>
+                <h4 className="text-xl font-bold text-gray-800 mb-4">2.5 Zimmer Wohnung (45-65 mÂ²)</h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>Grundreinigung: 250-380 CHF</li>
                   <li>Küchensonderreinigung: +80-110 CHF</li>
@@ -353,7 +353,7 @@ const ReinigungskostenRechnerPageClient = () => {
 
               {/* 3.5 Zimmer */}
               <div className="border-l-4 border-yellow-500 pl-6 bg-gray-50 p-4 rounded-r-lg">
-                <h4 className="text-xl font-bold text-gray-800 mb-4">3.5 Zimmer Wohnung (65-85 m²)</h4>
+                <h4 className="text-xl font-bold text-gray-800 mb-4">3.5 Zimmer Wohnung (65-85 mÂ²)</h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>Grundreinigung: 350-480 CHF</li>
                   <li>Küchensonderreinigung: +100-140 CHF</li>
@@ -365,7 +365,7 @@ const ReinigungskostenRechnerPageClient = () => {
 
               {/* 4.5 Zimmer */}
               <div className="border-l-4 border-purple-500 pl-6 bg-gray-50 p-4 rounded-r-lg">
-                <h4 className="text-xl font-bold text-gray-800 mb-4">4.5 Zimmer Wohnung (85-110 m²)</h4>
+                <h4 className="text-xl font-bold text-gray-800 mb-4">4.5 Zimmer Wohnung (85-110 mÂ²)</h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>Grundreinigung: 450-620 CHF</li>
                   <li>Küchensonderreinigung: +120-160 CHF</li>
@@ -376,7 +376,7 @@ const ReinigungskostenRechnerPageClient = () => {
 
               {/* 5.5 Zimmer */}
               <div className="border-l-4 border-orange-500 pl-6 bg-gray-50 p-4 rounded-r-lg">
-                <h4 className="text-xl font-bold text-gray-800 mb-4">5.5 Zimmer Wohnung (110-140 m²)</h4>
+                <h4 className="text-xl font-bold text-gray-800 mb-4">5.5 Zimmer Wohnung (110-140 mÂ²)</h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>Grundreinigung: 580-780 CHF</li>
                   <li>Küchensonderreinigung: +140-180 CHF</li>
@@ -387,7 +387,7 @@ const ReinigungskostenRechnerPageClient = () => {
 
               {/* 6.5 Zimmer */}
               <div className="border-l-4 border-red-500 pl-6 bg-gray-50 p-4 rounded-r-lg">
-                <h4 className="text-xl font-bold text-gray-800 mb-4">6.5 Zimmer Wohnung (140+ m²)</h4>
+                <h4 className="text-xl font-bold text-gray-800 mb-4">6.5 Zimmer Wohnung (140+ mÂ²)</h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>Grundreinigung: 720-950 CHF</li>
                   <li>Küchensonderreinigung: +160-220 CHF</li>
@@ -499,7 +499,7 @@ const ReinigungskostenRechnerPageClient = () => {
                   <li>Backofen-Intensivreinigung: 80-120 CHF</li>
                   <li>Kühlschrank-Desinfektion: 40-60 CHF</li>
                   <li>Kalkentfernung Badezimmer: 60-100 CHF</li>
-                  <li>Teppichreinigung pro m²: 8-15 CHF</li>
+                  <li>Teppichreinigung pro mÂ²: 8-15 CHF</li>
                 </ul>
               </div>
               <div>
@@ -882,3 +882,5 @@ const ReinigungskostenRechnerPageClient = () => {
 };
 
 export default ReinigungskostenRechnerPageClient;
+
+

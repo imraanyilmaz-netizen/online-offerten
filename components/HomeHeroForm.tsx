@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { useRouter } from 'next/navigation'
@@ -62,7 +62,7 @@ const HomeHeroForm = memo(() => {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   
-  // Stats - statik değer (gereksiz re-render'ları önlemek için)
+  // Stats - statik değer (gereksiz re-render'ları önlemek iÃ§in)
   const minutesAgo = 6
 
   // Memoize filtered options to prevent unnecessary recalculations
@@ -301,4 +301,6 @@ const HomeHeroForm = memo(() => {
 HomeHeroForm.displayName = 'HomeHeroForm'
 
 export default HomeHeroForm
+
+
 

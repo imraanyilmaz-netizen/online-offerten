@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 
 const ImageWithFallback = ({ src, fallbackSrc = "https://via.placeholder.com/800x400?text=Bild+nicht+verfügbar", alt, ...props }) => {
   const [imgSrc, setImgSrc] = useState(src);

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 
@@ -156,7 +156,7 @@ const ArticleSection = () => {
         <p>Durch unsere langjährige Erfahrung und die enge Zusammenarbeit mit Partnern in der Schweiz und weltweit stellen wir sicher, dass sämtliche Anforderungen der Zollbehörden erfüllt werden. Mit unserem umfassenden Service zur Zollabfertigung profitieren Sie von einem reibungslosen Ablauf: Wir übernehmen die Organisation, prüfen alle Unterlagen auf Vollständigkeit und sorgen dafür, dass Ihr Umzugsgut pünktlich und ohne unerwartete Komplikationen am neuen Wohnort eintrifft.</p>
       </section>
 
-      {/* Länder-spezifische Umzüge - Bu bölüm çok uzun, devam edeceğim */}
+      {/* Länder-spezifische Umzüge - Bu bölüm Ã§ok uzun, devam edeceğim */}
       <section className="mb-12">
         <h2 className="heading-2">Umzüge in verschiedene Länder</h2>
         
@@ -301,7 +301,7 @@ const ArticleSection = () => {
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <h4 className="font-semibold text-slate-800 mb-2">Route via Deutschland</h4>
-              <p className="text-sm">Der Weg nach Dänemark führt durch ganz Deutschland. Je nach Zielort kommen Brücken- oder Fährpassagen hinzu (z.B. Storebæltbrücke, Fehmarnbelt-Fähre).</p>
+              <p className="text-sm">Der Weg nach Dänemark führt durch ganz Deutschland. Je nach Zielort kommen Brücken- oder Fährpassagen hinzu (z.B. StorebÃ¦ltbrücke, Fehmarnbelt-Fähre).</p>
             </div>
             <div>
               <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
@@ -352,7 +352,7 @@ const ArticleSection = () => {
                 </tr>
                 <tr>
                   <td className="border border-slate-300 p-3">Umzugsvolumen</td>
-                  <td className="border border-slate-300 p-3">Angabe in Kubikmetern (m³), abhängig von Wohnungsgrösse</td>
+                  <td className="border border-slate-300 p-3">Angabe in Kubikmetern (mÂ³), abhängig von Wohnungsgrösse</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-300 p-3">Stockwerk & Tragewege</td>
@@ -638,4 +638,6 @@ const InternationaleUmzugPageClient = () => {
 }
 
 export default InternationaleUmzugPageClient
+
+
 

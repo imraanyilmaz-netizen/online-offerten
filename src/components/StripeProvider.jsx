@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+﻿import React, { lazy, Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
 
 // Lazy load Stripe only when needed

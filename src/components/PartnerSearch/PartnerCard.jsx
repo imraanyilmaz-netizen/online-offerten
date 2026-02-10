@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import React from 'react';
 import { Star, MapPin, CheckCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';

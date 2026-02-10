@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
 // Framer Motion removed for better performance
@@ -1084,4 +1084,6 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
 }
 
 export default UmzugsoffertenPageClient
+
+
 
