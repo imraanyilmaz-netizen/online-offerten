@@ -297,7 +297,7 @@ const UmzugsfirmaBernPageClient = ({ bernPartners = [] }: UmzugsfirmaBernPageCli
                         <table className="w-full table-fixed">
                           <thead className="bg-gray-50">
                             <tr>
-                              <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 mÂ³)</th>
+                              <th className="px-4 py-3 text-left heading-4 border-b border-gray-200 w-2/3">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
                               <th className="px-4 py-3 text-right heading-4 border-b border-gray-200 w-1/3">Preis</th>
                             </tr>
                           </thead>

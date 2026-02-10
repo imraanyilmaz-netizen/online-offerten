@@ -40,7 +40,7 @@ export default function TrustSignals({ variant = 'full', showLabels = true, clas
           console.error('Error fetching review count:', countError)
         }
         
-        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak iÃ§in)
+        // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
         const { data: allReviews, error: reviewsError } = await supabase
           .from('customer_reviews')
           .select('rating')
@@ -66,7 +66,7 @@ export default function TrustSignals({ variant = 'full', showLabels = true, clas
           customerCount: quoteCount || 10000, // Fallback to 10k if not available
           partnerCount: partnerCount || 500, // Fallback to 500 if not available
           reviewCount: totalReviewCount || 0, // Tüm onaylanmış yorumlar
-          averageRating: averageRating, // GerÃ§ek rating
+          averageRating: averageRating, // Gerçek rating
         })
       } catch (error) {
         console.error('Error fetching trust signals:', error)

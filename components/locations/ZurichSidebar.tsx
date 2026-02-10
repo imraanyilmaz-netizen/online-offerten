@@ -136,7 +136,7 @@ const ZurichSidebar = () => {
         })}
       </div>
       
-      {/* CTA Button - Sadece seÃ§ili servis varsa göster */}
+      {/* CTA Button - Sadece seçili servis varsa göster */}
       {selectedService && selectedServiceData && (
         <div className="px-4 pb-4 transition-all duration-300">
           <Button 

@@ -29,7 +29,7 @@ const UnterhaltsreinigungPageClient = () => {
   const faqItems = [
     {
       q: "Was kostet eine regelmässige Unterhaltsreinigung?",
-      a: "Die Kosten für Unterhaltsreinigung hängen von der Grösse der Wohnung, der Reinigungsfrequenz und dem Umfang der Leistungen ab. Preise liegen typischerweise zwischen 20 und 40 CHF pro Stunde oder 0.80-1.50 CHF pro mÃ‚Â². Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 2-3 Stunden pro Reinigung. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
+      a: "Die Kosten für Unterhaltsreinigung hängen von der Grösse der Wohnung, der Reinigungsfrequenz und dem Umfang der Leistungen ab. Preise liegen typischerweise zwischen 20 und 40 CHF pro Stunde oder 0.80-1.50 CHF pro m². Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 2-3 Stunden pro Reinigung. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
     },
     {
       q: "Wie oft sollte eine Unterhaltsreinigung durchgeführt werden?",
@@ -331,7 +331,7 @@ const UnterhaltsreinigungPageClient = () => {
                   {/* H2: Was kostet eine professionelle Unterhaltsreinigung? */}
                   <h2 className="heading-2">Was kostet eine professionelle Unterhaltsreinigung?</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Die Kosten für regelmässige Reinigung hängen von der Grösse der Wohnung, der Reinigungsfrequenz und dem Umfang der Leistungen ab. Preise liegen typischerweise zwischen 20 und 40 CHF pro Stunde oder 0.80-1.50 CHF pro mÃ‚Â². Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 2-3 Stunden pro Reinigung. Bei wöchentlicher Reinigung bedeutet dies monatliche Kosten von etwa 160-480 CHF, bei zweiwöchentlicher Reinigung etwa 80-240 CHF. Grössere Wohnungen oder zusätzliche Leistungen können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
+                    Die Kosten für regelmässige Reinigung hängen von der Grösse der Wohnung, der Reinigungsfrequenz und dem Umfang der Leistungen ab. Preise liegen typischerweise zwischen 20 und 40 CHF pro Stunde oder 0.80-1.50 CHF pro m². Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 2-3 Stunden pro Reinigung. Bei wöchentlicher Reinigung bedeutet dies monatliche Kosten von etwa 160-480 CHF, bei zweiwöchentlicher Reinigung etwa 80-240 CHF. Grössere Wohnungen oder zusätzliche Leistungen können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Unterhaltsreinigung sind */}

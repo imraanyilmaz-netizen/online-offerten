@@ -13,7 +13,7 @@ const stGallenFAQs = [
   },
   {
     question: "Was kostet ein Innenanstrich in St. Gallen?",
-    answer: "Die Kosten variieren je nach Wohnungsgrösse, Anzahl der Räume, Stockwerk und Zugänglichkeit. Ein Innenanstrich für eine 3.5-Zimmer-Wohnung (95 mÂ²) in St. Gallen kostet typischerweise zwischen 1.400 und 3.300 CHF. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden."
+    answer: "Die Kosten variieren je nach Wohnungsgrösse, Anzahl der Räume, Stockwerk und Zugänglichkeit. Ein Innenanstrich für eine 3.5-Zimmer-Wohnung (95 m²) in St. Gallen kostet typischerweise zwischen 1.400 und 3.300 CHF. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden."
   }
 ]
 

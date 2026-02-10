@@ -212,7 +212,7 @@ const MalerfirmaInDerNaehePageClient = () => {
     },
     {
       q: "Wie viel Geld muss man für Malerarbeiten einplanen?",
-      a: "Für Malerarbeiten sollten Sie je nach Art und Grösse folgende Budgets einplanen: Innenanstrich (3.5-Zimmer-Wohnung, 95 mÂ²): 1.400-3.300 CHF, Innenanstrich (4.5-Zimmer-Wohnung, 120 mÂ²): 1.800-4.200 CHF, Fassadenanstrich (Einfamilienhaus, 200 mÂ²): 6.000-16.000 CHF, Aussenanstrich (Wohnung, 80 mÂ²): 2.400-6.400 CHF. Zusätzlich sollten Sie 10-20% Reserve für unvorhergesehene Kosten einplanen. Durch den Vergleich mehrerer Offerten von regionalen Malerbetrieben können Sie bis zu 40% sparen."
+      a: "Für Malerarbeiten sollten Sie je nach Art und Grösse folgende Budgets einplanen: Innenanstrich (3.5-Zimmer-Wohnung, 95 m²): 1.400-3.300 CHF, Innenanstrich (4.5-Zimmer-Wohnung, 120 m²): 1.800-4.200 CHF, Fassadenanstrich (Einfamilienhaus, 200 m²): 6.000-16.000 CHF, Aussenanstrich (Wohnung, 80 m²): 2.400-6.400 CHF. Zusätzlich sollten Sie 10-20% Reserve für unvorhergesehene Kosten einplanen. Durch den Vergleich mehrerer Offerten von regionalen Malerbetrieben können Sie bis zu 40% sparen."
     },
     {
       q: "Wie teuer ist eine Malerfirma in der Schweiz?",
@@ -220,7 +220,7 @@ const MalerfirmaInDerNaehePageClient = () => {
     },
     {
       q: "Wie viel zahlt man für Malerarbeiten?",
-      a: "Die Kosten für Malerarbeiten hängen von mehreren Faktoren ab. Ein Innenanstrich (3.5-Zimmer-Wohnung, 95 mÂ²) kostet durchschnittlich 1.400-3.300 CHF, ein Fassadenanstrich (Einfamilienhaus, 200 mÂ²) 6.000-16.000 CHF. Zusätzliche Kosten können für Vorarbeiten (Spachteln, Grundieren), spezielle Farben oder schwierige Zugänglichkeiten anfallen. Der Vergleich mehrerer Offerten von Maleranbietern vor Ort hilft Ihnen, die besten Preise zu finden."
+      a: "Die Kosten für Malerarbeiten hängen von mehreren Faktoren ab. Ein Innenanstrich (3.5-Zimmer-Wohnung, 95 m²) kostet durchschnittlich 1.400-3.300 CHF, ein Fassadenanstrich (Einfamilienhaus, 200 m²) 6.000-16.000 CHF. Zusätzliche Kosten können für Vorarbeiten (Spachteln, Grundieren), spezielle Farben oder schwierige Zugänglichkeiten anfallen. Der Vergleich mehrerer Offerten von Maleranbietern vor Ort hilft Ihnen, die besten Preise zu finden."
     },
     {
       q: "Warum sollte ich eine Malerfirma in der Nähe wählen?",

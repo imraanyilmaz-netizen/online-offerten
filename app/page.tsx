@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 
 // ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
 // Bu sayfa statik olarak build edilir, ancak 1 saatte bir arka planda yenilenir
-// SEO iÃ§in daha hızlı yükleme ve daha iyi performans sağlar
+// SEO için daha hızlı yükleme ve daha iyi performans sağlar
 export const revalidate = 3600 // 1 Stunde – bessere Performance (TTFB), Slug-Änderungen sind stündlich sichtbar
 
 async function getHomePageData() {
@@ -325,7 +325,7 @@ export default async function HomePage() {
             
             <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
               <div className="max-w-2xl text-left">
-                {/* Search Form - H1 başlık formun iÃ§inde - Mobilde arka plan resmi ile */}
+                {/* Search Form - H1 başlık formun içinde - Mobilde arka plan resmi ile */}
                 <HomeHeroForm />
                 
                 {/* Service Quick Links */}
@@ -419,7 +419,7 @@ export default async function HomePage() {
                         ))}
                       </div>
                       <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
-                        Ã˜ {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount}{' '}
+                        Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount}{' '}
                         <Link 
                           href="/kunden-bewertungen"
                           className="underline"

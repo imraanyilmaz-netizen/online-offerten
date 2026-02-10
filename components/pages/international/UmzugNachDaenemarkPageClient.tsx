@@ -40,9 +40,9 @@ const UmzugNachDaenemarkPageClient = () => {
   const metaKeywords = "umzug nach dänemark, umzug schweiz dänemark, umzugsfirma schweiz dänemark, internationaler umzug dänemark, umzug nach kopenhagen, umzug nach aarhus, umzug nach odense, umzugsfirma international, zügelfirma schweiz dänemark, umzug schweiz nach dänemark, umzugskosten schweiz dänemark, umzugsfirma vergleichen dänemark, günstiger umzug dänemark, umzug nach dänemark preise, umzug nach dänemark kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge dänemark";
 
   const costTable = [
-    { size: "1-2 Zimmer (ca. 20-30 mÂ³)", cost: "3.000 – 5.000 CHF" },
-    { size: "3-4 Zimmer (ca. 40-60 mÂ³)", cost: "5.000 – 7.500 CHF" },
-    { size: "5+ Zimmer / Haus (ca. 70+ mÂ³)", cost: "7.000 – 11.000+ CHF" }
+    { size: "1-2 Zimmer (ca. 20-30 m³)", cost: "3.000 – 5.000 CHF" },
+    { size: "3-4 Zimmer (ca. 40-60 m³)", cost: "5.000 – 7.500 CHF" },
+    { size: "5+ Zimmer / Haus (ca. 70+ m³)", cost: "7.000 – 11.000+ CHF" }
   ];
 
   const costFactors = [

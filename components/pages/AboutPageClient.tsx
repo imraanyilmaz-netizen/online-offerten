@@ -32,7 +32,7 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
 
   const serviceName = getGermanServiceName(service_type);
   
-  // Dinamik yıldız hesaplama - Platform yorumları iÃ§in sadece rating değeri kullanılır
+  // Dinamik yıldız hesaplama - Platform yorumları için sadece rating değeri kullanılır
   const displayRating = rating || 0
   const fullStars = Math.floor(displayRating)
   const decimalPart = displayRating % 1

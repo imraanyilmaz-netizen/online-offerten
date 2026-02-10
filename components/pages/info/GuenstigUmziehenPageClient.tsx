@@ -523,7 +523,7 @@ const GuenstigUmziehenPageClient = () => {
                     <strong>Was ist bei Umzugsofferten zu beachten?</strong> Prüfen Sie Festpreis vs. Stundensatz, inkludierte Versicherung, Zusatzkosten für Montage und ob alle gewünschten Leistungen enthalten sind.
                   </p>
                   <p className="text-body">
-                    <strong>Welche Versicherung braucht man beim Umzug?</strong> Seriöse Schweizer Umzugsfirmen bieten Haftpflichtversicherung bis 500 CHF/mÂ³ – bei Wertgegenständen Zusatzschutz vereinbaren.
+                    <strong>Welche Versicherung braucht man beim Umzug?</strong> Seriöse Schweizer Umzugsfirmen bieten Haftpflichtversicherung bis 500 CHF/m³ – bei Wertgegenständen Zusatzschutz vereinbaren.
                   </p>
                   <p className="text-body">
                     <strong>Wie kann man kurzfristig noch Geld sparen?</strong> Selbst packen, Umzugskartons kostenlos bei Migros oder Coop besorgen und flexible Umzugstermine unter der Woche wählen.

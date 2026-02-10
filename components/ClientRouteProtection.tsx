@@ -88,6 +88,6 @@ export default function ClientRouteProtection() {
     }
   }, [user, loading, pathname, router])
 
-  return null // Bu component sadece redirect iÃ§in, UI render etmiyor
+  return null // Bu component sadece redirect için, UI render etmiyor
 }
 

@@ -13,7 +13,7 @@ const bernFAQs = [
   },
   {
     question: "Was kostet ein Innenanstrich in Bern?",
-    answer: "Die Kosten variieren je nach Wohnungsgrösse, Anzahl der Räume, Stockwerk und Zugänglichkeit. Ein Innenanstrich für eine 3.5-Zimmer-Wohnung (95 mÂ²) in Bern kostet typischerweise zwischen 1.400 und 3.300 CHF. Eine 4.5-Zimmer-Wohnung (120 mÂ²) kostet zwischen 1.800 und 4.200 CHF. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden."
+    answer: "Die Kosten variieren je nach Wohnungsgrösse, Anzahl der Räume, Stockwerk und Zugänglichkeit. Ein Innenanstrich für eine 3.5-Zimmer-Wohnung (95 m²) in Bern kostet typischerweise zwischen 1.400 und 3.300 CHF. Eine 4.5-Zimmer-Wohnung (120 m²) kostet zwischen 1.800 und 4.200 CHF. Vergleichen Sie mehrere Offerten, um das beste Angebot zu finden."
   },
   {
     question: "Gibt es Besonderheiten bei Malerarbeiten in der Berner Altstadt?",

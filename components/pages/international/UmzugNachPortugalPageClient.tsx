@@ -41,10 +41,10 @@ const UmzugNachPortugalPageClient = () => {
   const metaKeywords = "umzug nach portugal, umzug schweiz portugal, umzugsfirma schweiz portugal, internationaler umzug portugal, umzug nach lissabon, umzug nach porto, umzug nach faro, umzugsfirma international, zügelfirma schweiz portugal, umzug schweiz nach portugal, umzugskosten schweiz portugal, umzugsfirma vergleichen portugal, günstiger umzug portugal, umzug nach portugal preise, umzug nach portugal kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge portugal";
 
   const costTable = [
-    { size: "1-Zimmer-Wohnung (ca. 15-20 mÂ³)", cost: "3.500 – 5.500 CHF" },
-    { size: "2.5-Zimmer-Wohnung (ca. 25-35 mÂ³)", cost: "5.000 – 8.000 CHF" },
-    { size: "4.5-Zimmer-Wohnung (ca. 40-55 mÂ³)", cost: "7.500 – 12.000 CHF" },
-    { size: "Haus / > 6 Zimmer (> 60 mÂ³)", cost: "ab 11.000 CHF" }
+    { size: "1-Zimmer-Wohnung (ca. 15-20 m³)", cost: "3.500 – 5.500 CHF" },
+    { size: "2.5-Zimmer-Wohnung (ca. 25-35 m³)", cost: "5.000 – 8.000 CHF" },
+    { size: "4.5-Zimmer-Wohnung (ca. 40-55 m³)", cost: "7.500 – 12.000 CHF" },
+    { size: "Haus / > 6 Zimmer (> 60 m³)", cost: "ab 11.000 CHF" }
   ];
 
   const costFactors = [
@@ -57,7 +57,7 @@ const UmzugNachPortugalPageClient = () => {
   ];
 
   const movingChecklist = [
-    "**3-4 Monate vorher:** Umzugsofferten einholen und vergleichen. NIF-Nummer (NÃºmero de IdentificaÃ§Ã£o Fiscal) beantragen – dies ist online oder über Dienstleister möglich.",
+    "**3-4 Monate vorher:** Umzugsofferten einholen und vergleichen. NIF-Nummer (Número de Identificação Fiscal) beantragen – dies ist online oder über Dienstleister möglich.",
     "**2 Monate vorher:** Umzugsfirma verbindlich buchen. Klären, ob auch die Reinigung der Schweizer Wohnung angeboten wird.",
     "**1 Monat vorher:** Verträge in der Schweiz kündigen (Krankenkasse, Handy, etc.). Abmeldung bei der Wohngemeinde vorbereiten. Post-Nachsendeauftrag einrichten.",
     "**2 Wochen vorher:** Eine detaillierte Inventarliste auf Portugiesisch oder Englisch erstellen. Systematisch mit dem Packen beginnen und Kartons beschriften.",
@@ -95,15 +95,15 @@ const UmzugNachPortugalPageClient = () => {
     },
     {
       question: "Benötige ich ein Visum für den Umzug nach Portugal?",
-      answer: "Als Schweizer Bürger benötigen Sie für die Einreise und einen Aufenthalt von bis zu 90 Tagen kein Visum. Wenn Sie länger als drei Monate bleiben, müssen Sie sich bei der zuständigen Ausländerbehörde (ServiÃ§o de Estrangeiros e Fronteiras, SEF) registrieren und eine Aufenthaltsgenehmigung beantragen."
+      answer: "Als Schweizer Bürger benötigen Sie für die Einreise und einen Aufenthalt von bis zu 90 Tagen kein Visum. Wenn Sie länger als drei Monate bleiben, müssen Sie sich bei der zuständigen Ausländerbehörde (Serviço de Estrangeiros e Fronteiras, SEF) registrieren und eine Aufenthaltsgenehmigung beantragen."
     },
     {
       question: "Kann ich mein Auto aus der Schweiz nach Portugal mitnehmen?",
-      answer: "Ja, aber der Prozess der Ummeldung (MatriculaÃ§Ã£o) ist komplex und kann teuer sein. Sie müssen das Fahrzeug innerhalb von 60 Tagen nach Erhalt Ihrer Aufenthaltsgenehmigung ummelden und dabei Einfuhrsteuern (ISV) entrichten. Es wird dringend empfohlen, sich vorab von einer spezialisierten Agentur ('agência de documentaÃ§Ã£o') beraten zu lassen."
+      answer: "Ja, aber der Prozess der Ummeldung (Matriculação) ist komplex und kann teuer sein. Sie müssen das Fahrzeug innerhalb von 60 Tagen nach Erhalt Ihrer Aufenthaltsgenehmigung ummelden und dabei Einfuhrsteuern (ISV) entrichten. Es wird dringend empfohlen, sich vorab von einer spezialisierten Agentur ('agência de documentação') beraten zu lassen."
     },
     {
       question: "Wie funktioniert das Gesundheitssystem in Portugal?",
-      answer: "Portugal hat ein öffentliches Gesundheitssystem (ServiÃ§o Nacional de SaÃºde, SNS), das durch Steuern finanziert wird. Nach Ihrer Anmeldung als Resident erhalten Sie eine SNS-Nutzernummer ('nÃºmero de utente'), mit der Sie Zugang zu öffentlichen Gesundheitsdiensten haben. Viele Expats schliessen zusätzlich eine private Krankenversicherung ab, um Wartezeiten zu verkürzen und Zugang zu privaten Kliniken zu haben."
+      answer: "Portugal hat ein öffentliches Gesundheitssystem (Serviço Nacional de Saúde, SNS), das durch Steuern finanziert wird. Nach Ihrer Anmeldung als Resident erhalten Sie eine SNS-Nutzernummer ('número de utente'), mit der Sie Zugang zu öffentlichen Gesundheitsdiensten haben. Viele Expats schliessen zusätzlich eine private Krankenversicherung ab, um Wartezeiten zu verkürzen und Zugang zu privaten Kliniken zu haben."
     }
   ];
 
@@ -120,7 +120,7 @@ const UmzugNachPortugalPageClient = () => {
           <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-6 text-center py-28 md:py-40">
             <div
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-shadow-lg">OlÃ¡ Portugal! Ihr Umzug an die Atlantikküste</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-shadow-lg">Olá Portugal! Ihr Umzug an die Atlantikküste</h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">Von den Alpen an die Strände der Algarve. Wir machen Ihren Umzug nach Portugal einfach, sicher und unvergesslich.</p>
             </div>
           </div>
@@ -161,7 +161,7 @@ const UmzugNachPortugalPageClient = () => {
 
               <Section>
                 <SectionTitle icon={FileText} title="Zoll und die wichtige NIF-Nummer" />
-                 <p className="text-gray-700 leading-relaxed mb-6">Als Nicht-EU-Land muss Ihr Umzugsgut aus der Schweiz beim portugiesischen Zoll (Alfândega) deklariert werden. Bei einer Wohnsitzverlegung können Sie Ihr Hab und Gut als Übersiedlungsgut ('bens de mudanÃ§a') zollfrei einführen.</p>
+                 <p className="text-gray-700 leading-relaxed mb-6">Als Nicht-EU-Land muss Ihr Umzugsgut aus der Schweiz beim portugiesischen Zoll (Alfândega) deklariert werden. Bei einer Wohnsitzverlegung können Sie Ihr Hab und Gut als Übersiedlungsgut ('bens de mudança') zollfrei einführen.</p>
                  <p className="text-gray-700 leading-relaxed mb-6">Hierfür benötigen Sie die Abmeldebestätigung aus der Schweiz, Ihre NIF-Nummer, einen Nachweis über Ihren neuen Wohnsitz in Portugal (z.B. Mietvertrag) und eine detaillierte Inventarliste. Ihre Umzugsfirma wird Sie bei der Zusammenstellung dieser Dokumente unterstützen.</p>
                 <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
                     <h4 className="font-bold text-yellow-900">Profi-Tipp: Die NIF-Nummer ist entscheidend</h4>

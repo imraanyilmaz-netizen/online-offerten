@@ -135,7 +135,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
     setSortBy('rating_desc')
   }, [])
 
-  // Form iÃ§in initial data
+  // Form için initial data
   const getInitialFormData = () => {
     const initialData: any = {}
     if (selectedService && selectedService !== 'all') {

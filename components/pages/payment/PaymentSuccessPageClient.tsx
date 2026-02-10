@@ -35,7 +35,7 @@ const PaymentSuccessPageClient = () => {
       try {
         console.log("Verifying payment for session:", checkoutSessionId, `(Retry ${currentRetry})`);
         
-        // âœ… SADECE sessionId gönder - partnerId KALDIRILDI
+        // ✅ SADECE sessionId gönder - partnerId KALDIRILDI
         const { data, error } = await supabase.functions.invoke('verify-stripe-session', {
           body: { 
             sessionId: checkoutSessionId
@@ -60,7 +60,7 @@ const PaymentSuccessPageClient = () => {
             description: 'Ihr Guthaben wurde erfolgreich aufgeladen.',
           });
           
-          // âœ… Session'ı yenile (TWINT iÃ§in önemli)
+          // ✅ Session'ı yenile (TWINT için önemli)
           try {
             await supabase.auth.refreshSession();
           } catch (refreshError) {
@@ -95,7 +95,7 @@ const PaymentSuccessPageClient = () => {
       }
     };
 
-    // âœ… DOÄRUDAN Ã‡AÄIR - session kontrolü YOK
+    // ✅ DOĞRUDAN ÇAĞIR - session kontrolü YOK
     verifyPayment(0);
   }, [searchParams, router, toast]); // Removed t dependency
 

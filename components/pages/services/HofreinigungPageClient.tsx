@@ -29,7 +29,7 @@ const HofreinigungPageClient = () => {
   const faqItems = [
     {
       q: "Was kostet eine Hofreinigung?",
-      a: "Die Kosten für Hofreinigung hängen von der Grösse der Fläche, dem Verschmutzungsgrad, der Art der Oberfläche und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 5 und 15 CHF pro mÃ‚Â². Ein durchschnittlicher Hof mit 50 mÃ‚Â² kostet etwa 250-750 CHF. Grössere Flächen oder stark verschmutzte Bereiche können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
+      a: "Die Kosten für Hofreinigung hängen von der Grösse der Fläche, dem Verschmutzungsgrad, der Art der Oberfläche und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 5 und 15 CHF pro m². Ein durchschnittlicher Hof mit 50 m² kostet etwa 250-750 CHF. Grössere Flächen oder stark verschmutzte Bereiche können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
     },
     {
       q: "Welche Bereiche werden bei einer Hofreinigung gereinigt?",
@@ -356,7 +356,7 @@ const HofreinigungPageClient = () => {
                   {/* H2: Was kostet eine professionelle Hofreinigung? */}
                   <h2 className="heading-2">Was kostet eine professionelle Hofreinigung?</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Die Kosten für Hofreinigung hängen von der Grösse der Fläche, dem Verschmutzungsgrad, der Art der Oberfläche und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 5 und 15 CHF pro mÃ‚Â². Ein durchschnittlicher Hof mit 50 mÃ‚Â² kostet etwa 250-750 CHF. Grössere Flächen, stark verschmutzte Bereiche oder zusätzliche Leistungen wie Moos- und Algenentfernung können höhere Kosten verursachen. Die genauen Kosten hängen von der Grösse der Fläche, dem Zustand, dem Umfang der Reinigung und zusätzlichen Leistungen ab. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
+                    Die Kosten für Hofreinigung hängen von der Grösse der Fläche, dem Verschmutzungsgrad, der Art der Oberfläche und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 5 und 15 CHF pro m². Ein durchschnittlicher Hof mit 50 m² kostet etwa 250-750 CHF. Grössere Flächen, stark verschmutzte Bereiche oder zusätzliche Leistungen wie Moos- und Algenentfernung können höhere Kosten verursachen. Die genauen Kosten hängen von der Grösse der Fläche, dem Zustand, dem Umfang der Reinigung und zusätzlichen Leistungen ab. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Wie oft sollte eine Hofreinigung durchgeführt werden? */}

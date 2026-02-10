@@ -6,7 +6,7 @@ import { createStaticClient } from '@/lib/supabase/server'
 
 // ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
 // Bu sayfa statik olarak build edilir, ancak 1 saatte bir arka planda yenilenir
-// SEO iÃ§in daha hızlı yükleme ve daha iyi performans sağlar
+// SEO için daha hızlı yükleme ve daha iyi performans sağlar
 export const revalidate = 3600 // 1 saat
 
 async function getReviewStats() {
@@ -23,7 +23,7 @@ async function getReviewStats() {
       console.error('Error fetching review count:', countError);
     }
     
-    // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak iÃ§in)
+    // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
     const { data: allReviews, error: reviewsError } = await supabase
       .from('customer_reviews')
       .select('rating')
@@ -240,15 +240,15 @@ export const metadata: Metadata = {
 }
 
 export default async function UmzugsoffertenPage() {
-  // âœ… Server-side'da güncel verileri Ã§ek
+  // ✅ Server-side'da güncel verileri çek
   const reviewStats = await getReviewStats();
   
-  // âœ… Server-side schema - Google iÃ§in (her sayfa yüklendiğinde güncel)
+  // ✅ Server-side schema - Google için (her sayfa yüklendiğinde güncel)
   const schemaData = getSchemaData(reviewStats);
   
   return (
     <>
-      {/* âœ… Server-side schema - Google bot ilk taramada görür */}
+      {/* ✅ Server-side schema - Google bot ilk taramada görür */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}

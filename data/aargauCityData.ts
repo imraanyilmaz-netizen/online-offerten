@@ -6,9 +6,9 @@ export interface AargauCityData {
   housingTypes: string;
   logisticsChallenges: string;
   intro: string;
-  portalIntro: string; // Portal-güÃ§lü giriş
+  portalIntro: string; // Portal-güçlü giriş
   services: string;
-  serviceDetails: Array<{ name: string; description: string }>; // Her servis iÃ§in detaylı aÃ§ıklama
+  serviceDetails: Array<{ name: string; description: string }>; // Her servis için detaylı açıklama
   localFeatures: string;
   advantages: string;
   advantagesExtended: string; // Genişletilmiş avantajlar

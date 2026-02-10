@@ -29,7 +29,7 @@ const BodenreinigungPageClient = () => {
   const faqItems = [
     {
       q: "Was kostet eine professionelle Bodenreinigung?",
-      a: "Die Kosten für Bodenreinigung hängen von der Art des Belags, der Grösse der Fläche und der Art der Reinigung ab. Teppichreinigung kostet etwa 8-15 CHF pro mÃ‚Â², Parkettreinigung etwa 10-20 CHF pro mÃ‚Â². Fliesenreinigung kostet etwa 5-12 CHF pro mÃ‚Â², abhängig vom Zustand und der Fugenreinigung. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
+      a: "Die Kosten für Bodenreinigung hängen von der Art des Belags, der Grösse der Fläche und der Art der Reinigung ab. Teppichreinigung kostet etwa 8-15 CHF pro m², Parkettreinigung etwa 10-20 CHF pro m². Fliesenreinigung kostet etwa 5-12 CHF pro m², abhängig vom Zustand und der Fugenreinigung. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
     },
     {
       q: "Wie oft sollte ich meine Böden professionell reinigen lassen?",
@@ -41,7 +41,7 @@ const BodenreinigungPageClient = () => {
     },
     {
       q: "Wie lange dauert eine Bodenreinigung?",
-      a: "Die Dauer hängt von der Grösse der Fläche und dem Verschmutzungsgrad ab. Eine durchschnittliche Wohnung (80-100 mÃ‚Â²) benötigt etwa 2-4 Stunden. Grössere Flächen oder stark verschmutzte Böden können länger dauern. Professionelle Reinigungsfirmen können Ihnen nach der Besichtigung eine genaue Zeitangabe geben."
+      a: "Die Dauer hängt von der Grösse der Fläche und dem Verschmutzungsgrad ab. Eine durchschnittliche Wohnung (80-100 m²) benötigt etwa 2-4 Stunden. Grössere Flächen oder stark verschmutzte Böden können länger dauern. Professionelle Reinigungsfirmen können Ihnen nach der Besichtigung eine genaue Zeitangabe geben."
     },
     {
       q: "Kann ich nach der Reinigung sofort wieder betreten?",
@@ -366,7 +366,7 @@ const BodenreinigungPageClient = () => {
                   {/* H2: Was kostet eine professionelle Bodenreinigung? */}
                   <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was kostet eine professionelle Bodenreinigung?</h2>
                   <p className="text-body mb-6 break-words w-full">
-                    Die Kosten für Bodenreinigung hängen von der Art des Belags, der Grösse der Fläche und der Art der Reinigung ab. Teppichreinigung kostet etwa 8-15 CHF pro mÃ‚Â², Parkettreinigung etwa 10-20 CHF pro mÃ‚Â². Fliesenreinigung kostet etwa 5-12 CHF pro mÃ‚Â², abhängig vom Zustand und der Fugenreinigung. Laminat- und Vinylreinigung kostet etwa 6-12 CHF pro mÃ‚Â². Die genauen Kosten hängen vom Belagstyp, dem Zustand, dem Umfang der Reinigung und zusätzlichen Leistungen wie Fugenreinigung oder Parkettpflege ab. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
+                    Die Kosten für Bodenreinigung hängen von der Art des Belags, der Grösse der Fläche und der Art der Reinigung ab. Teppichreinigung kostet etwa 8-15 CHF pro m², Parkettreinigung etwa 10-20 CHF pro m². Fliesenreinigung kostet etwa 5-12 CHF pro m², abhängig vom Zustand und der Fugenreinigung. Laminat- und Vinylreinigung kostet etwa 6-12 CHF pro m². Die genauen Kosten hängen vom Belagstyp, dem Zustand, dem Umfang der Reinigung und zusätzlichen Leistungen wie Fugenreinigung oder Parkettpflege ab. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Wie oft sollte eine Bodenreinigung durchgeführt werden? */}

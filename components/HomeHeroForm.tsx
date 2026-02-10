@@ -62,7 +62,7 @@ const HomeHeroForm = memo(() => {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   
-  // Stats - statik değer (gereksiz re-render'ları önlemek iÃ§in)
+  // Stats - statik değer (gereksiz re-render'ları önlemek için)
   const minutesAgo = 6
 
   // Memoize filtered options to prevent unnecessary recalculations

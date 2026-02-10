@@ -62,15 +62,15 @@ const UmzugNachDeutschlandPageClient = () => {
 
   const whyCompareItems = [
     {
-      title: "âœ… Geprüfte Umzugsunternehmen mit Erfahrung",
+      title: "✅ Geprüfte Umzugsunternehmen mit Erfahrung",
       text: "Alle Umzugsfirmen sind auf internationale Umzüge von der Schweiz nach Deutschland spezialisiert und kennen die Einfuhrbestimmungen und Zollvorschriften."
     },
     {
-      title: "âœ… Bis zu 5 kostenlose Offerten in 24–48 Stunden",
+      title: "✅ Bis zu 5 kostenlose Offerten in 24–48 Stunden",
       text: "Schnelle Bearbeitung Ihrer Anfrage durch erfahrene Dienstleister für Ihren geplanten Umzug ins Ausland."
     },
     {
-      title: "âœ… Bis zu 40% Kosten sparen",
+      title: "✅ Bis zu 40% Kosten sparen",
       text: "Direkter Vergleich von Preis und Service verschiedener Anbieter sichert Ihnen das beste Angebot für Ihre Übersiedlung."
     }
   ];

@@ -47,7 +47,7 @@ const RaeumungEntsorgungPageClient = () => {
   ]
 
   const costFactors = [
-    "<strong>Menge des Räumguts (mÂ³):</strong> Das Volumen ist der grösste Kostenfaktor.",
+    "<strong>Menge des Räumguts (m³):</strong> Das Volumen ist der grösste Kostenfaktor.",
     "<strong>Art des Abfalls:</strong> Sondermüll wie Farben, Chemikalien oder Elektronik kostet mehr.",
     "<strong>Zugänglichkeit:</strong> Stockwerk, Lift vorhanden, Parkmöglichkeiten.",
     "<strong>Demontageaufwand:</strong> Müssen Einbauten oder grosse Möbel zerlegt werden?",
@@ -55,10 +55,10 @@ const RaeumungEntsorgungPageClient = () => {
   ]
 
   const volumeRates = [
-    { volume: "bis 5 mÂ³ (z.B. kleines Kellerabteil)", price: "ca. CHF 400 – 700" },
-    { volume: "bis 10 mÂ³ (z.B. 1-2 Zimmer Wohnung)", price: "ca. CHF 700 – 1'200" },
-    { volume: "bis 20 mÂ³ (z.B. 3-4 Zimmer Wohnung)", price: "ca. CHF 1'200 – 2'500" },
-    { volume: "ab 30 mÂ³ (z.B. Hausräumung)", price: "Auf Anfrage" }
+    { volume: "bis 5 m³ (z.B. kleines Kellerabteil)", price: "ca. CHF 400 – 700" },
+    { volume: "bis 10 m³ (z.B. 1-2 Zimmer Wohnung)", price: "ca. CHF 700 – 1'200" },
+    { volume: "bis 20 m³ (z.B. 3-4 Zimmer Wohnung)", price: "ca. CHF 1'200 – 2'500" },
+    { volume: "ab 30 m³ (z.B. Hausräumung)", price: "Auf Anfrage" }
   ]
 
   const schema = {
@@ -192,7 +192,7 @@ const RaeumungEntsorgungPageClient = () => {
 
           <section className="bg-white p-8 md:p-12 rounded-2xl shadow-xl">
              <h2 className="heading-2">Was kostet eine Räumung und Entsorgung?</h2>
-             <p className="text-slate-600 mb-8 max-w-4xl">Die Kosten für eine Räumung und Entsorgung in der Schweiz basieren hauptsächlich auf dem Volumen (in Kubikmetern, mÂ³) des zu entsorgenden Guts.</p>
+             <p className="text-slate-600 mb-8 max-w-4xl">Die Kosten für eine Räumung und Entsorgung in der Schweiz basieren hauptsächlich auf dem Volumen (in Kubikmetern, m³) des zu entsorgenden Guts.</p>
              <div className="grid md:grid-cols-2 gap-10">
                 <div>
                   <h3 className="text-2xl font-semibold text-slate-700 mb-4">Kostenfaktoren im Überblick:</h3>
@@ -213,7 +213,7 @@ const RaeumungEntsorgungPageClient = () => {
                         <h4 className="font-bold text-xl text-slate-800 mb-3 flex items-center"><Trash2 className="mr-3 text-green-600"/>Zusätzliche Entsorgungskosten</h4>
                         <p className="text-sm text-slate-600 mb-4">Bei Umzügen fallen oft auch Gegenstände zur Entsorgung an. Diese werden separat nach Volumen berechnet.</p>
                         <div className="flex justify-between items-center py-2 border-b last:border-0 border-green-200">
-                            <span className="font-medium text-slate-700">Kosten pro Kubikmeter (mÂ³)</span>
+                            <span className="font-medium text-slate-700">Kosten pro Kubikmeter (m³)</span>
                             <span className="font-bold text-green-700">ca. CHF 45 – 60</span>
                         </div>
                     </div>

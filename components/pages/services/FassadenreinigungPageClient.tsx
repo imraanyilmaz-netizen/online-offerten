@@ -29,7 +29,7 @@ const FassadenreinigungPageClient = () => {
   const faqItems = [
     {
       q: "Was kostet eine professionelle Fassadenreinigung?",
-      a: "Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro mÃ‚Â². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
+      a: "Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro m². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
     },
     {
       q: "Wie oft sollte ich meine Fassade reinigen lassen?",
@@ -321,7 +321,7 @@ const FassadenreinigungPageClient = () => {
                   {/* H2: Was kostet eine professionelle Fassadenreinigung? */}
                   <h2 className="heading-2">Was kostet eine professionelle Fassadenreinigung?</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
-                    Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro mÃ‚Â². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Grössere Gebäude, höhere Fassaden oder besonders verschmutzte Bereiche können höhere Kosten verursachen. Die Reinigungsmethode (Hochdruckreinigung vs. schonende Reinigung) und das Material beeinflussen ebenfalls die Kosten. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
+                    Die Kosten für Fassadenreinigung hängen von der Grösse der Fassade, der Höhe, dem Material, dem Verschmutzungsgrad und der Zugänglichkeit ab. Preise liegen typischerweise zwischen 10 und 30 CHF pro m². Ein durchschnittliches Einfamilienhaus kostet etwa 500-2000 CHF. Grössere Gebäude, höhere Fassaden oder besonders verschmutzte Bereiche können höhere Kosten verursachen. Die Reinigungsmethode (Hochdruckreinigung vs. schonende Reinigung) und das Material beeinflussen ebenfalls die Kosten. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen erhalten. Alle Offerten sind kostenlos und unverbindlich.
                   </p>
 
                   {/* H2: Warum wir der richtige Partner für Ihre Fassadenreinigung sind */}

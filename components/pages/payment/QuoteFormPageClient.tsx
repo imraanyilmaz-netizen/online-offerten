@@ -13,7 +13,7 @@ const QuoteFormPageClient = () => {
     setMounted(true);
   }, []);
 
-  // Loading state - hydration mismatch'i önlemek iÃ§in
+  // Loading state - hydration mismatch'i önlemek için
   if (!mounted || !ready) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 relative overflow-hidden flex items-center justify-center">

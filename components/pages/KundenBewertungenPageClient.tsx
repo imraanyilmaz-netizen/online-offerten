@@ -29,7 +29,7 @@ interface Review {
   customer_name: string
   city: string
   review_date: string
-  rating: number // Platform yorumları iÃ§in sadece rating değeri var
+  rating: number // Platform yorumları için sadece rating değeri var
   review_text?: string
   service_type?: string
   partner_name?: string
@@ -47,7 +47,7 @@ interface KundenBewertungenPageClientProps {
 const ReviewCard = ({ review }: { review: Review }) => {
   const serviceName = getGermanServiceName(review.service_type)
   
-  // Dinamik yıldız hesaplama - Platform yorumları iÃ§in sadece rating değeri kullanılır
+  // Dinamik yıldız hesaplama - Platform yorumları için sadece rating değeri kullanılır
   // Veritabanından gelen rating değerine göre yıldızlar dinamik hesaplanır
   const displayRating = review.rating || 0
   const fullStars = Math.floor(displayRating)
