@@ -21,14 +21,14 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-  description: 'Kostenlose Offerten für Umzug, Reinigung & Renovierung vergleichen. Zeit und Geld sparen mit geprüften Firmen aus Ihrer Region. Unverbindlich & transparent.',
+  title: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen | Online-Offerten.ch',
+  description: 'Kostenlose Offerten für Umzug, Reinigung & Malerarbeiten vergleichen. Bis zu 5 Angebote von geprüften Firmen aus Ihrer Region erhalten. ✓ Unverbindlich ✓ 100% kostenlos.',
   alternates: {
     canonical: 'https://online-offerten.ch/',
   },
   openGraph: {
-    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-    description: 'Zeit und Geld sparen mit geprüften Firmen aus Ihrer Region',
+    title: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen | Online-Offerten.ch',
+    description: 'Kostenlose Offerten für Umzug, Reinigung & Malerarbeiten. Bis zu 5 Angebote von geprüften Firmen erhalten.',
     url: 'https://online-offerten.ch/',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: 'https://online-offerten.ch/image/online-offerten.webp',
         width: 1200,
         height: 630,
-        alt: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
+        alt: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen',
       },
     ],
     locale: 'de_CH',
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-    description: 'Zeit und Geld sparen mit geprüften Firmen',
+    title: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen',
+    description: 'Bis zu 5 kostenlose Angebote von geprüften Firmen erhalten',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
   robots: {
@@ -146,7 +146,7 @@ const structuredData = {
       "@id": "https://online-offerten.ch/#organization",
       "name": "Online Offerten",
       "url": "https://online-offerten.ch",
-      "logo": "https://online-offerten.ch/image/logo-icon.avif",
+      "logo": "https://online-offerten.ch/image/logo-icon.webp",
       "contactPoint": {
         "@type": "ContactPoint",
         "email": "info@online-offerten.ch",
@@ -161,7 +161,7 @@ const structuredData = {
     {
       "@type": "Service",
       "name": "Kostenlose Offerten für Umzug, Reinigung & Renovierung",
-      "description": "Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- &  aus Ihrer Region anfordern. Mehrere Angebote vergleichen und Zeit und Geld sparen.",
+      "description": "Kostenlose Offerten von geprüften Umzugs-, Reinigungs-, Maler- & Entsorgungsfirmen aus Ihrer Region anfordern. Mehrere Angebote vergleichen und Zeit und Geld sparen.",
       "alternateName": "Offerten Portal aus Ihrer Region",
       "serviceType": [
         "Umzugsdienst",
@@ -292,15 +292,15 @@ export default async function HomePage() {
           {/* Hero Section - SEO Optimized - SERVER RENDERED */}
           <section 
             className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-gray-100 z-20" 
-            aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
+            aria-label="Kostenlose Offerten für Umzug, Reinigung und Malerarbeiten vergleichen"
           >
             {/* Background Image - Right Side - Desktop Only - Optimized with Next.js Image */}
             <div className="hidden lg:block absolute -right-60 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full overflow-hidden">
               <NextImage
-                src="/fotos/3b38703d-321c-4732-86ce-557415232adb.webp"
+                src="/fotos/umzug-reinigung-maler-offerten-schweiz.webp"
                 alt="Umzug, Reinigung und Renovierung Services in der Schweiz"
                 fill
-                loading="lazy"
+                priority
                 quality={75}
                 className="object-cover object-right"
                 style={{
@@ -470,9 +470,9 @@ export default async function HomePage() {
                         <FileText className="w-8 h-8 text-white" />
                       </div>
                     </div>
-                    <h4 className="heading-4 mb-3 text-center">
+                    <h3 className="heading-4 mb-3 text-center">
                       Anfrage ausfüllen
-                    </h4>
+                    </h3>
                     <p className="text-body text-center text-sm">
                       Beschreiben Sie Ihr Projekt in wenigen Schritten online.
                     </p>
@@ -488,9 +488,9 @@ export default async function HomePage() {
                         <GitCompareArrows className="w-8 h-8 text-white" />
                       </div>
                     </div>
-                    <h4 className="heading-4 mb-3 text-center">
+                    <h3 className="heading-4 mb-3 text-center">
                       Offerten erhalten
-                    </h4>
+                    </h3>
                     <p className="text-body text-center text-sm">
                       Bis zu 5 kostenlose Angebote von geprüften Partnern.
                     </p>
@@ -506,9 +506,9 @@ export default async function HomePage() {
                         <Users className="w-8 h-8 text-white" />
                       </div>
                     </div>
-                    <h4 className="heading-4 mb-3 text-center">
+                    <h3 className="heading-4 mb-3 text-center">
                       Anbieter wählen
-                    </h4>
+                    </h3>
                     <p className="text-body text-center text-sm">
                       Vergleichen & den besten Anbieter auswählen.
                     </p>
@@ -557,9 +557,9 @@ export default async function HomePage() {
                         <CheckCircle className="h-6 w-6 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="heading-4 mb-2">
+                        <h3 className="heading-4 mb-2">
                           100 % kostenlos
-                        </h4>
+                        </h3>
                         <p className="text-body leading-relaxed">
                           Unser Service ist für Sie völlig kostenfrei. Die Finanzierung erfolgt über die teilnehmenden Fachanbieter.
                         </p>
@@ -572,9 +572,9 @@ export default async function HomePage() {
                         <CheckCircle className="h-6 w-6 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="heading-4 mb-2">
+                        <h3 className="heading-4 mb-2">
                           Unverbindlich & risikofrei
-                        </h4>
+                        </h3>
                         <p className="text-body leading-relaxed">
                           Das Einholen und Vergleichen von Angeboten ist für Sie jederzeit unverbindlich – ohne Verpflichtungen.
                         </p>
@@ -587,9 +587,9 @@ export default async function HomePage() {
                         <CheckCircle className="h-6 w-6 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="heading-4 mb-2">
+                        <h3 className="heading-4 mb-2">
                           Passende Anbieter für Ihr Projekt
-                        </h4>
+                        </h3>
                         <p className="text-body leading-relaxed">
                           Sie erhalten ausschliesslich Vorschläge von Anbietern, die fachlich und inhaltlich zu Ihrem Projekt passen.
                         </p>
@@ -628,9 +628,9 @@ export default async function HomePage() {
                         <Truck className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="heading-4 mb-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="heading-4 mb-2 group-hover:text-blue-600 transition-colors">
                           Umzugsfirma
-                        </h4>
+                        </h3>
                         <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
                       </div>
                     </div>
@@ -659,9 +659,9 @@ export default async function HomePage() {
                         <Sparkles className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="heading-4 mb-2 group-hover:text-orange-600 transition-colors">
+                        <h3 className="heading-4 mb-2 group-hover:text-orange-600 transition-colors">
                           Reinigungsfirma
-                        </h4>
+                        </h3>
                         <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
                       </div>
                     </div>
@@ -690,9 +690,9 @@ export default async function HomePage() {
                         <Paintbrush className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="heading-4 mb-2 group-hover:text-purple-600 transition-colors">
+                        <h3 className="heading-4 mb-2 group-hover:text-purple-600 transition-colors">
                           Malerarbeiten
-                        </h4>
+                        </h3>
                         <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"></div>
                       </div>
                     </div>
@@ -854,9 +854,15 @@ export default async function HomePage() {
 
                 {/* CTA */}
                 <div className="text-left mt-12">
-                  <p className="text-body text-lg font-semibold">
+                  <p className="text-body text-lg font-semibold mb-4">
                     Jetzt kostenlose Offerten anfordern und passende Dienstleister finden
                   </p>
+                  <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                    <Link href="/kostenlose-offerte-anfordern" className="inline-flex items-center">
+                      Kostenlose Offerte anfordern
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>

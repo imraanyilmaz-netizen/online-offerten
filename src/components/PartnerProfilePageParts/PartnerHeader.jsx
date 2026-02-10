@@ -20,10 +20,10 @@ const PartnerHeader = ({ partner, averageRating, reviewCount, onGetOffer }) => {
             <img 
               alt={`${partner.name} Logo`} 
               className="max-w-24 max-h-24 md:max-w-28 md:max-h-28 w-auto h-auto object-contain" 
-              src={partner.logo_url || '/image/logo-icon.avif'} 
+              src={partner.logo_url || '/image/logo-icon.webp'} 
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = '/image/logo-icon.avif';
+                e.target.src = '/image/logo-icon.webp';
               }}
             />
           </div>

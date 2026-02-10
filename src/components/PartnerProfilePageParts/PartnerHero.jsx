@@ -47,14 +47,14 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
               className="flex-shrink-0 bg-white/90 rounded-2xl shadow-lg p-3 flex items-center justify-center mb-6 w-fit"
             >
               <img 
-                src={partner.logo_url || '/image/logo-icon.avif'}
+                src={partner.logo_url || '/image/logo-icon.webp'}
                 alt={`${partner.company_name} Logo`} 
                 className="max-w-40 max-h-40 md:max-w-48 md:max-h-48 w-auto h-auto object-contain"
                 loading="lazy"
                 decoding="async"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = '/image/logo-icon.avif';
+                  e.target.src = '/image/logo-icon.webp';
                 }}
               />
             </div>

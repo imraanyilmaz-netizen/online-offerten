@@ -86,7 +86,7 @@ export default async function AboutPage() {
       "@id": "https://online-offerten.ch/#organization",
       "name": "Online Offerten",
       "url": "https://online-offerten.ch",
-      "logo": "https://online-offerten.ch/image/logo-icon.avif",
+      "logo": "https://online-offerten.ch/image/logo-icon.webp",
       "description": "Unabhängige Schweizer Vermittlungsplattform für Umzugs-, Reinigungs- und Malerofferten. Kostenlose Vermittlung von geprüften Partnerfirmen in der ganzen Schweiz.",
       "contactPoint": {
         "@type": "ContactPoint",

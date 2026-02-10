@@ -116,13 +116,13 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
         <div className="flex items-start gap-4">
           <Link href={partnerHref} className="flex-shrink-0">
             <img
-              src={partner.logo_url || '/image/logo-icon.avif'}
+              src={partner.logo_url || '/image/logo-icon.webp'}
               alt={`Firmenlogo von ${partner.company_name}`}
               className="w-20 h-20 rounded-md object-contain border bg-gray-50"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
-                target.src = '/image/logo-icon.avif';
+                target.src = '/image/logo-icon.webp';
               }}
             />
           </Link>

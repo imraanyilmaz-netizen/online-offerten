@@ -49,7 +49,7 @@ const serviceSchema = {
     "@type": "Organization",
     "name": "Online-Offerten.ch",
     "url": "https://online-offerten.ch",
-    "logo": "https://online-offerten.ch/image/logo-icon.avif",
+    "logo": "https://online-offerten.ch/image/logo-icon.webp",
     "description": "Vergleichsplattform für Umzugsfirmen, Reinigungsfirmen und Malerfirmen in der Schweiz. Wir vermitteln kostenlose Offerten von geprüften Anbietern.",
     "contactPoint": {
       "@type": "ContactPoint",

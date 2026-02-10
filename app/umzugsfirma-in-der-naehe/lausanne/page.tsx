@@ -42,7 +42,7 @@ const serviceSchema = {
     "@type": "Organization",
     "name": "Online-Offerten.ch",
     "url": "https://online-offerten.ch",
-    "logo": "https://online-offerten.ch/image/logo-icon.avif",
+    "logo": "https://online-offerten.ch/image/logo-icon.webp",
     "description": "Vergleichsplattform für Umzugsfirmen, Reinigungsfirmen und Malerfirmen in der Schweiz.",
     "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "availableLanguage": ["German", "French"] }
   },

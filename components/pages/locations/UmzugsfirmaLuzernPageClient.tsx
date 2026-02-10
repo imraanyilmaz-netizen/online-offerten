@@ -503,7 +503,7 @@ const UmzugsfirmaLuzernPageClient = ({ luzernPartners = [] }: UmzugsfirmaLuzernP
                           />
                         ) : (
                           <Image
-                            src="/image/logo-icon.avif"
+                            src="/image/logo-icon.webp"
                             alt="Default logo"
                             width={80}
                             height={80}

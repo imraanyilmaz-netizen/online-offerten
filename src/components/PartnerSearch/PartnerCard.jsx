@@ -75,12 +75,12 @@ const PartnerCard = ({ partner }) => {
         
         <div className="absolute bottom-3 left-3">
           <img
-            src={partner.logo_url || '/image/logo-icon.avif'}
+            src={partner.logo_url || '/image/logo-icon.webp'}
             alt={`${partner.company_name} logo`}
             className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = '/image/logo-icon.avif';
+              e.target.src = '/image/logo-icon.webp';
             }}
           />
         </div>

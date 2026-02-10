@@ -23,10 +23,10 @@ export const metadata: Metadata = {
   publisher: 'Online-Offerten.ch',
   metadataBase: new URL('https://online-offerten.ch'),
   alternates: {
-    canonical: 'https://online-offerten.ch',
+    canonical: 'https://online-offerten.ch/',
     languages: {
-      'de-CH': 'https://online-offerten.ch',
-      'x-default': 'https://online-offerten.ch',
+      'de-CH': 'https://online-offerten.ch/',
+      'x-default': 'https://online-offerten.ch/',
     },
   },
   openGraph: {
