@@ -643,7 +643,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="/umzugsfirma" className="inline-flex items-center">
+                      <Link href="/umzugsfirma-in-der-naehe" className="inline-flex items-center">
                         Umzugsfirma finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
