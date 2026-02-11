@@ -244,8 +244,8 @@ const nextConfig = {
       },
       // Umzugsfirma-in-der-naehe alt sayfaları → /umzugsfirma/ altına (ana sayfa kalıyor)
       {
-        source: '/umzugsfirma-in-der-naehe/:path*',
-        destination: '/umzugsfirma/:path*',
+        source: '/umzugsfirma-in-der-naehe/:path+',
+        destination: '/umzugsfirma/:path+',
         permanent: true, // 301 redirect
       },
       // Eski kanton URL'leri → yeni URL'lere (tek hop, zincir yok)
