@@ -110,6 +110,8 @@ const PostPageClient = () => {
                                     src={post.featured_image_url}
                                     alt={post.title}
                                     className="w-full h-auto max-h-[500px] object-cover rounded-xl mb-8 shadow-md"
+                                    loading="eager"
+                                    fetchPriority="high"
                                 />
                             )}
                             <h1 className="text-[26px] font-extrabold text-gray-900 mb-4 leading-normal break-words w-full min-w-0 max-w-none -mx-6 md:-mx-8 px-6 md:px-8" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere', width: 'calc(100% + 3rem)', maxWidth: 'none', overflow: 'visible', textOverflow: 'unset', whiteSpace: 'normal' }}>{post.title && post.title.trim() ? post.title.trim() : (post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : '')}</h1>
