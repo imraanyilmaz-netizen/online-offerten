@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
@@ -7,12 +7,12 @@ import { MapPin, ExternalLink } from 'lucide-react';
 
 const RegionalDifferences = () => {
   const cities = [
-    { name: "Zürich", link: "umzugsfirma-in-der-naehe/zuerich" },
-    { name: "Basel", link: "umzugsfirma-in-der-naehe/basel" },
-    { name: "Bern", link: "umzugsfirma-in-der-naehe/bern" },
-    { name: "Luzern", link: "umzugsfirma-in-der-naehe/luzern" },
-    { name: "Genf", link: "umzugsfirma-in-der-naehe/genf" },
-    { name: "St. Gallen", link: "umzugsfirma-in-der-naehe/st-gallen" }
+    { name: "Zürich", link: "umzugsfirma/zuerich" },
+    { name: "Basel", link: "umzugsfirma/basel" },
+    { name: "Bern", link: "umzugsfirma/bern" },
+    { name: "Luzern", link: "umzugsfirma/luzern" },
+    { name: "Genf", link: "umzugsfirma/genf" },
+    { name: "St. Gallen", link: "umzugsfirma/st-gallen" }
   ];
 
   return (

@@ -127,61 +127,61 @@ async function generateSitemap() {
     '/reinigung/bueroreinigung', '/reinigung/umzugsreinigung', '/reinigung/unterhaltsreinigung', '/reinigung/grundreinigung', 
     '/reinigung/baureinigung', '/reinigung/fensterreinigung', '/reinigung/bodenreinigung', '/reinigung/fassadenreinigung', 
     '/reinigung/hofreinigung', '/raeumung-entsorgung', '/malerarbeitenkosten',
-    '/umzugsfirma', '/umzugsfirma-in-der-naehe', '/umzugsfirma-vergleichen', '/malerfirma-in-der-naehe'
+    '/umzugsfirma', '/umzugsfirma', '/umzugsfirma-vergleichen', '/malerfirma'
   ];
 
-  // Location pages (umzugsfirma-* pages) - New structure under /umzugsfirma-in-der-naehe
+  // Location pages (umzugsfirma-* pages) - New structure under /umzugsfirma
   const locationPagePrefixes = [
-    '/umzugsfirma-in-der-naehe/aargau',
-    '/umzugsfirma-in-der-naehe/basel',
-    '/umzugsfirma-in-der-naehe/bern',
-    '/umzugsfirma-in-der-naehe/biel-bienne',
-    '/umzugsfirma-in-der-naehe/genf',
-    '/umzugsfirma-in-der-naehe/lausanne',
-    '/umzugsfirma-in-der-naehe/lugano',
-    '/umzugsfirma-in-der-naehe/luzern',
-    '/umzugsfirma-in-der-naehe/st-gallen',
-    '/umzugsfirma-in-der-naehe/thun',
-    '/umzugsfirma-in-der-naehe/zuerich'
+    '/umzugsfirma/aargau',
+    '/umzugsfirma/basel',
+    '/umzugsfirma/bern',
+    '/umzugsfirma/biel-bienne',
+    '/umzugsfirma/genf',
+    '/umzugsfirma/lausanne',
+    '/umzugsfirma/lugano',
+    '/umzugsfirma/luzern',
+    '/umzugsfirma/st-gallen',
+    '/umzugsfirma/thun',
+    '/umzugsfirma/zuerich'
   ];
 
   // Aargau city pages (dynamic routes) - New structure
   const aargauCityPages = [
-    '/umzugsfirma-in-der-naehe/aargau/aarau',
-    '/umzugsfirma-in-der-naehe/aargau/baden',
-    '/umzugsfirma-in-der-naehe/aargau/zofingen',
-    '/umzugsfirma-in-der-naehe/aargau/brugg',
-    '/umzugsfirma-in-der-naehe/aargau/wettingen'
+    '/umzugsfirma/aargau/aarau',
+    '/umzugsfirma/aargau/baden',
+    '/umzugsfirma/aargau/zofingen',
+    '/umzugsfirma/aargau/brugg',
+    '/umzugsfirma/aargau/wettingen'
   ];
 
   // Zürich city pages (dynamic routes)
   const zurichCityPages = [
-    '/umzugsfirma-in-der-naehe/zuerich/winterthur',
-    '/umzugsfirma-in-der-naehe/zuerich/uster',
-    '/umzugsfirma-in-der-naehe/zuerich/dietikon',
-    '/umzugsfirma-in-der-naehe/zuerich/duebendorf',
-    '/umzugsfirma-in-der-naehe/zuerich/schlieren'
+    '/umzugsfirma/zuerich/winterthur',
+    '/umzugsfirma/zuerich/uster',
+    '/umzugsfirma/zuerich/dietikon',
+    '/umzugsfirma/zuerich/duebendorf',
+    '/umzugsfirma/zuerich/schlieren'
   ];
 
   // Cost pages
   const costPages = [
     '/umzugsfirma/umzugskosten', '/umzugsofferten', '/guenstig-umziehen',
-    '/umzugsfirma-in-der-naehe/zuerich/umzugsofferten-zuerich',
+    '/umzugsfirma/zuerich/umzugsofferten-zuerich',
     '/umzugskosten-aargau', '/reinigung/reinigungskosten'
   ];
 
   // Reinigungsfirma location pages (reinigungsfirma-* pages) - New structure
   const reinigungsfirmaLocationPages = [
-    '/reinigungsfirma-in-der-naehe/zuerich', '/reinigungsfirma-in-der-naehe/basel', '/reinigungsfirma-in-der-naehe/bern',
-    '/reinigungsfirma-in-der-naehe/genf', '/reinigungsfirma-in-der-naehe/lausanne', '/reinigungsfirma-in-der-naehe/luzern',
-    '/reinigungsfirma-in-der-naehe/st-gallen', '/reinigungsfirma-in-der-naehe/winterthur'
+    '/reinigungsfirma/zuerich', '/reinigungsfirma/basel', '/reinigungsfirma/bern',
+    '/reinigungsfirma/genf', '/reinigungsfirma/lausanne', '/reinigungsfirma/luzern',
+    '/reinigungsfirma/st-gallen', '/reinigungsfirma/winterthur'
   ];
 
-  // Malerfirma location pages (malerfirma-in-der-naehe/* pages)
+  // Malerfirma location pages (malerfirma/* pages)
   const malerfirmaLocationPages = [
-    '/malerfirma-in-der-naehe/zuerich', '/malerfirma-in-der-naehe/basel', '/malerfirma-in-der-naehe/bern',
-    '/malerfirma-in-der-naehe/genf', '/malerfirma-in-der-naehe/lausanne', '/malerfirma-in-der-naehe/luzern',
-    '/malerfirma-in-der-naehe/st-gallen', '/malerfirma-in-der-naehe/winterthur'
+    '/malerfirma/zuerich', '/malerfirma/basel', '/malerfirma/bern',
+    '/malerfirma/genf', '/malerfirma/lausanne', '/malerfirma/luzern',
+    '/malerfirma/st-gallen', '/malerfirma/winterthur'
   ];
 
   // Private and admin routes that should NOT be in sitemap
@@ -279,7 +279,7 @@ async function generateSitemap() {
   const locationPages = locationPagePrefixes
     .filter(route => allStaticRoutes.includes(route))
     .map(route => {
-      if (route === '/umzugsfirma-in-der-naehe/aargau') {
+      if (route === '/umzugsfirma/aargau') {
         return createUrlEntry(`${BASE_URL}${route}`, today, 'weekly', '1.0');
       }
       const priority = route === '/standorte' ? '0.95' : '0.9';

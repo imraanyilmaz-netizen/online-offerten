@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -19,7 +19,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
   }
 
   const cityName = cityData.name
-  const canonicalUrl = `/umzugsfirma-in-der-naehe/aargau/${city}`
+  const canonicalUrl = `/umzugsfirma/aargau/${city}`
 
   // Service Schema - Correct structure for location pages
   const serviceSchema = {
@@ -124,7 +124,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
             <nav className="flex items-center space-x-2 text-sm">
               <Link href="/" className="text-gray-600 hover:text-green-600">Start</Link>
               <span className="text-gray-400">/</span>
-              <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
+              <Link href="/umzugsfirma/aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 font-medium">{cityName}</span>
             </nav>
@@ -281,7 +281,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
               <h2 className="heading-2">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Aargau-Übersicht</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Aargau</Link> oder <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>. Informieren Sie sich auch über die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten in {cityName} berechnen</Link>, die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Preise für Umzüge in {cityName}</Link> oder <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Was kostet ein Umzug nach {cityName}?</Link>.
+                  Erfahren Sie mehr über <Link href="/umzugsfirma/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Aargau-Übersicht</Link>, <Link href="/umzugsfirma/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Aargau</Link> oder <Link href="/umzugsfirma/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>. Informieren Sie sich auch über die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugskosten in {cityName} berechnen</Link>, die <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Preise für Umzüge in {cityName}</Link> oder <Link href="/umzugskosten-aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Was kostet ein Umzug nach {cityName}?</Link>.
                 </p>
               </div>
             </article>

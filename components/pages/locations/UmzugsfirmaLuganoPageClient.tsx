@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 // framer-motion removed - CSS for better INP
@@ -50,7 +50,7 @@ const UmzugsfirmaLuganoPageClient = () => {
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
               <li><Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link></li>
               <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
-              <li><Link href="/umzugsfirma-in-der-naehe" className="hover:text-green-600 transition-colors">Umzugsfirma in der Nähe</Link></li>
+              <li><Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma in der Nähe</Link></li>
               <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
               <li className="text-gray-900 font-medium" aria-current="page">Umzugsfirma Lugano</li>
             </ol>

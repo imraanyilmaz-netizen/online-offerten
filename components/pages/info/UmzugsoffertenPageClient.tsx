@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
 // Framer Motion removed for better performance
@@ -370,13 +370,13 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
   ]
 
   const locations = [
-    { name: "Umzugsofferten Zürich", link: "/umzugsfirma-in-der-naehe/zuerich/umzugsofferten-zuerich", title: "Zürich Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten Basel", link: "/umzugsfirma-in-der-naehe/basel", title: "Basel Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten Bern", link: "/umzugsfirma-in-der-naehe/bern", title: "Bern Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten Genf", link: "/umzugsfirma-in-der-naehe/genf", title: "Genf Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten Lausanne", link: "/umzugsfirma-in-der-naehe/lausanne", title: "Lausanne Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten Luzern", link: "/umzugsfirma-in-der-naehe/luzern", title: "Luzern Umzugsofferten vergleichen" },
-    { name: "Umzugsofferten St. Gallen", link: "/umzugsfirma-in-der-naehe/st-gallen", title: "St. Gallen Umzugsofferten vergleichen" }
+    { name: "Umzugsofferten Zürich", link: "/umzugsfirma/zuerich/umzugsofferten-zuerich", title: "Zürich Umzugsofferten vergleichen" },
+    { name: "Umzugsofferten Basel", link: "/umzugsfirma/basel", title: "Basel Umzugsofferten vergleichen" },
+    { name: "Umzugsofferten Bern", link: "/umzugsfirma/bern", title: "Bern Umzugsofferten vergleichen" },
+    { name: "Umzugsofferten Genf", link: "/umzugsfirma/genf", title: "Genf Umzugsofferten vergleichen" },
+    { name: "Umzugsofferten Lausanne", link: "/umzugsfirma/lausanne", title: "Lausanne Umzugsofferten vergleichen" },
+    { name: "Umzugsofferten Luzern", link: "/umzugsfirma/luzern", title: "Luzern Umzugsofferten vergleichen" },
+    { name: "Umzugsofferten St. Gallen", link: "/umzugsfirma/st-gallen", title: "St. Gallen Umzugsofferten vergleichen" }
   ]
 
   return (

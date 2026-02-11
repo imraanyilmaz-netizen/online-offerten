@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -16,7 +16,7 @@ import {
 
 const ReinigungsfirmaInDerNaehePageClient = () => {
   const router = useRouter()
-  const canonicalUrl = 'https://online-offerten.ch/reinigungsfirma-in-der-naehe'
+  const canonicalUrl = 'https://online-offerten.ch/reinigungsfirma'
 
   // Inject structured data
   useEffect(() => {
@@ -138,9 +138,9 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
     const script = document.createElement('script')
     script.type = 'application/ld+json'
     script.text = JSON.stringify(schemaData)
-    script.id = 'reinigungsfirma-in-der-naehe-schema'
+    script.id = 'reinigungsfirma-schema'
     
-    const existing = document.getElementById('reinigungsfirma-in-der-naehe-schema')
+    const existing = document.getElementById('reinigungsfirma-schema')
     if (existing && existing.parentNode) {
       try {
         existing.remove()
@@ -153,7 +153,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
     
     return () => {
       if (typeof document === 'undefined') return
-      const scriptToRemove = document.getElementById('reinigungsfirma-in-der-naehe-schema')
+      const scriptToRemove = document.getElementById('reinigungsfirma-schema')
       if (scriptToRemove && scriptToRemove.parentNode) {
         try {
           scriptToRemove.remove()
@@ -375,14 +375,14 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
   ]
 
   const locations = [
-    { name: "Reinigungsfirma Zürich", link: "/reinigungsfirma-in-der-naehe/zuerich" },
-    { name: "Reinigungsfirma Basel", link: "/reinigungsfirma-in-der-naehe/basel" },
-    { name: "Reinigungsfirma Bern", link: "/reinigungsfirma-in-der-naehe/bern" },
-    { name: "Reinigungsfirma Genf", link: "/reinigungsfirma-in-der-naehe/genf" },
-    { name: "Reinigungsfirma Lausanne", link: "/reinigungsfirma-in-der-naehe/lausanne" },
-    { name: "Reinigungsfirma Luzern", link: "/reinigungsfirma-in-der-naehe/luzern" },
-    { name: "Reinigungsfirma St. Gallen", link: "/reinigungsfirma-in-der-naehe/st-gallen" },
-    { name: "Reinigungsfirma Winterthur", link: "/reinigungsfirma-in-der-naehe/winterthur" }
+    { name: "Reinigungsfirma Zürich", link: "/reinigungsfirma/zuerich" },
+    { name: "Reinigungsfirma Basel", link: "/reinigungsfirma/basel" },
+    { name: "Reinigungsfirma Bern", link: "/reinigungsfirma/bern" },
+    { name: "Reinigungsfirma Genf", link: "/reinigungsfirma/genf" },
+    { name: "Reinigungsfirma Lausanne", link: "/reinigungsfirma/lausanne" },
+    { name: "Reinigungsfirma Luzern", link: "/reinigungsfirma/luzern" },
+    { name: "Reinigungsfirma St. Gallen", link: "/reinigungsfirma/st-gallen" },
+    { name: "Reinigungsfirma Winterthur", link: "/reinigungsfirma/winterthur" }
   ]
 
   return (

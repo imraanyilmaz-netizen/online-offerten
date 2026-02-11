@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -16,7 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 const MalerfirmaZurichPageClient = () => {
   const router = useRouter()
   const city = 'Zürich'
-  const canonicalUrl = 'https://online-offerten.ch/malerfirma-in-der-naehe/zuerich'
+  const canonicalUrl = 'https://online-offerten.ch/malerfirma/zuerich'
 
   // Inject structured data
   useEffect(() => {
@@ -36,7 +36,7 @@ const MalerfirmaZurichPageClient = () => {
               "@type": "ListItem",
               "position": 2,
               "name": "Malerfirma in der Nähe",
-              "item": "https://online-offerten.ch/malerfirma-in-der-naehe"
+              "item": "https://online-offerten.ch/malerfirma"
             },
             {
               "@type": "ListItem",
@@ -149,9 +149,9 @@ const MalerfirmaZurichPageClient = () => {
   ]
 
   const neighboringCities = [
-    { name: "Malerfirma Basel", link: "/malerfirma-in-der-naehe/basel" },
-    { name: "Malerfirma Bern", link: "/malerfirma-in-der-naehe/bern" },
-    { name: "Malerfirma Winterthur", link: "/malerfirma-in-der-naehe/winterthur" }
+    { name: "Malerfirma Basel", link: "/malerfirma/basel" },
+    { name: "Malerfirma Bern", link: "/malerfirma/bern" },
+    { name: "Malerfirma Winterthur", link: "/malerfirma/winterthur" }
   ]
 
   return (
@@ -519,12 +519,12 @@ const MalerfirmaZurichPageClient = () => {
               </h3>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  <Link href="/malerfirma-in-der-naehe" className="text-purple-600 hover:text-purple-700 font-semibold underline">
+                  <Link href="/malerfirma" className="text-purple-600 hover:text-purple-700 font-semibold underline">
                     Alle Malerfirmen in der Schweiz vergleichen
                   </Link> – Finden Sie Malerbetriebe in Ihrer Region.
                 </p>
                 <p>
-                  Auch in <Link href="/malerfirma-in-der-naehe/basel" className="text-purple-600 hover:text-purple-700 font-semibold underline">Basel</Link> finden Sie lokale Malerbetriebe. Weitere regionale Malerunternehmen finden Sie in <Link href="/malerfirma-in-der-naehe/bern" className="text-purple-600 hover:text-purple-700 font-semibold underline">Bern</Link> und <Link href="/malerfirma-in-der-naehe/winterthur" className="text-purple-600 hover:text-purple-700 font-semibold underline">Winterthur</Link>.
+                  Auch in <Link href="/malerfirma/basel" className="text-purple-600 hover:text-purple-700 font-semibold underline">Basel</Link> finden Sie lokale Malerbetriebe. Weitere regionale Malerunternehmen finden Sie in <Link href="/malerfirma/bern" className="text-purple-600 hover:text-purple-700 font-semibold underline">Bern</Link> und <Link href="/malerfirma/winterthur" className="text-purple-600 hover:text-purple-700 font-semibold underline">Winterthur</Link>.
                 </p>
               </div>
             </div>

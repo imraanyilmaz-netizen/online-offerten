@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -128,10 +128,10 @@ const Article = () => {
             i18nKey="article.section8.p2_linked" 
             ns="privateUmzugPage"
             components={{
-              0: <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:underline font-semibold" />,
-              1: <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:underline font-semibold" />,
-              2: <Link href="/umzugsfirma-in-der-naehe/basel" className="text-green-600 hover:underline font-semibold" />,
-              3: <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:underline font-semibold" />,
+              0: <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:underline font-semibold" />,
+              1: <Link href="/umzugsfirma/bern" className="text-green-600 hover:underline font-semibold" />,
+              2: <Link href="/umzugsfirma/basel" className="text-green-600 hover:underline font-semibold" />,
+              3: <Link href="/umzugsfirma/luzern" className="text-green-600 hover:underline font-semibold" />,
               4: <Link href="/standorte" className="text-green-600 hover:underline font-semibold" />
             }}
           />

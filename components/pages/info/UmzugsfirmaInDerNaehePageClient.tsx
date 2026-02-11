@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect, useState } from 'react'
 // Framer Motion removed for better performance
@@ -21,7 +21,7 @@ import UmzugsfirmaInDerNaeheHeroForm from './UmzugsfirmaInDerNaeheHeroForm'
 
 const UmzugsfirmaInDerNaehePageClient = () => {
   const router = useRouter()
-  const canonicalUrl = 'https://online-offerten.ch/umzugsfirma-in-der-naehe'
+  const canonicalUrl = 'https://online-offerten.ch/umzugsfirma'
   
   // Rating stats - can be fetched from API or use defaults
   const [ratingStats] = useState({
@@ -139,9 +139,9 @@ const UmzugsfirmaInDerNaehePageClient = () => {
     const script = document.createElement('script')
     script.type = 'application/ld+json'
     script.text = JSON.stringify(schemaData)
-    script.id = 'umzugsfirma-in-der-naehe-schema'
+    script.id = 'umzugsfirma-schema'
     
-    const existing = document.getElementById('umzugsfirma-in-der-naehe-schema')
+    const existing = document.getElementById('umzugsfirma-schema')
     if (existing && existing.parentNode) {
       try {
         existing.remove()
@@ -154,7 +154,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
     
     return () => {
       if (typeof document === 'undefined') return
-      const scriptToRemove = document.getElementById('umzugsfirma-in-der-naehe-schema')
+      const scriptToRemove = document.getElementById('umzugsfirma-schema')
       if (scriptToRemove && scriptToRemove.parentNode) {
         try {
           scriptToRemove.remove()
@@ -221,17 +221,17 @@ const UmzugsfirmaInDerNaehePageClient = () => {
   ]
 
   const locations = [
-    { name: "Umzugsfirma Zürich", link: "/umzugsfirma-in-der-naehe/zuerich" },
-    { name: "Umzugsfirma Basel", link: "/umzugsfirma-in-der-naehe/basel" },
-    { name: "Umzugsfirma Bern", link: "/umzugsfirma-in-der-naehe/bern" },
-    { name: "Umzugsfirma Genf", link: "/umzugsfirma-in-der-naehe/genf" },
-    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma-in-der-naehe/lausanne" },
-    { name: "Umzugsfirma Luzern", link: "/umzugsfirma-in-der-naehe/luzern" },
-    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-in-der-naehe/st-gallen" },
-    { name: "Umzugsfirma Thun", link: "/umzugsfirma-in-der-naehe/thun" },
-    { name: "Umzugsfirma Biel-Bienne", link: "/umzugsfirma-in-der-naehe/biel-bienne" },
-    { name: "Umzugsfirma Lugano", link: "/umzugsfirma-in-der-naehe/lugano" },
-    { name: "Umzugsfirma Aargau", link: "/umzugsfirma-in-der-naehe/aargau" }
+    { name: "Umzugsfirma Zürich", link: "/umzugsfirma/zuerich" },
+    { name: "Umzugsfirma Basel", link: "/umzugsfirma/basel" },
+    { name: "Umzugsfirma Bern", link: "/umzugsfirma/bern" },
+    { name: "Umzugsfirma Genf", link: "/umzugsfirma/genf" },
+    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma/lausanne" },
+    { name: "Umzugsfirma Luzern", link: "/umzugsfirma/luzern" },
+    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma/st-gallen" },
+    { name: "Umzugsfirma Thun", link: "/umzugsfirma/thun" },
+    { name: "Umzugsfirma Biel-Bienne", link: "/umzugsfirma/biel-bienne" },
+    { name: "Umzugsfirma Lugano", link: "/umzugsfirma/lugano" },
+    { name: "Umzugsfirma Aargau", link: "/umzugsfirma/aargau" }
   ]
 
   return (

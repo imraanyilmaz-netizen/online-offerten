@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -16,7 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 const MalerfirmaGenfPageClient = () => {
   const router = useRouter()
   const city = 'Genf'
-  const canonicalUrl = 'https://online-offerten.ch/malerfirma-in-der-naehe/genf'
+  const canonicalUrl = 'https://online-offerten.ch/malerfirma/genf'
 
   useEffect(() => {
     const schemaData = {
@@ -35,7 +35,7 @@ const MalerfirmaGenfPageClient = () => {
               "@type": "ListItem",
               "position": 2,
               "name": "Malerfirma in der Nähe",
-              "item": "https://online-offerten.ch/malerfirma-in-der-naehe"
+              "item": "https://online-offerten.ch/malerfirma"
             },
             {
               "@type": "ListItem",
@@ -472,12 +472,12 @@ const MalerfirmaGenfPageClient = () => {
               </h3>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  <Link href="/malerfirma-in-der-naehe" className="text-purple-600 hover:text-purple-700 font-semibold underline">
+                  <Link href="/malerfirma" className="text-purple-600 hover:text-purple-700 font-semibold underline">
                     Alle Malerfirmen in der Schweiz vergleichen
                   </Link> – Finden Sie Malerbetriebe in Ihrer Region.
                 </p>
                 <p>
-                  Auch in <Link href="/malerfirma-in-der-naehe/lausanne" className="text-purple-600 hover:text-purple-700 font-semibold underline">Lausanne</Link> finden Sie lokale Malerbetriebe. Weitere regionale Malerunternehmen finden Sie in <Link href="/malerfirma-in-der-naehe/zuerich" className="text-purple-600 hover:text-purple-700 font-semibold underline">Zürich</Link> und <Link href="/malerfirma-in-der-naehe/bern" className="text-purple-600 hover:text-purple-700 font-semibold underline">Bern</Link>.
+                  Auch in <Link href="/malerfirma/lausanne" className="text-purple-600 hover:text-purple-700 font-semibold underline">Lausanne</Link> finden Sie lokale Malerbetriebe. Weitere regionale Malerunternehmen finden Sie in <Link href="/malerfirma/zuerich" className="text-purple-600 hover:text-purple-700 font-semibold underline">Zürich</Link> und <Link href="/malerfirma/bern" className="text-purple-600 hover:text-purple-700 font-semibold underline">Bern</Link>.
                 </p>
               </div>
             </div>

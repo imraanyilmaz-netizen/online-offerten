@@ -107,9 +107,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
       StarterKit.configure({
         heading: {
           levels: [1, 2, 3, 4, 5, 6],
-          HTMLAttributes: {
-            class: (level) => `heading-${level}`,
-          },
+          // Class'lar TiptapRenderer tarafından ekleniyor (heading-1, heading-2, vb.)
         },
         codeBlock: {
           HTMLAttributes: {
@@ -149,8 +147,12 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
       }),
       Link.configure({
         openOnClick: false,
+        autolink: true,
+        linkOnPaste: true,
         HTMLAttributes: {
           class: 'text-blue-600 underline cursor-pointer',
+          rel: 'noopener noreferrer',
+          target: null,
         },
       }),
       Image.configure({

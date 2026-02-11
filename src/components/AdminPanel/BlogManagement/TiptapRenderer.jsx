@@ -41,6 +41,61 @@ const TiptapRenderer = ({ jsonContent }) => {
     return processed;
   };
 
+  // Bozuk heading class'larını temizle (TipTap'ın fonksiyon serialize hatası)
+  // Örnek: class="e=>"heading-".concat(e) heading-2" → class="heading-2"
+  const cleanBrokenHeadingClasses = (html) => {
+    if (!html) return html;
+    return html.replace(
+      /class="([^"]*?)e=(?:&gt;|>)(?:&quot;|")heading-(?:&quot;|")\.concat\(e\)\s*/gi,
+      'class="$1'
+    );
+  };
+
+  // İç linklerden nofollow ve target="_blank" kaldır (dış linkler korunur)
+  const fixInternalLinks = (html) => {
+    if (!html) return html;
+    
+    return html.replace(/<a\s[^>]*>/gi, (match) => {
+      // href değerini kontrol et
+      const hrefMatch = match.match(/href="([^"]*)"/i);
+      if (!hrefMatch) return match;
+      
+      const href = hrefMatch[1];
+      // İç link mi kontrol et (relative veya online-offerten.ch domain)
+      const isInternal = href.startsWith('/') || 
+                          href.includes('online-offerten.ch');
+      
+      if (!isInternal) return match; // Dış linklere dokunma
+      
+      let fixed = match;
+      // target="_blank" kaldır
+      fixed = fixed.replace(/\s*target="_blank"/g, '');
+      // rel'den nofollow kaldır, diğerlerini koru
+      fixed = fixed.replace(/rel="([^"]*)"/g, (m, relValue) => {
+        const parts = relValue.split(/\s+/).filter(p => p !== 'nofollow' && p !== '');
+        return parts.length > 0 ? `rel="${parts.join(' ')}"` : '';
+      });
+      
+      return fixed;
+    });
+  };
+
+  // Eski URL'leri yeni URL'lere dönüştür (href attribute'larında)
+  const fixOldUrls = (html) => {
+    if (!html) return html;
+    
+    return html.replace(/href="([^"]*)"/gi, (match, url) => {
+      let newUrl = url;
+      // /umzugsfirma-in-der-naehe/X → /umzugsfirma/X (sadece alt sayfa varsa)
+      newUrl = newUrl.replace(/\/umzugsfirma-in-der-naehe\//g, '/umzugsfirma/');
+      // /reinigungsfirma-in-der-naehe → /reinigungsfirma
+      newUrl = newUrl.replace(/\/reinigungsfirma-in-der-naehe/g, '/reinigungsfirma');
+      // /malerfirma-in-der-naehe → /malerfirma
+      newUrl = newUrl.replace(/\/malerfirma-in-der-naehe/g, '/malerfirma');
+      return `href="${newUrl}"`;
+    });
+  };
+
   // HTML içindeki tabloları overflow-x-auto wrapper ile sarmala
   const wrapTablesInScrollableContainer = (html) => {
     if (!html || !html.includes('<table')) return html;
@@ -53,21 +108,48 @@ const TiptapRenderer = ({ jsonContent }) => {
     );
   };
 
+  // Tüm HTML dönüşümlerini sırayla uygula
+  const processHtml = (html) => {
+    let processed = html;
+    processed = cleanBrokenHeadingClasses(processed);  // 1. Bozuk class'ları temizle
+    processed = addStandardClasses(processed);          // 2. Standart class'ları ekle
+    processed = fixInternalLinks(processed);            // 3. İç linklerden nofollow kaldır
+    processed = fixOldUrls(processed);                  // 4. Eski URL'leri güncelle
+    processed = wrapTablesInScrollableContainer(processed); // 5. Tabloları sarmala
+    return processed;
+  };
+
   // Eğer içerik string ise (HTML), direkt kullan
   if (typeof jsonContent === 'string') {
-    const withClasses = addStandardClasses(jsonContent);
-    const wrappedContent = wrapTablesInScrollableContainer(withClasses);
+    const processedContent = processHtml(jsonContent);
     return (
       <div
         className="[&_p]:whitespace-pre-wrap [&_p]:break-words [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_table]:w-full [&_table]:min-w-[600px] [&_table]:border-collapse [&_table]:border [&_table]:border-gray-300 [&_table]:my-0 [&_th]:border [&_th]:border-gray-300 [&_th]:bg-gray-100 [&_th]:px-4 [&_th]:py-2 [&_th]:font-semibold [&_th]:text-left [&_th]:whitespace-nowrap [&_td]:border [&_td]:border-gray-300 [&_td]:px-4 [&_td]:py-2 [&_td]:whitespace-nowrap"
       >
-        <div dangerouslySetInnerHTML={{ __html: wrappedContent }} />
+        <div dangerouslySetInnerHTML={{ __html: processedContent }} />
       </div>
     );
   }
 
   // Eğer TipTap JSON formatı ise, HTML'e dönüştür (geriye dönük uyumluluk)
   if (jsonContent && typeof jsonContent === 'object') {
+    // Text node'larındaki mark'ları (bold, italic, underline, link) HTML'e dönüştür
+    const processMarks = (child) => {
+      if (child.type !== 'text') return '';
+      let formattedText = child.text;
+      if (child.marks) {
+        child.marks.forEach((mark) => {
+          if (mark.type === 'bold') formattedText = `<strong>${formattedText}</strong>`;
+          if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
+          if (mark.type === 'underline') formattedText = `<u>${formattedText}</u>`;
+          if (mark.type === 'link' && mark.attrs?.href) {
+            formattedText = `<a href="${mark.attrs.href}" rel="noopener noreferrer" class="text-blue-600 underline cursor-pointer">${formattedText}</a>`;
+          }
+        });
+      }
+      return formattedText;
+    };
+
     const convertTipTapToHTML = (json) => {
       if (!json || !json.content) return '';
 
@@ -78,15 +160,7 @@ const TiptapRenderer = ({ jsonContent }) => {
           if (node.content) {
             node.content.forEach((child) => {
               if (child.type === 'text') {
-                let formattedText = child.text;
-                if (child.marks) {
-                  child.marks.forEach((mark) => {
-                    if (mark.type === 'bold') formattedText = `<strong>${formattedText}</strong>`;
-                    if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
-                    if (mark.type === 'underline') formattedText = `<u>${formattedText}</u>`;
-                  });
-                }
-                text += formattedText;
+                text += processMarks(child);
               } else if (child.type === 'hardBreak') {
                 text += '<br>';
               }
@@ -99,14 +173,7 @@ const TiptapRenderer = ({ jsonContent }) => {
           if (node.content) {
             node.content.forEach((child) => {
               if (child.type === 'text') {
-                let formattedText = child.text;
-                if (child.marks) {
-                  child.marks.forEach((mark) => {
-                    if (mark.type === 'bold') formattedText = `<strong>${formattedText}</strong>`;
-                    if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
-                  });
-                }
-                text += formattedText;
+                text += processMarks(child);
               }
             });
           }
@@ -122,7 +189,7 @@ const TiptapRenderer = ({ jsonContent }) => {
                 item.content.forEach((para) => {
                   if (para.type === 'paragraph' && para.content) {
                     para.content.forEach((child) => {
-                      if (child.type === 'text') itemText += child.text;
+                      if (child.type === 'text') itemText += processMarks(child);
                     });
                   }
                 });
@@ -137,7 +204,7 @@ const TiptapRenderer = ({ jsonContent }) => {
             node.content.forEach((child) => {
               if (child.type === 'paragraph' && child.content) {
                 child.content.forEach((textNode) => {
-                  if (textNode.type === 'text') text += textNode.text;
+                  if (textNode.type === 'text') text += processMarks(textNode);
                 });
               }
             });
@@ -163,13 +230,12 @@ const TiptapRenderer = ({ jsonContent }) => {
     };
 
     const htmlContent = convertTipTapToHTML(jsonContent);
-    const withClasses = addStandardClasses(htmlContent);
-    const wrappedContent = wrapTablesInScrollableContainer(withClasses);
+    const processedContent = processHtml(htmlContent);
     return (
       <div
         className="[&_p]:whitespace-pre-wrap [&_p]:break-words [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_table]:w-full [&_table]:min-w-[600px] [&_table]:border-collapse [&_table]:border [&_table]:border-gray-300 [&_table]:my-0 [&_th]:border [&_th]:border-gray-300 [&_th]:bg-gray-100 [&_th]:px-4 [&_th]:py-2 [&_th]:font-semibold [&_th]:text-left [&_th]:whitespace-nowrap [&_td]:border [&_td]:border-gray-300 [&_td]:px-4 [&_td]:py-2 [&_td]:whitespace-nowrap"
       >
-        <div dangerouslySetInnerHTML={{ __html: wrappedContent }} />
+        <div dangerouslySetInnerHTML={{ __html: processedContent }} />
       </div>
     );
   }

@@ -227,7 +227,7 @@ const UmzugsfirmaBernPageClient = ({ bernPartners = [] }: UmzugsfirmaBernPageCli
                   <ChevronRight className="w-4 h-4 text-gray-400" />
                 </li>
                 <li>
-                  <Link href="/umzugsfirma-in-der-naehe" className="hover:text-green-600 transition-colors">
+                  <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
                     Umzugsfirma in der Nähe
                   </Link>
                 </li>

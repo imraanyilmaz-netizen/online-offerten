@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 // framer-motion removed - CSS for better INP
@@ -21,7 +21,7 @@ const UmzugsfirmaAargauPageClient = () => {
 
   const metaTitle = "Zügelfirma Aargau » Top Umzugsunternehmen vergleichen & sparen";
   const metaDescription = "Zügelfirma Aargau finden ✓ Geprüfte Umzugsunternehmen in Aarau, Baden, Zofingen vergleichen & bis zu 40% sparen. Kostenlose Offerten für Privat- & Geschäftsumzug.";
-  const canonicalUrl = '/umzugsfirma-in-der-naehe/aargau';
+  const canonicalUrl = '/umzugsfirma/aargau';
   const imageUrl = '/image/umzug-reinigung-malerarbeiten-aargau-offerten.webp';
 
   // Cost Table Data
@@ -42,11 +42,11 @@ const UmzugsfirmaAargauPageClient = () => {
   ];
 
   const aargauCities = [
-    { name: 'Aarau', link: '/umzugsfirma-in-der-naehe/aargau/aarau', description: 'Kantonshauptstadt mit historischem Charme', anchorTexts: ['Umzugsfirma in Aarau', 'Zügelfirmen in Aarau finden', 'Umzugsunternehmen Aarau'] },
-    { name: 'Baden', link: '/umzugsfirma-in-der-naehe/aargau/baden', description: 'Thermenstadt im Limmattal', anchorTexts: ['Zügelfirmen in Baden finden', 'Umzugsfirma Baden', 'Umzugsunternehmen Baden'] },
-    { name: 'Zofingen', link: '/umzugsfirma-in-der-naehe/aargau/zofingen', description: 'Schöne Altstadt im Oberaargau', anchorTexts: ['Umzugsunternehmen Zofingen', 'Umzugsfirma in Zofingen', 'Zügelfirma Zofingen'] },
-    { name: 'Brugg', link: '/umzugsfirma-in-der-naehe/aargau/brugg', description: 'Verkehrsknotenpunkt am Aareufer', anchorTexts: ['Professionelle Umzugshilfe in Brugg', 'Umzugsfirma Brugg', 'Zügelfirmen Brugg'] },
-    { name: 'Wettingen', link: '/umzugsfirma-in-der-naehe/aargau/wettingen', description: 'Klosterstadt im Limmattal', anchorTexts: ['Umzugsservice Wettingen', 'Umzugsfirma in Wettingen', 'Zügelfirmen Wettingen'] }
+    { name: 'Aarau', link: '/umzugsfirma/aargau/aarau', description: 'Kantonshauptstadt mit historischem Charme', anchorTexts: ['Umzugsfirma in Aarau', 'Zügelfirmen in Aarau finden', 'Umzugsunternehmen Aarau'] },
+    { name: 'Baden', link: '/umzugsfirma/aargau/baden', description: 'Thermenstadt im Limmattal', anchorTexts: ['Zügelfirmen in Baden finden', 'Umzugsfirma Baden', 'Umzugsunternehmen Baden'] },
+    { name: 'Zofingen', link: '/umzugsfirma/aargau/zofingen', description: 'Schöne Altstadt im Oberaargau', anchorTexts: ['Umzugsunternehmen Zofingen', 'Umzugsfirma in Zofingen', 'Zügelfirma Zofingen'] },
+    { name: 'Brugg', link: '/umzugsfirma/aargau/brugg', description: 'Verkehrsknotenpunkt am Aareufer', anchorTexts: ['Professionelle Umzugshilfe in Brugg', 'Umzugsfirma Brugg', 'Zügelfirmen Brugg'] },
+    { name: 'Wettingen', link: '/umzugsfirma/aargau/wettingen', description: 'Klosterstadt im Limmattal', anchorTexts: ['Umzugsservice Wettingen', 'Umzugsfirma in Wettingen', 'Zügelfirmen Wettingen'] }
   ];
 
   const howItWorksSteps = [
@@ -75,7 +75,7 @@ const UmzugsfirmaAargauPageClient = () => {
     addressRegion: 'AG',
     latitude: '47.3925',
     longitude: '8.0447',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/aargau'
+    canonicalUrl: '/umzugsfirma/aargau'
   };
   
   const schemaData = {
@@ -329,7 +329,7 @@ const UmzugsfirmaAargauPageClient = () => {
                   </h2>
                   <div className="prose prose-lg max-w-none">
                     <p className="text-gray-700 leading-relaxed mb-4">
-                      Der <strong>Aargau</strong>, liebevoll auch "Rüebliland" genannt, ist einer der schönsten und wirtschaftsstärksten Kantone der Schweiz. Mit seiner zentralen Lage zwischen Zürich, Basel und Bern ist der Aargau ein beliebter Wohn- und Wirtschaftsstandort. Ein Umzug in dieser Region – ob nach <Link href="/umzugsfirma-in-der-naehe/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Aarau</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Baden</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Zofingen</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/brugg" className="text-green-600 hover:text-green-800 underline font-semibold">Brugg</Link> oder in eine der vielen charmanten Gemeinden – erfordert einen professionellen <strong>Umzugsdienstleister</strong> oder <strong>Zügelunternehmen</strong>, der die Besonderheiten der Region kennt.
+                      Der <strong>Aargau</strong>, liebevoll auch "Rüebliland" genannt, ist einer der schönsten und wirtschaftsstärksten Kantone der Schweiz. Mit seiner zentralen Lage zwischen Zürich, Basel und Bern ist der Aargau ein beliebter Wohn- und Wirtschaftsstandort. Ein Umzug in dieser Region – ob nach <Link href="/umzugsfirma/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Aarau</Link>, <Link href="/umzugsfirma/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Baden</Link>, <Link href="/umzugsfirma/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Zofingen</Link>, <Link href="/umzugsfirma/aargau/brugg" className="text-green-600 hover:text-green-800 underline font-semibold">Brugg</Link> oder in eine der vielen charmanten Gemeinden – erfordert einen professionellen <strong>Umzugsdienstleister</strong> oder <strong>Zügelunternehmen</strong>, der die Besonderheiten der Region kennt.
                     </p>
                     <p className="text-gray-700 leading-relaxed mb-4">
                       Erfahrene <strong>Transportunternehmen für Umzüge</strong> im Aargau kennen die Verkehrswege, die Parkregelungen in den historischen Altstädten und die logistischen Herausforderungen der Region. Über unser Portal können Sie mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> vergleichen und die beste Lösung für Ihr Projekt finden. Professionelle <strong>regionale Zügelprofis</strong> kümmern sich um die Organisation von Halteverbotszonen, planen die schnellste Route und stellen sicher, dass Ihr Hab und Gut sicher und unversehrt im neuen Zuhause ankommt. Alle Partner sind <strong>versichert gemäss OR</strong> und verfügen über langjährige Erfahrung.
@@ -427,7 +427,7 @@ const UmzugsfirmaAargauPageClient = () => {
                 <article>
                   <h2 className="heading-2">Städte & Regionen im Aargau</h2>
                   <p className="text-gray-700 leading-relaxed mb-6">
-                    Der Aargau bietet eine vielfältige Landschaft mit historischen Städten, idyllischen Dörfern und modernen Wirtschaftszentren. Unsere Partner-<strong>Umzugsdienstleister</strong> und <strong>regionale Zügelprofis</strong> sind in der ganzen Region aktiv. Alle verfügen über umfassende Erfahrung und sind <strong>geprüfte Partner nach Schweizer Standards</strong>. Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen in Baden finden</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsunternehmen Zofingen</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/brugg" className="text-green-600 hover:text-green-800 underline font-semibold">Professionelle Umzugshilfe in Brugg</Link> und <Link href="/umzugsfirma-in-der-naehe/aargau/wettingen" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsservice Wettingen</Link>:
+                    Der Aargau bietet eine vielfältige Landschaft mit historischen Städten, idyllischen Dörfern und modernen Wirtschaftszentren. Unsere Partner-<strong>Umzugsdienstleister</strong> und <strong>regionale Zügelprofis</strong> sind in der ganzen Region aktiv. Alle verfügen über umfassende Erfahrung und sind <strong>geprüfte Partner nach Schweizer Standards</strong>. Erfahren Sie mehr über <Link href="/umzugsfirma/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen in Baden finden</Link>, <Link href="/umzugsfirma/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsunternehmen Zofingen</Link>, <Link href="/umzugsfirma/aargau/brugg" className="text-green-600 hover:text-green-800 underline font-semibold">Professionelle Umzugshilfe in Brugg</Link> und <Link href="/umzugsfirma/aargau/wettingen" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsservice Wettingen</Link>:
                   </p>
                   <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
                     {aargauCities.map((cityItem, index) => (
@@ -595,7 +595,7 @@ const UmzugsfirmaAargauPageClient = () => {
                       { icon: PiPianoKeysFill, title: 'Klaviertransport', link: '/umzugsfirma/spezialtransporte/klaviertransport', desc: 'Professioneller Klaviertransport' },
                       { icon: Sparkles, title: 'Reinigung', link: '/reinigung', desc: 'Umzugsreinigung & mehr' },
                       { icon: Sparkles, title: 'Umzugsreinigung', link: '/reinigung/umzugsreinigung', desc: 'Mit Abnahmegarantie' },
-                      { icon: MapPin, title: 'Möbellagerung', link: '/umzugsfirma-in-der-naehe/aargau', desc: 'Sichere Zwischenlagerung' }
+                      { icon: MapPin, title: 'Möbellagerung', link: '/umzugsfirma/aargau', desc: 'Sichere Zwischenlagerung' }
                     ].map((service, index) => {
                       const Icon = service.icon;
                       return (

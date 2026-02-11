@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -16,7 +16,7 @@ import {
 
 const MalerfirmaInDerNaehePageClient = () => {
   const router = useRouter()
-  const canonicalUrl = 'https://online-offerten.ch/malerfirma-in-der-naehe'
+  const canonicalUrl = 'https://online-offerten.ch/malerfirma'
 
   // Inject structured data
   useEffect(() => {
@@ -138,9 +138,9 @@ const MalerfirmaInDerNaehePageClient = () => {
     const script = document.createElement('script')
     script.type = 'application/ld+json'
     script.text = JSON.stringify(schemaData)
-    script.id = 'malerfirma-in-der-naehe-schema'
+    script.id = 'malerfirma-schema'
     
-    const existing = document.getElementById('malerfirma-in-der-naehe-schema')
+    const existing = document.getElementById('malerfirma-schema')
     if (existing && existing.parentNode) {
       try {
         existing.remove()
@@ -153,7 +153,7 @@ const MalerfirmaInDerNaehePageClient = () => {
     
     return () => {
       if (typeof document === 'undefined') return
-      const scriptToRemove = document.getElementById('malerfirma-in-der-naehe-schema')
+      const scriptToRemove = document.getElementById('malerfirma-schema')
       if (scriptToRemove && scriptToRemove.parentNode) {
         try {
           scriptToRemove.remove()
@@ -345,14 +345,14 @@ const MalerfirmaInDerNaehePageClient = () => {
   ]
 
   const locations = [
-    { name: "Malerfirma Zürich", link: "/malerfirma-in-der-naehe/zuerich" },
-    { name: "Malerfirma Basel", link: "/malerfirma-in-der-naehe/basel" },
-    { name: "Malerfirma Bern", link: "/malerfirma-in-der-naehe/bern" },
-    { name: "Malerfirma Winterthur", link: "/malerfirma-in-der-naehe/winterthur" },
-    { name: "Malerfirma Luzern", link: "/malerfirma-in-der-naehe/luzern" },
-    { name: "Malerfirma St. Gallen", link: "/malerfirma-in-der-naehe/st-gallen" },
-    { name: "Malerfirma Genf", link: "/malerfirma-in-der-naehe/genf" },
-    { name: "Malerfirma Lausanne", link: "/malerfirma-in-der-naehe/lausanne" }
+    { name: "Malerfirma Zürich", link: "/malerfirma/zuerich" },
+    { name: "Malerfirma Basel", link: "/malerfirma/basel" },
+    { name: "Malerfirma Bern", link: "/malerfirma/bern" },
+    { name: "Malerfirma Winterthur", link: "/malerfirma/winterthur" },
+    { name: "Malerfirma Luzern", link: "/malerfirma/luzern" },
+    { name: "Malerfirma St. Gallen", link: "/malerfirma/st-gallen" },
+    { name: "Malerfirma Genf", link: "/malerfirma/genf" },
+    { name: "Malerfirma Lausanne", link: "/malerfirma/lausanne" }
   ]
 
   return (

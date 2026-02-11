@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -15,7 +15,7 @@ import {
 
 const UmzugsoffertenZuerichPageClient = () => {
   const router = useRouter()
-  const canonicalUrl = 'https://online-offerten.ch/umzugsfirma-in-der-naehe/zuerich/umzugsofferten-zuerich'
+  const canonicalUrl = 'https://online-offerten.ch/umzugsfirma/zuerich/umzugsofferten-zuerich'
 
   // Inject structured data
   useEffect(() => {

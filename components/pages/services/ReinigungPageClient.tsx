@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 
@@ -424,7 +424,7 @@ const ReinigungPageClient = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/malerfirma-in-der-naehe" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                    <Link href="/malerfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
                       Malerfirmen vergleichen
                     </Link>
                   </li>

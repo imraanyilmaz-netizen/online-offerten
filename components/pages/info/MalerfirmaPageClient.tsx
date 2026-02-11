@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -735,17 +735,17 @@ const MalerfirmaPageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/malerfirma-in-der-naehe" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      <Link href="/malerfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
                         Malerfirma in der Nähe finden
                       </Link>
                     </li>
                     <li>
-                      <Link href="/malerfirma-in-der-naehe/zuerich" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      <Link href="/malerfirma/zuerich" className="text-blue-600 hover:text-blue-700 font-medium underline">
                         Malerfirma Zürich
                       </Link>
                     </li>
                     <li>
-                      <Link href="/malerfirma-in-der-naehe/basel" className="text-blue-600 hover:text-blue-700 font-medium underline">
+                      <Link href="/malerfirma/basel" className="text-blue-600 hover:text-blue-700 font-medium underline">
                         Malerfirma Basel
                       </Link>
                     </li>

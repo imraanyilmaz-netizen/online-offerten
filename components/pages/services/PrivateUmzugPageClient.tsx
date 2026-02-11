@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -266,10 +266,10 @@ const PrivateUmzugPageClient = () => {
                     </h2>
                     <div className="text-body mb-8 leading-relaxed space-y-4">
                       <p>
-                        Ein Privatumzug ist mehr als nur der Transport von Möbeln von A nach B – er betrifft das ganze Leben einer Familie. Ob Sie in <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-700 font-semibold underline">Zürich</Link>, <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Bern</Link>, <Link href="/umzugsfirma-in-der-naehe/basel" className="text-green-600 hover:text-green-700 font-semibold underline">Basel</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-700 font-semibold underline">Aargau</Link>, <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Luzern</Link> oder <Link href="/umzugsfirma-in-der-naehe/st-gallen" className="text-green-600 hover:text-green-700 font-semibold underline">St. Gallen</Link> wohnen: Die Wohnungsabgabe, neue Kita- oder Schulwege, veränderte Arbeitswege und die gesamte Organisation rund um den Wohnungswechsel erfordern eine frühzeitige Planung. Gerade in der Schweiz konzentrieren sich viele Privatumzüge auf bestimmte Stichtage - Ende März, Ende Juni und Ende September sind typische Mietzinswechsel-Termine, an denen die Nachfrage nach Umzugsfirmen besonders hoch ist.
+                        Ein Privatumzug ist mehr als nur der Transport von Möbeln von A nach B – er betrifft das ganze Leben einer Familie. Ob Sie in <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:text-green-700 font-semibold underline">Zürich</Link>, <Link href="/umzugsfirma/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Bern</Link>, <Link href="/umzugsfirma/basel" className="text-green-600 hover:text-green-700 font-semibold underline">Basel</Link>, <Link href="/umzugsfirma/aargau" className="text-green-600 hover:text-green-700 font-semibold underline">Aargau</Link>, <Link href="/umzugsfirma/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Luzern</Link> oder <Link href="/umzugsfirma/st-gallen" className="text-green-600 hover:text-green-700 font-semibold underline">St. Gallen</Link> wohnen: Die Wohnungsabgabe, neue Kita- oder Schulwege, veränderte Arbeitswege und die gesamte Organisation rund um den Wohnungswechsel erfordern eine frühzeitige Planung. Gerade in der Schweiz konzentrieren sich viele Privatumzüge auf bestimmte Stichtage - Ende März, Ende Juni und Ende September sind typische Mietzinswechsel-Termine, an denen die Nachfrage nach Umzugsfirmen besonders hoch ist.
                       </p>
                       <p>
-                        Genau hier setzt Online-Offerten.ch an: Als digitale Plattform ermöglicht sie es Ihnen, Ihren geplanten Umzug unkompliziert zu beschreiben und anschliessend mehrere Offerten von geprüften <Link href="/umzugsfirma-in-der-naehe" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirmen aus Ihrer Region</Link> zu erhalten. Sie entscheiden selbst, welches Unternehmen am besten zu Ihrem Bedarf passt – ob im Raum Zürichsee, Limmattal, der Agglomeration Bern oder anderswo in der Schweiz.
+                        Genau hier setzt Online-Offerten.ch an: Als digitale Plattform ermöglicht sie es Ihnen, Ihren geplanten Umzug unkompliziert zu beschreiben und anschliessend mehrere Offerten von geprüften <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirmen aus Ihrer Region</Link> zu erhalten. Sie entscheiden selbst, welches Unternehmen am besten zu Ihrem Bedarf passt – ob im Raum Zürichsee, Limmattal, der Agglomeration Bern oder anderswo in der Schweiz.
                       </p>
                       <p>
                         Alle Offerten sind kostenlos und unverbindlich. Das bedeutet: Sie gehen kein Risiko ein und behalten die volle Kontrolle über Ihre Entscheidung. Die Partner von Online-Offerten.ch sind regionale Spezialisten, die auf Privatumzüge spezialisiert sind und wissen, worauf es bei einem reibungslosen Wohnungswechsel ankommt.
@@ -931,7 +931,7 @@ const PrivateUmzugPageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/umzugsfirma-in-der-naehe" className="text-green-600 hover:underline font-medium flex items-center">
+                      <Link href="/umzugsfirma" className="text-green-600 hover:underline font-medium flex items-center">
                         <ArrowRight className="w-4 h-4 mr-2" />
                         Umzugsfirma in Ihrer Nähe finden
                       </Link>

@@ -15,7 +15,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'ZH',
     latitude: '47.3769',
     longitude: '8.5417',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/zuerich'
+    canonicalUrl: '/umzugsfirma/zuerich'
   },
   'Basel': {
     name: 'Basel',
@@ -24,7 +24,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'BS',
     latitude: '47.5596',
     longitude: '7.5886',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/basel'
+    canonicalUrl: '/umzugsfirma/basel'
   },
   'Bern': {
     name: 'Bern',
@@ -33,7 +33,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'BE',
     latitude: '46.9481',
     longitude: '7.4474',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/bern'
+    canonicalUrl: '/umzugsfirma/bern'
   },
   'Genf': {
     name: 'Genf',
@@ -42,7 +42,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'GE',
     latitude: '46.2044',
     longitude: '6.1432',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/genf'
+    canonicalUrl: '/umzugsfirma/genf'
   },
   'Lausanne': {
     name: 'Lausanne',
@@ -51,7 +51,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'VD',
     latitude: '46.5197',
     longitude: '6.6323',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/lausanne'
+    canonicalUrl: '/umzugsfirma/lausanne'
   },
   'Luzern': {
     name: 'Luzern',
@@ -60,7 +60,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'LU',
     latitude: '47.0502',
     longitude: '8.3093',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/luzern'
+    canonicalUrl: '/umzugsfirma/luzern'
   },
   'St. Gallen': {
     name: 'St. Gallen',
@@ -69,7 +69,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'SG',
     latitude: '47.4245',
     longitude: '9.3767',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/st-gallen'
+    canonicalUrl: '/umzugsfirma/st-gallen'
   },
   'Lugano': {
     name: 'Lugano',
@@ -78,7 +78,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'TI',
     latitude: '46.0101',
     longitude: '8.9600',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/lugano'
+    canonicalUrl: '/umzugsfirma/lugano'
   },
   'Thun': {
     name: 'Thun',
@@ -87,7 +87,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'BE',
     latitude: '46.7512',
     longitude: '7.6217',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/thun'
+    canonicalUrl: '/umzugsfirma/thun'
   },
   'Biel-Bienne': {
     name: 'Biel/Bienne',
@@ -96,7 +96,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'BE',
     latitude: '47.1367',
     longitude: '7.2467',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/biel-bienne'
+    canonicalUrl: '/umzugsfirma/biel-bienne'
   },
   'Aargau': {
     name: 'Aargau',
@@ -105,7 +105,7 @@ export const cityServiceData: Record<string, {
     addressRegion: 'AG',
     latitude: '47.3925',
     longitude: '8.0447',
-    canonicalUrl: '/umzugsfirma-in-der-naehe/aargau'
+    canonicalUrl: '/umzugsfirma/aargau'
   }
 }
 

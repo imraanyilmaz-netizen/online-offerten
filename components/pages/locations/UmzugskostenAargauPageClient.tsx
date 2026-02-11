@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -221,7 +221,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
             <nav className="flex items-center space-x-2 text-sm">
               <Link href="/" className="text-gray-600 hover:text-green-600">Start</Link>
               <span className="text-gray-400">/</span>
-              <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
+              <Link href="/umzugsfirma/aargau" className="text-gray-600 hover:text-green-600">Umzugsfirma Aargau</Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 font-medium">Umzugskosten</span>
             </nav>
@@ -486,7 +486,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
               <h2 className="heading-2">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirmen im Aargau vergleichen</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen Aargau finden</Link> oder informieren Sie sich über <Link href="/umzugsfirma-in-der-naehe/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma-in-der-naehe/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma Baden</Link> und <Link href="/umzugsfirma-in-der-naehe/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Anbieter im Kanton Aargau</Link>.
+                  Erfahren Sie mehr über <Link href="/umzugsfirma/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirmen im Aargau vergleichen</Link>, <Link href="/umzugsfirma/aargau" className="text-green-600 hover:text-green-800 underline font-semibold">Zügelfirmen Aargau finden</Link> oder informieren Sie sich über <Link href="/umzugsfirma/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma in Aarau</Link>, <Link href="/umzugsfirma/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Umzugsfirma Baden</Link> und <Link href="/umzugsfirma/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Anbieter im Kanton Aargau</Link>.
                 </p>
               </div>
             </article>

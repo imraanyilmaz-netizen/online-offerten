@@ -185,7 +185,7 @@ const HomeHeroForm = memo(() => {
     >
       <div>
         <h1 className="heading-1 break-words">
-          Kostenlose Offerten für Umzug, Reinigung & Malerarbeiten vergleichen
+          Offerten vergleichen & passende Anbieter in der Schweiz finden
         </h1>
         <p className="text-gray-600 text-base sm:text-lg mt-2">
           Bei Online-Offerten finden Sie geprüfte, passende Anbieter in Ihrer Nähe.

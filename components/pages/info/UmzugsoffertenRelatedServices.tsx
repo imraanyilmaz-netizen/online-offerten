@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 // framer-motion removed - CSS for better INP
@@ -65,12 +65,12 @@ const UmzugsoffertenRelatedServices: React.FC = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-700 font-medium underline">
+                  <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:text-green-700 font-medium underline">
                     Umzugsfirma Zürich
                   </Link>
                 </li>
                 <li>
-                  <Link href="/umzugsfirma-in-der-naehe/basel" className="text-green-600 hover:text-green-700 font-medium underline">
+                  <Link href="/umzugsfirma/basel" className="text-green-600 hover:text-green-700 font-medium underline">
                     Umzugsfirma Basel
                   </Link>
                 </li>

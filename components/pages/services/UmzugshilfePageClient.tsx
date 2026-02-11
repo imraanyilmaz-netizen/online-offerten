@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -379,7 +379,7 @@ const UmzugshilfePageClient = () => {
                   Lokale Umzugshelfer und Umzugsfirmen kennen die Gegebenheiten vor Ort, wie z.B. Parkregelungen oder Zufahrtsbeschränkungen. Das spart Zeit und Nerven am Umzugstag.
                 </p>
                 <p className="text-body leading-relaxed">
-                  Wir vermitteln Ihnen Umzugshilfe in der ganzen Schweiz. Finden Sie den passenden Partner in <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma-in-der-naehe/basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
+                  Wir vermitteln Ihnen Umzugshilfe in der ganzen Schweiz. Finden Sie den passenden Partner in <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:underline font-semibold">Zürich</Link>, <Link href="/umzugsfirma/bern" className="text-green-600 hover:underline font-semibold">Bern</Link>, <Link href="/umzugsfirma/basel" className="text-green-600 hover:underline font-semibold">Basel</Link>, <Link href="/umzugsfirma/luzern" className="text-green-600 hover:underline font-semibold">Luzern</Link> und <Link href="/standorte" className="text-green-600 hover:underline font-semibold">vielen weiteren Standorten</Link>.
                 </p>
               </section>
 
@@ -446,7 +446,7 @@ const UmzugshilfePageClient = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/umzugsfirma-in-der-naehe" className="text-green-600 hover:underline font-medium flex items-center">
+                      <Link href="/umzugsfirma" className="text-green-600 hover:underline font-medium flex items-center">
                         <ArrowRight className="w-4 h-4 mr-2" />
                         Umzugsfirma in Ihrer Nähe finden
                       </Link>

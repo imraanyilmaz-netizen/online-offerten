@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -49,7 +49,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
               "@type": "ListItem",
               "position": 2,
               "name": "Reinigungsfirma in der Nähe",
-              "item": "https://online-offerten.ch/reinigungsfirma-in-der-naehe"
+              "item": "https://online-offerten.ch/reinigungsfirma"
             },
             {
               "@type": "ListItem",

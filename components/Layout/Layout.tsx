@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { Suspense } from 'react'
 import { usePathname } from 'next/navigation'
@@ -53,21 +53,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     '/reinigung/fassadenreinigung',
     '/reinigung/hofreinigung',
     // Stadtseiten - Umzugsfirma
-    '/umzugsfirma-in-der-naehe/zuerich',
-    '/umzugsfirma-in-der-naehe/bern',
-    '/umzugsfirma-in-der-naehe/basel',
-    '/umzugsfirma-in-der-naehe/luzern',
-    '/umzugsfirma-in-der-naehe/st-gallen',
-    '/umzugsfirma-in-der-naehe/genf',
-    '/umzugsfirma-in-der-naehe/lausanne',
-    '/umzugsfirma-in-der-naehe/lugano',
-    '/umzugsfirma-in-der-naehe/aargau',
-    '/umzugsfirma-in-der-naehe/thun',
-    '/umzugsfirma-in-der-naehe/biel-bienne',
+    '/umzugsfirma/zuerich',
+    '/umzugsfirma/bern',
+    '/umzugsfirma/basel',
+    '/umzugsfirma/luzern',
+    '/umzugsfirma/st-gallen',
+    '/umzugsfirma/genf',
+    '/umzugsfirma/lausanne',
+    '/umzugsfirma/lugano',
+    '/umzugsfirma/aargau',
+    '/umzugsfirma/thun',
+    '/umzugsfirma/biel-bienne',
     // Info-Seiten
     '/umzugsfirma',
     '/reinigung',
-    '/malerfirma-in-der-naehe',
+    '/malerfirma',
     // Bewertungen
     '/kunden-bewertungen',
     // Ratgeber
@@ -77,7 +77,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   // Prefixe für dynamische Seiten (z.B. /ratgeber/slug)
   const allowedCTABannerPrefixes = [
     '/ratgeber/',
-    '/umzugsfirma-in-der-naehe',
+    '/umzugsfirma',
   ]
   
   const shouldShowCTABanner = !isFormPage && (

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -20,7 +20,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
   }
 
   const cityName = cityData.name
-  const canonicalUrl = `/umzugsfirma-in-der-naehe/zuerich/${city}`
+  const canonicalUrl = `/umzugsfirma/zuerich/${city}`
 
   // Service Schema - Correct structure for location pages
   const serviceSchema = {
@@ -138,7 +138,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
             <nav className="flex items-center space-x-2 text-sm">
               <Link href="/" className="text-gray-600 hover:text-green-600">Start</Link>
               <span className="text-gray-400">/</span>
-              <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-gray-600 hover:text-green-600">Umzugsfirma Zürich</Link>
+              <Link href="/umzugsfirma/zuerich" className="text-gray-600 hover:text-green-600">Umzugsfirma Zürich</Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 font-medium">{cityName}</span>
             </nav>
@@ -363,7 +363,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
               <h2 className="heading-2">Weitere Informationen</h2>
               <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Erfahren Sie mehr über <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Zürich-Übersicht</Link>, <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Kanton Zürich</Link> oder <Link href="/umzugsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>.
+                  Erfahren Sie mehr über <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Zurück zur Zürich-Übersicht</Link>, <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Alle Umzugsfirmen im Kanton Zürich</Link> oder <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:text-green-800 underline font-semibold">Weitere Standorte im Kanton</Link>.
                 </p>
               </div>
             </article>

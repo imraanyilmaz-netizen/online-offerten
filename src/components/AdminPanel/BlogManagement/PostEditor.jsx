@@ -87,6 +87,9 @@ const PostEditor = ({ post, onBack }) => {
                   if (mark.type === 'bold') formattedText = `<strong>${formattedText}</strong>`;
                   if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
                   if (mark.type === 'underline') formattedText = `<u>${formattedText}</u>`;
+                  if (mark.type === 'link' && mark.attrs?.href) {
+                    formattedText = `<a href="${mark.attrs.href}" rel="noopener noreferrer" class="text-blue-600 underline cursor-pointer">${formattedText}</a>`;
+                  }
                 });
               }
               text += formattedText;
@@ -107,6 +110,9 @@ const PostEditor = ({ post, onBack }) => {
                 child.marks.forEach(mark => {
                   if (mark.type === 'bold') formattedText = `<strong>${formattedText}</strong>`;
                   if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
+                  if (mark.type === 'link' && mark.attrs?.href) {
+                    formattedText = `<a href="${mark.attrs.href}" rel="noopener noreferrer" class="text-blue-600 underline cursor-pointer">${formattedText}</a>`;
+                  }
                 });
               }
               text += formattedText;

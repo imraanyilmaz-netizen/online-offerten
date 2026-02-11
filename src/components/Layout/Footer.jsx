@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
 import { Mail, MapPin, Building2, Sparkles, FileText, Send } from 'lucide-react';
 
@@ -8,21 +8,21 @@ const Footer = React.memo(() => {
 
   // Hauptstädte und wichtige Städte
   const hauptstaedte = [
-    { to: '/umzugsfirma-in-der-naehe/zuerich', text: 'Zürich' },
-    { to: '/umzugsfirma-in-der-naehe/bern', text: 'Bern' },
-    { to: '/umzugsfirma-in-der-naehe/basel', text: 'Basel' },
-    { to: '/umzugsfirma-in-der-naehe/luzern', text: 'Luzern' },
-    { to: '/umzugsfirma-in-der-naehe/st-gallen', text: 'St. Gallen' },
-    { to: '/umzugsfirma-in-der-naehe/genf', text: 'Genf' },
-    { to: '/umzugsfirma-in-der-naehe/lausanne', text: 'Lausanne' },
-    { to: '/umzugsfirma-in-der-naehe/lugano', text: 'Lugano' },
+    { to: '/umzugsfirma/zuerich', text: 'Zürich' },
+    { to: '/umzugsfirma/bern', text: 'Bern' },
+    { to: '/umzugsfirma/basel', text: 'Basel' },
+    { to: '/umzugsfirma/luzern', text: 'Luzern' },
+    { to: '/umzugsfirma/st-gallen', text: 'St. Gallen' },
+    { to: '/umzugsfirma/genf', text: 'Genf' },
+    { to: '/umzugsfirma/lausanne', text: 'Lausanne' },
+    { to: '/umzugsfirma/lugano', text: 'Lugano' },
   ];
 
   // Weitere wichtige Städte
   const weitereStaedte = [
-    { to: '/umzugsfirma-in-der-naehe/aargau', text: 'Aargau' },
-    { to: '/umzugsfirma-in-der-naehe/thun', text: 'Thun' },
-    { to: '/umzugsfirma-in-der-naehe/biel-bienne', text: 'Biel/Bienne' },
+    { to: '/umzugsfirma/aargau', text: 'Aargau' },
+    { to: '/umzugsfirma/thun', text: 'Thun' },
+    { to: '/umzugsfirma/biel-bienne', text: 'Biel/Bienne' },
   ];
 
   // Umzug Services
@@ -245,19 +245,19 @@ const Footer = React.memo(() => {
                 <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Firmen finden</h4>
                 <ul className="space-y-2.5">
                   <li>
-                    <Link href="/umzugsfirma-in-der-naehe" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                    <Link href="/umzugsfirma" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
                       <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
                       Umzugsfirma finden
                     </Link>
                   </li>
                   <li>
-                    <Link href="/reinigungsfirma-in-der-naehe" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                    <Link href="/reinigungsfirma" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
                       <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
                       Reinigungsfirma finden
                     </Link>
                   </li>
                   <li>
-                    <Link href="/malerfirma-in-der-naehe" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                    <Link href="/malerfirma" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
                       <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
                       Malerfirma finden
                     </Link>

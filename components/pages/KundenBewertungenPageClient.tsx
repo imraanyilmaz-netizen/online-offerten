@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
@@ -173,7 +173,7 @@ const services = [
   { name: 'Hausreinigung', icon: Building2, href: '/reinigung/hausreinigung' },
   { name: 'Büroreinigung', icon: Building2, href: '/reinigung/bueroreinigung' },
   { name: 'Umzugsreinigung', icon: Sparkles, href: '/reinigung/umzugsreinigung' },
-  { name: 'Malerarbeiten', icon: Paintbrush, href: '/malerfirma-in-der-naehe' },
+  { name: 'Malerarbeiten', icon: Paintbrush, href: '/malerfirma' },
 ]
 
 const KundenBewertungenPageClient = ({ 

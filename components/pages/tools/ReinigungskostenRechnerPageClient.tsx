@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -266,7 +266,7 @@ const ReinigungskostenRechnerPageClient = () => {
               Noch problematischer: <strong>73% der Mieter zahlen zu viel</strong> für ihre professionelle Endreinigung, weil sie weder die marktüblichen Preise kennen noch wissen, worauf bei der Offerte zu achten ist. Zwischen dem günstigsten und teuersten Anbieter liegen bei einer 3.5 Zimmer Wohnung schnell <strong>300-500 CHF Unterschied</strong> – bei identischer Leistung.
             </p>
             <p className="text-body leading-relaxed">
-              Dieser ultimative Guide liefert Ihnen alles, was Sie über <Link href="/ratgeber/umzugsreinigung-beim-umzug" className="text-green-600 hover:text-green-700 font-semibold underline">Endreinigung Wohnung Kosten in der Schweiz</Link> wissen müssen: von detaillierten Preistabellen für jede Wohnungsgrösse über regionale Unterschiede zwischen <Link href="/reinigungsfirma-in-der-naehe/zuerich" className="text-green-600 hover:text-green-700 font-semibold underline">Zürich</Link>, <Link href="/reinigungsfirma-in-der-naehe/genf" className="text-green-600 hover:text-green-700 font-semibold underline">Genf</Link> und ländlichen Gebieten bis hin zu 10 bewährten Spartipps, die wirklich funktionieren. Nach diesem Artikel brauchen Sie keine weiteren Quellen mehr.
+              Dieser ultimative Guide liefert Ihnen alles, was Sie über <Link href="/ratgeber/umzugsreinigung-beim-umzug" className="text-green-600 hover:text-green-700 font-semibold underline">Endreinigung Wohnung Kosten in der Schweiz</Link> wissen müssen: von detaillierten Preistabellen für jede Wohnungsgrösse über regionale Unterschiede zwischen <Link href="/reinigungsfirma/zuerich" className="text-green-600 hover:text-green-700 font-semibold underline">Zürich</Link>, <Link href="/reinigungsfirma/genf" className="text-green-600 hover:text-green-700 font-semibold underline">Genf</Link> und ländlichen Gebieten bis hin zu 10 bewährten Spartipps, die wirklich funktionieren. Nach diesem Artikel brauchen Sie keine weiteren Quellen mehr.
             </p>
           </section>
 
@@ -638,7 +638,7 @@ const ReinigungskostenRechnerPageClient = () => {
               <li className="leading-relaxed"><strong>Vorher selbst grob reinigen: 5-15% Nachlass</strong> – Groben Schmutz und Müll vorher entfernen</li>
               <li className="leading-relaxed"><strong>Flexible Termine: Express-Zuschläge vermeiden</strong> – Kurzfristige Buchungen kosten +25%</li>
               <li className="leading-relaxed"><strong>Mehrere Offerten: Bis zu 30% Preisunterschied</strong> – Mindestens 3 Angebote vergleichen</li>
-              <li className="leading-relaxed"><strong>Lokale Anbieter bevorzugen: Anfahrtskosten sparen</strong> – <Link href="/umzugsfirma-in-der-naehe" className="text-green-600 hover:text-green-700 font-semibold underline">Reinigungsfirma aus der Nähe wählen</Link></li>
+              <li className="leading-relaxed"><strong>Lokale Anbieter bevorzugen: Anfahrtskosten sparen</strong> – <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline">Reinigungsfirma aus der Nähe wählen</Link></li>
               <li className="leading-relaxed"><strong>Standard-Paket wählen: Extras einzeln prüfen</strong> – Brauchen Sie wirklich Teppich-Shampoonierung?</li>
               <li className="leading-relaxed"><strong>Langfristige Planung: Saison-Rabatte nutzen</strong> – Winter-Umzüge sind 10-15% günstiger</li>
             </ol>

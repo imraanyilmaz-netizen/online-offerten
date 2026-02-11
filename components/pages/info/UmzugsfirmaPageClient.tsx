@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
@@ -354,13 +354,13 @@ const UmzugsfirmaPageClient = () => {
   ]
 
   const locations = [
-    { name: "Umzugsfirma Zürich", link: "/umzugsfirma-in-der-naehe/zuerich" },
-    { name: "Umzugsfirma Basel", link: "/umzugsfirma-in-der-naehe/basel" },
-    { name: "Umzugsfirma Bern", link: "/umzugsfirma-in-der-naehe/bern" },
-    { name: "Umzugsfirma Genf", link: "/umzugsfirma-in-der-naehe/genf" },
-    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma-in-der-naehe/lausanne" },
-    { name: "Umzugsfirma Luzern", link: "/umzugsfirma-in-der-naehe/luzern" },
-    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma-in-der-naehe/st-gallen" }
+    { name: "Umzugsfirma Zürich", link: "/umzugsfirma/zuerich" },
+    { name: "Umzugsfirma Basel", link: "/umzugsfirma/basel" },
+    { name: "Umzugsfirma Bern", link: "/umzugsfirma/bern" },
+    { name: "Umzugsfirma Genf", link: "/umzugsfirma/genf" },
+    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma/lausanne" },
+    { name: "Umzugsfirma Luzern", link: "/umzugsfirma/luzern" },
+    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma/st-gallen" }
   ]
 
   return (
@@ -669,7 +669,7 @@ const UmzugsfirmaPageClient = () => {
                   Umzugsfirma Schweiz: Regionale Unterschiede
                 </h3>
                 <p className="text-body">
-                  Die Preise und Verfügbarkeit von Dienstleistern können je nach Region in der Schweiz variieren. In Ballungsgebieten wie Zürich, Basel oder Genf gibt es mehr Anbieter zur Auswahl, aber die Preise sind oft höher. Eine <Link href="/umzugsfirma-in-der-naehe/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Bern</Link> oder <Link href="/umzugsfirma-in-der-naehe/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Luzern</Link> hat oft höhere Lohnkosten als ein Partner in ländlicheren Regionen. Dennoch lohnt es sich, auch Anbieter aus anderen Regionen zu kontaktieren, da diese oft günstigere Preise anbieten können. In ländlicheren Regionen sind die <strong>Umzugskosten</strong> oft niedriger, aber die Auswahl an Partnern ist begrenzter.
+                  Die Preise und Verfügbarkeit von Dienstleistern können je nach Region in der Schweiz variieren. In Ballungsgebieten wie Zürich, Basel oder Genf gibt es mehr Anbieter zur Auswahl, aber die Preise sind oft höher. Eine <Link href="/umzugsfirma/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Bern</Link> oder <Link href="/umzugsfirma/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Luzern</Link> hat oft höhere Lohnkosten als ein Partner in ländlicheren Regionen. Dennoch lohnt es sich, auch Anbieter aus anderen Regionen zu kontaktieren, da diese oft günstigere Preise anbieten können. In ländlicheren Regionen sind die <strong>Umzugskosten</strong> oft niedriger, aber die Auswahl an Partnern ist begrenzter.
                 </p>
 
                 <h3 className="heading-3 mt-8 mb-4">

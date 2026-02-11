@@ -21,13 +21,13 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen | Online-Offerten.ch',
+  title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden | Online-Offerten.ch',
   description: 'Kostenlose Offerten für Umzug, Reinigung & Malerarbeiten vergleichen. Bis zu 5 Angebote von geprüften Firmen aus Ihrer Region erhalten. ✓ Unverbindlich ✓ 100% kostenlos.',
   alternates: {
     canonical: 'https://online-offerten.ch/',
   },
   openGraph: {
-    title: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen | Online-Offerten.ch',
+    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden | Online-Offerten.ch',
     description: 'Kostenlose Offerten für Umzug, Reinigung & Malerarbeiten. Bis zu 5 Angebote von geprüften Firmen erhalten.',
     url: 'https://online-offerten.ch/',
     siteName: 'Online-Offerten.ch',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: 'https://online-offerten.ch/image/online-offerten.webp',
         width: 1200,
         height: 630,
-        alt: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen',
+        alt: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
       },
     ],
     locale: 'de_CH',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzug, Reinigung & Maler Offerten kostenlos vergleichen',
+    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
     description: 'Bis zu 5 kostenlose Angebote von geprüften Firmen erhalten',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
@@ -292,7 +292,7 @@ export default async function HomePage() {
           {/* Hero Section - SEO Optimized - SERVER RENDERED */}
           <section 
             className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-gray-100 z-20" 
-            aria-label="Kostenlose Offerten für Umzug, Reinigung und Malerarbeiten vergleichen"
+            aria-label="Offerten vergleichen & passende Anbieter in der Schweiz finden"
           >
             {/* Background Image - Right Side - Desktop Only - Optimized with Next.js Image */}
             <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full overflow-hidden">
@@ -643,7 +643,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="/umzugsfirma-in-der-naehe" className="inline-flex items-center">
+                      <Link href="/umzugsfirma" className="inline-flex items-center">
                         Umzugsfirma finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
@@ -674,7 +674,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="/reinigungsfirma-in-der-naehe" className="inline-flex items-center">
+                      <Link href="/reinigungsfirma" className="inline-flex items-center">
                         Reinigungsfirma finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
@@ -705,7 +705,7 @@ export default async function HomePage() {
                       </p>
                     </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="/malerfirma-in-der-naehe" className="inline-flex items-center">
+                      <Link href="/malerfirma" className="inline-flex items-center">
                         Maler finden
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
