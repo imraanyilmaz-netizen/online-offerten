@@ -1,10 +1,14 @@
 ﻿import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import PostPageClient from '@/components/pages/tools/PostPageClient'
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
+
+// ISR: Sayfa 60 saniyede bir arka planda yenilenir
+// Blog yazıları public veri olduğu için cookies gerekmez
+export const revalidate = 60
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const supabase = await createClient()
+  const supabase = createStaticClient()
   
   // Fetch post data for metadata - including meta_title, published_at, updated_at
   const { data: post, error } = await supabase
@@ -90,7 +94,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function RatgeberPostPage({ params }: { params: { slug: string } }) {
-  const supabase = await createClient()
+  const supabase = createStaticClient()
   
   // Fetch FULL post data for SSR (including content for SEO)
   const { data: post } = await supabase
