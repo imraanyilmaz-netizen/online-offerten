@@ -5,10 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "npm run sitemap && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "node -r dotenv/config scripts/generate-sitemap.js",
     "favicons": "node scripts/generate-favicons.js"
   },
   "dependencies": {
