@@ -509,8 +509,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .order('published_at', { ascending: false })
 
     blogPages = (posts || [])
-      .filter(post => post.slug)
-      .map(post => ({
+      .filter((post: any) => post.slug)
+      .map((post: any) => ({
         url: `${BASE_URL}/ratgeber/${post.slug}`,
         lastModified: new Date(post.updated_at || post.published_at || post.created_at),
         changeFrequency: 'weekly' as const,
@@ -532,8 +532,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .not('slug', 'is', null)
 
     partnerPages = (partners || [])
-      .filter(partner => partner.slug)
-      .map(partner => ({
+      .filter((partner: any) => partner.slug)
+      .map((partner: any) => ({
         url: `${BASE_URL}/partner/${partner.slug}`,
         lastModified: partner.updated_at ? new Date(partner.updated_at) : undefined,
         changeFrequency: 'weekly' as const,
