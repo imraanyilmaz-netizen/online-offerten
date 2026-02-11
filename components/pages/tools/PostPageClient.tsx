@@ -1,77 +1,34 @@
 ﻿'use client'
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { supabase } from '@/lib/supabaseClient';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Tag, Folder, Home, ChevronRight, Loader2, ArrowLeft, HelpCircle } from 'lucide-react';
+import { Calendar, Folder, Home, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-// framer-motion removed - CSS for better INP
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import PostSidebar from '@/src/components/tools/PostSidebar';
 
-const PostPageClient = () => {
+interface PostPageClientProps {
+    initialPost?: any;
+    initialRecentPosts?: any[];
+}
+
+const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClientProps) => {
     const params = useParams();
     const slug = params?.slug as string | undefined;
-    const [post, setPost] = useState<any>(null);
-    const [recentPosts, setRecentPosts] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     
     const ratgeberBasePath = '/ratgeber';
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            setLoading(true);
-            
-            const { data: postData, error: postError } = await supabase
-                .from('posts')
-                .select('*, meta_title, faq, faq_title, faq_description, custom_html')
-                .eq('slug', slug)
-                .single();
+    const post = initialPost;
+    const recentPosts = initialRecentPosts;
 
-            if (postError || !postData) {
-                console.error('Error fetching post:', postError);
-                setError('Beitrag konnte nicht gefunden werden.');
-                setLoading(false);
-                return;
-            }
-            
-            setPost(postData);
-
-            const { data: recentData, error: recentError } = await supabase
-                .from('posts')
-                .select('title, slug, featured_image_url')
-                .eq('status', 'published')
-                .neq('slug', slug)
-                .order('published_at', { ascending: false })
-                .limit(5);
-
-            if (recentError) {
-                console.error('Error fetching recent posts:', recentError);
-            } else {
-                setRecentPosts(recentData || []);
-            }
-
-            setLoading(false);
-        };
-
-        window.scrollTo(0, 0);
-        fetchPost();
-    }, [slug]);
-
-    if (loading) {
-        return <div className="flex justify-center items-center h-screen"><Loader2 className="w-12 h-12 animate-spin text-green-600" /></div>;
-    }
-
-    if (error) {
+    if (!post) {
         return (
             <div className="text-center py-20">
                 <h1 className="text-2xl font-bold mb-4">Fehler</h1>
-                <p className="text-gray-600">{error}</p>
+                <p className="text-gray-600">Beitrag konnte nicht gefunden werden.</p>
                 <Button asChild className="mt-4">
                     <Link href={ratgeberBasePath}>
                         <ArrowLeft className="mr-2 h-4 w-4" />
@@ -81,8 +38,6 @@ const PostPageClient = () => {
             </div>
         );
     }
-    
-    if (!post) return null;
 
     const canonicalUrl = `https://online-offerten.ch${ratgeberBasePath}/${slug}`;
 

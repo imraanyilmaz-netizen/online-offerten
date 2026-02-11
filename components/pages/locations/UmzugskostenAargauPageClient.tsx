@@ -155,7 +155,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
     "@type": "Organization",
     "name": "Online-Offerten.ch",
     "url": "https://online-offerten.ch",
-    "logo": "https://online-offerten.ch/logo.png",
+    "logo": "https://online-offerten.ch/image/logo-icon.webp",
     "description": "Vergleichsportal für Umzugsfirmen, Reinigungsfirmen und Malerbetriebe in der Schweiz",
     "address": {
       "@type": "PostalAddress",

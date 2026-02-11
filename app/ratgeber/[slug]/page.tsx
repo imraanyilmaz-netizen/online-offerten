@@ -92,13 +92,22 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function RatgeberPostPage({ params }: { params: { slug: string } }) {
   const supabase = await createClient()
   
-  // Fetch post data for schema
+  // Fetch FULL post data for SSR (including content for SEO)
   const { data: post } = await supabase
     .from('posts')
-    .select('title, meta_title, meta_description, featured_image_url, category, published_at, updated_at, created_at, faq, faq_title, faq_description, custom_html')
+    .select('*, meta_title, faq, faq_title, faq_description, custom_html')
     .eq('slug', params.slug)
     .eq('status', 'published')
     .single()
+
+  // Fetch recent posts on server for SSR
+  const { data: recentPosts } = await supabase
+    .from('posts')
+    .select('title, slug, featured_image_url')
+    .eq('status', 'published')
+    .neq('slug', params.slug)
+    .order('published_at', { ascending: false })
+    .limit(5)
 
   // Prepare schema data
   const postTitle = post?.meta_title || post?.title || 'Ratgeber'
@@ -126,7 +135,7 @@ export default async function RatgeberPostPage({ params }: { params: { slug: str
       "name": "Online-Offerten.ch",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://online-offerten.ch/image/logo.png"
+        "url": "https://online-offerten.ch/image/logo-icon.webp"
       }
     },
     "mainEntityOfPage": {
@@ -194,7 +203,7 @@ export default async function RatgeberPostPage({ params }: { params: { slug: str
         />
       )}
     <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
-      <PostPageClient />
+      <PostPageClient initialPost={post} initialRecentPosts={recentPosts || []} />
     </Suspense>
     </>
   )

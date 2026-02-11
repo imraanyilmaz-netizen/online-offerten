@@ -49,7 +49,7 @@ const UmzugsfirmaPageClient = () => {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
             "url": "https://online-offerten.ch",
-            "logo": "https://online-offerten.ch/image/logo.png"
+            "logo": "https://online-offerten.ch/image/logo-icon.webp"
           },
           "areaServed": {
             "@type": "Country",

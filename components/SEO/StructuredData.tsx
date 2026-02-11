@@ -78,7 +78,7 @@ export default function StructuredData({
           '@type': 'Organization',
           name: 'Online-Offerten.ch',
           url: 'https://online-offerten.ch',
-          logo: 'https://online-offerten.ch/image/logo.png',
+          logo: 'https://online-offerten.ch/image/logo-icon.webp',
         },
         areaServed: {
           '@type': 'Country',
@@ -143,7 +143,7 @@ export default function StructuredData({
         '@type': 'Organization',
         name: organization.name,
         url: organization.url,
-        logo: organization.logo || 'https://online-offerten.ch/image/logo.png',
+        logo: organization.logo || 'https://online-offerten.ch/image/logo-icon.webp',
       }
 
       if (organization.contactPoint) {

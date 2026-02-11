@@ -103,7 +103,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
             "url": "https://online-offerten.ch",
-            "logo": "https://online-offerten.ch/image/logo.png"
+            "logo": "https://online-offerten.ch/image/logo-icon.webp"
           },
           "areaServed": {
             "@type": "Country",
@@ -122,7 +122,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
           "@id": "https://online-offerten.ch/#organization",
           "name": "Online-Offerten.ch",
           "url": "https://online-offerten.ch",
-          "logo": "https://online-offerten.ch/image/logo.png",
+          "logo": "https://online-offerten.ch/image/logo-icon.webp",
           "description": "Vergleichsportal für Umzugsfirmen in der Schweiz",
           "address": {
             "@type": "PostalAddress",
