@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Check, X } from 'lucide-react';
+import { Check, X, ExternalLink } from 'lucide-react';
 
 const DetailItem = ({ label, value, children }) => (
   <div>
@@ -59,23 +59,43 @@ const QuoteDetailModal = ({ quote, onClose, onAction, isProcessing }) => {
           {(quote.from_city || quote.to_city) && (
             <Section title="Umzugsdetails">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <Label className="font-bold text-gray-700">Auszugsadresse</Label>
-                  <p className="text-gray-800 font-semibold mt-1">
-                    {[quote.from_street, [quote.from_zip, quote.from_city].filter(Boolean).join(' ')].filter(Boolean).join(', ')}
-                  </p>
-                  {quote.from_floor && <p className="text-gray-600 text-xs mt-1">Stockwerk: {quote.from_floor}</p>}
-                  {quote.from_rooms && <p className="text-gray-600 text-xs">Zimmer: {quote.from_rooms}</p>}
-                </div>
-                {(quote.to_zip || quote.to_city) && (
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                    <Label className="font-bold text-gray-700">Einzugsadresse</Label>
-                    <p className="text-gray-800 font-semibold mt-1">
-                      {[quote.to_street, [quote.to_zip, quote.to_city].filter(Boolean).join(' ')].filter(Boolean).join(', ')}
-                    </p>
-                    {quote.to_floor && <p className="text-gray-600 text-xs mt-1">Stockwerk: {quote.to_floor}</p>}
-                  </div>
-                )}
+                {(() => {
+                  const fromAddress = [quote.from_street, [quote.from_zip, quote.from_city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+                  const fromMapsUrl = fromAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fromAddress + ', Schweiz')}` : null;
+                  return (
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <Label className="font-bold text-gray-700">Auszugsadresse</Label>
+                      {fromMapsUrl ? (
+                        <a href={fromMapsUrl} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 hover:underline font-semibold mt-1 inline-flex items-center gap-1">
+                          {fromAddress}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ) : (
+                        <p className="text-gray-800 font-semibold mt-1">{fromAddress}</p>
+                      )}
+                      {quote.from_floor && <p className="text-gray-600 text-xs mt-1">Stockwerk: {quote.from_floor}</p>}
+                      {quote.from_rooms && <p className="text-gray-600 text-xs">Zimmer: {quote.from_rooms}</p>}
+                    </div>
+                  );
+                })()}
+                {(quote.to_zip || quote.to_city) && (() => {
+                  const toAddress = [quote.to_street, [quote.to_zip, quote.to_city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+                  const toMapsUrl = toAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(toAddress + ', Schweiz')}` : null;
+                  return (
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <Label className="font-bold text-gray-700">Einzugsadresse</Label>
+                      {toMapsUrl ? (
+                        <a href={toMapsUrl} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 hover:underline font-semibold mt-1 inline-flex items-center gap-1">
+                          {toAddress}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ) : (
+                        <p className="text-gray-800 font-semibold mt-1">{toAddress}</p>
+                      )}
+                      {quote.to_floor && <p className="text-gray-600 text-xs mt-1">Stockwerk: {quote.to_floor}</p>}
+                    </div>
+                  );
+                })()}
               </div>
               {quote.move_date && (
                 <div className="mt-3 text-sm">

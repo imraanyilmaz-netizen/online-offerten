@@ -50,6 +50,7 @@ const PartnerPanel = ({ setCompanyName }) => {
     purchasedQuotes,
     archivedQuotes,
     missedQuotes,
+    refundRequests,
     isResending,
     refreshKey,
     handlePurchaseQuote,
@@ -58,6 +59,7 @@ const PartnerPanel = ({ setCompanyName }) => {
     handleResendConfirmation,
     handleArchiveQuote,
     handleUnarchiveQuote,
+    handleRequestRefund,
     fetchDashboardData
   } = usePartnerDashboard(handleActionSuccess);
 
@@ -259,7 +261,7 @@ const PartnerPanel = ({ setCompanyName }) => {
                 <CardTitle className="text-xl sm:text-2xl font-bold text-gray-900">Gekaufte Anfragen</CardTitle>
               </CardHeader>
               <CardContent className="p-5 sm:p-6">
-                <PurchasedQuoteList quotes={purchasedQuotes} onArchiveQuote={handleArchiveQuote} />
+                <PurchasedQuoteList quotes={purchasedQuotes} onArchiveQuote={handleArchiveQuote} onRequestRefund={handleRequestRefund} refundRequests={refundRequests} />
               </CardContent>
             </Card>
           </TabsContent>

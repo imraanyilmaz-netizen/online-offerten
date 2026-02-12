@@ -15,12 +15,30 @@ export const usePartnerDashboard = (onActionSuccess) => {
   const [purchasedQuotes, setPurchasedQuotes] = useState([]);
   const [archivedQuotes, setArchivedQuotes] = useState([]);
   const [missedQuotes, setMissedQuotes] = useState([]);
+  const [refundRequests, setRefundRequests] = useState([]);
   const [isResending, setIsResending] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+
+  const fetchRefundRequests = useCallback(async (uid) => {
+    const id = uid || user?.id;
+    if (!id) return;
+    try {
+      const { data, error } = await supabase
+        .from('refund_requests')
+        .select('*')
+        .eq('partner_id', id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setRefundRequests(data || []);
+    } catch (err) {
+      console.error('Error fetching refund requests:', err);
+    }
+  }, [user]);
 
   const fetchDashboardData = useCallback(async () => {
     if (!user?.id) return;
@@ -54,6 +72,9 @@ export const usePartnerDashboard = (onActionSuccess) => {
       setArchivedQuotes(dashboardData.archived_quotes || []);
       setMissedQuotes(dashboardData.missed_quotes || []);
       setPanelStatus('active');
+
+      // Fetch refund requests
+      await fetchRefundRequests(user.id);
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
       setError(err.message);
@@ -61,7 +82,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [user, fetchRefundRequests]);
 
   useEffect(() => {
     if (!user || !session) {
@@ -296,6 +317,27 @@ export const usePartnerDashboard = (onActionSuccess) => {
     }
   };
 
+  const handleRequestRefund = async (quoteId, reason, amount) => {
+    try {
+      const { error } = await supabase
+        .from('refund_requests')
+        .insert({
+          partner_id: partnerId,
+          quote_id: quoteId,
+          amount: amount,
+          reason: reason,
+          status: 'pending',
+        });
+
+      if (error) throw error;
+
+      toast({ title: 'Erfolg', description: 'Rückerstattungsanfrage wurde erfolgreich gesendet.' });
+      await fetchDashboardData();
+    } catch (error) {
+      toast({ title: 'Fehler', description: error.message, variant: 'destructive' });
+    }
+  };
+
   return {
     user,
     partnerId,
@@ -307,6 +349,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
     purchasedQuotes,
     archivedQuotes,
     missedQuotes,
+    refundRequests,
     isResending,
     refreshKey,
     handlePurchaseQuote,
@@ -315,6 +358,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
     handleResendConfirmation,
     handleArchiveQuote,
     handleUnarchiveQuote,
+    handleRequestRefund,
     fetchDashboardData,
   };
 };

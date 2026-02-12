@@ -1,10 +1,11 @@
 ﻿import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Loader2, SlidersHorizontal, CheckCircle, Archive, Send } from 'lucide-react';
+import { Loader2, SlidersHorizontal, CheckCircle, Archive, Send, RefreshCw } from 'lucide-react';
 import QuoteMatcher from '@/components/AdminPanel/QuoteManagement/QuoteMatcher.jsx';
 import QuoteDetailView from '@/components/AdminPanel/QuoteManagement/QuoteDetailView.jsx';
 import QuoteEditForm from '@/components/AdminPanel/QuoteManagement/QuoteEditForm.jsx';
+import RefundRequestList from '@/components/AdminPanel/QuoteManagement/RefundRequestList.jsx';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,10 +21,12 @@ import QuoteCard from './QuoteManagement/QuoteCard';
 
 const QuoteManagement = () => {
   const {
-    quotes, allPartners, purchasedQuotesInfo, loading, isProcessing, expandedQuote, dialogState, setDialogState,
+    quotes, allPartners, purchasedQuotesInfo, rejectedQuotesInfo, refundRequests, loading, isProcessing, expandedQuote, dialogState, setDialogState,
     handleSaveMatch, handleSendQuote, openArchiveDialog, handleRestoreQuote,
-    handleConfirmDialog, toggleView, handleUpdateQuote
+    handleConfirmDialog, toggleView, handleUpdateQuote, handleApproveRefund, handleRejectRefund
   } = useQuoteManagement();
+
+  const pendingRefundCount = useMemo(() => refundRequests.filter(r => r.status === 'pending').length, [refundRequests]);
 
   const filteredQuotes = useMemo(() => ({
     new_quote: quotes.filter(q => q.status === 'new_quote' || q.status === 'pending'),
@@ -45,12 +48,14 @@ const QuoteManagement = () => {
             const isExpanded = expandedQuote.id === quote.id;
             const expandedView = isExpanded ? expandedQuote.view : null;
             const purchasers = purchasedQuotesInfo[quote.id] || [];
+            const rejections = rejectedQuotesInfo[quote.id] || [];
 
             return (
               <QuoteCard 
                 key={quote.id} 
                 quote={quote}
                 purchasers={purchasers}
+                rejections={rejections}
                 onToggleView={toggleView}
                 onSend={handleSendQuote}
                 onArchive={openArchiveDialog}
@@ -117,6 +122,17 @@ const QuoteManagement = () => {
                 <Send className="w-4 h-4"/> Versendet ({filteredQuotes.approved.length})
             </TabsTrigger>
             <TabsTrigger 
+              value="refunds" 
+              className="relative flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+            >
+                <RefreshCw className="w-4 h-4"/> Rückerstattungen ({refundRequests.length})
+                {pendingRefundCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-white text-xs font-bold shadow-md animate-pulse">
+                    {pendingRefundCount}
+                  </span>
+                )}
+            </TabsTrigger>
+            <TabsTrigger 
               value="archived" 
               className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
             >
@@ -127,6 +143,14 @@ const QuoteManagement = () => {
         <TabsContent value="new_quote" className="mt-4">{renderQuoteList(filteredQuotes.new_quote)}</TabsContent>
         <TabsContent value="matched" className="mt-4">{renderQuoteList(filteredQuotes.matched)}</TabsContent>
         <TabsContent value="approved" className="mt-4">{renderQuoteList(filteredQuotes.approved)}</TabsContent>
+        <TabsContent value="refunds" className="mt-4">
+          <RefundRequestList 
+            refundRequests={refundRequests}
+            onApprove={handleApproveRefund}
+            onReject={handleRejectRefund}
+            isProcessing={isProcessing}
+          />
+        </TabsContent>
         <TabsContent value="archived" className="mt-4">{renderQuoteList(filteredQuotes.archived)}</TabsContent>
       </Tabs>
 

@@ -4,7 +4,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Loader2, Inbox, ArrowDown, ArrowUp, Gift, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Loader2, Inbox, ArrowDown, ArrowUp, Gift, Star, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
 
 const TransactionHistory = ({ partnerId, key }) => {
   const [transactions, setTransactions] = useState([]);
@@ -52,6 +52,8 @@ const TransactionHistory = ({ partnerId, key }) => {
         return { label: 'Abo-Anfrage', icon: <Star className="h-4 w-4 text-yellow-500" />, color: 'text-yellow-600' };
       case 'subscription':
         return { label: 'Abo-Kauf', icon: <Star className="h-4 w-4 text-purple-500" />, color: 'text-purple-600' };
+      case 'refund':
+        return { label: 'Rückerstattung', icon: <RefreshCw className="h-4 w-4 text-orange-500" />, color: 'text-orange-600' };
       default:
         return { label: type, icon: null, color: 'text-gray-600' };
     }

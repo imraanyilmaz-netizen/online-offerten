@@ -3,8 +3,10 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, MoveRight, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
-import { formatDate, getServiceTypeLabel } from '@/lib/utils'; // Import formatDate from utils
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
+import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, Calendar, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { formatDate } from '@/lib/utils';
 import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
@@ -69,6 +71,7 @@ const AddressBox = ({ title, quote, type }) => {
     if (!zip && !street) return null;
 
     const addressLine = [street, [zip, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+    const mapsUrl = addressLine ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLine + ', Schweiz')}` : null;
 
     return (
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
@@ -76,7 +79,14 @@ const AddressBox = ({ title, quote, type }) => {
                 <MapPin className="w-4 h-4 text-green-600" />
                 {title}
             </h4>
-            <p className="text-sm font-semibold text-gray-800 mb-2">{addressLine}</p>
+            {mapsUrl ? (
+                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-green-700 hover:text-green-900 hover:underline mb-2 inline-flex items-center gap-1">
+                    {addressLine}
+                    <ExternalLink className="w-3 h-3" />
+                </a>
+            ) : (
+                <p className="text-sm font-semibold text-gray-800 mb-2">{addressLine}</p>
+            )}
             {(isInternational || canton || floor || lift !== null || rooms || objectType) && (
                 <ul className="space-y-1 text-sm text-gray-600">
                     {isInternational && country && <li><span className="font-bold">Land:</span> {country.name}</li>}
@@ -91,9 +101,42 @@ const AddressBox = ({ title, quote, type }) => {
     );
 };
 
-const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
+const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundRequests = [] }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [refundDialog, setRefundDialog] = useState({ open: false, quote: null });
+  const [refundReason, setRefundReason] = useState('');
+  const [isSubmittingRefund, setIsSubmittingRefund] = useState(false);
   const itemsPerPage = 20;
+
+  // Create a map of quote_id -> refund request for quick lookup
+  const refundRequestMap = useMemo(() => {
+    const map = {};
+    refundRequests.forEach(req => {
+      map[req.quote_id] = req;
+    });
+    return map;
+  }, [refundRequests]);
+
+  const handleOpenRefundDialog = (quote) => {
+    setRefundDialog({ open: true, quote });
+    setRefundReason('');
+  };
+
+  const handleSubmitRefund = async () => {
+    if (!refundReason.trim()) return;
+    setIsSubmittingRefund(true);
+    try {
+      await onRequestRefund(
+        refundDialog.quote.id,
+        refundReason.trim(),
+        refundDialog.quote.purchase_info?.purchase_price || refundDialog.quote.lead_price || 0
+      );
+      setRefundDialog({ open: false, quote: null });
+      setRefundReason('');
+    } finally {
+      setIsSubmittingRefund(false);
+    }
+  };
 
   // Calculate pagination
   const totalPages = Math.ceil(quotes.length / itemsPerPage);
@@ -130,28 +173,47 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
         >
           <AccordionItem value={`item-${index}`} className="border rounded-lg bg-green-50">
             <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg data-[state=open]:bg-green-100">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full text-left gap-2">
-                <div className="flex-1 space-y-1">
-                  <p className="text-base font-bold text-black">{getServiceTypeLabel(quote.servicetype)}</p>
-                  <h3 className="text-sm font-semibold text-gray-800">{quote.firstname} {quote.lastname}</h3>
-                  {isMoving && (
-                    <div className="flex items-center text-xs text-gray-500 font-medium">
-                      <span>{quote.from_zip || quote.from_city}</span>
-                      {quote.to_city && <MoveRight className="w-3 h-3 mx-1.5" />}
-                      {quote.to_city && <span>{quote.to_zip || quote.to_city}</span>}
-                    </div>
-                  )}
-                  <div className="flex items-center text-base font-bold text-gray-900">
-                    <CalendarDays className="w-4 h-4 mr-1.5 text-gray-700" /> {quote.move_date ? `${formatDate(quote.move_date)} ${quote.move_date_flexible ? `(flexibel)` : ''}`.trim() : 'N/A'}
+              <div className="flex items-center justify-between w-full text-left">
+                <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
+                  {(() => {
+                    const Icon = icon;
+                    return (
+                      <div className="flex items-center gap-2 font-semibold text-base">
+                        <Icon className="w-5 h-5 text-green-600" />
+                        <span>{quote.servicetype}</span>
+                      </div>
+                    );
+                  })()}
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <MapPin className="w-4 h-4" />
+                    <span>{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip} ${quote.to_city}`}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <CalendarDays className="w-4 h-4" />
+                    <span>{quote.move_date ? formatDate(quote.move_date) : 'N/A'}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 sm:flex-col sm:items-end sm:text-right w-full sm:w-auto self-start sm:self-center">
-                  <Badge variant="secondary" className="bg-white w-fit">CHF {quote.purchase_info?.purchase_price.toFixed(2)}</Badge>
-                  <p className="text-xs text-gray-500">{formatDate(quote.purchase_info?.purchased_at)}</p>
+                <div className="flex items-center gap-2 ml-4 flex-shrink-0">
+                  {refundRequestMap[quote.id]?.status === 'approved' && (
+                    <Badge className="bg-green-600 text-white text-xs font-semibold">
+                      <CheckCircle className="w-3 h-3 mr-1" /> Erstattet
+                    </Badge>
+                  )}
+                  {refundRequestMap[quote.id]?.status === 'pending' && (
+                    <Badge className="bg-yellow-500 text-white text-xs font-semibold animate-pulse">
+                      <Clock className="w-3 h-3 mr-1" /> Beantragt
+                    </Badge>
+                  )}
+                  {refundRequestMap[quote.id]?.status === 'rejected' && (
+                    <Badge className="bg-red-500 text-white text-xs font-semibold">
+                      <XCircle className="w-3 h-3 mr-1" /> Abgelehnt
+                    </Badge>
+                  )}
+                  <Badge variant="secondary" className="bg-white font-bold">CHF {quote.purchase_info?.purchase_price.toFixed(2)}</Badge>
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="p-3 sm:p-4 border-t border-green-200">
+            <AccordionContent className="p-3 sm:p-4 border-t border-green-200 bg-white">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <div className="p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
@@ -198,26 +260,72 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
                       <QuoteDetail label="Wunschtermin" value={formatDate(quote.move_date)} />
                       <QuoteDetail label="Termin flexibel" value={quote.move_date_flexible} />
                   </DetailSection>
+                </div>
+              </div>
 
-                  {quote.additional_info && (
-                      <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
-                          <p className="text-sm text-gray-700 whitespace-pre-wrap">{quote.additional_info}</p>
-                      </DetailSection>
-                  )}
+              {quote.additional_info && (
+                <div className="mt-4">
+                  <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
+                    <p className="text-sm text-gray-700 whitespace-pre-wrap">{quote.additional_info}</p>
+                  </DetailSection>
+                </div>
+              )}
 
-                  <div className="flex justify-end pt-2">
+              {/* Refund Status & Action Buttons - full width at bottom */}
+              <div className="mt-4 space-y-3">
+                {refundRequestMap[quote.id] && (
+                  <div className={`p-3 rounded-lg border text-sm ${
+                    refundRequestMap[quote.id].status === 'approved' 
+                      ? 'bg-green-50 border-green-200 text-green-800'
+                      : refundRequestMap[quote.id].status === 'rejected'
+                      ? 'bg-red-50 border-red-200 text-red-800'
+                      : 'bg-yellow-50 border-yellow-200 text-yellow-800'
+                  }`}>
+                    <div className="flex items-center gap-2 font-semibold">
+                      {refundRequestMap[quote.id].status === 'approved' && <CheckCircle className="w-4 h-4" />}
+                      {refundRequestMap[quote.id].status === 'rejected' && <XCircle className="w-4 h-4" />}
+                      {refundRequestMap[quote.id].status === 'pending' && <Clock className="w-4 h-4" />}
+                      {refundRequestMap[quote.id].status === 'approved' 
+                        ? 'Guthaben wurde erstattet' 
+                        : refundRequestMap[quote.id].status === 'rejected'
+                        ? 'Rückerstattung abgelehnt'
+                        : 'Rückerstattung beantragt'}
+                    </div>
+                    <p className="text-xs mt-1 opacity-80">
+                      {formatDate(refundRequestMap[quote.id].created_at)}
+                      {refundRequestMap[quote.id].status === 'approved' && refundRequestMap[quote.id].resolved_at && 
+                        ` • Erstattet am ${formatDate(refundRequestMap[quote.id].resolved_at)}`
+                      }
+                    </p>
+                  </div>
+                )}
+
+                <div className="flex justify-end gap-2">
+                  {!refundRequestMap[quote.id] && (
                     <Button
                       variant="outline"
                       size="sm"
+                      className="border-orange-300 text-orange-700 hover:bg-orange-50 hover:text-orange-800"
                       onClick={(e) => {
                         e.stopPropagation();
-                        onArchiveQuote(quote.purchase_info.purchase_id);
+                        handleOpenRefundDialog(quote);
                       }}
                     >
-                      <Archive className="w-4 h-4 mr-2" />
-                      Archivieren
+                      <AlertTriangle className="w-4 h-4 mr-2" />
+                      Rückerstattung
                     </Button>
-                  </div>
+                  )}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onArchiveQuote(quote.purchase_info.purchase_id);
+                    }}
+                  >
+                    <Archive className="w-4 h-4 mr-2" />
+                    Archivieren
+                  </Button>
                 </div>
               </div>
             </AccordionContent>
@@ -299,6 +407,55 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
           </div>
         </div>
       )}
+
+      {/* Refund Request Dialog */}
+      <Dialog open={refundDialog.open} onOpenChange={(open) => { if (!open) { setRefundDialog({ open: false, quote: null }); setRefundReason(''); } }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-orange-700">
+              <AlertTriangle className="w-5 h-5" />
+              Rückerstattung anfordern
+            </DialogTitle>
+            <DialogDescription>
+              Kunde nicht erreichbar? Beschreiben Sie den Grund für die Rückerstattungsanfrage. 
+              Der Betrag von <span className="font-bold">{refundDialog.quote?.purchase_info?.purchase_price?.toFixed(2) || '0.00'} CHF</span> wird nach Prüfung erstattet.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+                Grund <span className="text-red-500">*</span>
+              </label>
+              <Textarea
+                value={refundReason}
+                onChange={(e) => setRefundReason(e.target.value)}
+                placeholder="z.B. Kunde ist telefonisch und per E-Mail nicht erreichbar, mehrere Versuche unternommen..."
+                rows={4}
+                className="resize-none"
+              />
+              {refundReason.length === 0 && (
+                <p className="text-xs text-red-500 mt-1">Bitte geben Sie einen Grund an.</p>
+              )}
+            </div>
+          </div>
+          <DialogFooter className="gap-2">
+            <Button 
+              variant="outline" 
+              onClick={() => { setRefundDialog({ open: false, quote: null }); setRefundReason(''); }}
+              disabled={isSubmittingRefund}
+            >
+              Abbrechen
+            </Button>
+            <Button 
+              onClick={handleSubmitRefund}
+              disabled={!refundReason.trim() || isSubmittingRefund}
+              className="bg-orange-600 hover:bg-orange-700 text-white"
+            >
+              {isSubmittingRefund ? 'Wird gesendet...' : 'Anfrage senden'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

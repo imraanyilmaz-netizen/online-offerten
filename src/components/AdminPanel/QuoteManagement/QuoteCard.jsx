@@ -10,7 +10,7 @@ import { de } from 'date-fns/locale/de';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
 
-const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], children, onUpdateQuote, isProcessing: parentIsProcessing }) => {
+const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing }) => {
   const { id, from_city, to_city, servicetype, created_at, status, lead_price, assigned_partner_ids, purchase_quota, partner_target_regions, email_confirmed, email_confirmed_at, move_date, review_email_sent_at, review_email_sent_count } = quote;
   const formattedDate = format(new Date(created_at), "d MMM yyyy, HH:mm", { locale: de });
   const { toast } = useToast();
@@ -21,10 +21,20 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
 
   const handlePriceUpdate = async () => {
     if (parseFloat(newPrice) !== parseFloat(lead_price || 0)) {
-      await onUpdateQuote(quote.id, { lead_price: parseFloat(newPrice) });
+      const updateData = { lead_price: parseFloat(newPrice) };
+      // İlk fiyat değişikliğinde orijinal fiyatı kaydet
+      if (!quote.original_price) {
+        updateData.original_price = parseFloat(lead_price);
+      }
+      await onUpdateQuote(quote.id, updateData);
     }
     setIsEditingPrice(false);
   };
+
+  // İndirim hesaplama
+  const discountPercent = quote.original_price && lead_price < quote.original_price
+    ? Math.round((1 - lead_price / quote.original_price) * 100)
+    : null;
   
   const handleSendReviewEmail = async () => {
     setIsSendingReviewEmail(true);
@@ -180,7 +190,15 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                           </div>
                       ) : (
                           <div className="group flex items-center justify-end gap-1 cursor-pointer" onClick={() => { setNewPrice(lead_price); setIsEditingPrice(true); }}>
-                              <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                              <div className="flex items-center gap-2">
+                                {discountPercent > 0 && (
+                                  <>
+                                    <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
+                                    <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
+                                  </>
+                                )}
+                                <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                              </div>
                               <Button size="icon" variant="ghost" className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity">
                                   <Pencil className="w-3.5 h-3.5" />
                               </Button>
@@ -195,7 +213,15 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                 {status === 'matched' && (
                     <>
                         <div className="text-right">
-                            <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                            <div className="flex items-center justify-end gap-2">
+                              {discountPercent > 0 && (
+                                <>
+                                  <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
+                                  <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
+                                </>
+                              )}
+                              <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                            </div>
                             <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner</p>
                         </div>
                         <Button size="sm" onClick={() => onSend(quote.id)} disabled={parentIsProcessing}>
@@ -270,6 +296,30 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                 <p className="text-xs text-gray-500">Noch keine Käufe durch Partner.</p>
               )}
             </div>
+            {rejections.length > 0 && (
+            <div className="md:col-span-2 border-t border-gray-200 pt-5 mt-2">
+              <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
+                <X className="w-4 h-4 text-red-500"/> 
+                Ablehnende Partner ({rejections.length})
+              </h4>
+              <ul className="text-sm text-gray-700 space-y-2">
+                {rejections.map((r, idx) => (
+                  <li key={r.id || idx} className="flex items-start gap-2 bg-red-50 border border-red-100 rounded-lg p-3">
+                    <X className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5"/>
+                    <div>
+                      <span className="font-medium text-gray-800">{r.company_name}</span>
+                      {r.reason && (
+                        <p className="text-xs text-red-600 mt-1">Grund: {r.reason}</p>
+                      )}
+                      {r.created_at && (
+                        <p className="text-xs text-gray-400 mt-0.5">{format(new Date(r.created_at), "dd.MM.yyyy HH:mm", { locale: de })}</p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            )}
             {(status === 'approved' || status === 'quota_filled') && (
             <div className="md:col-span-2 border-t border-gray-200 pt-5 mt-2">
                <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">

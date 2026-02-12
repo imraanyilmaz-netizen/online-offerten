@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 
 export const useQuoteManagement = () => {
     const [quotes, setQuotes] = useState([]);
@@ -10,8 +11,11 @@ export const useQuoteManagement = () => {
     const [expandedQuote, setExpandedQuote] = useState({ id: null, view: null });
     const [dialogState, setDialogState] = useState({ open: false, type: null, id: null });
     const [purchasedQuotesInfo, setPurchasedQuotesInfo] = useState({});
+    const [rejectedQuotesInfo, setRejectedQuotesInfo] = useState({});
+    const [refundRequests, setRefundRequests] = useState([]);
 
     const { toast } = useToast();
+    const { user } = useAuth();
 
     const fetchQuotes = useCallback(async () => {
         setLoading(true);
@@ -60,11 +64,100 @@ export const useQuoteManagement = () => {
         setPurchasedQuotesInfo(info);
     }, [toast]);
 
+    const fetchRejectedQuotesInfo = useCallback(async () => {
+        const { data, error } = await supabase
+            .from('partner_quote_rejections')
+            .select('quote_id, reason, created_at, partner_id, partners(id, company_name)');
+
+        if (error) {
+            console.error('Fehler beim Laden der Ablehnungen:', error.message);
+            return;
+        }
+
+        const info = data.reduce((acc, item) => {
+            if (item.quote_id) {
+                if (!acc[item.quote_id]) {
+                    acc[item.quote_id] = [];
+                }
+                acc[item.quote_id].push({
+                    id: item.partner_id,
+                    company_name: item.partners?.company_name || 'Unbekannt',
+                    reason: item.reason,
+                    created_at: item.created_at,
+                });
+            }
+            return acc;
+        }, {});
+
+        setRejectedQuotesInfo(info);
+    }, []);
+
+    const fetchRefundRequests = useCallback(async () => {
+        const { data, error } = await supabase
+            .from('refund_requests')
+            .select('*, partners(id, company_name), quotes(id, servicetype, from_city, to_city, lead_price, firstname, lastname)')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Fehler beim Laden der Rückerstattungen:', error.message);
+            return;
+        }
+        setRefundRequests(data || []);
+    }, []);
+
+    const handleApproveRefund = useCallback(async (refundRequest) => {
+        setIsProcessing(true);
+        try {
+            // 1. Add refund to partner main_balance (not bonus)
+            const { error: creditError } = await supabase.rpc('add_refund_credit', {
+                p_partner_id: refundRequest.partner_id,
+                p_amount: refundRequest.amount,
+                p_description: `Rückerstattung: ${refundRequest.quotes?.servicetype || 'Anfrage'} - ${refundRequest.quotes?.from_city || ''}${refundRequest.quotes?.to_city ? ' → ' + refundRequest.quotes.to_city : ''}`,
+                p_admin_id: user?.id,
+            });
+            if (creditError) throw creditError;
+
+            // 2. Update refund_requests status to approved
+            const { error: updateError } = await supabase
+                .from('refund_requests')
+                .update({ status: 'approved', resolved_at: new Date().toISOString() })
+                .eq('id', refundRequest.id);
+            if (updateError) throw updateError;
+
+            toast({ title: 'Erfolg', description: `Rückerstattung von ${refundRequest.amount.toFixed(2)} CHF wurde erfolgreich erstattet.` });
+            await fetchRefundRequests();
+        } catch (error) {
+            toast({ title: 'Fehler', description: error.message, variant: 'destructive' });
+        } finally {
+            setIsProcessing(false);
+        }
+    }, [user, toast, fetchRefundRequests]);
+
+    const handleRejectRefund = useCallback(async (refundId, adminNote) => {
+        setIsProcessing(true);
+        try {
+            const { error } = await supabase
+                .from('refund_requests')
+                .update({ status: 'rejected', admin_note: adminNote || null, resolved_at: new Date().toISOString() })
+                .eq('id', refundId);
+            if (error) throw error;
+
+            toast({ title: 'Erfolg', description: 'Rückerstattung wurde abgelehnt.' });
+            await fetchRefundRequests();
+        } catch (error) {
+            toast({ title: 'Fehler', description: error.message, variant: 'destructive' });
+        } finally {
+            setIsProcessing(false);
+        }
+    }, [toast, fetchRefundRequests]);
+
     useEffect(() => {
         fetchQuotes();
         fetchPartners();
         fetchPurchasedQuotesInfo();
-    }, [fetchQuotes, fetchPartners, fetchPurchasedQuotesInfo]);
+        fetchRejectedQuotesInfo();
+        fetchRefundRequests();
+    }, [fetchQuotes, fetchPartners, fetchPurchasedQuotesInfo, fetchRejectedQuotesInfo, fetchRefundRequests]);
     
     const toggleView = (quoteId, viewType) => {
         if (expandedQuote.id === quoteId && expandedQuote.view === viewType) {
@@ -186,8 +279,8 @@ export const useQuoteManagement = () => {
     };
 
     return {
-        quotes, allPartners, purchasedQuotesInfo, loading, isProcessing, expandedQuote, dialogState,
+        quotes, allPartners, purchasedQuotesInfo, rejectedQuotesInfo, refundRequests, loading, isProcessing, expandedQuote, dialogState,
         setDialogState, handleSaveMatch, handleSendQuote, openArchiveDialog, handleRestoreQuote,
-        handleConfirmDialog, toggleView, handleUpdateQuote
+        handleConfirmDialog, toggleView, handleUpdateQuote, handleApproveRefund, handleRejectRefund
     };
 };

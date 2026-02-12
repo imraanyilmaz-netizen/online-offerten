@@ -49,7 +49,15 @@ const QuoteCard = ({ quote, onToggleMatch, onSend, onOpenDetails, isMatching, ch
             {status === 'matched' && (
                 <>
                     <div className="text-right">
-                        <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                        <div className="flex items-center justify-end gap-2">
+                          {quote.original_price && lead_price < quote.original_price && (
+                            <>
+                              <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
+                              <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{Math.round((1 - lead_price / quote.original_price) * 100)}%</span>
+                            </>
+                          )}
+                          <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                        </div>
                         <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner/Firma</p>
                     </div>
                     <Button size="sm" onClick={() => onSend(quote.id)}><Send className="w-4 h-4 mr-2" /> Gönder</Button>

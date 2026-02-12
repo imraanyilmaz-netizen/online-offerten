@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { 
     Calendar, CheckCircle, Clock, File, Image, Mail, 
     MapPin, MessageSquare, Phone, Truck, User, Building, 
-    Sparkles, Paintbrush, Leaf, Users
+    Sparkles, Paintbrush, Leaf, Users, ExternalLink
 } from 'lucide-react';
 import { getServiceTypeLabel, formatDate } from '@/lib/utils';
 import { countries } from '@/data/countries';
@@ -60,6 +60,7 @@ const AddressBox = ({ title, quote, type }) => {
     };
 
     const addressLine = [street, [zip, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+    const mapsUrl = addressLine ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLine + ', Schweiz')}` : null;
 
     return (
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
@@ -67,7 +68,14 @@ const AddressBox = ({ title, quote, type }) => {
                 <MapPin className="w-4 h-4 text-green-600" />
                 {title}
             </h4>
-            <p className="text-sm font-semibold text-gray-800 mb-2">{addressLine}</p>
+            {mapsUrl ? (
+                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-green-700 hover:text-green-900 hover:underline mb-2 inline-flex items-center gap-1">
+                    {addressLine}
+                    <ExternalLink className="w-3 h-3" />
+                </a>
+            ) : (
+                <p className="text-sm font-semibold text-gray-800 mb-2">{addressLine}</p>
+            )}
             {(isInternational || canton || floor || lift !== null || rooms || objectType) && (
                 <ul className="space-y-1 text-sm text-gray-600">
                     {isInternational && country && <li><span className="font-semibold">Land:</span> {country.name}</li>}
