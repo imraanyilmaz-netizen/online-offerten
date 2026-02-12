@@ -68,21 +68,25 @@ const AddressBox = ({ title, quote, type }) => {
     
     if (!zip && !street) return null;
 
+    const addressLine = [street, [zip, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+
     return (
-        <div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <h4 className="font-bold text-md flex items-center gap-2 mb-2">
-                {title}:
+                <MapPin className="w-4 h-4 text-green-600" />
+                {title}
             </h4>
-            <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 pl-2">
-                {street && <li><span className="font-bold">Strasse:</span> {street}</li>}
-                {zip && city && <li><span className="font-bold">Ort:</span> {zip} {city}</li>}
-                {isInternational && country && <li><span className="font-bold">Land:</span> {country.name}</li>}
-                {!isInternational && canton && <li><span className="font-bold">Kanton:</span> {canton}</li>}
-                {floor && <li><span className="font-bold">Stockwerk:</span> {floor}</li>}
-                {lift !== null && <li><span className="font-bold">Lift:</span> {lift ? 'Ja' : 'Nein'}</li>}
-                {rooms && <li><span className="font-bold">Zimmer:</span> {rooms}</li>}
-                {objectType && <li><span className="font-bold">Objektart:</span> {objectType}</li>}
-            </ul>
+            <p className="text-sm font-semibold text-gray-800 mb-2">{addressLine}</p>
+            {(isInternational || canton || floor || lift !== null || rooms || objectType) && (
+                <ul className="space-y-1 text-sm text-gray-600">
+                    {isInternational && country && <li><span className="font-bold">Land:</span> {country.name}</li>}
+                    {!isInternational && canton && <li><span className="font-bold">Kanton:</span> {canton}</li>}
+                    {floor && <li><span className="font-bold">Stockwerk:</span> {floor}</li>}
+                    {lift !== null && <li><span className="font-bold">Lift:</span> {lift ? 'Ja' : 'Nein'}</li>}
+                    {rooms && <li><span className="font-bold">Zimmer:</span> {rooms}</li>}
+                    {objectType && <li><span className="font-bold">Objektart:</span> {objectType}</li>}
+                </ul>
+            )}
         </div>
     );
 };
@@ -183,9 +187,9 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote }) => {
                 <div className="space-y-4">
                   <DetailSection title={isMoving ? "Umzugsadressen" : "Objektadresse"} icon={MapPin}>
                       <div className="grid grid-cols-1 gap-4">
-                          <AddressBox title={isMoving ? "Von Adresse" : "Adresse"} quote={quote} type="from" />
+                          <AddressBox title={isMoving ? "Auszugsadresse" : "Adresse"} quote={quote} type="from" />
                           {isMoving && quote.to_zip && (
-                              <AddressBox title="Nach Adresse" quote={quote} type="to" />
+                              <AddressBox title="Einzugsadresse" quote={quote} type="to" />
                           )}
                       </div>
                   </DetailSection>

@@ -59,23 +59,23 @@ const QuoteDetailModal = ({ quote, onClose, onAction, isProcessing }) => {
           {(quote.from_city || quote.to_city) && (
             <Section title="Umzugsdetails">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                <div>
-                  <Label className="font-medium text-gray-500">Von</Label>
-                  <div className="text-gray-700">
-                    {quote.from_street && <p>{quote.from_street}</p>}
-                    <p>{quote.from_zip} {quote.from_city}</p>
-                    {quote.from_rooms && <p>Anzahl Zimmer: {quote.from_rooms}</p>}
-                    {quote.from_floor && <p>Stockwerk: {quote.from_floor}</p>}
-                  </div>
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                  <Label className="font-bold text-gray-700">Auszugsadresse</Label>
+                  <p className="text-gray-800 font-semibold mt-1">
+                    {[quote.from_street, [quote.from_zip, quote.from_city].filter(Boolean).join(' ')].filter(Boolean).join(', ')}
+                  </p>
+                  {quote.from_floor && <p className="text-gray-600 text-xs mt-1">Stockwerk: {quote.from_floor}</p>}
+                  {quote.from_rooms && <p className="text-gray-600 text-xs">Zimmer: {quote.from_rooms}</p>}
                 </div>
-                <div>
-                  <Label className="font-medium text-gray-500">Nach</Label>
-                  <div className="text-gray-700">
-                    {quote.to_street && <p>{quote.to_street}</p>}
-                    <p>{quote.to_zip} {quote.to_city}</p>
-                    {quote.to_floor && <p>Stockwerk: {quote.to_floor}</p>}
+                {(quote.to_zip || quote.to_city) && (
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <Label className="font-bold text-gray-700">Einzugsadresse</Label>
+                    <p className="text-gray-800 font-semibold mt-1">
+                      {[quote.to_street, [quote.to_zip, quote.to_city].filter(Boolean).join(' ')].filter(Boolean).join(', ')}
+                    </p>
+                    {quote.to_floor && <p className="text-gray-600 text-xs mt-1">Stockwerk: {quote.to_floor}</p>}
                   </div>
-                </div>
+                )}
               </div>
               {quote.move_date && (
                 <div className="mt-3 text-sm">

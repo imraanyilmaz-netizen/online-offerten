@@ -59,21 +59,25 @@ const AddressBox = ({ title, quote, type }) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
+    const addressLine = [street, [zip, city].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+
     return (
-        <div>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <h4 className="font-bold text-md flex items-center gap-2 mb-2 text-gray-700">
-                {title}:
+                <MapPin className="w-4 h-4 text-green-600" />
+                {title}
             </h4>
-            <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 pl-2">
-                {street && <li><span className="font-semibold">Strasse:</span> {street}</li>}
-                {zip && city && <li><span className="font-semibold">Ort:</span> {zip} {city}</li>}
-                {isInternational && country && <li><span className="font-semibold">Land:</span> {country.name}</li>}
-                {!isInternational && canton && <li><span className="font-semibold">Kanton:</span> {canton}</li>}
-                {floor && <li><span className="font-semibold">Stockwerk:</span> {floor}</li>}
-                {lift !== null && <li><span className="font-semibold">Lift:</span> {lift ? 'Ja' : 'Nein'}</li>}
-                {rooms && <li><span className="font-semibold">Zimmer:</span> {rooms}</li>}
-                {objectType && <li><span className="font-semibold">Objektart:</span> {capitalizeFirstLetter(objectType)}</li>}
-            </ul>
+            <p className="text-sm font-semibold text-gray-800 mb-2">{addressLine}</p>
+            {(isInternational || canton || floor || lift !== null || rooms || objectType) && (
+                <ul className="space-y-1 text-sm text-gray-600">
+                    {isInternational && country && <li><span className="font-semibold">Land:</span> {country.name}</li>}
+                    {!isInternational && canton && <li><span className="font-semibold">Kanton:</span> {canton}</li>}
+                    {floor && <li><span className="font-semibold">Stockwerk:</span> {floor}</li>}
+                    {lift !== null && <li><span className="font-semibold">Lift:</span> {lift ? 'Ja' : 'Nein'}</li>}
+                    {rooms && <li><span className="font-semibold">Zimmer:</span> {rooms}</li>}
+                    {objectType && <li><span className="font-semibold">Objektart:</span> {capitalizeFirstLetter(objectType)}</li>}
+                </ul>
+            )}
         </div>
     );
 };
@@ -174,9 +178,9 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
 
         <DetailSection title={isMovingService(quote.servicetype) ? "Umzugsadressen" : "Objektadresse"} icon={MapPin}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <AddressBox title={isMovingService(quote.servicetype) ? "Von Adresse" : "Adresse"} quote={quote} type="from" />
+                <AddressBox title={isMovingService(quote.servicetype) ? "Auszugsadresse" : "Adresse"} quote={quote} type="from" />
                 {isMovingService(quote.servicetype) && (quote.to_zip || quote.to_street || quote.to_city) && (
-                    <AddressBox title="Nach Adresse" quote={quote} type="to" />
+                    <AddressBox title="Einzugsadresse" quote={quote} type="to" />
                 )}
             </div>
         </DetailSection>
