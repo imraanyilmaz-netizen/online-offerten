@@ -130,6 +130,22 @@ const zurichFAQs = [
   {
     question: "Welche Versicherung benötige ich für einen Umzug in Zürich?",
     answer: "Professionelle Umzugsfirmen in Zürich sind versichert gemäss OR und verfügen über Transport- und Betriebshaftpflichtversicherung. Zusätzlich können Sie eine Umzugsversicherung für wertvolle Gegenstände abschliessen. Fragen Sie nach dem Versicherungsschutz und prüfen Sie, ob Ihre Hausratversicherung den Umzug abdeckt."
+  },
+  {
+    question: "Brauche ich eine Halteverbotszone für meinen Umzug in Zürich?",
+    answer: "In vielen Quartieren Zürichs – besonders in der Altstadt, im Kreis 1 und in dicht bebauten Gebieten – ist eine Halteverbotszone dringend empfohlen. Professionelle Umzugsfirmen übernehmen die Beantragung bei der Stadt Zürich. Die Kosten liegen zwischen CHF 80 und CHF 150. Ohne Halteverbotszone riskieren Sie lange Laufwege und deutlich höhere Umzugskosten."
+  },
+  {
+    question: "Wann ist die beste Zeit für einen Umzug in Zürich?",
+    answer: "Die günstigsten Umzugstermine in Zürich sind unter der Woche (Dienstag bis Donnerstag) und Mitte des Monats. Monatsenden und Wochenenden sind Hauptumzugszeiten mit höheren Preisen. Im Winter (November bis Februar) sind die Preise generell niedriger als im Sommer. Planen Sie Ihren Umzug antizyklisch und sparen Sie bis zu 30% bei den Umzugskosten."
+  },
+  {
+    question: "Kann ich bei meinem Umzug in Zürich Geld sparen, wenn ich selbst mithelfe?",
+    answer: "Ja, durch Eigenleistung lassen sich die Umzugskosten in Zürich deutlich senken. Packen Sie Kisten selbst, demontieren Sie einfache Möbel und entrümpeln Sie vor dem Umzug. Viele Umzugsfirmen in Zürich bieten flexible Pakete an – vom Full-Service bis zum reinen Transport. So können Sie die teuren Arbeitsstunden der Profis reduzieren und trotzdem von professionellem Transport profitieren."
+  },
+  {
+    question: "Wie vergleiche ich Umzugsofferten richtig?",
+    answer: "Achten Sie beim Vergleich von Umzugsofferten nicht nur auf den Preis, sondern auch auf den Leistungsumfang. Eine seriöse Offerte enthält: Stundensatz, Anzahl Mitarbeiter, Fahrzeuggrösse, Versicherungsschutz, An-/Rückfahrtkosten und eventuelle Zusatzkosten. Über Online-Offerten.ch erhalten Sie bis zu 5 vergleichbare Offerten von geprüften Umzugsfirmen in Zürich – kostenlos und unverbindlich."
   }
 ]
 
@@ -358,9 +374,41 @@ async function getZurichPartners() {
   }
 }
 
+// Fetch Zürich-related reviews for social proof
+async function getZurichReviews() {
+  try {
+    const supabase = createStaticClient()
+    
+    // Fetch approved platform reviews related to Umzug in Zürich area
+    const { data: reviews, error } = await supabase
+      .from('customer_reviews')
+      .select(`
+        id, customer_name, rating, city, review_date, 
+        review_text, service_type, partner_name,
+        partners (slug, company_name)
+      `)
+      .eq('approval_status', 'approved')
+      .ilike('service_type', '%umzug%')
+      .order('review_date', { ascending: false })
+      .limit(6)
+
+    if (error) {
+      console.error('Error fetching Zürich reviews:', error)
+      return []
+    }
+    return reviews || []
+  } catch (error) {
+    console.error('Error in getZurichReviews:', error)
+    return []
+  }
+}
+
 export default async function UmzugsfirmaZurichPage() {
-  // Fetch partners server-side for SEO
-  const zurichPartners = await getZurichPartners()
+  // Fetch partners and reviews server-side for SEO
+  const [zurichPartners, zurichReviews] = await Promise.all([
+    getZurichPartners(),
+    getZurichReviews()
+  ])
   
   // ItemList Schema for partner listings - helps Google show rich results
   const itemListSchema = zurichPartners && zurichPartners.length > 0 ? {
@@ -436,7 +484,7 @@ export default async function UmzugsfirmaZurichPage() {
                       alt="Professionelle Zügelfirma in Zürich - Umzugsunternehmen bei der Arbeit"
                       fill
                       className="object-cover"
-                      loading="lazy"
+                      priority
                       sizes="(max-width: 1024px) 100vw, 40vw"
                     />
                   </div>
@@ -1073,6 +1121,101 @@ export default async function UmzugsfirmaZurichPage() {
 
 
             </main>
+          </div>
+        </section>
+
+        {/* Customer Reviews Section - Social Proof for SEO */}
+        {zurichReviews && zurichReviews.length > 0 && (
+          <section className="py-16 md:py-24 bg-white">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Kundenbewertungen: Was unsere Kunden über Umzugsfirmen in Zürich sagen
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Echte Erfahrungsberichte von Kunden, die über Online-Offerten.ch eine Umzugsfirma gefunden haben
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {zurichReviews.map((review: any) => (
+                  <div key={review.id} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div className="flex items-center mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          className={`w-5 h-5 ${i < Math.round(review.rating) ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} 
+                        />
+                      ))}
+                      <span className="ml-2 text-sm font-semibold text-gray-700">{review.rating?.toFixed(1)}</span>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed mb-4 line-clamp-4">
+                      &ldquo;{review.review_text}&rdquo;
+                    </p>
+                    <div className="flex items-center justify-between text-sm text-gray-500">
+                      <span className="font-medium text-gray-800">{review.customer_name}</span>
+                      <span>{review.city || 'Zürich'}</span>
+                    </div>
+                    {review.partners?.company_name && (
+                      <div className="mt-2 text-xs text-green-600 font-medium">
+                        Umzugsfirma: {review.partners.company_name}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="text-center mt-10">
+                <Button asChild variant="outline" className="border-green-600 text-green-600 hover:bg-green-50 font-semibold px-8 py-3">
+                  <Link href="/kunden-bewertungen">
+                    Alle Kundenbewertungen ansehen
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Google Maps Section - Local SEO Signal */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Umzugsfirmen in Zürich – Standort & Region
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Unsere geprüften Umzugspartner sind im gesamten Kanton Zürich aktiv. Von der Stadt Zürich über Winterthur bis nach Uster, Dietikon und Dübendorf – wir vermitteln Ihnen lokale Umzugsprofis in Ihrer Nähe.
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d172178.95174865046!2d8.397278349999999!3d47.37688945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900b9749bea219%3A0xe66e8df1e71fdc03!2sZ%C3%BCrich!5e0!3m2!1sde!2sch!4v1707850000000!5m2!1sde!2sch"
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Umzugsfirma Zürich - Standort auf Google Maps"
+                className="w-full"
+              />
+            </div>
+            <div className="mt-8 grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm text-center">
+                <MapPin className="w-8 h-8 text-green-600 mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-2">Stadt Zürich</h3>
+                <p className="text-sm text-gray-600">Kreis 1-12, Altstadt, Oerlikon, Zürich-West, Seefeld, Wiedikon</p>
+              </div>
+              <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm text-center">
+                <MapPin className="w-8 h-8 text-green-600 mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-2">Agglomeration</h3>
+                <p className="text-sm text-gray-600">Winterthur, Uster, Dietikon, Dübendorf, Schlieren, Kloten</p>
+              </div>
+              <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm text-center">
+                <MapPin className="w-8 h-8 text-green-600 mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-2">Kanton Zürich</h3>
+                <p className="text-sm text-gray-600">Alle Gemeinden im Kanton Zürich, Zürcher Oberland, Unterland, Weinland</p>
+              </div>
+            </div>
           </div>
         </section>
 
