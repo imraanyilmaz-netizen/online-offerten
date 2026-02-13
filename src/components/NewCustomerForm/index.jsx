@@ -839,6 +839,16 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       const { error } = await submitNewQuoteToSupabase(formData, t, i18n);
       if (error) throw error;
       setIsSubmitted(true);
+      
+      // Google Ads Conversion Tracking
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-10855452571/submit_lead',
+          'value': 1.0,
+          'currency': 'CHF'
+        });
+      }
+      
       toast({ title: t('quoteConfirmation.title'), description: t('quoteConfirmation.subtitle') });
       // Teşekkür mesajının görünmesi için formun bulunduğu konuma scroll et
       setTimeout(() => {
