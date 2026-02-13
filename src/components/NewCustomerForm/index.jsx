@@ -840,12 +840,16 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       if (error) throw error;
       setIsSubmitted(true);
       
-      // Google Ads Conversion Tracking
-      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-        window.gtag('event', 'conversion', {
-          'send_to': 'AW-10855452571/submit_lead',
-          'value': 1.0,
-          'currency': 'CHF'
+      // Google Tag Manager - Dönüşüm Event'i (Conversion Tracking)
+      if (typeof window !== 'undefined') {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'form_submission',
+          form_type: 'offerte_anfrage',
+          service_type: formData.serviceType || '',
+          from_city: formData.fromCity || '',
+          to_city: formData.toCity || '',
+          currency: 'CHF'
         });
       }
       
