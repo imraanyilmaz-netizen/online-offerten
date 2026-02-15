@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/SupabaseAuthContext'
 import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
@@ -54,6 +54,25 @@ const LoginPageClient = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
+
+  // Kullanıcı zaten giriş yapmışsa paneline yönlendir
+  useEffect(() => {
+    const checkSession = async () => {
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        const userRole = session.user?.user_metadata?.role
+        if (userRole === 'admin') {
+          window.location.href = '/admin-dashboard'
+        } else if (userRole === 'partner') {
+          window.location.href = '/partner/dashboard'
+        } else {
+          window.location.href = '/'
+        }
+      }
+    }
+    checkSession()
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
