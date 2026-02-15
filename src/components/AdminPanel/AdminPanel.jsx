@@ -5,7 +5,7 @@ import AdminPanelCore from './AdminPanelCore';
 import AdminPanelTabs from './AdminPanelTabs';
 import { Loader2 } from 'lucide-react';
 
-const AdminPanel = () => {
+const AdminPanel = ({ userRole = 'admin' }) => {
   console.log('[AdminPanel] Component rendering')
   
   const {
@@ -44,6 +44,7 @@ const AdminPanel = () => {
           onUpdatePartner={handleUpdatePartner}
           onDeletePartner={handleDeletePartner}
           onRefreshReviews={fetchPendingReviewsCount}
+          userRole={userRole}
         />
       </div>
     </div>

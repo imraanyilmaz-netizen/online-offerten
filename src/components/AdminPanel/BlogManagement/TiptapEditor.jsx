@@ -319,9 +319,9 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
   ];
 
   return (
-    <div className="border rounded-lg overflow-hidden bg-white">
+    <div className="border rounded-lg bg-white">
       {/* Toolbar */}
-      <div className="sticky top-0 z-10 bg-gray-50 border-b p-2 flex flex-wrap gap-1">
+      <div className="sticky top-16 z-50 bg-gray-50 border-b p-2 flex flex-wrap gap-1 rounded-t-lg shadow-sm">
         {/* Text Formatting */}
         <div className="flex gap-1 border-r pr-2 mr-2">
           <Button
@@ -670,7 +670,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
       </div>
 
       {/* Editor Content */}
-      <div className="max-h-[800px] overflow-y-auto">
+      <div>
         <EditorContent editor={editor} />
       </div>
     </div>

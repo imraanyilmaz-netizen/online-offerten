@@ -62,7 +62,7 @@ const LoginPageClient = () => {
       const { data: { session } } = await supabase.auth.getSession()
       if (session) {
         const userRole = session.user?.user_metadata?.role
-        if (userRole === 'admin') {
+        if (userRole === 'admin' || userRole === 'editor') {
           window.location.href = '/admin-dashboard'
         } else if (userRole === 'partner') {
           window.location.href = '/partner/dashboard'
@@ -250,11 +250,11 @@ const LoginPageClient = () => {
 
       // Redirect based on role using window.location.href for full page reload
       // This ensures middleware intercepts the request properly
-      if (userRole === 'admin') {
-        console.log('[LoginPage] Redirecting admin to /admin-dashboard')
+      if (userRole === 'admin' || userRole === 'editor') {
+        console.log('[LoginPage] Redirecting admin/editor to /admin-dashboard')
         toast({
           title: "Anmeldung erfolgreich",
-          description: "Sie werden zum Admin-Dashboard weitergeleitet...",
+          description: userRole === 'editor' ? "Sie werden zum Ratgeber-Bereich weitergeleitet..." : "Sie werden zum Admin-Dashboard weitergeleitet...",
         })
         window.location.href = '/admin-dashboard'
       } else if (userRole === 'partner') {

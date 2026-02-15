@@ -26,13 +26,13 @@ const AdminDashboardPageClient = () => {
 
         const userRole = session.user?.user_metadata?.role;
         
-        if (userRole !== 'admin') {
-          console.log('[AdminDashboardPageClient] User is not admin, redirecting to /');
+        if (userRole !== 'admin' && userRole !== 'editor') {
+          console.log('[AdminDashboardPageClient] User is not admin/editor, redirecting to /');
           router.replace('/');
           return;
         }
 
-        // User is admin - allow access
+        // User is admin or editor - allow access
         setUser(session.user);
         setLoading(false);
       } catch (error) {
@@ -55,13 +55,14 @@ const AdminDashboardPageClient = () => {
     );
   }
 
-  if (!user || user.user_metadata?.role !== 'admin') {
+  const userRole = user?.user_metadata?.role;
+  if (!user || (userRole !== 'admin' && userRole !== 'editor')) {
     return null;
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <AdminPanel />
+      <AdminPanel userRole={userRole} />
     </div>
   );
 };

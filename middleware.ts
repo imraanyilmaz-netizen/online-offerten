@@ -123,9 +123,9 @@ export async function middleware(request: NextRequest) {
       
       // Role-based access control
       if (pathname.startsWith('/admin-dashboard')) {
-        if (userRole !== 'admin') {
+        if (userRole !== 'admin' && userRole !== 'editor') {
           if (process.env.NODE_ENV === 'development') {
-            console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
+            console.log('[Middleware] User is not admin/editor, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
           }
           const loginUrl = new URL('/login', request.nextUrl.origin)
           return NextResponse.redirect(loginUrl, { status: 307 })
@@ -181,9 +181,9 @@ export async function middleware(request: NextRequest) {
     
     // Role-based access control
     if (pathname.startsWith('/admin-dashboard')) {
-      if (userRole !== 'admin') {
+      if (userRole !== 'admin' && userRole !== 'editor') {
         if (process.env.NODE_ENV === 'development') {
-          console.log('[Middleware] User is not admin, redirecting to /login:', { userRole, userEmail: user.email })
+          console.log('[Middleware] User is not admin/editor, redirecting to /login:', { userRole, userEmail: user.email })
         }
         const loginUrl = new URL('/login', request.nextUrl.origin)
         return NextResponse.redirect(loginUrl, { status: 307 })

@@ -440,17 +440,17 @@ const PostEditor = ({ post, onBack }) => {
               </p>
               <div className="p-4 border rounded-lg space-y-3 bg-blue-50 border-blue-200">
                 <div>
-                  <Label className="text-xs">FAQ Bölümü Ana Başlık (Title) - Opsiyonel</Label>
+                  <Label className="text-xs">FAQ-Bereich Haupttitel (Title) - Optional</Label>
                   <Input
                     value={faqTitle}
                     onChange={(e) => setFaqTitle(e.target.value)}
                     placeholder="z.B. FAQ - Häufige Fragen zum Möbellift mieten"
                     className="mt-1"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">Bu başlık tüm FAQ bölümünün üstünde görüntülenecektir</p>
+                  <p className="text-xs text-muted-foreground mt-1">Dieser Titel wird über dem gesamten FAQ-Bereich angezeigt</p>
                 </div>
                 <div>
-                  <Label className="text-xs">FAQ Bölümü Alt Açıklama (Description) - Opsiyonel</Label>
+                  <Label className="text-xs">FAQ-Bereich Beschreibung (Description) - Optional</Label>
                   <Textarea
                     value={faqDescription}
                     onChange={(e) => setFaqDescription(e.target.value)}
@@ -458,7 +458,7 @@ const PostEditor = ({ post, onBack }) => {
                     className="mt-1 min-h-[60px]"
                     rows={2}
                   />
-                  <p className="text-xs text-muted-foreground mt-1">Bu açıklama ana başlığın altında görüntülenecektir</p>
+                  <p className="text-xs text-muted-foreground mt-1">Diese Beschreibung wird unter dem Haupttitel angezeigt</p>
                 </div>
               </div>
               {faqs.map((faq, index) => (
@@ -523,7 +523,7 @@ const PostEditor = ({ post, onBack }) => {
           </CardHeader>
           <CardContent>
             <p className="text-xs text-muted-foreground mb-3">
-              HTML kodunu buraya ekleyin. "In Editor einfügen" butonuna tıklayarak kodu editöre ekleyebilirsiniz.
+              Fügen Sie den HTML-Code hier ein. Klicken Sie auf "In Editor einfügen", um den Code in den Editor einzufügen.
             </p>
             <Textarea
               value={customHtml}

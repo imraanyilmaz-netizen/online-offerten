@@ -3,7 +3,7 @@
 import React from 'react';
 
 const TiptapRenderer = ({ jsonContent }) => {
-  // HTML içindeki başlık ve paragraf tag'lerine standart class'ları ekle
+  // Standard-Klassen zu HTML-Überschriften und Absatz-Tags hinzufügen
   const addStandardClasses = (html) => {
     if (!html) return html;
     
@@ -119,7 +119,7 @@ const TiptapRenderer = ({ jsonContent }) => {
     return processed;
   };
 
-  // Eğer içerik string ise (HTML), direkt kullan
+  // Wenn der Inhalt ein String (HTML) ist, direkt verwenden
   if (typeof jsonContent === 'string') {
     const processedContent = processHtml(jsonContent);
     return (
