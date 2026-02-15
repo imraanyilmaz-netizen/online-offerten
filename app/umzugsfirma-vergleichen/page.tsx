@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import UmzugsfirmaVergleichenPageClient from '@/components/pages/info/UmzugsfirmaVergleichenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma vergleichen: Kostenlose Offerten',
-  description: 'Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz für Ihren Privatumzug oder die Reinigung. Sparen Sie Zeit und Geld mit nur einer Anfrage! Bis zu 5 Offerten im Vergleich.',
+  title: 'Umzugsfirma Vergleich Schweiz: Kostenlose Offerten vergleichen',
+  description: 'Umzugsfirma Vergleich Schweiz – Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz für Ihren Privatumzug oder die Reinigung. Sparen Sie Zeit und Geld mit nur einer Anfrage! Bis zu 5 Offerten im Vergleich.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-vergleichen',
   },
   openGraph: {
-    title: 'Umzugsfirma vergleichen: Kostenlose Offerten & bis zu 40% sparen',
-    description: 'Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz für Ihren Privatumzug oder die Reinigung. Sparen Sie Zeit und Geld mit nur einer Anfrage!',
+    title: 'Umzugsfirma Vergleich Schweiz: Kostenlose Offerten & bis zu 40% sparen',
+    description: 'Umzugsfirma Vergleich Schweiz – Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz. Sparen Sie Zeit und Geld mit nur einer Anfrage!',
     url: 'https://online-offerten.ch/umzugsfirma-vergleichen',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirma vergleichen: Kostenlose Offerten & bis zu 40% sparen',
-    description: 'Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz für Ihren Privatumzug oder die Reinigung.',
+    title: 'Umzugsfirma Vergleich Schweiz: Kostenlose Offerten & bis zu 40% sparen',
+    description: 'Umzugsfirma Vergleich Schweiz – Vergleichen Sie schnell und kostenlos die besten Umzugsfirmen in der Schweiz.',
     images: ['https://online-offerten.ch/image/umzugsfirma-kartons.webp'],
   },
   robots: {
