@@ -184,8 +184,8 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
         </div>
       )}
 
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:block sticky top-24 space-y-8">
+      {/* Sidebar - Desktop: sticky, Mobile: below article */}
+      <aside className="lg:sticky lg:top-24 space-y-8 mt-8 lg:mt-0">
         {/* Table of Contents */}
         {tableOfContents && tableOfContents.length > 0 && (
           <Card className="bg-gray-50 border-gray-200">

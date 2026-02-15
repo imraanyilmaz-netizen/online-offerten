@@ -854,15 +854,9 @@ export default async function HomePage() {
 
                 {/* CTA */}
                 <div className="text-left mt-12">
-                  <p className="text-body text-lg font-semibold mb-4">
-                    Jetzt kostenlose Offerten anfordern und passende Dienstleister finden
-                  </p>
-                  <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                    <Link href="/kostenlose-offerte-anfordern" className="inline-flex items-center">
-                      Kostenlose Offerte anfordern
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
+                  <Link href="/kostenlose-offerte-anfordern" className="text-lg font-semibold text-green-600 hover:text-green-700 underline transition-colors">
+                    Jetzt kostenlose Offerten anfordern und passende Dienstleister finden →
+                  </Link>
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@ import { Sparkles, Calculator, ListChecks, ArrowRight, Clock } from 'lucide-reac
 
 const RatgeberSidebar = ({ recentPosts }) => {
   return (
-    <aside className="sticky top-24 space-y-8">
+    <aside className="lg:sticky lg:top-24 space-y-8">
       {/* CTA Card */}
       <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg">
         <CardHeader>

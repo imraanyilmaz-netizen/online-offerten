@@ -207,7 +207,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     canScrollRight: true,
     canScrollLeftPosts: false,
     canScrollRightPosts: false,
-    selectedCategory: 'Alle' as string
+    selectedCategory: 'Alle' as string,
+    visiblePostsCount: 6
   });
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -593,7 +594,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                         {uniqueCategories.map((category) => (
                           <button
                             key={category}
-                            onClick={() => setState(prev => ({ ...prev, selectedCategory: category }))}
+                            onClick={() => setState(prev => ({ ...prev, selectedCategory: category, visiblePostsCount: 6 }))}
                             className={cn(
                               "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
                               state.selectedCategory === category
@@ -608,7 +609,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
                       {/* Articles Grid */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {filteredPosts.slice(0, 6).map((post: any) => {
+                        {filteredPosts.slice(0, state.visiblePostsCount).map((post: any) => {
                           const postUrl = `/ratgeber/${post.slug}`;
                           const isOverview = post.category?.toLowerCase().includes('übersicht') || post.title?.toLowerCase().includes('übersicht');
                           
@@ -631,11 +632,14 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                                     variant="secondary" 
                                     className="mb-2 self-start bg-blue-600 text-white hover:bg-blue-700 w-fit"
                                   >
-                                    {isOverview ? 'Übersicht' : 'Artikel'}
+                                    {post.category || 'Ratgeber'}
                                   </Badge>
                                   <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-green-600 transition-colors line-clamp-2">
                                     {post.title}
                                   </h3>
+                                  <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                                    {post.meta_description || ''}
+                                  </p>
                                 </CardContent>
                               </Card>
                             </Link>
@@ -645,6 +649,21 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     </>
                   );
                 })()}
+
+                {/* Mehr Ratgeber anzeigen Button */}
+                {filteredPosts.length > state.visiblePostsCount && (
+                  <div className="mt-10 text-center">
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className="group border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all"
+                      onClick={() => setState(prev => ({ ...prev, visiblePostsCount: prev.visiblePostsCount + 6 }))}
+                    >
+                      Weitere Ratgeber-Artikel anzeigen
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </div>
+                )}
               </div>
             </section>
           ) : null}

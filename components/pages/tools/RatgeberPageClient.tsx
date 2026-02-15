@@ -15,6 +15,7 @@ const RatgeberPageClient = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(10);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   
@@ -119,10 +120,10 @@ const RatgeberPageClient = () => {
             </p>
           </div>
 
-          <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             <main className="lg:col-span-8">
               <div className="grid grid-cols-1 gap-8">
-                {posts.map(post => {
+                {posts.slice(0, visibleCount).map(post => {
                   if (!post?.slug) return null;
                   const postHref = `${ratgeberBasePath}/${post.slug}`;
                   return (
@@ -166,9 +167,24 @@ const RatgeberPageClient = () => {
                   );
                 })}
               </div>
+
+              {/* Weitere Artikel laden */}
+              {posts.length > visibleCount && (
+                <div className="mt-10 text-center">
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="group border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all"
+                    onClick={() => setVisibleCount(prev => prev + 5)}
+                  >
+                    Weitere Artikel anzeigen
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </div>
+              )}
             </main>
             
-            <aside className="lg:col-span-4 mt-12 lg:mt-0">
+            <aside className="lg:col-span-4">
               <RatgeberSidebar recentPosts={recentPosts} />
             </aside>
 

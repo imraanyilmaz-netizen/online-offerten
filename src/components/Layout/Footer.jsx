@@ -92,8 +92,6 @@ const Footer = React.memo(() => {
               <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Online-Offerten.ch</span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-md">
-              Online-Offerten.ch ist eine unabhängige Schweizer Vermittlungsplattform für Umzugs-, Reinigungs- und Malerofferten.
-              <br /><br />
               Wir verbinden Privat- und Geschäftskunden mit geprüften, regionalen Partnerfirmen in der ganzen Schweiz.
               <br /><br />
               Nach dem Ausfüllen des Formulars wird Ihre Anfrage an bis zu 5 passende Anbieter in Ihrer Nähe weitergeleitet.
