@@ -12,8 +12,9 @@ import {
   Star, MapPin, Home, Building, Globe, Sparkles, FileText, Search,
   Truck, Navigation, Mail, ChevronRight, Paintbrush, Recycle,
   Package, Zap, Target, HeartHandshake, CheckCircle2, Layers, Grid2x2, SprayCan, Hammer,
-  BarChart3, BadgePercent
+  BarChart3, BadgePercent, ArrowUpDown
 } from 'lucide-react'
+import { PiPianoKeysFill } from 'react-icons/pi'
 
 const OffertenPortalPageClient = () => {
   const router = useRouter()
@@ -221,7 +222,7 @@ const OffertenPortalPageClient = () => {
                 Ihr Vergleichsportal für die Schweiz
               </div>
               <h1 className="heading-1 !mt-0">
-                Offertenportal Schweiz » Offerten kostenlos vergleichen
+                Offerten von Umzugsfirma & Reinigungsfirma vergleichen
               </h1>
               <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
                 Willkommen auf <strong>Online-Offerten.ch</strong> – Ihrem zentralen Vergleichsportal für <Link href="/umzugsfirma" className="text-green-700 hover:text-green-800 underline font-medium">Umzug</Link>, <Link href="/reinigung" className="text-green-700 hover:text-green-800 underline font-medium">Reinigung</Link> und <Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-medium">Malerarbeiten</Link> in der ganzen Schweiz. Mit nur einer Anfrage erhalten Sie bis zu 5 Offerten von geprüften Firmen aus Ihrer Region.
@@ -407,7 +408,7 @@ const OffertenPortalPageClient = () => {
                 Online-Offerten.ch ist Ihr zentrales <strong>Vergleichsportal</strong>, um schnell, einfach und kostenlos die besten Offerten für Umzüge, Reinigungen und Malerarbeiten in der gesamten Schweiz zu finden. Wir verbinden Sie mit einem Netzwerk von über 200 geprüften und qualifizierten Fachfirmen.
               </p>
               <p className="text-body mb-6">
-                Egal ob Sie einen <Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-medium">Privatumzug</Link> planen, eine professionelle <Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-medium">Endreinigung</Link> benötigen oder Ihre Wände neu streichen lassen möchten – unser Offertenportal spart Ihnen Zeit, Geld und Nerven. Mit nur einer Anfrage erreichen Sie mehrere Anbieter und können deren Offerten bequem online <Link href="/umzugsfirma-vergleichen" className="text-green-700 hover:text-green-800 underline font-medium">vergleichen</Link>.
+                Egal ob Sie einen Privatumzug planen, eine professionelle <Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-medium">Endreinigung</Link> benötigen oder Ihre Wände neu streichen lassen möchten – unser Offertenportal spart Ihnen Zeit, Geld und Nerven. Mit nur einer Anfrage erreichen Sie mehrere Anbieter und können deren Offerten bequem online <Link href="/umzugsfirma-vergleichen" className="text-green-700 hover:text-green-800 underline font-medium">vergleichen</Link>.
               </p>
 
               <div className="mb-6">
@@ -469,12 +470,14 @@ const OffertenPortalPageClient = () => {
           </p>
 
           <p className="text-sm font-semibold text-gray-700 mb-2">Umzugsart auswählen:</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-8">
             {[
               { label: 'Privatumzug', sub: 'Wohnungsumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug', icon: Home, color: 'blue' },
               { label: 'Geschäftsumzug', sub: 'Firmenumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug', icon: Building, color: 'purple' },
               { label: 'Auslandumzug', sub: 'International', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international', icon: Globe, color: 'emerald' },
+              { label: 'Klaviertransport', sub: 'Piano & Flügel', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport', icon: PiPianoKeysFill, color: 'amber' },
               { label: 'Kleintransport', sub: 'Einzelne Gegenstände', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport', icon: Package, color: 'teal' },
+              { label: 'Möbellift', sub: 'Bis 400 kg, 27m', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=moebellift', icon: ArrowUpDown, color: 'indigo' },
             ].map((item) => (
               <Link
                 key={item.label}
@@ -495,10 +498,12 @@ const OffertenPortalPageClient = () => {
           <h3 className="heading-3">Unsere Umzugsdienstleistungen</h3>
           <p className="text-body mb-4">Unsere Partner bieten ein breites Spektrum an Umzugsdienstleistungen an:</p>
           <ul className="text-body list-disc pl-5 space-y-2 mb-6">
-            <li><strong>Privatumzüge</strong>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
+            <li><Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Privatumzüge</Link>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
             <li><Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Geschäftsumzüge</Link>: Effiziente und schnelle Verlagerung von Büros und Gewerberäumen.</li>
             <li><Link href="/umzugsfirma/internationale-umzuege" className="text-green-700 hover:text-green-800 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
             <li><Link href="/umzugsfirma/spezialtransporte" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
+            <li><strong>Klaviertransport</strong>: Professioneller und schonender Transport von Klavieren und Flügeln mit Spezialtechnik.</li>
+            <li><strong>Möbellift</strong>: Bequemer Möbeltransport über das Fenster – ideal für schwere und sperrige Möbel bis 400 kg.</li>
           </ul>
           <p className="text-body">Erfahren Sie mehr über <Link href="/umzugsfirma/umzugskosten" className="text-green-700 hover:text-green-800 underline font-medium">Umzugskosten in der Schweiz</Link>.</p>
         </div>

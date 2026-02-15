@@ -375,11 +375,12 @@ export default async function HomePage() {
                 
                 {/* Rating Card */}
                 <div 
-                  className="bg-white rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-start items-start gap-4 transition-all duration-300 mt-6"
+                  className="bg-white rounded-xl p-5 sm:p-6 flex flex-col transition-all duration-300 mt-6"
                   style={{
                     boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
                   }}
                 >
+                  <div className="flex flex-row items-start gap-4">
                   <div className="flex-shrink-0 relative">
                     <div className="relative w-14 h-14 sm:w-16 sm:h-16">
                       {/* Main 3D Star */}
@@ -401,6 +402,7 @@ export default async function HomePage() {
                     </div>
                   </div>
                   <div className="flex-1 pt-1 w-full md:w-auto">
+                    <p className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1" style={{ left: '4px', position: 'relative' }}>Basierend auf echten Kundenbewertungen</p>
                     <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
                       <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
                         {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
@@ -429,20 +431,35 @@ export default async function HomePage() {
                         )
                       </span>
                     </div>
-                    {/* Trust Badges */}
-                    <div className="flex flex-wrap justify-start items-center gap-4 mt-4 pt-4 border-t border-gray-200">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="h-5 w-5 text-green-600" />
-                        <span className="text-sm text-gray-600">Kostenlos & unverbindlich</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="h-5 w-5 text-green-600" />
-                        <span className="text-sm text-gray-600">Nur geprüfte Firmen</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Award className="h-5 w-5 text-green-600" />
-                        <span className="text-sm text-gray-600">Zeit und Geld sparen</span>
-                      </div>
+                  </div>
+                  </div>
+                </div>
+
+                {/* Trust Badges + Hint - Separate Card */}
+                <div 
+                  className="bg-white rounded-xl p-5 sm:p-6 flex flex-col gap-3 transition-all duration-300 mt-4"
+                  style={{
+                    boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg flex-shrink-0">💡</span>
+                    <p className="text-sm sm:text-base font-medium text-green-800">
+                      Statt 5 Firmen einzeln zu kontaktieren, genügt eine einzige Anfrage.
+                    </p>
+                  </div>
+                  <div className="border-t border-gray-200 pt-3 flex flex-wrap items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                      <span className="text-sm text-gray-700">Kostenlos & unverbindlich</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-5 w-5 text-green-600" />
+                      <span className="text-sm text-gray-700">Nur geprüfte Firmen</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Award className="h-5 w-5 text-green-600" />
+                      <span className="text-sm text-gray-700">Zeit und Geld sparen</span>
                     </div>
                   </div>
                 </div>

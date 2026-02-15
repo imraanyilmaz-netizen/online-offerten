@@ -193,7 +193,7 @@ const HomeHeroForm = memo(() => {
           
        <div className="flex flex-col md:flex-row gap-4 rounded-xl mt-4 md:p-4 lg:p-0">
         <div className="flex-1 min-w-0">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Was steht an?</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Welche Dienstleistung benötigen Sie?</label>
           <div className="relative">
             <input
               ref={inputRef}
@@ -292,7 +292,6 @@ const HomeHeroForm = memo(() => {
           </Button>
         </div>
       </div>
-      
       </div>
     </form>
   )
