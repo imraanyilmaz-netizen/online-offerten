@@ -370,7 +370,7 @@ const MalerfirmaLausannePageClient = () => {
               </h2>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  ğŸ’° Preisbeispiele für Lausanne
+                  Preisbeispiele für Lausanne
                 </h3>
                 <div className="space-y-4 text-gray-700">
                   <div className="border-l-4 border-purple-600 pl-4">

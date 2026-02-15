@@ -709,7 +709,7 @@ const UmzugsfirmaPageClient = () => {
 
                 <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
                   <h4 className="heading-4 mb-3">
-                    ğŸ’¡ Pro-Tipp: Umzugsfirma richtig auswählen
+                    💡 Pro-Tipp: Umzugsfirma richtig auswählen
                   </h4>
                   <p className="text-body">
                     Beim Vergleich von Anbietern sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein etwas teurerer Partner kann durch bessere Leistungen, Versicherungen und Erfahrung das bessere Angebot sein. Für Spezialtransporte wie <Link href="/umzugsfirma/spezialtransporte/klaviertransport" className="text-blue-700 hover:text-blue-800 font-semibold underline">Klaviertransport</Link> oder <Link href="/umzugsfirma/spezialtransporte" className="text-blue-700 hover:text-blue-800 font-semibold underline">Spezialtransporte</Link> benötigen Sie spezialisierte Dienstleister mit entsprechender Erfahrung. Eine gute <strong>Umzugsplanung</strong> ist der Schlüssel zu einem erfolgreichen Umzug.

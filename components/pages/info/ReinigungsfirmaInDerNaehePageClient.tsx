@@ -707,7 +707,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
 
                 <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
                   <h4 className="text-xl font-bold text-gray-900 mb-4">
-                    ğŸ’° Preisbeispiele: Was kostet eine Reinigung konkret?
+                    Preisbeispiele: Was kostet eine Reinigung konkret?
                   </h4>
                   <div className="space-y-4 text-gray-700">
                     <div className="border-l-4 border-blue-600 pl-4">
@@ -757,7 +757,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
 
                 <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
                   <h4 className="text-xl font-bold text-gray-900 mb-3">
-                    ğŸ’¡ Pro-Tipp: Lokale Reinigungsunternehmen richtig auswählen
+                    💡 Pro-Tipp: Lokale Reinigungsunternehmen richtig auswählen
                   </h4>
                   <p className="text-gray-700">
                     Beim Vergleich von <strong>Reinigungsanbietern in Ihrer Region</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, verwendeten Reinigungsmittel, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein <strong>Reinigungsservice vor Ort</strong> mit lokaler Expertise kann trotz etwas höherem Preis das bessere Angebot sein, da er die örtlichen Gegebenheiten besser kennt.

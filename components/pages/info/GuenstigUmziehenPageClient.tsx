@@ -542,7 +542,7 @@ const GuenstigUmziehenPageClient = () => {
                 <div className="mb-6 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
                   <div className="text-center mb-6">
                     <p className="text-green-100 mb-4 text-body text-lg" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)', fontSize: '22px' }}>
-                      ğŸ”¹ <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> ğŸ”¹
+                      🔹 <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> 🔹
                     </p>
                     <p className="text-green-50 mb-6 text-body" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)' }}>
                       ✓ 100% kostenlos und unverbindlich ✓ Geprüfte Partner mit Erfahrung ✓ Transparente Preise ohne Verpflichtung

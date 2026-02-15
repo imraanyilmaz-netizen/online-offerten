@@ -566,7 +566,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
 
                 <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
                   <h4 className="text-xl font-bold text-gray-900 mb-3">
-                    ğŸ’¡ Pro-Tipp: Reinigungsunternehmen in {name} richtig auswählen
+                    💡 Pro-Tipp: Reinigungsunternehmen in {name} richtig auswählen
                   </h4>
                   <p className="text-gray-700">
                     Beim Vergleich von <strong>Reinigungsanbietern in {name}</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, verwendeten Reinigungsmittel, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein <strong>Reinigungsservice in {name}</strong> mit lokaler Expertise kann trotz etwas höherem Preis das bessere Angebot sein, da er die örtlichen Gegebenheiten besser kennt.

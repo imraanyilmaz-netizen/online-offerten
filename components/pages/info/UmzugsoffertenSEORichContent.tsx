@@ -82,7 +82,7 @@ const UmzugsoffertenSEORichContent: React.FC = () => {
 
               <div className="bg-green-50 border-l-4 border-green-600 p-6 my-8 hidden">
                 <h4 className="text-xl font-bold text-gray-900 mb-3">
-                  ğŸ’¡ Pro-Tipp: Angebote richtig vergleichen
+                  💡 Pro-Tipp: Angebote richtig vergleichen
                 </h4>
                 <p className="text-gray-700">
                   Beim Vergleich von <strong>Preisvorschlägen</strong> sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen der Umzugsfirmen und die Kommunikationsqualität. Ein etwas teureres <strong>Angebot</strong> kann durch bessere Leistungen und Versicherungen das bessere sein. Nutzen Sie unseren Umzugskosten-Rechner, um eine realistische Preiserwartung zu entwickeln, bevor Sie <strong>Kostenvoranschläge</strong> anfordern.
