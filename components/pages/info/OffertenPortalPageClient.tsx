@@ -404,7 +404,7 @@ const OffertenPortalPageClient = () => {
                 Willkommen auf dem Offertenportal Schweiz
               </h2>
               <p className="text-body mb-6">
-                Online-Offerten.ch ist Ihr zentrales <strong>Vergleichsportal</strong>, um schnell, einfach und kostenlos die besten Offerten für <Link href="/umzugsfirma" className="text-green-700 hover:text-green-800 underline font-medium">Umzüge</Link>, <Link href="/reinigung" className="text-green-700 hover:text-green-800 underline font-medium">Reinigungen</Link> und <Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-medium">Malerarbeiten</Link> in der gesamten Schweiz zu finden. Wir verbinden Sie mit einem Netzwerk von über 200 geprüften und qualifizierten Fachfirmen.
+                Online-Offerten.ch ist Ihr zentrales <strong>Vergleichsportal</strong>, um schnell, einfach und kostenlos die besten Offerten für Umzüge, Reinigungen und Malerarbeiten in der gesamten Schweiz zu finden. Wir verbinden Sie mit einem Netzwerk von über 200 geprüften und qualifizierten Fachfirmen.
               </p>
               <p className="text-body mb-6">
                 Egal ob Sie einen <Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-medium">Privatumzug</Link> planen, eine professionelle <Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-medium">Endreinigung</Link> benötigen oder Ihre Wände neu streichen lassen möchten – unser Offertenportal spart Ihnen Zeit, Geld und Nerven. Mit nur einer Anfrage erreichen Sie mehrere Anbieter und können deren Offerten bequem online <Link href="/umzugsfirma-vergleichen" className="text-green-700 hover:text-green-800 underline font-medium">vergleichen</Link>.
@@ -465,7 +465,7 @@ const OffertenPortalPageClient = () => {
             Alles rund um Ihren Umzug
           </h2>
           <p className="text-body mb-6">
-            Ein <Link href="/umzugsfirma" className="text-green-700 hover:text-green-800 underline font-medium">Umzug</Link> muss nicht stressig sein. Auf unserem Vergleichsportal finden Sie spezialisierte <Link href="/umzugsfirma-vergleichen" className="text-green-700 hover:text-green-800 underline font-medium">Umzugsfirmen</Link> für jede Art von Umzug – ob in <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:text-green-800 underline font-medium">Zürich</Link>, <Link href="/umzugsfirma/bern" className="text-green-700 hover:text-green-800 underline font-medium">Bern</Link>, <Link href="/umzugsfirma/basel" className="text-green-700 hover:text-green-800 underline font-medium">Basel</Link> oder einer anderen Stadt in der Schweiz.
+            Ein Umzug muss nicht stressig sein. Auf unserem Vergleichsportal finden Sie spezialisierte Umzugsfirmen für jede Art von Umzug – ob in <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:text-green-800 underline font-medium">Zürich</Link>, <Link href="/umzugsfirma/bern" className="text-green-700 hover:text-green-800 underline font-medium">Bern</Link>, <Link href="/umzugsfirma/basel" className="text-green-700 hover:text-green-800 underline font-medium">Basel</Link> oder einer anderen Stadt in der Schweiz.
           </p>
 
           <p className="text-sm font-semibold text-gray-700 mb-2">Umzugsart auswählen:</p>
@@ -493,9 +493,9 @@ const OffertenPortalPageClient = () => {
           </div>
 
           <h3 className="heading-3">Unsere Umzugsdienstleistungen</h3>
-          <p className="text-body mb-4">Unsere Partner bieten ein breites Spektrum an <Link href="/umzugsfirma" className="text-green-700 hover:text-green-800 underline font-medium">Umzugsdienstleistungen</Link> an:</p>
+          <p className="text-body mb-4">Unsere Partner bieten ein breites Spektrum an Umzugsdienstleistungen an:</p>
           <ul className="text-body list-disc pl-5 space-y-2 mb-6">
-            <li><Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Privatumzüge</Link>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
+            <li><strong>Privatumzüge</strong>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
             <li><Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Geschäftsumzüge</Link>: Effiziente und schnelle Verlagerung von Büros und Gewerberäumen.</li>
             <li><Link href="/umzugsfirma/internationale-umzuege" className="text-green-700 hover:text-green-800 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
             <li><Link href="/umzugsfirma/spezialtransporte" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
@@ -515,7 +515,7 @@ const OffertenPortalPageClient = () => {
             Professionelle Reinigung mit Abnahmegarantie
           </h2>
           <p className="text-body mb-6">
-            Eine besenreine Wohnung ist bei der Übergabe Pflicht. Unsere Partner für <Link href="/reinigung" className="text-green-700 hover:text-green-800 underline font-medium">Reinigungen</Link> garantieren eine reibungslose Wohnungsabgabe. Informieren Sie sich über die <Link href="/reinigung/reinigungskosten" className="text-green-700 hover:text-green-800 underline font-medium">Reinigungskosten</Link> in der Schweiz.
+            Eine besenreine Wohnung ist bei der Übergabe Pflicht. Unsere Partner für professionelle Reinigungen garantieren eine reibungslose Wohnungsabgabe. Informieren Sie sich über die <Link href="/reinigung/reinigungskosten" className="text-green-700 hover:text-green-800 underline font-medium">Reinigungskosten</Link> in der Schweiz.
           </p>
 
           <p className="text-sm font-semibold text-gray-700 mb-2">Reinigungsart auswählen:</p>
@@ -552,17 +552,17 @@ const OffertenPortalPageClient = () => {
             <li>Bei der Wohnungsübergabe anwesend zu sein.</li>
             <li>Eventuelle Nachreinigungen sofort und ohne zusätzliche Kosten durchzuführen.</li>
             <li>Solange zu arbeiten, bis der Vermieter die Sauberkeit im Abnahmeprotokoll bestätigt.</li>
-          </ul>
+                    </ul>
 
           <h3 className="heading-3">Umfang unserer Reinigungsdienstleistungen</h3>
-          <p className="text-body mb-4">Unsere Partner decken ein breites Spektrum an <Link href="/reinigung" className="text-green-700 hover:text-green-800 underline font-medium">Reinigungsarbeiten</Link> ab:</p>
+          <p className="text-body mb-4">Unsere Partner decken ein breites Spektrum an Reinigungsarbeiten ab:</p>
           <ul className="text-body list-disc pl-5 space-y-2 mb-4">
-            <li><Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Umzugsreinigung</Link>: Die komplette Endreinigung Ihrer alten Wohnung mit Abnahmegarantie.</li>
+            <li><strong>Umzugsreinigung</strong>: Die komplette Endreinigung Ihrer alten Wohnung mit Abnahmegarantie.</li>
             <li><Link href="/reinigung/fensterreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Fensterreinigung</Link>: Streifenfreie Sauberkeit für Fenster, Rahmen und Storen.</li>
             <li><Link href="/reinigung/bueroreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Büroreinigung</Link>: Regelmässige Unterhaltsreinigung für saubere und repräsentative Geschäftsräume.</li>
             <li><Link href="/reinigung/baureinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Baureinigung</Link>: Professionelle Reinigung nach Neu- oder Umbauten für einen sauberen Start.</li>
           </ul>
-          <p className="text-body">Mehr Informationen finden Sie auf unserer <Link href="/reinigung/reinigungskosten" className="text-green-700 hover:text-green-800 underline font-medium">Reinigungskosten-Seite</Link>.</p>
+          <p className="text-body">Mehr Informationen finden Sie auf unserer Reinigungskosten-Seite.</p>
                 </div>
             </section>
 
@@ -581,12 +581,12 @@ const OffertenPortalPageClient = () => {
           </p>
 
           <h3 className="heading-3">Unsere Maler-Dienstleistungen</h3>
-          <p className="text-body mb-4">Verleihen Sie Ihrem Eigentum neuen Glanz mit einer Vielzahl von <Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-medium">Malerarbeiten</Link>:</p>
+          <p className="text-body mb-4">Verleihen Sie Ihrem Eigentum neuen Glanz mit einer Vielzahl von professionellen Malerarbeiten:</p>
           <ul className="text-body list-disc pl-5 space-y-2 mb-6">
-            <li><Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-semibold">Innenanstriche</Link>: Streichen von Wänden, Decken, Türen und Fenstern für ein frisches Wohngefühl.</li>
-            <li><Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-semibold">Fassadenanstriche</Link>: Schutz und Verschönerung Ihrer Hausfassade mit wetterbeständigen Farben.</li>
-            <li><Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-semibold">Tapezierarbeiten</Link>: Professionelles Anbringen von Tapeten aller Art für eine individuelle Wandgestaltung.</li>
-            <li><Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-semibold">Lackierarbeiten</Link>: Hochwertiges Lackieren von Holzwerk, Metallteilen und Heizkörpern.</li>
+            <li><strong>Innenanstriche</strong>: Streichen von Wänden, Decken, Türen und Fenstern für ein frisches Wohngefühl.</li>
+            <li><strong>Fassadenanstriche</strong>: Schutz und Verschönerung Ihrer Hausfassade mit wetterbeständigen Farben.</li>
+            <li><strong>Tapezierarbeiten</strong>: Professionelles Anbringen von Tapeten aller Art für eine individuelle Wandgestaltung.</li>
+            <li><strong>Lackierarbeiten</strong>: Hochwertiges Lackieren von Holzwerk, Metallteilen und Heizkörpern.</li>
                     </ul>
                 </div>
             </section>
