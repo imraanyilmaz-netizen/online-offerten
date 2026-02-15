@@ -162,7 +162,7 @@ const ArticleSection = () => {
         
         {/* Deutschland */}
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Deutschland</h3>
+          <h3 className="heading-3">Umzug von der Schweiz nach Deutschland</h3>
           <p className="mb-4">Deutschland ist eines der häufigsten Zielländer für Auswanderer und Grenzgänger aus der Schweiz. Regionen wie Baden-Württemberg, Bayern oder die Metropolregion Berlin ziehen jährlich zahlreiche Schweizerinnen und Schweizer an – sei es für eine neue Arbeitsstelle, ein Studium oder um näher bei der Familie zu sein.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -180,7 +180,7 @@ const ArticleSection = () => {
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
           <div className="flex flex-col md:flex-row gap-6 mb-4">
             <div className="flex-1">
-              <h3 className="heading-3">Umzug Schweiz – Italien</h3>
+              <h3 className="heading-3">Umzug von der Schweiz nach Italien</h3>
               <p className="mb-4">Italien lockt mit Dolce Vita, mediterranem Klima und kulturellem Reichtum. Beliebte Ziele für Schweizer Auswanderer sind Mailand, die Region Como, die Toskana oder Rom – sei es für den Ruhestand, eine Zweitwohnung oder einen beruflichen Einsatz.</p>
               <div className="mb-4">
                 <h4 className="font-semibold text-slate-800 mb-2">Herausforderungen der Route</h4>
@@ -192,23 +192,25 @@ const ArticleSection = () => {
               </div>
               <div>
                 <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
-                <img 
-                  src="/fotos/umzug-schweiz-italien.webp" 
-                  alt="Umzug Schweiz Italien" 
-                  className="rounded-xl shadow-lg w-full h-auto object-cover mb-4"
-                />
                 <ul className="text-sm space-y-1">
                   <li className="mb-6">• Zürich–Mailand: ca. 280 km, meist Tagesumzug möglich</li>
                   <li className="mb-6">• Lugano–Florenz: ca. 380 km, längere Fahrzeit durch Apennin</li>
                 </ul>
               </div>
             </div>
+            <div className="w-full md:w-1/2 flex-shrink-0">
+              <img 
+                src="/fotos/umzug-schweiz-italien.webp" 
+                alt="Umzug von der Schweiz nach Italien – Internationale Umzugsfirma" 
+                className="rounded-xl shadow-lg w-full h-auto object-cover sticky top-4"
+              />
+            </div>
           </div>
         </div>
 
         {/* Diğer ülkeler - kısa tutacağım */}
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Österreich</h3>
+          <h3 className="heading-3">Umzug von der Schweiz nach Österreich</h3>
           <p className="mb-4">Österreich ist für viele Schweizer Familien und Berufstätige ein attraktives Ziel. Städte wie Wien, Graz, Innsbruck oder die Vorarlberger Region (Bregenz, Dornbirn) bieten Lebensqualität, kulturelle Nähe und gute Karrieremöglichkeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -226,7 +228,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Spanien</h3>
+          <h3 className="heading-3">Umzug von der Schweiz nach Spanien</h3>
           <p className="mb-4">Spanien zählt zu den beliebtesten Auswanderungszielen überhaupt. Barcelona, Madrid, Valencia, die Costa Brava, die Costa del Sol oder die Balearen (Mallorca, Ibiza) locken mit Sonne, Meer und einem entspannten Lebensstil.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -245,7 +247,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Portugal</h3>
+          <h3 className="heading-3">Umzug von der Schweiz nach Portugal</h3>
           <p className="mb-4">Portugal erfreut sich wachsender Beliebtheit bei Auswanderern und Remote-Workern aus der Schweiz. Lissabon, Porto und die Algarve bieten ein mildes Klima, vergleichsweise günstige Lebenshaltungskosten und eine hohe Lebensqualität.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -263,7 +265,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Holland</h3>
+          <h3 className="heading-3">Umzug von der Schweiz in die Niederlande</h3>
           <p className="mb-4">Die Niederlande sind ein Magnet für internationale Fachkräfte und Studierende. Amsterdam, Den Haag, Rotterdam und Utrecht bieten ein kosmopolitisches Umfeld und zahlreiche Karrieremöglichkeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -281,7 +283,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Belgien</h3>
+          <h3 className="heading-3">Umzug von der Schweiz nach Belgien</h3>
           <p className="mb-4">Belgien – insbesondere Brüssel, Antwerpen, Gent und Brügge – zieht viele Schweizer an, die bei EU-Institutionen oder internationalen Unternehmen arbeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -296,7 +298,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Dänemark</h3>
+          <h3 className="heading-3">Umzug von der Schweiz nach Dänemark</h3>
           <p className="mb-4">Dänemark – mit Kopenhagen, Aarhus und Odense – ist für Familien und Fachkräfte attraktiv, erfordert aber eine längere Anreise ab der Schweiz.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
@@ -314,7 +316,7 @@ const ArticleSection = () => {
         </div>
 
         <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-          <h3 className="heading-3">Umzug Schweiz – Schweden</h3>
+          <h3 className="heading-3">Umzug von der Schweiz nach Schweden</h3>
           <p className="mb-4">Schweden lockt mit hoher Lebensqualität, intakter Natur und attraktiven Arbeitsmöglichkeiten. Stockholm, Göteborg, Malmö und Uppsala gehören zu den beliebtesten Zielen.</p>
           <div className="mb-4">
             <h4 className="font-semibold text-slate-800 mb-2">Lange Distanz, komplexe Route</h4>
@@ -382,13 +384,19 @@ const ArticleSection = () => {
             </table>
           </div>
         </div>
-        <img 
-          src="/fotos/neu-modern-wohnungen-in-der-schweiz.webp" 
-          alt="Modernes Wohnen in der Schweiz" 
-          className="rounded-xl shadow-lg w-full h-auto object-cover mb-6"
-        />
-        <p className="mb-4"><strong>Grobe Orientierung:</strong> Ein Umzug einer 2,5-Zimmerwohnung von Zürich nach Stuttgart kostet deutlich weniger als ein vergleichbarer Umzug einer 4,5-Zimmerwohnung von Bern nach Barcelona. Die genauen Preise hängen von individuellen Faktoren ab und sollten immer auf Basis einer detaillierten Anfrage kalkuliert werden.</p>
-        <p>Holen Sie über Online-Offerten.ch mehrere Offerten ein, um Preisunterschiede und Leistungsumfang transparent zu vergleichen.</p>
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex-1">
+            <p className="mb-4"><strong>Grobe Orientierung:</strong> Ein Umzug einer 2,5-Zimmerwohnung von Zürich nach Stuttgart kostet deutlich weniger als ein vergleichbarer Umzug einer 4,5-Zimmerwohnung von Bern nach Barcelona. Die genauen Preise hängen von individuellen Faktoren ab und sollten immer auf Basis einer detaillierten Anfrage kalkuliert werden.</p>
+            <p>Holen Sie über Online-Offerten.ch mehrere Offerten ein, um Preisunterschiede und Leistungsumfang transparent zu vergleichen.</p>
+          </div>
+          <div className="w-full md:w-1/2 flex-shrink-0">
+            <img 
+              src="/fotos/neu-modern-wohnungen-in-der-schweiz.webp" 
+              alt="Modernes Wohnen in der Schweiz – Internationale Umzüge" 
+              className="rounded-xl shadow-lg w-full h-auto object-cover"
+            />
+          </div>
+        </div>
       </section>
 
       {/* Vorteile */}
