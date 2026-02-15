@@ -11,7 +11,7 @@ import Step2_ServiceDetails from '@/components/NewCustomerForm/Step2_ServiceDeta
 import Step2_DetailsAndContact from '@/components/NewCustomerForm/Step2_DetailsAndContact';
 import NewQuoteConfirmation from '@/components/NewCustomerForm/NewQuoteConfirmation';
 import { toast } from '@/components/ui/use-toast';
-import { ArrowLeft, Send, Home as HomeIcon, Loader2, ShieldCheck, Star, Clock, Lock, MapPin, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
+import { ArrowLeft, Send, Home as HomeIcon, Loader2, ShieldCheck, Star, Clock, Lock, MapPin, ChevronLeft, ChevronRight, FileText, CheckCircle2 } from 'lucide-react';
 import useNewCustomerForm from './useNewCustomerForm';
 import useNewFormValidation from './useNewFormValidation';
 import { submitNewQuoteToSupabase } from './newFormUtils';
@@ -1110,20 +1110,11 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           {renderStepContent()}
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-between items-center pt-4 sm:pt-6 border-t border-gray-200 gap-3 sm:gap-4">
-          {currentStep > 1 ? (
-            <div className="hidden sm:block">
-              <Button type="button" onClick={handlePrevStep} variant="outline" className="group py-2.5 text-sm sm:text-base">
-                <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-                {t('backButton')}
-              </Button>
-            </div>
-          ) : (
-            <Button type="button" onClick={handleNavigateHome} variant="outline" className="group w-full sm:w-auto py-2.5 text-sm sm:text-base text-gray-500 hover:text-green-600">
-              <HomeIcon className="w-4 h-4 mr-2" />
-              {t('toHomepageLink')}
-            </Button>
-          )}
+        <div className="flex flex-col-reverse sm:flex-row justify-between items-center pt-4 sm:pt-6 border-t border-gray-200 gap-3 sm:gap-4">
+          <div className="flex items-center gap-1.5 text-sm text-gray-500">
+            <CheckCircle2 className="w-4 h-4 text-green-600" />
+            <span>Kostenlos - Unverbindlich</span>
+          </div>
           
           <div className="flex-grow sm:block hidden"></div>
 
@@ -1146,14 +1137,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             </Button>
           )}
 
-          {currentStep > 1 && (
-            <div className="sm:hidden w-full">
-              <Button type="button" onClick={handlePrevStep} variant="ghost" className="group w-full py-2 text-sm text-gray-500 hover:text-gray-700">
-                <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-                {t('backButton')}
-              </Button>
-            </div>
-          )}
         </div>
       </form>
       
