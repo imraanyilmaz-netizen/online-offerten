@@ -28,7 +28,7 @@ const ForgotPasswordPageClient = () => {
     setError('')
 
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'https://online-offerten.ch/auth/callback?next=/update-password',
+      redirectTo: 'https://online-offerten.ch/update-password',
     })
 
     setLoading(false)
