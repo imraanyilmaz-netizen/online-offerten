@@ -233,27 +233,48 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
     if (!quote) return;
     setIsFetchingCantons(true);
     try {
-      const locationQueries = [];
-      if (quote.from_city && quote.from_zip) {
-        locationQueries.push(`${quote.from_zip} ${quote.from_city}`);
-      }
-      if (quote.to_city && quote.to_zip) {
-        locationQueries.push(`${quote.to_zip} ${quote.to_city}`);
-      }
+      // PLZ-basierte Kantonserkennung (zuverlässiger als Stadtname)
+      const zipCodes = [];
+      if (quote.from_zip) zipCodes.push(quote.from_zip);
+      if (quote.to_zip) zipCodes.push(quote.to_zip);
 
-      if (locationQueries.length === 0) {
+      if (zipCodes.length === 0) {
         setIsFetchingCantons(false);
+        toast({
+          title: "Keine PLZ vorhanden",
+          description: "Es wurden keine Postleitzahlen in der Anfrage gefunden.",
+          variant: "destructive",
+        });
         return;
       }
 
-      const { data, error } = await supabase.functions.invoke('fetch-canton-by-location', {
-        body: { queries: locationQueries },
-      });
+      const foundCantons = [];
 
-      if (error) throw new Error(error.message);
-      
-      if (data && data.cantons) {
-        setTargetRegions(prev => [...new Set([...prev, ...data.cantons])]);
+      for (const zip of zipCodes) {
+        try {
+          const { data, error } = await supabase.functions.invoke('fetch-city-by-zip', {
+            body: { zipCode: zip },
+          });
+          if (!error && data && data.canton) {
+            foundCantons.push(data.canton);
+          }
+        } catch (zipError) {
+          console.warn(`[QuoteMatcher] Kanton für PLZ ${zip} nicht gefunden:`, zipError);
+        }
+      }
+
+      if (foundCantons.length > 0) {
+        setTargetRegions(prev => [...new Set([...prev, ...foundCantons])]);
+        toast({
+          title: "✅ Kantone erkannt",
+          description: `${[...new Set(foundCantons)].map(c => c).join(', ')} automatisch erkannt.`,
+        });
+      } else {
+        toast({
+          title: "Kanton nicht gefunden",
+          description: "Für die angegebenen Postleitzahlen konnte kein Kanton ermittelt werden.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       toast({
