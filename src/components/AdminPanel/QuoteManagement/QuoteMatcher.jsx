@@ -233,46 +233,65 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
     if (!quote) return;
     setIsFetchingCantons(true);
     try {
-      // PLZ-basierte Kantonserkennung (zuverlässiger als Stadtname)
+      let foundCantons = [];
+
+      // ── Methode 1: PLZ-basiert (fetch-city-by-zip) ──
       const zipCodes = [];
       if (quote.from_zip) zipCodes.push(quote.from_zip);
       if (quote.to_zip) zipCodes.push(quote.to_zip);
 
-      if (zipCodes.length === 0) {
-        setIsFetchingCantons(false);
-        toast({
-          title: "Keine PLZ vorhanden",
-          description: "Es wurden keine Postleitzahlen in der Anfrage gefunden.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      const foundCantons = [];
-
-      for (const zip of zipCodes) {
-        try {
-          const { data, error } = await supabase.functions.invoke('fetch-city-by-zip', {
-            body: { zipCode: zip },
-          });
-          if (!error && data && data.canton) {
-            foundCantons.push(data.canton);
+      if (zipCodes.length > 0) {
+        for (const zip of zipCodes) {
+          try {
+            const { data, error } = await supabase.functions.invoke('fetch-city-by-zip', {
+              body: { zipCode: zip },
+            });
+            if (!error && data && data.canton) {
+              foundCantons.push(data.canton);
+            }
+          } catch (zipError) {
+            console.warn(`[QuoteMatcher] PLZ ${zip} Methode 1 fehlgeschlagen:`, zipError);
           }
-        } catch (zipError) {
-          console.warn(`[QuoteMatcher] Kanton für PLZ ${zip} nicht gefunden:`, zipError);
         }
       }
 
+      // ── Methode 2: Fallback mit fetch-canton-by-location ──
+      if (foundCantons.length === 0) {
+        console.log('[QuoteMatcher] Methode 1 fehlgeschlagen, versuche Methode 2 (fetch-canton-by-location)...');
+        const locationQueries = [];
+        if (quote.from_city && quote.from_zip) {
+          locationQueries.push(`${quote.from_zip} ${quote.from_city}`);
+        }
+        if (quote.to_city && quote.to_zip) {
+          locationQueries.push(`${quote.to_zip} ${quote.to_city}`);
+        }
+
+        if (locationQueries.length > 0) {
+          try {
+            const { data, error } = await supabase.functions.invoke('fetch-canton-by-location', {
+              body: { queries: locationQueries },
+            });
+            if (!error && data && data.cantons && data.cantons.length > 0) {
+              foundCantons = data.cantons;
+            }
+          } catch (fallbackError) {
+            console.warn('[QuoteMatcher] Methode 2 auch fehlgeschlagen:', fallbackError);
+          }
+        }
+      }
+
+      // ── Ergebnis auswerten ──
       if (foundCantons.length > 0) {
-        setTargetRegions(prev => [...new Set([...prev, ...foundCantons])]);
+        const uniqueCantons = [...new Set(foundCantons)];
+        setTargetRegions(prev => [...new Set([...prev, ...uniqueCantons])]);
         toast({
           title: "✅ Kantone erkannt",
-          description: `${[...new Set(foundCantons)].map(c => c).join(', ')} automatisch erkannt.`,
+          description: `${uniqueCantons.join(', ')} automatisch erkannt.`,
         });
       } else {
         toast({
           title: "Kanton nicht gefunden",
-          description: "Für die angegebenen Postleitzahlen konnte kein Kanton ermittelt werden.",
+          description: "Automatische Erkennung fehlgeschlagen. Bitte wählen Sie den Kanton manuell aus.",
           variant: "destructive",
         });
       }
