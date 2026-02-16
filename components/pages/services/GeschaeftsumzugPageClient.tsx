@@ -246,7 +246,7 @@ const GeschaeftsumzugPageClient = () => {
                   {/* Left Column - Content */}
                   <div className="lg:col-span-8">
                     <p className="text-body leading-relaxed mb-6">
-                      Ein Geschäftsumzug ist mehr als nur der Transport von Möbeln – es ist ein strategisches Projekt, das die Zukunft Ihres Unternehmens massgeblich beeinflussen kann. Ob Büroumzug, Firmenumzug oder Unternehmensumzug: Professionelle Planung und Durchführung sind entscheidend, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Übergang zu gewährleisten. Wir unterstützen Sie beim Firmenumzug in Zürich, Bern, Basel, Luzern und der ganzen Schweiz mit geprüften regionalen Umzugsfirmen in Ihrer Nähe.
+                      Umzüge für Unternehmen erfordern eine andere Herangehensweise als private Wohnungswechsel – sie sind strategische Projekte, die die Zukunft Ihres Unternehmens massgeblich beeinflussen können. Ob Büroumzug, Firmenumzug oder Unternehmensumzug: Professionelle Planung und Durchführung sind entscheidend, um Betriebsunterbrechungen zu minimieren und einen reibungslosen Übergang zu gewährleisten. Wir unterstützen Sie beim Firmenumzug in Zürich, Bern, Basel, Luzern und der ganzen Schweiz mit geprüften regionalen Umzugsfirmen in Ihrer Nähe.
                     </p>
                     
                     <h2 className="heading-2 mb-4">
@@ -408,7 +408,7 @@ const GeschaeftsumzugPageClient = () => {
               {/* H2 Section 6 */}
               <section className="pt-8 border-t border-gray-200">
                 <h2 className="heading-2">
-                  Tipps für einen erfolgreichen Büro- und Firmenumzug
+                  Tipps für erfolgreiche Umzüge für Unternehmen
                 </h2>
                 <div className="text-body leading-relaxed text-lg space-y-4">
                   <p>

@@ -124,13 +124,13 @@ const combinedSchema = {
 
 export const metadata: Metadata = {
   title: 'Geschäftsumzug: Kostenlose Offerten vergleichen',
-  description: 'Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen. Schnell, transparent und regional.',
+  description: 'Umzüge für Unternehmen: Kosten für Büroumzug & Firmenumzug vergleichen. Gratis Offerten von geprüften Umzugsfirmen in der Nähe. Schnell, transparent & regional.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/geschaeftsumzug',
   },
   openGraph: {
     title: 'Geschäftsumzug: Kostenlose Offerten vergleichen',
-    description: 'Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen.',
+    description: 'Umzüge für Unternehmen: Kosten für Büroumzug & Firmenumzug vergleichen. Gratis Offerten von geprüften Umzugsfirmen.',
     url: 'https://online-offerten.ch/umzugsfirma/geschaeftsumzug',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -147,7 +147,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Geschäftsumzug: Kostenlose Offerten vergleichen',
-    description: 'Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen.',
+    description: 'Umzüge für Unternehmen: Kosten für Büroumzug & Firmenumzug vergleichen. Gratis Offerten von geprüften Umzugsfirmen.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/gescheftsumzug.png'],
   },
   robots: {

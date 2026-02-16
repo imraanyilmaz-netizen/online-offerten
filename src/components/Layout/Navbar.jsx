@@ -103,12 +103,10 @@ const Navbar = () => {
   // Removed language switching - DE-only now
 
   const umzugLinks = [
-    { to: '/umzugsfirma', text: 'Umzugsfirma finden' },
     { to: '/umzugsfirma/privatumzug', text: 'Privatumzug' },
     { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug' },
     { to: '/umzugsfirma/internationale-umzuege', text: 'Internationale Umzüge' },
     { to: '/umzugsfirma/spezialtransporte', text: 'Spezialtransporte' },
-    { to: '/umzugsfirma-in-der-naehe', text: 'Umzugsfirma in der Nähe' },
     { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirmen vergleichen' },
   ];
 

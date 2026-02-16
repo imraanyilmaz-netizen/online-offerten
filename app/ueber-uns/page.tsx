@@ -4,14 +4,14 @@ import { createStaticClient } from '@/lib/supabase/server'
 import AboutPageClient from '@/components/pages/AboutPageClient'
 
 export const metadata: Metadata = {
-  title: 'Über uns – Online-Offerten.ch | Kostenlose Vermittlungsplattform für Umzug, Reinigung & Malerarbeiten',
-  description: 'Online-Offerten.ch ist eine unabhängige Schweizer Vermittlungsplattform. Wir verbinden Sie kostenlos mit bis zu 5 geprüften Partnerfirmen für Umzug, Reinigung und Malerarbeiten in der ganzen Schweiz. 100% kostenlos und unverbindlich.',
+  title: 'Über uns – Online-Offerten.ch | Unabhängiges Vergleichsportal für Umzug, Reinigung & Malerarbeiten',
+  description: 'Online-Offerten.ch ist ein unabhängiges Schweizer Vergleichsportal. Mit einer Anfrage bis zu 5 Offerten von geprüften Umzugs-, Reinigungs- und Malerfirmen erhalten. 100% kostenlos & unverbindlich.',
   alternates: {
     canonical: 'https://online-offerten.ch/ueber-uns',
   },
   openGraph: {
-    title: 'Über uns – Online-Offerten.ch | Kostenlose Vermittlungsplattform Schweiz',
-    description: 'Kostenlose Vermittlung von Umzugs-, Reinigungs- und Malerfirmen in der ganzen Schweiz. Bis zu 5 Offerten vergleichen – 100% kostenlos und unverbindlich.',
+    title: 'Über Online-Offerten.ch – Ihr unabhängiges Vergleichsportal',
+    description: 'Unabhängiges Vergleichsportal für Umzug, Reinigung & Malerarbeiten. Bis zu 5 Offerten von geprüften Firmen vergleichen – 100% kostenlos.',
     url: 'https://online-offerten.ch/ueber-uns',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: 'https://online-offerten.ch/image/online-offerten.webp',
         width: 1200,
         height: 630,
-        alt: 'Online-Offerten.ch – Über uns',
+        alt: 'Online-Offerten.ch – Unabhängiges Vergleichsportal',
       },
     ],
     locale: 'de_CH',
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Über uns – Online-Offerten.ch | Kostenlose Vermittlungsplattform',
-    description: 'Kostenlose Vermittlung von Umzugs-, Reinigungs- und Malerfirmen in der ganzen Schweiz. Bis zu 5 Offerten vergleichen.',
+    title: 'Über Online-Offerten.ch – Unabhängiges Vergleichsportal',
+    description: 'Unabhängiges Vergleichsportal für Umzug, Reinigung & Malerarbeiten. Bis zu 5 Offerten kostenlos vergleichen.',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
   robots: {
@@ -78,8 +78,8 @@ export default async function AboutPage() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "Über uns – Online-Offerten.ch",
-    "description": "Online-Offerten.ch ist eine unabhängige Schweizer Vermittlungsplattform für Umzugs-, Reinigungs- und Malerofferten. Wir verbinden Privat- und Geschäftskunden kostenlos mit geprüften Partnerfirmen in der ganzen Schweiz.",
+    "name": "Über Online-Offerten.ch – Unabhängiges Vergleichsportal",
+    "description": "Online-Offerten.ch ist ein unabhängiges Schweizer Vergleichsportal für Umzugs-, Reinigungs- und Malerofferten. Mit einer Anfrage bis zu 5 Offerten von geprüften Partnerfirmen erhalten – kostenlos und unverbindlich.",
     "url": "https://online-offerten.ch/ueber-uns",
     "mainEntity": {
       "@type": "Organization",
@@ -87,7 +87,7 @@ export default async function AboutPage() {
       "name": "Online Offerten",
       "url": "https://online-offerten.ch",
       "logo": "https://online-offerten.ch/image/logo-icon.webp",
-      "description": "Unabhängige Schweizer Vermittlungsplattform für Umzugs-, Reinigungs- und Malerofferten. Kostenlose Vermittlung von geprüften Partnerfirmen in der ganzen Schweiz.",
+      "description": "Unabhängiges Schweizer Vergleichsportal für Umzugs-, Reinigungs- und Malerofferten. Mit einer Anfrage bis zu 5 kostenlose Offerten von geprüften Partnerfirmen erhalten.",
       "contactPoint": {
         "@type": "ContactPoint",
         "email": "info@online-offerten.ch",

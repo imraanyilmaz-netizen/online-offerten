@@ -140,13 +140,13 @@ const combinedSchema = {
 
 export const metadata: Metadata = {
   title: 'Privatumzug Offerten vergleichen – Bis zu 40% sparen',
-  description: 'Privatumzug Offerten kostenlos vergleichen ✓ Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug. Sicher, stressfrei & bis zu 40% sparen. Jetzt vergleichen!',
+  description: 'Umzüge für Privatpersonen: Privatumzug Offerten kostenlos vergleichen ✓ Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug. Sicher, stressfrei & bis zu 40% sparen.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/privatumzug',
   },
   openGraph: {
     title: 'Privatumzug Offerten vergleichen – Bis zu 40% sparen',
-    description: 'Privatumzug Offerten kostenlos vergleichen ✓ Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug. Sicher, stressfrei & bis zu 40% sparen.',
+    description: 'Umzüge für Privatpersonen: Privatumzug Offerten kostenlos vergleichen ✓ Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug.',
     url: 'https://online-offerten.ch/umzugsfirma/privatumzug',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -163,7 +163,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Privatumzug Offerten vergleichen – Bis zu 40% sparen',
-    description: 'Privatumzug Offerten kostenlos vergleichen ✓ Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug. Sicher, stressfrei & bis zu 40% sparen.',
+    description: 'Umzüge für Privatpersonen: Privatumzug Offerten kostenlos vergleichen ✓ Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/privatumzug-offerten-kostenlos-vergleichen.png'],
   },
   robots: {

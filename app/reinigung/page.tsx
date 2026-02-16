@@ -3,13 +3,13 @@ import ReinigungPageClient from '@/components/pages/services/ReinigungPageClient
 
 export const metadata: Metadata = {
   title: 'Reinigungsfirma Schweiz – Kostenlose Offerten vergleichen & sparen',
-  description: 'Reinigungsfirmen in der Schweiz vergleichen: Kostenlos bis zu 5 Offerten von geprüften Reinigungsfirmen einholen. Umzugsreinigung, Wohnungsreinigung & Büroreinigung. ✓ Mit Abnahmegarantie ✓ 100% kostenlos',
+  description: 'Reinigung für Privatpersonen & Unternehmen: Kostenlos bis zu 5 Offerten von geprüften Reinigungsfirmen in der Schweiz vergleichen. Umzugsreinigung, Wohnungsreinigung & Büroreinigung. ✓ Abnahmegarantie ✓ 100% kostenlos',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung',
   },
   openGraph: {
     title: 'Reinigungsfirma Schweiz – Kostenlose Offerten vergleichen & sparen',
-    description: 'Reinigungsfirmen in der Schweiz vergleichen: Kostenlos bis zu 5 Offerten von geprüften Reinigungsfirmen einholen. Umzugsreinigung, Wohnungsreinigung & Büroreinigung.',
+    description: 'Reinigung für Privatpersonen & Unternehmen: Kostenlos bis zu 5 Offerten von geprüften Reinigungsfirmen in der Schweiz vergleichen.',
     url: 'https://online-offerten.ch/reinigung',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Reinigungsfirma Schweiz – Kostenlose Offerten vergleichen & sparen',
-    description: 'Reinigungsfirmen in der Schweiz vergleichen: Kostenlos Offerten einholen. Umzugsreinigung, Wohnungsreinigung & Büroreinigung.',
+    description: 'Reinigung für Privatpersonen & Unternehmen: Kostenlos Offerten von geprüften Reinigungsfirmen vergleichen.',
     images: ['https://online-offerten.ch/image/reinigungsfirma.webp'],
   },
   robots: {

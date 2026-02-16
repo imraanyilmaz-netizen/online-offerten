@@ -272,7 +272,7 @@ const PrivateUmzugPageClient = () => {
                         Genau hier setzt Online-Offerten.ch an: Als digitale Plattform ermöglicht sie es Ihnen, Ihren geplanten Umzug unkompliziert zu beschreiben und anschliessend mehrere Offerten von geprüften <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirmen aus Ihrer Region</Link> zu erhalten. Sie entscheiden selbst, welches Unternehmen am besten zu Ihrem Bedarf passt – ob im Raum Zürichsee, Limmattal, der Agglomeration Bern oder anderswo in der Schweiz.
                       </p>
                       <p>
-                        Alle Offerten sind kostenlos und unverbindlich. Das bedeutet: Sie gehen kein Risiko ein und behalten die volle Kontrolle über Ihre Entscheidung. Die Partner von Online-Offerten.ch sind regionale Spezialisten, die auf Privatumzüge spezialisiert sind und wissen, worauf es bei einem reibungslosen Wohnungswechsel ankommt.
+                        Alle Offerten sind kostenlos und unverbindlich. Das bedeutet: Sie gehen kein Risiko ein und behalten die volle Kontrolle über Ihre Entscheidung. Die Partner von Online-Offerten.ch sind regionale Spezialisten, die auf Umzüge für Privatpersonen spezialisiert sind und wissen, worauf es bei einem reibungslosen Wohnungswechsel ankommt.
                       </p>
                     </div>
                     
@@ -759,10 +759,10 @@ const PrivateUmzugPageClient = () => {
                   </p>
                 
                 <h3 className="heading-3">
-                  Besondere Umzüge: Senioren, Familien, WG & Erstwohnung
+                  Umzüge für Privatpersonen: Senioren, Familien, WG & Erstwohnung
                 </h3>
                 <p className="text-body leading-relaxed mb-3">
-                  Nicht jeder Privatumzug ist gleich. Unterschiedliche Lebenssituationen bringen unterschiedliche Bedürfnisse mit sich.
+                  Nicht jeder Privatumzug ist gleich. Umzüge für Privatpersonen unterscheiden sich je nach Lebenssituation erheblich – ob Senioren, Familien mit Kindern oder junge Einzelpersonen.
                 </p>
                 <div className="space-y-4 mb-4">
                   <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">

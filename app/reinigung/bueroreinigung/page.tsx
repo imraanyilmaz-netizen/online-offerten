@@ -3,13 +3,13 @@ import BueroreinigungPageClient from '@/components/pages/services/Bueroreinigung
 
 export const metadata: Metadata = {
   title: 'Büroreinigung – Kostenlose Offerten vergleichen',
-  description: 'Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Büroreinigung garantiert.',
+  description: 'Reinigung für Unternehmen: Professionelle Büroreinigung Offerten vergleichen. Kostenlos bis zu 5 Offerten von geprüften Reinigungsfirmen einholen & bis zu 40% sparen.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung/bueroreinigung',
   },
   openGraph: {
     title: 'Büroreinigung – Kostenlose Offerten vergleichen',
-    description: 'Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach.',
+    description: 'Reinigung für Unternehmen: Professionelle Büroreinigung Offerten vergleichen. Kostenlos Offerten von geprüften Reinigungsfirmen einholen.',
     url: 'https://online-offerten.ch/reinigung/bueroreinigung',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Büroreinigung – Kostenlose Offerten vergleichen',
-    description: 'Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen.',
+    description: 'Reinigung für Unternehmen: Büroreinigung Offerten vergleichen. Kostenlos Offerten von geprüften Reinigungsfirmen einholen.',
     images: ['https://online-offerten.ch/image/reinigungsfirma.webp'],
   },
   robots: {

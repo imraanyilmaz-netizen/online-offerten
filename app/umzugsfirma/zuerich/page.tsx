@@ -733,7 +733,7 @@ export default async function UmzugsfirmaZurichPage() {
                                 href={`/partner/${partnerSlug}`}
                                 className="text-green-600 hover:text-green-700 text-xs font-medium mt-1 inline-block"
                               >
-                                Mehr erfahren â†’
+                                Mehr erfahren →
                               </Link>
                             )}
                           </div>

@@ -388,8 +388,8 @@ const UmzugsfirmaPageClient = () => {
             <div
             >
               <h1 className="heading-1">
-                <span className="block">Umzugsfirma</span>
-                <span className="block text-green-600 mt-2">finden & vergleichen</span>
+                <span className="block">Umzugsfirma finden</span>
+                <span className="block text-green-600 mt-2">Kostenlos Offerten vergleichen & sparen</span>
                 <span className="block heading-4 text-gray-700 mt-4">
                   Bis zu 40% sparen bei Ihrem Umzug
                 </span>
