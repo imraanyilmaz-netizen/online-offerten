@@ -121,6 +121,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const needsImmediateAuth = 
       pathname?.startsWith('/admin-dashboard') ||
       pathname?.startsWith('/partner/dashboard') ||
+      pathname?.startsWith('/update-password') ||
       ['/login', '/forgot-password', '/partner-werden'].includes(pathname || '')
 
     let timeoutId: NodeJS.Timeout | number | null = null

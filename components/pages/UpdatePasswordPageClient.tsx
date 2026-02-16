@@ -1,6 +1,6 @@
 ﻿'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/SupabaseAuthContext'
 import { useToast } from '@/components/ui/use-toast'
@@ -8,16 +8,38 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Loader2, KeyRound } from 'lucide-react'
+import { Loader2, KeyRound, AlertCircle, CheckCircle } from 'lucide-react'
+import Link from 'next/link'
 // framer-motion removed - CSS for better INP
 
 const UpdatePasswordPageClient = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const { updateUserPassword } = useAuth()
+  const [sessionReady, setSessionReady] = useState(false)
+  const [sessionError, setSessionError] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const { user, session, loading: authLoading, updateUserPassword } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
+
+  // Session hazır olduğunda formu göster
+  useEffect(() => {
+    if (authLoading) return
+
+    if (session && user) {
+      setSessionReady(true)
+      setSessionError(false)
+    } else {
+      // Auth yüklendi ama session yok → hata
+      const timer = setTimeout(() => {
+        if (!session && !user) {
+          setSessionError(true)
+        }
+      }, 3000) // 3 saniye bekle (code exchange zaman alabilir)
+      return () => clearTimeout(timer)
+    }
+  }, [authLoading, session, user])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -53,12 +75,78 @@ const UpdatePasswordPageClient = () => {
         description: 'Passwort konnte nicht aktualisiert werden: ' + error.message,
       })
     } else {
+      setSuccess(true)
       toast({
         title: 'Erfolg!',
-        description: 'Ihr Passwort wurde erfolgreich aktualisiert. Sie werden zum Login weitergeleitet.',
+        description: 'Ihr Passwort wurde erfolgreich aktualisiert.',
       })
-      setTimeout(() => router.push('/login'), 2000)
+      setTimeout(() => router.push('/login'), 3000)
     }
+  }
+
+  // Erfolg-Ansicht
+  if (success) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+          <CardContent className="text-center py-12">
+            <CheckCircle className="mx-auto h-16 w-16 text-green-600" />
+            <h2 className="text-2xl font-bold text-gray-800 mt-4">Passwort aktualisiert!</h2>
+            <p className="text-gray-600 mt-2">Sie werden in Kürze zum Login weitergeleitet...</p>
+            <Link href="/login">
+              <Button className="mt-6 bg-green-600 hover:bg-green-700">
+                Zum Login
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  // Lade-Ansicht (Session wird vorbereitet)
+  if (authLoading || (!sessionReady && !sessionError)) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+          <CardContent className="text-center py-12">
+            <Loader2 className="mx-auto h-12 w-12 text-green-600 animate-spin" />
+            <p className="mt-4 text-lg text-gray-600">Sitzung wird vorbereitet...</p>
+            <p className="mt-2 text-sm text-gray-500">Bitte warten Sie einen Moment.</p>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  // Fehler-Ansicht (kein gültiger Recovery-Link)
+  if (sessionError) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+          <CardContent className="text-center py-12">
+            <AlertCircle className="mx-auto h-16 w-16 text-red-500" />
+            <h2 className="text-xl font-bold text-gray-800 mt-4">Link abgelaufen oder ungültig</h2>
+            <p className="text-gray-600 mt-2">
+              Der Link zum Zurücksetzen des Passworts ist abgelaufen oder ungültig. 
+              Bitte fordern Sie einen neuen Link an.
+            </p>
+            <div className="flex flex-col gap-3 mt-6">
+              <Link href="/forgot-password">
+                <Button className="w-full bg-green-600 hover:bg-green-700">
+                  Neuen Link anfordern
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button variant="outline" className="w-full">
+                  Zurück zum Login
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   return (

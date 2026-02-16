@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback, useMemo } from 'react';
+﻿import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
@@ -13,9 +13,20 @@ export const useQuoteManagement = () => {
     const [purchasedQuotesInfo, setPurchasedQuotesInfo] = useState({});
     const [rejectedQuotesInfo, setRejectedQuotesInfo] = useState({});
     const [refundRequests, setRefundRequests] = useState([]);
+    const debounceTimers = useRef({});
 
     const { toast } = useToast();
     const { user } = useAuth();
+
+    // Debounce helper
+    const debouncedFetch = useCallback((key, fn, delay = 800) => {
+        if (debounceTimers.current[key]) {
+            clearTimeout(debounceTimers.current[key]);
+        }
+        debounceTimers.current[key] = setTimeout(() => {
+            fn();
+        }, delay);
+    }, []);
 
     const fetchQuotes = useCallback(async () => {
         setLoading(true);
@@ -158,6 +169,100 @@ export const useQuoteManagement = () => {
         fetchRejectedQuotesInfo();
         fetchRefundRequests();
     }, [fetchQuotes, fetchPartners, fetchPurchasedQuotesInfo, fetchRejectedQuotesInfo, fetchRefundRequests]);
+
+    // ──── Real-time Subscriptions for Quote Management ────
+    useEffect(() => {
+        // 1) Quotes tablosu: yeni iş, güncelleme, silme
+        const quotesChannel = supabase
+            .channel('qm-quotes-realtime')
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'quotes' },
+                (payload) => {
+                    console.log('[Realtime QM] Quotes change:', payload.eventType);
+                    if (payload.eventType === 'INSERT') {
+                        // Yeni quote geldi → listeye ekle (tam refresh yerine)
+                        setQuotes(prev => [payload.new, ...prev]);
+                    } else if (payload.eventType === 'UPDATE') {
+                        // Quote güncellendi → state'de güncelle
+                        setQuotes(prev => prev.map(q => q.id === payload.new.id ? payload.new : q));
+                    } else if (payload.eventType === 'DELETE') {
+                        // Quote silindi → state'den kaldır
+                        setQuotes(prev => prev.filter(q => q.id !== payload.old.id));
+                    }
+                }
+            )
+            .subscribe((status) => {
+                if (status === 'SUBSCRIBED') console.log('[Realtime QM] ✅ Quotes channel active');
+            });
+
+        // 2) Purchased Quotes: partner teklif satın aldığında
+        const purchasedChannel = supabase
+            .channel('qm-purchased-realtime')
+            .on(
+                'postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'purchased_quotes' },
+                (payload) => {
+                    console.log('[Realtime QM] New purchase:', payload.new?.quote_id);
+                    toast({
+                        title: '💰 Anfrage gekauft!',
+                        description: 'Ein Partner hat eine Anfrage erworben.',
+                    });
+                    debouncedFetch('purchased', () => {
+                        fetchPurchasedQuotesInfo();
+                        fetchQuotes(); // Quota durumu değişmiş olabilir
+                    });
+                }
+            )
+            .subscribe((status) => {
+                if (status === 'SUBSCRIBED') console.log('[Realtime QM] ✅ Purchased channel active');
+            });
+
+        // 3) Rejections: partner teklifi reddettiğinde
+        const rejectionsChannel = supabase
+            .channel('qm-rejections-realtime')
+            .on(
+                'postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'partner_quote_rejections' },
+                (payload) => {
+                    console.log('[Realtime QM] New rejection:', payload.new?.quote_id);
+                    debouncedFetch('rejections', fetchRejectedQuotesInfo);
+                }
+            )
+            .subscribe((status) => {
+                if (status === 'SUBSCRIBED') console.log('[Realtime QM] ✅ Rejections channel active');
+            });
+
+        // 4) Refund Requests: rückerstellung talebi geldiğinde
+        const refundsChannel = supabase
+            .channel('qm-refunds-realtime')
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'refund_requests' },
+                (payload) => {
+                    console.log('[Realtime QM] Refund change:', payload.eventType);
+                    if (payload.eventType === 'INSERT') {
+                        toast({
+                            title: '🔄 Neue Rückerstattungsanfrage',
+                            description: 'Ein Partner hat eine Rückerstattung beantragt.',
+                        });
+                    }
+                    debouncedFetch('refunds', fetchRefundRequests);
+                }
+            )
+            .subscribe((status) => {
+                if (status === 'SUBSCRIBED') console.log('[Realtime QM] ✅ Refunds channel active');
+            });
+
+        // Cleanup on unmount
+        return () => {
+            Object.values(debounceTimers.current).forEach(clearTimeout);
+            supabase.removeChannel(quotesChannel);
+            supabase.removeChannel(purchasedChannel);
+            supabase.removeChannel(rejectionsChannel);
+            supabase.removeChannel(refundsChannel);
+        };
+    }, [fetchQuotes, fetchPurchasedQuotesInfo, fetchRejectedQuotesInfo, fetchRefundRequests, debouncedFetch, toast]);
     
     const toggleView = (quoteId, viewType) => {
         if (expandedQuote.id === quoteId && expandedQuote.view === viewType) {
