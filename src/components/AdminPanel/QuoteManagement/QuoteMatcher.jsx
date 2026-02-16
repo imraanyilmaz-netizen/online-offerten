@@ -11,8 +11,20 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
 import { findMatchingPartners } from '@/lib/matchUtils';
-import { getFullCantonName, getGermanServiceName, cantonOptions } from '@/lib/dataMapping';
+import { getFullCantonName, getGermanServiceName, cantonOptions, cantonMap } from '@/lib/dataMapping';
 import { supabase } from '@/lib/customSupabaseClient';
+
+// Kanton-Wert normalisieren: "Zürich" → "ZH", "ZH" → "ZH"
+const normalizeCantonToCode = (canton) => {
+  if (!canton) return null;
+  const trimmed = canton.trim();
+  const upper = trimmed.toUpperCase();
+  if (cantonMap[upper]) return upper;
+  const entry = Object.entries(cantonMap).find(
+    ([, name]) => name.toLowerCase() === trimmed.toLowerCase()
+  );
+  return entry ? entry[0] : trimmed;
+};
 
 const mainCategoryConfig = {
   umzug: { icon: Truck, label: 'Umzugsfirma', color: 'text-blue-600' },
@@ -233,50 +245,54 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
     if (!quote) return;
     setIsFetchingCantons(true);
     try {
-      let foundCantons = [];
+      const foundCantons = [];
 
-      // ── Methode 1: PLZ-basiert (fetch-city-by-zip) ──
-      const zipCodes = [];
-      if (quote.from_zip) zipCodes.push(quote.from_zip);
-      if (quote.to_zip) zipCodes.push(quote.to_zip);
+      // Jede PLZ einzeln prüfen (mit individuellem Fallback)
+      const zipEntries = [];
+      if (quote.from_zip) zipEntries.push({ zip: quote.from_zip, city: quote.from_city });
+      if (quote.to_zip) zipEntries.push({ zip: quote.to_zip, city: quote.to_city });
 
-      if (zipCodes.length > 0) {
-        for (const zip of zipCodes) {
-          try {
-            const { data, error } = await supabase.functions.invoke('fetch-city-by-zip', {
-              body: { zipCode: zip },
-            });
-            if (!error && data && data.canton) {
-              foundCantons.push(data.canton);
+      for (const entry of zipEntries) {
+        let cantonFound = false;
+
+        // ── Methode 1: PLZ-basiert (fetch-city-by-zip) ──
+        try {
+          const { data, error } = await supabase.functions.invoke('fetch-city-by-zip', {
+            body: { zipCode: entry.zip },
+          });
+          if (!error && data && data.canton) {
+            const code = normalizeCantonToCode(data.canton);
+            if (code) {
+              foundCantons.push(code);
+              cantonFound = true;
+              console.log(`[QuoteMatcher] PLZ ${entry.zip} → Kanton ${code} (via fetch-city-by-zip)`);
             }
-          } catch (zipError) {
-            console.warn(`[QuoteMatcher] PLZ ${zip} Methode 1 fehlgeschlagen:`, zipError);
           }
-        }
-      }
-
-      // ── Methode 2: Fallback mit fetch-canton-by-location ──
-      if (foundCantons.length === 0) {
-        console.log('[QuoteMatcher] Methode 1 fehlgeschlagen, versuche Methode 2 (fetch-canton-by-location)...');
-        const locationQueries = [];
-        if (quote.from_city && quote.from_zip) {
-          locationQueries.push(`${quote.from_zip} ${quote.from_city}`);
-        }
-        if (quote.to_city && quote.to_zip) {
-          locationQueries.push(`${quote.to_zip} ${quote.to_city}`);
+        } catch (zipError) {
+          console.warn(`[QuoteMatcher] PLZ ${entry.zip} Methode 1 fehlgeschlagen:`, zipError);
         }
 
-        if (locationQueries.length > 0) {
+        // ── Methode 2: Fallback pro PLZ (fetch-canton-by-location) ──
+        if (!cantonFound && entry.city) {
           try {
             const { data, error } = await supabase.functions.invoke('fetch-canton-by-location', {
-              body: { queries: locationQueries },
+              body: { queries: [`${entry.zip} ${entry.city}`] },
             });
             if (!error && data && data.cantons && data.cantons.length > 0) {
-              foundCantons = data.cantons;
+              const code = normalizeCantonToCode(data.cantons[0]);
+              if (code) {
+                foundCantons.push(code);
+                cantonFound = true;
+                console.log(`[QuoteMatcher] PLZ ${entry.zip} → Kanton ${code} (via fetch-canton-by-location)`);
+              }
             }
           } catch (fallbackError) {
-            console.warn('[QuoteMatcher] Methode 2 auch fehlgeschlagen:', fallbackError);
+            console.warn(`[QuoteMatcher] PLZ ${entry.zip} Methode 2 auch fehlgeschlagen:`, fallbackError);
           }
+        }
+
+        if (!cantonFound) {
+          console.warn(`[QuoteMatcher] ⚠️ Kein Kanton gefunden für PLZ ${entry.zip} (${entry.city || 'unbekannt'})`);
         }
       }
 
@@ -284,6 +300,23 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
       if (foundCantons.length > 0) {
         const uniqueCantons = [...new Set(foundCantons)];
         setTargetRegions(prev => [...new Set([...prev, ...uniqueCantons])]);
+
+        // ✅ Direkte Partner-Auswahl (nicht auf useEffect warten)
+        if (quote.status === 'new_quote' || quote.status === 'pending') {
+          const criteria = {
+            mainService: quote.umzugart === 'lagerung' ? 'lagerung_service' : quote.servicetype,
+            additionalServices: (quote.additional_services_cleaning || quote.umzugsreinigung) ? ['umzugsreinigung'] : [],
+            targetRegions: uniqueCantons,
+          };
+          const matched = findMatchingPartners(activePartners, criteria);
+          if (matched.length > 0) {
+            setSelectedPartnerIds(new Set(matched.map(p => p.id)));
+            console.log(`[QuoteMatcher] ✅ ${matched.length} Partner automatisch ausgewählt für Kantone: ${uniqueCantons.join(', ')}`);
+          } else {
+            console.log(`[QuoteMatcher] ⚠️ Keine passenden Partner für Kantone: ${uniqueCantons.join(', ')}`);
+          }
+        }
+
         toast({
           title: "✅ Kantone erkannt",
           description: `${uniqueCantons.join(', ')} automatisch erkannt.`,
@@ -304,7 +337,7 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
     } finally {
       setIsFetchingCantons(false);
     }
-  }, [quote, toast]);
+  }, [quote, toast, activePartners]);
 
   useEffect(() => {
     if (quote) {
