@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
@@ -20,6 +20,8 @@ import { formatDate } from '@/lib/utils'; // Import formatDate from utils
 const PartnerSettingsPageClient = () => {
   const { toast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get('tab') || 'profile';
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -217,7 +219,7 @@ const PartnerSettingsPageClient = () => {
             </Button>
           </div>
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Einstellungen</h1>
-          <Tabs defaultValue="profile" className="w-full">
+          <Tabs defaultValue={initialTab} className="w-full">
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="profile"><User className="mr-2 h-4 w-4" />Profil</TabsTrigger>
               <TabsTrigger value="images"><ImageIcon className="mr-2 h-4 w-4" />Bilder</TabsTrigger>

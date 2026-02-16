@@ -80,9 +80,24 @@ const UpdatePasswordPageClient = () => {
         title: 'Erfolg!',
         description: 'Ihr Passwort wurde erfolgreich aktualisiert.',
       })
-      setTimeout(() => router.push('/login'), 3000)
+      // Role'e göre doğru dashboard'a yönlendir
+      const userRole = user?.user_metadata?.role
+      const redirectPath = userRole === 'admin' || userRole === 'editor'
+        ? '/admin-dashboard'
+        : userRole === 'partner'
+          ? '/partner/dashboard'
+          : '/login'
+      setTimeout(() => router.push(redirectPath), 3000)
     }
   }
+
+  // Role'e göre Redirect-Pfad bestimmen
+  const userRole = user?.user_metadata?.role
+  const dashboardPath = userRole === 'admin' || userRole === 'editor'
+    ? '/admin-dashboard'
+    : userRole === 'partner'
+      ? '/partner/dashboard'
+      : '/login'
 
   // Erfolg-Ansicht
   if (success) {
@@ -92,10 +107,10 @@ const UpdatePasswordPageClient = () => {
           <CardContent className="text-center py-12">
             <CheckCircle className="mx-auto h-16 w-16 text-green-600" />
             <h2 className="text-2xl font-bold text-gray-800 mt-4">Passwort aktualisiert!</h2>
-            <p className="text-gray-600 mt-2">Sie werden in Kürze zum Login weitergeleitet...</p>
-            <Link href="/login">
+            <p className="text-gray-600 mt-2">Sie werden in Kürze weitergeleitet...</p>
+            <Link href={dashboardPath}>
               <Button className="mt-6 bg-green-600 hover:bg-green-700">
-                Zum Login
+                Zum Dashboard
               </Button>
             </Link>
           </CardContent>

@@ -1,7 +1,7 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react'
-import { usePathname } from 'next/navigation'
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import { createClient } from '@/lib/supabase/client'
 import type { User, Session } from '@supabase/supabase-js'
@@ -21,6 +21,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast()
   const pathname = usePathname()
+  const router = useRouter()
+  const recoveryHandled = useRef(false)
 
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
@@ -107,6 +109,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             console.warn('[AuthContext] Session missing user.id in onAuthStateChange, clearing')
             await supabase.auth.signOut()
             handleSession(null)
+            return
+          }
+
+          // PASSWORD_RECOVERY event: Kullanıcı şifre sıfırlama linkine tıkladı
+          if (event === 'PASSWORD_RECOVERY' && session && !recoveryHandled.current) {
+            recoveryHandled.current = true
+            console.log('[AuthContext] PASSWORD_RECOVERY detected, redirecting to settings...')
+            handleSession(session)
+            
+            const userRole = session.user?.user_metadata?.role
+            if (userRole === 'partner') {
+              router.push('/partner/einstellungen?tab=security')
+            } else if (userRole === 'admin' || userRole === 'editor') {
+              router.push('/admin-dashboard')
+            } else {
+              router.push('/update-password')
+            }
             return
           }
           
