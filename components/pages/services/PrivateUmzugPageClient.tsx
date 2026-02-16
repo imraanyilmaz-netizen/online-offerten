@@ -9,8 +9,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { 
   ArrowRight, CheckCircle, PackagePlus, ClipboardList, Users, ShieldCheck, 
   Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
-  Building, Globe, Sparkles, Trash2, Brush as PaintBrush, Box,
-  TrendingUp, FileText, Search, Mail, CheckCircle2, ChevronRight, ArrowUpDown
+  Building, Globe, Sparkles, Trash2, Brush as PaintBrush, Box, Package,
+  TrendingUp, FileText, Search, Mail, CheckCircle2, ChevronRight
 } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi';
 import dynamic from 'next/dynamic';
@@ -78,14 +78,14 @@ const PrivateUmzugPageClient = () => {
       url: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=kleintransport'
     },
     { 
-      id: 'moebellift',
-      name: 'Möbellift mieten',
-      description: 'Bis 400 kg, max. 27m',
-      icon: ArrowUpDown,
+      id: 'lagerung',
+      name: 'Lagerung',
+      description: 'Möbel sicher einlagern',
+      icon: Package,
       iconColor: 'text-rose-600',
       iconBg: 'bg-rose-100',
       iconBgHover: 'bg-rose-500',
-      url: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=moebellift'
+      url: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=lagerung'  // Lagerung
     }
   ];
 
@@ -472,7 +472,7 @@ const PrivateUmzugPageClient = () => {
                   <li><strong>Verpackungsservice</strong>: Das Team der Umzugsfirma verpackt Ihren gesamten Hausrat fachgerecht in Umzugskartons</li>
                   <li><strong>Bereitstellung von Verpackungsmaterial</strong>: Kartons, Kleiderboxen, Luftpolsterfolie, Decken</li>
                   <li><strong>Demontage und Montage</strong>: Aufbau und Abbau von Möbeln, Küchen, Lampen</li>
-                  <li><strong>Möbellift</strong>: Für grosse Gegenstände oder bei engen Treppenhäusern</li>
+                  <li><strong>Lagerung</strong>: Sichere Zwischenlagerung Ihrer Möbel bei zeitversetztem Umzug</li>
                   <li><strong>Entsorgung</strong>: Alte Möbel und Haushaltsgegenstände werden fachgerecht entsorgt</li>
                   <li><strong>Zwischenlagerung</strong>: Lagerraum für Mobiliar, wenn der Einzugstermin später liegt</li>
                   <li><strong>Umzugsreinigung</strong>: Professionelle Räumung und Reinigung mit Abgabegarantie</li>
@@ -496,7 +496,7 @@ const PrivateUmzugPageClient = () => {
                       Die Unterschiede zwischen einzelnen Offerten können erheblich sein, je nachdem welche Extras enthalten sind. Hier einige Beispiele für Zusatzservices, die Sie delegieren können:
                     </p>
                     <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
-                      <li><strong>Möbellift-Einsatz</strong>: Besonders bei Altbauten mit engen Treppenhäusern oder für den Transport schwerer Gegenstände wie Klaviere, Tresore oder Fitnessgeräte unverzichtbar</li>
+                      <li><strong>Lagerung</strong>: Wenn Ein- und Auszugsdatum nicht übereinstimmen, bieten viele Firmen sichere Zwischenlagerung an</li>
                       <li><strong>Kleiderboxen</strong>: Kleidung kann direkt am Bügel transportiert werden – spart Zeit beim Ein- und Auspacken</li>
                       <li><strong>Ein- und Auspackservice</strong>: Profis übernehmen das komplette Auspacken und Einräumen am Zielort</li>
                       <li><strong>Parkplatzreservation</strong>: Einige Firmen organisieren Halteverbotszonen bei der Gemeinde (etwa Stadt Zürich oder Stadt Bern)</li>
@@ -562,8 +562,8 @@ const PrivateUmzugPageClient = () => {
                         <td className="border border-gray-300 px-4 py-3 text-gray-700">Kleintransporter vs. grosser Umzugs-LKW</td>
                       </tr>
                       <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Möbellift-Einsatz</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Zusätzliche Kosten, aber oft günstiger als stundenlanges Treppensteigen</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Lagerung / Zwischenlagerung</td>
+                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Ab ca. CHF 80–150/Monat je nach Lagergrösse und Standort</td>
                       </tr>
                       <tr>
                         <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Zusatzleistungen</td>
@@ -602,7 +602,7 @@ const PrivateUmzugPageClient = () => {
                     <h4 className="font-semibold text-lg text-gray-800 mb-2">Beispiel 2: Kantonswechsel mit Full-Service</h4>
                     <ul className="space-y-1 text-gray-700 text-sm mb-2">
                       <li>• 4,5-Zimmer-Wohnung von Bern nach Luzern, ca. 100 km</li>
-                      <li>• Inkl. Demontage, Montage und Möbellift an einem Standort</li>
+                      <li>• Inkl. Demontage, Montage und Zwischenlagerung</li>
                       <li>• Verpackung durch Kunden</li>
                     </ul>
                     <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 2'500 – 4'500</p>
@@ -852,7 +852,7 @@ const PrivateUmzugPageClient = () => {
                     </p>
                     <ol className="space-y-2 list-decimal list-inside mb-4 text-gray-700">
                       <li><strong>Preis</strong>: Wie ist das Verhältnis von Kosten zu Leistung?</li>
-                      <li><strong>Leistungsumfang</strong>: Sind Möbellift, Verpackungsmaterial, Demontage/Montage, Reinigung explizit erwähnt?</li>
+                      <li><strong>Leistungsumfang</strong>: Sind Lagerung, Verpackungsmaterial, Demontage/Montage, Reinigung explizit erwähnt?</li>
                       <li><strong>Versicherungsdeckung</strong>: Welche Transport- und Haftpflichtversicherung hat die Firma?</li>
                       <li><strong>Kundenbewertungen</strong>: Was sagen andere Kunden über Pünktlichkeit, Sorgfalt und Kommunikation?</li>
                     </ol>

@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import UmzugNachPortugalPageClient from '@/components/pages/international/UmzugNachPortugalPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Portugal: Kosten & Planung 2025',
+  title: 'Umzug nach Portugal: Kosten & Planung 2026',
   description: 'Ihr Leitfaden für den Umzug von der Schweiz nach Portugal. Entdecken Sie Kosten, Tipps für Zoll & NIF, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-portugal',
   },
   openGraph: {
-    title: 'Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2025',
+    title: 'Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2026',
     description: 'Ihr Leitfaden für den Umzug von der Schweiz nach Portugal. Entdecken Sie Kosten, Tipps für Zoll & NIF, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.',
     url: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-portugal',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2025',
+    title: 'Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2026',
     description: 'Ihr Leitfaden für den Umzug von der Schweiz nach Portugal. Entdecken Sie Kosten, Tipps für Zoll & NIF, Checklisten und vergleichen Sie die besten Firmen.',
     images: ['https://online-offerten.ch/fotos/internationalen-umzuegen.webp'],
   },

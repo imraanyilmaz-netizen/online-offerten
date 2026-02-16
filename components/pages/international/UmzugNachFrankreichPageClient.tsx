@@ -36,7 +36,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 const UmzugNachFrankreichPageClient = () => {
   const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-frankreich';
 
-  const metaTitle = "Umzug nach Frankreich: Umfassender Guide & Kosten 2025";
+  const metaTitle = "Umzug nach Frankreich: Umfassender Guide & Kosten 2026";
   const metaDescription = "Ihr kompletter Ratgeber für den Umzug von der Schweiz nach Frankreich. Erfahren Sie alles über Kosten, Zoll, Planung und finden Sie die besten Umzugsfirmen. Inklusive FAQ und Checkliste.";
   const metaKeywords = "umzug nach frankreich, umzug schweiz frankreich, umzugsfirma schweiz frankreich, internationaler umzug frankreich, umzug nach paris, umzug nach lyon, umzug nach marseille, umzugsfirma international, zügelfirma schweiz frankreich, umzug schweiz nach frankreich, umzugskosten schweiz frankreich, umzugsfirma vergleichen frankreich, günstiger umzug frankreich, umzug nach frankreich preise, umzug nach frankreich kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge frankreich";
 

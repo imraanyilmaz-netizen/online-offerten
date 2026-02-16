@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { 
   ArrowRight, CheckCircle, Building2, Shield, TrendingDown, Clock, Users, Award,
   MessageSquare, ChevronRight, MapPin, Search, Calculator, Building, ShieldCheck, TrendingUp, Home,
-  Globe, Box, ArrowUpDown, CheckCircle2
+  Globe, Box, Package, CheckCircle2
 } from 'lucide-react'
 import { PiPianoKeysFill } from 'react-icons/pi'
 
@@ -69,14 +69,14 @@ const GeschaeftsumzugPageClient = () => {
       url: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=kleintransport'
     },
     { 
-      id: 'moebellift',
-      name: 'Möbellift mieten',
-      description: 'Bis 400 kg, max. 27m',
-      icon: ArrowUpDown,
+      id: 'lagerung',
+      name: 'Lagerung',
+      description: 'Möbel sicher einlagern',
+      icon: Package,
       iconColor: 'text-rose-600',
       iconBg: 'bg-rose-100',
       iconBgHover: 'bg-rose-500',
-      url: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=moebellift'
+      url: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=lagerung'
     }
   ];
 

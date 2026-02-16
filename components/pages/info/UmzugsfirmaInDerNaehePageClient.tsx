@@ -329,17 +329,17 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                   </div>
                 </Link>
                 
-                {/* Möbellift */}
+                {/* Lagerung */}
                 <Link 
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=moebellift"
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung"
                   className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
                 >
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
-                    <ArrowUpDown className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Möbellift</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Bis 400 kg, 27m</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Möbel einlagern</p>
                   </div>
                 </Link>
               </div>

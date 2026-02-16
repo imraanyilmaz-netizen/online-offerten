@@ -53,7 +53,7 @@ const initialFormData = {
   fensterreinigung_anzahl: '',
   fensterreinigung_scope: '',
   fensterreinigung_zugang: '',
-  moebellift: false, // New field for Möbellift
+  lagerung: false, // Lagerung field
 };
 
 const useNewCustomerForm = (initialData = {}) => {
@@ -123,7 +123,7 @@ const useNewCustomerForm = (initialData = {}) => {
           raeumung_scope: '',           fensterreinigung_anzahl: '', fensterreinigung_scope: '',
           fensterreinigung_zugang: '', what_to_paint: {}, maler_details_other: '',
           maler_current_condition: '',
-          moebellift: false, // Reset moebellift state when service changes
+          lagerung: false, // Reset lagerung state when service changes
         };
       }
       const newErrors = { ...prev.errors };

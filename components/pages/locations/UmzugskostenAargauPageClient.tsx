@@ -206,7 +206,7 @@ const UmzugskostenAargauPageClient: React.FC = () => {
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="max-w-4xl">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-                Umzugskosten Aargau – Preise & Kostenfaktoren 2025
+                Umzugskosten Aargau – Preise & Kostenfaktoren 2026
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
                 Detaillierte Übersicht über Umzugskosten im Aargau. Erfahren Sie, welche Faktoren die Preise beeinflussen, wie Sie sparen können und welche versteckten Kosten zu beachten sind.

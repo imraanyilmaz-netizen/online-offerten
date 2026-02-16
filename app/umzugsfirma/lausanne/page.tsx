@@ -138,7 +138,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in Lausanne gesucht? Vergleichen Sie geprüfte Umzugsunternehmen am Genfersee. Kostenlos bis zu 5 Offerten anfordern und bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/lausanne',
-    languages: { 'de-CH': 'https://online-offerten.ch/umzugsfirma/lausanne', 'x-default': 'https://online-offerten.ch/umzugsfirma/lausanne' },
   },
   openGraph: {
     title: 'Umzugsfirma Lausanne: Umzugsangebote am Genfersee vergleichen & sparen',

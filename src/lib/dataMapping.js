@@ -53,8 +53,8 @@ export const serviceMap = {
   'spezialtransport': 'Spezialtransport',
   'special_transport': 'Spezialtransport', // Legacy
   'kleintransport': 'Kleintransport',
-  'moebellift': 'Möbellift',
-  'moebellift_service': 'Möbellift',
+  'lagerung': 'Lagerung',
+  'lagerung_service': 'Lagerung',
   'umzugsreinigung_opt': 'Endreinigung', // From move form
   'additional_services_cleaning': 'Endreinigung', // Legacy from quote object
   'raeumung_service': 'Räumung',
@@ -126,7 +126,7 @@ export const serviceMap = {
   'Bodenreinigung': 'Bodenreinigung',
   'Fassadenreinigung': 'Fassadenreinigung',
   'Hofreinigung': 'Hofreinigung',
-  'Möbellift': 'Möbellift'
+  'Lagerung': 'Lagerung'
 };
 
 export const getFullCantonName = (key) => cantonMap[key] || key;

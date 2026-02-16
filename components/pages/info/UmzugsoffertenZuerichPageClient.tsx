@@ -310,7 +310,7 @@ const UmzugsoffertenZuerichPageClient = () => {
               </div>
               <h3 className="heading-3">Umzugsdetails angeben</h3>
               <p className="text-gray-600">
-                Tragen Sie Ihre wichtigsten Informationen ein: Umzugsdatum, alte und neue Adresse (PLZ 8000–8099 und Umgebung), Anzahl der Zimmer sowie besondere Anforderungen wie Klaviertransport oder Möbellift.
+                Tragen Sie Ihre wichtigsten Informationen ein: Umzugsdatum, alte und neue Adresse (PLZ 8000–8099 und Umgebung), Anzahl der Zimmer sowie besondere Anforderungen wie Klaviertransport oder Lagerung.
               </p>
             </div>
 
@@ -435,7 +435,7 @@ const UmzugsoffertenZuerichPageClient = () => {
             <div className="mt-12">
               <h3 className="heading-3">Typische Beispielpakete für Umzugsofferten in Zürich</h3>
               <p className="text-gray-700 mb-6">
-                Um Ihnen eine bessere Orientierung zu geben, hier drei realistische Beispielpakete, wie sie 2025 in Zürich üblich sind:
+                Um Ihnen eine bessere Orientierung zu geben, hier drei realistische Beispielpakete, wie sie 2026 in Zürich üblich sind:
               </p>
 
               <div className="space-y-6">
@@ -713,8 +713,8 @@ const UmzugsoffertenZuerichPageClient = () => {
                   <span className="text-gray-700">Galerien in Zürich-West oder private Sammlungen benötigen klimatisierte Transporte</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="font-semibold text-gray-900 mr-2">Möbellift-Einsatz:</span>
-                  <span className="text-gray-700">Ab 4. OG ohne Lift oft unverzichtbar, Mietkosten ca. CHF 300–600</span>
+                  <span className="font-semibold text-gray-900 mr-2">Lagerung:</span>
+                  <span className="text-gray-700">Zwischenlagerung von Möbeln bei zeitversetztem Umzug, ab ca. CHF 80–150/Monat</span>
                 </li>
                 <li className="flex items-start">
                   <span className="font-semibold text-gray-900 mr-2">Treppensteiger und Kraneinsätze:</span>

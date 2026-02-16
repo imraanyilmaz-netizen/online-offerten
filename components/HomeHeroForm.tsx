@@ -23,7 +23,7 @@ const serviceOptions: ServiceOption[] = [
   { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=tresortransport', category: 'Umzug' },
   { id: 'spezialtransport_maschinen', label: 'Maschinen / Schwere Geräte', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=maschinen_geraete', category: 'Umzug' },
   { id: 'kleintransport', label: 'Kleintransport', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport', category: 'Umzug' },
-  { id: 'moebellift', label: 'Möbellift mieten', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=moebellift', category: 'Umzug' },
+  { id: 'lagerung', label: 'Lagerung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung', category: 'Umzug' },
   
   // REINIGUNG Services
   { id: 'umzugsreinigung', label: 'Umzugsreinigung', url: '/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=umzugsreinigung', category: 'Reinigung' },

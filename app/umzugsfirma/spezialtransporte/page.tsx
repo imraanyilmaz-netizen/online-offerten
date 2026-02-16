@@ -88,10 +88,6 @@ export const metadata: Metadata = {
   description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/spezialtransporte',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/spezialtransporte',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/spezialtransporte',
-    },
   },
   openGraph: {
     title: 'Spezialtransporte: Kostenlose Offerten vergleichen',

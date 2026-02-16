@@ -77,12 +77,12 @@ const UmzugsfirmaZurichPageClient = ({
                   </Link>
                   
         <Link 
-          href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=moebellift&city=Zürich"
+          href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=lagerung&city=Zürich"
           className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-lg p-3 flex flex-col items-center justify-center transition-colors group overflow-hidden w-full"
                   >
           <MapPin className="w-6 h-6 text-green-600 mb-1.5 flex-shrink-0" />
-                    <span className="text-sm font-semibold text-gray-800 text-center mb-0.5 break-words w-full">Möbellift mieten</span>
-                    <span className="text-xs text-gray-600 text-center break-words w-full px-1">Bis 400 kg, max. 27m Länge</span>
+                    <span className="text-sm font-semibold text-gray-800 text-center mb-0.5 break-words w-full">Lagerung</span>
+                    <span className="text-xs text-gray-600 text-center break-words w-full px-1">Möbel sicher einlagern</span>
                     <ArrowRight className="w-3 h-3 text-green-600 mt-1.5" />
                   </Link>
                 </div>

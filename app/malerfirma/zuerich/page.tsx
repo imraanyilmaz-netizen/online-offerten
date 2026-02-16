@@ -115,10 +115,6 @@ export const metadata: Metadata = {
   description: 'Malerfirma Zürich finden ✓ Geprüfte Malerbetriebe vergleichen & bis zu 40% sparen. Kostenlose Offerten für Innenanstrich, Aussenanstrich & Fassadenanstrich.',
   alternates: {
     canonical: `https://online-offerten.ch${canonicalUrl}`,
-    languages: {
-      'de-CH': `https://online-offerten.ch${canonicalUrl}`,
-      'x-default': `https://online-offerten.ch${canonicalUrl}`,
-    },
   },
   openGraph: {
     title: 'Malerfirma Zürich » Top Malerbetriebe vergleichen & sparen',

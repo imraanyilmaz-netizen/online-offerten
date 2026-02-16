@@ -119,7 +119,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in Biel/Bienne gesucht? Vergleichen Sie zweisprachige Umzugsunternehmen. Kostenlos bis zu 5 Offerten anfordern und bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/biel-bienne',
-    languages: { 'de-CH': 'https://online-offerten.ch/umzugsfirma/biel-bienne', 'x-default': 'https://online-offerten.ch/umzugsfirma/biel-bienne' },
   },
   openGraph: {
     title: 'Umzugsfirma Biel/Bienne: Zweisprachige Umzugsexperten vergleichen',

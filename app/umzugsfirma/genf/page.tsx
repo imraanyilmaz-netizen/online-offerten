@@ -186,10 +186,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in Genf gesucht? Vergleichen Sie geprüfte Umzugsunternehmen in Genf. Kostenlos bis zu 5 Offerten anfordern – auch für internationale Umzüge nach Frankreich. Bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/genf',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/genf',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/genf',
-    },
   },
   openGraph: {
     title: 'Umzugsfirma Genf: Professionelle Offerten vergleichen & bis zu 40% sparen',

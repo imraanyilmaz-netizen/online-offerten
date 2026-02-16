@@ -199,14 +199,14 @@ function getSchemaData(reviewStats: { reviewCount: number; averageRating: number
 }
 
 export const metadata: Metadata = {
-  title: 'Umzugsofferten vergleichen – Bis zu 40% sparen',
-  description: 'Umzugsofferten kostenlos vergleichen ✓ Bis zu 5 Offerten von geprüften Umzugsfirmen erhalten. Umzug offerten Schweiz – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
+  title: 'Umzugsofferten einholen – Kostenlose Angebote von Umzugsfirmen',
+  description: 'Umzugsofferten kostenlos einholen ✓ Bis zu 5 unverbindliche Angebote von geprüften Umzugsfirmen in der Schweiz erhalten. Schnell, sicher und bis zu 40% günstiger. Jetzt Offerte anfordern!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsofferten',
   },
   openGraph: {
-    title: 'Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen',
-    description: 'Umzugsofferten kostenlos vergleichen ✓ Bis zu 5 Offerten von geprüften Umzugsfirmen erhalten. Umzug offerten Schweiz – schnell, sicher und bis zu 40% günstiger.',
+    title: 'Umzugsofferten einholen » Kostenlose Angebote von Umzugsfirmen',
+    description: 'Umzugsofferten kostenlos einholen ✓ Bis zu 5 unverbindliche Angebote von geprüften Umzugsfirmen in der Schweiz erhalten.',
     url: 'https://online-offerten.ch/umzugsofferten',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -222,8 +222,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen',
-    description: 'Umzugsofferten kostenlos vergleichen ✓ Bis zu 5 Offerten von geprüften Umzugsfirmen erhalten.',
+    title: 'Umzugsofferten einholen » Kostenlose Angebote von Umzugsfirmen',
+    description: 'Umzugsofferten kostenlos einholen ✓ Bis zu 5 unverbindliche Angebote von geprüften Umzugsfirmen erhalten.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/umzugsofferten-kostenlos-vergleichen.png'],
   },
   robots: {

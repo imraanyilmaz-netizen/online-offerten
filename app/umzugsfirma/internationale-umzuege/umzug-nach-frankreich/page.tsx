@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import UmzugNachFrankreichPageClient from '@/components/pages/international/UmzugNachFrankreichPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Frankreich: Umfassender Guide & Kosten 2025',
+  title: 'Umzug nach Frankreich: Umfassender Guide & Kosten 2026',
   description: 'Ihr kompletter Ratgeber für den Umzug von der Schweiz nach Frankreich. Erfahren Sie alles über Kosten, Zoll, Planung und finden Sie die besten Umzugsfirmen. Inklusive FAQ und Checkliste.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-frankreich',
   },
   openGraph: {
-    title: 'Umzug nach Frankreich: Umfassender Guide & Kosten 2025',
+    title: 'Umzug nach Frankreich: Umfassender Guide & Kosten 2026',
     description: 'Ihr kompletter Ratgeber für den Umzug von der Schweiz nach Frankreich. Erfahren Sie alles über Kosten, Zoll, Planung und finden Sie die besten Umzugsfirmen.',
     url: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-frankreich',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzug nach Frankreich: Umfassender Guide & Kosten 2025',
+    title: 'Umzug nach Frankreich: Umfassender Guide & Kosten 2026',
     description: 'Ihr kompletter Ratgeber für den Umzug von der Schweiz nach Frankreich. Erfahren Sie alles über Kosten, Zoll, Planung und finden Sie die besten Umzugsfirmen.',
     images: ['https://online-offerten.ch/fotos/internationalen-umzuegen.webp'],
   },

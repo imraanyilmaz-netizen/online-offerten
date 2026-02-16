@@ -12,7 +12,7 @@ Disallow: /partner/credit-top-up
 Disallow: /partner/payment-status
 Disallow: /payment/success
 Disallow: /payment/cancel
-Allow: /login
+Disallow: /login
 Disallow: /forgot-password
 Disallow: /update-password
 Disallow: /email-confirmed

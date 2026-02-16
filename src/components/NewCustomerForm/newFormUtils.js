@@ -98,9 +98,9 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
       case 'kleintransport':
         finalServiceType = 'Kleintransport';
         break;
-      case 'moebellift': // New Möbellift service
-        finalServiceType = 'Möbellift';
-        serviceSpecificDetails.push(tAdmin('step1.moebelliftDescription')); // Add description to details
+      case 'lagerung': // Lagerung service
+        finalServiceType = 'Lagerung';
+        serviceSpecificDetails.push(tAdmin('step1.lagerungDescription')); // Add description to details
         break;
       default:
         finalServiceType = 'Umzug';
@@ -203,7 +203,7 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     'international': tAdmin('step1.internationalMoveLabel'),
     'spezialtransport': tAdmin('step1.specialTransportLabel'),
     'kleintransport': tAdmin('step1.kleintransportLabel'),
-    'moebellift': tAdmin('step1.moebelliftLabel'), // Added Möbellift to mapping
+    'lagerung': tAdmin('step1.lagerungLabel'), // Lagerung service
     'raeumung': tAdmin('step1.entsorgungTypeRaeumungLabel'),
     'entsorgung': tAdmin('step1.entsorgungTypeEntsorgungLabel'),
     'maler_privat': tAdmin('step1.painterTypePrivateLabel'),

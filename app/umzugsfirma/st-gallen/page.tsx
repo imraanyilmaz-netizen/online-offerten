@@ -119,7 +119,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in St. Gallen gesucht? Vergleichen Sie geprüfte Umzugsunternehmen in der Ostschweiz. Kostenlos bis zu 5 Offerten anfordern und bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/st-gallen',
-    languages: { 'de-CH': 'https://online-offerten.ch/umzugsfirma/st-gallen', 'x-default': 'https://online-offerten.ch/umzugsfirma/st-gallen' },
   },
   openGraph: {
     title: 'Umzugsfirma St. Gallen: Ostschweizer Umzugsprofis vergleichen & sparen',

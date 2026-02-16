@@ -294,9 +294,9 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
     if (!quote) return null;
 
     let mainService = quote.servicetype;
-    // Special handling for 'moebellift' which is stored in `umzugart`
-    if (quote.umzugart === 'moebellift') {
-      mainService = 'moebellift_service';
+    // Special handling for 'lagerung' which is stored in `umzugart`
+    if (quote.umzugart === 'lagerung') {
+      mainService = 'lagerung_service';
     }
 
     const additionalServices = [];

@@ -232,10 +232,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in Bern gesucht? Vergleichen Sie geprüfte Zügelfirmen & Umzugsunternehmen im Kanton Bern. Kostenlos bis zu 5 Offerten anfordern – für Altstadt, Köniz, Ostermundigen & Umgebung. Bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/bern',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/bern',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/bern',
-    },
   },
   openGraph: {
     title: 'Umzugsfirma Bern: Zügelfirmen vergleichen & bis zu 40% sparen',

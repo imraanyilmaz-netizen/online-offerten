@@ -102,12 +102,30 @@ const Navbar = () => {
 
   // Removed language switching - DE-only now
 
+  const umzugLinks = [
+    { to: '/umzugsfirma', text: 'Umzugsfirma finden' },
+    { to: '/umzugsfirma/privatumzug', text: 'Privatumzug' },
+    { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug' },
+    { to: '/umzugsfirma/internationale-umzuege', text: 'Internationale Umzüge' },
+    { to: '/umzugsfirma/spezialtransporte', text: 'Spezialtransporte' },
+    { to: '/umzugsfirma-in-der-naehe', text: 'Umzugsfirma in der Nähe' },
+    { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirmen vergleichen' },
+  ];
+
+  const reinigungLinks = [
+    { to: '/reinigung', text: 'Alle Reinigungsdienste' },
+    { to: '/reinigung/umzugsreinigung', text: 'Umzugsreinigung' },
+    { to: '/reinigung/wohnungsreinigung', text: 'Wohnungsreinigung' },
+    { to: '/reinigung/bueroreinigung', text: 'Büroreinigung' },
+    { to: '/reinigung/grundreinigung', text: 'Grundreinigung' },
+    { to: '/reinigungsfirma', text: 'Reinigungsfirma finden' },
+  ];
+
   const kostenLinks = [
     { to: '/umzugsfirma/umzugskosten', text: 'Umzugskosten Rechner' },
     { to: '/reinigung/reinigungskosten', text: 'Reinigungskosten Rechner' },
     { to: '/umzugsofferten', text: 'Umzugsofferte' },
     { to: '/guenstig-umziehen', text: 'Günstig umziehen' },
-    { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirma vergleichen' },
   ];
 
   // CSS transitions used instead of framer-motion for better performance
@@ -129,8 +147,51 @@ const Navbar = () => {
     );
   };
 
+  const UmzugDropdownNav = () => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out">
+            UMZUG
+            <ChevronDown size={16} className="text-gray-500" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          {umzugLinks.map((link) => (
+            <DropdownMenuItem key={link.to} asChild>
+              <Link href={link.to} className="cursor-pointer">
+                {link.text}
+              </Link>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
+
+  const ReinigungDropdownNav = () => {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out">
+            REINIGUNG
+            <ChevronDown size={16} className="text-gray-500" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          {reinigungLinks.map((link) => (
+            <DropdownMenuItem key={link.to} asChild>
+              <Link href={link.to} className="cursor-pointer">
+                {link.text}
+              </Link>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
+
   const KostenToolsDropdownNav = () => {
-    // Removed useTranslation
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -164,18 +225,17 @@ const Navbar = () => {
           </Link>
 
           <nav 
-            className="hidden md:flex items-center space-x-4 flex-1 justify-center max-w-5xl mx-4"
+            className="hidden md:flex items-center space-x-1 lg:space-x-2 flex-1 justify-center max-w-5xl mx-4"
             style={{ minHeight: '40px', contain: 'layout' }}
           >
             <NavItem to="/kostenlose-offerte-anfordern">
               OFFERTEN
             </NavItem>
+            <UmzugDropdownNav />
+            <ReinigungDropdownNav />
             <KostenToolsDropdownNav />
             <NavItem to="/ratgeber">
               RATGEBER
-            </NavItem>
-            <NavItem to="/kontakt">
-              KONTAKT
             </NavItem>
           </nav>
 
@@ -219,8 +279,8 @@ const Navbar = () => {
 
       {/* Mobile menu – CSS transition instead of framer-motion for better INP */}
       <div
-        className={`md:hidden bg-white border-t overflow-hidden transition-all duration-200 ease-in-out ${
-          mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+        className={`md:hidden bg-white border-t overflow-hidden overflow-y-auto transition-all duration-200 ease-in-out ${
+          mobileMenuOpen ? 'max-h-[85vh] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -232,10 +292,50 @@ const Navbar = () => {
             <NavItem to="/kostenlose-offerte-anfordern" onClick={() => setMobileMenuOpen(false)}>
               OFFERTEN
             </NavItem>
-            <NavItem to="/ratgeber" onClick={() => setMobileMenuOpen(false)}>
-              RATGEBER
-            </NavItem>
 
+            {/* Umzug Section */}
+            <div className="pt-1">
+              <button onClick={() => toggleMobileSection('umzug')} className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
+                  <span>UMZUG</span>
+                  <ChevronDown size={16} className={`transition-transform duration-200 ${openMobileSections['umzug'] ? 'rotate-180' : ''}`} />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                  openMobileSections['umzug'] ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="pl-6 pt-1 space-y-1">
+                    {umzugLinks.map((link) => (
+                        <NavItem key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}>
+                            {link.text}
+                        </NavItem>
+                    ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Reinigung Section */}
+            <div className="pt-1">
+              <button onClick={() => toggleMobileSection('reinigung')} className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
+                  <span>REINIGUNG</span>
+                  <ChevronDown size={16} className={`transition-transform duration-200 ${openMobileSections['reinigung'] ? 'rotate-180' : ''}`} />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                  openMobileSections['reinigung'] ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="pl-6 pt-1 space-y-1">
+                    {reinigungLinks.map((link) => (
+                        <NavItem key={link.to} to={link.to} onClick={() => setMobileMenuOpen(false)}>
+                            {link.text}
+                        </NavItem>
+                    ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Kosten & Tools Section */}
             <div className="pt-1">
               <button onClick={() => toggleMobileSection('kosten')} className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
                   <span>KOSTEN & TOOLS</span>
@@ -256,6 +356,9 @@ const Navbar = () => {
               </div>
             </div>
 
+            <NavItem to="/ratgeber" onClick={() => setMobileMenuOpen(false)}>
+              RATGEBER
+            </NavItem>
             <NavItem to="/kontakt" onClick={() => setMobileMenuOpen(false)}>
               <Mail size={18} /> Kontakt
             </NavItem>

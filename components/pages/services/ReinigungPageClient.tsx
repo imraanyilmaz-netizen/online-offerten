@@ -128,7 +128,7 @@ const ReinigungPageClient = () => {
                     size="lg"
                     className="bg-green-600 hover:bg-green-700 text-white font-bold group px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                   >
-                    Jetzt kostenlose Offerten anfordern â†’
+                    Jetzt kostenlose Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
@@ -274,14 +274,20 @@ const ReinigungPageClient = () => {
                   <Award className="w-7 h-7 mr-3 text-blue-500"/>
                   Die Abnahmegarantie: Mehr als nur ein Versprechen für Ihre Reinigung
                 </h3>
-                <p>
-                  Der Begriff 'Abnahmegarantie' ist das wohl wichtigste Qualitätsmerkmal bei einer Umzugsreinigung. Doch was verbirgt sich genau dahinter? Es ist weit mehr als nur eine Zusage für Sauberkeit. Eine echte Abnahmegarantie bedeutet, dass ein Vertreter der Reinigungsfirma bei der Wohnungsübergabe an den Vermieter anwesend ist. Gemeinsam wird die Wohnung inspiziert. Sollte der Vermieter einen Mangel feststellen – sei es ein übersehener Fleck an der Wand oder eine nicht perfekt entkalkte Duschbrause – wird dieser umgehend und ohne zusätzliche Kosten von der Reinigungsfirma nachgebessert. Die Garantie gilt so lange, bis der Vermieter die Sauberkeit im Übergabeprotokoll bestätigt und seine Unterschrift daruntersetzt. Diese Garantie gibt Ihnen die absolute Sicherheit, dass die Reinigung den strengen Schweizer Standards entspricht und Sie keine unerwarteten Kosten fürchten müssen. Sie kaufen nicht nur eine Dienstleistung, sondern ein sorgenfreies Ergebnis.
-                </p>
-                <img 
-                  src="https://storage.googleapis.com/hostinger-horizons-assets-prod/debf3bb6-240b-49e1-ac20-d04a2d77b10a/3ed326ca4d6c724a080e41089283afe4.png" 
-                  alt="Die Abnahmegarantie: Mehr als nur ein Versprechen für Ihre Reinigung" 
-                  className="mt-6 rounded-lg shadow-md w-full object-cover" 
-                />
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <div className="flex-1">
+                    <p>
+                      Der Begriff &apos;Abnahmegarantie&apos; ist das wohl wichtigste Qualitätsmerkmal bei einer Umzugsreinigung. Doch was verbirgt sich genau dahinter? Es ist weit mehr als nur eine Zusage für Sauberkeit. Eine echte Abnahmegarantie bedeutet, dass ein Vertreter der Reinigungsfirma bei der Wohnungsübergabe an den Vermieter anwesend ist. Gemeinsam wird die Wohnung inspiziert. Sollte der Vermieter einen Mangel feststellen – sei es ein übersehener Fleck an der Wand oder eine nicht perfekt entkalkte Duschbrause – wird dieser umgehend und ohne zusätzliche Kosten von der Reinigungsfirma nachgebessert. Die Garantie gilt so lange, bis der Vermieter die Sauberkeit im Übergabeprotokoll bestätigt und seine Unterschrift daruntersetzt. Diese Garantie gibt Ihnen die absolute Sicherheit, dass die Reinigung den strengen Schweizer Standards entspricht und Sie keine unerwarteten Kosten fürchten müssen. Sie kaufen nicht nur eine Dienstleistung, sondern ein sorgenfreies Ergebnis.
+                    </p>
+                  </div>
+                  <div className="w-full md:w-80 flex-shrink-0">
+                    <img 
+                      src="/bilder/wohnungsreinigung-mit-abnahmegarantie.webp" 
+                      alt="Professionelle Reinigung mit Abnahmegarantie in der Schweiz" 
+                      className="rounded-lg shadow-md w-full h-auto object-cover" 
+                    />
+                  </div>
+                </div>
               </div>
 
               <h3 className="text-2xl font-semibold text-slate-800 pt-4">Der richtige Partner: Warum der Vergleich auf Online-Offerten.ch entscheidend ist</h3>
@@ -384,67 +390,8 @@ const ReinigungPageClient = () => {
             </div>
           </div>
 
-          {/* Additional Internal Links */}
-          <div className="bg-blue-50 border-l-4 border-blue-600 p-6 md:p-8 rounded-lg mt-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Weitere Informationen & Services
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-3">Reinigungsarten</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <Link href="/reinigung/umzugsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Umzugsreinigung mit Abnahmegarantie
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/reinigung/wohnungsreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Wohnungsreinigung Offerten
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/reinigung/bueroreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Büroreinigung vergleichen
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/reinigung/grundreinigung" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Grundreinigung buchen
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-3">Verwandte Services</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <Link href="/umzugsfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Umzugsfirmen finden
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/malerfirma" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Malerfirmen vergleichen
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/ratgeber" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Ratgeber & Tipps
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/reinigung/reinigungskosten" className="text-blue-600 hover:text-blue-700 font-medium underline">
-                      Reinigungskosten berechnen
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
           <section id="cta" className="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-6 rounded-2xl shadow-2xl">
-            <h2 className="heading-2">
+            <h2 className="heading-2-white">
               Bereit für eine makellose Übergabe?
             </h2>
             <p className="max-w-2xl mx-auto text-blue-200 mb-8">
@@ -463,6 +410,7 @@ const ReinigungPageClient = () => {
               </div>
             </div>
           </section>
+
         </div>
       </div>
     </>

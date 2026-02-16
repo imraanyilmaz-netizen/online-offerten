@@ -127,10 +127,6 @@ export const metadata: Metadata = {
   description: 'Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen. Schnell, transparent und regional.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/geschaeftsumzug',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/geschaeftsumzug',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/geschaeftsumzug',
-    },
   },
   openGraph: {
     title: 'Geschäftsumzug: Kostenlose Offerten vergleichen',

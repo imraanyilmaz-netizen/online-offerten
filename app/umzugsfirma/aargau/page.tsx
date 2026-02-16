@@ -302,10 +302,6 @@ export const metadata: Metadata = {
   description: 'Umzugsfirma im Aargau gesucht? ✓ Geprüfte Umzugsunternehmen in Aarau, Baden, Zofingen vergleichen ✓ Kostenlos bis zu 5 Offerten anfordern ✓ Bis zu 40% sparen bei Privat- & Geschäftsumzug im Kanton Aargau.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/aargau',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/aargau',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/aargau',
-    },
   },
   openGraph: {
     title: 'Umzugsfirma Aargau: Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen',

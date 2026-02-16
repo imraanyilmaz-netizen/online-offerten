@@ -832,6 +832,7 @@ const MalerfirmaPageClient = () => {
           </div>
         </div>
       </section>
+
     </>
   )
 }

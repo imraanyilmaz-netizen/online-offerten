@@ -948,8 +948,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         case 'kleintransport':
           umzugArtLabel = t('step1.kleintransportLabel');
           break;
-        case 'moebellift':
-          umzugArtLabel = t('step1.moebelliftLabel');
+        case 'lagerung':
+          umzugArtLabel = t('step1.lagerungLabel');
           break;
         default:
           umzugArtLabel = t('step1.mainServiceMove');

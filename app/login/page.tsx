@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     canonical: 'https://online-offerten.ch/login',
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 }
 

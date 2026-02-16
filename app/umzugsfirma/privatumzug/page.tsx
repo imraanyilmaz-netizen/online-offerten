@@ -143,10 +143,6 @@ export const metadata: Metadata = {
   description: 'Privatumzug Offerten kostenlos vergleichen ✓ Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug. Sicher, stressfrei & bis zu 40% sparen. Jetzt vergleichen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/privatumzug',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/privatumzug',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/privatumzug',
-    },
   },
   openGraph: {
     title: 'Privatumzug Offerten vergleichen – Bis zu 40% sparen',
@@ -236,7 +232,7 @@ export default function PrivateUmzugPage() {
             <li>Verpackungsservice: Das Team der Umzugsfirma verpackt Ihren gesamten Hausrat fachgerecht in Umzugskartons</li>
             <li>Bereitstellung von Verpackungsmaterial: Kartons, Kleiderboxen, Luftpolsterfolie, Decken</li>
             <li>Demontage und Montage: Aufbau und Abbau von Möbeln, Küchen, Lampen</li>
-            <li>Möbellift: Für grosse Gegenstände oder bei engen Treppenhäusern</li>
+            <li>Lagerung: Sichere Zwischenlagerung Ihrer Möbel bei zeitversetztem Umzug</li>
             <li>Entsorgung: Alte Möbel und Haushaltsgegenstände werden fachgerecht entsorgt</li>
             <li>Zwischenlagerung: Lagerraum für Mobiliar, wenn der Einzugstermin später liegt</li>
             <li>Umzugsreinigung: Professionelle Räumung und Reinigung mit Abgabegarantie</li>

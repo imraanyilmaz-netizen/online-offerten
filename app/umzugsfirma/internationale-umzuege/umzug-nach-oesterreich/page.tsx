@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import UmzugNachOesterreichPageClient from '@/components/pages/international/UmzugNachOesterreichPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Österreich: Kosten & Planung 2025',
+  title: 'Umzug nach Österreich: Kosten & Planung 2026',
   description: 'Ihr kompletter Leitfaden für den Umzug von der Schweiz nach Österreich. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Firmen für Transport und Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-oesterreich',
   },
   openGraph: {
-    title: 'Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2025',
+    title: 'Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2026',
     description: 'Ihr kompletter Leitfaden für den Umzug von der Schweiz nach Österreich. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Firmen für Transport und Reinigung.',
     url: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-oesterreich',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2025',
+    title: 'Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2026',
     description: 'Ihr kompletter Leitfaden für den Umzug von der Schweiz nach Österreich. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Firmen.',
     images: ['https://online-offerten.ch/fotos/internationalen-umzuegen.webp'],
   },

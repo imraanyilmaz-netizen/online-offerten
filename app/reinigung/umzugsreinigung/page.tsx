@@ -11,10 +11,6 @@ export const metadata: Metadata = {
   description: 'Umzugsreinigung Preis: Was kostet die professionelle Reinigung? Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung/umzugsreinigung',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/reinigung/umzugsreinigung',
-      'x-default': 'https://online-offerten.ch/reinigung/umzugsreinigung',
-    },
   },
   openGraph: {
     title: 'Umzugsreinigung Preis – Kostenlose Offerten vergleichen',

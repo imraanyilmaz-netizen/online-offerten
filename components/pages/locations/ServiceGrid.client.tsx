@@ -64,11 +64,11 @@ const ServiceGrid = ({ city }: ServiceGridProps) => {
       iconColor: 'text-indigo-600'
     },
     { 
-      id: 'moebellift',
-      name: 'Möbellift mieten',
-      description: 'Bis 400 kg, max. 27m Länge',
+      id: 'lagerung',
+      name: 'Lagerung',
+      description: 'Möbel sicher einlagern',
       icon: MapPin,
-      umzugArt: 'moebellift',
+      umzugArt: 'lagerung',
       gradient: 'from-rose-500 to-red-500',
       bgGradient: 'from-rose-50 to-red-50',
       iconColor: 'text-rose-600'
@@ -109,9 +109,9 @@ const ServiceGrid = ({ city }: ServiceGridProps) => {
       return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport&city=${city}`
     }
     
-    // Möbellift: step=3
-    if (service.id === 'moebellift') {
-      return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=moebellift&city=${city}`
+    // Lagerung: step=3
+    if (service.id === 'lagerung') {
+      return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung&city=${city}`
     }
     
     return `/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=${service.umzugArt}&city=${city}`

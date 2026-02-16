@@ -233,10 +233,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in Basel gesucht? Vergleichen Sie geprüfte Umzugsunternehmen in Basel-Stadt & Baselland. Kostenlos bis zu 5 Offerten anfordern – für Altstadt, Kleinbasel, Riehen & Dreiländereck. Bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/basel',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/basel',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/basel',
-    },
   },
   openGraph: {
     title: 'Umzugsfirma Basel: Günstige Umzugsanbieter vergleichen & bis zu 40% sparen',

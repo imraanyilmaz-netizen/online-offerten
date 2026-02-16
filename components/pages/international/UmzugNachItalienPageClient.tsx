@@ -36,7 +36,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 const UmzugNachItalienPageClient = () => {
   const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-italien';
 
-  const metaTitle = "Umzug nach Italien: Ihr Guide für Kosten & Planung 2025";
+  const metaTitle = "Umzug nach Italien: Ihr Guide für Kosten & Planung 2026";
   const metaDescription = "Alles für Ihren Umzug von der Schweiz nach Italien. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Umzugsfirmen für einen stressfreien Start in 'La Dolce Vita'.";
   const metaKeywords = "umzug nach italien, umzug schweiz italien, umzugsfirma schweiz italien, internationaler umzug italien, umzug nach rom, umzug nach mailand, umzug nach neapel, umzugsfirma international, zügelfirma schweiz italien, umzug schweiz nach italien, umzugskosten schweiz italien, umzugsfirma vergleichen italien, günstiger umzug italien, umzug nach italien preise, umzug nach italien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge italien";
 

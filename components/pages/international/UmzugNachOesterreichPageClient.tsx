@@ -36,7 +36,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 const UmzugNachOesterreichPageClient = () => {
   const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-oesterreich';
 
-  const metaTitle = "Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2025";
+  const metaTitle = "Umzug nach Österreich: Kosten, Planung & Firmenvergleich 2026";
   const metaDescription = "Ihr kompletter Leitfaden für den Umzug von der Schweiz nach Österreich. Entdecken Sie Kosten, Zolltipps, Checklisten und vergleichen Sie die besten Firmen für Transport und Reinigung.";
   const metaKeywords = "umzug nach österreich, umzug schweiz österreich, umzugsfirma schweiz österreich, internationaler umzug österreich, umzug nach wien, umzug nach salzburg, umzug nach graz, umzugsfirma international, zügelfirma schweiz österreich, umzug schweiz nach österreich, umzugskosten schweiz österreich, umzugsfirma vergleichen österreich, günstiger umzug österreich, umzug nach österreich preise, umzug nach österreich kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge österreich";
 

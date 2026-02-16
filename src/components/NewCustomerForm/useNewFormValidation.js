@@ -50,7 +50,7 @@ const useNewFormValidation = (formData) => {
         const step2errors = {};
         const prefixes = ['from'];
 
-        if (formData.service === 'umzug' && formData.umzugArt !== 'moebellift') prefixes.push('to');
+        if (formData.service === 'umzug' && formData.umzugArt !== 'lagerung') prefixes.push('to');
 
         prefixes.forEach(prefix => {
             if (!formData[`${prefix}_street`]) step2errors[`${prefix}_street`] = t('errors.streetRequired');

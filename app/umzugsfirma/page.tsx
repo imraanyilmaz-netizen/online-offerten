@@ -3,14 +3,14 @@ import { Suspense } from 'react'
 import UmzugsfirmaPageClient from '@/components/pages/info/UmzugsfirmaPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma finden & vergleichen – Bis zu 40% sparen',
-  description: 'Umzugsfirma finden und vergleichen ✓ Bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen in der Schweiz. Privatumzug, Geschäftsumzug, Umzugsreinigung – schnell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
+  title: 'Umzugsfirma Schweiz – Geprüfte Umzugsunternehmen in Ihrer Nähe finden',
+  description: 'Umzugsfirma in der Schweiz finden ✓ Geprüfte Umzugsunternehmen für Privatumzug, Geschäftsumzug & Spezialtransporte. Bis zu 5 kostenlose Offerten anfordern und bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma',
   },
   openGraph: {
-    title: 'Umzugsfirma finden & vergleichen » Bis zu 40% sparen',
-    description: 'Umzugsfirma finden und vergleichen ✓ Bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen in der Schweiz. Privatumzug, Geschäftsumzug – schnell, sicher und bis zu 40% günstiger.',
+    title: 'Umzugsfirma Schweiz » Geprüfte Umzugsunternehmen in Ihrer Nähe finden',
+    description: 'Umzugsfirma in der Schweiz finden ✓ Geprüfte Umzugsunternehmen für Privatumzug, Geschäftsumzug & Spezialtransporte. Bis zu 5 kostenlose Offerten!',
     url: 'https://online-offerten.ch/umzugsfirma',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirma finden & vergleichen » Bis zu 40% sparen',
-    description: 'Umzugsfirma finden und vergleichen ✓ Bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen in der Schweiz.',
+    title: 'Umzugsfirma Schweiz » Geprüfte Umzugsunternehmen finden',
+    description: 'Umzugsfirma in der Schweiz finden ✓ Geprüfte Umzugsunternehmen für Privatumzug & Geschäftsumzug.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/umzugsfirma-finden-vergleichen.png'],
   },
   robots: {

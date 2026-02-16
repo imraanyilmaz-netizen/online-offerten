@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import UmzugNachSpanienPageClient from '@/components/pages/international/UmzugNachSpanienPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzug nach Spanien: Kosten & Planung 2025',
+  title: 'Umzug nach Spanien: Kosten & Planung 2026',
   description: 'Alles für Ihren Umzug von der Schweiz nach Spanien. Entdecken Sie Kosten, Tipps für Zoll & NIE, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-spanien',
   },
   openGraph: {
-    title: 'Umzug nach Spanien: Ihr Guide für Kosten & Planung 2025',
+    title: 'Umzug nach Spanien: Ihr Guide für Kosten & Planung 2026',
     description: 'Alles für Ihren Umzug von der Schweiz nach Spanien. Entdecken Sie Kosten, Tipps für Zoll & NIE, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.',
     url: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege/umzug-nach-spanien',
     siteName: 'Online-Offerten.ch',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzug nach Spanien: Ihr Guide für Kosten & Planung 2025',
+    title: 'Umzug nach Spanien: Ihr Guide für Kosten & Planung 2026',
     description: 'Alles für Ihren Umzug von der Schweiz nach Spanien. Entdecken Sie Kosten, Tipps für Zoll & NIE, Checklisten und vergleichen Sie die besten Firmen.',
     images: ['https://online-offerten.ch/fotos/internationalen-umzuegen.webp'],
   },

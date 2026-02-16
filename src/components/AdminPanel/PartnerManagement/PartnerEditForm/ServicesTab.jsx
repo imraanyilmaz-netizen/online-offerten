@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { X, Plus, Truck, Sparkles, Paintbrush, Sprout, ArrowUpDown } from 'lucide-react';
+import { X, Plus, Truck, Sparkles, Paintbrush, Sprout, Archive } from 'lucide-react';
 import { cantonOptions, getFullCantonName } from '@/lib/dataMapping.js';
 
 const mainCategories = [
@@ -16,7 +16,7 @@ const mainCategories = [
     { id: 'auslandumzug', label: 'Auslandumzug', desc: 'Umzüge ins oder aus dem Ausland' },
     { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
     { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
-    { id: 'moebellift_service', label: 'Möbellift mieten', desc: 'Bis 400 kg, max. 27m Länge', icon: ArrowUpDown },
+    { id: 'lagerung_service', label: 'Lagerung', desc: 'Möbel sicher einlagern', icon: Archive },
     { id: 'umzugsreinigung_opt', label: 'Endreinigung', desc: 'mit Abnahmegarantie' },
     { id: 'raeumung_service', label: 'Räumung' },
     { id: 'entsorgung_service', label: 'Entsorgung' },

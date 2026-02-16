@@ -137,10 +137,6 @@ export const metadata: Metadata = {
   description: 'Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/internationale-umzuege',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/internationale-umzuege',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/internationale-umzuege',
-    },
   },
   openGraph: {
     title: 'Internationale Umzüge: Kostenlose Offerten vergleichen',

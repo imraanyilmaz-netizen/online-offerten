@@ -121,7 +121,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in Lugano gesucht? Vergleichen Sie geprüfte Umzugsunternehmen im Tessin. Kostenlos bis zu 5 Offerten anfordern und bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/lugano',
-    languages: { 'de-CH': 'https://online-offerten.ch/umzugsfirma/lugano', 'x-default': 'https://online-offerten.ch/umzugsfirma/lugano' },
   },
   openGraph: {
     title: 'Umzugsfirma Lugano: Umzugsangebote im Tessin vergleichen & sparen',

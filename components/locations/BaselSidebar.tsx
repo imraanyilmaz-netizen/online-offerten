@@ -61,14 +61,14 @@ const BaselSidebar = () => {
       url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport&city=Basel'
     },
     { 
-      id: 'moebellift',
-      name: 'Möbellift mieten',
-      description: 'Bis 400 kg, max. 27m',
-      icon: ArrowUpDown,
+      id: 'lagerung',
+      name: 'Lagerung',
+      description: 'Möbel sicher einlagern',
+      icon: Package,
       iconColor: 'text-rose-600',
       iconBg: 'bg-rose-100',
       iconBgHover: 'bg-rose-500',
-      url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=moebellift&city=Basel'
+      url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung&city=Basel'
     }
   ]
 

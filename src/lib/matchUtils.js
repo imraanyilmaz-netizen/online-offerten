@@ -30,8 +30,8 @@ const serviceKeyMap = {
   'malerarbeiten': 'maler_service',
   'malerarbeiten privat': 'maler_service',
   'malerarbeiten gewerbe': 'maler_service',
-  'möbellift': 'moebellift_service',
-  'moebellift_service': 'moebellift_service',
+  'lagerung': 'lagerung_service',
+  'lagerung_service': 'lagerung_service',
   // Add partner-side keys if they differ
   'geschaeftsumzug': 'geschaeftsumzug',
   'internationaler_umzug': 'auslandumzug',

@@ -21,67 +21,57 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
 
-    // Genel Sayfalar
-    {
-      url: `${BASE_URL}/agb`,
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
-    {
-      url: `${BASE_URL}/datenschutz`,
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
+    // Genel Sayfalar (AGB & Datenschutz sind noindex → nicht in Sitemap)
     {
       url: `${BASE_URL}/kontakt`,
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.4,
     },
     {
       url: `${BASE_URL}/kostenlose-offerte-anfordern`,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${BASE_URL}/kunden-bewertungen`,
       changeFrequency: 'weekly',
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/offerten-portal`,
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.4,
     },
     {
       url: `${BASE_URL}/partner-suche`,
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.4,
     },
     {
       url: `${BASE_URL}/partner-werden`,
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.4,
     },
     {
       url: `${BASE_URL}/standorte`,
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/ueber-uns`,
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.4,
     },
 
     // Ratgeber Übersicht
     {
       url: `${BASE_URL}/ratgeber`,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.7,
     },
 
     // ============================================
-    // Umzugsfirma Sayfaları
+    // Umzugsfirma Sayfaları (Ana Servis)
     // ============================================
     {
       url: `${BASE_URL}/umzugsfirma`,
@@ -96,93 +86,93 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${BASE_URL}/umzugsfirma-vergleichen`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugsofferten`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/guenstig-umziehen`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/malerarbeitenkosten`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/raeumung-entsorgung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
 
-    // Umzugsfirma Dienste
+    // Umzugsfirma Dienste (Alt Servisler)
     {
       url: `${BASE_URL}/umzugsfirma/checklists`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/umzugsfirma/geschaeftsumzug`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugsfirma/privatumzug`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugsfirma/umzugshilfe`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/umzugsfirma/umzugskosten`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugskosten-aargau`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
 
     // Spezialtransporte
     {
       url: `${BASE_URL}/umzugsfirma/spezialtransporte`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugsfirma/spezialtransporte/klaviertransport`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/umzugsfirma/spezialtransporte/klaviertransport/kosten`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
 
     // Internationale Umzüge
     {
       url: `${BASE_URL}/umzugsfirma/internationale-umzuege`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugsfirma/internationale-umzuege/umzug-nach-belgien`,
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/internationale-umzuege/umzug-nach-daenemark`,
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/internationale-umzuege/umzug-nach-deutschland`,
@@ -207,197 +197,198 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${BASE_URL}/umzugsfirma/internationale-umzuege/umzug-nach-portugal`,
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/internationale-umzuege/umzug-nach-spanien`,
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.6,
     },
 
-    // Umzugsfirma Şehir Sayfaları
+    // Umzugsfirma Şehir Sayfaları (Büyük Şehirler)
     {
-      url: `${BASE_URL}/umzugsfirma/aargau`,
+      url: `${BASE_URL}/umzugsfirma/zuerich`,
       changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/umzugsfirma/basel`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugsfirma/bern`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
-      url: `${BASE_URL}/umzugsfirma/biel-bienne`,
+      url: `${BASE_URL}/umzugsfirma/basel`,
       changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/umzugsfirma/genf`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/umzugsfirma/lausanne`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/umzugsfirma/lugano`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/umzugsfirma/luzern`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/umzugsfirma/aargau`,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/umzugsfirma/genf`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/umzugsfirma/lausanne`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/umzugsfirma/st-gallen`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/umzugsfirma/lugano`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/umzugsfirma/thun`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
     },
     {
-      url: `${BASE_URL}/umzugsfirma/zuerich`,
+      url: `${BASE_URL}/umzugsfirma/biel-bienne`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
     },
 
     // Aargau Alt Şehirler
     {
       url: `${BASE_URL}/umzugsfirma/aargau/aarau`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/aargau/baden`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/aargau/zofingen`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/aargau/brugg`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/aargau/wettingen`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
 
     // Zürich Alt Şehirler
     {
       url: `${BASE_URL}/umzugsfirma/zuerich/winterthur`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/umzugsfirma/zuerich/uster`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/zuerich/dietikon`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/zuerich/duebendorf`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/zuerich/schlieren`,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/umzugsfirma/zuerich/umzugsofferten-zuerich`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
     },
 
     // ============================================
-    // Reinigung Sayfaları
+    // Reinigung Sayfaları (Ana Servis)
     // ============================================
     {
       url: `${BASE_URL}/reinigung`,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    {
-      url: `${BASE_URL}/reinigung/baureinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/bodenreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/bueroreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/fassadenreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/fensterreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/grundreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/hausreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/hofreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
+    // Reinigung Alt Servisleri
     {
       url: `${BASE_URL}/reinigung/umzugsreinigung`,
       changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigung/unterhaltsreinigung`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/reinigung/wohnungsreinigung`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/reinigung/bueroreinigung`,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/reinigung/grundreinigung`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/reinigung/fensterreinigung`,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/reinigung/hausreinigung`,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/reinigung/fassadenreinigung`,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/reinigung/baureinigung`,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/reinigung/bodenreinigung`,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/reinigung/hofreinigung`,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/reinigung/unterhaltsreinigung`,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/reinigung/reinigungskosten`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
 
     // Reinigungsfirma Şehir Sayfaları
@@ -409,42 +400,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${BASE_URL}/reinigungsfirma/zuerich`,
       changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigungsfirma/basel`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/reinigungsfirma/bern`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
     },
     {
-      url: `${BASE_URL}/reinigungsfirma/genf`,
+      url: `${BASE_URL}/reinigungsfirma/basel`,
       changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/reinigungsfirma/lausanne`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/reinigungsfirma/luzern`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/reinigungsfirma/genf`,
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/reinigungsfirma/lausanne`,
+      changeFrequency: 'weekly',
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/reinigungsfirma/st-gallen`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/reinigungsfirma/winterthur`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.6,
     },
 
     // ============================================
@@ -453,47 +444,47 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${BASE_URL}/malerfirma`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/malerfirma/zuerich`,
       changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/malerfirma/basel`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/malerfirma/bern`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/malerfirma/basel`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/malerfirma/genf`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/malerfirma/lausanne`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/malerfirma/luzern`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/malerfirma/st-gallen`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/malerfirma/winterthur`,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.6,
     },
   ]
 

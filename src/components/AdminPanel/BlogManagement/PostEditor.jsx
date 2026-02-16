@@ -444,7 +444,7 @@ const PostEditor = ({ post, onBack }) => {
                   <Input
                     value={faqTitle}
                     onChange={(e) => setFaqTitle(e.target.value)}
-                    placeholder="z.B. FAQ - Häufige Fragen zum Möbellift mieten"
+                    placeholder="z.B. FAQ - Häufige Fragen zur Lagerung"
                     className="mt-1"
                   />
                   <p className="text-xs text-muted-foreground mt-1">Dieser Titel wird über dem gesamten FAQ-Bereich angezeigt</p>

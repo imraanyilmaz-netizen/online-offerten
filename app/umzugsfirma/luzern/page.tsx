@@ -237,10 +237,6 @@ export const metadata: Metadata = {
   description: 'Umzugsfirma in Luzern gesucht? ✓ Geprüfte Umzugsunternehmen in der Zentralschweiz vergleichen ✓ Kostenlos bis zu 5 Offerten anfordern ✓ Bis zu 40% sparen bei Privat- & Geschäftsumzug im Kanton Luzern.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/luzern',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/luzern',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/luzern',
-    },
   },
   openGraph: {
     title: 'Umzugsfirma Luzern: Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen',

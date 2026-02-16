@@ -116,7 +116,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
     }
     
     const isPrivateService = 
-      (formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'moebellift')) || // Added moebellift here
+      (formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'lagerung')) ||
       (formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung'].includes(formData.umzugArt)) ||
       (formData.service === 'maler' && formData.umzugArt === 'maler_privat');
     
@@ -138,7 +138,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
 
 
   const showObjectTypeField =
-      (formData.service === 'umzug' && ['privatumzug', 'international', 'geschaeftsumzug', 'moebellift'].includes(formData.umzugArt)) || // Added moebellift here
+      (formData.service === 'umzug' && ['privatumzug', 'international', 'geschaeftsumzug', 'lagerung'].includes(formData.umzugArt)) ||
       (formData.service === 'reinigung' && !['fensterreinigung', 'hofreinigung'].includes(formData.umzugArt)) ||
       (formData.service === 'raeumung') ||
       (formData.service === 'maler');
@@ -461,7 +461,7 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
 
 const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, handleCheckboxChange, handleRadioGroupChange, handleHowFoundChange, handleQuotesWantedChange, errors }) => {
   const { t } = useTranslation('newCustomerForm');
-  const isMoveService = formData.service === 'umzug' && formData.umzugArt !== 'moebellift';
+  const isMoveService = formData.service === 'umzug' && formData.umzugArt !== 'lagerung';
 
   const salutationOptions = [
     { value: 'herr', label: t('step3.salutationMr') },

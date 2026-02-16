@@ -36,7 +36,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 const UmzugNachPortugalPageClient = () => {
   const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-portugal';
 
-  const metaTitle = "Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2025";
+  const metaTitle = "Umzug nach Portugal: Kosten, Planung & Firmenvergleich 2026";
   const metaDescription = "Ihr Leitfaden für den Umzug von der Schweiz nach Portugal. Entdecken Sie Kosten, Tipps für Zoll & NIF, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.";
   const metaKeywords = "umzug nach portugal, umzug schweiz portugal, umzugsfirma schweiz portugal, internationaler umzug portugal, umzug nach lissabon, umzug nach porto, umzug nach faro, umzugsfirma international, zügelfirma schweiz portugal, umzug schweiz nach portugal, umzugskosten schweiz portugal, umzugsfirma vergleichen portugal, günstiger umzug portugal, umzug nach portugal preise, umzug nach portugal kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge portugal";
 

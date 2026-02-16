@@ -39,8 +39,8 @@
     "specialTransportDescription": "Piano, safe, art & more",
     "kleintransportLabel": "Small Transport",
     "kleintransportDescription": "Single items, small loads",
-    "moebelliftLabel": "Furniture Lift",
-    "moebelliftDescription": "With a load capacity of up to 400 kg and a maximum length of 27 meters",
+    "lagerungLabel": "Storage",
+    "lagerungDescription": "Safe storage for your furniture and belongings",
     "cleaningTypeSelectionTitle": "What type of cleaning do you need?",
     "cleaningTypeSelectionSubtitle": "Choose the appropriate cleaning type for your needs.",
     "cleaningOptions": {

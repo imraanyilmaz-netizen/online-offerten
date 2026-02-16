@@ -262,10 +262,6 @@ export const metadata: Metadata = {
   description: 'Umzugsfirma in Zürich gesucht? ✓ Geprüfte Umzugsunternehmen vergleichen ✓ Umzugskosten Rechner Zürich ✓ Kostenlos bis zu 5 Offerten anfordern ✓ Bis zu 40% sparen bei Privat- & Geschäftsumzug im Kanton Zürich.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/zuerich',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/zuerich',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/zuerich',
-    },
   },
   openGraph: {
     title: 'Umzugsfirma Zürich: Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen',

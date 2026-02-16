@@ -49,11 +49,11 @@ const umzugTypes: UmzugType[] = [
     link: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=kleintransport'
   },
   {
-    id: 'moebellift',
-    title: 'Möbellift mieten',
-    description: 'Bis 400 kg, max. 27m Länge',
+    id: 'lagerung',
+    title: 'Lagerung',
+    description: 'Möbel sicher einlagern',
     icon: Wind,
-    link: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=moebellift'
+    link: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=lagerung'
   }
 ];
 

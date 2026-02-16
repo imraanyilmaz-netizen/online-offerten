@@ -11,10 +11,6 @@ export const metadata: Metadata = {
   description: 'Professionelle Hausreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Hausreinigung garantiert.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung/hausreinigung',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/reinigung/hausreinigung',
-      'x-default': 'https://online-offerten.ch/reinigung/hausreinigung',
-    },
   },
   openGraph: {
     title: 'Hausreinigung mit Abnahmegarantie – Offerten vergleichen',

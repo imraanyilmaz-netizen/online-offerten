@@ -656,7 +656,7 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
     { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe size={16} /> },
     { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
     { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck size={16} /> },
-    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <ArrowUpDown /> } // Added Möbellift
+    { id: 'lagerung', labelKey: 'step1.lagerungLabel', subLabelKey: 'step1.lagerungDescription', icon: <Archive /> } // Lagerung
   ];
 
   const malerSubTypes = [

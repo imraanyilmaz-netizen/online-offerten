@@ -160,10 +160,6 @@ export const metadata: Metadata = {
   description: 'Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen. Flügeltransport, Piano-Transport & mehr. Professionell versichert, bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/spezialtransporte/klaviertransport',
-    languages: {
-      'de-CH': 'https://online-offerten.ch/umzugsfirma/spezialtransporte/klaviertransport',
-      'x-default': 'https://online-offerten.ch/umzugsfirma/spezialtransporte/klaviertransport',
-    },
   },
   openGraph: {
     title: 'Klaviertransport: Kostenlose Offerten vergleichen',

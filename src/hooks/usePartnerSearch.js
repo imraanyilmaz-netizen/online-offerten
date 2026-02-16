@@ -118,7 +118,7 @@ export const usePartnerSearch = () => {
         // Fallback: check if any offered_services belong to this category
         if (partner.offered_services && partner.offered_services.length > 0) {
           const categoryServiceMap = {
-            'umzug': ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'moebellift_service', 'raeumung_service', 'entsorgung_service'],
+            'umzug': ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'lagerung_service', 'raeumung_service', 'entsorgung_service'],
             'reinigung': ['wohnungsreinigung', 'hausreinigung', 'buero_reinigung', 'unterhaltsreinigung', 'baureinigung', 'grundreinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung', 'umzugsreinigung'],
             'maler': ['maler_service']
           };

@@ -53,7 +53,7 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
       borderColor: 'border-indigo-500',
       bgColor: 'bg-indigo-50'
     },
-    moebellift: {
+    lagerung: {
       iconBg: 'bg-rose-100',
       iconBgSelected: 'bg-rose-500',
       iconColor: 'text-rose-600',
@@ -639,7 +639,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
     { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe /> },
     { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Package /> },
     { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck /> },
-    { id: 'moebellift', labelKey: 'step1.moebelliftLabel', subLabelKey: 'step1.moebelliftDescription', icon: <ArrowUpDown /> }
+    { id: 'lagerung', labelKey: 'step1.lagerungLabel', subLabelKey: 'step1.lagerungDescription', icon: <Archive /> }
   ];
 
   const malerSubTypes = [

@@ -119,7 +119,6 @@ export const metadata: Metadata = {
   description: '✓ Umzugsfirma in Thun gesucht? Vergleichen Sie geprüfte Umzugsunternehmen am Thunersee. Kostenlos bis zu 5 Offerten anfordern und bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/thun',
-    languages: { 'de-CH': 'https://online-offerten.ch/umzugsfirma/thun', 'x-default': 'https://online-offerten.ch/umzugsfirma/thun' },
   },
   openGraph: {
     title: 'Umzugsfirma Thun: Umzugspartner am Thunersee finden & vergleichen',

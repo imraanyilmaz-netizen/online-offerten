@@ -3,7 +3,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { X, Truck, Sparkles, Paintbrush, ArrowUpDown } from 'lucide-react';
+import { X, Truck, Sparkles, Paintbrush, Archive } from 'lucide-react';
 
 const mainCategories = [
   { id: 'umzug', label: 'Umzug', icon: Truck, services: [
@@ -12,7 +12,7 @@ const mainCategories = [
     { id: 'auslandumzug', label: 'Auslandsumzug' },
     { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
     { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
-    { id: 'moebellift_service', label: 'Möbellift-Vermietung', icon: ArrowUpDown },
+    { id: 'lagerung_service', label: 'Lagerung', icon: Archive },
     { id: 'umzugsreinigung_opt', label: 'Endreinigung', desc: 'mit Abnahmegarantie' },
     { id: 'raeumung_service', label: 'Räumungsdienst' },
     { id: 'entsorgung_service', label: 'Entsorgungsservice' },

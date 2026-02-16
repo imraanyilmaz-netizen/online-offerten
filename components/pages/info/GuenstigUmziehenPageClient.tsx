@@ -477,7 +477,7 @@ const GuenstigUmziehenPageClient = () => {
                   <strong>Preisunterschiede nach Region</strong>: Genf und Zürich liegen 20-30% über dem Schweizer Durchschnitt, ländliche Kantone bieten günstigere Konditionen.
                 </p>
                 <p className="text-body mb-6">
-                  <strong>Versteckte Kosten erkennen</strong>: Achten Sie bei Offerten auf Faktoren wie Möbellift-Einsatz (200-500 CHF), Aufzugnutzung, Entsorgung von Umzugskartons und Umzugsmaterial sowie die Endreinigung der alten Wohnung.
+                  <strong>Versteckte Kosten erkennen</strong>: Achten Sie bei Offerten auf Faktoren wie Lagerung (80-150 CHF/Monat), Aufzugnutzung, Entsorgung von Umzugskartons und Umzugsmaterial sowie die Endreinigung der alten Wohnung.
                 </p>
 
                 <hr className="my-8 border-gray-300" />

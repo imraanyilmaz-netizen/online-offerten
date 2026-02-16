@@ -10,8 +10,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 // Only import icons that are actually used
 import { 
-  ArrowRight, CheckCircle, ShieldCheck, Clock, TrendingUp, Users, Award
+  ArrowRight, CheckCircle, ShieldCheck, Clock, TrendingUp, Users, Award,
+  MapPin, Home, Building, Globe, Package, ArrowUpDown
 } from 'lucide-react'
+import { PiPianoKeysFill } from 'react-icons/pi'
 import UmzugsoffertenHeroForm from './UmzugsoffertenHeroForm'
 
 // Lazy load heavy sections for better Core Web Vitals
@@ -59,26 +61,6 @@ const UmzugsoffertenSEORichContent = dynamic(
   }
 )
 
-const UmzugsoffertenRelatedServices = dynamic(
-  () => import('./UmzugsoffertenRelatedServices'),
-  { 
-    ssr: true,
-    loading: () => (
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/2 mx-auto mb-4"></div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-32 bg-gray-100 rounded"></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-)
 
 interface UmzugsoffertenPageClientProps {
   initialReviewStats?: {
@@ -382,41 +364,144 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-50 via-white to-blue-50 py-12 md:py-20 overflow-hidden">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Image - Mobile: order-1 (first), Desktop: order-2 (right) */}
-            <div className="relative order-1 md:order-2">
-              <div className="relative w-full h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center">
-                <NextImage
-                  src="/umzug/48569125erth8.webp"
-                  alt="Umzug Illustration"
-                  width={600}
-                  height={400}
-                  className="w-full h-auto rounded-2xl shadow-lg object-cover"
-                  loading="lazy"
-                />
+      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100">
+        <div className="absolute inset-0 z-[1]">
+          <div className="absolute inset-0 bg-gray-100"></div>
+        </div>
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+          <div className="grid md:grid-cols-5 gap-12 items-center">
+            <div className="md:col-span-3">
+              <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
+                <MapPin className="h-4 w-4 mr-2" />
+                Umzugsofferten kostenlos vergleichen
+              </div>
+              <h1 className="heading-1 !mt-0">
+                Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen
+              </h1>
+              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+                Fordern Sie in nur 5 Minuten bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen an und sparen Sie bares Geld bei Ihrem Umzug.
+              </p>
+              
+              {/* Umzug Type Buttons */}
+              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-6">
+                {/* Privatumzug */}
+                <Link 
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
+                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Privatumzug</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Wohnungsumzug</p>
+                  </div>
+                </Link>
+                
+                {/* Geschäftsumzug */}
+                <Link 
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
+                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Geschäftsumzug</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Firmenumzug</p>
+                  </div>
+                </Link>
+                
+                {/* International */}
+                <Link 
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
+                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Auslandumzug</p>
+                    <p className="text-xs text-gray-600 mt-0.5">International</p>
+                  </div>
+                </Link>
+                
+                {/* Klaviertransport */}
+                <Link 
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
+                    <PiPianoKeysFill className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Klaviertransport</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Piano & Flügel</p>
+                  </div>
+                </Link>
+                
+                {/* Kleintransport */}
+                <Link 
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Kleintransport</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Einzelne Gegenstände</p>
+                  </div>
+                </Link>
+                
+                {/* Lagerung */}
+                <Link 
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Möbel einlagern</p>
+                  </div>
+                </Link>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700">
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <span>Versicherte Firmen</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <span>100% kostenlos</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <span>Angebote von geprüften Partnern</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <span>Jetzt Preise vergleichen & sparen</span>
+                </div>
               </div>
             </div>
 
-            {/* Left Column - Text and Form - Mobile: order-2 (second), Desktop: order-1 (left) */}
-            <div className="space-y-6 order-2 md:order-1">
-              <h1 className="heading-1">
-                Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen
-              </h1>
-              <p className="text-body">
-                Fordern Sie bis zu 5 Angebote in 5 Minuten an
-              </p>
-              
-              <div className="mt-6">
-                <Button
-                  onClick={handleCtaClick}
-                  size="lg"
-                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
-                >
-                  Kostenlose Angebote
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+            {/* Right Column - Image */}
+            <div className="relative md:col-span-2">
+              <div className="relative w-full h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center">
+                <NextImage
+                  src="/umzug/48569125erth8.webp"
+                  alt="Umzugsofferten vergleichen Schweiz"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto rounded-2xl shadow-lg object-cover"
+                  loading="eager"
+                  priority
+                />
               </div>
             </div>
           </div>

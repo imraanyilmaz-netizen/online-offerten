@@ -36,7 +36,7 @@ const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
 const UmzugNachSpanienPageClient = () => {
   const canonicalPath = '/umzugsfirma/internationale-umzuege/umzug-nach-spanien';
 
-  const metaTitle = "Umzug nach Spanien: Ihr Guide für Kosten & Planung 2025";
+  const metaTitle = "Umzug nach Spanien: Ihr Guide für Kosten & Planung 2026";
   const metaDescription = "Alles für Ihren Umzug von der Schweiz nach Spanien. Entdecken Sie Kosten, Tipps für Zoll & NIE, Checklisten und vergleichen Sie die besten Firmen für Umzug und Reinigung.";
   const metaKeywords = "umzug nach spanien, umzug schweiz spanien, umzugsfirma schweiz spanien, internationaler umzug spanien, umzug nach madrid, umzug nach barcelona, umzug nach valencia, umzugsfirma international, zügelfirma schweiz spanien, umzug schweiz nach spanien, umzugskosten schweiz spanien, umzugsfirma vergleichen spanien, günstiger umzug spanien, umzug nach spanien preise, umzug nach spanien kosten, umzugsfirma schweiz, internationaler umzug, internationale umzüge spanien";
 

@@ -39,8 +39,8 @@
     "specialTransportDescription": "Klavier, Tresor, Kunst & mehr",
     "kleintransportLabel": "Kleintransport",
     "kleintransportDescription": "Einzelne Möbel, kleine Lasten",
-    "moebelliftLabel": "Möbellift mieten",
-    "moebelliftDescription": "Mit einer Tragkraft von bis zu 400 kg und einer maximalen Länge von 27 Metern",
+    "lagerungLabel": "Lagerung",
+    "lagerungDescription": "Sichere Einlagerung Ihrer Möbel und Gegenstände",
     "cleaningTypeSelectionTitle": "Welche Art von Reinigung benötigen Sie?",
     "cleaningTypeSelectionSubtitle": "Wählen Sie die passende Reinigungsart für Ihr Anliegen.",
     "cleaningOptions": {

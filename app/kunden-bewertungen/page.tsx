@@ -4,14 +4,14 @@ import KundenBewertungenPageClient from '@/components/pages/KundenBewertungenPag
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Kundenbewertungen - Echte Erfahrungen von zufriedenen Kunden',
-  description: 'Lesen Sie echte Kundenbewertungen und Erfahrungen. Über 1000+ verifizierte Bewertungen von zufriedenen Kunden für Umzug, Reinigung & Renovierung.',
+  title: 'Kundenbewertungen – Echte Erfahrungen unserer Kunden | Online-Offerten.ch',
+  description: 'Lesen Sie echte, verifizierte Kundenbewertungen und Erfahrungen mit Umzugs-, Reinigungs- und Malerfirmen in der Schweiz. Transparent und unabhängig.',
   alternates: {
     canonical: 'https://online-offerten.ch/kunden-bewertungen',
   },
   openGraph: {
-    title: 'Kundenbewertungen - Echte Erfahrungen von zufriedenen Kunden',
-    description: 'Über 1000+ verifizierte Bewertungen von zufriedenen Kunden',
+    title: 'Kundenbewertungen – Echte Erfahrungen unserer Kunden | Online-Offerten.ch',
+    description: 'Verifizierte Kundenbewertungen für Umzugs-, Reinigungs- und Malerfirmen in der Schweiz.',
     url: 'https://online-offerten.ch/kunden-bewertungen',
     siteName: 'Online-Offerten.ch',
     type: 'website',
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kundenbewertungen - Echte Erfahrungen',
-    description: 'Über 1000+ verifizierte Bewertungen',
+    title: 'Kundenbewertungen – Echte Erfahrungen unserer Kunden',
+    description: 'Verifizierte Kundenbewertungen für Umzugs-, Reinigungs- und Malerfirmen in der Schweiz.',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
 }

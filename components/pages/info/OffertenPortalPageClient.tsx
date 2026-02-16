@@ -477,7 +477,7 @@ const OffertenPortalPageClient = () => {
               { label: 'Auslandumzug', sub: 'International', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international', icon: Globe, color: 'emerald' },
               { label: 'Klaviertransport', sub: 'Piano & Flügel', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport', icon: PiPianoKeysFill, color: 'amber' },
               { label: 'Kleintransport', sub: 'Einzelne Gegenstände', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport', icon: Package, color: 'teal' },
-              { label: 'Möbellift', sub: 'Bis 400 kg, 27m', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=moebellift', icon: ArrowUpDown, color: 'indigo' },
+              { label: 'Lagerung', sub: 'Möbel einlagern', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung', icon: Package, color: 'indigo' },
             ].map((item) => (
               <Link
                 key={item.label}
@@ -503,7 +503,7 @@ const OffertenPortalPageClient = () => {
             <li><Link href="/umzugsfirma/internationale-umzuege" className="text-green-700 hover:text-green-800 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
             <li><Link href="/umzugsfirma/spezialtransporte" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
             <li><strong>Klaviertransport</strong>: Professioneller und schonender Transport von Klavieren und Flügeln mit Spezialtechnik.</li>
-            <li><strong>Möbellift</strong>: Bequemer Möbeltransport über das Fenster – ideal für schwere und sperrige Möbel bis 400 kg.</li>
+            <li><strong>Lagerung</strong>: Sichere Einlagerung Ihrer Möbel und Gegenstände während des Umzugs oder bei Platzmangel.</li>
           </ul>
           <p className="text-body">Erfahren Sie mehr über <Link href="/umzugsfirma/umzugskosten" className="text-green-700 hover:text-green-800 underline font-medium">Umzugskosten in der Schweiz</Link>.</p>
         </div>
