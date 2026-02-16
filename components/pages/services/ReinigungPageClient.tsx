@@ -6,11 +6,11 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, CheckCircle, ShieldCheck, Clock, Sparkles, ThumbsUp, BookOpen, Award, HelpCircle, Users, TrendingUp } from 'lucide-react'
+import { ArrowRight, CheckCircle, ShieldCheck, Clock, Sparkles, ThumbsUp, BookOpen, Award, HelpCircle, Home, Building, Brush, MapPin } from 'lucide-react'
+import NextImage from 'next/image'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import PricingTable from '@/components/SEO/PricingTable'
 import HowItWorks from '@/components/SEO/HowItWorks'
-import WhyChooseUs from '@/components/SEO/WhyChooseUs'
 
 const ReinigungPageClient = () => {
   const router = useRouter()
@@ -110,48 +110,138 @@ const ReinigungPageClient = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <div className="bg-slate-50">
-        <section className="relative w-full bg-gray-100 py-12 md:py-16">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="grid md:grid-cols-3 gap-0 items-center">
-              <div className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12">
-                <div>
-                  <h1 className="heading-1">
-                    Reinigungsfirma für eine stressfreie Reinigung
-                  </h1>
+        {/* Hero Section */}
+        <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100">
+          <div className="absolute inset-0 z-[1]">
+            <div className="absolute inset-0 bg-gray-100"></div>
+          </div>
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+            <div className="grid md:grid-cols-5 gap-12 items-center">
+              <div className="md:col-span-3">
+                <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Professionelle Reinigung in der Schweiz
                 </div>
-                <p className="text-base md:text-body mb-6 leading-relaxed">
+                <h1 className="heading-1 !mt-0">
+                  Reinigungsfirma finden & Offerten vergleichen » Bis zu 40% sparen
+                </h1>
+                <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
                   Sorgenfrei zur Wohnungsübergabe. Unsere geprüften Partner sorgen für eine blitzblanke Sauberkeit, damit Sie sich auf Ihr neues Zuhause konzentrieren können. Ideal nach einem Privatumzug.
                 </p>
-                <div className="mb-6">
-                  <Button
-                    onClick={handleCtaClick}
-                    size="lg"
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold group px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+
+                <p id="reinigungsart" className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Reinigungsart:</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-6">
+                  {/* Umzugsreinigung */}
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=umzugsreinigung"
+                    className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
                   >
-                    Jetzt kostenlose Offerten anfordern
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Button>
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
+                      <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-sm sm:text-base text-gray-900">Umzugsreinigung</p>
+                      <p className="text-xs text-gray-600 mt-0.5">Mit Abnahmegarantie</p>
+                    </div>
+                  </Link>
+
+                  {/* Wohnungsreinigung */}
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=wohnungsreinigung"
+                    className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
+                      <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-sm sm:text-base text-gray-900">Wohnungsreinigung</p>
+                      <p className="text-xs text-gray-600 mt-0.5">Gründlich & sauber</p>
+                    </div>
+                  </Link>
+
+                  {/* Büroreinigung */}
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=bueroreinigung"
+                    className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
+                      <Building className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-sm sm:text-base text-gray-900">Büroreinigung</p>
+                      <p className="text-xs text-gray-600 mt-0.5">Professionell & zuverlässig</p>
+                    </div>
+                  </Link>
+
+                  {/* Grundreinigung */}
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=grundreinigung"
+                    className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
+                      <Brush className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-sm sm:text-base text-gray-900">Grundreinigung</p>
+                      <p className="text-xs text-gray-600 mt-0.5">Tiefenreinigung</p>
+                    </div>
+                  </Link>
+
+                  {/* Fensterreinigung */}
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=fensterreinigung"
+                    className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
+                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-sm sm:text-base text-gray-900">Fensterreinigung</p>
+                      <p className="text-xs text-gray-600 mt-0.5">Streifenfrei & klar</p>
+                    </div>
+                  </Link>
+
+                  {/* Unterhaltsreinigung */}
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=unterhaltsreinigung"
+                    className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
+                      <ThumbsUp className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-sm sm:text-base text-gray-900">Unterhaltsreinigung</p>
+                      <p className="text-xs text-gray-600 mt-0.5">Regelmässig & sauber</p>
+                    </div>
+                  </Link>
                 </div>
-                <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-wrap gap-4 md:gap-6">
+
+                <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700">
                   <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
+                    <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                    <span>Geprüfte Reinigungsfirmen</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
+                    <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                    <span>100% kostenlos</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
+                    <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                    <span>Bis zu 40% sparen</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                    <span>Mit Abnahmegarantie</span>
                   </div>
                 </div>
               </div>
-              <div className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1581578731548-c64695cc6952"
-                  alt="Professionelle Umzugsreinigung"
-                  className="w-full h-full object-cover"
+              <div className="relative md:col-span-2">
+                <NextImage
+                  src="/bilder/reinigungsfirma-600-400.webp"
+                  alt="Professionelle Reinigung Schweiz"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto rounded-2xl shadow-lg object-cover"
                   loading="lazy"
                 />
               </div>
@@ -159,46 +249,13 @@ const ReinigungPageClient = () => {
           </div>
         </section>
 
-        {/* How It Works Section */}
+        {/* Warum eine professionelle Umzugsreinigung - moved to top */}
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
-          <HowItWorks
-            title="So einfach ist es"
-            ctaText="Jetzt kostenlose Reinigungs-Offerten anfordern"
-            ctaLink="/kostenlose-offerte-anfordern?service=reinigung"
-          />
-        </div>
-
-        {/* Why Choose Us Section */}
-        <div className="container mx-auto max-w-7xl px-4 md:px-6 pb-12 md:pb-16">
-          <WhyChooseUs
-            title="Warum Online-Offerten.ch?"
-            subtitle="Ihre Vorteile beim Vergleich von Reinigungs-Offerten"
-            advantages={[
-              {
-                icon: <ShieldCheck className="h-8 w-8" />,
-                title: "Geprüfte Reinigungsfirmen",
-                description: "Alle unsere Partner werden sorgfältig geprüft. Sie erhalten nur Offerten von vertrauenswürdigen, zertifizierten Reinigungsfirmen mit Abnahmegarantie."
-              },
-              {
-                icon: <TrendingUp className="h-8 w-8" />,
-                title: "Bis zu 40% sparen",
-                description: "Durch den Vergleich mehrerer Reinigungs-Offerten finden Sie das beste Preis-Leistungs-Verhältnis und sparen erheblich."
-              },
-              {
-                icon: <Users className="h-8 w-8" />,
-                title: "100% kostenlos",
-                description: "Die Anfrage ist vollständig kostenlos und unverbindlich. Keine versteckten Kosten, keine Verpflichtungen."
-              }
-            ]}
-          />
-        </div>
-
-        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
           <section className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="heading-2">Warum eine professionelle Umzugsreinigung?</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
-                Eine Wohnungsübergabe kann stressig sein. Vermieter haben hohe Ansprüche an die Sauberkeit. Mit einer professionellen Reinigungsfirma an Ihrer Seite sparen Sie nicht nur Zeit und Nerven, sondern sichern sich auch dank der Abnahmegarantie gegen teure Nachreinigungen ab. Die perfekte Lösung nach jedem Privatumzug. Vergleichen Sie kostenlose Reinigungsofferten von mehreren geprüften Firmen und finden Sie das beste Angebot.                 Erfahren Sie mehr über unsere <Link href="/umzugsfirma/privatumzug" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Privatumzug</Link> Dienstleistungen und wie wir Ihnen bei Ihrem Umzug helfen können.
+                Eine Wohnungsübergabe kann stressig sein. Vermieter haben hohe Ansprüche an die Sauberkeit. Mit einer professionellen Reinigungsfirma an Ihrer Seite sparen Sie nicht nur Zeit und Nerven, sondern sichern sich auch dank der Abnahmegarantie gegen teure Nachreinigungen ab. Die perfekte Lösung nach jedem Privatumzug. Vergleichen Sie kostenlose Reinigungsofferten von mehreren geprüften Firmen und finden Sie das beste Angebot. Erfahren Sie mehr über unsere <Link href="/umzugsfirma/privatumzug" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Privatumzug</Link> Dienstleistungen und wie wir Ihnen bei Ihrem Umzug helfen können.
               </p>
             </div>
             <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl">
@@ -209,16 +266,29 @@ const ReinigungPageClient = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
             </div>
           </section>
+        </div>
+
+        {/* How It Works Section */}
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
+          <HowItWorks
+            title="So einfach ist es"
+            ctaText="Jetzt kostenlose Reinigungs-Offerten anfordern"
+            ctaLink="/kostenlose-offerte-anfordern?service=reinigung"
+          />
+        </div>
+
+
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
 
           <section>
             <h2 className="heading-2 text-center">Ihre Vorteile auf einen Blick</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon
                 return (
                   <div
                     key={index}
-                    className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center"
+                    className="w-[75vw] min-w-[240px] max-w-[300px] md:w-auto md:min-w-0 md:max-w-none snap-start flex-shrink-0 md:flex-shrink bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center"
                   >
                     <div className="inline-block p-4 bg-blue-100 rounded-full mb-4">
                       <Icon className="w-8 h-8 text-blue-600" />
@@ -341,7 +411,7 @@ const ReinigungPageClient = () => {
                         ))}
                       </ul>
                       <p>
-                        Diese Preise sind Schätzungen. Für eine genaue Kostenübersicht nutzen Sie am besten unseren <Link href="/reinigung/reinigungskosten" className="text-blue-600 hover:underline font-semibold">Reinigungskosten-Rechner</Link> oder fordern Sie direkt <a href="#cta" className="text-blue-600 hover:underline font-semibold">unverbindliche Offerten</a> an.
+                        Diese Preise sind Schätzungen. Für eine genaue Kostenübersicht nutzen Sie am besten unseren <Link href="/reinigung/reinigungskosten" className="text-blue-600 hover:underline font-semibold">Reinigungskosten-Rechner</Link> oder fordern Sie direkt <a href="#reinigungsart" className="text-blue-600 hover:underline font-semibold">unverbindliche Offerten</a> an.
                       </p>
                     </div>
                   </AccordionContent>

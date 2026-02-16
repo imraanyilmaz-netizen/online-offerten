@@ -84,14 +84,14 @@ const combinedSchema = {
 }
 
 export const metadata: Metadata = {
-  title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
-  description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!',
+  title: 'Spezialtransporte Schweiz – Klavier, Tresor & mehr | Offerten vergleichen',
+  description: 'Spezialtransporte in der Schweiz: Klaviertransport, Tresortransport & Maschinentransport. Kostenlos bis zu 5 Offerten von geprüften Firmen vergleichen. ✓ Versichert ✓ Professionell',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/spezialtransporte',
   },
   openGraph: {
-    title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
-    description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!',
+    title: 'Spezialtransporte Schweiz – Klavier, Tresor & mehr | Offerten vergleichen',
+    description: 'Spezialtransporte in der Schweiz: Klaviertransport, Tresortransport & Maschinentransport. Kostenlos Offerten von geprüften Firmen vergleichen.',
     url: 'https://online-offerten.ch/umzugsfirma/spezialtransporte',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -107,8 +107,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
-    description: 'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport.',
+    title: 'Spezialtransporte Schweiz – Klavier, Tresor & mehr | Offerten vergleichen',
+    description: 'Spezialtransporte in der Schweiz: Klaviertransport, Tresortransport & Maschinentransport. Kostenlos Offerten vergleichen.',
     images: ['https://online-offerten.ch/image/b87025c3-7292-44e6-8a2c-7c1105b554bc.webp'],
   },
   robots: {

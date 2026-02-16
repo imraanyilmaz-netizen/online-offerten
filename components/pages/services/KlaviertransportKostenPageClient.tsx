@@ -130,9 +130,9 @@ const KlaviertransportKostenPageClient = () => {
               <div>
                 <h3 className="heading-3 mb-3">Etagen, Treppen und Lift</h3>
                 <ul className="list-disc list-inside space-y-2 text-body">
-                  <li><strong>Erdgeschoss</strong> â†’ günstigste Variante</li>
-                  <li><strong>Mehrere Stockwerke ohne Lift</strong> â†’ höherer Aufwand</li>
-                  <li><strong>Enge oder gewundene Treppen</strong> â†’ Kostensteigerung</li>
+                  <li><strong>Erdgeschoss</strong> → günstigste Variante</li>
+                  <li><strong>Mehrere Stockwerke ohne Lift</strong> → höherer Aufwand</li>
+                  <li><strong>Enge oder gewundene Treppen</strong> → Kostensteigerung</li>
                 </ul>
               </div>
 
@@ -267,7 +267,7 @@ const KlaviertransportKostenPageClient = () => {
 
             <div className="bg-green-50 border-l-4 border-green-600 rounded-r-lg p-4">
               <p className="text-body font-semibold">
-                â¡ï¸ Ein professioneller Klaviertransport ist keine Luxusleistung, sondern eine sichere und oft langfristig günstigere Lösung.
+                ⚡ Ein professioneller Klaviertransport ist keine Luxusleistung, sondern eine sichere und oft langfristig günstigere Lösung.
               </p>
             </div>
           </section>

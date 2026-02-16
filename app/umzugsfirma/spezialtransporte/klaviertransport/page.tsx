@@ -156,14 +156,14 @@ const combinedSchema = {
 }
 
 export const metadata: Metadata = {
-  title: 'Klaviertransport: Kostenlose Offerten vergleichen',
-  description: 'Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen. Flügeltransport, Piano-Transport & mehr. Professionell versichert, bis zu 40% sparen!',
+  title: 'Klaviertransport Schweiz – Offerten einholen & Kosten vergleichen',
+  description: 'Klaviertransport in der Schweiz: Klavier & Flügel sicher transportieren lassen. Kostenlos bis zu 5 Offerten von geprüften Spezialisten einholen und bis zu 40% sparen. ✓ Versichert ✓ Professionell',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/spezialtransporte/klaviertransport',
   },
   openGraph: {
-    title: 'Klaviertransport: Kostenlose Offerten vergleichen',
-    description: 'Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen. Flügeltransport, Piano-Transport & mehr.',
+    title: 'Klaviertransport Schweiz – Offerten einholen & Kosten vergleichen',
+    description: 'Klaviertransport in der Schweiz: Klavier & Flügel sicher transportieren. Kostenlos Offerten von geprüften Spezialisten einholen.',
     url: 'https://online-offerten.ch/umzugsfirma/spezialtransporte/klaviertransport',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -179,8 +179,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Klaviertransport: Kostenlose Offerten vergleichen',
-    description: 'Kostenlose Offerten von geprüften Spezialisten für Klaviertransport vergleichen. Flügeltransport, Piano-Transport & mehr.',
+    title: 'Klaviertransport Schweiz – Offerten einholen & Kosten vergleichen',
+    description: 'Klaviertransport in der Schweiz: Klavier & Flügel sicher transportieren. Kostenlos Offerten einholen und vergleichen.',
     images: ['https://online-offerten.ch/bilder/klaviertransport.avif'],
   },
   robots: {

@@ -298,7 +298,7 @@ const KundenBewertungenPageClient = ({
                       >
                         {loading ? (
                           <>
-                            <span className="animate-spin mr-2">â³</span>
+                            <span className="animate-spin mr-2">⏳</span>
                             Lade weitere Bewertungen...
                           </>
                         ) : (
