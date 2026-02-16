@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/SupabaseAuthContext'
+import { createClient } from '@/lib/supabase/client'
 import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -78,26 +79,20 @@ const UpdatePasswordPageClient = () => {
       setSuccess(true)
       toast({
         title: 'Erfolg!',
-        description: 'Ihr Passwort wurde erfolgreich aktualisiert.',
+        description: 'Ihr Passwort wurde erfolgreich aktualisiert. Sie werden zum Login weitergeleitet.',
       })
-      // Role'e göre doğru dashboard'a yönlendir
-      const userRole = user?.user_metadata?.role
-      const redirectPath = userRole === 'admin' || userRole === 'editor'
-        ? '/admin-dashboard'
-        : userRole === 'partner'
-          ? '/partner/dashboard'
-          : '/login'
-      setTimeout(() => router.push(redirectPath), 3000)
+      // Recovery session'ı temizle ve login'e yönlendir
+      try {
+        const supabase = createClient()
+        await supabase.auth.signOut()
+      } catch (e) {
+        console.warn('[UpdatePassword] SignOut error:', e)
+      }
+      setTimeout(() => {
+        window.location.href = '/login'
+      }, 2000)
     }
   }
-
-  // Role'e göre Redirect-Pfad bestimmen
-  const userRole = user?.user_metadata?.role
-  const dashboardPath = userRole === 'admin' || userRole === 'editor'
-    ? '/admin-dashboard'
-    : userRole === 'partner'
-      ? '/partner/dashboard'
-      : '/login'
 
   // Erfolg-Ansicht
   if (success) {
@@ -107,10 +102,10 @@ const UpdatePasswordPageClient = () => {
           <CardContent className="text-center py-12">
             <CheckCircle className="mx-auto h-16 w-16 text-green-600" />
             <h2 className="text-2xl font-bold text-gray-800 mt-4">Passwort aktualisiert!</h2>
-            <p className="text-gray-600 mt-2">Sie werden in Kürze weitergeleitet...</p>
-            <Link href={dashboardPath}>
+            <p className="text-gray-600 mt-2">Sie werden zum Login weitergeleitet...</p>
+            <Link href="/login">
               <Button className="mt-6 bg-green-600 hover:bg-green-700">
-                Zum Dashboard
+                Zum Login
               </Button>
             </Link>
           </CardContent>
