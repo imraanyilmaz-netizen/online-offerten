@@ -147,40 +147,91 @@ const LoginPageClient = () => {
       }
       
       if (sessionValue) {
-        // Cookie is now handled by the storage adapter with automatic splitting.
-        // Just trigger a re-sync by reading the storage (getItem syncs to cookie).
-        const supabaseForSync = createClient()
-        await supabaseForSync.auth.getSession() // This triggers getItem → setCookieWithSplit
+        console.log('[LoginPage] Manually syncing cookie from localStorage...', { 
+          sessionValueLength: sessionValue.length,
+          sessionValuePreview: sessionValue.substring(0, 50) + '...'
+        })
         
-        console.log('[LoginPage] Cookie synced via storage adapter')
+        // Parse session and create minimal cookie payload (only what middleware needs)
+        let minimalSession: any = null
+        try {
+          const fullSession = JSON.parse(sessionValue)
+          // Create minimal session with only essential data for middleware
+          minimalSession = {
+            access_token: fullSession.access_token,
+            user: {
+              id: fullSession.user?.id,
+              email: fullSession.user?.email,
+              user_metadata: {
+                role: fullSession.user?.user_metadata?.role
+              }
+            }
+          }
+          console.log('[LoginPage] Created minimal session payload', {
+            originalSize: sessionValue.length,
+            minimalSize: JSON.stringify(minimalSession).length,
+            reduction: `${Math.round((1 - JSON.stringify(minimalSession).length / sessionValue.length) * 100)}%`
+          })
+        } catch (e) {
+          console.error('[LoginPage] Failed to parse session, using full session:', e)
+          minimalSession = sessionValue
+        }
         
-        // Verify cookie was set
+        const expires = new Date()
+        expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
+        const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
+        const cookieValue = encodeURIComponent(typeof minimalSession === 'string' ? minimalSession : JSON.stringify(minimalSession))
+        
+        // Cookie size limit is ~4KB, but account for cookie name and attributes (~200 bytes)
+        // So actual data limit is ~3800 bytes
+        const MAX_COOKIE_SIZE = 3800
+        if (cookieValue.length > MAX_COOKIE_SIZE) {
+          console.log('[LoginPage] Cookie still too large after optimization, splitting into parts...', { 
+            cookieValueLength: cookieValue.length,
+            maxSize: MAX_COOKIE_SIZE
+          })
+          // Split cookie into chunks
+          let index = 0
+          let offset = 0
+          while (offset < cookieValue.length) {
+            const chunk = cookieValue.substring(offset, offset + MAX_COOKIE_SIZE)
+            const cookieName = index === 0 ? COOKIE_NAME : `${COOKIE_NAME}.${index}`
+            document.cookie = `${cookieName}=${chunk}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
+            offset += MAX_COOKIE_SIZE
+            index++
+          }
+          console.log('[LoginPage] Cookie split into', index, 'parts')
+        } else {
+          document.cookie = `${COOKIE_NAME}=${cookieValue}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
+          console.log('[LoginPage] Cookie set successfully (single cookie)', {
+            cookieValueLength: cookieValue.length
+          })
+        }
+        
+        // Wait a bit for cookie to be set
         await new Promise(resolve => setTimeout(resolve, 200))
-        const cookiesAfter = document.cookie
-        const cookieSet = cookiesAfter.includes(COOKIE_NAME)
-        console.log('[LoginPage] Cookie verification:', { cookieSet })
+        
+        // Check if cookie was actually set
+        const cookiesAfter = document.cookie.split(';').reduce((acc, cookie) => {
+          const [name, ...rest] = cookie.trim().split('=')
+          if (name && rest.length > 0) {
+            acc[name] = decodeURIComponent(rest.join('='))
+          }
+          return acc
+        }, {} as Record<string, string>)
+        
+        const cookieSet = !!cookiesAfter[COOKIE_NAME] || !!cookiesAfter[`${COOKIE_NAME}.0`]
+        const splitCookies = Object.keys(cookiesAfter).filter(key => key.startsWith(COOKIE_NAME))
+        console.log('[LoginPage] Cookie manually synced', { 
+          cookieName: COOKIE_NAME,
+          cookieValueLength: cookieValue.length,
+          cookieSet,
+          splitCookies,
+          allCookies: Object.keys(cookiesAfter)
+        })
         
         if (!cookieSet) {
-          console.error('[LoginPage] ❌ Cookie was NOT set! Attempting manual fallback...')
-          // Manual fallback: set minimal cookie for middleware
-          try {
-            const fullSession = JSON.parse(sessionValue)
-            const minimal = JSON.stringify({
-              access_token: fullSession.access_token,
-              user: {
-                id: fullSession.user?.id,
-                email: fullSession.user?.email,
-                user_metadata: { role: fullSession.user?.user_metadata?.role }
-              }
-            })
-            const expires = new Date()
-            expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000)
-            const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
-            document.cookie = `${COOKIE_NAME}=${encodeURIComponent(minimal)}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-            console.log('[LoginPage] Manual minimal cookie set as fallback')
-          } catch (e) {
-            console.error('[LoginPage] Manual fallback failed:', e)
-          }
+          console.error('[LoginPage] ❌ Cookie was NOT set! This will cause redirect loop.')
         }
       } else {
         console.warn('[LoginPage] No session value in localStorage to sync', { 
