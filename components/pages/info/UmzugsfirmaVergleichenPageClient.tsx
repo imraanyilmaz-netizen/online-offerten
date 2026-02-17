@@ -84,7 +84,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             {
               "@type": "Question",
               "name": "Wie viele Offerten sollte ich einholen?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Es empfiehlt sich, mindestens drei bis fünf Offerten von verschiedenen Umzugsunternehmen einzuholen, um ein gutes Preis-Leistungs-Verhältnis zu finden." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Es empfiehlt sich, mindestens vier bis fünf Offerten von verschiedenen Umzugsunternehmen einzuholen, um ein gutes Preis-Leistungs-Verhältnis zu finden." }
             },
             {
               "@type": "Question",
@@ -159,7 +159,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
     },
     {
       q: "Wie viele Offerten sollte ich einholen?",
-      a: "Es empfiehlt sich, mindestens drei bis fünf Offerten von verschiedenen Umzugsunternehmen einzuholen, um ein gutes Preis-Leistungs-Verhältnis zu finden."
+      a: "Es empfiehlt sich, mindestens vier bis fünf Offerten von verschiedenen Umzugsunternehmen einzuholen, um ein gutes Preis-Leistungs-Verhältnis zu finden."
     },
     {
       q: "Sind die Angebote über Online-Vergleichsplattformen wirklich kostenlos und unverbindlich?",
@@ -416,7 +416,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
               {
                 icon: BadgePercent,
                 title: 'Erhebliche Kostenersparnis',
-                description: 'Bei identischer Leistung liegen die Preisunterschiede zwischen Umzugsfirmen oft bei 300 bis 800 CHF. Durch das Einholen von mindestens drei Offerten sparen Kunden im Durchschnitt 20 bis 40% der Umzugskosten.'
+                description: 'Bei identischer Leistung liegen die Preisunterschiede zwischen Umzugsfirmen oft bei 300 bis 800 CHF. Durch das Einholen von mindestens vier Offerten sparen Kunden im Durchschnitt 20 bis 40% der Umzugskosten.'
               },
               {
                 icon: ShieldCheck,
@@ -885,7 +885,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             <ul className="space-y-3 text-body">
               <li className="flex items-start">
                 <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                <span>Holen Sie mindestens drei Offerten ein</span>
+                <span>Holen Sie mindestens vier Offerten ein</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
