@@ -1,14 +1,31 @@
 ﻿'use client'
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Calendar, Folder, Home, ChevronRight, ArrowLeft } from 'lucide-react';
+import { Calendar, Folder, Home, ChevronRight, ArrowLeft, List, ChevronDown, ChevronUp } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import PostSidebar from '@/src/components/tools/PostSidebar';
+
+// Almanca karakterleri dönüştürüp URL-uyumlu slug oluşturur
+const generateHeadingSlug = (text: string): string => {
+    return text
+        .toLowerCase()
+        .replace(/[äÄ]/g, 'ae')
+        .replace(/[öÖ]/g, 'oe')
+        .replace(/[üÜ]/g, 'ue')
+        .replace(/[ß]/g, 'ss')
+        .replace(/<[^>]*>/g, '')       // HTML tag'lerini temizle
+        .replace(/&[^;]+;/g, '')       // HTML entity'leri temizle
+        .replace(/[^a-z0-9\s-]/g, '')  // Özel karakterleri kaldır
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+};
 
 interface PostPageClientProps {
     initialPost?: any;
@@ -18,11 +35,76 @@ interface PostPageClientProps {
 const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClientProps) => {
     const params = useParams();
     const slug = params?.slug as string | undefined;
+    const [isMobileTocOpen, setIsMobileTocOpen] = useState(false);
     
     const ratgeberBasePath = '/ratgeber';
 
     const post = initialPost;
     const recentPosts = initialRecentPosts;
+
+    // İçerikten h2 ve h3 başlıklarını çıkar → Inhaltsverzeichnis için
+    const tableOfContents = useMemo(() => {
+        if (!post?.content) return [];
+
+        const headings: Array<{ id: string; title: string; level: number }> = [];
+        const usedIds: Record<string, number> = {};
+
+        const addHeading = (text: string, level: number) => {
+            const plainText = text.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '').trim();
+            if (!plainText) return;
+            let slug = generateHeadingSlug(plainText);
+            if (!slug) return;
+            if (usedIds[slug]) {
+                usedIds[slug]++;
+                slug = `${slug}-${usedIds[slug]}`;
+            } else {
+                usedIds[slug] = 1;
+            }
+            headings.push({ id: slug, title: plainText, level });
+        };
+
+        if (typeof post.content === 'string') {
+            // HTML string → regex ile sadece h2 başlıkları bul
+            const regex = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+            let match;
+            while ((match = regex.exec(post.content)) !== null) {
+                addHeading(match[1], 2);
+            }
+        } else if (typeof post.content === 'object' && post.content.content) {
+            // TipTap JSON → node'lardan sadece h2 başlıkları çıkar
+            post.content.content.forEach((node: any) => {
+                if (node.type === 'heading' && node.attrs?.level === 2) {
+                    let text = '';
+                    if (node.content) {
+                        node.content.forEach((child: any) => {
+                            if (child.type === 'text') text += child.text;
+                        });
+                    }
+                    addHeading(text, 2);
+                }
+            });
+        }
+
+        // FAQ bölümü varsa başlığını en alta ekle
+        if (post.faq && Array.isArray(post.faq) && post.faq.length > 0 && post.faq.some((faq: any) => faq.question?.trim() && faq.answer?.trim())) {
+            const faqTitle = post.faq_title && post.faq_title.trim() ? post.faq_title.trim() : 'Häufige Fragen (FAQ)';
+            addHeading(faqTitle, 2);
+        }
+
+        return headings;
+    }, [post?.content, post?.faq, post?.faq_title]);
+
+    // Mobil TOC'tan tıklayınca smooth scroll (header + sticky TOC yüksekliği kadar offset)
+    const handleMobileTocClick = (e: React.MouseEvent, id: string) => {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        if (element) {
+            const yOffset = -130; // header (64px) + sticky TOC bar (~48px) + boşluk
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+            setIsMobileTocOpen(false);
+        }
+    };
 
     if (!post) {
         return (
@@ -55,6 +137,47 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
                     <ChevronRight className="h-4 w-4 mx-1.5" />
                     <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</span>
                 </nav>
+
+                {/* Mobil Inhaltsverzeichnis — sadece mobilde, makale üstünde */}
+                {tableOfContents.length > 0 && (
+                    <div className="lg:hidden sticky top-16 z-40 bg-white border-b border-gray-200 shadow-sm mb-6 rounded-lg mobile-toc-container">
+                        <div className="px-4">
+                            <button
+                                onClick={() => setIsMobileTocOpen(!isMobileTocOpen)}
+                                className="w-full flex items-center justify-between py-3 text-left hover:bg-gray-50 transition-colors"
+                            >
+                                <span className="flex items-center gap-2 font-semibold text-gray-900">
+                                    <List className="w-5 h-5 text-gray-700" />
+                                    Inhaltsverzeichnis
+                                </span>
+                                {isMobileTocOpen ? (
+                                    <ChevronUp className="w-5 h-5 text-gray-600" />
+                                ) : (
+                                    <ChevronDown className="w-5 h-5 text-gray-600" />
+                                )}
+                            </button>
+
+                            {isMobileTocOpen && (
+                                <div className="py-3 border-t border-gray-200 max-h-[60vh] overflow-y-auto">
+                                    <nav className="space-y-1">
+                                        {tableOfContents.map((item) => (
+                                            <a
+                                                key={item.id}
+                                                href={`#${item.id}`}
+                                                onClick={(e) => handleMobileTocClick(e, item.id)}
+                                                className={`block py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors ${
+                                                    item.level === 3 ? 'pl-6 pr-3' : 'px-3'
+                                                }`}
+                                            >
+                                                {item.title}
+                                            </a>
+                                        ))}
+                                    </nav>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
 
                 <div className="min-w-0">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -92,7 +215,10 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
                                     className="mt-16 pt-12 border-t border-gray-200"
                                 >
                                     <div className="text-left mb-12">
-                                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                                        <h2
+                                            id={generateHeadingSlug(post.faq_title && post.faq_title.trim() ? post.faq_title.trim() : 'Häufige Fragen (FAQ)')}
+                                            className="text-2xl md:text-3xl font-bold text-gray-900 mb-2"
+                                        >
                                                 {post.faq_title && post.faq_title.trim() ? post.faq_title.trim() : 'Häufige Fragen (FAQ)'}
                                             </h2>
                                         <p className="text-base text-gray-600">
@@ -143,6 +269,8 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
                             tags={post.tags}
                             recentPosts={recentPosts}
                             ratgeberBasePath={ratgeberBasePath}
+                            tableOfContents={tableOfContents}
+                            hideMobileTOC={true}
                         />
                     </aside>
                     </div>

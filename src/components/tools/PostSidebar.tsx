@@ -8,6 +8,7 @@ import { Tag, Folder, Clock, Sparkles, ArrowRight, List, ChevronDown, ChevronUp 
 interface TableOfContentsItem {
   id: string;
   title: string;
+  level?: number; // 2 veya 3 (h3 için girinti)
 }
 
 interface PostSidebarProps {
@@ -16,6 +17,7 @@ interface PostSidebarProps {
   recentPosts?: any[];
   ratgeberBasePath?: string;
   tableOfContents?: TableOfContentsItem[];
+  hideMobileTOC?: boolean; // PostPageClient mobil TOC'u kendisi render ediyorsa true
 }
 
 const PostSidebar: React.FC<PostSidebarProps> = ({ 
@@ -23,7 +25,8 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
   tags, 
   recentPosts, 
   ratgeberBasePath = '/ratgeber', 
-  tableOfContents 
+  tableOfContents,
+  hideMobileTOC = false 
 }) => {
   const [activeSection, setActiveSection] = React.useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -131,28 +134,30 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
   };
 
   const TableOfContentsNav = () => (
-            <nav className="space-y-1">
+    <nav className="space-y-1">
       {tableOfContents?.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                  className={`block py-2 px-3 rounded-md text-sm transition-colors ${
-                    activeSection === item.id
-                      ? 'bg-green-100 text-green-700 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                  }`}
-                >
-                  {item.title}
-                </a>
-              ))}
-            </nav>
+        <a
+          key={item.id}
+          href={`#${item.id}`}
+          onClick={(e) => handleNavClick(e, item.id)}
+          className={`block py-2 rounded-md text-sm transition-colors ${
+            item.level === 3 ? 'pl-6 pr-3' : 'px-3'
+          } ${
+            activeSection === item.id
+              ? 'bg-green-100 text-green-700 font-semibold'
+              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+          }`}
+        >
+          {item.title}
+        </a>
+      ))}
+    </nav>
   );
 
   return (
     <>
       {/* Mobile TOC - Becomes Sticky After First H2 */}
-      {tableOfContents && tableOfContents.length > 0 && (
+      {!hideMobileTOC && tableOfContents && tableOfContents.length > 0 && (
         <div 
           className={`lg:hidden z-40 bg-white border-b border-gray-200 shadow-sm mb-6 mobile-toc-container transition-all duration-300 ${
             isTOCSticky ? 'sticky top-16' : 'relative'
@@ -186,9 +191,9 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
 
       {/* Sidebar - Desktop: sticky, Mobile: below article */}
       <aside className="lg:sticky lg:top-24 space-y-8 mt-8 lg:mt-0">
-        {/* Table of Contents */}
+        {/* Table of Contents - Desktop Only (mobil TOC PostPageClient'tan render edilir) */}
         {tableOfContents && tableOfContents.length > 0 && (
-          <Card className="bg-gray-50 border-gray-200">
+          <Card className="hidden lg:block bg-gray-50 border-gray-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <List className="w-5 h-5 text-gray-700" />

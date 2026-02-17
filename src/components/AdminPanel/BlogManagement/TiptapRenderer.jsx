@@ -108,14 +108,56 @@ const TiptapRenderer = ({ jsonContent }) => {
     );
   };
 
+  // Başlıklara otomatik id attribute ekle (anchor navigation + TOC için)
+  // h2, h3 başlıklarına URL-uyumlu slug ID'si eklenir
+  const addAnchorIds = (html) => {
+    if (!html) return html;
+    const usedIds = {};
+
+    return html.replace(/<(h[23])([^>]*)>([\s\S]*?)<\/h[23]>/gi, (match, tag, attrs, content) => {
+      // Zaten id varsa dokunma
+      if (/\bid=/.test(attrs)) return match;
+
+      // HTML tag'lerini ve entity'leri temizle → düz metin
+      const plainText = content.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '').trim();
+      if (!plainText) return match;
+
+      // Almanca karakterleri dönüştür ve URL-uyumlu slug oluştur
+      let slug = plainText
+        .toLowerCase()
+        .replace(/[äÄ]/g, 'ae')
+        .replace(/[öÖ]/g, 'oe')
+        .replace(/[üÜ]/g, 'ue')
+        .replace(/[ß]/g, 'ss')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+
+      if (!slug) return match;
+
+      // Aynı slug varsa sonuna numara ekle (tekil olsun)
+      if (usedIds[slug]) {
+        usedIds[slug]++;
+        slug = `${slug}-${usedIds[slug]}`;
+      } else {
+        usedIds[slug] = 1;
+      }
+
+      return `<${tag}${attrs} id="${slug}">${content}</${tag}>`;
+    });
+  };
+
   // Tüm HTML dönüşümlerini sırayla uygula
   const processHtml = (html) => {
     let processed = html;
     processed = cleanBrokenHeadingClasses(processed);  // 1. Bozuk class'ları temizle
-    processed = addStandardClasses(processed);          // 2. Standart class'ları ekle
-    processed = fixInternalLinks(processed);            // 3. İç linklerden nofollow kaldır
-    processed = fixOldUrls(processed);                  // 4. Eski URL'leri güncelle
-    processed = wrapTablesInScrollableContainer(processed); // 5. Tabloları sarmala
+    processed = addAnchorIds(processed);                // 2. Başlıklara id ekle (class'lardan önce)
+    processed = addStandardClasses(processed);          // 3. Standart class'ları ekle
+    processed = fixInternalLinks(processed);            // 4. İç linklerden nofollow kaldır
+    processed = fixOldUrls(processed);                  // 5. Eski URL'leri güncelle
+    processed = wrapTablesInScrollableContainer(processed); // 6. Tabloları sarmala
     return processed;
   };
 

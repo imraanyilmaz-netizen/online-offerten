@@ -3,9 +3,9 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tag, Folder, Clock, Sparkles, ArrowRight, List } from 'lucide-react';
+import { Tag, Folder, Clock, Sparkles, ArrowRight, List, ChevronDown, ChevronUp } from 'lucide-react';
 
-const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgeber', tableOfContents = [] }) => {
+const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgeber', tableOfContents = [], hideMobileTOC = false }) => {
   const [activeSection, setActiveSection] = React.useState('');
 
   React.useEffect(() => {
@@ -58,9 +58,9 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
 
   return (
     <aside className="sticky top-24 space-y-8">
-      {/* Table of Contents */}
+      {/* Table of Contents - Desktop Only */}
       {tableOfContents && tableOfContents.length > 0 && (
-        <Card className="bg-gray-50 border-gray-200">
+        <Card className="hidden lg:block bg-gray-50 border-gray-200">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
               <List className="w-5 h-5 text-gray-700" />
@@ -74,7 +74,9 @@ const PostSidebar = ({ category, tags, recentPosts, ratgeberBasePath = '/ratgebe
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(e, item.id)}
-                  className={`block py-2 px-3 rounded-md text-sm transition-colors ${
+                  className={`block py-2 rounded-md text-sm transition-colors ${
+                    item.level === 3 ? 'pl-6 pr-3' : 'px-3'
+                  } ${
                     activeSection === item.id
                       ? 'bg-green-100 text-green-700 font-semibold'
                       : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
