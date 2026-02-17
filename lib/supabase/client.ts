@@ -8,6 +8,49 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 // Cookie name format: sb-<project-ref>-auth-token
 const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
+// Max cookie chunk size (leave room for name + attributes ~200 bytes)
+const MAX_COOKIE_CHUNK = 3500
+
+// Helper: clear all split cookie chunks + base cookie
+function clearAllCookieChunks() {
+  const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
+  const expireStr = 'Thu, 01 Jan 1970 00:00:00 GMT'
+  // Clear base cookie
+  document.cookie = `${COOKIE_NAME}=; path=/; expires=${expireStr}; SameSite=Lax; ${secureFlag}`
+  // Clear up to 10 chunks (more than enough)
+  for (let i = 0; i < 10; i++) {
+    document.cookie = `${COOKIE_NAME}.${i}=; path=/; expires=${expireStr}; SameSite=Lax; ${secureFlag}`
+  }
+}
+
+// Helper: set cookie with automatic splitting for large values
+function setCookieWithSplit(value: string) {
+  const encoded = encodeURIComponent(value)
+  const expires = new Date()
+  expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
+  const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
+  const expStr = expires.toUTCString()
+
+  // Always clear old chunks first to prevent stale data
+  clearAllCookieChunks()
+
+  if (encoded.length <= MAX_COOKIE_CHUNK) {
+    // Fits in a single cookie — use base name (middleware checks this first)
+    document.cookie = `${COOKIE_NAME}=${encoded}; path=/; expires=${expStr}; SameSite=Lax; ${secureFlag}`
+  } else {
+    // Split into numbered chunks: .0, .1, .2, ...
+    let offset = 0
+    let index = 0
+    while (offset < encoded.length) {
+      const chunk = encoded.substring(offset, offset + MAX_COOKIE_CHUNK)
+      document.cookie = `${COOKIE_NAME}.${index}=${chunk}; path=/; expires=${expStr}; SameSite=Lax; ${secureFlag}`
+      offset += MAX_COOKIE_CHUNK
+      index++
+    }
+    console.log('[Supabase Storage] Cookie split into', index, 'chunks (total encoded:', encoded.length, 'bytes)')
+  }
+}
+
 // Custom storage that syncs between localStorage and cookies
 // Always returns a storage object to prevent Supabase warnings
 const createCookieStorage = () => {
@@ -28,56 +71,27 @@ const createCookieStorage = () => {
       
       // If session exists in localStorage but not in cookie, sync it
       if (value && key === COOKIE_NAME) {
-        // Check if cookie exists
-        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-          const [name, ...rest] = cookie.trim().split('=')
-          if (name && rest.length > 0) {
-            acc[name] = decodeURIComponent(rest.join('='))
-          }
-          return acc
-        }, {} as Record<string, string>)
-        
-        // If cookie doesn't exist or is different, sync it
-        if (!cookies[key] || cookies[key] !== value) {
-          const expires = new Date()
-          expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
-          const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
-          document.cookie = `${key}=${encodeURIComponent(value)}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-          console.log('[Supabase Storage] Cookie synced from localStorage:', { 
-            key, 
-            hadCookie: !!cookies[key], 
-            cookieDifferent: cookies[key] !== value,
-            cookieSet: true 
-          })
-        }
+        setCookieWithSplit(value)
       }
       
       return value
     },
     setItem: (key: string, value: string): void => {
-      console.log('[Supabase Storage] setItem called:', { key, valueLength: value?.length })
-      
       // Store in localStorage (primary storage)
       localStorage.setItem(key, value)
       
-      // Also sync to cookie for middleware
+      // Also sync to cookie for middleware (with automatic splitting)
       if (key === COOKIE_NAME) {
-        const expires = new Date()
-        expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
-        const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
-        const cookieString = `${key}=${encodeURIComponent(value)}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-        document.cookie = cookieString
-        console.log('[Supabase Storage] Cookie synced:', { key, cookieSet: true, expires: expires.toUTCString() })
+        setCookieWithSplit(value)
       }
     },
     removeItem: (key: string): void => {
       // Remove from localStorage
       localStorage.removeItem(key)
       
-      // Also remove cookie
+      // Also remove all cookie chunks
       if (key === COOKIE_NAME) {
-        const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
-        document.cookie = `${key}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; ${secureFlag}`
+        clearAllCookieChunks()
       }
     },
   }
