@@ -22,9 +22,6 @@ export const revalidate = 0
 export const metadata: Metadata = {
   title: 'AdminDashboardPage - Online-Offerten.ch',
   description: '',
-  alternates: {
-    canonical: 'https://online-offerten.ch/admin-dashboard',
-  },
   robots: {
     index: false,
     follow: false,

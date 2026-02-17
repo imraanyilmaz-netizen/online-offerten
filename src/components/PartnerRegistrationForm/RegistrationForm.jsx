@@ -337,41 +337,30 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         
         // Update partners table with logo_url (retry mechanism in case record doesn't exist yet)
         if (logoUrl && data.user.id) {
-          const updatePartnersTable = async (retries = 3) => {
-            for (let i = 0; i < retries; i++) {
-              try {
-                // Try to update first
-                const { error: updateError } = await customSupabase
-                  .from('partners')
-                  .update({ logo_url: logoUrl })
-                  .eq('id', data.user.id);
-                
-                // If update succeeds or record doesn't exist yet, wait and retry
-                if (updateError && updateError.message.includes('No rows')) {
-                  if (i < retries - 1) {
-                    await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // Wait 1s, 2s, 3s
-                    continue;
-                  }
-                } else if (!updateError) {
-                  // Successfully updated
-                  break;
-                } else {
-                  console.error('Error updating partners table with logo_url:', updateError);
-                  break;
-                }
-              } catch (err) {
-                console.error('Error updating partners table:', err);
-                if (i < retries - 1) {
-                  await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
-                }
+          const maxRetries = 5;
+          for (let i = 0; i < maxRetries; i++) {
+            try {
+              // Wait before first attempt to give DB trigger time to create partners record
+              await new Promise(resolve => setTimeout(resolve, 1500 * (i + 1)));
+              
+              const { data: updateData, error: updateError, count } = await customSupabase
+                .from('partners')
+                .update({ logo_url: logoUrl })
+                .eq('id', data.user.id)
+                .select();
+              
+              if (!updateError && updateData && updateData.length > 0) {
+                console.log('✅ Partners table updated with logo_url successfully');
+                break;
+              } else if (updateError) {
+                console.warn(`⚠️ Logo update attempt ${i + 1}/${maxRetries}:`, updateError.message);
+              } else {
+                console.warn(`⚠️ Logo update attempt ${i + 1}/${maxRetries}: No rows updated (record may not exist yet)`);
               }
+            } catch (err) {
+              console.error(`❌ Logo update attempt ${i + 1}/${maxRetries} error:`, err);
             }
-          };
-          
-          // Start update process (non-blocking)
-          updatePartnersTable().catch(err => {
-            console.error('Failed to update partners table with logo_url:', err);
-          });
+          }
         }
         
         setSubmitted(true);

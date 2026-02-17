@@ -18,6 +18,7 @@ Disallow: /update-password
 Disallow: /email-confirmed
 Disallow: /post
 Disallow: /bewertung/
+Disallow: /anfrage-status
 
 # Allow important pages
 Allow: /partner-suche

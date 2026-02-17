@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   title: 'PostPage - Online-Offerten.ch',
   description: '',
   
-  alternates: {
-    canonical: 'https://online-offerten.ch/post',
-  },
   robots: {
     index: false,
     follow: false,

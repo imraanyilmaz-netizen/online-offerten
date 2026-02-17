@@ -359,14 +359,14 @@ const UmzugsfirmaVergleichenPageClient = () => {
                         <p className="font-semibold text-gray-900">{feature.title}</p>
                         <p className="text-sm text-gray-600">{feature.description}</p>
                       </div>
-                    </div>
-                  ))}
+                  </div>
+                ))}
                 </div>
+              </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* ===== DER WEG ZUM STRESSFREIEN UMZUG ===== */}
       <section className="py-12 md:py-16 bg-white">
@@ -379,7 +379,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
               </div>
               <h2 className="heading-2 !mt-0">
                 Der Weg zum stressfreien Umzug beginnt mit dem richtigen Vergleich
-              </h2>
+            </h2>
               <p className="text-body mb-6">
                 Ein Umzug in der Schweiz kostet durchschnittlich zwischen <strong>1&apos;500 und 4&apos;000 CHF</strong> – je nach Wohnungsgrösse und Distanz. Das Problem: Bei über 500 aktiven Umzugsfirmen schweizweit variieren die Preise für identische Leistungen um bis zu <strong>800 CHF</strong>. Ohne systematischen Vergleich zahlen Sie schnell zu viel oder landen bei einem Anbieter, dessen Service nicht Ihren Erwartungen entspricht.
               </p>
@@ -401,7 +401,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             </div>
           </div>
         </div>
-      </section>
+          </section>
 
       {/* ===== WARUM VERGLEICHEN SINNVOLL IST ===== */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -440,18 +440,18 @@ const UmzugsfirmaVergleichenPageClient = () => {
               },
             ].map((item, index) => (
               <Card key={index} className="bg-white shadow-md hover:shadow-lg transition-shadow border-2 border-gray-100 hover:border-green-200">
-                <CardHeader>
+                      <CardHeader>
                   <CardTitle className="flex items-center gap-3 text-lg font-bold text-gray-900">
                     <div className="p-2 rounded-lg bg-green-100">
                       <item.icon className="w-6 h-6 text-green-600" />
-                    </div>
-                    {item.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+                          </div>
+                            {item.title}
+                          </CardTitle>
+                      </CardHeader>
+                      <CardContent>
                   <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
-                </CardContent>
-              </Card>
+                      </CardContent>
+                    </Card>
             ))}
           </div>
 
@@ -459,16 +459,16 @@ const UmzugsfirmaVergleichenPageClient = () => {
             <p className="text-body italic">
               Mit einem strukturierten Vergleich verwandeln Sie die stressige Suche nach dem richtigen Umzugsservice in einen überschaubaren Prozess mit klarem Ergebnis.
             </p>
-          </div>
-        </div>
-      </section>
+                  </div>
+            </div>
+          </section>
 
       {/* ===== WIE FUNKTIONIERT EIN UMZUGSVERGLEICH (5 Schritte) ===== */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <h2 className="heading-2">
             Wie funktioniert ein Umzugsvergleich in der Schweiz
-          </h2>
+            </h2>
           <p className="text-body mb-10">Ein effektiver Vergleich folgt einem klaren Ablauf in fünf Schritten:</p>
 
           <div className="space-y-6 mb-10">
@@ -507,8 +507,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
               <div key={index} className="flex gap-4 md:gap-6 items-start">
                 <div className="flex-shrink-0">
                   <div className="bg-green-600 text-white rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-xl font-bold shadow-lg">
-                    {step.number}
-                  </div>
+                        {step.number}
+                      </div>
                 </div>
                 <div className="flex-1 bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
                   <div className="flex items-center gap-3 mb-2">
@@ -516,8 +516,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     <h3 className="text-lg font-bold text-gray-900">{step.title}</h3>
                   </div>
                   <p className="text-body">{step.description}</p>
-                </div>
-              </div>
+                      </div>
+                    </div>
             ))}
           </div>
 
@@ -532,10 +532,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
             </p>
             <p className="text-body">
               Insgesamt sind Vergleichsplattformen ein wertvolles Werkzeug, um Umzugsservices in der Schweiz effizient und sicher zu vergleichen und den besten Anbieter für Ihren Umzug zu finden.
-            </p>
-          </div>
-        </div>
-      </section>
+                    </p>
+                  </div>
+            </div>
+          </section>
 
       {/* ===== KOSTENÜBERSICHT NACH WOHNUNGSGRÖSSE ===== */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -546,7 +546,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </div>
           <h2 className="heading-2 !mt-0">
             Kostenübersicht nach Wohnungsgrösse
-          </h2>
+            </h2>
           <p className="text-body mb-8">
             Die <Link href="/umzugsfirma/umzugskosten" className="text-green-700 hover:text-green-800 underline font-medium">Umzugskosten in der Schweiz</Link> hängen von mehreren Faktoren ab. Die folgende Übersicht zeigt typische Preisbereiche:
           </p>
@@ -630,7 +630,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 </li>
               </ul>
             </div>
-          </div>
+                      </div>
 
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
             <div className="flex items-start gap-3">
@@ -639,8 +639,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 <strong>Tipp:</strong> Fordern Sie immer einen Festpreis statt Stundenlohn an. So vermeiden Sie unerwartete Mehrkosten, wenn der Umzug länger dauert als geplant.
               </p>
             </div>
-          </div>
-        </div>
+                        </div>
+                      </div>
       </section>
 
       {/* ===== SPEZIALDIENSTLEISTUNGEN UND ZUSATZLEISTUNGEN ===== */}
@@ -709,16 +709,16 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     <h4 className="font-bold text-gray-900">{item.title}</h4>
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                    </CardContent>
+                  </Card>
+              ))}
           </div>
 
           <p className="text-body">
             Die gezielte Auswahl dieser Zusatzleistungen ermöglicht es, den Umzugsservice optimal auf die eigenen Anforderungen abzustimmen. Erfahren Sie mehr über <Link href="/umzugsfirma/spezialtransporte" className="text-green-700 hover:text-green-800 underline font-medium">Spezialtransporte</Link> oder starten Sie jetzt Ihre <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-700 hover:text-green-800 underline font-medium">kostenlose Anfrage</Link>.
           </p>
-        </div>
-      </section>
+            </div>
+          </section>
 
       {/* ===== SERIÖSE UMZUGSFIRMA ERKENNEN ===== */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -915,17 +915,17 @@ const UmzugsfirmaVergleichenPageClient = () => {
               Egal ob <Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-medium">Privatumzug</Link> in <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:text-green-800 underline font-medium">Zürich</Link>, <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-medium">Geschäftsumzug</Link> in <Link href="/umzugsfirma/bern" className="text-green-700 hover:text-green-800 underline font-medium">Bern</Link> oder Zügeln von Kanton zu Kanton: Die Plattform vermittelt neutral zwischen Ihnen und qualifizierten Partnerfirmen, die auf Ihre Art von Umzug spezialisiert sind.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                asChild
-                size="lg"
+                <Button
+                  asChild
+                  size="lg"
                 className="bg-green-600 hover:bg-green-700 text-white font-bold group px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all"
-              >
+                >
                 <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2">
                   Jetzt kostenlose Offerten anfragen
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </div>
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+              </div>
             <div className="mt-4 flex flex-wrap gap-4 text-sm text-green-700">
               <span>🔒 Geprüfte Anbieter</span>
               <span>|</span>
@@ -1036,14 +1036,14 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     <Link key={item.name} href={item.href} className="flex items-center gap-2 text-slate-700 hover:text-green-700 transition-colors py-1.5 px-2 rounded-md hover:bg-green-50 text-sm">
                       <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0" />
                       {item.name}
-                    </Link>
+                  </Link>
                   ))}
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
+              </div>
+            </div>
+          </section>
 
       {/* ===== FAQ SECTION ===== */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
@@ -1107,8 +1107,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 </div>
               </div>
             )}
-          </div>
         </div>
+      </div>
       </section>
     </>
   )

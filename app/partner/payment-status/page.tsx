@@ -10,9 +10,6 @@ export const metadata: Metadata = {
   title: 'Payment Status - Online-Offerten.ch',
   description: 'Zahlungsstatus für Partner-Guthaben',
   
-  alternates: {
-    canonical: 'https://online-offerten.ch/partner/payment-status',
-  },
   robots: {
     index: false,
     follow: false,

@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { X, Truck, Sparkles, Paintbrush, Archive } from 'lucide-react';
@@ -128,14 +127,11 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
                         onClick={() => handleServiceChange(service.id)}
                       >
                         <Checkbox
-                          id={service.id}
                               checked={isServiceSelected}
-                          onCheckedChange={() => handleServiceChange(service.id)}
-                              className="mt-0.5"
+                              className="mt-0.5 pointer-events-none"
                         />
                             <div className="grid gap-1 flex-1">
-                              <Label 
-                            htmlFor={service.id} 
+                              <span
                                 className={`font-semibold cursor-pointer flex items-center ${
                                   isServiceSelected ? 'text-green-800' : 'text-slate-800'
                                 }`}
@@ -144,7 +140,7 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
                               <service.icon className={`w-4 h-4 mr-2 ${isServiceSelected ? 'text-green-600' : 'text-slate-500'}`} />
                             )}
                             {service.label}
-                          </Label>
+                          </span>
                               {service.desc && (
                                 <p className={`text-xs ${isServiceSelected ? 'text-green-700' : 'text-slate-500'}`}>
                                   {service.desc}

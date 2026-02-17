@@ -5,9 +5,6 @@ import LoginPageClient from '@/components/pages/LoginPageClient'
 export const metadata: Metadata = {
   title: 'Partner Login : Online-Offerten.ch',
   description: 'Melden Sie sich als Partner bei Online-Offerten.ch an, um Ihr Dashboard zu nutzen und Ihre Anfragen zu verwalten.',
-  alternates: {
-    canonical: 'https://online-offerten.ch/login',
-  },
   robots: {
     index: false,
     follow: false,

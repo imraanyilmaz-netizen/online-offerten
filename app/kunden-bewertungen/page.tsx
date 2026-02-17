@@ -30,6 +30,17 @@ export const metadata: Metadata = {
     description: 'Verifizierte Kundenbewertungen für Umzugs-, Reinigungs- und Malerfirmen in der Schweiz.',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 // ISR: Sayfa 5 dakikada bir otomatik yenilenecek

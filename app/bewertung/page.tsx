@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   title: 'ReviewPage - Online-Offerten.ch',
   description: '',
   
-  alternates: {
-    canonical: 'https://online-offerten.ch/bewertung',
-  },
   robots: {
     index: false,
     follow: false,

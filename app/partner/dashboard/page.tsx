@@ -22,9 +22,6 @@ export const revalidate = 0
 export const metadata: Metadata = {
   title: 'PartnerDashboardPage - Online-Offerten.ch',
   description: '',
-  alternates: {
-    canonical: 'https://online-offerten.ch/partner/dashboard',
-  },
   robots: {
     index: false,
     follow: false,

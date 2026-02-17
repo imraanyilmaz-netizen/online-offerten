@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   title: 'QuoteStatusPage - Online-Offerten.ch',
   description: '',
   
-  alternates: {
-    canonical: 'https://online-offerten.ch/anfrage-status',
-  },
   robots: {
     index: false,
     follow: false,
