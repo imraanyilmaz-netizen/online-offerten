@@ -94,12 +94,12 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
         return headings;
     }, [post?.content, post?.faq, post?.faq_title]);
 
-    // Mobil TOC'tan tıklayınca smooth scroll (header + sticky TOC yüksekliği kadar offset)
+    // Mobil TOC'tan tıklayınca smooth scroll
     const handleMobileTocClick = (e: React.MouseEvent, id: string) => {
         e.preventDefault();
         const element = document.getElementById(id);
         if (element) {
-            const yOffset = -130; // header (64px) + sticky TOC bar (~48px) + boşluk
+            const yOffset = -80;
             const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
             setIsMobileTocOpen(false);
