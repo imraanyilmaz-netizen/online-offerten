@@ -94,16 +94,20 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
         return headings;
     }, [post?.content, post?.faq, post?.faq_title]);
 
-    // Mobil TOC'tan tıklayınca smooth scroll
+    // Mobil TOC'tan tıklayınca smooth scroll (navbar 64px + TOC bar ~48px = ~120px offset)
     const handleMobileTocClick = (e: React.MouseEvent, id: string) => {
         e.preventDefault();
-        const element = document.getElementById(id);
-        if (element) {
-            const yOffset = -80;
-            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-            setIsMobileTocOpen(false);
-        }
+        // Önce menüyü kapat (yükseklik değişikliği scroll'u etkilemesin)
+        setIsMobileTocOpen(false);
+        // Küçük bir gecikme ile scroll yap (DOM güncellenmesini bekle)
+        setTimeout(() => {
+            const element = document.getElementById(id);
+            if (element) {
+                const yOffset = -130; // navbar (64px) + TOC bar (~48px) + güvenlik marjı
+                const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        }, 100);
     };
 
     if (!post) {
@@ -138,9 +142,9 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
                     <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</span>
                 </nav>
 
-                {/* Mobil Inhaltsverzeichnis — sadece mobilde, makale üstünde (sticky değil) */}
+                {/* Mobil Inhaltsverzeichnis — sadece mobilde, makale üstünde, sticky */}
                 {tableOfContents.length > 0 && (
-                    <div className="lg:hidden bg-white border border-gray-200 shadow-sm mb-6 rounded-lg mobile-toc-container">
+                    <div className="lg:hidden sticky top-[64px] z-40 bg-white border-b border-gray-200 shadow-sm mb-6 rounded-lg mobile-toc-container">
                         <div className="px-4">
                             <button
                                 onClick={() => setIsMobileTocOpen(!isMobileTocOpen)}
@@ -218,6 +222,7 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
                                         <h2
                                             id={generateHeadingSlug(post.faq_title && post.faq_title.trim() ? post.faq_title.trim() : 'Häufige Fragen (FAQ)')}
                                             className="text-2xl md:text-3xl font-bold text-gray-900 mb-2"
+                                            style={{ scrollMarginTop: '120px' }}
                                         >
                                                 {post.faq_title && post.faq_title.trim() ? post.faq_title.trim() : 'Häufige Fragen (FAQ)'}
                                             </h2>

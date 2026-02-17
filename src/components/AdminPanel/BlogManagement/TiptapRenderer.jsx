@@ -145,7 +145,7 @@ const TiptapRenderer = ({ jsonContent }) => {
         usedIds[slug] = 1;
       }
 
-      return `<${tag}${attrs} id="${slug}">${content}</${tag}>`;
+      return `<${tag}${attrs} id="${slug}" style="scroll-margin-top:120px">${content}</${tag}>`;
     });
   };
 
