@@ -138,13 +138,13 @@ const PostPageClient = ({ initialPost, initialRecentPosts = [] }: PostPageClient
                     <span className="font-medium text-gray-700 truncate max-w-[200px] md:max-w-xs">{post.meta_title && post.meta_title.trim() ? post.meta_title.trim() : post.title}</span>
                 </nav>
 
-                {/* Mobil Inhaltsverzeichnis — sadece mobilde, makale üstünde */}
+                {/* Mobil Inhaltsverzeichnis — sadece mobilde, makale üstünde (sticky değil) */}
                 {tableOfContents.length > 0 && (
-                    <div className="lg:hidden sticky top-16 z-40 bg-white border-b border-gray-200 shadow-sm mb-6 rounded-lg mobile-toc-container">
+                    <div className="lg:hidden bg-white border border-gray-200 shadow-sm mb-6 rounded-lg mobile-toc-container">
                         <div className="px-4">
                             <button
                                 onClick={() => setIsMobileTocOpen(!isMobileTocOpen)}
-                                className="w-full flex items-center justify-between py-3 text-left hover:bg-gray-50 transition-colors"
+                                className="w-full flex items-center justify-between py-3 text-left hover:bg-gray-50 transition-colors rounded-lg"
                             >
                                 <span className="flex items-center gap-2 font-semibold text-gray-900">
                                     <List className="w-5 h-5 text-gray-700" />
