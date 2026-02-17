@@ -1,5 +1,5 @@
 ﻿import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 // framer-motion removed - CSS transitions for better INP
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,18 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 
 const NewQuoteConfirmation = ({ onResetForm }) => {
   const { t, i18n } = useTranslation('newCustomerForm');
+
+  // Google Ads Conversion — GTM lead_success event
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'lead_success',
+        value: 1,
+        currency: 'CHF'
+      });
+    }
+  }, []);
 
   // Use existing paths (these pages currently exist only in German)
   const checklistenLink = '/umzugsfirma/checklists';
