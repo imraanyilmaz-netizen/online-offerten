@@ -1,9 +1,9 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush } from 'lucide-react';
+import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush, Clock, Activity } from 'lucide-react';
 // framer-motion removed - CSS for better INP
 import PartnerDetailView from './PartnerDetailView';
 import PartnerEditModal from './PartnerEditModal';
@@ -23,10 +23,54 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
   const [creditingPartner, setCreditingPartner] = useState(null);
   const [updatingStatusId, setUpdatingStatusId] = useState(null);
 
+  const [sortBy, setSortBy] = useState('last_activity');
+
   const mainCategoryConfig = {
     umzug: { icon: Truck, label: 'Umzug' },
     reinigung: { icon: Sparkles, label: 'Reinigung' },
     maler: { icon: Paintbrush, label: 'Maler' },
+  };
+
+  // Helper: relative time in German
+  const getRelativeTime = (dateString) => {
+    if (!dateString) return null;
+    const now = new Date();
+    const date = new Date(dateString);
+    const diffMs = now - date;
+    const diffMin = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMin < 5) return { text: 'Online', color: 'green', isOnline: true };
+    if (diffMin < 60) return { text: `Vor ${diffMin} Min.`, color: 'green', isOnline: false };
+    if (diffHours < 24) return { text: `Vor ${diffHours} Std.`, color: diffHours <= 3 ? 'green' : 'yellow', isOnline: false };
+    if (diffDays < 7) return { text: `Vor ${diffDays} ${diffDays === 1 ? 'Tag' : 'Tagen'}`, color: 'yellow', isOnline: false };
+    if (diffDays < 30) return { text: `Vor ${diffDays} Tagen`, color: 'red', isOnline: false };
+    return { text: `Vor ${Math.floor(diffDays / 30)} Mon.`, color: 'red', isOnline: false };
+  };
+
+  const ActivityBadge = ({ lastActivity }) => {
+    const activity = getRelativeTime(lastActivity);
+    if (!activity) {
+      return (
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-400">
+          <span className="w-2 h-2 rounded-full bg-gray-300" />
+          Nie eingeloggt
+        </span>
+      );
+    }
+    const colorMap = {
+      green: { dot: 'bg-green-500', text: 'text-green-700', bg: 'bg-green-50' },
+      yellow: { dot: 'bg-yellow-500', text: 'text-yellow-700', bg: 'bg-yellow-50' },
+      red: { dot: 'bg-red-500', text: 'text-red-700', bg: 'bg-red-50' },
+    };
+    const colors = colorMap[activity.color];
+    return (
+      <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${colors.text} ${colors.bg} px-2 py-0.5 rounded-full`}>
+        <span className={`w-2 h-2 rounded-full ${colors.dot} ${activity.isOnline ? 'animate-pulse' : ''}`} />
+        {activity.text}
+      </span>
+    );
   };
 
   const handleUpdateStatus = async (partnerId, newStatus) => {
@@ -65,15 +109,35 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
     return <Badge variant="outline" className={`${config.className} border px-3 py-1`}>{config.label}</Badge>;
   };
 
-  const filteredPartners = partners.filter(partner => {
-    const searchLower = searchTerm.toLowerCase();
-    const matchesSearch = !searchTerm ||
-                         (partner.company_name && partner.company_name.toLowerCase().includes(searchLower)) ||
-                         (partner.name && partner.name.toLowerCase().includes(searchLower)) ||
-                         (partner.email && partner.email.toLowerCase().includes(searchLower));
-    const matchesStatus = statusFilter === 'all' || partner.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
+  const filteredPartners = useMemo(() => {
+    const filtered = partners.filter(partner => {
+      const searchLower = searchTerm.toLowerCase();
+      const matchesSearch = !searchTerm ||
+                           (partner.company_name && partner.company_name.toLowerCase().includes(searchLower)) ||
+                           (partner.name && partner.name.toLowerCase().includes(searchLower)) ||
+                           (partner.email && partner.email.toLowerCase().includes(searchLower));
+      const matchesStatus = statusFilter === 'all' || partner.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+
+    // Sort by selected criteria
+    return filtered.sort((a, b) => {
+      if (sortBy === 'last_activity') {
+        const aTime = a.last_activity ? new Date(a.last_activity).getTime() : 0;
+        const bTime = b.last_activity ? new Date(b.last_activity).getTime() : 0;
+        return bTime - aTime; // Most recently active first
+      }
+      if (sortBy === 'name') {
+        return (a.company_name || a.name || '').localeCompare(b.company_name || b.name || '');
+      }
+      if (sortBy === 'created_at') {
+        const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
+        const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
+        return bTime - aTime;
+      }
+      return 0;
+    });
+  }, [partners, searchTerm, statusFilter, sortBy]);
 
   const getStatusActions = (partner) => {
     const isUpdating = updatingStatusId === partner.id;
@@ -132,6 +196,8 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
         statusFilter={statusFilter} 
         setStatusFilter={setStatusFilter}
         filteredCount={filteredPartners.length}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
       />
       
       {filteredPartners.length > 0 ? (
@@ -153,7 +219,8 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                       <div className="flex items-start justify-between gap-3 mb-3 flex-wrap">
                         <div className="flex items-center gap-3 flex-wrap">
                           <h3 className="text-xl font-bold text-gray-900">{partner.company_name || partner.name}</h3>
-                        {getStatusBadge(partner.status)}
+                          {getStatusBadge(partner.status)}
+                          <ActivityBadge lastActivity={partner.last_activity} />
                         </div>
                       </div>
                       
@@ -210,10 +277,14 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                         </div>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">
-                            <Calendar className="w-4 h-4 text-gray-400" />
-                            <span className="text-xs font-medium text-gray-500">Beitritt</span>
+                            <Activity className="w-4 h-4 text-purple-500" />
+                            <span className="text-xs font-medium text-gray-500">Letzte Aktivität</span>
                           </div>
-                          <span className="text-sm font-bold text-gray-900">{new Date(partner.join_date || partner.created_at).toLocaleDateString('de-DE')}</span>
+                          <span className="text-sm font-bold text-gray-900">
+                            {partner.last_activity 
+                              ? new Date(partner.last_activity).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })
+                              : 'Nie'}
+                          </span>
                         </div>
                       </div>
                     </div>

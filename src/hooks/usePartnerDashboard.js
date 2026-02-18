@@ -73,6 +73,15 @@ export const usePartnerDashboard = (onActionSuccess) => {
       setMissedQuotes(dashboardData.missed_quotes || []);
       setPanelStatus('active');
 
+      // Update last_activity timestamp silently (for admin panel tracking)
+      supabase
+        .from('partners')
+        .update({ last_activity: new Date().toISOString() })
+        .eq('id', user.id)
+        .then(({ error: activityError }) => {
+          if (activityError) console.warn('Could not update last_activity:', activityError.message);
+        });
+
       // Fetch refund requests
       await fetchRefundRequests(user.id);
     } catch (err) {

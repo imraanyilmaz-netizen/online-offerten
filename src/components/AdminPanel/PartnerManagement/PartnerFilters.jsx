@@ -2,9 +2,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Users, Search, Filter } from 'lucide-react';
+import { Users, Search, Filter, ArrowUpDown } from 'lucide-react';
 
-const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilter, filteredCount }) => {
+const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilter, filteredCount, sortBy, setSortBy }) => {
   return (
     <Card className="border border-gray-200 shadow-sm">
       <CardHeader className="pb-4 border-b border-gray-100">
@@ -44,6 +44,19 @@ const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilt
                 <SelectItem value="active">Aktiv</SelectItem>
                 <SelectItem value="inactive">Inaktiv</SelectItem>
                 <SelectItem value="pending">Ausstehend</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="w-full md:w-56">
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="h-11 border-gray-300 focus:border-green-500 focus:ring-green-500">
+                <ArrowUpDown className="w-4 h-4 mr-2 text-gray-500" />
+                <SelectValue placeholder="Sortieren nach" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="last_activity">Letzte Aktivität</SelectItem>
+                <SelectItem value="name">Name (A-Z)</SelectItem>
+                <SelectItem value="created_at">Beitrittsdatum</SelectItem>
               </SelectContent>
             </Select>
           </div>

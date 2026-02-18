@@ -218,7 +218,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                 <div className="space-y-4">
                   <div className="p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
                       <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2 border-b pb-2 mb-4 uppercase">Kundenkontakt</h3>
-                      <ContactItem icon={<User size={16}/>} label="Name" value={`${quote.firstname} ${quote.lastname}`} />
+                      <ContactItem icon={<User size={16}/>} label="Name" value={`${quote.salutation ? quote.salutation + ' ' : ''}${quote.firstname} ${quote.lastname}`} />
                       {(quote.firmenname || quote.company_name) && <ContactItem icon={<Building size={16}/>} label="Firma" value={quote.firmenname || quote.company_name} />}
                       <ContactItem icon={<Phone size={16}/>} label="Telefon" value={quote.phone} />
                       <ContactItem icon={<CalendarDays size={16}/>} label="Telefonische Erreichbarkeit" value={quote.preferredtime} />

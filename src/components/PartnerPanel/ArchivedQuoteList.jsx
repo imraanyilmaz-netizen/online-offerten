@@ -86,7 +86,7 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
                 <div className="space-y-4">
                     <div className="p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
                         <h4 className="text-md font-semibold text-gray-700 mb-2">Kundenkontakt</h4>
-                        <ContactItem icon={<User size={16}/>} label="Name" value={`${quote.firstname} ${quote.lastname}`} />
+                        <ContactItem icon={<User size={16}/>} label="Name" value={`${quote.salutation ? quote.salutation + ' ' : ''}${quote.firstname} ${quote.lastname}`} />
                         <ContactItem icon={<Phone size={16}/>} label="Telefon" value={quote.phone} isLink linkType="tel:" />
                         <ContactItem icon={<Mail size={16}/>} label="E-Mail" value={quote.email} isLink linkType="mailto:" />
                     </div>

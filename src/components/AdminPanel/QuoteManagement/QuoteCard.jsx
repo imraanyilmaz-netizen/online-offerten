@@ -156,9 +156,9 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
               <EmailConfirmationStatus />
             </div>
           </div>
-          <div className="flex items-center gap-2 self-start sm:self-center flex-wrap">
+          <div className="flex flex-col items-end gap-2 self-start sm:self-center">
             {status === 'archived' ? (
-               <>
+               <div className="flex items-center gap-2">
                 <Button size="sm" variant="outline" onClick={() => onRestore(quote.id)}>
                     <Undo2 className="w-4 h-4 mr-2" /> Wiederherstellen
                 </Button>
@@ -166,9 +166,10 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                   <Info className="w-4 h-4 mr-2"/>
                   {isDetailsExpanded ? "Schliessen" : "Details"}
                 </Button>
-              </>
+              </div>
             ) : (
               <>
+                {/* Fiyat satırı */}
                 {(status === 'approved' || status === 'quota_filled') && (
                     <div className="text-right">
                       {isEditingPrice ? (
@@ -211,48 +212,53 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                     </div>
                 )}
                 {status === 'matched' && (
-                    <>
-                        <div className="text-right">
-                            <div className="flex items-center justify-end gap-2">
-                              {discountPercent > 0 && (
-                                <>
-                                  <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
-                                  <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
-                                </>
-                              )}
-                              <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
-                            </div>
-                            <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner</p>
+                    <div className="text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          {discountPercent > 0 && (
+                            <>
+                              <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
+                              <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
+                            </>
+                          )}
+                          <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
                         </div>
-                        <Button size="sm" onClick={() => onSend(quote.id)} disabled={parentIsProcessing}>
-                            {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2" />} 
-                            Senden
-                        </Button>
-                    </>
+                        <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner</p>
+                    </div>
                 )}
-                {(status === 'new_quote' || status === 'pending' || status === 'matched') && (
-                    <Button size="sm" variant={isMatcherExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'matcher')}>
-                        {status === 'new_quote' || status === 'pending' ? <Settings className="w-4 h-4 mr-2"/> : <Edit className="w-4 h-4 mr-2"/> }
-                        {isMatcherExpanded ? "Schliessen" : (status === 'new_quote' || status === 'pending' ? "Zuweisen" : "Zuweisung bearbeiten")}
+                {/* Butonlar satırı */}
+                <div className="flex items-center gap-2 flex-wrap">
+                  {status === 'matched' && (
+                    <Button size="sm" onClick={() => onSend(quote.id)} disabled={parentIsProcessing}>
+                        {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2" />} 
+                        Senden
                     </Button>
-                )}
-                <Button asChild size="sm" variant="outline">
-                  <Link href={`/anfrage-status/${id}`} target="_blank">
-                    <ExternalLink className="w-4 h-4 mr-2"/>
-                    Kundenansicht
-                  </Link>
-                </Button>
-                <Button size="sm" variant={isEditExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'edit')}>
-                  <Pencil className="w-4 h-4 mr-2"/>
-                  {isEditExpanded ? "Schliessen" : "Bearbeiten"}
-                </Button>
-                <Button size="sm" variant={isDetailsExpanded ? "secondary" : "ghost"} onClick={() => onToggleView(quote.id, 'details')}>
-                  <Info className="w-4 h-4 mr-2"/>
-                  {isDetailsExpanded ? "Schliessen" : "Details"}
-                </Button>
-                <Button size="sm" variant="ghost" className="text-gray-500 hover:bg-gray-100" onClick={() => onArchive(quote.id)}>
-                    <Archive className="w-4 h-4"/>
-                </Button>
+                  )}
+                  {(status === 'new_quote' || status === 'pending' || status === 'matched') && (
+                      <Button size="sm" variant={isMatcherExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'matcher')}>
+                          {status === 'new_quote' || status === 'pending' ? <Settings className="w-4 h-4 mr-2"/> : <Edit className="w-4 h-4 mr-2"/> }
+                          {isMatcherExpanded ? "Schliessen" : (status === 'new_quote' || status === 'pending' ? "Zuweisen" : "Zuweisung bearbeiten")}
+                      </Button>
+                  )}
+                  {email_confirmed && (
+                  <Button asChild size="sm" variant="outline">
+                    <Link href={`/anfrage-status/${id}`} target="_blank">
+                      <ExternalLink className="w-4 h-4 mr-2"/>
+                      Kundenansicht
+                    </Link>
+                  </Button>
+                  )}
+                  <Button size="sm" variant={isEditExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'edit')}>
+                    <Pencil className="w-4 h-4 mr-2"/>
+                    {isEditExpanded ? "Schliessen" : "Bearbeiten"}
+                  </Button>
+                  <Button size="sm" variant={isDetailsExpanded ? "secondary" : "ghost"} onClick={() => onToggleView(quote.id, 'details')}>
+                    <Info className="w-4 h-4 mr-2"/>
+                    {isDetailsExpanded ? "Schliessen" : "Details"}
+                  </Button>
+                  <Button size="sm" variant="ghost" className="text-gray-500 hover:bg-gray-100" onClick={() => onArchive(quote.id)}>
+                      <Archive className="w-4 h-4"/>
+                  </Button>
+                </div>
               </>
             )}
           </div>
@@ -278,49 +284,49 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                 )}
               </div>
             </div>
-            <div>
-              <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <Users className="w-4 h-4 text-gray-500"/> 
-                Kaufende Partner ({purchasers.length})
-              </h4>
-              {purchasers.length > 0 ? (
-                <ul className="text-sm text-gray-700 space-y-2">
-                  {purchasers.map(p => (
-                    <li key={p.id} className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0"/>
-                      <span className="font-medium">{p.company_name}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-xs text-gray-500">Noch keine Käufe durch Partner.</p>
-              )}
-            </div>
-            {rejections.length > 0 && (
-            <div className="md:col-span-2 border-t border-gray-200 pt-5 mt-2">
-              <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <X className="w-4 h-4 text-red-500"/> 
-                Ablehnende Partner ({rejections.length})
-              </h4>
-              <ul className="text-sm text-gray-700 space-y-2">
-                {rejections.map((r, idx) => (
-                  <li key={r.id || idx} className="flex items-start gap-2 bg-red-50 border border-red-100 rounded-lg p-3">
-                    <X className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5"/>
-                    <div>
+            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
+                  <Users className="w-4 h-4 text-gray-500"/> 
+                  Kaufende Partner ({purchasers.length})
+                </h4>
+                {purchasers.length > 0 ? (
+                  <div className="flex flex-wrap gap-2">
+                    {purchasers.map(p => (
+                      <div key={p.id} className="inline-flex items-center gap-2 bg-green-50 border border-green-100 rounded-lg px-3 py-2 text-sm">
+                        <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0"/>
+                        <span className="font-medium text-gray-800">{p.company_name}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-gray-500">Noch keine Käufe durch Partner.</p>
+                )}
+              </div>
+              {rejections.length > 0 && (
+              <div>
+                <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
+                  <X className="w-4 h-4 text-red-500"/> 
+                  Ablehnende Partner ({rejections.length})
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {rejections.map((r, idx) => (
+                    <div key={r.id || idx} className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-lg px-3 py-2 text-sm">
+                      <X className="w-3.5 h-3.5 text-red-400 flex-shrink-0"/>
                       <span className="font-medium text-gray-800">{r.company_name}</span>
-                      {r.reason && (
-                        <p className="text-xs text-red-600 mt-1">Grund: {r.reason}</p>
-                      )}
                       {r.created_at && (
-                        <p className="text-xs text-gray-400 mt-0.5">{format(new Date(r.created_at), "dd.MM.yyyy HH:mm", { locale: de })}</p>
+                        <span className="text-xs text-gray-400">{format(new Date(r.created_at), "dd.MM.yyyy HH:mm", { locale: de })}</span>
+                      )}
+                      {r.reason && (
+                        <span className="text-xs text-red-600">({r.reason})</span>
                       )}
                     </div>
-                  </li>
-                ))}
-              </ul>
+                  ))}
+                </div>
+              </div>
+              )}
             </div>
-            )}
-            {(status === 'approved' || status === 'quota_filled') && (
+            {(status === 'approved' || status === 'quota_filled') && isReviewEmailButtonActive && (
             <div className="md:col-span-2 border-t border-gray-200 pt-5 mt-2">
                <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
                  <Star className="w-4 h-4 text-gray-500"/> 
@@ -330,7 +336,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                     <Button 
                         size="sm"
                         onClick={handleSendReviewEmail}
-                        disabled={!isReviewEmailButtonActive || isSendingReviewEmail || reviewSendLimitReached}
+                        disabled={isSendingReviewEmail || reviewSendLimitReached}
                     >
                         {isSendingReviewEmail ? <Loader2 className="w-4 h-4 animate-spin mr-2"/> : <Mail className="w-4 h-4 mr-2"/>}
                         Bewertungslink senden
