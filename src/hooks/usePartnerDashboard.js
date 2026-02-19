@@ -1,7 +1,46 @@
-﻿import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useToast } from '@/components/ui/use-toast';
+
+// 🔔 Bildirim sesi — Web Audio API ile "ting" bell sesi üretir (dosya gereksiz)
+const playNotificationSound = () => {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Ting 1 — yüksek nota
+    const osc1 = ctx.createOscillator();
+    const gain1 = ctx.createGain();
+    osc1.type = 'sine';
+    osc1.frequency.setValueAtTime(1200, ctx.currentTime);
+    osc1.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.15);
+    gain1.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+    osc1.connect(gain1);
+    gain1.connect(ctx.destination);
+    osc1.start(ctx.currentTime);
+    osc1.stop(ctx.currentTime + 0.4);
+
+    // Ting 2 — ikinci nota (0.15s sonra)
+    const osc2 = ctx.createOscillator();
+    const gain2 = ctx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(1500, ctx.currentTime + 0.15);
+    osc2.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime + 0.35);
+    gain2.gain.setValueAtTime(0, ctx.currentTime);
+    gain2.gain.setValueAtTime(0.25, ctx.currentTime + 0.15);
+    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+    osc2.connect(gain2);
+    gain2.connect(ctx.destination);
+    osc2.start(ctx.currentTime + 0.15);
+    osc2.stop(ctx.currentTime + 0.6);
+
+    // AudioContext'i temizle
+    setTimeout(() => ctx.close(), 1000);
+  } catch (e) {
+    // Ses çalamazsa sessizce devam et
+  }
+};
 
 export const usePartnerDashboard = (onActionSuccess) => {
   const { user, session } = useAuth();
@@ -40,10 +79,11 @@ export const usePartnerDashboard = (onActionSuccess) => {
     }
   }, [user]);
 
-  const fetchDashboardData = useCallback(async () => {
+  const fetchDashboardData = useCallback(async (silent = false) => {
     if (!user?.id) return;
 
-    setLoading(true);
+    // Nur beim ersten Laden den Loading-Spinner anzeigen
+    if (!silent) setLoading(true);
     try {
       const { data: dashboardData, error: dashboardError } = await supabase.rpc('get_partner_dashboard_data', {
         p_partner_id: user.id,
@@ -86,10 +126,12 @@ export const usePartnerDashboard = (onActionSuccess) => {
       await fetchRefundRequests(user.id);
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
-      setError(err.message);
-      setPanelStatus('error');
+      if (!silent) {
+        setError(err.message);
+        setPanelStatus('error');
+      }
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   }, [user, fetchRefundRequests]);
 
@@ -165,6 +207,13 @@ export const usePartnerDashboard = (onActionSuccess) => {
           if (isAssignedToPartner && updatedQuote.status === 'approved' && !isRefreshing) {
             console.log('Quote assigned and approved, refreshing dashboard...', updatedQuote.id);
             
+            // 🔔 Bildirim sesi + Toast
+            playNotificationSound();
+            toast({
+              title: '🔔 Neue Anfrage!',
+              description: 'Eine neue Anfrage ist für Sie verfügbar.',
+            });
+
             // Debounce: clear existing timeout and set a new one
             if (timeoutId) {
               clearTimeout(timeoutId);
@@ -174,7 +223,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
             timeoutId = setTimeout(async () => {
               isRefreshing = true;
               try {
-                await fetchDashboardData();
+                await fetchDashboardData(true); // silent: kein Loading-Spinner
               } finally {
                 isRefreshing = false;
               }
@@ -209,7 +258,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
 
       if (data.success) {
         toast({ title: 'Erfolg!', description: data.message });
-        await fetchDashboardData();
+        await fetchDashboardData(true);
         setRefreshKey((prev) => prev + 1);
         scrollToTop();
         if (onActionSuccess) onActionSuccess('purchased');
@@ -232,7 +281,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
       if (error) throw error;
 
       toast({ title: 'Erfolg', description: 'Anfrage erfolgreich abgelehnt.' });
-      await fetchDashboardData();
+      await fetchDashboardData(true);
       scrollToTop();
       if (onActionSuccess) onActionSuccess('available');
     } catch (error) {
@@ -299,7 +348,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
       if (error) throw error;
 
       toast({ title: 'Erfolg', description: 'Anfrage erfolgreich archiviert.' });
-      await fetchDashboardData();
+      await fetchDashboardData(true);
       scrollToTop();
       if (onActionSuccess) onActionSuccess('archived');
     } catch (error) {
@@ -317,7 +366,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
       if (error) throw error;
 
       toast({ title: 'Erfolg', description: 'Anfrage erfolgreich dearchiviert.' });
-      await fetchDashboardData();
+      await fetchDashboardData(true);
       scrollToTop();
       if (onActionSuccess) onActionSuccess('purchased');
     } catch (error) {
@@ -340,7 +389,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
       if (error) throw error;
 
       toast({ title: 'Erfolg', description: 'Rückerstattungsanfrage wurde erfolgreich gesendet.' });
-      await fetchDashboardData();
+      await fetchDashboardData(true);
     } catch (error) {
       toast({ title: 'Fehler', description: error.message, variant: 'destructive' });
     }

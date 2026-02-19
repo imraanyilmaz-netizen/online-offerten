@@ -36,7 +36,7 @@ const PartnerPanel = ({ setCompanyName }) => {
 
   const handleActionSuccess = (tab) => {
     if(tab) setActiveTab(tab);
-    fetchDashboardData();
+    fetchDashboardData(true); // silent: kein Loading-Spinner
   };
 
   const {
@@ -73,7 +73,7 @@ const PartnerPanel = ({ setCompanyName }) => {
   useEffect(() => {
     const fromPayment = sessionStorage.getItem('fromPayment');
     if (fromPayment === 'true') {
-      fetchDashboardData();
+      fetchDashboardData(true); // silent: kein Loading-Spinner
       sessionStorage.removeItem('fromPayment');
     }
   }, [fetchDashboardData]);
