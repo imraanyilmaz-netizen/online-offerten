@@ -566,7 +566,7 @@ const OffertenPortalPageClient = () => {
             <li><Link href="/reinigung/fensterreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Fensterreinigung</Link>: Streifenfreie Sauberkeit für Fenster, Rahmen und Storen.</li>
             <li><Link href="/reinigung/bueroreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Büroreinigung</Link>: Regelmässige Unterhaltsreinigung für saubere und repräsentative Geschäftsräume.</li>
             <li><Link href="/reinigung/baureinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Baureinigung</Link>: Professionelle Reinigung nach Neu- oder Umbauten für einen sauberen Start.</li>
-          </ul>
+                    </ul>
           <p className="text-body">Mehr Informationen finden Sie auf unserer Reinigungskosten-Seite.</p>
                 </div>
             </section>

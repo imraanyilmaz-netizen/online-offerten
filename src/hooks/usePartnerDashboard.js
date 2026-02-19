@@ -157,13 +157,12 @@ export const usePartnerDashboard = (onActionSuccess) => {
           const updatedQuote = payload.new;
           const oldQuote = payload.old;
           
-          // Check if this quote is assigned to this partner and status changed to 'approved'
+          // Check if this quote is assigned to this partner and is approved
+          // Covers both: initial send (status → approved) AND nachsenden (assigned_partner_ids updated)
           const isAssignedToPartner = Array.isArray(updatedQuote.assigned_partner_ids) && 
                                       updatedQuote.assigned_partner_ids.includes(partnerId);
-          const statusChangedToApproved = updatedQuote.status === 'approved' && 
-                                         oldQuote?.status !== 'approved';
           
-          if (isAssignedToPartner && statusChangedToApproved && !isRefreshing) {
+          if (isAssignedToPartner && updatedQuote.status === 'approved' && !isRefreshing) {
             console.log('Quote assigned and approved, refreshing dashboard...', updatedQuote.id);
             
             // Debounce: clear existing timeout and set a new one

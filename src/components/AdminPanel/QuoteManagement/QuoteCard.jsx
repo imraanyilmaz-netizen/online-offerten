@@ -1,16 +1,17 @@
 ﻿import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Settings, Send, Edit, Info, Archive, Undo2, ShoppingCart, Users, MapPin, CheckCircle, Pencil, X, Loader2, ExternalLink, Mail, Star } from 'lucide-react';
+import { Settings, Send, Edit, Info, Archive, Undo2, ShoppingCart, Users, MapPin, CheckCircle, Pencil, X, Loader2, ExternalLink, Mail, Star, ChevronDown, ChevronUp, Building2, UserPlus, Plus, Search, GripHorizontal } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { format, isAfter, subDays } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
 
-const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing }) => {
+const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing, allPartners = [], onSendToAdditionalPartners }) => {
   const { id, from_city, to_city, servicetype, created_at, status, lead_price, assigned_partner_ids, purchase_quota, partner_target_regions, email_confirmed, email_confirmed_at, move_date, review_email_sent_at, review_email_sent_count } = quote;
   const formattedDate = format(new Date(created_at), "d MMM yyyy, HH:mm", { locale: de });
   const { toast } = useToast();
@@ -18,6 +19,93 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const [isEditingPrice, setIsEditingPrice] = useState(false);
   const [newPrice, setNewPrice] = useState(lead_price);
   const [isSendingReviewEmail, setIsSendingReviewEmail] = useState(false);
+  const [showAssignedPartners, setShowAssignedPartners] = useState(false);
+  const [showAddPartner, setShowAddPartner] = useState(false);
+  const [selectedNewPartnerIds, setSelectedNewPartnerIds] = useState(new Set());
+  const [isSendingAdditional, setIsSendingAdditional] = useState(false);
+  const [partnerSearchTerm, setPartnerSearchTerm] = useState('');
+  const [listHeight, setListHeight] = useState(192); // default max-h-48 = 192px
+  const isDragging = useRef(false);
+  const startY = useRef(0);
+  const startHeight = useRef(0);
+  const listRef = useRef(null);
+
+  // Sektör-Label Helper
+  const getCategoryLabel = (categories) => {
+    if (!categories || categories.length === 0) return null;
+    const labelMap = { umzug: 'Umzug', reinigung: 'Reinigung', maler: 'Maler' };
+    return categories.map(c => labelMap[c] || c).join(', ');
+  };
+
+  // Drag-to-resize Handler
+  const handleDragStart = useCallback((e) => {
+    e.preventDefault();
+    isDragging.current = true;
+    startY.current = e.clientY || e.touches?.[0]?.clientY || 0;
+    startHeight.current = listHeight;
+
+    const handleDragMove = (ev) => {
+      if (!isDragging.current) return;
+      const clientY = ev.clientY || ev.touches?.[0]?.clientY || 0;
+      const diff = clientY - startY.current;
+      const newHeight = Math.max(120, Math.min(600, startHeight.current + diff));
+      setListHeight(newHeight);
+    };
+
+    const handleDragEnd = () => {
+      isDragging.current = false;
+      document.removeEventListener('mousemove', handleDragMove);
+      document.removeEventListener('mouseup', handleDragEnd);
+      document.removeEventListener('touchmove', handleDragMove);
+      document.removeEventListener('touchend', handleDragEnd);
+    };
+
+    document.addEventListener('mousemove', handleDragMove);
+    document.addEventListener('mouseup', handleDragEnd);
+    document.addEventListener('touchmove', handleDragMove);
+    document.addEventListener('touchend', handleDragEnd);
+  }, [listHeight]);
+
+  // Zugewiesene Partner mit Kauf-Status auflösen
+  const purchaserIds = new Set(purchasers.map(p => p.id));
+  const rejectionIds = new Set(rejections.map(r => r.partner_id || r.id));
+  const assignedPartnersResolved = (assigned_partner_ids || []).map(partnerId => {
+    const partner = allPartners.find(p => p.id === partnerId);
+    const name = partner ? (partner.company_name || partner.name || 'Unbekannt') : 'Unbekannt';
+    const hasPurchased = purchaserIds.has(partnerId);
+    const hasRejected = rejectionIds.has(partnerId);
+    return { id: partnerId, name, hasPurchased, hasRejected };
+  });
+
+  // Noch nicht zugewiesene aktive Partner (für Nachsenden)
+  const assignedSet = new Set(assigned_partner_ids || []);
+  const unassignedPartners = allPartners.filter(p => p.status === 'active' && !assignedSet.has(p.id));
+
+  const handleToggleNewPartner = (partnerId) => {
+    setSelectedNewPartnerIds(prev => {
+      const next = new Set(prev);
+      if (next.has(partnerId)) {
+        next.delete(partnerId);
+      } else {
+        next.add(partnerId);
+      }
+      return next;
+    });
+  };
+
+  const handleSendAdditional = async () => {
+    if (selectedNewPartnerIds.size === 0 || !onSendToAdditionalPartners) return;
+    setIsSendingAdditional(true);
+    try {
+      await onSendToAdditionalPartners(quote.id, [...selectedNewPartnerIds]);
+      setSelectedNewPartnerIds(new Set());
+      setShowAddPartner(false);
+    } catch (err) {
+      // Error handled in parent
+    } finally {
+      setIsSendingAdditional(false);
+    }
+  };
 
   const handlePriceUpdate = async () => {
     if (parseFloat(newPrice) !== parseFloat(lead_price || 0)) {
@@ -284,48 +372,166 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                 )}
               </div>
             </div>
-            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                  <Users className="w-4 h-4 text-gray-500"/> 
-                  Kaufende Partner ({purchasers.length})
-                </h4>
-                {purchasers.length > 0 ? (
+            {/* Zugewiesene Partner - Collapsible mit Kauf-Status */}
+            {assigned_partner_ids && assigned_partner_ids.length > 0 && (
+            <div>
+              <button
+                onClick={() => setShowAssignedPartners(!showAssignedPartners)}
+                className="flex items-center gap-2 text-sm font-bold text-gray-800 mb-3 hover:text-green-700 transition-colors w-full text-left"
+              >
+                <Send className="w-4 h-4 text-gray-500"/>
+                Zugewiesene Partner ({assigned_partner_ids.length})
+                <span className="text-xs font-normal text-gray-500 ml-1">
+                  — {purchasers.length} gekauft{rejections.length > 0 ? `, ${rejections.length} abgelehnt` : ''}
+                </span>
+                {showAssignedPartners ? <ChevronUp className="w-4 h-4 ml-auto flex-shrink-0"/> : <ChevronDown className="w-4 h-4 ml-auto flex-shrink-0"/>}
+              </button>
+              {showAssignedPartners && (
+                <div className="space-y-3">
                   <div className="flex flex-wrap gap-2">
-                    {purchasers.map(p => (
-                      <div key={p.id} className="inline-flex items-center gap-2 bg-green-50 border border-green-100 rounded-lg px-3 py-2 text-sm">
-                        <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0"/>
-                        <span className="font-medium text-gray-800">{p.company_name}</span>
+                    {assignedPartnersResolved.map((p) => (
+                      <div 
+                        key={p.id} 
+                        className={`inline-flex items-center gap-2 border rounded-lg px-3 py-2 text-sm ${
+                          p.hasPurchased 
+                            ? 'bg-green-50 border-green-200' 
+                            : p.hasRejected
+                              ? 'bg-red-50 border-red-200'
+                              : 'bg-gray-50 border-gray-200'
+                        }`}
+                      >
+                        {p.hasPurchased ? (
+                          <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0"/>
+                        ) : p.hasRejected ? (
+                          <X className="w-3.5 h-3.5 text-red-400 flex-shrink-0"/>
+                        ) : (
+                          <Building2 className="w-3.5 h-3.5 text-gray-400 flex-shrink-0"/>
+                        )}
+                        <span className="font-medium text-gray-800">{p.name}</span>
+                        {p.hasPurchased && <span className="text-xs text-green-600">Gekauft</span>}
+                        {p.hasRejected && <span className="text-xs text-red-500">Abgelehnt</span>}
                       </div>
                     ))}
                   </div>
-                ) : (
-                  <p className="text-xs text-gray-500">Noch keine Käufe durch Partner.</p>
-                )}
-              </div>
-              {rejections.length > 0 && (
-              <div>
-                <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                  <X className="w-4 h-4 text-red-500"/> 
-                  Ablehnende Partner ({rejections.length})
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {rejections.map((r, idx) => (
-                    <div key={r.id || idx} className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-lg px-3 py-2 text-sm">
-                      <X className="w-3.5 h-3.5 text-red-400 flex-shrink-0"/>
-                      <span className="font-medium text-gray-800">{r.company_name}</span>
-                      {r.created_at && (
-                        <span className="text-xs text-gray-400">{format(new Date(r.created_at), "dd.MM.yyyy HH:mm", { locale: de })}</span>
-                      )}
-                      {r.reason && (
-                        <span className="text-xs text-red-600">({r.reason})</span>
+
+                  {/* Partner nachsenden */}
+                  {(status === 'approved' || status === 'quota_filled') && unassignedPartners.length > 0 && (
+                    <div className="pt-2 border-t border-gray-100">
+                      {!showAddPartner ? (
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => setShowAddPartner(true)}
+                          className="text-blue-600 border-blue-200 hover:bg-blue-50"
+                        >
+                          <UserPlus className="w-4 h-4 mr-2"/>
+                          Partner nachsenden
+                        </Button>
+                      ) : (
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <h5 className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
+                              <UserPlus className="w-3.5 h-3.5"/>
+                              Partner auswählen zum Nachsenden
+                              <span className="text-gray-400 font-normal">({unassignedPartners.length})</span>
+                            </h5>
+                            <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={() => { setShowAddPartner(false); setSelectedNewPartnerIds(new Set()); setPartnerSearchTerm(''); setListHeight(192); }}>
+                              <X className="w-4 h-4"/>
+                            </Button>
+                          </div>
+                          {/* Suche */}
+                          <div className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"/>
+                            <Input
+                              type="text"
+                              placeholder="Partner suchen..."
+                              value={partnerSearchTerm}
+                              onChange={(e) => setPartnerSearchTerm(e.target.value)}
+                              className="pl-9 h-9 text-sm"
+                            />
+                          </div>
+                          <div className="relative">
+                            <div 
+                              ref={listRef}
+                              style={{ maxHeight: `${listHeight}px` }}
+                              className="overflow-y-auto border border-gray-200 rounded-lg divide-y divide-gray-100 transition-[max-height] duration-100"
+                            >
+                              {unassignedPartners
+                                .filter(p => {
+                                  if (!partnerSearchTerm.trim()) return true;
+                                  const term = partnerSearchTerm.toLowerCase();
+                                  const name = (p.company_name || p.name || '').toLowerCase();
+                                  const cat = getCategoryLabel(p.main_categories)?.toLowerCase() || '';
+                                  return name.includes(term) || cat.includes(term);
+                                })
+                                .map(p => (
+                                <label 
+                                  key={p.id} 
+                                  className={`flex items-center gap-3 px-3 py-2.5 cursor-pointer hover:bg-blue-50 transition-colors ${
+                                    selectedNewPartnerIds.has(p.id) ? 'bg-blue-50' : ''
+                                  }`}
+                                >
+                                  <Checkbox
+                                    checked={selectedNewPartnerIds.has(p.id)}
+                                    onCheckedChange={() => handleToggleNewPartner(p.id)}
+                                    className="h-4 w-4"
+                                  />
+                                  <div className="flex-1 min-w-0">
+                                    <span className="text-sm font-medium text-gray-800 block truncate">
+                                      {p.company_name || p.name || 'Unbekannt'}
+                                    </span>
+                                    {p.main_categories && p.main_categories.length > 0 && (
+                                      <span className="text-xs text-gray-500 block truncate">
+                                        {getCategoryLabel(p.main_categories)}
+                                      </span>
+                                    )}
+                                  </div>
+                                </label>
+                              ))}
+                              {unassignedPartners.filter(p => {
+                                if (!partnerSearchTerm.trim()) return true;
+                                const term = partnerSearchTerm.toLowerCase();
+                                const name = (p.company_name || p.name || '').toLowerCase();
+                                const cat = getCategoryLabel(p.main_categories)?.toLowerCase() || '';
+                                return name.includes(term) || cat.includes(term);
+                              }).length === 0 && (
+                                <div className="px-3 py-4 text-center text-sm text-gray-500">
+                                  Kein Partner gefunden für &quot;{partnerSearchTerm}&quot;
+                                </div>
+                              )}
+                            </div>
+                            {/* Drag handle zum Vergrössern/Verkleinern */}
+                            <div
+                              onMouseDown={handleDragStart}
+                              onTouchStart={handleDragStart}
+                              className="flex items-center justify-center py-1 cursor-ns-resize hover:bg-gray-100 border border-t-0 border-gray-200 rounded-b-lg select-none"
+                              title="Ziehen zum Vergrössern/Verkleinern"
+                            >
+                              <GripHorizontal className="w-4 h-4 text-gray-400"/>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              size="sm"
+                              onClick={handleSendAdditional}
+                              disabled={selectedNewPartnerIds.size === 0 || isSendingAdditional || parentIsProcessing}
+                              className="bg-blue-600 hover:bg-blue-700"
+                            >
+                              {isSendingAdditional ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2"/>}
+                              An {selectedNewPartnerIds.size} Partner senden
+                            </Button>
+                            <Button size="sm" variant="ghost" onClick={() => { setShowAddPartner(false); setSelectedNewPartnerIds(new Set()); }}>
+                              Abbrechen
+                            </Button>
+                          </div>
+                        </div>
                       )}
                     </div>
-                  ))}
+                  )}
                 </div>
-              </div>
               )}
             </div>
+            )}
             {(status === 'approved' || status === 'quota_filled') && isReviewEmailButtonActive && (
             <div className="md:col-span-2 border-t border-gray-200 pt-5 mt-2">
                <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">

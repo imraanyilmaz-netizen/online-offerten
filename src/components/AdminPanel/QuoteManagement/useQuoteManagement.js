@@ -373,6 +373,46 @@ export const useQuoteManagement = () => {
         await handleUpdateQuote(quoteId, { status: previousStatus });
     }, [quotes, handleUpdateQuote]);
 
+    const handleSendToAdditionalPartners = useCallback(async (quoteId, newPartnerIds) => {
+        setIsProcessing(true);
+        try {
+            // 1) Edge Function: Mail senden + assigned_partner_ids aktualisieren
+            const { data, error } = await supabase.functions.invoke('send-quote-to-additional-partners', {
+                body: { quoteId, partnerIds: newPartnerIds },
+            });
+
+            if (error) throw error;
+
+            // 2) quote_assignments Tabelle synchronisieren (damit get_partner_dashboard_data funktioniert)
+            // Hole aktuelle assigned_partner_ids (nach Update durch Edge Function)
+            const { data: updatedQuote, error: fetchError } = await supabase
+                .from('quotes')
+                .select('*')
+                .eq('id', quoteId)
+                .single();
+
+            if (fetchError) throw fetchError;
+
+            const allAssignedIds = updatedQuote.assigned_partner_ids || [];
+            const { error: assignmentError } = await supabase.rpc('assign_quote_to_partners', {
+                p_quote_id: quoteId,
+                p_partner_ids: allAssignedIds
+            });
+
+            if (assignmentError) {
+                console.warn('quote_assignments sync warning:', assignmentError.message);
+            }
+
+            toast({ title: 'Erfolg', description: `Anfrage wurde nachträglich an ${newPartnerIds.length} Partner gesendet.` });
+            updateQuoteInState(updatedQuote);
+
+        } catch (error) {
+            const errorBody = error.context?.body ? await error.context.body.json().catch(() => ({ message: error.message })) : { message: error.message };
+            toast({ title: 'Fehler', description: `Nachsendung fehlgeschlagen: ${errorBody.message || error.message}`, variant: 'destructive' });
+            setIsProcessing(false);
+        }
+    }, [toast, updateQuoteInState]);
+
     const openArchiveDialog = (quoteId) => {
         setDialogState({ open: true, type: 'archive', id: quoteId });
     };
@@ -385,7 +425,7 @@ export const useQuoteManagement = () => {
 
     return {
         quotes, allPartners, purchasedQuotesInfo, rejectedQuotesInfo, refundRequests, loading, isProcessing, expandedQuote, dialogState,
-        setDialogState, handleSaveMatch, handleSendQuote, openArchiveDialog, handleRestoreQuote,
+        setDialogState, handleSaveMatch, handleSendQuote, handleSendToAdditionalPartners, openArchiveDialog, handleRestoreQuote,
         handleConfirmDialog, toggleView, handleUpdateQuote, handleApproveRefund, handleRejectRefund
     };
 };
