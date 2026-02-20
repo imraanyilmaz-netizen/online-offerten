@@ -99,6 +99,33 @@ export const usePartnerDashboard = (onActionSuccess) => {
 
       if (partnerError) throw partnerError;
 
+      // Insurance: rejection_reason aus partner_insurance holen falls rejected
+      if (partner.insurance_status === 'rejected') {
+        const { data: insData } = await supabase
+          .from('partner_insurance')
+          .select('rejection_reason, valid_until')
+          .eq('partner_id', user.id)
+          .order('updated_at', { ascending: false })
+          .limit(1)
+          .single();
+        if (insData) {
+          partner.insurance_rejection_reason = insData.rejection_reason;
+          partner.insurance_valid_until = insData.valid_until;
+        }
+      } else if (partner.insurance_status === 'approved') {
+        const { data: insData } = await supabase
+          .from('partner_insurance')
+          .select('valid_until')
+          .eq('partner_id', user.id)
+          .eq('status', 'approved')
+          .order('updated_at', { ascending: false })
+          .limit(1)
+          .single();
+        if (insData) {
+          partner.insurance_valid_until = insData.valid_until;
+        }
+      }
+
       setPartnerData(partner);
       
       const viewedIds = new Set(dashboardData.viewed_quote_ids || []);

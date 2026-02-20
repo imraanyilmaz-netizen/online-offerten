@@ -20,7 +20,7 @@ const quickAmounts = [50, 100, 200];
 
 const PartnerCreditTopUpPageClient = () => {
   // Removed useTranslation
-  const { user } = useAuth();
+  const { user, loading: authContextLoading } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
   const [amount, setAmount] = useState('100');
@@ -33,38 +33,25 @@ const PartnerCreditTopUpPageClient = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Client-only auth check
+  // useAuth() ile güvenilir auth check
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const { createClient } = await import('@/lib/supabase/client');
-        const supabase = createClient();
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error || !session) {
-          console.log('[PartnerCreditTopUpPageClient] No session, redirecting to /login');
-          router.replace('/login');
-          return;
-        }
+    if (authContextLoading) return;
+    
+    if (!user) {
+      console.log('[PartnerCreditTopUpPageClient] No user, redirecting to /login');
+      router.replace('/login');
+      return;
+    }
 
-        const userRole = session.user?.user_metadata?.role;
-        
-        if (userRole !== 'partner') {
-          console.log('[PartnerCreditTopUpPageClient] User is not partner, redirecting to /');
-          router.replace('/');
-          return;
-        }
+    if (user.user_metadata?.role !== 'partner') {
+      console.log('[PartnerCreditTopUpPageClient] User is not partner, redirecting to /');
+      router.replace('/');
+      return;
+    }
 
-        // User is partner - continue
-        setAuthLoading(false);
-      } catch (error) {
-        console.error('[PartnerCreditTopUpPageClient] Auth check error:', error);
-        router.replace('/login');
-      }
-    };
-
-    checkAuth();
-  }, [router]);
+    // User is partner - continue
+    setAuthLoading(false);
+  }, [user, authContextLoading, router]);
 
   useEffect(() => {
     const fetchMinAmount = async () => {

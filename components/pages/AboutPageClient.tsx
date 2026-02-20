@@ -266,6 +266,108 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
           </div>
         </section>
 
+        {/* Geprüfte & versicherte Partnerfirmen — Trust Section (SEO: erstes sichtbares Inhaltselement nach Hero) */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-green-50 via-emerald-50 to-white">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center px-3 py-1 bg-green-100 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+                IHRE SICHERHEIT
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Nur geprüfte & versicherte Partnerfirmen
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Ihre Sicherheit steht bei uns an erster Stelle. Bevor eine Firma über Online-Offerten.ch Kundenanfragen erhalten kann, durchläuft sie einen <strong>strengen Prüf- und Verifizierungsprozess</strong>. So garantieren wir Ihnen höchste Qualität und Zuverlässigkeit.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
+              {/* Left: Prüfprozess */}
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Unser Prüfprozess im Detail</h3>
+                {[
+                  {
+                    step: "1",
+                    title: "Pflicht: Betriebshaftpflichtversicherung",
+                    description: "Jede Partnerfirma ist verpflichtet, eine gültige Betriebshaftpflichtversicherung nachzuweisen. Ohne diesen Nachweis ist es nicht möglich, Kundenanfragen zu erhalten.",
+                    icon: FileText,
+                    color: "bg-blue-100 text-blue-600"
+                  },
+                  {
+                    step: "2",
+                    title: "Manuelle Prüfung durch unser Team",
+                    description: "Jedes eingereichte Versicherungsdokument wird von unseren Experten manuell geprüft – auf Gültigkeit, Deckungsumfang und Echtheit. Automatisierte Freigaben gibt es bei uns nicht.",
+                    icon: Search,
+                    color: "bg-amber-100 text-amber-600"
+                  },
+                  {
+                    step: "3",
+                    title: "Freigabe oder Ablehnung",
+                    description: "Nur Firmen mit vollständiger und gültiger Versicherung werden freigeschaltet. Unvollständige oder ungültige Unterlagen führen zur sofortigen Ablehnung.",
+                    icon: CheckCircle,
+                    color: "bg-green-100 text-green-600"
+                  },
+                  {
+                    step: "4",
+                    title: "Kontinuierliche Überwachung",
+                    description: "Wir überwachen die Gültigkeit aller Versicherungen laufend. Läuft eine Versicherung ab, wird die Firma automatisch gesperrt, bis ein aktueller Nachweis vorliegt.",
+                    icon: Clock,
+                    color: "bg-purple-100 text-purple-600"
+                  }
+                ].map((item, index) => {
+                  const StepIcon = item.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                      <div className={`w-12 h-12 rounded-xl ${item.color} flex items-center justify-center flex-shrink-0`}>
+                        <StepIcon className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Right: Trust Card */}
+              <div className="bg-white rounded-2xl p-8 md:p-10 shadow-xl border border-green-100">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-4">
+                    <ShieldCheck className="w-10 h-10 text-green-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Verifiziert & versichert</h3>
+                  <p className="text-gray-600">Jede aktive Partnerfirma ist vollständig geprüft</p>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    "Gültige Betriebshaftpflichtversicherung nachgewiesen",
+                    "Manuelle Dokumentenprüfung durch unser Team",
+                    "Regelmässige Aktualisierung der Versicherungsnachweise",
+                    "Sofortige Sperrung bei abgelaufener Versicherung",
+                    "Maximale Transparenz und Sicherheit für Kunden"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                      <span className="text-gray-700 font-medium text-sm">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-8 pt-6 border-t border-gray-100">
+                  <div className="bg-green-50 rounded-xl p-4 text-center">
+                    <p className="text-sm text-green-800 font-semibold">
+                      🛡️ Ihr Schutz ist unsere Verantwortung
+                    </p>
+                    <p className="text-xs text-green-700 mt-1">
+                      Wir vermitteln ausschliesslich Firmen, die unseren strengen Qualitäts- und Sicherheitsstandards entsprechen. So können Sie sich auf einen reibungslosen Ablauf verlassen.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Wer wir sind */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4 max-w-7xl">

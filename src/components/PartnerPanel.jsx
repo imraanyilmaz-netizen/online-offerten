@@ -17,6 +17,8 @@ import ArchivedQuoteList from '@/components/PartnerPanel/ArchivedQuoteList';
 import MissedQuoteList from '@/components/PartnerPanel/MissedQuoteList';
 import TransactionHistory from '@/components/PartnerPanel/TransactionHistory';
 import SubscriptionManagement from '@/components/PartnerPanel/SubscriptionManagement';
+import InsuranceBanner from '@/components/PartnerPanel/InsuranceBanner';
+import InsuranceUploadModal from '@/components/PartnerPanel/InsuranceUploadModal';
 
 const StatusDisplay = ({ icon: Icon, title, description, children }) => (
   <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 text-center p-4">
@@ -33,6 +35,7 @@ const PartnerPanel = ({ setCompanyName }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState('available');
+  const [isInsuranceModalOpen, setIsInsuranceModalOpen] = useState(false);
 
   const handleActionSuccess = (tab) => {
     if(tab) setActiveTab(tab);
@@ -194,6 +197,9 @@ const PartnerPanel = ({ setCompanyName }) => {
           </div>
         </header>
 
+        {/* Insurance Banner */}
+        <InsuranceBanner partnerData={partnerData} onUploadClick={() => setIsInsuranceModalOpen(true)} />
+
         <PartnerStats stats={stats} onTopUpClick={() => router.push('/partner/credit-top-up')} />
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -251,6 +257,8 @@ const PartnerPanel = ({ setCompanyName }) => {
                   onRejectQuote={handleRejectQuote}
                   partnerBalance={partnerData.main_balance + partnerData.bonus_balance}
                   hasActiveSubscription={stats.hasActiveSubscription}
+                  insuranceStatus={partnerData?.insurance_status}
+                  onInsuranceUploadClick={() => setIsInsuranceModalOpen(true)}
                 />
               </CardContent>
             </Card>
@@ -304,6 +312,14 @@ const PartnerPanel = ({ setCompanyName }) => {
         </Tabs>
       </div>
     </div>
+
+    {/* Insurance Upload Modal */}
+    <InsuranceUploadModal 
+      open={isInsuranceModalOpen} 
+      onOpenChange={setIsInsuranceModalOpen} 
+      partnerId={partnerId}
+      onSuccess={() => fetchDashboardData(true)}
+    />
     </>
   );
 };

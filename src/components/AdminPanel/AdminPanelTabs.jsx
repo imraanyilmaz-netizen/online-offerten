@@ -1,9 +1,9 @@
 ﻿'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Users, Coins, Settings, Star, BookOpen, Mail } from 'lucide-react';
+import { FileText, Users, Coins, Settings, Star, BookOpen, Mail, ShieldCheck } from 'lucide-react';
 import QuoteManagement from '@/components/AdminPanel/QuoteManagement';
 import PartnerManagement from '@/components/AdminPanel/PartnerManagement';
 import FinancialManagement from '@/components/AdminPanel/FinancialManagement';
@@ -11,6 +11,8 @@ import AdminSettings from '@/components/AdminPanel/AdminSettings';
 import ReviewManagement from '@/components/AdminPanel/ReviewManagement';
 import BlogManagement from '@/components/AdminPanel/BlogManagement/BlogManagement';
 import PartnerInviteEmail from '@/components/AdminPanel/PartnerInviteEmail';
+import InsuranceManagement from '@/components/AdminPanel/InsuranceManagement';
+import { supabase } from '@/lib/supabaseClient';
 
 const AdminPanelTabs = ({
   partners,
@@ -26,6 +28,35 @@ const AdminPanelTabs = ({
   // Sadece "pending" (Ausstehend) partnerleri say - "inactive" partnerler sayılmamalı
   const pendingPartnerCount = partners?.filter(p => p.status === 'pending').length || 0;
   const pendingReviewsCount = stats?.pending_reviews_count || 0;
+
+  // Sigortası 30 gün içinde dolacak partner sayısını partner_insurance tablosundan çek
+  const [expiringInsuranceCount, setExpiringInsuranceCount] = useState(0);
+
+  const fetchExpiringInsuranceCount = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('partner_insurance')
+        .select('valid_until')
+        .eq('status', 'approved');
+      
+      if (error) { console.error('Error fetching expiring insurance:', error); return; }
+      
+      const now = new Date();
+      const count = (data || []).filter(r => {
+        if (!r.valid_until) return false;
+        const daysLeft = Math.ceil((new Date(r.valid_until) - now) / (1000 * 60 * 60 * 24));
+        return daysLeft <= 30;
+      }).length;
+      
+      setExpiringInsuranceCount(count);
+    } catch (err) {
+      console.error('Error counting expiring insurance:', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchExpiringInsuranceCount();
+  }, [fetchExpiringInsuranceCount]);
 
   return (
     <Card className="bg-white shadow-2xl border border-gray-100 rounded-xl overflow-visible">
@@ -107,6 +138,20 @@ const AdminPanelTabs = ({
               )}
               {!isEditor && (
                 <TabsTrigger 
+                  value="insurance"
+                  className="relative flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                >
+                  <ShieldCheck className="w-4 h-4" />
+                  Versicherung
+                  {expiringInsuranceCount > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold shadow-md animate-pulse">
+                      {expiringInsuranceCount}
+                    </span>
+                  )}
+                </TabsTrigger>
+              )}
+              {!isEditor && (
+                <TabsTrigger 
                   value="settings"
                   className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
                 >
@@ -154,6 +199,12 @@ const AdminPanelTabs = ({
             {!isEditor && (
               <TabsContent value="invite" className="mt-0">
                 <PartnerInviteEmail />
+              </TabsContent>
+            )}
+
+            {!isEditor && (
+              <TabsContent value="insurance" className="mt-0">
+                <InsuranceManagement partners={partners} onRefreshPartners={onRefreshPartners} />
               </TabsContent>
             )}
 

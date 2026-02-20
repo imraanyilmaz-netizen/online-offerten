@@ -84,6 +84,22 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
       if (error) throw error;
       if (data && !data.success) throw new Error(data.error);
 
+      // Bei Aktivierung: Versicherungs-Upload-Frist (30 Tage) setzen, falls noch keine Versicherung vorhanden
+      if (newStatus === 'active') {
+        const partner = partners.find(p => p.id === partnerId);
+        if (!partner?.insurance_status || partner.insurance_status === 'none' || partner.insurance_status === 'pending_upload') {
+          const deadline = new Date();
+          deadline.setDate(deadline.getDate() + 30);
+          await supabase
+            .from('partners')
+            .update({ 
+              insurance_status: 'pending_upload',
+              insurance_upload_deadline: deadline.toISOString(),
+            })
+            .eq('id', partnerId);
+        }
+      }
+
       const successMessage = newStatus === 'active'
         ? 'Partner erfolgreich aktiviert und Benachrichtigung gesendet.'
         : 'Partner erfolgreich deaktiviert.';

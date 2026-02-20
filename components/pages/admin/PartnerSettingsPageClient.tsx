@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -22,6 +22,7 @@ const PartnerSettingsPageClient = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialTab = searchParams.get('tab') || 'profile';
+  const { user: authUser, loading: authLoading } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -45,38 +46,24 @@ const PartnerSettingsPageClient = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Client-only auth check
+  // useAuth() ile güvenilir auth check
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const { createClient } = await import('@/lib/supabase/client');
-        const supabase = createClient();
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error || !session) {
-          console.log('[PartnerSettingsPageClient] No session, redirecting to /login');
-          router.replace('/login');
-          return;
-        }
+    if (authLoading) return;
+    
+    if (!authUser) {
+      console.log('[PartnerSettingsPageClient] No user, redirecting to /login');
+      router.replace('/login');
+      return;
+    }
 
-        const userRole = session.user?.user_metadata?.role;
-        
-        if (userRole !== 'partner') {
-          console.log('[PartnerSettingsPageClient] User is not partner, redirecting to /');
-          router.replace('/');
-          return;
-        }
+    if (authUser.user_metadata?.role !== 'partner') {
+      console.log('[PartnerSettingsPageClient] User is not partner, redirecting to /');
+      router.replace('/');
+      return;
+    }
 
-        // User is partner - set user and continue
-        setUser(session.user);
-      } catch (error) {
-        console.error('[PartnerSettingsPageClient] Auth check error:', error);
-        router.replace('/login');
-      }
-    };
-
-    checkAuth();
-  }, [router]);
+    setUser(authUser);
+  }, [authUser, authLoading, router]);
 
   const fetchPartnerData = useCallback(async () => {
     if (!user) return;
