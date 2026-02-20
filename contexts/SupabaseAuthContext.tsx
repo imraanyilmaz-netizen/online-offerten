@@ -228,19 +228,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [toast, supabase])
 
   const signOut = useCallback(async () => {
-    const { error } = await supabase.auth.signOut()
-
-    if (error && error.message !== 'Session from session_id claim in JWT does not exist' && error.message !== 'Authentifizierungssitzung nicht gefunden.') {
-      toast({
-        variant: "destructive",
-        title: "Abmeldung fehlgeschlagen",
-        description: error.message || "Etwas ist schief gelaufen",
-      })
-      return { error }
+    // 1️⃣ Supabase oturumunu kapat
+    try {
+      await supabase.auth.signOut()
+    } catch (e) {
+      console.warn('[AuthContext] signOut error (ignored):', e)
     }
-    
+
+    // 2️⃣ Auth state'i hemen sıfırla
+    setUser(null)
+    setSession(null)
+
+    // 3️⃣ Tüm storage'ı temizle
+    if (typeof window !== 'undefined') {
+      localStorage.clear()
+      sessionStorage.clear()
+    }
+
     return { error: null }
-  }, [toast, supabase])
+  }, [supabase])
 
   const updateUserPassword = useCallback(async (newPassword: string) => {
     const { data, error } = await supabase.auth.updateUser({ password: newPassword })

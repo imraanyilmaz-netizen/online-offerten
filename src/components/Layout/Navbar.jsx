@@ -16,7 +16,6 @@ import {
 // Removed useTranslation
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 // logoUrl removed - using inline SVG icon instead
-import { useToast } from '@/components/ui/use-toast';
 // Removed useLanguageSwitcher and getLocalizedUrl
 
 const UserMenu = ({ user, onLogout }) => {
@@ -75,7 +74,6 @@ const Navbar = () => {
   const { user, signOut, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const { toast } = useToast();
   const settingsPath = '/partner/einstellungen';
 
   // Prevent hydration mismatch
@@ -85,12 +83,9 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await signOut();
-    toast({
-      title: 'Erfolgreich abgemeldet',
-      description: 'Sie wurden erfolgreich abgemeldet. Auf Wiedersehen!',
-    });
-    router.push('/');
-    setMobileMenuOpen(false);
+    // Full page reload — auth state, cache, her şey sıfırlanır
+    // replace() kullanıyoruz: history'ye eklenmez → geri tuşuyla loop yok
+    window.location.replace('/');
   };
   
   const toggleMobileSection = (section) => {

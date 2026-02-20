@@ -1,6 +1,7 @@
 ﻿import { getGermanServiceName } from './dataMapping';
 
 const serviceKeyMap = {
+  // ── Teklif (Quote) tarafı: servicetype → normalized key ──
   'privatumzug': 'privatumzug',
   'geschäftsumzug': 'geschaeftsumzug',
   'internationaler umzug': 'auslandumzug',
@@ -8,9 +9,10 @@ const serviceKeyMap = {
   'spezialtransport': 'spezialtransport',
   'spezialtransporte': 'spezialtransport',
   'kleintransport': 'kleintransport',
+  'endreinigung': 'umzugsreinigung',        // ✅ Müşteri formu "Endreinigung" → umzugsreinigung
   'umzugsreinigung': 'umzugsreinigung',
   'wohnungsreinigung': 'wohnungsreinigung',
-  'räumung & entsorgung': 'raeumung_service', // Combined
+  'räumung & entsorgung': 'raeumung_service',
   'räumung': 'raeumung_service',
   'entsorgung': 'entsorgung_service',
   'klaviertransport': 'klaviertransport',
@@ -32,10 +34,11 @@ const serviceKeyMap = {
   'malerarbeiten gewerbe': 'maler_service',
   'lagerung': 'lagerung_service',
   'lagerung_service': 'lagerung_service',
-  // Add partner-side keys if they differ
+  // ── Partner tarafı: offered_services ID → normalized key ──
   'geschaeftsumzug': 'geschaeftsumzug',
   'internationaler_umzug': 'auslandumzug',
   'auslandumzug': 'auslandumzug',
+  'umzugsreinigung_opt': 'umzugsreinigung',  // ✅ Partner Umzug kategorisi altında "Endreinigung" seçtiğinde
   'raeumung_service': 'raeumung_service',
   'entsorgung_service': 'entsorgung_service',
   'lagerung': 'lagerung',
@@ -120,11 +123,14 @@ export const findMatchingPartners = (allPartners, criteria) => {
   return allPartners.filter(partner => {
     if (partner.status !== 'active') return false;
 
-    const partnerServices = new Set(partner.offered_services || []);
+    // Partner servislerini de normalize et (örn. umzugsreinigung_opt → umzugsreinigung)
+    const normalizedPartnerServices = new Set(
+      (partner.offered_services || []).map(s => findServiceKey(s) || s)
+    );
     const partnerRegions = new Set(partner.service_regions || []);
 
     // Check if partner offers ALL required services
-    const hasAllServices = requiredServiceKeys.every(key => partnerServices.has(key));
+    const hasAllServices = requiredServiceKeys.every(key => normalizedPartnerServices.has(key));
     
     if (!hasAllServices) {
       return false;
