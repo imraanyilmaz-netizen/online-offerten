@@ -1,6 +1,7 @@
-﻿'use client'
+'use client'
 
 import { useEffect } from 'react'
+import { siteConfig } from '@/config/site'
 
 interface BreadcrumbItem {
   name: string
@@ -76,9 +77,9 @@ export default function StructuredData({
         description: service.description,
         provider: {
           '@type': 'Organization',
-          name: 'Online-Offerten.ch',
-          url: 'https://online-offerten.ch',
-          logo: 'https://online-offerten.ch/image/logo-icon.webp',
+          name: siteConfig.name,
+          url: siteConfig.url,
+          logo: siteConfig.logoUrl,
         },
         areaServed: {
           '@type': 'Country',
@@ -87,7 +88,7 @@ export default function StructuredData({
         },
         offers: {
           '@type': 'Offer',
-          url: service.url || 'https://online-offerten.ch/kostenlose-offerte-anfordern',
+          url: service.url || `${siteConfig.url}/kostenlose-offerte-anfordern`,
           priceCurrency: 'CHF',
           price: '0',
           availability: 'https://schema.org/InStock',
@@ -103,7 +104,7 @@ export default function StructuredData({
         '@type': 'LocalBusiness',
         name: localBusiness.name,
         description: localBusiness.description,
-        url: 'https://online-offerten.ch',
+        url: siteConfig.url,
         address: localBusiness.address
           ? {
               '@type': 'PostalAddress',
@@ -143,7 +144,7 @@ export default function StructuredData({
         '@type': 'Organization',
         name: organization.name,
         url: organization.url,
-        logo: organization.logo || 'https://online-offerten.ch/image/logo-icon.webp',
+        logo: organization.logo || siteConfig.logoUrl,
       }
 
       if (organization.contactPoint) {

@@ -1,4 +1,4 @@
-﻿import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
@@ -15,6 +15,7 @@ import {
 // framer-motion removed – using CSS transitions for better INP
 // Removed useTranslation
 import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { siteConfig } from '@/config/site';
 // logoUrl removed - using inline SVG icon instead
 // Removed useLanguageSwitcher and getLocalizedUrl
 
@@ -214,7 +215,7 @@ const Navbar = () => {
             <div className="inline-flex items-center justify-center w-9 h-9 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex-shrink-0">
               <Send className="w-[18px] h-[18px] text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-800">Online-Offerten.ch</span>
+            <span className="text-xl font-bold text-gray-800">{siteConfig.name}</span>
           </Link>
 
           <nav 

@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster'
 import AppClient from '@/components/AppClient'
 import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { siteConfig } from '@/config/site'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -16,22 +17,22 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | Online-Offerten.ch',
+  title: `Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | ${siteConfig.name}`,
   description: 'Kostenlose Offerten für Umzug, Reinigung & Renovierung vergleichen. Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region. Unverbindlich & transparent.',
-  authors: [{ name: 'Online-Offerten.ch' }],
-  creator: 'Online-Offerten.ch',
-  publisher: 'Online-Offerten.ch',
-  metadataBase: new URL('https://online-offerten.ch'),
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: 'website',
     locale: 'de_CH',
-    url: 'https://online-offerten.ch',
-    siteName: 'Online-Offerten.ch',
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
     description: 'Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region',
     images: [
       {
-        url: 'https://online-offerten.ch/image/online-offerten.webp',
+        url: siteConfig.ogImageUrl,
         width: 1200,
         height: 630,
         alt: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Offerten vergleichen - Kostenlose Offerten',
     description: 'Bis zu 40% sparen mit geprüften Firmen',
-    images: ['https://online-offerten.ch/image/online-offerten.webp'],
+    images: [siteConfig.ogImageUrl],
   },
   robots: {
     index: true,
@@ -74,6 +75,8 @@ export const viewport: Viewport = {
 }
 
 const isProduction = process.env.VERCEL_ENV === 'production'
+const siteDomain = siteConfig.domain
+const wwwSiteDomain = `www.${siteDomain}`
 
 export default function RootLayout({
   children,
@@ -92,7 +95,7 @@ export default function RootLayout({
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,l,i){
-              if(w.location.hostname!=='online-offerten.ch'&&w.location.hostname!=='www.online-offerten.ch')return;
+              if(w.location.hostname!=='${siteDomain}'&&w.location.hostname!=='${wwwSiteDomain}')return;
               w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=

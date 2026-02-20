@@ -1,1 +1,3 @@
-﻿export const logoUrl = 'https://online-offerten.ch/image/logo-icon.webp';
+import { siteConfig } from '@/config/site';
+
+export const logoUrl = siteConfig.logoUrl;

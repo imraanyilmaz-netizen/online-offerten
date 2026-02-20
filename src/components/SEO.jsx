@@ -1,6 +1,7 @@
-﻿import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { siteConfig } from '@/config/site';
 // Removed useTranslation and URL mapping - DE-only
 
 const SEO = ({ title, description, ogImageUrl, schemaMarkup, keywords, ogType = 'website', noIndex = false, canonicalUrl: propCanonicalUrl }) => {
@@ -14,7 +15,7 @@ const SEO = ({ title, description, ogImageUrl, schemaMarkup, keywords, ogType = 
   };
   
   // Sabit domain kullan (SSR ve bot taramaları için)
-  const baseUrl = 'https://online-offerten.ch';
+  const baseUrl = siteConfig.url;
   
   // Canonical URL'i normalize et - hem prop hem de pathname için
   const normalizeUrl = (url) => {
@@ -78,7 +79,7 @@ const SEO = ({ title, description, ogImageUrl, schemaMarkup, keywords, ogType = 
   const fullUrl = canonicalUrl;
   
   // Default OG image if not provided - 3 professionals illustration (Umzug, Reinigung, Maler)
-  const defaultOgImage = ogImageUrl || 'https://online-offerten.ch/image/online-offerten.webp';
+  const defaultOgImage = ogImageUrl || siteConfig.ogImageUrl;
   
   // DE-only - no alternate URLs
   
@@ -103,7 +104,7 @@ const SEO = ({ title, description, ogImageUrl, schemaMarkup, keywords, ogType = 
       <meta property="og:image" content={defaultOgImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:site_name" content="Online-Offerten.ch" />
+      <meta property="og:site_name" content={siteConfig.name} />
       <meta property="og:locale" content="de_CH" />
       
       {/* Twitter Card */}

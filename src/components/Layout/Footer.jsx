@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
 import { Mail, MapPin, Building2, Sparkles, FileText, Send } from 'lucide-react';
+import { siteConfig } from '@/config/site';
 
 const Footer = React.memo(() => {
   // Removed useTranslation
   const currentYear = new Date().getFullYear();
+  const contactEmail = siteConfig.contactEmail;
 
   // Hauptstädte und wichtige Städte
   const hauptstaedte = [
@@ -89,7 +91,7 @@ const Footer = React.memo(() => {
               <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg group-hover:scale-110 transition-transform duration-300">
                 <Send className="w-8 h-8 text-white" />
               </div>
-              <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Online-Offerten.ch</span>
+              <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">{siteConfig.name}</span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-md">
               Ihr Vergleichsportal für Umzug, Reinigung &amp; Malerarbeiten in der Schweiz.
@@ -102,8 +104,8 @@ const Footer = React.memo(() => {
             </p>
             <div className="flex items-center gap-2 text-slate-400 text-sm">
               <Mail className="w-4 h-4" />
-              <a href="mailto:info@online-offerten.ch" className="hover:text-green-400 transition-colors">
-                info@online-offerten.ch
+              <a href={`mailto:${contactEmail}`} className="hover:text-green-400 transition-colors">
+                {contactEmail}
               </a>
             </div>
           </div>
