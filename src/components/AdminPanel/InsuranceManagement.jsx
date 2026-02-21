@@ -129,6 +129,20 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
         .eq('id', record.partner_id);
       if (partnerError) throw partnerError;
 
+      // Email an Partner senden
+      try {
+        await supabase.functions.invoke('send-insurance-notification', {
+          body: {
+            type: 'approved',
+            email: record.email,
+            companyName: record.company_name,
+            validUntil: record.valid_until || null,
+          }
+        });
+      } catch (emailErr) {
+        console.warn('Insurance email could not be sent:', emailErr);
+      }
+
       toast({ title: 'Erfolg', description: `Versicherung von ${record.company_name} genehmigt.` });
       await fetchInsuranceRecords();
       if (onRefreshPartners) onRefreshPartners();
@@ -187,6 +201,20 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
         .eq('id', record.partner_id);
       if (partnerError) throw partnerError;
 
+      // Email an Partner senden
+      try {
+        await supabase.functions.invoke('send-insurance-notification', {
+          body: {
+            type: 'approved',
+            email: record.email,
+            companyName: record.company_name,
+            validUntil: manualValidUntil,
+          }
+        });
+      } catch (emailErr) {
+        console.warn('Insurance email could not be sent:', emailErr);
+      }
+
       toast({ title: 'Erfolg', description: `Versicherung von ${record.company_name} manuell genehmigt bis ${new Date(manualValidUntil).toLocaleDateString('de-DE')}.` });
       setManualApproveDialog({ open: false, record: null });
       setManualValidUntil('');
@@ -226,6 +254,20 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
         })
         .eq('id', record.partner_id);
       if (partnerError) throw partnerError;
+
+      // Email an Partner senden
+      try {
+        await supabase.functions.invoke('send-insurance-notification', {
+          body: {
+            type: 'rejected',
+            email: record.email,
+            companyName: record.company_name,
+            rejectionReason: rejectionReason || null,
+          }
+        });
+      } catch (emailErr) {
+        console.warn('Insurance email could not be sent:', emailErr);
+      }
 
       toast({ title: 'Erfolg', description: `Versicherung von ${record.company_name} abgelehnt.` });
       setRejectDialog({ open: false, record: null });
@@ -268,6 +310,19 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
         })
         .eq('id', record.partner_id);
       if (partnerError) throw partnerError;
+
+      // Email an Partner senden
+      try {
+        await supabase.functions.invoke('send-insurance-notification', {
+          body: {
+            type: 'revoked',
+            email: record.email,
+            companyName: record.company_name,
+          }
+        });
+      } catch (emailErr) {
+        console.warn('Insurance email could not be sent:', emailErr);
+      }
 
       toast({ title: 'Erfolg', description: `Versicherung von ${record.company_name} widerrufen. Partner muss innerhalb von 30 Tagen eine Versicherung hochladen.` });
       await fetchInsuranceRecords();
