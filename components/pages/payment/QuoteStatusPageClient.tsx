@@ -501,7 +501,7 @@ const QuoteStatusPageClient = () => {
                   )}
                   {quote && (
                     <div key="content">
-                      <div className="grid md:grid-cols-2 gap-x-8 gap-y-12">
+                      <div className="space-y-8">
                           <div>
                               <h3 className="text-lg font-semibold mb-4 text-gray-700">Timeline</h3>
                               <StatusTimeline status={quote.status} />
@@ -520,8 +520,8 @@ const QuoteStatusPageClient = () => {
                       )}
 
                       <div className="mt-12 pt-8 border-t">
-                        <h2 className="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-2">Interessierte Firmen</h2>
-                        <p className="text-center text-gray-600 mb-8">Hier sehen Sie die Firmen, die an Ihrer Anfrage interessiert sind und mit Ihnen Kontakt aufnehmen werden.</p>
+                        <h2 className="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-2">Ihre Offerten-Partner</h2>
+                        <p className="text-center text-gray-600 mb-8">Diese geprüften Partnerfirmen möchten Ihnen eine unverbindliche Offerte unterbreiten und werden sich in Kürze bei Ihnen melden.</p>
                         {purchasingPartners.length > 0 ? (
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {purchasingPartners.map(partner => (
@@ -536,8 +536,8 @@ const QuoteStatusPageClient = () => {
                         ) : (
                           <div className="text-center py-12 text-gray-500">
                             <Building className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                            <h3 className="text-lg font-semibold">Noch keine Firma hat Interesse an Ihrer Anfrage gezeigt.</h3>
-                            <p className="text-sm text-gray-400">Bald werden sich interessierte Partner bei Ihnen melden!</p>
+                            <h3 className="text-lg font-semibold">Ihre Anfrage wird gerade bearbeitet.</h3>
+                            <p className="text-sm text-gray-400">Unsere geprüften Partnerfirmen werden sich in Kürze bei Ihnen melden!</p>
                           </div>
                         )}
                       </div>
