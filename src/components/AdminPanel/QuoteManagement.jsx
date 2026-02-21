@@ -103,7 +103,7 @@ const QuoteManagement = () => {
         <p className="text-base text-gray-600 leading-relaxed max-w-3xl">Verwalten Sie eingehende Kundenanfragen, weisen Sie Partner zu und versenden Sie die Anfragen.</p>
       </header>
       <Tabs defaultValue="new_quote" className="w-full">
-        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6 sticky top-0 z-10">
+        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6 sticky top-16 z-20">
           <TabsList className="p-2 bg-transparent rounded-lg justify-start sm:justify-start gap-2 min-h-[60px] items-center">
             <TabsTrigger 
               value="new_quote" 

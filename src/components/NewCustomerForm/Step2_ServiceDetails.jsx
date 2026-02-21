@@ -136,9 +136,9 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                                     name={`what_to_clean.${option.id}`}
                                     checked={formData.what_to_clean?.[option.id] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`what_to_clean.${option.id}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`what_to_clean_${option.id}`} className="flex-grow cursor-pointer font-normal text-sm sm:text-base text-gray-800 flex items-center gap-2">
+                                <Label htmlFor={`what_to_clean_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 flex items-center gap-2">
                                     {option.icon} {t(option.labelKey)}
                                 </Label>
                             </div>
@@ -197,9 +197,9 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                                     name={`floor_types.${option.id}`}
                                     checked={formData.floor_types?.[option.id] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`floor_types.${option.id}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`floor_type_${option.id}`} className="flex-grow cursor-pointer font-normal text-sm sm:text-base text-gray-800 flex items-center gap-2">
+                                <Label htmlFor={`floor_type_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 flex items-center gap-2">
                                     {option.icon} {t(option.labelKey)}
                                 </Label>
                             </div>
@@ -293,9 +293,9 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                                     name={`fassadenreinigung_verschmutzung.${option.id}`}
                                     checked={formData.fassadenreinigung_verschmutzung?.[option.id] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`fassadenreinigung_verschmutzung.${option.id}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`verschmutzung_${option.id}`} className="flex-grow cursor-pointer font-normal text-sm text-gray-800">{t(option.labelKey)}</Label>
+                                <Label htmlFor={`verschmutzung_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800">{t(option.labelKey)}</Label>
                             </div>
                         </div>
                     ))}
@@ -376,17 +376,14 @@ const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxCha
         <div className="space-y-4 mt-3">
             {/* Wohnungsfläche */}
             <div>
-                <Label htmlFor="cleaning_area_size" className="font-semibold text-gray-700 text-sm">
-                    Wohnungsfläche (ca.)
-                </Label>
                 <select
                     id="cleaning_area_size"
                     name="cleaning_area_size"
                     value={formData.cleaning_area_size || ''}
                     onChange={(e) => handleSelectChange('cleaning_area_size', e.target.value)}
-                    className="mt-1 w-full rounded-lg border-2 border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-green-500 focus:outline-none hover:border-green-300 transition-colors"
+                    className="w-full rounded-lg border-2 border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-green-500 focus:outline-none hover:border-green-300 transition-colors"
                 >
-                    <option value="">Bitte wählen</option>
+                    <option value="">Wohnungsfläche (ca.) *</option>
                     {areaSizeOptions.map(opt => (
                         <option key={opt.value} value={opt.value}>{opt.label}</option>
                     ))}
@@ -396,17 +393,14 @@ const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxCha
             {/* Art der Reinigung - nur für Endreinigung */}
             {showCleaningType && (
                 <div>
-                    <Label htmlFor="cleaning_type" className="font-semibold text-gray-700 text-sm">
-                        Art der Reinigung
-                    </Label>
                     <select
                         id="cleaning_type"
                         name="cleaning_type"
                         value={formData.cleaning_type || ''}
                         onChange={(e) => handleSelectChange('cleaning_type', e.target.value)}
-                        className="mt-1 w-full rounded-lg border-2 border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-green-500 focus:outline-none hover:border-green-300 transition-colors"
+                        className="w-full rounded-lg border-2 border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-green-500 focus:outline-none hover:border-green-300 transition-colors"
                     >
-                        <option value="">Bitte wählen</option>
+                        <option value="">Art der Reinigung *</option>
                         {cleaningTypeOptions.map(opt => (
                             <option key={opt.value} value={opt.value}>{opt.label}</option>
                         ))}
@@ -416,9 +410,7 @@ const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxCha
 
             {/* Zusatzflächen */}
             <div>
-                <Label className="font-semibold text-gray-700 text-sm">
-                    Zusatzflächen <span className="text-gray-400 font-normal">(optional)</span>
-                </Label>
+                <span className="text-sm text-slate-600">Zusatzflächen (optional)</span>
                 <div className="grid grid-cols-3 gap-2 mt-2">
                     {[
                         { id: 'cleaning_extra_balkon', label: 'Balkon' },
@@ -437,9 +429,9 @@ const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxCha
                                     name={item.id}
                                     checked={formData[item.id] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(item.id, checked)}
-                                    className="h-4 w-4 mr-2"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={item.id} className="cursor-pointer font-normal text-sm text-gray-800">
+                                <Label htmlFor={item.id} className="cursor-pointer font-medium text-base text-slate-800">
                                     {item.label}
                                 </Label>
                             </div>
@@ -646,9 +638,9 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
                                     name={`what_to_paint.${option}`}
                                     checked={formData.what_to_paint?.[option] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`what_to_paint.${option}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`what_to_paint_${option}`} className="flex-grow cursor-pointer font-normal text-sm sm:text-base text-gray-800">
+                                <Label htmlFor={`what_to_paint_${option}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800">
                                     {t(`step1.whatToPaint.${malerType}.${option}`)}
                                 </Label>
                             </div>
@@ -939,10 +931,10 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                             name="additional_cleaning" 
                             checked={formData.additional_cleaning || false} 
                             onCheckedChange={(checked) => handleAdditionalCleaningChange ? handleAdditionalCleaningChange(checked) : handleCheckboxChange('additional_cleaning', checked)}
-                            className="h-5 w-5 mr-3"
+                            className="h-6 w-6 mr-3"
                         />
                         <Label htmlFor="additional_cleaning" className="flex-grow cursor-pointer">
-                            <span className="font-semibold text-base text-gray-800">{t('step1.additionalCleaningLabel')}</span>
+                            <span className="font-semibold text-base text-slate-800">{t('step1.additionalCleaningLabel')}</span>
                             <p className="text-sm text-gray-600 font-normal">
                               {formData.umzugArt === 'geschaeftsumzug' 
                                 ? t('step1.additionalCleaningDescriptionBusiness')

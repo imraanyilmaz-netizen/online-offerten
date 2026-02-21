@@ -145,9 +145,9 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                                     name={`what_to_clean.${option.id}`}
                                     checked={formData.what_to_clean?.[option.id] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`what_to_clean.${option.id}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`what_to_clean_${option.id}`} className="flex-grow cursor-pointer font-normal text-sm sm:text-base text-gray-800 flex items-center gap-2">
+                                <Label htmlFor={`what_to_clean_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 flex items-center gap-2">
                                     {option.icon} {t(option.labelKey)}
                                 </Label>
                             </div>
@@ -206,9 +206,9 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                                     name={`floor_types.${option.id}`}
                                     checked={formData.floor_types?.[option.id] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`floor_types.${option.id}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`floor_type_${option.id}`} className="flex-grow cursor-pointer font-normal text-sm sm:text-base text-gray-800 flex items-center gap-2">
+                                <Label htmlFor={`floor_type_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 flex items-center gap-2">
                                     {option.icon} {t(option.labelKey)}
                                 </Label>
                             </div>
@@ -302,9 +302,9 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                                     name={`fassadenreinigung_verschmutzung.${option.id}`}
                                     checked={formData.fassadenreinigung_verschmutzung?.[option.id] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`fassadenreinigung_verschmutzung.${option.id}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`verschmutzung_${option.id}`} className="flex-grow cursor-pointer font-normal text-sm text-gray-800">{t(option.labelKey)}</Label>
+                                <Label htmlFor={`verschmutzung_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800">{t(option.labelKey)}</Label>
                             </div>
                         </div>
                     ))}
@@ -557,9 +557,9 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
                                     name={`what_to_paint.${option}`}
                                     checked={formData.what_to_paint?.[option] || false}
                                     onCheckedChange={(checked) => handleCheckboxChange(`what_to_paint.${option}`, checked)}
-                                    className="h-5 w-5 mr-3"
+                                    className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`what_to_paint_${option}`} className="flex-grow cursor-pointer font-normal text-sm sm:text-base text-gray-800">
+                                <Label htmlFor={`what_to_paint_${option}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800">
                                     {t(`step1.whatToPaint.${malerType}.${option}`)}
                                 </Label>
                             </div>

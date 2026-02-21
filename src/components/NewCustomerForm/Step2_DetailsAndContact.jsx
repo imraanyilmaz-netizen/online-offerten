@@ -196,14 +196,10 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       </div>
 
       {isInternationalMove && (
-          <div className="space-y-1">
-              <Label htmlFor={`${prefix}_country`} className="font-medium text-slate-700 text-sm sm:text-base flex items-center">
-                  <Globe className="w-4 h-4 mr-2" />
-                  {t('step2.countryLabel')} <span className="text-red-500 ml-1">*</span>
-              </Label>
+          <div>
               <Select name={`${prefix}_country`} value={formData[`${prefix}_country`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_country`, value)}>
                   <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
-                      <SelectValue placeholder={t('step2.countryPlaceholder')} />
+                      <SelectValue placeholder={`${t('step2.countryLabel')} *`} />
                   </SelectTrigger>
                   <SelectContent className="text-sm sm:text-base">
                       {countries.map(country => <SelectItem key={country.code} value={country.code} className="text-sm sm:text-base">{country.name}</SelectItem>)}
@@ -212,117 +208,117 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               {errors && errors[`${prefix}_country`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_country`]}</p>}
           </div>
       )}
-      
-      <div className="space-y-1 relative" ref={streetWrapperRef}>
-        <Label htmlFor={`${prefix}_street`} className="font-medium text-slate-700 text-sm sm:text-base">{t('step2.streetLabel')} <span className="text-red-500 ml-1">*</span></Label>
-        <Input
-          id={`${prefix}_street`}
-          name={`${prefix}_street`}
-          value={formData[`${prefix}_street`] || ''}
-          onChange={handleStreetInputChange}
-          onFocus={() => setIsStreetInputFocused(true)}
-          placeholder={t('step2.streetPlaceholder')}
-          className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
-          autoComplete="off"
-        />
-        {isStreetInputFocused && (addressLoading || suggestions.length > 0) && (
-          <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-72 overflow-y-auto">
-            {addressLoading && (
-              <div className="p-3 text-sm text-gray-500 flex items-center">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {t('step2.addressSearching')}
-              </div>
-            )}
-            {!addressLoading && displayedStreetSuggestions.length > 0 && (
-              <ul className="py-1">
-                {displayedStreetSuggestions.map((suggestion) => (
-                  <li
-                    key={suggestion.id}
-                    className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-start"
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      handleStreetSuggestionSelect(suggestion);
-                    }}
-                  >
-                    <MapPin className="w-4 h-4 mr-3 mt-0.5 text-gray-400 shrink-0" />
-                    <div className="flex-grow">
-                      <p className="font-medium text-sm sm:text-base">
-                        {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
-                      </p>
-                      <p className="text-xs sm:text-sm text-gray-500">
-                        {suggestion.postcode} {suggestion.city}
-                        {suggestion.suburb && suggestion.suburb !== suggestion.city ? `, ${suggestion.suburb}` : ''}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-                {!showAllStreetSuggestions && suggestions.length > 5 && (
-                  <li className="px-3 py-2 border-t border-gray-200">
-                    <button
-                      type="button"
-                      className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center hover:underline"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShowAllStreetSuggestions(true);
-                      }}
-                    >
-                      <ChevronsUpDown className="w-4 h-4 mr-2" />
-                      {t('step2.showAllSuggestions', { count: suggestions.length - 5 })}
-                    </button>
-                  </li>
-                )}
-              </ul>
-            )}
-            {!addressLoading && formData[`${prefix}_street`] && formData[`${prefix}_street`].length >= 3 && suggestions.length === 0 && (
-              <div className="p-3 text-sm text-gray-500">
-                {t('step2.noSuggestionsFound')}
-              </div>
-            )}
-          </div>
-        )}
-        {errors && errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_street`]}</p>}
-      </div>
 
-      <div className="space-y-1">
-        <Label htmlFor={`${prefix}_zip`} className="font-medium text-slate-700 text-sm sm:text-base">{t('step2.zipCityLabel')} <span className="text-red-500 ml-1">*</span></Label>
-        <div className="grid grid-cols-3 gap-4 items-start">
-          <div className="col-span-1 relative">
+      <div className={!isMoveService ? "grid grid-cols-1 lg:grid-cols-2 gap-4" : "space-y-4"}>
+        {/* Sol taraf: Adres alanları */}
+        <div className="space-y-4">
+          <div className="space-y-1 relative" ref={streetWrapperRef}>
             <Input
-              id={`${prefix}_zip`}
-              name={`${prefix}_zip`}
-              value={formData[`${prefix}_zip`] || ''}
-              onChange={handleZipChange}
-              placeholder={t('step2.zipPlaceholder')}
+              id={`${prefix}_street`}
+              name={`${prefix}_street`}
+              value={formData[`${prefix}_street`] || ''}
+              onChange={handleStreetInputChange}
+              onFocus={() => setIsStreetInputFocused(true)}
+              placeholder={`${t('step2.streetLabel')} *`}
               className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
-              maxLength={10}
+              autoComplete={`section-${prefix} address-line1`}
             />
-            {isFetchingCity && <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-gray-400" />}
-             {errors && errors[`${prefix}_zip`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_zip`]}</p>}
+            {isStreetInputFocused && (addressLoading || suggestions.length > 0) && (
+              <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-72 overflow-y-auto">
+                {addressLoading && (
+                  <div className="p-3 text-sm text-gray-500 flex items-center">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t('step2.addressSearching')}
+                  </div>
+                )}
+                {!addressLoading && displayedStreetSuggestions.length > 0 && (
+                  <ul className="py-1">
+                    {displayedStreetSuggestions.map((suggestion) => (
+                      <li
+                        key={suggestion.id}
+                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-start"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          handleStreetSuggestionSelect(suggestion);
+                        }}
+                      >
+                        <MapPin className="w-4 h-4 mr-3 mt-0.5 text-gray-400 shrink-0" />
+                        <div className="flex-grow">
+                          <p className="font-medium text-sm sm:text-base">
+                            {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
+                          </p>
+                          <p className="text-xs sm:text-sm text-gray-500">
+                            {suggestion.postcode} {suggestion.city}
+                            {suggestion.suburb && suggestion.suburb !== suggestion.city ? `, ${suggestion.suburb}` : ''}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                    {!showAllStreetSuggestions && suggestions.length > 5 && (
+                      <li className="px-3 py-2 border-t border-gray-200">
+                        <button
+                          type="button"
+                          className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center hover:underline"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowAllStreetSuggestions(true);
+                          }}
+                        >
+                          <ChevronsUpDown className="w-4 h-4 mr-2" />
+                          {t('step2.showAllSuggestions', { count: suggestions.length - 5 })}
+                        </button>
+                      </li>
+                    )}
+                  </ul>
+                )}
+                {!addressLoading && formData[`${prefix}_street`] && formData[`${prefix}_street`].length >= 3 && suggestions.length === 0 && (
+                  <div className="p-3 text-sm text-gray-500">
+                    {t('step2.noSuggestionsFound')}
+                  </div>
+                )}
+              </div>
+            )}
+            {errors && errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_street`]}</p>}
           </div>
-          <div className="col-span-2">
-            <Input
-              id={`${prefix}_city`}
-              name={`${prefix}_city`}
-              value={formData[`${prefix}_city`] || ''}
-              onChange={handleChange}
-              placeholder={t('step2.cityPlaceholder')}
-              className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
-              readOnly={isFetchingCity}
-            />
-             {errors && errors[`${prefix}_city`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_city`]}</p>}
+
+          <div className="grid grid-cols-3 gap-4 items-start">
+            <div className="col-span-1 relative">
+              <Input
+                id={`${prefix}_zip`}
+                name={`${prefix}_zip`}
+                value={formData[`${prefix}_zip`] || ''}
+                onChange={handleZipChange}
+                placeholder={`${t('step2.zipPlaceholder')} *`}
+                className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+                maxLength={10}
+                autoComplete={`section-${prefix} postal-code`}
+              />
+              {isFetchingCity && <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-gray-400" />}
+              {errors && errors[`${prefix}_zip`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_zip`]}</p>}
+            </div>
+            <div className="col-span-2">
+              <Input
+                id={`${prefix}_city`}
+                name={`${prefix}_city`}
+                value={formData[`${prefix}_city`] || ''}
+                onChange={handleChange}
+                placeholder={t('step2.cityPlaceholder')}
+                className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+                readOnly={isFetchingCity}
+                autoComplete={`section-${prefix} address-level2`}
+              />
+              {errors && errors[`${prefix}_city`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_city`]}</p>}
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div className="grid grid-cols-2 gap-3 items-start pt-1">
-        
+
+        {/* Sağ taraf: Detay alanları */}
+        <div className="grid grid-cols-2 gap-3 items-start">
           {showFloorField && (
-            <div className="space-y-1"
-            >
-              <Label htmlFor={`${prefix}_floor`} className="font-medium text-slate-700 text-xs">{t('step2.floorLabel')} <span className="text-red-500 ml-1">*</span></Label>
+            <div>
               <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
                 <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={t('step2.floorLabel')} />
+                  <SelectValue placeholder={`${t('step2.floorLabel')} *`} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
                   {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
@@ -331,16 +327,12 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               {errors && errors[`${prefix}_floor`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
             </div>
           )}
-        
 
-        
           {showRoomsField && (
-            <div className="space-y-1"
-            >
-              <Label htmlFor={`${prefix}_rooms`} className="font-medium text-slate-700 text-xs">{t('step2.roomsLabel')} <span className="text-red-500 ml-1">*</span></Label>
+            <div>
               <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
                 <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder="Zimmer" />
+                  <SelectValue placeholder={`${t('step2.roomsLabel')} *`} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
                   {roomCountOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
@@ -349,16 +341,12 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               {errors && errors[`${prefix}_rooms`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_rooms`]}</p>}
             </div>
           )}
-        
-        
-        
+
           {showObjectTypeField && (
-            <div className="space-y-1"
-            >
-              <Label htmlFor={`${prefix}_object_type`} className="font-medium text-slate-700 text-xs">{t('step2.objectTypeLabel')} <span className="text-red-500 ml-1">*</span></Label>
+            <div>
               <Select name={`${prefix}_object_type`} value={formData[`${prefix}_object_type`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_object_type`, value)}>
                 <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={t('step2.objectTypeLabel')} />
+                  <SelectValue placeholder={`${t('step2.objectTypeLabel')} *`} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
                   {objectTypeOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
@@ -367,27 +355,21 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               {errors && errors[`${prefix}_object_type`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_object_type`]}</p>}
             </div>
           )}
-        
 
-        
           {showLiftField && (
-            <div
-              className="space-y-1"
-            >
-              <Label className="font-medium text-slate-700 text-xs">{t('step2.liftLabel')}</Label>
-              <RadioGroup name={`${prefix}_lift`} value={String(formData[`${prefix}_lift`])} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')} className="flex items-center space-x-2 pt-1.5">
-                <div className="flex items-center space-x-1">
-                  <RadioGroupItem value="true" id={`${prefix}_lift_yes`} className="h-4 w-4" />
-                  <Label htmlFor={`${prefix}_lift_yes`} className="font-normal text-xs">{t('step2.liftOptionYes')}</Label>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <RadioGroupItem value="false" id={`${prefix}_lift_no`} className="h-4 w-4" />
-                  <Label htmlFor={`${prefix}_lift_no`} className="font-normal text-xs">{t('step2.liftOptionNo')}</Label>
-                </div>
-              </RadioGroup>
+            <div>
+              <Select name={`${prefix}_lift`} value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')}>
+                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
+                  <SelectValue placeholder={t('step2.liftLabel')} />
+                </SelectTrigger>
+                <SelectContent className="text-sm">
+                  <SelectItem value="true">{t('step2.liftOptionYes')}</SelectItem>
+                  <SelectItem value="false">{t('step2.liftOptionNo')}</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           )}
-        
+        </div>
       </div>
       
     </div>
@@ -548,9 +530,9 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
               <Label className="font-medium text-slate-700 text-sm">{t('step3.salutationLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <RadioGroup name="salutation" value={formData.salutation || ''} onValueChange={(value) => handleRadioGroupChange('salutation', value)} className="flex items-center space-x-4 pt-1">
                 {salutationOptions.map(opt => (
-                  <div key={opt.value} className="flex items-center space-x-1.5">
-                    <RadioGroupItem value={opt.value} id={`salutation_${opt.value}`} />
-                    <Label htmlFor={`salutation_${opt.value}`} className="font-normal text-sm">{opt.label}</Label>
+                  <div key={opt.value} className="flex items-center space-x-2">
+                    <RadioGroupItem value={opt.value} id={`salutation_${opt.value}`} className="h-6 w-6" />
+                    <Label htmlFor={`salutation_${opt.value}`} className="font-medium text-base text-slate-800 cursor-pointer">{opt.label}</Label>
                   </div>
                 ))}
               </RadioGroup>
@@ -593,14 +575,14 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
         
         <SectionCard icon={<CalendarDays className="w-6 h-6 text-green-600" />} titleKey={getDateTitleKey()} descriptionKey="step3.moveDateDescription">
           <div className="space-y-3">
+            <div className="flex items-center space-x-2 pt-4">
+              <Checkbox id="move_date_flexible" name="move_date_flexible" checked={formData.move_date_flexible || false} onCheckedChange={(checked) => handleCheckboxChange('move_date_flexible', checked)} className="h-6 w-6 accent-green-600"/>
+              <Label htmlFor="move_date_flexible" className="font-medium text-base text-slate-800 cursor-pointer">{t('step3.dateFlexibleLabel')}</Label>
+            </div>
             <div className="space-y-1">
               <Label htmlFor="move_date" className="font-medium text-slate-700 text-sm">{t(getDateLabelKey())} <span className="text-red-500 ml-1">*</span></Label>
               <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9" min={new Date().toISOString().split("T")[0]}/>
               {errors && errors.move_date && <p className="text-xs text-red-500 mt-1">{errors.move_date}</p>}
-            </div>
-            <div className="flex items-center space-x-2">
-                <Checkbox id="move_date_flexible" name="move_date_flexible" checked={formData.move_date_flexible || false} onCheckedChange={(checked) => handleCheckboxChange('move_date_flexible', checked)} className="h-4 w-4 accent-green-600"/>
-                <Label htmlFor="move_date_flexible" className="font-normal text-sm text-slate-600">{t('step3.dateFlexibleLabel')}</Label>
             </div>
             <div className="space-y-1">
                 <Label htmlFor="preferred_time" className="font-medium text-slate-700 text-sm">{t('step3.preferredTimeLabel')}</Label>
@@ -617,133 +599,141 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
         </SectionCard>
       </div>
 
-      {/* Additional Info - Full Width Below */}
+      {/* Additional Info - Two Columns */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
-          <div className="space-y-3">
-            {/* Umzug: Zusätzliche Leistungen */}
-            {formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international') && (
-              <>
-                <p className="text-xs text-slate-500 mb-1">Wählen Sie bitte aus, falls zutreffend.</p>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="furniture_assembly" name="furniture_assembly" checked={formData.furniture_assembly || false} onCheckedChange={(checked) => handleCheckboxChange('furniture_assembly', checked)} className="h-4 w-4 accent-green-600"/>
-                  <Label htmlFor="furniture_assembly" className="font-normal text-sm text-slate-700">Möbel müssen demontiert und wieder montiert werden</Label>
+        {/* Sol: Umzug Zusätzliche Leistungen */}
+        {formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international') && (
+          <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
+            <div className="space-y-3">
+              <p className="text-xs text-slate-500 mb-1">Wählen Sie bitte aus, falls zutreffend.</p>
+              <div className="flex items-center space-x-3">
+                <Checkbox id="furniture_assembly" name="furniture_assembly" checked={formData.furniture_assembly || false} onCheckedChange={(checked) => handleCheckboxChange('furniture_assembly', checked)} className="h-6 w-6 accent-green-600"/>
+                <Label htmlFor="furniture_assembly" className="font-medium text-base text-slate-800 cursor-pointer">Möbel müssen demontiert und wieder montiert werden</Label>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Checkbox id="additional_services_packing" name="additional_services_packing" checked={formData.additional_services_packing || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_packing', checked)} className="h-6 w-6 accent-green-600"/>
+                <Label htmlFor="additional_services_packing" className="font-medium text-base text-slate-800 cursor-pointer">Umzug mit Einpackservice</Label>
+              </div>
+              <div>
+                <div className="flex items-center space-x-3">
+                  <Checkbox id="special_transport" name="special_transport" checked={formData.special_transport || false} onCheckedChange={(checked) => {
+                    handleCheckboxChange('special_transport', checked);
+                    if (!checked) {
+                      handleCheckboxChange('special_transport_piano', false);
+                      handleCheckboxChange('special_transport_safe', false);
+                      handleCheckboxChange('special_transport_heavy', false);
+                    }
+                  }} className="h-6 w-6 accent-green-600"/>
+                  <Label htmlFor="special_transport" className="font-medium text-base text-slate-800 cursor-pointer">Spezialtransporte (z.B. Klavier, Tresor, schwere Möbel)</Label>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="additional_services_packing" name="additional_services_packing" checked={formData.additional_services_packing || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_packing', checked)} className="h-4 w-4 accent-green-600"/>
-                  <Label htmlFor="additional_services_packing" className="font-normal text-sm text-slate-700">Umzug mit Einpackservice</Label>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="special_transport" name="special_transport" checked={formData.special_transport || false} onCheckedChange={(checked) => {
-                      handleCheckboxChange('special_transport', checked);
-                      if (!checked) {
-                        handleCheckboxChange('special_transport_piano', false);
-                        handleCheckboxChange('special_transport_safe', false);
-                        handleCheckboxChange('special_transport_heavy', false);
-                      }
-                    }} className="h-4 w-4 accent-green-600"/>
-                    <Label htmlFor="special_transport" className="font-normal text-sm text-slate-700">Spezialtransporte (z.B. Klavier, Tresor, schwere Möbel)</Label>
-                  </div>
-                  {formData.special_transport && (
-                    <div className="ml-6 mt-2 space-y-1.5 pl-2 border-l-2 border-green-200">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox id="special_transport_piano" checked={formData.special_transport_piano || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_piano', checked)} className="h-3.5 w-3.5"/>
-                        <Label htmlFor="special_transport_piano" className="font-normal text-sm text-slate-600">Klavier / Flügel</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox id="special_transport_safe" checked={formData.special_transport_safe || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_safe', checked)} className="h-3.5 w-3.5"/>
-                        <Label htmlFor="special_transport_safe" className="font-normal text-sm text-slate-600">Tresor</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox id="special_transport_heavy" checked={formData.special_transport_heavy || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_heavy', checked)} className="h-3.5 w-3.5"/>
-                        <Label htmlFor="special_transport_heavy" className="font-normal text-sm text-slate-600">Schwere Möbel / Geräte</Label>
-                      </div>
+                {formData.special_transport && (
+                  <div className="ml-9 mt-2 space-y-2 pl-3 border-l-2 border-green-200">
+                    <div className="flex items-center space-x-3">
+                      <Checkbox id="special_transport_piano" checked={formData.special_transport_piano || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_piano', checked)} className="h-6 w-6"/>
+                      <Label htmlFor="special_transport_piano" className="font-medium text-base text-slate-800 cursor-pointer">Klavier / Flügel</Label>
                     </div>
-                  )}
-                </div>
-                <div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="additional_services_disposal" name="additional_services_disposal" checked={formData.additional_services_disposal || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_disposal', checked)} className="h-4 w-4 accent-green-600"/>
-                    <Label htmlFor="additional_services_disposal" className="font-normal text-sm text-slate-700">Entsorgung von Möbeln / Gegenständen</Label>
-                  </div>
-                  <p className="ml-6 text-xs text-slate-400 mt-0.5">Sperrgut, das entsorgt werden soll</p>
-                </div>
-              </>
-            )}
-
-            {/* Reinigung: Wohnungsfläche, Art der Reinigung, Zusatzflächen */}
-            {((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) ||
-              (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) && (
-              <div className="space-y-4 pt-3 border-t border-gray-100">
-                <h4 className="font-semibold text-sm text-slate-800">Angaben zur Reinigung</h4>
-                {/* Wohnungsfläche */}
-                <div className="space-y-1">
-                  <Label htmlFor="cleaning_area_size" className="font-medium text-slate-700 text-sm">Wohnungsfläche (ca.)</Label>
-                  <select
-                    id="cleaning_area_size"
-                    name="cleaning_area_size"
-                    value={formData.cleaning_area_size || ''}
-                    onChange={(e) => handleSelectChange('cleaning_area_size', e.target.value)}
-                    className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none"
-                  >
-                    <option value="">Bitte wählen</option>
-                    <option value="bis_40">bis 40 m²</option>
-                    <option value="40_60">40 – 60 m²</option>
-                    <option value="60_80">60 – 80 m²</option>
-                    <option value="80_100">80 – 100 m²</option>
-                    <option value="100_120">100 – 120 m²</option>
-                    <option value="120_140">120 – 140 m²</option>
-                    <option value="ueber_140">über 140 m²</option>
-                  </select>
-                </div>
-
-                {/* Art der Reinigung - nur für Endreinigung */}
-                {(formData.umzugArt === 'umzugsreinigung' || (formData.service === 'umzug' && formData.additional_cleaning)) && (
-                  <div className="space-y-1">
-                    <Label htmlFor="cleaning_type" className="font-medium text-slate-700 text-sm">Art der Reinigung</Label>
-                    <select
-                      id="cleaning_type"
-                      name="cleaning_type"
-                      value={formData.cleaning_type || ''}
-                      onChange={(e) => handleSelectChange('cleaning_type', e.target.value)}
-                      className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none"
-                    >
-                      <option value="">Bitte wählen</option>
-                      <option value="mit_abnahmegarantie">Endreinigung mit Abnahmegarantie</option>
-                      <option value="ohne_abnahmegarantie">Endreinigung ohne Abnahmegarantie</option>
-                      <option value="umzugsreinigung">Umzugsreinigung</option>
-                    </select>
+                    <div className="flex items-center space-x-3">
+                      <Checkbox id="special_transport_safe" checked={formData.special_transport_safe || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_safe', checked)} className="h-6 w-6"/>
+                      <Label htmlFor="special_transport_safe" className="font-medium text-base text-slate-800 cursor-pointer">Tresor</Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <Checkbox id="special_transport_heavy" checked={formData.special_transport_heavy || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_heavy', checked)} className="h-6 w-6"/>
+                      <Label htmlFor="special_transport_heavy" className="font-medium text-base text-slate-800 cursor-pointer">Schwere Möbel / Geräte</Label>
+                    </div>
                   </div>
                 )}
+              </div>
+              <div>
+                <div className="flex items-center space-x-3">
+                  <Checkbox id="additional_services_disposal" name="additional_services_disposal" checked={formData.additional_services_disposal || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_disposal', checked)} className="h-6 w-6 accent-green-600"/>
+                  <Label htmlFor="additional_services_disposal" className="font-medium text-base text-slate-800 cursor-pointer">Entsorgung von Möbeln / Gegenständen</Label>
+                </div>
+                <p className="ml-9 text-xs text-slate-400 mt-0.5">Sperrgut, das entsorgt werden soll</p>
+              </div>
+            </div>
+            <div className="space-y-1 pt-3">
+              <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm">{t('step3.additionalInfoLabel')}</Label>
+              <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[70px] text-sm"/>
+            </div>
+          </SectionCard>
+        )}
 
-                {/* Zusatzflächen */}
-                <div className="space-y-1.5">
-                  <Label className="font-medium text-slate-700 text-sm">Zusatzflächen <span className="text-gray-400 font-normal">(optional)</span></Label>
-                  <div className="flex flex-wrap gap-3">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="cleaning_extra_balkon" checked={formData.cleaning_extra_balkon || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_balkon', checked)} className="h-4 w-4"/>
-                      <Label htmlFor="cleaning_extra_balkon" className="font-normal text-sm text-slate-700">Balkon</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="cleaning_extra_keller" checked={formData.cleaning_extra_keller || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_keller', checked)} className="h-4 w-4"/>
-                      <Label htmlFor="cleaning_extra_keller" className="font-normal text-sm text-slate-700">Keller</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="cleaning_extra_garage" checked={formData.cleaning_extra_garage || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_garage', checked)} className="h-4 w-4"/>
-                      <Label htmlFor="cleaning_extra_garage" className="font-normal text-sm text-slate-700">Garage</Label>
-                    </div>
+        {/* Sağ: Reinigung Angaben */}
+        {((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) ||
+          (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) && (
+          <SectionCard icon={<Search className="w-6 h-6 text-green-600" />} titleKey="step3.cleaningDetailsTitle" descriptionKey="step3.cleaningDetailsDescription">
+            <div className="space-y-4">
+              {/* Wohnungsfläche */}
+              <div>
+                <select
+                  id="cleaning_area_size"
+                  name="cleaning_area_size"
+                  value={formData.cleaning_area_size || ''}
+                  onChange={(e) => handleSelectChange('cleaning_area_size', e.target.value)}
+                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none"
+                >
+                  <option value="">Wohnungsfläche (ca.) *</option>
+                  <option value="bis_40">bis 40 m²</option>
+                  <option value="40_60">40 – 60 m²</option>
+                  <option value="60_80">60 – 80 m²</option>
+                  <option value="80_100">80 – 100 m²</option>
+                  <option value="100_120">100 – 120 m²</option>
+                  <option value="120_140">120 – 140 m²</option>
+                  <option value="ueber_140">über 140 m²</option>
+                </select>
+              </div>
+
+              {/* Art der Reinigung - nur für Endreinigung */}
+              {(formData.umzugArt === 'umzugsreinigung' || (formData.service === 'umzug' && formData.additional_cleaning)) && (
+                <div>
+                  <select
+                    id="cleaning_type"
+                    name="cleaning_type"
+                    value={formData.cleaning_type || ''}
+                    onChange={(e) => handleSelectChange('cleaning_type', e.target.value)}
+                    className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none"
+                  >
+                    <option value="">Art der Reinigung *</option>
+                    <option value="mit_abnahmegarantie">Endreinigung mit Abnahmegarantie</option>
+                    <option value="ohne_abnahmegarantie">Endreinigung ohne Abnahmegarantie</option>
+                    <option value="umzugsreinigung">Umzugsreinigung</option>
+                  </select>
+                </div>
+              )}
+
+              {/* Zusatzflächen */}
+              <div className="space-y-1.5">
+                <span className="text-sm text-slate-600">Zusatzflächen (optional)</span>
+                <div className="flex flex-wrap gap-3">
+                  <div className="flex items-center space-x-3">
+                    <Checkbox id="cleaning_extra_balkon" checked={formData.cleaning_extra_balkon || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_balkon', checked)} className="h-6 w-6"/>
+                    <Label htmlFor="cleaning_extra_balkon" className="font-medium text-base text-slate-800 cursor-pointer">Balkon</Label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Checkbox id="cleaning_extra_keller" checked={formData.cleaning_extra_keller || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_keller', checked)} className="h-6 w-6"/>
+                    <Label htmlFor="cleaning_extra_keller" className="font-medium text-base text-slate-800 cursor-pointer">Keller</Label>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Checkbox id="cleaning_extra_garage" checked={formData.cleaning_extra_garage || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_garage', checked)} className="h-6 w-6"/>
+                    <Label htmlFor="cleaning_extra_garage" className="font-medium text-base text-slate-800 cursor-pointer">Garage</Label>
                   </div>
                 </div>
               </div>
-            )}
-          </div>
-          <div className="space-y-1 pt-3">
-            <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm">{t('step3.additionalInfoLabel')}</Label>
-            <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[70px] text-sm"/>
-          </div>
-        </SectionCard>
+            </div>
+          </SectionCard>
+        )}
 
+        {/* Zusätzliche Infos - sadece Umzug yoksa veya sadece Reinigung ise */}
+        {!(formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international')) && (
+          <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
+            <div className="space-y-1">
+              <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm">{t('step3.additionalInfoLabel')}</Label>
+              <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[70px] text-sm"/>
+            </div>
+          </SectionCard>
+        )}
+
+        {/* Wie viele Offerten - Grid içinde boş alanı doldurur */}
         <SectionCard icon={<FileText className="w-6 h-6 text-green-600" />} titleKey="step3.quotesWantedTitle" descriptionKey="step3.quotesWantedDescription">
           <div className="grid grid-cols-4 gap-2">
               {quotesWantedOptions.map(opt => (
@@ -770,10 +760,10 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
               name="datenschutz" 
               checked={formData.datenschutz || false} 
               onCheckedChange={(checked) => handleCheckboxChange('datenschutz', checked)} 
-              className={`h-5 w-5 mt-0.5 ${errors && errors.datenschutz ? "border-red-500" : ""}`}
+              className={`h-6 w-6 mt-0.5 ${errors && errors.datenschutz ? "border-red-500" : ""}`}
               required
             />
-            <Label htmlFor="datenschutz" className="text-sm text-slate-700 leading-relaxed cursor-pointer flex-1">
+            <Label htmlFor="datenschutz" className="font-medium text-base text-slate-800 leading-relaxed cursor-pointer flex-1">
               Ich akzeptiere die{' '}
               <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">
                 AGB

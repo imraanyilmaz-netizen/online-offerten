@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Home, Building, Loader2, MapPin, ChevronsUpDown, Globe } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
@@ -148,14 +147,10 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       </div>
 
       {isInternationalMove && (
-          <div className="space-y-1">
-              <Label htmlFor={`${prefix}_country`} className="font-medium text-slate-700 text-sm sm:text-base flex items-center">
-                  <Globe className="w-4 h-4 mr-2" />
-                  {t('step2.countryLabel')} <span className="text-red-500 ml-1">*</span>
-              </Label>
+          <div>
               <Select name={`${prefix}_country`} value={formData[`${prefix}_country`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_country`, value)}>
                   <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
-                      <SelectValue placeholder={t('step2.countryPlaceholder')} />
+                      <SelectValue placeholder={`${t('step2.countryLabel')} *`} />
                   </SelectTrigger>
                   <SelectContent className="text-sm sm:text-base">
                       {countries.map(country => <SelectItem key={country.code} value={country.code} className="text-sm sm:text-base">{country.name}</SelectItem>)}
@@ -165,148 +160,148 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
           </div>
       )}
       
-      <div className="space-y-1 relative" ref={streetWrapperRef}>
-        <Label htmlFor={`${prefix}_street_manual`} className="font-medium text-slate-700 text-sm sm:text-base">{t('step2.streetLabel')} <span className="text-red-500">*</span></Label>
-        <Input
-          id={`${prefix}_street_manual`}
-          name={`${prefix}_street`}
-          value={formData[`${prefix}_street`] || ''}
-          onChange={handleStreetInputChange}
-          onFocus={() => setIsStreetInputFocused(true)}
-          placeholder={t('step2.streetPlaceholder')}
-          className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
-          autoComplete="off"
-        />
-        {isStreetInputFocused && (addressLoading || suggestions.length > 0) && (
-          <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-72 overflow-y-auto">
-            {addressLoading && (
-              <div className="p-3 text-sm text-gray-500 flex items-center">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {t('step2.addressSearching')}
-              </div>
-            )}
-            {!addressLoading && displayedStreetSuggestions.length > 0 && (
-              <ul className="py-1">
-                {displayedStreetSuggestions.map((suggestion) => (
-                  <li
-                    key={suggestion.id}
-                    className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-start"
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      handleStreetSuggestionSelect(suggestion);
-                    }}
-                  >
-                    <MapPin className="w-4 h-4 mr-3 mt-0.5 text-gray-400 shrink-0" />
-                    <div className="flex-grow">
-                      <p className="font-medium text-sm sm:text-base">
-                        {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
-                      </p>
-                      <p className="text-xs sm:text-sm text-gray-500">
-                        {suggestion.postcode} {suggestion.city}
-                        {suggestion.suburb && suggestion.suburb !== suggestion.city ? `, ${suggestion.suburb}` : ''}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-                {!showAllStreetSuggestions && suggestions.length > 5 && (
-                  <li className="px-3 py-2 border-t border-gray-200">
-                    <button
-                      type="button"
-                      className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center hover:underline"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShowAllStreetSuggestions(true);
-                      }}
-                    >
-                      <ChevronsUpDown className="w-4 h-4 mr-2" />
-                      {t('step2.showAllSuggestions', { count: suggestions.length - 5 })}
-                    </button>
-                  </li>
+      <div className={!isMoveService ? "grid grid-cols-1 lg:grid-cols-2 gap-4" : "space-y-5"}>
+        {/* Sol taraf: Adres alanları */}
+        <div className="space-y-5">
+          <div className="space-y-1 relative" ref={streetWrapperRef}>
+            <Input
+              id={`${prefix}_street_manual`}
+              name={`${prefix}_street`}
+              value={formData[`${prefix}_street`] || ''}
+              onChange={handleStreetInputChange}
+              onFocus={() => setIsStreetInputFocused(true)}
+              placeholder={`${t('step2.streetLabel')} *`}
+              className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+              autoComplete={`section-${prefix} address-line1`}
+            />
+            {isStreetInputFocused && (addressLoading || suggestions.length > 0) && (
+              <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-72 overflow-y-auto">
+                {addressLoading && (
+                  <div className="p-3 text-sm text-gray-500 flex items-center">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t('step2.addressSearching')}
+                  </div>
                 )}
-              </ul>
-            )}
-            {!addressLoading && formData[`${prefix}_street`] && formData[`${prefix}_street`].length >= 3 && suggestions.length === 0 && (
-              <div className="p-3 text-sm text-gray-500">
-                {t('step2.noSuggestionsFound')}
+                {!addressLoading && displayedStreetSuggestions.length > 0 && (
+                  <ul className="py-1">
+                    {displayedStreetSuggestions.map((suggestion) => (
+                      <li
+                        key={suggestion.id}
+                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-start"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          handleStreetSuggestionSelect(suggestion);
+                        }}
+                      >
+                        <MapPin className="w-4 h-4 mr-3 mt-0.5 text-gray-400 shrink-0" />
+                        <div className="flex-grow">
+                          <p className="font-medium text-sm sm:text-base">
+                            {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
+                          </p>
+                          <p className="text-xs sm:text-sm text-gray-500">
+                            {suggestion.postcode} {suggestion.city}
+                            {suggestion.suburb && suggestion.suburb !== suggestion.city ? `, ${suggestion.suburb}` : ''}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                    {!showAllStreetSuggestions && suggestions.length > 5 && (
+                      <li className="px-3 py-2 border-t border-gray-200">
+                        <button
+                          type="button"
+                          className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center hover:underline"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowAllStreetSuggestions(true);
+                          }}
+                        >
+                          <ChevronsUpDown className="w-4 h-4 mr-2" />
+                          {t('step2.showAllSuggestions', { count: suggestions.length - 5 })}
+                        </button>
+                      </li>
+                    )}
+                  </ul>
+                )}
+                {!addressLoading && formData[`${prefix}_street`] && formData[`${prefix}_street`].length >= 3 && suggestions.length === 0 && (
+                  <div className="p-3 text-sm text-gray-500">
+                    {t('step2.noSuggestionsFound')}
+                  </div>
+                )}
               </div>
             )}
+            {errors && errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_street`]}</p>}
           </div>
-        )}
-        {errors && errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_street`]}</p>}
-      </div>
 
-      <div className="space-y-1">
-        <Label htmlFor={`${prefix}_zip_manual`} className="font-medium text-slate-700 text-sm sm:text-base">{t('step2.zipCityLabel')} <span className="text-red-500">*</span></Label>
-        <div className="grid grid-cols-3 gap-4 items-start">
-          <div className="col-span-1 relative">
-            <Input
-              id={`${prefix}_zip_manual`}
-              name={`${prefix}_zip`}
-              value={formData[`${prefix}_zip`] || ''}
-              onChange={handleZipChange}
-              placeholder={t('step2.zipPlaceholder')}
-              className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
-              maxLength={10}
-            />
-            {isFetchingCity && <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-gray-400" />}
-             {errors && errors[`${prefix}_zip`] && !errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_zip`]}</p>}
-          </div>
-          <div className="col-span-2">
-            <Input
-              id={`${prefix}_city_manual`}
-              name={`${prefix}_city`}
-              value={formData[`${prefix}_city`] || ''}
-              onChange={handleChange}
-              placeholder={t('step2.cityPlaceholder')}
-              className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
-              readOnly={isFetchingCity}
-            />
-             {errors && errors[`${prefix}_city`] && !errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_city`]}</p>}
+          <div className="grid grid-cols-3 gap-4 items-start">
+            <div className="col-span-1 relative">
+              <Input
+                id={`${prefix}_zip_manual`}
+                name={`${prefix}_zip`}
+                value={formData[`${prefix}_zip`] || ''}
+                onChange={handleZipChange}
+                placeholder={`${t('step2.zipPlaceholder')} *`}
+                className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+                maxLength={10}
+                autoComplete={`section-${prefix} postal-code`}
+              />
+              {isFetchingCity && <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-gray-400" />}
+              {errors && errors[`${prefix}_zip`] && !errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_zip`]}</p>}
+            </div>
+            <div className="col-span-2">
+              <Input
+                id={`${prefix}_city_manual`}
+                name={`${prefix}_city`}
+                value={formData[`${prefix}_city`] || ''}
+                onChange={handleChange}
+                placeholder={t('step2.cityPlaceholder')}
+                className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+                readOnly={isFetchingCity}
+                autoComplete={`section-${prefix} address-level2`}
+              />
+              {errors && errors[`${prefix}_city`] && !errors[`${prefix}_street`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_city`]}</p>}
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4 items-end pt-2">
-        <div className="space-y-1">
-          <Label htmlFor={`${prefix}_floor`} className="font-medium text-slate-700 text-sm sm:text-base">{t('step2.floorLabel')} <span className="text-red-500">*</span></Label>
-          <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
-            <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
-              <SelectValue placeholder={t('step2.floorPlaceholder')} />
-            </SelectTrigger>
-            <SelectContent className="text-sm sm:text-base">
-              {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
-            </SelectContent>
-          </Select>
-          {errors && errors[`${prefix}_floor`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
-        </div>
 
-        {showRoomsField && (
-          <div className="space-y-1">
-            <Label htmlFor={`${prefix}_rooms`} className="font-medium text-slate-700 text-sm sm:text-base">{t('step2.roomsLabel')} <span className="text-red-500">*</span></Label>
-            <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
+        {/* Sağ taraf: Detay alanları */}
+        <div className={isMoveService ? "grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4 items-end" : "grid grid-cols-2 gap-3 items-start"}>
+          <div>
+            <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
               <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
-                <SelectValue placeholder={t('step2.roomsPlaceholder')} />
+                <SelectValue placeholder={`${t('step2.floorLabel')} *`} />
               </SelectTrigger>
               <SelectContent className="text-sm sm:text-base">
-                {currentRoomOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
+                {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
               </SelectContent>
             </Select>
-            {errors && errors[`${prefix}_rooms`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_rooms`]}</p>}
+            {errors && errors[`${prefix}_floor`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
           </div>
-        )}
 
-        <div className="space-y-1">
-          <Label className="font-medium text-slate-700 text-sm sm:text-base">{t('step2.liftLabel')}</Label>
-          <RadioGroup name={`${prefix}_lift`} value={String(formData[`${prefix}_lift`])} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')} className="flex items-center space-x-3 pt-2">
-            <div className="flex items-center space-x-1.5">
-              <RadioGroupItem value="true" id={`${prefix}_lift_yes`} />
-              <Label htmlFor={`${prefix}_lift_yes`} className="font-normal text-sm sm:text-base">{t('step2.liftOptionYes')}</Label>
+          {showRoomsField && (
+            <div>
+              <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
+                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+                  <SelectValue placeholder={`${t('step2.roomsLabel')} *`} />
+                </SelectTrigger>
+                <SelectContent className="text-sm sm:text-base">
+                  {currentRoomOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
+                </SelectContent>
+              </Select>
+              {errors && errors[`${prefix}_rooms`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_rooms`]}</p>}
             </div>
-            <div className="flex items-center space-x-1.5">
-              <RadioGroupItem value="false" id={`${prefix}_lift_no`} />
-              <Label htmlFor={`${prefix}_lift_no`} className="font-normal text-sm sm:text-base">{t('step2.liftOptionNo')}</Label>
-            </div>
-          </RadioGroup>
+          )}
+
+          <div>
+            <Select name={`${prefix}_lift`} value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')}>
+              <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+                <SelectValue placeholder={t('step2.liftLabel')} />
+              </SelectTrigger>
+              <SelectContent className="text-sm sm:text-base">
+                <SelectItem value="true">{t('step2.liftOptionYes')}</SelectItem>
+                <SelectItem value="false">{t('step2.liftOptionNo')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
       

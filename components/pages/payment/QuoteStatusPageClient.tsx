@@ -275,14 +275,13 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
             {isPaintingService(quote.servicetype) && quote.reinigung_details && <div className="border-t pt-4"><PaintingDetails details={quote.reinigung_details} /></div>}
 
             {/* Umzug: Zusätzliche Leistungen */}
-            {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.additional_services_piano || quote.additional_services_furniture_lift || quote.additional_services_disposal) && (
+            {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
               <div className="border-t pt-4">
                 <p className="text-sm text-gray-500 mb-2">Zusätzliche Leistungen</p>
                 <div className="flex flex-wrap gap-2">
                   {quote.additional_services_furniture_assembly && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Möbel De-/Montage</span>}
-                  {quote.additional_services_packing && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Verpackungsservice</span>}
-                  {quote.additional_services_piano && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Klavier-/Schwertransport</span>}
-                  {quote.additional_services_furniture_lift && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Möbellift</span>}
+                  {quote.additional_services_packing && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Einpackservice</span>}
+                  {quote.special_transport && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Spezialtransporte ({[quote.special_transport_piano && 'Klavier/Flügel', quote.special_transport_safe && 'Tresor', quote.special_transport_heavy && 'Schwere Möbel/Geräte'].filter(Boolean).join(', ') || 'Ja'})</span>}
                   {quote.additional_services_disposal && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Entsorgung</span>}
                 </div>
               </div>
@@ -308,7 +307,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
                     <div>
                       <p className="text-sm text-gray-500">Art der Reinigung</p>
                       <div className="font-medium text-gray-800 text-sm">
-                        {({'mit_abnahmegarantie': 'mit Abnahmegarantie', 'ohne_abnahmegarantie': 'ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'} as Record<string, string>)[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}
+                        {({'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'} as Record<string, string>)[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}
                       </div>
                     </div>
                   </div>
@@ -360,7 +359,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
                     <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Calendar /></div>
                     <div className="flex-grow">
                         <p className="text-sm text-gray-500">{labels.dateLabel}</p>
-                        <div className="font-medium text-gray-800 text-sm">{format(new Date(quote.move_date), 'dd. MMMM yyyy', { locale: de })}</div>
+                        <div className="font-medium text-gray-800 text-sm">{format(new Date(quote.move_date), 'EEEE, dd. MMMM yyyy', { locale: de })}</div>
                         {quote.move_date_flexible && <div className="text-xs text-blue-600 mt-1">Datum ist flexibel</div>}
                     </div>
                 </div>

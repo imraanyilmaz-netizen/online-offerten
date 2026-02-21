@@ -388,14 +388,23 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     } else {
       params.delete('step');
     }
-    // Service-Parameter beibehalten, wenn er bereits in der URL ist oder wenn formData.service gesetzt ist
+    // Service-Parameter beibehalten
     if (formData.service) {
       params.set('service', formData.service);
     }
-    // URL'i güncelle - scroll: false ile Next.js'in otomatik scroll'unu engelle
-    // Manuel scroll handleNextStep ve useEffect'te yapılıyor
+    // umzugArt / reinigungArt / malerArt / raeumungArt Parameter beibehalten
+    if (formData.umzugArt) {
+      const serviceArtParamMap = {
+        umzug: 'umzugArt',
+        reinigung: 'reinigungArt',
+        maler: 'malerArt',
+        raeumung: 'raeumungArt',
+      };
+      const paramName = serviceArtParamMap[formData.service] || 'umzugArt';
+      params.set(paramName, formData.umzugArt);
+    }
     router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
-  }, [searchParamsString, pathname, router, formRef, formData.service]);
+  }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt]);
 
   const scrollToFormTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
