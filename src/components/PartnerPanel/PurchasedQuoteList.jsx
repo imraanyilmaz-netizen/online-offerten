@@ -80,23 +80,23 @@ const AddressBox = ({ title, quote, type }) => {
                 {title}
             </h4>
             {mapsUrl ? (
-                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-green-700 hover:text-green-900 hover:underline mb-2 inline-flex items-center gap-1">
+                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-green-700 hover:text-green-900 hover:underline inline-flex items-center gap-1">
                     {addressLine}
                     <ExternalLink className="w-3 h-3" />
                 </a>
             ) : (
-                <p className="text-sm font-semibold text-gray-800 mb-2">{addressLine}</p>
+                <p className="text-sm font-semibold text-gray-800">{addressLine}</p>
             )}
-            {(isInternational || canton || floor || lift !== null || rooms || objectType) && (
-                <ul className="space-y-1 text-sm text-gray-600">
-                    {isInternational && country && <li><span className="font-bold">Land:</span> {country.name}</li>}
-                    {!isInternational && canton && <li><span className="font-bold">Kanton:</span> {canton}</li>}
-                    {floor && <li><span className="font-bold">Stockwerk:</span> {floor}</li>}
-                    {lift !== null && <li><span className="font-bold">Lift:</span> {lift ? 'Ja' : 'Nein'}</li>}
-                    {rooms && <li><span className="font-bold">Zimmer:</span> {rooms}</li>}
-                    {objectType && <li><span className="font-bold">Objektart:</span> {objectType}</li>}
-                </ul>
-            )}
+            <div className="text-sm text-gray-600 mt-1 space-y-0.5">
+                {isInternational && country && <p><span className="font-bold">Land:</span> {country.name}</p>}
+                {!isInternational && canton && <p><span className="font-bold">Kanton:</span> {canton}</p>}
+                {(floor || lift !== null) && (
+                    <p>{[floor, lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</p>
+                )}
+                {(rooms || objectType) && (
+                    <p>{[rooms, objectType ? objectType.charAt(0).toUpperCase() + objectType.slice(1) : null].filter(Boolean).join(' / ')}</p>
+                )}
+            </div>
         </div>
     );
 };
@@ -236,14 +236,58 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                   
                   <DetailSection title="Dienstleistungsdetails" icon={icon}>
                       <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
+                      <QuoteDetail label="Wunschtermin" value={formatDate(quote.move_date)} />
+                      {quote.move_date_flexible && <QuoteDetail label="Termin flexibel" value={quote.move_date_flexible} />}
                       {isMoving && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
-                      {isMoving && quote.additional_services_piano && <QuoteDetail label="Klaviertransport" value="Ja" />}
-                      {isMoving && (quote.umzugart === 'Privatumzug' || quote.umzugart === 'Auslandumzug') && quote.services_detail1 && quote.services_detail1.includes('Möbel De-/Montage: Ja') && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
-                      {isMoving && <QuoteDetail label="Spezialtransport Art" value={quote.special_transport_type} />}
-                      {isMoving && <QuoteDetail label="Details Spezialtransport" value={quote.special_transport_other_details} />}
-
-                      <ServiceDetails details={quote.services_detail1} />
                   </DetailSection>
+
+                  {/* Umzug + Reinigung Zusatzinfos nebeneinander */}
+                  {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal || quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+                    <div className={`grid gap-4 ${(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+                      {/* Umzug Zusatzleistungen */}
+                      {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
+                        <div className="bg-white p-4 rounded-lg border shadow-sm">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Truck className="w-4 h-4 text-blue-600" />
+                            <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
+                          </div>
+                          <div className="space-y-2">
+                            {quote.additional_services_furniture_assembly && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
+                            {quote.additional_services_packing && <QuoteDetail label="Einpackservice" value="Ja" />}
+                            {quote.special_transport && (
+                              <QuoteDetail label="Spezialtransporte" value={
+                                [quote.special_transport_piano && 'Klavier/Flügel', quote.special_transport_safe && 'Tresor', quote.special_transport_heavy && 'Schwere Möbel/Geräte'].filter(Boolean).join(', ') || 'Ja'
+                              } />
+                            )}
+                            {quote.additional_services_disposal && <QuoteDetail label="Entsorgung" value="Ja" />}
+                          </div>
+                        </div>
+                      )}
+                      {/* Reinigung Zusatzinfos */}
+                      {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+                        <div className="bg-white p-4 rounded-lg border shadow-sm">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Sparkles className="w-4 h-4 text-teal-600" />
+                            <h4 className="font-semibold text-sm text-gray-800">Reinigung – Details</h4>
+                          </div>
+                          <div className="space-y-2">
+                            {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
+                              'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
+                              '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
+                            }[quote.cleaning_area_sqm] || quote.cleaning_area_sqm} />}
+                            {quote.cleaning_type_guarantee && <QuoteDetail label="Art der Reinigung" value={{
+                              'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'
+                            }[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee} />}
+                            {(quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+                              <QuoteDetail label="Zusatzflächen" value={
+                                [quote.cleaning_additional_balcony && 'Balkon', quote.cleaning_additional_cellar && 'Keller', quote.cleaning_additional_garage && 'Garage'].filter(Boolean).join(', ')
+                              } />
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-4">
@@ -256,10 +300,6 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                       </div>
                   </DetailSection>
 
-                  <DetailSection title="Termin & Zusatzinformationen" icon={Calendar}>
-                      <QuoteDetail label="Wunschtermin" value={formatDate(quote.move_date)} />
-                      <QuoteDetail label="Termin flexibel" value={quote.move_date_flexible} />
-                  </DetailSection>
                 </div>
               </div>
 

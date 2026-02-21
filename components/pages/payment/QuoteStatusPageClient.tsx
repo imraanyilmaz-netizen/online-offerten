@@ -187,11 +187,14 @@ const AddressCard = ({ title, icon, street, zip, city, floor, lift, rooms }: { t
                     <div className="font-medium text-gray-800 text-sm mt-1 space-y-0.5">
                         {street && <div>{street}</div>}
                         {(zip || city) && <div>{`${zip || ''} ${city || ''}`}</div>}
-                        <div className="flex items-center flex-wrap gap-x-4 gap-y-1 mt-1 text-xs text-gray-600">
-                            {floor && <span className="flex items-center gap-1"><Layers className="w-3 h-3"/> Etage: {floor}</span>}
-                            {lift !== null && <span className="flex items-center gap-1"><Lift className="w-3 h-3"/> Lift: {lift ? <Check className="w-4 h-4 text-green-600"/> : <X className="w-4 h-4 text-red-600"/>}</span>}
-                            {rooms && <span className="flex items-center gap-1"><Building2 className="w-3 h-3"/> Zimmer: {rooms}</span>}
-                        </div>
+                        {(floor || lift !== null || rooms) && (
+                            <div className="text-xs text-gray-600 mt-1 space-y-0.5">
+                                {(floor || lift !== null) && (
+                                    <div>{[floor ? `${floor}` : null, lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</div>
+                                )}
+                                {rooms && <div>{rooms} Zimmer</div>}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -270,6 +273,56 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
             
             {isCleaningService(quote.servicetype) && quote.reinigung_details && <div className="border-t pt-4"><CleaningDetails details={quote.reinigung_details} /></div>}
             {isPaintingService(quote.servicetype) && quote.reinigung_details && <div className="border-t pt-4"><PaintingDetails details={quote.reinigung_details} /></div>}
+
+            {/* Umzug: Zusätzliche Leistungen */}
+            {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.additional_services_piano || quote.additional_services_furniture_lift || quote.additional_services_disposal) && (
+              <div className="border-t pt-4">
+                <p className="text-sm text-gray-500 mb-2">Zusätzliche Leistungen</p>
+                <div className="flex flex-wrap gap-2">
+                  {quote.additional_services_furniture_assembly && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Möbel De-/Montage</span>}
+                  {quote.additional_services_packing && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Verpackungsservice</span>}
+                  {quote.additional_services_piano && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Klavier-/Schwertransport</span>}
+                  {quote.additional_services_furniture_lift && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Möbellift</span>}
+                  {quote.additional_services_disposal && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Entsorgung</span>}
+                </div>
+              </div>
+            )}
+
+            {/* Reinigung Zusatzinfos */}
+            {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+              <div className="border-t pt-4 space-y-2">
+                {quote.cleaning_area_sqm && (
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Home /></div>
+                    <div>
+                      <p className="text-sm text-gray-500">Wohnungsfläche</p>
+                      <div className="font-medium text-gray-800 text-sm">
+                        {({'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'} as Record<string, string>)[quote.cleaning_area_sqm] || quote.cleaning_area_sqm}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {quote.cleaning_type_guarantee && (
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Sparkles /></div>
+                    <div>
+                      <p className="text-sm text-gray-500">Art der Reinigung</p>
+                      <div className="font-medium text-gray-800 text-sm">
+                        {({'mit_abnahmegarantie': 'mit Abnahmegarantie', 'ohne_abnahmegarantie': 'ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'} as Record<string, string>)[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {(quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    <span className="text-sm text-gray-500 mr-1">Zusatzflächen:</span>
+                    {quote.cleaning_additional_balcony && <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">Balkon</span>}
+                    {quote.cleaning_additional_cellar && <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">Keller</span>}
+                    {quote.cleaning_additional_garage && <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">Garage</span>}
+                  </div>
+                )}
+              </div>
+            )}
 
              <div className="border-t pt-4 flex items-start gap-3">
                 <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Calendar /></div>

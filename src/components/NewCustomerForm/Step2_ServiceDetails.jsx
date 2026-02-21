@@ -355,7 +355,104 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
 };
 
 
-const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckboxChange, errors, subQuestionsRef }) => {
+const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxChange, showCleaningType = false }) => {
+    const areaSizeOptions = [
+        { value: 'bis_40', label: 'bis 40 m²' },
+        { value: '40_60', label: '40 – 60 m²' },
+        { value: '60_80', label: '60 – 80 m²' },
+        { value: '80_100', label: '80 – 100 m²' },
+        { value: '100_120', label: '100 – 120 m²' },
+        { value: '120_140', label: '120 – 140 m²' },
+        { value: 'ueber_140', label: 'über 140 m²' },
+    ];
+
+    const cleaningTypeOptions = [
+        { value: 'mit_abnahmegarantie', label: 'Endreinigung mit Abnahmegarantie' },
+        { value: 'ohne_abnahmegarantie', label: 'Endreinigung ohne Abnahmegarantie' },
+        { value: 'umzugsreinigung', label: 'Umzugsreinigung' },
+    ];
+
+    return (
+        <div className="space-y-4 mt-3">
+            {/* Wohnungsfläche */}
+            <div>
+                <Label htmlFor="cleaning_area_size" className="font-semibold text-gray-700 text-sm">
+                    Wohnungsfläche (ca.)
+                </Label>
+                <select
+                    id="cleaning_area_size"
+                    name="cleaning_area_size"
+                    value={formData.cleaning_area_size || ''}
+                    onChange={(e) => handleSelectChange('cleaning_area_size', e.target.value)}
+                    className="mt-1 w-full rounded-lg border-2 border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-green-500 focus:outline-none hover:border-green-300 transition-colors"
+                >
+                    <option value="">Bitte wählen</option>
+                    {areaSizeOptions.map(opt => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                </select>
+            </div>
+
+            {/* Art der Reinigung - nur für Endreinigung */}
+            {showCleaningType && (
+                <div>
+                    <Label htmlFor="cleaning_type" className="font-semibold text-gray-700 text-sm">
+                        Art der Reinigung
+                    </Label>
+                    <select
+                        id="cleaning_type"
+                        name="cleaning_type"
+                        value={formData.cleaning_type || ''}
+                        onChange={(e) => handleSelectChange('cleaning_type', e.target.value)}
+                        className="mt-1 w-full rounded-lg border-2 border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-green-500 focus:outline-none hover:border-green-300 transition-colors"
+                    >
+                        <option value="">Bitte wählen</option>
+                        {cleaningTypeOptions.map(opt => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        ))}
+                    </select>
+                </div>
+            )}
+
+            {/* Zusatzflächen */}
+            <div>
+                <Label className="font-semibold text-gray-700 text-sm">
+                    Zusatzflächen <span className="text-gray-400 font-normal">(optional)</span>
+                </Label>
+                <div className="grid grid-cols-3 gap-2 mt-2">
+                    {[
+                        { id: 'cleaning_extra_balkon', label: 'Balkon' },
+                        { id: 'cleaning_extra_keller', label: 'Keller' },
+                        { id: 'cleaning_extra_garage', label: 'Garage' },
+                    ].map(item => (
+                        <div
+                            key={item.id}
+                            className={`p-2.5 border-2 rounded-lg transition-all duration-200 ease-in-out cursor-pointer ${
+                                formData[item.id] ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-400'
+                            }`}
+                        >
+                            <div className="flex items-center">
+                                <Checkbox
+                                    id={item.id}
+                                    name={item.id}
+                                    checked={formData[item.id] || false}
+                                    onCheckedChange={(checked) => handleCheckboxChange(item.id, checked)}
+                                    className="h-4 w-4 mr-2"
+                                />
+                                <Label htmlFor={item.id} className="cursor-pointer font-normal text-sm text-gray-800">
+                                    {item.label}
+                                </Label>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckboxChange, handleSelectChange, errors, subQuestionsRef }) => {
     const { t } = useTranslation('newCustomerForm');
     const cleaningFrequencyOptions = ['einmalig', 'woechentlich', 'zweiwoechig', 'monatlich'];
     const showGeneralCleaningDetails = false;
@@ -458,6 +555,8 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                         />
                     </div>
                 )}
+
+                {/* Wohnungsfläche, Art der Reinigung, Zusatzflächen werden in Step 3 abgefragt */}
             
         </div>
     );
@@ -686,7 +785,8 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
             <CleaningSubQuestions 
               formData={formData} 
               handleRadioGroupChange={handleRadioGroupChange} 
-              handleCheckboxChange={handleCheckboxChange} 
+              handleCheckboxChange={handleCheckboxChange}
+              handleSelectChange={handleSelectChange}
               errors={errors}
               subQuestionsRef={subQuestionsRef}
             />
@@ -827,7 +927,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
             </div>
 
             
-              {(formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug') && (
+              {formData.umzugArt === 'privatumzug' && (
                 <div
                   className="space-y-3 sm:space-y-4 pt-4 sm:pt-4 border-t border-gray-100"
                 >
@@ -851,6 +951,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                             </p>
                         </Label>
                     </div>
+                    {/* Endreinigung Detailfragen werden in Step 3 abgefragt */}
                   </div>
                 </div>
               )}

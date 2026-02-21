@@ -160,8 +160,39 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
                 <>
                     <CheckboxField id="additional_services_cleaning" label="Zusätzliche Reinigung" checked={formData.additional_services_cleaning || false} onChange={(checked) => handleCheckboxChange('additional_services_cleaning', checked)} />
                     <CheckboxField id="additional_services_piano" label="Klaviertransport" checked={formData.additional_services_piano || false} onChange={(checked) => handleCheckboxChange('additional_services_piano', checked)} />
+                    <CheckboxField id="additional_services_furniture_assembly" label="Möbel De-/Montage" checked={formData.additional_services_furniture_assembly || false} onChange={(checked) => handleCheckboxChange('additional_services_furniture_assembly', checked)} />
+                    <CheckboxField id="additional_services_packing" label="Verpackungsservice" checked={formData.additional_services_packing || false} onChange={(checked) => handleCheckboxChange('additional_services_packing', checked)} />
+                    <CheckboxField id="additional_services_furniture_lift" label="Möbellift" checked={formData.additional_services_furniture_lift || false} onChange={(checked) => handleCheckboxChange('additional_services_furniture_lift', checked)} />
+                    <CheckboxField id="additional_services_disposal" label="Entsorgung" checked={formData.additional_services_disposal || false} onChange={(checked) => handleCheckboxChange('additional_services_disposal', checked)} />
                 </>
             )}
+        </Fieldset>
+
+        {/* Reinigung Zusatzfelder */}
+        <Fieldset legend="Reinigung Zusatzinfos">
+            <FormField id="cleaning_area_sqm" label="Wohnungsfläche">
+              <select name="cleaning_area_sqm" value={formData.cleaning_area_sqm || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                <option value="">—</option>
+                <option value="bis_40">bis 40 m²</option>
+                <option value="40_60">40 – 60 m²</option>
+                <option value="60_80">60 – 80 m²</option>
+                <option value="80_100">80 – 100 m²</option>
+                <option value="100_120">100 – 120 m²</option>
+                <option value="120_140">120 – 140 m²</option>
+                <option value="ueber_140">über 140 m²</option>
+              </select>
+            </FormField>
+            <FormField id="cleaning_type_guarantee" label="Art der Reinigung">
+              <select name="cleaning_type_guarantee" value={formData.cleaning_type_guarantee || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                <option value="">—</option>
+                <option value="mit_abnahmegarantie">mit Abnahmegarantie</option>
+                <option value="ohne_abnahmegarantie">ohne Abnahmegarantie</option>
+                <option value="umzugsreinigung">Umzugsreinigung</option>
+              </select>
+            </FormField>
+            <CheckboxField id="cleaning_additional_balcony" label="Balkon" checked={formData.cleaning_additional_balcony || false} onChange={(checked) => handleCheckboxChange('cleaning_additional_balcony', checked)} />
+            <CheckboxField id="cleaning_additional_cellar" label="Keller" checked={formData.cleaning_additional_cellar || false} onChange={(checked) => handleCheckboxChange('cleaning_additional_cellar', checked)} />
+            <CheckboxField id="cleaning_additional_garage" label="Garage" checked={formData.cleaning_additional_garage || false} onChange={(checked) => handleCheckboxChange('cleaning_additional_garage', checked)} />
         </Fieldset>
 
         {showMovingFields && (

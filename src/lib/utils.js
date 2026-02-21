@@ -36,7 +36,7 @@ export function formatDate(dateString) {
     if (isNaN(date.getTime())) {
       return dateString; // Return original string if invalid date
     }
-    return format(date, 'dd. MMMM yyyy', { locale: de });
+    return format(date, 'EEEE, dd. MMMM yyyy', { locale: de });
   } catch (error) {
     console.error("Error formatting date:", error);
     return dateString;

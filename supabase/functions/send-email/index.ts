@@ -9,8 +9,23 @@ const corsHeaders = {
 };
 
 const createAdminEmailHtml = (quoteDetails)=>{
-  const { servicetype, firstname, lastname, email, phone, preferredtime, quoteswanted, from_street, from_zip, from_city, from_rooms, move_date, additional_services_piano, how_found, salutation, from_country, to_country, move_date_flexible } = quoteDetails;
+  const { servicetype, firstname, lastname, email, phone, preferredtime, quoteswanted, from_street, from_zip, from_city, from_rooms, move_date, additional_services_piano, additional_services_furniture_assembly, additional_services_packing, additional_services_furniture_lift, additional_services_disposal, cleaning_area_sqm, cleaning_type_guarantee, cleaning_additional_balcony, cleaning_additional_cellar, cleaning_additional_garage, how_found, salutation, from_country, to_country, move_date_flexible } = quoteDetails;
   const formattedDate = move_date ? new Date(move_date).toLocaleDateString('de-DE') : 'N/A';
+  
+  // Zusätzliche Leistungen sammeln
+  const additionalServices = [];
+  if (additional_services_furniture_assembly) additionalServices.push('Möbel De-/Montage');
+  if (additional_services_packing) additionalServices.push('Verpackungsservice');
+  if (additional_services_piano) additionalServices.push('Klavier-/Schwertransport');
+  if (additional_services_furniture_lift) additionalServices.push('Möbellift');
+  if (additional_services_disposal) additionalServices.push('Entsorgung');
+  const additionalServicesStr = additionalServices.length > 0 ? additionalServices.join(', ') : 'Keine';
+
+  // Reinigung Labels
+  const areaSizeLabels: Record<string, string> = { 'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²' };
+  const cleaningTypeLabels: Record<string, string> = { 'mit_abnahmegarantie': 'mit Abnahmegarantie', 'ohne_abnahmegarantie': 'ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung' };
+  const extras = [cleaning_additional_balcony && 'Balkon', cleaning_additional_cellar && 'Keller', cleaning_additional_garage && 'Garage'].filter(Boolean);
+
   return `
     <!DOCTYPE html>
     <html>
@@ -22,7 +37,7 @@ const createAdminEmailHtml = (quoteDetails)=>{
         .details { border: 1px solid #ddd; padding: 15px; border-radius: 5px; background-color: #f9f9f9; margin: 20px 0; }
         table { width: 100%; border-collapse: collapse; }
         td { padding: 8px; border-bottom: 1px solid #eee; }
-        td:first-child { font-weight: bold; width: 150px; }
+        td:first-child { font-weight: bold; width: 180px; }
         .button { display: inline-block; padding: 12px 24px; background-color: #28a745; color: #fff; text-decoration: none; border-radius: 5px; }
         .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; }
       </style>
@@ -50,7 +65,10 @@ const createAdminEmailHtml = (quoteDetails)=>{
             <tr><td><strong>Nach (Land):</strong></td><td>${to_country || 'N/A'}</td></tr>
             <tr><td><strong>Umzugsdatum:</strong></td><td>${formattedDate}</td></tr>
             <tr><td><strong>Datum flexibel:</strong></td><td>${move_date_flexible ? 'Ja' : 'Nein'}</td></tr>
-            <tr><td><strong>Klaviertransport:</strong></td><td>${additional_services_piano ? 'Ja' : 'Nein'}</td></tr>
+            <tr><td><strong>Zusätzl. Leistungen:</strong></td><td>${additionalServicesStr}</td></tr>
+            ${cleaning_area_sqm ? `<tr><td><strong>Wohnungsfläche:</strong></td><td>${areaSizeLabels[cleaning_area_sqm] || cleaning_area_sqm}</td></tr>` : ''}
+            ${cleaning_type_guarantee ? `<tr><td><strong>Art der Reinigung:</strong></td><td>${cleaningTypeLabels[cleaning_type_guarantee] || cleaning_type_guarantee}</td></tr>` : ''}
+            ${extras.length > 0 ? `<tr><td><strong>Zusatzflächen:</strong></td><td>${extras.join(', ')}</td></tr>` : ''}
             <tr><td><strong>Wie gefunden:</strong></td><td>${how_found || 'N/A'}</td></tr>
           </table>
         </div>

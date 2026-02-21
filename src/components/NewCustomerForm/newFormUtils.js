@@ -190,9 +190,43 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     }
   }
 
-  // Möbel De-/Montage bilgisini ekle (sadece Privatumzug und Auslandumzug için)
-  if (formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'international') && formData.furniture_assembly) {
-    serviceSpecificDetails.push('Möbel De-/Montage: Ja');
+  // Umzug: Zusätzliche Leistungen Infos
+  if (formData.service === 'umzug' && ['privatumzug', 'geschaeftsumzug', 'international'].includes(formData.umzugArt)) {
+    if (formData.furniture_assembly) serviceSpecificDetails.push('Möbel De-/Montage: Ja');
+    if (formData.additional_services_packing) serviceSpecificDetails.push('Einpackservice: Ja');
+    if (formData.special_transport) {
+      const items = [];
+      if (formData.special_transport_piano) items.push('Klavier/Flügel');
+      if (formData.special_transport_safe) items.push('Tresor');
+      if (formData.special_transport_heavy) items.push('Schwere Möbel/Geräte');
+      serviceSpecificDetails.push(`Spezialtransporte: ${items.length > 0 ? items.join(', ') : 'Ja'}`);
+    }
+    if (formData.additional_services_disposal) serviceSpecificDetails.push('Entsorgung: Ja');
+  }
+
+  // Reinigung: Wohnungsfläche, Art der Reinigung, Zusatzflächen Infos
+  const isCleaningWithArea = formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt);
+  const isUmzugWithCleaning = formData.service === 'umzug' && ['privatumzug', 'geschaeftsumzug'].includes(formData.umzugArt) && formData.additional_cleaning;
+  
+  if (isCleaningWithArea || isUmzugWithCleaning) {
+    const areaSizeLabels = {
+      'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
+      '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
+    };
+    if (formData.cleaning_area_size) serviceSpecificDetails.push(`Wohnungsfläche: ${areaSizeLabels[formData.cleaning_area_size] || formData.cleaning_area_size}`);
+    
+    const cleaningTypeLabels = {
+      'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie',
+      'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie',
+      'umzugsreinigung': 'Umzugsreinigung'
+    };
+    if (formData.cleaning_type) serviceSpecificDetails.push(`Art der Reinigung: ${cleaningTypeLabels[formData.cleaning_type] || formData.cleaning_type}`);
+    
+    const extras = [];
+    if (formData.cleaning_extra_balkon) extras.push('Balkon');
+    if (formData.cleaning_extra_keller) extras.push('Keller');
+    if (formData.cleaning_extra_garage) extras.push('Garage');
+    if (extras.length > 0) serviceSpecificDetails.push(`Zusatzflächen: ${extras.join(', ')}`);
   }
 
   const serviceDetailsString = serviceSpecificDetails.join('\n');
@@ -379,7 +413,20 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     move_date_flexible: formData.move_date_flexible,
     preferredtime: preferredTimeLabel,
     additional_cleaning: formData.additional_cleaning,
-    additional_services_piano: formData.additional_piano,
+    additional_services_piano: formData.additional_piano || formData.special_transport_piano || false,
+    additional_services_furniture_assembly: formData.furniture_assembly || false,
+    additional_services_packing: formData.additional_services_packing || false,
+    additional_services_furniture_lift: formData.additional_services_furniture_lift || false,
+    additional_services_disposal: formData.additional_services_disposal || false,
+    special_transport: formData.special_transport || false,
+    special_transport_piano: formData.special_transport_piano || false,
+    special_transport_safe: formData.special_transport_safe || false,
+    special_transport_heavy: formData.special_transport_heavy || false,
+    cleaning_area_sqm: formData.cleaning_area_size || null,
+    cleaning_type_guarantee: formData.cleaning_type || null,
+    cleaning_additional_balcony: formData.cleaning_extra_balkon || false,
+    cleaning_additional_cellar: formData.cleaning_extra_keller || false,
+    cleaning_additional_garage: formData.cleaning_extra_garage || false,
     how_found: howFoundLabel,
     quoteswanted: quotesWantedValue,
     status: 'pending', 
