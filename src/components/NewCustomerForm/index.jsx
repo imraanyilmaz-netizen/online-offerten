@@ -403,8 +403,17 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       const paramName = serviceArtParamMap[formData.service] || 'umzugArt';
       params.set(paramName, formData.umzugArt);
     }
+    // Sub-Parameter für Seitenaktualisierung beibehalten
+    params.delete('special_transport_type');
+    params.delete('raeumung_scope');
+    if (formData.special_transport_type && formData.umzugArt === 'spezialtransport') {
+      params.set('special_transport_type', formData.special_transport_type);
+    }
+    if (formData.raeumung_scope && formData.service === 'raeumung' && formData.umzugArt === 'raeumung') {
+      params.set('raeumung_scope', formData.raeumung_scope);
+    }
     router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
-  }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt]);
+  }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt, formData.special_transport_type, formData.raeumung_scope]);
 
   const scrollToFormTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -485,6 +494,12 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       hasInitializedUmzugArtFromUrl.current = false;
     }
     
+    // URL'den okuma yapılıyorsa (sayfa yenileme), URL'yi değiştirme
+    // Çünkü URL zaten doğru parametrelere sahip
+    if (isFromUrl) {
+      return;
+    }
+    
     const params = new URLSearchParams(searchParamsString);
     params.set('service', serviceId);
     
@@ -499,7 +514,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     // router.replace kullan ki URL değişikliği görünsün ama history'ye entry eklenmesin
     router.replace(newUrl);
     
-    if (serviceId === 'umzug' && !isFromUrl) {
+    if (serviceId === 'umzug') {
       setTimeout(scrollToUmzugArt, 50); 
     }
   }, [scrollToUmzugArt, handleServiceSelect, pathname, currentStep, searchParamsString, router]);
@@ -513,6 +528,12 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       userManuallySelectedUmzugArt.current = true;
     }
     
+    // URL'den okuma yapılıyorsa (sayfa yenileme), URL'yi değiştirme
+    // Çünkü URL zaten doğru parametrelere sahip
+    if (isFromUrl) {
+      return;
+    }
+    
     // Update URL with service-specific parameter name
     const params = new URLSearchParams(searchParamsString);
     
@@ -521,6 +542,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     params.delete('reinigungArt');
     params.delete('malerArt');
     params.delete('raeumungArt');
+    // Remove sub-parameters (they belong to old umzugArt)
+    params.delete('special_transport_type');
+    params.delete('raeumung_scope');
     
     // Set the correct parameter for current service
     const paramName = getServiceArtParamName(formData.service);
