@@ -330,16 +330,16 @@ export const useQuoteManagement = () => {
         }
     }, [handleUpdateQuote, toast]);
 
-    const handleSendQuote = useCallback(async (quoteId) => {
+    const handleSendQuote = useCallback(async (quoteId, skipEmail = false) => {
         setIsProcessing(true);
         try {
             const { data, error } = await supabase.functions.invoke('approve_and_notify_partners', {
-                body: { quoteId: quoteId },
+                body: { quoteId: quoteId, skipEmail: skipEmail },
             });
 
             if (error) throw error;
 
-            toast({ title: 'Erfolg', description: 'Anfrage wurde an die zugewiesenen Partner versendet.' });
+            toast({ title: 'Erfolg', description: skipEmail ? 'Anfrage wurde ohne E-Mail an die Partner zugewiesen.' : 'Anfrage wurde an die zugewiesenen Partner versendet.' });
             
             // Re-fetch data to get the latest status
             const { data: updatedQuote, error: fetchError } = await supabase

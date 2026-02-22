@@ -23,6 +23,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const [showAddPartner, setShowAddPartner] = useState(false);
   const [selectedNewPartnerIds, setSelectedNewPartnerIds] = useState(new Set());
   const [isSendingAdditional, setIsSendingAdditional] = useState(false);
+  const [skipEmail, setSkipEmail] = useState(false);
   const [partnerSearchTerm, setPartnerSearchTerm] = useState('');
   const [listHeight, setListHeight] = useState(192); // default max-h-48 = 192px
   const isDragging = useRef(false);
@@ -316,10 +317,19 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                 {/* Butonlar satırı */}
                 <div className="flex items-center gap-2 flex-wrap">
                   {status === 'matched' && (
-                    <Button size="sm" onClick={() => onSend(quote.id)} disabled={parentIsProcessing}>
-                        {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2" />} 
-                        Senden
-                    </Button>
+                    <div className="flex items-center gap-3">
+                      <Button size="sm" onClick={() => onSend(quote.id, skipEmail)} disabled={parentIsProcessing}>
+                          {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2" />} 
+                          {skipEmail ? 'Ohne E-Mail senden' : 'Senden'}
+                      </Button>
+                      <label className="flex items-center gap-1.5 cursor-pointer text-xs text-gray-600 select-none">
+                        <Checkbox 
+                          checked={skipEmail} 
+                          onCheckedChange={(checked) => setSkipEmail(!!checked)} 
+                        />
+                        Ohne E-Mail
+                      </label>
+                    </div>
                   )}
                   {(status === 'new_quote' || status === 'pending' || status === 'matched') && (
                       <Button size="sm" variant={isMatcherExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'matcher')}>
