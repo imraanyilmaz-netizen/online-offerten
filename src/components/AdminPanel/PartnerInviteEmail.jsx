@@ -189,7 +189,7 @@ const PartnerInviteEmail = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex gap-4 items-end">
+          <div className="flex flex-col sm:flex-row gap-4 sm:items-end">
             <div className="flex-1">
               <Label htmlFor="company-name">Firma</Label>
               <Input
