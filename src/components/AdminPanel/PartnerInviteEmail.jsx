@@ -76,6 +76,23 @@ const PartnerInviteEmail = () => {
 
     setAddingToList(true);
     try {
+      // Prüfen ob E-Mail bereits als Partner registriert ist
+      const { data: existingPartner } = await supabase
+        .from('partners')
+        .select('id, company_name, email')
+        .eq('email', email)
+        .maybeSingle();
+
+      if (existingPartner) {
+        toast({
+          variant: "destructive",
+          title: "⚠️ Bereits registrierter Partner",
+          description: `${existingPartner.company_name || email} ist bereits als Partner registriert. Eine Einladung ist nicht nötig.`,
+        });
+        setAddingToList(false);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('partner_invitations')
         .insert({ company_name: name, email: email, status: 'pending' })
@@ -100,6 +117,23 @@ const PartnerInviteEmail = () => {
   const sendEmailForInvitation = async (invitation) => {
     setSendingId(invitation.id);
     try {
+      // Prüfen ob E-Mail bereits als Partner registriert ist
+      const { data: existingPartner } = await supabase
+        .from('partners')
+        .select('id, company_name')
+        .eq('email', invitation.email)
+        .maybeSingle();
+
+      if (existingPartner) {
+        toast({
+          variant: "destructive",
+          title: "⚠️ Bereits registrierter Partner",
+          description: `${existingPartner.company_name || invitation.email} ist bereits als Partner registriert. E-Mail wird nicht gesendet.`,
+        });
+        setSendingId(null);
+        return;
+      }
+
       const { data, error } = await supabase.functions.invoke('partner-einladung-email', {
         body: {
           companies: [{
