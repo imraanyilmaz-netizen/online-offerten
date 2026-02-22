@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { supabase } from '@/lib/customSupabaseClient';
-import { Mail, Plus, X, Loader2, Send, Clock, Search, Trash2, RotateCcw, CheckCircle } from 'lucide-react';
+import { Mail, Plus, Loader2, Send, Clock, Search, Trash2, RotateCcw, CheckCircle, Eye, MousePointerClick } from 'lucide-react';
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 
@@ -19,7 +19,7 @@ const PartnerInviteEmail = () => {
   const [invitations, setInvitations] = useState([]);
   const [loadingInvitations, setLoadingInvitations] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sendingId, setSendingId] = useState(null); // welche Einladung wird gerade gesendet
+  const [sendingId, setSendingId] = useState(null);
   const [addingToList, setAddingToList] = useState(false);
 
   // Dialoge
@@ -32,7 +32,7 @@ const PartnerInviteEmail = () => {
       const { data, error } = await supabase
         .from('partner_invitations')
         .select('*')
-        .order('sent_at', { ascending: false });
+        .order('created_at', { ascending: false });
 
       if (error) {
         console.error('Error fetching invitations:', error);
@@ -50,7 +50,15 @@ const PartnerInviteEmail = () => {
     fetchInvitations();
   }, [fetchInvitations]);
 
-  // Firma zur Liste hinzufügen (noch keine Mail senden)
+  // Auto-refresh alle 30 Sekunden für Tracking-Updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchInvitations();
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [fetchInvitations]);
+
+  // Firma zur Liste hinzufügen
   const handleAddToList = async () => {
     const name = companyName.trim();
     const email = companyEmail.trim();
@@ -88,13 +96,17 @@ const PartnerInviteEmail = () => {
     }
   };
 
-  // Mail senden für eine Einladung
+  // Mail senden für eine Einladung (mit invitationId für Tracking)
   const sendEmailForInvitation = async (invitation) => {
     setSendingId(invitation.id);
     try {
       const { data, error } = await supabase.functions.invoke('partner-einladung-email', {
         body: {
-          companies: [{ name: invitation.company_name, email: invitation.email }]
+          companies: [{
+            name: invitation.company_name,
+            email: invitation.email,
+            invitationId: invitation.id
+          }]
         }
       });
 
@@ -125,7 +137,7 @@ const PartnerInviteEmail = () => {
     }
   };
 
-  // Erneut senden (nach Bestätigung)
+  // Erneut senden
   const handleResendConfirm = async () => {
     const invitation = resendDialog.invitation;
     setResendDialog({ open: false, invitation: null });
@@ -230,7 +242,11 @@ const PartnerInviteEmail = () => {
                 <span className="text-sm font-normal text-gray-500">({invitations.length})</span>
               </CardTitle>
               <CardDescription>
-                Verwalten Sie Ihre Partner-Einladungen. Senden Sie E-Mails oder entfernen Sie Einträge.
+                Verwalten Sie Ihre Partner-Einladungen.
+                <span className="inline-flex items-center gap-1 ml-2 text-xs">
+                  <Eye className="w-3 h-3 text-green-500" /> = E-Mail geöffnet
+                  <MousePointerClick className="w-3 h-3 text-blue-500 ml-2" /> = Link geklickt
+                </span>
               </CardDescription>
             </div>
           </div>
@@ -264,6 +280,8 @@ const PartnerInviteEmail = () => {
               {filteredInvitations.map((inv) => {
                 const isSending = sendingId === inv.id;
                 const isSent = inv.status === 'sent';
+                const hasOpened = !!inv.email_opened_at;
+                const hasClicked = !!inv.link_clicked_at;
 
                 return (
                   <div key={inv.id} className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${isSent ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'}`}>
@@ -283,11 +301,24 @@ const PartnerInviteEmail = () => {
                             Ausstehend
                           </span>
                         )}
+                        {/* Tracking Icons */}
+                        {isSent && (
+                          <div className="flex items-center gap-1.5 ml-1">
+                            <span title={hasOpened ? `Geöffnet am ${format(new Date(inv.email_opened_at), "d. MMM yyyy, HH:mm", { locale: de })}` : 'Noch nicht geöffnet'}>
+                              <Eye className={`w-4 h-4 ${hasOpened ? 'text-green-500' : 'text-gray-300'}`} />
+                            </span>
+                            <span title={hasClicked ? `Geklickt am ${format(new Date(inv.link_clicked_at), "d. MMM yyyy, HH:mm", { locale: de })}` : 'Noch nicht geklickt'}>
+                              <MousePointerClick className={`w-4 h-4 ${hasClicked ? 'text-blue-500' : 'text-gray-300'}`} />
+                            </span>
+                          </div>
+                        )}
                       </div>
                       <p className="text-xs text-gray-500 truncate">{inv.email}</p>
                       {isSent && inv.sent_at && (
                         <p className="text-xs text-gray-400 mt-0.5">
                           Gesendet am {format(new Date(inv.sent_at), "d. MMM yyyy, HH:mm", { locale: de })}
+                          {hasOpened && <span className="text-green-600 ml-2">• Geöffnet {format(new Date(inv.email_opened_at), "d. MMM, HH:mm", { locale: de })}</span>}
+                          {hasClicked && <span className="text-blue-600 ml-2">• Geklickt {format(new Date(inv.link_clicked_at), "d. MMM, HH:mm", { locale: de })}</span>}
                         </p>
                       )}
                     </div>
@@ -295,7 +326,6 @@ const PartnerInviteEmail = () => {
                     {/* Aktionen */}
                     <div className="flex items-center gap-2 flex-shrink-0 ml-3">
                       {isSent ? (
-                        // Erneut senden
                         <Button
                           size="sm"
                           variant="outline"
@@ -307,7 +337,6 @@ const PartnerInviteEmail = () => {
                           Erneut senden
                         </Button>
                       ) : (
-                        // Erstmals senden
                         <Button
                           size="sm"
                           onClick={() => sendEmailForInvitation(inv)}
@@ -318,7 +347,6 @@ const PartnerInviteEmail = () => {
                           Mail senden
                         </Button>
                       )}
-                      {/* Löschen */}
                       <Button
                         size="sm"
                         variant="ghost"
