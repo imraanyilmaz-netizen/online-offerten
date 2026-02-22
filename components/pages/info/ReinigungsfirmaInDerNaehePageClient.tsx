@@ -821,61 +821,82 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       {/* FAQ Section */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="mb-10">
-            <h2 className="heading-2">
-              Häufig gestellte Fragen (FAQ)
-            </h2>
-          </div>
+          <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+            {/* Left: FAQ */}
+            <div className="md:col-span-3">
+              <div className="mb-8">
+                <h2 className="heading-2">
+                  Häufig gestellte Fragen (FAQ)
+                </h2>
+              </div>
 
-          <div className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-b">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                    <h4 className="faq-question">{item.q}</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-body leading-relaxed">
-                    {item.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+              <Accordion type="single" collapsible className="w-full">
+                {faqItems.map((item, index) => (
+                  <AccordionItem key={index} value={`item-${index}`} className="border-b">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                      <h4 className="faq-question">{item.q}</h4>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-body leading-relaxed">
+                      {item.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
+            {/* Right: Image */}
+            <div className="relative md:col-span-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <Image
+                  src="/reinigungsfirma/f1fd77b6.webp"
+                  alt="Reinigungsfirma FAQ – Häufig gestellte Fragen zur professionellen Reinigung"
+                  width={600}
+                  height={450}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              {/* Floating Badge */}
+              <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                <p className="text-sm font-bold">Fragen & Antworten</p>
+                <p className="text-xs text-blue-100">Rund um Reinigungsfirmen</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="heading-2-white mb-6">
+            <h2 className="heading-2 mb-6">
               Jetzt kostenlose Offerten anfordern
             </h2>
-            <p className="text-body-white mb-8">
+            <p className="text-body mb-8">
               Finden Sie in wenigen Minuten die passende Reinigungsfirma für Ihre Räumlichkeiten – ob Wohnungsreinigung, Büroreinigung oder Baureinigung.
             </p>
             <Button
               onClick={handleCtaClick}
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-6 shadow-xl"
+              className="bg-blue-600 text-white hover:bg-blue-700 text-lg px-8 py-6 shadow-xl"
             >
               <Zap className="mr-2 h-5 w-5" />
               Jetzt Offerten anfordern
             </Button>
-            <p className="mt-6 text-blue-100 text-sm italic">
+            <p className="mt-6 text-gray-500 text-sm italic">
               Kein Risiko. Keine Kosten. Nur passende Angebote von Reinigungsfirmen in Ihrer Nähe.
             </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-blue-50">
+            <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-gray-700">
               <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2" />
+                <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
                 <span>100% kostenlos</span>
               </div>
               <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2" />
+                <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
                 <span>Unverbindlich</span>
               </div>
               <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 mr-2" />
+                <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
                 <span>Geprüfte Schweizer Reinigungsunternehmen</span>
               </div>
             </div>

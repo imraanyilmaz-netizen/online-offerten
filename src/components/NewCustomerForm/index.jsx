@@ -406,14 +406,20 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     // Sub-Parameter für Seitenaktualisierung beibehalten
     params.delete('special_transport_type');
     params.delete('raeumung_scope');
+    params.delete('endreinigung');
     if (formData.special_transport_type && formData.umzugArt === 'spezialtransport') {
       params.set('special_transport_type', formData.special_transport_type);
     }
     if (formData.raeumung_scope && formData.service === 'raeumung' && formData.umzugArt === 'raeumung') {
       params.set('raeumung_scope', formData.raeumung_scope);
     }
+    // Endreinigung Parameter beibehalten (Privatumzug/Geschäftsumzug + Endreinigung)
+    if (formData.additional_cleaning && formData.service === 'umzug' && 
+        (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug')) {
+      params.set('endreinigung', 'ja');
+    }
     router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
-  }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt, formData.special_transport_type, formData.raeumung_scope]);
+  }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt, formData.special_transport_type, formData.raeumung_scope, formData.additional_cleaning]);
 
   const scrollToFormTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -508,6 +514,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     params.delete('reinigungArt');
     params.delete('malerArt');
     params.delete('raeumungArt');
+    params.delete('endreinigung');
     
     if(currentStep > 1) params.delete('step');
     const newUrl = `${pathname}?${params.toString()}`;
@@ -545,6 +552,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     // Remove sub-parameters (they belong to old umzugArt)
     params.delete('special_transport_type');
     params.delete('raeumung_scope');
+    params.delete('endreinigung');
     
     // Set the correct parameter for current service
     const paramName = getServiceArtParamName(formData.service);
@@ -666,7 +674,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   }, [searchParamsString, formData.service, formData.umzugArt, formData.raeumung_scope, handleRadioGroupChange]);
 
-  // URL'den additional_cleaning parametresini oku ve otomatik setzen
+  // URL'den endreinigung parametresini oku ve otomatik setzen
   useEffect(() => {
     // Eğer kullanıcı zaten manuel değişiklik yaptıysa, URL'den okuma yapma
     if (userManuallyChangedAdditionalCleaning.current) {
@@ -679,12 +687,12 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
     
     const params = new URLSearchParams(searchParamsString);
-    const additionalCleaningFromUrl = params.get('additional_cleaning');
+    const endReinigungFromUrl = params.get('endreinigung');
     
-    // Nur wenn service=umzug, umzugArt=privatumzug veya geschaeftsumzug ise ve additional_cleaning=true ise
+    // Nur wenn service=umzug, umzugArt=privatumzug veya geschaeftsumzug ise ve endreinigung=ja ise
     if (formData.service === 'umzug' && 
         (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug') && 
-        additionalCleaningFromUrl === 'true' && 
+        endReinigungFromUrl === 'ja' && 
         !formData.additional_cleaning) {
       handleCheckboxChange('additional_cleaning', true);
       hasInitializedAdditionalCleaningFromUrl.current = true;
@@ -697,7 +705,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
              formData.additional_cleaning) {
       handleCheckboxChange('additional_cleaning', false);
       hasInitializedAdditionalCleaningFromUrl.current = true;
-    } else if (!additionalCleaningFromUrl) {
+    } else if (!endReinigungFromUrl) {
       // URL'de parametre yoksa bile flag'i true yap, tekrar kontrol etme
       hasInitializedAdditionalCleaningFromUrl.current = true;
     }
