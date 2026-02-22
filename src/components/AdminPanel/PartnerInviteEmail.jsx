@@ -1,192 +1,396 @@
 ﻿'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { supabase } from '@/lib/customSupabaseClient';
-import { Mail, Plus, X, Loader2, Send } from 'lucide-react';
+import { Mail, Plus, X, Loader2, Send, Clock, Search, Trash2, RotateCcw, CheckCircle } from 'lucide-react';
+import { format } from 'date-fns';
+import { de } from 'date-fns/locale/de';
 
 const PartnerInviteEmail = () => {
   const { toast } = useToast();
-  const [companies, setCompanies] = useState([
-    { name: '', email: '' }
-  ]);
-  const [loading, setLoading] = useState(false);
+  const [companyName, setCompanyName] = useState('');
+  const [companyEmail, setCompanyEmail] = useState('');
+  const [invitations, setInvitations] = useState([]);
+  const [loadingInvitations, setLoadingInvitations] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sendingId, setSendingId] = useState(null); // welche Einladung wird gerade gesendet
+  const [addingToList, setAddingToList] = useState(false);
 
-  const addCompany = () => {
-    setCompanies([...companies, { name: '', email: '' }]);
-  };
+  // Dialoge
+  const [resendDialog, setResendDialog] = useState({ open: false, invitation: null });
+  const [deleteDialog, setDeleteDialog] = useState({ open: false, invitation: null });
 
-  const removeCompany = (index) => {
-    setCompanies(companies.filter((_, i) => i !== index));
-  };
+  // Einladungen laden
+  const fetchInvitations = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('partner_invitations')
+        .select('*')
+        .order('sent_at', { ascending: false });
 
-  const updateCompany = (index, field, value) => {
-    const updated = [...companies];
-    updated[index][field] = value;
-    setCompanies(updated);
-  };
+      if (error) {
+        console.error('Error fetching invitations:', error);
+        return;
+      }
+      setInvitations(data || []);
+    } catch (err) {
+      console.error('Error fetching invitations:', err);
+    } finally {
+      setLoadingInvitations(false);
+    }
+  }, []);
 
-  const handleSendInvites = async () => {
-    // Validate
-    const validCompanies = companies.filter(c => c.name.trim() && c.email.trim());
-    
-    if (validCompanies.length === 0) {
-      toast({
-        variant: "destructive",
-        title: "Fehler",
-        description: "Bitte geben Sie mindestens eine Firma mit Name und E-Mail ein.",
-      });
+  useEffect(() => {
+    fetchInvitations();
+  }, [fetchInvitations]);
+
+  // Firma zur Liste hinzufügen (noch keine Mail senden)
+  const handleAddToList = async () => {
+    const name = companyName.trim();
+    const email = companyEmail.trim();
+
+    if (!name || !email) {
+      toast({ variant: "destructive", title: "Fehler", description: "Bitte Firma und E-Mail eingeben." });
       return;
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const invalidEmails = validCompanies.filter(c => !emailRegex.test(c.email));
-    
-    if (invalidEmails.length > 0) {
-      toast({
-        variant: "destructive",
-        title: "Fehler",
-        description: `Ungültige E-Mail-Adressen: ${invalidEmails.map(c => c.email).join(', ')}`,
-      });
+    if (!emailRegex.test(email)) {
+      toast({ variant: "destructive", title: "Fehler", description: "Ungültige E-Mail-Adresse." });
       return;
     }
 
-    setLoading(true);
+    setAddingToList(true);
+    try {
+      const { data, error } = await supabase
+        .from('partner_invitations')
+        .insert({ company_name: name, email: email, status: 'pending' })
+        .select()
+        .single();
 
+      if (error) throw error;
+
+      setInvitations(prev => [data, ...prev]);
+      setCompanyName('');
+      setCompanyEmail('');
+      toast({ title: "Hinzugefügt", description: `${name} wurde zur Liste hinzugefügt.` });
+    } catch (error) {
+      console.error('Error adding to list:', error);
+      toast({ variant: "destructive", title: "Fehler", description: error.message || "Fehler beim Hinzufügen." });
+    } finally {
+      setAddingToList(false);
+    }
+  };
+
+  // Mail senden für eine Einladung
+  const sendEmailForInvitation = async (invitation) => {
+    setSendingId(invitation.id);
     try {
       const { data, error } = await supabase.functions.invoke('partner-einladung-email', {
         body: {
-          companies: validCompanies.map(c => ({
-            name: c.name.trim(),
-            email: c.email.trim()
-          }))
+          companies: [{ name: invitation.company_name, email: invitation.email }]
         }
       });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
-      const successCount = data.results?.filter(r => r.success).length || 0;
-      const failCount = validCompanies.length - successCount;
+      const success = data.results?.[0]?.success;
+      if (!success) throw new Error('E-Mail konnte nicht gesendet werden.');
 
-      if (successCount > 0) {
-        toast({
-          title: "Erfolg",
-          description: `${successCount} Einladung(en) erfolgreich gesendet${failCount > 0 ? `, ${failCount} fehlgeschlagen` : ''}`,
-        });
-        
-        // Clear form
-        setCompanies([{ name: '', email: '' }]);
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Fehler",
-          description: "Keine E-Mails konnten gesendet werden. Bitte versuchen Sie es erneut.",
-        });
-      }
+      // Status in DB aktualisieren
+      const { error: updateError } = await supabase
+        .from('partner_invitations')
+        .update({ status: 'sent', sent_at: new Date().toISOString() })
+        .eq('id', invitation.id);
+
+      if (updateError) console.error('Update error:', updateError);
+
+      // Lokal aktualisieren
+      setInvitations(prev => prev.map(inv =>
+        inv.id === invitation.id ? { ...inv, status: 'sent', sent_at: new Date().toISOString() } : inv
+      ));
+
+      toast({ title: "Gesendet ✅", description: `E-Mail an ${invitation.company_name} wurde erfolgreich gesendet.` });
     } catch (error) {
-      console.error('Error sending invites:', error);
-      toast({
-        variant: "destructive",
-        title: "Fehler",
-        description: error.message || "Fehler beim Senden der Einladungen",
-      });
+      console.error('Error sending email:', error);
+      toast({ variant: "destructive", title: "Fehler", description: error.message || "E-Mail konnte nicht gesendet werden." });
     } finally {
-      setLoading(false);
+      setSendingId(null);
     }
   };
 
+  // Erneut senden (nach Bestätigung)
+  const handleResendConfirm = async () => {
+    const invitation = resendDialog.invitation;
+    setResendDialog({ open: false, invitation: null });
+    if (invitation) {
+      await sendEmailForInvitation(invitation);
+    }
+  };
+
+  // Einladung löschen
+  const handleDeleteConfirm = async () => {
+    const invitation = deleteDialog.invitation;
+    setDeleteDialog({ open: false, invitation: null });
+    if (!invitation) return;
+
+    try {
+      const { error } = await supabase
+        .from('partner_invitations')
+        .delete()
+        .eq('id', invitation.id);
+
+      if (error) throw error;
+
+      setInvitations(prev => prev.filter(inv => inv.id !== invitation.id));
+      toast({ title: "Gelöscht", description: `${invitation.company_name} wurde aus der Liste entfernt.` });
+    } catch (error) {
+      console.error('Error deleting invitation:', error);
+      toast({ variant: "destructive", title: "Fehler", description: "Löschen fehlgeschlagen." });
+    }
+  };
+
+  // Gefilterte Einladungen
+  const filteredInvitations = invitations.filter(inv => {
+    if (!searchTerm) return true;
+    const term = searchTerm.toLowerCase();
+    return inv.company_name.toLowerCase().includes(term) || inv.email.toLowerCase().includes(term);
+  });
+
   return (
     <div className="space-y-6">
+      {/* Firma hinzufügen */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Mail className="w-5 h-5" />
-            Partner Einladung Mail
+            Partner Einladung
           </CardTitle>
           <CardDescription>
-            Senden Sie Einladungs-E-Mails an potenzielle Partner. Geben Sie Firma und E-Mail-Adresse ein.
+            Fügen Sie Firmen zur Liste hinzu und senden Sie Einladungs-E-Mails.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {companies.map((company, index) => (
-            <div key={index} className="flex gap-4 items-end p-4 border rounded-lg bg-gray-50">
-              <div className="flex-1">
-                <Label htmlFor={`name-${index}`}>Firma name</Label>
-                <Input
-                  id={`name-${index}`}
-                  value={company.name}
-                  onChange={(e) => updateCompany(index, 'name', e.target.value)}
-                  placeholder="Firma name"
-                  className="mt-1"
-                />
-              </div>
-              <div className="flex-1">
-                <Label htmlFor={`email-${index}`}>Emailadrese</Label>
-                <Input
-                  id={`email-${index}`}
-                  type="email"
-                  value={company.email}
-                  onChange={(e) => updateCompany(index, 'email', e.target.value)}
-                  placeholder="Emailadrese"
-                  className="mt-1"
-                />
-              </div>
-              {companies.length > 1 && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => removeCompany(index)}
-                  className="mb-0"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              )}
+        <CardContent>
+          <div className="flex gap-4 items-end">
+            <div className="flex-1">
+              <Label htmlFor="company-name">Firma</Label>
+              <Input
+                id="company-name"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+                placeholder="Firma name"
+                className="mt-1"
+                onKeyDown={(e) => e.key === 'Enter' && handleAddToList()}
+              />
             </div>
-          ))}
-
-          <div className="flex gap-2">
+            <div className="flex-1">
+              <Label htmlFor="company-email">E-Mail</Label>
+              <Input
+                id="company-email"
+                type="email"
+                value={companyEmail}
+                onChange={(e) => setCompanyEmail(e.target.value)}
+                placeholder="E-Mail-Adresse"
+                className="mt-1"
+                onKeyDown={(e) => e.key === 'Enter' && handleAddToList()}
+              />
+            </div>
             <Button
-              variant="outline"
-              onClick={addCompany}
-              className="flex items-center gap-2"
+              onClick={handleAddToList}
+              disabled={addingToList}
+              className="bg-green-600 hover:bg-green-700 text-white flex-shrink-0"
             >
-              <Plus className="w-4 h-4" />
-              Weitere Firma hinzufügen
-            </Button>
-          </div>
-
-          <div className="pt-4 border-t">
-            <Button
-              onClick={handleSendInvites}
-              disabled={loading}
-              className="w-full bg-green-600 hover:bg-green-700 text-white"
-              size="lg"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Wird gesendet...
-                </>
+              {addingToList ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
                 <>
-                  <Send className="w-4 h-4 mr-2" />
-                  Einladung senden
+                  <Plus className="w-4 h-4 mr-1" />
+                  Hinzufügen
                 </>
               )}
             </Button>
           </div>
         </CardContent>
       </Card>
+
+      {/* Einladungsliste */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="w-5 h-5" />
+                Einladungsliste
+                <span className="text-sm font-normal text-gray-500">({invitations.length})</span>
+              </CardTitle>
+              <CardDescription>
+                Verwalten Sie Ihre Partner-Einladungen. Senden Sie E-Mails oder entfernen Sie Einträge.
+              </CardDescription>
+            </div>
+          </div>
+          {invitations.length > 5 && (
+            <div className="relative mt-3">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Suche nach Firma oder E-Mail..."
+                className="pl-9"
+              />
+            </div>
+          )}
+        </CardHeader>
+        <CardContent>
+          {loadingInvitations ? (
+            <div className="flex justify-center p-8">
+              <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
+            </div>
+          ) : filteredInvitations.length === 0 ? (
+            <div className="text-center p-8 text-gray-500 bg-gray-50 rounded-lg border-2 border-dashed">
+              <Mail className="w-10 h-10 mx-auto mb-2 text-gray-300" />
+              <p className="text-sm font-medium">
+                {searchTerm ? 'Keine Ergebnisse gefunden.' : 'Noch keine Einladungen in der Liste.'}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">Fügen Sie oben eine Firma hinzu.</p>
+            </div>
+          ) : (
+            <div className="space-y-2 max-h-[500px] overflow-y-auto">
+              {filteredInvitations.map((inv) => {
+                const isSending = sendingId === inv.id;
+                const isSent = inv.status === 'sent';
+
+                return (
+                  <div key={inv.id} className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${isSent ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'}`}>
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-semibold text-gray-900 truncate">{inv.company_name}</p>
+                        {isSent && (
+                          <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
+                            <CheckCircle className="w-3 h-3" />
+                            Gesendet
+                          </span>
+                        )}
+                        {inv.status === 'pending' && (
+                          <span className="inline-flex items-center gap-1 text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">
+                            <Clock className="w-3 h-3" />
+                            Ausstehend
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-500 truncate">{inv.email}</p>
+                      {isSent && inv.sent_at && (
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          Gesendet am {format(new Date(inv.sent_at), "d. MMM yyyy, HH:mm", { locale: de })}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Aktionen */}
+                    <div className="flex items-center gap-2 flex-shrink-0 ml-3">
+                      {isSent ? (
+                        // Erneut senden
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setResendDialog({ open: true, invitation: inv })}
+                          disabled={isSending}
+                          className="text-xs"
+                        >
+                          {isSending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RotateCcw className="w-3.5 h-3.5 mr-1" />}
+                          Erneut senden
+                        </Button>
+                      ) : (
+                        // Erstmals senden
+                        <Button
+                          size="sm"
+                          onClick={() => sendEmailForInvitation(inv)}
+                          disabled={isSending}
+                          className="bg-green-600 hover:bg-green-700 text-white text-xs"
+                        >
+                          {isSending ? <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" /> : <Send className="w-3.5 h-3.5 mr-1" />}
+                          Mail senden
+                        </Button>
+                      )}
+                      {/* Löschen */}
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => setDeleteDialog({ open: true, invitation: inv })}
+                        className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Erneut senden Warnung */}
+      <AlertDialog open={resendDialog.open} onOpenChange={(open) => !open && setResendDialog({ open: false, invitation: null })}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>⚠️ Erneut senden?</AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div>
+                <p className="mb-3">Sie haben bereits eine Einladung an diese Firma gesendet:</p>
+                {resendDialog.invitation && (
+                  <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg mb-3">
+                    <p className="text-sm font-semibold text-gray-900">{resendDialog.invitation.company_name}</p>
+                    <p className="text-xs text-gray-500">{resendDialog.invitation.email}</p>
+                    {resendDialog.invitation.sent_at && (
+                      <p className="text-xs text-yellow-700 mt-1">
+                        Zuletzt gesendet am {format(new Date(resendDialog.invitation.sent_at), "d. MMM yyyy, HH:mm", { locale: de })}
+                      </p>
+                    )}
+                  </div>
+                )}
+                <p>Möchten Sie die Einladung trotzdem erneut senden?</p>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction onClick={handleResendConfirm} className="bg-green-600 hover:bg-green-700">
+              Trotzdem senden
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Löschen Bestätigung */}
+      <AlertDialog open={deleteDialog.open} onOpenChange={(open) => !open && setDeleteDialog({ open: false, invitation: null })}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Einladung löschen?</AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div>
+                {deleteDialog.invitation && (
+                  <p>Möchten Sie <strong>{deleteDialog.invitation.company_name}</strong> ({deleteDialog.invitation.email}) wirklich aus der Liste entfernen?</p>
+                )}
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">
+              Löschen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
 
 export default PartnerInviteEmail;
-
