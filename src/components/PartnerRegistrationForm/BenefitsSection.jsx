@@ -4,38 +4,38 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, TrendingUp, ToggleRight, ShieldCheck, Eye, Settings2 } from 'lucide-react';
 
 const BenefitsSection = () => {
-  const sectionTitle = "Ihre Vorteile als Partner";
+  const sectionTitle = "Warum Partnerbetriebe mit uns arbeiten";
 
   const benefits = [
     { 
       icon: Users, 
-      title: "Zugang zu neuen Kunden ohne Marketingkosten", 
-      desc: "Als Umzugsfirma, Reinigungsfirma oder Malerbetrieb erweitern Sie Ihren Kundenstamm ohne teure Marketingausgaben. Wir bringen qualifizierte Kunden aus Ihrer Region direkt zu Ihnen – Sie sparen Zeit und Geld." 
+      title: "Neue Kunden ohne Streuverlust", 
+      desc: "Sie erreichen gezielt Kundinnen und Kunden, die aktiv eine Offerte suchen – statt breit und teuer zu werben." 
     },
     { 
       icon: TrendingUp, 
-      title: "Steigerung Ihres Umsatzes durch mehr Aufträge", 
-      desc: "Mehr qualifizierte Anfragen bedeuten mehr Aufträge für Ihr Unternehmen. Konzentrieren Sie sich auf Ihr Kerngeschäft – wir kümmern uns um die Kundenakquise und bringen Ihnen passende Anfragen." 
+      title: "Mehr Aufträge aus Ihrer Region", 
+      desc: "Sie erhalten regelmässig passende Anfragen und können Ihre Auslastung nachhaltig verbessern." 
     },
     { 
       icon: ToggleRight, 
-      title: "Volle Flexibilität & Kontrolle über Ihre Anfragen", 
-      desc: "Sie entscheiden selbst, welche Anfragen Sie annehmen möchten. Keine Verpflichtungen, keine versteckten Kosten, keine langfristigen Verträge. Sie zahlen nur für Anfragen, die Sie tatsächlich nutzen." 
+      title: "Volle Kontrolle", 
+      desc: "Sie entscheiden selbst, welche Anfragen Sie bearbeiten möchten. Keine Pflicht zur Angebotsabgabe." 
     },
     { 
       icon: ShieldCheck, 
-      title: "Geprüfte & qualifizierte Anfragen für höhere Erfolgsquote", 
-      desc: "Wir überprüfen jede Kundenanfrage sorgfältig, um Ihnen nur qualitativ hochwertige und ernsthafte Kundenkontakte zu vermitteln. Das erhöht Ihre Erfolgsquote bei der Auftragsgewinnung erheblich." 
+      title: "Qualifizierte Kundenkontakte", 
+      desc: "Anfragen werden vorqualifiziert, damit Sie sich auf seriöse und relevante Projekte konzentrieren können." 
     },
     { 
       icon: Eye, 
-      title: "Erhöhte Sichtbarkeit für Ihr Unternehmen", 
-      desc: "Profitieren Sie von unserer starken Reichweite und präsentieren Sie Ihr Umzugs-, Reinigungs- oder Maler-Unternehmen einer breiten Zielgruppe. Mehr Sichtbarkeit bedeutet mehr potenzielle Kunden." 
+      title: "Mehr Sichtbarkeit als Fachbetrieb", 
+      desc: "Ihr Unternehmen ist auf einer etablierten Schweizer Vergleichsplattform präsent und wird von passenden Kunden gefunden." 
     },
     { 
       icon: Settings2, 
-      title: "Einfache Verwaltung über Ihr Partner-Dashboard", 
-      desc: "Verwalten Sie alle Ihre Anfragen, Ihr Firmenprofil und Ihre Zahlungen bequem und übersichtlich über Ihr persönliches Partner-Dashboard. Alles an einem Ort – einfach und effizient." 
+      title: "Einfaches Partner-Dashboard", 
+      desc: "Verwalten Sie Anfragen und Profildaten an einem Ort – übersichtlich, schnell und effizient." 
     },
   ];
 

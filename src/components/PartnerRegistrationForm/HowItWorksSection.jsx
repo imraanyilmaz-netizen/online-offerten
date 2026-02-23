@@ -3,28 +3,28 @@
 import { UserPlus, ListChecks, Send, Award } from 'lucide-react';
 
 const HowItWorksSection = () => {
-  const sectionTitle = "So einfach funktioniert's";
+  const sectionTitle = "So funktioniert die Zusammenarbeit";
 
   const steps = [
     { 
       icon: UserPlus, 
-      title: "Registrieren & Profil erstellen", 
-      desc: "Als Umzugsfirma, Reinigungsfirma oder Malerbetrieb registrieren Sie sich kostenlos und erstellen Ihr professionelles Firmenprofil in nur wenigen Minuten – ohne versteckte Kosten oder Verpflichtungen." 
+      title: "Kostenlos registrieren", 
+      desc: "Sie erstellen Ihr Partnerprofil in wenigen Schritten und hinterlegen, welche Leistungen und Regionen Sie abdecken." 
     },
     { 
       icon: ListChecks, 
-      title: "Qualifizierte Anfragen erhalten", 
-      desc: "Wir senden Ihnen geprüfte und qualifizierte Kundenanfragen aus Ihrer Region direkt per E-Mail und in Ihr persönliches Partner-Dashboard. Sie sehen sofort, welche Anfragen zu Ihrem Unternehmen passen." 
+      title: "Passende Anfragen erhalten", 
+      desc: "Sie sehen qualifizierte Kundenanfragen aus Ihrer Region direkt im Partner-Dashboard und per E-Mail." 
     },
     { 
       icon: Send, 
-      title: "Offerten erstellen & Auftrag gewinnen", 
-      desc: "Kaufen Sie nur die Anfragen, die Sie interessieren. Erstellen Sie eine professionelle Offerte und gewinnen Sie neue Aufträge. Sie zahlen nur für Anfragen, die Sie tatsächlich nutzen – volle Kontrolle, keine Risiken." 
+      title: "Anfragen auswählen und reagieren", 
+      desc: "Sie entscheiden bei jeder Anfrage selbst, ob sie für Ihren Betrieb interessant ist und ob Sie eine Offerte senden möchten." 
     },
     { 
       icon: Award, 
-      title: "Erfolg feiern & wachsen", 
-      desc: "Gewinnen Sie regelmässig neue Aufträge und bauen Sie Ihr Umzugs-, Reinigungs- oder Maler-Unternehmen erfolgreich aus. Mit qualifizierten Kundenanfragen aus Ihrer Region wächst Ihr Geschäft kontinuierlich." 
+      title: "Langfristig wachsen", 
+      desc: "Mit regelmässigen Anfragen steigern Sie planbar Ihre Auslastung und gewinnen neue Aufträge in Ihrer Zielregion." 
     },
   ];
 
