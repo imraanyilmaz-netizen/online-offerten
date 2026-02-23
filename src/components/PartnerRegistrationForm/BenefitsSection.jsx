@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, TrendingUp, ToggleRight, ShieldCheck, Eye, Settings2 } from 'lucide-react';
 
 const BenefitsSection = () => {
-  const sectionTitle = "Warum Partnerbetriebe mit uns arbeiten";
+  const sectionTitle = "Warum Firmen mit uns arbeiten";
 
   const benefits = [
     { 

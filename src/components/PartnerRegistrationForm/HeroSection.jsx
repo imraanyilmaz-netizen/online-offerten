@@ -30,7 +30,7 @@ const HeroSection = () => {
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-4">
               <Award className="h-4 w-4 mr-2" />
-              Partnerprogramm Schweiz
+              Partner werden
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
               Partner werden und regelmässig neue Kundenanfragen erhalten
