@@ -24,12 +24,27 @@ const MissedQuoteList = ({ quotes }) => {
   const getReasonDetails = (reason) => {
     switch (reason) {
       case 'manual':
-        return { text: 'Selbst abgelehnt', variant: 'destructive', icon: <XCircle className="w-3 h-3 mr-1.5" /> };
+        return {
+          text: 'Selbst abgelehnt',
+          variant: 'destructive',
+          className: 'bg-red-500 text-white hover:bg-red-600',
+          icon: <XCircle className="w-3 h-3 mr-1.5" />,
+        };
       case 'Ausverkauft':
-        return { text: 'Ausverkauft', variant: 'secondary', icon: <ShoppingCart className="w-3 h-3 mr-1.5" /> };
+        return {
+          text: 'Ausverkauft',
+          variant: 'secondary',
+          className: 'bg-green-600 text-white hover:bg-green-700',
+          icon: <ShoppingCart className="w-3 h-3 mr-1.5" />,
+        };
       case 'expired':
       default:
-        return { text: 'Abgelaufen', variant: 'outline', icon: <Clock className="w-3 h-3 mr-1.5" /> };
+        return {
+          text: 'Abgelaufen',
+          variant: 'outline',
+          className: '',
+          icon: <Clock className="w-3 h-3 mr-1.5" />,
+        };
     }
   };
 
@@ -47,7 +62,7 @@ const MissedQuoteList = ({ quotes }) => {
                   <div className="sm:col-span-8 space-y-2">
                     <div className="flex items-center gap-2 flex-wrap">
                       <Badge variant="secondary">{getServiceTypeLabel(quote.servicetype)}</Badge>
-                       <Badge variant={reasonDetails.variant} className="flex items-center">
+                       <Badge variant={reasonDetails.variant} className={`flex items-center ${reasonDetails.className}`}>
                         {reasonDetails.icon}
                         {reasonDetails.text}
                       </Badge>

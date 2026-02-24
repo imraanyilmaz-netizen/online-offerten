@@ -413,6 +413,123 @@ export const useQuoteManagement = () => {
         }
     }, [toast, updateQuoteInState]);
 
+    const handleUpdatePurchaseQuotaAfterSend = useCallback(async (quoteId, newQuota) => {
+        setIsProcessing(true);
+        try {
+            const normalizedQuota = Math.max(1, parseInt(newQuota, 10) || 1);
+            const quote = quotes.find(q => q.id === quoteId);
+
+            if (!quote) {
+                throw new Error('Anfrage nicht gefunden.');
+            }
+
+            const purchaserCount = (purchasedQuotesInfo[quoteId] || []).length;
+            let nextStatus = quote.status;
+
+            if (purchaserCount >= normalizedQuota) {
+                nextStatus = 'quota_filled';
+            } else if (quote.status === 'quota_filled') {
+                nextStatus = 'approved';
+            }
+
+            const { data, error } = await supabase
+                .from('quotes')
+                .update({
+                    purchase_quota: normalizedQuota,
+                    status: nextStatus,
+                })
+                .eq('id', quoteId)
+                .select()
+                .single();
+
+            if (error) throw error;
+
+            updateQuoteInState(data);
+
+            toast({
+                title: 'Erfolg',
+                description: `Kauf-Kontingent wurde auf ${normalizedQuota} aktualisiert.`,
+            });
+        } catch (error) {
+            toast({
+                title: 'Fehler',
+                description: error.message || 'Kauf-Kontingent konnte nicht aktualisiert werden.',
+                variant: 'destructive',
+            });
+            setIsProcessing(false);
+        }
+    }, [quotes, purchasedQuotesInfo, toast, updateQuoteInState]);
+
+    const handleMarkQuoteSoldOut = useCallback(async (quoteId) => {
+        setIsProcessing(true);
+        try {
+            const quote = quotes.find(q => q.id === quoteId);
+            if (!quote) throw new Error('Anfrage nicht gefunden.');
+
+            const assignedIds = quote.assigned_partner_ids || [];
+
+            const { data: purchasedRows, error: purchasedError } = await supabase
+                .from('purchased_quotes')
+                .select('partner_id')
+                .eq('quote_id', quoteId);
+
+            if (purchasedError) throw purchasedError;
+
+            const purchasedIds = new Set((purchasedRows || []).map(r => r.partner_id));
+            const nonPurchasedAssigned = assignedIds.filter(pid => !purchasedIds.has(pid));
+
+            if (nonPurchasedAssigned.length > 0) {
+                const { data: existingRejections, error: rejectionsError } = await supabase
+                    .from('partner_quote_rejections')
+                    .select('partner_id')
+                    .eq('quote_id', quoteId)
+                    .in('partner_id', nonPurchasedAssigned);
+
+                if (rejectionsError) throw rejectionsError;
+
+                const existingSet = new Set((existingRejections || []).map(r => r.partner_id));
+                const rowsToInsert = nonPurchasedAssigned
+                    .filter(pid => !existingSet.has(pid))
+                    .map(pid => ({
+                        quote_id: quoteId,
+                        partner_id: pid,
+                        reason: 'Ausverkauft',
+                    }));
+
+                if (rowsToInsert.length > 0) {
+                    const { error: insertError } = await supabase
+                        .from('partner_quote_rejections')
+                        .insert(rowsToInsert);
+
+                    if (insertError) throw insertError;
+                }
+            }
+
+            const { data: updatedQuote, error: updateError } = await supabase
+                .from('quotes')
+                .update({ status: 'quota_filled' })
+                .eq('id', quoteId)
+                .select('*')
+                .single();
+
+            if (updateError) throw updateError;
+
+            updateQuoteInState(updatedQuote);
+
+            toast({
+                title: 'Erfolg',
+                description: 'Anfrage wurde als Kontingent erfüllt markiert.',
+            });
+        } catch (error) {
+            toast({
+                title: 'Fehler',
+                description: error.message || 'Ausverkauft konnte nicht gesetzt werden.',
+                variant: 'destructive',
+            });
+            setIsProcessing(false);
+        }
+    }, [quotes, toast, updateQuoteInState]);
+
     const openArchiveDialog = (quoteId) => {
         setDialogState({ open: true, type: 'archive', id: quoteId });
     };
@@ -425,7 +542,7 @@ export const useQuoteManagement = () => {
 
     return {
         quotes, allPartners, purchasedQuotesInfo, rejectedQuotesInfo, refundRequests, loading, isProcessing, expandedQuote, dialogState,
-        setDialogState, handleSaveMatch, handleSendQuote, handleSendToAdditionalPartners, openArchiveDialog, handleRestoreQuote,
+        setDialogState, handleSaveMatch, handleSendQuote, handleSendToAdditionalPartners, handleUpdatePurchaseQuotaAfterSend, handleMarkQuoteSoldOut, openArchiveDialog, handleRestoreQuote,
         handleConfirmDialog, toggleView, handleUpdateQuote, handleApproveRefund, handleRejectRefund
     };
 };

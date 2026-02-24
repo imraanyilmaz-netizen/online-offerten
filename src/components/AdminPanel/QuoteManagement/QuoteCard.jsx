@@ -3,15 +3,17 @@ import React, { useState, useRef, useCallback } from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Settings, Send, Edit, Info, Archive, Undo2, ShoppingCart, Users, MapPin, CheckCircle, Pencil, X, Loader2, ExternalLink, Mail, Star, ChevronDown, ChevronUp, Building2, UserPlus, Plus, Search, GripHorizontal } from 'lucide-react';
+import { Settings, Send, Edit, Info, Archive, Undo2, ShoppingCart, Users, MapPin, CheckCircle, Pencil, X, Loader2, ExternalLink, Mail, Star, ChevronDown, ChevronUp, Building2, UserPlus, Plus, Search, GripHorizontal, Package, AlertTriangle } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { format, isAfter, subDays } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
 
-const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing, allPartners = [], onSendToAdditionalPartners }) => {
+const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing, allPartners = [], onSendToAdditionalPartners, onUpdatePurchaseQuota, onMarkSoldOut }) => {
   const { id, from_city, to_city, servicetype, created_at, status, lead_price, assigned_partner_ids, purchase_quota, partner_target_regions, email_confirmed, email_confirmed_at, move_date, review_email_sent_at, review_email_sent_count } = quote;
   const formattedDate = format(new Date(created_at), "d MMM yyyy, HH:mm", { locale: de });
   const { toast } = useToast();
@@ -26,6 +28,9 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const [skipEmail, setSkipEmail] = useState(false);
   const [partnerSearchTerm, setPartnerSearchTerm] = useState('');
   const [listHeight, setListHeight] = useState(192); // default max-h-48 = 192px
+  const [quotaDialogOpen, setQuotaDialogOpen] = useState(false);
+  const [newQuota, setNewQuota] = useState(String(purchase_quota || 1));
+  const [soldOutDialogOpen, setSoldOutDialogOpen] = useState(false);
   const isDragging = useRef(false);
   const startY = useRef(0);
   const startHeight = useRef(0);
@@ -108,6 +113,23 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
     }
   };
 
+  const openQuotaDialog = () => {
+    setNewQuota(String(purchase_quota || 1));
+    setQuotaDialogOpen(true);
+  };
+
+  const handleQuotaSave = async () => {
+    if (!onUpdatePurchaseQuota) return;
+    await onUpdatePurchaseQuota(quote.id, newQuota);
+    setQuotaDialogOpen(false);
+  };
+
+  const handleConfirmSoldOut = async () => {
+    if (!onMarkSoldOut) return;
+    await onMarkSoldOut(quote.id);
+    setSoldOutDialogOpen(false);
+  };
+
   const handlePriceUpdate = async () => {
     if (parseFloat(newPrice) !== parseFloat(lead_price || 0)) {
       const updateData = { lead_price: parseFloat(newPrice) };
@@ -165,6 +187,8 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
         return <Badge variant="outline" className="bg-gray-100 text-gray-700">Archiviert</Badge>;
       case 'quota_filled':
          return <Badge variant="destructive">Kontingent erfüllt</Badge>;
+      case 'sold_out':
+         return <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300">Ausverkauft</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -294,10 +318,21 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                               </Button>
                           </div>
                       )}
-                      <p className="text-xs text-gray-500 flex items-center justify-end gap-1 mt-0.5">
+                      <div className="text-xs text-gray-500 flex items-center justify-end gap-1 mt-0.5">
                         <ShoppingCart className="w-3 h-3"/>
-                        {purchasers.length} / {purchase_quota || '∞'} Gekauft
-                      </p>
+                        <span>{purchasers.length} / {purchase_quota || '∞'} Gekauft</span>
+                        <Button
+                          type="button"
+                          size="icon"
+                          variant="ghost"
+                          className="h-6 w-6"
+                          onClick={openQuotaDialog}
+                          disabled={parentIsProcessing}
+                          title="Kauf-Kontingent bearbeiten"
+                        >
+                          <Package className="w-3.5 h-3.5" />
+                        </Button>
+                      </div>
                     </div>
                 )}
                 {status === 'matched' && (
@@ -330,6 +365,19 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                         Ohne E-Mail
                       </label>
                     </div>
+                  )}
+                  {status === 'approved' && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-orange-300 text-orange-700 hover:bg-orange-50"
+                      onClick={() => setSoldOutDialogOpen(true)}
+                      disabled={parentIsProcessing || purchasers.length > 0}
+                      title={purchasers.length > 0 ? 'Bereits gekauft - kann nicht als Ausverkauft markiert werden' : 'Als Ausverkauft markieren'}
+                    >
+                      <AlertTriangle className="w-4 h-4 mr-2" />
+                      Ausverkauft
+                    </Button>
                   )}
                   {(status === 'new_quote' || status === 'pending' || status === 'matched') && (
                       <Button size="sm" variant={isMatcherExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'matcher')}>
@@ -569,6 +617,54 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
           </div>
         </div>
       )}
+      <Dialog open={quotaDialogOpen} onOpenChange={setQuotaDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Kauf-Kontingent aktualisieren</DialogTitle>
+            <DialogDescription>
+              Dieses Kontingent gilt sofort. Falls bereits gleich viele oder mehr Käufe vorhanden sind,
+              wird die Anfrage als Kontingent erfüllt markiert.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-600">
+              Aktuell gekauft: <strong>{purchasers.length}</strong>
+            </p>
+            <Input
+              type="number"
+              min="1"
+              step="1"
+              value={newQuota}
+              onChange={(e) => setNewQuota(e.target.value)}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setQuotaDialogOpen(false)}>
+              Abbrechen
+            </Button>
+            <Button onClick={handleQuotaSave} disabled={parentIsProcessing}>
+              {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+              Speichern
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <AlertDialog open={soldOutDialogOpen} onOpenChange={setSoldOutDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Als Ausverkauft markieren?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Diese Anfrage wird aus dem Bereich Versendet entfernt und bei zugewiesenen Partnern ohne Kauf als Verpasst markiert.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmSoldOut}>
+              Ja, Ausverkauft setzen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       {children}
     </div>
   );

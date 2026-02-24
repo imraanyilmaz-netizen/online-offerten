@@ -22,7 +22,7 @@ import QuoteCard from './QuoteManagement/QuoteCard';
 const QuoteManagement = () => {
   const {
     quotes, allPartners, purchasedQuotesInfo, rejectedQuotesInfo, refundRequests, loading, isProcessing, expandedQuote, dialogState, setDialogState,
-    handleSaveMatch, handleSendQuote, handleSendToAdditionalPartners, openArchiveDialog, handleRestoreQuote,
+    handleSaveMatch, handleSendQuote, handleSendToAdditionalPartners, handleUpdatePurchaseQuotaAfterSend, handleMarkQuoteSoldOut, openArchiveDialog, handleRestoreQuote,
     handleConfirmDialog, toggleView, handleUpdateQuote, handleApproveRefund, handleRejectRefund
   } = useQuoteManagement();
 
@@ -58,6 +58,8 @@ const QuoteManagement = () => {
                 rejections={rejections}
                 allPartners={allPartners}
                 onSendToAdditionalPartners={handleSendToAdditionalPartners}
+                onUpdatePurchaseQuota={handleUpdatePurchaseQuotaAfterSend}
+                onMarkSoldOut={handleMarkQuoteSoldOut}
                 onToggleView={toggleView}
                 onSend={handleSendQuote}
                 onArchive={openArchiveDialog}
