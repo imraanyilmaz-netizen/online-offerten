@@ -477,18 +477,32 @@ export const useQuoteManagement = () => {
 
             const purchasedIds = new Set((purchasedRows || []).map(r => r.partner_id));
             const nonPurchasedAssigned = assignedIds.filter(pid => !purchasedIds.has(pid));
+            let validAssignedIds = assignedIds;
 
             if (nonPurchasedAssigned.length > 0) {
+                // FK hatalarını önlemek için mevcut partner kayıtlarını doğrula.
+                const { data: validPartners, error: validPartnersError } = await supabase
+                    .from('partners')
+                    .select('id')
+                    .in('id', assignedIds);
+
+                if (validPartnersError) throw validPartnersError;
+
+                const validPartnerSet = new Set((validPartners || []).map(p => p.id));
+                validAssignedIds = assignedIds.filter(pid => validPartnerSet.has(pid));
+                const validNonPurchasedAssigned = nonPurchasedAssigned.filter(pid => validPartnerSet.has(pid));
+
+                if (validNonPurchasedAssigned.length > 0) {
                 const { data: existingRejections, error: rejectionsError } = await supabase
                     .from('partner_quote_rejections')
                     .select('partner_id')
                     .eq('quote_id', quoteId)
-                    .in('partner_id', nonPurchasedAssigned);
+                    .in('partner_id', validNonPurchasedAssigned);
 
                 if (rejectionsError) throw rejectionsError;
 
                 const existingSet = new Set((existingRejections || []).map(r => r.partner_id));
-                const rowsToInsert = nonPurchasedAssigned
+                const rowsToInsert = validNonPurchasedAssigned
                     .filter(pid => !existingSet.has(pid))
                     .map(pid => ({
                         quote_id: quoteId,
@@ -503,11 +517,16 @@ export const useQuoteManagement = () => {
 
                     if (insertError) throw insertError;
                 }
+                }
             }
 
             const { data: updatedQuote, error: updateError } = await supabase
                 .from('quotes')
-                .update({ status: 'quota_filled' })
+                .update({
+                    status: 'quota_filled',
+                    // Geçersiz partner ID'lerini de temizleyerek veriyi tutarlı tut.
+                    assigned_partner_ids: validAssignedIds,
+                })
                 .eq('id', quoteId)
                 .select('*')
                 .single();

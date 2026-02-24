@@ -137,7 +137,55 @@ export const usePartnerDashboard = (onActionSuccess) => {
       setAvailableQuotes(enrichedAvailableQuotes);
       setPurchasedQuotes(dashboardData.purchased_quotes || []);
       setArchivedQuotes(dashboardData.archived_quotes || []);
-      setMissedQuotes(dashboardData.missed_quotes || []);
+      const missedQuotes = dashboardData.missed_quotes || [];
+      let soldOutRejectedQuoteIds = new Set();
+
+      // Partnerin kendi red kayıtlarında "Ausverkauft" varsa bunu UI'a net yansıt.
+      if (missedQuotes.length > 0) {
+        const missedQuoteIds = missedQuotes.map((q) => q.id).filter(Boolean);
+        if (missedQuoteIds.length > 0) {
+          const { data: soldOutRows, error: soldOutRowsError } = await supabase
+            .from('partner_quote_rejections')
+            .select('quote_id')
+            .eq('partner_id', user.id)
+            .eq('reason', 'Ausverkauft')
+            .in('quote_id', missedQuoteIds);
+
+          if (!soldOutRowsError) {
+            soldOutRejectedQuoteIds = new Set((soldOutRows || []).map((row) => row.quote_id));
+          } else {
+            // Bu query hata verirse dashboard'ı bozma, fallback normalizasyonuyla devam et.
+            console.warn('Could not load sold-out rejection rows:', soldOutRowsError.message);
+          }
+        }
+      }
+
+      // Some backend paths can return "expired" or "manual" while quote is actually quota_filled/sold_out.
+      // Normalize this so partner UI shows "Ausverkauft" consistently.
+      const normalizedMissedQuotes = missedQuotes.map((q) => {
+        const reason = q?.missed_reason;
+        const status = q?.status;
+        if (
+          soldOutRejectedQuoteIds.has(q?.id) ||
+          (
+            (reason === 'expired' || reason === 'manual') &&
+            (status === 'quota_filled' || status === 'sold_out')
+          ) ||
+          (
+            String(reason || '').toLowerCase() === 'ausverkauft'
+          )
+        ) {
+          return { ...q, missed_reason: 'Ausverkauft' };
+        }
+        if (
+          reason === 'expired' &&
+          (status === 'quota_filled' || status === 'sold_out')
+        ) {
+          return { ...q, missed_reason: 'Ausverkauft' };
+        }
+        return q;
+      });
+      setMissedQuotes(normalizedMissedQuotes);
       setPanelStatus('active');
 
       // Update last_activity timestamp silently (for admin panel tracking)

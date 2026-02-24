@@ -22,6 +22,8 @@ const MissedQuoteList = ({ quotes }) => {
   };
 
   const getReasonDetails = (reason) => {
+    const normalizedReason = (reason || '').toLowerCase();
+
     switch (reason) {
       case 'manual':
         return {
@@ -39,6 +41,18 @@ const MissedQuoteList = ({ quotes }) => {
         };
       case 'expired':
       default:
+        if (
+          normalizedReason === 'ausverkauft' ||
+          normalizedReason === 'sold_out' ||
+          normalizedReason === 'quota_filled'
+        ) {
+          return {
+            text: 'Ausverkauft',
+            variant: 'secondary',
+            className: 'bg-green-600 text-white hover:bg-green-700',
+            icon: <ShoppingCart className="w-3 h-3 mr-1.5" />,
+          };
+        }
         return {
           text: 'Abgelaufen',
           variant: 'outline',

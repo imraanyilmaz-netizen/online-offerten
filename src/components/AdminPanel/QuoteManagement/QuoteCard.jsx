@@ -74,13 +74,25 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
 
   // Zugewiesene Partner mit Kauf-Status auflösen
   const purchaserIds = new Set(purchasers.map(p => p.id));
-  const rejectionIds = new Set(rejections.map(r => r.partner_id || r.id));
+  const rejectionMap = new Map(
+    rejections.map(r => [r.partner_id || r.id, r.reason || null])
+  );
+  const soldOutCount = rejections.filter(r => r.reason === 'Ausverkauft').length;
+  const rejectedCount = rejections.length - soldOutCount;
   const assignedPartnersResolved = (assigned_partner_ids || []).map(partnerId => {
     const partner = allPartners.find(p => p.id === partnerId);
     const name = partner ? (partner.company_name || partner.name || 'Unbekannt') : 'Unbekannt';
     const hasPurchased = purchaserIds.has(partnerId);
-    const hasRejected = rejectionIds.has(partnerId);
-    return { id: partnerId, name, hasPurchased, hasRejected };
+    const rejectionReason = rejectionMap.get(partnerId) || null;
+    const hasRejected = !!rejectionReason;
+    return {
+      id: partnerId,
+      name,
+      hasPurchased,
+      hasRejected,
+      rejectionReason,
+      isSoldOut: rejectionReason === 'Ausverkauft',
+    };
   });
 
   // Noch nicht zugewiesene aktive Partner (für Nachsenden)
@@ -440,7 +452,9 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                 <Send className="w-4 h-4 text-gray-500"/>
                 Zugewiesene Partner ({assigned_partner_ids.length})
                 <span className="text-xs font-normal text-gray-500 ml-1">
-                  — {purchasers.length} gekauft{rejections.length > 0 ? `, ${rejections.length} abgelehnt` : ''}
+                  — {purchasers.length} gekauft
+                  {soldOutCount > 0 ? `, ${soldOutCount} ausverkauft` : ''}
+                  {rejectedCount > 0 ? `, ${rejectedCount} abgelehnt` : ''}
                 </span>
                 {showAssignedPartners ? <ChevronUp className="w-4 h-4 ml-auto flex-shrink-0"/> : <ChevronDown className="w-4 h-4 ml-auto flex-shrink-0"/>}
               </button>
@@ -453,13 +467,17 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                         className={`inline-flex items-center gap-2 border rounded-lg px-3 py-2 text-sm ${
                           p.hasPurchased 
                             ? 'bg-green-50 border-green-200' 
-                            : p.hasRejected
+                            : p.isSoldOut
+                              ? 'bg-amber-50 border-amber-200'
+                              : p.hasRejected
                               ? 'bg-red-50 border-red-200'
                               : 'bg-gray-50 border-gray-200'
                         }`}
                       >
                         {p.hasPurchased ? (
                           <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0"/>
+                        ) : p.isSoldOut ? (
+                          <ShoppingCart className="w-3.5 h-3.5 text-amber-500 flex-shrink-0"/>
                         ) : p.hasRejected ? (
                           <X className="w-3.5 h-3.5 text-red-400 flex-shrink-0"/>
                         ) : (
@@ -467,7 +485,8 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                         )}
                         <span className="font-medium text-gray-800">{p.name}</span>
                         {p.hasPurchased && <span className="text-xs text-green-600">Gekauft</span>}
-                        {p.hasRejected && <span className="text-xs text-red-500">Abgelehnt</span>}
+                        {p.isSoldOut && <span className="text-xs text-amber-600">Ausverkauft</span>}
+                        {p.hasRejected && !p.isSoldOut && <span className="text-xs text-red-500">Abgelehnt</span>}
                       </div>
                     ))}
                   </div>
@@ -654,7 +673,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
           <AlertDialogHeader>
             <AlertDialogTitle>Als Ausverkauft markieren?</AlertDialogTitle>
             <AlertDialogDescription>
-              Diese Anfrage wird aus dem Bereich Versendet entfernt und bei zugewiesenen Partnern ohne Kauf als Verpasst markiert.
+              Diese Anfrage wird als Kontingent erfüllt markiert. Zugewiesene Partner ohne Kauf sehen sie als Verpasst (Ausverkauft).
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
