@@ -93,11 +93,21 @@ const RaeumungEntsorgungPageClient = () => {
       />
       <div className="bg-slate-50">
         <section
-          className="relative w-full bg-gray-100 py-12 md:py-16"
+          className="relative w-full py-12 md:py-16 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-green-50"
         >
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="grid md:grid-cols-3 gap-0 items-center">
-              <div className="md:col-span-2 bg-gray-100 px-8 md:px-10 py-8 md:py-12">
+          <div className="absolute inset-0 opacity-5">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                backgroundSize: '60px 60px',
+              }}
+            />
+          </div>
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+            <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+              <div className="px-2 md:px-0">
                 <div
                 >
                   <h1 className="heading-1">
@@ -138,14 +148,20 @@ const RaeumungEntsorgungPageClient = () => {
                   </div>
                 </div>
               </div>
-              <div className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1615895233623-731367f50a8b"
-                  alt="Professionelle Räumung und Entsorgung"
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                  fetchPriority="high"
-                />
+              <div className="relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                  <img
+                    src="/umzug/a8b7dd19-1.webp"
+                    alt="Professionelle Räumung und Entsorgung"
+                    className="w-full h-[320px] md:h-[460px] object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-green-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                  <p className="text-sm font-bold">Geprüfte Partnerfirmen</p>
+                  <p className="text-xs text-green-100">Schweizweit im Einsatz</p>
+                </div>
               </div>
             </div>
           </div>
@@ -164,7 +180,7 @@ const RaeumungEntsorgungPageClient = () => {
               <img
                 className="absolute inset-0 w-full h-full object-cover"
                 alt="Professionelles Team bei einer Wohnungsräumung"
-                src="https://images.unsplash.com/photo-1615895233623-731367f50a8b" />
+                src="/umzug/5b4ec6a0-3.webp" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
             </div>
           </section>
@@ -237,7 +253,7 @@ const RaeumungEntsorgungPageClient = () => {
 
           <section id="cta" className="text-center bg-gradient-to-r from-green-600 to-green-800 text-white py-16 px-6 rounded-2xl shadow-2xl">
             <h2
-              className="heading-2"
+              className="heading-2 bg-gradient-to-r from-white to-black bg-clip-text text-transparent"
             >
               Bereit, Platz für Neues zu schaffen?
             </h2>
