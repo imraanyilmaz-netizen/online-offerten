@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Home, Building, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText } from 'lucide-react';
+import { Home, Building, Loader2, MapPin, ChevronsUpDown, ChevronDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { countries } from '@/data/countries';
@@ -131,10 +131,12 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
   const objectTypeOptions = getObjectTypeOptions();
   
   const showRoomsField =
-    (formData.service === 'umzug' && ['privatumzug', 'international'].includes(formData.umzugArt)) ||
-    (formData.service === 'reinigung' && !['fensterreinigung', 'fassadenreinigung', 'hofreinigung'].includes(formData.umzugArt)) ||
-    (formData.service === 'raeumung' && formData.umzugArt === 'raeumung' && formData.raeumung_scope !== 'komplette_raeumung') ||
-    (formData.service === 'maler' && formData.umzugArt === 'maler_privat');
+    prefix === 'from' && (
+      (formData.service === 'umzug' && ['privatumzug', 'international'].includes(formData.umzugArt)) ||
+      (formData.service === 'reinigung' && !['fensterreinigung', 'fassadenreinigung', 'hofreinigung'].includes(formData.umzugArt)) ||
+      (formData.service === 'raeumung' && formData.umzugArt === 'raeumung' && formData.raeumung_scope !== 'komplette_raeumung') ||
+      (formData.service === 'maler' && formData.umzugArt === 'maler_privat')
+    );
 
 
   const showObjectTypeField =
@@ -316,57 +318,88 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
         <div className="grid grid-cols-2 gap-3 items-start">
           {showFloorField && (
             <div>
-              <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={`${t('step2.floorLabel')} *`} />
-                </SelectTrigger>
-                <SelectContent className="text-sm">
-                  {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <select
+                  name={`${prefix}_floor`}
+                  value={formData[`${prefix}_floor`] || ''}
+                  onChange={(e) => handleSelectChange(`${prefix}_floor`, e.target.value)}
+                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 pr-9 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none h-9 appearance-none"
+                >
+                  <option value="">{`${t('step2.floorLabel')} *`}</option>
+                  {floorOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+              </div>
               {errors && errors[`${prefix}_floor`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
             </div>
           )}
 
           {showRoomsField && (
             <div>
-              <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={`${t('step2.roomsLabel')} *`} />
-                </SelectTrigger>
-                <SelectContent className="text-sm">
-                  {roomCountOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <select
+                  name={`${prefix}_rooms`}
+                  value={formData[`${prefix}_rooms`] || ''}
+                  onChange={(e) => handleSelectChange(`${prefix}_rooms`, e.target.value)}
+                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 pr-9 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none h-9 appearance-none"
+                >
+                  <option value="">{`${t('step2.roomsLabel')} *`}</option>
+                  {roomCountOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+              </div>
               {errors && errors[`${prefix}_rooms`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_rooms`]}</p>}
             </div>
           )}
 
           {showObjectTypeField && (
             <div>
-              <Select name={`${prefix}_object_type`} value={formData[`${prefix}_object_type`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_object_type`, value)}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={`${t('step2.objectTypeLabel')} *`} />
-                </SelectTrigger>
-                <SelectContent className="text-sm">
-                  {objectTypeOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <select
+                  name={`${prefix}_object_type`}
+                  value={formData[`${prefix}_object_type`] || ''}
+                  onChange={(e) => handleSelectChange(`${prefix}_object_type`, e.target.value)}
+                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 pr-9 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none h-9 appearance-none"
+                >
+                  <option value="">{`${t('step2.objectTypeLabel')} *`}</option>
+                  {objectTypeOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+              </div>
               {errors && errors[`${prefix}_object_type`] && <p className="text-xs text-red-500 mt-1">{errors[`${prefix}_object_type`]}</p>}
             </div>
           )}
 
           {showLiftField && (
             <div>
-              <Select name={`${prefix}_lift`} value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={t('step2.liftLabel')} />
-                </SelectTrigger>
-                <SelectContent className="text-sm">
-                  <SelectItem value="true">{t('step2.liftOptionYes')}</SelectItem>
-                  <SelectItem value="false">{t('step2.liftOptionNo')}</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <select
+                  name={`${prefix}_lift`}
+                  value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''}
+                  onChange={(e) => handleSelectChange(
+                    `${prefix}_lift`,
+                    e.target.value === '' ? '' : e.target.value === 'true'
+                  )}
+                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 pr-9 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none h-9 appearance-none"
+                >
+                  <option value="">{t('step2.liftLabel')}</option>
+                  <option value="true">{t('step2.liftOptionYes')}</option>
+                  <option value="false">{t('step2.liftOptionNo')}</option>
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+              </div>
             </div>
           )}
         </div>
@@ -444,6 +477,8 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
 const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, handleCheckboxChange, handleRadioGroupChange, handleHowFoundChange, handleQuotesWantedChange, errors }) => {
   const { t } = useTranslation('newCustomerForm');
   const isMoveService = formData.service === 'umzug' && formData.umzugArt !== 'lagerung';
+  const [moveDateInput, setMoveDateInput] = useState('');
+  const moveDatePickerRef = useRef(null);
 
   const salutationOptions = [
     { value: 'herr', label: t('step3.salutationMr') },
@@ -495,6 +530,59 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
       default:
         return 'step3.moveDateTitle';
     }
+  };
+
+  const formatIsoToDisplayDate = (isoDate) => {
+    if (!isoDate) return '';
+    const [year, month, day] = String(isoDate).split('-');
+    if (!year || !month || !day) return '';
+    return `${day}.${month}.${year}`;
+  };
+
+  const parseDisplayDateToIso = (displayDate) => {
+    const match = displayDate.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+    if (!match) return '';
+    const [, day, month, year] = match;
+    const iso = `${year}-${month}-${day}`;
+    const date = new Date(`${iso}T00:00:00`);
+    const isValid =
+      !Number.isNaN(date.getTime()) &&
+      date.getFullYear() === Number(year) &&
+      date.getMonth() + 1 === Number(month) &&
+      date.getDate() === Number(day);
+    return isValid ? iso : '';
+  };
+
+  const normalizeDateInput = (value) => {
+    const digits = value.replace(/\D/g, '').slice(0, 8);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 4) return `${digits.slice(0, 2)}.${digits.slice(2)}`;
+    return `${digits.slice(0, 2)}.${digits.slice(2, 4)}.${digits.slice(4)}`;
+  };
+
+  const openMoveDatePicker = () => {
+    if (moveDatePickerRef.current?.showPicker) {
+      moveDatePickerRef.current.showPicker();
+      return;
+    }
+    moveDatePickerRef.current?.focus();
+  };
+
+  useEffect(() => {
+    setMoveDateInput(formatIsoToDisplayDate(formData.move_date));
+  }, [formData.move_date]);
+
+  const handleMoveDateTextChange = (e) => {
+    const normalized = normalizeDateInput(e.target.value);
+    setMoveDateInput(normalized);
+
+    const isoDate = parseDisplayDateToIso(normalized);
+    handleChange({
+      target: {
+        name: 'move_date',
+        value: isoDate || '',
+      },
+    });
   };
 
   const getAdditionalInfoPlaceholder = () => {
@@ -581,7 +669,43 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
             </div>
             <div className="space-y-1">
               <Label htmlFor="move_date" className="font-medium text-slate-700 text-sm">{t(getDateLabelKey())} <span className="text-red-500 ml-1">*</span></Label>
-              <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9" min={new Date().toISOString().split("T")[0]}/>
+              <div className="relative">
+                <Input
+                  type="text"
+                  id="move_date"
+                  name="move_date_display"
+                  value={moveDateInput}
+                  onChange={handleMoveDateTextChange}
+                  onClick={openMoveDatePicker}
+                  placeholder="TT.MM.JJJJ"
+                  inputMode="numeric"
+                  maxLength={10}
+                  className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9 pr-9"
+                  aria-label="Datum im Format TT.MM.JJJJ"
+                />
+                <button
+                  type="button"
+                  onClick={openMoveDatePicker}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
+                  aria-label="Kalender öffnen"
+                >
+                  <CalendarDays className="h-4 w-4" />
+                </button>
+                <input
+                  ref={moveDatePickerRef}
+                  type="date"
+                  value={formData.move_date || ''}
+                  onChange={(e) => {
+                    handleChange({ target: { name: 'move_date', value: e.target.value } });
+                    setMoveDateInput(formatIsoToDisplayDate(e.target.value));
+                  }}
+                  min={new Date().toISOString().split("T")[0]}
+                  lang="de-CH"
+                  className="absolute h-0 w-0 opacity-0 pointer-events-none"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                />
+              </div>
               {errors && errors.move_date && <p className="text-xs text-red-500 mt-1">{errors.move_date}</p>}
             </div>
             <div className="space-y-1">
@@ -605,7 +729,7 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
         {formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international') && (
           <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
             <div className="space-y-3">
-              <p className="text-xs text-slate-500 mb-1">Wählen Sie bitte aus, falls zutreffend.</p>
+              <p className="text-xs text-slate-500 mb-1">Mehr Details helfen uns, passende und faire Angebote für Sie zu finden. Unvollständige Angaben können zu späteren Preisänderungen führen.</p>
               <div className="flex items-center space-x-3">
                 <Checkbox id="furniture_assembly" name="furniture_assembly" checked={formData.furniture_assembly || false} onCheckedChange={(checked) => handleCheckboxChange('furniture_assembly', checked)} className="h-6 w-6 accent-green-600"/>
                 <Label htmlFor="furniture_assembly" className="font-medium text-base text-slate-800 cursor-pointer">Möbel müssen demontiert und wieder montiert werden</Label>
@@ -624,21 +748,17 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
                       handleCheckboxChange('special_transport_heavy', false);
                     }
                   }} className="h-6 w-6 accent-green-600"/>
-                  <Label htmlFor="special_transport" className="font-medium text-base text-slate-800 cursor-pointer">Spezialtransporte (z.B. Klavier, Tresor, schwere Möbel)</Label>
+                  <Label htmlFor="special_transport" className="font-medium text-base text-slate-800 cursor-pointer">Wird auch ein Klavier oder Flügel mittransportiert?</Label>
                 </div>
                 {formData.special_transport && (
                   <div className="ml-9 mt-2 space-y-2 pl-3 border-l-2 border-green-200">
                     <div className="flex items-center space-x-3">
                       <Checkbox id="special_transport_piano" checked={formData.special_transport_piano || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_piano', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="special_transport_piano" className="font-medium text-base text-slate-800 cursor-pointer">Klavier / Flügel</Label>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Checkbox id="special_transport_safe" checked={formData.special_transport_safe || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_safe', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="special_transport_safe" className="font-medium text-base text-slate-800 cursor-pointer">Tresor</Label>
+                      <Label htmlFor="special_transport_piano" className="font-medium text-base text-slate-800 cursor-pointer">Klavier</Label>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Checkbox id="special_transport_heavy" checked={formData.special_transport_heavy || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_heavy', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="special_transport_heavy" className="font-medium text-base text-slate-800 cursor-pointer">Schwere Möbel / Geräte</Label>
+                      <Label htmlFor="special_transport_heavy" className="font-medium text-base text-slate-800 cursor-pointer">Flügel</Label>
                     </div>
                   </div>
                 )}

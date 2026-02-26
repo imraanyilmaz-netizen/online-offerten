@@ -101,6 +101,34 @@ const AddressBox = ({ title, quote, type }) => {
     );
 };
 
+const formatWithUnd = (items) => {
+  if (!items || items.length === 0) return '';
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} und ${items[1]}`;
+  return `${items.slice(0, -1).join(', ')} und ${items[items.length - 1]}`;
+};
+
+const getMovingExtrasText = (quote) => {
+  const selectedSpecialTransports = [
+    quote.special_transport_piano && 'Klavier',
+    quote.special_transport_safe && 'Tresor',
+    quote.special_transport_heavy && 'Flügel',
+  ].filter(Boolean);
+
+  const selectedMovingExtras = [
+    quote.additional_services_furniture_assembly && 'Möbel-De-/Montage',
+    quote.additional_services_packing && 'Einpackservice',
+    quote.additional_services_disposal && 'Entsorgung',
+    ...(quote.special_transport
+      ? selectedSpecialTransports.length > 0
+        ? selectedSpecialTransports
+        : ['Spezialtransporte']
+      : []),
+  ].filter(Boolean);
+
+  return formatWithUnd(selectedMovingExtras);
+};
+
 const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundRequests = [] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [refundDialog, setRefundDialog] = useState({ open: false, quote: null });
@@ -166,6 +194,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
         const serviceCategory = getServiceCategory(quote.servicetype);
         const icon = serviceCategory === 'moving' ? Truck : (serviceCategory === 'cleaning' ? Sparkles : Paintbrush);
         const isMoving = serviceCategory === 'moving';
+        const movingExtrasText = getMovingExtrasText(quote);
 
         return (
         <div
@@ -252,14 +281,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                             <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
                           </div>
                           <div className="space-y-2">
-                            {quote.additional_services_furniture_assembly && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
-                            {quote.additional_services_packing && <QuoteDetail label="Einpackservice" value="Ja" />}
-                            {quote.special_transport && (
-                              <QuoteDetail label="Spezialtransporte" value={
-                                [quote.special_transport_piano && 'Klavier/Flügel', quote.special_transport_safe && 'Tresor', quote.special_transport_heavy && 'Schwere Möbel/Geräte'].filter(Boolean).join(', ') || 'Ja'
-                              } />
-                            )}
-                            {quote.additional_services_disposal && <QuoteDetail label="Entsorgung" value="Ja" />}
+                            {movingExtrasText && <QuoteDetail label="Umzug inkl." value={movingExtrasText} />}
                           </div>
                         </div>
                       )}

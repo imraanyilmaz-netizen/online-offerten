@@ -281,7 +281,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
                 <div className="flex flex-wrap gap-2">
                   {quote.additional_services_furniture_assembly && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Möbel De-/Montage</span>}
                   {quote.additional_services_packing && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Einpackservice</span>}
-                  {quote.special_transport && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Spezialtransporte ({[quote.special_transport_piano && 'Klavier/Flügel', quote.special_transport_safe && 'Tresor', quote.special_transport_heavy && 'Schwere Möbel/Geräte'].filter(Boolean).join(', ') || 'Ja'})</span>}
+                  {quote.special_transport && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Spezialtransporte ({[quote.special_transport_piano && 'Klavier', quote.special_transport_safe && 'Tresor', quote.special_transport_heavy && 'Flügel'].filter(Boolean).join(', ') || 'Ja'})</span>}
                   {quote.additional_services_disposal && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Entsorgung</span>}
                 </div>
               </div>

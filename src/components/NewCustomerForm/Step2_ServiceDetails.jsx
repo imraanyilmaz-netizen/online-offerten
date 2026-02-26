@@ -935,12 +935,17 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                         />
                         <Label htmlFor="additional_cleaning" className="flex-grow cursor-pointer">
                             <span className="font-semibold text-base text-slate-800">{t('step1.additionalCleaningLabel')}</span>
-                            <p className="text-sm text-gray-600 font-normal">
-                              {formData.umzugArt === 'geschaeftsumzug' 
-                                ? t('step1.additionalCleaningDescriptionBusiness')
-                                : t('step1.additionalCleaningDescription')
-                              }
-                            </p>
+                            {(formData.umzugArt === 'geschaeftsumzug' 
+                              ? t('step1.additionalCleaningDescriptionBusiness')
+                              : t('step1.additionalCleaningDescription')
+                            ) && (
+                              <p className="text-sm text-gray-600 font-normal">
+                                {formData.umzugArt === 'geschaeftsumzug' 
+                                  ? t('step1.additionalCleaningDescriptionBusiness')
+                                  : t('step1.additionalCleaningDescription')
+                                }
+                              </p>
+                            )}
                         </Label>
                     </div>
                     {/* Endreinigung Detailfragen werden in Step 3 abgefragt */}

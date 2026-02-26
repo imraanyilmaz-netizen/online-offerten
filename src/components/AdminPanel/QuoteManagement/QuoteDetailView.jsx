@@ -123,6 +123,27 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
   if (!quote) return null;
   
   const serviceCategory = getServiceCategory(quote.servicetype);
+  const selectedSpecialTransports = [
+    quote.special_transport_piano && 'Klavier',
+    quote.special_transport_safe && 'Tresor',
+    quote.special_transport_heavy && 'Flügel',
+  ].filter(Boolean);
+  const selectedMovingExtras = [
+    quote.additional_services_furniture_assembly && 'Möbel-De-/Montage',
+    quote.additional_services_packing && 'Einpackservice',
+    quote.additional_services_disposal && 'Entsorgung',
+    ...(quote.special_transport
+      ? selectedSpecialTransports.length > 0
+        ? selectedSpecialTransports
+        : ['Spezialtransporte']
+      : []),
+  ].filter(Boolean);
+  const formatWithUnd = (items) => {
+    if (!items || items.length === 0) return '';
+    if (items.length === 1) return items[0];
+    if (items.length === 2) return `${items[0]} und ${items[1]}`;
+    return `${items.slice(0, -1).join(', ')} und ${items[items.length - 1]}`;
+  };
   
   const getServiceIcon = () => {
       switch(serviceCategory) {
@@ -191,14 +212,9 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
                   <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
                 </div>
                 <div className="space-y-2">
-                  {quote.additional_services_furniture_assembly && <QuoteDetail label="Möbel De-/Montage" value="Ja" />}
-                  {quote.additional_services_packing && <QuoteDetail label="Einpackservice" value="Ja" />}
-                  {quote.special_transport && (
-                    <QuoteDetail label="Spezialtransporte" value={
-                      [quote.special_transport_piano && 'Klavier/Flügel', quote.special_transport_safe && 'Tresor', quote.special_transport_heavy && 'Schwere Möbel/Geräte'].filter(Boolean).join(', ') || 'Ja'
-                    } />
+                  {selectedMovingExtras.length > 0 && (
+                    <QuoteDetail label="Umzug inkl." value={formatWithUnd(selectedMovingExtras)} />
                   )}
-                  {quote.additional_services_disposal && <QuoteDetail label="Entsorgung" value="Ja" />}
                 </div>
               </div>
             )}

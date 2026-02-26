@@ -70,9 +70,9 @@ serve(async (req) => {
       if (quote.additional_services_packing) zusatz.push('Einpackservice');
       if (quote.special_transport) {
         const details = [
-          quote.special_transport_piano && 'Klavier/Flügel',
+          quote.special_transport_piano && 'Klavier',
           quote.special_transport_safe && 'Tresor',
-          quote.special_transport_heavy && 'Schwere Möbel/Geräte'
+          quote.special_transport_heavy && 'Flügel'
         ].filter(Boolean).join(', ');
         zusatz.push(`Spezialtransporte (${details || 'Ja'})`);
       }

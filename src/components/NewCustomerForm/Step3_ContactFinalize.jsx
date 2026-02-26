@@ -80,6 +80,8 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
 
 const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, handleCheckboxChange, handleRadioGroupChange, handleHowFoundChange, handleQuotesWantedChange, errors }) => {
   const { t } = useTranslation('newCustomerForm');
+  const [moveDateInput, setMoveDateInput] = React.useState('');
+  const moveDatePickerRef = React.useRef(null);
 
   const salutationOptions = [
     { value: 'herr', label: t('step3.salutationMr') },
@@ -127,6 +129,59 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
       default:
         return 'step3.moveDateTitle';
     }
+  };
+
+  const formatIsoToDisplayDate = (isoDate) => {
+    if (!isoDate) return '';
+    const [year, month, day] = String(isoDate).split('-');
+    if (!year || !month || !day) return '';
+    return `${day}.${month}.${year}`;
+  };
+
+  const parseDisplayDateToIso = (displayDate) => {
+    const match = displayDate.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+    if (!match) return '';
+    const [, day, month, year] = match;
+    const iso = `${year}-${month}-${day}`;
+    const date = new Date(`${iso}T00:00:00`);
+    const isValid =
+      !Number.isNaN(date.getTime()) &&
+      date.getFullYear() === Number(year) &&
+      date.getMonth() + 1 === Number(month) &&
+      date.getDate() === Number(day);
+    return isValid ? iso : '';
+  };
+
+  const normalizeDateInput = (value) => {
+    const digits = value.replace(/\D/g, '').slice(0, 8);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 4) return `${digits.slice(0, 2)}.${digits.slice(2)}`;
+    return `${digits.slice(0, 2)}.${digits.slice(2, 4)}.${digits.slice(4)}`;
+  };
+
+  const openMoveDatePicker = () => {
+    if (moveDatePickerRef.current?.showPicker) {
+      moveDatePickerRef.current.showPicker();
+      return;
+    }
+    moveDatePickerRef.current?.focus();
+  };
+
+  React.useEffect(() => {
+    setMoveDateInput(formatIsoToDisplayDate(formData.move_date));
+  }, [formData.move_date]);
+
+  const handleMoveDateTextChange = (e) => {
+    const normalized = normalizeDateInput(e.target.value);
+    setMoveDateInput(normalized);
+
+    const isoDate = parseDisplayDateToIso(normalized);
+    handleChange({
+      target: {
+        name: 'move_date',
+        value: isoDate || '',
+      },
+    });
   };
 
   const getAdditionalInfoPlaceholder = () => {
@@ -180,7 +235,43 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4">
             <div className="space-y-1">
               <Label htmlFor="move_date" className="font-medium text-slate-700 text-sm sm:text-base">{t(getDateLabelKey())} <span className="text-red-500">*</span></Label>
-              <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base" min={new Date().toISOString().split("T")[0]}/>
+              <div className="relative">
+                <Input
+                  type="text"
+                  id="move_date"
+                  name="move_date_display"
+                  value={moveDateInput}
+                  onChange={handleMoveDateTextChange}
+                  onClick={openMoveDatePicker}
+                  placeholder="TT.MM.JJJJ"
+                  inputMode="numeric"
+                  maxLength={10}
+                  className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base pr-10"
+                  aria-label="Datum im Format TT.MM.JJJJ"
+                />
+                <button
+                  type="button"
+                  onClick={openMoveDatePicker}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
+                  aria-label="Kalender öffnen"
+                >
+                  <CalendarDays className="h-4 w-4" />
+                </button>
+                <input
+                  ref={moveDatePickerRef}
+                  type="date"
+                  value={formData.move_date || ''}
+                  onChange={(e) => {
+                    handleChange({ target: { name: 'move_date', value: e.target.value } });
+                    setMoveDateInput(formatIsoToDisplayDate(e.target.value));
+                  }}
+                  min={new Date().toISOString().split("T")[0]}
+                  lang="de-CH"
+                  className="absolute h-0 w-0 opacity-0 pointer-events-none"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                />
+              </div>
               {errors && errors.move_date && <p className="text-sm text-red-500 mt-1">{errors.move_date}</p>}
             </div>
             <div className="flex items-end pb-1.5">
@@ -208,7 +299,7 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
             {/* Umzug: Zusätzliche Leistungen */}
             {formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international') && (
               <>
-                <p className="text-xs text-slate-500 mb-1">Wählen Sie bitte aus, falls zutreffend.</p>
+                <p className="text-xs text-slate-500 mb-1">Mehr Details helfen uns, passende und faire Angebote für Sie zu finden. Unvollständige Angaben können zu späteren Preisänderungen führen.</p>
                 <div className="flex items-center space-x-3">
                   <Checkbox id="furniture_assembly_s3" name="furniture_assembly" checked={formData.furniture_assembly || false} onCheckedChange={(checked) => handleCheckboxChange('furniture_assembly', checked)} className="h-6 w-6"/>
                   <Label htmlFor="furniture_assembly_s3" className="font-medium text-base text-slate-800 cursor-pointer">Möbel müssen demontiert und wieder montiert werden</Label>
@@ -227,21 +318,17 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
                         handleCheckboxChange('special_transport_heavy', false);
                       }
                     }} className="h-6 w-6"/>
-                    <Label htmlFor="special_transport_s3" className="font-medium text-base text-slate-800 cursor-pointer">Spezialtransporte (z.B. Klavier, Tresor, schwere Möbel)</Label>
+                    <Label htmlFor="special_transport_s3" className="font-medium text-base text-slate-800 cursor-pointer">Wird auch ein Klavier oder Flügel mittransportiert?</Label>
                   </div>
                   {formData.special_transport && (
                     <div className="ml-9 mt-2 space-y-2 pl-3 border-l-2 border-green-200">
                       <div className="flex items-center space-x-3">
                         <Checkbox id="special_transport_piano_s3" checked={formData.special_transport_piano || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_piano', checked)} className="h-6 w-6"/>
-                        <Label htmlFor="special_transport_piano_s3" className="font-medium text-base text-slate-800 cursor-pointer">Klavier / Flügel</Label>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <Checkbox id="special_transport_safe_s3" checked={formData.special_transport_safe || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_safe', checked)} className="h-6 w-6"/>
-                        <Label htmlFor="special_transport_safe_s3" className="font-medium text-base text-slate-800 cursor-pointer">Tresor</Label>
+                        <Label htmlFor="special_transport_piano_s3" className="font-medium text-base text-slate-800 cursor-pointer">Klavier</Label>
                       </div>
                       <div className="flex items-center space-x-3">
                         <Checkbox id="special_transport_heavy_s3" checked={formData.special_transport_heavy || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_heavy', checked)} className="h-6 w-6"/>
-                        <Label htmlFor="special_transport_heavy_s3" className="font-medium text-base text-slate-800 cursor-pointer">Schwere Möbel / Geräte</Label>
+                        <Label htmlFor="special_transport_heavy_s3" className="font-medium text-base text-slate-800 cursor-pointer">Flügel</Label>
                       </div>
                     </div>
                   )}

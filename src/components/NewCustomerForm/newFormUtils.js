@@ -196,9 +196,9 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     if (formData.additional_services_packing) serviceSpecificDetails.push('Einpackservice: Ja');
     if (formData.special_transport) {
       const items = [];
-      if (formData.special_transport_piano) items.push('Klavier/Flügel');
+      if (formData.special_transport_piano) items.push('Klavier');
       if (formData.special_transport_safe) items.push('Tresor');
-      if (formData.special_transport_heavy) items.push('Schwere Möbel/Geräte');
+      if (formData.special_transport_heavy) items.push('Flügel');
       serviceSpecificDetails.push(`Spezialtransporte: ${items.length > 0 ? items.join(', ') : 'Ja'}`);
     }
     if (formData.additional_services_disposal) serviceSpecificDetails.push('Entsorgung: Ja');
