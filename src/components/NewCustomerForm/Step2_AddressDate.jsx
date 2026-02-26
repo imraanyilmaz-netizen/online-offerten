@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Home, Building, Loader2, MapPin, ChevronsUpDown, ChevronDown, Globe } from 'lucide-react';
+import { Home, Building, Loader2, MapPin, ChevronsUpDown, Globe } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { countries } from '@/data/countries';
@@ -266,64 +266,41 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
         {/* Sağ taraf: Detay alanları */}
         <div className={isMoveService ? "grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4 items-end" : "grid grid-cols-2 gap-3 items-start"}>
           <div>
-            <div className="relative">
-              <select
-                name={`${prefix}_floor`}
-                value={formData[`${prefix}_floor`] || ''}
-                onChange={(e) => handleSelectChange(`${prefix}_floor`, e.target.value)}
-                className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 pr-9 py-2 text-sm sm:text-base focus:bg-white focus:border-green-500 focus:outline-none appearance-none"
-              >
-                <option value="">{`${t('step2.floorLabel')} *`}</option>
-                {floorOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-            </div>
+            <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
+              <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+                <SelectValue placeholder={`${t('step2.floorLabel')} *`} />
+              </SelectTrigger>
+              <SelectContent className="text-sm sm:text-base">
+                {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
             {errors && errors[`${prefix}_floor`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
           </div>
 
           {showRoomsField && (
             <div>
-              <div className="relative">
-                <select
-                  name={`${prefix}_rooms`}
-                  value={formData[`${prefix}_rooms`] || ''}
-                  onChange={(e) => handleSelectChange(`${prefix}_rooms`, e.target.value)}
-                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 pr-9 py-2 text-sm sm:text-base focus:bg-white focus:border-green-500 focus:outline-none appearance-none"
-                >
-                  <option value="">{`${t('step2.roomsLabel')} *`}</option>
-                  {currentRoomOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-              </div>
+              <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
+                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+                  <SelectValue placeholder={`${t('step2.roomsLabel')} *`} />
+                </SelectTrigger>
+                <SelectContent className="text-sm sm:text-base">
+                  {currentRoomOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
+                </SelectContent>
+              </Select>
               {errors && errors[`${prefix}_rooms`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_rooms`]}</p>}
             </div>
           )}
 
           <div>
-            <div className="relative">
-              <select
-                name={`${prefix}_lift`}
-                value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''}
-                onChange={(e) => handleSelectChange(
-                  `${prefix}_lift`,
-                  e.target.value === '' ? '' : e.target.value === 'true'
-                )}
-                className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 pr-9 py-2 text-sm sm:text-base focus:bg-white focus:border-green-500 focus:outline-none appearance-none"
-              >
-                <option value="">{t('step2.liftLabel')}</option>
-                <option value="true">{t('step2.liftOptionYes')}</option>
-                <option value="false">{t('step2.liftOptionNo')}</option>
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-            </div>
+            <Select name={`${prefix}_lift`} value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')}>
+              <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+                <SelectValue placeholder={t('step2.liftLabel')} />
+              </SelectTrigger>
+              <SelectContent className="text-sm sm:text-base">
+                <SelectItem value="true">{t('step2.liftOptionYes')}</SelectItem>
+                <SelectItem value="false">{t('step2.liftOptionNo')}</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </div>
