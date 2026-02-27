@@ -85,7 +85,7 @@ const FooterCTABanner = () => {
             href="/kostenlose-offerte-anfordern" 
             className="block w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-center py-4 px-6 rounded-xl text-sm transition-colors"
           >
-            Jetzt kostenlos Offerten vergleichen
+            Kostenlose Offerten anfordern
           </Link>
         </div>
 
@@ -94,7 +94,7 @@ const FooterCTABanner = () => {
           {/* Left Section - Branding & CTA Text */}
           <div className="flex items-center gap-6 flex-shrink-0">
             <div className="flex flex-col">
-              <span className="text-white/70 text-xs font-medium uppercase tracking-wider">Kostenlos & Unverbindlich</span>
+              <span className="text-white/70 text-xs font-medium tracking-wider">Ihre Anfrage ist kostenlos und unverbindlich</span>
               <span className="text-white text-xl font-bold tracking-tight">
                 Jetzt Offerten vergleichen
               </span>
@@ -135,7 +135,7 @@ const FooterCTABanner = () => {
               className="bg-white text-green-700 hover:bg-green-50 hover:text-green-800 font-bold px-8 py-3.5 rounded-full whitespace-nowrap shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 group text-base"
             >
               <Link href="/kostenlose-offerte-anfordern" className="flex items-center gap-2">
-                <span>Kostenlose Offerte anfordern</span>
+                <span>Kostenlose Offerten anfordern</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>

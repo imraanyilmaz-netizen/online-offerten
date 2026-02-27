@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import UmzugskostenRechnerPageClient from '@/components/pages/tools/UmzugskostenRechnerPageClient'
-import { createStaticClient } from '@/lib/supabase/server'
 
 // ISR: Sayfa 1 saatte bir otomatik yenilenecek (3600 saniye)
 // Bu sayfa statik olarak build edilir, ancak 1 saatte bir arka planda yenilenir
@@ -8,14 +7,14 @@ import { createStaticClient } from '@/lib/supabase/server'
 export const revalidate = 3600 // 1 saat
 
 export const metadata: Metadata = {
-  title: 'Umzugskosten berechnen: Kostenlos & schnell',
-  description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Umzugskosten-Rechner für die Schweiz. In 2 Minuten wissen, was Ihr Umzug kostet! Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.',
+  title: 'Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen',
+  description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/umzugskosten',
   },
   openGraph: {
-    title: 'Umzugskosten berechnen: Kosten Umzugsunternehmen & Umzugsfirma Kosten Tabelle',
-    description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Umzugskosten-Rechner für die Schweiz. In 2 Minuten wissen, was Ihr Umzug kostet!',
+    title: 'Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen',
+    description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.',
     url: 'https://online-offerten.ch/umzugsfirma/umzugskosten',
     siteName: 'Online-Offerten.ch',
     locale: 'de_CH',
@@ -31,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugskosten berechnen: Kosten Umzugsunternehmen & Umzugsfirma Kosten Tabelle',
-    description: 'Umzugskosten berechnen: Kosten Umzugsunternehmen, Umziehen Kosten & Umzugsfirma Kosten Tabelle. Kostenloser Rechner für die Schweiz.',
+    title: 'Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen',
+    description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.',
     images: ['https://online-offerten.ch/image/umzugsfirma-kartons.webp'],
   },
   robots: {
@@ -48,53 +47,10 @@ export const metadata: Metadata = {
   },
 }
 
-async function getReviewStats() {
-  try {
-    const supabase = createStaticClient();
-    
-    // Tüm onaylanmış yorumları say (sınırsız)
-    const { count: totalReviewCount, error: countError } = await supabase
-      .from('customer_reviews')
-      .select('*', { count: 'exact', head: true })
-      .eq('approval_status', 'approved');
-    
-    if (countError) {
-      console.error('Error fetching review count:', countError);
-    }
-    
-    // Tüm onaylanmış yorumların rating'lerini al (average hesaplamak için)
-    const { data: allReviews, error: reviewsError } = await supabase
-      .from('customer_reviews')
-      .select('rating')
-      .eq('approval_status', 'approved');
-    
-    if (reviewsError) {
-      console.error('Error fetching reviews for average:', reviewsError);
-    }
-    
-    // Average rating hesapla
-    let averageRating = 0;
-    if (allReviews && allReviews.length > 0) {
-      const totalRating = allReviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0);
-      averageRating = totalRating / allReviews.length;
-    }
-    
-    return {
-      reviewCount: totalReviewCount || 0,
-      averageRating: averageRating
-    };
-  } catch (error) {
-    console.error('Error fetching review stats on server:', error);
-    return { reviewCount: 0, averageRating: 0 };
-  }
-}
-
 export default async function UmzugskostenPage() {
-  const reviewStats = await getReviewStats();
-  
   // Server-side schema oluştur (Google için)
-  const metaTitle = "Umzugskosten-Rechner: Kostenlose Schätzung in 2 Minuten";
-  const metaDescription = "In 2 Minuten wissen, was Ihr Umzug kostet! Kostenloser Umzugskosten-Rechner mit sofortiger Preis-Schätzung. Vergleichen Sie mehrere Angebote & sparen Sie bis zu 40%.";
+  const metaTitle = "Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen";
+  const metaDescription = "Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.";
   
   const serverSchema = {
     "@context": "https://schema.org",
@@ -280,7 +236,7 @@ export default async function UmzugskostenPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serverSchema) }}
       />
-      <UmzugskostenRechnerPageClient initialReviewStats={reviewStats} />
+      <UmzugskostenRechnerPageClient />
     </>
   );
 }
