@@ -329,60 +329,60 @@ export default async function HomePage() {
                 <HomeHeroForm />
                 
                 {/* Service Quick Links */}
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-3 mt-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-3 mt-6 mb-6">
                   {/* Umzug Button */}
                   <Link 
                     href="/kostenlose-offerte-anfordern?step=2&service=umzug"
-                    className="w-full flex items-center gap-2.5 sm:flex-col sm:items-center sm:text-center p-3 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-lg group"
+                    className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-lg group"
                   >
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                      <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
+                      <Truck className="w-5 h-5 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
                     </div>
                     <div className="flex-1 text-left sm:text-center">
-                      <p className="font-semibold text-sm sm:text-base text-gray-900">Umzug</p>
-                      <p className="text-[10px] sm:text-xs text-gray-600 mt-0.5 leading-tight">Privat, Geschäftlich, International & Spezial</p>
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Umzug</p>
+                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Privat, Geschäftlich, International & Spezial</p>
                     </div>
                   </Link>
                   
                   {/* Reinigung Button */}
                   <Link 
                     href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
-                    className="w-full flex items-center gap-2.5 sm:flex-col sm:items-center sm:text-center p-3 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-lg group"
+                    className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-lg group"
                   >
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                      <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
+                      <Sparkles className="w-5 h-5 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
                     </div>
                     <div className="flex-1 text-left sm:text-center">
-                      <p className="font-semibold text-sm sm:text-base text-gray-900">Reinigung</p>
-                      <p className="text-[10px] sm:text-xs text-gray-600 mt-0.5 leading-tight">Umzugs-, Büro-, Fensterreinigung & mehr</p>
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Reinigung</p>
+                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Umzugs-, Büro-, Fensterreinigung & mehr</p>
                     </div>
                   </Link>
                   
                   {/* Räumung & Entsorgung Button */}
                   <Link 
                     href="/kostenlose-offerte-anfordern?service=raeumung&step=2"
-                    className="w-full flex items-center gap-2.5 sm:flex-col sm:items-center sm:text-center p-3 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-red-500 hover:bg-red-50 hover:shadow-lg group"
+                    className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-red-500 hover:bg-red-50 hover:shadow-lg group"
                   >
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 group-hover:bg-red-500 transition-colors">
-                      <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 group-hover:text-white transition-colors" />
+                    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 group-hover:bg-red-500 transition-colors">
+                      <Trash2 className="w-5 h-5 sm:w-5 sm:h-5 text-red-600 group-hover:text-white transition-colors" />
                     </div>
                     <div className="flex-1 text-left sm:text-center">
-                      <p className="font-semibold text-sm sm:text-base text-gray-900">Entsorgung</p>
-                      <p className="text-[10px] sm:text-xs text-gray-600 mt-0.5 leading-tight">Wohnung, Haus, Keller & Estrich</p>
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Entsorgung</p>
+                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Wohnung, Haus, Keller & Estrich</p>
                     </div>
                   </Link>
                   
                   {/* Klaviertransport Button */}
                   <Link 
                     href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport"
-                    className="w-full flex items-center gap-2.5 sm:flex-col sm:items-center sm:text-center p-3 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-lg group"
+                    className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-lg group"
                   >
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.5 8c-1.4 0-2.6-.8-3.2-2A6.87 6.87 0 0 0 2 9v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8.5C22 9.6 20.4 8 18.5 8"/><path d="M2 14h20"/><path d="M6 14v4"/><path d="M10 14v4"/><path d="M14 14v4"/><path d="M18 14v4"/></svg>
+                    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
+                      <svg className="w-5 h-5 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.5 8c-1.4 0-2.6-.8-3.2-2A6.87 6.87 0 0 0 2 9v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8.5C22 9.6 20.4 8 18.5 8"/><path d="M2 14h20"/><path d="M6 14v4"/><path d="M10 14v4"/><path d="M14 14v4"/><path d="M18 14v4"/></svg>
                     </div>
                     <div className="flex-1 text-left sm:text-center">
-                      <p className="font-semibold text-sm sm:text-base text-gray-900">Klaviertransport</p>
-                      <p className="text-[10px] sm:text-xs text-gray-600 mt-0.5 leading-tight">Klavier, Flügel & Piano sicher transportieren</p>
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Klaviertransport</p>
+                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Klavier, Flügel & Piano sicher transportieren</p>
                     </div>
                   </Link>
                 </div>
