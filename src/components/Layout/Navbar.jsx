@@ -15,27 +15,51 @@ import {
 // framer-motion removed – using CSS transitions for better INP
 // Removed useTranslation
 import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { supabase } from '@/lib/supabaseClient';
 // logoUrl removed - using inline SVG icon instead
 // Removed useLanguageSwitcher and getLocalizedUrl
 
-const UserMenu = ({ user, onLogout }) => {
+const UserMenu = ({ user, onLogout, partnerBrand }) => {
   // Removed useTranslation
+  const [logoFailed, setLogoFailed] = useState(false);
   const dashboardPath = user?.user_metadata?.role === 'admin' ? '/admin-dashboard' : '/partner/dashboard';
   const settingsPath = '/partner/einstellungen';
+  const logoUrl = partnerBrand.logoUrl || user?.user_metadata?.logo_url || user?.user_metadata?.avatar_url || null;
+  const displayName = partnerBrand.companyName || user?.user_metadata?.company_name || user?.email?.split('@')?.[0] || 'Konto';
+  const fallbackChar = (partnerBrand.companyName?.charAt(0) || user?.user_metadata?.company_name?.charAt(0) || user?.email?.charAt(0) || 'U').toUpperCase();
+
+  useEffect(() => {
+    setLogoFailed(false);
+  }, [logoUrl]);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-9 w-9 rounded-full">
-          <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-            {user.email?.charAt(0).toUpperCase()}
-          </div>
+        <Button variant="ghost" className="relative h-10 rounded-full pl-1 pr-2 gap-2 max-w-[220px]">
+          <span className="shrink-0">
+            {logoUrl && !logoFailed ? (
+              <img
+                src={logoUrl}
+                alt="Partner Logo"
+                className="w-9 h-9 rounded-full object-cover border border-gray-200"
+                onError={() => setLogoFailed(true)}
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                {fallbackChar}
+              </div>
+            )}
+          </span>
+          <span className="text-sm font-semibold text-gray-800 truncate" title={displayName}>
+            {displayName}
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{user.user_metadata?.company_name || user.email}</p>
+            <p className="text-sm font-medium leading-none">{partnerBrand.companyName || user.user_metadata?.company_name || user.email}</p>
             <p className="text-xs leading-none text-muted-foreground">
               {user.email}
             </p>
@@ -71,15 +95,51 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openMobileSections, setOpenMobileSections] = useState({});
   const [mounted, setMounted] = useState(false);
+  const [partnerBrand, setPartnerBrand] = useState({ logoUrl: null, companyName: null });
+  const [mobileLogoFailed, setMobileLogoFailed] = useState(false);
   const { user, signOut, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const settingsPath = '/partner/einstellungen';
+  const mobileLogoUrl = partnerBrand.logoUrl || user?.user_metadata?.logo_url || user?.user_metadata?.avatar_url || null;
+  const mobileDisplayName = partnerBrand.companyName || user?.user_metadata?.company_name || user?.email?.split('@')?.[0] || user?.email || 'Konto';
+  const mobileFallbackChar = (partnerBrand.companyName?.charAt(0) || user?.user_metadata?.company_name?.charAt(0) || user?.email?.charAt(0) || 'U').toUpperCase();
 
   // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    const fetchPartnerBrand = async () => {
+      if (!user?.email || user?.user_metadata?.role !== 'partner') {
+        setPartnerBrand({ logoUrl: null, companyName: null });
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('partners')
+        .select('logo_url, company_name')
+        .eq('email', user.email)
+        .limit(1)
+        .maybeSingle();
+
+      if (error || !data) {
+        return;
+      }
+
+      setPartnerBrand({
+        logoUrl: data.logo_url || null,
+        companyName: data.company_name || null,
+      });
+    };
+
+    fetchPartnerBrand();
+  }, [user?.email, user?.user_metadata?.role]);
+
+  useEffect(() => {
+    setMobileLogoFailed(false);
+  }, [mobileLogoUrl]);
 
   const handleLogout = async () => {
     await signOut();
@@ -247,7 +307,7 @@ const Navbar = () => {
               {!mounted || loading ? (
                 <div className="w-9 h-9 bg-gray-200 rounded-full animate-pulse" style={{ minWidth: '36px', minHeight: '36px' }}></div>
               ) : user ? (
-                <UserMenu user={user} onLogout={handleLogout} />
+                <UserMenu user={user} onLogout={handleLogout} partnerBrand={partnerBrand} />
               ) : (
                 <Button asChild size="sm" className="bg-green-600 hover:bg-green-700 text-white" style={{ minWidth: '80px' }}>
                   <Link href="/login">Anmelden</Link>
@@ -366,7 +426,24 @@ const Navbar = () => {
                 <div className="h-10 bg-gray-200 rounded-md animate-pulse"></div>
               ) : user ? (
                 <>
-                  <p className="px-3 py-2 text-sm font-semibold text-gray-500 truncate">{user.email}</p>
+                  <div className="px-3 py-2 flex items-center gap-2 min-w-0">
+                    <span className="shrink-0">
+                      {mobileLogoUrl && !mobileLogoFailed ? (
+                        <img
+                          src={mobileLogoUrl}
+                          alt="Partner Logo"
+                          className="w-7 h-7 rounded-full object-cover border border-gray-200"
+                          onError={() => setMobileLogoFailed(true)}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-7 h-7 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xs">
+                          {mobileFallbackChar}
+                        </div>
+                      )}
+                    </span>
+                    <p className="text-sm font-semibold text-gray-700 truncate">{mobileDisplayName}</p>
+                  </div>
                   <NavItem to={user?.user_metadata?.role === 'admin' ? '/admin-dashboard' : '/partner/dashboard'} onClick={() => setMobileMenuOpen(false)}>
                     <LayoutDashboard size={18} /> Dashboard
                   </NavItem>

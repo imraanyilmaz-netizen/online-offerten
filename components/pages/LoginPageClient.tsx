@@ -41,7 +41,7 @@ const waitForCookie = async (maxWait = 2000): Promise<boolean> => {
 }
 
 const LoginPageClient = () => {
-  const { signIn } = useAuth()
+  const { signIn, user, loading } = useAuth()
   const { toast } = useToast()
   const searchParams = useSearchParams()
 
@@ -52,27 +52,12 @@ const LoginPageClient = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isRedirectingAfterLogin, setIsRedirectingAfterLogin] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
 
-  // Kullanıcı zaten giriş yapmışsa paneline yönlendir
-  useEffect(() => {
-    const checkSession = async () => {
-      const supabase = createClient()
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session) {
-        const userRole = session.user?.user_metadata?.role
-        if (userRole === 'admin' || userRole === 'editor') {
-          window.location.href = '/admin-dashboard'
-        } else if (userRole === 'partner') {
-          window.location.href = '/partner/dashboard'
-        } else {
-          window.location.href = '/'
-        }
-      }
-    }
-    checkSession()
-  }, [])
+  // IMPORTANT: Do not auto-redirect from /login to avoid redirect loops.
+  // If user is already authenticated, show a direct dashboard button instead.
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -85,6 +70,7 @@ const LoginPageClient = () => {
 
     if (!error) {
       console.log('[LoginPage] Login successful, waiting for auth state change...')
+      setIsRedirectingAfterLogin(true)
       
       // Wait for onAuthStateChange event to fire and session to be saved
       const supabase = createClient()
@@ -94,7 +80,7 @@ const LoginPageClient = () => {
         const timeout = setTimeout(() => {
           console.warn('[LoginPage] Auth state change timeout, proceeding anyway')
           resolve()
-        }, 2000)
+        }, 800)
         
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
           console.log('[LoginPage] Auth state change:', { event, hasSession: !!session })
@@ -107,7 +93,7 @@ const LoginPageClient = () => {
       })
       
       // Wait a bit more for localStorage to be updated
-      await new Promise(resolve => setTimeout(resolve, 300))
+      await new Promise(resolve => setTimeout(resolve, 100))
       
       // Get session to determine user role
       const { data: { session }, error: sessionError } = await supabase.auth.getSession()
@@ -242,7 +228,7 @@ const LoginPageClient = () => {
 
       // Wait for cookie to be set before redirecting
       console.log('[LoginPage] Waiting for cookie to be set...')
-      const cookieReady = await waitForCookie(1000)
+      const cookieReady = await waitForCookie(400)
       
       if (!cookieReady) {
         console.warn('[LoginPage] Cookie not ready, but proceeding with redirect anyway')
@@ -274,6 +260,7 @@ const LoginPageClient = () => {
       }
     } else {
       console.log('[LoginPage] Login failed:', error?.message)
+      setIsRedirectingAfterLogin(false)
       toast({
         variant: "destructive",
         title: "Anmeldung fehlgeschlagen",
@@ -292,6 +279,39 @@ const LoginPageClient = () => {
   const cardVariants = {
     login: { height: 'auto' },
     register: { height: 'auto' },
+  }
+
+  if (isRedirectingAfterLogin) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
+        <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
+          <h1 className="text-2xl font-bold text-black mb-2">Anmeldung wird abgeschlossen</h1>
+          <p className="text-gray-600">Bitte einen Moment warten...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!loading && user) {
+    const userRole = user?.user_metadata?.role
+    const dashboardHref =
+      userRole === 'admin' || userRole === 'editor'
+        ? '/admin-dashboard'
+        : userRole === 'partner'
+        ? '/partner/dashboard'
+        : '/'
+
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
+        <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
+          <h1 className="text-2xl font-bold text-black mb-2">Sie sind bereits angemeldet</h1>
+          <p className="text-gray-600 mb-6">Sie konnen direkt in Ihr Dashboard wechseln.</p>
+          <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg">
+            <Link href={dashboardHref}>Zum Dashboard</Link>
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (

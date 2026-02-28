@@ -60,21 +60,6 @@ export default function ClientRouteProtection() {
       }
     }
 
-    // Redirect authenticated users away from /login (client-side)
-    if (pathname === '/login' && user) {
-      if (userRole === 'admin') {
-        console.log('[ClientRouteProtection] Authenticated admin on /login, redirecting to /admin-dashboard')
-        router.replace('/admin-dashboard')
-      } else if (userRole === 'partner') {
-        console.log('[ClientRouteProtection] Authenticated partner on /login, redirecting to /partner/dashboard')
-        router.replace('/partner/dashboard')
-      } else {
-        // User authenticated but no valid role - redirect to home
-        console.log('[ClientRouteProtection] User authenticated but no valid role, redirecting to home')
-        router.replace('/')
-      }
-    }
-
     // Redirect authenticated users away from auth pages
     const authRoutes = ['/forgot-password', '/partner-werden']
     if (authRoutes.includes(pathname || '') && user) {
