@@ -12,58 +12,103 @@ const PrivacyPolicyPageClient = () => {
       title: "1. Verantwortlicher",
       content: [
         "Verantwortlich für die Datenverarbeitung auf dieser Website ist:",
-        "Online-Offerten.ch<br>E-Mail: info@online-offerten.ch",
+        "Online-Offerten.ch<br>Schweiz<br>E-Mail: info@online-offerten.ch",
         "",
-        "Es wurde kein Datenschutzbeauftragter benannt, da dies gesetzlich nicht erforderlich ist. Für datenschutzrechtliche Fragen können Sie uns jederzeit über die oben genannten Kontaktdaten erreichen."
+        "Online-Offerten.ch ist eine Vermittlungsplattform und erbringt selbst keine Umzugs-, Reinigungs- oder Transportdienstleistungen."
       ]
     },
     {
-      title: "2. Nutzung unserer Website",
+      title: "2. Erhebung und Verarbeitung personenbezogener Daten",
       content: [
-        "Durch die Nutzung unserer Website erklären Sie sich mit dieser Datenschutzerklärung einverstanden. Zur Verbesserung der Funktionalität und Nutzerfreundlichkeit sammeln wir allgemeine Informationen über Besuche auf unserer Website, wie z. B. Browsertyp oder Zugriffszeitpunkte.",
+        "Wir erheben personenbezogene Daten, wenn Sie:",
+        "• eine Anfrage über unser Formular stellen<br>• uns per E-Mail kontaktieren<br>• unsere Website besuchen",
         "",
-        "Wir verwenden Cookies, um bestimmte Funktionen zu ermöglichen und Ihre Erfahrung zu optimieren. Cookies können jederzeit in Ihrem Browser gelöscht oder blockiert werden. Eine eingeschränkte Nutzung kann die Funktionalität der Website beeinflussen."
+        "Zu den erhobenen Daten gehören insbesondere:",
+        "• Name<br>• Telefonnummer<br>• E-Mail-Adresse<br>• Umzugs- oder Projektdetails<br>• Adressangaben",
+        "",
+        "Diese Daten werden ausschliesslich zum Zweck der Vermittlung geeigneter Partnerfirmen verarbeitet."
       ]
     },
     {
-      title: "3. Angebotsanfragen",
+      title: "3. Weitergabe an Partnerfirmen",
       content: [
-        "Wenn Sie über ein Formular oder per E-Mail Kontakt aufnehmen, geben Sie personenbezogene Daten an (z. B. Name, E-Mail, Telefonnummer, Projektdetails). Diese Daten werden ausschliesslich zur Bearbeitung Ihrer Anfrage verwendet.",
+        "Als Vermittlungsplattform leiten wir Ihre Anfrage an ausgewählte Partnerfirmen in Ihrer Region weiter.",
         "",
-        "Sie können auswählen, wie viele Offerten Sie erhalten möchten (2–6). Ihre Daten werden dann entsprechend an die ausgewählten Partnerfirmen in Ihrer Region weitergeleitet, damit diese Ihnen individuelle Angebote erstellen und direkt Kontakt aufnehmen können.",
+        "Die Weitergabe erfolgt ausschliesslich zum Zweck der Angebotserstellung und direkten Kontaktaufnahme durch die Partnerfirma.",
         "",
-        "Die Weitergabe erfolgt nur für diesen Zweck. Online-Offerten.ch selbst erbringt keine Dienstleistungen."
+        "Mit der Nutzung unseres Formulars erklären Sie sich ausdrücklich mit dieser Datenweitergabe einverstanden.",
+        "",
+        "Online-Offerten.ch wird nicht Vertragspartei zwischen Kunde und Partnerfirma."
       ]
     },
     {
-      title: "4. Datensicherheit",
+      title: "4. Rechtsgrundlage",
       content: [
-        "Wir treffen angemessene technische und organisatorische Massnahmen, um Ihre Daten vor Verlust, unberechtigtem Zugriff oder unrechtmässiger Verwendung zu schützen.",
+        "Die Verarbeitung Ihrer Daten erfolgt:",
         "",
-        "Alle Datenübertragungen erfolgen verschlüsselt per SSL/TLS."
+        "• zur Vertragserfüllung<br>• aufgrund Ihrer Einwilligung<br>• zur Wahrung berechtigter Interessen im Rahmen der Vermittlung"
       ]
     },
     {
-      title: "5. Serverstandort",
+      title: "5. Speicherdauer",
       content: [
-        "Unsere Server befinden sich in der Schweiz (z. B. Infomaniak) und in der EU (z. B. Frankfurt). Wir verwenden keine Server von Amazon, Microsoft oder Google für die Speicherung personenbezogener Daten."
+        "Personenbezogene Daten werden nur so lange gespeichert, wie dies für den Vermittlungszweck erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen."
       ]
     },
     {
-      title: "6. Webanalysedienste",
+      title: "6. Serverstandort und Datensicherheit",
       content: [
-        "Wir verwenden IP-anonymisierte Webanalysen, z. B.:<br>Google Analytics: <a href='https://www.google.com/intl/de/policies/technologies/' target='_blank' rel='noopener noreferrer'>https://www.google.com/intl/de/policies/technologies/</a>",
+        "Unsere Server befinden sich in der Schweiz und innerhalb der EU.",
         "",
-        "Persönliche Daten werden nicht zurückverfolgt und nicht für individuelle Nachforschungen genutzt. Nutzer können Google Analytics über das Browser-Addon deaktivieren."
+        "Die Datenübertragung erfolgt verschlüsselt (SSL/TLS).",
+        "",
+        "Wir treffen angemessene technische und organisatorische Massnahmen zum Schutz Ihrer Daten."
       ]
     },
     {
-      title: "7. Ihre Rechte",
+      title: "7. Zahlungsabwicklung",
       content: [
-        "Sie haben jederzeit das Recht auf:",
-        "• Auskunft über gespeicherte personenbezogene Daten<br>• Berichtigung unrichtiger Daten<br>• Löschung Ihrer Daten<br>• Einschränkung der Verarbeitung<br>• Datenübertragbarkeit<br>• Widerruf einer erteilten Einwilligung<br>• Widerspruch gegen die Verarbeitung",
+        "Falls Zahlungen über externe Zahlungsdienstleister (z. B. Stripe) erfolgen, werden Zahlungsdaten direkt durch den jeweiligen Anbieter verarbeitet.",
         "",
-        "Beschwerden können Sie an uns (info@online-offerten.ch) oder an den Eidgenössischen Öffentlichkeits- und Datenschutzbeauftragten (EDÖB) richten: <a href='https://www.edoeb.admin.ch' target='_blank' rel='noopener noreferrer'>https://www.edoeb.admin.ch</a>"
+        "Es gelten die Datenschutzbestimmungen des jeweiligen Zahlungsdienstleisters."
+      ]
+    },
+    {
+      title: "8. Webanalyse",
+      content: [
+        "Wir verwenden Webanalyse-Tools (z. B. Google Analytics mit IP-Anonymisierung), um die Nutzung unserer Website statistisch auszuwerten.",
+        "",
+        "Die Nutzung erfolgt nur im Rahmen der geltenden gesetzlichen Bestimmungen.",
+        "",
+        "Sie können die Erfassung über entsprechende Browser-Add-ons deaktivieren."
+      ]
+    },
+    {
+      title: "9. Einsatz von Drittanbietern",
+      content: [
+        "Zur technischen Bereitstellung unserer Plattform sowie zur Zahlungsabwicklung und Analyse setzen wir externe Dienstleister ein (z. B. Hosting-Anbieter, Zahlungsdienstleister wie Stripe oder Analyse-Dienste wie Google).",
+        "",
+        "Diese Anbieter verarbeiten personenbezogene Daten gemäss ihren eigenen Datenschutzbestimmungen."
+      ]
+    },
+    {
+      title: "10. Datenübermittlung ins Ausland",
+      content: [
+        "Im Rahmen der Nutzung externer Dienstleister kann es zu Datenübermittlungen in Länder ausserhalb der Schweiz oder der EU kommen.",
+        "",
+        "In solchen Fällen erfolgt die Bearbeitung nur unter Einhaltung der geltenden datenschutzrechtlichen Vorgaben. Soweit erforderlich, werden geeignete Garantien eingesetzt (z. B. vertragliche Schutzmechanismen wie Standardvertragsklauseln), um ein angemessenes Datenschutzniveau sicherzustellen."
+      ]
+    },
+    {
+      title: "11. Ihre Rechte",
+      content: [
+        "Sie haben im Rahmen der anwendbaren Datenschutzgesetze insbesondere folgende Rechte:",
+        "",
+        "• Auskunft über die Bearbeitung Ihrer personenbezogenen Daten<br>• Berichtigung unrichtiger Daten<br>• Löschung Ihrer Daten, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen<br>• Einschränkung der Bearbeitung<br>• Widerspruch gegen bestimmte Bearbeitungen<br>• Herausgabe bzw. Übertragbarkeit Ihrer Daten, soweit gesetzlich vorgesehen<br>• Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft",
+        "",
+        "Zur Ausübung Ihrer Rechte können Sie uns jederzeit unter info@online-offerten.ch kontaktieren.",
+        "",
+        "Wenn Sie der Ansicht sind, dass die Bearbeitung Ihrer Daten gegen geltendes Datenschutzrecht verstösst, können Sie zudem eine Beschwerde bei der zuständigen Datenschutzaufsichtsbehörde einreichen."
       ]
     }
   ]
@@ -73,15 +118,15 @@ const PrivacyPolicyPageClient = () => {
       <div className="container mx-auto max-w-navbar px-4 md:px-6">
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="heading-2">
+            <CardTitle className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
               {pageTitle}
             </CardTitle>
-            <p className="text-sm text-slate-500">{lastUpdated}</p>
+            <p className="text-sm md:text-base text-slate-500">{lastUpdated}</p>
           </CardHeader>
-          <CardContent className="prose prose-slate max-w-none prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-p:leading-relaxed prose-a:text-green-600 prose-a:no-underline hover:prose-a:underline prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4">
+          <CardContent className="prose prose-slate max-w-none text-slate-700 prose-headings:text-slate-900 prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-3 prose-h4:text-lg prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-2 prose-p:text-base md:prose-p:text-[17px] prose-p:leading-8 prose-p:my-4 prose-strong:text-slate-900 prose-strong:font-semibold prose-a:text-green-700 prose-a:no-underline hover:prose-a:underline prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4">
             {sections.map((section, index) => (
               <div key={index}>
-                <h2>{section.title}</h2>
+                <h2 className="scroll-mt-24">{section.title}</h2>
                 {Array.isArray(section.content) ? (
                   section.content.map((paragraph, pIndex) => {
                     if (!paragraph) return <br key={pIndex} />
