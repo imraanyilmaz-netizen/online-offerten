@@ -39,17 +39,10 @@ const QuoteFormPageClient = () => {
           </p>
         </div>
 
-        {/* Mobile */}
-        <div className="md:hidden bg-white">
-          <div className="px-4 pb-4">
-            <CustomerForm />
-          </div>
-        </div>
-
-        {/* Desktop: Sticky centered form */}
-        <div className="hidden md:block min-h-screen py-4">
+        {/* Tek form instance: mobile + desktop */}
+        <div className="min-h-screen py-4">
           <div className="max-w-5xl mx-auto px-4">
-            <div className="sticky top-4 bg-white">
+            <div className="md:sticky md:top-4 bg-white">
               {/* Form */}
               <CustomerForm />
             </div>

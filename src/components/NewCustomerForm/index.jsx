@@ -140,6 +140,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const userManuallySelectedService = useRef(false);
   const hasInitializedAdditionalCleaningFromUrl = useRef(false);
   const userManuallyChangedAdditionalCleaning = useRef(false);
+  const hasTrackedLeadSuccessRef = useRef(false);
   
   // Memoize searchParams string to prevent unnecessary re-renders
   const searchParamsString = useMemo(() => searchParams?.toString() || '', [searchParams]);
@@ -877,11 +878,34 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     setIsLoading(true);
     try {
       // Admin Panel'e Almanca olarak gönderilmeli, i18n instance'ını geçir
-      const { error } = await submitNewQuoteToSupabase(formData, t, i18n);
+      const { data, error } = await submitNewQuoteToSupabase(formData, t, i18n);
       if (error) throw error;
       setIsSubmitted(true);
+
+      // Google Ads dönüşümü: yalnızca başarılı submit sonrasında ve tek sefer tetikle
+      if (typeof window !== 'undefined' && !hasTrackedLeadSuccessRef.current) {
+        const quoteId = data?.id || null;
+        const dedupeKey = quoteId ? `lead_success_sent_${quoteId}` : null;
+        const wasAlreadySent = dedupeKey ? window.sessionStorage.getItem(dedupeKey) === '1' : false;
+
+        if (!wasAlreadySent) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'lead_success',
+            value: 1,
+            currency: 'CHF',
+            quote_id: quoteId
+          });
+
+          if (dedupeKey) {
+            window.sessionStorage.setItem(dedupeKey, '1');
+          }
+        }
+
+        hasTrackedLeadSuccessRef.current = true;
+      }
       
-      // Google Tag Manager - Dönüşüm Event'i (Conversion Tracking)
+      // Google Tag Manager - Bilgi event'i (analytics amaçlı)
       if (typeof window !== 'undefined') {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
