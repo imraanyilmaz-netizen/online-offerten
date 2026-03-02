@@ -905,19 +905,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         hasTrackedLeadSuccessRef.current = true;
       }
       
-      // Google Tag Manager - Bilgi event'i (analytics amaçlı)
-      if (typeof window !== 'undefined') {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'form_submission',
-          form_type: 'offerte_anfrage',
-          service_type: formData.serviceType || '',
-          from_city: formData.fromCity || '',
-          to_city: formData.toCity || '',
-          currency: 'CHF'
-        });
-      }
-      
       toast({ title: t('quoteConfirmation.title'), description: t('quoteConfirmation.subtitle') });
       // Teşekkür mesajının görünmesi için formun bulunduğu konuma scroll et
       setTimeout(() => {
