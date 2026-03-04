@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { createStaticClient } from '@/lib/supabase/server'
-import HomeHeroForm from '@/components/HomeHeroForm'
 
 // Lazy load HomePageClient to improve initial page load performance
 // SSR enabled for SEO, but component is code-split for better mobile performance
@@ -325,11 +324,22 @@ export default async function HomePage() {
             
             <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
               <div className="max-w-2xl text-left">
-                {/* Search Form - H1 başlık formun içinde - Mobilde arka plan resmi ile */}
-                <HomeHeroForm />
+                <div className="mb-4">
+                  <h1 className="heading-1 break-words">
+                    Offerten vergleichen & passende Anbieter in der Schweiz finden
+                  </h1>
+                  <p className="text-gray-600 text-base sm:text-lg mt-2">
+                    Vergleichen Sie geprüfte Umzugs- und Reinigungsfirmen in Ihrer Region, buchen Sie online und sparen Sie Zeit und Kosten.
+                  </p>
+                </div>
                 
-                {/* Service Quick Links */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3 mt-6 mb-6">
+                <div className="rounded-2xl border border-gray-200 bg-white/80 p-3 sm:p-4 mb-6">
+                  <h2 className="text-base md:text-lg font-bold text-gray-800 mt-0 mb-2 text-left">
+                    Welche Dienstleistung benötigen Sie?
+                  </h2>
+                  
+                  {/* Service Quick Links */}
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3 mt-0 mb-0">
                   {/* Umzug Button */}
                   <Link 
                     href="/kostenlose-offerte-anfordern?step=3&service=umzug&umzugArt=privatumzug&endreinigung=ja"
@@ -428,6 +438,7 @@ export default async function HomePage() {
                       <p className="font-semibold text-base text-gray-900">Klavierumzug</p>
                     </div>
                   </Link>
+                  </div>
                 </div>
                 
                 {/* Rating Card */}

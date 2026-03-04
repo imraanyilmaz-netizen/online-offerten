@@ -193,8 +193,8 @@ const HomeHeroForm = memo(() => {
           
        <div className="flex flex-col md:flex-row gap-4 rounded-xl mt-4 md:p-4 lg:p-0">
         <div className="flex-1 min-w-0">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Welche Dienstleistung benötigen Sie?</label>
-          <div className="relative">
+          <label className="block text-base md:text-lg font-bold text-gray-800 mb-2 text-left">Welche Dienstleistung benötigen Sie?</label>
+          <div className="relative hidden">
             <input
               ref={inputRef}
               type="text"
@@ -285,7 +285,7 @@ const HomeHeroForm = memo(() => {
           <Button
             type="submit"
             size={undefined}
-            className="md:hidden w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
+            className="hidden md:hidden w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
             style={{ borderRadius: '0.65rem' }}
           >
             Kostenlos anfragen
