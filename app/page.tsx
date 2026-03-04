@@ -355,7 +355,7 @@ export default async function HomePage() {
                       <ArrowRight className="w-4 h-4 text-blue-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                     </div>
                     <div className="mt-3 text-left">
-                      <p className="font-semibold text-base text-gray-900">Umzug & Reinigung</p>
+                      <p className="font-semibold text-base text-gray-900 whitespace-nowrap">Umzug & Reinigung</p>
                     </div>
                   </Link>
 
@@ -439,95 +439,95 @@ export default async function HomePage() {
                     </div>
                   </Link>
                   </div>
-                </div>
-                
-                {/* Rating Card */}
-                <div 
-                  className="bg-white rounded-xl p-5 sm:p-6 flex flex-col transition-all duration-300 mt-6"
-                  style={{
-                    boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
-                  }}
-                >
-                  <div className="flex flex-row items-start gap-4">
-                  <div className="flex-shrink-0 relative">
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16">
-                      {/* Main 3D Star */}
-                      <div className="absolute inset-0">
-                        <Star className="w-14 h-14 sm:w-16 sm:h-16 text-yellow-400 fill-yellow-400 absolute inset-0" 
-                          style={{ 
-                            filter: 'drop-shadow(0 4px 8px rgba(234, 179, 8, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
-                            transform: 'perspective(100px) rotateY(-5deg) rotateX(5deg)'
-                          }} 
-                        />
-                        {/* Inner smaller star for 3D effect */}
-                        <Star className="w-9 h-9 sm:w-10 sm:h-10 text-yellow-500 fill-yellow-500 absolute top-1 right-1" 
-                          style={{ 
-                            filter: 'drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3))',
-                            transform: 'perspective(100px) rotateY(-3deg) rotateX(3deg)'
-                          }} 
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-1 pt-1 w-full md:w-auto">
-                    <p className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1" style={{ left: '4px', position: 'relative' }}>Basierend auf echten Kundenbewertungen</p>
-                    <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
-                      <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
-                        {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
-                          <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                        ))}
-                        {ratingStats.averageRating % 1 !== 0 && (
-                          <div className="relative flex-shrink-0">
-                            <Star size={16} className="md:w-5 md:h-5 text-gray-300" />
-                            <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                              <Star size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                            </div>
-                          </div>
-                        )}
-                        {[...Array(5 - Math.floor(ratingStats.averageRating) - (ratingStats.averageRating % 1 !== 0 ? 1 : 0))].map((_, i) => (
-                          <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
-                        ))}
-                      </div>
-                      <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
-                        Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount}{' '}
-                        <Link 
-                          href="/kunden-bewertungen"
-                          className="underline"
-                        >
-                          Bewertungen
-                        </Link>
-                        )
-                      </span>
-                    </div>
-                  </div>
-                  </div>
-                </div>
 
-                {/* Trust Badges + Hint - Separate Card */}
-                <div 
-                  className="bg-white rounded-xl p-5 sm:p-6 flex flex-col gap-3 transition-all duration-300 mt-4"
-                  style={{
-                    boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
-                  }}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg flex-shrink-0">💡</span>
-                    <p className="text-sm sm:text-base font-medium text-green-800">
-                      Statt 5 Firmen einzeln zu kontaktieren, genügt eine einzige Anfrage.
-                    </p>
+                  {/* Rating Card */}
+                  <div 
+                    className="bg-white rounded-xl p-5 sm:p-6 flex flex-col transition-all duration-300 mt-4"
+                    style={{
+                      boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
+                    }}
+                  >
+                    <div className="flex flex-row items-start gap-4">
+                    <div className="flex-shrink-0 relative">
+                      <div className="relative w-14 h-14 sm:w-16 sm:h-16">
+                        {/* Main 3D Star */}
+                        <div className="absolute inset-0">
+                          <Star className="w-14 h-14 sm:w-16 sm:h-16 text-yellow-400 fill-yellow-400 absolute inset-0" 
+                            style={{ 
+                              filter: 'drop-shadow(0 4px 8px rgba(234, 179, 8, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
+                              transform: 'perspective(100px) rotateY(-5deg) rotateX(5deg)'
+                            }} 
+                          />
+                          {/* Inner smaller star for 3D effect */}
+                          <Star className="w-9 h-9 sm:w-10 sm:h-10 text-yellow-500 fill-yellow-500 absolute top-1 right-1" 
+                            style={{ 
+                              filter: 'drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3))',
+                              transform: 'perspective(100px) rotateY(-3deg) rotateX(3deg)'
+                            }} 
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex-1 pt-1 w-full md:w-auto">
+                      <p className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1" style={{ left: '4px', position: 'relative' }}>Basierend auf echten Kundenbewertungen</p>
+                      <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
+                        <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
+                          {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
+                            <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
+                          ))}
+                          {ratingStats.averageRating % 1 !== 0 && (
+                            <div className="relative flex-shrink-0">
+                              <Star size={16} className="md:w-5 md:h-5 text-gray-300" />
+                              <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
+                                <Star size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
+                              </div>
+                            </div>
+                          )}
+                          {[...Array(5 - Math.floor(ratingStats.averageRating) - (ratingStats.averageRating % 1 !== 0 ? 1 : 0))].map((_, i) => (
+                            <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
+                          ))}
+                        </div>
+                        <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
+                          Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount}{' '}
+                          <Link 
+                            href="/kunden-bewertungen"
+                            className="underline"
+                          >
+                            Bewertungen
+                          </Link>
+                          )
+                        </span>
+                      </div>
+                    </div>
+                    </div>
                   </div>
-                  <div className="border-t border-gray-200 pt-3 flex flex-wrap items-center gap-4">
+
+                  {/* Trust Badges + Hint */}
+                  <div 
+                    className="bg-white rounded-xl p-5 sm:p-6 flex flex-col gap-3 transition-all duration-300 mt-4"
+                    style={{
+                      boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
+                    }}
+                  >
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-700">Kostenlos & unverbindlich</span>
+                      <span className="text-lg flex-shrink-0">💡</span>
+                      <p className="text-sm sm:text-base font-medium text-green-800">
+                        Statt 5 Firmen einzeln zu kontaktieren, genügt eine einzige Anfrage.
+                      </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-700">Nur geprüfte Firmen</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-700">Zeit und Geld sparen</span>
+                    <div className="border-t border-gray-200 pt-3 flex flex-wrap items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-5 w-5 text-green-600" />
+                        <span className="text-sm text-gray-700">Kostenlos & unverbindlich</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <ShieldCheck className="h-5 w-5 text-green-600" />
+                        <span className="text-sm text-gray-700">Nur geprüfte Firmen</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Award className="h-5 w-5 text-green-600" />
+                        <span className="text-sm text-gray-700">Zeit und Geld sparen</span>
+                      </div>
                     </div>
                   </div>
                 </div>
