@@ -3,15 +3,15 @@ import { Suspense } from 'react'
 import QuoteFormPageClient from '@/components/pages/payment/QuoteFormPageClient'
 
 export const metadata: Metadata = {
-  title: 'Kostenlose Offerten anfordern – Umzug & Reinigung',
-  description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Renovierungsfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%. Unverbindlich & kostenlos.',
+  title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Malerarbeiten',
+  description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Malerfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%. Unverbindlich & kostenlos.',
   
   alternates: {
     canonical: 'https://online-offerten.ch/kostenlose-offerte-anfordern',
   },
   openGraph: {
-    title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Renovierung',
-    description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Renovierungsfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%.',
+    title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Malerarbeiten',
+    description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Malerfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%.',
     url: 'https://online-offerten.ch/kostenlose-offerte-anfordern',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Renovierung',
-    description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Renovierungsfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%.',
+    title: 'Kostenlose Offerten anfordern – Umzug, Reinigung & Malerarbeiten',
+    description: 'Kostenlose Offerten von geprüften Umzugs-, Reinigungs- und Malerfirmen anfordern. Vergleichen Sie mehrere Angebote und sparen Sie bis zu 40%.',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
   robots: {

@@ -494,7 +494,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
             <div className="relative md:col-span-2">
               <div className="relative w-full h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center">
                 <NextImage
-                  src="/umzug/48569125erth8.webp"
+                  src="/fotos/offerten.webp"
                   alt="Umzugsofferten vergleichen Schweiz"
                   width={600}
                   height={400}
@@ -576,80 +576,59 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
             <h2 id="umzugsofferte-3-schritte" className="heading-2 mb-6 scroll-mt-24">
               Umzugsofferte: In 3 Schritten passende Umzugsfirmen in der Schweiz finden
             </h2>
-            <p className="text-body mb-6">
-              Ein Umzug bedeutet Veränderung – und oft auch eine Menge Aufwand. Ob Sie eine Wohnung wechseln, ein neues Haus beziehen oder Ihr Büro verlegen: Die Wahl der richtigen Umzugsfirma entscheidet darüber, ob Sie entspannt zügeln oder unnötig Geld und Nerven verlieren. In diesem Artikel erfahren Sie, wie Sie eine professionelle Umzugsofferte erhalten, worauf Sie beim Vergleich achten sollten und wie Sie in wenigen Schritten den passenden Umzugspartner in der Schweiz finden.
+            <p className="text-body mb-4">
+              Sie geben Ihre Umzugsdetails einmal ein und erhalten bis zu 5 kostenlose Offerten von geprueften Firmen. Danach vergleichen Sie Preise, Leistungen und Verfuegbarkeit in Ruhe.
             </p>
+            <ol className="list-decimal list-inside space-y-2 mb-8 text-body">
+              <li>Umzugsdaten und Wuensche im Formular erfassen.</li>
+              <li>Innerhalb von 24-48 Stunden Angebote erhalten.</li>
+              <li>Beste Offerte waehlen und direkt mit der Firma abstimmen.</li>
+            </ol>
 
             <h2 id="umzugsofferte-vergleich" className="heading-2 mb-4 mt-8 scroll-mt-24">
-              Umzugsofferte – warum sich der Vergleich für Sie lohnt
+              Umzugsofferte - warum sich der Vergleich fuer Sie lohnt
             </h2>
             <p className="text-body mb-4">
-              Eine Umzugsofferte bildet die Grundlage für eine solide Planung, eine realistische Kostenkontrolle und letztlich einen stressfreien Umzug. Ohne ein detailliertes Angebot tappen Sie bei den tatsächlichen Umzugskosten oft im Dunkeln – und das kann teuer werden.
+              Preis und Leistungsumfang unterscheiden sich je nach Anbieter deutlich. Durch den Vergleich sehen Sie, welche Offerte wirklich zu Ihrem Budget und Ihrem Umzug passt.
             </p>
-            <p className="text-body mb-4">
-              Jede Umzugssituation ist individuell. Faktoren wie die Wohnungsgrösse, das Stockwerk, das Vorhandensein eines Lift, die Distanz zwischen alter und neuer Adresse sowie gewünschte Zusatzleistungen beeinflussen den Preis erheblich. Deshalb können sich die Offerten verschiedener Umzugsfirmen stark unterscheiden.
-            </p>
-            <p className="text-body mb-4">
-              Auf Online-Offerten.ch erhalten Sie mit nur einer Anfrage bis zu 5 Offerten von geprüften Schweizer Umzugsfirmen. Das spart Zeit und ermöglicht einen direkten Vergleich – ohne mühsames Herumtelefonieren.
-            </p>
-            <p className="text-body mb-4">
-              Die Vorteile des Vergleichs auf einen Blick:
-            </p>
-            <div className="overflow-x-auto mb-6">
+            <div className="overflow-x-auto mb-8">
               <table className="min-w-full border-collapse border border-gray-300">
                 <thead>
                   <tr className="bg-gray-100">
                     <th className="border border-gray-300 px-4 py-2 text-left heading-4">Vorteil</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Beschreibung</th>
+                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Nutzen</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td className="border border-gray-300 px-4 py-2 text-body">Bessere Preise</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Wettbewerb zwischen Anbietern führt zu fairen Konditionen</td>
+                    <td className="border border-gray-300 px-4 py-2 text-body">Mehr Wettbewerb fuehrt oft zu besseren Konditionen.</td>
                   </tr>
                   <tr>
                     <td className="border border-gray-300 px-4 py-2 text-body">Mehr Transparenz</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Detaillierte Aufschlüsselung aller Leistungen und Kosten</td>
+                    <td className="border border-gray-300 px-4 py-2 text-body">Sie erkennen klar, welche Leistungen enthalten sind.</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Passende Leistungen</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Angebote, die genau auf Ihre Bedürfnisse zugeschnitten sind</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Höhere Planungssicherheit</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Klare Angaben zu Terminen, Umfang und Budget</td>
+                    <td className="border border-gray-300 px-4 py-2 text-body">Mehr Sicherheit</td>
+                    <td className="border border-gray-300 px-4 py-2 text-body">Sie entscheiden auf Basis von Preis, Service und Bewertungen.</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            
-            {/* CTA Box */}
+
             <div className="mb-8 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
               <div className="text-center mb-6">
                 <h3 className="text-2xl md:text-3xl font-bold text-green-100 mb-3">
-                  Jetzt Umzugsofferten vergleichen und kostenlos Angebote erhalten.
+                  Jetzt Umzugsofferten vergleichen und kostenlos Angebote erhalten
                 </h3>
                 <p className="text-green-50 text-base md:text-lg">
-                  Wir vermitteln Ihnen die passenden Umzugsfirmen aus Ihrer Nähe!
+                  Eine Anfrage, mehrere passende Anbieter aus Ihrer Region.
                 </p>
               </div>
               <div className="flex justify-center">
                 <Button
                   onClick={handleCtaClick}
                   className="bg-[#eab308] hover:bg-[#ca8a04] text-[#000000] font-medium px-8 py-4 rounded-lg text-sm leading-[20px] shadow-lg transform transition-all duration-300 hover:scale-105"
-                  style={{
-                    fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
-                    fontWeight: 500,
-                    textAlign: 'center',
-                    letterSpacing: 'normal',
-                    wordSpacing: '0px',
-                    fontStyle: 'normal',
-                    fontVariant: 'normal',
-                    textTransform: 'none',
-                    textDecoration: 'none',
-                    textIndent: '0px'
-                  }}
                 >
                   Umzugsfirmen vergleichen
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -658,9 +637,9 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
             </div>
 
             <div className="mb-8">
-              <img 
-                src="/bilder/f4203971-365f-48a9-8afc-53246f91f929.webp" 
-                alt="Professionelle Umzugshelfer laden Umzugskartons und Möbel in einen Transporter, um einen reibungslosen Umzug in Zürich zu gewährleisten. Diese Umzugsfirma bietet umfassende Dienstleistungen und sorgt dafür, dass alles sicher und effizient transportiert wird."
+              <img
+                src="/bilder/f4203971-365f-48a9-8afc-53246f91f929.webp"
+                alt="Umzugshelfer laden Kartons und Moebel in einen Transporter."
                 className="w-full h-auto rounded-lg shadow-md"
               />
             </div>
@@ -669,411 +648,75 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
               Was ist eine Umzugsofferte genau?
             </h2>
             <p className="text-body mb-4">
-              Eine Umzugsofferte ist ein schriftliches Angebot einer Umzugsfirma, das eine detaillierte Übersicht zu Leistungen, Kosten, Terminen und Bedingungen enthält. Sie dient als verbindliche Grundlage für den späteren Umzugsvertrag und hilft, Missverständnisse zwischen Ihnen und dem Umzugsunternehmen von Anfang an zu vermeiden.
+              Eine Umzugsofferte ist ein schriftliches Angebot mit Preis, Leistungsumfang, Termin und Bedingungen. Sie schafft eine klare Grundlage fuer Ihre Entscheidung.
             </p>
-            <p className="text-body mb-4">
-              In einer professionellen Umzugsofferte sollten alle Positionen nachvollziehbar und inklusive Mehrwertsteuer aufgeführt sein. Dazu gehören Angaben wie der Name des Unternehmen, die Adresse, eine klare Leistungsbeschreibung sowie die genauen Preise für jeden Service.
-            </p>
-            <p className="text-body mb-4">
-              Beachten Sie, dass Offerten in der Regel für einen bestimmten Zeitraum gültig sind – oft 30 Tage. Prüfen Sie daher immer das Gültigkeitsdatum, bevor Sie sich entscheiden. Über Online-Offerten.ch erhalten Sie ausschliesslich Offerten von seriösen, in der Schweiz aktiven Firmen.
-            </p>
-
-            <h3 id="verbindlichkeit" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Wie verbindlich ist eine Umzugsofferte?
-            </h3>
-            <p className="text-body mb-4">
-              Eine Offerte wird nach Ihrer Annahme – sei es schriftlich oder mündlich – rechtlich verbindlich. Ab diesem Zeitpunkt müssen die vereinbarten Leistungen zu den angegebenen Konditionen erbracht werden. Dies gibt Ihnen als Kunden Sicherheit.
-            </p>
-            <p className="text-body mb-4">
-              Sollten sich nach der Offertstellung Änderungen ergeben (zum Beispiel mehr Umzugsgut, ein zusätzlicher Stopp oder weitere Möbel aus dem Keller oder Estrich), kann dies zu einer Anpassung der Kosten führen. Sprechen Sie solche Änderungen deshalb frühzeitig mit der Firma ab.
-            </p>
-            <p className="text-body mb-4">
-              Prüfen Sie die Offerte sorgfältig, bevor Sie zusagen:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Sind alle Leistungen klar beschrieben?</li>
-              <li>Welche Stundenansätze oder Pauschalen gelten?</li>
-              <li>Gibt es Zuschläge oder versteckte Gebühren?</li>
-              <li>Wie lauten die Zahlungsbedingungen?</li>
-            </ul>
-            <p className="text-body mb-6">
-              Bei Unklarheiten fragen Sie immer nach und lassen Sie sich zusätzliche Punkte schriftlich bestätigen.
-            </p>
-
-            <h3 id="kosten-offerte" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Kostet eine Umzugsofferte etwas?
-            </h3>
-            <p className="text-body mb-4">
-              Offerten über Online-Offerten.ch sind für Nutzer immer kostenlos und unverbindlich. Sie gehen keine Verpflichtung ein, wenn Sie Angebote anfordern.
-            </p>
-            <p className="text-body mb-4">
-              Professionelle Umzugsfirmen erstellen seriöse Angebote ohne versteckte Kosten. Die Offerte selbst wird nicht verrechnet. In manchen Fällen bieten Firmen eine kostenpflichtige Besichtigung vor Ort an, die jedoch bei Auftragsvergabe oft wieder gutgeschrieben wird. Prüfen Sie dies im Vorfeld.
-            </p>
-            <p className="text-body mb-6">
-              Fordern Sie jetzt Ihre kostenlose Umzugsofferte an und vergleichen Sie mehrere Angebote ohne Risiko.
+            <p className="text-body mb-8">
+              Achten Sie auf eine saubere Aufschluesselung, Gueltigkeitsdauer und transparente Angaben zu Versicherung und Zusatzkosten.
             </p>
 
             <h2 id="transparente-offerte" className="heading-2 mb-4 mt-8 scroll-mt-24">
               Welche Punkte sollte eine transparente Umzugsofferte enthalten?
             </h2>
-            <p className="text-body mb-4">
-              Für einen aussagekräftigen Vergleich und eine realistische Budgetplanung sind detaillierte Offerten unerlässlich. Nur wenn alle Angebote dieselben Informationen enthalten, können Sie diese fair gegenüberstellen.
-            </p>
-            <p className="text-body mb-4">
-              Alle Offerten sollten idealerweise nach denselben Kriterien beurteilt werden: Leistungen, Preise, Zeiten, Versicherung und Bedingungen. In den folgenden Abschnitten erläutern wir die zentralen Bestandteile einer professionellen Umzugsofferte.
-            </p>
-            <p className="text-body mb-6">
-              Fehlen wichtige Angaben (zum Beispiel zur Versicherung oder Entsorgung), fordern Sie diese nach, bevor Sie sich entscheiden.
-            </p>
-
-            <h3 id="leistungen-umfang" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Leistungen und Umfang des Umzugs
-            </h3>
-            <p className="text-body mb-4">
-              Eine transparente Offerte sollte folgende Punkte klar aufführen:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Ein- und Ausladen der Möbel und Umzugskartons</li>
-              <li>Transport zwischen alter und neuer Adresse</li>
-              <li>Verpackungsservice (inkl. Kartons und Schutzmaterial)</li>
-              <li>Möbelmontage und Demontage</li>
-              <li>Entsorgung von altem Mobiliar oder Verpackungsmaterial</li>
-              <li>Endreinigung der alten Wohnung</li>
-              <li>Bereitstellung von Umzugsmaterial</li>
+            <ul className="list-disc list-inside space-y-2 mb-8 text-body">
+              <li>Gesamtpreis mit klarer Aufschluesselung</li>
+              <li>Leistungen wie Transport, Montage, Packservice und Reinigung</li>
+              <li>Versicherung und Haftungsdetails</li>
+              <li>Teamgroesse, Zeitfenster, Fahrzeugangaben</li>
+              <li>Zahlungs- und Stornobedingungen</li>
             </ul>
-            <p className="text-body mb-4">
-              Zusätzlich sollten die Anzahl der Umzugshelfer und Fahrzeuge, die geplante Arbeitszeit und allfällige Zusatzfahrten genannt werden. Prüfen Sie, ob Spezialtransporte (beispielsweise Klavier, Safe oder grosse Schränke) explizit erwähnt sind.
-            </p>
-            <p className="text-body mb-6">
-              Angebote auf Online-Offerten.ch enthalten üblicherweise eine klare Leistungsbeschreibung, um Vergleiche zu erleichtern.
-            </p>
-
-            <h3 id="preise-zuschlaege" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Preise, Zuschläge und Mehrwertsteuer
-            </h3>
-            <p className="text-body mb-4">
-              Offerten werden entweder als Pauschalpreis (Festpreis) oder mit Stundensätzen erstellt. Beide Modelle haben Vor- und Nachteile:
-            </p>
-            <div className="overflow-x-auto mb-6">
-              <table className="min-w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Preismodell</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Vorteile</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Nachteile</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Festpreis</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Planungssicherheit, keine Überraschungen</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Weniger flexibel bei Änderungen</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Stundensatz</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Zahlung nach Aufwand, flexibel</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Risiko bei Verzögerungen</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p className="text-body mb-4">
-              Achten Sie darauf, dass alle Preise inklusive Mehrwertsteuer ausgewiesen sind. So ist der Endpreis klar ersichtlich. Mögliche Zuschläge (zum Beispiel für lange Tragewege, fehlenden Lift, Abend- oder Wochenendeinsätze) müssen transparent aufgeführt sein.
-            </p>
-            <p className="text-body mb-6">
-              Legen Sie mehrere Offerten nebeneinander und achten Sie nicht nur auf den Gesamtpreis, sondern vor allem auf die enthaltenen Leistungen.
-            </p>
-
-            <h3 id="termin-dauer" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Termin, Dauer und Team
-            </h3>
-            <p className="text-body mb-4">
-              In der Offerte sollten folgende Details zum Termin stehen:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Das genaue Umzugsdatum und gegebenenfalls ein Zeitfenster</li>
-              <li>Ein realistischer Zeitbedarf (Anzahl Stunden oder Tagespauschale)</li>
-              <li>Die Anzahl der Mitarbeitenden und Fahrzeuge</li>
-            </ul>
-            <p className="text-body mb-6">
-              Diese Angaben helfen Ihnen, den Umfang des Einsatzes zu verstehen und Ihren Tag entsprechend zu planen. Bei knappen Terminen oder engen Zeitfenstern erwähnen Sie dies bereits bei der Offertanfrage über Online-Offerten.ch.
-            </p>
-
-            <h3 id="versicherung-haftung" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Versicherung und Haftung
-            </h3>
-            <p className="text-body mb-4">
-              Jede seriöse Umzugsfirma verfügt über eine Haftpflicht- und Transportversicherung. In der Offerte sollte klar ersichtlich sein, welche Schäden gedeckt sind, welche Selbstbehalte gelten und wo Haftungsausschlüsse bestehen.
-            </p>
-            <p className="text-body mb-6">
-              Melden Sie wertvolle Gegenstände (zum Beispiel Kunst, Elektronik oder Schmuck) im Voraus und prüfen Sie bei Bedarf eine Zusatzversicherung. Über Online-Offerten.ch können Sie auch Firmen anfragen, die besondere Erfahrung mit empfindlichem Umzugsgut haben.
-            </p>
-
-            <h3 id="bedingungen-zahlung" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Allgemeine Bedingungen und Zahlungsmodalitäten
-            </h3>
-            <p className="text-body mb-4">
-              Professionelle Offerten enthalten Informationen zu:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Zahlungsfristen und Akonto-Zahlungen</li>
-              <li>Akzeptierten Zahlungsmitteln</li>
-              <li>Stornobedingungen und Umbuchungsmöglichkeiten</li>
-              <li>Allfälligen Gebühren bei Terminänderung</li>
-            </ul>
-            <p className="text-body mb-6">
-              Lesen Sie die Allgemeinen Geschäftsbedingungen (AGB), insbesondere zu Haftung, Wartezeiten und Zusatzarbeiten vor Ort. Bei Unklarheiten fragen Sie vor der Zusage schriftlich nach, um spätere Diskussionen zu vermeiden.
-            </p>
-            <div className="mb-8">
-              <img 
-                src="/bilder/83ae5b64-b499-4641-969f-9cc07997a27.webp" 
-                alt="Eine Person sitzt an einem Schreibtisch und vergleicht mehrere Dokumente, die Informationen zu Umzugskosten und Angeboten von verschiedenen Umzugsfirmen enthalten. Auf dem Tisch liegen auch Formulare und Notizen, die sich auf die Planung eines Privatumzugs beziehen."
-                className="w-full h-auto rounded-lg shadow-md"
-              />
-            </div>
 
             <h2 id="vergleich-funktioniert" className="heading-2 mb-4 mt-8 scroll-mt-24">
               So funktioniert der Vergleich von Umzugsofferten auf Online-Offerten.ch
             </h2>
             <p className="text-body mb-4">
-              Der gesamte Prozess läuft online, schnell und ohne Verpflichtung ab. Mit einer einzigen Anfrage erhalten Sie mehrere, auf Ihre Situation zugeschnittene Angebote – ohne mühsames Herumtelefonieren.
+              Sie erfassen Ihre Daten nur einmal. Danach erhalten Sie passende Offerten von geprueften Partnern und vergleichen diese nach den fuer Sie wichtigsten Kriterien.
             </p>
-            <p className="text-body mb-4">
-              Nur ausgewählte, in der Schweiz aktive Umzugsfirmen erhalten Ihre Offertanfrage. Das garantiert Qualität und Seriosität.
-            </p>
-            <p className="text-body mb-6">
-              Jetzt Umzugsofferten vergleichen und passende Anbieter finden.
-            </p>
-
-            <h3 id="schritt-1" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Schritt 1: Online-Anfrage ausfüllen
-            </h3>
-            <p className="text-body mb-4">
-              Füllen Sie ein kurzes Online Formular aus. Dabei geben Sie folgende Daten und Details an:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Wohnungsgrösse und Anzahl Zimmer</li>
-              <li>Stockwerk und Vorhandensein eines Lift</li>
-              <li>Distanz zwischen alter und neuer Adresse</li>
-              <li>Gewünschtes Umzugsdatum</li>
-              <li>Zusatzleistungen wie Reinigung, Entsorgung oder Montage</li>
-              <li>Ihre Kontaktdaten (Vorname, Nachname, E Mail, Telefon)</li>
-            </ul>
-            <p className="text-body mb-4">
-              Je genauer Ihre Angaben zu den Umzugsdetails sind, desto präziser fallen die Offerten aus. Erwähnen Sie beispielsweise enge Treppenhäuser, einen fehlenden Lift oder Spezialmöbel, die besondere Sorge erfordern.
-            </p>
-            <p className="text-body mb-6">
-              Die Anfrage ist kostenlos und führt zu keiner Buchungsverpflichtung. Sie können das Formular rund um die Uhr ausfüllen – unabhängig von Geschäftszeiten.
-            </p>
-
-            <h3 id="schritt-2" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Schritt 2: Bis zu 5 Offerten von geprüften Umzugsfirmen erhalten
-            </h3>
-            <p className="text-body mb-4">
-              Ihre Anfrage wird an passende, geprüfte Umzugsunternehmen in Ihrer Region weitergeleitet. In der Regel erhalten Sie innerhalb von 24 bis 48 Stunden bis zu 5 individuelle Offerten.
-            </p>
-            <p className="text-body mb-4">
-              Alle Anbieter werden über die Plattform seriös geprüft. Dies umfasst den Firmensitz in der Schweiz und die Erbringung professioneller Dienstleistungen.
-            </p>
-            <p className="text-body mb-6">
-              Fordern Sie jetzt mehrere Umzugsofferten an und verschaffen Sie sich einen Überblick über Preise und Leistungen.
-            </p>
-
-            <h3 id="schritt-3" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Schritt 3: Offerten vergleichen und passende Firma wählen
-            </h3>
-            <p className="text-body mb-4">
-              Vergleichen Sie die Angebote strukturiert. Eine einfache Tabelle hilft beim Überblick:
-            </p>
-            <div className="overflow-x-auto mb-6">
-              <table className="min-w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Kriterium</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Firma A</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Firma B</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Firma C</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Gesamtpreis</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Enthaltene Leistungen</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Versicherungsschutz</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Erfahrung / Bewertungen</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Erreichbarkeit</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                    <td className="border border-gray-300 px-4 py-2 text-body"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p className="text-body mb-4">
-              Berücksichtigen Sie nicht nur den günstigsten Preis, sondern auch Serviceumfang, Erreichbarkeit und Erfahrung des Team. Sie können direkt mit den Umzugsfirmen Kontakt aufnehmen, um Fragen zu klären oder Besichtigungen zu vereinbaren.
-            </p>
-            <p className="text-body mb-6">
-              Der Auftrag wird erst erteilt, wenn Sie sich bewusst für eine Firma entscheiden. Es gibt keinen automatischen Vertragsabschluss über Online-Offerten.ch.
-            </p>
-
-            <h2 id="wann-einholen" className="heading-2 mb-4 mt-8 scroll-mt-24">
-              Wann sollten Sie Umzugsofferten einholen?
-            </h2>
-            <p className="text-body mb-4">
-              Eine gute Planung beginnt rechtzeitig. Wer frühzeitig Offerten einholt, vermeidet Stress, Engpässe und höhere Preise.
-            </p>
-            <p className="text-body mb-4">
-              Die Nachfrage nach Umzugsfirmen variiert je nach Jahreszeit, Monatsende und Wochenenden. In Spitzenzeiten sind beliebte Anbieter oft ausgebucht – und die Preise steigen entsprechend.
-            </p>
-            <p className="text-body mb-6">
-              Planen Sie frühzeitig und vergleichen Sie jetzt unverbindliche Umzugsofferten.
-            </p>
-
-            <h3 id="fruehzeitige-planung" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Frühzeitige Planung für mehr Auswahl
-            </h3>
-            <p className="text-body mb-4">
-              Holen Sie Umzugsofferten idealerweise 4 bis 8 Wochen vor dem geplanten Umzugstermin ein. In stark nachgefragten Zeiten (zum Beispiel Monats- und Jahreswechsel) ist ein längerer Vorlauf sinnvoll.
-            </p>
-            <p className="text-body mb-4">
-              Die Vorteile der frühzeitigen Planung:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Mehr Firmen sind verfügbar</li>
-              <li>Bessere Konditionen und Flexibilität bei der Wahl des Termins</li>
-              <li>Weniger Stress bei der Vorbereitung</li>
-              <li>Zeit für Rückfragen und Beratung</li>
-            </ul>
-            <p className="text-body mb-6">
-              Starten Sie am besten bereits nach der Vertragsunterzeichnung für die neue Wohnung oder das neue Haus mit der Offertanfrage.
-            </p>
-
-            <h3 id="kurzfristiger-umzug" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Kurzfristiger Umzug – was ist möglich?
-            </h3>
-            <p className="text-body mb-4">
-              Auch bei kurzfristigen Umzügen können über Online-Offerten.ch rasch geeignete Anbieter gefunden werden. Bei sehr knappen Fristen ist Flexibilität beim Umzugstag oder bei den Leistungen hilfreich.
-            </p>
-            <p className="text-body mb-6">
-              Erwähnen Sie im Anfrageformular klar, dass der Umzug dringlich ist. So können Anbieter entsprechend reagieren und verfügbare Kapazitäten anbieten.
-            </p>
-            <p className="text-body mb-6">
-              Jetzt kurzfristig Umzugsofferten einholen und verfügbare Kapazitäten prüfen lassen.
+            <p className="text-body mb-8">
+              Der Service ist kostenlos, unverbindlich und ohne automatische Buchung.
             </p>
             <div className="mb-8">
-              <img 
-                src="/bilder/a37ef9fd-e196-4b29-bae7-46de33406448.webp" 
-                alt="Professionelle Umzugshelfer tragen sorgfältig verpackte Möbel aus einem Haus, während sie auf dem Weg zu einem Umzugsfahrzeug sind. Im Hintergrund sind Kartons und ein Möbel-Lift sichtbar, was auf einen organisierten Umzug hinweist."
+              <img
+                src="/fotos/moving.png"
+                alt="Umzug in der Schweiz mit professioneller Planung und Umzugsservice."
                 className="w-full h-auto rounded-lg shadow-md"
               />
             </div>
 
-            <h2 id="tipps-auswahl" className="heading-2 mb-4 mt-8 scroll-mt-24">
-              Tipps: So wählen Sie die beste Umzugsofferte aus
+            <h2 id="wann-einholen" className="heading-2 mb-4 mt-8 scroll-mt-24">
+              Wann sollten Sie Umzugsofferten einholen?
             </h2>
-            <p className="text-body mb-4">
-              Die günstigste Offerte ist nicht immer die beste Wahl. Qualität, Zuverlässigkeit, Transparenz und Kommunikation sind beim Umzug oft wichtiger als ein paar gesparte Franken.
-            </p>
-            <p className="text-body mb-4">
-              Mit den folgenden Praxistipps treffen Sie die richtige Wahl.
-            </p>
-            <p className="text-body mb-6">
-              Vergleichen Sie jetzt verschiedene Umzugsofferten und nutzen Sie diese Tipps bei Ihrer Auswahl.
-            </p>
-
-            <h3 id="leistungsumfang-preis" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Auf Leistungsumfang statt nur auf den Preis achten
-            </h3>
-            <p className="text-body mb-4">
-              Offerten mit ähnlichem Preis können sehr unterschiedliche Leistungen enthalten. Das eine Angebot beinhaltet vielleicht keinen Verpackungsservice, keine Montage oder keine Reinigungsfirmen. Das andere deckt alles ab.
-            </p>
-            <p className="text-body mb-4">
-              Nutzen Sie eine einfache Checkliste:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>[ ] Transport inklusive?</li>
-              <li>[ ] Verpackung und Umzugskartons enthalten?</li>
-              <li>[ ] Möbelmontage und Demontage dabei?</li>
-              <li>[ ] Endreinigung der alten Wohnung inbegriffen?</li>
-              <li>[ ] Entsorgung organisiert?</li>
-              <li>[ ] Möbellift oder Spezialist für schwere Gegenstände verfügbar?</li>
+            <ul className="list-disc list-inside space-y-2 mb-8 text-body">
+              <li>Ideal: 4-6 Wochen vor dem Umzug</li>
+              <li>Bei Auslandsumzuegen: frueher planen</li>
+              <li>In Spitzenzeiten (Sommer/Monatsende) moeglichst frueh anfragen</li>
+              <li>Kurzfristig ist moeglich, Auswahl kann aber kleiner sein</li>
             </ul>
-            <p className="text-body mb-4">
-              Ein etwas höherer Preis mit umfassendem Umzugsservice kann günstiger sein als ein vermeintlich billiges Angebot mit vielen Zusatzkosten. Bei Unklarheiten schreiben Sie die Firmen direkt an und lassen Sie sich fehlende Positionen ergänzen.
-            </p>
 
-            <h3 id="erfahrungen-bewertungen" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Erfahrungen, Bewertungen und Auftreten prüfen
-            </h3>
-            <p className="text-body mb-4">
-              Achten Sie auf Bewertungen früherer Kunden, Referenzen und die Art der Kommunikation. Professionelle Anbieter reagieren zeitnah, klar und vollständig auf Anfragen.
-            </p>
-            <p className="text-body mb-4">
-              Hinweise auf Seriosität:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Respektvoller Umgang mit Menschen</li>
-              <li>Saubere Fahrzeuge und gepflegtes Material</li>
-              <li>Klare Informationen ohne Ausweichen</li>
-              <li>Erfahrung in der Umgebung und Region</li>
+            <h2 id="tipps-auswahl" className="heading-2 mb-4 mt-8 scroll-mt-24">
+              Tipps: So waehlen Sie die beste Umzugsofferte aus
+            </h2>
+            <ul className="list-disc list-inside space-y-2 mb-8 text-body">
+              <li>Nicht nur den Endpreis vergleichen, sondern das Gesamtpaket.</li>
+              <li>Unklare Positionen immer vorab schriftlich klaeren.</li>
+              <li>Bewertungen, Kommunikation und Zuverlaessigkeit mitbewerten.</li>
+              <li>Bei groesseren Umzuegen eine Besichtigung vor Ort einplanen.</li>
             </ul>
-            <p className="text-body mb-6">
-              Bei grösseren Umzügen – zum Beispiel einem Umzug in Zürich oder einem Privatumzug mit viel Inventar – vereinbaren Sie ein unverbindliches Gespräch oder eine Besichtigung vor Ort.
-            </p>
-
-            <h3 id="details-klaeren" className="heading-3 mb-4 mt-6 scroll-mt-24">
-              Alle Details klären und schriftlich bestätigen lassen
-            </h3>
-            <p className="text-body mb-4">
-              Klären Sie offene Fragen vor der Zusage:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-body">
-              <li>Wer kümmert sich um die Parkbewilligung?</li>
-              <li>Wie lang sind die Tragewege?</li>
-              <li>Gibt es Spezialtransporte (zum Beispiel für empfindliche Möbel)?</li>
-              <li>Was kostet ein Umzug bei Änderungen im Bedarf?</li>
-            </ul>
-            <p className="text-body mb-4">
-              Melden Sie Änderungen im Umfang (mehr Möbel, zusätzliche Zimmer, Gegenstände aus dem Zuhause oder dem Keller) möglichst früh. Alle Absprachen – Rabatte, Zusatzleistungen, Terminänderungen – sollten schriftlich festgehalten werden.
-            </p>
-            <p className="text-body mb-6">
-              Nutzen Sie Online-Offerten.ch, um verschiedene Umzugsofferten einzuholen und alles in Ruhe zu vergleichen.
-            </p>
+            <div className="mb-8">
+              <img
+                src="/fotos/umzugstag.webp"
+                alt="Vorbereiteter Umzugstag mit Kartons und klarer Terminplanung."
+                className="w-full h-auto rounded-lg shadow-md"
+              />
+            </div>
 
             <h2 id="fazit" className="heading-2 mb-4 mt-8 scroll-mt-24">
-              Fazit: Mit der richtigen Umzugsofferte entspannt zügeln
+              Fazit: Mit der richtigen Umzugsofferte entspannt zuegeln
             </h2>
             <p className="text-body mb-4">
-              Eine sorgfältig geprüfte Umzugsofferte bietet Ihnen Planungssicherheit, transparente Kosten und weniger Stress am Umzugstag. Sie wissen genau, welche Leistungen Sie für Ihr Geld erhalten und können böse Überraschungen vermeiden.
-            </p>
-            <p className="text-body mb-4">
-              Der Vergleich mehrerer Angebote ist der Schlüssel, um den passenden Umzugspartner zu finden und unnötige Kosten zu sparen. Mit einem klaren Kostendach behalten Sie Ihr Budget im Griff.
-            </p>
-            <p className="text-body mb-4">
-              Online-Offerten.ch vereinfacht diesen Prozess: Mit einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von geprüften Schweizer Zügelunternehmen. So finden Sie schnell und unkompliziert die richtige Umzugsfirma – passend zu Ihrem Ort, Ihrer Art des Umzugs und Ihren individuellen Bedürfnissen.
+              Wer mehrere Offerten strukturiert vergleicht, spart haeufig Kosten und reduziert Stress. Sie treffen Ihre Entscheidung auf Basis klarer Daten statt auf Vermutungen.
             </p>
             <p className="text-body mb-6 font-bold">
-              Jetzt kostenlose und unverbindliche Umzugsofferten vergleichen und den passenden Umzugspartner für Ihren Umzug in der Schweiz finden.
+              Jetzt kostenlos anfragen und bis zu 5 passende Umzugsofferten aus Ihrer Region vergleichen.
             </p>
 
             {/* FAQ Section - Moved here after Fazit */}

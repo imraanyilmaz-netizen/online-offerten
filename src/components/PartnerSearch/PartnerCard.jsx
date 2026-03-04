@@ -24,17 +24,18 @@ const PartnerCard = ({ partner }) => {
   const mainCategories = partner.main_categories || [];
   const hasUmzug = mainCategories.includes('umzug');
   const hasReinigung = mainCategories.includes('reinigung');
-  const isOnlyReinigung = hasReinigung && !hasUmzug && mainCategories.length === 1;
 
   // Varsayılan resim seçimi
   const getDefaultImage = () => {
-    if (isOnlyReinigung) {
+    if (hasReinigung && !hasUmzug) {
       return '/reinigungsfirma/hausreinigung_mit_wohnraum.webp';
-    } else if (hasUmzug || hasReinigung) {
+    }
+    if (hasUmzug) {
       return '/bilder/6bb8eb00-0fb6-4ebd-ba5c-f5c1726ee18a.webp';
     }
     return null;
   };
+  const defaultImage = getDefaultImage();
 
   return (
     <div className="bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5 border border-gray-200/80 overflow-hidden flex flex-col">
@@ -48,16 +49,21 @@ const PartnerCard = ({ partner }) => {
                 className="w-full h-48 object-cover"
                 loading="lazy"
                 onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.classList.add('bg-white');
+                  e.target.onerror = null;
+                  if (defaultImage) {
+                    e.target.src = defaultImage;
+                  } else {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.classList.add('bg-white');
+                  }
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </>
-          ) : getDefaultImage() ? (
+          ) : defaultImage ? (
             <>
               <img
-                src={getDefaultImage()}
+                src={defaultImage}
             alt={`${partner.company_name} hero image`}
             className="w-full h-48 object-cover"
             loading="lazy"

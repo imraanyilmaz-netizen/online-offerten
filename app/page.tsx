@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button'
 import { 
   Star, ArrowRight, MapPin, CheckCircle, 
   FileText, Users, GitCompareArrows, 
-  Truck, Sparkles, Paintbrush, Trash2,
+  Truck, Sparkles, Paintbrush, Trash2, Building2, Package,
   ShieldCheck, Award
 } from 'lucide-react'
 
@@ -329,22 +329,37 @@ export default async function HomePage() {
                 <HomeHeroForm />
                 
                 {/* Service Quick Links */}
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-3 mt-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3 mt-6 mb-6">
                   {/* Umzug Button */}
                   <Link 
-                    href="/kostenlose-offerte-anfordern?step=2&service=umzug"
+                    href="/kostenlose-offerte-anfordern?step=3&service=umzug&umzugArt=privatumzug&endreinigung=ja"
                     className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-lg group"
                   >
                     <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                      <Truck className="w-5 h-5 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                      <div className="relative w-5 h-5">
+                        <Package className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
+                        <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-blue-700 group-hover:text-white transition-colors" />
+                      </div>
                     </div>
                     <div className="flex-1 text-left sm:text-center">
-                      <p className="font-semibold text-base sm:text-base text-gray-900">Umzug</p>
-                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Privat, Geschäftlich, International & Spezial</p>
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Umzug & Reinigung</p>
                     </div>
                   </Link>
-                  
-                  {/* Reinigung Button */}
+
+                  {/* Nur Umzug Button */}
+                  <Link 
+                    href="/kostenlose-offerte-anfordern?step=2&service=umzug"
+                    className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-sky-500 hover:bg-sky-50 hover:shadow-lg group"
+                  >
+                    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-sky-100 group-hover:bg-sky-500 transition-colors">
+                      <Truck className="w-5 h-5 sm:w-5 sm:h-5 text-sky-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Nur Umzug</p>
+                    </div>
+                  </Link>
+
+                  {/* Nur Reinigung Button */}
                   <Link 
                     href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
                     className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-lg group"
@@ -353,8 +368,20 @@ export default async function HomePage() {
                       <Sparkles className="w-5 h-5 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
                     </div>
                     <div className="flex-1 text-left sm:text-center">
-                      <p className="font-semibold text-base sm:text-base text-gray-900">Reinigung</p>
-                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Umzugs-, Büro-, Fensterreinigung & mehr</p>
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Nur Reinigung</p>
+                    </div>
+                  </Link>
+                  
+                  {/* Büroumzug Button */}
+                  <Link 
+                    href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
+                    className="w-full flex items-center gap-3 sm:flex-col sm:items-center sm:text-center p-4 sm:p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-lg group"
+                  >
+                    <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
+                      <Building2 className="w-5 h-5 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 text-left sm:text-center">
+                      <p className="font-semibold text-base sm:text-base text-gray-900">Büroumzug</p>
                     </div>
                   </Link>
                   
@@ -368,7 +395,6 @@ export default async function HomePage() {
                     </div>
                     <div className="flex-1 text-left sm:text-center">
                       <p className="font-semibold text-base sm:text-base text-gray-900">Entsorgung</p>
-                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Wohnung, Haus, Keller & Estrich</p>
                     </div>
                   </Link>
                   
@@ -382,7 +408,6 @@ export default async function HomePage() {
                     </div>
                     <div className="flex-1 text-left sm:text-center">
                       <p className="font-semibold text-base sm:text-base text-gray-900">Klaviertransport</p>
-                      <p className="text-xs sm:text-xs text-gray-600 mt-1 leading-snug">Klavier, Flügel & Piano sicher transportieren</p>
                     </div>
                   </Link>
                 </div>
@@ -484,9 +509,9 @@ export default async function HomePage() {
           {/* So einfach geht's Section */}
           <section className="py-12 md:py-16 lg:py-20 bg-white relative z-10">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-                <h2 className="heading-2 mb-8 md:mb-12 text-left">
-                So einfach geht's:
-                  </h2>
+              <h2 className="heading-2 mb-8 md:mb-12 text-left">
+                So erhalten Sie passende Offerten:
+              </h2>
                   
               {/* Steps - Scrollable on mobile */}
               <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible">
@@ -557,7 +582,7 @@ export default async function HomePage() {
                 <div className="relative order-2 lg:order-1">
                   <div className="relative rounded-2xl overflow-hidden shadow-xl">
                     <NextImage
-                      src="/bilder/83ae5b64-b499-4641-969f-9cc07997a27.webp"
+                      src="/fotos/offerten.webp"
                       alt="Zufriedene Kunden"
                       width={600}
                       height={400}
@@ -573,9 +598,11 @@ export default async function HomePage() {
                 {/* Right Side - Text Content */}
                 <div className="space-y-6 order-1 lg:order-2">
                   <div>
-                    <h2 className="heading-2 mb-3 text-center px-4 py-2 rounded-lg bg-green-50">
-                      Warum Online-offerten.ch
-                    </h2>
+                    <div className="flex justify-start mb-3">
+                      <h2 className="inline-flex w-fit items-center rounded-full bg-green-50 px-4 py-2 text-sm md:text-base font-semibold text-green-800">
+                        Mit Online-Offerten.ch zu besseren Offerten.
+                      </h2>
+                    </div>
                     <h3 className="heading-3 mb-6">
                       Ihre Vorteile mit unserer Vermittlung
                     </h3>
@@ -645,9 +672,9 @@ export default async function HomePage() {
             {/* Overlay for better text readability */}
             <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white/85 to-green-50/40 pointer-events-none z-10"></div>
             <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-20">
-              <div className="text-left sm:text-center mb-12 md:mb-16">
+              <div className="text-center mb-12 md:mb-16">
                 <h2 className="heading-2 mb-4">
-                  Online-Anfragen stellen, Offerten vergleichen und passende, günstige Anbieter finden
+                  Online anfragen, Offerten vergleichen und smart entscheiden.
                 </h2>
               </div>
               <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
@@ -744,6 +771,34 @@ export default async function HomePage() {
                   </div>
                 </div>
 
+                {/* Entsorgung */}
+                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-5 mb-6">
+                      <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
+                        <Trash2 className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="heading-4 mb-2 group-hover:text-emerald-600 transition-colors">
+                          Entsorgung
+                        </h3>
+                        <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="space-y-4 mb-8">
+                      <p className="text-body leading-relaxed">
+                        Entsorgung von altem Mobiliar, Sperrgut und Haushaltsabfaellen geplant? Fordern Sie jetzt kostenlos und unverbindlich mehrere Entsorgungsofferten an, vergleichen Sie Preise und Leistungen regionaler Anbieter und finden Sie schnell den passenden Service fuer Wohnungsraeumung, Kellerraeumung oder fachgerechte Entsorgung nach Umzug und Renovation.
+                      </p>
+                    </div>
+                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                      <Link href="/kostenlose-offerte-anfordern?service=raeumung&step=2" className="inline-flex items-center">
+                        Entsorgungsofferten
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </section>
@@ -751,147 +806,6 @@ export default async function HomePage() {
           {/* Client Components - Interactive parts */}
       <HomePageClient initialReviews={reviews} initialPosts={posts} />
 
-          {/* SEO Content Section */}
-          <section className="py-12 md:py-16 bg-white">
-            <div className="container mx-auto max-w-navbar px-4 md:px-6">
-              <div className="max-w-4xl mx-auto prose prose-lg">
-                <h2 className="heading-2 mb-4">
-                  Umzugsfirmen, Reinigungsfirmen und Malerarbeiten vergleichen
-                </h2>
-                <p className="text-body mb-8">
-                  Mehrere Offerten erhalten und passende Anbieter auswählen
-                </p>
-                <p className="text-body mb-8 leading-relaxed">
-                  Mit Online-offerten.ch findest du zuverlässige Anbieter für Umzüge, Reinigungen und Malerarbeiten. Vergleiche mehrere Offerten aus deiner Region und wähle den Dienstleister, der am besten zu deinem Projekt passt.
-                </p>
-
-                {/* Ana Hizmet Blokları */}
-                <div className="space-y-12 mb-16">
-                  <div>
-                    <h2 className="heading-2 mb-4">
-                      Umzugsfirma finden – einfach und unkompliziert
-                    </h2>
-                    <p className="text-body mb-6">
-                      Geprüfte Anbieter für Privatumzüge, Firmenumzüge und internationale Umzüge
-                    </p>
-
-                    <p className="text-body mb-6 leading-relaxed">
-                      Ein Umzug erfordert Planung und Vertrauen. Über Online-offerten.ch erhältst du Offerten von geprüften Umzugsfirmen für Privatumzüge, Firmenumzüge sowie internationale Umzüge. So kannst du Preise und Leistungen vergleichen und schnell die passende Umzugsfirma finden.
-                    </p>
-
-                    <h3 className="heading-3 mb-4">
-                      Transparente Offerten und seriöse Umzugsfirmen
-                    </h3>
-                    <p className="text-body mb-6 leading-relaxed">
-                      Alle vermittelten Umzugsfirmen erstellen klare und transparente Offerten. Durch den Vergleich mehrerer Angebote sparst du Zeit und Kosten und triffst eine fundierte Entscheidung für dein Umzugsprojekt.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h2 className="heading-2 mb-4">
-                      Reinigungsfirma für Endreinigung und Umzugsreinigung vergleichen
-                    </h2>
-                    <p className="text-body mb-6">
-                      Professionelle Reinigungsfirmen für Wohnung und Büro
-                    </p>
-
-                    <p className="text-body mb-6 leading-relaxed">
-                      Ob Endreinigung nach dem Umzug, Umzugsreinigung oder Büroreinigung – über Online-offerten.ch findest du erfahrene Reinigungsfirmen. Vergleiche Offerten, prüfe Preise und Leistungen und wähle die Reinigungsfirma, die optimal zu deinem Bedarf passt.
-                    </p>
-
-                    <h3 className="heading-3 mb-4">
-                      Zuverlässige Endreinigung für eine reibungslose Wohnungsabgabe
-                    </h3>
-                    <p className="text-body mb-6 leading-relaxed">
-                      Unsere Partnerfirmen führen Endreinigungen zuverlässig gemäss den Vorgaben für die Wohnungsübergabe durch. So kannst du deine Wohnung stressfrei abgeben und sicher sein, dass alle Anforderungen erfüllt sind.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h2 className="heading-2 mb-4">
-                      Malerarbeiten vergleichen und erfahrene Malerbetriebe finden
-                    </h2>
-                    <p className="text-body mb-6">
-                      Professionelle Malerarbeiten für Innen- und Aussenbereiche
-                    </p>
-
-                    <p className="text-body mb-6 leading-relaxed">
-                      Für Renovationen im Innen- und Aussenbereich vermitteln wir qualifizierte Anbieter für Malerarbeiten. Vergleiche Offerten für Streichen, Lackieren oder Fassadenarbeiten und finde den passenden Malerbetrieb für dein Projekt.
-                    </p>
-
-                    <p className="text-body mb-6 leading-relaxed">
-                      Hochwertige Materialien und moderne Arbeitstechniken sorgen für saubere, langlebige und optisch überzeugende Ergebnisse.
-                    </p>
-                  </div>
-
-                </div>
-
-                {/* Warum Online-offerten.ch */}
-                <div className="space-y-8 mb-16">
-                  <h2 className="heading-2 mb-8">
-                    Warum Online-offerten.ch die richtige Wahl ist
-                  </h2>
-
-                  <h3 className="heading-3 mb-4">
-                    Kostenlose und unverbindliche Offerten
-                  </h3>
-                  <p className="text-body mb-6 leading-relaxed">
-                    Du erhältst mehrere Offerten kostenlos und unverbindlich. So kannst du Anbieter vergleichen, ohne Zeit zu verlieren oder Verpflichtungen einzugehen.
-                  </p>
-
-                  <h3 className="heading-3 mb-4">
-                    Zeit- und Kostenersparnis durch direkten Vergleich
-                  </h3>
-                  <p className="text-body mb-6 leading-relaxed">
-                    Der Vergleich verschiedener Anbieter hilft dir, Preise und Leistungen transparent gegenüberzustellen und die beste Entscheidung für dein Projekt zu treffen.
-                  </p>
-                </div>
-
-                {/* So funktioniert Online-offerten.ch */}
-                <div className="space-y-8 mb-12">
-                  <h2 className="heading-2 mb-8">
-                    So funktioniert Online-offerten.ch
-                  </h2>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="heading-3 mb-3">
-                        1. Anfrage ausfüllen
-                      </h3>
-                      <p className="text-body mb-4 leading-relaxed">
-                        Beschreibe dein Projekt in wenigen Schritten und sende deine Anfrage ab.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="heading-3 mb-3">
-                        2. Offerten erhalten und vergleichen
-                      </h3>
-                      <p className="text-body mb-4 leading-relaxed">
-                        Erhalte mehrere Offerten von passenden Anbietern und vergleiche Preise, Leistungen und Bewertungen direkt online.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="heading-3 mb-3">
-                        3. Anbieter auswählen
-                      </h3>
-                      <p className="text-body mb-4 leading-relaxed">
-                        Wähle den Dienstleister, der dein Projekt zuverlässig, effizient und kostengünstig umsetzt.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <div className="text-left mt-12">
-                  <Link href="/kostenlose-offerte-anfordern" className="text-lg font-semibold text-green-600 hover:text-green-700 underline transition-colors">
-                    Jetzt kostenlose Offerten anfordern und passende Dienstleister finden →
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
         </main>
       </div>
     </>

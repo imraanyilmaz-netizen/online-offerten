@@ -188,7 +188,7 @@ const HomeHeroForm = memo(() => {
           Offerten vergleichen & passende Anbieter in der Schweiz finden
         </h1>
         <p className="text-gray-600 text-base sm:text-lg mt-2">
-          Bei Online-Offerten finden Sie geprüfte, passende Anbieter in Ihrer Nähe.
+          Vergleichen Sie geprüfte Umzugs- und Reinigungsfirmen in Ihrer Region, buchen Sie online und sparen Sie Zeit und Kosten.
         </p>
           
        <div className="flex flex-col md:flex-row gap-4 rounded-xl mt-4 md:p-4 lg:p-0">

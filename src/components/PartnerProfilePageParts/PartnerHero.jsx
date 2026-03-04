@@ -2,13 +2,27 @@
 // Removed useTranslation
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
-import { Star, ShieldCheck, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import QualityBadge from './QualityBadge';
 import StarRating from './StarRating';
 
 const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   // Removed useTranslation
-  const heroImageUrl = partner.hero_image_url || '/image/umzugsservice-Schweiz/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.webp';
+  const mainCategories = partner.main_categories || [];
+  const hasUmzug = mainCategories.includes('umzug');
+  const hasReinigung = mainCategories.includes('reinigung');
+
+  const getHeroFallbackImage = () => {
+    if (hasReinigung && !hasUmzug) {
+      return '/reinigungsfirma/hausreinigung_mit_wohnraum.webp';
+    }
+    if (hasUmzug) {
+      return '/bilder/6bb8eb00-0fb6-4ebd-ba5c-f5c1726ee18a.webp';
+    }
+    return '/image/online-offerten.webp';
+  };
+
+  const heroImageUrl = partner.hero_image_url || getHeroFallbackImage();
   
   // Gerçek yorum sayısı ve rating'i kullan (prop'tan gelen veya partner objesinden)
   const displayRating = averageRating !== undefined ? averageRating : (partner.average_rating || 0);
@@ -19,14 +33,25 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
       className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden bg-slate-50"
     >
       {/* Background Image - Right Side */}
-      <div 
-        className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 h-full bg-cover bg-center bg-no-repeat"
+      <div
+        className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 h-full overflow-hidden"
         style={{
-          backgroundImage: `url('${heroImageUrl}')`,
           maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
           WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
         }}
-      ></div>
+      >
+        <img
+          src={heroImageUrl}
+          alt={`${partner.company_name} Hero`}
+          className="w-full h-full object-contain object-right"
+          loading="eager"
+          decoding="async"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = getHeroFallbackImage();
+          }}
+        />
+      </div>
       
       {/* Gradient Overlay - White from left to right with shadow effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
@@ -36,7 +61,7 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
       <div 
         className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 pointer-events-none"
         style={{
-          boxShadow: 'inset -100px 0 100px -50px rgba(255, 255, 255, 0.8)'
+          boxShadow: 'inset 120px 0 100px -50px rgba(255, 255, 255, 0.8)'
         }}
       ></div>
       
