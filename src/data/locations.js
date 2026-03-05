@@ -7,8 +7,8 @@ export const locations = [
   { name: 'Aargau', slug: 'umzugsfirma/aargau', canton: 'AG', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-aargau-offerten.webp' },
   { name: 'Genf', slug: 'umzugsfirma/genf', canton: 'GE', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-genf-offerten.webp' },
   { name: 'Lausanne', slug: 'umzugsfirma/lausanne', canton: 'VD', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-lausanne-kostenlose-offerte.webp' },
-  { name: 'Thun', slug: 'umzugsfirma/thun', canton: 'BE', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-thun-kostenlose-offerte.webp' },
-  { name: 'Biel/Bienne', slug: 'umzugsfirma/biel-bienne', canton: 'BE', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-biel-bienne-offerten.webp' },
+  { name: 'Thun', slug: 'umzugsfirma/thun', canton: 'BE', showInNav: false, showOnHome: false, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-thun-kostenlose-offerte.webp' },
+  { name: 'Biel/Bienne', slug: 'umzugsfirma/biel-bienne', canton: 'BE', showInNav: false, showOnHome: false, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-biel-bienne-offerten.webp' },
   { name: 'Lugano', slug: 'umzugsfirma/lugano', canton: 'TI', showInNav: false, showOnHome: true, image: 'https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-lugano-kostenlose-offerte.webp' },
-  { name: 'Thurgau', slug: 'umzugsfirma/thurgau', canton: 'TG', showInNav: false, showOnHome: false, image: '/umzug/kanton-thurgau.webp' },
+  { name: 'Thurgau', slug: 'umzugsfirma/thurgau', canton: 'TG', showInNav: false, showOnHome: true, image: '/umzug/kanton-thurgau.webp' },
 ];

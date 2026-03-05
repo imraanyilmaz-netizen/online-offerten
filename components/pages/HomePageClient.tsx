@@ -36,18 +36,68 @@ const getCantonFlagSrc = (canton?: string): string => {
       return '/kanton/sg.svg'
     case 'AG':
       return '/kanton/ag.svg'
+    case 'AI':
+      return '/kanton/ai.svg'
+    case 'AR':
+      return '/kanton/ar.svg'
+    case 'BL':
+      return '/kanton/bl.svg'
+    case 'FR':
+      return '/kanton/fr.svg'
     case 'GE':
       return '/kanton/ge.svg'
+    case 'GL':
+      return '/kanton/gl.svg'
+    case 'GR':
+      return '/kanton/gr.svg'
+    case 'JU':
+      return '/kanton/ju.svg'
     case 'VD':
       return '/kanton/vd.svg'
+    case 'NE':
+      return '/kanton/ne.svg'
+    case 'NW':
+      return '/kanton/nw.svg'
+    case 'OW':
+      return '/kanton/ow.svg'
+    case 'SH':
+      return '/kanton/sh.svg'
+    case 'SO':
+      return '/kanton/so.svg'
+    case 'SZ':
+      return '/kanton/sz.svg'
     case 'TI':
       return '/kanton/ti.svg'
     case 'TG':
       return '/kanton/tg.svg'
+    case 'UR':
+      return '/kanton/ur.svg'
+    case 'VS':
+      return '/kanton/vs.svg'
+    case 'ZG':
+      return '/kanton/zg.svg'
     default:
       return '/kanton/ch.svg'
   }
 }
+
+const additionalHomeCantons = [
+  { name: 'Uri', canton: 'UR' },
+  { name: 'Schwyz', canton: 'SZ' },
+  { name: 'Obwalden', canton: 'OW' },
+  { name: 'Nidwalden', canton: 'NW' },
+  { name: 'Glarus', canton: 'GL' },
+  { name: 'Zug', canton: 'ZG' },
+  { name: 'Fribourg', canton: 'FR' },
+  { name: 'Solothurn', canton: 'SO' },
+  { name: 'Basel-Landschaft', canton: 'BL' },
+  { name: 'Schaffhausen', canton: 'SH' },
+  { name: 'Graubünden', canton: 'GR' },
+  { name: 'Thurgau', canton: 'TG' },
+  { name: 'Neuchâtel', canton: 'NE' },
+  { name: 'Jura', canton: 'JU' },
+  { name: 'Valais', canton: 'VS' }
+];
 
 // Review Card Component
 interface ReviewCardProps {
@@ -360,6 +410,23 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     return ['Alle', ...cats.map(formatCategory)];
   }, [state.posts]);
 
+  const homeLocationItems = useMemo(() => {
+    const linkedLocations = locations
+      .filter((city) => city?.slug && city.showOnHome !== false)
+      .map((city) => ({ ...city, isLinked: true }));
+
+    const existingCantons = new Set(linkedLocations.map((item) => item.canton));
+    const unlinkedCantons = additionalHomeCantons
+      .filter((item) => !existingCantons.has(item.canton))
+      .map((item) => ({
+        ...item,
+        slug: null,
+        isLinked: false
+      }));
+
+    return [...linkedLocations, ...unlinkedCantons];
+  }, []);
+
   return (
     <>
         
@@ -499,32 +566,47 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 </div>
                 <div className="max-w-4xl mx-auto mb-8">
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-6">
-                    {locations.filter((city) => city?.slug).map((city) => {
-                      const cityHref = `/${city.slug}`;
-                      return (
-                        <Link
-                          key={city.slug}
-                          href={cityHref}
-                          className="flex items-center justify-between bg-white text-gray-900 border border-gray-200 px-4 py-2.5 rounded-lg text-sm md:text-base font-semibold shadow-sm hover:bg-green-50 hover:border-green-300 transition-all duration-200"
-                        >
+                    {homeLocationItems.map((item) => {
+                      const cardClassName = 'flex items-center justify-between bg-white text-gray-900 border border-gray-200 px-4 py-2.5 rounded-lg text-sm md:text-base font-semibold shadow-sm transition-all duration-200';
+
+                      const cardContent = (
+                        <>
                           <span className="inline-flex items-center gap-2">
                             <span
                               aria-hidden="true"
                               className="w-6 h-4 rounded-sm border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden"
                             >
                               <img
-                                src={getCantonFlagSrc(city.canton)}
-                                alt={`${city.canton} Kantonsflagge`}
+                                src={getCantonFlagSrc(item.canton)}
+                                alt={`${item.canton} Kantonsflagge`}
                                 className="w-full h-full object-cover"
                                 loading="lazy"
                               />
                             </span>
-                            <span>{city.name}</span>
+                            <span>{item.name}</span>
                           </span>
                           <span className="text-xs md:text-sm bg-gray-100 text-gray-700 px-2 py-0.5 rounded font-bold">
-                            {city.canton}
+                            {item.canton}
                           </span>
-                        </Link>
+                        </>
+                      );
+
+                      if (item.isLinked && item.slug) {
+                        return (
+                          <Link
+                            key={item.slug}
+                            href={`/${item.slug}`}
+                            className={`${cardClassName} hover:bg-green-50 hover:border-green-300`}
+                          >
+                            {cardContent}
+                          </Link>
+                        );
+                      }
+
+                      return (
+                        <div key={item.canton} className={cardClassName}>
+                          {cardContent}
+                        </div>
                       );
                     })}
                   </div>
