@@ -23,7 +23,6 @@ const cityData = cityServiceData[city] || {
   canonicalUrl: '/umzugsfirma/aargau'
 }
 const canonicalUrl = '/umzugsfirma/aargau'
-const locationData = locations.find(loc => loc.name === city)
 const imageUrl = '/image/umzug-reinigung-malerarbeiten-aargau-offerten.webp'
 
 // Service Schema - Enhanced for rich results & clarification as comparison platform
@@ -397,23 +396,20 @@ export default async function UmzugsfirmaAargauPage() {
         />
       )}
       <div className="bg-white overflow-x-hidden">
-        {/* Modern Hero Section */}
-        <section className="relative w-full bg-white py-16 md:py-20 lg:py-24 overflow-hidden">
-          {/* Subtle Background Pattern */}
-          <div className="absolute inset-0 opacity-[0.03]">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, gray 1px, transparent 0)`,
-              backgroundSize: '40px 40px'
-            }}></div>
+        {/* Hero Section */}
+        <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50">
+          <div className="absolute inset-0 opacity-5">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                backgroundSize: '60px 60px',
+              }}
+            />
           </div>
-          
-          {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20 translate-y-1/2 -translate-x-1/2"></div>
-          
           <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-            {/* Breadcrumb Navigation - Matches BreadcrumbList schema */}
-            <nav className="mb-4 pt-4" aria-label="Breadcrumb">
+            <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
                   <Link href="/" className="hover:text-green-600 transition-colors">
@@ -436,74 +432,57 @@ export default async function UmzugsfirmaAargauPage() {
                 </li>
               </ol>
             </nav>
-            
-            <div className="grid lg:grid-cols-5 gap-12 items-center">
-              {/* Left Content */}
-              <div className="text-gray-900 lg:col-span-3">
-                <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-green-50 rounded-full border border-green-200">
-                  <span className="text-sm font-medium text-gray-700">Kanton Aargau</span>
+
+            <div className="grid md:grid-cols-5 gap-12 items-center">
+              <div className="md:col-span-3">
+                <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-4">
+                  Kanton Aargau
                 </div>
-                
-                <h1 className="typography-h1 mb-6">
+                <h1 className="heading-1 !mt-0 mb-4">
                   Umzugsfirma in Aargau – Kostenlos Umzugsofferten vergleichen
                 </h1>
-                
-                <p className="typography-p mb-8 max-w-2xl">
-                  Finden Sie die besten <strong className="text-gray-900">Umzugsdienstleister</strong> und <strong>Zügelunternehmen im Kanton Aargau</strong> für Ihren Umzug. Vergleichen Sie kostenlos mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> in <strong>Aarau</strong>, <strong>Baden</strong>, <strong>Zofingen</strong> und der ganzen Region. Professionelle <strong>Transportunternehmen für Umzüge</strong> und <strong>regionale Zügelprofis</strong> bieten umfassende Dienstleistungen für Privatumzug, Geschäftsumzug, Auslandumzug und Spezialtransporte. Alle Partner sind <strong>versichert gemäss OR</strong>.
+                <p className="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed max-w-2xl">
+                  Vergleichen Sie geprüfte Umzugsfirmen im Kanton Aargau und erhalten Sie mehrere kostenlose Offerten für Ihren Privat- oder Firmenumzug.
                 </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Button 
-                    asChild
-                    size="lg" 
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
-                  >
-                    <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Aargau">
-                      Kostenlose Offerten anfordern
-                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                  <Button 
-                    asChild
-                    variant="outline"
-                    size="lg" 
-                    className="bg-white hover:bg-gray-50 text-gray-700 border-gray-300 px-8 py-6 text-lg rounded-lg shadow-sm hover:shadow-md"
-                  >
-                    <Link href="/umzugskosten">
-                      <Calculator className="w-5 h-5 mr-2" />
-                      Kosten berechnen
-                    </Link>
-                  </Button>
+
+                <div className="bg-white/95 rounded-xl p-3 sm:p-4 mb-6 border border-gray-200 shadow-sm">
+                  <h2 className="text-sm sm:text-base font-bold text-gray-900 mb-2">
+                    Welche Dienstleistung benötigen Sie?
+                  </h2>
+                  <ServiceGrid city={city} compact />
                 </div>
-                
-                {/* Trust Badges */}
-                <div className="flex flex-wrap gap-6 text-sm">
-                  <div className="flex items-center gap-2 text-gray-700">
+
+                <div className="flex flex-wrap gap-6 text-sm text-gray-700">
+                  <div className="flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600" />
                     <span className="font-medium">100% kostenlos</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-700">
+                  <div className="flex items-center gap-2">
                     <ShieldCheck className="w-5 h-5 text-green-600" />
                     <span className="font-medium">Geprüfte Partner</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-700">
+                  <div className="flex items-center gap-2">
                     <TrendingUp className="w-5 h-5 text-green-600" />
                     <span className="font-medium">Bis zu 40% sparen</span>
                   </div>
                 </div>
               </div>
-              
-              {/* Right Image */}
-              <div className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl border border-gray-200 lg:col-span-2">
+
+              <div className="relative md:col-span-2">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                 <Image
                   src={imageUrl}
                   alt="Professionelle Zügelfirma im Aargau - Umzugsunternehmen bei der Arbeit"
-                  fill
-                  className="object-cover"
+                    width={600}
+                    height={450}
+                    className="w-full h-auto object-cover"
                   priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent"></div>
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-green-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                  <p className="text-sm font-bold">Bis zu 40% sparen</p>
+                  <p className="text-xs text-green-100">Kostenlos & unverbindlich</p>
+                </div>
               </div>
             </div>
           </div>
@@ -938,12 +917,12 @@ export default async function UmzugsfirmaAargauPage() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-8 text-white text-center">
-                  <h3 className="typography-h3 mb-4" style={{ textAlign: 'center', fontSize: '28px', color: 'rgba(255, 255, 255, 1)' }}>
+                <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-8 text-white text-center flex flex-col items-center">
+                  <h3 className="typography-h3 mb-4 text-center" style={{ fontSize: '28px', color: '#ffffff' }}>
                     Jetzt Umzugsofferten für Aarau erhalten
                   </h3>
-                  <p className="typography-p text-green-50 mb-6 max-w-2xl mx-auto" style={{ color: 'rgba(0, 0, 0, 1)' }}>
-                    Füllen Sie unser einfaches Online-Formular aus und erhalten Sie passende Offerten von zuverlässigen <strong>Umzugsfirmen in Aarau</strong>. Unser Service ist kostenlos – Kosten entstehen erst, wenn Sie sich für ein Angebot entscheiden. Ob innerhalb von Aarau, in einen anderen Kanton oder ins Ausland: Wir finden den richtigen Umzugspartner für Sie.
+                  <p className="typography-p mb-6 max-w-2xl mx-auto text-center" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                    Füllen Sie unser einfaches Online-Formular aus und erhalten Sie passende Offerten von zuverlässigen <strong className="text-white">Umzugsfirmen in Aarau</strong>. Unser Service ist kostenlos – Kosten entstehen erst, wenn Sie sich für ein Angebot entscheiden. Ob innerhalb von Aarau, in einen anderen Kanton oder ins Ausland: Wir finden den richtigen Umzugspartner für Sie.
                   </p>
                   <div className="flex justify-center">
                     <Button 
@@ -1074,12 +1053,12 @@ export default async function UmzugsfirmaAargauPage() {
               </article>
 
               {/* CTA Section */}
-              <article className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 md:p-12 text-white text-center">
-                <h2 className="typography-h2 mb-4">
+              <article className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 md:p-12 text-white text-center flex flex-col items-center">
+                <h2 className="typography-h2 mb-4 text-center" style={{ color: '#ffffff' }}>
                   Bereit für Ihren Umzug im Aargau?
                 </h2>
-                <p className="typography-p text-green-50 mb-8 max-w-2xl mx-auto">
-                  Starten Sie jetzt Ihre Anfrage und erhalten Sie in Kürze bis zu 5 Offerten von geprüften <strong>Umzugsfirmen im Aargau</strong> und Zügelfirmen aus dem Aargau.
+                <p className="typography-p mb-8 max-w-2xl mx-auto text-center" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  Starten Sie jetzt Ihre Anfrage und erhalten Sie in Kürze bis zu 5 Offerten von geprüften <strong className="text-white">Umzugsfirmen im Aargau</strong> und Zügelfirmen aus dem Aargau.
                 </p>
                 <Button 
                   asChild
@@ -1096,86 +1075,43 @@ export default async function UmzugsfirmaAargauPage() {
           </div>
         </section>
 
-        {/* FAQ Section - Aargau spezifisch */}
-        <section className="py-16 md:py-24 bg-gray-50">
+        {/* FAQ Section - Styled like St. Gallen */}
+        <section className="py-12 md:py-16 bg-white border-t border-gray-200">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="text-center mb-12">
-              <h2 className="typography-h2 mb-4" style={{ textAlign: 'center' }}>
-                Häufige Fragen zu Umzügen im Aargau
-              </h2>
-              <p className="typography-p max-w-2xl mx-auto" style={{ textAlign: 'center' }}>
-                Antworten auf die wichtigsten Fragen rund um Umzüge im Kanton Aargau
-              </p>
-            </div>
-            
-            <div className="w-full">
-              <Accordion type="single" collapsible className="w-full space-y-4">
-                <AccordionItem value="item-1" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="text-left hover:no-underline py-4">
-                    <h4 className="faq-question">Wie finde ich eine seriöse Umzugsfirma im Aargau?</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <p className="typography-p">
-                      Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen im Aargau. Achten Sie auf lokale Erfahrung, besonders mit Umzügen in historischen Städten wie Aarau oder Baden. Seriöse Firmen kennen die Besonderheiten der Aargauer Altstädte mit ihren Riegelhäusern und engen Gassen und können Umzüge professionell planen.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                
-                <AccordionItem value="item-2" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="text-left hover:no-underline py-4">
-                    <h4 className="faq-question">Was kostet ein Umzug innerhalb des Aargaus?</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <p className="typography-p">
-                      Die Kosten hängen von Wohnungsgrösse, Distanz, Stockwerk und Zugänglichkeit ab. Ein Umzug innerhalb des Aargaus kostet typischerweise zwischen 600 und 2'800 CHF für eine 3.5-Zimmer-Wohnung. Die zentrale Lage zwischen Zürich, Basel und Bern macht den Aargau zu einer kostengünstigen Region für Umzüge.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                
-                <AccordionItem value="item-3" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="text-left hover:no-underline py-4">
-                    <h4 className="faq-question">Gibt es Besonderheiten bei Umzügen in Aargauer Altstädte?</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <p className="typography-p">
-                      Ja, die historischen Altstädte mit ihren typischen Riegelhäusern und engen Gassen erfordern besondere Sorgfalt. Viele Gebäude haben keine Lifts, und die engen Durchfahrten erfordern kleinere Fahrzeuge. Professionelle Umzugsfirmen beantragen Halteverbotszonen rechtzeitig und verwenden geeignete Ausrüstung für Altstadtumzüge.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                
-                <AccordionItem value="item-4" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="text-left hover:no-underline py-4">
-                    <h4 className="faq-question">Wie lange im Voraus sollte ich eine Umzugsfirma im Aargau buchen?</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <p className="typography-p">
-                      Für einen reibungslosen Ablauf empfehlen wir eine Buchung 4-6 Wochen im Voraus, besonders für Umzüge in die Altstädte von Aarau, Baden oder Zofingen. Kurzfristige Buchungen sind möglich, aber die Auswahl an verfügbaren Terminen ist dann begrenzter. Frühbucher profitieren oft von besseren Konditionen.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                
-                <AccordionItem value="item-5" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="text-left hover:no-underline py-4">
-                    <h4 className="faq-question">Kann ich auch einen Umzug von Aarau nach Baden organisieren?</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <p className="typography-p">
-                      Ja, viele Umzugsfirmen im Aargau bieten Umzüge zwischen den verschiedenen Städten im Kanton an, wie von Aarau nach Baden, Zofingen oder Brugg. Die kurzen Distanzen innerhalb des Aargaus machen solche Umzüge oft kostengünstiger. Vergleichen Sie mehrere Offerten für den besten Preis.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                
-                <AccordionItem value="item-6" className="bg-white rounded-xl border border-gray-200 px-6">
-                  <AccordionTrigger className="text-left hover:no-underline py-4">
-                    <h4 className="faq-question">Welche Vorteile bietet ein Umzug in den Aargau?</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6">
-                    <p className="typography-p">
-                      Der Aargau bietet eine ideale Balance zwischen zentraler Lage und moderaten Lebenshaltungskosten. Die Nähe zu Zürich, Basel und Bern ermöglicht flexible Arbeitsstandorte, während die Wohnkosten deutlich niedriger sind. Familien schätzen die hohe Lebensqualität, gute Schulen und die Nähe zur Natur.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+            <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+              <div className="md:col-span-3">
+                <div className="mb-8">
+                  <h2 className="heading-2">Häufig gestellte Fragen zu Umzugsfirmen im Aargau</h2>
+                </div>
+                <Accordion type="single" collapsible className="w-full">
+                  {aargauFAQs.map((faq, index) => (
+                    <AccordionItem key={faq.question} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">{faq.question}</h4>
+                      </AccordionTrigger>
+                      <AccordionContent className="text-body leading-relaxed">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+
+              <div className="relative md:col-span-2">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                  <Image
+                    src={imageUrl}
+                    alt="Umzug im Aargau – FAQ und Antworten"
+                    width={600}
+                    height={450}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                  <p className="text-sm font-bold">Fragen & Antworten</p>
+                  <p className="text-xs text-blue-100">Rund um Umzüge im Aargau</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

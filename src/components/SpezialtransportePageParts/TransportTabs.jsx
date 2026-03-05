@@ -2,7 +2,7 @@
 // framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CheckSquare, Shield, Cog, FileText, HelpCircle, Wrench } from 'lucide-react';
+import { CheckSquare, Shield, Cog, FileText, Wrench } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi';
 
 const Section = ({ title, icon, children, delay = 0 }) => (
@@ -61,23 +61,38 @@ const TransportCategory = ({ categoryData }) => {
         <p className="text-sm italic text-gray-500 mt-2">{categoryData.pricing.disclaimer}</p>
       </Section>
       
-      <Section title={categoryData.faq.title} icon={<HelpCircle className="mr-3 text-green-500" />} delay={2}>
-        <p className="mb-4">{categoryData.faq.intro}</p>
-        <Accordion type="single" collapsible className="w-full">
-          {categoryData.faq.questions.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="border-b">
-              <AccordionTrigger className="font-semibold text-left text-base md:text-lg hover:no-underline py-4">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="pt-2 pb-6">
-                <div className="prose max-w-none">
-                  <p>{faq.a}</p>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </Section>
+      <div className="pt-8 border-t border-gray-200">
+        <div className={categoryData.faq.image ? "grid md:grid-cols-5 gap-8 md:gap-12 items-start" : ""}>
+          <div className={categoryData.faq.image ? "md:col-span-3" : ""}>
+            <h3 className="heading-2 mb-4">Häufig gestellte Fragen (FAQ)</h3>
+            <p className="text-body mb-6">{categoryData.faq.intro}</p>
+            <Accordion type="single" collapsible className="w-full">
+              {categoryData.faq.questions.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    <h4 className="faq-question">{faq.q}</h4>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-body leading-relaxed">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+          {categoryData.faq.image && (
+            <div className="relative md:col-span-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <img
+                  src={categoryData.faq.image}
+                  alt={categoryData.faq.imageAlt || "FAQ Bild"}
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
 
       <Section title={categoryData.materials.title} icon={<Wrench className="mr-3 text-green-500" />} delay={3}>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
@@ -119,6 +134,8 @@ const TransportTabs = () => {
     faq: {
       title: "Häufige Fragen & Antworten",
       intro: "Hier finden Sie Antworten auf die wichtigsten Fragen rund um den Klaviertransport. Unsere Experten geben Einblicke und Tipps für eine reibungslose Abwicklung.",
+      image: "/umzug/142d52c4.webp",
+      imageAlt: "Klaviertransport in der Schweiz – FAQ und Antworten",
       questions: [
         { q: "Ist mein Klavier während des Transports versichert?", a: "Ja, absolut. Alle unsere Partner verfügen über eine umfassende Transport- und Haftpflichtversicherung, die speziell für solche wertvollen Güter ausgelegt ist. Die genauen Deckungssummen und Bedingungen sind transparent in der jeweiligen Offerte aufgeführt, sodass Sie volle Sicherheit haben." },
         { q: "Wie lange dauert ein Klaviertransport?", a: "Ein Standard-Klaviertransport innerhalb derselben Stadt dauert in der Regel 2-4 Stunden. Diese Zeit umfasst die sorgfältige Vorbereitung und Verpackung, den eigentlichen Transport und das Platzieren am neuen Standort. Bei längeren Distanzen, komplexen Treppenhäusern oder wenn ein Kran benötigt wird, kann der Zeitaufwand entsprechend höher sein." },

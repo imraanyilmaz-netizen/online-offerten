@@ -53,8 +53,8 @@ const PartnerCard = ({ partner }) => {
                   if (defaultImage) {
                     e.target.src = defaultImage;
                   } else {
-                    e.target.style.display = 'none';
-                    e.target.parentElement.classList.add('bg-white');
+                  e.target.style.display = 'none';
+                  e.target.parentElement.classList.add('bg-white');
                   }
                 }}
               />

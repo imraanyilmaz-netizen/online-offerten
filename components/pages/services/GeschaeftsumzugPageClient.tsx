@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { 
   ArrowRight, CheckCircle, Building2, Shield, TrendingDown, Clock, Users, Award,
   MessageSquare, ChevronRight, MapPin, Search, Calculator, Building, ShieldCheck, TrendingUp, Home,
@@ -419,32 +420,60 @@ const GeschaeftsumzugPageClient = () => {
 
 
               {/* FAQ Section */}
-              <section className="pt-8 border-t-2 border-gray-300">
-                <h3 className="heading-3">Häufig gestellte Fragen zum Geschäftsumzug</h3>
-                <div className="space-y-6">
-                  <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="heading-4">Was kostet ein Büroumzug?</h4>
-                    <p className="text-body leading-relaxed text-base">
-                      Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, grössere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen.
-                    </p>
+              <section className="py-12 md:py-16 bg-white border-t border-gray-200 mt-6">
+                <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+                  <div className="md:col-span-3">
+                    <div className="mb-8">
+                      <h2 className="heading-2">Häufig gestellte Fragen (FAQ)</h2>
+                    </div>
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1" className="border-b border-gray-200 last:border-b-0">
+                        <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                          <h4 className="faq-question">Was kostet ein Büroumzug?</h4>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-body leading-relaxed">
+                          Die Kosten für einen Büroumzug hängen von Umfang, Distanz und Aufwand ab. Ein kleiner Büroumzug kann ab 2.000 CHF beginnen, grössere Firmenumzüge kosten oft 10.000 CHF oder mehr. Holen Sie kostenlose Offerten ein, um die besten Preise zu vergleichen.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-2" className="border-b border-gray-200 last:border-b-0">
+                        <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                          <h4 className="faq-question">Wie finde ich die richtige Firma für meinen Firmenumzug?</h4>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-body leading-relaxed">
+                          Vergleichen Sie Angebote regionaler Umzugsfirmen in Ihrer Nähe für einen professionellen Firmenumzug. Über unsere Plattform erhalten Sie schnell passende Offerten von geprüften Partnern. Achten Sie auf Versicherungen, positive Bewertungen und Spezialisierung auf Geschäftsumzüge.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-3" className="border-b border-gray-200 last:border-b-0">
+                        <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                          <h4 className="faq-question">Wie lange dauert ein Geschäftsumzug?</h4>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-body leading-relaxed">
+                          Die Dauer hängt von der Unternehmensgrösse und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, grössere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-4" className="border-b border-gray-200 last:border-b-0">
+                        <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                          <h4 className="faq-question">Was übernehmen professionelle Umzugsfirmen?</h4>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-body leading-relaxed">
+                          Professionelle Umzugsfirmen übernehmen die komplette Planung, Demontage und Montage von Büromöbeln, den sicheren Transport von IT-Equipment, Verpackungsservice, Zwischenlagerung, Entsorgung von Altmobiliar und die Koordination mit Handwerkern am neuen Standort.
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   </div>
-                  <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="heading-4">Wie finde ich die richtige Firma für meinen Firmenumzug?</h4>
-                    <p className="text-body leading-relaxed text-base">
-                      Vergleichen Sie Angebote regionaler Umzugsfirmen in Ihrer Nähe für einen professionellen Firmenumzug. Über unsere Plattform erhalten Sie schnell passende Offerten von geprüften Partnern. Achten Sie auf Versicherungen, positive Bewertungen und Spezialisierung auf Geschäftsumzüge.
-                    </p>
-                  </div>
-                  <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="heading-4">Wie lange dauert ein Geschäftsumzug?</h4>
-                    <p className="text-body leading-relaxed text-base">
-                      Die Dauer hängt von der Unternehmensgrösse und dem Umfang ab. Kleinere Büros können an einem Wochenende umziehen, grössere Unternehmen benötigen mehrere Tage. Eine genaue Zeitplanung erfolgt nach einer Vor-Ort-Besichtigung.
-                    </p>
-                  </div>
-                  <div className="bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-500 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="heading-4">Was übernehmen professionelle Umzugsfirmen?</h4>
-                    <p className="text-body leading-relaxed text-base">
-                      Professionelle Umzugsfirmen übernehmen die komplette Planung, Demontage und Montage von Büromöbeln, den sicheren Transport von IT-Equipment, Verpackungsservice, Zwischenlagerung, Entsorgung von Altmobiliar und die Koordination mit Handwerkern am neuen Standort.
-                    </p>
+                  <div className="relative md:col-span-2">
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                      <img
+                        src="/fotos/offerten.webp"
+                        alt="Geschäftsumzug FAQ – Antworten rund um Kosten, Planung und Ablauf"
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                      <p className="text-sm font-bold">Fragen & Antworten</p>
+                      <p className="text-xs text-blue-100">Rund um Geschäftsumzüge</p>
+                    </div>
                   </div>
                 </div>
               </section>

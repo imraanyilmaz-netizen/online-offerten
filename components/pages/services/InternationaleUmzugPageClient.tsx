@@ -9,7 +9,7 @@ import InternationalPageNavigation from '@/components/international/Internationa
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import InternationalCostCalculator from '@/components/international/InternationalCostCalculator'
 
-const ArticleSection = () => {
+const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
   const faqItems = [
     {
       q: "Was kostet ein internationaler Umzug von der Schweiz aus?",
@@ -471,19 +471,41 @@ const ArticleSection = () => {
         </Button>
       </div>
 
-      <h3 className="text-2xl md:text-3xl font-semibold text-slate-800 mb-6">Häufig gestellte Fragen (FAQ)</h3>
-      <Accordion type="single" collapsible className="w-full">
-        {faqItems.map((item, index) => (
-          <AccordionItem value={`item-${index}`} key={index}>
-            <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
-              <h4 className="faq-question">{item.q}</h4>
-            </AccordionTrigger>
-            <AccordionContent className="text-base text-slate-600">
-              {item.a}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <section className="not-prose py-12 md:py-16 bg-white border-t border-gray-200 mt-6">
+        <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+          <div className="md:col-span-3">
+            <div className="mb-8">
+              <h2 className="heading-2">Häufig gestellte Fragen (FAQ)</h2>
+            </div>
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, index) => (
+                <AccordionItem value={`item-${index}`} key={index} className="border-b border-gray-200 last:border-b-0">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                    <h4 className="faq-question">{item.q}</h4>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-body leading-relaxed">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+          <div className="relative md:col-span-2">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              <img
+                src={heroImageUrl}
+                alt="Internationale Umzüge FAQ – Antworten zu Kosten, Dauer und Zollabwicklung"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+              <p className="text-sm font-bold">Fragen & Antworten</p>
+              <p className="text-xs text-blue-100">Rund um internationale Umzüge</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
@@ -618,7 +640,7 @@ const InternationaleUmzugPageClient = () => {
 
         <section className="py-12 md:py-20 bg-white">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <ArticleSection />
+            <ArticleSection heroImageUrl={imageUrl} />
           </div>
         </section>
 

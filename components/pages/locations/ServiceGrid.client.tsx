@@ -7,9 +7,10 @@ import { Button } from '@/components/ui/button'
 
 interface ServiceGridProps {
   city: string
+  compact?: boolean
 }
 
-const ServiceGrid = ({ city }: ServiceGridProps) => {
+const ServiceGrid = ({ city, compact = false }: ServiceGridProps) => {
   const [selectedService, setSelectedService] = useState<string | null>(null)
 
   const services = [
@@ -35,7 +36,7 @@ const ServiceGrid = ({ city }: ServiceGridProps) => {
     },
     { 
       id: 'international',
-      name: 'Internationaler Umzug',
+      name: 'Auslandumzug',
       description: 'Umzüge ins oder aus dem Ausland',
       icon: Globe,
       umzugArt: 'international',
@@ -119,91 +120,122 @@ const ServiceGrid = ({ city }: ServiceGridProps) => {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 w-full mb-6">
+      <div className={`grid grid-cols-2 md:grid-cols-3 w-full mb-4 ${compact ? 'gap-3 md:gap-4' : 'gap-4 md:gap-6'}`}>
         {services.map((service) => {
           const Icon = service.icon
           const isSelected = selectedService === service.id
+          const baseStateClass = isSelected
+            ? `border-green-600 bg-gradient-to-br ${service.bgGradient} shadow-xl scale-105 ring-2 ring-green-500 ring-offset-2`
+            : 'border-gray-200 hover:border-green-400 hover:shadow-lg hover:scale-102'
+
+          const compactLayoutClass =
+            'rounded-lg p-1.5 md:p-2 min-h-[84px] md:min-h-[92px] items-start justify-start text-left'
+          const defaultLayoutClass =
+            'rounded-xl p-5 md:p-6 items-center justify-center text-center'
+
           return (
             <button
               key={service.id}
               onClick={() => handleServiceClick(service.id)}
               className={`
-                relative bg-white border-2 rounded-xl p-5 md:p-6 
-                flex flex-col items-center justify-center 
+                relative bg-white border-2
+                flex flex-col
                 transition-all duration-300 ease-in-out
                 group overflow-hidden
                 w-full
-                ${isSelected 
-                  ? `border-green-600 bg-gradient-to-br ${service.bgGradient} shadow-xl scale-105 ring-2 ring-green-500 ring-offset-2` 
-                  : 'border-gray-200 hover:border-green-400 hover:shadow-lg hover:scale-102'
-                }
+                ${compact ? compactLayoutClass : defaultLayoutClass}
+                ${baseStateClass}
               `}
             >
               {/* Background Gradient Effect */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 ${isSelected ? 'opacity-10' : ''}`} />
+              {!compact && (
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 ${isSelected ? 'opacity-10' : ''}`} />
+              )}
               
               {/* Selected Indicator */}
-              {isSelected && (
+              {isSelected && !compact && (
                 <div className="absolute top-2 right-2">
                   <div className="bg-green-600 rounded-full p-1 shadow-lg">
                     <CheckCircle2 className="w-4 h-4 text-white" />
                   </div>
                 </div>
               )}
-              
-              {/* Icon Container */}
-              <div className={`
-                relative z-10 w-14 h-14 md:w-16 md:h-16 
-                rounded-2xl mb-4
-                flex items-center justify-center
-                transition-all duration-300
-                ${isSelected 
-                  ? `bg-gradient-to-br ${service.gradient} shadow-lg` 
-                  : `bg-gradient-to-br ${service.bgGradient} group-hover:shadow-md`
-                }
-              `}>
-                <Icon className={`w-7 h-7 md:w-8 md:h-8 ${isSelected ? 'text-white' : service.iconColor}`} />
-              </div>
-              
-              {/* Content */}
-              <div className="relative z-10 text-center w-full">
-                <h3 className={`
-                  text-base md:text-lg font-bold mb-2
-                  transition-colors duration-300
-                  ${isSelected ? 'text-gray-900' : 'text-gray-800'}
-                `}>
-                  {service.name}
-                </h3>
-                <p className={`
-                  text-xs md:text-sm 
-                  transition-colors duration-300
-                  ${isSelected ? 'text-gray-700' : 'text-gray-600'}
-                  leading-relaxed
-                `}>
-                  {service.description}
-                </p>
-              </div>
-              
-              {/* Arrow Indicator */}
-              <div className={`
-                relative z-10 mt-3
-                transition-all duration-300
-                ${isSelected 
-                  ? 'translate-x-0 opacity-100' 
-                  : 'translate-x-[-8px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100'
-                }
-              `}>
-                <ArrowRight className={`w-5 h-5 ${isSelected ? 'text-green-600' : 'text-gray-400'}`} />
-              </div>
+
+              {compact ? (
+                <>
+                  <div className="relative z-10 w-full flex items-start justify-between mb-0.5">
+                    <div className={`
+                      w-9 h-9 rounded-xl flex items-center justify-center
+                      transition-all duration-300
+                      ${isSelected ? `bg-gradient-to-br ${service.gradient}` : `bg-gradient-to-br ${service.bgGradient}`}
+                    `}>
+                      <Icon className={`w-5 h-5 ${isSelected ? 'text-white' : service.iconColor}`} />
+                    </div>
+                    <ArrowRight className={`w-4 h-4 mt-1 ${isSelected ? 'text-green-600' : 'text-gray-500'}`} />
+                  </div>
+                  <div className="relative z-10 w-full">
+                    <h3 className={`text-base font-bold leading-tight ${isSelected ? 'text-gray-900' : 'text-gray-800'}`}>
+                      {service.name}
+                    </h3>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Icon Container */}
+                  <div className={`
+                    relative z-10 rounded-2xl
+                    flex items-center justify-center
+                    transition-all duration-300
+                    w-14 h-14 md:w-16 md:h-16 mb-4
+                    ${isSelected 
+                      ? `bg-gradient-to-br ${service.gradient} shadow-lg` 
+                      : `bg-gradient-to-br ${service.bgGradient} group-hover:shadow-md`
+                    }
+                  `}>
+                    <Icon className={`w-7 h-7 md:w-8 md:h-8 ${isSelected ? 'text-white' : service.iconColor}`} />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 text-center w-full">
+                    <h3 className={`
+                      font-bold text-base md:text-lg mb-2
+                      transition-colors duration-300
+                      ${isSelected ? 'text-gray-900' : 'text-gray-800'}
+                    `}>
+                      {service.name}
+                    </h3>
+                    <p className={`
+                      text-xs md:text-sm
+                      transition-colors duration-300
+                      ${isSelected ? 'text-gray-700' : 'text-gray-600'}
+                      leading-relaxed
+                    `}>
+                      {service.description}
+                    </p>
+                  </div>
+                  
+                  {/* Arrow Indicator */}
+                  <div className={`
+                    relative z-10 mt-3
+                    transition-all duration-300
+                    ${isSelected 
+                      ? 'translate-x-0 opacity-100' 
+                      : 'translate-x-[-8px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100'
+                    }
+                  `}>
+                    <ArrowRight className={`w-5 h-5 ${isSelected ? 'text-green-600' : 'text-gray-400'}`} />
+                  </div>
+                </>
+              )}
             </button>
           )
         })}
       </div>
       
       {selectedService && (
-        <div className="mt-6 animate-fade-in">
+        <div className={`animate-fade-in ${compact ? 'mt-4' : 'mt-6'}`}>
           <Link href={getFormUrl()}>
-            <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-6 text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+            <Button className={`w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] ${compact ? 'py-4 text-base' : 'py-6 text-lg'}`}>
               Jetzt kostenlose Offerten anfordern
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>

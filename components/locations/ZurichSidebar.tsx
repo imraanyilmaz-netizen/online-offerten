@@ -76,16 +76,6 @@ const ZurichSidebar = () => {
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-4">
-        <h3 className="text-xl font-bold text-white">
-          Umzugsfirma Zürich
-        </h3>
-        <p className="text-sm text-green-50 mt-1">
-          Wählen Sie Ihre Dienstleistung
-        </p>
-      </div>
-      
       {/* Services List */}
       <div className="p-4 space-y-3">
         {services.map((service) => {

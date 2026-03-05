@@ -33,7 +33,7 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
       className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden bg-slate-50"
     >
       {/* Background Image - Right Side */}
-      <div
+      <div 
         className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 h-full overflow-hidden"
         style={{
           maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',

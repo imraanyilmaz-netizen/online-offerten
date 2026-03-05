@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp, Calculator, FileText, Mail, BarChart3, MapPin, Building, Star, ChevronRight } from 'lucide-react'
 import ZurichSidebar from '@/components/locations/ZurichSidebar'
+import ServiceGrid from '@/components/pages/locations/ServiceGrid.client'
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation'
 import { cityServiceData } from '@/data/cityLocalBusinessData'
 import { Button } from '@/components/ui/button'
@@ -464,100 +465,23 @@ export default async function UmzugsfirmaZurichPage() {
       )}
       
       <div className="bg-white overflow-x-hidden">
-        {/* Hero Section - Ana Sayfa Stili */}
-        <section 
-          className="relative w-full py-0 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-white z-20" 
+        {/* Hero Section */}
+        <section
+          className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50"
           aria-label="Umzugsfirma Zürich - Kostenlose Offerten"
         >
-          <div className="container mx-auto max-w-7xl px-0 sm:px-4 md:px-6">
-            <div className="bg-white rounded-none sm:rounded-2xl overflow-hidden shadow-none sm:shadow-xl">
-              <div className="flex flex-col lg:flex-row-reverse">
-                {/* Right Side - Image (40% on desktop) */}
-                <div className="w-full lg:w-[40%] relative">
-                  <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full lg:min-h-[500px]">
-                    <Image 
-                      src={imageUrl}
-                      alt="Professionelle Zügelfirma in Zürich - Umzugsunternehmen bei der Arbeit"
-                      fill
-                      className="object-cover"
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                    />
-                  </div>
-                </div>
-
-                {/* Left Side - Green Content Area (60% on desktop) */}
-                <div className="w-full lg:w-[60%] bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 relative px-4 sm:px-8 md:px-12 py-6 sm:py-10 md:py-12 lg:py-16">
-                  {/* Yellow Badge - Top Right */}
-                  <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-yellow-400 rounded-full px-4 py-2 shadow-lg z-10">
-                    <p className="text-black text-xs sm:text-sm font-bold text-center leading-tight">
-                      Kostenlos &<br />unverbindlich
-                    </p>
-                  </div>
-
-                  {/* Badge */}
-                  <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-white/10 rounded-full border border-white/20">
-                    <span className="text-sm font-medium text-white">Umziehen leicht gemacht!</span>
-                  </div>
-
-                  {/* Heading */}
-                  <h1 
-                    className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-tight font-bold mb-6 sm:mb-8 text-white pr-20 sm:pr-24"
-                    style={{
-                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                      fontWeight: 700,
-                      textAlign: 'start',
-                      letterSpacing: 'normal',
-                      wordSpacing: '0px',
-                      fontStyle: 'normal',
-                      textTransform: 'none',
-                      textDecoration: 'none',
-                      textIndent: '0px'
-                    }}
-                  >
-                    Umzugsfirma in Zürich – Kostenlos Umzugsofferten vergleichen
-                  </h1>
-                    
-                  {/* Description */}
-                  <p className="hero-description text-base sm:text-lg text-white/90 mb-8 leading-relaxed">
-                    Finden Sie über Online-Offerten.ch die passende Umzugsfirma in Zürich. Vergleichen Sie kostenlos bis zu 5 Offerten von geprüften Umzugsunternehmen im Kanton Zürich – ob Privatumzug, Geschäftsumzug oder Spezialtransport. Transparente Preise, echte Kundenbewertungen und lokale Expertise für Ihren Umzug.
-                  </p>
-                  
-                  {/* Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                    <Button 
-                      asChild
-                      size="lg" 
-                      className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 group"
-                    >
-                      <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Zürich">
-                        Kostenlose Offerten anfordern
-                        <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                  
-                  {/* Trust Badges */}
-                  <div className="flex flex-wrap gap-6 text-sm">
-                    <div className="flex items-center gap-2 text-white">
-                      <CheckCircle className="w-5 h-5 text-yellow-400" />
-                      <span className="font-medium">100% kostenlos</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-white">
-                      <ShieldCheck className="w-5 h-5 text-yellow-400" />
-                      <span className="font-medium">Geprüfte Partner</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-white">
-                      <TrendingUp className="w-5 h-5 text-yellow-400" />
-                      <span className="font-medium">Zeit und Geld sparen</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Breadcrumb Navigation - Matches BreadcrumbList schema */}
-            <nav className="mt-4 sm:mt-6 pt-4 px-4 sm:px-0" aria-label="Breadcrumb">
+          <div className="absolute inset-0 opacity-5">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                backgroundSize: '60px 60px',
+              }}
+            />
+          </div>
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+            <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
                   <Link href="/" className="hover:text-green-600 transition-colors">
@@ -580,6 +504,59 @@ export default async function UmzugsfirmaZurichPage() {
                 </li>
               </ol>
             </nav>
+
+            <div className="grid md:grid-cols-5 gap-12 items-center">
+              <div className="md:col-span-3">
+                <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-4">
+                  Kanton Zürich
+                </div>
+                <h1 className="heading-1 !mt-0 mb-4">
+                  Umzugsfirma in Zürich – Kostenlos Umzugsofferten vergleichen
+                </h1>
+                <p className="hero-description text-base sm:text-lg text-gray-600 mb-6 leading-relaxed max-w-2xl">
+                  Finden Sie über Online-Offerten.ch die passende Umzugsfirma in Zürich. Vergleichen Sie kostenlos bis zu 5 Offerten von geprüften Umzugsunternehmen im Kanton Zürich – ob Privatumzug, Geschäftsumzug oder Spezialtransport.
+                </p>
+
+                <div className="bg-white/95 rounded-xl p-3 sm:p-4 mb-6 border border-gray-200 shadow-sm">
+                  <h2 className="text-sm sm:text-base font-bold text-gray-900 mb-2">
+                    Welche Dienstleistung benötigen Sie?
+                  </h2>
+                  <ServiceGrid city={city} compact />
+                </div>
+
+                <div className="flex flex-wrap gap-6 text-sm text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">100% kostenlos</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">Geprüfte Partner</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">Zeit und Geld sparen</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative md:col-span-2">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                  <Image
+                    src={imageUrl}
+                    alt="Professionelle Zügelfirma in Zürich - Umzugsunternehmen bei der Arbeit"
+                    width={600}
+                    height={450}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-green-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                  <p className="text-sm font-bold">Bis zu 40% sparen</p>
+                  <p className="text-xs text-green-100">Kostenlos & unverbindlich</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
         

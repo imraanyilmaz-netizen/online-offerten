@@ -353,7 +353,7 @@ export default async function HomePage() {
                   <h2 className="text-base md:text-lg font-bold text-gray-800 mt-0 mb-2 text-left">
                     Welche Dienstleistung benötigen Sie?
                   </h2>
-                  {/* Service Quick Links */}
+                {/* Service Quick Links */}
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3 mt-0 mb-0">
                   {/* Umzug Button */}
                   <Link 
@@ -382,14 +382,14 @@ export default async function HomePage() {
                     <div className="flex items-center justify-between">
                       <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-sky-100 group-hover:bg-sky-500 transition-colors">
                         <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 group-hover:text-white transition-colors" />
-                      </div>
+                    </div>
                       <ArrowRight className="w-4 h-4 text-sky-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                     </div>
                     <div className="mt-3 text-left">
                       <p className="font-semibold text-base text-gray-900">Nur Umzug</p>
                     </div>
                   </Link>
-
+                  
                   {/* Nur Reinigung Button */}
                   <Link 
                     href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
@@ -398,7 +398,7 @@ export default async function HomePage() {
                     <div className="flex items-center justify-between">
                       <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
                         <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
-                      </div>
+                    </div>
                       <ArrowRight className="w-4 h-4 text-purple-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                     </div>
                     <div className="mt-3 text-left">
@@ -430,7 +430,7 @@ export default async function HomePage() {
                     <div className="flex items-center justify-between">
                       <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 group-hover:bg-red-500 transition-colors">
                         <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 group-hover:text-white transition-colors" />
-                      </div>
+                    </div>
                       <ArrowRight className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                     </div>
                     <div className="mt-3 text-left">
@@ -446,7 +446,7 @@ export default async function HomePage() {
                     <div className="flex items-center justify-between">
                       <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
                         <svg className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.5 8c-1.4 0-2.6-.8-3.2-2A6.87 6.87 0 0 0 2 9v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8.5C22 9.6 20.4 8 18.5 8"/><path d="M2 14h20"/><path d="M6 14v4"/><path d="M10 14v4"/><path d="M14 14v4"/><path d="M18 14v4"/></svg>
-                      </div>
+                    </div>
                       <ArrowRight className="w-4 h-4 text-teal-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                     </div>
                     <div className="mt-3 text-left">
@@ -455,7 +455,7 @@ export default async function HomePage() {
                   </Link>
                   </div>
                 </div>
-
+                
                 {/* Rating Card */}
                 <div 
                   className="hidden bg-white rounded-xl p-5 sm:p-6 flex-col transition-all duration-300 mt-6"
@@ -553,9 +553,9 @@ export default async function HomePage() {
           {/* So einfach geht's Section */}
           <section className="py-12 md:py-16 lg:py-20 bg-white relative z-10">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-              <h2 className="heading-2 mb-8 md:mb-12 text-left">
+                <h2 className="heading-2 mb-8 md:mb-12 text-left">
                 So erhalten Sie passende Offerten:
-              </h2>
+                  </h2>
                   
               {/* Steps - Scrollable on mobile */}
               <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible">
@@ -645,7 +645,7 @@ export default async function HomePage() {
                     <div className="flex justify-start mb-3">
                       <h2 className="inline-flex w-fit items-center rounded-full bg-green-50 px-4 py-2 text-sm md:text-base font-semibold text-green-800">
                         Mit Online-Offerten.ch zu besseren Offerten.
-                      </h2>
+                    </h2>
                     </div>
                     <h3 className="heading-3 mb-6">
                       Ihre Vorteile mit unserer Vermittlung
@@ -821,30 +821,30 @@ export default async function HomePage() {
                     <div className="flex items-start gap-5 mb-6">
                       <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
                         <Trash2 className="w-7 h-7 text-white" />
-                      </div>
+              </div>
                       <div className="flex-1">
                         <h3 className="heading-4 mb-2 group-hover:text-emerald-600 transition-colors">
                           Entsorgung
-                        </h3>
+                    </h3>
                         <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
-                      </div>
-                    </div>
+                  </div>
+                  </div>
                     <div className="space-y-4 mb-8">
                       <p className="text-body leading-relaxed">
                         Entsorgung von altem Mobiliar, Sperrgut und Haushaltsabfaellen geplant? Fordern Sie jetzt kostenlos und unverbindlich mehrere Entsorgungsofferten an, vergleichen Sie Preise und Leistungen regionaler Anbieter und finden Sie schnell den passenden Service fuer Wohnungsraeumung, Kellerraeumung oder fachgerechte Entsorgung nach Umzug und Renovation.
-                      </p>
-                    </div>
+                    </p>
+                  </div>
                     <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
                       <Link href="/kostenlose-offerte-anfordern?service=raeumung&step=2" className="inline-flex items-center">
                         Entsorgungsofferten
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
                     </Button>
-                  </div>
+                </div>
                 </div>
 
-              </div>
-            </div>
+                    </div>
+                    </div>
           </section>
 
           {/* Client Components - Interactive parts */}

@@ -71,6 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/umzugsfirma/lausanne` },
     { url: `${BASE_URL}/umzugsfirma/st-gallen` },
     { url: `${BASE_URL}/umzugsfirma/lugano` },
+    { url: `${BASE_URL}/umzugsfirma/thurgau` },
     { url: `${BASE_URL}/umzugsfirma/thun` },
     { url: `${BASE_URL}/umzugsfirma/biel-bienne` },
 

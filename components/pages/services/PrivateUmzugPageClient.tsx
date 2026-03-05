@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { 
   ArrowRight, CheckCircle, PackagePlus, ClipboardList, Users, ShieldCheck, 
-  Wrench, HeartHandshake, MapPin, Home, Star, HelpCircle, Info, Calculator,
+  Wrench, HeartHandshake, MapPin, Home, Star, Calculator,
   Building, Globe, Sparkles, Trash2, Brush as PaintBrush, Box, Package,
   TrendingUp, FileText, Search, Mail, CheckCircle2, ChevronRight
 } from 'lucide-react';
@@ -941,24 +941,21 @@ const PrivateUmzugPageClient = () => {
               </section>
 
               {/* FAQ Section */}
-              <section className="pt-6 border-t border-gray-200">
-                <h3 className="heading-3 flex items-center">
-                  <HelpCircle size={28} className="mr-3 text-purple-500" />
-                  Häufige Fragen zum Privatumzug
-                </h3>
-                <Accordion type="single" collapsible className="w-full bg-slate-50 rounded-lg shadow">
+              <section className="py-12 md:py-16 bg-white border-t border-gray-200 mt-6">
+                <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+                  <div className="md:col-span-3">
+                    <div className="mb-8">
+                      <h2 className="heading-2">
+                        Häufig gestellte Fragen (FAQ)
+                      </h2>
+                    </div>
+                    <Accordion type="single" collapsible className="w-full">
                   {/* FAQ 1 */}
                     <AccordionItem value="item-1" className="border-b border-gray-200 last:border-b-0">
-                      <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
-                        <div className="flex items-center">
-                          <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          <h4 className="faq-question">Was kostet ein Privatumzug in der Schweiz?</h4>
-                        </div>
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">Was kostet ein Privatumzug in der Schweiz?</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
-                        <div className="flex items-start">
-                          <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
-                          <div>
+                      <AccordionContent className="text-body leading-relaxed">
                             <p>
                               Die Kosten hängen stark von der Wohnungsgrösse und dem Umzugsvolumen ab. Unser <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold">Umzugskosten-Rechner</Link> gibt Ihnen eine gute erste Schätzung. Hier ist eine grobe Übersicht:
                             </p>
@@ -990,23 +987,15 @@ const PrivateUmzugPageClient = () => {
                                 </Link>
                               </Button>
                             </div>
-                          </div>
-                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 2 */}
                     <AccordionItem value="item-2" className="border-b border-gray-200 last:border-b-0">
-                      <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
-                        <div className="flex items-center">
-                          <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          <h4 className="faq-question">Welche Leistungen sind bei einem Standard-Wohnungsumzug inklusive?</h4>
-                        </div>
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">Welche Leistungen sind bei einem Standard-Wohnungsumzug inklusive?</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
-                        <div className="flex items-start">
-                          <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
-                          <div>
+                      <AccordionContent className="text-body leading-relaxed">
                             <p>Ein Standardangebot einer Zügelfirma umfasst in der Regel folgende Leistungen:</p>
                             <div className="my-2">
                               <ul className="list-disc list-inside space-y-1">
@@ -1020,23 +1009,15 @@ const PrivateUmzugPageClient = () => {
                                 ))}
                               </ul>
                             </div>
-                          </div>
-                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 3 */}
                     <AccordionItem value="item-3" className="border-b border-gray-200 last:border-b-0">
-                      <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
-                        <div className="flex items-center">
-                          <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          <h4 className="faq-question">Wie bereite ich mich am besten auf den Umzugstag vor?</h4>
-                        </div>
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">Wie bereite ich mich am besten auf den Umzugstag vor?</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
-                        <div className="flex items-start">
-                          <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
-                          <div>
+                      <AccordionContent className="text-body leading-relaxed">
                             <p>
                               Eine gute Vorbereitung ist alles! Die wichtigsten Schritte sind:
                             </p>
@@ -1056,23 +1037,15 @@ const PrivateUmzugPageClient = () => {
                             <p className="mt-2">
                               Nutzen Sie unsere <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold">detaillierte Umzugs-Checkliste</Link> für eine vollständige Übersicht.
                             </p>
-                          </div>
-                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 4 */}
                     <AccordionItem value="item-4" className="border-b border-gray-200 last:border-b-0">
-                      <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
-                        <div className="flex items-center">
-                          <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          <h4 className="faq-question">Was sollte ich bei der Auswahl der Umzugsfirma beachten?</h4>
-                        </div>
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">Was sollte ich bei der Auswahl der Umzugsfirma beachten?</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
-                        <div className="flex items-start">
-                          <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
-                          <div>
+                      <AccordionContent className="text-body leading-relaxed">
                             <p>Achten Sie auf folgende Punkte, um eine seriöse Firma zu erkennen:</p>
                             <div className="my-2">
                               <ul className="list-disc list-inside space-y-1">
@@ -1087,23 +1060,15 @@ const PrivateUmzugPageClient = () => {
                                 ))}
                               </ul>
                             </div>
-                          </div>
-                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 5 */}
                     <AccordionItem value="item-5" className="border-b border-gray-200 last:border-b-0">
-                      <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
-                        <div className="flex items-center">
-                          <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          <h4 className="faq-question">Wann sollte ich mit der Planung meines Wohnungsumzugs beginnen?</h4>
-                        </div>
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">Wann sollte ich mit der Planung meines Wohnungsumzugs beginnen?</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
-                        <div className="flex items-start">
-                          <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
-                          <div>
+                      <AccordionContent className="text-body leading-relaxed">
                             <p className="mb-2">
                               Je früher, desto besser! Wir empfehlen, unserer <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold">detaillierten Zeitachse</Link> zu folgen:
                             </p>
@@ -1167,23 +1132,15 @@ const PrivateUmzugPageClient = () => {
                                 ))}
                               </ul>
                             </div>
-                          </div>
-                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 6 */}
                     <AccordionItem value="item-6" className="border-b border-gray-200 last:border-b-0">
-                      <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
-                        <div className="flex items-center">
-                          <HelpCircle className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
-                          <h4 className="faq-question">Lohnt sich ein Ein- und Auspackservice?</h4>
-                        </div>
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">Lohnt sich ein Ein- und Auspackservice?</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="pt-0 pb-5 px-2 text-gray-600 leading-relaxed">
-                        <div className="flex items-start">
-                          <Info className="w-5 h-5 mr-3 text-blue-500 mt-1 flex-shrink-0" />
-                          <div>
+                      <AccordionContent className="text-body leading-relaxed">
                             <p>Ein Packservice lohnt sich besonders, wenn Sie:</p>
                             <div className="my-2">
                               <ul className="list-disc list-inside space-y-1">
@@ -1197,11 +1154,26 @@ const PrivateUmzugPageClient = () => {
                                 ))}
                               </ul>
                             </div>
-                          </div>
-                        </div>
                       </AccordionContent>
                     </AccordionItem>
-                </Accordion>
+                    </Accordion>
+                  </div>
+                  <div className="relative md:col-span-2">
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                      <Image
+                        src="/fotos/umzugstag.webp"
+                        alt="Privatumzug FAQ – Antworten rund um Planung, Kosten und Leistungen"
+                        width={600}
+                        height={450}
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                      <p className="text-sm font-bold">Fragen & Antworten</p>
+                      <p className="text-xs text-blue-100">Rund um Privatumzüge</p>
+                    </div>
+                  </div>
+                </div>
               </section>
 
               {/* CTA Button */}

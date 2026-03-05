@@ -615,7 +615,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
                 </tbody>
               </table>
             </div>
-
+            
             <div className="mb-8 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
               <div className="text-center mb-6">
                 <h3 className="text-2xl md:text-3xl font-bold text-green-100 mb-3">
@@ -637,8 +637,8 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
             </div>
 
             <div className="mb-8">
-              <img
-                src="/bilder/f4203971-365f-48a9-8afc-53246f91f929.webp"
+              <img 
+                src="/bilder/f4203971-365f-48a9-8afc-53246f91f929.webp" 
                 alt="Umzugshelfer laden Kartons und Moebel in einen Transporter."
                 className="w-full h-auto rounded-lg shadow-md"
               />
@@ -675,7 +675,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
               Der Service ist kostenlos, unverbindlich und ohne automatische Buchung.
             </p>
             <div className="mb-8">
-              <img
+              <img 
                 src="/fotos/moving.png"
                 alt="Umzug in der Schweiz mit professioneller Planung und Umzugsservice."
                 className="w-full h-auto rounded-lg shadow-md"
@@ -702,7 +702,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
               <li>Bei groesseren Umzuegen eine Besichtigung vor Ort einplanen.</li>
             </ul>
             <div className="mb-8">
-              <img
+              <img 
                 src="/fotos/umzugstag.webp"
                 alt="Vorbereiteter Umzugstag mit Kartons und klarer Terminplanung."
                 className="w-full h-auto rounded-lg shadow-md"

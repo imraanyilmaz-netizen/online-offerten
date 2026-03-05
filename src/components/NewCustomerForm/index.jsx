@@ -881,7 +881,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       const { data, error } = await submitNewQuoteToSupabase(formData, t, i18n);
       if (error) throw error;
       setIsSubmitted(true);
-
+      
       // Google Ads dönüşümü: yalnızca başarılı submit sonrasında ve tek sefer tetikle
       if (typeof window !== 'undefined' && !hasTrackedLeadSuccessRef.current) {
         const quoteId = data?.id || null;
@@ -889,13 +889,13 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         const wasAlreadySent = dedupeKey ? window.sessionStorage.getItem(dedupeKey) === '1' : false;
 
         if (!wasAlreadySent) {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
             event: 'lead_success',
             value: 1,
             currency: 'CHF',
             quote_id: quoteId
-          });
+        });
 
           if (dedupeKey) {
             window.sessionStorage.setItem(dedupeKey, '1');
