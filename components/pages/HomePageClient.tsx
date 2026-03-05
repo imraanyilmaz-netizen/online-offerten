@@ -477,7 +477,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           </section>
 
           {/* Nationwide Presence Section */}
-          <section className="py-[50px] bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 overflow-hidden relative">
+          <section className="py-[50px] bg-gray-100 overflow-hidden relative">
             {/* Decorative background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-20 right-10 w-72 h-72 bg-green-700/20 rounded-full blur-3xl"></div>
@@ -487,30 +487,30 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
               <div className="max-w-4xl mx-auto text-center">
                 <div className="mb-8">
-                  <div className="flex items-center justify-center mb-4 text-green-300">
+                  <div className="flex items-center justify-center mb-4 text-green-600">
                     <MapPin className="w-8 h-8 md:w-10 md:h-10 mr-3" />
-                    <h2 className="heading-2-white">
+                    <h2 className="heading-2 text-gray-900">
                       In der ganzen Schweiz für Sie da
                     </h2>
                   </div>
-                  <p className="text-lg text-green-100 max-w-2xl mx-auto">
+                  <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                     Unser Netzwerk an Umzugs- und Reinigungsfirmen erstreckt sich über alle Kantone.
                   </p>
                 </div>
                 <div className="max-w-4xl mx-auto mb-8">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-6">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-6">
                     {locations.filter((city) => city?.slug).map((city) => {
                       const cityHref = `/${city.slug}`;
                       return (
                         <Link
                           key={city.slug}
                           href={cityHref}
-                          className="flex items-center justify-between bg-white/15 backdrop-blur-sm text-white border border-white/25 px-4 py-2.5 rounded-lg text-sm md:text-base font-semibold shadow-md hover:bg-white/25 hover:border-white/40 transition-all duration-200"
+                          className="flex items-center justify-between bg-white text-gray-900 border border-gray-200 px-4 py-2.5 rounded-lg text-sm md:text-base font-semibold shadow-sm hover:bg-green-50 hover:border-green-300 transition-all duration-200"
                         >
                           <span className="inline-flex items-center gap-2">
                             <span
                               aria-hidden="true"
-                              className="w-6 h-4 rounded-sm border border-white/70 shadow-sm flex-shrink-0 overflow-hidden"
+                              className="w-6 h-4 rounded-sm border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden"
                             >
                               <img
                                 src={getCantonFlagSrc(city.canton)}
@@ -521,7 +521,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                             </span>
                             <span>{city.name}</span>
                           </span>
-                          <span className="text-xs md:text-sm bg-white/20 px-2 py-0.5 rounded font-bold">
+                          <span className="text-xs md:text-sm bg-gray-100 text-gray-700 px-2 py-0.5 rounded font-bold">
                             {city.canton}
                           </span>
                         </Link>
@@ -529,13 +529,10 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     })}
                   </div>
                 </div>
-                <p className="text-base md:text-lg text-green-50 font-medium mb-4">
-                  Unser Netzwerk an Umzugs- und Reinigungsfirmen erstreckt sich über alle Kantone.
-                </p>
-                <p className="text-base md:text-lg text-green-50 font-medium mb-4">
+                <p className="text-base md:text-lg text-gray-700 font-medium mb-4">
                   Online-Offerten.ch ist ein Portal, das als Vermittlungsplattform für geprüfte Anbieter in der ganzen Schweiz dient und Ihnen hilft, passende Dienstleister einfach und sicher zu vergleichen.
                 </p>
-                <p className="text-lg text-green-50 font-medium">
+                <p className="text-lg text-gray-700 font-medium">
                   Finden Sie noch heute den idealen Partner für Ihr Vorhaben.
                 </p>
               </div>
