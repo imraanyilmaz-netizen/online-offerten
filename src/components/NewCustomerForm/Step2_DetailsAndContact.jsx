@@ -151,7 +151,8 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       (formData.service === 'maler' && ['waende', 'zimmerdecke', 'innenanstrich', 'tueren'].some(option => formData.what_to_paint?.[option])) ||
       (formData.service === 'raeumung');
 
-  const showFloorField = true;
+  const isSingleFamilyHouse = formData[`${prefix}_object_type`] === 'einfamilienhaus';
+  const showFloorField = !isSingleFamilyHouse;
 
 
   const floorOptions = [
@@ -159,7 +160,6 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
     { value: 'hochparterre', label: t('step2.floorOptions.hochparterre') },
     ...Array.from({ length: 10 }, (_, i) => ({ value: `${i + 1}.etage`, label: t('step2.floorOptions.etage', { count: i + 1 }) })),
     { value: 'mehr_10_etage', label: t('step2.floorOptions.mehr10Etage') },
-    { value: 'etage_einfamilienhaus', label: t('step2.floorOptions.etageEinfamilienhaus') },
   ];
 
 

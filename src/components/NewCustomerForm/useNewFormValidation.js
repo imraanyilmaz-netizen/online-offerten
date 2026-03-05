@@ -58,7 +58,8 @@ const useNewFormValidation = (formData) => {
             if (!formData[`${prefix}_city`]) step2errors[`${prefix}_city`] = t('errors.cityRequired');
             
             const isFenster = formData.service === 'reinigung' && formData.umzugArt === 'fensterreinigung';
-            const skipFloor = isFenster;
+            const isSingleFamilyHouse = formData[`${prefix}_object_type`] === 'einfamilienhaus';
+            const skipFloor = isFenster || isSingleFamilyHouse;
             const skipObjectType = isFenster; 
 
             if (!skipFloor && !formData[`${prefix}_floor`]) {

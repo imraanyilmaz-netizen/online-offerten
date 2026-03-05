@@ -22,6 +22,33 @@ import { formatDate, cn } from '@/lib/utils';
 import { getGermanServiceName } from '@/src/lib/dataMapping.js';
 import { locations } from '@/data/locations';
 
+const getCantonFlagSrc = (canton?: string): string => {
+  switch ((canton || '').toUpperCase()) {
+    case 'ZH':
+      return '/kanton/zh.svg'
+    case 'BE':
+      return '/kanton/be.svg'
+    case 'BS':
+      return '/kanton/bs.svg'
+    case 'LU':
+      return '/kanton/lu.svg'
+    case 'SG':
+      return '/kanton/sg.svg'
+    case 'AG':
+      return '/kanton/ag.svg'
+    case 'GE':
+      return '/kanton/ge.svg'
+    case 'VD':
+      return '/kanton/vd.svg'
+    case 'TI':
+      return '/kanton/ti.svg'
+    case 'TG':
+      return '/kanton/tg.svg'
+    default:
+      return '/kanton/ch.svg'
+  }
+}
+
 // Review Card Component
 interface ReviewCardProps {
   review: any;
@@ -470,24 +497,37 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     Unser Netzwerk an Umzugs- und Reinigungsfirmen erstreckt sich über alle Kantone.
                   </p>
                 </div>
-                <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
-                  {locations.filter(city => city?.slug).map((city) => {
-                    const cityHref = `/${city.slug}`;
-                    return (
-                    <Link 
-                      key={city.slug}
-                      href={cityHref}
-                      className="block bg-white/20 backdrop-blur-sm text-white border border-white/30 px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:bg-white/30 hover:border-white/50 hover:scale-105 transform transition-all duration-200"
-                    >
-                      {city.name}
-                    </Link>
-                    );
-                  })}
-                  <Link href="/standorte" 
-                    className="block bg-white/10 backdrop-blur-sm text-green-100 border border-white/20 px-4 py-2 rounded-full text-sm font-medium shadow-lg cursor-pointer hover:bg-white/20 hover:text-white hover:scale-105 transform transition-all duration-200"
-                  >
-                    ... und viele mehr!
-                  </Link>
+                <div className="max-w-4xl mx-auto mb-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-6">
+                    {locations.filter((city) => city?.slug).map((city) => {
+                      const cityHref = `/${city.slug}`;
+                      return (
+                        <Link
+                          key={city.slug}
+                          href={cityHref}
+                          className="flex items-center justify-between bg-white/15 backdrop-blur-sm text-white border border-white/25 px-4 py-2.5 rounded-lg text-sm md:text-base font-semibold shadow-md hover:bg-white/25 hover:border-white/40 transition-all duration-200"
+                        >
+                          <span className="inline-flex items-center gap-2">
+                            <span
+                              aria-hidden="true"
+                              className="w-6 h-4 rounded-sm border border-white/70 shadow-sm flex-shrink-0 overflow-hidden"
+                            >
+                              <img
+                                src={getCantonFlagSrc(city.canton)}
+                                alt={`${city.canton} Kantonsflagge`}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                              />
+                            </span>
+                            <span>{city.name}</span>
+                          </span>
+                          <span className="text-xs md:text-sm bg-white/20 px-2 py-0.5 rounded font-bold">
+                            {city.canton}
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
                 <p className="text-base md:text-lg text-green-50 font-medium mb-4">
                   Unser Netzwerk an Umzugs- und Reinigungsfirmen erstreckt sich über alle Kantone.

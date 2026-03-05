@@ -99,6 +99,8 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       (formData.service === 'raeumung' && formData.umzugArt === 'raeumung_komplett') || 
       (formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'international'))
     );
+  const isSingleFamilyHouse = formData[`${prefix}_object_type`] === 'einfamilienhaus';
+  const showFloorField = !isSingleFamilyHouse;
 
   const currentRoomOptions = showRoomsField ? detailedRoomOptions : [];
 
@@ -108,7 +110,6 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
     { value: 'hochparterre', label: t('step2.floorOptions.hochparterre') },
     ...Array.from({ length: 10 }, (_, i) => ({ value: `${i + 1}.etage`, label: t('step2.floorOptions.etage', { count: i + 1 }) })),
     { value: 'mehr_10_etage', label: t('step2.floorOptions.mehr10Etage') },
-    { value: 'etage_einfamilienhaus', label: t('step2.floorOptions.etageEinfamilienhaus') },
   ];
 
 
@@ -265,17 +266,19 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
 
         {/* Sağ taraf: Detay alanları */}
         <div className={isMoveService ? "grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4 items-end" : "grid grid-cols-2 gap-3 items-start"}>
-          <div>
-            <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
-              <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
-                <SelectValue placeholder={`${t('step2.floorLabel')} *`} />
-              </SelectTrigger>
-              <SelectContent className="text-sm sm:text-base">
-                {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
-              </SelectContent>
-            </Select>
-            {errors && errors[`${prefix}_floor`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
-          </div>
+          {showFloorField && (
+            <div>
+              <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
+                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+                  <SelectValue placeholder={`${t('step2.floorLabel')} *`} />
+                </SelectTrigger>
+                <SelectContent className="text-sm sm:text-base">
+                  {floorOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
+                </SelectContent>
+              </Select>
+              {errors && errors[`${prefix}_floor`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_floor`]}</p>}
+            </div>
+          )}
 
           {showRoomsField && (
             <div>
