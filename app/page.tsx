@@ -325,6 +325,9 @@ export default async function HomePage() {
             <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
               <div className="max-w-2xl text-left">
                 <div className="mb-4">
+                  <div className="hidden sm:inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700 shadow-sm mb-3">
+                    Jetzt Preise vergleichen
+                  </div>
                   <div className="relative">
                     <h1 className="heading-1 break-words pr-28 sm:pr-40">
                       Offerten vergleichen & passende Anbieter in der Schweiz finden
