@@ -210,7 +210,8 @@ const PartnerInviteEmail = () => {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="px-4 md:px-6 pb-6 md:pb-8">
+      <div className="space-y-6">
       {/* Firma hinzufügen */}
       <Card>
         <CardHeader>
@@ -451,6 +452,7 @@ const PartnerInviteEmail = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      </div>
     </div>
   );
 };

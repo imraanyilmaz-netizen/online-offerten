@@ -27,7 +27,9 @@ const AdminPanelTabs = ({
   const [activeTab, setActiveTab] = useState(isEditor ? 'ratgeber' : 'quotes');
   // Sadece "pending" (Ausstehend) partnerleri say - "inactive" partnerler sayılmamalı
   const pendingPartnerCount = partners?.filter(p => p.status === 'pending').length || 0;
+  const [seenPendingPartnerCount, setSeenPendingPartnerCount] = useState(0);
   const pendingReviewsCount = stats?.pending_reviews_count || 0;
+  const unseenPendingPartnerCount = Math.max(0, pendingPartnerCount - seenPendingPartnerCount);
 
   // Sigortası 30 gün içinde dolacak partner sayısını partner_insurance tablosundan çek
   const [expiringInsuranceCount, setExpiringInsuranceCount] = useState(0);
@@ -58,8 +60,30 @@ const AdminPanelTabs = ({
     fetchExpiringInsuranceCount();
   }, [fetchExpiringInsuranceCount]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const savedSeenCount = window.localStorage.getItem('admin_seen_pending_partner_count');
+    if (savedSeenCount !== null) {
+      const parsed = Number(savedSeenCount);
+      if (Number.isFinite(parsed) && parsed >= 0) {
+        setSeenPendingPartnerCount(parsed);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem('admin_seen_pending_partner_count', String(seenPendingPartnerCount));
+  }, [seenPendingPartnerCount]);
+
+  useEffect(() => {
+    if (activeTab === 'partners' && pendingPartnerCount > seenPendingPartnerCount) {
+      setSeenPendingPartnerCount(pendingPartnerCount);
+    }
+  }, [activeTab, pendingPartnerCount, seenPendingPartnerCount]);
+
   return (
-    <Card className="bg-white shadow-2xl border border-gray-100 rounded-xl overflow-visible">
+    <Card className="bg-transparent shadow-none border-0 rounded-none overflow-visible">
       <CardHeader className="bg-gradient-to-r from-green-600 via-green-600 to-emerald-600 text-white py-5 px-6">
         <div className="flex items-center justify-between">
           <CardTitle className="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -90,9 +114,9 @@ const AdminPanelTabs = ({
                 >
                   <Users className="w-4 h-4" />
                   Partner ({partners?.length || 0})
-                  {pendingPartnerCount > 0 && (
+                  {unseenPendingPartnerCount > 0 && (
                     <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-white text-xs font-bold shadow-md animate-pulse">
-                      {pendingPartnerCount}
+                      {unseenPendingPartnerCount}
                     </span>
                   )}
                 </TabsTrigger>
@@ -164,13 +188,13 @@ const AdminPanelTabs = ({
 
           <div>
             {!isEditor && (
-              <TabsContent value="quotes" className="mt-0">
+              <TabsContent value="quotes" className="mt-0 pt-6">
                 <QuoteManagement />
               </TabsContent>
             )}
 
             {!isEditor && (
-              <TabsContent value="partners" className="mt-0">
+              <TabsContent value="partners" className="mt-0 pt-6">
                 <PartnerManagement
                   partners={partners}
                   onRefresh={onRefreshPartners}
@@ -181,35 +205,35 @@ const AdminPanelTabs = ({
             )}
             
             {!isEditor && (
-              <TabsContent value="reviews" className="mt-0">
+              <TabsContent value="reviews" className="mt-0 pt-6">
                   <ReviewManagement onRefresh={onRefreshReviews} />
               </TabsContent>
             )}
 
-            <TabsContent value="ratgeber" className="mt-0">
+            <TabsContent value="ratgeber" className="mt-0 pt-6">
               <BlogManagement />
             </TabsContent>
             
             {!isEditor && (
-              <TabsContent value="financials" className="mt-0">
+              <TabsContent value="financials" className="mt-0 pt-6">
                 <FinancialManagement partners={partners} />
               </TabsContent>
             )}
 
             {!isEditor && (
-              <TabsContent value="invite" className="mt-0">
+              <TabsContent value="invite" className="mt-0 pt-6">
                 <PartnerInviteEmail />
               </TabsContent>
             )}
 
             {!isEditor && (
-              <TabsContent value="insurance" className="mt-0">
+              <TabsContent value="insurance" className="mt-0 pt-6">
                 <InsuranceManagement partners={partners} onRefreshPartners={onRefreshPartners} />
               </TabsContent>
             )}
 
             {!isEditor && (
-              <TabsContent value="settings" className="mt-0">
+              <TabsContent value="settings" className="mt-0 pt-6">
                 <AdminSettings />
               </TabsContent>
             )}

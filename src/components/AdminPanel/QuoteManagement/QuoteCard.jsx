@@ -216,8 +216,8 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const EmailConfirmationStatus = () => {
     if (email_confirmed && email_confirmed_at) {
       return (
-        <div className="flex items-center text-xs text-green-700 mt-2">
-          <CheckCircle className="w-4 h-4 mr-1.5 flex-shrink-0" />
+        <div className="inline-flex items-center rounded-md border border-green-200 bg-green-50 px-2.5 py-1 text-xs text-green-700">
+          <CheckCircle className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
           <span className="font-medium">
             Kunde hat die E-Mail bestätigt am {format(new Date(email_confirmed_at), "dd.MM.yyyy HH:mm", { locale: de })}
           </span>
@@ -225,8 +225,8 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
       );
     }
     return (
-      <div className="flex items-center text-xs text-orange-700 mt-2">
-        <X className="w-4 h-4 mr-1.5 flex-shrink-0" />
+      <div className="inline-flex items-center rounded-md border border-orange-200 bg-orange-50 px-2.5 py-1 text-xs text-orange-700">
+        <X className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
         <span className="font-medium">Kunde hat die E-Mail noch nicht bestätigt</span>
       </div>
     );
@@ -260,45 +260,53 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
       className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
     >
       <div className="p-5 md:p-6">
-        <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+          <div className="flex items-center gap-3 flex-wrap">
+              <h3 className="font-bold text-gray-900 text-lg sm:text-xl">{servicetype}</h3>
+              {getStatusBadge()}
+          </div>
+          <p className="text-xs text-gray-500 text-left sm:text-right">Anfrage am: {formattedDate}</p>
+        </div>
+        <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-6">
           <div className="flex-grow min-w-0">
-            <div className="flex items-center gap-3 flex-wrap mb-3">
-                <h3 className="font-bold text-gray-900 text-lg sm:text-xl">{servicetype}</h3>
-                {getStatusBadge()}
-            </div>
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <span>{from_city} {to_city && `→ ${to_city}`}</span>
-              </p>
-              <p className="text-xs text-gray-500">Anfrage am: {formattedDate}</p>
-              <div className="pt-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-stretch">
+              <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[112px] h-full flex flex-col">
                 <p className="text-sm font-medium text-gray-800">
                   {quote.firstname} {quote.lastname}
                 </p>
-                <p className="text-xs text-gray-600">{quote.email}</p>
+                <p className="text-xs text-gray-600 mt-0.5">{quote.email}</p>
+                <div className="mt-2">
+                  <EmailConfirmationStatus />
+                </div>
               </div>
-              <EmailConfirmationStatus />
+
+               <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 min-h-[112px] h-full flex flex-col">
+                <p className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <span>{from_city} {to_city && `→ ${to_city}`}</span>
+                </p>
+                {(partner_target_regions && partner_target_regions.length > 0) && (
+                  <div className="mt-2 flex flex-wrap items-center gap-1.5 pl-6">
+                    {partner_target_regions.map(region => (
+                      <Badge key={region} variant="secondary" className="bg-green-50 text-green-700 border-green-200 font-medium text-[11px] px-2 py-0.5">
+                        {region}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <div className="flex flex-col items-end gap-2 self-start sm:self-center">
+          <div className="w-full lg:w-auto lg:min-w-[320px] flex flex-col items-stretch lg:items-end gap-3 self-start">
             {status === 'archived' ? (
-               <div className="flex items-center gap-2">
-                <Button size="sm" variant="outline" onClick={() => onRestore(quote.id)}>
-                    <Undo2 className="w-4 h-4 mr-2" /> Wiederherstellen
-                </Button>
-                <Button size="sm" variant={isDetailsExpanded ? "secondary" : "ghost"} onClick={() => onToggleView(quote.id, 'details')}>
-                  <Info className="w-4 h-4 mr-2"/>
-                  {isDetailsExpanded ? "Schliessen" : "Details"}
-                </Button>
-              </div>
+               <></>
             ) : (
               <>
                 {/* Fiyat satırı */}
                 {(status === 'approved' || status === 'quota_filled') && (
-                    <div className="text-right">
+                    <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-left lg:text-right min-h-[110px] flex flex-col justify-center">
                       {isEditingPrice ? (
-                          <div className="flex items-center justify-end gap-1">
+                          <div className="flex items-center justify-start lg:justify-end gap-1">
                               <Input 
                                   type="number"
                                   value={newPrice || ''}
@@ -315,7 +323,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                               </Button>
                           </div>
                       ) : (
-                          <div className="group flex items-center justify-end gap-1 cursor-pointer" onClick={() => { setNewPrice(lead_price); setIsEditingPrice(true); }}>
+                          <div className="group flex items-center justify-start lg:justify-end gap-1 cursor-pointer" onClick={() => { setNewPrice(lead_price); setIsEditingPrice(true); }}>
                               <div className="flex items-center gap-2">
                                 {discountPercent > 0 && (
                                   <>
@@ -330,7 +338,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                               </Button>
                           </div>
                       )}
-                      <div className="text-xs text-gray-500 flex items-center justify-end gap-1 mt-0.5">
+                      <div className="text-xs text-gray-500 flex items-center justify-start lg:justify-end gap-1 mt-0.5">
                         <ShoppingCart className="w-3 h-3"/>
                         <span>{purchasers.length} / {purchase_quota || '∞'} Gekauft</span>
                         <Button
@@ -348,8 +356,8 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                     </div>
                 )}
                 {status === 'matched' && (
-                    <div className="text-right">
-                        <div className="flex items-center justify-end gap-2">
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-left lg:text-right">
+                        <div className="flex items-center justify-start lg:justify-end gap-2">
                           {discountPercent > 0 && (
                             <>
                               <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
@@ -361,87 +369,81 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                         <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner</p>
                     </div>
                 )}
-                {/* Butonlar satırı */}
-                <div className="flex items-center gap-2 flex-wrap">
-                  {status === 'matched' && (
-                    <div className="flex items-center gap-3">
-                      <Button size="sm" onClick={() => onSend(quote.id, skipEmail)} disabled={parentIsProcessing}>
-                          {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2" />} 
-                          {skipEmail ? 'Ohne E-Mail senden' : 'Senden'}
-                      </Button>
-                      <label className="flex items-center gap-1.5 cursor-pointer text-xs text-gray-600 select-none">
-                        <Checkbox 
-                          checked={skipEmail} 
-                          onCheckedChange={(checked) => setSkipEmail(!!checked)} 
-                        />
-                        Ohne E-Mail
-                      </label>
-                    </div>
-                  )}
-                  {status === 'approved' && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-orange-300 text-orange-700 hover:bg-orange-50"
-                      onClick={() => setSoldOutDialogOpen(true)}
-                      disabled={parentIsProcessing || purchasers.length > 0}
-                      title={purchasers.length > 0 ? 'Bereits gekauft - kann nicht als Ausverkauft markiert werden' : 'Als Ausverkauft markieren'}
-                    >
-                      <AlertTriangle className="w-4 h-4 mr-2" />
-                      Ausverkauft
-                    </Button>
-                  )}
-                  {(status === 'new_quote' || status === 'pending' || status === 'matched') && (
-                      <Button size="sm" variant={isMatcherExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'matcher')}>
-                          {status === 'new_quote' || status === 'pending' ? <Settings className="w-4 h-4 mr-2"/> : <Edit className="w-4 h-4 mr-2"/> }
-                          {isMatcherExpanded ? "Schliessen" : (status === 'new_quote' || status === 'pending' ? "Zuweisen" : "Zuweisung bearbeiten")}
-                      </Button>
-                  )}
-                  {email_confirmed && (
-                  <Button asChild size="sm" variant="outline">
-                    <Link href={`/anfrage-status/${id}`} target="_blank">
-                      <ExternalLink className="w-4 h-4 mr-2"/>
-                      Kundenansicht
-                    </Link>
-                  </Button>
-                  )}
-                  <Button size="sm" variant={isEditExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'edit')}>
-                    <Pencil className="w-4 h-4 mr-2"/>
-                    {isEditExpanded ? "Schliessen" : "Bearbeiten"}
-                  </Button>
-                  <Button size="sm" variant={isDetailsExpanded ? "secondary" : "ghost"} onClick={() => onToggleView(quote.id, 'details')}>
-                    <Info className="w-4 h-4 mr-2"/>
-                    {isDetailsExpanded ? "Schliessen" : "Details"}
-                  </Button>
-                  <Button size="sm" variant="ghost" className="text-gray-500 hover:bg-gray-100" onClick={() => onArchive(quote.id)}>
-                      <Archive className="w-4 h-4"/>
-                  </Button>
-                </div>
               </>
             )}
           </div>
         </div>
+        {/* Aktionsbereich: unten separat, damit rechts nichts gequetscht wirkt */}
+        <div className="mt-4 pt-3 border-t border-gray-200/80 flex flex-wrap justify-end items-center gap-2">
+          {status === 'archived' && (
+            <>
+              <Button size="sm" variant="outline" onClick={() => onRestore(quote.id)}>
+                <Undo2 className="w-4 h-4 mr-2" /> Wiederherstellen
+              </Button>
+              <Button size="sm" variant={isDetailsExpanded ? "secondary" : "ghost"} onClick={() => onToggleView(quote.id, 'details')}>
+                <Info className="w-4 h-4 mr-2"/>
+                {isDetailsExpanded ? "Schliessen" : "Details"}
+              </Button>
+            </>
+          )}
+          {status === 'matched' && (
+            <div className="flex flex-wrap items-center justify-end gap-3 w-full lg:w-auto lg:ml-auto">
+              <Button size="sm" onClick={() => onSend(quote.id, skipEmail)} disabled={parentIsProcessing}>
+                {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2" />} 
+                {skipEmail ? 'Ohne E-Mail senden' : 'Senden'}
+              </Button>
+              <label className="flex items-center gap-1.5 cursor-pointer text-xs text-gray-600 select-none">
+                <Checkbox 
+                  checked={skipEmail} 
+                  onCheckedChange={(checked) => setSkipEmail(!!checked)} 
+                />
+                Ohne E-Mail
+              </label>
+            </div>
+          )}
+          {status === 'approved' && (
+            <Button
+              size="sm"
+              variant="outline"
+              className="border-orange-300 text-orange-700 hover:bg-orange-50"
+              onClick={() => setSoldOutDialogOpen(true)}
+              disabled={parentIsProcessing || purchasers.length > 0}
+              title={purchasers.length > 0 ? 'Bereits gekauft - kann nicht als Ausverkauft markiert werden' : 'Als Ausverkauft markieren'}
+            >
+              <AlertTriangle className="w-4 h-4 mr-2" />
+              Ausverkauft
+            </Button>
+          )}
+          {(status === 'new_quote' || status === 'pending' || status === 'matched') && (
+            <Button size="sm" variant={isMatcherExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'matcher')}>
+              {status === 'new_quote' || status === 'pending' ? <Settings className="w-4 h-4 mr-2"/> : <Edit className="w-4 h-4 mr-2"/> }
+              {isMatcherExpanded ? "Schliessen" : (status === 'new_quote' || status === 'pending' ? "Zuweisen" : "Zuweisung bearbeiten")}
+            </Button>
+          )}
+          {email_confirmed && (
+            <Button asChild size="sm" variant="outline">
+              <Link href={`/anfrage-status/${id}`} target="_blank">
+                <ExternalLink className="w-4 h-4 mr-2"/>
+                Kundenansicht
+              </Link>
+            </Button>
+          )}
+          <Button size="sm" variant={isEditExpanded ? "secondary" : "outline"} onClick={() => onToggleView(quote.id, 'edit')}>
+            <Pencil className="w-4 h-4 mr-2"/>
+            {isEditExpanded ? "Schliessen" : "Bearbeiten"}
+          </Button>
+          <Button size="sm" variant={isDetailsExpanded ? "secondary" : "ghost"} onClick={() => onToggleView(quote.id, 'details')}>
+            <Info className="w-4 h-4 mr-2"/>
+            {isDetailsExpanded ? "Schliessen" : "Details"}
+          </Button>
+          <Button size="sm" variant="ghost" className="text-gray-500 hover:bg-gray-100" onClick={() => onArchive(quote.id)}>
+            <Archive className="w-4 h-4"/>
+          </Button>
+        </div>
       </div>
        {(status === 'approved' || status === 'archived' || status === 'quota_filled') && (
         <div className="p-5 md:p-6 border-t border-gray-200 bg-gradient-to-br from-gray-50 to-white">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
-            <div>
-              <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-gray-500"/> 
-                Zielregionen
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {(partner_target_regions && partner_target_regions.length > 0) ? (
-                  partner_target_regions.map(region => (
-                    <Badge key={region} variant="secondary" className="bg-green-50 text-green-700 border-green-200 font-medium">
-                      {region}
-                    </Badge>
-                  ))
-                ) : (
-                  <span className="text-xs text-gray-500">Keine Regionen angegeben.</span>
-                )}
-              </div>
-            </div>
+          <div className="grid grid-cols-1 gap-y-5">
             {/* Zugewiesene Partner - Collapsible mit Kauf-Status */}
             {assigned_partner_ids && assigned_partner_ids.length > 0 && (
             <div>

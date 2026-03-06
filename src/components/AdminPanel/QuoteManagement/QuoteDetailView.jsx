@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { 
-    Calendar, CheckCircle, Clock, File, Image, Mail, 
+    Calendar, Clock, File, Image, Mail, 
     MapPin, MessageSquare, Phone, Truck, User, Building, 
-    Sparkles, Paintbrush, Leaf, Users, ExternalLink
+    Sparkles, Paintbrush, ExternalLink
 } from 'lucide-react';
 import { getServiceTypeLabel, formatDate } from '@/lib/utils';
 import { countries } from '@/data/countries';
@@ -12,7 +12,7 @@ import PaintingDetails from '@/components/common/PaintingDetails';
 import { getServiceCategory, isMovingService, isCleaningService, isPaintingService } from '@/lib/serviceCategorizer';
 
 const DetailSection = ({ title, icon: Icon, children }) => (
-    <div className="bg-white p-4 rounded-lg border shadow-sm">
+    <div className="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2 border-b pb-2 mb-4 uppercase tracking-wider">
              {Icon && <Icon className="w-5 h-5 text-green-600" />}
             {title}
@@ -169,7 +169,7 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5 px-1 sm:px-2">
       <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-2 text-gray-800">
@@ -181,8 +181,10 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
           {getStatusBadge(quote.status)}
         </div>
       </header>
-      
-        <div className="p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg">
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="space-y-5">
+          <div className="p-4 sm:p-5 bg-white border border-gray-200 rounded-xl shadow-sm">
             <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2 border-b pb-2 mb-4 uppercase">Kundenkontakt</h3>
             <ContactItem icon={<User size={16}/>} label="Anrede" value={quote.salutation} />
             <ContactItem icon={<User size={16}/>} label="Name" value={`${quote.firstname} ${quote.lastname}`} />
@@ -190,9 +192,9 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
             <ContactItem icon={<Phone size={16}/>} label="Telefon" value={quote.phone} />
             <ContactItem icon={<Clock size={16}/>} label="Telefonische Erreichbarkeit" value={quote.preferredtime} />
             <ContactItem icon={<Mail size={16}/>} label="E-Mail" value={quote.email} isLink linkType="mailto:" />
-        </div>
-        
-        <DetailSection title="Dienstleistungsdetails" icon={getServiceIcon()}>
+          </div>
+
+          <DetailSection title="Dienstleistungsdetails" icon={getServiceIcon()}>
             <QuoteDetail label="Dienstleistung" value={getServiceTypeLabel(quote.servicetype)} />
             <QuoteDetail label="Wunschtermin" value={formatDate(quote.move_date)} />
             {quote.move_date_flexible && <QuoteDetail label="Termin flexibel" value={quote.move_date_flexible} />}
@@ -200,100 +202,96 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
             {isMovingService(quote.servicetype) && quote.umzugart && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
             {isCleaningService(quote.servicetype) && <CleaningDetails details={quote} />}
             {isPaintingService(quote.servicetype) && <PaintingDetails details={quote} />}
-        </DetailSection>
-
-        {/* Umzug + Reinigung Zusatzinfos nebeneinander */}
-        {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal || quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-          <div className={`grid gap-4 ${(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
-            {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
-              <div className="bg-white p-4 rounded-lg border shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <Truck className="w-4 h-4 text-blue-600" />
-                  <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
-                </div>
-                <div className="space-y-2">
-                  {selectedMovingExtras.length > 0 && (
-                    <QuoteDetail label="Umzug inkl." value={formatWithUnd(selectedMovingExtras)} />
-                  )}
-                </div>
-              </div>
-            )}
-            {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-              <div className="bg-white p-4 rounded-lg border shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <Sparkles className="w-4 h-4 text-teal-600" />
-                  <h4 className="font-semibold text-sm text-gray-800">Reinigung – Details</h4>
-                </div>
-                <div className="space-y-2">
-                  {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
-                    'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
-                    '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
-                  }[quote.cleaning_area_sqm] || quote.cleaning_area_sqm} />}
-                  {quote.cleaning_type_guarantee && <QuoteDetail label="Art der Reinigung" value={{
-                    'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'
-                  }[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee} />}
-                  {(quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-                    <QuoteDetail label="Zusatzflächen" value={
-                      [quote.cleaning_additional_balcony && 'Balkon', quote.cleaning_additional_cellar && 'Keller', quote.cleaning_additional_garage && 'Garage'].filter(Boolean).join(', ')
-                    } />
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        <DetailSection title={isMovingService(quote.servicetype) ? "Umzugsadressen" : "Objektadresse"} icon={MapPin}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <AddressBox title={isMovingService(quote.servicetype) ? "Auszugsadresse" : "Adresse"} quote={quote} type="from" />
-                {isMovingService(quote.servicetype) && (quote.to_zip || quote.to_street || quote.to_city) && (
-                    <AddressBox title="Einzugsadresse" quote={quote} type="to" />
-                )}
-            </div>
-        </DetailSection>
-        
-        {quote.additional_info && (
-            <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
-                <p className="text-sm text-gray-700 whitespace-pre-wrap">{quote.additional_info}</p>
-            </DetailSection>
-        )}
-
-        {(quote.image_urls?.length > 0 || quote.file_urls?.length > 0) && (
-        <DetailSection title="Anhänge" icon={Image}>
-            {quote.image_urls?.length > 0 && (
-              <div className="mb-4">
-                <h4 className="font-semibold text-md mb-2">Bilder</h4>
-                <div className="flex flex-wrap gap-2">
-                  {quote.image_urls.map((url, i) => (
-                    <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-                      <img src={url} alt={`Anhang ${i+1}`} className="w-24 h-24 object-cover rounded-md border" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-             {quote.file_urls?.length > 0 && (
-              <div>
-                <h4 className="font-semibold text-md mb-2">Dateien</h4>
-                 <div className="flex flex-col gap-2">
-                  {quote.file_urls.map((url, i) => (
-                    <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center gap-2 text-sm">
-                      <File size={14} /> Datei {i+1}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
           </DetailSection>
-        )}
 
-        {purchasers && purchasers.length > 0 && (
-            <DetailSection title="Gekauft von" icon={Users}>
-              <ul className="text-sm text-gray-600 space-y-2">
-                {purchasers.map(p => <li key={p.id} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500"/>{p.company_name}</li>)}
-              </ul>
-            </DetailSection>
-        )}
+          {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal || quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+            <div className={`grid gap-4 ${(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+              {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
+                <div className="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 shadow-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Truck className="w-4 h-4 text-blue-600" />
+                    <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
+                  </div>
+                  <div className="space-y-2">
+                    {selectedMovingExtras.length > 0 && (
+                      <QuoteDetail label="Umzug inkl." value={formatWithUnd(selectedMovingExtras)} />
+                    )}
+                  </div>
+                </div>
+              )}
+              {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+                <div className="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 shadow-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-4 h-4 text-teal-600" />
+                    <h4 className="font-semibold text-sm text-gray-800">Reinigung – Details</h4>
+                  </div>
+                  <div className="space-y-2">
+                    {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
+                      'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
+                      '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
+                    }[quote.cleaning_area_sqm] || quote.cleaning_area_sqm} />}
+                    {quote.cleaning_type_guarantee && <QuoteDetail label="Art der Reinigung" value={{
+                      'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'
+                    }[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee} />}
+                    {(quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+                      <QuoteDetail label="Zusatzflächen" value={
+                        [quote.cleaning_additional_balcony && 'Balkon', quote.cleaning_additional_cellar && 'Keller', quote.cleaning_additional_garage && 'Garage'].filter(Boolean).join(', ')
+                      } />
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="space-y-5">
+          <DetailSection title={isMovingService(quote.servicetype) ? "Umzugsadressen" : "Objektadresse"} icon={MapPin}>
+            <div className="grid grid-cols-1 gap-4">
+              <AddressBox title={isMovingService(quote.servicetype) ? "Auszugsadresse" : "Adresse"} quote={quote} type="from" />
+              {isMovingService(quote.servicetype) && (quote.to_zip || quote.to_street || quote.to_city) && (
+                <AddressBox title="Einzugsadresse" quote={quote} type="to" />
+              )}
+            </div>
+          </DetailSection>
+        </div>
+      </div>
+
+      {quote.additional_info && (
+        <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
+          <p className="text-sm text-gray-700 whitespace-pre-wrap">{quote.additional_info}</p>
+        </DetailSection>
+      )}
+
+      {(quote.image_urls?.length > 0 || quote.file_urls?.length > 0) && (
+        <DetailSection title="Anhänge" icon={Image}>
+          {quote.image_urls?.length > 0 && (
+            <div className="mb-4">
+              <h4 className="font-semibold text-md mb-2">Bilder</h4>
+              <div className="flex flex-wrap gap-2">
+                {quote.image_urls.map((url, i) => (
+                  <a key={i} href={url} target="_blank" rel="noopener noreferrer">
+                    <img src={url} alt={`Anhang ${i+1}`} className="w-24 h-24 object-cover rounded-md border" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+          {quote.file_urls?.length > 0 && (
+            <div>
+              <h4 className="font-semibold text-md mb-2">Dateien</h4>
+              <div className="flex flex-col gap-2">
+                {quote.file_urls.map((url, i) => (
+                  <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center gap-2 text-sm">
+                    <File size={14} /> Datei {i+1}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </DetailSection>
+      )}
+
     </div>
   );
 };

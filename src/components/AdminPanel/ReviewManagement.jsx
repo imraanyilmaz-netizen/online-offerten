@@ -361,30 +361,32 @@ const ReviewList = ({ status, onRefresh }) => {
 
 const ReviewManagement = ({ onRefresh }) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Bewertungsmanagement</CardTitle>
-        <CardDescription>Hier können Sie neue Kundenbewertungen genehmigen, ablehnen oder löschen.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Tabs defaultValue="pending" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="pending">Ausstehend</TabsTrigger>
-            <TabsTrigger value="approved">Genehmigt</TabsTrigger>
-            <TabsTrigger value="rejected">Abgelehnt</TabsTrigger>
-          </TabsList>
-          <TabsContent value="pending" className="pt-4">
-            <ReviewList status="pending" onRefresh={onRefresh} />
-          </TabsContent>
-          <TabsContent value="approved" className="pt-4">
-            <ReviewList status="approved" onRefresh={onRefresh} />
-          </TabsContent>
-          <TabsContent value="rejected" className="pt-4">
-            <ReviewList status="rejected" onRefresh={onRefresh} />
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-    </Card>
+    <div className="px-4 md:px-6 pb-6 md:pb-8">
+      <Card>
+        <CardHeader>
+          <CardTitle>Bewertungsmanagement</CardTitle>
+          <CardDescription>Hier können Sie neue Kundenbewertungen genehmigen, ablehnen oder löschen.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="pending" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="pending">Ausstehend</TabsTrigger>
+              <TabsTrigger value="approved">Genehmigt</TabsTrigger>
+              <TabsTrigger value="rejected">Abgelehnt</TabsTrigger>
+            </TabsList>
+            <TabsContent value="pending" className="pt-4">
+              <ReviewList status="pending" onRefresh={onRefresh} />
+            </TabsContent>
+            <TabsContent value="approved" className="pt-4">
+              <ReviewList status="approved" onRefresh={onRefresh} />
+            </TabsContent>
+            <TabsContent value="rejected" className="pt-4">
+              <ReviewList status="rejected" onRefresh={onRefresh} />
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
