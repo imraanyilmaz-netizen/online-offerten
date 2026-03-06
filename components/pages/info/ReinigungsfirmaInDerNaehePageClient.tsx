@@ -881,7 +881,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               className="bg-blue-600 text-white hover:bg-blue-700 text-lg px-8 py-6 shadow-xl"
             >
               <Zap className="mr-2 h-5 w-5" />
-              Jetzt Offerten anfordern
+              Jetzt kostenlose Offerten anfordern
             </Button>
             <p className="mt-6 text-gray-500 text-sm italic">
               Kein Risiko. Keine Kosten. Nur passende Angebote von Reinigungsfirmen in Ihrer Nähe.

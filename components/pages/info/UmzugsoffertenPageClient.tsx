@@ -485,7 +485,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                  <span>Jetzt Preise vergleichen & sparen</span>
+                  <span>Jetzt kostenlose Offerten anfordern</span>
                 </div>
               </div>
             </div>

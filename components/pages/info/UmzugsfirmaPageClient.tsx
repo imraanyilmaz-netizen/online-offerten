@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 // framer-motion removed - CSS for better INP
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -205,39 +206,6 @@ const UmzugsfirmaPageClient = () => {
     router.push('/kostenlose-offerte-anfordern?service=umzug&step=2')
   }
 
-  const features = [
-    {
-      icon: CheckCircle,
-      title: 'Bis zu 5 Anbieter vergleichen',
-      description: 'Erhalten Sie mehrere Offerten von geprüften Partnern in Ihrer Region'
-    },
-    {
-      icon: ShieldCheck,
-      title: '100% kostenlos & unverbindlich',
-      description: 'Keine Gebühren, keine versteckten Kosten, keine Verpflichtungen'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Bis zu 40% sparen',
-      description: 'Durch den Vergleich mehrerer Anbieter finden Sie die besten Preise'
-    },
-    {
-      icon: Users,
-      title: 'Nur geprüfte Partner',
-      description: 'Alle Partnerfirmen sind versichert und verfügen über positive Bewertungen'
-    },
-    {
-      icon: Clock,
-      title: 'Schnelle Antworten',
-      description: 'Erhalten Sie die ersten Offerten bereits innerhalb von 24 Stunden'
-    },
-    {
-      icon: Award,
-      title: 'Transparente Preise',
-      description: 'Alle Offerten enthalten detaillierte Preisaufschlüsselungen'
-    }
-  ]
-
   const faqItems = [
     { 
       q: "Was ist eine Umzugsfirma und welche Dienstleistungen bietet sie?", 
@@ -281,98 +249,24 @@ const UmzugsfirmaPageClient = () => {
     }
   ]
 
-  const services = [
-    {
-      title: "Privatumzug",
-      description: "Wohnungsumzüge und Hausumzüge für Privatpersonen mit vollständiger Betreuung von der Planung bis zur Übergabe.",
-      link: "/umzugsfirma/privatumzug",
-      icon: Home
-    },
-    {
-      title: "Geschäftsumzug",
-      description: "Professionelle Büroumzüge mit minimaler Geschäftsunterbrechung und spezieller Logistik für Büroausstattung.",
-      link: "/umzugsfirma/geschaeftsumzug",
-      icon: Building
-    },
-    {
-      title: "Umzugsreinigung",
-      description: "Gründliche Reinigung der alten und neuen Wohnung, damit Sie sofort einziehen können.",
-      link: "/reinigung/umzugsreinigung",
-      icon: Sparkles
-    },
-    {
-      title: "Auslandumzug",
-      description: "Umzüge ins Ausland mit Zolldokumentation und internationaler Logistik.",
-      link: "/umzugsfirma/internationale-umzuege",
-      icon: Globe
-    },
-    {
-      title: "Spezialtransporte",
-      description: "Transport von Klavieren, Antiquitäten, Kunstwerken und anderen wertvollen Gegenständen.",
-      link: "/umzugsfirma/spezialtransporte",
-      icon: Package
-    },
-    {
-      title: "Klaviertransport",
-      description: "Professioneller Transport von Klavieren und Flügeln durch spezialisierte Umzugsfirmen.",
-      link: "/umzugsfirma/spezialtransporte/klaviertransport",
-      icon: Box
-    }
-  ]
-
-  const selectionCriteria = [
-    {
-      icon: Shield,
-      title: "Versicherungsschutz",
-      description: "Ein seriöser Partner verfügt über eine gültige Transportversicherung und Betriebshaftpflichtversicherung. Prüfen Sie die Deckungssummen und Versicherungsdetails in den Offerten."
-    },
-    {
-      icon: Star,
-      title: "Bewertungen und Referenzen",
-      description: "Lesen Sie Bewertungen anderer Kunden und fragen Sie nach Referenzen. Ein guter Partner hat positive Bewertungen und kann Referenzen vorweisen."
-    },
-    {
-      icon: FileText,
-      title: "Transparente Offerten",
-      description: "Ein professioneller Partner erstellt detaillierte, schriftliche Offerten mit klarer Preisaufschlüsselung aller Leistungen. Vermeiden Sie mündliche Zusagen."
-    },
-    {
-      icon: Phone,
-      title: "Erreichbarkeit und Kommunikation",
-      description: "Ein guter Partner ist erreichbar, antwortet schnell auf Anfragen und kommuniziert klar. Testen Sie die Erreichbarkeit vor der Buchung."
-    },
-    {
-      icon: Calendar,
-      title: "Verfügbarkeit",
-      description: "Prüfen Sie, ob der Partner am gewünschten Umzugsdatum verfügbar ist. Flexible Anbieter bieten alternative Termine an."
-    },
-    {
-      icon: Award,
-      title: "Erfahrung und Expertise",
-      description: "Wählen Sie einen Partner mit langjähriger Erfahrung und Expertise in Ihrem Umzugstyp. Spezialisierte Dienstleister bieten bessere Qualität."
-    }
-  ]
-
-  const locations = [
-    { name: "Umzugsfirma Zürich", link: "/umzugsfirma/zuerich" },
-    { name: "Umzugsfirma Basel", link: "/umzugsfirma/basel" },
-    { name: "Umzugsfirma Bern", link: "/umzugsfirma/bern" },
-    { name: "Umzugsfirma Genf", link: "/umzugsfirma/genf" },
-    { name: "Umzugsfirma Lausanne", link: "/umzugsfirma/lausanne" },
-    { name: "Umzugsfirma Luzern", link: "/umzugsfirma/luzern" },
-    { name: "Umzugsfirma St. Gallen", link: "/umzugsfirma/st-gallen" }
-  ]
-
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 py-12 md:py-20 overflow-hidden">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          {/* Breadcrumb Navigation */}
+      <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: '60px 60px'
+            }}
+          ></div>
+        </div>
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <nav className="mb-6 pt-4" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
               <li>
-                <Link href="/" className="hover:text-green-600 transition-colors">
+                <Link href="/" className="hover:text-blue-600 transition-colors">
                   Home
                 </Link>
               </li>
@@ -384,272 +278,208 @@ const UmzugsfirmaPageClient = () => {
               </li>
             </ol>
           </nav>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div
-            >
-              <h1 className="heading-1">
-                <span className="block">Umzugsfirma finden</span>
-                <span className="block text-green-600 mt-2">Kostenlos Offerten vergleichen & sparen</span>
-                <span className="block heading-4 text-gray-700 mt-4">
-                  Bis zu 40% sparen bei Ihrem Umzug
-                </span>
-          </h1>
-              <p className="text-body mb-8">
-                Finden Sie den <strong>besten Partner</strong> für Ihren Umzug in der Schweiz. Vergleichen Sie <strong>bis zu 5 kostenlose Offerten</strong> von geprüften Anbietern – <strong>100% kostenlos und unverbindlich</strong>. Sparen Sie Zeit und Geld durch den direkten Vergleich professioneller Dienstleister. Mit unserem Vergleichsportal finden Sie schnell den passenden Partner für Ihren Bedarf.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  onClick={handleCtaClick}
-                  size="lg"
-                  className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
-                >
-                  <Search className="mr-2 h-5 w-5" />
-                  Jetzt Umzugsfirma finden
-                </Button>
-                <Button
-                  onClick={() => router.push('/umzugsfirma/umzugskosten')}
-                  variant="outline"
-                  size="lg"
-                  className="text-lg px-8 py-6"
-                >
-                  <Calculator className="mr-2 h-5 w-5" />
-                  Kosten berechnen
-          </Button>
+
+          <div className="grid md:grid-cols-5 gap-12 items-center">
+            <div className="md:col-span-3">
+              <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
+                <MapPin className="h-4 w-4 mr-2" />
+                Lokale Umzugsfirmen finden
               </div>
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-600">
+              <h1 className="heading-1 !mt-0">
+                Umzugsfirma finden – Kostenlose Offerten vergleichen
+              </h1>
+              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+                Vergleichen Sie bis zu 5 Offerten von geprüften Umzugsfirmen in Ihrer Region – kostenlos und unverbindlich.
+              </p>
+
+              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-6">
+                <Link
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
+                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Privatumzug</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Wohnungsumzug</p>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
+                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Geschäftsumzug</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Firmenumzug</p>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
+                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Auslandumzug</p>
+                    <p className="text-xs text-gray-600 mt-0.5">International</p>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
+                    <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Spezialtransport</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Klavier, Safe & mehr</p>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Kleintransport</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Einzelne Gegenstände</p>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
+                >
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
+                    <Box className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="flex-1 text-left sm:text-center">
+                    <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Möbel einlagern</p>
+                  </div>
+                </Link>
+              </div>
+
+              <div className="flex flex-wrap gap-6 text-sm text-gray-700">
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                  <span>Bis zu 5 Umzugsfirmen</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
                   <span>100% kostenlos</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                  <span>Nur geprüfte Firmen</span>
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                  <span>Geprüfte Firmen</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                  <span>Bis zu 5 Offerten</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
                   <span>Bis zu 40% sparen</span>
                 </div>
               </div>
             </div>
-            <div
-              className="relative"
-            >
-              <div className="bg-gradient-to-br from-blue-100 to-green-100 rounded-2xl p-8 shadow-2xl">
-                <div className="bg-white rounded-xl p-6 shadow-lg">
-                  <h3 className="heading-3 mb-4">Ihre Vorteile</h3>
-                  <ul className="space-y-3">
-                    {features.slice(0, 4).map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <feature.icon className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="font-semibold text-gray-900">{feature.title}</p>
-                          <p className="text-sm text-gray-600">{feature.description}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+
+            <div className="relative md:col-span-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <Image
+                  src="/bilder/umzugsfirma-privatumzug-600-400.webp"
+                  alt="Umzugsfirma in der Schweiz – Offerten vergleichen"
+                  width={600}
+                  height={450}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                <p className="text-sm font-bold">Professioneller Umzugsservice</p>
+                <p className="text-xs text-blue-100">In Ihrer Region</p>
               </div>
             </div>
           </div>
         </div>
-              </section>
-
-      {/* Why Compare Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div
-            className="text-center mb-12"
-          >
-            <h2 className="heading-2">
-              Warum mehrere Umzugsfirmen vergleichen?
-            </h2>
-            <p className="text-body max-w-3xl mx-auto">
-              Der Vergleich mehrerer Anbieter ist der effektivste Weg, um faire Preise zu finden und bei Ihrem Umzug Geld zu sparen. Studien zeigen, dass Kunden durch den Vergleich durchschnittlich <strong>30-40% der Umzugskosten einsparen</strong> können. Eine gute <strong>Umzugsplanung</strong> mit Vergleich mehrerer Dienstleister hilft Ihnen, das beste Preis-Leistungs-Verhältnis zu finden.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-              >
-                <Card className="h-full border-2 hover:border-green-500 transition-colors">
-                    <CardHeader>
-                    <div className="flex items-center mb-4">
-                      <div className="bg-green-100 p-3 rounded-lg mr-4">
-                        <feature.icon className="h-6 w-6 text-green-600" />
-                      </div>
-                      <CardTitle className="text-xl">{feature.title}</CardTitle>
-                    </div>
-                    </CardHeader>
-                    <CardContent>
-                    <p className="text-gray-600">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-              </div>
-            ))}
-          </div>
-                </div>
-              </section>
-
-      {/* Services Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div
-            className="text-center mb-12"
-          >
-            <h2 className="heading-2">
-              Welche Umzugsfirma brauchen Sie?
-            </h2>
-            <p className="text-body max-w-3xl mx-auto">
-              Verschiedene Anbieter spezialisieren sich auf unterschiedliche Umzugstypen. Finden Sie den richtigen Partner für Ihren spezifischen Bedarf. Von <strong>Privatumzug</strong> bis <strong>Geschäftsumzug</strong> – wir helfen Ihnen, den passenden Dienstleister zu finden.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div
-                key={index}
-              >
-                <Link href={service.link}>
-                  <Card className="h-full hover:border-green-500 hover:shadow-lg transition-all cursor-pointer">
-                    <CardHeader>
-                      <div className="flex items-center mb-4">
-                        <div className="bg-green-100 p-3 rounded-lg mr-4">
-                          <service.icon className="h-6 w-6 text-green-600" />
-                        </div>
-                        <CardTitle className="text-xl">{service.title}</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-600">{service.description}</p>
-                      <div className="mt-4 flex items-center text-green-600 font-semibold">
-                        <span>Mehr erfahren</span>
-                        <ArrowRight className="h-4 w-4 ml-2" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
-
-      {/* Selection Criteria Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div
-            className="text-center mb-12"
-          >
-            <h2 className="heading-2">
-              Worauf sollten Sie bei der Auswahl einer Umzugsfirma achten?
-            </h2>
-            <p className="text-body max-w-3xl mx-auto">
-              Nicht alle Anbieter sind gleich. Diese Kriterien helfen Ihnen, den besten Partner für Ihren Umzug zu finden. Eine gute <strong>Umzugsplanung</strong> beginnt mit der richtigen Auswahl des Dienstleisters.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {selectionCriteria.map((criterion, index) => (
-              <div
-                key={index}
-              >
-                <Card className="h-full">
-                    <CardHeader>
-                    <div className="flex items-center mb-4">
-                      <div className="bg-blue-100 p-3 rounded-lg mr-4">
-                        <criterion.icon className="h-6 w-6 text-blue-600" />
-                      </div>
-                      <CardTitle className="text-lg">{criterion.title}</CardTitle>
-                    </div>
-                    </CardHeader>
-                    <CardContent>
-                    <p className="text-gray-600">{criterion.description}</p>
-                    </CardContent>
-                  </Card>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Location Links Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div
-            className="text-center mb-12"
-          >
-            <h2 className="heading-2">
-              Umzugsfirmen nach Region
-            </h2>
-            <p className="text-body max-w-3xl mx-auto">
-              Finden Sie Anbieter in Ihrer Region. Wir vermitteln Ihnen geprüfte Partner aus der ganzen Schweiz – von den grossen Städten bis in die ländlichen Regionen. Finden Sie den passenden Dienstleister in Ihrer Nähe.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {locations.map((location, index) => (
-              <div
-                key={index}
-              >
-                <Link href={location.link}>
-                  <Card className="h-full hover:border-green-500 hover:shadow-lg transition-all cursor-pointer">
-                    <CardContent className="p-6">
-                      <div className="flex items-center">
-                        <MapPin className="h-5 w-5 text-green-600 mr-3" />
-                        <span className="font-semibold text-gray-900">{location.name}</span>
-                        <ArrowRight className="h-4 w-4 text-gray-400 ml-auto" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </div>
-            ))}
-          </div>
-                </div>
-              </section>
 
       {/* Detailed Content Section - SEO Rich Content */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="max-w-4xl mx-auto prose prose-lg">
+          <div className="max-w-navbar mx-auto prose prose-lg">
             <div
             >
-              <h2 className="heading-2 mb-6">
-                Umzugsfirma in der Schweiz: Ihr kompletter Ratgeber
-              </h2>
-              
               <div className="space-y-6">
-                <p className="text-body">
-                  Eine <strong>Umzugsfirma</strong> ist Ihr Partner für einen erfolgreichen und stressfreien Umzug in der Schweiz. Wenn Sie einen passenden Anbieter finden möchten, sollten Sie mehrere Dienstleister vergleichen, um die beste Offerte zu erhalten. Bei Online-Offerten.ch können Sie <strong>kostenlose Offerten von geprüften Partnern</strong> anfordern und diese in Ruhe vergleichen. Ein professioneller Dienstleister übernimmt alle wichtigen Aufgaben rund um Ihren <strong>Wohnungswechsel</strong> und sorgt für einen reibungslosen Ablauf.
-                </p>
+                <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                  <div className="lg:col-span-6">
+                    <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+                      <Image
+                        src="/umzug/umzugsfirma-zurich.webp"
+                        alt="Umzugsfirma in Zürich – professionelle Umzugsdienstleistungen"
+                        width={700}
+                        height={900}
+                        className="w-full h-auto lg:min-h-[520px] object-cover"
+                      />
+                    </div>
+                  </div>
 
-                <h3 className="heading-3 mt-8 mb-4">
-                  Was macht eine gute Umzugsfirma aus?
-                </h3>
-                <p className="text-body">
-                  Ein professioneller Dienstleister zeichnet sich durch mehrere wichtige Merkmale aus. Ein seriöser Anbieter verfügt über eine gültige Transportversicherung und Betriebshaftpflichtversicherung, geschultes Personal, spezielle Fahrzeuge und Equipment für verschiedene Umzugstypen. Ein guter Partner bietet transparente Offerten mit detaillierter Preisaufschlüsselung, ist erreichbar und kommuniziert klar. Der beste Anbieter für Sie ist derjenige, der Ihre spezifischen Bedürfnisse erfüllt und ein faires Preis-Leistungs-Verhältnis bietet. Professionelle Dienstleister verfügen über langjährige Erfahrung, positive Kundenbewertungen und können Referenzen vorweisen. Sie bieten umfassende <strong>Umzugsdienstleistungen</strong> von der <strong>Umzugsplanung</strong> bis zur Übergabe Ihrer neuen Wohnung.
-                </p>
+                  <div className="lg:col-span-6">
+                    <h2 className="heading-2 mb-6">
+                      Umzugsfirma in der Schweiz: Ihr kompletter Ratgeber
+                    </h2>
 
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma finden: So gehen Sie vor
-                </h3>
-                <p className="text-body">
-                  Um den richtigen Partner zu finden, sollten Sie systematisch vorgehen. Zunächst definieren Sie Ihre Anforderungen: Umzugsdatum, Umzugsstrecke, Wohnungsgrösse und gewünschte Leistungen. Eine gute <strong>Umzugsplanung</strong> ist der erste Schritt zu einem erfolgreichen Umzug. Dann fordern Sie mehrere Offerten von verschiedenen Anbietern an – am besten über ein Vergleichsportal wie Online-Offerten.ch. Vergleichen Sie die Offerten nicht nur nach Preis, sondern auch nach enthaltenen Leistungen, Versicherungen und Bewertungen. Ein lokaler Anbieter kann Vorteile haben, aber auch weiter entfernte Partner können gute Angebote machen. Für internationale Umzüge finden Sie passende <Link href="/umzugsfirma/internationale-umzuege" className="text-green-600 hover:text-green-700 font-semibold underline">internationale Umzugsfirmen</Link> in unserem Netzwerk.
-                </p>
+                    <p className="text-body">
+                      Eine <strong>Umzugsfirma</strong> ist Ihr Partner für einen erfolgreichen und stressfreien Umzug in der Schweiz. Wenn Sie einen passenden Anbieter finden möchten, sollten Sie mehrere Dienstleister vergleichen, um die beste Offerte zu erhalten. Bei Online-Offerten.ch können Sie <strong>kostenlose Offerten von geprüften Partnern</strong> anfordern und diese in Ruhe vergleichen. Ein professioneller Dienstleister übernimmt alle wichtigen Aufgaben rund um Ihren <strong>Wohnungswechsel</strong> und sorgt für einen reibungslosen Ablauf.
+                    </p>
 
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma Kosten: Was beeinflusst den Preis?
-                </h3>
-                <p className="text-body">
-                  Die <strong>Umzugskosten</strong> variieren je nach verschiedenen Faktoren. Ein professioneller Dienstleister berechnet den Preis basierend auf der Umzugsstrecke, dem Umfang des Umzugsguts, der Anzahl der Stockwerke, benötigten Leistungen und dem Umzugsdatum. Weitere Faktoren, die die <strong>Umzugskosten</strong> beeinflussen, sind: Größe der Wohnung, Menge der Möbel, Spezialtransporte (z.B. Klavier), Verpackungsservice, Montage- und Demontagearbeiten sowie der Zeitpunkt des Umzugs (Sommer und Monatsende sind teurer). Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF, je nach Umfang und Region. Geschäftsumzüge oder Umzüge mit Spezialtransporten können deutlich teurer sein. Der beste Weg, um faire <strong>Umzugskosten</strong> zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Anbietern. Durch den Vergleich können Sie bis zu 40% sparen.
-                </p>
+                    <h3 className="heading-3 mt-8 mb-4">
+                      Was macht eine gute Umzugsfirma aus?
+                    </h3>
+                    <p className="text-body">
+                      Ein professioneller Dienstleister zeichnet sich durch mehrere wichtige Merkmale aus. Ein seriöser Anbieter verfügt über eine gültige Transportversicherung und Betriebshaftpflichtversicherung, geschultes Personal, spezielle Fahrzeuge und Equipment für verschiedene Umzugstypen. Ein guter Partner bietet transparente Offerten mit detaillierter Preisaufschlüsselung, ist erreichbar und kommuniziert klar. Der beste Anbieter für Sie ist derjenige, der Ihre spezifischen Bedürfnisse erfüllt und ein faires Preis-Leistungs-Verhältnis bietet. Professionelle Dienstleister verfügen über langjährige Erfahrung, positive Kundenbewertungen und können Referenzen vorweisen. Sie bieten umfassende <strong>Umzugsdienstleistungen</strong> von der <Link href="/ratgeber/umzugsplanung" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsplanung</Link> bis zur Übergabe Ihrer neuen Wohnung.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start mt-2">
+                  <div className="lg:col-span-7">
+                    <h3 className="heading-3 mt-8 mb-4">
+                      Umzugsfirma finden: So gehen Sie vor
+                    </h3>
+                    <p className="text-body">
+                      Um den richtigen Partner zu finden, sollten Sie systematisch vorgehen. Zunächst definieren Sie Ihre Anforderungen: Umzugsdatum, Umzugsstrecke, Wohnungsgrösse und gewünschte Leistungen. Eine gute <strong>Umzugsplanung</strong> ist der erste Schritt zu einem erfolgreichen Umzug. Dann fordern Sie mehrere Offerten von verschiedenen Anbietern an – am besten über ein Vergleichsportal wie Online-Offerten.ch. Vergleichen Sie die Offerten nicht nur nach Preis, sondern auch nach enthaltenen Leistungen, Versicherungen und Bewertungen. Ein lokaler Anbieter kann Vorteile haben, aber auch weiter entfernte Partner können gute Angebote machen. Für internationale Umzüge finden Sie passende <Link href="/umzugsfirma/internationale-umzuege" className="text-green-600 hover:text-green-700 font-semibold underline">internationale Umzugsfirmen</Link> in unserem Netzwerk.
+                    </p>
+
+                    <h3 className="heading-3 mt-8 mb-4">
+                      Umzugsfirma Kosten: Was beeinflusst den Preis?
+                    </h3>
+                    <p className="text-body">
+                      Die <strong>Umzugskosten</strong> variieren je nach verschiedenen Faktoren. Ein professioneller Dienstleister berechnet den Preis basierend auf der Umzugsstrecke, dem Umfang des Umzugsguts, der Anzahl der Stockwerke, benötigten Leistungen und dem Umzugsdatum. Weitere Faktoren, die die <strong>Umzugskosten</strong> beeinflussen, sind: Größe der Wohnung, Menge der Möbel, Spezialtransporte (z.B. Klavier), Verpackungsservice, Montage- und Demontagearbeiten sowie der Zeitpunkt des Umzugs (Sommer und Monatsende sind teurer). Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF, je nach Umfang und Region. Geschäftsumzüge oder Umzüge mit Spezialtransporten können deutlich teurer sein. Der beste Weg, um faire <strong>Umzugskosten</strong> zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Anbietern. Durch den Vergleich können Sie bis zu 40% sparen.
+                    </p>
+                  </div>
+
+                  <div className="lg:col-span-5 lg:pt-8">
+                    <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+                      <Image
+                        src="/umzug/umzugsfirmalocal.webp"
+                        alt="Umzugsfirma lokal vergleichen – Kosten und Leistungen in der Schweiz"
+                        width={700}
+                        height={900}
+                        className="w-full h-auto lg:min-h-[520px] object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
 
                 <h3 className="heading-3 mt-8 mb-4">
                   Umzugsfirma vergleichen: So sparen Sie bis zu 40%
@@ -722,34 +552,50 @@ const UmzugsfirmaPageClient = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div
-            className="text-center mb-12"
-          >
-            <h2 className="heading-2">
-              Häufige Fragen zu Umzugsfirmen
-            </h2>
-            <p className="text-body max-w-3xl mx-auto">
-              Alles, was Sie über Umzugsfirmen wissen müssen – beantwortet von unseren Experten.
-            </p>
-          </div>
+          <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+            <div className="md:col-span-3">
+              <div className="mb-8">
+                <h2 className="heading-2">
+                  Häufige Fragen zu Umzugsfirmen
+                </h2>
+                <p className="text-body max-w-3xl">
+                  Alles, was Sie über Umzugsfirmen wissen müssen – beantwortet von unseren Experten.
+                </p>
+              </div>
 
-          <div className="max-w-4xl mx-auto">
-          <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-b">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-green-600">
-                    <h4 className="faq-question">{item.q}</h4>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 leading-relaxed">
-                    {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+              <Accordion type="single" collapsible className="w-full">
+                {faqItems.map((item, index) => (
+                  <AccordionItem key={index} value={`item-${index}`} className="border-b">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                      <h4 className="faq-question">{item.q}</h4>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-body leading-relaxed">
+                      {item.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
+            <div className="relative md:col-span-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <Image
+                  src="/bilder/umzugsfirma-privatumzug-600-400.webp"
+                  alt="Umzugsfirma FAQ – Häufige Fragen zu Umzug, Offerten und Kosten"
+                  width={600}
+                  height={450}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                <p className="text-sm font-bold">Fragen & Antworten</p>
+                <p className="text-xs text-blue-100">Rund um Umzugsfirmen</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </section>
 
       {/* CTA Section */}
@@ -771,7 +617,7 @@ const UmzugsfirmaPageClient = () => {
                 className="bg-white text-green-600 hover:bg-gray-100 text-lg px-8 py-6 shadow-xl"
               >
                 <Zap className="mr-2 h-5 w-5" />
-                Jetzt Partner finden
+                Jetzt kostenlose Offerten anfordern
               </Button>
               <Button
                 onClick={() => router.push('/umzugsfirma/umzugskosten')}

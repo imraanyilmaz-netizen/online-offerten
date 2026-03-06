@@ -3,14 +3,14 @@ import { Suspense } from 'react'
 import UmzugsfirmaPageClient from '@/components/pages/info/UmzugsfirmaPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirma Schweiz – Geprüfte Umzugsunternehmen in Ihrer Nähe finden',
-  description: 'Umzugsfirma in der Schweiz finden ✓ Geprüfte Umzugsunternehmen für Privatumzug, Geschäftsumzug & Spezialtransporte. Bis zu 5 kostenlose Offerten anfordern und bis zu 40% sparen!',
+  title: 'Umzugsfirma Schweiz | Geprüfte Anbieter vergleichen',
+  description: 'Finden Sie eine passende Umzugsfirma in der Schweiz und vergleichen Sie geprüfte Anbieter für Privat- und Geschäftsumzug sowie Spezialtransporte.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma',
   },
   openGraph: {
-    title: 'Umzugsfirma Schweiz » Geprüfte Umzugsunternehmen in Ihrer Nähe finden',
-    description: 'Umzugsfirma in der Schweiz finden ✓ Geprüfte Umzugsunternehmen für Privatumzug, Geschäftsumzug & Spezialtransporte. Bis zu 5 kostenlose Offerten!',
+    title: 'Umzugsfirma Schweiz | Geprüfte Anbieter vergleichen',
+    description: 'Finden Sie eine passende Umzugsfirma in der Schweiz und vergleichen Sie geprüfte Anbieter für Privat- und Geschäftsumzug sowie Spezialtransporte.',
     url: 'https://online-offerten.ch/umzugsfirma',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirma Schweiz » Geprüfte Umzugsunternehmen finden',
-    description: 'Umzugsfirma in der Schweiz finden ✓ Geprüfte Umzugsunternehmen für Privatumzug & Geschäftsumzug.',
+    title: 'Umzugsfirma Schweiz | Geprüfte Anbieter vergleichen',
+    description: 'Finden Sie eine passende Umzugsfirma in der Schweiz und vergleichen Sie geprüfte Anbieter für Privat- und Geschäftsumzug sowie Spezialtransporte.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/umzugsfirma-finden-vergleichen.png'],
   },
   robots: {

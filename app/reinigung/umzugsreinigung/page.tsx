@@ -7,14 +7,14 @@ import UmzugsreinigungPageClient from '@/components/pages/services/Umzugsreinigu
 export const revalidate = 86400 // 24 saat
 
 export const metadata: Metadata = {
-  title: 'Umzugsreinigung Preis – Kostenlose Offerten vergleichen',
-  description: 'Umzugsreinigung Preis: Was kostet die professionelle Reinigung? Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
+  title: 'Umzugsreinigung mit Abnahmegarantie | Offerten vergleichen',
+  description: 'Vergleichen Sie kostenlose Offerten für professionelle Umzugsreinigung mit Abnahmegarantie in der Schweiz. Geprüfte Reinigungsfirmen, transparente Preise.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung/umzugsreinigung',
   },
   openGraph: {
-    title: 'Umzugsreinigung Preis – Kostenlose Offerten vergleichen',
-    description: 'Umzugsreinigung Preis: Was kostet die professionelle Reinigung? Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach.',
+    title: 'Umzugsreinigung mit Abnahmegarantie | Offerten vergleichen',
+    description: 'Vergleichen Sie kostenlose Offerten für professionelle Umzugsreinigung mit Abnahmegarantie in der Schweiz. Geprüfte Reinigungsfirmen, transparente Preise.',
     url: 'https://online-offerten.ch/reinigung/umzugsreinigung',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsreinigung Preis – Kostenlose Offerten vergleichen',
-    description: 'Umzugsreinigung Preis: Was kostet die professionelle Reinigung? Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen.',
+    title: 'Umzugsreinigung mit Abnahmegarantie | Offerten vergleichen',
+    description: 'Vergleichen Sie kostenlose Offerten für professionelle Umzugsreinigung mit Abnahmegarantie in der Schweiz. Geprüfte Reinigungsfirmen, transparente Preise.',
     images: ['https://online-offerten.ch/bilder/wohnungsreinigung-mit-abnahmegarantie.webp'],
   },
   robots: {
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
 
 export default async function UmzugsreinigungPage() {
   
-  const metaTitle = "Umzugsreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen";
-  const metaDescription = "Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.";
+  const metaTitle = "Umzugsreinigung mit Abnahmegarantie | Offerten vergleichen";
+  const metaDescription = "Vergleichen Sie kostenlose Offerten für professionelle Umzugsreinigung mit Abnahmegarantie in der Schweiz. Geprüfte Reinigungsfirmen, transparente Preise.";
   const canonicalUrl = 'https://online-offerten.ch/reinigung/umzugsreinigung';
   
   // Server-side schema - Google için gerçek yorum sayısı

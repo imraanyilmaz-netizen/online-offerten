@@ -921,7 +921,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 className="bg-green-600 hover:bg-green-700 text-white font-bold group px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all"
                 >
                 <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2">
-                  Jetzt kostenlose Offerten anfragen
+                  Jetzt kostenlose Offerten anfordern
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
@@ -1046,26 +1046,47 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </section>
 
       {/* ===== FAQ SECTION ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="heading-2">Häufig gestellte Fragen (FAQ) zu Umzugsfirmen vergleichen in der Schweiz</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Alles Wichtige rund um das Vergleichen von Umzugsfirmen
-            </p>
+          <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+            <div className="md:col-span-3">
+              <div className="mb-8">
+                <h2 className="heading-2">Häufig gestellte Fragen (FAQ) zu Umzugsfirmen vergleichen in der Schweiz</h2>
+                <p className="text-body max-w-2xl">
+                  Alles Wichtige rund um das Vergleichen von Umzugsfirmen
+                </p>
+              </div>
+
+              <Accordion type="single" collapsible className="w-full">
+                {faqItems.map((item, index) => (
+                  <AccordionItem key={index} value={`item-${index}`} className="border-b">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                      <h4 className="faq-question">{item.q}</h4>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-body leading-relaxed">
+                      {item.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
+            <div className="relative md:col-span-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <NextImage
+                  src="/bilder/umzugsfirma-privatumzug-600-400.webp"
+                  alt="FAQ zum Vergleich von Umzugsfirmen in der Schweiz"
+                  width={600}
+                  height={450}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                <p className="text-sm font-bold">Fragen & Antworten</p>
+                <p className="text-xs text-blue-100">Rund um Umzugsfirmen-Vergleich</p>
+              </div>
+            </div>
           </div>
-          <Accordion type="single" collapsible className="w-full bg-white p-4 rounded-lg shadow-xl border border-gray-200">
-            {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-slate-800">
-                  <h4 className="faq-question">{item.q}</h4>
-                </AccordionTrigger>
-                <AccordionContent className="text-base text-slate-600 leading-relaxed pt-2 pb-4">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
         </div>
       </section>
 
@@ -1075,7 +1096,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl text-left">
             <h2 className="heading-2-white">
-              Jetzt Umzugsfirmen vergleichen | Kostenlos & unverbindlich
+              Jetzt kostenlose Offerten anfordern
             </h2>
 
             {/* Search Form */}

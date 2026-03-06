@@ -3,14 +3,14 @@ import { Suspense } from 'react'
 import ReinigungsfirmaInDerNaehePageClient from '@/components/pages/info/ReinigungsfirmaInDerNaehePageClient'
 
 export const metadata: Metadata = {
-  title: 'Reinigungsfirma in der Nähe finden – Bis zu 40% sparen',
-  description: 'Reinigungsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region. Büroreinigung, Haushaltsreinigung, Endreinigung – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
+  title: 'Reinigungsfirma finden in der Schweiz | Offerten kostenlos vergleichen',
+  description: 'Finden Sie geprüfte Reinigungsfirmen in Ihrer Region und vergleichen Sie bis zu 5 kostenlose Offerten für Umzugsreinigung, Haus- oder Büroreinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigungsfirma',
   },
   openGraph: {
-    title: 'Reinigungsfirma in der Nähe finden » Bis zu 40% sparen',
-    description: 'Reinigungsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region. Büroreinigung, Haushaltsreinigung – professionell, sicher und bis zu 40% günstiger.',
+    title: 'Reinigungsfirma finden in der Schweiz | Offerten kostenlos vergleichen',
+    description: 'Finden Sie geprüfte Reinigungsfirmen in Ihrer Region und vergleichen Sie bis zu 5 kostenlose Offerten für Umzugsreinigung, Haus- oder Büroreinigung.',
     url: 'https://online-offerten.ch/reinigungsfirma',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Reinigungsfirma in der Nähe finden » Bis zu 40% sparen',
-    description: 'Reinigungsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region.',
+    title: 'Reinigungsfirma finden in der Schweiz | Offerten kostenlos vergleichen',
+    description: 'Finden Sie geprüfte Reinigungsfirmen in Ihrer Region und vergleichen Sie bis zu 5 kostenlose Offerten für Umzugsreinigung, Haus- oder Büroreinigung.',
     images: ['https://online-offerten.ch/image/reinigungsfirma-finden.png'],
   },
   robots: {

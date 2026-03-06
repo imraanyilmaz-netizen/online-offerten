@@ -199,14 +199,14 @@ function getSchemaData(reviewStats: { reviewCount: number; averageRating: number
 }
 
 export const metadata: Metadata = {
-  title: 'Umzugsofferten einholen – Kostenlose Angebote von Umzugsfirmen',
-  description: 'Umzugsofferten kostenlos einholen ✓ Bis zu 5 unverbindliche Angebote von geprüften Umzugsfirmen in der Schweiz erhalten. Schnell, sicher und bis zu 40% günstiger. Jetzt Offerte anfordern!',
+  title: 'Umzugsofferten vergleichen | Kostenlos & unverbindlich',
+  description: 'Bis zu 5 Umzugsofferten von geprüften Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsofferten',
   },
   openGraph: {
-    title: 'Umzugsofferten einholen » Kostenlose Angebote von Umzugsfirmen',
-    description: 'Umzugsofferten kostenlos einholen ✓ Bis zu 5 unverbindliche Angebote von geprüften Umzugsfirmen in der Schweiz erhalten.',
+    title: 'Umzugsofferten vergleichen | Kostenlos & unverbindlich',
+    description: 'Bis zu 5 Umzugsofferten von geprüften Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
     url: 'https://online-offerten.ch/umzugsofferten',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -222,8 +222,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsofferten einholen » Kostenlose Angebote von Umzugsfirmen',
-    description: 'Umzugsofferten kostenlos einholen ✓ Bis zu 5 unverbindliche Angebote von geprüften Umzugsfirmen erhalten.',
+    title: 'Umzugsofferten vergleichen | Kostenlos & unverbindlich',
+    description: 'Bis zu 5 Umzugsofferten von geprüften Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/umzugsofferten-kostenlos-vergleichen.png'],
   },
   robots: {
