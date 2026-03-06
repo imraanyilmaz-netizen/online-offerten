@@ -185,13 +185,13 @@ const combinedSchema = {
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Umzugsfirma in der Nähe",
+          "name": "Umzugsfirma",
           "item": "https://online-offerten.ch/umzugsfirma"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Umzugsfirma Aargau",
+          "name": "Aargau",
           "item": `https://online-offerten.ch${canonicalUrl}`
         }
       ]
@@ -421,14 +421,14 @@ export default async function UmzugsfirmaAargauPage() {
                 </li>
                 <li>
                   <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
-                    Umzugsfirma in der Nähe
+                    Umzugsfirma
                   </Link>
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />
                 </li>
                 <li className="text-gray-900 font-medium" aria-current="page">
-                  Umzugsfirma Aargau
+                  Aargau
                 </li>
               </ol>
             </nav>
@@ -1126,5 +1126,6 @@ export default async function UmzugsfirmaAargauPage() {
     </>
   )
 }
+
 
 

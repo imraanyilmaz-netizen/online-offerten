@@ -95,13 +95,13 @@ const combinedSchema = {
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Umzugsfirma in der Nähe",
+          "name": "Umzugsfirma",
           "item": "https://online-offerten.ch/umzugsfirma"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Umzugsfirma Zürich",
+          "name": "Zürich",
           "item": "https://online-offerten.ch/umzugsfirma/zuerich"
         },
         {
@@ -288,7 +288,7 @@ export default function UmzugsfirmaUsterPage() {
                 </li>
                 <li>
                   <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
-                    Umzugsfirma in der Nähe
+                    Umzugsfirma
                   </Link>
                 </li>
                 <li>
@@ -303,7 +303,7 @@ export default function UmzugsfirmaUsterPage() {
                   <ChevronRight className="w-4 h-4 text-gray-400" />
                 </li>
                 <li className="text-gray-900 font-medium" aria-current="page">
-                  Umzugsfirma Uster
+                  Uster
                 </li>
               </ol>
             </nav>
@@ -609,5 +609,6 @@ export default function UmzugsfirmaUsterPage() {
     </>
   )
 }
+
 
 

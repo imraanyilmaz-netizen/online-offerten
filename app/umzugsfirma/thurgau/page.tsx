@@ -90,8 +90,8 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Startseite', item: 'https://online-offerten.ch/' },
-    { '@type': 'ListItem', position: 2, name: 'Umzugsfirma in der Nähe', item: 'https://online-offerten.ch/umzugsfirma' },
-    { '@type': 'ListItem', position: 3, name: 'Umzugsfirma Thurgau', item: `https://online-offerten.ch${canonicalUrl}` },
+    { '@type': 'ListItem', position: 2, name: 'Umzugsfirma', item: 'https://online-offerten.ch/umzugsfirma' },
+    { '@type': 'ListItem', position: 3, name: 'Thurgau', item: `https://online-offerten.ch${canonicalUrl}` },
   ],
 }
 
@@ -184,9 +184,9 @@ export default async function UmzugsfirmaThurgauPage() {
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li><Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link></li>
                 <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
-                <li><Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma in der Nähe</Link></li>
+                <li><Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma</Link></li>
                 <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
-                <li className="text-gray-900 font-medium" aria-current="page">Umzugsfirma Thurgau</li>
+                <li className="text-gray-900 font-medium" aria-current="page">Thurgau</li>
               </ol>
             </nav>
 
@@ -435,4 +435,5 @@ export default async function UmzugsfirmaThurgauPage() {
     </>
   )
 }
+
 

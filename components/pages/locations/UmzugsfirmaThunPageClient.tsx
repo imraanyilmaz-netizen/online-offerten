@@ -1,13 +1,14 @@
 'use client'
 
 import React from 'react';
-// framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck, TrendingUp } from 'lucide-react';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import LocationSidebar from '@/components/locations/LocationSidebar';
+import Image from 'next/image';
+import ServiceGrid from '@/components/pages/locations/ServiceGrid.client';
 
 const UmzugsfirmaThunPageClient = () => {
   const city = "Thun";
@@ -42,39 +43,136 @@ const UmzugsfirmaThunPageClient = () => {
 
   return (
     <>
-      <div className="bg-gray-50 py-12 md:py-16">
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          {/* Breadcrumb Navigation */}
-          <nav className="mb-4 pt-4" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2 text-sm text-gray-600">
-              <li><Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link></li>
-              <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
-              <li><Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma in der Nähe</Link></li>
-              <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
-              <li className="text-gray-900 font-medium" aria-current="page">Umzugsfirma Thun</li>
-            </ol>
-          </nav>
+      <div className="bg-white overflow-x-hidden">
+        {/* Hero Section */}
+        <section
+          className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-green-50 via-white to-emerald-50"
+          aria-label="Umzugsfirma Thun - Kostenlose Offerten"
+        >
+          <div className="absolute inset-0 opacity-5">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                backgroundSize: '60px 60px',
+              }}
+            />
+          </div>
+          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+            <nav className="mb-6" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+                <li>
+                  <Link href="/" className="hover:text-green-600 transition-colors">
+                    Startseite
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li>
+                  <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
+                    Umzugsfirma
+                  </Link>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </li>
+                <li className="text-gray-900 font-medium" aria-current="page">
+                  Thun
+                </li>
+              </ol>
+            </nav>
 
-          <header
-            className="text-center mb-12 md:mb-16 pt-8"
-          >
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4">
-              Umzugsfirma Thun – Umzugspartner am Thunersee finden & vergleichen
-            </h1>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
-              Vom Tor zum Berner Oberland in Ihr neues Zuhause – stressfrei und zuverlässig.
-            </p>
-          </header>
+            <div className="grid md:grid-cols-5 gap-12 items-center">
+              <div className="md:col-span-3">
+                <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-4">
+                  Thun & Berner Oberland
+                </div>
+                <h1 className="heading-1 !mt-0 mb-4">
+                  Umzugsfirma Thun - Umzugspartner am Thunersee finden und vergleichen
+                </h1>
+                <p className="hero-description text-base sm:text-lg text-gray-600 mb-6 leading-relaxed max-w-2xl">
+                  Vergleichen Sie geprüfte Umzugsfirmen in Thun und Umgebung. Mit nur einer Anfrage erhalten Sie mehrere Offerten für einen sicheren und stressfreien Umzug.
+                </p>
 
-          <div className="grid lg:grid-cols-5 gap-8 md:gap-12 items-start">
-            <main
-              className="lg:col-span-3 bg-white p-6 md:p-8 rounded-xl shadow-xl space-y-8"
-            >
-              <article>
-                <h2 className="heading-2">Sorgenfrei umziehen in der Alpenstadt Thun</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">Thun, idyllisch am Thunersee gelegen und umgeben von einer atemberaubenden Bergkulisse, bietet hohe Lebensqualität. Damit Ihr Umzug in oder aus Thun genauso reibungslos verläuft, verbinden wir Sie mit den besten lokalen Umzugsunternehmen. Holen Sie sich jetzt Ihre unverbindlichen Offerten.</p>
-              </article>
+                <div className="bg-white/95 rounded-xl p-3 sm:p-4 mb-6 border border-gray-200 shadow-sm">
+                  <h2 className="text-sm sm:text-base font-bold text-gray-900 mb-2">
+                    Welche Dienstleistung benötigen Sie?
+                  </h2>
+                  <ServiceGrid city={city} compact />
+                </div>
 
+                <div className="flex flex-wrap gap-6 text-sm text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">100% kostenlos</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">Geprüfte Partner</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-green-600" />
+                    <span className="font-medium">Bis zu 40% sparen</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative md:col-span-2">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                  <Image
+                    src={(locationData as any)?.image || '/image/default-umzug.jpg'}
+                    alt="Professionelle Zügelfirma in Thun - Umzugsunternehmen bei der Arbeit"
+                    width={600}
+                    height={450}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-green-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                  <p className="text-sm font-bold">Bis zu 40% sparen</p>
+                  <p className="text-xs text-green-100">Kostenlos & unverbindlich</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Two Column Layout: Content Left, Sidebar Right */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+              <div className="lg:col-span-8">
+                <h2 className="heading-2">
+                  Umzugsfirma Thun: Sicher umziehen in der Region Thunersee
+                </h2>
+                <div className="text-gray-700 mb-8 leading-relaxed space-y-4">
+                  <p>
+                    Thun verbindet See, Altstadt und Nähe zum Berner Oberland - eine attraktive, aber logistisch anspruchsvolle Region für Umzüge. Unterschiedliche Wohnlagen, enge Zufahrten in einzelnen Quartieren und saisonale Verkehrssituationen erfordern eine gute Planung.
+                  </p>
+                  <p>
+                    Über Online-Offerten.ch vergleichen Sie mehrere geprüfte Umzugsunternehmen in Thun mit transparenten Leistungen und klaren Preisen. So finden Sie einfacher den Anbieter, der zu Ihrem Zeitplan, Ihrem Umzugsvolumen und Ihrem Budget passt.
+                  </p>
+                  <p>
+                    Ob Wohnungswechsel innerhalb der Stadt, Umzug ins Umland oder Transport Richtung Oberland: Mit dem passenden Umzugspartner reduzieren Sie Aufwand und Risiko und starten deutlich entspannter in den neuen Abschnitt.
+                  </p>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4">
+                <div className="sticky top-24">
+                  <LocationSidebar city={city} districts={undefined as any} searches={undefined as any} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Content Section */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <main className="space-y-12">
               <article className="pt-8 border-t border-gray-200 space-y-6">
                 <h2 className="heading-2 mb-6">Was kostet ein Umzug mit einer Umzugsfirma in Thun?</h2>
                 <p className="text-body mb-4">
@@ -83,9 +181,8 @@ const UmzugsfirmaThunPageClient = () => {
                 <p className="text-body mb-6">
                   Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Thun und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
                 </p>
-                
+
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  {/* Hourly Rates Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
                       <h3 className="heading-3 !text-white">Umzugspreise - Kosten pro Stunde</h3>
@@ -110,7 +207,6 @@ const UmzugsfirmaThunPageClient = () => {
                     </div>
                   </div>
 
-                  {/* Room Size Costs Table */}
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col h-full">
                     <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex-shrink-0">
                       <h3 className="heading-3 !text-white">Umzugskosten nach Zimmergrössen</h3>
@@ -135,7 +231,7 @@ const UmzugsfirmaThunPageClient = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="bg-gray-50 rounded-lg px-6 py-4 border border-gray-200">
                   <p className="text-body text-gray-600 italic">
                     Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
@@ -143,36 +239,45 @@ const UmzugsfirmaThunPageClient = () => {
                 </div>
               </article>
 
-              <div className="text-center bg-gray-100 p-6 rounded-lg border-l-4 border-blue-500">
-                 <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white group shadow-lg">
+              <article className="pt-8 border-t border-gray-200">
+                <h2 className="heading-2">Unsere Partner für Thun bieten Ihnen</h2>
+                <ul className="list-none space-y-3 mt-4">
+                  {advantages.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+
+              <div className="text-center bg-green-50 p-8 rounded-lg border-l-4 border-green-500 shadow-md">
+                <h3 className="heading-3">Jetzt Umzugsofferten für Thun einholen</h3>
+                <p className="text-gray-700 mb-6 font-medium">
+                  Mit nur einer Anfrage erhalten Sie bis zu fünf kostenlose und unverbindliche Offerten von geprüften Umzugsfirmen in Thun.
+                </p>
+                <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group shadow-lg">
                   <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Thun">
                     Offerten für Thun vergleichen
                     <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
               </div>
-
-              <article className="pt-8 border-t border-gray-200">
-                  <h2 className="heading-2">Unsere Partner für Thun bieten Ihnen:</h2>
-                  <ul className="list-none space-y-3 mt-4">
-                    {advantages.map((item, index) => (
-                      <li key={index} className="flex items-center"><CheckCircle className="h-5 w-5 text-green-500 mr-2"/>{item}</li>
-                    ))}
-                  </ul>
-              </article>
             </main>
-
-            <LocationSidebar city={city} districts={undefined as any} searches={undefined as any} />
           </div>
-          
+        </section>
 
-          <LocationPageNavigation allLocations={locations} currentCity={city} />
-        </div>
+        <section className="py-12 md:py-16 bg-white border-t border-gray-200">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <LocationPageNavigation allLocations={locations} currentCity={city} />
+          </div>
+        </section>
       </div>
     </>
   );
 };
 
 export default UmzugsfirmaThunPageClient;
+
 
 

@@ -204,13 +204,13 @@ const combinedSchema = {
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Umzugsfirma in der Nähe",
+          "name": "Umzugsfirma",
           "item": "https://online-offerten.ch/umzugsfirma"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Umzugsfirma Zürich",
+          "name": "Zürich",
           "item": `https://online-offerten.ch${canonicalUrl}`
         }
       ]
@@ -493,14 +493,14 @@ export default async function UmzugsfirmaZurichPage() {
                 </li>
                 <li>
                   <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
-                    Umzugsfirma in der Nähe
+                    Umzugsfirma
                   </Link>
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />
                 </li>
                 <li className="text-gray-900 font-medium" aria-current="page">
-                  Umzugsfirma Zürich
+                  Zürich
                 </li>
               </ol>
             </nav>
@@ -731,25 +731,6 @@ export default async function UmzugsfirmaZurichPage() {
                 })}
               </div>
 
-              {/* CTA Section - Form Button */}
-              <div className="mt-16 text-center">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                  Jetzt Umzugsfirmen vergleichen und Auftrag starten!
-                </h3>
-                <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-                  Vergleichen Sie schnell und einfach verschiedene Umzugsofferten und finden Sie die passende Umzugsfirma für Ihren Umzug.
-                </p>
-                <Button 
-                  asChild
-                  size="lg" 
-                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-                >
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Zürich">
-                    Kostenlose Offerten anfordern
-                    <ArrowRight className="w-5 h-5 ml-2 inline" />
-                  </Link>
-                </Button>
-              </div>
             </div>
           </section>
         )}
@@ -1066,29 +1047,52 @@ export default async function UmzugsfirmaZurichPage() {
 
               {/* Checklist */}
               <article className="bg-gradient-to-br from-slate-50 to-gray-100 rounded-2xl p-8 md:p-10 border border-gray-200">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Checkliste für die perfekte Wahl</h2>
-                <p className="text-gray-700 mb-6">
-                  Lassen Sie sich nicht von der erstbesten Offerte überzeugen. Vergleichen Sie mehrere Anbieter. Eine gründliche Prüfung ist entscheidend für die beste Wahl.
-                </p>
-                <div className="space-y-6">
-                  {[
-                    { title: 'Detaillierte Offerten einholen', text: 'Eine seriöse Offerte von einer Zügelfirma ist mehr als nur eine Zahl. Sie sollte alle Posten detailliert auflisten: Stundensätze, Mitarbeiterzahl, Fahrzeuggrösse, Versicherung und alle gebuchten Zusatzleistungen.' },
-                    { title: 'Versicherungsschutz prüfen', text: 'Eine ausreichende Transport- und Betriebshaftpflichtversicherung ist nicht verhandelbar. Professionelle Umzugsdienstleister sind bis 100\'000 CHF versichert.' },
-                    { title: 'Bewertungen und Referenzen analysieren', text: 'Lesen Sie authentische Kundenbewertungen auf unserem Portal. Achten Sie auf Kommentare zu Pünktlichkeit, Sorgfalt und Teamfreundlichkeit. Ein Beispiel: „Herr Isufi und sein Team haben unseren Umzug äusserst professionell und freundlich durchgeführt – wir fühlten uns bestens betreut." Unsere Partner verfügen über umfassende Erfahrung in der Vermittlung von Umzügen im Kanton Zürich.' },
-                    { title: 'Regionale Kenntnisse prüfen', text: 'Ein Zügelunternehmen im Kanton Zürich sollte die Region kennen. Fragen Sie nach Erfahrungen mit Umzügen in Ihrer spezifischen Gemeinde.' }
-                  ].map((item, index) => (
-                    <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
-                      <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">
-                          {index + 1}
+                <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                  <div className="lg:col-span-12">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-6">Checkliste für die perfekte Wahl</h2>
+                    <p className="text-gray-700 mb-6">
+                      Lassen Sie sich nicht von der erstbesten Offerte überzeugen. Vergleichen Sie mehrere Anbieter. Eine gründliche Prüfung ist entscheidend für die beste Wahl.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {[
+                        { title: 'Detaillierte Offerten einholen', text: 'Eine seriöse Offerte von einer Zügelfirma ist mehr als nur eine Zahl. Sie sollte alle Posten detailliert auflisten: Stundensätze, Mitarbeiterzahl, Fahrzeuggrösse, Versicherung und alle gebuchten Zusatzleistungen.' },
+                        { title: 'Versicherungsschutz prüfen', text: 'Eine ausreichende Transport- und Betriebshaftpflichtversicherung ist nicht verhandelbar. Professionelle Umzugsdienstleister sind bis 100\'000 CHF versichert.' },
+                        { title: 'Bewertungen und Referenzen analysieren', text: 'Lesen Sie authentische Kundenbewertungen auf unserem Portal. Achten Sie auf Kommentare zu Pünktlichkeit, Sorgfalt und Teamfreundlichkeit. Ein Beispiel: „Herr Isufi und sein Team haben unseren Umzug äusserst professionell und freundlich durchgeführt – wir fühlten uns bestens betreut." Unsere Partner verfügen über umfassende Erfahrung in der Vermittlung von Umzügen im Kanton Zürich.' },
+                        { title: 'Regionale Kenntnisse prüfen', text: 'Ein Zügelunternehmen im Kanton Zürich sollte die Region kennen. Fragen Sie nach Erfahrungen mit Umzügen in Ihrer spezifischen Gemeinde.' }
+                      ].map((item, index) => (
+                        <div key={index} className="bg-white rounded-lg p-6 shadow-sm h-full">
+                          <div className="flex items-start gap-4">
+                            <div className="flex-shrink-0 w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">
+                              {index + 1}
+                            </div>
+                            <div>
+                              <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
+                              <p className="text-gray-600 leading-relaxed">{item.text}</p>
+                              {index === 3 && (
+                                <div className="mt-6 border-t border-gray-100 pt-4">
+                                  <h5 className="text-base font-bold text-gray-900 mb-3">Kurzcheck vor der Entscheidung</h5>
+                                  <ul className="space-y-2 text-gray-700">
+                                    <li className="flex items-start gap-2">
+                                      <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                                      <span>Sind alle Leistungen transparent aufgelistet?</span>
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                      <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                                      <span>Ist der Versicherungsschutz klar dokumentiert?</span>
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                      <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                                      <span>Passen Bewertungen und Erfahrung zu Ihrem Umzug?</span>
+                                    </li>
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
-                          <p className="text-gray-600 leading-relaxed">{item.text}</p>
-                        </div>
-                      </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
               </article>
 
@@ -1148,79 +1152,45 @@ export default async function UmzugsfirmaZurichPage() {
           </section>
         )}
 
-        {/* Google Maps Section - Local SEO Signal */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-gray-100">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Umzugsfirmen in Zürich – Standort & Region
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Unsere geprüften Umzugspartner sind im gesamten Kanton Zürich aktiv. Von der Stadt Zürich über Winterthur bis nach Uster, Dietikon und Dübendorf – wir vermitteln Ihnen lokale Umzugsprofis in Ihrer Nähe.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d172178.95174865046!2d8.397278349999999!3d47.37688945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900b9749bea219%3A0xe66e8df1e71fdc03!2sZ%C3%BCrich!5e0!3m2!1sde!2sch!4v1707850000000!5m2!1sde!2sch"
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Umzugsfirma Zürich - Standort auf Google Maps"
-                className="w-full"
-              />
-            </div>
-            <div className="mt-8 grid md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm text-center">
-                <MapPin className="w-8 h-8 text-green-600 mx-auto mb-3" />
-                <h3 className="font-bold text-gray-900 mb-2">Stadt Zürich</h3>
-                <p className="text-sm text-gray-600">Kreis 1-12, Altstadt, Oerlikon, Zürich-West, Seefeld, Wiedikon</p>
-              </div>
-              <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm text-center">
-                <MapPin className="w-8 h-8 text-green-600 mx-auto mb-3" />
-                <h3 className="font-bold text-gray-900 mb-2">Agglomeration</h3>
-                <p className="text-sm text-gray-600">Winterthur, Uster, Dietikon, Dübendorf, Schlieren, Kloten</p>
-              </div>
-              <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm text-center">
-                <MapPin className="w-8 h-8 text-green-600 mx-auto mb-3" />
-                <h3 className="font-bold text-gray-900 mb-2">Kanton Zürich</h3>
-                <p className="text-sm text-gray-600">Alle Gemeinden im Kanton Zürich, Zürcher Oberland, Unterland, Weinland</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* FAQ Section - Zürich spezifisch */}
-        <section className="py-16 md:py-24 bg-gray-50">
+        <section className="py-12 md:py-16 bg-white border-t border-gray-200 mt-6">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Häufige Fragen zu Umzugsfirmen und Umzugskosten in Zürich
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Antworten auf die wichtigsten Fragen rund um Umzüge im Kanton Zürich
-              </p>
-            </div>
-            
-            <div className="max-w-4xl mx-auto">
-              <Accordion type="single" collapsible className="w-full space-y-4">
-                {zurichFAQs.map((faq, index) => (
-                  <AccordionItem 
-                    key={index} 
-                    value={`item-${index}`}
-                    className="bg-white rounded-xl border border-gray-200 shadow-sm px-6 py-2 mb-4"
-                  >
-                    <AccordionTrigger className="text-xl font-semibold text-gray-900 hover:no-underline py-4">
-                      <h4 className="faq-question">{faq.question}</h4>
-                    </AccordionTrigger>
-                    <AccordionContent className="text-gray-700 leading-relaxed pb-4">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+            <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+              <div className="md:col-span-3">
+                <div className="mb-8">
+                  <h2 className="heading-2">
+                    Häufige Fragen zu Umzugsfirmen und Umzugskosten in Zürich
+                  </h2>
+                </div>
+                <Accordion type="single" collapsible className="w-full">
+                  {zurichFAQs.map((faq, index) => (
+                    <AccordionItem key={index} value={`item-${index + 1}`} className="border-b border-gray-200 last:border-b-0">
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                        <h4 className="faq-question">{faq.question}</h4>
+                      </AccordionTrigger>
+                      <AccordionContent className="text-body leading-relaxed">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+              <div className="relative md:col-span-2">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                  <Image
+                    src={imageUrl}
+                    alt="Häufige Fragen zu Umzugsfirmen und Umzugskosten in Zürich"
+                    width={600}
+                    height={450}
+                    className="w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+                  <p className="text-sm font-bold">Fragen & Antworten</p>
+                  <p className="text-xs text-blue-100">Rund um Zürich-Umzüge</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -153,13 +153,13 @@ const combinedSchema = {
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Umzugsfirma in der Nähe",
+          "name": "Umzugsfirma",
           "item": "https://online-offerten.ch/umzugsfirma"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Umzugsfirma Bern",
+          "name": "Bern",
           "item": `https://online-offerten.ch${canonicalUrl}`
         }
       ]
@@ -330,5 +330,6 @@ export default async function UmzugsfirmaBernPage() {
     </>
   )
 }
+
 
 

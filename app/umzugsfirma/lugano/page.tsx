@@ -87,8 +87,8 @@ const combinedSchema = {
     webPageSchema,
     { "@type": "BreadcrumbList", "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://online-offerten.ch/" },
-      { "@type": "ListItem", "position": 2, "name": "Umzugsfirma in der Nähe", "item": "https://online-offerten.ch/umzugsfirma" },
-      { "@type": "ListItem", "position": 3, "name": "Umzugsfirma Lugano", "item": `https://online-offerten.ch${canonicalUrl}` }
+      { "@type": "ListItem", "position": 2, "name": "Umzugsfirma", "item": "https://online-offerten.ch/umzugsfirma" },
+      { "@type": "ListItem", "position": 3, "name": "Lugano", "item": `https://online-offerten.ch${canonicalUrl}` }
     ]},
     serviceSchema, faqSchema
   ]
@@ -156,5 +156,6 @@ export default async function UmzugsfirmaLuganoPage() {
     </>
   )
 }
+
 
 
