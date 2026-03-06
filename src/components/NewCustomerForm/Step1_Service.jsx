@@ -1,4 +1,4 @@
-﻿import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 // framer-motion removed – CSS transitions for better INP
 import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, ArrowUpDown, ArrowRight } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi'; 
@@ -60,10 +60,10 @@ const ServiceButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) =
     <button
       type="button"
       onClick={() => onClick(id)}
-      className={`w-full flex items-center gap-4 p-4 sm:p-5 border-2 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]
+      className={`w-full flex items-center gap-4 p-4 sm:p-5 border-2 rounded-xl transition-all duration-300 md:hover:scale-[1.02] active:scale-[0.98]
         ${selected 
           ? `${config.bgColor} ${config.borderColor} shadow-lg` 
-          : 'bg-white border-gray-200 hover:border-green-400 hover:bg-green-50'
+          : 'bg-white border-gray-200 md:hover:border-green-400 md:hover:bg-green-50'
         }`}
     >
       {/* Icon Container */}
@@ -103,10 +103,10 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
     <button
       type="button"
       onClick={() => onClick(id)}
-      className={`w-full p-2.5 sm:p-3 border-2 rounded-lg text-left transition-all duration-200 ease-in-out transform hover:-translate-y-0.5
+      className={`w-full p-2.5 sm:p-3 border-2 rounded-lg text-left transition-all duration-200 ease-in-out transform md:hover:-translate-y-0.5
         ${selected 
           ? 'bg-teal-50 border-teal-500 shadow-md ring-1 ring-teal-500' 
-          : 'bg-white border-gray-200 hover:border-teal-400'
+          : 'bg-white border-gray-200 md:hover:border-teal-400'
         }`}
     >
       <div className="flex items-center mb-0.5 sm:mb-1">
@@ -138,7 +138,7 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.whatToClean.title')} <span className="text-red-500">*</span></h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {whatToCleanOptions.map(option => (
-                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_clean?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_clean?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`what_to_clean_${option.id}`}
@@ -169,7 +169,7 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                             key={option}
                             htmlFor={`area_${option}`}
                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                ${formData.estimated_area === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`
+                                ${formData.estimated_area === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`
                             }
                         >
                             <RadioGroupItem value={option} id={`area_${option}`} className="h-5 w-5 shrink-0" />
@@ -199,7 +199,7 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.floorTypes.title')} <span className="text-red-500">*</span></h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {floorTypeOptions.map(option => (
-                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.floor_types?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.floor_types?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`floor_type_${option.id}`}
@@ -230,7 +230,7 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                             key={option}
                             htmlFor={`floor_area_${option}`}
                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                ${formData.floor_area === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`
+                                ${formData.floor_area === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`
                             }
                         >
                             <RadioGroupItem value={option} id={`floor_area_${option}`} className="h-5 w-5 shrink-0" />
@@ -266,7 +266,7 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                     className="grid grid-cols-2 gap-2"
                 >
                     {flaecheOptions.map(option => (
-                        <Label key={option} htmlFor={`flaeche_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_flaeche === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`flaeche_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_flaeche === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <RadioGroupItem value={option} id={`flaeche_${option}`} className="h-5 w-5 shrink-0" />
                             <span className="font-normal text-sm text-gray-800">{t(`step1.fassadenreinigung.flaeche.${option}`)}</span>
                         </Label>
@@ -283,7 +283,7 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                     className="grid grid-cols-1 sm:grid-cols-3 gap-2"
                 >
                     {erreichbarkeitOptions.map(option => (
-                        <Label key={option} htmlFor={`erreichbarkeit_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_erreichbarkeit === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`erreichbarkeit_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_erreichbarkeit === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <RadioGroupItem value={option} id={`erreichbarkeit_${option}`} className="h-5 w-5 shrink-0" />
                             <span className="font-normal text-sm text-gray-800">{t(`step1.fassadenreinigung.erreichbarkeit.${option}`)}</span>
                         </Label>
@@ -295,7 +295,7 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fassadenreinigung.verschmutzung.title')} <span className="text-red-500">*</span></h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {verschmutzungOptions.map(option => (
-                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.fassadenreinigung_verschmutzung?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.fassadenreinigung_verschmutzung?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`verschmutzung_${option.id}`}
@@ -327,7 +327,7 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fensterreinigung.anzahl.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup name="fensterreinigung_anzahl" value={formData.fensterreinigung_anzahl || ''} onValueChange={(value) => handleRadioGroupChange('fensterreinigung_anzahl', value)} className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {anzahlOptions.map(option => (
-                        <Label key={option} htmlFor={`anzahl_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_anzahl === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`anzahl_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_anzahl === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <RadioGroupItem value={option} id={`anzahl_${option}`} className="h-5 w-5 shrink-0" />
                             <span className="font-normal text-sm text-gray-800">{t(`step1.fensterreinigung.anzahl.${option}`)}</span>
                         </Label>
@@ -339,7 +339,7 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fensterreinigung.scope.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup name="fensterreinigung_scope" value={formData.fensterreinigung_scope || ''} onValueChange={(value) => handleRadioGroupChange('fensterreinigung_scope', value)} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     {scopeOptions.map(option => (
-                        <Label key={option} htmlFor={`scope_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_scope === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`scope_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_scope === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <RadioGroupItem value={option} id={`scope_${option}`} className="h-5 w-5 shrink-0" />
                             <span className="font-normal text-sm text-gray-800">{t(`step1.fensterreinigung.scope.${option}`)}</span>
                         </Label>
@@ -351,7 +351,7 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
                 <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fensterreinigung.zugang.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup name="fensterreinigung_zugang" value={formData.fensterreinigung_zugang || ''} onValueChange={(value) => handleRadioGroupChange('fensterreinigung_zugang', value)} className="grid grid-cols-2 gap-2">
                     {zugangOptions.map(option => (
-                        <Label key={option} htmlFor={`zugang_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_zugang === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`zugang_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_zugang === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
                             <RadioGroupItem value={option} id={`zugang_${option}`} className="h-5 w-5 shrink-0" />
                             <span className="font-normal text-sm text-gray-800">{t(`step1.fensterreinigung.zugang.${option}`)}</span>
                         </Label>
@@ -405,7 +405,7 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                                     key={option}
                                     htmlFor={`freq_${option}`}
                                     className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                        ${formData.cleaning_frequency === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 hover:border-green-300'}`
+                                        ${formData.cleaning_frequency === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`
                                     }
                                 >
                                     <RadioGroupItem value={option} id={`freq_${option}`} className="h-5 w-5 shrink-0" />
@@ -508,7 +508,7 @@ const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
                   key={option}
                   htmlFor={`cleaning_${option}`}
                   className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                    ${formData.umzugArt === option ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-300'}`
+                    ${formData.umzugArt === option ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 md:hover:border-teal-300'}`
                   }
                 >
                   <RadioGroupItem value={option} id={`cleaning_${option}`} className="h-5 w-5 shrink-0" />
@@ -550,7 +550,7 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 {currentOptions.map(option => (
                     <div key={option}>
-                        <div className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_paint?.[option] ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-400'}`}>
+                        <div className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_paint?.[option] ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 md:hover:border-teal-400'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`what_to_paint_${option}`}
@@ -615,7 +615,7 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
                             key={opt.value}
                             htmlFor={`condition_${opt.value}`}
                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                ${formData.maler_current_condition === opt.value ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 hover:border-teal-300'}`
+                                ${formData.maler_current_condition === opt.value ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 md:hover:border-teal-300'}`
                             }
                         >
                             <RadioGroupItem value={opt.value} id={`condition_${opt.value}`} className="h-5 w-5 shrink-0" />

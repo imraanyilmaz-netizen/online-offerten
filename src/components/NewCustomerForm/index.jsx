@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
@@ -47,7 +47,7 @@ const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
         ))}
       </div>
       <span className="font-semibold text-gray-800">{(rating || 0).toFixed(1)}</span>
-      <a href="/kunden-bewertungen" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-green-600 hover:underline transition-colors">({reviewCount} {t('ratings', { count: reviewCount })})</a>
+      <a href="/kunden-bewertungen" target="_blank" rel="noopener noreferrer" className="text-gray-600 md:hover:text-green-600 md:hover:underline transition-colors">({reviewCount} {t('ratings', { count: reviewCount })})</a>
     </div>
   );
 };
@@ -1174,18 +1174,18 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             <Button 
               type="button" 
               onClick={handleNextStep} 
-              className="bg-green-500 hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={(currentStep === 1 && !isStep1Completed) || (currentStep === 2 && !isStep2Completed)}
             >
                 {t('nextButton')}
-                <ArrowLeft className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 rotate-180" />
+                <ArrowLeft className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1 rotate-180" />
             </Button>
           )}
           
           {currentStep === TOTAL_FORM_STEPS && (
-            <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base" disabled={isLoading}>
+            <Button type="submit" className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base" disabled={isLoading}>
               {submitButtonText}
-              {isLoading ? <Loader2 className="w-4 h-4 ml-2 animate-spin" /> : <Send className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />}
+              {isLoading ? <Loader2 className="w-4 h-4 ml-2 animate-spin" /> : <Send className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1" />}
             </Button>
           )}
 
@@ -1205,14 +1205,14 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
               <button 
                 type="button"
                 onClick={() => setTickerIndex(prev => prev === 0 ? recentRequests.length - 1 : prev - 1)}
-                className="p-1 rounded-full hover:bg-gray-200 transition-colors text-gray-400 hover:text-gray-600"
+                className="p-1 rounded-full md:hover:bg-gray-200 transition-colors text-gray-400 md:hover:text-gray-600"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button 
                 type="button"
                 onClick={() => setTickerIndex(prev => (prev + 1) % recentRequests.length)}
-                className="p-1 rounded-full hover:bg-gray-200 transition-colors text-gray-400 hover:text-gray-600"
+                className="p-1 rounded-full md:hover:bg-gray-200 transition-colors text-gray-400 md:hover:text-gray-600"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -1269,8 +1269,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleStayInForm} className="bg-green-500 hover:bg-green-600 text-white border-none">{t('exitAlert.cancel')}</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmExit} className="bg-gray-100 hover:bg-gray-200 text-gray-600 border border-gray-300">{t('exitAlert.confirm')}</AlertDialogAction>
+            <AlertDialogCancel onClick={handleStayInForm} className="bg-green-500 md:hover:bg-green-600 text-white border-none">{t('exitAlert.cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmExit} className="bg-gray-100 md:hover:bg-gray-200 text-gray-600 border border-gray-300">{t('exitAlert.confirm')}</AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -188,7 +188,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                     {displayedStreetSuggestions.map((suggestion) => (
                       <li
                         key={suggestion.id}
-                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-start"
+                        className="px-3 py-2 text-sm text-gray-700 md:hover:bg-gray-100 cursor-pointer flex items-start"
                         onMouseDown={(e) => {
                           e.preventDefault();
                           handleStreetSuggestionSelect(suggestion);
@@ -210,7 +210,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                       <li className="px-3 py-2 border-t border-gray-200">
                         <button
                           type="button"
-                          className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center hover:underline"
+                          className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center md:hover:underline"
                           onClick={(e) => {
                             e.preventDefault();
                             setShowAllStreetSuggestions(true);

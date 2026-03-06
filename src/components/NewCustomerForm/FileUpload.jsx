@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UploadCloud, File as FileIcon, X, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -88,7 +88,7 @@ const FileUpload = ({ files, onFilesChange, onFileRemove }) => {
       <div
         {...getRootProps()}
         className={`flex flex-col items-center justify-center w-full p-6 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer transition-colors
-          ${isDragActive ? 'bg-green-50 border-green-400' : 'bg-gray-50 hover:bg-gray-100'}`}
+          ${isDragActive ? 'bg-green-50 border-green-400' : 'bg-gray-50 md:hover:bg-gray-100'}`}
       >
         <input {...getInputProps()} />
         <UploadCloud className="w-10 h-10 mb-3 text-gray-500" />
@@ -111,7 +111,7 @@ const FileUpload = ({ files, onFilesChange, onFileRemove }) => {
                     <p className="text-xs text-gray-500">{formatBytes(file.size)}</p>
                   </div>
                 </div>
-                <Button type="button" variant="ghost" size="icon" onClick={() => onFileRemove(file)} className="h-7 w-7 text-gray-500 hover:text-red-500 hover:bg-red-100">
+                <Button type="button" variant="ghost" size="icon" onClick={() => onFileRemove(file)} className="h-7 w-7 text-gray-500 md:hover:text-red-500 md:hover:bg-red-100">
                   <X className="w-4 h-4" />
                 </Button>
               </li>

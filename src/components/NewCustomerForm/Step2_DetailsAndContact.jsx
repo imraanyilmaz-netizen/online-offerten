@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Label } from "@/components/ui/label";
@@ -238,7 +238,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                     {displayedStreetSuggestions.map((suggestion) => (
                       <li
                         key={suggestion.id}
-                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-start"
+                        className="px-3 py-2 text-sm text-gray-700 md:hover:bg-gray-100 cursor-pointer flex items-start"
                         onMouseDown={(e) => {
                           e.preventDefault();
                           handleStreetSuggestionSelect(suggestion);
@@ -260,7 +260,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                       <li className="px-3 py-2 border-t border-gray-200">
                         <button
                           type="button"
-                          className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center hover:underline"
+                          className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center md:hover:underline"
                           onClick={(e) => {
                             e.preventDefault();
                             setShowAllStreetSuggestions(true);
@@ -412,7 +412,7 @@ const HowFoundButton = ({ id, labelKey, icon, selected, onClick }) => {
         variant="outline"
         onClick={() => onClick(id)}
         className={`flex-1 justify-start text-left h-auto py-2.5 px-3
-          ${selected ? 'bg-green-50 border-green-500 text-green-700 ring-1 ring-green-500' : 'text-gray-700 hover:bg-gray-50'}`}
+          ${selected ? 'bg-green-50 border-green-500 text-green-700 ring-1 ring-green-500' : 'text-gray-700 md:hover:bg-gray-50'}`}
       >
         {icon}
         <span className="ml-2 text-sm sm:text-base">{t(labelKey)}</span>
@@ -429,10 +429,10 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
         onClick={() => onClick(count)}
         className={`w-full h-auto py-2 px-1 flex flex-col items-center justify-center text-center transition-all duration-200
           ${selected 
-            ? 'bg-green-500 border-green-600 text-white hover:bg-green-600 shadow-lg ring-2 ring-green-500 ring-offset-1 transform scale-105' 
+            ? 'bg-green-500 border-green-600 text-white md:hover:bg-green-600 shadow-lg ring-2 ring-green-500 ring-offset-1 transform scale-105' 
             : recommended 
-              ? 'border-green-400 text-green-700 hover:bg-green-50 hover:border-green-500' 
-              : 'text-gray-700 hover:bg-gray-50 hover:border-gray-400'
+              ? 'border-green-400 text-green-700 md:hover:bg-green-50 md:hover:border-green-500' 
+              : 'text-gray-700 md:hover:bg-gray-50 md:hover:border-gray-400'
           }
         `}
       >
@@ -763,11 +763,11 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
             />
             <Label htmlFor="datenschutz" className="font-medium text-base text-slate-800 leading-relaxed cursor-pointer flex-1">
               Ich akzeptiere die{' '}
-              <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">
+              <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
                 AGB
               </Link>
               {' '}und die{' '}
-              <Link href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">
+              <Link href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
                 Datenschutzerklärung
               </Link>
               .

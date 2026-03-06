@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
 // framer-motion removed - CSS transitions for better INP
 import { useTranslation } from 'react-i18next';
@@ -101,7 +101,7 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
             {helpfulResources.map((resource, index) => (
               <Link href={resource.link} key={index} className="block group">
-                <Card className="h-full flex flex-col shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-gray-200 hover:border-green-400">
+                <Card className="h-full flex flex-col shadow-md md:hover:shadow-xl md:hover:-translate-y-1 transition-all duration-300 border-gray-200 md:hover:border-green-400">
                   <CardHeader className="flex-row items-center gap-4">
                     {resource.icon}
                     <CardTitle className="text-lg font-semibold text-gray-800">{resource.title}</CardTitle>
@@ -110,9 +110,9 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
                     <CardDescription className="text-gray-600">{resource.description}</CardDescription>
                   </CardContent>
                   <div className="p-4 pt-0">
-                      <div className="text-green-600 font-semibold flex items-center group-hover:text-green-700 transition-colors">
+                      <div className="text-green-600 font-semibold flex items-center group-md:hover:text-green-700 transition-colors">
                         {resource.buttonText}
-                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1" />
                       </div>
                   </div>
                 </Card>
@@ -126,9 +126,9 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
           <Button 
             onClick={onResetForm} 
             size="lg" 
-            className="bg-green-500 hover:bg-green-600 text-white group"
+            className="bg-green-500 md:hover:bg-green-600 text-white group"
           >
-            <ArrowLeft size={20} className="mr-2 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft size={20} className="mr-2 transition-transform group-md:hover:-translate-x-1" />
             {t('quoteConfirmation.newQuoteButton')}
           </Button>
         </div>

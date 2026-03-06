@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next'; 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -46,7 +46,7 @@ const HowFoundButton = ({ id, labelKey, icon, selected, onClick }) => {
         variant="outline"
         onClick={() => onClick(id)}
         className={`flex-1 justify-start text-left h-auto py-2.5 px-3
-          ${selected ? 'bg-green-50 border-green-500 text-green-700 ring-1 ring-green-500' : 'text-gray-700 hover:bg-gray-50'}`}
+          ${selected ? 'bg-green-50 border-green-500 text-green-700 ring-1 ring-green-500' : 'text-gray-700 md:hover:bg-gray-50'}`}
       >
         {icon}
         <span className="ml-2 text-sm sm:text-base">{t(labelKey)}</span>
@@ -63,10 +63,10 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
         onClick={() => onClick(count)}
         className={`w-full h-auto py-2 px-1 flex flex-col items-center justify-center text-center transition-all duration-200
           ${selected 
-            ? 'bg-green-500 border-green-600 text-white hover:bg-green-600 shadow-lg ring-2 ring-green-500 ring-offset-1 transform scale-105' 
+            ? 'bg-green-500 border-green-600 text-white md:hover:bg-green-600 shadow-lg ring-2 ring-green-500 ring-offset-1 transform scale-105' 
             : recommended 
-              ? 'border-green-400 text-green-700 hover:bg-green-50 hover:border-green-500' 
-              : 'text-gray-700 hover:bg-gray-50 hover:border-gray-400'
+              ? 'border-green-400 text-green-700 md:hover:bg-green-50 md:hover:border-green-500' 
+              : 'text-gray-700 md:hover:bg-gray-50 md:hover:border-gray-400'
           }
         `}
       >
