@@ -96,7 +96,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
     
     const isGewerbeService =
         (formData.service === 'umzug' && formData.umzugArt === 'geschaeftsumzug') ||
-        (formData.service === 'reinigung' && formData.umzugArt === 'buero') || // Büroreinigung uses full gewerbe list
+        (formData.service === 'reinigung' && ['buero', 'praxisreinigung'].includes(formData.umzugArt)) || // Büro-/Praxisreinigung use full gewerbe list
         (formData.service === 'maler' && formData.umzugArt === 'maler_gewerbe');
 
     if (isGewerbeService) {
@@ -508,7 +508,7 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
 
   const showCompanyNameField = 
     (formData.service === 'umzug' && formData.umzugArt === 'geschaeftsumzug') ||
-    (formData.service === 'reinigung' && ['buero', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fassadenreinigung'].includes(formData.umzugArt)) ||
+    (formData.service === 'reinigung' && ['buero', 'praxisreinigung', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fassadenreinigung'].includes(formData.umzugArt)) ||
     (formData.service === 'maler' && formData.umzugArt === 'maler_gewerbe') ||
     (formData.from_object_type === 'gewerbeimmobilie');
 

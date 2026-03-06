@@ -559,7 +559,7 @@ const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
   const { t } = useTranslation('newCustomerForm');
   
   const cleaningGroups = {
-    residential: ['wohnungsreinigung', 'hausreinigung', 'buero'],
+    residential: ['wohnungsreinigung', 'hausreinigung', 'buero', 'praxisreinigung', 'treppenhausreinigung'],
     special: ['umzugsreinigung', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fensterreinigung', 'bodenreinigung'],
     exterior: ['fassadenreinigung', 'hofreinigung']
   };

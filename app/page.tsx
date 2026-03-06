@@ -718,7 +718,7 @@ export default async function HomePage() {
           >
             {/* Overlay for better text readability */}
             <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white/85 to-green-50/40 pointer-events-none z-10"></div>
-            <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-20">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-20">
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="heading-2 mb-4">
                   Online anfragen, Offerten vergleichen und smart entscheiden.
