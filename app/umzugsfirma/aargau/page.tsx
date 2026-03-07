@@ -488,33 +488,39 @@ export default async function UmzugsfirmaAargauPage() {
           </div>
         </section>
 
-        {/* Service Selection Cards */}
-        <section className="py-16 md:py-20 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 border-b border-gray-200 relative overflow-hidden">
-          {/* Decorative Background Elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-30 -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-100 rounded-full blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"></div>
-          
-          <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-            <div className="text-center mb-12">
-              <h2 className="typography-h2 mb-4 text-gray-900" style={{ textAlign: 'center' }}>
-                Wählen Sie Ihre gewünschte Dienstleistung
-              </h2>
-              <p className="typography-p max-w-2xl mx-auto text-gray-600" style={{ textAlign: 'center' }}>
-                Professionelle Umzugsservices für jeden Bedarf – von Privatumzug bis Spezialtransport
-              </p>
-            </div>
-            <ServiceGrid city={city} />
+        {/* Main Content Section */}
+        <section className="py-16 md:py-24 bg-white" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
+          <div className="container mx-auto max-w-7xl px-4 md:px-6" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
+            <main className="space-y-12">
+              {/* Introduction */}
+              <article>
+                <h2 className="typography-h2 mb-6">
+                  Umzugsfirma im Aargau finden & Umzugsofferten vergleichen
+                </h2>
+                <div className="prose prose-lg max-w-none">
+                  <p className="typography-p mb-4">
+                    Der <strong>Aargau</strong>, liebevoll auch "Rüebliland" genannt, ist einer der schönsten und wirtschaftsstärksten Kantone der Schweiz. Mit seiner zentralen Lage zwischen Zürich, Basel und Bern ist der Aargau ein beliebter Wohn- und Wirtschaftsstandort. Ein Umzug in dieser Region – ob nach <Link href="/umzugsfirma/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Aarau</Link>, <Link href="/umzugsfirma/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Baden</Link>, <Link href="/umzugsfirma/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Zofingen</Link>, <Link href="/umzugsfirma/aargau/brugg" className="text-green-600 hover:text-green-800 underline font-semibold">Brugg</Link> oder in eine der vielen charmanten Gemeinden – erfordert einen professionellen <strong>Umzugsdienstleister</strong> oder <strong>Zügelunternehmen</strong>, der die Besonderheiten der Region kennt.
+                  </p>
+                  <p className="typography-p mb-4">
+                    Erfahrene <strong>Transportunternehmen für Umzüge</strong> im Aargau kennen die Verkehrswege, die Parkregelungen in den historischen Altstädten und die logistischen Herausforderungen der Region. Über unser Portal können Sie mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> vergleichen und die beste Lösung für Ihr Projekt finden. Professionelle <strong>regionale Zügelprofis</strong> kümmern sich um die Organisation von Halteverbotszonen, planen die schnellste Route und stellen sicher, dass Ihr Hab und Gut sicher und unversehrt im neuen Zuhause ankommt. Alle Partner sind <strong>versichert gemäss OR</strong> und verfügen über langjährige Erfahrung.
+                  </p>
+                  <p className="typography-p">
+                    Der Vergleich mehrerer Anbieter gibt Ihnen die Sicherheit, einen geprüften und versicherten <strong>Umzugspartner im Aargau</strong> zu finden, der Ihren Ansprüchen gerecht wird. Durch den direkten Vergleich finden Sie das beste Preis-Leistungs-Verhältnis und sparen dabei erheblich. Unser <strong>Schweizer Kundenservice</strong> steht Ihnen bei allen Fragen zur Verfügung.
+                  </p>
+                </div>
+              </article>
+            </main>
           </div>
         </section>
 
         {/* How It Works Section */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-gray-100">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="text-center mb-12">
+            <div className="text-left mb-12">
               <h2 className="typography-h2 mb-4" style={{ textAlign: 'left' }}>
                 So funktioniert's: Ihr Umzug im Aargau leicht gemacht
               </h2>
-              <p className="typography-p max-w-2xl mx-auto" style={{ textAlign: 'left' }}>
+              <p className="typography-p max-w-2xl" style={{ textAlign: 'left' }}>
                 In nur drei einfachen Schritten erhalten Sie mehrere Offerten von geprüften <strong>Umzugsfirmen im Aargau</strong> und <strong>Zügelfirmen</strong> aus dem Aargau
               </p>
             </div>
@@ -683,31 +689,6 @@ export default async function UmzugsfirmaAargauPage() {
           </section>
         )}
 
-        {/* Main Content Section */}
-        <section className="py-16 md:py-24 bg-white" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
-          <div className="container mx-auto max-w-7xl px-4 md:px-6" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
-            <main className="space-y-12">
-              {/* Introduction */}
-              <article>
-                <h2 className="typography-h2 mb-6">
-                  Umzug im Kanton Aargau – Professionelle Anbieter vergleichen
-                </h2>
-                <div className="prose prose-lg max-w-none">
-                  <p className="typography-p mb-4">
-                    Der <strong>Aargau</strong>, liebevoll auch "Rüebliland" genannt, ist einer der schönsten und wirtschaftsstärksten Kantone der Schweiz. Mit seiner zentralen Lage zwischen Zürich, Basel und Bern ist der Aargau ein beliebter Wohn- und Wirtschaftsstandort. Ein Umzug in dieser Region – ob nach <Link href="/umzugsfirma/aargau/aarau" className="text-green-600 hover:text-green-800 underline font-semibold">Aarau</Link>, <Link href="/umzugsfirma/aargau/baden" className="text-green-600 hover:text-green-800 underline font-semibold">Baden</Link>, <Link href="/umzugsfirma/aargau/zofingen" className="text-green-600 hover:text-green-800 underline font-semibold">Zofingen</Link>, <Link href="/umzugsfirma/aargau/brugg" className="text-green-600 hover:text-green-800 underline font-semibold">Brugg</Link> oder in eine der vielen charmanten Gemeinden – erfordert einen professionellen <strong>Umzugsdienstleister</strong> oder <strong>Zügelunternehmen</strong>, der die Besonderheiten der Region kennt.
-                  </p>
-                  <p className="typography-p mb-4">
-                    Erfahrene <strong>Transportunternehmen für Umzüge</strong> im Aargau kennen die Verkehrswege, die Parkregelungen in den historischen Altstädten und die logistischen Herausforderungen der Region. Über unser Portal können Sie mehrere <strong>geprüfte Partner nach Schweizer Standards</strong> vergleichen und die beste Lösung für Ihr Projekt finden. Professionelle <strong>regionale Zügelprofis</strong> kümmern sich um die Organisation von Halteverbotszonen, planen die schnellste Route und stellen sicher, dass Ihr Hab und Gut sicher und unversehrt im neuen Zuhause ankommt. Alle Partner sind <strong>versichert gemäss OR</strong> und verfügen über langjährige Erfahrung.
-                  </p>
-                  <p className="typography-p">
-                    Der Vergleich mehrerer Anbieter gibt Ihnen die Sicherheit, einen geprüften und versicherten <strong>Umzugspartner im Aargau</strong> zu finden, der Ihren Ansprüchen gerecht wird. Durch den direkten Vergleich finden Sie das beste Preis-Leistungs-Verhältnis und sparen dabei erheblich. Unser <strong>Schweizer Kundenservice</strong> steht Ihnen bei allen Fragen zur Verfügung.
-                  </p>
-                </div>
-              </article>
-            </main>
-          </div>
-        </section>
-
         {/* Benefits Section - Full Width */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -758,59 +739,62 @@ export default async function UmzugsfirmaAargauPage() {
                   Die angegebenen Richtwerte beziehen sich auf Umzüge ab oder innerhalb von Aargau und dienen ausschliesslich zur Orientierung. Preisunterschiede können je nach Wohnsituation, Zugänglichkeit der Liegenschaft und Umfang des Umzugsguts entstehen.
                 </p>
                 
-                {/* Hourly Rates Table */}
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 mb-6">
-                  <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4">
-                    <h3 className="typography-h3 text-white">Umzugspreise - Kosten pro Stunde</h3>
-                  </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th className="px-6 py-4 text-left typography-h4 border-b border-gray-200">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
-                          <th className="px-6 py-4 text-right typography-h4 border-b border-gray-200">Preis</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {hourlyRates.map((row, index) => (
-                          <tr key={index} className="hover:bg-gray-50 transition-colors">
-                            <td className="px-6 py-4 border-b border-gray-100 typography-p">{row.service}</td>
-                            <td className="px-6 py-4 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+                  {/* Hourly Rates Table */}
+                  <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-5 py-3">
+                      <h3 className="typography-h3 text-white">Umzugspreise - Kosten pro Stunde</h3>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200">Umzugswagen und Zügelmänner (ca. 25 m³)</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200">Preis</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {hourlyRates.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.service}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Room Size Costs Table */}
+                  <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+                    <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-5 py-3">
+                      <h3 className="typography-h3 text-white">Umzugskosten nach Zimmergrössen</h3>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left typography-h4 border-b border-gray-200">Anzahl Zimmer</th>
+                            <th className="px-4 py-3 text-right typography-h4 border-b border-gray-200">Umzugskosten durchschnittlich (CHF)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {costTableRows.map((row, index) => (
+                            <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 border-b border-gray-100 typography-p">{row.size}</td>
+                              <td className="px-4 py-3 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
 
-                {/* Room Size Costs Table */}
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 mb-6">
-                  <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4">
-                    <h3 className="typography-h3 text-white">Umzugskosten nach Zimmergrössen</h3>
-                  </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th className="px-6 py-4 text-left typography-h4 border-b border-gray-200">Anzahl Zimmer</th>
-                          <th className="px-6 py-4 text-right typography-h4 border-b border-gray-200">Umzugskosten durchschnittlich (CHF)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {costTableRows.map((row, index) => (
-                          <tr key={index} className="hover:bg-gray-50 transition-colors">
-                            <td className="px-6 py-4 border-b border-gray-100 typography-p">{row.size}</td>
-                            <td className="px-6 py-4 border-b border-gray-100 text-right typography-p font-semibold text-green-600">{row.cost}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                    <p className="typography-p text-gray-600 italic">
-                      Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
-                    </p>
-                  </div>
+                <div className="rounded-xl border border-gray-200 bg-gray-50 px-6 py-4">
+                  <p className="typography-p text-gray-600 italic">
+                    Alle Angaben verstehen sich exklusive Mehrwertsteuer. Kosten für An- und Rückfahrt, Verpackungsmaterial sowie zusätzliche Leistungen werden in der Regel nach individuellem Aufwand berechnet und separat ausgewiesen.
+                  </p>
                 </div>
               </article>
 
@@ -982,7 +966,7 @@ export default async function UmzugsfirmaAargauPage() {
                 </p>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { icon: 'Home', title: 'Privatumzug', link: '/privatumzug', desc: 'Wohnungswechsel individuell' },
+                    { icon: 'Startseite', title: 'Privatumzug', link: '/privatumzug', desc: 'Wohnungswechsel individuell' },
                     { icon: 'Building', title: 'Geschäftsumzug', link: '/geschaeftsumzug', desc: 'Büro- und Firmenumzug' },
                     { icon: 'Globe', title: 'Internationale Umzüge', link: '/internationale-umzuege', desc: 'Umzug ins Ausland' },
                     { icon: 'Package', title: 'Spezialtransporte', link: '/spezialtransporte', desc: 'Klavier, Tresor, Maschinen' },

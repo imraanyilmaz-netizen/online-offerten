@@ -131,9 +131,7 @@ const PrivateUmzugPageClient = () => {
             <nav className="mb-3 pt-4" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-green-600 transition-colors">
-                    Home
-                  </Link>
+                  <Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link>
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />
@@ -209,35 +207,25 @@ const PrivateUmzugPageClient = () => {
               <div className="relative md:col-span-2">
                 <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
                   <h3 className="heading-3 text-center mb-6">
-                    Finden Sie Ihre Umzugsfirma
+                    Die besten Umzugsfirmen bei Online-Offerten.ch finden
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-start">
-                      <MapPin className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="font-semibold text-gray-900">Qualifizierte Anbieter</p>
-                        <p className="text-sm text-gray-600">Finden Sie qualifizierte Anbieter direkt in Ihrer Region</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start">
                       <ShieldCheck className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-gray-900">100% kostenlos & unverbindlich</p>
-                        <p className="text-sm text-gray-600">Keine Gebühren, keine versteckten Kosten, keine Verpflichtungen</p>
+                        <p className="font-semibold text-gray-900">Kostenlose und unverbindliche Anfrage</p>
                       </div>
                     </div>
                     <div className="flex items-start">
-                      <TrendingUp className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-gray-900">Transparente Preise</p>
-                        <p className="text-sm text-gray-600">Durch den Vergleich mehrerer lokaler Umzugsfirmen finden Sie die besten Preise</p>
+                        <p className="font-semibold text-gray-900">Ausschließlich qualitätsgeprüfte Umzugsfirmen</p>
                       </div>
                     </div>
                     <div className="flex items-start">
-                      <Users className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <MapPin className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-gray-900">Versicherte Partner</p>
-                        <p className="text-sm text-gray-600">Alle Partnerfirmen sind versichert und verfügen über positive Bewertungen</p>
+                        <p className="font-semibold text-gray-900">Auswahl aus mehreren Anbietern in Ihrer Region</p>
                       </div>
                     </div>
                   </div>

@@ -135,7 +135,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Home",
+          "name": "Startseite",
           "item": "https://online-offerten.ch/"
         }
       ]
@@ -326,7 +326,7 @@ export default async function HomePage() {
               <div className="max-w-2xl text-left">
                 <div className="mb-4">
                   <div className="hidden sm:inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700 shadow-sm mb-3">
-                    Jetzt Preise vergleichen
+                    Jetzt kostenlos vergleichen
                   </div>
                   <div className="relative">
                     <h1 className="heading-1 break-words pr-28 sm:pr-40">
@@ -348,7 +348,7 @@ export default async function HomePage() {
                     </div>
                   </div>
                   <p className="text-gray-600 text-base sm:text-lg mt-2">
-                    Vergleichen Sie geprüfte Umzugs- und Reinigungsfirmen in Ihrer Region, buchen Sie online und sparen Sie Zeit und Kosten.
+                    Bei Online-Offerten.ch erhalten Sie kostenlos und unverbindlich bis zu 5 Offerten von geprüften Umzugs- und Reinigungsfirmen aus Ihrer Region.
                   </p>
                 </div>
                 
