@@ -12,12 +12,6 @@ import {
   ArrowRight,
   MessageSquare,
   CheckCircle,
-  Truck,
-  Sparkles,
-  Paintbrush,
-  Home,
-  Building2,
-  FileText,
   MapPin
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
@@ -47,14 +41,8 @@ interface KundenBewertungenPageClientProps {
 const ReviewCard = ({ review }: { review: Review }) => {
   const serviceName = getGermanServiceName(review.service_type)
   
-  // Dinamik yıldız hesaplama - Platform yorumları için sadece rating değeri kullanılır
-  // Veritabanından gelen rating değerine göre yıldızlar dinamik hesaplanır
-  const displayRating = review.rating || 0
-  const fullStars = Math.floor(displayRating)
-  const decimalPart = displayRating % 1
-  // 0.25-0.74 arası yarım yıldız, 0.75+ bir sonraki tam yıldıza yakın (tam yıldız sayılır)
-  const hasHalfStar = decimalPart >= 0.25 && decimalPart < 0.75
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
+  // Exakte Sternfüllung: 4.8 => letzter Stern 80% gefüllt, 4.5 => 50%, 4.0 => 4 volle Sterne
+  const displayRating = Math.max(0, Math.min(5, Number(review.rating) || 0))
   
   return (
     <Card className="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300">
@@ -81,20 +69,19 @@ const ReviewCard = ({ review }: { review: Review }) => {
           {/* Desktop: Sağ üstte göster */}
           <div className="hidden md:flex items-center gap-2 bg-yellow-50 px-3 py-1.5 rounded-lg border border-yellow-200">
             <div className="flex items-center gap-0.5">
-              {[...Array(fullStars)].map((_, i) => (
-                <Star key={`full-${i}`} size={14} className="text-yellow-400 fill-yellow-400" />
-              ))}
-              {hasHalfStar && (
-                <div className="relative">
-                  <Star size={14} className="text-gray-300" />
-                  <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                    <Star size={14} className="text-yellow-400 fill-yellow-400" />
+              {[...Array(5)].map((_, i) => {
+                const fillPercent = Math.max(0, Math.min(100, (displayRating - i) * 100))
+                return (
+                  <div key={i} className="relative w-[14px] h-[14px]">
+                    <Star size={14} className="absolute inset-0 text-gray-300" />
+                    {fillPercent > 0 && (
+                      <div className="absolute inset-0 overflow-hidden" style={{ width: `${fillPercent}%` }}>
+                        <Star size={14} className="text-yellow-400 fill-yellow-400" />
+                      </div>
+                    )}
                   </div>
-                </div>
-              )}
-              {[...Array(emptyStars)].map((_, i) => (
-                <Star key={`empty-${i}`} size={14} className="text-gray-300" />
-              ))}
+                )
+              })}
             </div>
             <span className="font-bold text-lg text-gray-900">
               {displayRating.toFixed(2)}
@@ -105,20 +92,19 @@ const ReviewCard = ({ review }: { review: Review }) => {
         {/* Mobil: Yorum textinin üstünde göster */}
         <div className="md:hidden flex items-center gap-2 mb-4 bg-yellow-50 px-3 py-1.5 rounded-lg border border-yellow-200 w-fit">
           <div className="flex items-center gap-0.5">
-            {[...Array(fullStars)].map((_, i) => (
-              <Star key={`full-mobile-${i}`} size={14} className="text-yellow-400 fill-yellow-400" />
-            ))}
-            {hasHalfStar && (
-              <div className="relative">
-                <Star size={14} className="text-gray-300" />
-                <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                  <Star size={14} className="text-yellow-400 fill-yellow-400" />
+            {[...Array(5)].map((_, i) => {
+              const fillPercent = Math.max(0, Math.min(100, (displayRating - i) * 100))
+              return (
+                <div key={`mobile-${i}`} className="relative w-[14px] h-[14px]">
+                  <Star size={14} className="absolute inset-0 text-gray-300" />
+                  {fillPercent > 0 && (
+                    <div className="absolute inset-0 overflow-hidden" style={{ width: `${fillPercent}%` }}>
+                      <Star size={14} className="text-yellow-400 fill-yellow-400" />
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
-            {[...Array(emptyStars)].map((_, i) => (
-              <Star key={`empty-mobile-${i}`} size={14} className="text-gray-300" />
-            ))}
+              )
+            })}
           </div>
           <span className="font-bold text-lg text-gray-900">
             {displayRating.toFixed(2)}
@@ -167,13 +153,13 @@ const ReviewCard = ({ review }: { review: Review }) => {
   )
 }
 
-const services = [
-  { name: 'Umzug', icon: Truck, href: '/umzugsfirma' },
-  { name: 'Wohnungsreinigung', icon: Home, href: '/reinigung/wohnungsreinigung' },
-  { name: 'Hausreinigung', icon: Building2, href: '/reinigung/hausreinigung' },
-  { name: 'Büroreinigung', icon: Building2, href: '/reinigung/bueroreinigung' },
-  { name: 'Umzugsreinigung', icon: Sparkles, href: '/reinigung/umzugsreinigung' },
-  { name: 'Malerarbeiten', icon: Paintbrush, href: '/malerfirma' },
+const serviceButtons = [
+  { label: 'Umzug & Reinigung', href: '/kostenlose-offerte-anfordern?step=3&service=umzug&umzugArt=privatumzug&endreinigung=ja' },
+  { label: 'Nur Umzug', href: '/kostenlose-offerte-anfordern?step=2&service=umzug' },
+  { label: 'Nur Reinigung', href: '/kostenlose-offerte-anfordern?service=reinigung&step=2' },
+  { label: 'Büroumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug' },
+  { label: 'Entsorgung', href: '/kostenlose-offerte-anfordern?service=raeumung&step=2' },
+  { label: 'Klavierumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport' },
 ]
 
 const KundenBewertungenPageClient = ({ 
@@ -187,6 +173,8 @@ const KundenBewertungenPageClient = ({
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(initialReviews.length < initialTotalCount)
   const [totalCount, setTotalCount] = useState(initialTotalCount)
+  const [selectedServiceHref, setSelectedServiceHref] = useState(serviceButtons[0]?.href || '/kostenlose-offerte-anfordern')
+  const selectedService = serviceButtons.find((item) => item.href === selectedServiceHref) || serviceButtons[0]
 
   const loadMoreReviews = useCallback(async () => {
     if (loading || !hasMore) return
@@ -317,52 +305,37 @@ const KundenBewertungenPageClient = ({
             {/* Sidebar */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
-                {/* Services - Professional Design */}
-                <Card className="border-0 shadow-xl bg-gradient-to-br from-white to-gray-50/50 overflow-hidden">
-                  <CardContent className="p-0">
-                    {/* Header */}
-                    <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-4">
-                      <h3 className="text-lg font-bold text-white">
-                        Unsere Dienstleistungen
-                      </h3>
-                      <p className="text-green-100 text-sm mt-1">
-                        Professionelle Lösungen für Ihr Projekt
-                      </p>
+                <Card className="border border-gray-200 shadow-lg bg-white overflow-hidden">
+                  <CardContent className="p-5">
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">
+                      Welche Dienstleistung benötigen Sie?
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-4">
+                      Kostenlos Offerten einholen
+                    </p>
+                    <div className="space-y-2">
+                      {serviceButtons.map((item) => (
+                        <button
+                          key={item.label}
+                          type="button"
+                          onClick={() => setSelectedServiceHref(item.href)}
+                          className={`w-full flex items-center justify-between rounded-lg border px-3 py-2.5 text-sm font-semibold transition-colors ${
+                            selectedServiceHref === item.href
+                              ? 'border-green-500 bg-green-50 text-green-700'
+                              : 'border-gray-200 bg-white text-gray-800 hover:border-green-300 hover:bg-green-50 hover:text-green-700'
+                          }`}
+                        >
+                          <span>{item.label}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      ))}
                     </div>
-                    
-                    {/* Service Links */}
-                    <div className="p-4">
-                      <div className="space-y-1">
-                        {services.map((service, index) => {
-                          const Icon = service.icon
-                          return (
-                            <Link
-                              key={service.name}
-                              href={service.href}
-                              className="flex items-center gap-4 p-3 rounded-xl hover:bg-green-50 transition-all duration-200 group border border-transparent hover:border-green-200 hover:shadow-sm"
-                            >
-                              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center group-hover:from-green-500 group-hover:to-emerald-500 transition-all duration-300 shadow-sm">
-                                <Icon className="w-5 h-5 text-green-600 group-hover:text-white transition-colors" />
-                              </div>
-                              <div className="flex-1">
-                                <span className="font-semibold text-gray-800 group-hover:text-green-700 transition-colors block">
-                                  {service.name}
-                                </span>
-                              </div>
-                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all opacity-0 group-hover:opacity-100" />
-                            </Link>
-                          )
-                        })}
-                      </div>
-                    </div>
-                    
-                    {/* Footer CTA */}
-                    <div className="px-4 pb-4">
-                      <Link 
-                        href="/kostenlose-offerte-anfordern"
-                        className="block w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white text-center font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg"
+                    <div className="pt-4 mt-4 border-t border-gray-100">
+                      <Link
+                        href={selectedService?.href || '/kostenlose-offerte-anfordern'}
+                        className="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-semibold py-3 rounded-lg transition-colors"
                       >
-                        Jetzt Offerte anfordern
+                        Offerte für {selectedService?.label || 'Ihre Auswahl'} anfordern
                       </Link>
                     </div>
                   </CardContent>

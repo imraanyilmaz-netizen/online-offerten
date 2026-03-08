@@ -119,14 +119,8 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
 
   const serviceName = getGermanServiceName(service_type);
 
-  // Dinamik yıldız hesaplama - Platform yorumları için sadece rating değeri kullanılır
-  // Veritabanından gelen rating değerine göre yıldızlar dinamik hesaplanır
-  const displayRating = rating || 0
-  const fullStars = Math.floor(displayRating)
-  const decimalPart = displayRating % 1
-  // 0.25-0.74 arası yarım yıldız, 0.75+ bir sonraki tam yıldıza yakın (tam yıldız sayılır)
-  const hasHalfStar = decimalPart >= 0.25 && decimalPart < 0.75
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
+  // Exakte Sternfüllung: 4.8 => letzter Stern 80% gefüllt, 4.5 => 50%, 4.0 => 4 volle Sterne
+  const displayRating = Math.max(0, Math.min(5, Number(rating) || 0))
 
   return (
     <div className="h-full">
@@ -156,20 +150,19 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
           {/* Yıldızlar - Yorumun üstünde */}
           <div className="flex items-center gap-2 mb-4">
             <div className="flex items-center gap-0.5">
-              {[...Array(fullStars)].map((_, i) => (
-                <Star key={`full-${i}`} size={16} className="text-yellow-400 fill-yellow-400" />
-              ))}
-              {hasHalfStar && (
-                <div className="relative">
-                  <Star size={16} className="text-gray-300" />
-                  <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                    <Star size={16} className="text-yellow-400 fill-yellow-400" />
+              {[...Array(5)].map((_, i) => {
+                const fillPercent = Math.max(0, Math.min(100, (displayRating - i) * 100))
+                return (
+                  <div key={i} className="relative w-4 h-4">
+                    <Star size={16} className="absolute inset-0 text-gray-300" />
+                    {fillPercent > 0 && (
+                      <div className="absolute inset-0 overflow-hidden" style={{ width: `${fillPercent}%` }}>
+                        <Star size={16} className="text-yellow-400 fill-yellow-400" />
+                      </div>
+                    )}
                   </div>
-                </div>
-              )}
-              {[...Array(emptyStars)].map((_, i) => (
-                <Star key={`empty-${i}`} size={16} className="text-gray-300" />
-              ))}
+                )
+              })}
             </div>
             <span className="font-bold text-base text-gray-900">{displayRating.toFixed(2)}</span>
           </div>
