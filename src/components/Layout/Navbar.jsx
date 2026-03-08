@@ -280,13 +280,12 @@ const Navbar = () => {
             >
               Online-Offerten.ch
             </span>
-            <span
-              className="relative inline-flex h-4 w-5 items-center justify-center rounded-[2px] bg-red-600 border border-red-500/80 shadow-sm"
-              aria-hidden="true"
-            >
-              <span className="absolute h-[2px] w-3 bg-white rounded-[1px]" />
-              <span className="absolute h-3 w-[2px] bg-white rounded-[1px]" />
-            </span>
+            <img
+              src="/image/swiss-flag-custom.svg"
+              alt="Schweiz Flagge"
+              className="h-5 w-6 object-contain"
+              loading="lazy"
+            />
           </Link>
 
           <nav 
