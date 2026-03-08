@@ -75,11 +75,16 @@ const Footer = React.memo(() => {
           
           {/* Logo & Beschreibung */}
           <div className="col-span-2 md:col-span-2 lg:col-span-3">
-            <Link href="/" className="flex items-center gap-3 mb-6 group">
-              <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                <Send className="w-8 h-8 text-white" />
-              </div>
-              <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Online-Offerten.ch</span>
+            <Link href="/" className="flex items-center gap-2.5 mb-6 group">
+              <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 shadow-sm flex-shrink-0">
+                <Send className="w-[18px] h-[18px] text-white" />
+              </span>
+              <span
+                className="text-[22px] md:text-2xl lg:text-[26px] leading-none font-bold italic tracking-tight text-white group-hover:text-green-400 transition-colors"
+                style={{ fontFamily: 'Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif', fontSynthesis: 'none' }}
+              >
+                Online-Offerten.ch
+              </span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-md">
               Online-Offerten.ch ist ein Vergleichsportal fuer Umzug, Reinigung und Malerarbeiten in der Schweiz.
