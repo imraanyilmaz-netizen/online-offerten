@@ -13,16 +13,12 @@ const Footer = React.memo(() => {
     { to: '/umzugsfirma/basel', text: 'Basel' },
     { to: '/umzugsfirma/luzern', text: 'Luzern' },
     { to: '/umzugsfirma/st-gallen', text: 'St. Gallen' },
-    { to: '/umzugsfirma/genf', text: 'Genf' },
-    { to: '/umzugsfirma/lausanne', text: 'Lausanne' },
-    { to: '/umzugsfirma/lugano', text: 'Lugano' },
   ];
 
   // Weitere wichtige Städte
   const weitereStaedte = [
     { to: '/umzugsfirma/aargau', text: 'Aargau' },
-    { to: '/umzugsfirma/thun', text: 'Thun' },
-    { to: '/umzugsfirma/biel-bienne', text: 'Biel/Bienne' },
+    { to: '/umzugsfirma/genf', text: 'Genf' },
   ];
 
   // Umzug Services
@@ -30,7 +26,6 @@ const Footer = React.memo(() => {
     { to: '/umzugsfirma/privatumzug', text: 'Privatumzug' },
     { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug' },
     { to: '/umzugsfirma/internationale-umzuege', text: 'Internationale Umzüge' },
-    { to: '/umzugsfirma/spezialtransporte', text: 'Spezialtransporte' },
     { to: '/umzugsfirma/spezialtransporte/klaviertransport', text: 'Klaviertransport' },
   ];
 
@@ -41,16 +36,7 @@ const Footer = React.memo(() => {
     { to: '/reinigung/bueroreinigung', text: 'Büroreinigung' },
     { to: '/reinigung/umzugsreinigung', text: 'Umzugsreinigung' },
     { to: '/reinigung/unterhaltsreinigung', text: 'Unterhaltsreinigung' },
-    { to: '/reinigung/grundreinigung', text: 'Grundreinigung' },
-  ];
-
-  // Weitere Reinigungsdienstleistungen
-  const weitereReinigung = [
-    { to: '/reinigung/baureinigung', text: 'Baureinigung' },
     { to: '/reinigung/fensterreinigung', text: 'Fensterreinigung' },
-    { to: '/reinigung/bodenreinigung', text: 'Bodenreinigung' },
-    { to: '/reinigung/fassadenreinigung', text: 'Fassadenreinigung' },
-    { to: '/reinigung/hofreinigung', text: 'Hofreinigung' },
   ];
 
   // Weitere Services
@@ -63,10 +49,14 @@ const Footer = React.memo(() => {
   const kostenTools = [
     { to: '/umzugsfirma/umzugskosten', text: 'Umzugskosten Rechner' },
     { to: '/reinigung/reinigungskosten', text: 'Reinigungskosten Rechner' },
-    { to: '/malerarbeitenkosten', text: 'Malerarbeiten kosten' },
-    { to: '/umzugsofferten', text: 'Umzugsofferte' },
-    { to: '/guenstig-umziehen', text: 'Günstig umziehen' },
     { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirma vergleichen' },
+    { to: '/kostenlose-offerte-anfordern', text: 'Kostenlose Offerten anfordern' },
+  ];
+
+  // Unternehmen
+  const unternehmenLinks = [
+    { to: '/ueber-uns', text: 'Über uns' },
+    { to: '/kontakt', text: 'Kontakt' },
   ];
 
   return (
@@ -92,13 +82,9 @@ const Footer = React.memo(() => {
               <span className="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">Online-Offerten.ch</span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-md">
-              Ihr Vergleichsportal für Umzug, Reinigung &amp; Malerarbeiten in der Schweiz.
+              Online-Offerten.ch ist ein Vergleichsportal fuer Umzug, Reinigung und Malerarbeiten in der Schweiz.
               <br /><br />
-              Wir verbinden Privat- und Geschäftskunden mit geprüften, regionalen Partnerfirmen in der ganzen Schweiz.
-              <br /><br />
-              Nach dem Ausfüllen des Formulars wird Ihre Anfrage an bis zu 5 passende Anbieter in Ihrer Nähe weitergeleitet.
-              <br /><br />
-              Die Partnerfirmen kontaktieren Sie direkt mit individuellen Offerten. Der Vergleich ist 100 % kostenlos und unverbindlich – die Entscheidung liegt vollständig bei Ihnen.
+              Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von geprueften Firmen aus Ihrer Region - kostenlos und unverbindlich.
             </p>
             <div className="flex items-center gap-2 text-slate-400 text-sm">
               <Mail className="w-4 h-4" />
@@ -112,11 +98,10 @@ const Footer = React.memo(() => {
           <div className="lg:col-span-2">
             <h3 className="text-base font-bold mb-6 text-white flex items-center gap-2">
               <Building2 className="w-5 h-5 text-green-400" />
-              Services
+              Umzug
             </h3>
             <div className="space-y-6">
               <div>
-                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Umzug</h4>
                 <ul className="space-y-2.5">
               {umzugServices.map(link => (
                 <li key={link.to}>
@@ -144,17 +129,6 @@ const Footer = React.memo(() => {
               </div>
             
               <div>
-                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Kosten & Tools</h4>
-                <ul className="space-y-2.5">
-              {kostenTools.map(link => (
-                <li key={link.to}>
-                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                    {link.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
               </div>
             </div>
           </div>
@@ -176,19 +150,6 @@ const Footer = React.memo(() => {
                   </li>
                 ))}
               </ul>
-              <div>
-                <h4 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Weitere</h4>
-                <ul className="space-y-2.5">
-                  {weitereReinigung.map(link => (
-                    <li key={link.to}>
-                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                        {link.text}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </div>
 
@@ -200,7 +161,7 @@ const Footer = React.memo(() => {
             </h3>
             <div className="space-y-6">
               <div>
-                <h4 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Hauptstädte</h4>
+                <h4 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Schweiz</h4>
                 <ul className="space-y-2.5">
                   {hauptstaedte.map(link => (
                     <li key={link.to}>
@@ -210,11 +171,6 @@ const Footer = React.memo(() => {
                       </Link>
                     </li>
                   ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">Weitere Städte</h4>
-                <ul className="space-y-2.5">
                   {weitereStaedte.map(link => (
                     <li key={link.to}>
                       <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
@@ -238,55 +194,41 @@ const Footer = React.memo(() => {
           <div className="col-span-1 md:col-span-1 lg:col-span-2">
             <h3 className="text-base font-bold mb-6 text-white flex items-center gap-2">
               <FileText className="w-5 h-5 text-green-400" />
-              Unternehmen
+              Kosten & Tools
             </h3>
             <div className="space-y-6">
               <div>
-                <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Firmen finden</h4>
                 <ul className="space-y-2.5">
-                  <li>
-                    <Link href="/umzugsfirma" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                      Umzugsfirma finden
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/reinigungsfirma" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                      Reinigungsfirma finden
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/malerfirma" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                      Malerfirma finden
-                    </Link>
-                  </li>
-            </ul>
+                  {kostenTools.map(link => (
+                    <li key={link.to}>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              
               <div>
                 <h4 className="text-sm font-semibold mb-3 text-slate-300 uppercase tracking-wider">Unternehmen</h4>
                 <ul className="space-y-2.5">
-                  <li>
-                    <Link href="/ueber-uns" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                      Über uns
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/kontakt" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
-                      Kontakt
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/partner-werden" className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                  {unternehmenLinks.map(link => (
+                    <li key={link.to}>
+                      <Link href={link.to} className="text-sm text-slate-400 hover:text-green-400 transition-colors duration-200 flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-slate-600 rounded-full group-hover:bg-green-400 transition-colors"></span>
+                        {link.text}
+                      </Link>
+                    </li>
+                  ))}
+                  <li className="pt-2">
+                    <Link
+                      href="/partner-werden"
+                      className="inline-flex items-center justify-center rounded-md border border-green-600 text-green-600 hover:bg-green-50 px-3 py-1.5 text-sm font-semibold transition-colors"
+                    >
                       Partner werden
                     </Link>
-              </li>
-            </ul>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

@@ -60,7 +60,7 @@ const AargauCityPageClient: React.FC<AargauCityPageClientProps> = ({ city }) => 
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
+            "name": "Startseite",
             "item": "https://online-offerten.ch/"
           },
           {

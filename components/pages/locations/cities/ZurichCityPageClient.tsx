@@ -61,7 +61,7 @@ const ZurichCityPageClient: React.FC<ZurichCityPageClientProps> = ({ city }) => 
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
+            "name": "Startseite",
             "item": "https://online-offerten.ch/"
           },
           {

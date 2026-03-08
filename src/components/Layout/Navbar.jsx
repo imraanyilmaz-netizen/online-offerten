@@ -270,11 +270,23 @@ const Navbar = () => {
     <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style paint', zIndex: 3000 }}>
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between h-16" style={{ minHeight: '64px' }}>
-          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-            <div className="inline-flex items-center justify-center w-9 h-9 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex-shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group">
+            <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 shadow-sm flex-shrink-0">
               <Send className="w-[18px] h-[18px] text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-800">Online-Offerten.ch</span>
+            </span>
+            <span
+              className="text-lg sm:text-xl lg:text-[26px] leading-none font-bold italic tracking-tight text-black"
+              style={{ fontFamily: '"Booster Next FY", Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif' }}
+            >
+              Online-Offerten.ch
+            </span>
+            <span
+              className="relative inline-flex h-4 w-5 items-center justify-center rounded-[2px] bg-red-600 border border-red-500/80 shadow-sm"
+              aria-hidden="true"
+            >
+              <span className="absolute h-[2px] w-3 bg-white rounded-[1px]" />
+              <span className="absolute h-3 w-[2px] bg-white rounded-[1px]" />
+            </span>
           </Link>
 
           <nav 

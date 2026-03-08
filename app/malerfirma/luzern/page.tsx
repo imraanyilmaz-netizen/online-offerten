@@ -67,7 +67,7 @@ const combinedSchema = {
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Home",
+          "name": "Startseite",
           "item": "https://online-offerten.ch/"
         },
         {
@@ -140,9 +140,7 @@ export default function MalerfirmaLuzernPage() {
             <nav className="mb-4" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-purple-600 transition-colors">
-                    Home
-                  </Link>
+                  <Link href="/" className="hover:text-purple-600 transition-colors">Startseite</Link>
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />

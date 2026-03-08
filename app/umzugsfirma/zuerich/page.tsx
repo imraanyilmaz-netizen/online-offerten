@@ -1023,7 +1023,7 @@ export default async function UmzugsfirmaZurichPage() {
                     </p>
                     <div className="flex md:grid md:grid-cols-2 gap-4 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-4 md:mx-0 px-4 md:px-0 scrollbar-hide">
                       {[
-                        { icon: 'Home', title: 'Privatumzug', link: '/umzugsfirma/privatumzug', desc: 'Wohnungswechsel individuell' },
+                        { icon: 'Startseite', title: 'Privatumzug', link: '/umzugsfirma/privatumzug', desc: 'Wohnungswechsel individuell' },
                         { icon: 'Building', title: 'Geschäftsumzug', link: '/umzugsfirma/geschaeftsumzug', desc: 'Büro- und Firmenumzug' },
                         { icon: 'Globe', title: 'Internationale Umzüge', link: '/umzugsfirma/internationale-umzuege', desc: 'Umzug ins Ausland' },
                         { icon: 'Package', title: 'Spezialtransporte', link: '/umzugsfirma/spezialtransporte', desc: 'Klavier, Tresor, Maschinen' },

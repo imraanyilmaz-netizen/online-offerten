@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -42,9 +42,7 @@ const KlaviertransportKostenPageClient = () => {
           <nav className="mb-6 pt-4" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
               <li>
-                <Link href="/" className="hover:text-green-600 transition-colors">
-                  Home
-                </Link>
+                <Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link>
               </li>
               <li>
                 <span className="mx-2">/</span>

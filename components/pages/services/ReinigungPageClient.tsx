@@ -131,7 +131,7 @@ const ReinigungPageClient = () => {
             <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
+                  <Link href="/" className="hover:text-blue-600 transition-colors">Startseite</Link>
                 </li>
                 <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
                 <li className="text-gray-900 font-medium" aria-current="page">Reinigung</li>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useMemo, useEffect } from 'react';
 // framer-motion removed - CSS for better INP
@@ -248,7 +248,7 @@ const ChecklistsPageClient = () => {
         "itemListElement": [{
           "@type": "ListItem",
           "position": 1,
-          "name": "Home",
+          "name": "Startseite",
           "item": "https://online-offerten.ch/"
         },{
           "@type": "ListItem",

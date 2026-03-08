@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -31,7 +31,7 @@ const OffertenPortalPageClient = () => {
             {
               "@type": "ListItem",
               "position": 1,
-              "name": "Home",
+              "name": "Startseite",
               "item": "https://online-offerten.ch/"
             },
             {

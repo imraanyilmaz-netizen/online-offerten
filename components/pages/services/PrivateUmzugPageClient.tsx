@@ -219,7 +219,7 @@ const PrivateUmzugPageClient = () => {
                     <div className="flex items-start">
                       <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-gray-900">Ausschließlich qualitätsgeprüfte Umzugsfirmen</p>
+                        <p className="font-semibold text-gray-900">Ausschliesslich qualitätsgeprüfte Umzugsfirmen</p>
                       </div>
                     </div>
                     <div className="flex items-start">

@@ -28,7 +28,7 @@ const MalerfirmaGenfPageClient = () => {
             {
               "@type": "ListItem",
               "position": 1,
-              "name": "Home",
+              "name": "Startseite",
               "item": "https://online-offerten.ch/"
             },
             {

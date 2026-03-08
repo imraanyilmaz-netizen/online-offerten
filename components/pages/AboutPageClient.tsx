@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react'
 import Link from 'next/link'
@@ -204,7 +204,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
             <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-green-600 transition-colors">Home</Link>
+                  <Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link>
                 </li>
                 <li><ChevronRightIcon className="w-4 h-4 text-gray-400" /></li>
                 <li className="text-gray-900 font-medium" aria-current="page">Über uns</li>
