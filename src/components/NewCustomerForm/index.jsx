@@ -23,28 +23,24 @@ const TOTAL_FORM_STEPS = 3;
 const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
   const { t } = useTranslation('newCustomerForm'); // i18n geri eklendi
   const totalStars = 5;
-  const displayRating = Math.round((rating || 0) * 2) / 2;
-  const fullStars = Math.floor(displayRating);
-  const hasHalfStar = displayRating % 1 !== 0;
-  const emptyStars = totalStars - fullStars - (hasHalfStar ? 1 : 0);
+  const normalizedRating = Math.max(0, Math.min(totalStars, Number(rating) || 0));
 
   return (
     <div className="flex items-center gap-2">
       <div className="flex">
-        {[...Array(fullStars)].map((_, i) => (
-          <Star key={`full-${i}`} size={starSize} className="text-yellow-400 fill-yellow-400" />
-        ))}
-        {hasHalfStar && (
-            <div style={{ position: 'relative' }}>
-                <Star key="half-empty" size={starSize} className="text-gray-300" />
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '50%', overflow: 'hidden' }}>
-                    <Star key="half-full" size={starSize} className="text-yellow-400 fill-yellow-400" />
-                </div>
+        {[...Array(totalStars)].map((_, i) => {
+          const fillPercent = Math.max(0, Math.min(100, (normalizedRating - i) * 100));
+          return (
+            <div key={i} style={{ position: 'relative', width: starSize, height: starSize }}>
+                <Star size={starSize} className="absolute inset-0 text-gray-300" />
+                {fillPercent > 0 && (
+                  <div style={{ position: 'absolute', top: 0, left: 0, width: `${fillPercent}%`, overflow: 'hidden' }}>
+                    <Star size={starSize} className="text-yellow-400 fill-yellow-400" />
+                  </div>
+                )}
             </div>
-        )}
-        {[...Array(emptyStars)].map((_, i) => (
-          <Star key={`empty-${i}`} size={starSize} className="text-gray-300" />
-        ))}
+          );
+        })}
       </div>
       <span className="font-semibold text-gray-800">{(rating || 0).toFixed(1)}</span>
       <a href="/kunden-bewertungen" target="_blank" rel="noopener noreferrer" className="text-gray-600 md:hover:text-green-600 md:hover:underline transition-colors">({reviewCount} {t('ratings', { count: reviewCount })})</a>

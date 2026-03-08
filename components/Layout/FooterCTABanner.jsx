@@ -72,9 +72,7 @@ const FooterCTABanner = () => {
     return null
   }
 
-  const fullStars = Math.floor(stats.average_rating)
-  const hasHalfStar = stats.average_rating % 1 !== 0
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
+  const normalizedRating = Math.max(0, Math.min(5, Number(stats.average_rating) || 0))
 
   return (
     <div className="sticky bottom-0 bg-white md:bg-gradient-to-r md:from-green-700 md:via-green-600 md:to-emerald-600 w-full py-3 md:py-4 z-[2000] overflow-hidden will-change-transform shadow-[0_-2px_10px_rgba(0,0,0,0.1)] md:shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
@@ -105,20 +103,22 @@ const FooterCTABanner = () => {
           <div className="flex items-center gap-6 flex-1 justify-center">
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2.5 flex items-center gap-3">
               <div className="flex items-center gap-0.5">
-                {[...Array(fullStars)].map((_, i) => (
-                  <Star key={`full-${i}`} size={18} className="text-yellow-400 fill-yellow-400" />
-                ))}
-                {hasHalfStar && (
-                  <div className="relative">
-                    <Star size={18} className="text-white/30" />
-                    <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                      <Star size={18} className="text-yellow-400 fill-yellow-400" />
+                {[...Array(5)].map((_, i) => {
+                  const fillPercent = Math.max(0, Math.min(100, (normalizedRating - i) * 100))
+                  return (
+                    <div key={i} className="relative w-[18px] h-[18px]">
+                      <Star size={18} className="absolute inset-0 text-white/30" />
+                      {fillPercent > 0 && (
+                        <div
+                          className="absolute inset-0 overflow-hidden"
+                          style={{ width: `${fillPercent}%` }}
+                        >
+                          <Star size={18} className="text-yellow-400 fill-yellow-400" />
+                        </div>
+                      )}
                     </div>
-                  </div>
-                )}
-                {[...Array(emptyStars)].map((_, i) => (
-                  <Star key={`empty-${i}`} size={18} className="text-white/30" />
-                ))}
+                  )
+                })}
               </div>
               <div className="h-4 w-px bg-white/30"></div>
               <span className="text-sm font-semibold text-white whitespace-nowrap">
