@@ -46,27 +46,27 @@ const RaeumungEntsorgungPageClient = () => {
     }
   ]
 
-  const costFactors = [
-    "<strong>Menge des Räumguts (m³):</strong> Das Volumen ist der grösste Kostenfaktor.",
-    "<strong>Art des Abfalls:</strong> Sondermüll wie Farben, Chemikalien oder Elektronik kostet mehr.",
-    "<strong>Zugänglichkeit:</strong> Stockwerk, Lift vorhanden, Parkmöglichkeiten.",
-    "<strong>Demontageaufwand:</strong> Müssen Einbauten oder grosse Möbel zerlegt werden?",
-    "<strong>Zusatzleistungen:</strong> Endreinigung, kleinere Reparaturen."
+  const wohnungsRaeumungPrices = [
+    { size: "2.5 Zimmer", price: "ab 650.– bis 1’550.–" },
+    { size: "3.5 Zimmer", price: "ab 830.– bis 2’250.–" },
+    { size: "4.5 Zimmer", price: "ab 1’250.– bis 3’050.–" },
+    { size: "Ab 5.5 Zimmer", price: "ab 1’550.– (Offerten einholen)" },
   ]
 
-  const volumeRates = [
-    { volume: "bis 5 m³ (z.B. kleines Kellerabteil)", price: "ca. CHF 400 – 700" },
-    { volume: "bis 10 m³ (z.B. 1-2 Zimmer Wohnung)", price: "ca. CHF 700 – 1'200" },
-    { volume: "bis 20 m³ (z.B. 3-4 Zimmer Wohnung)", price: "ca. CHF 1'200 – 2'500" },
-    { volume: "ab 30 m³ (z.B. Hausräumung)", price: "Auf Anfrage" }
+  const hausUndEinzelraumPrices = [
+    { service: "Garage oder Einzelraum", price: "ab 400.– bis 750.–" },
+    { service: "Keller- / Estrichräumung", price: "ab 400.– bis 650.–" },
+    { service: "Einfamilienhaus (klein/mittel)", price: "ab 1’850.– bis 2’950.–" },
+    { service: "Einfamilienhaus (gross)", price: "ab 2’550.– bis 6’050.–" },
+    { service: "Räumung bei Messie-Haushalt", price: "Offerten einholen" },
   ]
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Räumung & Entsorgung Schweiz finden & vergleichen » Kostenlose Offerten | Professionell & Günstig",
-    "serviceType": "Räumung- & Entsorgungs-Vermittlung",
-    "description": "Räumung & Entsorgung Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Entsorgungsfirmen. Wohnungsräumung, Haushaltsauflösung, Kellerräumung & umweltgerechte Entsorgung – professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!",
+    "name": "Räumung & Entsorgung in der Schweiz",
+    "serviceType": "Räumung und Entsorgung",
+    "description": "Vergleichen Sie bis zu 5 kostenlose Offerten für Räumung und Entsorgung in der Schweiz. Geprüfte Firmen, transparente Preise und schnelle Abwicklung.",
     "provider": {
       "@type": "Organization",
       "name": "Online-Offerten.ch",
@@ -91,7 +91,7 @@ const RaeumungEntsorgungPageClient = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <div className="bg-slate-50">
+      <div className="bg-white">
         <section
           className="relative w-full py-12 md:py-16 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-green-50"
         >
@@ -111,13 +111,13 @@ const RaeumungEntsorgungPageClient = () => {
                 <div
                 >
                   <h1 className="heading-1">
-                    Professionelle Räumung & Entsorgung
+                    Räumung & Entsorgung: Räumungsfirmen in Ihrer Region vergleichen
                   </h1>
                 </div>
                 <p
                   className="text-base md:text-body mb-6 leading-relaxed"
                 >
-                  Schaffen Sie Platz für Neues. Wir organisieren Ihre komplette Räumung – von der Entrümpelung bis zur besenreinen Übergabe. Effizient, zuverlässig und umweltgerecht.
+                  Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Firmen für Räumung und Entsorgung. Von der Entrümpelung bis zur besenreinen Übergabe – effizient, zuverlässig und umweltgerecht.
                 </p>
                 <div
                   className="mb-6"
@@ -169,13 +169,12 @@ const RaeumungEntsorgungPageClient = () => {
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-20 space-y-16 md:space-y-24">
           <section className="grid md:grid-cols-2 gap-12 items-center">
-            <div
-            >
+            <div className="order-1 md:order-2">
               <h2 className="heading-2">Warum eine professionelle Räumungsfirma beauftragen?</h2>
               <p className="text-lg text-slate-600 leading-relaxed">Eine Räumung ist oft mehr als nur das Ausmisten alter Gegenstände. Sie erfordert Organisation, körperlichen Einsatz und Wissen über die fachgerechte Entsorgung. Eine professionelle Firma nimmt Ihnen diese Last ab, kümmert sich um die umweltfreundliche Trennung von Wertstoffen und Abfall und garantiert eine schnelle und diskrete Abwicklung.</p>
             </div>
             <div
-              className="relative h-80 rounded-2xl overflow-hidden shadow-2xl"
+              className="relative h-80 rounded-2xl overflow-hidden shadow-2xl order-2 md:order-1"
             >
               <img
                 className="absolute inset-0 w-full h-full object-cover"
@@ -207,65 +206,65 @@ const RaeumungEntsorgungPageClient = () => {
           </section>
 
           <section className="bg-white p-8 md:p-12 rounded-2xl shadow-xl">
-             <h2 className="heading-2">Was kostet eine Räumung und Entsorgung?</h2>
-             <p className="text-slate-600 mb-8 max-w-4xl">Die Kosten für eine Räumung und Entsorgung in der Schweiz basieren hauptsächlich auf dem Volumen (in Kubikmetern, m³) des zu entsorgenden Guts.</p>
-             <div className="grid md:grid-cols-2 gap-10">
-                <div>
-                  <h3 className="text-2xl font-semibold text-slate-700 mb-4">Kostenfaktoren im Überblick:</h3>
-                   <ul className="space-y-3">
-                    {costFactors.map((factor, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start"
-                      >
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                        <span className="text-slate-700" dangerouslySetInnerHTML={{ __html: factor }} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                    <div className="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
-                        <h4 className="font-bold text-xl text-slate-800 mb-3 flex items-center"><Trash2 className="mr-3 text-green-600"/>Zusätzliche Entsorgungskosten</h4>
-                        <p className="text-sm text-slate-600 mb-4">Bei Umzügen fallen oft auch Gegenstände zur Entsorgung an. Diese werden separat nach Volumen berechnet.</p>
-                        <div className="flex justify-between items-center py-2 border-b last:border-0 border-green-200">
-                            <span className="font-medium text-slate-700">Kosten pro Kubikmeter (m³)</span>
-                            <span className="font-bold text-green-700">ca. CHF 45 – 60</span>
-                        </div>
+            <h2 className="heading-2">Räumung & Entsorgung Kosten in der Schweiz: Richtpreise im Überblick</h2>
+            <p className="text-slate-600 mt-4 max-w-4xl">
+              Die folgenden Richtpreise helfen Ihnen bei der ersten Budgetplanung. Der effektive Preis hängt unter anderem von Menge,
+              Zugänglichkeit, Entsorgungsart und Zusatzleistungen ab.
+            </p>
+            <div className="grid md:grid-cols-2 gap-8 mt-8">
+              <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+                <h3 className="text-2xl font-semibold text-slate-800 mb-4">Richtpreise für Hausräumung, Keller und Einzelräume</h3>
+                <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-4 text-sm font-semibold text-slate-700 border-b border-green-200 pb-2">
+                    <span>Dienstleistung</span>
+                    <span>Geschätzte Kosten (CHF)</span>
+                  </div>
+                  {hausUndEinzelraumPrices.map((item, i) => (
+                    <div key={i} className="grid grid-cols-2 gap-4 py-2 border-b last:border-0 border-green-200">
+                      <span className="text-slate-700">{item.service}</span>
+                      <span className="font-semibold text-green-700">{item.price}</span>
                     </div>
-                     <div className="bg-green-50 p-6 rounded-lg border border-green-200">
-                        <h4 className="font-bold text-xl text-slate-800 mb-3 flex items-center"><Scale className="mr-3 text-green-600"/>Richtpreise für Kompletträumung (nach Volumen)</h4>
-                        <p className="text-sm text-slate-600 mb-4">Bei kompletten Wohnungs- oder Hausräumungen ist die Abrechnung nach Kubikmetern üblich.</p>
-                        {volumeRates.map((item, i) => (
-                            <div key={i} className="flex justify-between items-center py-2 border-b last:border-0 border-green-200">
-                                <span className="font-medium text-slate-700">{item.volume}</span>
-                                <span className="font-bold text-green-700">{item.price}</span>
-                            </div>
-                        ))}
-                    </div>
-                    <p className="text-xs text-slate-500 mt-4 italic">Alle Preise sind Schätzungen und verstehen sich exkl. MwSt. Für eine genaue offerten ist oft eine kostenlose Besichtigung notwendig.</p>
+                  ))}
                 </div>
-             </div>
+              </div>
+
+              <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+                <h3 className="text-2xl font-semibold text-slate-800 mb-4">Richtpreise für Wohnungsräumung nach Grösse</h3>
+                <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-4 text-sm font-semibold text-slate-700 border-b border-green-200 pb-2">
+                    <span>Wohnungsgrösse</span>
+                    <span>Geschätzte Kosten (CHF)</span>
+                  </div>
+                  {wohnungsRaeumungPrices.map((item, i) => (
+                    <div key={i} className="grid grid-cols-2 gap-4 py-2 border-b last:border-0 border-green-200">
+                      <span className="text-slate-700">{item.size}</span>
+                      <span className="font-semibold text-green-700">{item.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-slate-500 mt-4 italic">Alle Preise sind durchschnittliche Richtwerte und verstehen sich exkl. MwSt. Je nach Anbieter, Region und Aufwand können die Preise abweichen. Für genaue Preise empfehlen wir, mehrere Offerten einzuholen und zu vergleichen.</p>
           </section>
 
           <Article />
           <Faq />
 
-          <section id="cta" className="text-center bg-gradient-to-r from-green-600 to-green-800 text-white py-16 px-6 rounded-2xl shadow-2xl">
+          <section id="cta" className="text-center bg-white text-gray-900 py-16 px-6 rounded-2xl shadow-xl border border-gray-200">
             <h2
-              className="heading-2 bg-gradient-to-r from-white to-black bg-clip-text text-transparent"
+              className="heading-2"
             >
-              Bereit, Platz für Neues zu schaffen?
+              Bereit, Räumungsofferten zu vergleichen?
             </h2>
             <p
-              className="max-w-2xl mx-auto text-green-200 mb-8"
+              className="max-w-2xl mx-auto text-gray-600 mb-8"
             >
-              Erhalten Sie mit nur einer Anfrage kostenlose und unverbindliche Offerten von geprüften Räumungsfirmen aus Ihrer Region.
+              Bei Online-Offerten.ch erhalten Sie mit einer einzigen Anfrage kostenlos und unverbindlich mehrere Offerten von geprüften Räumungsfirmen aus Ihrer Region.
             </p>
             <div
             >
               <Button onClick={handleCtaClick} size="lg" className="bg-white text-green-700 hover:bg-green-100 group w-full sm:w-auto px-8 py-4 text-base">
-                Kostenlose Offerten anfordern
+                Jetzt kostenlose Offerten vergleichen
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>

@@ -574,7 +574,7 @@ export default async function HomePage() {
                       </div>
                     </div>
                     <h3 className="heading-4 mb-3 text-center">
-                      Anfrage ausfüllen
+                      Offerten einholen
                     </h3>
                     <p className="text-body text-center text-sm">
                       Beschreiben Sie Ihr Projekt in wenigen Schritten online.
@@ -592,7 +592,7 @@ export default async function HomePage() {
                       </div>
                     </div>
                     <h3 className="heading-4 mb-3 text-center">
-                      Offerten erhalten
+                      Offerten vergleichen
                     </h3>
                     <p className="text-body text-center text-sm">
                       Bis zu 5 kostenlose Angebote von geprüften Partnern.
@@ -610,7 +610,7 @@ export default async function HomePage() {
                       </div>
                     </div>
                     <h3 className="heading-4 mb-3 text-center">
-                      Anbieter wählen
+                      Anbieter auswählen
                     </h3>
                     <p className="text-body text-center text-sm">
                       Vergleichen & den besten Anbieter auswählen.

@@ -36,8 +36,8 @@ const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
                 {fillPercent > 0 && (
                   <div style={{ position: 'absolute', top: 0, left: 0, width: `${fillPercent}%`, overflow: 'hidden' }}>
                     <Star size={starSize} className="text-yellow-400 fill-yellow-400" />
-                  </div>
-                )}
+            </div>
+        )}
             </div>
           );
         })}

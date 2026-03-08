@@ -38,27 +38,44 @@ const Faq = () => {
   ];
 
   return (
-    <section
-      className="bg-slate-100 p-8 md:p-12 rounded-2xl"
-    >
-      <h2 className="text-3xl md:text-4xl font-bold text-slate-800 text-center mb-10 flex items-center justify-center">
-        <HelpCircle className="w-8 h-8 mr-4 text-green-600" />
-        Häufig gestellte Fragen zu Räumung & Entsorgung
-      </h2>
-      <Accordion type="single" collapsible className="w-full max-w-navbar mx-auto">
-        {faqItems.map((item, index) => (
-          <div
-            key={item.value}
-          >
-            <AccordionItem value={item.value}>
-              <AccordionTrigger>{item.q}</AccordionTrigger>
-              <AccordionContent>
-                <div className="prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: item.a }} />
-              </AccordionContent>
-            </AccordionItem>
+    <section className="py-12 md:py-16 bg-white border-t border-gray-200 mt-6">
+      <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
+        <div className="md:col-span-3">
+          <div className="mb-8">
+            <h2 className="heading-2 flex items-center">
+              <HelpCircle className="w-8 h-8 mr-3 text-green-600" />
+              Häufig gestellte Fragen zu Räumung & Entsorgung
+            </h2>
           </div>
-        ))}
-      </Accordion>
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item) => (
+              <AccordionItem key={item.value} value={item.value} className="border-b border-gray-200 last:border-b-0">
+                <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-body leading-relaxed">
+                  <div className="prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: item.a }} />
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+
+        <div className="relative md:col-span-2">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+            <img
+              src="/umzug/5b4ec6a0-3.webp"
+              alt="Räumung und Entsorgung FAQ – Antworten zu Kosten, Ablauf und Leistungen"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+            <p className="text-sm font-bold">Fragen & Antworten</p>
+            <p className="text-xs text-blue-100">Rund um Räumung & Entsorgung</p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

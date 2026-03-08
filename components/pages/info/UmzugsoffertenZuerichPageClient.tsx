@@ -735,7 +735,7 @@ const UmzugsoffertenZuerichPageClient = () => {
           <div className="max-w-4xl mx-auto">
             <NextImage 
               src="/image/umzugsservice-Schweiz/umzugsofferten-zuerich-3.png" 
-              alt="Professionelle Umzugshelfer tragen vorsichtig einen großen Karton" 
+              alt="Professionelle Umzugshelfer tragen vorsichtig einen grossen Karton" 
               width={1200}
               height={600}
               className="w-full h-auto rounded-lg shadow-lg"

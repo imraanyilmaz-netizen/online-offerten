@@ -366,7 +366,7 @@ const UmzugsfirmaPageClient = () => {
                   </div>
                   <div className="flex-1 text-left sm:text-center">
                     <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Möbel einlagern</p>
+                    <p className="text-xs text-gray-600 mt-0.5">Wohnung ein-/auslagern</p>
                   </div>
                 </Link>
               </div>
@@ -419,7 +419,7 @@ const UmzugsfirmaPageClient = () => {
             >
               <div className="space-y-6">
                 <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-                  <div className="lg:col-span-6">
+                  <div className="order-2 lg:order-1 lg:col-span-6">
                     <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
                       <Image
                         src="/umzug/umzugsfirma-zurich.webp"
@@ -431,7 +431,7 @@ const UmzugsfirmaPageClient = () => {
                     </div>
                   </div>
 
-                  <div className="lg:col-span-6">
+                  <div className="order-1 lg:order-2 lg:col-span-6">
                     <h2 className="heading-2 mb-6">
                       Umzugsfirma in der Schweiz: Ihr kompletter Ratgeber
                     </h2>
@@ -462,7 +462,7 @@ const UmzugsfirmaPageClient = () => {
                       Umzugsfirma Kosten: Was beeinflusst den Preis?
                     </h3>
                     <p className="text-body">
-                      Die <strong>Umzugskosten</strong> variieren je nach verschiedenen Faktoren. Ein professioneller Dienstleister berechnet den Preis basierend auf der Umzugsstrecke, dem Umfang des Umzugsguts, der Anzahl der Stockwerke, benötigten Leistungen und dem Umzugsdatum. Weitere Faktoren, die die <strong>Umzugskosten</strong> beeinflussen, sind: Größe der Wohnung, Menge der Möbel, Spezialtransporte (z.B. Klavier), Verpackungsservice, Montage- und Demontagearbeiten sowie der Zeitpunkt des Umzugs (Sommer und Monatsende sind teurer). Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF, je nach Umfang und Region. Geschäftsumzüge oder Umzüge mit Spezialtransporten können deutlich teurer sein. Der beste Weg, um faire <strong>Umzugskosten</strong> zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Anbietern. Durch den Vergleich können Sie bis zu 40% sparen.
+                      Die <strong>Umzugskosten</strong> variieren je nach verschiedenen Faktoren. Ein professioneller Dienstleister berechnet den Preis basierend auf der Umzugsstrecke, dem Umfang des Umzugsguts, der Anzahl der Stockwerke, benötigten Leistungen und dem Umzugsdatum. Weitere Faktoren, die die <strong>Umzugskosten</strong> beeinflussen, sind: Groesse der Wohnung, Menge der Möbel, Spezialtransporte (z.B. Klavier), Verpackungsservice, Montage- und Demontagearbeiten sowie der Zeitpunkt des Umzugs (Sommer und Monatsende sind teurer). Ein durchschnittlicher Wohnungsumzug in der Schweiz kostet zwischen 1.500 und 4.000 CHF, je nach Umfang und Region. Geschäftsumzüge oder Umzüge mit Spezialtransporten können deutlich teurer sein. Der beste Weg, um faire <strong>Umzugskosten</strong> zu finden, ist der Vergleich mehrerer Offerten von verschiedenen Anbietern. Durch den Vergleich können Sie bis zu 40% sparen.
                     </p>
                   </div>
 
@@ -479,70 +479,72 @@ const UmzugsfirmaPageClient = () => {
                   </div>
                 </div>
 
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma vergleichen: So sparen Sie bis zu 40%
-                </h3>
-                <p className="text-body">
-                  Der Vergleich mehrerer Anbieter ist der effektivste Weg, um bei Ihrem Umzug Geld zu sparen. Studien zeigen, dass Kunden durch den Vergleich durchschnittlich 30-40% der <strong>Umzugskosten</strong> einsparen können. Dies liegt daran, dass die Preise zwischen verschiedenen Dienstleistern erheblich variieren können. Ein günstiger Anbieter bedeutet nicht immer das beste Angebot – achten Sie auf Qualität, enthaltene Leistungen und Versicherungen. Durch das Vergleichen mehrerer Partner erhalten Sie einen fairen Marktüberblick. Nutzen Sie Vergleichsportale wie Online-Offerten.ch, um bis zu 5 Offerten von geprüften Partnern zu erhalten. Vergleichen Sie nicht nur die Preise, sondern auch die Bewertungen, Versicherungssummen und enthaltenen Leistungen.
-                </p>
-
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirmen im Vergleich: Was ist wichtig?
-                </h3>
-                <p className="text-body">
-                  Wenn Sie verschiedene Anbieter vergleichen, sollten Sie auf mehrere Kriterien achten. Neben dem Preis sind die Versicherungssummen, enthaltenen Leistungen, Erfahrung und Bewertungen wichtig. Ein guter Partner bietet eine detaillierte Offerte mit klarer Preisaufschlüsselung. Prüfen Sie, ob Verpackungsmaterial, Transport, Montage/Demontage und Versicherung im Preis enthalten sind. Ein professioneller Dienstleister verfügt über gültige Versicherungen und kann Referenzen vorweisen. Vergleichen Sie auch die Kommunikationsqualität – ein guter Partner ist erreichbar und antwortet schnell auf Anfragen. Lesen Sie Bewertungen anderer Kunden, um sich ein Bild von der Qualität der Dienstleistung zu machen.
-                </p>
-
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma Schweiz: Regionale Unterschiede
-                </h3>
-                <p className="text-body">
-                  Die Preise und Verfügbarkeit von Dienstleistern können je nach Region in der Schweiz variieren. In Ballungsgebieten wie Zürich, Basel oder Genf gibt es mehr Anbieter zur Auswahl, aber die Preise sind oft höher. Eine <Link href="/umzugsfirma/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Bern</Link> oder <Link href="/umzugsfirma/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Luzern</Link> hat oft höhere Lohnkosten als ein Partner in ländlicheren Regionen. Dennoch lohnt es sich, auch Anbieter aus anderen Regionen zu kontaktieren, da diese oft günstigere Preise anbieten können. In ländlicheren Regionen sind die <strong>Umzugskosten</strong> oft niedriger, aber die Auswahl an Partnern ist begrenzter.
-                </p>
-
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma buchen: Tipps für die richtige Wahl
-                </h3>
-                <p className="text-body">
-                  Wenn Sie einen Partner buchen, sollten Sie frühzeitig planen. Die beste Zeit für die <strong>Umzugsplanung</strong> ist 1-2 Monate vor dem Umzugsdatum, besonders in den Sommermonaten und zum Monatsende. Frühzeitige Buchung gibt Ihnen mehr Auswahl und oft auch bessere Preise. Bevor Sie einen Dienstleister buchen, sollten Sie mehrere Offerten vergleichen und eine schriftliche Offerte anfordern. Prüfen Sie die Versicherungen, Bewertungen und Referenzen der Anbieter. Ein professioneller Partner bietet eine kostenlose Besichtigung vor Ort, um eine realistische Offerte zu erstellen. Nach dem Umzug können Sie auch eine <Link href="/reinigung/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsreinigung</Link> buchen, um Ihre neue Wohnung professionell reinigen zu lassen.
-                </p>
-
-                <h3 className="heading-3 mt-8 mb-4">
-                  Seriöse Umzugsfirma erkennen: Worauf achten?
-                </h3>
-                <p className="text-body">
-                  Einen seriösen Partner erkennt man an mehreren Merkmalen. Er bietet schriftliche, detaillierte Offerten mit klarer Preisaufschlüsselung, verfügt über gültige Versicherungen und kann Referenzen vorweisen. Ein seriöser Dienstleister ist erreichbar, antwortet schnell auf Anfragen und kommuniziert professionell. Vermeiden Sie Anbieter, die nur mündliche Zusagen machen, Druck ausüben oder ungewöhnlich günstige Preise ohne Erklärung anbieten. Ein seriöser Partner ist transparent und beantwortet alle Ihre Fragen. Prüfen Sie auch, ob der Anbieter über eine gültige Transportversicherung und Betriebshaftpflichtversicherung verfügt. Ein professioneller Dienstleister kann Ihnen Versicherungsnachweise zeigen und verfügt über positive Kundenbewertungen.
-                </p>
-
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma Bewertungen: So erkennen Sie Qualität
-                </h3>
-                <p className="text-body">
-                  <strong>Bewertungen</strong> sind ein wichtiges Kriterium bei der Auswahl. Lesen Sie Bewertungen auf verschiedenen Plattformen, um sich ein umfassendes Bild von der Qualität der Anbieter zu machen. Achten Sie nicht nur auf die Bewertungssterne, sondern auch auf die Inhalte der Bewertungen. Positive Bewertungen erwähnen oft pünktliche Ankunft, sorgfältigen Umgang mit Möbeln, freundliches Personal und transparente Preise. Negative Bewertungen können auf Probleme wie Verspätungen, Schäden oder unprofessionelles Verhalten hinweisen. Ein guter Partner hat überwiegend positive Bewertungen und reagiert professionell auf Kritik. Bei Online-Offerten.ch können Sie Bewertungen unserer Partnerfirmen einsehen, um den besten Dienstleister für Ihren Umzug zu finden.
-                </p>
-
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma Offerten: Was sollte enthalten sein?
-                </h3>
-                <p className="text-body">
-                  Professionelle <strong>Offerten</strong> sollten alle wichtigen Informationen enthalten: Gesamtpreis mit detaillierter Aufschlüsselung, alle enthaltenen Leistungen (Verpackung, Transport, Montage/Demontage), Versicherungsschutz und Deckungssumme, Umzugsdatum und Zeitfenster, Anzahl der Umzugshelfer und Fahrzeuge, Zusatzleistungen und deren Kosten, Zahlungsbedingungen und Stornierungsbedingungen. Ein guter Partner erstellt schriftliche Offerten, die alle Leistungen transparent auflisten. Vergleichen Sie <strong>Offerten</strong> nicht nur nach Preis, sondern auch nach Qualität und Umfang der Leistungen. Eine detaillierte Offerte hilft Ihnen, verschiedene Anbieter objektiv zu vergleichen und den besten Partner für Ihren Bedarf zu finden.
-                </p>
-
-                <h3 className="heading-3 mt-8 mb-4">
-                  Umzugsfirma in der Nähe: Vorteile und Nachteile
-                </h3>
-                <p className="text-body">
-                  Ein lokaler Partner hat den Vorteil, dass er die lokalen Gegebenheiten kennt und kurze Anfahrtswege hat. Dies kann zu günstigeren <strong>Umzugskosten</strong> führen. Allerdings bedeutet ein lokaler Anbieter nicht automatisch das beste Angebot. Auch weiter entfernte Dienstleister können gute Preise anbieten, besonders wenn sie in Ihrer Zielregion tätig sind. Vergleichen Sie sowohl lokale als auch regionale Partner, um das beste Angebot zu finden. Ein lokaler Dienstleister kann Vorteile bei der Umzugsplanung haben, da er die Gegebenheiten in Ihrer Region kennt. Nutzen Sie unser Vergleichsportal, um sowohl lokale als auch überregionale Anbieter zu vergleichen.
-                </p>
-
-                <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
-                  <h4 className="heading-4 mb-3">
-                    💡 Pro-Tipp: Umzugsfirma richtig auswählen
-                  </h4>
+                <div className="lg:max-w-4xl">
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Umzugsfirma vergleichen: So sparen Sie bis zu 40%
+                  </h3>
                   <p className="text-body">
-                    Beim Vergleich von Anbietern sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein etwas teurerer Partner kann durch bessere Leistungen, Versicherungen und Erfahrung das bessere Angebot sein. Für Spezialtransporte wie <Link href="/umzugsfirma/spezialtransporte/klaviertransport" className="text-blue-700 hover:text-blue-800 font-semibold underline">Klaviertransport</Link> oder <Link href="/umzugsfirma/spezialtransporte" className="text-blue-700 hover:text-blue-800 font-semibold underline">Spezialtransporte</Link> benötigen Sie spezialisierte Dienstleister mit entsprechender Erfahrung. Eine gute <strong>Umzugsplanung</strong> ist der Schlüssel zu einem erfolgreichen Umzug.
+                    Der Vergleich mehrerer Anbieter ist der effektivste Weg, um bei Ihrem Umzug Geld zu sparen. Studien zeigen, dass Kunden durch den Vergleich durchschnittlich 30-40% der <strong>Umzugskosten</strong> einsparen können. Dies liegt daran, dass die Preise zwischen verschiedenen Dienstleistern erheblich variieren können. Ein günstiger Anbieter bedeutet nicht immer das beste Angebot – achten Sie auf Qualität, enthaltene Leistungen und Versicherungen. Durch das Vergleichen mehrerer Partner erhalten Sie einen fairen Marktüberblick. Nutzen Sie Vergleichsportale wie Online-Offerten.ch, um bis zu 5 Offerten von geprüften Partnern zu erhalten. Vergleichen Sie nicht nur die Preise, sondern auch die Bewertungen, Versicherungssummen und enthaltenen Leistungen.
                   </p>
-        </div>
+
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Umzugsfirmen im Vergleich: Was ist wichtig?
+                  </h3>
+                  <p className="text-body">
+                    Wenn Sie verschiedene Anbieter vergleichen, sollten Sie auf mehrere Kriterien achten. Neben dem Preis sind die Versicherungssummen, enthaltenen Leistungen, Erfahrung und Bewertungen wichtig. Ein guter Partner bietet eine detaillierte Offerte mit klarer Preisaufschlüsselung. Prüfen Sie, ob Verpackungsmaterial, Transport, Montage/Demontage und Versicherung im Preis enthalten sind. Ein professioneller Dienstleister verfügt über gültige Versicherungen und kann Referenzen vorweisen. Vergleichen Sie auch die Kommunikationsqualität – ein guter Partner ist erreichbar und antwortet schnell auf Anfragen. Lesen Sie Bewertungen anderer Kunden, um sich ein Bild von der Qualität der Dienstleistung zu machen.
+                  </p>
+
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Umzugsfirma Schweiz: Regionale Unterschiede
+                  </h3>
+                  <p className="text-body">
+                    Die Preise und Verfügbarkeit von Dienstleistern können je nach Region in der Schweiz variieren. In Ballungsgebieten wie <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:text-green-700 font-semibold underline">Zürich</Link>, <Link href="/umzugsfirma/basel" className="text-green-600 hover:text-green-700 font-semibold underline">Basel</Link> oder <Link href="/umzugsfirma/genf" className="text-green-600 hover:text-green-700 font-semibold underline">Genf</Link> gibt es mehr Anbieter zur Auswahl, aber die Preise sind oft höher. Eine <Link href="/umzugsfirma/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Bern</Link> oder <Link href="/umzugsfirma/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirma Luzern</Link> hat oft höhere Lohnkosten als ein Partner in ländlicheren Regionen. Dennoch lohnt es sich, auch Anbieter aus anderen Regionen zu kontaktieren, da diese oft günstigere Preise anbieten können. In ländlicheren Regionen sind die <strong>Umzugskosten</strong> oft niedriger, aber die Auswahl an Partnern ist begrenzter.
+                  </p>
+
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Umzugsfirma buchen: Tipps für die richtige Wahl
+                  </h3>
+                  <p className="text-body">
+                    Wenn Sie einen Partner buchen, sollten Sie frühzeitig planen. Die beste Zeit für die <strong>Umzugsplanung</strong> ist 1-2 Monate vor dem Umzugsdatum, besonders in den Sommermonaten und zum Monatsende. Frühzeitige Buchung gibt Ihnen mehr Auswahl und oft auch bessere Preise. Bevor Sie einen Dienstleister buchen, sollten Sie mehrere Offerten vergleichen und eine schriftliche Offerte anfordern. Prüfen Sie die Versicherungen, Bewertungen und Referenzen der Anbieter. Ein professioneller Partner bietet eine kostenlose Besichtigung vor Ort, um eine realistische Offerte zu erstellen. Nach dem Umzug können Sie auch eine <Link href="/reinigung/umzugsreinigung" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsreinigung</Link> buchen, um Ihre neue Wohnung professionell reinigen zu lassen.
+                  </p>
+
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Seriöse Umzugsfirma erkennen: Worauf achten?
+                  </h3>
+                  <p className="text-body">
+                    Einen seriösen Partner erkennt man an mehreren Merkmalen. Er bietet schriftliche, detaillierte Offerten mit klarer Preisaufschlüsselung, verfügt über gültige Versicherungen und kann Referenzen vorweisen. Ein seriöser Dienstleister ist erreichbar, antwortet schnell auf Anfragen und kommuniziert professionell. Vermeiden Sie Anbieter, die nur mündliche Zusagen machen, Druck ausüben oder ungewöhnlich günstige Preise ohne Erklärung anbieten. Ein seriöser Partner ist transparent und beantwortet alle Ihre Fragen. Prüfen Sie auch, ob der Anbieter über eine gültige Transportversicherung und Betriebshaftpflichtversicherung verfügt. Ein professioneller Dienstleister kann Ihnen Versicherungsnachweise zeigen und verfügt über positive Kundenbewertungen.
+                  </p>
+
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Umzugsfirma Bewertungen: So erkennen Sie Qualität
+                  </h3>
+                  <p className="text-body">
+                    <strong>Bewertungen</strong> sind ein wichtiges Kriterium bei der Auswahl. Lesen Sie Bewertungen auf verschiedenen Plattformen, um sich ein umfassendes Bild von der Qualität der Anbieter zu machen. Achten Sie nicht nur auf die Bewertungssterne, sondern auch auf die Inhalte der Bewertungen. Positive Bewertungen erwähnen oft pünktliche Ankunft, sorgfältigen Umgang mit Möbeln, freundliches Personal und transparente Preise. Negative Bewertungen können auf Probleme wie Verspätungen, Schäden oder unprofessionelles Verhalten hinweisen. Ein guter Partner hat überwiegend positive Bewertungen und reagiert professionell auf Kritik. Bei Online-Offerten.ch können Sie Bewertungen unserer Partnerfirmen einsehen, um den besten Dienstleister für Ihren Umzug zu finden.
+                  </p>
+
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Umzugsfirma Offerten: Was sollte enthalten sein?
+                  </h3>
+                  <p className="text-body">
+                    Professionelle <strong>Offerten</strong> sollten alle wichtigen Informationen enthalten: Gesamtpreis mit detaillierter Aufschlüsselung, alle enthaltenen Leistungen (Verpackung, Transport, Montage/Demontage), Versicherungsschutz und Deckungssumme, Umzugsdatum und Zeitfenster, Anzahl der Umzugshelfer und Fahrzeuge, Zusatzleistungen und deren Kosten, Zahlungsbedingungen und Stornierungsbedingungen. Ein guter Partner erstellt schriftliche Offerten, die alle Leistungen transparent auflisten. Vergleichen Sie <strong>Offerten</strong> nicht nur nach Preis, sondern auch nach Qualität und Umfang der Leistungen. Eine detaillierte Offerte hilft Ihnen, verschiedene Anbieter objektiv zu vergleichen und den besten Partner für Ihren Bedarf zu finden.
+                  </p>
+
+                  <h3 className="heading-3 mt-8 mb-4">
+                    Umzugsfirma in der Nähe: Vorteile und Nachteile
+                  </h3>
+                  <p className="text-body">
+                    Ein lokaler Partner hat den Vorteil, dass er die lokalen Gegebenheiten kennt und kurze Anfahrtswege hat. Dies kann zu günstigeren <strong>Umzugskosten</strong> führen. Allerdings bedeutet ein lokaler Anbieter nicht automatisch das beste Angebot. Auch weiter entfernte Dienstleister können gute Preise anbieten, besonders wenn sie in Ihrer Zielregion tätig sind. Vergleichen Sie sowohl lokale als auch regionale Partner, um das beste Angebot zu finden. Ein lokaler Dienstleister kann Vorteile bei der Umzugsplanung haben, da er die Gegebenheiten in Ihrer Region kennt. Nutzen Sie unser Vergleichsportal, um sowohl lokale als auch überregionale Anbieter zu vergleichen.
+                  </p>
+
+                  <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
+                    <h4 className="heading-4 mb-3">
+                      💡 Pro-Tipp: Umzugsfirma richtig auswählen
+                    </h4>
+                    <p className="text-body">
+                      Beim Vergleich von Anbietern sollten Sie nicht nur auf den Preis achten. Vergleichen Sie auch die enthaltenen Leistungen, Versicherungssummen, Bewertungen und die Kommunikationsqualität. Ein etwas teurerer Partner kann durch bessere Leistungen, Versicherungen und Erfahrung das bessere Angebot sein. Für Spezialtransporte wie <Link href="/umzugsfirma/spezialtransporte/klaviertransport" className="text-blue-700 hover:text-blue-800 font-semibold underline">Klaviertransport</Link> oder <Link href="/umzugsfirma/spezialtransporte" className="text-blue-700 hover:text-blue-800 font-semibold underline">Spezialtransporte</Link> benötigen Sie spezialisierte Dienstleister mit entsprechender Erfahrung. Eine gute <strong>Umzugsplanung</strong> ist der Schlüssel zu einem erfolgreichen Umzug.
+                    </p>
+                  </div>
+                </div>
       </div>
             </div>
         </div>
@@ -603,7 +605,7 @@ const UmzugsfirmaPageClient = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <h4 className="heading-4-white">
-              Bereit, Ihren Partner zu finden?
+              Jetzt Umzugsfirmen vergleichen und Auftrag starten!
             </h4>
             <p className="text-body-white mb-8">
               Fordern Sie jetzt kostenlos und unverbindlich bis zu 5 Offerten von geprüften Partnern an. Vergleichen Sie Preise und sparen Sie bis zu 40% bei Ihrem Umzug.

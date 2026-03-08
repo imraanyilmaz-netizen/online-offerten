@@ -476,7 +476,7 @@ const PrivateUmzugPageClient = () => {
                   <div>
                     <Image
                       src="/image/4e73e4b7-ab5b-4e20-9412-394b5b526cf0.webp"
-                      alt="Professionelle Umzugshelfer tragen sorgfältig einen großen Schrank durch ein Treppenhaus, während sie sich um die Sicherheit der Möbel kümmern. Diese Umzugsfirma zeigt ihre Erfahrung und Qualität im Möbeltransport, um den Privatumzug stressfrei zu gestalten."
+                      alt="Professionelle Umzugshelfer tragen sorgfältig einen grossen Schrank durch ein Treppenhaus, während sie sich um die Sicherheit der Möbel kümmern. Diese Umzugsfirma zeigt ihre Erfahrung und Qualität im Möbeltransport, um den Privatumzug stressfrei zu gestalten."
                       width={800}
                       height={450}
                       className="w-full h-auto rounded-lg shadow-lg"

@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import RaeumungEntsorgungPageClient from '@/components/pages/services/RaeumungEntsorgungPageClient'
 
 export const metadata: Metadata = {
-  title: 'Räumung & Entsorgung Schweiz: Kostenlose Offerten',
-  description: 'Räumung & Entsorgung Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Entsorgungsfirmen. Wohnungsräumung, Haushaltsauflösung, Kellerräumung & umweltgerechte Entsorgung – professionell und bis zu 40% günstiger. Jetzt Offerten anfordern!',
+  title: 'Räumung & Entsorgung Schweiz vergleichen | Kostenlose Offerten',
+  description: 'Vergleichen Sie bis zu 5 kostenlose Offerten für Räumung und Entsorgung in der Schweiz. Geprüfte Firmen, transparente Preise und schnelle Abwicklung.',
   alternates: {
     canonical: 'https://online-offerten.ch/raeumung-entsorgung',
   },
   openGraph: {
-    title: 'Räumung & Entsorgung Schweiz finden & vergleichen',
-    description: 'Vergleichen Sie kostenlos Offerten von geprüften Entsorgungsfirmen. Wohnungsräumung, Haushaltsauflösung, Kellerräumung & umweltgerechte Entsorgung.',
+    title: 'Räumung & Entsorgung Schweiz vergleichen | Kostenlose Offerten',
+    description: 'Bis zu 5 kostenlose Offerten für Räumung und Entsorgung in der Schweiz vergleichen. Geprüfte Firmen und transparente Preise.',
     url: 'https://online-offerten.ch/raeumung-entsorgung',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Räumung & Entsorgung Schweiz finden & vergleichen',
-    description: 'Vergleichen Sie kostenlos Offerten von geprüften Entsorgungsfirmen. Wohnungsräumung, Haushaltsauflösung, Kellerräumung & umweltgerechte Entsorgung.',
+    title: 'Räumung & Entsorgung Schweiz vergleichen | Kostenlose Offerten',
+    description: 'Bis zu 5 kostenlose Offerten für Räumung und Entsorgung in der Schweiz vergleichen. Geprüfte Firmen und transparente Preise.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/entsorgung-min.png'],
   },
   robots: {
