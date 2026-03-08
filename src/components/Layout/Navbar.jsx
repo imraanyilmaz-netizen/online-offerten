@@ -276,7 +276,12 @@ const Navbar = () => {
             </span>
             <span
               className="text-[22px] md:text-2xl lg:text-[26px] leading-none font-bold italic tracking-tight text-black"
-              style={{ fontFamily: 'Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif', fontSynthesis: 'none' }}
+              style={{
+                fontFamily: 'Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif',
+                fontSynthesis: 'none',
+                fontOpticalSizing: 'none',
+                fontFeatureSettings: '"liga" 1, "calt" 1',
+              }}
             >
               Online-Offerten.ch
             </span>

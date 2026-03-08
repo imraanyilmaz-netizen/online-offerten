@@ -89,7 +89,7 @@ async function getHomePageData() {
       .select('id, title, slug, meta_description, featured_image_url, category, tags')
       .eq('status', 'published')
       .order('published_at', { ascending: false })
-      .limit(9),
+      .limit(100),
     // Fetch all approved platform reviews count (for homepage AggregateRating)
     supabase
       .from('customer_reviews')
