@@ -275,7 +275,7 @@ const Navbar = () => {
               <Send className="w-[18px] h-[18px] text-white" />
             </span>
             <span
-              className="text-[26px] leading-none font-bold italic tracking-tight text-black"
+              className="text-[22px] md:text-2xl lg:text-[26px] leading-none font-bold italic tracking-tight text-black"
               style={{ fontFamily: '"Booster Next FY", Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif' }}
             >
               Online-Offerten.ch
