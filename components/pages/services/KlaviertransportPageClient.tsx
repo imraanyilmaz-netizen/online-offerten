@@ -7,8 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, CheckCircle, AlertTriangle, Shield, Users, HelpCircle, Star, Package, MapPin, Clock, Calculator, Sparkles, BookOpen, ChevronRight, Search, ShieldCheck, TrendingUp, Building, Home, Globe, Box, ArrowUpDown, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, CheckCircle, AlertTriangle, Shield, Users, HelpCircle, Package, MapPin, Clock, Calculator, Sparkles, BookOpen, ChevronRight, Search, ShieldCheck, TrendingUp, Building, Home, Globe, Box, ArrowUpDown, CheckCircle2 } from 'lucide-react'
 import { PiPianoKeysFill } from 'react-icons/pi'
 
 const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
@@ -101,46 +100,14 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
             </div>
           </div>
           <div className="relative md:col-span-2">
-            <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
-              <div className="flex items-center justify-center mb-6">
-                <div className="bg-green-100 p-4 rounded-full">
-                  <PiPianoKeysFill className="h-12 w-12 text-green-600" />
-                </div>
-              </div>
-              <h3 className="heading-3 text-center mb-6">
-                Finden Sie Ihre Umzugsfirma
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <MapPin className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-gray-900">Qualifizierte Anbieter</p>
-                    <p className="text-sm text-gray-600">Finden Sie qualifizierte Anbieter direkt in Ihrer Region</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <ShieldCheck className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-gray-900">100% kostenlos & unverbindlich</p>
-                    <p className="text-sm text-gray-600">Keine Gebühren, keine versteckten Kosten, keine Verpflichtungen</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <TrendingUp className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-gray-900">Transparente Preise</p>
-                    <p className="text-sm text-gray-600">Durch den Vergleich mehrerer lokaler Umzugsfirmen finden Sie die besten Preise</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <Users className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-gray-900">Versicherte Partner</p>
-                    <p className="text-sm text-gray-600">Alle Partnerfirmen sind versichert und verfügen über positive Bewertungen</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img
+              src="https://online-offerten.ch/bilder/klaviertransport.avif"
+              alt="Professioneller Klaviertransport in der Schweiz - Kostenlose Offerten vergleichen"
+              className="w-full h-auto object-cover rounded-2xl shadow-lg"
+              loading="eager"
+              width="1200"
+              height="600"
+            />
           </div>
         </div>
       </div>
@@ -149,134 +116,70 @@ const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
 }
 
 const ContentSection = ({ sectionData }: { sectionData: any }) => {
-  const icons: Record<string, React.ReactNode> = {
-    why: <AlertTriangle className="w-8 h-8 text-green-600" />,
-    process: <Users className="w-8 h-8 text-green-600" />,
-    costs: <Calculator className="w-8 h-8 text-green-600" />,
-    types: <PiPianoKeysFill className="w-8 h-8 text-green-600" />,
-    services: <Package className="w-8 h-8 text-green-600" />,
-    distance: <MapPin className="w-8 h-8 text-green-600" />,
-    insurance: <Shield className="w-8 h-8 text-green-600" />,
-    checklist: <CheckCircle className="w-8 h-8 text-green-600" />,
-  }
-
-  const bgColors: Record<string, string> = {
-    why: "bg-white",
-    process: "bg-gray-50",
-    costs: "bg-white",
-    types: "bg-gray-50",
-    services: "bg-white",
-    distance: "bg-gray-50",
-    insurance: "bg-white",
-    checklist: "bg-gray-50",
-  }
-
   return (
-    <section
-      className={`py-16 md:py-20 ${bgColors[sectionData.key] || 'bg-white'}`}
-    >
-      <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        {/* Header */}
-        <div className="text-left mb-6">
-          <h2 className="heading-2">{sectionData.title}</h2>
-          {sectionData.subtitle && (
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
-              {sectionData.subtitle}
-            </p>
-          )}
-        </div>
+    <div className="space-y-6 py-8 border-b border-gray-200 last:border-b-0">
+      <div className="text-left">
+        <h2 className="heading-2">{sectionData.title}</h2>
+        {sectionData.subtitle && (
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
+            {sectionData.subtitle}
+          </p>
+        )}
+      </div>
 
-        {/* Content */}
-        <div>
-          <div className="space-y-6 text-body leading-relaxed text-base md:text-lg">
-            {sectionData.paragraphs.map((p: string, i: number) => (
-              <p key={i} dangerouslySetInnerHTML={{ __html: p }} className="mb-4" />
+      <div className="space-y-6 text-body leading-relaxed text-base md:text-lg">
+        {sectionData.paragraphs.map((p: string, i: number) => (
+          <p key={i} dangerouslySetInnerHTML={{ __html: p }} className="mb-4" />
+        ))}
+      </div>
+
+      {sectionData.points && (
+        <div className="mt-4 pt-6 border-t border-gray-200">
+          <div className="grid md:grid-cols-2 gap-6">
+            {sectionData.points.map((point: any, i: number) => (
+              <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div className="flex-shrink-0 mt-1">
+                  <CheckCircle className="w-6 h-6 text-green-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-lg">{point.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{point.description}</p>
+                </div>
+              </div>
             ))}
           </div>
-
-          {/* Points Grid */}
-          {sectionData.points && (
-            <div className="mt-10 pt-8 border-t border-gray-200">
-              <div className="grid md:grid-cols-2 gap-6">
-                {sectionData.points.map((point: any, i: number) => (
-                  <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div className="flex-shrink-0 mt-1">
-                      <CheckCircle className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-2 text-lg">{point.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{point.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
-      </div>
-    </section>
+      )}
+    </div>
   )
 }
 
 const FaqSection = ({ faqData }: { faqData: any }) => {
   return (
-    <section
-      className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white"
-    >
-      <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <div className="text-left mb-12">
-          <h2 className="heading-2">{faqData.title}</h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl">{faqData.subtitle}</p>
+    <div className="py-10">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-10 shadow-sm">
+        <div className="mb-8">
+          <p className="text-sm font-semibold text-green-700 mb-2">FAQ</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{faqData.title}</h2>
+          <p className="text-base md:text-lg text-gray-600 mt-3 max-w-2xl">{faqData.subtitle}</p>
         </div>
-        <Card className="border-0 shadow-lg bg-white">
-          <CardContent className="p-6 md:p-8">
         <Accordion type="single" collapsible className="w-full">
           {faqData.questions.map((item: any, index: number) => (
-                <AccordionItem 
-                  key={index} 
-                  value={`item-${index}`} 
-                  className="border-b border-gray-200 last:border-0 px-4 py-2"
-                >
-                  <AccordionTrigger className="font-semibold text-left hover:no-underline py-4 text-gray-900">
+            <AccordionItem key={index} value={`item-${index}`}>
+              <AccordionTrigger className="text-left font-semibold text-gray-900">
                 <h4 className="faq-question text-left">{item.q}</h4>
               </AccordionTrigger>
-                  <AccordionContent className="pt-2 pb-4">
-                    <p className="text-body leading-relaxed">{item.a}</p>
+              <AccordionContent className="text-gray-600 leading-relaxed">
+                <p className="text-body">{item.a}</p>
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
-          </CardContent>
-        </Card>
       </div>
-    </section>
+    </div>
   )
 }
 
-
-const Cta = ({ quoteUrl }: { quoteUrl: string }) => (
-  <section
-    className="bg-gradient-to-r from-green-600 to-green-800"
-  >
-    <div className="container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-20 text-center text-white">
-      <Star className="w-16 h-16 text-white/50 mx-auto mb-6" />
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">Kostenlose Offerten für Klaviertransport Zürich anfordern</h2>
-      <p className="text-lg md:text-xl text-green-200 max-w-3xl mx-auto mb-8">
-        Erhalten Sie kostenlos und unverbindlich Offerten von geprüften Spezialisten aus Ihrer Region. Vergleichen Sie Preise und Leistungen und finden Sie den perfekten Partner für den Transport Ihres wertvollen Instruments. Bis zu 40% sparen!
-      </p>
-      <Button
-        asChild
-        size="lg"
-        className="bg-white text-green-700 hover:bg-green-50 group px-10 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-      >
-        <Link href={`${quoteUrl}?service=umzug&special=klaviertransport`}>
-          Jetzt kostenlose Offerten anfordern
-          <ArrowRight className="w-6 h-6 ml-3 transition-transform group-hover:translate-x-1.5" />
-        </Link>
-      </Button>
-    </div>
-  </section>
-)
 
 const KlaviertransportPageClient = () => {
   const router = useRouter()
@@ -561,23 +464,12 @@ const KlaviertransportPageClient = () => {
         <Hero quoteUrl={quoteUrl} />
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="w-full">
-            <main className="bg-white p-6 md:p-10 rounded-2xl shadow-2xl space-y-8">
+            <main className="space-y-8">
               {/* Service Selection Section - Like Geschäftsumzug Page */}
               <section className="py-8 border-b border-gray-200">
                 <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
                   {/* Left Column - Content */}
                   <div className="lg:col-span-8">
-                    {/* Hero Image - Above "Warum ein professioneller Klaviertransport unerlässlich ist" */}
-                    <div className="mb-12">
-                      <img
-                        src="https://online-offerten.ch/bilder/klaviertransport.avif"
-                        alt="Professioneller Klaviertransport in der Schweiz - Kostenlose Offerten vergleichen"
-                        className="w-full h-auto object-cover rounded-2xl shadow-lg"
-                        loading="eager"
-                        width="1200"
-                        height="600"
-                      />
-                    </div>
                     <ContentSection sectionData={whyData} />
                     <ContentSection sectionData={processData} />
                     <ContentSection sectionData={costsData} />
@@ -586,6 +478,7 @@ const KlaviertransportPageClient = () => {
                     <ContentSection sectionData={distanceData} />
                     <ContentSection sectionData={insuranceData} />
                     <ContentSection sectionData={checklistData} />
+                    <FaqSection faqData={faqData} />
                   </div>
                   
                   {/* Right Column - Service Selection */}
@@ -674,8 +567,6 @@ const KlaviertransportPageClient = () => {
             </main>
           </div>
         </div>
-        <FaqSection faqData={faqData} />
-        <Cta quoteUrl={quoteUrl} />
       </div>
     </>
   )

@@ -159,9 +159,9 @@ const Navbar = () => {
 
   const umzugLinks = [
     { to: '/umzugsfirma/privatumzug', text: 'Privatumzug' },
+    { to: '/umzugsfirma/klaviertransport', text: 'Klaviertransport' },
     { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug' },
     { to: '/umzugsfirma/internationale-umzuege', text: 'Internationale Umzüge' },
-    { to: '/umzugsfirma/spezialtransporte', text: 'Spezialtransporte' },
     { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirmen vergleichen' },
   ];
 
