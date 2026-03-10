@@ -166,7 +166,6 @@ const Navbar = () => {
   ];
 
   const reinigungLinks = [
-    { to: '/reinigung', text: 'Alle Reinigungsdienste' },
     { to: '/reinigung/umzugsreinigung', text: 'Umzugsreinigung' },
     { to: '/reinigung/wohnungsreinigung', text: 'Wohnungsreinigung' },
     { to: '/reinigung/bueroreinigung', text: 'Büroreinigung' },

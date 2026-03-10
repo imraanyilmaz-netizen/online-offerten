@@ -3,18 +3,12 @@
 import React from 'react'
 
 // Framer Motion removed for better performance - using CSS transitions instead
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { ArrowRight, CheckCircle, ShieldCheck, Clock, Sparkles, ThumbsUp, BookOpen, Award, HelpCircle, Home, Building, Brush, MapPin, ChevronRight, Star, FileText, Zap } from 'lucide-react'
+import { CheckCircle, Sparkles, ThumbsUp, Home, Building, Brush, ChevronRight, Star } from 'lucide-react'
 import NextImage from 'next/image'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import PricingTable from '@/components/SEO/PricingTable'
-import HowItWorks from '@/components/SEO/HowItWorks'
 
 const ReinigungPageClient = () => {
-  const router = useRouter()
-
   // SEO Data (moved to server component, but kept for schema generation if needed client-side)
   const metaTitle = "Reinigungsfirma – Kostenlose Offerten vergleichen | Schweiz"
   const metaDescription = "Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%."
@@ -46,28 +40,6 @@ const ReinigungPageClient = () => {
     }
   }
 
-  const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=reinigung&step=2')
-  }
-
-  const handleCalculatorClick = () => {
-    router.push('/reinigung/reinigungskosten')
-  }
-
-  const benefits = [
-    { icon: ShieldCheck, title: "Abnahmegarantie", text: "Unsere Partner sind bei der Übergabe anwesend und garantieren die Abnahme durch den Vermieter. Falls Nachbesserungen nötig sind, werden diese kostenlos erledigt.", color: "blue" },
-    { icon: Clock, title: "Zeitersparnis & Stressreduktion", text: "Konzentrieren Sie sich auf das Einrichten Ihres neuen Heims, während Profis die aufwändige Endreinigung übernehmen.", color: "emerald" },
-    { icon: Sparkles, title: "Professionelle Ausrüstung", text: "Reinigungsfirmen verfügen über spezielle Geräte und Mittel, um auch hartnäckigsten Schmutz zu entfernen und perfekte Ergebnisse zu erzielen.", color: "purple" },
-    { icon: ThumbsUp, title: "Geprüfte Qualität", text: "Wir arbeiten nur mit qualifizierten und versicherten Reinigungsfirmen zusammen, die höchste Standards erfüllen.", color: "amber" },
-  ]
-
-  const colorMap: Record<string, { bg: string; icon: string; hoverBg: string }> = {
-    blue: { bg: 'bg-blue-100', icon: 'text-blue-600', hoverBg: 'group-hover:bg-blue-200' },
-    emerald: { bg: 'bg-emerald-100', icon: 'text-emerald-600', hoverBg: 'group-hover:bg-emerald-200' },
-    purple: { bg: 'bg-purple-100', icon: 'text-purple-600', hoverBg: 'group-hover:bg-purple-200' },
-    amber: { bg: 'bg-amber-100', icon: 'text-amber-600', hoverBg: 'group-hover:bg-amber-200' },
-  }
-
   const includedServices = [
     "Gründliche Reinigung von Küche (inkl. Backofen, Dampfabzug, Kühlschrank)",
     "Komplette Bad- und WC-Reinigung (inkl. Entkalkung von Armaturen)",
@@ -91,23 +63,7 @@ const ReinigungPageClient = () => {
     { size: "1.5 - 2.5 Zimmer", cost: "500 - 800 CHF", description: "Kleine Wohnung, WG-Zimmer" },
     { size: "3.5 Zimmer", cost: "800 - 1'100 CHF", description: "Standard Wohnung" },
     { size: "4.5 Zimmer", cost: "950 - 1'300 CHF", description: "Grössere Wohnung" },
-    { size: "5.5+ Zimmer", cost: "Ab 1'200 CHF", description: "Einfamilienhaus, Villa" }
-  ]
-
-  const oldCostData = [
-    "1.5 - 2.5 Zimmer-Wohnung: CHF 500 - 800",
-    "3.5 Zimmer-Wohnung: CHF 800 - 1'100",
-    "4.5 Zimmer-Wohnung: CHF 950 - 1'300",
-    "5.5 Zimmer-Wohnung oder grösser: ab CHF 1'200"
-  ]
-
-  const reinigungServices = [
-    { path: '/reinigung/wohnungsreinigung', title: 'Wohnungsreinigung', icon: Home, description: 'Gründliche Reinigung Ihrer Wohnung' },
-    { path: '/reinigung/hausreinigung', title: 'Hausreinigung', icon: Building, description: 'Professionelle Hausreinigung' },
-    { path: '/reinigung/bueroreinigung', title: 'Büroreinigung', icon: FileText, description: 'Sauberes Arbeitsumfeld' },
-    { path: '/reinigung/umzugsreinigung', title: 'Umzugsreinigung', icon: Sparkles, description: 'Mit Abnahmegarantie' },
-    { path: '/reinigung/unterhaltsreinigung', title: 'Unterhaltsreinigung', icon: Clock, description: 'Regelmässig & zuverlässig' },
-    { path: '/reinigung/grundreinigung', title: 'Grundreinigung', icon: Brush, description: 'Tiefenreinigung vom Profi' },
+    { size: "5.5+ Zimmer", cost: "Ab 1'200 CHF", description: "Einfamilienhaus" }
   ]
 
   return (
@@ -177,7 +133,6 @@ const ReinigungPageClient = () => {
                     </div>
                     <div className="flex-1 text-left sm:text-center">
                       <p className="font-semibold text-sm sm:text-base text-gray-900">Wohnungsreinigung</p>
-                      <p className="text-xs text-gray-600 mt-0.5">Gründlich & sauber</p>
                     </div>
                   </Link>
 
@@ -191,21 +146,19 @@ const ReinigungPageClient = () => {
                     </div>
                     <div className="flex-1 text-left sm:text-center">
                       <p className="font-semibold text-sm sm:text-base text-gray-900">Büroreinigung</p>
-                      <p className="text-xs text-gray-600 mt-0.5">Professionell & zuverlässig</p>
                     </div>
                   </Link>
 
-                  {/* Grundreinigung */}
+                  {/* Hausreinigung */}
                   <Link
-                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=grundreinigung"
+                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2&reinigungArt=hausreinigung"
                     className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
                   >
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
-                      <Brush className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                      <Home className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
                     </div>
                     <div className="flex-1 text-left sm:text-center">
-                      <p className="font-semibold text-sm sm:text-base text-gray-900">Grundreinigung</p>
-                      <p className="text-xs text-gray-600 mt-0.5">Tiefenreinigung</p>
+                      <p className="font-semibold text-sm sm:text-base text-gray-900">Hausreinigung</p>
                     </div>
                   </Link>
 
@@ -215,11 +168,10 @@ const ReinigungPageClient = () => {
                     className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
                   >
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                      <Star className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
                     </div>
                     <div className="flex-1 text-left sm:text-center">
                       <p className="font-semibold text-sm sm:text-base text-gray-900">Fensterreinigung</p>
-                      <p className="text-xs text-gray-600 mt-0.5">Streifenfrei & klar</p>
                     </div>
                   </Link>
 
@@ -233,7 +185,6 @@ const ReinigungPageClient = () => {
                     </div>
                     <div className="flex-1 text-left sm:text-center">
                       <p className="font-semibold text-sm sm:text-base text-gray-900">Unterhaltsreinigung</p>
-                      <p className="text-xs text-gray-600 mt-0.5">Regelmässig & sauber</p>
                     </div>
                   </Link>
                 </div>
@@ -272,102 +223,159 @@ const ReinigungPageClient = () => {
                 </div>
                 {/* Floating Badge */}
                 <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
-                  <p className="text-sm font-bold">Mit Abnahmegarantie</p>
-                  <p className="text-xs text-blue-100">In der ganzen Schweiz</p>
+                  <p className="text-sm font-bold">Endreinigung</p>
+                  <p className="text-xs text-blue-100">Mit Abnahmegarantie</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Warum eine professionelle Umzugsreinigung */}
+        {/* Article Content Section */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-blue-700 font-semibold text-xs mb-4">
-                  WARUM PROFESSIONELLE REINIGUNG?
-                </div>
-                <h2 className="heading-2 mb-6">Warum eine professionelle Umzugsreinigung?</h2>
+            <article className="max-w-4xl space-y-10">
+              <header className="space-y-4">
+                <h2 className="heading-2">Reinigungsfirma Schweiz: Offerten vergleichen und passend buchen</h2>
                 <p className="text-body">
-                  Eine Wohnungsübergabe kann stressig sein. Vermieter haben hohe Ansprüche an die Sauberkeit. Ob Reinigung für Privatpersonen nach einem Wohnungswechsel oder eine gründliche Endreinigung vor der Übergabe – mit einer professionellen Reinigungsfirma an Ihrer Seite sparen Sie nicht nur Zeit und Nerven, sondern sichern sich auch dank der Abnahmegarantie gegen teure Nachreinigungen ab. Vergleichen Sie kostenlose Reinigungsofferten von mehreren geprüften Firmen und finden Sie das beste Angebot. Erfahren Sie mehr über unsere <Link href="/umzugsfirma/privatumzug" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Privatumzug</Link> Dienstleistungen und wie wir Ihnen bei Ihrem Umzug helfen können.
+                  Wer heute eine Reinigung sucht, möchte vor allem drei Dinge: einen fairen Preis, verlässliche Qualität
+                  und einen klaren Ablauf ohne Überraschungen. Genau dafür ist Online-Offerten.ch da. Sie stellen eine
+                  einzige Anfrage und erhalten passende Offerten von geprüften Anbietern aus Ihrer Region. So vergleichen
+                  Sie Leistungen transparent, sparen Aufwand bei der Suche und entscheiden sich gezielt für den Partner,
+                  der zu Ihrem Objekt und Ihrem Zeitplan passt.
+                </p>
+                <p className="text-body">
+                  Ob Wohnungsreinigung, Hausreinigung, Büroreinigung oder Fensterreinigung: Jede Dienstleistung stellt
+                  andere Anforderungen an Team, Material und Zeitfenster. Bei einem Privathaushalt stehen meist Hygiene,
+                  Sorgfalt und flexible Termine im Mittelpunkt. Bei Unternehmen sind oft klare Einsatzpläne,
+                  gleichbleibende Qualität und diskrete Abläufe entscheidend. Mit einem strukturierten Offertenvergleich
+                  lassen sich diese Unterschiede sauber abbilden.
+                </p>
+                <p className="text-body">
+                  Gleichzeitig finden viele Nutzer über Suchanfragen wie <strong>Reinigungsfirma in der Nähe</strong>,
+                  <strong> Reinigungsservice in der Nähe</strong> oder <strong>Reinigungsdienst in der Nähe</strong>
+                  zur passenden Lösung. Auf dieser Seite erhalten Sie einen vollständigen Überblick zu Services, Preisen,
+                  Qualitätskriterien und regionalen Möglichkeiten in der Schweiz.
+                </p>
+              </header>
+
+              <div className="space-y-4 rounded-2xl border border-gray-200 bg-slate-50 p-6 md:p-8">
+                <h3 className="heading-3">Welche Reinigungsdienstleistung passt zu Ihrem Bedarf?</h3>
+                <p id="reinigungsart" className="text-body">
+                  Wählen Sie direkt den passenden Service und starten Sie den Vergleich mit wenigen Angaben:
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link href="/reinigung/wohnungsreinigung" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Wohnungsreinigung</Link>
+                  <Link href="/reinigung/hausreinigung" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Hausreinigung</Link>
+                  <Link href="/reinigung/bueroreinigung" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Büroreinigung</Link>
+                  <Link href="/reinigung/umzugsreinigung" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Umzugsreinigung</Link>
+                  <Link href="/reinigung/unterhaltsreinigung" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Unterhaltsreinigung</Link>
+                  <Link href="/reinigung/fensterreinigung" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Fensterreinigung</Link>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="heading-3">Wohnungsreinigung: gründlich, planbar und alltagstauglich</h3>
+                <p className="text-body">
+                  Die Wohnungsreinigung ist ideal für alle, die ihren Alltag entlasten möchten oder vor einer Übergabe
+                  zusätzlichen Aufwand vermeiden wollen. Typische Leistungen sind die gründliche Reinigung von Küche,
+                  Bad, Böden, Oberflächen und bei Bedarf auch Fenster, Balkon oder Keller. Gute Anbieter arbeiten mit
+                  einem klaren Leistungsumfang, damit Sie im Voraus sehen, was enthalten ist und was optional ergänzt
+                  werden kann. Genau diese Transparenz macht den Unterschied, wenn Sie Offerten vergleichen.
+                </p>
+                <p className="text-body">
+                  Besonders hilfreich ist die Wohnungsreinigung bei engen Zeitfenstern, etwa nach einer Renovation, vor
+                  Besuch oder vor der Wohnungsabgabe. Ein professionelles Team arbeitet strukturiert und bringt die
+                  passenden Reinigungsmittel direkt mit. So erhalten Sie ein sauberes Resultat ohne zusätzlichen
+                  Koordinationsaufwand.
                 </p>
               </div>
-              <div className="relative">
-                <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl">
-                  <img  
-                    className="absolute inset-0 w-full h-full object-cover"
-                    alt="Professionelles Reinigungsteam bei der Endreinigung einer Wohnung"
-                    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                </div>
-                {/* Floating stat */}
-                <div className="absolute -bottom-4 -right-4 bg-white px-5 py-3 rounded-xl shadow-lg border border-gray-100 hidden md:block">
-                  <p className="text-2xl font-bold text-blue-600">40%</p>
-                  <p className="text-xs text-gray-600">Durchschnittliche Ersparnis</p>
-                </div>
+
+              <div className="space-y-4">
+                <h3 className="heading-3">Hausreinigung: mehr Fläche, mehr Details, klarer Standard</h3>
+                <p className="text-body">
+                  Bei der Hausreinigung geht es häufig um grössere Flächen und zusätzliche Bereiche wie Treppenhaus,
+                  Keller, Nebenräume oder Aussenzonen. Deshalb ist eine saubere Planung besonders wichtig: Welche Räume
+                  sind priorisiert, welche Intervalle sind sinnvoll, und welche Aufgaben sollen regelmässig durchgeführt
+                  werden? Ein seriöser Fachbetrieb dokumentiert diese Punkte klar und bietet nachvollziehbare Pakete.
+                </p>
+                <p className="text-body">
+                  Wenn Sie mehrere Offerten nebeneinander sehen, erkennen Sie schnell Unterschiede bei Umfang,
+                  Materialeinsatz und Taktung. Genau dadurch vermeiden Sie unklare Pauschalen und wählen ein Angebot,
+                  das wirklich zu Ihrer Immobilie passt.
+                </p>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* How It Works Section */}
-        <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <HowItWorks
-              title="So einfach ist es"
-              ctaText="Jetzt kostenlose Reinigungs-Offerten anfordern"
-              ctaLink="/kostenlose-offerte-anfordern?service=reinigung"
-            />
-          </div>
-        </section>
-
-        {/* Ihre Vorteile auf einen Blick */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-blue-700 font-semibold text-xs mb-4">
-                IHRE VORTEILE
+              <div className="space-y-4">
+                <h3 className="heading-3">Büroreinigung und Büro putzen: sauber arbeiten ohne Unterbruch</h3>
+                <p className="text-body">
+                  Für Unternehmen sind Suchbegriffe wie <strong>Büroreinigung</strong>, <strong>Büro putzen</strong>
+                  oder <strong>Büro Reinigung</strong> besonders relevant. Der Hintergrund ist klar: Arbeitsplätze sollen
+                  dauerhaft hygienisch und repräsentativ bleiben, ohne den Betrieb zu stören. Deshalb setzen viele Firmen
+                  auf flexible Einsatzzeiten am frühen Morgen, am Abend oder am Wochenende.
+                </p>
+                <p className="text-body">
+                  Gute Anbieter definieren vorab, welche Zonen täglich, wöchentlich oder monatlich gereinigt werden.
+                  Dazu gehören Arbeitsflächen, Sanitärbereiche, Empfang, Besprechungsräume und Gemeinschaftsflächen.
+                  Für Praxen, Studios oder Kanzleien werden zusätzlich branchenspezifische Anforderungen berücksichtigt.
+                  Ein durchdachtes Konzept sorgt dafür, dass Qualität, Hygiene und Diskretion langfristig stimmen.
+                </p>
               </div>
-              <h2 className="heading-2">Ihre Vorteile auf einen Blick</h2>
-            </div>
-            <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon
-                const colors = colorMap[benefit.color] || colorMap.blue
-                return (
-                  <div
-                    key={index}
-                    className="group w-[75vw] min-w-[240px] max-w-[300px] md:w-auto md:min-w-0 md:max-w-none snap-start flex-shrink-0 md:flex-shrink bg-white p-8 rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center"
-                  >
-                    <div className={`inline-flex p-4 rounded-2xl mb-5 ${colors.bg} ${colors.hoverBg} transition-colors`}>
-                      <Icon className={`w-7 h-7 ${colors.icon}`} />
-                    </div>
-                    <h3 className="heading-5 mb-3">{benefit.title}</h3>
-                    <p className="text-body">{benefit.text}</p>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
 
-        {/* Was ist in einer Umzugsreinigung enthalten? */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1">
-                <div className="inline-flex items-center px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-emerald-700 font-semibold text-xs mb-4">
-                  LEISTUNGSUMFANG
-                </div>
-                <h2 className="heading-2 mb-4">Was ist in einer Umzugsreinigung enthalten?</h2>
-                <p className="text-body mb-6">Eine Standard-Umzugsreinigung mit Abnahmegarantie umfasst alle notwendigen Arbeiten für eine erfolgreiche Wohnungsübergabe. Vergleichen Sie Reinigungsofferten von verschiedenen Anbietern, um das beste Angebot zu finden:</p>
+              <div className="space-y-4">
+                <h3 className="heading-3">Unterhaltsreinigung: konstante Qualität im festen Rhythmus</h3>
+                <p className="text-body">
+                  Die Unterhaltsreinigung ist die passende Lösung, wenn Sie regelmässig saubere Räume benötigen. Anders
+                  als bei einer einmaligen Grundaktion werden hier feste Abläufe vereinbart, die sich an Ihrem Alltag
+                  orientieren. Das schafft Planbarkeit, reduziert spontane Einsätze und sorgt für ein dauerhaft gepflegtes
+                  Umfeld.
+                </p>
+                <p className="text-body">
+                  Im privaten Bereich bedeutet das vor allem Entlastung. Im geschäftlichen Umfeld ist es ein wichtiger
+                  Qualitätsfaktor für Mitarbeitende, Kundschaft und Besuch. Über den Offertenvergleich sehen Sie schnell,
+                  welche Firma ein realistisches Intervall, nachvollziehbare Konditionen und verlässliche Kommunikation
+                  anbietet.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="heading-3">Fensterreinigung: streifenfrei bei Wohnungen, Häusern und Büros</h3>
+                <p className="text-body">
+                  Fensterreinigung wird oft unterschätzt, obwohl sie den Gesamteindruck eines Objekts stark beeinflusst.
+                  Professionelle Teams reinigen Glasflächen, Rahmen und bei Bedarf auch Storen oder Lamellen. Je nach
+                  Objektgrösse, Zugänglichkeit und Verschmutzung werden sichere Methoden und passendes Material eingesetzt.
+                </p>
+                <p className="text-body">
+                  Für Privatobjekte steht meist ein klares, streifenfreies Resultat im Vordergrund. Bei Büros kommen
+                  zusätzlich Faktoren wie Terminfenster, Sicherheit und laufender Betrieb hinzu. Ein direkter
+                  Offertenvergleich hilft, Qualität und Preis besser einzuordnen statt nur den günstigsten Anbieter zu
+                  wählen.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="heading-3">Umzugsreinigung mit Abnahmegarantie: Sicherheit bei der Übergabe</h3>
+                <p className="text-body">
+                  Die Umzugsreinigung mit Abnahmegarantie gehört zu den wichtigsten Services bei einem Wohnungswechsel.
+                  Sie reduziert das Risiko von Beanstandungen bei der Abgabe und schützt vor teuren Nachreinigungen.
+                  Entscheidend ist, dass der Leistungsumfang vollständig dokumentiert ist und die Firma im Fall einer
+                  Rückmeldung zeitnah nachbessert.
+                </p>
+                <p className="text-body">
+                  Gerade in Städten mit engem Wohnungsmarkt sind Termine knapp. Deshalb lohnt es sich, früh Offerten
+                  einzuholen und nicht erst kurz vor dem Umzug zu starten. Über Online-Offerten.ch können Sie Umzug und
+                  Reinigung abgestimmt planen und Leistungen gezielt kombinieren.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="heading-3">Was ist bei einer Umzugsreinigung typischerweise enthalten?</h3>
+                <p className="text-body">
+                  Eine strukturierte Endreinigung umfasst in der Regel folgende Leistungen:
+                </p>
                 <ul className="space-y-3">
                   {includedServices.map((service, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start"
-                    >
+                    <li key={index} className="flex items-start">
                       <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
                         <CheckCircle className="w-4 h-4 text-green-600" />
                       </div>
@@ -376,232 +384,197 @@ const ReinigungPageClient = () => {
                   ))}
                 </ul>
               </div>
-              <div className="relative order-1 md:order-2">
-                <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                  <img   
-                    className="absolute inset-0 w-full h-full object-cover"
-                    alt="Glänzende saubere Küche nach einer professionellen Umzugsreinigung"
-                    src="https://images.unsplash.com/photo-1641823911769-c55f23c25143" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+              <div className="space-y-4">
+                <h3 className="heading-3">Reinigung Preise pro Stunde und typische Pauschalen</h3>
+                <p className="text-body">
+                  Viele Nutzer suchen nach Begriffen wie <strong>Reinigung Preise pro Stunde</strong>,
+                  <strong> Preise für Reinigungsdienste</strong> oder <strong>Wohnungsreinigung Kosten Schweiz</strong>.
+                  In der Praxis arbeiten Firmen je nach Auftrag mit Stundenansätzen, Pauschalen oder Mischmodellen.
+                  Entscheidend sind Objektgrösse, Verschmutzung, Erreichbarkeit und gewünschter Leistungsumfang.
+                </p>
+                <p className="text-body">
+                  Die folgende Tabelle zeigt übliche Richtwerte für Umzugsreinigung in der Schweiz. Für eine exakte
+                  Offerte sollten Sie immer objektspezifische Angaben übermitteln.
+                </p>
+                <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
+                  <table className="min-w-full text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-3 text-left font-semibold text-gray-800">Reinigungsart</th>
+                        <th className="px-4 py-3 text-left font-semibold text-gray-800">Durchschnittliche Kosten</th>
+                        <th className="px-4 py-3 text-left font-semibold text-gray-800">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {pricingTableData.map((row, index) => (
+                        <tr key={index}>
+                          <td className="px-4 py-3 text-gray-700">{row.size}</td>
+                          <td className="px-4 py-3 text-gray-700">{row.cost}</td>
+                          <td className="px-4 py-3 text-gray-700">{row.description}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-          
-        {/* Article Section */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="inline-flex items-center px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-blue-700 font-semibold text-xs mb-4">
-                <BookOpen className="w-3.5 h-3.5 mr-1.5" />
-                RATGEBER
+
+              <div className="space-y-4 rounded-2xl border border-gray-200 bg-slate-50 p-6 md:p-8">
+                <h3 className="heading-3">Reinigungsfirma nach Standort finden</h3>
+                <p className="text-body">
+                  Regionale Verfügbarkeit ist ein zentraler Faktor für Preis und Termin. Besonders häufig werden
+                  Reinigungsfirmen in Zürich, Bern, Basel, Luzern und St. Gallen gesucht. Über unsere Standortseiten
+                  gelangen Sie direkt zu passenden regionalen Angeboten:
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link href="/reinigungsfirma/zuerich" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma Zürich</Link>
+                  <Link href="/reinigungsfirma/bern" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma Bern</Link>
+                  <Link href="/reinigungsfirma/basel" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma Basel</Link>
+                  <Link href="/reinigungsfirma/luzern" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma Luzern</Link>
+                  <Link href="/reinigungsfirma/st-gallen" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma St. Gallen</Link>
+                  <Link href="/reinigungsfirma/winterthur" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma Winterthur</Link>
+                  <Link href="/reinigungsfirma/genf" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma Genf</Link>
+                  <Link href="/reinigungsfirma/lausanne" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">Reinigungsfirma Lausanne</Link>
+                </div>
               </div>
-              <h2 className="heading-2 mb-8">
-                Ihr Leitfaden für die perfekte Umzugsreinigung
-              </h2>
-              <div className="prose prose-lg max-w-none space-y-6">
+
+              <div className="space-y-4">
+                <h3 className="heading-3">So funktioniert der Offertenvergleich auf Online-Offerten.ch</h3>
+                <ol className="list-decimal pl-6 space-y-2 text-gray-700">
+                  <li>Sie wählen die gewünschte Reinigungsart und erfassen die wichtigsten Angaben zum Objekt.</li>
+                  <li>Geprüfte Anbieter aus Ihrer Region senden Ihnen passende Offerten.</li>
+                  <li>Sie vergleichen Preise, Leistungsumfang, Verfügbarkeit und Bewertungen in Ruhe.</li>
+                  <li>Sie wählen das Angebot, das fachlich und preislich am besten zu Ihrem Bedarf passt.</li>
+                </ol>
                 <p className="text-body">
-                  Die Schlüsselübergabe steht bevor und der Umzugsstress erreicht seinen Höhepunkt. Inmitten von Kisten und Chaos ist die Endreinigung der alten Wohnung oft die letzte Hürde, die es zu überwinden gilt. Doch diese Hürde hat es in sich: Vermieter in der Schweiz sind für ihre hohen Ansprüche an die Sauberkeit bekannt. Ein nicht gründlich gereinigter Backofen oder Kalkrückstände im Bad können schnell zu teuren Nachreinigungen oder sogar zur Einbehaltung der Mietkaution führen. Genau hier kommt die professionelle Umzugsreinigung mit Abnahmegarantie ins Spiel – Ihr Schutzschild für eine reibungslose und stressfreie Übergabe. Es geht nicht nur darum, eine Reinigungsfirma zu beauftragen, sondern den richtigen, vertrauenswürdigen Partner für diese wichtige Aufgabe zu finden. Ein Partner, der Qualität liefert und dessen Preis-Leistungs-Verhältnis überzeugt.
+                  Dieser Ablauf spart Zeit, reduziert Rückfragen und erhöht die Chance, direkt eine passende Firma zu
+                  finden. Statt dutzende Kontakte einzeln anzuschreiben, erhalten Sie strukturierte Vergleichbarkeit mit
+                  nur einer Anfrage.
                 </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="heading-3">Qualität, Sicherheit und Vertrauen</h3>
                 <p className="text-body">
-                  Die Suche nach diesem idealen Partner kann jedoch schnell zu einer zeitraubenden Aufgabe werden. Unzählige Anbieter werben mit ihren Diensten, doch wie trennt man die Spreu vom Weizen? Wie stellt man sicher, dass die versprochene Qualität auch wirklich geliefert wird? An dieser Stelle wird der Wert einer Plattform wie Online-Offerten.ch unschätzbar. Statt stundenlang zu recherchieren und einzelne Offerten einzuholen, ermöglichen wir Ihnen, mit nur einer einzigen Anfrage mehrere Offerten von geprüften und bewerteten Reinigungsfirmen aus Ihrer Region zu erhalten. Sie vergleichen nicht nur Preise, sondern auch Kundenbewertungen und Leistungsumfänge. So treffen Sie eine fundierte Entscheidung und finden eine Firma, die nicht nur sauber putzt, sondern der Sie voll und ganz vertrauen können. Dieser Leitfaden führt Sie durch alle wichtigen Aspekte der Umzugsreinigung und zeigt Ihnen, wie Sie mit dem richtigen Vorgehen Zeit, Geld und vor allem Nerven sparen.
+                  Eine gute Offerte ist mehr als ein Preisblatt. Achten Sie auf klare Leistungsbeschriebe,
+                  transparente Konditionen und einen nachvollziehbaren Ablauf bei Rückfragen oder Nachbesserung.
+                  Besonders bei Umzugsreinigung ist die Abnahmegarantie ein zentrales Qualitätsmerkmal.
                 </p>
-                
-                {/* Abnahmegarantie Highlight Box */}
-                <div className="!mt-10 !mb-8 p-8 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center">
-                      <Award className="w-6 h-6 text-white"/>
-                    </div>
-                    <h3 className="heading-3 pt-1">
-                      Die Abnahmegarantie: Mehr als nur ein Versprechen für Ihre Reinigung
-                    </h3>
-                  </div>
-                  <div className="flex flex-col md:flex-row gap-6 items-start">
-                    <div className="flex-1">
-                      <p className="text-body">
-                        Der Begriff &apos;Abnahmegarantie&apos; ist das wohl wichtigste Qualitätsmerkmal bei einer Umzugsreinigung. Doch was verbirgt sich genau dahinter? Es ist weit mehr als nur eine Zusage für Sauberkeit. Eine echte Abnahmegarantie bedeutet, dass ein Vertreter der Reinigungsfirma bei der Wohnungsübergabe an den Vermieter anwesend ist. Gemeinsam wird die Wohnung inspiziert. Sollte der Vermieter einen Mangel feststellen – sei es ein übersehener Fleck an der Wand oder eine nicht perfekt entkalkte Duschbrause – wird dieser umgehend und ohne zusätzliche Kosten von der Reinigungsfirma nachgebessert. Die Garantie gilt so lange, bis der Vermieter die Sauberkeit im Übergabeprotokoll bestätigt und seine Unterschrift daruntersetzt. Diese Garantie gibt Ihnen die absolute Sicherheit, dass die Reinigung den strengen Schweizer Standards entspricht und Sie keine unerwarteten Kosten fürchten müssen. Sie kaufen nicht nur eine Dienstleistung, sondern ein sorgenfreies Ergebnis.
-                      </p>
-                    </div>
-                    <div className="w-full md:w-80 flex-shrink-0">
-                      <img 
-                        src="/bilder/wohnungsreinigung-mit-abnahmegarantie.webp" 
-                        alt="Professionelle Reinigung mit Abnahmegarantie in der Schweiz" 
-                        className="rounded-xl shadow-lg w-full h-auto object-cover border-2 border-white" 
-                      />
-                    </div>
-                  </div>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2"><CheckCircle className="h-5 w-5 text-green-600 mt-0.5" /><span>Transparente Leistungen statt unklarer Pauschaltexte</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-5 w-5 text-green-600 mt-0.5" /><span>Regionale Anbieter mit planbaren Terminen</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-5 w-5 text-green-600 mt-0.5" /><span>Vergleich von Preis, Qualität und Verfügbarkeit auf einen Blick</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-5 w-5 text-green-600 mt-0.5" /><span>Effizienter Ablauf für Privatpersonen und Unternehmen</span></li>
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-10 shadow-sm">
+                <div className="mb-8">
+                  <p className="text-sm font-semibold text-green-700 mb-2">FAQ</p>
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                    Häufige Fragen zu Reinigung, Preisen und Ablauf
+                  </h2>
                 </div>
 
-                <h3 className="heading-3 !mt-10 !mb-4">Der richtige Partner: Warum der Vergleich auf Online-Offerten.ch entscheidend ist</h3>
-                <p className="text-body">
-                  Die Auswahl der richtigen Reinigungsfirma ist der Schlüssel zum Erfolg. Ein günstiger Preis allein ist kein Garant für Qualität. Auf unserer Plattform legen wir Wert auf Transparenz und Vertrauen. Alle Partnerfirmen werden von uns sorgfältig geprüft. Sie können auf echte Kundenbewertungen zugreifen und sehen auf einen Blick, welche Erfahrungen andere Mieter mit den jeweiligen Unternehmen gemacht haben. Indem Sie mehrere Offerten vergleichen, bekommen Sie ein realistisches Gefühl für die marktüblichen Preise und können Offerten identifizieren, die möglicherweise zu gut sind, um wahr zu sein. Ein detaillierter Vergleich der in den Offerten enthaltenen Leistungen ist ebenso wichtig. Ist die Fensterreinigung inklusive Storen abgedeckt? Wie sieht es mit dem Kellerabteil oder dem Balkon aus? Unser standardisiertes Anfrageformular stellt sicher, dass alle Offerten auf derselben Grundlage basieren und somit fair vergleichbar sind. Sie sparen sich die mühsame Koordination mit verschiedenen Anbietern und erhalten stattdessen übersichtlich aufbereitete, konkurrenzfähige Offerten direkt in Ihr Postfach. So finden Sie mühelos die perfekte Balance aus Preis, Leistung und Vertrauenswürdigkeit. Neben der <Link href="/umzugsreinigung" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Umzugsreinigung</Link> bieten wir auch <Link href="/wohnungsreinigung" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Wohnungsreinigung</Link>, <Link href="/hausreinigung" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Hausreinigung</Link> und <Link href="/bueroreinigung" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Büroreinigung</Link> an. Für regelmässige Reinigung empfehlen wir unsere <Link href="/unterhaltsreinigung" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Unterhaltsreinigung</Link>.
-                </p>
-                <p className="text-body">
-                  Zusammenfassend lässt sich sagen, dass eine professionelle Umzugsreinigung eine kluge Investition in Ihren Seelenfrieden ist. Sie delegieren eine der anspruchsvollsten Aufgaben des Umzugsprozesses an Experten und sichern sich durch die Abnahmegarantie vollständig ab. Nutzen Sie die Macht des Vergleichs auf Online-Offerten.ch, um den idealen Reinigungspartner zu finden, der Ihnen eine makellose Wohnungsübergabe garantiert. So können Sie sich voll und ganz auf das freuen, was wirklich zählt: der Start in Ihrem neuen Zuhause. Weitere Informationen finden Sie auf unseren <Link href="/standorte" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Standorte-Seiten</Link> oder in unserem <Link href="/ratgeber" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">Ratgeber</Link>.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing Table Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <PricingTable
-              title="Preise für Umzugsreinigung"
-              subtitle="Durchschnittliche Preise in der Schweiz"
-              rows={pricingTableData}
-              serviceType="reinigung"
-            />
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-10">
-                <div className="inline-flex items-center px-3 py-1 bg-amber-50 border border-amber-200 rounded-full text-amber-700 font-semibold text-xs mb-4">
-                  <HelpCircle className="w-3.5 h-3.5 mr-1.5" />
-                  FAQ
-                </div>
-                <h2 className="heading-2">
-                  Häufig gestellte Fragen zur Umzugsreinigung
-                </h2>
-              </div>
-              <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-200">
                 <Accordion type="single" collapsible className="w-full">
-                  <div>
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>
-                        <h4 className="faq-question">Was genau bedeutet die &apos;Abnahmegarantie&apos;?</h4>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <p>Die Abnahmegarantie ist Ihre Versicherung für eine erfolgreiche Wohnungsübergabe. Das bedeutet konkret: Ein Mitarbeiter der Reinigungsfirma ist bei der Übergabe anwesend. Beanstandet der Vermieter einen Punkt bezüglich der Sauberkeit, wird dieser sofort und ohne Mehrkosten nachgereinigt. Die Garantie gilt, bis der Vermieter die Reinigung im Übergabeprotokoll als einwandfrei akzeptiert.</p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </div>
-                  <div>
-                    <AccordionItem value="item-2">
-                      <AccordionTrigger>
-                        <h4 className="faq-question">Wie viel kostet eine Umzugsreinigung?</h4>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div>
-                          <p>Die Kosten variieren je nach Grösse der Wohnung, Verschmutzungsgrad und inkludierten Zusatzleistungen (z.B. sehr hohe Fenster). Als grobe Richtlinie können Sie mit folgenden Preisen rechnen:</p>
-                          <ul className="list-disc list-inside my-2 space-y-1">
-                            {costData.map((item, index) => (
-                              <li key={index}>{item}</li>
-                            ))}
-                          </ul>
-                          <p>
-                            Diese Preise sind Schätzungen. Für eine genaue Kostenübersicht nutzen Sie am besten unseren <Link href="/reinigung/reinigungskosten" className="text-blue-600 hover:underline font-semibold">Reinigungskosten-Rechner</Link> oder fordern Sie direkt <a href="#reinigungsart" className="text-blue-600 hover:underline font-semibold">unverbindliche Offerten</a> an.
-                          </p>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </div>
-                  <div>
-                    <AccordionItem value="item-3">
-                      <AccordionTrigger>
-                        <h4 className="faq-question">Was muss ich vor der Ankunft des Reinigungsteams tun?</h4>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <p>Für einen reibungslosen Ablauf sollte die Wohnung komplett leer und geräumt sein. Alle persönlichen Gegenstände und Möbel müssen entfernt sein, damit das Team alle Flächen, Ecken und Schränke uneingeschränkt erreichen und reinigen kann. Stellen Sie zudem sicher, dass Strom und Wasser funktionieren.</p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </div>
-                  <div>
-                    <AccordionItem value="item-4">
-                      <AccordionTrigger>
-                        <h4 className="faq-question">Wie lange dauert eine professionelle Umzugsreinigung?</h4>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <p>Die Dauer hängt stark von der Grösse und dem Zustand der Wohnung ab. In der Regel benötigt ein Team von 2-3 Personen für eine durchschnittlich grosse 3.5-Zimmer-Wohnung zwischen 6 und 9 Stunden. Planen Sie am besten einen ganzen Tag für die Reinigung ein.</p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </div>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900">
+                      Was kostet eine Reinigungsfirma in der Schweiz?
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 leading-relaxed">
+                      Die Kosten hängen von Objektgrösse, Reinigungsart, Verschmutzung und Region ab. Bei
+                      Unterhaltsreinigung sind oft Stundenansätze üblich, bei Umzugsreinigung eher Pauschalen. Statt sich
+                      auf einzelne Richtwerte zu verlassen, empfiehlt sich ein direkter Vergleich mehrerer Offerten mit
+                      identischem Leistungsumfang.
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-2">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900">
+                      Worin unterscheidet sich Wohnungsreinigung von Umzugsreinigung?
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 leading-relaxed">
+                      Wohnungsreinigung fokussiert den laufenden oder einmaligen Unterhalt eines bewohnten Objekts.
+                      Umzugsreinigung ist auf die Übergabe ausgerichtet und beinhaltet in der Regel deutlich detailliertere
+                      Arbeiten. Häufig kommt zusätzlich eine Abnahmegarantie hinzu, damit Beanstandungen ohne Mehrkosten
+                      behoben werden.
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-3">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900">
+                      Was bedeutet Abnahmegarantie genau?
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 leading-relaxed">
+                      Bei einer Abnahmegarantie begleitet oder unterstützt die Reinigungsfirma die Übergabe. Falls bei
+                      der Kontrolle ein relevanter Punkt beanstandet wird, erfolgt eine Nachreinigung im vereinbarten
+                      Rahmen. So reduzieren Sie das Risiko von zusätzlichen Kosten.
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-4">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900">
+                      Wie schnell erhalte ich Offerten?
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 leading-relaxed">
+                      Das hängt von Region, Auslastung und gewünschter Reinigungsart ab. In der Regel treffen erste
+                      Angebote kurzfristig ein. Je klarer Ihre Angaben zu Objekt, Umfang und Terminfenster sind, desto
+                      präziser fallen die Offerten aus.
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-5">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900">
+                      Welche Angaben sollte ich für eine genaue Offerte machen?
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 leading-relaxed">
+                      Wichtig sind Objektart, Zimmeranzahl oder Fläche, gewünschte Leistungen, Zustand des Objekts,
+                      Terminwunsch und Standort. Bei Fenster- oder Umzugsreinigung helfen zusätzliche Hinweise zu
+                      Zugänglichkeit und besonderen Anforderungen.
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-6">
+                    <AccordionTrigger className="text-left font-semibold text-gray-900">
+                      Gibt es auch Lösungen für Unternehmen mit festen Intervallen?
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 leading-relaxed">
+                      Ja. Für Büros, Praxen und Gewerbeobjekte sind feste Einsatzpläne besonders sinnvoll.
+                      Reinigungsintervalle und Leistungsbereiche werden vorab definiert, damit Qualität und Abläufe
+                      langfristig stabil bleiben.
+                    </AccordionContent>
+                  </AccordionItem>
                 </Accordion>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Weitere Reinigungsdienstleistungen */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center px-3 py-1 bg-purple-50 border border-purple-200 rounded-full text-purple-700 font-semibold text-xs mb-4">
-                UNSERE SERVICES
-              </div>
-              <h3 className="heading-2">
-                Weitere Reinigungsdienstleistungen
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {reinigungServices.filter(service => service?.path).map((service) => {
-                const Icon = service.icon
-                return (
-                  <Link
-                    key={service.path}
-                    href={service.path}
-                    className="group flex items-center gap-4 p-5 bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
-                      <Icon className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                        {service.title}
-                      </h4>
-                      <p className="text-sm text-gray-500">{service.description}</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto max-w-7xl px-4 md:px-6">
-            <div id="cta" className="relative text-center bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-16 px-8 md:px-12 rounded-3xl shadow-2xl overflow-hidden">
-              {/* Background pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2h2v2h18v2H22v2.5L20 20.5z'/%3E%3C/g%3E%3C/svg%3E")`,
-                  backgroundSize: '40px 40px'
-                }}></div>
-              </div>
-              <div className="relative z-10">
-                <div className="inline-flex items-center px-4 py-1.5 bg-white/20 rounded-full text-white font-semibold text-sm mb-6 backdrop-blur-sm">
-                  <Zap className="h-4 w-4 mr-2" />
-                  Kostenlos & unverbindlich
-                </div>
-                <h2 className="heading-2-white mb-4">
-                  Bereit für eine makellose Übergabe?
-                </h2>
-                <p className="text-body-white max-w-2xl mx-auto mb-8">
-                  Erhalten Sie in wenigen Schritten kostenlose und unverbindliche Offerten von geprüften Reinigungsfirmen in Ihrer Region.
+              <div className="rounded-2xl border border-green-200 bg-green-50 p-6 md:p-8 space-y-4">
+                <h3 className="heading-3 !mt-0">Jetzt passende Reinigungsofferten einholen</h3>
+                <p className="text-body">
+                  Vergleichen Sie kostenlos mehrere Angebote für Wohnungsreinigung, Hausreinigung, Büroreinigung,
+                  Unterhaltsreinigung, Fensterreinigung oder Umzugsreinigung mit Abnahmegarantie. So finden Sie schnell
+                  eine zuverlässige Lösung mit gutem Preis-Leistungs-Verhältnis.
                 </p>
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                  <Button onClick={handleCtaClick} size="lg" className="bg-white text-blue-700 hover:bg-blue-50 group w-full sm:w-auto px-8 py-4 text-base font-bold shadow-lg">
-                    Kostenlose Offerten erhalten
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                  <div className="flex flex-col items-center w-full sm:w-auto">
-                    <p className="text-blue-200 text-sm mb-1">Oder berechnen Sie zuerst die ungefähren Kosten:</p>
-                    <Button onClick={handleCalculatorClick} variant="link" className="text-white hover:text-blue-200">
-                      Zum Reinigungskosten-Rechner
-                    </Button>
-                  </div>
+                <p className="text-body">
+                  Besonders bei kurzfristigen Terminen oder mehreren offenen Aufgaben lohnt sich ein zentraler Vergleich:
+                  Sie reduzieren Abstimmungsaufwand, behalten den Überblick über Konditionen und wählen genau den
+                  Anbieter, der fachlich, zeitlich und preislich am besten zu Ihrem Objekt passt.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=reinigung"
+                    className="inline-flex items-center rounded-lg bg-green-600 px-5 py-3 text-sm font-semibold text-white hover:bg-green-700 transition-colors"
+                  >
+                    Kostenlose Offerten anfordern
+                  </Link>
+                  <Link
+                    href="/reinigung/reinigungskosten"
+                    className="inline-flex items-center rounded-lg border border-green-300 bg-white px-5 py-3 text-sm font-semibold text-green-700 hover:bg-green-100 transition-colors"
+                  >
+                    Reinigungskosten ansehen
+                  </Link>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         </section>
 

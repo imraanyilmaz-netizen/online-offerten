@@ -154,11 +154,11 @@ const PrivateUmzugPageClient = () => {
               <div className="md:col-span-3">
                 <div className="space-y-2 mb-4">
                   <div className="inline-flex items-center px-4 py-2 bg-green-50 rounded-full text-green-700 font-semibold text-sm">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    Privatumzug leicht gemacht!
-                  </div>
+                  <MapPin className="h-4 w-4 mr-2" />
+                  Privatumzug leicht gemacht!
+                </div>
                   <div className="heading-1" role="presentation">
-                    Privatumzug in der Schweiz » Geprüfte Partner vergleichen
+                  Privatumzug in der Schweiz » Geprüfte Partner vergleichen
                   </div>
                 </div>
                 <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed">
@@ -360,15 +360,15 @@ const PrivateUmzugPageClient = () => {
               <section className="pt-6 border-t border-gray-200">
                 <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                   <div className="lg:col-span-8">
-                    <h2 className="heading-2">
-                      So funktioniert der Privatumzug mit Online-Offerten.ch
-                    </h2>
-                    <p className="text-body leading-relaxed mb-4">
+                <h2 className="heading-2">
+                  So funktioniert der Privatumzug mit Online-Offerten.ch
+                </h2>
+                <p className="text-body leading-relaxed mb-4">
                       Sie beschreiben Ihren Umzug einmal und erhalten danach passende Offerten von regionalen Umzugsfirmen. So sparen Sie Zeit und können Angebote in Ruhe vergleichen.
-                    </p>
-                    <h3 className="heading-3">
-                      Schritt für Schritt zur passenden Umzugsfirma
-                    </h3>
+                </p>
+                <h3 className="heading-3">
+                  Schritt für Schritt zur passenden Umzugsfirma
+                </h3>
 
                     <div className="grid sm:grid-cols-2 gap-4 mb-4">
                       <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
@@ -395,7 +395,7 @@ const PrivateUmzugPageClient = () => {
                       <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
                         <div className="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center mb-3">
                           <CheckCircle2 className="w-5 h-5" />
-                        </div>
+                    </div>
                         <h4 className="heading-4 mb-2">Vergleichen und entscheiden</h4>
                         <p className="text-body leading-relaxed">
                           Vergleichen Sie Preis, Umfang der Leistungen, Verfügbarkeit und Bewertungen und wählen Sie danach den Anbieter, der am besten zu Ihrem Umzug passt.
@@ -421,7 +421,7 @@ const PrivateUmzugPageClient = () => {
                           <span>Der Auftrag entsteht direkt zwischen Ihnen und der gewählten Umzugsfirma.</span>
                         </li>
                       </ul>
-                    </div>
+                </div>
                   </aside>
                 </div>
               </section>
@@ -919,7 +919,7 @@ const PrivateUmzugPageClient = () => {
                   {/* FAQ 1 */}
                     <AccordionItem value="item-1" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                        <h4 className="faq-question">Was kostet ein Privatumzug in der Schweiz?</h4>
+                          <h4 className="faq-question">Was kostet ein Privatumzug in der Schweiz?</h4>
                       </AccordionTrigger>
                       <AccordionContent className="text-body leading-relaxed">
                             <p>
@@ -952,14 +952,14 @@ const PrivateUmzugPageClient = () => {
                                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                                 </Link>
                               </Button>
-                            </div>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 2 */}
                     <AccordionItem value="item-2" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                        <h4 className="faq-question">Welche Leistungen sind bei einem Standard-Wohnungsumzug inklusive?</h4>
+                          <h4 className="faq-question">Welche Leistungen sind bei einem Standard-Wohnungsumzug inklusive?</h4>
                       </AccordionTrigger>
                       <AccordionContent className="text-body leading-relaxed">
                             <p>Ein Standardangebot einer Zügelfirma umfasst in der Regel folgende Leistungen:</p>
@@ -974,14 +974,14 @@ const PrivateUmzugPageClient = () => {
                                   <li key={index}>{item}</li>
                                 ))}
                               </ul>
-                            </div>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 3 */}
                     <AccordionItem value="item-3" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                        <h4 className="faq-question">Wie bereite ich mich am besten auf den Umzugstag vor?</h4>
+                          <h4 className="faq-question">Wie bereite ich mich am besten auf den Umzugstag vor?</h4>
                       </AccordionTrigger>
                       <AccordionContent className="text-body leading-relaxed">
                             <p>
@@ -1009,7 +1009,7 @@ const PrivateUmzugPageClient = () => {
                   {/* FAQ 4 */}
                     <AccordionItem value="item-4" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                        <h4 className="faq-question">Was sollte ich bei der Auswahl der Umzugsfirma beachten?</h4>
+                          <h4 className="faq-question">Was sollte ich bei der Auswahl der Umzugsfirma beachten?</h4>
                       </AccordionTrigger>
                       <AccordionContent className="text-body leading-relaxed">
                             <p>Achten Sie auf folgende Punkte, um eine seriöse Firma zu erkennen:</p>
@@ -1025,14 +1025,14 @@ const PrivateUmzugPageClient = () => {
                                   <li key={index}>{item}</li>
                                 ))}
                               </ul>
-                            </div>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 5 */}
                     <AccordionItem value="item-5" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                        <h4 className="faq-question">Wann sollte ich mit der Planung meines Wohnungsumzugs beginnen?</h4>
+                          <h4 className="faq-question">Wann sollte ich mit der Planung meines Wohnungsumzugs beginnen?</h4>
                       </AccordionTrigger>
                       <AccordionContent className="text-body leading-relaxed">
                             <p className="mb-2">
@@ -1097,14 +1097,14 @@ const PrivateUmzugPageClient = () => {
                                   <li key={index}>{item}</li>
                                 ))}
                               </ul>
-                            </div>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
 
                   {/* FAQ 6 */}
                     <AccordionItem value="item-6" className="border-b border-gray-200 last:border-b-0">
                       <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
-                        <h4 className="faq-question">Lohnt sich ein Ein- und Auspackservice?</h4>
+                          <h4 className="faq-question">Lohnt sich ein Ein- und Auspackservice?</h4>
                       </AccordionTrigger>
                       <AccordionContent className="text-body leading-relaxed">
                             <p>Ein Packservice lohnt sich besonders, wenn Sie:</p>
@@ -1119,10 +1119,10 @@ const PrivateUmzugPageClient = () => {
                                   <li key={index}>{item}</li>
                                 ))}
                               </ul>
-                            </div>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
-                    </Accordion>
+                </Accordion>
                   </div>
                   <div className="relative md:col-span-2">
                     <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">

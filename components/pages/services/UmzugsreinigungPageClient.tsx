@@ -29,32 +29,28 @@ const UmzugsreinigungPageClient = () => {
   // FAQ Data
   const faqItems = [
     {
-      q: "Was kostet eine professionelle Umzugsreinigung?",
-      a: "Die Kosten für Umzugsreinigung hängen von der Grösse der Wohnung, dem Zustand und dem Umfang der Reinigung ab. Eine durchschnittliche 3-Zimmer-Wohnung kostet etwa 400-900 CHF. Preise liegen typischerweise zwischen 25 und 50 CHF pro Stunde. Durch den Vergleich mehrerer Offerten können Sie bis zu 40% sparen."
+      q: "Was kostet eine Umzugsreinigung in der Schweiz?",
+      a: "Die Kosten hängen von Wohnungsgrösse, Zustand, Region und Leistungsumfang ab. Für kleine Wohnungen starten Offerten oft im unteren dreistelligen Bereich, bei grösseren Objekten liegen sie entsprechend höher. Wichtig ist, dass Sie Angebote mit identischem Leistungsumfang vergleichen. So sehen Sie transparent, welches Angebot wirklich fair ist."
     },
     {
-      q: "Was beinhaltet eine umfassende Umzugsreinigung?",
-      a: "Eine umfassende Umzugsreinigung beinhaltet die gründliche Reinigung aller Räume: Entfernung aller Rückstände, Staubwischen aller Oberflächen, Reinigung der Böden inklusive Ecken und Kanten, Reinigung der Küche inklusive Herd, Backofen und Kühlschrank, gründliche Reinigung des Badezimmers inklusive Sanitäranlagen, Reinigung der Fenster innen und aussen, sowie die Reinigung von Heizkörpern, Lichtschaltern und Steckdosen."
+      q: "Was bedeutet eine Umzugsreinigung mit Abnahmegarantie genau?",
+      a: "Abnahmegarantie bedeutet, dass die Reinigungsfirma im vereinbarten Rahmen nachbessert, wenn bei der Übergabe ein relevanter Punkt beanstandet wird. Das reduziert Ihr Risiko für zusätzliche Kosten und gibt mehr Sicherheit beim Abgabetermin."
     },
     {
-      q: "Was bedeutet Abnahmegarantie bei der Umzugsreinigung?",
-      a: "Abnahmegarantie bedeutet, dass die Reinigungsfirma garantiert, dass die Wohnung den Anforderungen für die Übergabe entspricht. Sollte der Vermieter oder neue Eigentümer Mängel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis die Wohnung den Anforderungen entspricht. Dies gibt Ihnen Sicherheit und schützt vor unerwarteten Kosten."
+      q: "Welche Leistungen sind normalerweise enthalten?",
+      a: "Typischerweise enthalten sind Küche, Bad/WC, Böden, Fenster, Türen, Schränke, Steckdosen und Lichtschalter. Je nach Offerte kommen Keller, Balkon oder weitere Nebenräume hinzu. Entscheidend ist ein klarer Leistungsbeschrieb, damit es später keine Missverständnisse gibt."
     },
     {
-      q: "Wann sollte die Umzugsreinigung stattfinden?",
-      a: "Die Umzugsreinigung sollte idealerweise nach dem Auszug aller Möbel, aber vor der finalen Übergabe stattfinden. Dies ermöglicht eine gründliche Reinigung aller Bereiche. Professionelle Reinigungsfirmen können flexibel planen und die Reinigung zu einem Zeitpunkt durchführen, der zu Ihrem Umzugstermin passt."
+      q: "Wann sollte ich die Umzugsreinigung buchen?",
+      a: "Am besten frühzeitig, vor allem in stark nachgefragten Monaten. Ideal ist die Reinigung nach dem Auszug und vor der Schlüsselübergabe. Je genauer Ihre Objektangaben sind, desto präziser fallen die Offerten aus."
     },
     {
-      q: "Ist Umzugsreinigung gesetzlich vorgeschrieben?",
-      a: "In der Schweiz ist der Mieter verpflichtet, die Wohnung bei Auszug in einem ordnungsgemässen Zustand zu übergeben. Dies beinhaltet in der Regel eine gründliche Reinigung. Die genauen Anforderungen können im Mietvertrag festgelegt sein. Professionelle Umzugsreinigung mit Abnahmegarantie stellt sicher, dass alle Anforderungen erfüllt werden."
+      q: "Wie kann ich bei der Umzugsreinigung Kosten sparen?",
+      a: "Vergleichen Sie mehrere Offerten, achten Sie auf klar definierte Leistungen und geben Sie genaue Objektdaten an. So vermeiden Sie unklare Pauschalen und unnötige Zusatzkosten. Ein strukturierter Vergleich spart häufig deutlich mehr als reine Preisverhandlung mit nur einem Anbieter."
     },
     {
-      q: "Sind die Reinigungskräfte versichert?",
-      a: "Ja, alle Reinigungsfirmen in unserem Netzwerk sind vollständig versichert. Dies umfasst Haftpflichtversicherung, Unfallversicherung und Versicherung für Schäden. Sie haben die Sicherheit, dass im Falle eines Schadens die Versicherung greift. Alle Partnerfirmen müssen ihre Versicherungsnachweise vorlegen, bevor sie in unser Netzwerk aufgenommen werden."
-    },
-    {
-      q: "Kann ich die Reinigung flexibel planen?",
-      a: "Ja, professionelle Reinigungsfirmen bieten flexible Terminplanung an. Sie können die Reinigung zu einem Zeitpunkt durchführen, der zu Ihrem Umzugstermin passt. Viele Firmen bieten auch Notfalltermine an, falls kurzfristig eine Reinigung benötigt wird. Frühzeitige Planung ist jedoch empfehlenswert, um den gewünschten Termin zu sichern, besonders während der Umzugssaison."
+      q: "Ist eine Besichtigung immer notwendig?",
+      a: "Nicht immer. Bei standardisierten Objekten reichen oft detaillierte Angaben und Fotos. Bei grossen, komplexen oder stark verschmutzten Objekten ist eine Besichtigung sinnvoll, damit die Offerte realistisch kalkuliert werden kann."
     }
   ]
 
@@ -188,251 +184,275 @@ const UmzugsreinigungPageClient = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {/* Main Article */}
               <div className="lg:col-span-2">
-                <article
-                  className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8"
-                >
-                  {/* H2: Umzugsreinigung Preis */}
-                  <h2 className="heading-2 mb-6 break-words">Umzugsreinigung Preis: Was kostet die professionelle Reinigung?</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Die Preise für Umzugsreinigung variieren je nach Wohnungsgrösse, Zustand der Wohnung und Umfang der Reinigung. Eine durchschnittliche 3-Zimmer-Wohnung kostet etwa 400-900 CHF. Die Preise liegen typischerweise zwischen 25 und 50 CHF pro Stunde. Grössere Wohnungen oder Häuser können entsprechend mehr kosten. Durch den Vergleich mehrerer Offerten von geprüften Reinigungsfirmen können Sie bis zu 40% sparen. Wichtig ist, dass Sie eine Reinigungsfirma mit Abnahmegarantie wählen, um sicherzustellen, dass die Wohnung den Anforderungen für die Übergabe entspricht.
-                  </p>
-
-                  {/* H2: Warum eine professionelle Umzugsreinigung sinnvoll ist */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Warum eine professionelle Umzugsreinigung sinnvoll ist</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Eine professionelle Endreinigung ist ein entscheidender Schritt beim Wohnungswechsel, der nicht unterschätzt werden sollte. Sie spart wertvolle Zeit während des stressigen Umzugsprozesses und reduziert den Stress erheblich, da Profis die Umzugsreinigung übernehmen und für einen reibungslosen Ablauf sorgen. Professionelle Reinigungskräfte verfügen über das Fachwissen und die richtigen Geräte, um auch schwer zugängliche Stellen gründlich zu reinigen. Zudem trägt eine gründliche Endreinigung dazu bei, dass keine Nachforderungen vom Vermieter entstehen. Besonders wichtig ist die Abnahmegarantie, die sicherstellt, dass die Wohnung den Anforderungen entspricht und bei Bedarf kostenlos nachgebessert wird.
-                  </p>
-
-                  {/* H2: Unsere Leistungen im Bereich Reinigung */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Unsere Leistungen im Bereich Reinigung</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Spektrum an Reinigungsleistungen für die professionelle Endreinigung. Dabei wird wirklich alles gereinigt – von Fenstern bis zu verschiedenen Bodenbelägen – sodass Sie ein sorgenfreies Komplettpaket ohne versteckte Kosten erhalten. Dazu gehören die gründliche Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung innen und aussen, die Reinigung sämtlicher Bodenbeläge (z.B. Parkett, Laminat, Teppich) inklusive Ecken und Kanten, Reinigung von Heizkörpern, Lichtschaltern und Steckdosen, sowie die Entfernung von Klebebandresten und Möbelspuren. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass die Wohnung den Anforderungen entspricht.
-                  </p>
-
-                  {/* Leistungen Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/umzugsreinigungsdienstleistungen_professionell.png"
-                      alt="Umzugsreinigungsdienstleistungen - Professionelle Reinigung aller Räume"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  {/* Bullet Points - Leistungen */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
-                    <li>Gründliche Reinigung aller Räume</li>
-                    <li>Küchen- und Badezimmerreinigung</li>
-                    <li>Fensterreinigung innen und aussen</li>
-                    <li>Reinigung sämtlicher Bodenbeläge inklusive Ecken und Kanten</li>
-                    <li>Reinigung von Heizkörpern, Lichtschaltern und Steckdosen</li>
-                    <li>Entfernung von Klebebandresten und Möbelspuren</li>
-                    <li>Spachteln und Streichen von Löchern in Wänden</li>
-                    <li>Desinfektion von Oberflächen</li>
-                    <li>Reinigung schwer zugänglicher Stellen</li>
-                  </ul>
-
-                  {/* CTA 1 - After Leistungen */}
-                  <div className="mt-6 md:mt-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200 mb-6 md:mb-8">
-                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">
-                      Professionelle Umzugsreinigung buchen
-                    </h3>
-                    <p className="text-body mb-3 md:mb-4">
-                      Vergleichen Sie jetzt kostenlos Offerten von geprüften Reinigungsfirmen.
+                <article className="mb-6 md:mb-8">
+                  <div className="space-y-8 md:space-y-10">
+                    <h2 className="heading-2 break-words">Umzugsreinigung in der Schweiz: Offerten vergleichen statt Risiko eingehen</h2>
+                    <p className="text-body break-words w-full">
+                      Eine Wohnungsabgabe ist oft der letzte und zugleich stressigste Schritt eines Umzugs. Kartons sind
+                      gepackt, Termine laufen parallel, und genau in dieser Phase entscheidet die Endreinigung häufig
+                      darüber, ob die Übergabe reibungslos verläuft oder teure Nacharbeiten entstehen. Viele Mieter
+                      unterschätzen, wie detailliert Verwaltungen prüfen: Backofen, Kalkränder, Fensterrahmen,
+                      Lichtschalter, Storen oder Fugen. Bereits kleine Rückstände können Beanstandungen auslösen.
                     </p>
-                    <Button 
-                      onClick={handleCtaClick} 
-                      size="lg" 
-                      className="bg-green-700 hover:bg-green-800 text-white w-full sm:w-auto text-base font-semibold"
-                    >
-                      Schnelle Anfrage senden
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                  </div>
+                    <p className="text-body break-words w-full">
+                      Genau deshalb lohnt sich eine professionelle Umzugsreinigung mit Abnahmegarantie. Auf
+                      Online-Offerten.ch erhalten Sie mehrere Offerten von geprüften Reinigungsfirmen und vergleichen
+                      transparent nach Preis, Leistung und Verfügbarkeit. Statt unklarer Einzelangebote sehen Sie klar,
+                      was enthalten ist und welche Zusatzleistungen optional dazukommen.
+                    </p>
 
-                  {/* H2: Vorteile unserer Umzugsreinigung mit Abnahmegarantie */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Vorteile unserer Umzugsreinigung mit Abnahmegarantie</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Die Abnahmegarantie ist ein entscheidender Vorteil bei der professionellen Endreinigung. Unsere Firma ist im Handelsregister eingetragen und offiziell angemeldet, was Ihnen zusätzliche Sicherheit und Vertrauen in unsere Zuverlässigkeit und Professionalität bietet. Sie bedeutet, dass die Reinigungsfirma garantiert, dass die Wohnung den Anforderungen für die Übergabe entspricht. Sollte der Vermieter oder neue Eigentümer Mängel feststellen, wird die Reinigungsfirma kostenlos nachbessern, bis die Wohnung den Anforderungen entspricht. Dies gibt Ihnen maximale Sicherheit und spart Zeit und Nerven. Zusätzlich profitieren Sie von unserer über 12-jährigen Erfahrung im Bereich Reinigungsdienstleistungen und von unserem Netzwerk geprüfter, versicherter Reinigungsfirmen. Eine professionelle Endreinigung mit Abnahmegarantie schützt Sie vor teuren Nachforderungen und gibt Ihnen die Gewissheit, dass die Wohnungsübergabe reibungslos verläuft.
-                  </p>
+                    <h2 className="heading-2 break-words">Für wen ist eine professionelle Umzugsreinigung sinnvoll?</h2>
+                    <p className="text-body break-words w-full">
+                      Die Dienstleistung ist ideal für Mieter, Eigentümer, Familien und Berufstätige mit engem
+                      Zeitplan. Wer neben dem Umzug noch Behördenwege, Adressänderungen und Übergabetermine koordinieren
+                      muss, gewinnt durch ein eingespieltes Reinigungsteam vor allem Planungssicherheit. Auch bei
+                      grösseren Wohnungen, Häusern oder Objekten mit Balkon und Keller ist professionelle Unterstützung
+                      meist die effizientere Lösung.
+                    </p>
 
-                  {/* Vorteile Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/reinigungsmittel_auf_tisch.webp"
-                      alt="Umzugsreinigung mit Abnahmegarantie - Vorher und Nachher Vergleich"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
+                    <div className="rounded-lg overflow-hidden">
+                      <img
+                        src="https://online-offerten.ch/reinigungsfirma/umzugsreinigungsdienstleistungen_professionell.png"
+                        alt="Umzugsreinigungsdienstleistungen - Professionelle Reinigung aller Räume"
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
 
-                  {/* Bullet Points - Vorteile */}
-                  <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
-                    <li>100% Abnahmegarantie für sorgenfreie Übergabe</li>
-                    <li>Nur geprüfte, versicherte Reinigungsfirmen</li>
-                    <li>Umweltfreundliche Reinigungsmittel</li>
-                    <li>Flexible Terminplanung</li>
-                    <li>Bis zu 40% Kostenersparnis durch Vergleich</li>
-                    <li>Schutz vor teuren Nachforderungen</li>
-                  </ul>
+                    <h2 className="heading-2 break-words">Was ist bei einer Umzugsreinigung enthalten?</h2>
+                    <p className="text-body break-words w-full">
+                      Der genaue Umfang hängt von Objektgrösse und Offerte ab. Seriöse Anbieter decken in der Regel alle
+                      übergaberelevanten Bereiche ab und dokumentieren diese klar. So können Sie Angebote fair
+                      vergleichen und vermeiden Missverständnisse.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-body">
+                      <li>Gründliche Küchenreinigung inkl. Backofen, Dampfabzug und Kühlschrank</li>
+                      <li>Komplette Bad- und WC-Reinigung inkl. Entkalkung</li>
+                      <li>Fenster innen und aussen inkl. Rahmen und Fensterbänke</li>
+                      <li>Bodenreinigung aller Beläge und Detailflächen</li>
+                      <li>Reinigung von Türen, Schränken, Griffen, Schaltern und Steckdosen</li>
+                      <li>Optional: Balkon, Keller, Nebenräume und weitere Zusatzleistungen</li>
+                    </ul>
 
-                  {/* H2: Was bei einer gründlichen Umzugsreinigung gereinigt wird */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was bei einer gründlichen Umzugsreinigung gereinigt wird</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Eine umfassende Endreinigung beinhaltet die Reinigung aller Räume und Bereiche. Dazu gehören das Staubwischen aller Oberflächen, inklusive Regale, Schränke, Fensterbänke und Heizkörper. Die Böden werden gründlich gesaugt und gewischt, inklusive Ecken und Kanten. In der Küche werden Herd, Backofen, Kühlschrank, Spüle und Arbeitsflächen gereinigt, wobei auch hartnäckige Verschmutzungen entfernt werden. Das Badezimmer wird komplett gereinigt, inklusive Toilette, Dusche, Badewanne, Waschbecken und Fliesen, wobei ebenfalls auf die Beseitigung von Verschmutzungen geachtet wird. Fenster werden innen und aussen gereinigt, und alle Oberflächen werden desinfiziert. Auch Aussenbereiche wie Terrasse, Sitzplätze und Balkone werden bei der Umzugsreinigung berücksichtigt. Zusätzlich werden Klebebandreste entfernt, Löcher in Wänden gespachtelt und gestrichen, und alle Rückstände von Möbeln beseitigt. Eine professionelle Reinigung geht weit über das normale Putzen hinaus und sorgt für eine hygienisch saubere Wohnung, die den Anforderungen für die Übergabe entspricht.
-                  </p>
+                    <h2 className="heading-2 break-words">Umzugsreinigung Preis: Was kostet die Endreinigung?</h2>
+                    <p className="text-body break-words w-full">
+                      Suchanfragen wie „Umzugsreinigung Preis“, „Endreinigung Wohnung Kosten Schweiz“ oder „Reinigung
+                      Preise pro Stunde“ zeigen, dass Transparenz beim Budget zentral ist. In der Praxis arbeiten
+                      Reinigungsfirmen je nach Auftrag mit Pauschalen, Stundenansätzen oder Mischmodellen. Ein einzelner
+                      Preis sagt jedoch wenig aus, wenn Leistungen und Objektangaben nicht vergleichbar sind.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Die wichtigsten Preisfaktoren sind Zimmeranzahl, Wohnfläche, Verschmutzungsgrad, Anzahl Fenster,
+                      Zugänglichkeit und Terminfenster. Deshalb gilt: Nur Offerten mit identischem Leistungsumfang
+                      vergleichen. Genau hier schafft eine Vergleichsplattform einen echten Vorteil.
+                    </p>
 
-                  {/* H2: Umzugsreinigung für verschiedene Wohnungstypen */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Umzugsreinigung für verschiedene Wohnungstypen</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Professionelle Endreinigung wird für alle Wohnungstypen sowie für Häuser und andere Immobilien angeboten, von kleinen Studios bis hin zu grossen Familienhäusern. Jeder Wohnungstyp und jede Immobilie hat ihre eigenen Besonderheiten: Studios erfordern eine kompakte, aber gründliche Reinigung, während grössere Wohnungen und Häuser mehr Zeit und Aufwand benötigen. Einfamilienhäuser können zusätzliche Bereiche wie Keller, Dachboden oder Garage umfassen. Professionelle Reinigungsfirmen passen ihre Methoden und den Umfang der Reinigung an die spezifischen Anforderungen jeder Immobilie an. Unsere Partner verfügen über umfangreiche Erfahrung in der Reinigung unterschiedlichster Objekte und haben bereits zahlreiche Immobilien erfolgreich für die Übergabe vorbereitet. Unabhängig von der Grösse der Wohnung, des Hauses oder der Immobilie, alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass das Objekt den Anforderungen entspricht.
-                  </p>
+                    <div className="p-5 md:p-6 bg-green-50 rounded-lg border border-green-200">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
+                        Kostenlose Offerten für Umzugsreinigung vergleichen
+                      </h3>
+                      <p className="text-body mb-4">
+                        Mit einer Anfrage erhalten Sie mehrere Angebote von geprüften Firmen und sehen Preis und Leistung
+                        direkt im Vergleich.
+                      </p>
+                      <Button
+                        onClick={handleCtaClick}
+                        size="lg"
+                        className="bg-green-700 hover:bg-green-800 text-white w-full sm:w-auto text-base font-semibold"
+                      >
+                        Jetzt Offerten einholen
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Button>
+                    </div>
 
-                  {/* Wohnungstypen Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/umzugsreinigung_wohnungstypen_studio_2_3_4_zimmer.png"
-                      alt="Umzugsreinigung für verschiedene Wohnungstypen - Studio, 2-Zimmer, 3-Zimmer, 4-Zimmer"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
+                    <h2 className="heading-2 break-words">Abnahmegarantie: der zentrale Sicherheitsfaktor</h2>
+                    <p className="text-body break-words w-full">
+                      Die Abnahmegarantie ist mehr als ein Werbeversprechen. Sie bedeutet, dass die Reinigungsfirma im
+                      vereinbarten Rahmen nachbessert, falls bei der Übergabe ein relevanter Punkt beanstandet wird. Das
+                      reduziert Ihr Kostenrisiko und sorgt für deutlich mehr Sicherheit am Abgabetermin.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Achten Sie auf die Details: Ist die Nachbesserung klar geregelt? Gibt es eine erreichbare
+                      Kontaktperson? Sind kritische Bereiche wie Fenster, Küche und Sanitärbereiche eindeutig in der
+                      Offerte enthalten? Gute Anbieter beantworten diese Fragen bereits vor der Buchung.
+                    </p>
 
-                  {/* H2: Rechtliche Aspekte und Mietvertrag */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Rechtliche Aspekte und Mietvertrag</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    In der Schweiz ist der Mieter gesetzlich verpflichtet, die Wohnung bei Auszug in einem ordnungsgemässen Zustand zu übergeben. Dies beinhaltet in der Regel eine gründliche Reinigung aller Räume. Besonders wichtig ist dabei die Abnahme der Wohnung durch den Vermieter oder die Hausverwaltung, bei der ein Abnahmeprotokoll erstellt wird, um die ordnungsgemässe Reinigung und den Zustand der Wohnung zu dokumentieren und Beanstandungen zu vermeiden. Die genauen Anforderungen können im Mietvertrag festgelegt sein und variieren je nach Vermieter. Professionelle Endreinigung mit Abnahmegarantie stellt sicher, dass alle rechtlichen Anforderungen erfüllt werden und keine Nachforderungen entstehen. Die Abnahmegarantie gibt Ihnen zusätzliche Sicherheit, da die Reinigungsfirma bei Bedarf kostenlos nachbessert. Dies schützt Sie vor teuren Nachforderungen und rechtlichen Auseinandersetzungen. Eine professionelle Reinigung mit Abnahmegarantie ist eine Investition, die sich lohnt.
-                  </p>
+                    <div className="rounded-lg overflow-hidden">
+                      <img
+                        src="https://online-offerten.ch/reinigungsfirma/reinigungsmittel_auf_tisch.webp"
+                        alt="Umzugsreinigung mit Abnahmegarantie - Vorher und Nachher Vergleich"
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
 
-                  {/* H2: Moderne und umweltfreundliche Reinigungsmittel */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Moderne und umweltfreundliche Reinigungsmittel</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Moderne Reinigungsfirmen setzen zunehmend auf umweltfreundliche und gesundheitsschonende Reinigungsmittel. Diese sind nicht nur besser für die Umwelt, sondern auch für Ihre Gesundheit und die Ihrer Familie. Biologische Reinigungsmittel sind besonders für Haushalte mit Kindern, Allergikern oder Haustieren empfehlenswert. Sie sind effektiv gegen Schmutz und Bakterien, schonen aber gleichzeitig die Umwelt und die Gesundheit. Unsere Partnerfirmen verwenden ausschliesslich zertifizierte, umweltfreundliche Reinigungsmittel und achten darauf, dass keine schädlichen Chemikalien in der Wohnung zurückbleiben. Dies ist besonders wichtig bei der Endreinigung, da die Wohnung für den nächsten Mieter oder Eigentümer bereit sein muss.
-                  </p>
-
-                  {/* Umweltfreundlich Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/umweltfreundliche_reinigungsmittel_modern.webp"
-                      alt="Umweltfreundliche Reinigungsmittel für Umzugsreinigung - Biologische und gesundheitsschonende Produkte"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
-                  {/* H2: Qualitätssicherung und Sauberkeit */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Qualitätssicherung und Sauberkeit</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Bei unserer Umzugsreinigung mit Abnahmegarantie in Zürich steht die Qualitätssicherung an oberster Stelle. Unsere Reinigungsfirma setzt ausschliesslich auf erfahrene und geschulte Mitarbeiter, die mit modernster Ausrüstung und umweltfreundlichen Reinigungsmitteln arbeiten. So garantieren wir eine professionelle Endreinigung, die selbst höchste Ansprüche an Sauberkeit erfüllt. Jeder Bereich der Wohnung – von der Küche über das Bad bis hin zu allen Zimmern und dem Balkon – wird sorgfältig gereinigt und kontrolliert. Unsere Qualitätssicherung umfasst eine abschliessende Überprüfung aller Reinigungsarbeiten, damit Sie sicher sein können, dass Ihre Wohnung bei der Übergabe makellos ist. Die Abnahmegarantie gibt Ihnen dabei die Gewissheit, dass auch im Nachhinein kostenlos nachgebessert wird, falls der Vermieter Beanstandungen hat.
-                  </p>
-
-                  {/* H2: Ablauf unserer Umzugsreinigung – Schritt für Schritt */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Ablauf unserer Umzugsreinigung – Schritt für Schritt</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Der Ablauf einer professionellen Endreinigung ist strukturiert und effizient. Zunächst erfolgt eine Besichtigung der Wohnung, um den Umfang der Reinigung zu bestimmen und eine genaue Offerte zu erstellen. Die Besichtigung sowie die anschliessende Endreinigung finden direkt vor Ort statt, um einen reibungslosen Ablauf zu gewährleisten. Nach der Auftragsbestätigung wird ein Termin vereinbart, der zu Ihrem Umzugstermin passt. Am Reinigungstag erscheint das professionelle Reinigungsteam pünktlich mit allen notwendigen Geräten und Reinigungsmitteln. Die Reinigung erfolgt systematisch Raum für Raum, beginnend mit den am stärksten verschmutzten Bereichen. Nach Abschluss der Reinigung erfolgt eine Qualitätskontrolle, und Sie erhalten eine Abnahmegarantie. Bei der Wohnungsübergabe ist unser Team persönlich anwesend, um eventuelle Beanstandungen direkt vor Ort zu klären und die Abwicklung zu erleichtern. Sollten Sie mit dem Ergebnis nicht zufrieden sein, wird kostenlos nachgebessert, bis die Wohnung den Anforderungen entspricht.
-                  </p>
-
-                  {/* Ablauf Image/Icon */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 p-6 md:p-8">
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6">
+                    <h2 className="heading-2 break-words">Ablauf einer professionellen Umzugsreinigung</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-5 bg-gradient-to-br from-blue-50 to-cyan-50 p-5 md:p-6 rounded-lg">
                       {[
                         { icon: Home, text: "Kostenlose Offerte anfordern" },
-                        { icon: Clock, text: "Besichtigung und Offerte erhalten" },
-                        { icon: Calendar, text: "Termin vereinbaren" },
-                        { icon: Sparkles, text: "Professionelle Reinigung durchführen" },
-                        { icon: CheckCircle, text: "Qualitätskontrolle und Abnahme" }
+                        { icon: Clock, text: "Leistungen vergleichen" },
+                        { icon: Calendar, text: "Termin fixieren" },
+                        { icon: Sparkles, text: "Reinigung durchführen" },
+                        { icon: CheckCircle, text: "Übergabe absichern" }
                       ].map((step, index) => {
                         const IconComponent = step.icon
                         return (
                           <div key={index} className="flex flex-col items-center text-center">
-                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-blue-600 flex items-center justify-center mb-3">
-                              <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                            <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-2">
+                              <IconComponent className="w-6 h-6 text-white" />
                             </div>
                             <p className="text-xs md:text-sm text-gray-700 font-medium">{step.text}</p>
                           </div>
                         )
                       })}
                     </div>
-                  </div>
-
-                  {/* H2: Was kostet eine professionelle Umzugsreinigung? */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Was kostet eine professionelle Umzugsreinigung?</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Die Kosten für Endreinigung variieren je nach Grösse der Wohnung, Umfang der Reinigung, Region und dem Verschmutzungsgrad. Der Preis hängt also auch davon ab, wie stark die Wohnung verschmutzt ist. In der Regel werden Preise zwischen 25 und 50 CHF pro Stunde berechnet. Je nach Anbieter werden die Preise als Pauschalpreis oder nach Aufwand kalkuliert. Eine durchschnittliche 3-Zimmer-Wohnung benötigt etwa 4-6 Stunden, was Kosten von 400-900 CHF bedeutet. Grössere Wohnungen oder besonders verschmutzte Bereiche können höhere Kosten verursachen. Durch den Vergleich mehrerer Offerten über unsere Plattform können Sie bis zu 40% sparen und gleichzeitig sicherstellen, dass Sie qualitativ hochwertige Dienstleistungen mit Abnahmegarantie erhalten. Alle Offerten sind kostenlos und unverbindlich.
-                  </p>
-
-                  {/* H2: Zeitplanung und Terminvereinbarung */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Zeitplanung und Terminvereinbarung</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Die Endreinigung sollte idealerweise nach dem Auszug aller Möbel, aber vor der finalen Übergabe stattfinden. Dies ermöglicht eine gründliche Reinigung aller Bereiche. Professionelle Reinigungsfirmen können flexibel planen und die Reinigung zu einem Zeitpunkt durchführen, der zu Ihrem Umzugstermin passt. Auf Wunsch werden auch individuelle Terminwünsche berücksichtigt, sodass die Reinigung exakt nach Ihren Vorstellungen und Bedürfnissen organisiert werden kann. Frühzeitige Planung ist wichtig, um den richtigen Termin zu sichern, besonders während der Umzugssaison. Viele Reinigungsfirmen bieten auch Notfalltermine an, falls kurzfristig eine Reinigung benötigt wird. Die Abnahmegarantie gibt Ihnen zusätzliche Sicherheit, da die Reinigungsfirma bei Bedarf kostenlos nachbessert, falls die Übergabe verschoben wird.
-                  </p>
-
-                  {/* H2: Organisation und Koordination */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Organisation und Koordination</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Eine reibungslose Organisation und Koordination sind das Herzstück unserer Umzugsreinigung mit Abnahmegarantie. Bereits vor der Reinigung bieten wir Ihnen eine kostenlose und unverbindliche Besichtigung Ihrer Wohnung an, um den genauen Aufwand und die zu erwartenden Kosten transparent zu ermitteln. Unsere Reinigungsfirma übernimmt die gesamte Kommunikation mit der Verwaltung und stimmt alle Termine rund um die Wohnungsübergabe optimal ab. Während der Endreinigung und bei der Übergabe sind unsere Mitarbeiter persönlich anwesend, um sicherzustellen, dass alle Reinigungsarbeiten den vereinbarten Standards entsprechen. So können Sie sich entspannt zurücklehnen und sich auf Ihren Umzug konzentrieren, während wir für eine stressfreie und erfolgreiche Übergabe Ihrer Wohnung sorgen.
-                  </p>
-
-                  {/* H2: Warum wir der richtige Partner für Ihre Endreinigung sind */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Warum wir der richtige Partner für Ihre Endreinigung sind</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Wir sind der vertrauenswürdige Partner für Ihre Endreinigung. Als erfahrenes Putzinstitut bieten wir Ihnen einen umfassenden Reinigungsservice, der speziell auf Umzugsreinigung und Wohnungsreinigung ausgerichtet ist. Unser Netzwerk umfasst nur geprüfte, versicherte Reinigungsfirmen, die höchste Qualitätsstandards erfüllen. Alle Partnerfirmen bieten eine 100% Abnahmegarantie und verwenden moderne, umweltfreundliche Reinigungsmittel. Wir haben bereits über 500 zufriedene Kunden geholfen, die richtige Reinigungsfirma zu finden. Unser Service ist komplett kostenlos und unverbindlich – Sie zahlen nur für die Reinigung selbst, nicht für unsere Vermittlung. Zudem können Sie durch den Vergleich mehrerer Offerten bis zu 40% sparen.
-                  </p>
-
-                  {/* CTA Banner Section */}
-                  <div className="mt-6 md:mt-8 mb-6 md:mb-8">
-                    <div className="bg-gradient-to-br from-green-700 via-green-600 to-emerald-700 rounded-xl p-6 md:p-8 lg:p-10 shadow-xl">
-                      {/* Header with icons */}
-                      <div className="flex items-center justify-center mb-4 md:mb-6">
-                        <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 mr-2"></div>
-                        <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center leading-tight">
-                          Umzugsreinigung mit Abnahmegarantie – Kostenlose Offerten anfordern und bis zu 40% sparen
-                        </h3>
-                        <div className="w-3 h-3 bg-blue-300 rounded-sm rotate-45 ml-2"></div>
-                      </div>
-                      
-                      {/* Features with checkmarks */}
-                      <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
-                        <div className="flex items-center">
-                          <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
-                          <span className="text-white text-base md:text-lg font-medium">100% kostenlos und unverbindlich</span>
-                        </div>
-                        <div className="flex items-center">
-                          <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
-                          <span className="text-white text-base md:text-lg font-medium">Geprüfte Partner mit 100% Abnahmegarantie</span>
-                      </div>
-                        <div className="flex items-center">
-                          <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-300 mr-3 flex-shrink-0" />
-                          <span className="text-white text-base md:text-lg font-medium">Transparente Preise ohne Verpflichtung</span>
-                        </div>
-                      </div>
-                      
-                      {/* CTA Button */}
-                      <div className="flex justify-center">
-                        <Button
-                          onClick={handleCtaClick}
-                          className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 flex items-center gap-2"
-                        >
-                          Kostenlose Offerten anfordern
-                          <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* H2: Vorteile für den Vermieter */}
-                  <h2 className="heading-2 mt-8 md:mt-12 mb-6 break-words">Vorteile für den Vermieter</h2>
-                  <p className="text-body mb-6 break-words w-full">
-                    Auch für Vermieter bietet unsere Umzugsreinigung mit Abnahmegarantie zahlreiche Vorteile. Unsere Reinigungsfirma sorgt für eine professionelle Endreinigung der Wohnung, die exakt den Anforderungen des Vermieters entspricht. Sollte es dennoch Beanstandungen geben, übernehmen wir selbstverständlich die Nachreinigung – und das ohne zusätzliche Kosten. Die Abnahmegarantie schützt den Vermieter vor unerwarteten Überraschungen und stellt sicher, dass die Wohnung in einem einwandfreien Zustand übergeben wird. So profitieren Vermieter von einer zuverlässigen Lösung, die Zeit, Aufwand und Kosten spart und für eine reibungslose Neuvermietung sorgt.
-                  </p>
-
-
-                  {/* H2: Häufig gestellte Fragen zur Umzugsreinigung */}
-                  <div className="mt-8 md:mt-12">
-                    <h2 className="heading-2 mb-6">Häufig gestellte Fragen zur Endreinigung</h2>
-                    <p className="text-body mb-6 md:mb-8">
-                      Häufig gestellte Fragen zur professionellen Endreinigung mit Abnahmegarantie: Was kostet eine professionelle Umzugsreinigung oder Wohnungsendreinigung? Was beinhaltet eine umfassende Wohnungsreinigung vor der Wohnungsabgabe? Wie lange dauert eine Reinigung in Zug oder in Ihrer Nähe? Was bedeutet Abnahmegarantie bei der Wohnungsabgabe? Unterstützen Sie mich bei der persönlichen Wohnungsabgabe an den Vermieter? Sind die Reinigungskräfte versichert? Kann ich die Reinigung flexibel planen? Ist eine Endreinigung gesetzlich vorgeschrieben? Unsere professionelle Umzugsreinigung sorgt für ein sauberes neues Zuhause und eine reibungslose Übergabe. Diese und weitere Fragen beantworten wir Ihnen gerne. Über unsere Plattform können Sie kostenlos Offerten von geprüften Reinigungsfirmen aus Ihrer Nähe, zum Beispiel aus Zug, vergleichen und dabei bis zu 40% sparen.
+                    <p className="text-body break-words w-full">
+                      Dieser Ablauf spart Zeit, weil Sie nicht jedes Unternehmen einzeln kontaktieren müssen. Sie bündeln
+                      den Prozess, erhalten strukturierte Offerten und treffen Ihre Entscheidung auf Basis klarer Daten
+                      statt auf Bauchgefühl.
                     </p>
+
+                    <h2 className="heading-2 break-words">Regionale Verfügbarkeit in der Schweiz</h2>
+                    <p className="text-body break-words w-full">
+                      Verfügbarkeit und Preise unterscheiden sich je nach Region. Besonders in Städten wie Zürich, Basel,
+                      Bern oder Luzern ist eine frühzeitige Anfrage wichtig. Über unsere Plattform finden Sie passende
+                      Anbieter aus Ihrer Region und können den Umzugstermin mit der Reinigung sinnvoll abstimmen.
+                    </p>
+
+                    <h2 className="heading-2 break-words">Welche Faktoren beeinflussen den Endpreis?</h2>
+                    <p className="text-body break-words w-full">
+                      Ein professioneller Vergleich beginnt immer mit den richtigen Eingabedaten. Der wichtigste
+                      Kostenfaktor ist die Objektgrösse: Eine 1.5-Zimmer-Wohnung benötigt deutlich weniger Zeit als ein
+                      5.5-Zimmer-Objekt mit Nebenräumen. Ebenso relevant ist der tatsächliche Verschmutzungsgrad. Wer
+                      mehrere Jahre in der Wohnung gelebt hat, benötigt in der Regel mehr Detailarbeit in Küche, Bad,
+                      Fenstern und schwer zugänglichen Bereichen. Dazu kommen mögliche Zusatzleistungen wie
+                      Storenreinigung, Balkonflächen oder besonders hohe Fenster.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Auch die Zugänglichkeit des Objekts spielt in der Praxis eine Rolle. Ohne Lift oder mit langen
+                      Laufwegen steigt der Aufwand. Gleiches gilt bei knappen Terminfenstern, etwa wenn Reinigung und
+                      Übergabe am selben Tag stattfinden müssen. Eine gute Offerte macht diese Punkte transparent und
+                      zeigt klar, welche Leistungen im Grundpreis enthalten sind. Dadurch erkennen Sie sofort, ob ein
+                      Angebot realistisch kalkuliert wurde oder ob später mit Zusatzkosten zu rechnen ist.
+                    </p>
+
+                    <h2 className="heading-2 break-words">Typische Fehler bei der Umzugsreinigung vermeiden</h2>
+                    <p className="text-body break-words w-full">
+                      Der häufigste Fehler ist die Entscheidung nur nach dem tiefsten Preis. Günstige Offerten sind nicht
+                      automatisch schlecht, aber ohne klaren Leistungsumfang lassen sie sich kaum fair bewerten.
+                      Unpräzise Formulierungen wie „komplette Reinigung“ reichen nicht aus. Entscheidend ist, ob
+                      kritische Punkte wie Backofen, Dunstabzug, Fensterrahmen, Storen, Fugen und Einbauschränke
+                      ausdrücklich genannt werden.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Ein weiterer Fehler ist eine zu späte Buchung. Besonders in Monaten mit hoher Umzugsaktivität sind
+                      gute Termine schnell vergeben. Wer zu spät anfragt, muss häufig Kompromisse bei Preis oder
+                      Verfügbarkeit eingehen. Ebenfalls problematisch ist es, wenn der Zustand der Wohnung in der Anfrage
+                      zu optimistisch beschrieben wird. Je genauer Ihre Angaben sind, desto präziser erhalten Sie
+                      Offerten, die später auch eingehalten werden können.
+                    </p>
+
+                    <h2 className="heading-2 break-words">Checkliste vor dem Reinigungstermin</h2>
+                    <p className="text-body break-words w-full">
+                      Damit das Reinigungsteam effizient arbeiten kann, sollte das Objekt vor dem Termin vollständig
+                      geräumt sein. Persönliche Gegenstände, Möbelreste und lose Materialien verzögern den Ablauf und
+                      erhöhen das Risiko, dass bestimmte Flächen nicht sauber bearbeitet werden können. Prüfen Sie vorab,
+                      ob Strom und Wasser verfügbar sind und ob alle Räume zugänglich sind.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-body">
+                      <li>Wohnung komplett leer räumen (inkl. Keller/Nebenraum, falls im Auftrag enthalten)</li>
+                      <li>Schlüsselübergabe und Zugang zum Objekt rechtzeitig organisieren</li>
+                      <li>Besondere Mängel oder sensible Bereiche im Voraus kommunizieren</li>
+                      <li>Leistungsumfang und Termin schriftlich bestätigen lassen</li>
+                      <li>Ansprechperson für den Übergabetag festlegen</li>
+                    </ul>
+                    <p className="text-body break-words w-full">
+                      Diese Vorbereitung spart nicht nur Zeit, sondern verbessert auch die Qualität des Ergebnisses.
+                      Gleichzeitig minimieren Sie das Risiko für spätere Diskussionen mit Verwaltung oder Vermieterschaft.
+                    </p>
+
+                    <h2 className="heading-2 break-words">Qualität erkennen: worauf Sie bei Offerten achten sollten</h2>
+                    <p className="text-body break-words w-full">
+                      Eine hochwertige Offerte zeichnet sich durch Klarheit aus. Dazu gehören nachvollziehbare
+                      Leistungspositionen, transparente Konditionen und ein realistisches Terminfenster. Seriöse Anbieter
+                      kommunizieren offen, welche Leistungen standardmässig enthalten sind und welche als Zusatzoptionen
+                      gelten. Gerade bei der Umzugsreinigung ist das entscheidend, weil kleine Lücken im Leistungsumfang
+                      bei der Übergabe schnell zu Problemen führen.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Zusätzlich sollten Sie prüfen, wie die Firma mit Rückfragen und Nachbesserung umgeht. Gibt es eine
+                      klare Kontaktperson? Ist der Ablauf bei Beanstandungen definiert? Wie schnell wird reagiert? Solche
+                      Punkte sind oft wichtiger als ein kleiner Preisunterschied. Ein verlässlicher Partner spart am Ende
+                      Zeit, Nerven und in vielen Fällen auch Geld.
+                    </p>
+
+                    <h2 className="heading-2 break-words">Umzugsreinigung für Mieter und Vermieter</h2>
+                    <p className="text-body break-words w-full">
+                      Für Mieter steht vor allem die reibungslose Rückgabe der Wohnung im Zentrum. Ziel ist eine saubere
+                      Übergabe ohne zusätzliche Nachforderungen. Für Vermieter wiederum ist eine zügige Neuvermietung
+                      wichtig. Eine professionell gereinigte Wohnung erleichtert die Übergabe an neue Bewohner deutlich.
+                      Deshalb profitieren beide Seiten von einem klar definierten Reinigungsstandard und einem
+                      nachvollziehbaren Ablauf.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Besonders bei angespannten Zeitplänen – etwa wenn die nächste Mietpartei bereits feststeht –
+                      schafft eine professionelle Endreinigung Sicherheit. Das gilt auch bei Objekten mit hoher
+                      Beanspruchung, in denen ohne Fachteam häufiger Nacharbeiten nötig wären. Ein strukturierter
+                      Offertenvergleich ist daher für beide Seiten sinnvoll.
+                    </p>
+
+                    <h2 className="heading-2 break-words">Umweltfreundliche Reinigung ohne Qualitätsverlust</h2>
+                    <p className="text-body break-words w-full">
+                      Moderne Reinigungsfirmen arbeiten zunehmend mit umweltschonenden und materialverträglichen
+                      Reinigungsmitteln. Das ist nicht nur für die Umwelt relevant, sondern auch für Innenräume, in denen
+                      empfindliche Oberflächen vorhanden sind. Entscheidend ist, dass ökologische Mittel fachgerecht
+                      eingesetzt werden und der Reinigungsprozess an Material und Verschmutzung angepasst wird.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Bei hochwertigen Küchenfronten, Naturstein oder empfindlichen Bodenbelägen ist professionelle
+                      Produktauswahl besonders wichtig. Gute Anbieter kombinieren deshalb geschultes Personal mit
+                      passender Ausstattung, statt mit Standardlösungen zu arbeiten. So bleibt die Reinigungsleistung
+                      hoch, ohne Oberflächen unnötig zu belasten.
+                    </p>
+
+                    <h2 className="heading-2 break-words">So holen Sie in wenigen Minuten passende Offerten ein</h2>
+                    <p className="text-body break-words w-full">
+                      Über das Anfrageformular geben Sie zuerst die wichtigsten Eckdaten an: Objekttyp, Zimmerzahl,
+                      Standort, gewünschter Termin und besondere Anforderungen. Anschliessend erhalten Sie Angebote von
+                      geprüften Reinigungsfirmen, die zu Ihren Kriterien passen. Diese Offerten können Sie direkt
+                      gegenüberstellen und nach Preis, Leistung und Verfügbarkeit bewerten.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Der Vorteil: Sie müssen nicht selbst dutzende Anbieter recherchieren und kontaktieren. Mit einer
+                      einzigen Anfrage bekommen Sie strukturierte Vergleichbarkeit und sparen wertvolle Zeit in einer
+                      ohnehin intensiven Umzugsphase.
+                    </p>
+
+                    <h2 className="heading-2 break-words">Fazit: sauberer Abschluss für einen stressfreien Umzug</h2>
+                    <p className="text-body break-words w-full">
+                      Eine professionelle Umzugsreinigung ist keine Nebensache, sondern ein zentraler Teil einer
+                      erfolgreichen Wohnungsabgabe. Wer früh plant, Leistungen sauber vergleicht und auf klare
+                      Abnahmebedingungen achtet, reduziert das Risiko für teure Nacharbeiten erheblich. Genau hier
+                      unterstützt Sie Online-Offerten.ch: transparent, unverbindlich und mit Fokus auf realistische
+                      Angebote statt auf Werbeversprechen.
+                    </p>
+                    <p className="text-body break-words w-full">
+                      Ob kleine Wohnung, Familienhaushalt oder grösseres Objekt mit Nebenräumen: Mit einem strukturierten
+                      Offertenvergleich finden Sie den passenden Anbieter schneller und treffen Entscheidungen auf Basis
+                      nachvollziehbarer Leistungen. So gelingt der letzte Schritt Ihres Umzugs effizient, planbar und mit
+                      deutlich weniger Stress.
+                    </p>
+
+                    <div className="rounded-lg overflow-hidden">
+                      <img
+                        src="https://online-offerten.ch/reinigungsfirma/umweltfreundliche_reinigungsmittel_modern.webp"
+                        alt="Umweltfreundliche Reinigungsmittel für Umzugsreinigung - Biologische und gesundheitsschonende Produkte"
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <h2 className="heading-2 break-words">Häufig gestellte Fragen zur Endreinigung</h2>
                     <Accordion type="single" collapsible className="w-full">
                       {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
@@ -445,48 +465,41 @@ const UmzugsreinigungPageClient = () => {
                         </AccordionItem>
                       ))}
                     </Accordion>
-                  </div>
 
-                  {/* H2: Fazit */}
-                  <div className="mt-8 md:mt-12">
-                    <h2 className="heading-2 mb-6">Fazit</h2>
-                    <p className="text-body mb-6">
-                      Unsere Umzugsreinigung mit Abnahmegarantie in Zürich und Umgebung ist die ideale Lösung für eine professionelle Endreinigung Ihrer Wohnung. Als erfahrene Reinigungsfirma legen wir höchsten Wert auf Qualität, Sauberkeit und eine sorgfältige Organisation, damit die Übergabe an Vermieter oder Verwaltung reibungslos und stressfrei verläuft. Dank kostenloser Besichtigung, transparenter Kommunikation und persönlicher Betreuung sind wir Ihr zuverlässiger Partner für eine professionelle Umzugsreinigung. Ob Mieter oder Vermieter – mit unserer Abnahmegarantie erhalten Sie die Sicherheit, dass Ihre Wohnung in bestem Zustand übergeben wird. Vertrauen Sie auf unsere Erfahrung und unseren Service für eine saubere Lösung bei jedem Umzug.
-                    </p>
-                  </div>
+                    <div className="p-5 md:p-6 bg-blue-50 rounded-lg border border-blue-200">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
+                        Jetzt unverbindliche Offerten für Umzugsreinigung anfordern
+                      </h3>
+                      <p className="text-body mb-4">
+                        Vergleichen Sie kostenlos Angebote von geprüften Reinigungsfirmen und sichern Sie sich eine
+                        reibungslose Übergabe mit Abnahmegarantie.
+                      </p>
+                      <Button
+                        onClick={handleCtaClick}
+                        size="lg"
+                        className="bg-blue-700 hover:bg-blue-800 text-white w-full sm:w-auto text-base font-semibold"
+                      >
+                        Kostenlose Offerten anfordern
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Button>
+                    </div>
 
-                  {/* H2: Jetzt unverbindliche Reinigungs-Offerte anfordern */}
-                  <div className="mt-8 md:mt-12">
-                    <h2 className="heading-2 mb-6">Jetzt unverbindliche Reinigungs-Offerte anfordern</h2>
-                    <p className="text-body mb-6">
-                      Vergleichen Sie kostenlos Offerten von geprüften Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%. Alle Offerten beinhalten eine 100% Abnahmegarantie. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma für Ihre Umzugsreinigung.
-                    </p>
-                    <Button 
-                      onClick={handleCtaClick} 
-                      size="lg" 
-                      className="bg-blue-700 hover:bg-blue-800 text-white w-full sm:w-auto text-base font-semibold"
-                    >
-                      Kostenlose Offerten anfordern
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                  </div>
-
-                  {/* Internal Links */}
-                  <div className="mt-8 md:mt-12">
-                    <h3 className="heading-3 mb-6">Weitere Reinigungsdienstleistungen</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                      <Link href="/reinigung/wohnungsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="heading-4 mb-2">Wohnungsreinigung</h4>
-                        <p className="text-sm text-gray-600">Gründliche Wohnungsreinigung mit 100% Abnahmegarantie für alle Räume.</p>
-                      </Link>
-                      <Link href="/reinigung/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="heading-4 mb-2">Fensterreinigung</h4>
-                        <p className="text-sm text-gray-600">Streifenfreie Fensterreinigung innen und aussen von professionellen Reinigungsfirmen.</p>
-                      </Link>
-                      <Link href="/reinigung/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                        <h4 className="heading-4 mb-2">Baureinigung</h4>
-                        <p className="text-sm text-gray-600">Gründliche Baureinigung nach Neubau oder Renovation für perfekte Resultate.</p>
-                      </Link>
+                    <div>
+                      <h3 className="heading-3 mb-5">Weitere Reinigungsdienstleistungen</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                        <Link href="/reinigung/wohnungsreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                          <h4 className="heading-4 mb-2">Wohnungsreinigung</h4>
+                          <p className="text-sm text-gray-600">Gründliche Wohnungsreinigung mit klar definiertem Leistungsumfang.</p>
+                        </Link>
+                        <Link href="/reinigung/fensterreinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                          <h4 className="heading-4 mb-2">Fensterreinigung</h4>
+                          <p className="text-sm text-gray-600">Streifenfreie Fensterreinigung innen und aussen.</p>
+                        </Link>
+                        <Link href="/reinigung/baureinigung" className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                          <h4 className="heading-4 mb-2">Baureinigung</h4>
+                          <p className="text-sm text-gray-600">Saubere Übergabe nach Neubau oder Renovation.</p>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </article>
