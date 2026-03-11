@@ -85,6 +85,31 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Google Ads Tag (gtag) — nur in Production */}
+        {isProduction && (
+          <>
+            <Script
+              id="google-ads-gtag-src"
+              src="https://www.googletagmanager.com/gtag/js?id=AW-10855452571"
+              strategy="afterInteractive"
+            />
+            <Script
+              id="google-ads-gtag-config"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  if (window.location.hostname === 'online-offerten.ch' || window.location.hostname === 'www.online-offerten.ch') {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    window.gtag = window.gtag || gtag;
+                    gtag('js', new Date());
+                    gtag('config', 'AW-10855452571');
+                  }
+                `,
+              }}
+            />
+          </>
+        )}
         {/* Google Tag Manager — nur in Production */}
         {isProduction && (
           <Script
