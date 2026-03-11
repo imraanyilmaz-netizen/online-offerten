@@ -260,18 +260,18 @@ const UmzugsfirmaPageClient = () => {
               </p>
               <p className="text-body">
                 Mit der <strong>Vergleichsplattform</strong> der Schweiz, <strong>online-offerten.ch</strong>, können Sie Umzugsofferten einfach
-                und kostenlos vergleichen und passende Anbieter finden. Durch einen schnellen Anbietervergleich erhalten
+                und kostenlos vergleichen und passende Anbieter finden. Durch einen schnellen Umzugspreisvergleich erhalten
                 Sie mehrere <strong>Umzugsangebote</strong> von geprüften Unternehmen und können die beste Lösung für Ihren Umzug
                 auswählen.
               </p>
               <p className="text-body">
                 Viele Menschen suchen nach Möglichkeiten, Umzugskosten in der Schweiz zu reduzieren. Genau hier hilft ein
-                professioneller Anbietervergleich, der Preise, Leistungen und Bewertungen transparent macht.
+                professioneller Umzugspreisvergleich, der Preise, Leistungen und Bewertungen transparent macht.
               </p>
             </header>
 
             <article className="space-y-4">
-              <h3 className="heading-3">Anbietervergleich – so finden Sie das passende Umzugsunternehmen</h3>
+              <h3 className="heading-3">Umzugspreisvergleich – so finden Sie das passende Umzugsunternehmen</h3>
               <p className="text-body">
                 Ein professioneller Umzugsofferten-Vergleich spart Zeit und Geld. Statt mehrere Firmen einzeln anzufragen,
                 können Sie über eine <strong>Vergleichsplattform</strong> mehrere Umzugsofferten gleichzeitig erhalten.
@@ -351,29 +351,29 @@ const UmzugsfirmaPageClient = () => {
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma Zürich</h3>
               <p className="text-body">
-                Viele Menschen suchen nach einer zuverlässigen <strong>Umzugsfirma in Zürich</strong> oder einer
-                professionellen Zügelfirma in Zürich, um ihren Umzug sicher und effizient durchzuführen.
+                Viele Menschen suchen nach einer zuverlässigen <strong><Link href="/umzugsfirma/zuerich" className="text-green-700 hover:underline">Umzugsfirma in Zürich</Link></strong> oder einer
+                professionellen <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:underline">Zügelfirma in Zürich</Link>, um ihren Umzug sicher und effizient durchzuführen.
                 In einer grossen Stadt wie Zürich sind Erfahrung und gute Planung besonders wichtig, da enge Strassen,
                 Parkplatzregelungen und hohe Verkehrsbelastung den Umzug komplizierter machen können.
               </p>
               <p className="text-body">
                 Professionelle Umzugshelfer in Zürich kennen die lokalen Gegebenheiten und sorgen dafür, dass Möbel und
                 Umzugsgut sicher transportiert werden. Durch den Vergleich verschiedener Anbieter können Sie schnell eine
-                passende und preiswerte Umzugsfirma in Zürich finden.
+                passende und preiswerte <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:underline">Umzugsfirma in Zürich</Link> finden.
               </p>
             </article>
 
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma Bern</h3>
               <p className="text-body">
-                Auch in der Hauptstadt gibt es viele erfahrene Umzugsfirmen in Bern, die private und geschäftliche Umzüge
-                professionell durchführen. Eine zuverlässige <strong>Zügelfirma in Bern</strong> übernimmt nicht nur den
+                Auch in der Hauptstadt gibt es viele erfahrene <Link href="/umzugsfirma/bern" className="text-green-700 hover:underline">Umzugsfirmen in Bern</Link>, die private und geschäftliche Umzüge
+                professionell durchführen. Eine zuverlässige <strong><Link href="/umzugsfirma/bern" className="text-green-700 hover:underline">Zügelfirma in Bern</Link></strong> übernimmt nicht nur den
                 Transport der Möbel, sondern bietet häufig zusätzliche Dienstleistungen wie Verpackung, Möbelmontage oder
                 Umzugsreinigung an.
               </p>
               <p className="text-body">
                 Besonders bei grösseren Wohnungswechseln oder Firmenumzügen ist eine strukturierte Planung entscheidend.
-                Durch den Vergleich verschiedener Anbieter finden Sie schnell eine Umzugsfirma in Bern, die zu Ihrem Budget
+                Durch den Vergleich verschiedener Anbieter finden Sie schnell eine <Link href="/umzugsfirma/bern" className="text-green-700 hover:underline">Umzugsfirma in Bern</Link>, die zu Ihrem Budget
                 und Ihren Anforderungen passt.
               </p>
             </article>
@@ -381,21 +381,21 @@ const UmzugsfirmaPageClient = () => {
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma Luzern</h3>
               <p className="text-body">
-                In der Zentralschweiz gibt es zahlreiche professionelle Umzugsfirmen in Luzern, die Umzüge innerhalb der
-                Region oder in andere Teile der Schweiz durchführen. Eine erfahrene Umzugsfirma sorgt dafür, dass der
+                In der Zentralschweiz gibt es zahlreiche professionelle <Link href="/umzugsfirma/luzern" className="text-green-700 hover:underline">Umzugsfirmen in Luzern</Link>, die Umzüge innerhalb der
+                Region oder in andere Teile der Schweiz durchführen. Eine erfahrene <Link href="/umzugsfirma/luzern" className="text-green-700 hover:underline">Umzugsfirma in Luzern</Link> sorgt dafür, dass der
                 Transport Ihrer Möbel sicher und effizient organisiert wird.
               </p>
               <p className="text-body">
                 Viele Anbieter bieten neben dem klassischen Umzug auch Zusatzservices wie Verpackungsservice, Lagerung oder
-                Umzugsreinigung an. Wenn Sie mehrere Angebote vergleichen, können Sie die passende Umzugsfirma in Luzern
-                finden und gleichzeitig Kosten sparen.
+                Umzugsreinigung an. Wenn Sie mehrere Angebote vergleichen, können Sie die passende <Link href="/umzugsfirma/luzern" className="text-green-700 hover:underline">Umzugsfirma in Luzern</Link>
+                {' '}finden und gleichzeitig Kosten sparen.
               </p>
             </article>
 
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma St. Gallen</h3>
               <p className="text-body">
-                Eine professionelle Umzugsfirma in St. Gallen unterstützt sowohl private Haushalte als auch Unternehmen bei
+                Eine professionelle <Link href="/umzugsfirma/st-gallen" className="text-green-700 hover:underline">Umzugsfirma in St. Gallen</Link>{' '}unterstützt sowohl private Haushalte als auch Unternehmen bei
                 regionalen und internationalen Umzügen. Durch ihre Erfahrung können Umzugsfirmen den gesamten Ablauf
                 effizient planen und durchführen.
               </p>
@@ -407,7 +407,7 @@ const UmzugsfirmaPageClient = () => {
                 <li>Umzugsreinigung</li>
               </ul>
               <p className="text-body">
-                Wenn Sie verschiedene Anbieter vergleichen, finden Sie schnell zuverlässige Umzugsofferten in St. Gallen.
+                Wenn Sie verschiedene Anbieter vergleichen, finden Sie schnell zuverlässige <Link href="/umzugsfirma/st-gallen" className="text-green-700 hover:underline">Umzugsofferten in St. Gallen</Link>.
               </p>
             </article>
 
@@ -435,7 +435,7 @@ const UmzugsfirmaPageClient = () => {
               <p className="text-body">
                 Ein Umzug kann je nach Stadt unterschiedliche Herausforderungen mit sich bringen. Mit online-offerten.ch
                 können Sie Umzugskosten in verschiedenen Städten der Schweiz vergleichen und schnell passende
-                <strong>Umzugsangebote</strong> für Ihre Region finden.
+                {' '}<strong>Umzugsangebote</strong> für Ihre Region finden.
               </p>
               <p className="text-body font-semibold text-gray-900">Beliebte Suchanfragen sind zum Beispiel:</p>
               <div className="flex flex-wrap gap-3">
