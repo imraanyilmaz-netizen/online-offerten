@@ -492,50 +492,6 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
             </section>
           ) : null}
 
-          {/* Partner werden Section */}
-          <section className="py-16 md:py-24 bg-white">
-            <div className="container mx-auto max-w-7xl px-4 md:px-6">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                {/* Left Side - Text Content */}
-                <div className="space-y-6">
-                  <div>
-                    <p className="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">
-                      Werden Sie Partner bei Online-Offerten.ch
-                    </p>
-                    <h2 className="heading-2">
-                      Sind Sie Dienstleister?
-                    </h2>
-                    <p className="text-body leading-relaxed">
-                      Wir verbinden Sie mit potenziellen Kunden in Ihrer Region, die genau Ihre Dienstleistungen suchen. Erweitern Sie Ihre Reichweite und gewinnen Sie neue Aufträge
-                    </p>
-                  </div>
-                  <Button asChild size="lg" className="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 px-8 py-6 text-lg font-semibold">
-                    <Link href="/partner-werden" className="inline-flex items-center">
-                      Jetzt Partner werden
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                </div>
-
-                {/* Right Side - Image Collage */}
-                <div className="relative">
-                  <div className="relative w-full aspect-square max-w-md mx-auto">
-                    <NextImage
-                      src="/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp"
-                      alt="Partner werden"
-                      width={600}
-                      height={600}
-                      className="w-full h-full object-cover rounded-2xl"
-                      priority={false}
-                      loading="lazy"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           {/* Nationwide Presence Section */}
           <section className="py-[50px] bg-gray-100 overflow-hidden relative">
             {/* Decorative background elements */}
@@ -550,11 +506,11 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <div className="flex items-center justify-center mb-4 text-green-600">
                     <MapPin className="w-8 h-8 md:w-10 md:h-10 mr-3" />
                     <h2 className="heading-2 text-gray-900">
-                      In der ganzen Schweiz für Sie da
+                      In der ganzen Schweiz: Geprüfte Anbieter für Umzug, Reinigung und Malerarbeiten
                     </h2>
                   </div>
                   <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                    Unser Netzwerk an Umzugs- und Reinigungsfirmen erstreckt sich über alle Kantone.
+                    Unser Partnernetzwerk ist in allen Kantonen <span className="text-green-700 font-semibold">online</span> für Sie da - von Zürich und Bern bis Lausanne, Lugano und in die Ostschweiz.
                   </p>
                 </div>
                 <div className="max-w-4xl mx-auto mb-8">
@@ -605,11 +561,55 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   </div>
                 </div>
                 <p className="text-base md:text-lg text-gray-700 font-medium mb-4">
-                  Online-Offerten.ch ist ein Portal, das als Vermittlungsplattform für geprüfte Anbieter in der ganzen Schweiz dient und Ihnen hilft, passende Dienstleister einfach und sicher zu vergleichen.
+                  Online-Offerten.ch bringt Sie mit qualifizierten Anbietern zusammen, die zu Ihrem Bedarf passen. Mit nur einer Anfrage erhalten Sie mehrere passende Offerten, können Leistungen transparent gegenüberstellen und anschliessend den richtigen Partner auswählen.
                 </p>
                 <p className="text-lg text-gray-700 font-medium">
-                  Finden Sie noch heute den idealen Partner für Ihr Vorhaben.
+                  Starten Sie jetzt und finden Sie den idealen Anbieter für Ihr Vorhaben.
                 </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Partner werden Section */}
+          <section className="py-16 md:py-24 bg-white">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* Left Side - Text Content */}
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">
+                      Werden Sie Partner bei Online-Offerten.ch
+                    </p>
+                    <h2 className="heading-2">
+                      Sind Sie Dienstleister?
+                    </h2>
+                    <p className="text-body leading-relaxed">
+                      Wir verbinden Sie mit potenziellen Kundinnen und Kunden in Ihrer Region, die genau nach Ihren Dienstleistungen suchen. Erweitern Sie Ihre Reichweite und gewinnen Sie neue Aufträge.
+                    </p>
+                  </div>
+                  <Button asChild size="lg" className="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 px-8 py-6 text-lg font-semibold">
+                    <Link href="/partner-werden" className="inline-flex items-center">
+                      Jetzt Partner werden
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+
+                {/* Right Side - Image Collage */}
+                <div className="relative">
+                  <div className="relative w-full aspect-square max-w-md mx-auto">
+                    <NextImage
+                      src="/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp"
+                      alt="Partner werden"
+                      width={600}
+                      height={600}
+                      className="w-full h-full object-cover rounded-2xl"
+                      priority={false}
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </section>

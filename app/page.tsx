@@ -183,67 +183,6 @@ const structuredData = {
         "availability": "https://schema.org/InStock",
         "url": "https://online-offerten.ch/kostenlose-offerte-anfordern"
       }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Ist der Service wirklich kostenlos und unverbindlich?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja, unser Service ist vollständig kostenlos und unverbindlich. Sie können alle Offerten in Ruhe vergleichen und entscheiden, ob Sie eine davon annehmen möchten oder nicht. Es entstehen keine Kosten oder Verpflichtungen, wenn Sie keine der Offerten annehmen."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Wie funktioniert das Offerten-Vergleichsportal?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sie füllen ein kurzes Formular aus, in dem Sie Ihre Anforderungen beschreiben. Wir leiten Ihre Anfrage an bis zu 5 passende Partnerfirmen in Ihrer Region weiter. Diese kontaktieren Sie direkt mit individuellen Offerten. Sie vergleichen die Angebote und wählen das beste aus."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Wie lange dauert es, bis ich Offerten erhalte?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In der Regel erhalten Sie die ersten Offerten innerhalb von 24-48 Stunden. Die Partnerfirmen kontaktieren Sie direkt per E-Mail oder Telefon mit ihren individuellen Angeboten."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Sind alle Partnerfirmen geprüft und seriös?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja, alle Partnerfirmen werden von uns sorgfältig geprüft und müssen hohe Qualitätsstandards erfüllen. Wir arbeiten nur mit seriösen, versicherten Unternehmen zusammen, die über die notwendigen Lizenzen und Erfahrung verfügen."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Kann ich auch Offerten für mehrere Dienstleistungen gleichzeitig anfordern?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja, Sie können für verschiedene Dienstleistungen Offerten anfordern. Füllen Sie einfach für jede Dienstleistung eine separate Anfrage aus, oder kontaktieren Sie uns direkt, wenn Sie mehrere Services benötigen."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Was passiert, wenn ich keine der Offerten annehme?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Kein Problem. Sie sind zu nichts verpflichtet. Wenn keine der Offerten Ihren Anforderungen entspricht, müssen Sie nichts weiter tun. Es entstehen keine Kosten oder Verpflichtungen."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Für welche Dienstleistungen kann ich Offerten anfordern?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sie können Offerten für Umzüge (Privatumzug, Geschäftsumzug, Auslandumzug, Spezialtransporte), Reinigungsdienstleistungen (Wohnungsreinigung, Büroreinigung, Umzugsreinigung, Grundreinigung) und Malerarbeiten (Innen- und Aussenanstriche) anfordern."
-          }
-        }
-      ]
     }
   ]
 }
@@ -333,12 +272,22 @@ export default async function HomePage() {
                       Offerten vergleichen & passende Anbieter in der Schweiz finden
                     </h1>
                     <div
-                      className="absolute right-0 -top-2 sm:-top-5 w-24 h-24 sm:w-32 sm:h-32 bg-emerald-500 text-white shadow-2xl rotate-[-10deg] flex items-center justify-center shrink-0 ring-4 ring-white/85"
-                      style={{
-                        clipPath: 'polygon(50% 0%, 61% 8%, 75% 3%, 81% 16%, 95% 17%, 93% 31%, 100% 43%, 89% 53%, 92% 67%, 78% 71%, 74% 85%, 60% 81%, 50% 92%, 39% 81%, 25% 85%, 22% 71%, 8% 67%, 11% 53%, 0% 43%, 7% 31%, 5% 17%, 19% 16%, 25% 3%, 39% 8%)'
-                      }}
+                      className="absolute right-0 -top-2 sm:-top-5 w-24 h-24 sm:w-32 sm:h-32 text-white rotate-[-10deg] flex items-center justify-center shrink-0"
                     >
-                      <span className="text-xs sm:text-base font-black leading-tight text-center tracking-wide">
+                      <svg
+                        viewBox="0 0 100 100"
+                        className="absolute inset-0 w-full h-full"
+                        aria-hidden="true"
+                      >
+                        <polygon
+                          points="50,2 59,12 73,8 79,21 92,23 88,37 98,50 88,63 92,77 79,79 73,92 59,88 50,98 41,88 27,92 21,79 8,77 12,63 2,50 12,37 8,23 21,21 27,8 41,12"
+                          fill="#10b981"
+                          stroke="rgba(255,255,255,0.85)"
+                          strokeWidth="3"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span className="relative z-10 text-xs sm:text-base font-black leading-tight text-center tracking-wide">
                         BIS ZU
                         <br />
                         40%
@@ -579,6 +528,18 @@ export default async function HomePage() {
                     <p className="text-body text-center text-sm">
                       Beschreiben Sie Ihr Projekt in wenigen Schritten online.
                     </p>
+                    <div className="mt-5 text-center">
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="sm"
+                        className="border-green-600 text-green-700 hover:bg-green-50 font-semibold"
+                      >
+                        <Link href="/kostenlose-offerte-anfordern">
+                          Gratis Anfrage starten
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
 
                   {/* Step 2 */}
@@ -850,8 +811,51 @@ export default async function HomePage() {
                     </div>
           </section>
 
+          {/* FAQ Section - visible for users only (no FAQ schema) */}
+          <section className="py-12 md:py-16 bg-white border-t border-gray-100">
+            <div className="container mx-auto max-w-4xl px-4 sm:px-6">
+              <h2 className="heading-2 mb-8">Häufige Fragen zu Anfragen und Offerten</h2>
+              <div className="space-y-6">
+                <div className="rounded-xl border border-gray-200 p-5">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Was kostet mich eine Anfrage?</h3>
+                  <p className="text-body">
+                    Die Anfrage ist komplett kostenlos und unverbindlich. Sie zahlen nichts für das Vergleichen von Offerten.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-gray-200 p-5">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Was passiert nach meiner Anfrage?</h3>
+                  <p className="text-body">
+                    Passende Firmen aus Ihrer Region melden sich mit individuellen Offerten. Sie vergleichen in Ruhe und entscheiden selbst, ob Sie ein Angebot annehmen.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-gray-200 p-5">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Wie viele Offerten erhalte ich?</h3>
+                  <p className="text-body">
+                    Sie können im Formular selbst auswählen, von wie vielen Firmen Sie Offerten erhalten möchten (zwischen 2 und 5). Maximal sind 5 Offerten möglich.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-gray-200 p-5">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Bin ich verpflichtet, eine Offerte anzunehmen?</h3>
+                  <p className="text-body">
+                    Nein. Der Vergleich ist unverbindlich. Sie entscheiden frei, ob und welche Offerte zu Ihnen passt.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-gray-200 p-5">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Wie schnell erhalte ich Rückmeldungen?</h3>
+                  <p className="text-body">
+                    In der Regel erhalten Sie die ersten Offerten innerhalb von 1 bis 24 Stunden nach der Bestätigung Ihrer E-Mail-Adresse. Erfolgt Ihre Anfrage am Wochenende, melden sich die meisten Firmen am Montag bei Ihnen.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Client Components - Interactive parts */}
-      <HomePageClient initialReviews={reviews} initialPosts={posts} />
+          <HomePageClient initialReviews={reviews} initialPosts={posts} />
 
         </main>
       </div>
