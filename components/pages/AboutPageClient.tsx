@@ -827,21 +827,41 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         ) : null}
 
         {/* Final CTA */}
-        <section className="bg-gradient-to-br from-gray-900 to-gray-800 py-16 md:py-24">
-          <div className="container mx-auto max-w-7xl px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Bereit für Ihren kostenlosen Vergleich?
-            </h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              Finden Sie in wenigen Minuten die besten Dienstleister für Ihr Vorhaben. Unverbindlich und unkompliziert – 100% kostenlos.
-            </p>
-            <Button
-              size="lg"
-              className="bg-green-600 text-white hover:bg-green-700 font-bold text-lg px-8 py-6"
-              onClick={() => router.push('/kostenlose-offerte-anfordern')}
-            >
-              Jetzt kostenlose Offerten anfordern
-            </Button>
+        <section className="bg-white py-14 md:py-20">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="relative overflow-hidden rounded-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/fotos/offerten.webp')" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/45" />
+
+              <div className="relative z-10 grid lg:grid-cols-3 gap-6 lg:gap-10 items-center p-6 md:p-8">
+                <div className="lg:col-span-2 text-white">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    Das passende Umzugsunternehmen finden mit Online-offerten.ch
+                  </h2>
+                  <p className="text-lg text-gray-100 max-w-2xl">
+                    Finden Sie in wenigen Minuten die besten Dienstleister für Ihr Vorhaben. Unverbindlich und unkompliziert - 100% kostenlos.
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-xl p-5 md:p-6 shadow-lg">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-6 whitespace-nowrap"
+                  >
+                    <Link href="/kostenlose-offerte-anfordern">
+                      Kostenlose Offerten anfordern
+                    </Link>
+                  </Button>
+                  <p className="text-gray-800 text-base leading-relaxed mt-4">
+                    Schnell, kostenlos und unverbindlich.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
