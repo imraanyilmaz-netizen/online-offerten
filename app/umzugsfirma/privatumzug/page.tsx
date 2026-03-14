@@ -200,7 +200,7 @@ export default function PrivateUmzugPage() {
 
           <h1>Privatumzug in der Schweiz – Geprüfte Partner vergleichen</h1>
 
-          <p>Erhalten Sie in nur 5 Minuten bis zu 5 kostenlose Offerten von geprüften Umzugsunternehmen. Vergleichen Sie Preise und Leistungen und sparen Sie bis zu 40% bei Ihrem Umzug.</p>
+          <p>Erhalten Sie bis zu 5 kostenlose Offerten von geprüften Umzugsunternehmen. Vergleichen Sie Preise und Leistungen und sparen Sie bis zu 40% bei Ihrem Umzug.</p>
 
           <ul>
             <li>Versicherte Firmen</li>

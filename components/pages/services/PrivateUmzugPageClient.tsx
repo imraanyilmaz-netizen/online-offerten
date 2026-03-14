@@ -10,7 +10,7 @@ import {
   ArrowRight, CheckCircle, PackagePlus, ClipboardList, Users, ShieldCheck, 
   Wrench, HeartHandshake, MapPin, Home, Star, Calculator,
   Building, Globe, Sparkles, Trash2, Brush as PaintBrush, Box, Package,
-  TrendingUp, FileText, Search, Mail, CheckCircle2, ChevronRight
+  TrendingUp, FileText, Mail, CheckCircle2, ChevronRight
 } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi';
 import dynamic from 'next/dynamic';
@@ -155,14 +155,14 @@ const PrivateUmzugPageClient = () => {
                 <div className="space-y-2 mb-4">
                   <div className="inline-flex items-center px-4 py-2 bg-green-50 rounded-full text-green-700 font-semibold text-sm">
                   <MapPin className="h-4 w-4 mr-2" />
-                  Privatumzug leicht gemacht!
+                  Stressfrei umziehen mit Umzugspreisvergleich
                 </div>
                   <div className="heading-1" role="presentation">
-                  Privatumzug in der Schweiz » Geprüfte Partner vergleichen
+                  Privatumzug in der Schweiz – Umzugsfirma Vergleichen und Stressfrei Umziehen
                   </div>
                 </div>
                 <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed">
-                  Erhalten Sie in nur 5 Minuten bis zu 5 kostenlose Offerten von geprüften Umzugsunternehmen. Vergleichen Sie Preise und Leistungen und sparen Sie bis zu 40% bei Ihrem Umzug.
+                  Erhalten Sie bis zu 5 kostenlose Offerten von geprüften Umzugsunternehmen. Vergleichen Sie Preise und Leistungen und sparen Sie bis zu 40% bei Ihrem Umzug.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button
@@ -171,18 +171,8 @@ const PrivateUmzugPageClient = () => {
                     className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-6 rounded-lg shadow-xl transform transition-all duration-300 hover:scale-105"
                   >
                     <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=privatumzug">
-                      <Search className="mr-2 h-5 w-5" />
-                      Offerten einholen
+                      Jetzt Umzugspreise vergleichen
                     </Link>
-                  </Button>
-                  <Button
-                    onClick={() => router.push('/umzugsfirma/umzugskosten')}
-                    variant="outline"
-                    size="lg"
-                    className="bg-white hover:bg-gray-50 text-gray-700 border-gray-300 text-lg px-8 py-6"
-                  >
-                    <Calculator className="mr-2 h-5 w-5" />
-                    Kosten berechnen
                   </Button>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700">
@@ -251,13 +241,46 @@ const PrivateUmzugPageClient = () => {
                     </h2>
                     <div className="text-body mb-8 leading-relaxed space-y-4">
                       <p>
-                        Ein Privatumzug ist mehr als nur der Transport von Möbeln von A nach B – er betrifft das ganze Leben einer Familie. Ob Sie in <Link href="/umzugsfirma/zuerich" className="text-green-600 hover:text-green-700 font-semibold underline">Zürich</Link>, <Link href="/umzugsfirma/bern" className="text-green-600 hover:text-green-700 font-semibold underline">Bern</Link>, <Link href="/umzugsfirma/basel" className="text-green-600 hover:text-green-700 font-semibold underline">Basel</Link>, <Link href="/umzugsfirma/aargau" className="text-green-600 hover:text-green-700 font-semibold underline">Aargau</Link>, <Link href="/umzugsfirma/luzern" className="text-green-600 hover:text-green-700 font-semibold underline">Luzern</Link> oder <Link href="/umzugsfirma/st-gallen" className="text-green-600 hover:text-green-700 font-semibold underline">St. Gallen</Link> wohnen: Die Wohnungsabgabe, neue Kita- oder Schulwege, veränderte Arbeitswege und die gesamte Organisation rund um den Wohnungswechsel erfordern eine frühzeitige Planung. Gerade in der Schweiz konzentrieren sich viele Privatumzüge auf bestimmte Stichtage - Ende März, Ende Juni und Ende September sind typische Mietzinswechsel-Termine, an denen die Nachfrage nach Umzugsfirmen besonders hoch ist.
+                        Ein Privatumzug in der Schweiz gehört zu den Ereignissen im Leben, die oft mit viel Organisation, Planung und körperlicher Arbeit verbunden sind. Egal ob Sie innerhalb derselben Stadt umziehen oder in eine andere Region ziehen - ein Privatumzug in der Schweiz erfordert meist eine gute Vorbereitung.
                       </p>
                       <p>
-                        Genau hier setzt Online-Offerten.ch an: Als digitale Plattform ermöglicht sie es Ihnen, Ihren geplanten Umzug unkompliziert zu beschreiben und anschliessend mehrere Offerten von geprüften <Link href="/umzugsfirma" className="text-green-600 hover:text-green-700 font-semibold underline">Umzugsfirmen aus Ihrer Region</Link> zu erhalten. Sie entscheiden selbst, welches Unternehmen am besten zu Ihrem Bedarf passt – ob im Raum Zürichsee, Limmattal, der Agglomeration Bern oder anderswo in der Schweiz.
+                        Viele Menschen unterschätzen den Aufwand, den ein Privatumzug in der Schweiz mit sich bringt. Möbel müssen abgebaut, sorgfältig verpackt und sicher transportiert werden. Gleichzeitig müssen Termine koordiniert, Helfer organisiert und Transportmöglichkeiten eingeplant werden. Ohne Erfahrung kann ein Privatumzug in der Schweiz schnell stressig werden.
                       </p>
                       <p>
-                        Alle Offerten sind kostenlos und unverbindlich. Das bedeutet: Sie gehen kein Risiko ein und behalten die volle Kontrolle über Ihre Entscheidung. Die Partner von Online-Offerten.ch sind regionale Spezialisten, die auf Umzüge für Privatpersonen spezialisiert sind und wissen, worauf es bei einem reibungslosen Wohnungswechsel ankommt.
+                        Eine professionelle Umzugsfirma kann den gesamten Prozess deutlich erleichtern. Wer mehrere Angebote einholt und Umzugsfirmen vergleicht, kann einen Privatumzug in der Schweiz deutlich effizienter und oft auch günstiger organisieren.
+                      </p>
+                      <p>
+                        Über Plattformen wie Online-Offerten können Sie innerhalb weniger Minuten mehrere Angebote erhalten und die passende Umzugsfirma für Ihren Privatumzug in der Schweiz auswählen.
+                      </p>
+
+                      <h3 className="heading-3 pt-2">Privatumzug in Zürich</h3>
+                      <p>
+                        Ein <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:underline">Privatumzug in Zürich</Link> erfordert oft eine besonders gute Planung, da die Stadt sehr dicht besiedelt ist. Parkplätze für Umzugswagen sind häufig begrenzt, weshalb eine frühzeitige Organisation wichtig ist. Ausserdem ist die Nachfrage nach Umzugsfirmen in Zürich besonders hoch.
+                      </p>
+
+                      <h3 className="heading-3 pt-2">Privatumzug in Bern</h3>
+                      <p>
+                        Ein <Link href="/umzugsfirma/bern" className="text-green-700 hover:underline">Privatumzug in Bern</Link> ist meist etwas entspannter als in grösseren Städten, dennoch sollte die Planung rechtzeitig beginnen. Gerade in der Altstadt können enge Strassen und eingeschränkte Zufahrten den Umzug erschweren. Eine erfahrene Umzugsfirma kann hier viel Zeit sparen.
+                      </p>
+
+                      <h3 className="heading-3 pt-2">Privatumzug in Basel</h3>
+                      <p>
+                        Ein <Link href="/umzugsfirma/basel" className="text-green-700 hover:underline">Privatumzug in Basel</Link> findet häufig auch im internationalen Kontext statt, da viele Menschen aus beruflichen Gründen in die Stadt ziehen. Besonders bei Umzügen über längere Distanzen ist eine professionelle Planung hilfreich. Zudem sind viele Wohnhäuser in Basel älter, was den Möbeltransport erschweren kann.
+                      </p>
+
+                      <h3 className="heading-3 pt-2">Privatumzug im Aargau</h3>
+                      <p>
+                        Ein <Link href="/umzugsfirma/aargau" className="text-green-700 hover:underline">Privatumzug im Aargau</Link> ist oft etwas einfacher zu organisieren, da viele Gemeinden über gute Zufahrtsmöglichkeiten verfügen. Dennoch lohnt es sich, verschiedene Umzugsfirmen zu vergleichen, um das beste Angebot zu finden. Gerade bei Familienumzügen spielt eine gute Vorbereitung eine wichtige Rolle.
+                      </p>
+
+                      <h3 className="heading-3 pt-2">Privatumzug in Luzern</h3>
+                      <p>
+                        Ein <Link href="/umzugsfirma/luzern" className="text-green-700 hover:underline">Privatumzug in Luzern</Link> kann aufgrund der Lage rund um den See und der historischen Altstadt besondere Herausforderungen mit sich bringen. Enge Strassen und begrenzte Parkmöglichkeiten sollten bei der Planung berücksichtigt werden. Eine frühzeitige Organisation erleichtert den Ablauf deutlich.
+                      </p>
+
+                      <h3 className="heading-3 pt-2">Privatumzug in St. Gallen</h3>
+                      <p>
+                        Ein <Link href="/umzugsfirma/st-gallen" className="text-green-700 hover:underline">Privatumzug in St. Gallen</Link> ist häufig mit kürzeren Distanzen verbunden, da viele Umzüge innerhalb der Region stattfinden. Trotzdem sollte auch hier eine sorgfältige Planung erfolgen, besonders wenn grössere Möbel transportiert werden müssen. Mit der richtigen Umzugsfirma lässt sich der Umzug effizient durchführen.
                       </p>
                     </div>
                     
@@ -354,123 +377,118 @@ const PrivateUmzugPageClient = () => {
                     </div>
                   </div>
                 </div>
-              </section>
 
-              {/* So funktioniert Section */}
-              <section className="pt-6 border-t border-gray-200">
-                <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-                  <div className="lg:col-span-8">
+                <div className="pt-6 border-t border-gray-200 mt-6">
                 <h2 className="heading-2">
-                  So funktioniert der Privatumzug mit Online-Offerten.ch
+                  Umzugsfirma vergleichen für einen Privatumzug in der Schweiz
                 </h2>
-                <p className="text-body leading-relaxed mb-4">
-                      Sie beschreiben Ihren Umzug einmal und erhalten danach passende Offerten von regionalen Umzugsfirmen. So sparen Sie Zeit und können Angebote in Ruhe vergleichen.
+                <p className="text-body leading-relaxed mb-3">
+                  Wer einen Privatumzug in der Schweiz plant, sollte mehrere Angebote vergleichen. Dadurch lassen sich Preisunterschiede erkennen und die beste Umzugsfirma auswählen.
                 </p>
-                <h3 className="heading-3">
-                  Schritt für Schritt zur passenden Umzugsfirma
-                </h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Ein Offertenvergleich kann den gesamten Privatumzug in der Schweiz deutlich einfacher machen.
+                </p>
 
-                    <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                    <div className="grid sm:grid-cols-1 gap-4 mb-4">
                       <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
                         <div className="w-9 h-9 rounded-full bg-green-600 text-white font-bold flex items-center justify-center mb-3">1</div>
-                        <h4 className="heading-4 mb-2">Online-Formular ausfüllen</h4>
-                        <p className="text-body leading-relaxed">
-                          Geben Sie die wichtigsten Angaben ein: Start- und Zieladresse, Termin, Wohnungsgrösse sowie Hinweise wie Lift, Parkmöglichkeiten oder besondere Transportgüter.
+                        <h4 className="heading-4 mb-2">Schritt 1 – Formular ausfüllen</h4>
+                        <p className="text-body leading-relaxed mb-2">
+                          Für einen Privatumzug in der Schweiz geben Sie grundlegende Informationen ein:
                         </p>
+                        <ul className="list-disc list-inside space-y-1 text-body">
+                          <li>aktuelle Adresse</li>
+                          <li>neue Adresse</li>
+                          <li>Wohnungsgrösse</li>
+                          <li>Umzugsdatum</li>
+                        </ul>
                       </div>
                       <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
                         <div className="w-9 h-9 rounded-full bg-green-600 text-white font-bold flex items-center justify-center mb-3">2</div>
-                        <h4 className="heading-4 mb-2">Anfrage wird geprüft</h4>
+                        <h4 className="heading-4 mb-2">Schritt 2 – Offerten erhalten</h4>
                         <p className="text-body leading-relaxed">
-                          Ihre Anfrage wird geprüft und an passende Umzugsfirmen in Ihrer Region weitergeleitet.
+                          Nach der Anfrage erhalten Sie mehrere Angebote für Ihren Privatumzug in der Schweiz.
                         </p>
                       </div>
                       <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
                         <div className="w-9 h-9 rounded-full bg-green-600 text-white font-bold flex items-center justify-center mb-3">3</div>
-                        <h4 className="heading-4 mb-2">Offerten erhalten</h4>
+                        <h4 className="heading-4 mb-2">Schritt 3 – Angebote vergleichen</h4>
                         <p className="text-body leading-relaxed">
-                          Sie erhalten in der Regel innerhalb von 24 bis 48 Stunden mehrere Offerten mit klaren Leistungsangaben.
-                        </p>
-                      </div>
-                      <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-                        <div className="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center mb-3">
-                          <CheckCircle2 className="w-5 h-5" />
-                    </div>
-                        <h4 className="heading-4 mb-2">Vergleichen und entscheiden</h4>
-                        <p className="text-body leading-relaxed">
-                          Vergleichen Sie Preis, Umfang der Leistungen, Verfügbarkeit und Bewertungen und wählen Sie danach den Anbieter, der am besten zu Ihrem Umzug passt.
+                          Sie können Preise und Leistungen vergleichen und die passende Umzugsfirma für Ihren Privatumzug in der Schweiz auswählen.
                         </p>
                       </div>
                     </div>
-                  </div>
-
-                  <aside className="lg:col-span-4">
-                    <div className="bg-green-50 border border-green-200 rounded-xl p-5 shadow-sm lg:sticky lg:top-24">
-                      <h4 className="heading-4 mb-3">Wichtig zu wissen</h4>
-                      <ul className="space-y-2 text-gray-700">
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <span>Die Anfrage ist kostenlos und unverbindlich.</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <span>Sie entscheiden selbst, ob und welche Offerte Sie annehmen.</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <span>Der Auftrag entsteht direkt zwischen Ihnen und der gewählten Umzugsfirma.</span>
-                        </li>
-                      </ul>
-                </div>
-                  </aside>
                 </div>
               </section>
 
               {/* Article Section 2 */}
               <section className="pt-6 border-t border-gray-200">
                 <h2 className="heading-2">
-                  Welche Leistungen umfasst ein moderner Privatumzug?
+                  Leistungen bei einem Privatumzug in der Schweiz
                 </h2>
                 <p className="text-body leading-relaxed mb-4">
-                  Ein moderner Privatumzug umfasst heute deutlich mehr als den reinen Transport von Möbeln. Je nach Bedarf übernehmen Umzugsfirmen in der Schweiz einzelne Aufgaben oder den kompletten Ablauf von der Vorbereitung bis zur Übergabe.
+                  Viele Umzugsfirmen bieten verschiedene Dienstleistungen für einen Privatumzug in der Schweiz an.
                 </p>
-                <p className="text-body leading-relaxed mb-3">Typische Leistungen, die in Offerten auftauchen können:</p>
-                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
-                  <li><strong>Verpackungsservice</strong>: Das Team verpackt empfindliche Gegenstände und Möbel fachgerecht.</li>
-                  <li><strong>Verpackungsmaterial</strong>: Umzugskartons, Kleiderboxen, Schutzfolien und Decken werden bereitgestellt.</li>
-                  <li><strong>Demontage und Montage</strong>: Schränke, Betten, Lampen oder weitere Möbel werden ab- und wieder aufgebaut.</li>
-                  <li><strong>Zwischenlagerung</strong>: Wenn Ein- und Auszug nicht am gleichen Tag stattfinden, kann Mobiliar vorübergehend eingelagert werden.</li>
-                  <li><strong>Entsorgung</strong>: Nicht mehr benötigte Möbel oder Hausrat werden korrekt entsorgt.</li>
-                  <li><strong>Umzugsreinigung</strong>: Auf Wunsch inklusive Endreinigung mit Abgabegarantie.</li>
-                </ul>
-                  <p className="text-body leading-relaxed mb-4">
-                  Viele Umzugsfirmen bieten zusätzlich die Abgabereinigung an. Das ist besonders hilfreich, wenn Umzug und Wohnungsübergabe zeitlich eng zusammenliegen.
-                </p>
+                <h3 className="heading-3">Möbeltransport</h3>
                 <p className="text-body leading-relaxed mb-4">
-                  Wichtig für eine präzise Offerte: Geben Sie bei Ihrer Anfrage möglichst genau an, welche Leistungen Sie brauchen. So erhalten Sie vergleichbare Angebote - vom reinen Transport bis zum Full-Service-Umzug.
-                  </p>
+                  Der Transport von Möbeln ist der wichtigste Bestandteil eines Privatumzugs in der Schweiz.
+                </p>
+                <h3 className="heading-3">Verpackungsservice</h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Ein professioneller Verpackungsservice kann einen Privatumzug in der Schweiz deutlich einfacher machen.
+                </p>
+                <h3 className="heading-3">Möbelmontage</h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Viele Umzugsfirmen übernehmen die Montage und Demontage von Möbeln während eines Privatumzugs in der Schweiz.
+                </p>
+                <h3 className="heading-3">Umzugsreinigung</h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Nach einem Privatumzug in der Schweiz muss häufig eine gründliche Reinigung der Wohnung durchgeführt werden.
+                </p>
+                <h3 className="heading-3">Lagerung</h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Manchmal ist eine Zwischenlagerung von Möbeln während eines Privatumzugs in der Schweiz notwendig.
+                </p>
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200 mb-8">
                   <p className="text-body leading-relaxed"><strong>Tipp</strong>: Bei grösseren Wohnungen ab 3,5 Zimmern empfiehlt sich ein Besichtigungstermin (vor Ort oder per Video), damit die Offerte realistisch kalkuliert werden kann.</p>
                 </div>
                 
                 <h3 className="heading-3">
-                  Typische Zusatzservices beim Privatumzug
+                  Tipps für einen erfolgreichen Privatumzug in der Schweiz
                 </h3>
                 <div className="grid md:grid-cols-2 gap-8 items-start">
                   <div>
                     <p className="text-body leading-relaxed mb-3">
-                      Die Unterschiede zwischen Offerten liegen oft in den enthaltenen Zusatzleistungen. Typische Beispiele:
+                      Mit einer guten Vorbereitung kann ein Privatumzug in der Schweiz deutlich entspannter verlaufen.
                     </p>
-                    <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
-                      <li><strong>Lagerung</strong>: Bei Terminlücken zwischen Auszug und Einzug.</li>
-                      <li><strong>Kleiderboxen</strong>: Kleidung kann direkt am Bügel transportiert werden.</li>
-                      <li><strong>Ein- und Auspackservice</strong>: Auf Wunsch übernimmt das Team das Ein- und Auspacken.</li>
-                      <li><strong>Parkplatzreservation</strong>: Unterstützung bei Halteverbotszonen je nach Gemeinde.</li>
-                      <li><strong>Entsorgung</strong>: Sperrgut und alte Möbel werden fachgerecht abgeführt.</li>
-                      <li><strong>Handwerkerleistungen</strong>: z.B. Lampen montieren oder Geräte anschliessen.</li>
-                    </ul>
+                    <div className="space-y-4 mb-4">
+                      <div>
+                        <h4 className="heading-4 mb-1">Frühzeitig planen</h4>
+                        <p className="text-body leading-relaxed">
+                          Ein Privatumzug in der Schweiz lässt sich deutlich entspannter organisieren, wenn Sie frühzeitig mit der Planung beginnen. Idealerweise sollten Sie mehrere Wochen vor dem Umzug Angebote von Umzugsfirmen vergleichen und wichtige Termine festlegen. Eine rechtzeitige Planung hilft dabei, Stress zu vermeiden und den gesamten Ablauf besser zu koordinieren.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="heading-4 mb-1">Kartons richtig packen</h4>
+                        <p className="text-body leading-relaxed">
+                          Beim Packen für einen Privatumzug in der Schweiz ist es wichtig, Umzugskartons sinnvoll zu befüllen. Schwere Gegenstände sollten auf mehrere Kartons verteilt werden, damit sie leichter zu tragen sind. Beschriften Sie die Kartons zusätzlich mit dem jeweiligen Raum, damit beim Einzug alles schneller seinen Platz findet.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="heading-4 mb-1">Unnötige Dinge aussortieren</h4>
+                        <p className="text-body leading-relaxed">
+                          Vor einem Privatumzug in der Schweiz lohnt es sich, alte oder nicht mehr benötigte Gegenstände auszusortieren. Dadurch reduzieren Sie die Anzahl der Kartons und erleichtern den Transport. Gleichzeitig sparen Sie Platz und können Ihr neues Zuhause übersichtlicher einrichten.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="heading-4 mb-1">Parkplatz reservieren</h4>
+                        <p className="text-body leading-relaxed">
+                          Ein reservierter Parkplatz kann einen Privatumzug in der Schweiz erheblich vereinfachen. Wenn der Umzugswagen direkt vor der Wohnung stehen kann, verkürzt sich der Transportweg deutlich. Dadurch sparen Sie Zeit und der gesamte Umzug kann schneller durchgeführt werden.
+                        </p>
+                      </div>
+                    </div>
                     <p className="text-body leading-relaxed">
-                      Markieren Sie diese Punkte direkt in Ihrer Anfrage auf Online-Offerten.ch. Dadurch erhalten Sie Offerten, die besser zu Ihrem tatsächlichen Bedarf passen.
+                      Mit diesen Tipps planen Sie Ihren Privatumzug in der Schweiz strukturierter und vermeiden unnötige Verzögerungen.
                     </p>
                   </div>
                   <div>
@@ -489,363 +507,144 @@ const PrivateUmzugPageClient = () => {
               {/* Article Section 3 */}
               <section className="pt-6 border-t border-gray-200">
                 <h2 className="heading-2">
-                  Kosten eines Privatumzugs: Wovon der Preis in der Schweiz abhängt
+                  Kosten für einen Privatumzug in der Schweiz
                 </h2>
                 <p className="text-body leading-relaxed mb-4">
-                  Die Kosten für einen Privatumzug variieren in der Schweiz stark – je nach Stadt, Distanz, Umfang und gewünschten Dienstleistungen. Genau deshalb ist der Vergleich mehrerer Offerten so wichtig: Nur so erhalten Sie ein realistisches Bild davon, was Ihr Umzug tatsächlich kosten wird.
+                  Die Kosten für einen Privatumzug in der Schweiz können je nach Umfang und Entfernung unterschiedlich sein. Mehrere Faktoren beeinflussen den Preis eines Privatumzugs in der Schweiz.
                 </p>
-                
-                <h3 className="heading-3">
-                  Zentrale Preisfaktoren im Überblick
-                </h3>
-                <div className="overflow-x-auto mb-4">
-                  <table className="w-full border-collapse border border-gray-300 bg-white">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Faktor</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Einfluss auf den Preis</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Wohnungsgrösse</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">2,5-Zimmer vs. 4,5-Zimmer – mehr Volumen bedeutet mehr Aufwand</td>
-                      </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Stockwerk & Lift</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Ohne Lift im 4. Stock kostet mehr als Parterre mit Lift</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Distanz</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Umzug innerhalb von Zürich vs. Bern nach Basel</td>
-                      </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Anzahl Mitarbeiter</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Je nach Umzugsvolumen 2–5 Umzugshelfer</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Fahrzeuggrösse</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Kleintransporter vs. grosser Umzugs-LKW</td>
-                      </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Lagerung / Zwischenlagerung</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Ab ca. CHF 80–150/Monat je nach Lagergrösse und Standort</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold">Zusatzleistungen</td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Montage, Verpackung, Reinigung, Entsorgung</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <h3 className="heading-3">Durchschnittliche Kosten</h3>
                 <p className="text-body leading-relaxed mb-3">
-                  <strong>Timing ist Geld</strong>: Wochenend- oder Monatsend-Umzüge (30. Juni, 30. September) sind oft teurer als Termine unter der Woche in der Monatsmitte. Wenn Sie flexibel sind, können Sie bares Geld sparen.
+                  Typische Preise für einen Privatumzug in der Schweiz können ungefähr so aussehen:
                 </p>
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
-                  <p className="text-body leading-relaxed"><strong>Empfehlung</strong>: Reichen Sie Ihre Anfrage möglichst 4–6 Wochen vor Ihrem Wunschtermin ein. So haben die Firmen noch gute Verfügbarkeit, und Sie erhalten bessere Preise.</p>
-                </div>
-                <p className="text-body leading-relaxed mb-4">
-                  Online-Offerten.ch fördert Transparenz: Sie erhalten mehrere konkrete Preisangebote und sehen sofort, welche Leistungen im Pauschalpreis enthalten sind. Achten Sie beim Vergleich auch auf mögliche versteckte Zusatzkosten wie Kilometerentschädigung, Versicherungszuschläge oder Parkgebühren.
-                </p>
-                
-                <h3 className="heading-3">
-                  Beispiele für typische Umzugspreise
-                </h3>
-                <p className="text-body leading-relaxed mb-4">
-                  Die folgenden Preisrahmen sind als grobe Orientierung zu verstehen – die tatsächlichen Kosten hängen von vielen Faktoren ab und können nur durch eine konkrete Offerte ermittelt werden.
-                </p>
-                <div className="space-y-4 mb-4">
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Beispiel 1: Kleiner Stadtumzug in Zürich</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm mb-2">
-                      <li>• 2,5-Zimmer-Wohnung, Kreis 3 nach Kreis 6, ca. 10 km</li>
-                      <li>• Lift in beiden Häusern vorhanden</li>
-                      <li>• Nur Transport und Standardmontage</li>
+                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
+                  <li>2 Zimmer Wohnung: etwa 800 - 1300 CHF</li>
+                  <li>3 Zimmer Wohnung: etwa 1200 - 1800 CHF</li>
+                  <li>4 Zimmer Wohnung: etwa 1500 - 2500 CHF</li>
                 </ul>
-                    <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 800 – 1'400</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Beispiel 2: Kantonswechsel mit Full-Service</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm mb-2">
-                      <li>• 4,5-Zimmer-Wohnung von Bern nach Luzern, ca. 100 km</li>
-                      <li>• Inkl. Demontage, Montage und Zwischenlagerung</li>
-                      <li>• Verpackung durch Kunden</li>
-                    </ul>
-                    <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 2'500 – 4'500</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Beispiel 3: Budget-Umzug für Singles</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm mb-2">
-                      <li>• 1–1,5-Zimmer-Wohnung innerhalb derselben Stadt</li>
-                      <li>• Minimaler Service, nur Transport</li>
-                    </ul>
-                    <p className="text-green-700 font-semibold">Typischer Rahmen: CHF 400 – 800</p>
-                  </div>
-                </div>
+
+                <p className="text-body leading-relaxed mb-4">
+                  Der genaue Preis für einen Privatumzug in der Schweiz hängt jedoch von verschiedenen Faktoren ab.
+                </p>
+
+                <h3 className="heading-3">Wohnungsgrösse</h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Je grösser der Haushalt ist, desto mehr Möbel müssen bei einem Privatumzug in der Schweiz transportiert werden.
+                </p>
+
+                <h3 className="heading-3">Entfernung</h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Ein Privatumzug in der Schweiz innerhalb derselben Stadt ist meist günstiger als ein Umzug zwischen zwei Kantonen.
+                </p>
+
+                <h3 className="heading-3">Stockwerk und Lift</h3>
+                <p className="text-body leading-relaxed mb-4">
+                  Wenn kein Lift vorhanden ist, kann ein Privatumzug in der Schweiz mehr Zeit und Arbeitsaufwand erfordern.
+                </p>
+
+                <h3 className="heading-3">Zusatzleistungen</h3>
                 <p className="text-body leading-relaxed">
-                  Diese Angaben sind Richtwerte. Für genaue Preise nutzen Sie das Anfrageformular auf Online-Offerten.ch und erhalten Sie verbindliche Offerten von Umzugsfirmen aus Ihrer Umgebung.
+                  Zusätzliche Services wie Verpackung oder Möbelmontage können einen Privatumzug in der Schweiz komfortabler machen, erhöhen jedoch oft auch den Preis.
                 </p>
               </section>
 
               {/* Article Section 4 */}
               <section className="pt-6 border-t border-gray-200">
                 <h2 className="heading-2">
-                  Privatumzug planen: Checkliste von der Kündigung bis zur Schlüsselübergabe
+                  Checkliste für den Privatumzug
                 </h2>
                 <p className="text-body leading-relaxed mb-4">
-                  Gute Planung reduziert Stress erheblich – besonders in Städten mit angespanntem Wohnungsmarkt wie Zürich, Genf oder Basel. Eine klare zeitliche Struktur hilft Ihnen, nichts Wichtiges zu vergessen.
+                  Für eine stressfreie Planung finden Sie auf unserer Checklisten-Seite praktische Vorlagen für alle Umzugsphasen - von der Vorbereitung bis zur Übergabe.
                 </p>
-                
-                <h3 className="heading-3">
-                  Zeitlicher Ablauf für Ihren Umzug
-                </h3>
-                <div className="grid md:grid-cols-2 gap-4 mb-6">
-                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">2–3 Monate vor dem Umzug:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Mietvertrag kündigen unter Einhaltung der vertraglichen Fristen</li>
-                      <li>Falls nötig: Nachmieter suchen</li>
-                      <li>Neue Wohnung vertraglich sichern</li>
-                      <li>Erste Anfrage auf Online-Offerten.ch stellen</li>
-                    </ul>
-                  </div>
-                  <div className="bg-green-50 p-4 rounded-lg border border-green-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">4–6 Wochen vorher:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Offerten vergleichen und Umzugsfirma beauftragen</li>
-                      <li>Adressänderungen vorbereiten: Einwohnerkontrolle, Postnachsendung, Versicherungen, Banken, Krankenkasse, Arbeitgeber, Schulen</li>
-                      <li>Aussortieren und Entsorgung organisieren</li>
-                      <li>Bei Bedarf Lagerung reservieren</li>
-                    </ul>
-                  </div>
-                  <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">1–2 Wochen vorher:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Verpackungsmaterial besorgen oder vom Umzugsunternehmen liefern lassen</li>
-                      <li>Mit dem Packen beginnen</li>
-                      <li>Parkplatzreservation für Umzugstag organisieren</li>
-                      <li>Nachbarn informieren</li>
-                    </ul>
-                  </div>
-                  <div className="bg-orange-50 p-4 rounded-lg border border-orange-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Umzugswoche:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Letzte Kartons packen</li>
-                      <li>Kühlschrank abtauen</li>
-                      <li>Wohnung reinigen oder Reinigungsfirma beauftragen</li>
-                      <li>Zählerstände notieren</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 md:col-span-2">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Nach dem Umzug:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Anmeldung am neuen Ort (in den meisten Schweizer Gemeinden innerhalb von 14 Tagen Pflicht)</li>
-                      <li>Wohnungsübergabe alte Wohnung mit Protokoll</li>
-                      <li>Adressänderungen abschliessen</li>
-                    </ul>
-                  </div>
-                </div>
                 <p className="text-body leading-relaxed mb-4">
-                  Viele Umzugsfirmen bieten eigene Checklisten an. Über Online-Offerten.ch können Sie Anbieter wählen, die bei der Planung aktiv mithelfen und Sie durch den gesamten Prozess begleiten.
+                  Sie können die Checklisten direkt online nutzen und als PDF herunterladen.
                 </p>
-                
-                <h3 className="heading-3">
-                  Praktische Tipps für den Umzugstag
-                </h3>
-                <div className="grid md:grid-cols-2 gap-8 items-start">
-                  <div>
-                    <p className="text-body leading-relaxed mb-3">
-                      Mit guter Vorbereitung verläuft der Umzugstag selbst deutlich entspannter. Hier einige bewährte Tipps aus der Praxis:
-                    </p>
-                    <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
-                      <li><strong>Wertsachen separat transportieren</strong>: Dokumente, Schmuck, Medikamente und wichtige Unterlagen gehören in eine Tasche, die Sie persönlich mitnehmen</li>
-                      <li><strong>Parkplätze freihalten</strong>: Sorgen Sie dafür, dass der Umzugswagen direkt vor dem Haus stehen kann</li>
-                      <li><strong>Nachbarn rechtzeitig informieren</strong>: Ein kurzer Hinweis verhindert Ärger wegen blockierter Zugänge oder Lärm</li>
-                      <li><strong>Kinder und Haustiere organisieren</strong>: Bringen Sie sie während des eigentlichen Umzugs bei Freunden, Familie oder in einer Tagesbetreuung unter</li>
-                      <li><strong>Kartons sinnvoll beschriften</strong>: Zimmer, Inhalt und Priorität notieren – das erleichtert das Einräumen am Zielort enorm</li>
-                      <li><strong>Möbelplan erstellen</strong>: Ein einfacher Grundriss der neuen Wohnung hilft dem Team, alles gleich an den richtigen Ort zu stellen</li>
-                    </ul>
-                    <p className="text-body leading-relaxed">
-                      Am Ende des Umzugs empfiehlt sich eine kurze Kontrolle gemeinsam mit der Umzugsfirma: Sind alle Gegenstände angekommen? Gibt es Schäden? Haben Sie in der alten Wohnung nichts vergessen? Notieren Sie die Zählerstände für Strom, Wasser und Gas.
-                    </p>
-                  </div>
-                  <div>
-                    <Image
-                      src="/image/7946a949-0354-4f72-aff6-a406d89f84db.webp"
-                      alt="Eine Familie mit Kindern steht in einer leeren Wohnung, umgeben von Umzugskartons, während sie sich auf ihren bevorstehenden Privatumzug vorbereitet. Die Atmosphäre ist geschäftig und voller Vorfreude auf das neue Zuhause, während die Eltern die Organisation und Planung des Umzugs koordinieren."
-                      width={800}
-                      height={450}
-                      className="w-full h-auto rounded-lg shadow-lg"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+                <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
+                  <Link href="/umzugsfirma/checklists">
+                    Zur Umzugs-Checkliste
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
               </section>
 
               {/* Article Section 5 */}
               <section className="pt-6 border-t border-gray-200">
                 <h2 className="heading-2">
-                  Privatumzug innerhalb der Schweiz, ins Ausland oder aus dem Ausland
+                  Privatumzug ins Ausland - Internationale Umzüge gezielt vergleichen
                 </h2>
                 <p className="text-body leading-relaxed mb-4">
-                  Über Online-Offerten.ch können Sie nicht nur regionale Umzüge anfragen, sondern auch grössere Distanzen in der Schweiz sowie internationale Umzüge. Die Art des Umzugs bestimmt, worauf Sie besonders achten sollten.
+                  Wenn Sie aus der Schweiz ins Ausland umziehen, ist eine erfahrene Umzugsfirma besonders wichtig. Je nach Zielland unterscheiden sich Zoll, Transportdauer, Dokumente und Kosten deutlich. Über Online-Offerten.ch vergleichen Sie internationale Offerten und finden passende Spezialisten für Ihren Auslandsumzug.
                 </p>
-                
-                <h3 className="heading-3">
-                  Unterschiedliche Umzugstypen
-                </h3>
+
+                <h3 className="heading-3">Beliebte Ziele für den Auslandsumzug</h3>
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Lokal-Umzug (z. B. innerhalb Zürich):</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Kurze Wege, oft innerhalb weniger Stunden abgeschlossen</li>
-                      <li>Fokus auf Effizienz und reibungslose Durchführung</li>
-                    </ul>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <Link href="/umzugsfirma/internationale-umzuege/umzug-nach-deutschland" className="text-green-700 hover:underline font-semibold">
+                      Umzug nach Deutschland
+                    </Link>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Kantonswechsel (z. B. von Aargau nach Zug):</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Längere Fahrzeit, eventuell Verkehrsengpässe (Gotthard, Seelisberg)</li>
-                      <li>Bei sehr langen Strecken: Möglicherweise Übernachtung des Teams nötig</li>
-                      <li>Administrative Schritte: Abmeldung und Anmeldung in unterschiedlichen Kantonen</li>
-                    </ul>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <Link href="/umzugsfirma/internationale-umzuege/umzug-nach-italien" className="text-green-700 hover:underline font-semibold">
+                      Umzug nach Italien
+                    </Link>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 md:col-span-2">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Auslandsumzug (z. B. Schweiz–Deutschland, Schweiz–Frankreich):</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Zollbestimmungen beachten</li>
-                      <li>Inventarlisten erstellen</li>
-                      <li>Einfuhrbeschränkungen je nach Zielland prüfen (EU vs. Nicht-EU)</li>
-                      <li>Spezielle Dokumentation für Eigentum und Hausrat</li>
-                    </ul>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <Link href="/umzugsfirma/internationale-umzuege/umzug-nach-frankreich" className="text-green-700 hover:underline font-semibold">
+                      Umzug nach Frankreich
+                    </Link>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <Link href="/umzugsfirma/internationale-umzuege/umzug-nach-oesterreich" className="text-green-700 hover:underline font-semibold">
+                      Umzug nach Oesterreich
+                    </Link>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <Link href="/umzugsfirma/internationale-umzuege/umzug-nach-spanien" className="text-green-700 hover:underline font-semibold">
+                      Umzug nach Spanien
+                    </Link>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <Link href="/umzugsfirma/internationale-umzuege/umzug-nach-portugal" className="text-green-700 hover:underline font-semibold">
+                      Umzug nach Portugal
+                    </Link>
                   </div>
                 </div>
+
                 <p className="text-body leading-relaxed mb-4">
-                  Auf Online-Offerten.ch finden Sie auch Umzugsfirmen mit Erfahrung in Zollabwicklung und internationalen Transporten. Bei komplexen Umzügen lohnt sich ein ausführliches Beratungsgespräch mit der gewählten Firma – fragen Sie gezielt nach Referenzen und Erfahrung mit Ihrem Zielort.
-                  </p>
-                
-                <h3 className="heading-3">
-                  Umzüge für Privatpersonen: Senioren, Familien, WG & Erstwohnung
-                </h3>
-                <p className="text-body leading-relaxed mb-3">
-                  Nicht jeder Privatumzug ist gleich. Umzüge für Privatpersonen unterscheiden sich je nach Lebenssituation erheblich – ob Senioren, Familien mit Kindern oder junge Einzelpersonen.
+                  Typische Erfolgsfaktoren bei einem Privatumzug ins Ausland sind eine saubere Inventarliste, klare Absprachen zur Versicherung sowie die fruehzeitige Planung von Zoll- und Einfuhrunterlagen.
                 </p>
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Seniorenumzug:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Entlastung beim Sortieren, Packen und Entsorgen</li>
-                      <li>Behutsamer Umgang mit Erinnerungsstücken und persönlichem Eigentum</li>
-                      <li>Koordination mit Heimen oder Altersresidenzen</li>
-                      <li>Besondere Rücksicht auf körperliche Einschränkungen</li>
-                    </ul>
-                </div>
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 h-full">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">Familienumzug:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Planung rund um Schulwechsel und Kita-Plätze</li>
-                      <li>Arbeitswege beider Partner berücksichtigen</li>
-                      <li>Ideale Umzugstermine: Schulferien (Sommer, Sport, Herbst)</li>
-                      <li>Kinderzimmer als erstes einrichten für Normalität</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 md:col-span-2">
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">WG-Umzug oder Erstwohnung:</h4>
-                    <ul className="space-y-1 text-gray-700 text-sm list-disc list-inside">
-                      <li>Oft kleineres Budget</li>
-                      <li>Weniger Möbel, dafür vielleicht schwierige Zugänge in Altbauwohnungen</li>
-                      <li>Möglichkeit, Eigenleistung mit Profiservice zu kombinieren</li>
-                      <li>Flexibilität bei Terminen nutzen</li>
-                    </ul>
-                  </div>
-                </div>
                 <p className="text-body leading-relaxed">
-                  Bei Ihrer Anfrage auf Online-Offerten.ch können Sie diese Situation kurz beschreiben. So können die Anbieter gezielt auf Ihre Bedürfnisse eingehen und eine passende Lösung vorschlagen.
+                  Beschreiben Sie Ihre Route und Anforderungen moeglichst genau, damit Sie vergleichbare Offerten fuer Ihren Auslandsumzug erhalten - von der Schweiz nach Deutschland, Italien oder in andere europaeische Ziellaender.
                 </p>
               </section>
 
               {/* Article Section 6 */}
               <section className="pt-6 border-t border-gray-200">
                 <h2 className="heading-2">
-                  Warum Offerten für Ihren Privatumzug vergleichen? Ihre Vorteile mit Online-Offerten.ch
+                  Was Bedeutet Privatumzug in der Schweiz?
                 </h2>
                 <p className="text-body leading-relaxed mb-4">
-                  In der Schweiz gibt es zahlreiche Umzugsfirmen mit sehr unterschiedlichen Preis- und Leistungsstrukturen. Ohne Vergleich laufen Sie Gefahr, entweder zu viel zu bezahlen oder Leistungen zu buchen, die Sie gar nicht benötigen.
+                  Ein Privatumzug in der Schweiz beschreibt den Umzug eines privaten Haushalts von einer Wohnung oder einem Haus in ein neues Zuhause. Dabei werden Möbel, Haushaltsgeräte, persönliche Gegenstände und Umzugskartons transportiert.
                 </p>
-                
-                <h3 className="heading-3">
-                  Die vier grossen Vorteile
-                </h3>
-                <div className="overflow-x-auto mb-4">
-                  <table className="w-full border-collapse border border-gray-300 bg-white">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Vorteil</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Was das für Sie bedeutet</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Zeitersparnis</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Statt jede Firma einzeln zu kontaktieren, stellen Sie einmal eine Anfrage und erhalten mehrere Angebote</td>
-                      </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Kostenkontrolle</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Direkte Vergleichbarkeit der Preise und Leistungen, Identifikation von versteckten Zusatzkosten</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Qualität</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Anbieterprofile mit Kundenbewertungen, Referenzen und Spezialisierungen helfen bei der Auswahl</td>
-                      </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700 font-semibold"><strong>Sicherheit</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-gray-700">Ausschliesslich professionelle Umzugsfirmen aus der Schweiz, keine anonymen Kleinanzeigen</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
                 <p className="text-body leading-relaxed mb-4">
-                  Der Service von Online-Offerten.ch ist für private Umziehende vollständig kostenlos und unverbindlich. Sie profitieren von der Arbeit, die bereits geleistet wurde: Die Plattform hat geprüfte Partner aus der ganzen Schweiz, sodass Sie dank deren Erfahrung schnell zu seriösen Angeboten kommen.
+                  Ein Privatumzug in der Schweiz kann sehr unterschiedlich aussehen. Manche Menschen ziehen aus einer kleinen Wohnung in eine grössere Wohnung, während andere einen kompletten Haushalt in ein Haus verlegen. Je nach Umfang kann ein Privatumzug in der Schweiz wenige Stunden oder sogar mehrere Tage dauern.
                 </p>
-                
-                <h3 className="heading-3">
-                  So wählen Sie die passende Umzugsfirma aus Ihren Offerten
-                </h3>
-                <div className="grid md:grid-cols-2 gap-8 items-start">
-                  <div>
-                    <p className="text-body leading-relaxed mb-3">
-                      Der günstigste Preis ist nicht immer der beste. Um die richtige Entscheidung zu treffen, sollten Sie die Offerten anhand von vier Kriterien prüfen:
-                    </p>
-                    <ol className="space-y-2 list-decimal list-inside mb-4 text-gray-700">
-                      <li><strong>Preis</strong>: Wie ist das Verhältnis von Kosten zu Leistung?</li>
-                      <li><strong>Leistungsumfang</strong>: Sind Lagerung, Verpackungsmaterial, Demontage/Montage, Reinigung explizit erwähnt?</li>
-                      <li><strong>Versicherungsdeckung</strong>: Welche Transport- und Haftpflichtversicherung hat die Firma?</li>
-                      <li><strong>Kundenbewertungen</strong>: Was sagen andere Kunden über Pünktlichkeit, Sorgfalt und Kommunikation?</li>
-                    </ol>
-                    <p className="text-body leading-relaxed mb-4">
-                      Achten Sie auf klare Beschreibungen in der Offerte. Wenn etwas unklar ist, klären Sie offene Fragen vor der Auftragserteilung per Telefon oder E-Mail – etwa zu Parkplätzen, Zugang oder Spezialtransporten.
-                    </p>
-                    <p className="text-body leading-relaxed">
-                      Am Ende sollten Sie sich für die Firma entscheiden, bei der Kommunikation, Transparenz und Ihr Bauchgefühl stimmen. Erfahrung zeigt: Ein guter erster Kontakt ist oft ein Zeichen für eine professionelle Zusammenarbeit. Online-Offerten.ch übernimmt nur die Kontaktanbahnung – der Vertrag wird direkt mit der Umzugsfirma Ihrer Wahl geschlossen.
-                    </p>
-                  </div>
-                  <div>
-                    <Image
-                      src="/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp"
-                      alt="Ein lächelnder Umzugshelfer übergibt den Schlüssel an zufriedene Kunden, die vor ihrem neuen Zuhause stehen. Diese Szene symbolisiert den erfolgreichen Abschluss eines Privatumzugs, bei dem die Umzugsfirma ihre Dienstleistungen und die Qualität ihrer Arbeit unter Beweis stellt."
-                      width={800}
-                      height={450}
-                      className="w-full h-auto rounded-lg shadow-lg"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+                <h3 className="heading-3">Typische Situationen für einen Privatumzug in der Schweiz sind</h3>
+                <ul className="space-y-2 list-inside list-disc mb-4 text-gray-700">
+                  <li>Umzug in eine grössere Wohnung</li>
+                  <li>Wohnortwechsel wegen eines neuen Jobs</li>
+                  <li>Zusammenzug mit Partner oder Familie</li>
+                  <li>Umzug in eine andere Stadt</li>
+                  <li>Wechsel in ein neues Haus</li>
+                </ul>
+                <p className="text-body leading-relaxed">
+                  Viele Menschen entscheiden sich dafür, für ihren Privatumzug in der Schweiz eine professionelle Umzugsfirma zu beauftragen, da dies Zeit spart und den gesamten Ablauf erleichtert.
+                </p>
               </section>
 
               {/* Article Section 7 - CTA */}
               <section className="pt-6 border-t border-gray-200">
                 <h2 className="heading-2">
-                  Jetzt Ihren Privatumzug online anfragen
+                  Privatumzug in der Schweiz anfragen und Umzugsfirma vergleichen
                 </h2>
                 <p className="text-body leading-relaxed mb-4">
                   Planen Sie in den nächsten Wochen oder Monaten einen Umzug? Ob innerhalb Ihrer Stadt, in einen anderen Kanton oder sogar ins Ausland – der erste Schritt zu einem entspannten Umzug ist einfacher als gedacht.
@@ -856,54 +655,6 @@ const PrivateUmzugPageClient = () => {
                 <p className="text-body leading-relaxed mt-4">
                   Vergleichen Sie in Ruhe, stellen Sie Fragen und entscheiden Sie sich für die Lösung, die am besten zu Ihrem Privatumzug passt. So starten Sie entspannt in Ihr neues Zuhause – mit Profis an Ihrer Seite, die wissen, worauf es ankommt.
                 </p>
-              </section>
-
-              {/* Related Services Section */}
-              <section className="pt-8 border-t border-gray-200">
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
-                  <h3 className="heading-3 flex items-center">
-                    <Sparkles className="w-5 h-5 mr-2 text-green-600" />
-                    Weitere Services
-                  </h3>
-                  <ul className="space-y-3 text-gray-700">
-                    <li>
-                      <Link href="/reinigung" className="text-green-600 hover:underline font-medium flex items-center">
-                        <ArrowRight className="w-4 h-4 mr-2" />
-                        Umzugsreinigung mit Abnahmegarantie
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-600 hover:underline font-medium flex items-center">
-                        <ArrowRight className="w-4 h-4 mr-2" />
-                        Geschäftsumzug Offerten vergleichen
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/umzugsfirma/internationale-umzuege" className="text-green-600 hover:underline font-medium flex items-center">
-                        <ArrowRight className="w-4 h-4 mr-2" />
-                        Internationale Umzüge
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/malerarbeitenkosten" className="text-green-600 hover:underline font-medium flex items-center">
-                        <ArrowRight className="w-4 h-4 mr-2" />
-                        Malerarbeiten Offerten vergleichen
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/raeumung-entsorgung" className="text-green-600 hover:underline font-medium flex items-center">
-                        <ArrowRight className="w-4 h-4 mr-2" />
-                        Räumung & Entsorgung
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/umzugsfirma" className="text-green-600 hover:underline font-medium flex items-center">
-                        <ArrowRight className="w-4 h-4 mr-2" />
-                        Umzugsfirma in Ihrer Nähe finden
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
               </section>
 
               {/* FAQ Section */}
