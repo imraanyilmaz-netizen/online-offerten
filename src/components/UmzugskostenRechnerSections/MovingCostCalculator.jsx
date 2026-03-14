@@ -304,7 +304,7 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
         <CardHeader className="bg-green-50 rounded-t-lg">
           <CardTitle className="text-2xl font-bold text-green-700 flex items-center">
             <Calculator size={28} className="mr-3" />
-            Umzugskosten online berechnen
+            Umzugskostenrechner
           </CardTitle>
           <CardDescription>Erhalten Sie eine sofortige Kostenschätzung basierend auf Ihren Angaben.</CardDescription>
         </CardHeader>

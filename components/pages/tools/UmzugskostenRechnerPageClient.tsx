@@ -78,7 +78,8 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
                   Umzugskosten vergleichen
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
-                  Umzug Kosten Schweiz - Transparente Preise durch Offertenvergleich
+                  Umzugskosten:
+                  <span className="block">Was kostet mein Umzug?</span>
                 </h1>
                 <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
                   Vergleichen Sie bis zu 5 kostenlose Offerten von gepruften Umzugsfirmen und sparen Sie bei Ihrem nachsten Umzug.
