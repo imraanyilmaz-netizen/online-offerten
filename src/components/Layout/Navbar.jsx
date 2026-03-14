@@ -1,5 +1,4 @@
-﻿import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
+﻿import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Mail, ChevronDown, User, LogOut, LayoutDashboard, Settings, Send } from 'lucide-react';
@@ -94,11 +93,13 @@ const Navbar = () => {
   // Removed useTranslation
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openMobileSections, setOpenMobileSections] = useState({});
+  const [openDesktopMenu, setOpenDesktopMenu] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [partnerBrand, setPartnerBrand] = useState({ logoUrl: null, companyName: null });
   const [mobileLogoFailed, setMobileLogoFailed] = useState(false);
+  const desktopMenuCloseTimeoutRef = React.useRef(null);
+  const desktopNavRef = React.useRef(null);
   const { user, signOut, loading } = useAuth();
-  const router = useRouter();
   const pathname = usePathname();
   const settingsPath = '/partner/einstellungen';
   const mobileLogoUrl = partnerBrand.logoUrl || user?.user_metadata?.logo_url || user?.user_metadata?.avatar_url || null;
@@ -141,6 +142,26 @@ const Navbar = () => {
     setMobileLogoFailed(false);
   }, [mobileLogoUrl]);
 
+  useEffect(() => {
+    return () => {
+      if (desktopMenuCloseTimeoutRef.current) {
+        clearTimeout(desktopMenuCloseTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleDocumentClick = (event) => {
+      if (!desktopNavRef.current) return;
+      if (!desktopNavRef.current.contains(event.target)) {
+        setOpenDesktopMenu(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleDocumentClick);
+    return () => document.removeEventListener('mousedown', handleDocumentClick);
+  }, []);
+
   const handleLogout = async () => {
     await signOut();
     // Full page reload — auth state, cache, her şey sıfırlanır
@@ -153,6 +174,21 @@ const Navbar = () => {
         ...prev,
         [section]: !prev[section]
     }));
+  };
+
+  const openDesktopDropdown = (menuKey) => {
+    if (desktopMenuCloseTimeoutRef.current) {
+      clearTimeout(desktopMenuCloseTimeoutRef.current);
+      desktopMenuCloseTimeoutRef.current = null;
+    }
+    setOpenDesktopMenu(menuKey);
+  };
+
+  const scheduleCloseDesktopDropdown = () => {
+    if (desktopMenuCloseTimeoutRef.current) {
+      clearTimeout(desktopMenuCloseTimeoutRef.current);
+    }
+    desktopMenuCloseTimeoutRef.current = setTimeout(() => setOpenDesktopMenu(null), 180);
   };
 
   // Removed language switching - DE-only now
@@ -199,74 +235,63 @@ const Navbar = () => {
     );
   };
 
-  const UmzugDropdownNav = () => {
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out">
-            UMZUG
-            <ChevronDown size={16} className="text-gray-500" />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          {umzugLinks.map((link) => (
-            <DropdownMenuItem key={link.to} asChild>
-              <Link href={link.to} className="cursor-pointer">
-                {link.text}
-              </Link>
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  };
+  const DesktopDropdownNav = ({ label, links, menuKey, baseHref = null }) => {
+    const isOpen = openDesktopMenu === menuKey;
 
-  const ReinigungDropdownNav = () => {
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out">
-            REINIGUNG
+      <div
+        className="relative"
+        onMouseEnter={() => openDesktopDropdown(menuKey)}
+        onMouseLeave={scheduleCloseDesktopDropdown}
+      >
+        <div
+          className="flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out"
+        >
+          {baseHref ? (
+            <Link href={baseHref} className="leading-none text-gray-700 hover:text-gray-900">
+              {label}
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => openDesktopDropdown(menuKey)}
+              className="leading-none text-gray-700 hover:text-gray-900"
+            >
+              {label}
+            </button>
+          )}
+          <button
+            type="button"
+            aria-label={`${label} Menü öffnen`}
+            aria-expanded={isOpen}
+            onClick={() => setOpenDesktopMenu(prev => (prev === menuKey ? null : menuKey))}
+            className="inline-flex items-center justify-center rounded-sm p-0.5 hover:bg-gray-200"
+          >
             <ChevronDown size={16} className="text-gray-500" />
           </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          {reinigungLinks.map((link) => (
-            <DropdownMenuItem key={link.to} asChild>
-              <Link href={link.to} className="cursor-pointer">
-                {link.text}
-              </Link>
-            </DropdownMenuItem>
+        </div>
+        <div
+          className={`absolute left-0 top-full z-[4000] min-w-[220px] rounded-md border border-gray-200 bg-white p-1 shadow-lg transition-all duration-150 ${
+            isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'
+          }`}
+        >
+          {links.map((link) => (
+            <Link
+              key={link.to}
+              href={link.to}
+              onClick={() => setOpenDesktopMenu(null)}
+              className="block rounded-sm px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              {link.text}
+            </Link>
           ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  };
-
-  const KostenToolsDropdownNav = () => {
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out">
-            KOSTEN & TOOLS
-            <ChevronDown size={16} className="text-gray-500" />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          {kostenLinks.map((link) => (
-            <DropdownMenuItem key={link.to} asChild>
-              <Link href={link.to} className="cursor-pointer">
-                {link.text}
-              </Link>
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </div>
+      </div>
     );
   };
 
   return (
-    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style paint', zIndex: 3000 }}>
+    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style', zIndex: 3000 }}>
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between h-16" style={{ minHeight: '64px' }}>
           <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group">
@@ -292,16 +317,17 @@ const Navbar = () => {
             />
           </Link>
 
-          <nav 
+          <nav
+            ref={desktopNavRef}
             className="hidden md:flex items-center space-x-1 lg:space-x-2 flex-1 justify-center max-w-5xl mx-4"
             style={{ minHeight: '40px', contain: 'layout' }}
           >
             <NavItem to="/kostenlose-offerte-anfordern">
               OFFERTEN
             </NavItem>
-            <UmzugDropdownNav />
-            <ReinigungDropdownNav />
-            <KostenToolsDropdownNav />
+            <DesktopDropdownNav label="UMZUG" links={umzugLinks} menuKey="umzug" baseHref="/umzugsfirma" />
+            <DesktopDropdownNav label="REINIGUNG" links={reinigungLinks} menuKey="reinigung" />
+            <DesktopDropdownNav label="KOSTEN & TOOLS" links={kostenLinks} menuKey="kosten" />
             <NavItem to="/ratgeber">
               RATGEBER
             </NavItem>
@@ -363,10 +389,23 @@ const Navbar = () => {
 
             {/* Umzug Section */}
             <div className="pt-1">
-              <button onClick={() => toggleMobileSection('umzug')} className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
-                  <span>UMZUG</span>
+              <div className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
+                  <Link
+                    href="/umzugsfirma"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex-1 text-left"
+                  >
+                    UMZUG
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection('umzug')}
+                    aria-label="Umzug Menü öffnen"
+                    className="inline-flex items-center justify-center"
+                  >
                   <ChevronDown size={16} className={`transition-transform duration-200 ${openMobileSections['umzug'] ? 'rotate-180' : ''}`} />
-              </button>
+                  </button>
+              </div>
               <div
                 className={`overflow-hidden transition-all duration-200 ease-in-out ${
                   openMobileSections['umzug'] ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
