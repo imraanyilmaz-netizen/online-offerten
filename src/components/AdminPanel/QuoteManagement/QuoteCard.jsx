@@ -213,6 +213,61 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const isDetailsExpanded = expandedView === 'details';
   const isEditExpanded = expandedView === 'edit';
 
+  const formatFloorLift = (floor, lift) =>
+    [floor, lift !== null && lift !== undefined ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null]
+      .filter(Boolean)
+      .join(' / ');
+
+  const formatRoomsObject = (rooms, objectType) =>
+    [
+      rooms,
+      objectType ? `${objectType.charAt(0).toUpperCase()}${objectType.slice(1)}` : null,
+    ]
+      .filter(Boolean)
+      .join(' / ');
+
+  const buildMapsUrl = (...parts) => {
+    const query = parts.filter(Boolean).join(', ');
+    if (!query) return null;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${query}, Schweiz`)}`;
+  };
+
+  const movingExtras = [
+    quote.additional_services_furniture_assembly && 'Möbel-De-/Montage',
+    quote.additional_services_packing && 'Einpackservice',
+    quote.additional_services_disposal && 'Entsorgung',
+    quote.special_transport_piano && 'Klavier',
+    quote.special_transport_safe && 'Tresor',
+    quote.special_transport_heavy && 'Flügel',
+  ].filter(Boolean);
+
+  const cleaningAreaLabelMap = {
+    bis_40: 'bis 40 m²',
+    '40_60': '40-60 m²',
+    '60_80': '60-80 m²',
+    '80_100': '80-100 m²',
+    '100_120': '100-120 m²',
+    '120_140': '120-140 m²',
+    ueber_140: 'über 140 m²',
+  };
+
+  const cleaningTypeLabelMap = {
+    mit_abnahmegarantie: 'Mit Abnahmegarantie',
+    ohne_abnahmegarantie: 'Ohne Abnahmegarantie',
+    umzugsreinigung: 'Umzugsreinigung',
+  };
+
+  const cleaningExtras = [
+    quote.cleaning_area_sqm && `Fläche: ${cleaningAreaLabelMap[quote.cleaning_area_sqm] || quote.cleaning_area_sqm}`,
+    quote.cleaning_type_guarantee && `Art: ${cleaningTypeLabelMap[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}`,
+    (quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) &&
+      `Zusatzflächen: ${[
+        quote.cleaning_additional_balcony && 'Balkon',
+        quote.cleaning_additional_cellar && 'Keller',
+        quote.cleaning_additional_garage && 'Garage',
+      ].filter(Boolean).join(', ')}`,
+  ].filter(Boolean);
+
   const EmailConfirmationStatus = () => {
     if (email_confirmed && email_confirmed_at) {
       return (
@@ -267,24 +322,72 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
           </div>
           <p className="text-xs text-gray-500 text-left sm:text-right">Anfrage am: {formattedDate}</p>
         </div>
-        <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-6">
-          <div className="flex-grow min-w-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-stretch">
-              <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[112px] h-full flex flex-col">
+        <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
+              <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[148px] h-full flex flex-col">
                 <p className="text-sm font-medium text-gray-800">
                   {quote.firstname} {quote.lastname}
                 </p>
                 <p className="text-xs text-gray-600 mt-0.5">{quote.email}</p>
+                {quote.phone && <p className="text-xs text-gray-600 mt-0.5">{quote.phone}</p>}
                 <div className="mt-2">
                   <EmailConfirmationStatus />
                 </div>
+                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-gray-600">
+                  <p><span className="font-medium text-gray-700">Wunschtermin:</span> {quote.move_date ? format(new Date(quote.move_date), "EEEE, dd.MM.yyyy", { locale: de }) : 'N/A'}</p>
+                </div>
               </div>
 
-               <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 min-h-[112px] h-full flex flex-col">
+               <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 min-h-[148px] h-full flex flex-col">
+                {(() => {
+                  const fromMapsUrl = buildMapsUrl(quote.from_street, quote.from_zip, quote.from_city);
+                  const toMapsUrl = buildMapsUrl(quote.to_street, quote.to_zip, quote.to_city);
+                  return (
+                    <>
                 <p className="text-sm font-medium text-gray-700 flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
                   <span>{from_city} {to_city && `→ ${to_city}`}</span>
                 </p>
+                <div className="mt-1 space-y-1 text-xs text-gray-600 pl-6">
+                  <p>
+                    <span className="font-medium text-gray-700">Von:</span>{' '}
+                    {fromMapsUrl ? (
+                      <a
+                        href={fromMapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-700 hover:text-green-900 hover:underline"
+                      >
+                        {[quote.from_street, quote.from_zip, quote.from_city].filter(Boolean).join(', ')}
+                      </a>
+                    ) : (
+                      <span>{[quote.from_street, quote.from_zip, quote.from_city].filter(Boolean).join(', ')}</span>
+                    )}
+                  </p>
+                  {to_city && (
+                    <p>
+                      <span className="font-medium text-gray-700">Nach:</span>{' '}
+                      {toMapsUrl ? (
+                        <a
+                          href={toMapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-green-700 hover:text-green-900 hover:underline"
+                        >
+                          {[quote.to_street, quote.to_zip, quote.to_city].filter(Boolean).join(', ')}
+                        </a>
+                      ) : (
+                        <span>{[quote.to_street, quote.to_zip, quote.to_city].filter(Boolean).join(', ')}</span>
+                      )}
+                    </p>
+                  )}
+                  {formatFloorLift(quote.from_floor, quote.from_lift) && (
+                    <p><span className="font-medium text-gray-700">Auszug:</span> {formatFloorLift(quote.from_floor, quote.from_lift)}</p>
+                  )}
+                  {formatRoomsObject(quote.from_rooms, quote.from_object_type) && (
+                    <p><span className="font-medium text-gray-700">Objekt:</span> {formatRoomsObject(quote.from_rooms, quote.from_object_type)}</p>
+                  )}
+                </div>
                 {(partner_target_regions && partner_target_regions.length > 0) && (
                   <div className="mt-2 flex flex-wrap items-center gap-1.5 pl-6">
                     {partner_target_regions.map(region => (
@@ -294,84 +397,97 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                     ))}
                   </div>
                 )}
+                    </>
+                  );
+                })()}
               </div>
-            </div>
-          </div>
-          <div className="w-full lg:w-auto lg:min-w-[320px] flex flex-col items-stretch lg:items-end gap-3 self-start">
-            {status === 'archived' ? (
-               <></>
-            ) : (
-              <>
-                {/* Fiyat satırı */}
-                {(status === 'approved' || status === 'quota_filled') && (
-                    <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-left lg:text-right min-h-[110px] flex flex-col justify-center">
-                      {isEditingPrice ? (
-                          <div className="flex items-center justify-start lg:justify-end gap-1">
-                              <Input 
-                                  type="number"
-                                  value={newPrice || ''}
-                                  onChange={(e) => setNewPrice(e.target.value)}
-                                  className="h-9 w-24 text-lg font-bold"
-                                  autoFocus
-                                  onKeyDown={(e) => { if (e.key === 'Enter') handlePriceUpdate(); if (e.key === 'Escape') setIsEditingPrice(false); }}
-                              />
-                              <Button size="icon" className="h-9 w-9" onClick={handlePriceUpdate} disabled={parentIsProcessing}>
-                                  {parentIsProcessing ? <Loader2 className="w-4 h-4 animate-spin"/> : <CheckCircle className="w-5 h-5" />}
-                              </Button>
-                              <Button size="icon" variant="ghost" className="h-9 w-9" onClick={() => setIsEditingPrice(false)} disabled={parentIsProcessing}>
-                                  <X className="w-5 h-5" />
-                              </Button>
-                          </div>
-                      ) : (
-                          <div className="group flex items-center justify-start lg:justify-end gap-1 cursor-pointer" onClick={() => { setNewPrice(lead_price); setIsEditingPrice(true); }}>
-                              <div className="flex items-center gap-2">
-                                {discountPercent > 0 && (
-                                  <>
-                                    <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
-                                    <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
-                                  </>
-                                )}
-                                <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
-                              </div>
-                              <Button size="icon" variant="ghost" className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                                  <Pencil className="w-3.5 h-3.5" />
-                              </Button>
-                          </div>
-                      )}
-                      <div className="text-xs text-gray-500 flex items-center justify-start lg:justify-end gap-1 mt-0.5">
-                        <ShoppingCart className="w-3 h-3"/>
-                        <span>{purchasers.length} / {purchase_quota || '∞'} Gekauft</span>
-                        <Button
-                          type="button"
-                          size="icon"
-                          variant="ghost"
-                          className="h-6 w-6"
-                          onClick={openQuotaDialog}
-                          disabled={parentIsProcessing}
-                          title="Kauf-Kontingent bearbeiten"
-                        >
-                          <Package className="w-3.5 h-3.5" />
-                        </Button>
+
+              {(movingExtras.length > 0 || cleaningExtras.length > 0) && (
+                <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[148px] h-full flex flex-col">
+                  <p className="text-sm font-medium text-gray-700">Zusatzdetails</p>
+                  <div className="mt-1 space-y-1 text-xs text-gray-600 overflow-hidden">
+                    {movingExtras.length > 0 && (
+                      <p className="line-clamp-2">
+                        <span className="font-medium text-gray-700">Umzug:</span> {movingExtras.join(', ')}
+                      </p>
+                    )}
+                    {cleaningExtras.length > 0 && (
+                      <p className="line-clamp-3">
+                        <span className="font-medium text-gray-700">Reinigung:</span> {cleaningExtras.join(' | ')}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {status !== 'archived' && (status === 'approved' || status === 'quota_filled') && (
+                <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[148px] h-full flex flex-col justify-center">
+                  {isEditingPrice ? (
+                    <div className="flex items-center justify-start gap-1">
+                      <Input
+                        type="number"
+                        value={newPrice || ''}
+                        onChange={(e) => setNewPrice(e.target.value)}
+                        className="h-9 w-24 text-lg font-bold"
+                        autoFocus
+                        onKeyDown={(e) => { if (e.key === 'Enter') handlePriceUpdate(); if (e.key === 'Escape') setIsEditingPrice(false); }}
+                      />
+                      <Button size="icon" className="h-9 w-9" onClick={handlePriceUpdate} disabled={parentIsProcessing}>
+                        {parentIsProcessing ? <Loader2 className="w-4 h-4 animate-spin"/> : <CheckCircle className="w-5 h-5" />}
+                      </Button>
+                      <Button size="icon" variant="ghost" className="h-9 w-9" onClick={() => setIsEditingPrice(false)} disabled={parentIsProcessing}>
+                        <X className="w-5 h-5" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="group flex items-center justify-start gap-1 cursor-pointer" onClick={() => { setNewPrice(lead_price); setIsEditingPrice(true); }}>
+                      <div className="flex items-center gap-2">
+                        {discountPercent > 0 && (
+                          <>
+                            <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
+                            <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
+                          </>
+                        )}
+                        <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
                       </div>
+                      <Button size="icon" variant="ghost" className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Pencil className="w-3.5 h-3.5" />
+                      </Button>
                     </div>
-                )}
-                {status === 'matched' && (
-                    <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-left lg:text-right">
-                        <div className="flex items-center justify-start lg:justify-end gap-2">
-                          {discountPercent > 0 && (
-                            <>
-                              <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
-                              <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
-                            </>
-                          )}
-                          <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
-                        </div>
-                        <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner</p>
-                    </div>
-                )}
-              </>
-            )}
-          </div>
+                  )}
+                  <div className="text-xs text-gray-500 flex items-center justify-start gap-1 mt-0.5">
+                    <ShoppingCart className="w-3 h-3"/>
+                    <span>{purchasers.length} / {purchase_quota || '∞'} Gekauft</span>
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="ghost"
+                      className="h-6 w-6"
+                      onClick={openQuotaDialog}
+                      disabled={parentIsProcessing}
+                      title="Kauf-Kontingent bearbeiten"
+                    >
+                      <Package className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {status !== 'archived' && status === 'matched' && (
+                <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 min-h-[148px] h-full flex flex-col justify-center">
+                  <div className="flex items-center justify-start gap-2">
+                    {discountPercent > 0 && (
+                      <>
+                        <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
+                        <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
+                      </>
+                    )}
+                    <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                  </div>
+                  <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner</p>
+                </div>
+              )}
+            </div>
         </div>
         {/* Aktionsbereich: unten separat, damit rechts nichts gequetscht wirkt */}
         <div className="mt-4 pt-3 border-t border-gray-200/80 flex flex-wrap justify-end items-center gap-2">
