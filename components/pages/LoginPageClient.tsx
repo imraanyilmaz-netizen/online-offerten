@@ -58,6 +58,44 @@ const waitForCookie = async (maxWait = 2000): Promise<boolean> => {
   return false
 }
 
+const syncAuthCookieFromSession = async (session: any): Promise<boolean> => {
+  if (!session?.access_token || !session?.user?.id) return false
+
+  const minimalSession = {
+    access_token: session.access_token,
+    user: {
+      id: session.user.id,
+      email: session.user.email,
+      user_metadata: {
+        role: session.user?.user_metadata?.role
+      }
+    }
+  }
+
+  const expires = new Date()
+  expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
+  const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
+  const cookieValue = encodeURIComponent(JSON.stringify(minimalSession))
+
+  const MAX_COOKIE_SIZE = 3800
+  if (cookieValue.length > MAX_COOKIE_SIZE) {
+    let index = 0
+    let offset = 0
+    while (offset < cookieValue.length) {
+      const chunk = cookieValue.substring(offset, offset + MAX_COOKIE_SIZE)
+      const cookieName = index === 0 ? COOKIE_NAME : `${COOKIE_NAME}.${index}`
+      document.cookie = `${cookieName}=${chunk}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
+      offset += MAX_COOKIE_SIZE
+      index++
+    }
+  } else {
+    document.cookie = `${COOKIE_NAME}=${cookieValue}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
+  }
+
+  // Ensure cookie is readable before redirecting to protected route.
+  return waitForCookie(600)
+}
+
 const LoginPageClient = () => {
   const { signIn, user, loading } = useAuth()
   const { toast } = useToast()
@@ -72,12 +110,16 @@ const LoginPageClient = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isRedirectingAfterLogin, setIsRedirectingAfterLogin] = useState(false)
   const [isValidatingCurrentSession, setIsValidatingCurrentSession] = useState(false)
-  const [allowAlreadyLoggedView, setAllowAlreadyLoggedView] = useState<boolean | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
 
-  // IMPORTANT: Do not auto-redirect from /login to avoid redirect loops.
-  // If user is already authenticated, show a direct dashboard button instead.
+  // Keep /login loop-safe: validate current session first, then redirect if valid.
+
+  const getDashboardHrefByRole = (role?: string) => {
+    if (role === 'admin' || role === 'editor') return '/admin-dashboard'
+    if (role === 'partner') return '/partner/dashboard'
+    return '/'
+  }
 
   useEffect(() => {
     let isMounted = true
@@ -87,7 +129,6 @@ const LoginPageClient = () => {
 
       if (!user) {
         if (isMounted) {
-          setAllowAlreadyLoggedView(null)
           setIsValidatingCurrentSession(false)
         }
         return
@@ -95,25 +136,51 @@ const LoginPageClient = () => {
 
       setIsValidatingCurrentSession(true)
       const supabase = createClient()
-      const { data: { user: verifiedUser }, error } = await supabase.auth.getUser()
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
 
       if (!isMounted) return
 
-      if (error || !verifiedUser) {
-        console.warn('[LoginPage] Existing session invalid, clearing auth artifacts', error?.message)
+      if (sessionError || !session?.access_token || !session?.user?.id) {
+        console.warn('[LoginPage] Existing session missing/invalid, clearing auth artifacts', sessionError?.message)
         try {
           await supabase.auth.signOut()
         } catch (signOutError) {
           console.warn('[LoginPage] signOut during session validation failed:', signOutError)
         }
         clearClientAuthArtifacts()
-        setAllowAlreadyLoggedView(false)
         setIsValidatingCurrentSession(false)
         return
       }
 
-      setAllowAlreadyLoggedView(true)
+      const { data: { user: verifiedUser }, error: userError } = await supabase.auth.getUser(session.access_token)
+      if (userError || !verifiedUser) {
+        console.warn('[LoginPage] Existing session failed server validation, clearing auth artifacts', userError?.message)
+        try {
+          await supabase.auth.signOut()
+        } catch (signOutError) {
+          console.warn('[LoginPage] signOut during getUser validation failed:', signOutError)
+        }
+        clearClientAuthArtifacts()
+        setIsValidatingCurrentSession(false)
+        return
+      }
+
+      const cookieReady = await syncAuthCookieFromSession(session)
+      if (!cookieReady) {
+        console.warn('[LoginPage] Cookie sync failed for existing session, forcing re-login')
+        try {
+          await supabase.auth.signOut()
+        } catch (signOutError) {
+          console.warn('[LoginPage] signOut after cookie sync failure failed:', signOutError)
+        }
+        clearClientAuthArtifacts()
+        setIsValidatingCurrentSession(false)
+        return
+      }
+
       setIsValidatingCurrentSession(false)
+      const redirectTarget = getDashboardHrefByRole(verifiedUser.user_metadata?.role)
+      window.location.replace(redirectTarget)
     }
 
     validateCurrentSession()
@@ -121,17 +188,6 @@ const LoginPageClient = () => {
       isMounted = false
     }
   }, [loading, user])
-
-  const goToDashboard = () => {
-    const userRole = user?.user_metadata?.role
-    const dashboardHref =
-      userRole === 'admin' || userRole === 'editor'
-        ? '/admin-dashboard'
-        : userRole === 'partner'
-        ? '/partner/dashboard'
-        : '/'
-    window.location.assign(dashboardHref)
-  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -186,126 +242,22 @@ const LoginPageClient = () => {
       const userRole = session.user?.user_metadata?.role
       console.log('[LoginPage] User role detected:', userRole)
 
-      // Debug: Check all localStorage keys
-      const allKeys = Object.keys(localStorage)
-      const supabaseKeys = allKeys.filter(key => key.includes('supabase') || key.includes('auth-token'))
-      console.log('[LoginPage] localStorage keys:', { allKeys, supabaseKeys })
-
-      // Manually sync localStorage to cookie as backup
-      // This ensures cookie is set before redirect
-      let sessionValue = localStorage.getItem(COOKIE_NAME)
-      
-      // If not found with exact name, try to find any Supabase auth token
-      if (!sessionValue) {
-        for (const key of supabaseKeys) {
-          if (key.includes('auth-token')) {
-            sessionValue = localStorage.getItem(key)
-            console.log('[LoginPage] Found session in different key:', key)
-            break
-          }
-        }
-      }
-      
-      if (sessionValue) {
-        console.log('[LoginPage] Manually syncing cookie from localStorage...', { 
-          sessionValueLength: sessionValue.length,
-          sessionValuePreview: sessionValue.substring(0, 50) + '...'
-        })
-        
-        // Parse session and create minimal cookie payload (only what middleware needs)
-        let minimalSession: any = null
-        try {
-          const fullSession = JSON.parse(sessionValue)
-          // Create minimal session with only essential data for middleware
-          minimalSession = {
-            access_token: fullSession.access_token,
-            user: {
-              id: fullSession.user?.id,
-              email: fullSession.user?.email,
-              user_metadata: {
-                role: fullSession.user?.user_metadata?.role
-              }
-            }
-          }
-          console.log('[LoginPage] Created minimal session payload', {
-            originalSize: sessionValue.length,
-            minimalSize: JSON.stringify(minimalSession).length,
-            reduction: `${Math.round((1 - JSON.stringify(minimalSession).length / sessionValue.length) * 100)}%`
+      // Build cookie payload from current verified session (not from localStorage keys).
+      if (session?.access_token && session?.user?.id) {
+        const cookieReady = await syncAuthCookieFromSession(session)
+        if (!cookieReady) {
+          console.error('[LoginPage] ❌ Cookie sync failed after login')
+          toast({
+            variant: "destructive",
+            title: "Fehler",
+            description: "Anmeldung konnte nicht stabilisiert werden. Bitte erneut versuchen.",
           })
-        } catch (e) {
-          console.error('[LoginPage] Failed to parse session, using full session:', e)
-          minimalSession = sessionValue
-        }
-        
-        const expires = new Date()
-        expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
-        const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
-        const cookieValue = encodeURIComponent(typeof minimalSession === 'string' ? minimalSession : JSON.stringify(minimalSession))
-        
-        // Cookie size limit is ~4KB, but account for cookie name and attributes (~200 bytes)
-        // So actual data limit is ~3800 bytes
-        const MAX_COOKIE_SIZE = 3800
-        if (cookieValue.length > MAX_COOKIE_SIZE) {
-          console.log('[LoginPage] Cookie still too large after optimization, splitting into parts...', { 
-            cookieValueLength: cookieValue.length,
-            maxSize: MAX_COOKIE_SIZE
-          })
-          // Split cookie into chunks
-          let index = 0
-          let offset = 0
-          while (offset < cookieValue.length) {
-            const chunk = cookieValue.substring(offset, offset + MAX_COOKIE_SIZE)
-            const cookieName = index === 0 ? COOKIE_NAME : `${COOKIE_NAME}.${index}`
-            document.cookie = `${cookieName}=${chunk}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-            offset += MAX_COOKIE_SIZE
-            index++
-          }
-          console.log('[LoginPage] Cookie split into', index, 'parts')
-        } else {
-          document.cookie = `${COOKIE_NAME}=${cookieValue}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-          console.log('[LoginPage] Cookie set successfully (single cookie)', {
-            cookieValueLength: cookieValue.length
-          })
-        }
-        
-        // Wait a bit for cookie to be set
-        await new Promise(resolve => setTimeout(resolve, 200))
-        
-        // Check if cookie was actually set
-        const cookiesAfter = document.cookie.split(';').reduce((acc, cookie) => {
-          const [name, ...rest] = cookie.trim().split('=')
-          if (name && rest.length > 0) {
-            acc[name] = decodeURIComponent(rest.join('='))
-          }
-          return acc
-        }, {} as Record<string, string>)
-        
-        const cookieSet = !!cookiesAfter[COOKIE_NAME] || !!cookiesAfter[`${COOKIE_NAME}.0`]
-        const splitCookies = Object.keys(cookiesAfter).filter(key => key.startsWith(COOKIE_NAME))
-        console.log('[LoginPage] Cookie manually synced', { 
-          cookieName: COOKIE_NAME,
-          cookieValueLength: cookieValue.length,
-          cookieSet,
-          splitCookies,
-          allCookies: Object.keys(cookiesAfter)
-        })
-        
-        if (!cookieSet) {
-          console.error('[LoginPage] ❌ Cookie was NOT set! This will cause redirect loop.')
+          setIsRedirectingAfterLogin(false)
+          setIsSubmitting(false)
+          return
         }
       } else {
-        console.warn('[LoginPage] No session value in localStorage to sync', { 
-          checkedKey: COOKIE_NAME,
-          supabaseKeys 
-        })
-      }
-
-      // Wait for cookie to be set before redirecting
-      console.log('[LoginPage] Waiting for cookie to be set...')
-      const cookieReady = await waitForCookie(400)
-      
-      if (!cookieReady) {
-        console.warn('[LoginPage] Cookie not ready, but proceeding with redirect anyway')
+        console.warn('[LoginPage] No valid session data available to sync cookie')
       }
 
       // Redirect based on role using window.location.href for full page reload
@@ -366,26 +318,12 @@ const LoginPageClient = () => {
     )
   }
 
-  if (!loading && user && (isValidatingCurrentSession || allowAlreadyLoggedView === null)) {
+  if (!loading && user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
         <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
           <h1 className="text-2xl font-bold text-black mb-2">Sitzung wird überprüft</h1>
-          <p className="text-gray-600">Bitte einen Moment warten...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (!loading && user && allowAlreadyLoggedView) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
-        <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
-          <h1 className="text-2xl font-bold text-black mb-2">Sie sind bereits angemeldet</h1>
-          <p className="text-gray-600 mb-6">Sie konnen direkt in Ihr Dashboard wechseln.</p>
-          <Button onClick={goToDashboard} className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg">
-            Zum Dashboard
-          </Button>
+          <p className="text-gray-600">{isValidatingCurrentSession ? 'Bitte einen Moment warten...' : 'Weiterleitung wird vorbereitet...'}</p>
         </div>
       </div>
     )

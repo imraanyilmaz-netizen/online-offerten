@@ -164,9 +164,8 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await signOut();
-    // Full page reload — auth state, cache, her şey sıfırlanır
-    // replace() kullanıyoruz: history'ye eklenmez → geri tuşuyla loop yok
-    window.location.replace('/');
+    // Full page reload and clear post-logout flow through login route
+    window.location.replace('/login?reason=signed_out');
   };
   
   const toggleMobileSection = (section) => {

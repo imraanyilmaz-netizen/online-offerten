@@ -1,7 +1,9 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { createMiddlewareClient } from '@/lib/supabase/middleware'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
 const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://uhkiaodpzvhsuqfrwgih.supabase.co'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVoa2lhb2RwenZoc3VxZnJ3Z2loIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk1NzY4NDAsImV4cCI6MjA2NTE1Mjg0MH0.PI2YNNYtcUgQYooV-6z2P6qK-1tIQF8DL7oILhfHmDg'
 
 function redirectToLoginWithCleanup(request: NextRequest, reason?: string) {
   const loginUrl = new URL('/login', request.nextUrl.origin)
@@ -25,6 +27,79 @@ function redirectToLoginWithCleanup(request: NextRequest, reason?: string) {
   })
 
   return response
+}
+
+function parseCookies(cookieHeader: string) {
+  return cookieHeader.split(';').reduce((acc, cookie) => {
+    const trimmed = cookie.trim()
+    const equalIndex = trimmed.indexOf('=')
+    if (equalIndex === -1) return acc
+
+    const name = trimmed.substring(0, equalIndex).trim()
+    const rawValue = trimmed.substring(equalIndex + 1).trim()
+    if (!name || !rawValue) return acc
+
+    try {
+      acc[name] = decodeURIComponent(rawValue)
+    } catch {
+      acc[name] = rawValue
+    }
+    return acc
+  }, {} as Record<string, string>)
+}
+
+function getSessionFromCookies(cookieHeader: string) {
+  const cookies = parseCookies(cookieHeader)
+  let sessionValue = cookies[AUTH_COOKIE_NAME] || null
+
+  // Rebuild chunked cookie format.
+  // Supports both styles:
+  // 1) base + .1 + .2 ...
+  // 2) .0 + .1 + .2 ...
+  if (!sessionValue) {
+    const parts: string[] = []
+    if (cookies[`${AUTH_COOKIE_NAME}.0`]) {
+      let index = 0
+      while (cookies[`${AUTH_COOKIE_NAME}.${index}`]) {
+        parts.push(cookies[`${AUTH_COOKIE_NAME}.${index}`])
+        index++
+      }
+    } else if (cookies[AUTH_COOKIE_NAME]) {
+      parts.push(cookies[AUTH_COOKIE_NAME])
+      let index = 1
+      while (cookies[`${AUTH_COOKIE_NAME}.${index}`]) {
+        parts.push(cookies[`${AUTH_COOKIE_NAME}.${index}`])
+        index++
+      }
+    }
+
+    if (parts.length > 0) {
+      sessionValue = parts.join('')
+    }
+  }
+
+  if (!sessionValue && cookies[AUTH_COOKIE_NAME]) {
+    const parts: string[] = [cookies[AUTH_COOKIE_NAME]]
+    let index = 1
+    while (cookies[`${AUTH_COOKIE_NAME}.${index}`]) {
+      parts.push(cookies[`${AUTH_COOKIE_NAME}.${index}`])
+      index++
+    }
+    if (parts.length > 0) {
+      sessionValue = parts.join('')
+    }
+  }
+
+  if (!sessionValue) return null
+
+  try {
+    return JSON.parse(sessionValue) as {
+      access_token?: string
+      user?: { user_metadata?: { role?: string } }
+    }
+  } catch {
+    return null
+  }
 }
 
 export async function middleware(request: NextRequest) {
@@ -54,9 +129,24 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    // Always verify user on Supabase side to avoid stale/corrupted local sessions.
-    const supabase = createMiddlewareClient(request)
-    const { data: { user }, error } = await supabase.auth.getUser()
+    const cookieHeader = request.headers.get('cookie') || ''
+    const parsedSession = getSessionFromCookies(cookieHeader)
+    const accessToken = parsedSession?.access_token
+
+    if (!accessToken) {
+      return redirectToLoginWithCleanup(request, 'session_expired')
+    }
+
+    // Verify token directly on Supabase with explicit access token.
+    const supabase = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      }
+    })
+
+    const { data: { user }, error } = await supabase.auth.getUser(accessToken)
     
     if (process.env.NODE_ENV === 'development') {
       console.log('[Middleware] getUser result:', {
