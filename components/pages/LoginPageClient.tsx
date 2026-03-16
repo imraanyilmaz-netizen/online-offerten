@@ -16,6 +16,24 @@ import { createClient } from '@/lib/supabase/client'
 
 const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
+const clearClientAuthArtifacts = () => {
+  if (typeof window === 'undefined') return
+
+  const authStorageKeys = Object.keys(localStorage).filter(
+    (key) => key.includes('supabase') || key.includes('auth-token')
+  )
+  authStorageKeys.forEach((key) => localStorage.removeItem(key))
+  sessionStorage.clear()
+
+  document.cookie.split(';').forEach((rawCookie) => {
+    const cookieName = rawCookie.split('=')[0]?.trim()
+    if (!cookieName) return
+    if (cookieName.includes('auth-token') || cookieName === COOKIE_NAME || cookieName.startsWith(`${COOKIE_NAME}.`)) {
+      document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`
+    }
+  })
+}
+
 // Helper function to wait for cookie to be set
 const waitForCookie = async (maxWait = 2000): Promise<boolean> => {
   const startTime = Date.now()
@@ -53,11 +71,67 @@ const LoginPageClient = () => {
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isRedirectingAfterLogin, setIsRedirectingAfterLogin] = useState(false)
+  const [isValidatingCurrentSession, setIsValidatingCurrentSession] = useState(false)
+  const [allowAlreadyLoggedView, setAllowAlreadyLoggedView] = useState<boolean | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
 
   // IMPORTANT: Do not auto-redirect from /login to avoid redirect loops.
   // If user is already authenticated, show a direct dashboard button instead.
+
+  useEffect(() => {
+    let isMounted = true
+
+    const validateCurrentSession = async () => {
+      if (loading) return
+
+      if (!user) {
+        if (isMounted) {
+          setAllowAlreadyLoggedView(null)
+          setIsValidatingCurrentSession(false)
+        }
+        return
+      }
+
+      setIsValidatingCurrentSession(true)
+      const supabase = createClient()
+      const { data: { user: verifiedUser }, error } = await supabase.auth.getUser()
+
+      if (!isMounted) return
+
+      if (error || !verifiedUser) {
+        console.warn('[LoginPage] Existing session invalid, clearing auth artifacts', error?.message)
+        try {
+          await supabase.auth.signOut()
+        } catch (signOutError) {
+          console.warn('[LoginPage] signOut during session validation failed:', signOutError)
+        }
+        clearClientAuthArtifacts()
+        setAllowAlreadyLoggedView(false)
+        setIsValidatingCurrentSession(false)
+        return
+      }
+
+      setAllowAlreadyLoggedView(true)
+      setIsValidatingCurrentSession(false)
+    }
+
+    validateCurrentSession()
+    return () => {
+      isMounted = false
+    }
+  }, [loading, user])
+
+  const goToDashboard = () => {
+    const userRole = user?.user_metadata?.role
+    const dashboardHref =
+      userRole === 'admin' || userRole === 'editor'
+        ? '/admin-dashboard'
+        : userRole === 'partner'
+        ? '/partner/dashboard'
+        : '/'
+    window.location.assign(dashboardHref)
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -292,22 +366,25 @@ const LoginPageClient = () => {
     )
   }
 
-  if (!loading && user) {
-    const userRole = user?.user_metadata?.role
-    const dashboardHref =
-      userRole === 'admin' || userRole === 'editor'
-        ? '/admin-dashboard'
-        : userRole === 'partner'
-        ? '/partner/dashboard'
-        : '/'
+  if (!loading && user && (isValidatingCurrentSession || allowAlreadyLoggedView === null)) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
+        <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
+          <h1 className="text-2xl font-bold text-black mb-2">Sitzung wird überprüft</h1>
+          <p className="text-gray-600">Bitte einen Moment warten...</p>
+        </div>
+      </div>
+    )
+  }
 
+  if (!loading && user && allowAlreadyLoggedView) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
         <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
           <h1 className="text-2xl font-bold text-black mb-2">Sie sind bereits angemeldet</h1>
           <p className="text-gray-600 mb-6">Sie konnen direkt in Ihr Dashboard wechseln.</p>
-          <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg">
-            <Link href={dashboardHref}>Zum Dashboard</Link>
+          <Button onClick={goToDashboard} className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg">
+            Zum Dashboard
           </Button>
         </div>
       </div>

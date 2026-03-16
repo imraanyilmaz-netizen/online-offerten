@@ -40,7 +40,7 @@ export default function ClientRouteProtection() {
 
     // Admin route protection (client-side)
     if (pathname?.startsWith('/admin-dashboard')) {
-      if (userRole !== 'admin') {
+      if (userRole !== 'admin' && userRole !== 'editor') {
         console.log('[ClientRouteProtection] Non-admin user on admin route, redirecting to login')
         router.replace('/login')
         return
@@ -63,7 +63,7 @@ export default function ClientRouteProtection() {
     // Redirect authenticated users away from auth pages
     const authRoutes = ['/forgot-password', '/partner-werden']
     if (authRoutes.includes(pathname || '') && user) {
-      if (userRole === 'admin') {
+      if (userRole === 'admin' || userRole === 'editor') {
         router.replace('/admin-dashboard')
       } else if (userRole === 'partner') {
         router.replace('/partner/dashboard')

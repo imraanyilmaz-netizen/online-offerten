@@ -78,6 +78,14 @@ const createCookieStorage = () => {
       if (key === COOKIE_NAME) {
         const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
         document.cookie = `${key}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; ${secureFlag}`
+        // Remove potential chunked cookies (.0, .1, ...)
+        document.cookie.split(';').forEach((rawCookie) => {
+          const cookieName = rawCookie.split('=')[0]?.trim()
+          if (!cookieName) return
+          if (cookieName === key || cookieName.startsWith(`${key}.`)) {
+            document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; ${secureFlag}`
+          }
+        })
       }
     },
   }
@@ -117,8 +125,9 @@ export function createClient() {
           })
           // Clear cookies
           document.cookie.split(";").forEach(c => {
-            if (c.includes('auth-token')) {
-              document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/")
+            const cookieName = c.split('=')[0]?.trim()
+            if (cookieName && cookieName.includes('auth-token')) {
+              document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`
             }
           })
         }

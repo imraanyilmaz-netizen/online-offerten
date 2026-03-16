@@ -1,70 +1,30 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/lib/supabase/middleware'
 
-// Helper function to parse user from cookie session
-function parseUserFromCookie(cookieHeader: string) {
-  try {
-    const cookies = cookieHeader.split(';').reduce((acc, cookie) => {
-      const trimmed = cookie.trim()
-      const equalIndex = trimmed.indexOf('=')
-      if (equalIndex === -1) return acc
-      
-      const name = trimmed.substring(0, equalIndex).trim()
-      const rawValue = trimmed.substring(equalIndex + 1).trim()
-      
-      if (name && rawValue) {
-        try {
-          acc[name] = decodeURIComponent(rawValue)
-        } catch (e) {
-          acc[name] = rawValue
-        }
-      }
-      return acc
-    }, {} as Record<string, string>)
-    
-    const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
-    let sessionValue = cookies[COOKIE_NAME] || null
-    
-    // Check for split cookies
-    if (!sessionValue && cookies[`${COOKIE_NAME}.0`]) {
-      let index = 0
-      const parts: string[] = []
-      while (cookies[`${COOKIE_NAME}.${index}`]) {
-        parts.push(cookies[`${COOKIE_NAME}.${index}`])
-        index++
-      }
-      if (parts.length > 0) {
-        sessionValue = parts.join('')
+const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
+
+function redirectToLoginWithCleanup(request: NextRequest, reason?: string) {
+  const loginUrl = new URL('/login', request.nextUrl.origin)
+  if (reason) {
+    loginUrl.searchParams.set('reason', reason)
   }
-    }
-    
-    if (sessionValue) {
-      try {
-        const session = JSON.parse(sessionValue)
-        if (session?.user) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[Middleware] Parsed session from cookie:', {
-          hasUser: !!session.user,
-          userId: session.user.id,
-          userEmail: session.user.email,
-          userRole: session.user.user_metadata?.role,
-          isMinimal: !session.user.user_metadata?.company_name // Minimal session doesn't have company_name
-        })
-      }
-          return session.user
-        }
-      } catch (parseError) {
-        console.error('[Middleware] Failed to parse session from cookie:', {
-          error: parseError instanceof Error ? parseError.message : String(parseError),
-          sessionValueLength: sessionValue.length,
-          sessionValuePreview: sessionValue.substring(0, 100)
-        })
-      }
-    }
-  } catch (error) {
-    // Parse failed, return null
+
+  const response = NextResponse.redirect(loginUrl, { status: 307 })
+
+  // Delete known auth cookie and chunked variants.
+  response.cookies.set(AUTH_COOKIE_NAME, '', { path: '/', expires: new Date(0) })
+  for (let i = 0; i <= 10; i++) {
+    response.cookies.set(`${AUTH_COOKIE_NAME}.${i}`, '', { path: '/', expires: new Date(0) })
   }
-  return null
+
+  // Delete any auth-token cookies found in request as additional safety.
+  request.cookies.getAll().forEach(({ name }) => {
+    if (name.includes('auth-token')) {
+      response.cookies.set(name, '', { path: '/', expires: new Date(0) })
+    }
+  })
+
+  return response
 }
 
 export async function middleware(request: NextRequest) {
@@ -93,64 +53,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Debug: Log cookie info (only in development)
-  const cookieHeader = request.headers.get('cookie') || ''
-  const hasAuthCookie = cookieHeader.includes('sb-uhkiaodpzvhsuqfrwgih-auth-token')
-  
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[Middleware] Request:', {
-      pathname,
-      hasCookies: !!cookieHeader,
-      cookieLength: cookieHeader.length,
-      hasAuthCookie
-    })
-  }
-  
   try {
-    // First, try to parse user directly from cookie (faster and more reliable)
-    const userFromCookie = parseUserFromCookie(cookieHeader)
-    
-    if (userFromCookie && userFromCookie.id) {
-      const userRole = userFromCookie.user_metadata?.role
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[Middleware] User from cookie:', {
-          userId: userFromCookie.id,
-          userEmail: userFromCookie.email,
-          userRole
-        })
-      }
-      
-      // Role-based access control
-      if (pathname.startsWith('/admin-dashboard')) {
-        if (userRole !== 'admin' && userRole !== 'editor') {
-          if (process.env.NODE_ENV === 'development') {
-            console.log('[Middleware] User is not admin/editor, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
-          }
-          const loginUrl = new URL('/login', request.nextUrl.origin)
-          return NextResponse.redirect(loginUrl, { status: 307 })
-        }
-      } else if (
-    pathname.startsWith('/partner/dashboard') ||
-    pathname.startsWith('/partner/credit-top-up') ||
-    pathname.startsWith('/partner/einstellungen')
-  ) {
-        if (userRole !== 'partner') {
-          if (process.env.NODE_ENV === 'development') {
-            console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: userFromCookie.email })
-          }
-          const loginUrl = new URL('/login', request.nextUrl.origin)
-          return NextResponse.redirect(loginUrl, { status: 307 })
-    }
-      }
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[Middleware] ✅ Access granted (from cookie):', { pathname, userRole, userEmail: userFromCookie.email })
-      }
-    return NextResponse.next()
-    }
-
-    // Fallback: Try getUser() if cookie parse failed
+    // Always verify user on Supabase side to avoid stale/corrupted local sessions.
     const supabase = createMiddlewareClient(request)
     const { data: { user }, error } = await supabase.auth.getUser()
     
@@ -166,15 +70,12 @@ export async function middleware(request: NextRequest) {
     
     if (error || !user) {
       if (process.env.NODE_ENV === 'development') {
-        console.log('[Middleware] No user found, redirecting to /login:', { 
+        console.log('[Middleware] No valid user found, redirecting to /login:', {
           error: error?.message,
-          errorStatus: error?.status,
-          hasCookies: !!cookieHeader,
-          hasAuthCookie
+          errorStatus: error?.status
         })
       }
-      const loginUrl = new URL('/login', request.nextUrl.origin)
-      return NextResponse.redirect(loginUrl, { status: 307 })
+      return redirectToLoginWithCleanup(request, 'session_expired')
     }
     
     const userRole = user.user_metadata?.role
@@ -185,8 +86,7 @@ export async function middleware(request: NextRequest) {
         if (process.env.NODE_ENV === 'development') {
           console.log('[Middleware] User is not admin/editor, redirecting to /login:', { userRole, userEmail: user.email })
         }
-        const loginUrl = new URL('/login', request.nextUrl.origin)
-        return NextResponse.redirect(loginUrl, { status: 307 })
+        return redirectToLoginWithCleanup(request, 'role_invalid')
       }
     } else if (
       pathname.startsWith('/partner/dashboard') ||
@@ -197,8 +97,7 @@ export async function middleware(request: NextRequest) {
         if (process.env.NODE_ENV === 'development') {
           console.log('[Middleware] User is not partner, redirecting to /login:', { userRole, userEmail: user.email })
         }
-        const loginUrl = new URL('/login', request.nextUrl.origin)
-        return NextResponse.redirect(loginUrl, { status: 307 })
+        return redirectToLoginWithCleanup(request, 'role_invalid')
       }
     }
     
@@ -207,14 +106,14 @@ export async function middleware(request: NextRequest) {
     }
   return NextResponse.next()
   } catch (error) {
+    const cookieHeader = request.headers.get('cookie') || ''
     console.error('[Middleware] ❌ Exception:', {
       error: error instanceof Error ? error.message : String(error),
       stack: error instanceof Error ? error.stack : undefined,
       pathname,
       hasCookies: !!cookieHeader
     })
-    const loginUrl = new URL('/login', request.nextUrl.origin)
-    return NextResponse.redirect(loginUrl, { status: 307 })
+    return redirectToLoginWithCleanup(request, 'auth_error')
   }
 }
 

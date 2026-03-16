@@ -17,6 +17,7 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
+const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast()
@@ -28,6 +29,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
+  const clearClientAuthStorage = useCallback(() => {
+    if (typeof window === 'undefined') return
+
+    const authStorageKeys = Object.keys(localStorage).filter(
+      (key) => key.includes('supabase') || key.includes('auth-token')
+    )
+    authStorageKeys.forEach((key) => localStorage.removeItem(key))
+    sessionStorage.clear()
+
+    document.cookie.split(';').forEach((rawCookie) => {
+      const cookieName = rawCookie.split('=')[0]?.trim()
+      if (!cookieName) return
+      if (cookieName.includes('auth-token') || cookieName === AUTH_COOKIE_NAME || cookieName.startsWith(`${AUTH_COOKIE_NAME}.`)) {
+        document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`
+      }
+    })
+  }, [])
+
   const handleSession = useCallback(async (session: Session | null) => {
     console.log('[AuthContext] handleSession called:', { 
       hasSession: !!session, 
@@ -38,6 +57,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(session?.user ?? null)
     setLoading(false)
   }, [])
+
+  const invalidateBrokenSession = useCallback(async (reason: string) => {
+    console.warn('[AuthContext] Invalid session detected:', reason)
+    try {
+      await supabase.auth.signOut()
+    } catch (signOutError) {
+      console.warn('[AuthContext] Error during signOut while invalidating session:', signOutError)
+    }
+    clearClientAuthStorage()
+    await handleSession(null)
+  }, [clearClientAuthStorage, handleSession, supabase])
+
+  const validateSessionWithServer = useCallback(async (session: Session | null) => {
+    if (!session) return null
+
+    const { data: { user: verifiedUser }, error: userError } = await supabase.auth.getUser()
+    if (userError || !verifiedUser) {
+      await invalidateBrokenSession(userError?.message || 'getUser failed')
+      return null
+    }
+
+    return { ...session, user: verifiedUser } as Session
+  }, [invalidateBrokenSession, supabase])
 
   useEffect(() => {
     const initAuth = () => {
@@ -53,35 +95,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           error.message?.includes('Refresh Token Not Found') ||
           error.message?.includes('refresh_token')
         )) {
-          console.warn('[AuthContext] Invalid session detected, clearing:', error.message)
-          // Clear corrupted session and storage
-          try {
-            await supabase.auth.signOut()
-            // Also clear localStorage manually as backup
-            if (typeof window !== 'undefined') {
-              const keys = Object.keys(localStorage)
-              keys.forEach(key => {
-                if (key.includes('supabase') || key.includes('auth-token')) {
-                  localStorage.removeItem(key)
-                }
-              })
-            }
-          } catch (signOutError) {
-            console.warn('[AuthContext] Error during signOut:', signOutError)
-          }
-          handleSession(null)
+          await invalidateBrokenSession(error.message)
           return
         }
         
         // Validate session has proper user structure
         if (session?.user && !session.user.id) {
-          console.warn('[AuthContext] Session missing user.id, clearing')
-          await supabase.auth.signOut()
-          handleSession(null)
+          await invalidateBrokenSession('Session missing user.id')
           return
         }
-        
-        handleSession(session)
+
+        const validatedSession = await validateSessionWithServer(session)
+        await handleSession(validatedSession)
       }
 
       getSession()
@@ -97,17 +122,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           
           // Handle token refresh errors
           if (event === 'TOKEN_REFRESHED' && !session) {
-            console.warn('[AuthContext] Token refresh failed, clearing session')
-            await supabase.auth.signOut()
-            handleSession(null)
+            await invalidateBrokenSession('Token refresh failed')
             return
           }
           
           // Validate session on auth state change
           if (session?.user && !session.user.id) {
-            console.warn('[AuthContext] Session missing user.id in onAuthStateChange, clearing')
-            await supabase.auth.signOut()
-            handleSession(null)
+            await invalidateBrokenSession('Session missing user.id in onAuthStateChange')
             return
           }
 
@@ -115,11 +136,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           if (event === 'PASSWORD_RECOVERY' && session && !recoveryHandled.current) {
             recoveryHandled.current = true
             console.log('[AuthContext] PASSWORD_RECOVERY detected, session ready for password update')
-            handleSession(session)
+            const validatedRecoverySession = await validateSessionWithServer(session)
+            await handleSession(validatedRecoverySession)
             return
           }
-          
-          handleSession(session)
+
+          const validatedSession = await validateSessionWithServer(session)
+          await handleSession(validatedSession)
         }
       )
 
@@ -156,7 +179,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
       if (cleanupFn) cleanupFn()
     }
-  }, [handleSession, pathname, supabase])
+  }, [handleSession, invalidateBrokenSession, pathname, supabase, validateSessionWithServer])
 
   const signUp = useCallback(async (email: string, password: string, options?: any) => {
     const { error } = await supabase.auth.signUp({
@@ -239,14 +262,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null)
     setSession(null)
 
-    // 3️⃣ Tüm storage'ı temizle
-    if (typeof window !== 'undefined') {
-      localStorage.clear()
-      sessionStorage.clear()
-    }
+    // 3️⃣ Auth storage/cookie temizliği
+    clearClientAuthStorage()
 
     return { error: null }
-  }, [supabase])
+  }, [clearClientAuthStorage, supabase])
 
   const updateUserPassword = useCallback(async (newPassword: string) => {
     const { data, error } = await supabase.auth.updateUser({ password: newPassword })
