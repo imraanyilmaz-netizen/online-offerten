@@ -23,36 +23,10 @@ const createCookieStorage = () => {
   // Client-side: return full storage implementation
   return {
     getItem: (key: string): string | null => {
-      // Read from localStorage (primary storage)
-      const value = localStorage.getItem(key)
-      
-      // If session exists in localStorage but not in cookie, sync it
-      if (value && key === COOKIE_NAME) {
-        // Check if cookie exists
-        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-          const [name, ...rest] = cookie.trim().split('=')
-          if (name && rest.length > 0) {
-            acc[name] = decodeURIComponent(rest.join('='))
-          }
-          return acc
-        }, {} as Record<string, string>)
-        
-        // If cookie doesn't exist or is different, sync it
-        if (!cookies[key] || cookies[key] !== value) {
-          const expires = new Date()
-          expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
-          const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
-          document.cookie = `${key}=${encodeURIComponent(value)}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-          console.log('[Supabase Storage] Cookie synced from localStorage:', { 
-            key, 
-            hadCookie: !!cookies[key], 
-            cookieDifferent: cookies[key] !== value,
-            cookieSet: true 
-          })
-        }
-      }
-      
-      return value
+      // Read from localStorage only.
+      // Intentionally do not re-create auth cookies from localStorage during reads.
+      // This prevents a tampered cookie from being auto-healed before middleware checks.
+      return localStorage.getItem(key)
     },
     setItem: (key: string, value: string): void => {
       console.log('[Supabase Storage] setItem called:', { key, valueLength: value?.length })
