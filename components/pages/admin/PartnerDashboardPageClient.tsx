@@ -31,7 +31,20 @@ const PartnerDashboardPageClient = () => {
           return;
         }
 
-        const userRole = session.user?.user_metadata?.role;
+        // Always validate session token server-side to avoid stale/broken client-only sessions.
+        const { data: { user: verifiedUser }, error: userError } = await supabase.auth.getUser(session.access_token);
+        if (userError || !verifiedUser) {
+          console.log('[PartnerDashboardPageClient] Invalid session on getUser, redirecting to /login');
+          try {
+            await supabase.auth.signOut();
+          } catch (signOutError) {
+            console.warn('[PartnerDashboardPageClient] signOut after failed getUser:', signOutError);
+          }
+          router.replace('/login?reason=session_expired');
+          return;
+        }
+
+        const userRole = verifiedUser.user_metadata?.role ?? verifiedUser.app_metadata?.role;
         
         if (userRole !== 'partner') {
           console.log('[PartnerDashboardPageClient] User is not partner, redirecting to /');
@@ -40,7 +53,7 @@ const PartnerDashboardPageClient = () => {
         }
 
         // User is partner - allow access
-        setUser(session.user);
+        setUser(verifiedUser);
         setLoading(false);
       } catch (error) {
         console.error('[PartnerDashboardPageClient] Auth check error:', error);
@@ -55,7 +68,8 @@ const PartnerDashboardPageClient = () => {
     return <LoadingFallback />;
   }
 
-  if (!user || user.user_metadata?.role !== 'partner') {
+  const role = user?.user_metadata?.role ?? user?.app_metadata?.role;
+  if (!user || role !== 'partner') {
     return null;
   }
 

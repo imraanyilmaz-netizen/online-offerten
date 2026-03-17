@@ -104,11 +104,6 @@ function getSessionFromCookies(cookieHeader: string) {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  
-  // Skip RSC requests - these are internal Next.js requests
-  if (pathname.includes('_rsc') || request.nextUrl.searchParams.has('_rsc')) {
-    return NextResponse.next()
-  }
 
   // Skip /login route to prevent redirect loops
   if (pathname === '/login' || pathname.startsWith('/login/')) {
