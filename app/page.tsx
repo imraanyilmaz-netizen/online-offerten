@@ -303,7 +303,7 @@ export default async function HomePage() {
                 
                 <div className="rounded-2xl border border-gray-200 bg-white/80 p-3 sm:p-4 mb-6">
                   <h2 className="text-base md:text-lg font-bold text-gray-800 mt-0 mb-2 text-left">
-                    Welche Dienstleistung benötigen Sie?
+                    SERVICE WÄHLEN
                   </h2>
                 {/* Service Quick Links */}
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3 mt-0 mb-0">

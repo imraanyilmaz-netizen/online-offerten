@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle, MapPin, Home, Building, Globe, Package, Truck, Box, ChevronRight } from 'lucide-react'
+import { CheckCircle, Clock3, ChevronRight } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 const UmzugsfirmaPageClient = () => {
@@ -158,114 +158,44 @@ const UmzugsfirmaPageClient = () => {
 
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
-              <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
-                <MapPin className="h-4 w-4 mr-2" />
-                Lokale Umzugsfirmen finden
-              </div>
-              <h1 className="heading-1 !mt-0">
-                Umzugsfirma finden – Kostenlose Umzugsofferten vergleichen
-              </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
-                Vergleichen Sie bis zu 5 Offerten von geprüften Umzugsfirmen in Ihrer Region – kostenlos und unverbindlich.
-              </p>
-
-              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-6">
-                <Link
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
-                >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Privatumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Wohnungsumzug</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
-                >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Geschäftsumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Firmenumzug</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
-                >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
-                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Auslandumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">International</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
-                >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
-                    <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Spezialtransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Klavier, Safe & mehr</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
-                >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Kleintransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Einzelne Gegenstände</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
-                >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
-                    <Box className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Wohnung ein-/auslagern</p>
-                  </div>
-                </Link>
-              </div>
-
-              <div className="flex flex-wrap gap-6 text-sm text-gray-700">
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
-                  <span>100% kostenlos</span>
+              <div>
+                <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
+                  <Clock3 className="h-4 w-4 mr-2" />
+                  In 2 Minuten kostenlos Angebote erhalten
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
-                  <span>Geprüfte Firmen</span>
+                <h1 className="heading-1 !mt-0">
+                  Umzugsfirma finden – Kostenlose Umzugsofferten vergleichen
+                </h1>
+                <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+                  Vergleichen Sie bis zu 5 Offerten von <strong>geprüften Umzugsfirmen</strong> in Ihrer Region – kostenlos und unverbindlich.
+                </p>
+
+                <div className="mb-6">
+                  <Link
+                    href="https://online-offerten.ch/kostenlose-offerte-anfordern?step=2&service=umzug"
+                    className="inline-flex w-full sm:w-auto rounded-xl bg-green-600 px-6 py-3 text-center text-white shadow-md transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
+                  >
+                    <span className="text-base font-bold sm:text-lg">Kostenlose Offerten anfordern</span>
+                  </Link>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
-                  <span>Bis zu 5 Offerten</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
-                  <span>Bis zu 40% sparen</span>
+
+                <div className="flex flex-wrap gap-6 text-sm text-gray-700">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <span>100% kostenlos</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <span>Geprüfte Firmen</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <span>Bis zu 5 Offerten</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <span>Bis zu 40% sparen</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -273,7 +203,7 @@ const UmzugsfirmaPageClient = () => {
             <div className="relative md:col-span-2">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                 <Image
-                  src="/bilder/umzugsfirma-privatumzug-600-400.webp"
+                  src="/umzug/b073e2a2-3bd4-4499-af1a-f2cf4f3e1a92.webp"
                   alt="Umzugsfirma in der Schweiz – Offerten vergleichen"
                   width={600}
                   height={450}
@@ -281,9 +211,9 @@ const UmzugsfirmaPageClient = () => {
                   priority
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl shadow-lg hidden md:block">
+              <div className="absolute -bottom-4 -left-4 rounded-xl border border-gray-200 bg-white px-5 py-3 text-gray-900 shadow-sm hidden md:block">
                 <p className="text-sm font-bold">Professioneller Umzugsservice</p>
-                <p className="text-xs text-blue-100">In Ihrer Region</p>
+                <p className="text-xs text-gray-600">In Ihrer Region</p>
               </div>
             </div>
           </div>
@@ -468,7 +398,7 @@ const UmzugsfirmaPageClient = () => {
                 <li>Endreinigung</li>
               </ul>
               <p className="text-body">
-                Über dieses <strong>Portal</strong> können Sie verschiedene Anbieter vergleichen und schnell die passende Umzugsofferte
+                Über unser <strong>Portal</strong> können Sie verschiedene Anbieter vergleichen und schnell die passende Umzugsofferte
                 im Aargau erhalten.
               </p>
             </article>
