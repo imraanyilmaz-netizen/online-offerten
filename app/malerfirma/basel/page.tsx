@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
+import { BreadcrumbHomeLink } from '@/components/ui/breadcrumb-home-link'
 import MalerfirmaBaselPageClient from '@/components/pages/locations/MalerfirmaBaselPageClient'
 
 const city = "Basel"

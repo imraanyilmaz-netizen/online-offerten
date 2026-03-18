@@ -11,6 +11,7 @@ import {
   MessageSquare, ChevronRight, MapPin, Building, ShieldCheck, TrendingUp, Home,
   Globe, Box, Package, CheckCircle2
 } from 'lucide-react'
+import { BreadcrumbHomeLink } from '@/components/ui/breadcrumb-home-link'
 import { PiPianoKeysFill } from 'react-icons/pi'
 
 const GeschaeftsumzugPageClient = () => {

@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowRight, CheckCircle, AlertTriangle, Calculator, MapPin, ShieldCheck, TrendingUp } from 'lucide-react'
+import { BreadcrumbHomeLink } from '@/components/ui/breadcrumb-home-link'
 
 const KlaviertransportKostenPageClient = () => {
   const quoteUrl = "/kostenlose-offerte-anfordern"

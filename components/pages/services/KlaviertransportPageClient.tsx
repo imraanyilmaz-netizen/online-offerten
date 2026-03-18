@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ArrowRight, CheckCircle, AlertTriangle, Shield, Users, HelpCircle, Package, MapPin, Clock, Calculator, Sparkles, BookOpen, ChevronRight, Search, ShieldCheck, TrendingUp, Building, Home, Globe, Box, ArrowUpDown, CheckCircle2 } from 'lucide-react'
+import { BreadcrumbHomeLink } from '@/components/ui/breadcrumb-home-link'
 import { PiPianoKeysFill } from 'react-icons/pi'
 
 const Hero = ({ quoteUrl }: { quoteUrl: string }) => {
