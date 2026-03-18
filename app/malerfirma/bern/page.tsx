@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import MalerfirmaBernPageClient from '@/components/pages/locations/MalerfirmaBernPageClient'
+import { BreadcrumbHomeLink } from '@/components/ui/breadcrumb-home-link'
 
 const city = "Bern"
 const canonicalUrl = '/malerfirma/bern'
@@ -158,7 +159,7 @@ export default function MalerfirmaBernPage() {
             <nav className="mb-4" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-purple-600 transition-colors">Startseite</Link>
+                  <BreadcrumbHomeLink />
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />

@@ -279,7 +279,7 @@ export default function UmzugsfirmaDietikonPage() {
             <nav className="mt-4 sm:mt-6 pt-4 px-4 sm:px-0" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link>
+                  <BreadcrumbHomeLink />
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />

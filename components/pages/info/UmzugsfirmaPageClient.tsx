@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle, Clock3, ChevronRight } from 'lucide-react'
+import { CheckCircle, Clock3, ChevronRight, Home } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 const UmzugsfirmaPageClient = () => {
@@ -131,7 +131,7 @@ const UmzugsfirmaPageClient = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+      <section className="relative pt-9 pb-0 md:pt-14 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50">
         <div className="absolute inset-0 opacity-5">
           <div
             className="absolute inset-0"
@@ -142,29 +142,15 @@ const UmzugsfirmaPageClient = () => {
           ></div>
         </div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-          <nav className="mb-6 pt-4" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2 text-sm text-gray-600">
-              <li>
-                <Link href="/" className="hover:text-blue-600 transition-colors">Startseite</Link>
-              </li>
-              <li>
-                <ChevronRight className="w-4 h-4 text-gray-400" />
-              </li>
-              <li className="text-gray-900 font-medium" aria-current="page">
-                Umzugsfirma
-              </li>
-            </ol>
-          </nav>
-
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
               <div>
-                <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
+                <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
                   <Clock3 className="h-4 w-4 mr-2" />
                   In 2 Minuten kostenlos Angebote erhalten
                 </div>
                 <h1 className="heading-1 !mt-0">
-                  Umzugsfirma finden – Kostenlose Umzugsofferten vergleichen
+                  Umzugsfirmen finden – Kostenlose Umzugsofferten vergleichen
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
                   Vergleichen Sie bis zu 5 Offerten von <strong>geprüften Umzugsfirmen</strong> in Ihrer Region – kostenlos und unverbindlich.
@@ -173,7 +159,7 @@ const UmzugsfirmaPageClient = () => {
                 <div className="mb-6">
                   <Link
                     href="https://online-offerten.ch/kostenlose-offerte-anfordern?step=2&service=umzug"
-                    className="inline-flex w-full sm:w-auto rounded-xl bg-green-600 px-6 py-3 text-center text-white shadow-md transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
+                    className="inline-flex rounded-xl bg-green-600 px-6 py-3 text-center text-white shadow-md transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
                   >
                     <span className="text-base font-bold sm:text-lg">Kostenlose Offerten anfordern</span>
                   </Link>
@@ -211,12 +197,26 @@ const UmzugsfirmaPageClient = () => {
                   priority
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 rounded-xl border border-gray-200 bg-white px-5 py-3 text-gray-900 shadow-sm hidden md:block">
+              <div className="absolute -bottom-4 -left-4 rounded-xl border border-gray-200 bg-white px-5 py-3 text-gray-900 shadow-sm">
                 <p className="text-sm font-bold">Professioneller Umzugsservice</p>
                 <p className="text-xs text-gray-600">In Ihrer Region</p>
               </div>
             </div>
           </div>
+
+          <nav className="mt-8 pt-4 pb-4 border-b border-gray-200 -mx-4 px-4 md:-mx-6 md:px-6" aria-label="Breadcrumb">
+            <ol className="flex items-center space-x-2 text-sm text-gray-600">
+              <li>
+                <Link href="/" className="hover:text-blue-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
+              </li>
+              <li>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Umzugsfirma
+              </li>
+            </ol>
+          </nav>
         </div>
       </section>
 

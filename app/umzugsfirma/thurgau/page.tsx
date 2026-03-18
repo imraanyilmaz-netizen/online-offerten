@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp, ChevronRight, FileText, Mail, BarChart3, MapPin } from 'lucide-react'
+import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp, ChevronRight, FileText, Mail, BarChart3, MapPin, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import ServiceGrid from '@/components/pages/locations/ServiceGrid.client'
@@ -182,7 +182,7 @@ export default async function UmzugsfirmaThurgauPage() {
           <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
             <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
-                <li><Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link></li>
+                <li><Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link></li>
                 <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
                 <li><Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma</Link></li>
                 <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>

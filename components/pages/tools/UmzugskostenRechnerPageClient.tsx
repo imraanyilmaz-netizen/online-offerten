@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 // Framer Motion removed for better performance
-import { Calculator, CheckCircle, ChevronRight as ChevronRightIcon } from 'lucide-react';
+import { Calculator, CheckCircle, ChevronRight as ChevronRightIcon, Home } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import MovingCostCalculator from '@/components/UmzugskostenRechnerSections/MovingCostCalculator';
 
@@ -61,7 +61,7 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
             <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link>
+                  <Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
                 </li>
                 <li><ChevronRightIcon className="w-4 h-4 text-gray-400" /></li>
                 <li>

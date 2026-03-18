@@ -4,7 +4,7 @@ import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, ShieldCheck, Package, Sparkles, MapPin, ChevronRight, Calculator, TrendingUp, FileText, Mail, BarChart3, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle, ShieldCheck, Package, Sparkles, MapPin, ChevronRight, Calculator, TrendingUp, FileText, Mail, BarChart3, Star, Home } from 'lucide-react';
 import Image from 'next/image';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
@@ -112,9 +112,7 @@ const UmzugsfirmaBaselPageClient = ({ baselPartners = [] }: UmzugsfirmaBaselPage
           <nav className="mb-6" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
               <li>
-                <Link href="/" className="hover:text-green-600 transition-colors">
-                  Startseite
-                </Link>
+                <Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
               </li>
               <li>
                 <ChevronRight className="w-4 h-4 text-gray-400" />

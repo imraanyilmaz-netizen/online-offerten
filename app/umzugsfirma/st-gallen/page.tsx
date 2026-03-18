@@ -182,7 +182,7 @@ export default async function UmzugsfirmaStGallenPage() {
           <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
             <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
-                <li><Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link></li>
+                <li><BreadcrumbHomeLink /></li>
                 <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
                 <li><Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma</Link></li>
                 <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>

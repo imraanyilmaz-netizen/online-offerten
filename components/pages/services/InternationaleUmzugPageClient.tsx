@@ -4,7 +4,7 @@ import React from 'react'
 
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Globe2, ChevronRight } from 'lucide-react'
+import { ArrowRight, CheckCircle, Globe2, ChevronRight, Home } from 'lucide-react'
 import InternationalPageNavigation from '@/components/international/InternationalPageNavigation'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import InternationalCostCalculator from '@/components/international/InternationalCostCalculator'
@@ -543,7 +543,7 @@ const InternationaleUmzugPageClient = () => {
             <nav className="mb-4 pt-4" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link>
+                  <Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />

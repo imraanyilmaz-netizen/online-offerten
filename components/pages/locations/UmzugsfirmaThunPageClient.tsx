@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck, TrendingUp } from 'lucide-react';
+import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck, TrendingUp, Home } from 'lucide-react';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import LocationSidebar from '@/components/locations/LocationSidebar';
@@ -63,9 +63,7 @@ const UmzugsfirmaThunPageClient = () => {
             <nav className="mb-6" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-green-600 transition-colors">
-                    Startseite
-                  </Link>
+<Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
                 </li>
                 <li>
                   <ChevronRight className="w-4 h-4 text-gray-400" />

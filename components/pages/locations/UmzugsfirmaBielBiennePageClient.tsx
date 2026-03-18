@@ -4,7 +4,7 @@ import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Users, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle, Users, ChevronRight, Home } from 'lucide-react';
 import { locations } from '@/data/locations';
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation';
 import LocationSidebar from '@/components/locations/LocationSidebar';
@@ -48,7 +48,7 @@ const UmzugsfirmaBielBiennePageClient = () => {
           {/* Breadcrumb Navigation */}
           <nav className="mb-4 pt-4" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
-              <li><Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link></li>
+              <li><Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link></li>
               <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
               <li><Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma</Link></li>
               <li><ChevronRight className="w-4 h-4 text-gray-400" /></li>
