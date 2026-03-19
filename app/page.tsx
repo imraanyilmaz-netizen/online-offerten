@@ -306,106 +306,63 @@ export default async function HomePage() {
                     SERVICE WÄHLEN
                   </h2>
                 {/* Service Quick Links */}
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3 mt-0 mb-0">
-                  {/* Umzug Button */}
-                  <Link 
-                    href="/kostenlose-offerte-anfordern?step=3&service=umzug&umzugArt=privatumzug&endreinigung=ja"
-                    className="w-full flex flex-col p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-lg group"
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-0 mb-0">
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=umzug&step=2"
+                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-blue-400 hover:shadow-md group"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                        <div className="relative w-4 h-4 sm:w-5 sm:h-5">
-                          <Package className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
-                          <Sparkles className="absolute -top-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 text-blue-700 group-hover:text-white transition-colors" />
-                        </div>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-blue-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
+                    <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                      <Truck className="w-7 h-7 text-blue-600" />
                     </div>
-                    <div className="mt-3 text-left">
-                      <p className="font-semibold text-base text-gray-900 whitespace-nowrap">Umzug & Reinigung</p>
+                    <div className="flex-1 text-left min-w-0">
+                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Umzug</p>
+                      <p className="text-sm text-gray-700 leading-snug">Privat, Geschäftlich, International & Spezial</p>
                     </div>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                   </Link>
 
-                  {/* Nur Umzug Button */}
-                  <Link 
-                    href="/kostenlose-offerte-anfordern?step=2&service=umzug"
-                    className="w-full flex flex-col p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-sky-500 hover:bg-sky-50 hover:shadow-lg group"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-sky-100 group-hover:bg-sky-500 transition-colors">
-                        <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 group-hover:text-white transition-colors" />
-                    </div>
-                      <ArrowRight className="w-4 h-4 text-sky-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
-                    </div>
-                    <div className="mt-3 text-left">
-                      <p className="font-semibold text-base text-gray-900">Nur Umzug</p>
-                    </div>
-                  </Link>
-                  
-                  {/* Nur Reinigung Button */}
-                  <Link 
+                  <Link
                     href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
-                    className="w-full flex flex-col p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-lg group"
+                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-purple-400 hover:shadow-md group"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                        <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                    <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center flex-shrink-0">
+                      <Sparkles className="w-7 h-7 text-purple-600" />
                     </div>
-                      <ArrowRight className="w-4 h-4 text-purple-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
+                    <div className="flex-1 text-left min-w-0">
+                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Reinigung</p>
+                      <p className="text-sm text-gray-700 leading-snug">Umzugs-, Büro-, Fensterreinigung & mehr</p>
                     </div>
-                    <div className="mt-3 text-left">
-                      <p className="font-semibold text-base text-gray-900">Nur Reinigung</p>
-                    </div>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                   </Link>
-                  
-                  {/* Büroumzug Button */}
-                  <Link 
-                    href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
-                    className="w-full flex flex-col p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-lg group"
+
+                  <Link
+                    href="/kostenlose-offerte-anfordern?service=maler&step=2"
+                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-amber-400 hover:shadow-md group"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
-                        <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-indigo-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
+                    <div className="w-16 h-16 rounded-2xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+                      <Paintbrush className="w-7 h-7 text-amber-600" />
                     </div>
-                    <div className="mt-3 text-left">
-                      <p className="font-semibold text-base text-gray-900">Büroumzug</p>
+                    <div className="flex-1 text-left min-w-0">
+                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Malerarbeiten</p>
+                      <p className="text-sm text-gray-700 leading-snug">Innen-, Aussenanstrich, Fassaden & mehr</p>
                     </div>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                   </Link>
-                  
-                  {/* Räumung & Entsorgung Button */}
-                  <Link 
+
+                  <Link
                     href="/kostenlose-offerte-anfordern?service=raeumung&step=2"
-                    className="w-full flex flex-col p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-red-500 hover:bg-red-50 hover:shadow-lg group"
+                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-emerald-400 hover:shadow-md group"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 group-hover:bg-red-500 transition-colors">
-                        <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 group-hover:text-white transition-colors" />
+                    <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                      <Trash2 className="w-7 h-7 text-emerald-600" />
                     </div>
-                      <ArrowRight className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
+                    <div className="flex-1 text-left min-w-0">
+                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Räumung & Entsorgung</p>
+                      <p className="text-sm text-gray-700 leading-snug">Wohnungsräumung, Entrümpelung & mehr</p>
                     </div>
-                    <div className="mt-3 text-left">
-                      <p className="font-semibold text-base text-gray-900">Entsorgung</p>
-                    </div>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
                   </Link>
-                  
-                  {/* Klaviertransport Button */}
-                  <Link 
-                    href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport"
-                    className="w-full flex flex-col p-4 border-2 rounded-xl transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-lg group"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18.5 8c-1.4 0-2.6-.8-3.2-2A6.87 6.87 0 0 0 2 9v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8.5C22 9.6 20.4 8 18.5 8"/><path d="M2 14h20"/><path d="M6 14v4"/><path d="M10 14v4"/><path d="M14 14v4"/><path d="M18 14v4"/></svg>
-                    </div>
-                      <ArrowRight className="w-4 h-4 text-teal-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
-                    </div>
-                    <div className="mt-3 text-left">
-                      <p className="font-semibold text-base text-gray-900">Klavierumzug</p>
-                    </div>
-                  </Link>
-                  </div>
+                </div>
                 </div>
                 
                 {/* Rating Card */}
@@ -478,9 +435,11 @@ export default async function HomePage() {
                   }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-lg flex-shrink-0">💡</span>
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <ShieldCheck className="h-4 w-4 text-green-700" />
+                    </div>
                     <p className="text-sm sm:text-base font-medium text-green-800">
-                      Statt 5 Firmen einzeln zu kontaktieren, genügt eine einzige Anfrage.
+                      Vergleichen Sie kostenlos regionale Umzugs- und Reinigungsfirmen für Ihren Umzug oder Ihre Reinigung.
                     </p>
                   </div>
                   <div className="border-t border-gray-200 pt-3 flex flex-wrap items-center gap-4">
@@ -505,78 +464,80 @@ export default async function HomePage() {
           {/* So einfach geht's Section */}
           <section className="py-12 md:py-16 lg:py-20 bg-white relative z-10">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-                <h2 className="heading-2 mb-8 md:mb-12 text-left">
-                So erhalten Sie passende Offerten:
-                  </h2>
-                  
-              {/* Steps - Scrollable on mobile */}
-              <div className="overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible">
-                <div className="flex md:grid md:grid-cols-3 gap-6 min-w-max md:min-w-0">
-                  {/* Step 1 */}
-                  <div className="bg-white rounded-2xl p-6 md:p-8 flex-shrink-0 w-[280px] md:w-auto shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
-                    <div className="bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold w-fit mb-6">
+              <div className="mb-8 md:mb-12">
+                <h2 className="heading-2 mb-3 text-left">
+                  In 3 Schritten die besten Anbieter Ihrer Region finden
+                </h2>
+                <p className="text-gray-600 text-base md:text-lg max-w-3xl">
+                  In drei klaren Schritten kommen Sie schnell zu passenden Angeboten aus Ihrer Region.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+                {/* Step 1 */}
+                <div className="group rounded-2xl border border-gray-200 bg-gradient-to-b from-white to-gray-50 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="bg-green-600 text-white rounded-lg px-3 py-1.5 text-xs font-semibold">
                       Schritt 1
                     </div>
-                    <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center">
-                        <FileText className="w-8 h-8 text-white" />
-                      </div>
-                    </div>
-                    <h3 className="heading-4 mb-3 text-center">
-                      Offerten einholen
-                    </h3>
-                    <p className="text-body text-center text-sm">
-                      Beschreiben Sie Ihr Projekt in wenigen Schritten online.
-                    </p>
-                    <div className="mt-5 text-center">
-                      <Button
-                        asChild
-                        variant="outline"
-                        size="sm"
-                        className="border-green-600 text-green-700 hover:bg-green-50 font-semibold"
-                      >
-                        <Link href="/kostenlose-offerte-anfordern">
-                          Gratis Anfrage starten
-                        </Link>
-                      </Button>
+                    <div className="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center">
+                      <FileText className="w-6 h-6 text-green-600" />
                     </div>
                   </div>
+                  <h3 className="heading-4 mb-3">
+                    Kostenlose Offerten einholen
+                  </h3>
+                  <p className="text-body text-sm">
+                    Beschreiben Sie Ihr Projekt in wenigen Schritten online.
+                  </p>
+                  <div className="mt-5">
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="border-green-600 text-green-700 hover:bg-green-50 font-semibold"
+                    >
+                      <Link href="/kostenlose-offerte-anfordern">
+                        Gratis Anfrage starten
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
 
-                  {/* Step 2 */}
-                  <div className="bg-white rounded-2xl p-6 md:p-8 flex-shrink-0 w-[280px] md:w-auto shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
-                    <div className="bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold w-fit mb-6">
+                {/* Step 2 */}
+                <div className="group rounded-2xl border border-gray-200 bg-gradient-to-b from-white to-gray-50 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="bg-green-600 text-white rounded-lg px-3 py-1.5 text-xs font-semibold">
                       Schritt 2
                     </div>
-                    <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center">
-                        <GitCompareArrows className="w-8 h-8 text-white" />
-                      </div>
+                    <div className="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center">
+                      <GitCompareArrows className="w-6 h-6 text-green-600" />
                     </div>
-                    <h3 className="heading-4 mb-3 text-center">
-                      Offerten vergleichen
-                    </h3>
-                    <p className="text-body text-center text-sm">
-                      Bis zu 5 kostenlose Angebote von geprüften Partnern.
-                    </p>
                   </div>
+                  <h3 className="heading-4 mb-3">
+                    Offerten vergleichen
+                  </h3>
+                  <p className="text-body text-sm">
+                    Bis zu 5 kostenlose Angebote von geprüften Partnern.
+                  </p>
+                </div>
 
-                  {/* Step 3 */}
-                  <div className="bg-white rounded-2xl p-6 md:p-8 flex-shrink-0 w-[280px] md:w-auto shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
-                    <div className="bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold w-fit mb-6">
+                {/* Step 3 */}
+                <div className="group rounded-2xl border border-gray-200 bg-gradient-to-b from-white to-gray-50 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="bg-green-600 text-white rounded-lg px-3 py-1.5 text-xs font-semibold">
                       Schritt 3
                     </div>
-                    <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center">
-                        <Users className="w-8 h-8 text-white" />
-                      </div>
+                    <div className="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center">
+                      <Users className="w-6 h-6 text-green-600" />
                     </div>
-                    <h3 className="heading-4 mb-3 text-center">
-                      Anbieter auswählen
-                    </h3>
-                    <p className="text-body text-center text-sm">
-                      Vergleichen & den besten Anbieter auswählen.
-                    </p>
                   </div>
+                  <h3 className="heading-4 mb-3">
+                    Anbieter auswählen
+                  </h3>
+                  <p className="text-body text-sm">
+                    Vergleichen & den besten Anbieter auswählen.
+                  </p>
                 </div>
               </div>
             </div>
@@ -606,13 +567,8 @@ export default async function HomePage() {
                 {/* Right Side - Text Content */}
                 <div className="space-y-6 order-1 lg:order-2">
                   <div>
-                    <div className="flex justify-start mb-3">
-                      <h2 className="inline-flex w-fit items-center rounded-full bg-green-50 px-4 py-2 text-sm md:text-base font-semibold text-green-800">
-                        Mit Online-Offerten.ch zu besseren Offerten.
-                    </h2>
-                    </div>
                     <h3 className="heading-3 mb-6">
-                      Ihre Vorteile mit unserer Vermittlung
+                      Ihre Vorteile, wenn Sie den Umzug mit uns planen
                     </h3>
                   </div>
 
@@ -624,10 +580,10 @@ export default async function HomePage() {
                       </div>
                       <div>
                         <h3 className="heading-4 mb-2">
-                          100 % kostenlos
+                          Schnell angefragt, klar verglichen
                         </h3>
                         <p className="text-body leading-relaxed">
-                          Unser Service ist für Sie völlig kostenfrei. Die Finanzierung erfolgt über die teilnehmenden Fachanbieter.
+                          Mit unserem einfachen Formular stellen Sie Ihre Anfrage in rund 2 Minuten. Danach erhalten Sie mehrere passende Offerten und können durch den direkten Vergleich bis zu 40% sparen.
                         </p>
                       </div>
                     </div>
@@ -639,10 +595,10 @@ export default async function HomePage() {
                       </div>
                       <div>
                         <h3 className="heading-4 mb-2">
-                          Unverbindlich & risikofrei
+                          Geprüfte Anbieter aus Ihrer Region
                         </h3>
                         <p className="text-body leading-relaxed">
-                          Das Einholen und Vergleichen von Angeboten ist für Sie jederzeit unverbindlich – ohne Verpflichtungen.
+                          Ihre Anfrage wird an geeignete Umzugsunternehmen aus Ihrer Umgebung weitergeleitet. So vergleichen Sie Bewertungen, Leistungen und Konditionen ohne lange eigene Suche.
                         </p>
                       </div>
                     </div>
@@ -654,10 +610,10 @@ export default async function HomePage() {
                       </div>
                       <div>
                         <h3 className="heading-4 mb-2">
-                          Passende Anbieter für Ihr Projekt
+                          Persönliche Unterstützung bei größeren Umzügen
                         </h3>
                         <p className="text-body leading-relaxed">
-                          Sie erhalten ausschliesslich Vorschläge von Anbietern, die fachlich und inhaltlich zu Ihrem Projekt passen.
+                          Bei umfangreichen Umzügen oder längeren Strecken helfen wir Ihnen bei der Einordnung der Angebote, damit Sie die für Ihr Projekt passende Entscheidung treffen können.
                         </p>
                       </div>
                     </div>
@@ -677,14 +633,7 @@ export default async function HomePage() {
               backgroundRepeat: 'no-repeat'
             }}
           >
-            {/* Overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white/85 to-green-50/40 pointer-events-none z-10"></div>
             <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-20">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="heading-2 mb-4">
-                  Online anfragen, Offerten vergleichen und smart entscheiden.
-                </h2>
-              </div>
               <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
                 {/* Umzugsfirma */}
                 <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
