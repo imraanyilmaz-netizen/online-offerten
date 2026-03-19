@@ -115,9 +115,14 @@ const TrustBadge = memo(() => {
     if (stats.review_count === 0) return null;
 
     return (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-center">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-                <StarRating rating={stats.average_rating} reviewCount={stats.review_count} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-center">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+                    <StarRating rating={stats.average_rating} reviewCount={stats.review_count} />
+                </div>
+            </div>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-center font-medium text-green-800">
+                In 2 Minuten kostenlos Angebote erhalten
             </div>
         </div>
     );
@@ -949,7 +954,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   };
 
-  const stepTitle = getStepTitle();
   
   // Get selected service names for Step 3
   const getSelectedServiceText = () => {
@@ -1053,7 +1057,9 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   };
   
+  const stepTitle = getStepTitle();
   const selectedServiceText = getSelectedServiceText();
+
   
   const handleNavigateHome = () => {
     setPendingNavigation('/');
@@ -1127,17 +1133,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       ref={formRef}
       className="w-full max-w-6xl mx-auto py-3 sm:py-4 md:py-5 px-2 sm:px-0"
     >
-      <div className="px-4 sm:px-6 md:px-8 mb-3">
-        <TrustBadge />
-      </div>
-
-      <div className="text-center p-2 sm:p-3 md:p-4">
-        <p className="text-sm sm:text-base md:text-lg text-gray-600 font-medium">{stepTitle}</p>
-        {selectedServiceText && (
-          <p className="text-xs sm:text-sm text-gray-500 mt-1">{selectedServiceText}</p>
-        )}
-      </div>
-
       <div className="p-2 sm:p-3">
           <div className="flex justify-between items-center mb-1.5 sm:mb-2 px-1 sm:px-2">
               <span className="text-xs text-gray-500">{t('stepProgress', { currentStep, totalSteps: TOTAL_FORM_STEPS })}</span>
@@ -1150,7 +1145,18 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           </div>
       </div>
       
-      <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 border border-gray-200 rounded-xl shadow-lg bg-white" noValidate>
+      <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 border border-gray-200 rounded-xl shadow-lg bg-gradient-to-b from-emerald-50/30 via-white to-slate-50/30" noValidate>
+        {currentStep === 3 && (
+          <div className="text-center border border-emerald-100 bg-gradient-to-b from-emerald-50/60 to-white rounded-lg px-3 py-3 mb-1">
+            {selectedServiceText && (
+              <p className="inline-flex items-center mt-2 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs sm:text-sm text-emerald-800 font-medium">
+                {selectedServiceText}
+              </p>
+            )}
+            <p className="text-base sm:text-lg md:text-xl text-gray-800 font-semibold leading-snug mt-2">{stepTitle}</p>
+          </div>
+        )}
+
         <div
           key={currentStep}
           className={`transition-opacity duration-300 ease-in-out ${(currentStep === 2 && !isStep1Completed) || (currentStep === 3 && (!isStep1Completed || !isStep2Completed)) ? 'pointer-events-none opacity-50' : ''}`}
@@ -1187,6 +1193,23 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
 
         </div>
       </form>
+
+      <div className="mt-3 mb-2 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/70 via-white to-slate-50 p-4 sm:p-6 shadow-sm">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-emerald-200 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 font-medium">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <span>{t('quoteFormPage.benefits.free')}</span>
+          </div>
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-emerald-200 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 font-medium">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span>{t('quoteFormPage.benefits.verified')}</span>
+          </div>
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-emerald-200 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 font-medium">
+            <Clock className="w-4 h-4 text-emerald-600" />
+            <span>{t('quoteFormPage.benefits.fast')}</span>
+          </div>
+        </div>
+      </div>
       
       {/* Zurück zur Startseite - jetzt nur in Step 1 im Button-Bereich sichtbar */}
 

@@ -87,9 +87,9 @@ const Footer = React.memo(() => {
               </span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-md">
-              Online-Offerten.ch ist ein Vergleichsportal fuer Umzug, Reinigung und Malerarbeiten in der Schweiz.
+              Online-Offerten.ch ist ein Vergleichsportal für Umzug, Reinigung und Malerarbeiten in der Schweiz.
               <br /><br />
-              Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von geprueften Firmen aus Ihrer Region - kostenlos und unverbindlich.
+              Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von geprüften Firmen aus Ihrer Region - kostenlos und unverbindlich.
             </p>
             <div className="flex items-center gap-2 text-slate-400 text-sm">
               <Mail className="w-4 h-4" />

@@ -203,55 +203,8 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
         </div>
       </SectionCard>
 
-      <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
+      <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle">
         <div className="space-y-3">
-            {/* Umzug: Zusätzliche Leistungen */}
-            {formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international') && (
-              <>
-                <p className="text-xs text-slate-500 mb-1">Mehr Details helfen uns, passende und faire Angebote für Sie zu finden. Unvollständige Angaben können zu späteren Preisänderungen führen.</p>
-                <div className="flex items-center space-x-3">
-                  <Checkbox id="furniture_assembly_s3" name="furniture_assembly" checked={formData.furniture_assembly || false} onCheckedChange={(checked) => handleCheckboxChange('furniture_assembly', checked)} className="h-6 w-6"/>
-                  <Label htmlFor="furniture_assembly_s3" className="font-medium text-base text-slate-800 cursor-pointer">Möbel müssen demontiert und wieder montiert werden</Label>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Checkbox id="additional_services_packing_s3" name="additional_services_packing" checked={formData.additional_services_packing || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_packing', checked)} className="h-6 w-6"/>
-                  <Label htmlFor="additional_services_packing_s3" className="font-medium text-base text-slate-800 cursor-pointer">Umzug mit Einpackservice</Label>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-3">
-                    <Checkbox id="special_transport_s3" name="special_transport" checked={formData.special_transport || false} onCheckedChange={(checked) => {
-                      handleCheckboxChange('special_transport', checked);
-                      if (!checked) {
-                        handleCheckboxChange('special_transport_piano', false);
-                        handleCheckboxChange('special_transport_safe', false);
-                        handleCheckboxChange('special_transport_heavy', false);
-                      }
-                    }} className="h-6 w-6"/>
-                    <Label htmlFor="special_transport_s3" className="font-medium text-base text-slate-800 cursor-pointer">Wird auch ein Klavier oder Flügel mittransportiert?</Label>
-                  </div>
-                  {formData.special_transport && (
-                    <div className="ml-9 mt-2 space-y-2 pl-3 border-l-2 border-green-200">
-                      <div className="flex items-center space-x-3">
-                        <Checkbox id="special_transport_piano_s3" checked={formData.special_transport_piano || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_piano', checked)} className="h-6 w-6"/>
-                        <Label htmlFor="special_transport_piano_s3" className="font-medium text-base text-slate-800 cursor-pointer">Klavier</Label>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <Checkbox id="special_transport_heavy_s3" checked={formData.special_transport_heavy || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_heavy', checked)} className="h-6 w-6"/>
-                        <Label htmlFor="special_transport_heavy_s3" className="font-medium text-base text-slate-800 cursor-pointer">Flügel</Label>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <div className="flex items-center space-x-3">
-                    <Checkbox id="additional_services_disposal_s3" name="additional_services_disposal" checked={formData.additional_services_disposal || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_disposal', checked)} className="h-6 w-6"/>
-                    <Label htmlFor="additional_services_disposal_s3" className="font-medium text-base text-slate-800 cursor-pointer">Entsorgung von Möbeln / Gegenständen</Label>
-                  </div>
-                  <p className="ml-9 text-xs text-slate-400 mt-0.5">Sperrgut, das entsorgt werden soll</p>
-                </div>
-              </>
-            )}
-
             {/* Reinigung: Wohnungsfläche, Art der Reinigung, Zusatzflächen */}
             {((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) ||
               (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) && (
@@ -295,28 +248,11 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
                   </div>
                 )}
 
-                {/* Zusatzflächen */}
-                <div className="space-y-1.5">
-                  <span className="text-sm text-slate-600">Zusatzflächen (optional)</span>
-                  <div className="flex flex-wrap gap-3">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="cleaning_extra_balkon_s3" checked={formData.cleaning_extra_balkon || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_balkon', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="cleaning_extra_balkon_s3" className="font-medium text-base text-slate-800 cursor-pointer">Balkon</Label>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Checkbox id="cleaning_extra_keller_s3" checked={formData.cleaning_extra_keller || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_keller', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="cleaning_extra_keller_s3" className="font-medium text-base text-slate-800 cursor-pointer">Keller</Label>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Checkbox id="cleaning_extra_garage_s3" checked={formData.cleaning_extra_garage || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_garage', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="cleaning_extra_garage_s3" className="font-medium text-base text-slate-800 cursor-pointer">Garage</Label>
-                    </div>
-                  </div>
-                </div>
+                {/* Zusatzflächen sind vorübergehend ausgeblendet. */}
               </div>
             )}
         </div>
-        <div className="space-y-1 pt-3">
+        <div className={`space-y-1 ${((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) || (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) ? 'pt-3' : ''}`}>
             <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm sm:text-base">{t('step3.additionalInfoLabel')}</Label>
             <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[90px] text-sm sm:text-base"/>
         </div>

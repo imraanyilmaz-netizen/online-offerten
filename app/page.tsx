@@ -796,7 +796,7 @@ export default async function HomePage() {
                 <div className="rounded-xl border border-gray-200 p-5">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Wie schnell erhalte ich Rückmeldungen?</h3>
                   <p className="text-body">
-                    In der Regel erhalten Sie die ersten Offerten innerhalb von 1 bis 24 Stunden nach der Bestätigung Ihrer E-Mail-Adresse. Erfolgt Ihre Anfrage am Wochenende, melden sich die meisten Firmen am Montag bei Ihnen.
+                    Sie erhalten Ihre ersten Offerten in der Regel sehr schnell nach Ihrer Anfrage.
                   </p>
                 </div>
               </div>

@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Home, Building, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText } from 'lucide-react';
+import { Home, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText, Sparkles } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { countries } from '@/data/countries';
@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors, t, isMoveService }) => {
   const prefix = type;
   const titleKey = isMoveService ? (type === 'from' ? 'step2.fromAddressTitleMove' : 'step2.toAddressTitleMove') : 'step2.serviceAddressTitle';
-  const icon = type === 'from' || !isMoveService ? <Home className="w-6 h-6 text-green-600 mr-2" /> : <Building className="w-6 h-6 text-green-600 mr-2" />;
+  const icon = <Home className="w-6 h-6 text-green-600 mr-2" />;
   const [isFetchingCity, setIsFetchingCity] = useState(false);
   
   const isInternationalMove = formData.umzugArt === 'international';
@@ -382,7 +382,7 @@ const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
   const { t } = useTranslation('newCustomerForm');
   return (
     <Card className="w-full bg-white shadow-md border-gray-200 rounded-lg overflow-hidden">
-      <CardHeader className="bg-slate-50 p-3 border-b border-slate-200">
+      <CardHeader className="bg-gradient-to-r from-emerald-50/70 via-emerald-50/40 to-slate-50 p-3 border-b border-emerald-100">
         <div className="flex items-center gap-2">
           {React.cloneElement(icon, { className: "w-5 h-5 text-green-600" })}
           <div>
@@ -575,9 +575,9 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
           </div>
         </SectionCard>
         
-        <SectionCard icon={<CalendarDays className="w-6 h-6 text-green-600" />} titleKey={getDateTitleKey()} descriptionKey="step3.moveDateDescription">
+        <SectionCard icon={<CalendarDays className="w-6 h-6 text-green-600" />} titleKey={getDateTitleKey()}>
           <div className="space-y-3">
-            <div className="flex items-center space-x-2 pt-4">
+            <div className="flex items-center space-x-2 pt-8">
               <Checkbox id="move_date_flexible" name="move_date_flexible" checked={formData.move_date_flexible || false} onCheckedChange={(checked) => handleCheckboxChange('move_date_flexible', checked)} className="h-6 w-6 accent-green-600"/>
               <Label htmlFor="move_date_flexible" className="font-medium text-base text-slate-800 cursor-pointer">{t('step3.dateFlexibleLabel')}</Label>
             </div>
@@ -605,51 +605,8 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Sol: Umzug Zusätzliche Leistungen */}
         {formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international') && (
-          <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
-            <div className="space-y-3">
-              <p className="text-xs text-slate-500 mb-1">Mehr Details helfen uns, passende und faire Angebote für Sie zu finden. Unvollständige Angaben können zu späteren Preisänderungen führen.</p>
-              <div className="flex items-center space-x-3">
-                <Checkbox id="furniture_assembly" name="furniture_assembly" checked={formData.furniture_assembly || false} onCheckedChange={(checked) => handleCheckboxChange('furniture_assembly', checked)} className="h-6 w-6 accent-green-600"/>
-                <Label htmlFor="furniture_assembly" className="font-medium text-base text-slate-800 cursor-pointer">Möbel müssen demontiert und wieder montiert werden</Label>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Checkbox id="additional_services_packing" name="additional_services_packing" checked={formData.additional_services_packing || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_packing', checked)} className="h-6 w-6 accent-green-600"/>
-                <Label htmlFor="additional_services_packing" className="font-medium text-base text-slate-800 cursor-pointer">Umzug mit Einpackservice</Label>
-              </div>
-              <div>
-                <div className="flex items-center space-x-3">
-                  <Checkbox id="special_transport" name="special_transport" checked={formData.special_transport || false} onCheckedChange={(checked) => {
-                    handleCheckboxChange('special_transport', checked);
-                    if (!checked) {
-                      handleCheckboxChange('special_transport_piano', false);
-                      handleCheckboxChange('special_transport_safe', false);
-                      handleCheckboxChange('special_transport_heavy', false);
-                    }
-                  }} className="h-6 w-6 accent-green-600"/>
-                  <Label htmlFor="special_transport" className="font-medium text-base text-slate-800 cursor-pointer">Wird auch ein Klavier oder Flügel mittransportiert?</Label>
-                </div>
-                {formData.special_transport && (
-                  <div className="ml-9 mt-2 space-y-2 pl-3 border-l-2 border-green-200">
-                    <div className="flex items-center space-x-3">
-                      <Checkbox id="special_transport_piano" checked={formData.special_transport_piano || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_piano', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="special_transport_piano" className="font-medium text-base text-slate-800 cursor-pointer">Klavier</Label>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Checkbox id="special_transport_heavy" checked={formData.special_transport_heavy || false} onCheckedChange={(checked) => handleCheckboxChange('special_transport_heavy', checked)} className="h-6 w-6"/>
-                      <Label htmlFor="special_transport_heavy" className="font-medium text-base text-slate-800 cursor-pointer">Flügel</Label>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div>
-                <div className="flex items-center space-x-3">
-                  <Checkbox id="additional_services_disposal" name="additional_services_disposal" checked={formData.additional_services_disposal || false} onCheckedChange={(checked) => handleCheckboxChange('additional_services_disposal', checked)} className="h-6 w-6 accent-green-600"/>
-                  <Label htmlFor="additional_services_disposal" className="font-medium text-base text-slate-800 cursor-pointer">Entsorgung von Möbeln / Gegenständen</Label>
-                </div>
-                <p className="ml-9 text-xs text-slate-400 mt-0.5">Sperrgut, das entsorgt werden soll</p>
-              </div>
-            </div>
-            <div className="space-y-1 pt-3">
+          <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle">
+            <div className="space-y-1">
               <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm">{t('step3.additionalInfoLabel')}</Label>
               <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[70px] text-sm"/>
             </div>
@@ -659,7 +616,7 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
         {/* Sağ: Reinigung Angaben */}
         {((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) ||
           (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) && (
-          <SectionCard icon={<Search className="w-6 h-6 text-green-600" />} titleKey="step3.cleaningDetailsTitle" descriptionKey="step3.cleaningDetailsDescription">
+          <SectionCard icon={<Sparkles className="w-6 h-6 text-green-600" />} titleKey="step3.cleaningDetailsTitle" descriptionKey="step3.cleaningDetailsDescription">
             <div className="space-y-4">
               {/* Wohnungsfläche */}
               <div>
@@ -699,24 +656,7 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
                 </div>
               )}
 
-              {/* Zusatzflächen */}
-              <div className="space-y-1.5">
-                <span className="text-sm text-slate-600">Zusatzflächen (optional)</span>
-                <div className="flex flex-wrap gap-3">
-                  <div className="flex items-center space-x-3">
-                    <Checkbox id="cleaning_extra_balkon" checked={formData.cleaning_extra_balkon || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_balkon', checked)} className="h-6 w-6"/>
-                    <Label htmlFor="cleaning_extra_balkon" className="font-medium text-base text-slate-800 cursor-pointer">Balkon</Label>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <Checkbox id="cleaning_extra_keller" checked={formData.cleaning_extra_keller || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_keller', checked)} className="h-6 w-6"/>
-                    <Label htmlFor="cleaning_extra_keller" className="font-medium text-base text-slate-800 cursor-pointer">Keller</Label>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <Checkbox id="cleaning_extra_garage" checked={formData.cleaning_extra_garage || false} onCheckedChange={(checked) => handleCheckboxChange('cleaning_extra_garage', checked)} className="h-6 w-6"/>
-                    <Label htmlFor="cleaning_extra_garage" className="font-medium text-base text-slate-800 cursor-pointer">Garage</Label>
-                  </div>
-                </div>
-              </div>
+              {/* Zusatzflächen sind vorübergehend ausgeblendet. */}
             </div>
           </SectionCard>
         )}

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Home, Building, Loader2, MapPin, ChevronsUpDown, Globe } from 'lucide-react';
+import { Home, Loader2, MapPin, ChevronsUpDown, Globe } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { countries } from '@/data/countries';
@@ -11,7 +11,7 @@ import { countries } from '@/data/countries';
 const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors, t, isMoveService }) => {
   const prefix = type;
   const titleKey = isMoveService ? (type === 'from' ? 'step2.fromAddressTitleMove' : 'step2.toAddressTitleMove') : 'step2.serviceAddressTitle';
-  const icon = type === 'from' || !isMoveService ? <Home className="w-6 h-6 text-green-600 mr-2" /> : <Building className="w-6 h-6 text-green-600 mr-2" />;
+  const icon = <Home className="w-6 h-6 text-green-600 mr-2" />;
   const [isFetchingCity, setIsFetchingCity] = useState(false);
   
   const isInternationalMove = formData.umzugArt === 'international';

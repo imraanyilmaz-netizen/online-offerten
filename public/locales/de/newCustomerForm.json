@@ -203,8 +203,8 @@
   },
   "step2": {
     "headerTitleNew": "Adressen, Details und Kontaktinformationen",
-    "fromAddressTitleMove": "Auszugsadresse",
-    "toAddressTitleMove": "Einzugsadresse",
+    "fromAddressTitleMove": "Ich möchte umziehen von:",
+    "toAddressTitleMove": "Ich möchte umziehen nach:",
     "serviceAddressTitle": "Adresse des Einsatzortes",
     "streetLabel": "Strasse und Hausnummer",
     "streetPlaceholder": "z.B. Bahnhofstrasse 10",
@@ -416,7 +416,7 @@
     "benefits": {
       "free": "100% kostenlos & unverbindlich",
       "verified": "Nur geprüfte Firmen",
-      "fast": "Schnelle Offerten in 24h",
+      "fast": "In 2 Minuten kostenlos Angebote erhalten",
       "save": "Bis zu 40% sparen"
     },
     "trustSection": {
