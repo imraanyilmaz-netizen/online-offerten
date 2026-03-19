@@ -685,7 +685,7 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
       <div>
         <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1.5 sm:mb-2">{t('step1.mainServiceQuestion')} <span className="text-red-500">*</span></h2>
         <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{t('step1.mainServiceDescription')}</p>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {mainServices.map((service) => (
             <ServiceButton 
               key={service.id}
