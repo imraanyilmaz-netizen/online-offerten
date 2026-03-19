@@ -423,10 +423,6 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
   }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt, formData.special_transport_type, formData.raeumung_scope, formData.additional_cleaning]);
 
-  const scrollToFormTop = () => {
-    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-  
   const handleConfirmExit = () => {
     const navigationPath = pendingNavigation;
     setShowExitDialog(false);
@@ -466,7 +462,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
   const scrollToUmzugArt = useCallback(() => {
     if (umzugArtSectionRef.current) {
       requestAnimationFrame(() => {
-        umzugArtSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        umzugArtSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
     }
   }, [umzugArtSectionRef]);
@@ -785,14 +781,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         // Step 2'ye geçerken history'ye entry ekle (geri tuşu için)
         if (currentStep === 1) {
           updateUrlStep(currentStep + 1, false);
-          setTimeout(() => {
-            scrollToFormTop();
-          }, 100);
         } else {
           updateUrlStep(currentStep + 1);
-          setTimeout(() => {
-            scrollToFormTop();
-          }, 100);
         }
       } else {
         setErrors(errors);
@@ -909,7 +899,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       toast({ title: t('quoteConfirmation.title'), description: t('quoteConfirmation.subtitle') });
       // Teşekkür mesajının görünmesi için formun bulunduğu konuma scroll et
       setTimeout(() => {
-        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }, 100);
     } catch (error) {
       console.error('Error submitting quote:', error);
@@ -1164,14 +1154,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           {renderStepContent()}
         </div>
 
-        <div className="flex flex-col-reverse sm:flex-row justify-between items-center pt-4 sm:pt-6 border-t border-gray-200 gap-3 sm:gap-4">
-          <div className="flex items-center gap-1.5 text-sm text-gray-500">
-            <CheckCircle2 className="w-4 h-4 text-green-600" />
-            <span>Kostenlos - Unverbindlich</span>
-          </div>
-          
-          <div className="flex-grow sm:block hidden"></div>
-
+        <div className="flex flex-col sm:flex-row justify-end items-stretch sm:items-center pt-4 sm:pt-6 border-t border-gray-200 gap-3 sm:gap-4">
           {currentStep < TOTAL_FORM_STEPS && (
             <Button 
               type="button" 

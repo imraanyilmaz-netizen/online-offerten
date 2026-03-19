@@ -5,7 +5,7 @@ import CustomerForm from '@/components/NewCustomerForm';
 import { useTranslation } from 'react-i18next';
 
 const QuoteFormPageClient = () => {
-  const { t, ready } = useTranslation('newCustomerForm');
+  const { ready } = useTranslation('newCustomerForm');
   const [mounted, setMounted] = useState(false);
   
   // Client-side mount kontrolü
@@ -28,7 +28,7 @@ const QuoteFormPageClient = () => {
         {/* Tek form instance: mobile + desktop */}
         <div className="min-h-screen py-4">
           <div className="max-w-5xl mx-auto px-4">
-            <div className="md:sticky md:top-4 bg-white">
+            <div className="bg-white">
               {/* Form */}
               <CustomerForm />
             </div>
