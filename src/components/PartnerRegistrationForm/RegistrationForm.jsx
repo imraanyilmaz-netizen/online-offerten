@@ -1,7 +1,6 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // framer-motion removed - CSS for better INP
 import { supabase } from '@/lib/supabaseClient';
-import { supabase as customSupabase } from '@/lib/customSupabaseClient';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Card } from '@/components/ui/card';
@@ -305,64 +304,48 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
           throw error;
         }
       } else if (data?.user) {
-        let logoUrl = null;
-        
-        // Upload logo if provided
+        // Logo: Nach signUp oft keine Session (E-Mail-Bestätigung) → Client-Upload schlägt fehl.
+        // Edge Function mit Service Role lädt zuverlässig hoch und setzt partners.logo_url.
         if (formData.logoFile && data.user.id) {
           try {
-            const fileExt = formData.logoFile.name.split('.').pop();
-            const fileName = `${data.user.id}/${Date.now()}.${fileExt}`;
-            
-            const { error: uploadError } = await customSupabase.storage
-              .from('partner-logos')
-              .upload(fileName, formData.logoFile);
-            
-            if (!uploadError) {
-              const { data: publicUrlData } = customSupabase.storage
-                .from('partner-logos')
-                .getPublicUrl(fileName);
-              
-              logoUrl = publicUrlData.publicUrl;
-              
-              // Update user metadata with logo URL
-              await customSupabase.auth.updateUser({
-                data: { ...partnerMetaData, logo_url: logoUrl }
-              });
+            const file = formData.logoFile;
+            const fileBase64 = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                const result = reader.result;
+                if (typeof result !== 'string') {
+                  reject(new Error('Logo read failed'));
+                  return;
+                }
+                const parts = result.split(',');
+                resolve(parts[1] || '');
+              };
+              reader.onerror = () => reject(reader.error);
+              reader.readAsDataURL(file);
+            });
+
+            const { error: logoFnError, data: logoFnData } = await supabase.functions.invoke('upload-partner-logo', {
+              body: {
+                userId: data.user.id,
+                email: formData.email,
+                fileBase64,
+                fileName: file.name,
+                mimeType: file.type || 'application/octet-stream',
+              },
+            });
+
+            if (logoFnError) {
+              console.error('upload-partner-logo invoke error:', logoFnError);
+            } else if (logoFnData && logoFnData.success === false) {
+              console.error('upload-partner-logo:', logoFnData.error);
+            } else {
+              console.log('upload-partner-logo OK:', logoFnData);
             }
           } catch (logoError) {
             console.error('Error uploading logo:', logoError);
-            // Don't fail registration if logo upload fails
           }
         }
-        
-        // Update partners table with logo_url (retry mechanism in case record doesn't exist yet)
-        if (logoUrl && data.user.id) {
-          const maxRetries = 5;
-          for (let i = 0; i < maxRetries; i++) {
-            try {
-              // Wait before first attempt to give DB trigger time to create partners record
-              await new Promise(resolve => setTimeout(resolve, 1500 * (i + 1)));
-              
-              const { data: updateData, error: updateError, count } = await customSupabase
-                .from('partners')
-                .update({ logo_url: logoUrl })
-                .eq('id', data.user.id)
-                .select();
-              
-              if (!updateError && updateData && updateData.length > 0) {
-                console.log('✅ Partners table updated with logo_url successfully');
-                break;
-              } else if (updateError) {
-                console.warn(`⚠️ Logo update attempt ${i + 1}/${maxRetries}:`, updateError.message);
-              } else {
-                console.warn(`⚠️ Logo update attempt ${i + 1}/${maxRetries}: No rows updated (record may not exist yet)`);
-              }
-            } catch (err) {
-              console.error(`❌ Logo update attempt ${i + 1}/${maxRetries} error:`, err);
-            }
-          }
-        }
-        
+
         setSubmitted(true);
         toast({
           title: "Registrierung erfolgreich!",
