@@ -439,11 +439,11 @@ const LoginPageClient = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
                           <Label htmlFor="password" className="font-semibold text-gray-700">Passwort</Label>
                           <Link
                             href={forgotPasswordHref}
-                            className="text-sm font-medium text-green-600 hover:text-green-500 hidden md:inline"
+                            className="text-sm font-medium text-green-600 hover:text-green-500 shrink-0"
                           >
                             Passwort vergessen?
                           </Link>

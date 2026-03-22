@@ -8,10 +8,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Loader2, MailCheck, AlertCircle, MonitorSmartphone } from 'lucide-react'
+import { Loader2, MailCheck, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 // framer-motion removed - CSS for better INP
-import useMediaQuery from '@/hooks/useMediaQuery'
 
 const ForgotPasswordPageClient = () => {
   const searchParams = useSearchParams()
@@ -21,7 +20,6 @@ const ForgotPasswordPageClient = () => {
   const [error, setError] = useState('')
   const { toast } = useToast()
   const supabase = createClient()
-  const isMobile = useMediaQuery('(max-width: 768px)')
 
   useEffect(() => {
     const raw = searchParams.get('email')
@@ -63,20 +61,6 @@ const ForgotPasswordPageClient = () => {
       })
     }
   }
-  
-  const renderMobileWarning = () => (
-    <div className="text-center p-4 bg-yellow-100/80 border border-yellow-200 rounded-lg">
-      <MonitorSmartphone className="mx-auto h-12 w-12 text-yellow-600" />
-      <p className="mt-4 text-yellow-800 font-medium">
-        Bitte führen Sie die Passwort-Wiederherstellung auf einem Desktop-Computer durch.
-      </p>
-      <Link href="/login">
-        <Button className="mt-6 w-full bg-green-600 hover:bg-green-700">
-          Zurück zum Login
-        </Button>
-      </Link>
-    </div>
-  )
 
   return (
     <div
@@ -85,14 +69,12 @@ const ForgotPasswordPageClient = () => {
       <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-extrabold text-gray-800">Passwort vergessen?</CardTitle>
-          {!isMobile && (
-            <CardDescription className="text-gray-600 mt-2">
-              Kein Problem! Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen.
-            </CardDescription>
-          )}
+          <CardDescription className="text-gray-600 mt-2">
+            Kein Problem! Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          {isMobile ? renderMobileWarning() : message ? (
+          {message ? (
             <div className="text-center p-4 bg-green-100/80 border border-green-200 rounded-lg">
               <MailCheck className="mx-auto h-12 w-12 text-green-600" />
               <p className="mt-4 text-green-800 font-medium">{message}</p>
