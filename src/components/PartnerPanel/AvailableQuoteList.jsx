@@ -139,12 +139,9 @@ const PurchaseConfirmationDialog = ({ open, onOpenChange, onConfirm, quote, hasA
                 <DialogHeader>
                     <DialogTitle>Anfrage kaufen</DialogTitle>
                     <DialogDescription>
-                        {hasActiveSubscription 
+                        {hasActiveSubscription
                             ? 'Dank Ihres Abonnements ist diese Anfrage für Sie kostenlos. Möchten Sie sie jetzt freischalten?'
-                            : (quote.original_price && quote.lead_price < quote.original_price
-                                ? `Originalpreis: ${quote.original_price.toFixed(2)} CHF → Jetzt nur ${quote.lead_price.toFixed(2)} CHF (-${Math.round((1 - quote.lead_price / quote.original_price) * 100)}%). Möchten Sie fortfahren?`
-                                : `Sie sind dabei, diese Anfrage für ${quote.lead_price.toFixed(2)} CHF zu kaufen. Möchten Sie fortfahren?`
-                            )
+                            : `Sie sind dabei, diese Anfrage für ${quote.lead_price.toFixed(2)} CHF zu kaufen. Möchten Sie fortfahren?`
                         }
                     </DialogDescription>
                 </DialogHeader>
@@ -246,11 +243,6 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                       </div>
                     </div>
                     <div className="flex items-center gap-2 ml-4">
-                      {quote.original_price && quote.lead_price < quote.original_price && (
-                        <Badge className="bg-red-500 text-white font-bold animate-pulse">
-                          -{Math.round((1 - quote.lead_price / quote.original_price) * 100)}%
-                        </Badge>
-                      )}
                       {!quote.is_viewed && <Badge variant="destructive" className="animate-pulse">Neu</Badge>}
                       <Eye className={`w-5 h-5 ${quote.is_viewed ? 'text-green-500' : 'text-gray-400'}`} />
                     </div>
@@ -344,12 +336,7 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                             ) : (
                                 <>
                                     <h4 className="text-sm font-medium text-gray-600">Preis der Anfrage</h4>
-                                    {quote.original_price && quote.lead_price < quote.original_price && (
-                                      <div className="flex items-center justify-center gap-2 mb-1">
-                                        <span className="text-lg text-gray-400 line-through">{quote.original_price.toFixed(2)} CHF</span>
-                                        <span className="text-sm font-bold text-white bg-red-500 px-2 py-0.5 rounded-full">-{Math.round((1 - quote.lead_price / quote.original_price) * 100)}%</span>
-                                      </div>
-                                    )}
+                                    {/* Rabatt bleibt in den Daten; Altpreis + %-Badge nicht anzeigen */}
                                     <p className="text-3xl font-bold text-gray-800">{quote.lead_price.toFixed(2)} <span className="text-lg font-normal">CHF</span></p>
                                     {!canAfford && (
                                         <p className="text-xs text-red-600 mt-1">Guthaben nicht ausreichend.</p>
