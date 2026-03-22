@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { useAuth } from '@/contexts/SupabaseAuthContext'
 import { createClient } from '@/lib/supabase/client'
 import { useToast } from '@/components/ui/use-toast'
@@ -27,6 +27,10 @@ function parseSupabaseUrlAuthError(): string | null {
 
 const AUTH_LOADING_TIMEOUT_MS = 20000
 
+/** PKCE recovery: ilk yüklemede session gecikebilir; 2 sn sonra tek seferlik yenileme (sonsuz döngü yok) */
+const RECOVERY_AUTO_RELOAD_MS = 2000
+const RECOVERY_AUTO_RELOAD_KEY = 'pw_recovery_auto_reload_v1'
+
 const UpdatePasswordPageClient = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -40,10 +44,42 @@ const UpdatePasswordPageClient = () => {
   const [authStuck, setAuthStuck] = useState(false)
   const { user, session, loading: authLoading, updateUserPassword } = useAuth()
   const { toast } = useToast()
+  const sessionRef = useRef(session)
+  const userRef = useRef(user)
+  sessionRef.current = session
+  userRef.current = user
 
   useLayoutEffect(() => {
     setUrlErrorCode(parseSupabaseUrlAuthError())
   }, [])
+
+  // Recovery-Link (?code=): oturum 2 sn içinde gelmezse tek sefer sayfa yenilenir
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (parseSupabaseUrlAuthError()) return
+    const params = new URLSearchParams(window.location.search)
+    if (!params.get('code')) return
+    if (sessionStorage.getItem(RECOVERY_AUTO_RELOAD_KEY) === '1') return
+
+    if (sessionRef.current && userRef.current) {
+      sessionStorage.removeItem(RECOVERY_AUTO_RELOAD_KEY)
+      return
+    }
+
+    let cancelled = false
+    const t = window.setTimeout(() => {
+      if (cancelled) return
+      if (parseSupabaseUrlAuthError()) return
+      if (sessionRef.current && userRef.current) return
+      sessionStorage.setItem(RECOVERY_AUTO_RELOAD_KEY, '1')
+      window.location.reload()
+    }, RECOVERY_AUTO_RELOAD_MS)
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(t)
+    }
+  }, [authLoading, session, user])
 
   useEffect(() => {
     if (!authLoading) {
