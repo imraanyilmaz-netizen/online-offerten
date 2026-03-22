@@ -3,11 +3,34 @@ import { Suspense } from 'react'
 import LoginPageClient from '@/components/pages/LoginPageClient'
 
 export const metadata: Metadata = {
-  title: 'Partner Login : Online-Offerten.ch',
-  description: 'Melden Sie sich als Partner bei Online-Offerten.ch an, um Ihr Dashboard zu nutzen und Ihre Anfragen zu verwalten.',
+  title: 'Login | Online-Offerten.ch',
+  description:
+    'Login und Anmeldung für Partner: Melden Sie sich bei Online-Offerten.ch an, um Ihr Dashboard zu öffnen, Anfragen zu bearbeiten und Ihre Top Offerten zu verwalten. Neu hier? Die Registrierung erfolgt über «Partner werden».',
+  keywords: [
+    'Online-Offerten Login',
+    'Login Online-Offerten',
+    'Online-Offerten Anmeldung',
+    'Partner Login',
+    'Online-Offerten Partner',
+    'Anmeldung Partner',
+    'Online-Offerten registrieren',
+    'Top Offerten',
+  ],
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: 'https://online-offerten.ch/login',
+  },
+  openGraph: {
+    title: 'Login | Online-Offerten.ch',
+    description:
+      'Hier einloggen: Partner-Login für Online-Offerten.ch. Dashboard öffnen, Anfragen bearbeiten und Ihre Top Offerten im Blick behalten. Registrierung für neue Partner über «Partner werden».',
+    url: 'https://online-offerten.ch/login',
+    siteName: 'Online-Offerten.ch',
+    locale: 'de_CH',
+    type: 'website',
   },
 }
 

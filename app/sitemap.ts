@@ -19,9 +19,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // --- General pages ---
     { url: `${BASE_URL}/kontakt` },
+    { url: `${BASE_URL}/login` },
     { url: `${BASE_URL}/kostenlose-offerte-anfordern` },
     { url: `${BASE_URL}/kunden-bewertungen` },
     { url: `${BASE_URL}/offerten-portal` },
+    { url: `${BASE_URL}/top-offerten-schweiz` },
     { url: `${BASE_URL}/partner-suche` },
     { url: `${BASE_URL}/partner-werden` },
     { url: `${BASE_URL}/standorte` },

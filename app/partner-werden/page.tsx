@@ -2,16 +2,16 @@ import type { Metadata } from 'next'
 import PartnerRegistrationPageClient from '@/components/pages/PartnerRegistrationPageClient'
 
 export const metadata: Metadata = {
-  title: 'Partner werden | Kundenanfragen für Umzug, Reinigung & Malerarbeiten',
+  title: 'Partner werden bei Online-Offerten.ch | Registrierung & Kundenanfragen',
   description:
-    'Jetzt als Partnerbetrieb bei Online-Offerten.ch registrieren und qualifizierte Kundenanfragen aus Ihrer Region erhalten. Kostenlos, unverbindlich und mit voller Kontrolle pro Anfrage.',
+    'Online-Offerten.ch: Jetzt als Partner registrieren – Umzug, Reinigung, Malerarbeiten. Kostenlos registrieren, qualifizierte Anfragen aus der Region. Noch kein Konto? Hier Partner werden.',
   alternates: {
     canonical: 'https://online-offerten.ch/partner-werden',
   },
   openGraph: {
-    title: 'Partner werden bei Online-Offerten.ch',
+    title: 'Partner werden & registrieren | Online-Offerten.ch',
     description:
-      'Registrieren Sie Ihren Betrieb für Umzug, Reinigung oder Malerarbeiten und erhalten Sie qualifizierte Kundenanfragen aus Ihrer Region.',
+      'Registrierung für Betriebe: Umzug, Reinigung, Malerarbeiten. Jetzt bei Online-Offerten.ch Partner werden – kostenlos und unverbindlich.',
     url: 'https://online-offerten.ch/partner-werden',
     siteName: 'Online-Offerten.ch',
     images: [

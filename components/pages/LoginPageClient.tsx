@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -101,9 +101,9 @@ const LoginPageClient = () => {
   const { toast } = useToast()
   const searchParams = useSearchParams()
 
-  const pageTitle = "Partner Login"
-  const welcomeMessage = "Willkommen zurück!"
-  const pageSubtitle = "Bitte geben Sie Ihre Daten ein, um sich anzumelden."
+  const pageTitle = 'Partner-Login bei Online-Offerten.ch'
+  const welcomeMessage = 'Willkommen zurück!'
+  const pageSubtitle = 'Melden Sie sich mit E-Mail und Passwort an – Login für registrierte Partner.'
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

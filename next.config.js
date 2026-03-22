@@ -96,6 +96,12 @@ const nextConfig = {
         destination: '/kostenlose-offerte-anfordern',
         permanent: true,
       },
+      // Top-Offerten: kurze URL → SEO-URL mit «Schweiz»
+      {
+        source: '/top-offerten',
+        destination: '/top-offerten-schweiz',
+        permanent: true,
+      },
       // Alte Services-Seite → Startseite
       {
         source: '/services',
