@@ -134,12 +134,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             return
           }
 
-          // PASSWORD_RECOVERY event: Kullanıcı şifre sıfırlama linkine tıkladı
+          // PASSWORD_RECOVERY: Session kommt direkt nach gültigem Recovery-Link – kein zusätzliches getUser(),
+          // sonst kann validateSessionWithServer hängen oder die Recovery-Session fälschlich invalidieren.
           if (event === 'PASSWORD_RECOVERY' && session && !recoveryHandled.current) {
             recoveryHandled.current = true
-            console.log('[AuthContext] PASSWORD_RECOVERY detected, session ready for password update')
-            const validatedRecoverySession = await validateSessionWithServer(session)
-            await handleSession(validatedRecoverySession)
+            console.log('[AuthContext] PASSWORD_RECOVERY detected, applying session without extra getUser() round-trip')
+            await handleSession(session)
             return
           }
 
