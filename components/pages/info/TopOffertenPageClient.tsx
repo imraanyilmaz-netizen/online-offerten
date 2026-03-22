@@ -21,7 +21,7 @@ const faqItems = [
     a: 'Ja. Beschreiben Sie im Formular Ihren Standort und Ihr Projekt – wir vermitteln passende Anbieter aus Ihrer Region. Zusätzlich finden Sie auf Online-Offerten.ch Stadtseiten (z. B. Umzug oder Reinigung in Zürich, Bern, Basel), die Sie mit der zentralen Offertenanfrage kombinieren können.',
   },
   {
-    q: 'Wie hole ich online mehrere Offerten ein und vergleiche sie?',
+    q: 'Wie frage ich online mehrere Offerten an und vergleiche sie?',
     a: 'Sie füllen einmal unser Formular aus. Anschliessend erhalten Sie – je nach Auftrag – bis zu mehrere Offerten von geprüften Firmen. Diese legen Sie in Ruhe nebeneinander: Leistung, Preis und Termine. So vergleichen Sie ohne mehrfaches Anfragen bei einzelnen Anbietern.',
   },
   {
@@ -69,7 +69,7 @@ const TopOffertenPageClient = () => {
           name: 'Top Offerten in der Schweiz – Umzugs- und Reinigungsofferten kostenlos vergleichen | Online-Offerten.ch',
           url: canonicalUrl,
           description:
-            'Top Offerten in der Schweiz: online einholen, vergleichen, sparen. Umzug, Reinigung, Maler – mehrere Offerten von geprüften Anbietern. Kostenlos auf Online-Offerten.ch.',
+            'Top Offerten in der Schweiz: online anfragen, vergleichen, sparen. Umzug, Reinigung, Maler – mehrere Offerten von geprüften Anbietern. Kostenlos auf Online-Offerten.ch.',
           isPartOf: { '@type': 'WebSite', name: 'Online-Offerten.ch', url: 'https://online-offerten.ch' },
         },
         {
@@ -110,24 +110,97 @@ const TopOffertenPageClient = () => {
     }
   }, [])
 
-  /** Städte mit SEO-relevanten Links (Umzug + optional Reinigung) */
+  /** Städte mit SEO-relevanten Links und je einer kurzen, einzigartigen Einleitung */
   const cityTopOfferten: {
     name: string
     umzug: string
     reinigung: string | null
+    intro: string
   }[] = [
-    { name: 'Zürich', umzug: '/umzugsfirma/zuerich', reinigung: '/reinigungsfirma/zuerich' },
-    { name: 'Bern', umzug: '/umzugsfirma/bern', reinigung: '/reinigungsfirma/bern' },
-    { name: 'Basel', umzug: '/umzugsfirma/basel', reinigung: '/reinigungsfirma/basel' },
-    { name: 'Luzern', umzug: '/umzugsfirma/luzern', reinigung: '/reinigungsfirma/luzern' },
-    { name: 'Genf', umzug: '/umzugsfirma/genf', reinigung: '/reinigungsfirma/genf' },
-    { name: 'St. Gallen', umzug: '/umzugsfirma/st-gallen', reinigung: '/reinigungsfirma/st-gallen' },
-    { name: 'Lausanne', umzug: '/umzugsfirma/lausanne', reinigung: '/reinigungsfirma/lausanne' },
-    { name: 'Winterthur', umzug: '/umzugsfirma/zuerich/winterthur', reinigung: '/reinigungsfirma/winterthur' },
-    { name: 'Lugano', umzug: '/umzugsfirma/lugano', reinigung: null },
-    { name: 'Biel/Bienne', umzug: '/umzugsfirma/biel-bienne', reinigung: null },
-    { name: 'Thun', umzug: '/umzugsfirma/thun', reinigung: null },
-    { name: 'Aargau', umzug: '/umzugsfirma/aargau', reinigung: null },
+    {
+      name: 'Zürich',
+      umzug: '/umzugsfirma/zuerich',
+      reinigung: '/reinigungsfirma/zuerich',
+      intro:
+        'In der grössten Stadt der Schweiz unterscheiden sich Umzugs- und Reinigungsangebote stark. Engpässe beim Parkieren und kurze Zeitfenster machen eine erfahrene Firma besonders wertvoll. Über Online-Offerten.ch vergleichen Sie mehrere Offerten und finden eine passende Lösung für Ihr Budget.',
+    },
+    {
+      name: 'Bern',
+      umzug: '/umzugsfirma/bern',
+      reinigung: '/reinigungsfirma/bern',
+      intro:
+        'In der Bundesstadt stehen viele Zügelfirmen für private und geschäftliche Umzüge bereit – oft inklusive Verpackung oder Endreinigung. Ein Preisvergleich hilft, Leistung und Kosten transparent gegeneinander abzuwägen, bevor Sie einen Auftrag vergeben.',
+    },
+    {
+      name: 'Basel',
+      umzug: '/umzugsfirma/basel',
+      reinigung: '/reinigungsfirma/basel',
+      intro:
+        'Nahe der Grenze spielen Logistik und Termine eine grosse Rolle. Ob Umzug innerhalb der Region oder mit Anschluss ins Ausland: Wenn Sie mehrere Offerten vergleichen, erkennen Sie schnell, welcher Anbieter zu Ihrem Zeitplan und Ihrer Wohnung passt.',
+    },
+    {
+      name: 'Luzern',
+      umzug: '/umzugsfirma/luzern',
+      reinigung: '/reinigungsfirma/luzern',
+      intro:
+        'In der Zentralschweiz verbinden viele Betriebe Umzug mit Zusatzleistungen wie Lagerung oder Reinigung. Wer regional vergleicht, erkennt Unterschiede bei Festpreisen und Stundenansätzen – ideal, um die richtige Firma für den nächsten Schritt zu wählen.',
+    },
+    {
+      name: 'Genf',
+      umzug: '/umzugsfirma/genf',
+      reinigung: '/reinigungsfirma/genf',
+      intro:
+        'Internationale Aufträge und höhere Mieten prägen den Markt rund um den Genfersee. Eine strukturierte Offertenanfrage spart Zeit: Sie erhalten vergleichbare Angebote von geprüften Partnern, ohne jeden Anbieter einzeln kontaktieren zu müssen.',
+    },
+    {
+      name: 'St. Gallen',
+      umzug: '/umzugsfirma/st-gallen',
+      reinigung: '/reinigungsfirma/st-gallen',
+      intro:
+        'In der Ostschweiz sind viele Umzüge regional, einige führen über Kantonsgrenzen hinweg. Ob Haushalt oder Büro: Wer mehrere Offerten gegenüberstellt, erkennt schneller, welche Firma Erfahrung mit Ihrer Situation hat und faire Konditionen bietet.',
+    },
+    {
+      name: 'Lausanne',
+      umzug: '/umzugsfirma/lausanne',
+      reinigung: '/reinigungsfirma/lausanne',
+      intro:
+        'Am Genfersee treffen unterschiedliche Preisniveaus und Dienstleistungsumfänge aufeinander. Ein Vergleich mehrerer Offerten schafft Klarheit bei Leistung, Versicherung und Terminen – besonders bei grösseren Wohnungen oder Firmenumzügen.',
+    },
+    {
+      name: 'Winterthur',
+      umzug: '/umzugsfirma/zuerich/winterthur',
+      reinigung: '/reinigungsfirma/winterthur',
+      intro:
+        'Als wachsende Stadt im Zürcher Umland gibt es viele Anbieter mit kurzen Anfahrtswegen. Für Umzug und Reinigung lohnt sich der direkte Preisvergleich: So finden Sie oft schneller einen Termin und eine Offerte, die zu Ihrem Projekt passt.',
+    },
+    {
+      name: 'Lugano',
+      umzug: '/umzugsfirma/lugano',
+      reinigung: null,
+      intro:
+        'Im Tessin gelten besondere topografische und sprachliche Gegebenheiten. Regionale Umzugsfirmen kennen die Wege und Zufahrten; über unser Formular fragen Sie parallel mehrere Offerten an und behalten die Übersicht über Kosten und Leistungen.',
+    },
+    {
+      name: 'Biel/Bienne',
+      umzug: '/umzugsfirma/biel-bienne',
+      reinigung: null,
+      intro:
+        'Die zweisprachige Region bietet eine breite Auswahl an Züglern für Privat- und Geschäftsumzüge. Ein Vergleich mehrerer Angebote zeigt, wo Montage, Verpackung oder Reinigung bereits enthalten sind – und wo Nachverhandlungsspielraum besteht.',
+    },
+    {
+      name: 'Thun',
+      umzug: '/umzugsfirma/thun',
+      reinigung: null,
+      intro:
+        'Im Berner Oberland spielen Entfernungen und Saisonalität eine Rolle. Ob Tal oder Hanglage: Mit einer zentralen Offertenanfrage erreichen Sie passende Firmen und vergleichen Angebote sachlich, statt sich auf den ersten Preis zu verlassen.',
+    },
+    {
+      name: 'Aargau',
+      umzug: '/umzugsfirma/aargau',
+      reinigung: null,
+      intro:
+        'Der Kanton liegt verkehrsgünstig zwischen grossen Wirtschaftszentren. Viele Umzüge verlaufen innerhalb der Region oder in Nachbarstädte. Mehrere Offerten zu vergleichen, hilft, Transportwege und Zusatzkosten realistisch einzuplanen.',
+    },
   ]
 
   return (
@@ -153,7 +226,8 @@ const TopOffertenPageClient = () => {
               <p className="text-base text-gray-600 mb-8 leading-relaxed">
                 Ob <Link href="/umzugsfirma" className="text-green-700 hover:text-green-800 underline font-medium">Umzug</Link>,{' '}
                 <Link href="/reinigung" className="text-green-700 hover:text-green-800 underline font-medium">Reinigung</Link> oder{' '}
-                <Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-medium">Malerarbeiten</Link>: Sie holen mehrere Offerten online ein und vergleichen sie in Ruhe – ohne Druck, einen Anbieter zu wählen. So finden Sie den passenden Partner für Ihr Budget.
+                <Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-medium">Malerarbeiten</Link>: So können Sie{' '}
+                <strong>Top Offerten einholen</strong> – mit einer Anfrage mehrere Angebote erhalten und in Ruhe vergleichen – ohne Druck, einen Anbieter zu wählen. So finden Sie den passenden Partner für Ihr Budget.
               </p>
 
               <p className="text-sm font-semibold text-gray-700 mb-2">Dienstleistung wählen und Top Offerten auf Online-Offerten.ch anfordern:</p>
@@ -496,15 +570,15 @@ const TopOffertenPageClient = () => {
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-12 max-w-4xl">
             <h2 className="heading-2 !text-left md:!text-center mb-4">
-              Top Offerten nach Stadt – online einholen & vergleichen
+              Top Offerten nach Stadt – online anfragen & vergleichen
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
               Für <strong>Umzug Zürich</strong>, <strong>Reinigung Bern</strong> oder <strong>Malerarbeiten Basel</strong> – in jeder Grossstadt und in vielen Regionen: Auf{' '}
-              <strong>Online-Offerten.ch</strong> können Sie mehrere Offerten online einholen und Preise sowie Leistungen transparent vergleichen. Nutzen Sie unsere{' '}
+              <strong>Online-Offerten.ch</strong> können Sie <strong>Top Offerten einholen</strong> – mehrere Anbieter online anfragen und Preise sowie Leistungen transparent vergleichen. Nutzen Sie unsere{' '}
               <Link href="/umzugsfirma-vergleichen" className="text-green-700 hover:text-green-800 underline font-medium">
-                Umzugsvergleich
-              </Link>
-              -Infos oder starten Sie direkt die{' '}
+                Umzugsvergleich-Infos
+              </Link>{' '}
+              oder starten Sie direkt die{' '}
               <Link href="/kostenlose-offerte-anfordern" className="text-green-700 hover:text-green-800 underline font-medium">
                 kostenlose Offertenanfrage
               </Link>
@@ -513,7 +587,7 @@ const TopOffertenPageClient = () => {
             <p className="text-gray-600 leading-relaxed">
               Unten finden Sie ausgewählte Städte mit direkten Links zu{' '}
               <span className="font-medium text-gray-800">Umzug</span> und – wo verfügbar – <span className="font-medium text-gray-800">Reinigung</span> – jeweils mit passenden
-              Informationen vor Ort, kombinierbar mit Ihrer zentralen Anfrage nach Top Offerten.
+              Informationen vor Ort. Über eine zentrale Anfrage können Sie dort dieselben <strong>Top Offerten einholen</strong> und Angebote vergleichen.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
@@ -524,9 +598,7 @@ const TopOffertenPageClient = () => {
                     <MapPin className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
                     <div>
                       <h3 className="text-lg font-bold text-gray-900 leading-snug">Top Offerten {city.name}</h3>
-                      <p className="text-sm text-gray-600 mt-1">
-                        Umzug & Reinigung: Offerten online einholen und vergleichen – über die gleiche Plattform wie in der ganzen Schweiz.
-                      </p>
+                      <p className="text-sm text-gray-600 mt-1.5 leading-relaxed">{city.intro}</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -535,7 +607,7 @@ const TopOffertenPageClient = () => {
                     href={city.umzug}
                     className="block text-sm font-semibold text-green-700 hover:text-green-800 hover:underline py-1.5 px-2 rounded-md hover:bg-green-50"
                   >
-                    Umzug {city.name}: Offerten einholen & vergleichen
+                    Umzug {city.name}: Top Offerten einholen & vergleichen
                     <ChevronRight className="w-3 h-3 inline ml-1" />
                   </Link>
                   {city.reinigung ? (
@@ -543,19 +615,12 @@ const TopOffertenPageClient = () => {
                       href={city.reinigung}
                       className="block text-sm font-semibold text-green-700 hover:text-green-800 hover:underline py-1.5 px-2 rounded-md hover:bg-green-50"
                     >
-                      Reinigung {city.name}: Top Offerten anfragen
+                      Reinigung {city.name}: Top Offerten einholen
                       <ChevronRight className="w-3 h-3 inline ml-1" />
                     </Link>
                   ) : (
                     <p className="text-xs text-gray-500 px-2 py-1">Reinigung: siehe allgemeine Reinigungsseite & Formular.</p>
                   )}
-                  <Link
-                    href="/kostenlose-offerte-anfordern"
-                    className="mt-auto text-xs text-gray-600 pt-2 border-t border-gray-100 flex items-center gap-1 hover:text-green-700"
-                  >
-                    <ArrowRight className="w-3 h-3" />
-                    Direkt zum Formular für {city.name}
-                  </Link>
                 </CardContent>
               </Card>
             ))}
