@@ -1,7 +1,6 @@
 'use client'
 
 import React, { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from 'react'
-import { usePathname } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import { createClient } from '@/lib/supabase/client'
 import type { User, Session } from '@supabase/supabase-js'
@@ -21,7 +20,6 @@ const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast()
-  const pathname = usePathname()
   const recoveryHandled = useRef(false)
 
   const [user, setUser] = useState<User | null>(null)
@@ -149,37 +147,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return () => subscription.unsubscribe()
     }
 
-    // Defer auth initialization to improve initial page load
-    const needsImmediateAuth = 
-      pathname?.startsWith('/admin-dashboard') ||
-      pathname?.startsWith('/partner/dashboard') ||
-      pathname?.startsWith('/update-password') ||
-      ['/login', '/forgot-password', '/partner-werden'].includes(pathname || '')
-
-    let timeoutId: NodeJS.Timeout | number | null = null
-    let cleanupFn: (() => void) | null = null
-
-    if (needsImmediateAuth) {
-      cleanupFn = initAuth()
-    } else {
-      if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-        timeoutId = requestIdleCallback(initAuth as any, { timeout: 2000 })
-      } else {
-        timeoutId = setTimeout(initAuth, 100)
-      }
-    }
+    // Always initialize auth immediately so Navbar/session state is ready on first paint.
+    // (Deferred requestIdleCallback caused long or stuck "loading" on public pages.)
+    const cleanupFn = initAuth()
 
     return () => {
-      if (timeoutId) {
-        if (typeof window !== 'undefined' && 'cancelIdleCallback' in window) {
-          cancelIdleCallback(timeoutId as number)
-        } else {
-          clearTimeout(timeoutId as NodeJS.Timeout)
-        }
-      }
-      if (cleanupFn) cleanupFn()
+      cleanupFn()
     }
-  }, [handleSession, invalidateBrokenSession, pathname, supabase, validateSessionWithServer])
+  }, [handleSession, invalidateBrokenSession, supabase, validateSessionWithServer])
 
   const signUp = useCallback(async (email: string, password: string, options?: any) => {
     const { error } = await supabase.auth.signUp({
