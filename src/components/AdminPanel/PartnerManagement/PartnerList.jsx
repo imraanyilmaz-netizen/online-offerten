@@ -1,15 +1,16 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush, Clock, Activity } from 'lucide-react';
+import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush, Clock, Activity, Mail } from 'lucide-react';
 // framer-motion removed - CSS for better INP
 import PartnerDetailView from './PartnerDetailView';
 import PartnerEditModal from './PartnerEditModal';
 import PartnerDeleteModal from './PartnerDeleteModal';
 import PartnerFilters from './PartnerFilters';
 import ManualCreditModal from './ManualCreditModal';
+import PartnerEmailModal from './PartnerEmailModal';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -21,6 +22,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
   const [editingPartner, setEditingPartner] = useState(null);
   const [deletingPartner, setDeletingPartner] = useState(null);
   const [creditingPartner, setCreditingPartner] = useState(null);
+  const [emailPartner, setEmailPartner] = useState(null);
   const [updatingStatusId, setUpdatingStatusId] = useState(null);
 
   const [sortBy, setSortBy] = useState('last_activity');
@@ -328,6 +330,14 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                         <Button 
                           variant="outline" 
                           size="sm" 
+                          onClick={() => setEmailPartner(partner)}
+                          className="font-medium text-blue-700 border-blue-200 hover:bg-blue-50"
+                        >
+                          <Mail className="w-4 h-4 mr-1.5" />E-Mail
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
                           onClick={() => setEditingPartner(partner)}
                           className="font-medium"
                         >
@@ -388,6 +398,12 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
       <PartnerEditModal partner={editingPartner} isOpen={!!editingPartner} onClose={() => setEditingPartner(null)} onSave={onUpdatePartner} onRefresh={onRefresh} />
       <PartnerDeleteModal partner={deletingPartner} isOpen={!!deletingPartner} onClose={() => setDeletingPartner(null)} onDelete={onDeletePartner} />
       <ManualCreditModal partner={creditingPartner} isOpen={!!creditingPartner} onClose={() => setCreditingPartner(null)} onRefresh={onRefresh} />
+      <PartnerEmailModal
+        partner={emailPartner}
+        isOpen={!!emailPartner}
+        onClose={() => setEmailPartner(null)}
+        onSent={onRefresh}
+      />
     </div>
   );
 };
