@@ -45,13 +45,22 @@ const regionGroups = [
 
 const allCantons = regionGroups.flatMap(group => group.cantons);
 
+/**
+ * @param {object} props
+ * @param {{ selectedRegions: string[] }} props.formData
+ * @param {(cantonId: string) => void} props.onRegionChange
+ * @param {Record<string, string>} [props.errors]
+ * @param {boolean} [props.hideMarketingContent]
+ * @param {string} [props.selectionHeading]
+ * @param {string} [props.emptySelectionText]
+ */
 const Step2Regions = ({
   formData,
   onRegionChange,
   errors = {},
   hideMarketingContent = false,
-  selectionHeading,
-  emptySelectionText,
+  selectionHeading = undefined,
+  emptySelectionText = undefined,
 }) => {
 
   const getCantonById = (id) => allCantons.find(c => c.id === id);
