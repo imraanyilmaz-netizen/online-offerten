@@ -10,7 +10,11 @@ interface AuthContextType {
   session: Session | null
   loading: boolean
   signUp: (email: string, password: string, options?: any) => Promise<{ error: any }>
-  signIn: (email: string, password: string) => Promise<{ error: any }>
+  signIn: (
+    email: string,
+    password: string,
+    options?: { silent?: boolean }
+  ) => Promise<{ error: any }>
   signOut: () => Promise<{ error: any }>
   updateUserPassword: (newPassword: string) => Promise<{ data: any; error: any }>
 }
@@ -186,44 +190,55 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return { error }
   }, [toast, supabase])
 
-  const signIn = useCallback(async (email: string, password: string) => {
-    console.log('[AuthContext] signIn called:', { email })
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-
-    console.log('[AuthContext] signIn result:', { 
-      hasError: !!error, 
-      errorMessage: error?.message,
-      hasSession: !!data?.session,
-      userEmail: data?.session?.user?.email,
-      userRole: data?.session?.user?.user_metadata?.role 
-    })
-
-    if (error) {
-      let errorMessage = error.message || "Etwas ist schief gelaufen"
-      // Übersetze häufige Fehlermeldungen
-      if (error.message?.toLowerCase().includes('email not confirmed') || error.message?.toLowerCase().includes('email_not_confirmed')) {
-        errorMessage = "E-Mail nicht bestätigt"
-      } else if (error.message?.toLowerCase().includes('invalid login') || error.message?.toLowerCase().includes('invalid credentials')) {
-        errorMessage = "Ungültige Anmeldedaten"
-      } else if (error.message?.toLowerCase().includes('user not found')) {
-        errorMessage = "Benutzer nicht gefunden"
-      } else if (error.message?.toLowerCase().includes('wrong password')) {
-        errorMessage = "Falsches Passwort"
-      }
-      toast({
-        variant: "destructive",
-        title: "Anmeldung fehlgeschlagen",
-        description: errorMessage,
+  const signIn = useCallback(
+    async (email: string, password: string, options?: { silent?: boolean }) => {
+      const silent = options?.silent === true
+      console.log('[AuthContext] signIn called:', { email })
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       })
-    } else {
-      console.log('[AuthContext] signIn successful, session should be set')
-    }
 
-    return { error }
-  }, [toast, supabase])
+      console.log('[AuthContext] signIn result:', {
+        hasError: !!error,
+        errorMessage: error?.message,
+        hasSession: !!data?.session,
+        userEmail: data?.session?.user?.email,
+        userRole: data?.session?.user?.user_metadata?.role,
+      })
+
+      if (error) {
+        let errorMessage = error.message || 'Etwas ist schief gelaufen'
+        if (
+          error.message?.toLowerCase().includes('email not confirmed') ||
+          error.message?.toLowerCase().includes('email_not_confirmed')
+        ) {
+          errorMessage = 'E-Mail nicht bestätigt'
+        } else if (
+          error.message?.toLowerCase().includes('invalid login') ||
+          error.message?.toLowerCase().includes('invalid credentials')
+        ) {
+          errorMessage = 'Ungültige Anmeldedaten'
+        } else if (error.message?.toLowerCase().includes('user not found')) {
+          errorMessage = 'Benutzer nicht gefunden'
+        } else if (error.message?.toLowerCase().includes('wrong password')) {
+          errorMessage = 'Falsches Passwort'
+        }
+        if (!silent) {
+          toast({
+            variant: 'destructive',
+            title: 'Anmeldung fehlgeschlagen',
+            description: errorMessage,
+          })
+        }
+      } else {
+        console.log('[AuthContext] signIn successful, session should be set')
+      }
+
+      return { error }
+    },
+    [toast, supabase]
+  )
 
   const signOut = useCallback(async () => {
     // 1️⃣ Supabase oturumunu kapat

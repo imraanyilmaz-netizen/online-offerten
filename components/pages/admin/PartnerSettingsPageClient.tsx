@@ -1,7 +1,8 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
@@ -11,17 +12,41 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Loader2, User, Lock, Image as ImageIcon, Star, ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { Loader2, User, Lock, Image as ImageIcon, Star, ArrowLeft, Eye, EyeOff, MapPin, ExternalLink } from 'lucide-react';
 import ImageUploader from '@/components/PartnerPanel/ImageUploader';
 import GalleryImageUploader from '@/components/PartnerPanel/GalleryImageUploader';
 import ReviewCard from '@/components/PartnerProfilePageParts/ReviewCard';
 import { formatDate } from '@/lib/utils'; // Import formatDate from utils
+import Step2Regions from '@/src/components/PartnerRegistrationForm/Step2Regions';
+import { cantonMap } from '@/src/lib/dataMapping.js';
+
+/** Kantons-Codes aus DB normalisieren (ZH, BE, …) – gleiche Logik wie Partner-Registrierung */
+function normalizeServiceRegions(raw: unknown): string[] {
+  if (!raw || !Array.isArray(raw)) return [];
+  const valid = new Set(Object.keys(cantonMap));
+  const upper = raw.map((r) => String(r).trim().toUpperCase()).filter((r) => valid.has(r));
+  if (upper.length > 0) return upper;
+  // Fallback: seltene Legacy-Einträge als Kantons-Name (z. B. "Zürich")
+  const byLabel = raw
+    .map((r) => {
+      const s = String(r).trim();
+      const entry = Object.entries(cantonMap).find(
+        ([, label]) => label.toLowerCase() === s.toLowerCase()
+      );
+      return entry?.[0];
+    })
+    .filter((k): k is string => Boolean(k));
+  return byLabel;
+}
 
 const PartnerSettingsPageClient = () => {
   const { toast } = useToast();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialTab = searchParams.get('tab') || 'profile';
+  const tabParam = searchParams.get('tab');
+  const settingsTabs = ['profile', 'regions', 'images', 'security', 'reviews'] as const;
+  const initialTab =
+    tabParam && settingsTabs.includes(tabParam as (typeof settingsTabs)[number]) ? tabParam : 'profile';
   const { user: authUser, loading: authLoading } = useAuth();
 
   const [loading, setLoading] = useState(true);
@@ -45,6 +70,9 @@ const PartnerSettingsPageClient = () => {
   });
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  /** Kantons-Codes wie bei Registrierung (service_regions in partners) */
+  const [serviceRegions, setServiceRegions] = useState<string[]>([]);
+  const [savingRegions, setSavingRegions] = useState(false);
 
   // useAuth() ile güvenilir auth check
   useEffect(() => {
@@ -76,6 +104,7 @@ const PartnerSettingsPageClient = () => {
         .single();
       if (error) throw error;
       setPartnerData(data);
+      setServiceRegions(normalizeServiceRegions(data.service_regions));
       setFormData({
         company_name: data.company_name || '',
         contact_person: data.contact_person || '',
@@ -134,6 +163,45 @@ const PartnerSettingsPageClient = () => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPasswordData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleRegionToggle = (cantonId: string) => {
+    setServiceRegions((prev) =>
+      prev.includes(cantonId) ? prev.filter((id) => id !== cantonId) : [...prev, cantonId]
+    );
+  };
+
+  const handleRegionsSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+    if (serviceRegions.length === 0) {
+      toast({
+        variant: 'destructive',
+        title: 'Regionen fehlen',
+        description: 'Bitte wählen Sie mindestens ein Kanton / eine Region aus.',
+      });
+      return;
+    }
+    setSavingRegions(true);
+    try {
+      const { error } = await supabase
+        .from('partners')
+        .update({ service_regions: serviceRegions })
+        .eq('id', user.id);
+      if (error) throw error;
+      setPartnerData((prev: any) => (prev ? { ...prev, service_regions: serviceRegions } : prev));
+      toast({ title: 'Gespeichert', description: 'Ihre Einsatzgebiete wurden aktualisiert.' });
+    } catch (err: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Fehler',
+        description:
+          err?.message ||
+          'Einsatzgebiete konnten nicht gespeichert werden. Prüfen Sie die Berechtigung in Supabase (RLS) für service_regions.',
+      });
+    } finally {
+      setSavingRegions(false);
+    }
   };
 
   const handleProfileSave = async (e: React.FormEvent) => {
@@ -207,13 +275,24 @@ const PartnerSettingsPageClient = () => {
               Zurück zum Dashboard
             </Button>
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">Einstellungen</h1>
-          <Tabs defaultValue={initialTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="profile"><User className="mr-2 h-4 w-4" />Profil</TabsTrigger>
-              <TabsTrigger value="images"><ImageIcon className="mr-2 h-4 w-4" />Bilder</TabsTrigger>
-              <TabsTrigger value="security"><Lock className="mr-2 h-4 w-4" />Sicherheit</TabsTrigger>
-              <TabsTrigger value="reviews"><Star className="mr-2 h-4 w-4" />Bewertungen</TabsTrigger>
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h1 className="text-3xl font-bold text-gray-800">Einstellungen</h1>
+            {partnerData?.slug ? (
+              <Button variant="outline" size="sm" className="shrink-0 w-full sm:w-auto" asChild>
+                <Link href={`/partner/${partnerData.slug}`} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Profil ansehen
+                </Link>
+              </Button>
+            ) : null}
+          </div>
+          <Tabs key={initialTab} defaultValue={initialTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1 h-auto py-1">
+              <TabsTrigger value="profile" className="text-xs sm:text-sm"><User className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Profil</TabsTrigger>
+              <TabsTrigger value="regions" className="text-xs sm:text-sm"><MapPin className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Einsatzgebiete</TabsTrigger>
+              <TabsTrigger value="images" className="text-xs sm:text-sm"><ImageIcon className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Bilder</TabsTrigger>
+              <TabsTrigger value="security" className="text-xs sm:text-sm"><Lock className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Sicherheit</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-xs sm:text-sm col-span-2 sm:col-span-1 lg:col-span-1"><Star className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Bewertungen</TabsTrigger>
             </TabsList>
 
             <TabsContent value="profile" className="mt-6">
@@ -264,6 +343,35 @@ const PartnerSettingsPageClient = () => {
                       <Button type="submit" disabled={saving}>
                         {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         Speichern
+                      </Button>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="regions" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Einsatzgebiete bearbeiten</CardTitle>
+                  <CardDescription>
+                    Sie sehen hier Ihre aktuell hinterlegten Kantone. Sie können die Auswahl jederzeit ändern – neue
+                    Regionen hinzufügen oder Einsatzgebiete entfernen. Nach dem Speichern gelten die Änderungen für Ihr
+                    Profil und die Zuordnung von Anfragen.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleRegionsSave} className="space-y-6">
+                    <Step2Regions
+                      formData={{ selectedRegions: serviceRegions }}
+                      onRegionChange={handleRegionToggle}
+                      errors={{}}
+                      hideMarketingContent
+                    />
+                    <div className="flex justify-end pt-2 border-t">
+                      <Button type="submit" disabled={savingRegions}>
+                        {savingRegions && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        Einsatzgebiete speichern
                       </Button>
                     </div>
                   </form>

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -45,14 +45,40 @@ const regionGroups = [
 
 const allCantons = regionGroups.flatMap(group => group.cantons);
 
-const Step2Regions = ({ formData, onRegionChange, errors = {} }) => {
+const Step2Regions = ({
+  formData,
+  onRegionChange,
+  errors = {},
+  hideMarketingContent = false,
+  selectionHeading,
+  emptySelectionText,
+}) => {
 
   const getCantonById = (id) => allCantons.find(c => c.id === id);
 
+  const selectionTitle =
+    selectionHeading ?? (hideMarketingContent ? 'Aktuelle Einsatzgebiete' : 'Ihre Auswahl');
+  const emptyText =
+    emptySelectionText ??
+    (hideMarketingContent
+      ? 'Noch keine Kantone gewählt – aktivieren Sie unten die gewünschten Regionen.'
+      : 'Noch keine Regionen ausgewählt');
+
   return (
     <div>
-      <h3 className="text-xl font-semibold mb-2">Wählen Sie Ihre Service-Regionen</h3>
-      <p className="text-slate-500 mb-6">In welchen Regionen bieten Sie Ihre Dienstleistungen an?</p>
+      {!hideMarketingContent && (
+        <>
+          <h3 className="text-xl font-semibold mb-2">Wählen Sie Ihre Service-Regionen</h3>
+          <p className="text-slate-500 mb-6">In welchen Regionen bieten Sie Ihre Dienstleistungen an?</p>
+        </>
+      )}
+
+      {hideMarketingContent && (
+        <p className="text-sm text-slate-600 mb-4">
+          Hier können Sie Ihre bisher gewählten Kantone anpassen: In den Regionenlisten weitere Kantone aktivieren oder
+          über die Badges im Abschnitt «{selectionTitle}» einzelne Einsatzgebiete wieder entfernen.
+        </p>
+      )}
       
       {errors.selectedRegions && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
@@ -85,7 +111,7 @@ const Step2Regions = ({ formData, onRegionChange, errors = {} }) => {
       </Accordion>
 
       <div className="mt-8">
-        <h4 className="font-semibold mb-2">Ihre Auswahl</h4>
+        <h4 className="font-semibold mb-2">{selectionTitle}</h4>
         {formData.selectedRegions.length > 0 ? (
           <div className="flex flex-wrap gap-2 p-4 border rounded-lg bg-slate-50">
             {formData.selectedRegions.map(cantonId => {
@@ -101,27 +127,31 @@ const Step2Regions = ({ formData, onRegionChange, errors = {} }) => {
             })}
           </div>
         ) : (
-          <p className="text-sm text-slate-500">Noch keine Regionen ausgewählt</p>
+          <p className="text-sm text-slate-500">{emptyText}</p>
         )}
-        <p className="text-xs text-slate-500 mt-2">Kunden finden Sie basierend auf den von Ihnen ausgewählten Regionen</p>
+        {!hideMarketingContent && (
+          <p className="text-xs text-slate-500 mt-2">Kunden finden Sie basierend auf den von Ihnen ausgewählten Regionen</p>
+        )}
       </div>
 
-      <div className="mt-8 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
-        <div className="flex">
-          <div className="flex-shrink-0">
-            <Info className="h-5 w-5 text-green-500" />
-          </div>
-          <div className="ml-3">
-            <h4 className="text-md font-semibold text-green-800">Warum ist das wichtig?</h4>
-            <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-green-700">
-              <li>Kunden finden Sie leichter, wenn sie nach Dienstleistungen in ihrer Region suchen</li>
-              <li>Sie erhalten relevantere Anfragen von Kunden in Ihrer Nähe</li>
-              <li>Ihr Unternehmen wird in den Suchergebnissen für die ausgewählten Regionen angezeigt</li>
-              <li>Sie können Ihre Reichweite jederzeit erweitern</li>
-            </ul>
+      {!hideMarketingContent && (
+        <div className="mt-8 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <Info className="h-5 w-5 text-green-500" />
+            </div>
+            <div className="ml-3">
+              <h4 className="text-md font-semibold text-green-800">Warum ist das wichtig?</h4>
+              <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-green-700">
+                <li>Kunden finden Sie leichter, wenn sie nach Dienstleistungen in ihrer Region suchen</li>
+                <li>Sie erhalten relevantere Anfragen von Kunden in Ihrer Nähe</li>
+                <li>Ihr Unternehmen wird in den Suchergebnissen für die ausgewählten Regionen angezeigt</li>
+                <li>Sie können Ihre Reichweite jederzeit erweitern</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

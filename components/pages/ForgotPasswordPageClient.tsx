@@ -1,6 +1,7 @@
-﻿'use client'
+'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
@@ -13,6 +14,7 @@ import Link from 'next/link'
 import useMediaQuery from '@/hooks/useMediaQuery'
 
 const ForgotPasswordPageClient = () => {
+  const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
@@ -20,6 +22,19 @@ const ForgotPasswordPageClient = () => {
   const { toast } = useToast()
   const supabase = createClient()
   const isMobile = useMediaQuery('(max-width: 768px)')
+
+  useEffect(() => {
+    const raw = searchParams.get('email')
+    if (!raw) return
+    try {
+      const decoded = decodeURIComponent(raw).trim()
+      if (decoded.length > 0) {
+        setEmail(decoded)
+      }
+    } catch {
+      // ungültige Kodierung ignorieren
+    }
+  }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

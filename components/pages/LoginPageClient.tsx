@@ -96,14 +96,35 @@ const syncAuthCookieFromSession = async (session: any): Promise<boolean> => {
   return waitForCookie(600)
 }
 
+/** Eine klare Meldung pro Fehlerfall (gleiche Logik wie AuthContext, für Inline-Anzeige) */
+function mapLoginErrorMessage(error: { message?: string } | null): string {
+  if (!error?.message) {
+    return 'Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.'
+  }
+  const m = error.message.toLowerCase()
+  if (m.includes('email not confirmed') || m.includes('email_not_confirmed')) {
+    return 'E-Mail-Adresse noch nicht bestätigt. Bitte prüfen Sie Ihren Posteingang.'
+  }
+  if (m.includes('invalid login') || m.includes('invalid credentials')) {
+    return 'E-Mail oder Passwort ist nicht korrekt.'
+  }
+  if (m.includes('user not found')) {
+    return 'Kein Konto mit dieser E-Mail-Adresse gefunden.'
+  }
+  if (m.includes('wrong password')) {
+    return 'Das Passwort ist nicht korrekt.'
+  }
+  return 'Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.'
+}
+
 const LoginPageClient = () => {
   const { signIn, user, loading } = useAuth()
   const { toast } = useToast()
   const searchParams = useSearchParams()
 
-  const pageTitle = 'Partner-Login bei Online-Offerten.ch'
+  const pageTitle = 'Partner Login'
   const welcomeMessage = 'Willkommen zurück!'
-  const pageSubtitle = 'Melden Sie sich mit E-Mail und Passwort an – Login für registrierte Partner.'
+  const pageSubtitle = 'Bitte geben Sie Ihre Daten ein, um sich anzumelden.'
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -112,6 +133,14 @@ const LoginPageClient = () => {
   const [isValidatingCurrentSession, setIsValidatingCurrentSession] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
+  const [loginFormError, setLoginFormError] = useState<string | null>(null)
+  const [failedLoginAttempts, setFailedLoginAttempts] = useState(0)
+
+  /** Passwort-vergessen-Seite mit vorausgefüllter E-Mail (professioneller Flow) */
+  const forgotPasswordHref =
+    email.trim().length > 0
+      ? `/forgot-password?email=${encodeURIComponent(email.trim())}`
+      : '/forgot-password'
 
   // Keep /login loop-safe: validate current session first, then redirect if valid.
 
@@ -191,14 +220,16 @@ const LoginPageClient = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoginFormError(null)
     setIsSubmitting(true)
     console.log('[LoginPage] handleLogin called:', { email })
 
-    const { error } = await signIn(email, password)
+    const { error } = await signIn(email, password, { silent: true })
 
     console.log('[LoginPage] signIn result:', { hasError: !!error, errorMessage: error?.message })
 
     if (!error) {
+      setFailedLoginAttempts(0)
       console.log('[LoginPage] Login successful, waiting for auth state change...')
       setIsRedirectingAfterLogin(true)
       
@@ -287,11 +318,8 @@ const LoginPageClient = () => {
     } else {
       console.log('[LoginPage] Login failed:', error?.message)
       setIsRedirectingAfterLogin(false)
-      toast({
-        variant: "destructive",
-        title: "Anmeldung fehlgeschlagen",
-        description: "Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.",
-      })
+      setFailedLoginAttempts((n) => n + 1)
+      setLoginFormError(mapLoginErrorMessage(error))
       setIsSubmitting(false)
     }
   }
@@ -353,13 +381,59 @@ const LoginPageClient = () => {
                 <CardContent className="p-8">
                   <form onSubmit={handleLogin} className="space-y-6">
                     <div className="space-y-2">
+                    {loginFormError && (
+                      <div
+                        role="alert"
+                        className="rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-left text-sm text-red-900"
+                      >
+                        <p className="font-semibold text-red-950">Anmeldung fehlgeschlagen</p>
+                        <p className="mt-1 text-red-800">{loginFormError}</p>
+                      </div>
+                    )}
+                    {failedLoginAttempts >= 3 && (
+                      <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3 text-left text-sm text-amber-950">
+                        <p className="leading-relaxed">
+                          Mehrere Anmeldeversuche sind fehlgeschlagen. Sie können Ihr Passwort zurücksetzen – wir senden
+                          Ihnen einen Link per E-Mail.
+                        </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="mt-3 w-full border-amber-300 bg-white font-semibold text-amber-950 hover:bg-amber-100"
+                          asChild
+                        >
+                          <Link href={forgotPasswordHref}>Passwort zurücksetzen</Link>
+                        </Button>
+                      </div>
+                    )}
+                    </div>
+                    <div className="space-y-2">
                       <Label htmlFor="email" className="font-semibold text-gray-700">E-Mail-Adresse</Label>
                       <Input
                         id="email"
                         type="email"
                         placeholder="ihre.email@beispiel.com"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {
+                          setEmail(e.target.value)
+                          setLoginFormError(null)
+                          setFailedLoginAttempts(0)
+                        }}
+                        onInput={(e) => {
+                          e.currentTarget.setCustomValidity('')
+                        }}
+                        onInvalid={(e) => {
+                          const el = e.currentTarget
+                          if (el.validity.valueMissing) {
+                            el.setCustomValidity('Bitte geben Sie Ihre E-Mail-Adresse ein.')
+                          } else if (el.validity.typeMismatch) {
+                            el.setCustomValidity(
+                              'Bitte geben Sie eine gültige E-Mail-Adresse ein (z. B. name@beispiel.ch).'
+                            )
+                          } else {
+                            el.setCustomValidity('Bitte geben Sie eine gültige E-Mail-Adresse ein.')
+                          }
+                        }}
                         required
                         className="bg-white/70"
                       />
@@ -367,8 +441,11 @@ const LoginPageClient = () => {
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                           <Label htmlFor="password" className="font-semibold text-gray-700">Passwort</Label>
-                          <Link href="/forgot-password" className="text-sm font-medium text-green-600 hover:text-green-500 hidden md:inline">
-                              Passwort vergessen?
+                          <Link
+                            href={forgotPasswordHref}
+                            className="text-sm font-medium text-green-600 hover:text-green-500 hidden md:inline"
+                          >
+                            Passwort vergessen?
                           </Link>
                       </div>
                       <div className="relative">
@@ -377,7 +454,21 @@ const LoginPageClient = () => {
                           type={showPassword ? "text" : "password"}
                           placeholder="••••••••"
                           value={password}
-                          onChange={(e) => setPassword(e.target.value)}
+                          onChange={(e) => {
+                            setPassword(e.target.value)
+                            setLoginFormError(null)
+                          }}
+                          onInput={(e) => {
+                            e.currentTarget.setCustomValidity('')
+                          }}
+                          onInvalid={(e) => {
+                            const el = e.currentTarget
+                            if (el.validity.valueMissing) {
+                              el.setCustomValidity('Bitte geben Sie Ihr Passwort ein.')
+                            } else {
+                              el.setCustomValidity('')
+                            }
+                          }}
                           required
                           className="bg-white/70 pr-10"
                         />
