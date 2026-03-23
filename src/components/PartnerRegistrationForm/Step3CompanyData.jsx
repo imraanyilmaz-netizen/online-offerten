@@ -1,17 +1,16 @@
-﻿import React from 'react';
+import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import AddressInput from './AddressInput';
-import LogoUpload from './LogoUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building, MapPin, Briefcase, ShieldCheck, Lock, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Step3CompanyData = ({ formData, onInputChange, onValueChange, onLogoChange, errors = {} }) => {
+const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const employeeCountOptions = [
@@ -352,14 +351,6 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, onLogoChange
                   <p className="text-sm text-red-600 mt-1">{errors.commercial_register_number}</p>
                 )}
               </div>
-            </div>
-            
-            <div className="md:col-span-2 space-y-2 mt-4">
-              <LogoUpload 
-                logoFile={formData.logoFile}
-                onLogoChange={onLogoChange}
-                errors={errors}
-              />
             </div>
             
             <div className="md:col-span-2 space-y-2 mt-4">

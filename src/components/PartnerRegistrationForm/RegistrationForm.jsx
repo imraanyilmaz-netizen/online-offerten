@@ -10,7 +10,6 @@ import Step1Services from './Step1Services';
 import Step2Regions from './Step2Regions';
 import Step3CompanyData from './Step3CompanyData';
 import SuccessMessage from './SuccessMessage';
-import LogoUpload from './LogoUpload';
 import { CheckCircle2, Edit3 } from 'lucide-react';
 
 const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
@@ -35,7 +34,6 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
     liability_insurance: null,
     commercial_register_number: '',
     company_description: '',
-    logoFile: null,
     agreedToTerms: false
   });
   const [loading, setLoading] = useState(false);
@@ -312,47 +310,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
           throw error;
         }
       } else if (data?.user) {
-        // Logo: Nach signUp oft keine Session (E-Mail-Bestätigung) → Client-Upload schlägt fehl.
-        // Edge Function mit Service Role lädt zuverlässig hoch und setzt partners.logo_url.
-        if (formData.logoFile && data.user.id) {
-          try {
-            const file = formData.logoFile;
-            const fileBase64 = await new Promise((resolve, reject) => {
-              const reader = new FileReader();
-              reader.onload = () => {
-                const result = reader.result;
-                if (typeof result !== 'string') {
-                  reject(new Error('Logo read failed'));
-                  return;
-                }
-                const parts = result.split(',');
-                resolve(parts[1] || '');
-              };
-              reader.onerror = () => reject(reader.error);
-              reader.readAsDataURL(file);
-            });
-
-            const { error: logoFnError, data: logoFnData } = await supabase.functions.invoke('upload-partner-logo', {
-              body: {
-                userId: data.user.id,
-                email: formData.email,
-                fileBase64,
-                fileName: file.name,
-                mimeType: file.type || 'application/octet-stream',
-              },
-            });
-
-            if (logoFnError) {
-              console.error('upload-partner-logo invoke error:', logoFnError);
-            } else if (logoFnData && logoFnData.success === false) {
-              console.error('upload-partner-logo:', logoFnData.error);
-            } else {
-              console.log('upload-partner-logo OK:', logoFnData);
-            }
-          } catch (logoError) {
-            console.error('Error uploading logo:', logoError);
-          }
-        }
+        // Logo wird nicht bei der Registrierung hochgeladen — Partner kann es unter Einstellungen setzen.
 
         if (data.user.id) {
           try {
@@ -517,7 +475,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                 >
                   {step === 1 && <Step1Services formData={formData} onMainCategoryChange={handleMainCategoryChange} onServiceChange={handleServiceChange} errors={errors} />}
                   {step === 2 && <Step2Regions formData={formData} onRegionChange={handleRegionChange} errors={errors} />}
-                  {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} onLogoChange={(file) => setFormData(prev => ({ ...prev, logoFile: file }))} errors={errors} />}
+                  {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} errors={errors} />}
                 </div>
               )}
             
@@ -645,7 +603,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                   >
                     {step === 1 && <Step1Services formData={formData} onMainCategoryChange={handleMainCategoryChange} onServiceChange={handleServiceChange} errors={errors} />}
                     {step === 2 && <Step2Regions formData={formData} onRegionChange={handleRegionChange} errors={errors} />}
-                    {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} onLogoChange={(file) => setFormData(prev => ({ ...prev, logoFile: file }))} errors={errors} />}
+                    {step === 3 && <Step3CompanyData formData={formData} onInputChange={handleInputChange} onValueChange={handleValueChange} errors={errors} />}
                   </div>
                 )}
               
