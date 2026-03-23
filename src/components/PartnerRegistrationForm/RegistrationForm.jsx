@@ -264,8 +264,17 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
     setLoading(true);
     
     try {
-      const partnerMetaData = {
+      const companyDescription = (formData.company_description || '').trim();
+
+      // Klein halten JWT (kein langer message-Text). company_name muss für DB-Trigger auf
+      // partners (NOT NULL) oft aus metadata kommen — sonst Signup 500.
+      const partnerMetaDataMinimal = {
         role: 'partner',
+        company_name: (formData.companyName || '').trim(),
+      };
+
+      // Für E-Mails & sync-partner-registration (gleiche Felder wie früher in metadata).
+      const partnerProfilePayload = {
         company_name: formData.companyName,
         contact_person: formData.contactPerson,
         phone: formData.phone,
@@ -280,7 +289,6 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         employee_count: formData.employee_count,
         liability_insurance: formData.liability_insurance,
         commercial_register_number: formData.commercial_register_number,
-        message: formData.company_description, // Database column is 'message', not 'company_description'
         agreed_to_terms: formData.agreedToTerms,
       };
 
@@ -289,7 +297,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         password: formData.password,
         options: {
           emailRedirectTo: 'https://online-offerten.ch/email-confirmed',
-          data: partnerMetaData,
+          data: partnerMetaDataMinimal,
         },
       });
 
@@ -346,6 +354,29 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
           }
         }
 
+        if (data.user.id) {
+          try {
+            const { error: syncErr, data: syncData } = await supabase.functions.invoke(
+              'sync-partner-registration',
+              {
+                body: {
+                  userId: data.user.id,
+                  email: formData.email,
+                  ...partnerProfilePayload,
+                  message: companyDescription,
+                },
+              },
+            );
+            if (syncErr) {
+              console.error('sync-partner-registration invoke error:', syncErr);
+            } else if (syncData && syncData.success === false) {
+              console.warn('sync-partner-registration:', syncData.error || syncData);
+            }
+          } catch (syncEx) {
+            console.error('sync-partner-registration:', syncEx);
+          }
+        }
+
         setSubmitted(true);
         toast({
           title: "Registrierung erfolgreich!",
@@ -359,7 +390,9 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
               // Bu Edge Function beklediği format: { partnerData: { ... } }
               partnerData: {
                 email: formData.email,
-                ...partnerMetaData,
+                role: 'partner',
+                ...partnerProfilePayload,
+                ...(companyDescription ? { message: companyDescription } : {}),
               },
             },
           });
