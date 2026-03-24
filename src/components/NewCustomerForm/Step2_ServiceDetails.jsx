@@ -369,7 +369,6 @@ const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxCha
     const cleaningTypeOptions = [
         { value: 'mit_abnahmegarantie', label: 'Endreinigung mit Abnahmegarantie' },
         { value: 'ohne_abnahmegarantie', label: 'Endreinigung ohne Abnahmegarantie' },
-        { value: 'umzugsreinigung', label: 'Umzugsreinigung' },
     ];
 
     return (

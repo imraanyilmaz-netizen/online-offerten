@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -18,6 +18,7 @@ import { getGermanServiceName } from '@/lib/dataMapping';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
 import { isCleaningService, isPaintingService, isDisposalService } from '@/lib/serviceCategorizer';
+import { formatMoveDateLine } from '@/lib/utils';
 
 const StatusTimeline = ({ status }: { status: string }) => {
   const steps = [
@@ -219,7 +220,6 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
 
       if (cleaningService) {
         return {
-          dateLabel: 'Wunschdatum für die Reinigung',
           fromLocationLabel: 'Dienstleistungsadresse',
           toLocationLabel: null,
           fromLocationIcon: <Sparkles />,
@@ -227,7 +227,6 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
       }
       if (paintingService) {
         return {
-          dateLabel: 'Ausführungsdatum',
           fromLocationLabel: 'Objektadresse',
           toLocationLabel: null,
           fromLocationIcon: <Paintbrush />,
@@ -235,7 +234,6 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
       }
       if (false) {
         return {
-          dateLabel: 'Ausführungsdatum',
           fromLocationLabel: 'Objektadresse',
           toLocationLabel: null,
           fromLocationIcon: <Sparkles />,
@@ -243,7 +241,6 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
       }
       if (disposalService) {
         return {
-          dateLabel: 'Entsorgungsdatum',
           fromLocationLabel: 'Entsorgungsadresse',
           toLocationLabel: null,
           fromLocationIcon: <Box />,
@@ -251,7 +248,6 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
       }
       // Default to 'umzug'
       return {
-        dateLabel: 'Umzugsdatum',
         fromLocationLabel: 'Auszugsort',
         toLocationLabel: 'Einzugsort',
         fromLocationIcon: <Home />,
@@ -358,9 +354,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
                  <div className="border-t pt-4 flex items-start gap-3">
                     <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Calendar /></div>
                     <div className="flex-grow">
-                        <p className="text-sm text-gray-500">{labels.dateLabel}</p>
-                        <div className="font-medium text-gray-800 text-sm">{format(new Date(quote.move_date), 'EEEE, dd. MMMM yyyy', { locale: de })}</div>
-                        {quote.move_date_flexible && <div className="text-xs text-blue-600 mt-1">Datum ist flexibel</div>}
+                        <div className="font-bold text-gray-900 text-sm">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</div>
                     </div>
                 </div>
             )}

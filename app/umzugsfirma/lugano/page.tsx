@@ -112,7 +112,7 @@ async function getLuganoPartners() {
       return cityMatch || regionMatch
     })
     filtered.sort((a: any, b: any) => { const rA = a.average_rating || 0; const rB = b.average_rating || 0; if (rB !== rA) return rB - rA; return (b.review_count || 0) - (a.review_count || 0) })
-    return filtered.slice(0, 12)
+    return filtered
   } catch (error) { console.error('Error in getLuganoPartners:', error); return [] }
 }
 

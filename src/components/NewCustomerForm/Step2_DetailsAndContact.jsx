@@ -577,25 +577,39 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
         
         <SectionCard icon={<CalendarDays className="w-6 h-6 text-green-600" />} titleKey={getDateTitleKey()}>
           <div className="space-y-3">
-            <div className="flex items-center space-x-2 pt-8">
-              <Checkbox id="move_date_flexible" name="move_date_flexible" checked={formData.move_date_flexible || false} onCheckedChange={(checked) => handleCheckboxChange('move_date_flexible', checked)} className="h-6 w-6 accent-green-600"/>
-              <Label htmlFor="move_date_flexible" className="font-medium text-base text-slate-800 cursor-pointer">{t('step3.dateFlexibleLabel')}</Label>
-            </div>
             <div className="space-y-1">
               <Label htmlFor="move_date" className="font-medium text-slate-700 text-sm">{t(getDateLabelKey())} <span className="text-red-500 ml-1">*</span></Label>
               <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9" min={new Date().toISOString().split("T")[0]} lang="de-CH" placeholder="TT.MM.JJJJ" title="TT.MM.JJJJ"/>
               {errors && errors.move_date && <p className="text-xs text-red-500 mt-1">{errors.move_date}</p>}
             </div>
+            <div className="space-y-2">
+              <p className="font-semibold text-slate-900 text-sm leading-snug">{t('step3.dateFlexibleQuestion')}</p>
+              <RadioGroup
+                name="move_date_flexible"
+                value={formData.move_date_flexible ? 'yes' : 'no'}
+                onValueChange={(v) => handleCheckboxChange('move_date_flexible', v === 'yes')}
+                className="flex flex-col gap-1.5"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="yes" id="move_date_flexible_yes" className="h-4 w-4" />
+                  <Label htmlFor="move_date_flexible_yes" className="text-sm font-normal text-slate-700 cursor-pointer leading-snug">{t('step3.dateFlexibleOptionYes')}</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="no" id="move_date_flexible_no" className="h-4 w-4" />
+                  <Label htmlFor="move_date_flexible_no" className="text-sm font-normal text-slate-700 cursor-pointer leading-snug">{t('step3.dateFlexibleOptionNo')}</Label>
+                </div>
+              </RadioGroup>
+            </div>
             <div className="space-y-1">
-                <Label htmlFor="preferred_time" className="font-medium text-slate-700 text-sm">{t('step3.preferredTimeLabel')}</Label>
-                <Select name="preferred_time" value={formData.preferred_time || ''} onValueChange={(value) => handleSelectChange('preferred_time', value)}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                    <SelectValue placeholder={t('step3.preferredTimePlaceholder')} />
+              <Label htmlFor="preferred_time" className="font-medium text-slate-700 text-sm">{t('step3.preferredTimeLabel')}</Label>
+              <Select name="preferred_time" value={formData.preferred_time || ''} onValueChange={(value) => handleSelectChange('preferred_time', value)}>
+                <SelectTrigger id="preferred_time" className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9 w-full">
+                  <SelectValue placeholder={t('step3.preferredTimePlaceholder')} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
-                    {preferredTimeOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
+                  {preferredTimeOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm">{option.label}</SelectItem>)}
                 </SelectContent>
-                </Select>
+              </Select>
             </div>
           </div>
         </SectionCard>
@@ -651,7 +665,6 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
                     <option value="">Art der Reinigung *</option>
                     <option value="mit_abnahmegarantie">Endreinigung mit Abnahmegarantie</option>
                     <option value="ohne_abnahmegarantie">Endreinigung ohne Abnahmegarantie</option>
-                    <option value="umzugsreinigung">Umzugsreinigung</option>
                   </select>
                 </div>
               )}

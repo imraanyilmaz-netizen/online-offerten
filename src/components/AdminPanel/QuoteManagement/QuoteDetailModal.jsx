@@ -1,10 +1,11 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Check, X, ExternalLink } from 'lucide-react';
+import { formatMoveDateLine } from '@/lib/utils';
 
 const DetailItem = ({ label, value, children }) => (
   <div>
@@ -99,11 +100,7 @@ const QuoteDetailModal = ({ quote, onClose, onAction, isProcessing }) => {
               </div>
               {quote.move_date && (
                 <div className="mt-3 text-sm">
-                  <Label className="font-medium text-gray-500">Umzugsdatum</Label>
-                  <p className="text-gray-700">
-                    {new Date(quote.move_date).toLocaleDateString('de-DE')}
-                    {quote.move_date_flexible && ' (Flexibel)'}
-                  </p>
+                  <p className="font-bold text-gray-900">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</p>
                 </div>
               )}
             </Section>

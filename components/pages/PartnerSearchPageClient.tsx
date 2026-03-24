@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import Link from 'next/link'
@@ -236,9 +236,10 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div>
                 <p className="text-body">
-                  Auf Online-Offerten.ch finden Sie eine Auswahl an qualifizierten und geprüften Dienstleistern
-                  für Umzüge und Reinigungen in der gesamten Schweiz. Jeder Partner durchläuft einen
-                  Verifizierungsprozess, bevor er auf unserer Plattform gelistet wird.
+                  Auf Online-Offerten.ch finden Sie eine Auswahl an Dienstleistern für Umzüge und Reinigungen
+                  in der gesamten Schweiz. Bei der Registrierung fordern wir von Partnern relevante Unterlagen an
+                  und prüfen insbesondere die <strong>Versicherungsnachweise</strong> (z.&nbsp;B. Betriebshaftpflicht),
+                  bevor eine Firma Kundenanfragen erhalten kann.
                 </p>
                 <p className="text-body">
                   Vergleichen Sie Kundenbewertungen, angebotene Services und die Erfahrung unserer Partner,
@@ -251,7 +252,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <Shield className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-600">Alle Partner sind geprüft und verifiziert</span>
+                    <span className="text-gray-600">Versicherungsnachweise der Partner werden geprüft</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Star className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />

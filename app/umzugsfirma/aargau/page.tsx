@@ -290,7 +290,7 @@ async function getAargauPartners() {
       return (b.review_count || 0) - (a.review_count || 0)
     })
     
-    return aargauPartners.slice(0, 12)
+    return aargauPartners
   } catch (error) {
     console.error('Error in getAargauPartners:', error)
     return []

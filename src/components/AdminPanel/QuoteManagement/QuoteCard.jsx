@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React, { useState, useRef, useCallback } from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ import { format, isAfter, subDays } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
+import { formatMoveDateLine } from '@/lib/utils';
 
 const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing, allPartners = [], onSendToAdditionalPartners, onUpdatePurchaseQuota, onMarkSoldOut }) => {
   const { id, from_city, to_city, servicetype, created_at, status, lead_price, assigned_partner_ids, purchase_quota, partner_target_regions, email_confirmed, email_confirmed_at, move_date, review_email_sent_at, review_email_sent_count } = quote;
@@ -334,7 +335,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                   <EmailConfirmationStatus />
                 </div>
                 <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-gray-600">
-                  <p><span className="font-medium text-gray-700">Wunschtermin:</span> {quote.move_date ? format(new Date(quote.move_date), "EEEE, dd.MM.yyyy", { locale: de }) : 'N/A'}</p>
+                  <p className="font-bold text-gray-900">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</p>
                 </div>
               </div>
 

@@ -363,8 +363,7 @@ async function getZurichPartners() {
       return (b.review_count || 0) - (a.review_count || 0)
     })
     
-    // Step 4: Limit to max 12 partners
-    return zurichPartners.slice(0, 12)
+    return zurichPartners
   } catch (error) {
     console.error('Error in getZurichPartners:', error)
     return []

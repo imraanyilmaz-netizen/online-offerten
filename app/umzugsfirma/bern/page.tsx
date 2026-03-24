@@ -220,7 +220,7 @@ async function getBernPartners() {
       return (b.review_count || 0) - (a.review_count || 0)
     })
     
-    return bernPartners.slice(0, 12)
+    return bernPartners
   } catch (error) {
     console.error('Error in getBernPartners:', error)
     return []
@@ -270,9 +270,12 @@ export const metadata: Metadata = {
 
 export default async function UmzugsfirmaBernPage() {
   const bernPartners = await getBernPartners()
-  
-  // ItemList Schema for partner listings
-  const itemListSchema = bernPartners && bernPartners.length > 0 ? {
+
+  // ItemList / sichtbare Liste nur ab 10 Partnern (gleiche Schwelle wie im Client)
+  const bernPartnerListMinCount = 10
+  const itemListSchema =
+    bernPartners && bernPartners.length >= bernPartnerListMinCount
+      ? {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Geprüfte Umzugsfirmen in Bern",
@@ -306,7 +309,8 @@ export default async function UmzugsfirmaBernPage() {
         })
       }
     }))
-  } : null
+  }
+      : null
 
   return (
     <>

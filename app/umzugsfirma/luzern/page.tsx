@@ -225,7 +225,7 @@ async function getLuzernPartners() {
       return (b.review_count || 0) - (a.review_count || 0)
     })
     
-    return luzernPartners.slice(0, 12)
+    return luzernPartners
   } catch (error) {
     console.error('Error in getLuzernPartners:', error)
     return []

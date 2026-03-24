@@ -230,26 +230,9 @@ const UmzugsfirmaLuzernPageClient = ({ luzernPartners = [] }: UmzugsfirmaLuzernP
               {/* Right Column - Services - Luzern Özel */}
               <div className="lg:col-span-4">
                 <div className="sticky top-24">
-                  <LocationSidebar 
-                    city={city} 
-                    districts={{
-                      title: "Stadtteile in Luzern",
-                      text: "Unsere Partner sind in allen Quartieren von Luzern für Sie im Einsatz:",
-                      list: [
-                        "Altstadt",
-                        "Neustadt",
-                        "Wesemlin",
-                        "Tribschen",
-                        "Bramberg",
-                        "Hirschmatt",
-                        "Maihof",
-                        "Biregg",
-                        "Littau",
-                        "Reussbühl",
-                        "Würzenbach",
-                        "Stadtteil Nord"
-                      ]
-                    }}
+                  <LocationSidebar
+                    city={city}
+                    districts={undefined as any}
                     searches={undefined as any}
                   />
                 </div>
@@ -257,6 +240,114 @@ const UmzugsfirmaLuzernPageClient = ({ luzernPartners = [] }: UmzugsfirmaLuzernP
             </div>
           </div>
         </section>
+
+        {/* Geprüfte Umzugsfirmen – direkt unter Intro (vor Preistabellen) */}
+        {luzernPartners && luzernPartners.length > 0 && (
+          <section className="py-16 md:py-24 bg-white border-t border-gray-100">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
+              <div className="text-center mb-12">
+                <h2 className="heading-2 mb-4" style={{ textAlign: 'center' }}>
+                  Geprüfte Umzugsfirmen in Luzern
+                </h2>
+                <p className="font-medium max-w-3xl mx-auto" style={{ textAlign: 'center' }}>
+                  Unsere Partner sind erfahrene Umzugsunternehmen mit langjähriger Erfahrung in Luzern und der Zentralschweiz. Vergleichen Sie Profile, Bewertungen und fordern Sie kostenlose Offerten an.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {luzernPartners.map((partner: any) => {
+                  const rating = partner.average_rating || 0
+                  const reviewCount = partner.review_count || 0
+                  const partnerSlug = partner.slug || partner.id
+
+                  return (
+                    <Link
+                      key={partner.id}
+                      href={`/partner/${partnerSlug}`}
+                      className="group flex items-center gap-4 md:gap-6 bg-white rounded-xl border border-gray-200 hover:border-green-400 hover:shadow-lg transition-all duration-300 p-4 md:p-5"
+                    >
+                      <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl border border-gray-200 bg-gray-50 overflow-hidden flex items-center justify-center p-2 group-hover:border-green-300 transition-colors">
+                        {partner.logo_url ? (
+                          <Image
+                            src={partner.logo_url}
+                            alt={`${partner.company_name} logo`}
+                            width={80}
+                            height={80}
+                            className="object-contain w-full h-full"
+                            unoptimized
+                          />
+                        ) : (
+                          <Image
+                            src="/image/logo-icon.webp"
+                            alt="Default logo"
+                            width={80}
+                            height={80}
+                            className="object-contain w-full h-full"
+                          />
+                        )}
+                      </div>
+
+                      <div className="flex-grow min-w-0">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-4">
+                          <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors truncate">
+                            {partner.company_name}
+                          </h3>
+                          <div className="flex items-center text-sm text-gray-500 flex-shrink-0">
+                            <MapPin className="w-4 h-4 mr-1 text-green-600" />
+                            <span className="font-medium">Umzugsfirma in {city}</span>
+                          </div>
+                        </div>
+
+                        {partner.message && (
+                          <p className="text-sm text-gray-600 mt-1 truncate">
+                            {partner.message.length > 100
+                              ? `${partner.message.substring(0, 100)}...`
+                              : partner.message
+                            }
+                          </p>
+                        )}
+
+                        {reviewCount > 0 && (
+                          <div className="flex items-center mt-2 gap-1">
+                            <div className="flex items-center text-yellow-500">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-4 h-4 ${i < Math.round(rating) ? 'fill-current' : 'text-gray-300'}`}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-sm text-gray-700 font-semibold ml-1">{rating.toFixed(1)}</span>
+                            <span className="text-xs text-gray-500">({reviewCount} Bewertungen)</span>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex-shrink-0 hidden md:flex items-center">
+                        <div className="w-10 h-10 rounded-full bg-green-50 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <ArrowRight className="w-5 h-5 text-green-600 transition-transform group-hover:translate-x-1" />
+                        </div>
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+
+              <div className="mt-10 text-center">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg rounded-lg shadow-xl"
+                >
+                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Luzern">
+                    Kostenlose Offerten anfordern
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Main Content Section */}
         <section className="py-12 md:py-16 bg-white">
@@ -425,120 +516,6 @@ const UmzugsfirmaLuzernPageClient = ({ luzernPartners = [] }: UmzugsfirmaLuzernP
             </main>
           </div>
         </section>
-          
-        {/* Geprüfte Umzugsfirmen in Luzern - Partner Liste */}
-        {luzernPartners && luzernPartners.length > 0 && (
-          <section className="py-16 md:py-24 bg-white">
-            <div className="container mx-auto max-w-7xl px-4 md:px-6">
-              <div className="text-center mb-12">
-                <h2 className="heading-2 mb-4" style={{ textAlign: 'center' }}>
-                  Geprüfte Umzugsfirmen in Luzern
-                </h2>
-                <p className="font-medium max-w-3xl mx-auto" style={{ textAlign: 'center' }}>
-                  Unsere Partner sind erfahrene Umzugsunternehmen mit langjähriger Erfahrung in Luzern und der Zentralschweiz. Vergleichen Sie Profile, Bewertungen und fordern Sie kostenlose Offerten an.
-                </p>
-              </div>
-              
-              <div className="space-y-4">
-                {luzernPartners.map((partner: any) => {
-                  const rating = partner.average_rating || 0
-                  const reviewCount = partner.review_count || 0
-                  const partnerSlug = partner.slug || partner.id
-                  
-                  return (
-                    <Link 
-                      key={partner.id} 
-                      href={`/partner/${partnerSlug}`}
-                      className="group flex items-center gap-4 md:gap-6 bg-white rounded-xl border border-gray-200 hover:border-green-400 hover:shadow-lg transition-all duration-300 p-4 md:p-5"
-                    >
-                      {/* Logo */}
-                      <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl border border-gray-200 bg-gray-50 overflow-hidden flex items-center justify-center p-2 group-hover:border-green-300 transition-colors">
-                        {partner.logo_url ? (
-                          <Image
-                            src={partner.logo_url}
-                            alt={`${partner.company_name} logo`}
-                            width={80}
-                            height={80}
-                            className="object-contain w-full h-full"
-                            unoptimized
-                          />
-                        ) : (
-                          <Image
-                            src="/image/logo-icon.webp"
-                            alt="Default logo"
-                            width={80}
-                            height={80}
-                            className="object-contain w-full h-full"
-                          />
-                        )}
-                      </div>
-                      
-                      {/* Content */}
-                      <div className="flex-grow min-w-0">
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-4">
-                          <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors truncate">
-                            {partner.company_name}
-                          </h3>
-                          <div className="flex items-center text-sm text-gray-500 flex-shrink-0">
-                            <MapPin className="w-4 h-4 mr-1 text-green-600" />
-                            <span className="font-medium">Umzugsfirma in {city}</span>
-                          </div>
-                        </div>
-                        
-                        {/* Über uns */}
-                        {partner.message && (
-                          <p className="text-sm text-gray-600 mt-1 truncate">
-                            {partner.message.length > 100
-                              ? `${partner.message.substring(0, 100)}...`
-                              : partner.message
-                            }
-                          </p>
-                        )}
-                        
-                        {/* Bewertungen */}
-                        {reviewCount > 0 && (
-                          <div className="flex items-center mt-2 gap-1">
-                            <div className="flex items-center text-yellow-500">
-                              {[...Array(5)].map((_, i) => (
-                                <Star 
-                                  key={i} 
-                                  className={`w-4 h-4 ${i < Math.round(rating) ? 'fill-current' : 'text-gray-300'}`} 
-                                />
-                              ))}
-                            </div>
-                            <span className="text-sm text-gray-700 font-semibold ml-1">{rating.toFixed(1)}</span>
-                            <span className="text-xs text-gray-500">({reviewCount} Bewertungen)</span>
-                          </div>
-                        )}
-                      </div>
-                      
-                      {/* Arrow */}
-                      <div className="flex-shrink-0 hidden md:flex items-center">
-                        <div className="w-10 h-10 rounded-full bg-green-50 group-hover:bg-green-100 flex items-center justify-center transition-colors">
-                          <ArrowRight className="w-5 h-5 text-green-600 transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </div>
-                    </Link>
-                  )
-                })}
-              </div>
-
-              {/* CTA */}
-              <div className="mt-10 text-center">
-                <Button 
-                  asChild
-                  size="lg" 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-6 text-lg rounded-lg shadow-xl"
-                >
-                  <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&city=Luzern">
-                    Kostenlose Offerten anfordern
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* Navigation Section */}
         <section className="py-12 md:py-16 bg-white border-t border-gray-200">

@@ -1,4 +1,4 @@
-﻿import { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 const initialFormData = {
   service: '',
@@ -26,7 +26,7 @@ const initialFormData = {
   to_object_type: '',
   to_country: 'CH',
   move_date: '',
-  move_date_flexible: false,
+  move_date_flexible: true,
   salutation: '',
   companyName: '',
   firstName: '',

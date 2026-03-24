@@ -57,6 +57,7 @@ const Footer = React.memo(() => {
   const unternehmenLinks = [
     { to: '/ueber-uns', text: 'Über uns' },
     { to: '/kontakt', text: 'Kontakt' },
+    { to: '/impressum', text: 'Impressum' },
   ];
 
   return (
@@ -244,9 +245,9 @@ const Footer = React.memo(() => {
             <p className="text-sm text-slate-400">
               © {currentYear} Online-Offerten.ch. Alle Rechte vorbehalten.
             </p>
-            <div className="flex items-center gap-6 text-sm text-slate-400">
+            <div className="flex flex-wrap justify-center md:justify-end items-center gap-4 md:gap-6 text-sm text-slate-400">
               <Link href="/datenschutz" className="hover:text-green-400 transition-colors">Datenschutz</Link>
-              <span className="text-slate-600">•</span>
+              <span className="text-slate-600 hidden sm:inline">•</span>
               <Link href="/agb" className="hover:text-green-400 transition-colors">AGB</Link>
             </div>
           </div>

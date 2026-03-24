@@ -1,4 +1,4 @@
-﻿import { clsx } from "clsx"
+import { clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale/de';
@@ -41,6 +41,26 @@ export function formatDate(dateString) {
     console.error("Error formatting date:", error);
     return dateString;
   }
+}
+
+/** Formular-Checkbox „Datum ist flexibel“ / DB (boolean, Ja/Nein) */
+export function isMoveDateFlexible(moveDateFlexible) {
+  if (moveDateFlexible === true) return true;
+  if (moveDateFlexible === false || moveDateFlexible == null || moveDateFlexible === '') return false;
+  if (typeof moveDateFlexible === 'string') {
+    const s = moveDateFlexible.trim().toLowerCase();
+    if (s === 'nein' || s === 'false' || s === '0') return false;
+    if (s === 'ja' || s === 'true' || s === '1' || s === 'yes') return true;
+  }
+  return Boolean(moveDateFlexible);
+}
+
+/** „Flexibler Termin – …“ oder „Fester Termin – …“ + formatiertes Datum */
+export function formatMoveDateLine(moveDate, moveDateFlexible) {
+  const datePart = formatDate(moveDate);
+  if (!datePart) return '';
+  const prefix = isMoveDateFlexible(moveDateFlexible) ? 'Flexibler Termin' : 'Fester Termin';
+  return `${prefix} – ${datePart}`;
 }
 
 export function getServiceTypeLabel(serviceType) {

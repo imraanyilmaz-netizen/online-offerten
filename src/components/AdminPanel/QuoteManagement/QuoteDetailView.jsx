@@ -1,11 +1,11 @@
-﻿import React from 'react';
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { 
     Calendar, Clock, File, Image, Mail, 
     MapPin, MessageSquare, Phone, Truck, User, Building, 
     Sparkles, Paintbrush, ExternalLink
 } from 'lucide-react';
-import { getServiceTypeLabel, formatDate } from '@/lib/utils';
+import { getServiceTypeLabel, formatDate, formatMoveDateLine } from '@/lib/utils';
 import { countries } from '@/data/countries';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
@@ -23,10 +23,18 @@ const DetailSection = ({ title, icon: Icon, children }) => (
     </div>
 );
 
-const QuoteDetail = ({ label, value }) => {
+const QuoteDetail = ({ label, value, noLabel = false }) => {
   if (!value && typeof value !== 'boolean' && value !== 0) return null;
-  
+
   const displayValue = typeof value === 'boolean' ? (value ? 'Ja' : 'Nein') : value;
+
+  if (noLabel) {
+    return (
+      <div className="flex items-start gap-3 text-sm">
+        <div className="font-bold text-gray-900">{displayValue}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-start gap-3 text-sm text-gray-700">
@@ -196,8 +204,7 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
 
           <DetailSection title="Dienstleistungsdetails" icon={getServiceIcon()}>
             <QuoteDetail label="Dienstleistung" value={getServiceTypeLabel(quote.servicetype)} />
-            <QuoteDetail label="Wunschtermin" value={formatDate(quote.move_date)} />
-            {quote.move_date_flexible && <QuoteDetail label="Termin flexibel" value={quote.move_date_flexible} />}
+            <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
             <EmailConfirmationDetail quote={quote} />
             {isMovingService(quote.servicetype) && quote.umzugart && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
             {isCleaningService(quote.servicetype) && <CleaningDetails details={quote} />}

@@ -13,7 +13,7 @@ import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
 import ServiceDetails from '@/components/common/ServiceDetails';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatMoveDateLine } from '@/lib/utils';
 
 const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
@@ -238,8 +238,8 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                         <span>{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip} ${quote.to_city}`}</span>
                       </div>
                       <div className="flex items-center gap-2 text-gray-600">
-                        <Calendar className="w-4 h-4" />
-                        <span>{formatDate(quote.move_date)}</span>
+                        <Calendar className="w-4 h-4 shrink-0" />
+                        <span className="line-clamp-2 text-gray-600">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 ml-4">
@@ -254,8 +254,7 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                       <div className="lg:col-span-2 space-y-6">
                         <DetailSection title="Dienstleistungsdetails" icon={icon}>
                             <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
-                            <QuoteDetail label="Wunschtermin" value={formatDate(quote.move_date)} />
-                            {quote.move_date_flexible && <QuoteDetail label="Termin flexibel" value={quote.move_date_flexible} />}
+                            <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
                             <EmailConfirmationDetail quote={quote} />
                             {serviceCategory === 'moving' && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
                         </DetailSection>
@@ -278,10 +277,6 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                             {/* Reinigung Zusatzinfos */}
                             {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
                               <div className="bg-white p-4 rounded-lg border shadow-sm">
-                                <div className="flex items-center gap-2 mb-3">
-                                  <Sparkles className="w-4 h-4 text-teal-600" />
-                                  <h4 className="font-semibold text-sm text-gray-800">Reinigung – Details</h4>
-                                </div>
                                 <div className="space-y-2">
                                   {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
                                     'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',

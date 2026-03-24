@@ -231,7 +231,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                    <span>Geprüfte Partner</span>
+                    <span>Geprüfte Versicherung</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
@@ -277,7 +277,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 Nur geprüfte & versicherte Partnerfirmen
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Ihre Sicherheit steht bei uns an erster Stelle. Bevor eine Firma über Online-Offerten.ch Kundenanfragen erhalten kann, durchläuft sie einen <strong>strengen Prüf- und Verifizierungsprozess</strong>. So garantieren wir Ihnen höchste Qualität und Zuverlässigkeit.
+                Ihre Sicherheit bei der Versicherung der Partner steht bei uns an erster Stelle: Bevor eine Firma über Online-Offerten.ch Kundenanfragen erhalten kann, müssen <strong>Versicherungsnachweise</strong> (Betriebshaftpflicht) eingereicht werden – <strong>diese Dokumente prüfen wir manuell</strong>. Eine umfassende Qualitäts- oder Betriebsprüfung der Firmen führen wir nicht durch; die Wahl des Anbieters treffen Sie selbst.
               </p>
             </div>
 
@@ -296,7 +296,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   {
                     step: "2",
                     title: "Manuelle Prüfung durch unser Team",
-                    description: "Jedes eingereichte Versicherungsdokument wird von unseren Experten manuell geprüft – auf Gültigkeit, Deckungsumfang und Echtheit. Automatisierte Freigaben gibt es bei uns nicht.",
+                    description: "Jedes eingereichte Versicherungsdokument wird von uns manuell geprüft – auf Gültigkeit, Deckungsumfang und Echtheit. Automatisierte Freigaben gibt es bei uns nicht.",
                     icon: Search,
                     color: "bg-amber-100 text-amber-600"
                   },
@@ -336,8 +336,8 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-4">
                     <ShieldCheck className="w-10 h-10 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Verifiziert & versichert</h3>
-                  <p className="text-gray-600">Jede aktive Partnerfirma ist vollständig geprüft</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Versicherte Partner</h3>
+                  <p className="text-gray-600">Jede aktive Partnerfirma weist einen geprüften Versicherungsnachweis nach</p>
                 </div>
                 <div className="space-y-4">
                   {[
@@ -359,7 +359,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                       🛡️ Ihr Schutz ist unsere Verantwortung
                     </p>
                     <p className="text-xs text-green-700 mt-1">
-                      Wir vermitteln ausschliesslich Firmen, die unseren strengen Qualitäts- und Sicherheitsstandards entsprechen. So können Sie sich auf einen reibungslosen Ablauf verlassen.
+                      Wir vermitteln Firmen, deren Versicherungsnachweise unseren Anforderungen entsprechen. Die Beurteilung von Preis, Leistung und Zuverlässigkeit obliegt Ihnen beim Vergleich der Offerten.
                     </p>
                   </div>
                 </div>
@@ -521,8 +521,8 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 },
                 {
                   icon: ShieldCheck,
-                  title: "Geprüfte Partner",
-                  description: "Jede Partnerfirma wird sorgfältig geprüft. Qualität und Zuverlässigkeit haben bei uns höchste Priorität.",
+                  title: "Geprüfte Versicherungsnachweise",
+                  description: "Bei der Registrierung prüfen wir die eingereichten Versicherungsdokumente (z. B. Betriebshaftpflicht). Die Firmenauswahl und Qualitätsbeurteilung treffen Sie beim Offertenvergleich.",
                   color: "bg-green-100 text-green-600"
                 },
                 {

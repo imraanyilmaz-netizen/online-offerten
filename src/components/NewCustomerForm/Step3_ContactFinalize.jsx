@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from '@/components/ui/button';
 import { UserCircle, CalendarDays, Info, Search, Users, FileText } from 'lucide-react';
 
@@ -177,29 +176,41 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
       </SectionCard>
 
       <SectionCard icon={<CalendarDays className="w-6 h-6 text-green-600" />} titleKey={getDateTitleKey()} descriptionKey="step3.moveDateDescription">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4">
-            <div className="space-y-1">
-              <Label htmlFor="move_date" className="font-medium text-slate-700 text-sm sm:text-base">{t(getDateLabelKey())} <span className="text-red-500">*</span></Label>
-              <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base" min={new Date().toISOString().split("T")[0]} lang="de-CH" placeholder="TT.MM.JJJJ" title="TT.MM.JJJJ"/>
-              {errors && errors.move_date && <p className="text-sm text-red-500 mt-1">{errors.move_date}</p>}
-            </div>
-            <div className="flex items-end pb-1.5">
-                <div className="flex items-center space-x-2">
-                    <Checkbox id="move_date_flexible" name="move_date_flexible" checked={formData.move_date_flexible || false} onCheckedChange={(checked) => handleCheckboxChange('move_date_flexible', checked)} className="h-6 w-6 accent-green-600"/>
-                    <Label htmlFor="move_date_flexible" className="font-medium text-base text-slate-800 cursor-pointer">{t('step3.dateFlexibleLabel')}</Label>
-                </div>
-            </div>
-        </div>
-        <div className="space-y-1 pt-2">
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <Label htmlFor="move_date" className="font-medium text-slate-700 text-sm sm:text-base">{t(getDateLabelKey())} <span className="text-red-500">*</span></Label>
+            <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base" min={new Date().toISOString().split("T")[0]} lang="de-CH" placeholder="TT.MM.JJJJ" title="TT.MM.JJJJ"/>
+            {errors && errors.move_date && <p className="text-sm text-red-500 mt-1">{errors.move_date}</p>}
+          </div>
+          <div className="space-y-2">
+            <p className="font-semibold text-slate-900 text-sm leading-snug">{t('step3.dateFlexibleQuestion')}</p>
+            <RadioGroup
+              name="move_date_flexible"
+              value={formData.move_date_flexible ? 'yes' : 'no'}
+              onValueChange={(v) => handleCheckboxChange('move_date_flexible', v === 'yes')}
+              className="flex flex-col gap-1.5"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="yes" id="move_date_flexible_yes_s3" className="h-4 w-4" />
+                <Label htmlFor="move_date_flexible_yes_s3" className="text-sm font-normal text-slate-700 cursor-pointer leading-snug">{t('step3.dateFlexibleOptionYes')}</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="no" id="move_date_flexible_no_s3" className="h-4 w-4" />
+                <Label htmlFor="move_date_flexible_no_s3" className="text-sm font-normal text-slate-700 cursor-pointer leading-snug">{t('step3.dateFlexibleOptionNo')}</Label>
+              </div>
+            </RadioGroup>
+          </div>
+          <div className="space-y-1">
             <Label htmlFor="preferred_time" className="font-medium text-slate-700 text-sm sm:text-base">{t('step3.preferredTimeLabel')}</Label>
             <Select name="preferred_time" value={formData.preferred_time || ''} onValueChange={(value) => handleSelectChange('preferred_time', value)}>
-            <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+              <SelectTrigger id="preferred_time" className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base w-full">
                 <SelectValue placeholder={t('step3.preferredTimePlaceholder')} />
-            </SelectTrigger>
-            <SelectContent className="text-sm sm:text-base">
+              </SelectTrigger>
+              <SelectContent className="text-sm sm:text-base">
                 {preferredTimeOptions.map(option => <SelectItem key={option.value} value={option.value} className="text-sm sm:text-base">{option.label}</SelectItem>)}
-            </SelectContent>
+              </SelectContent>
             </Select>
+          </div>
         </div>
       </SectionCard>
 
@@ -243,7 +254,6 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
                       <option value="">Art der Reinigung *</option>
                       <option value="mit_abnahmegarantie">Endreinigung mit Abnahmegarantie</option>
                       <option value="ohne_abnahmegarantie">Endreinigung ohne Abnahmegarantie</option>
-                      <option value="umzugsreinigung">Umzugsreinigung</option>
                     </select>
                   </div>
                 )}

@@ -174,7 +174,7 @@ async function getGenfPartners() {
       return (b.review_count || 0) - (a.review_count || 0)
     })
     
-    return genfPartners.slice(0, 12)
+    return genfPartners
   } catch (error) {
     console.error('Error in getGenfPartners:', error)
     return []

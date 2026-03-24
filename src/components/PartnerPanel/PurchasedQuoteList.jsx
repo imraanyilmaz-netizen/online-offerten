@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, Calendar, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle } from 'lucide-react';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatMoveDateLine } from '@/lib/utils';
 import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
@@ -218,8 +218,8 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                     <span>{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip} ${quote.to_city}`}</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600">
-                    <CalendarDays className="w-4 h-4" />
-                    <span>{quote.move_date ? formatDate(quote.move_date) : 'N/A'}</span>
+                    <CalendarDays className="w-4 h-4 shrink-0" />
+                    <span className="line-clamp-2 text-gray-600">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 ml-4 flex-shrink-0">
@@ -265,8 +265,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                   
                   <DetailSection title="Dienstleistungsdetails" icon={icon}>
                       <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
-                      <QuoteDetail label="Wunschtermin" value={formatDate(quote.move_date)} />
-                      {quote.move_date_flexible && <QuoteDetail label="Termin flexibel" value={quote.move_date_flexible} />}
+                      <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
                       {isMoving && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
                   </DetailSection>
 
@@ -288,10 +287,6 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                       {/* Reinigung Zusatzinfos */}
                       {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
                         <div className="bg-white p-4 rounded-lg border shadow-sm">
-                          <div className="flex items-center gap-2 mb-3">
-                            <Sparkles className="w-4 h-4 text-teal-600" />
-                            <h4 className="font-semibold text-sm text-gray-800">Reinigung – Details</h4>
-                          </div>
                           <div className="space-y-2">
                             {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
                               'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',

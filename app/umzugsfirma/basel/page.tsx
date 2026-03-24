@@ -221,7 +221,7 @@ async function getBaselPartners() {
       return (b.review_count || 0) - (a.review_count || 0)
     })
     
-    return baselPartners.slice(0, 12)
+    return baselPartners
   } catch (error) {
     console.error('Error in getBaselPartners:', error)
     return []
