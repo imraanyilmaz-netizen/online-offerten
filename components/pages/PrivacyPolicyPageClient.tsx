@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -12,9 +12,9 @@ const PrivacyPolicyPageClient = () => {
       title: "1. Verantwortlicher",
       content: [
         "Verantwortlich für die Datenverarbeitung auf dieser Website ist:",
-        "Online-Offerten.ch<br>Schweiz<br>E-Mail: info@online-offerten.ch",
+        "<strong>Yilmaz Platform Solutions</strong><br>Kreuzstrasse 16<br>8953 Dietikon<br>Schweiz<br>UID: CHE-234.206.612<br>E-Mail: <a href=\"mailto:info@online-offerten.ch\">info@online-offerten.ch</a>",
         "",
-        "Online-Offerten.ch ist eine Vermittlungsplattform und erbringt selbst keine Umzugs-, Reinigungs- oder Transportdienstleistungen."
+        "Die Plattform <strong>Online-Offerten.ch</strong> wird im Rahmen dieser Firma betrieben. Online-Offerten.ch ist eine Vermittlungsplattform und erbringt selbst keine Umzugs-, Reinigungs- oder Transportdienstleistungen."
       ]
     },
     {
@@ -115,28 +115,39 @@ const PrivacyPolicyPageClient = () => {
 
   return (
     <div className="bg-slate-50 py-12 md:py-20">
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <Card className="shadow-lg">
-          <CardHeader>
+          <CardHeader className="p-0 px-4 pt-6 pb-3 md:px-6">
             <CardTitle className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
               {pageTitle}
             </CardTitle>
             <p className="text-sm md:text-base text-slate-500">{lastUpdated}</p>
           </CardHeader>
-          <CardContent className="prose prose-slate max-w-none text-slate-700 prose-headings:text-slate-900 prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-3 prose-h4:text-lg prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-2 prose-p:text-base md:prose-p:text-[17px] prose-p:leading-8 prose-p:my-4 prose-strong:text-slate-900 prose-strong:font-semibold prose-a:text-green-700 prose-a:no-underline hover:prose-a:underline prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4">
-            {sections.map((section, index) => (
-              <div key={index}>
-                <h2 className="scroll-mt-24">{section.title}</h2>
-                {Array.isArray(section.content) ? (
-                  section.content.map((paragraph, pIndex) => {
-                    if (!paragraph) return <br key={pIndex} />
-                    return <p key={pIndex} dangerouslySetInnerHTML={{ __html: paragraph }} />
-                  })
-                ) : (
-                  <p dangerouslySetInnerHTML={{ __html: section.content }} />
-                )}
-              </div>
-            ))}
+          <CardContent className="max-w-none border-0 p-0 px-4 pb-8 pt-0 md:px-6 [&_a]:text-base [&_a]:font-normal [&_a]:text-green-700 [&_a]:underline-offset-2 hover:[&_a]:underline [&_strong]:font-semibold [&_strong]:text-slate-900">
+            {sections.map((section, index) => {
+              const blocks = Array.isArray(section.content)
+                ? section.content.filter((p) => p && p.trim() !== '')
+                : [section.content]
+              return (
+                <section
+                  key={index}
+                  className="scroll-mt-24 border-b border-slate-100 py-8 first:pt-2 last:border-b-0 last:pb-2"
+                >
+                  <h2 className="mb-5 border-b border-slate-200 pb-3 text-xl font-bold tracking-tight text-slate-900 md:text-2xl">
+                    {section.title}
+                  </h2>
+                  <div className="space-y-4 text-base font-normal leading-relaxed text-slate-700">
+                    {blocks.map((paragraph, pIndex) => (
+                      <p
+                        key={pIndex}
+                        className="break-words [overflow-wrap:anywhere]"
+                        dangerouslySetInnerHTML={{ __html: paragraph }}
+                      />
+                    ))}
+                  </div>
+                </section>
+              )
+            })}
           </CardContent>
         </Card>
       </div>
