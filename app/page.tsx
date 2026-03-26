@@ -20,14 +20,14 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden | Online-Offerten.ch',
-  description: 'Kostenlose Offerten für Umzug, Reinigung & Malerarbeiten vergleichen. Bis zu 5 Angebote von geprüften Firmen aus Ihrer Region erhalten. ✓ Unverbindlich ✓ 100% kostenlos.',
+  title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
+  description: 'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/',
   },
   openGraph: {
-    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden | Online-Offerten.ch',
-    description: 'Kostenlose Offerten für Umzug, Reinigung & Malerarbeiten. Bis zu 5 Angebote von geprüften Firmen erhalten.',
+    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
+    description: 'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
     url: 'https://online-offerten.ch/',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-    description: 'Bis zu 5 kostenlose Angebote von geprüften Firmen erhalten',
+    description: 'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
   robots: {

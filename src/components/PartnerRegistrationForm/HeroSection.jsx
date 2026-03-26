@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Award, CheckCircle2, ArrowRight } from 'lucide-react';
@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
   const trustPoints = [
-    'Kostenlose Registrierung',
-    'Nur qualifizierte Anfragen',
-    'Sie entscheiden pro Anfrage',
-    'Keine langfristige Bindung',
+    'Schweizer Vergleichsplattform',
+    'Umzug, Reinigung & Malerarbeiten',
+    'Anfragen nach Ihren Regionen',
+    'Lead-Preis vor dem Kauf sichtbar',
   ];
 
   return (
@@ -30,17 +30,22 @@ const HeroSection = () => {
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-4">
               <Award className="h-4 w-4 mr-2" />
-              Partner werden
+              Mehr Aufträge - Weniger Aufwand
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
               Partner werden und regelmässig neue Kundenanfragen erhalten
             </h1>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
-              Als Umzugsfirma, Reinigungsfirma oder Malerbetrieb erhalten Sie über
-              Online-Offerten.ch passende Anfragen aus Ihrer Region. Die
-              Registrierung ist kostenlos und Sie entscheiden bei jeder Anfrage
-              selbst, ob Sie ein Angebot abgeben möchten.
-            </p>
+            <div className="space-y-3 mb-8">
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                Online-Offerten.ch bringt Betriebe wie Ihres mit Kundinnen und Kunden zusammen, die in
+                der Schweiz aktiv Offerten einholen. Ohne Werbebudget im Voraus: Sie registrieren sich
+                unverbindlich und entscheiden erst bei der konkreten Anfrage, ob ein Angebot für Sie
+                sinnvoll ist.
+              </p>
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed font-medium">
+                Profil anlegen, Regionen festlegen – passende Anfragen folgen im Partner-Dashboard.
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
               {trustPoints.map((point) => (

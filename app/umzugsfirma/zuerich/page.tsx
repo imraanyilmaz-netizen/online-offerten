@@ -260,13 +260,13 @@ const savingsTips = [
 
 export const metadata: Metadata = {
   title: 'Umzugsfirma in Zürich – Kostenlos Umzugsofferten vergleichen',
-  description: 'Umzugsfirma in Zürich gesucht? ✓ Geprüfte Umzugsunternehmen vergleichen ✓ Umzugskosten Rechner Zürich ✓ Kostenlos bis zu 5 Offerten anfordern ✓ Bis zu 40% sparen bei Privat- & Geschäftsumzug im Kanton Zürich.',
+  description: 'Umzugsfirma in Zürich gesucht? Vergleichen Sie geprüfte Umzugsunternehmen, holen Sie in 2 Minuten Umzugsofferten ein und sparen Sie bis zu 40%.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/zuerich',
   },
   openGraph: {
     title: 'Umzugsfirma Zürich: Geprüfte Umzugsunternehmen vergleichen & bis zu 40% sparen',
-    description: 'Vergleichen Sie jetzt Umzugsfirmen in Zürich. Kostenlos bis zu 5 Offerten anfordern, Umzugskosten berechnen und den besten Anbieter für Ihren Umzug im Kanton Zürich finden.',
+    description: 'Umzugsfirma in Zürich gesucht? Vergleichen Sie geprüfte Umzugsunternehmen, holen Sie in 2 Minuten Umzugsofferten ein und sparen Sie bis zu 40%.',
     url: 'https://online-offerten.ch/umzugsfirma/zuerich',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -283,7 +283,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Umzugsfirma Zürich: Top Umzugsunternehmen vergleichen & sparen',
-    description: 'Geprüfte Umzugsfirmen in Zürich vergleichen ✓ Kostenlos Offerten anfordern ✓ Bis zu 40% sparen beim Umzug im Kanton Zürich.',
+    description: 'Umzugsfirma in Zürich gesucht? Vergleichen Sie geprüfte Umzugsunternehmen, holen Sie in 2 Minuten Umzugsofferten ein und sparen Sie bis zu 40%.',
     images: ['https://online-offerten.ch/image/umzug-reinigung-malerarbeiten-zuerich-offerten.webp'],
   },
   robots: {
