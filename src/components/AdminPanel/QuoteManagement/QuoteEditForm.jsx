@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,6 +7,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, Save, X } from 'lucide-react';
 import { getServiceCategory, isMovingService } from '@/lib/serviceCategorizer';
+import { CLEANING_AREA_LEGACY_SELECT_OPTIONS } from '@/components/NewCustomerForm/cleaningAreaOptions';
+import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
 
 const FormField = ({ id, label, children }) => (
   <div>
@@ -171,16 +173,15 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
         {/* Reinigung Zusatzfelder */}
         <Fieldset legend="Reinigung Zusatzinfos">
             <FormField id="cleaning_area_sqm" label="Wohnungsfläche">
-              <select name="cleaning_area_sqm" value={formData.cleaning_area_sqm || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
-                <option value="">—</option>
-                <option value="bis_40">bis 40 m²</option>
-                <option value="40_60">40 – 60 m²</option>
-                <option value="60_80">60 – 80 m²</option>
-                <option value="80_100">80 – 100 m²</option>
-                <option value="100_120">100 – 120 m²</option>
-                <option value="120_140">120 – 140 m²</option>
-                <option value="ueber_140">über 140 m²</option>
-              </select>
+              <CleaningAreaSelect
+                id="cleaning_area_sqm"
+                name="cleaning_area_sqm"
+                value={formData.cleaning_area_sqm}
+                onChange={(v) => handleChange({ target: { name: 'cleaning_area_sqm', value: v } })}
+                placeholder="—"
+                extraOptions={CLEANING_AREA_LEGACY_SELECT_OPTIONS}
+                selectClassName="border-gray-300 bg-white"
+              />
             </FormField>
             <FormField id="cleaning_type_guarantee" label="Art der Reinigung">
               <select name="cleaning_type_guarantee" value={formData.cleaning_type_guarantee || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">

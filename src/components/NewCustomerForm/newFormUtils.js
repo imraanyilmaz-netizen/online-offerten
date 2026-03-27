@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabaseClient';
+import { getCleaningAreaSqmLabel, CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import { toast } from '@/components/ui/use-toast';
 import { v4 as uuidv4 } from 'uuid';
 import i18n from '@/i18n';
@@ -204,24 +205,31 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     if (formData.additional_services_disposal) serviceSpecificDetails.push('Entsorgung: Ja');
   }
 
-  // Reinigung: Wohnungsfläche, Art der Reinigung, Zusatzflächen Infos
-  const isCleaningWithArea = formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt);
-  const isUmzugWithCleaning = formData.service === 'umzug' && ['privatumzug', 'geschaeftsumzug'].includes(formData.umzugArt) && formData.additional_cleaning;
-  
-  if (isCleaningWithArea || isUmzugWithCleaning) {
-    const areaSizeLabels = {
-      'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
-      '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
-    };
-    if (formData.cleaning_area_size) serviceSpecificDetails.push(`Wohnungsfläche: ${areaSizeLabels[formData.cleaning_area_size] || formData.cleaning_area_size}`);
-    
+  // Reinigung: Wohnungsfläche, Art der Reinigung, Zusatzflächen Infos — Privatumzug immer Fläche (auch ohne Endreinigung)
+  const isReinigungWithArea =
+    formData.service === 'reinigung' && CLEANING_AREA_TYPES_WITH_FIELD.includes(formData.umzugArt);
+  const isPrivatumzugWithArea = formData.service === 'umzug' && formData.umzugArt === 'privatumzug';
+  const isUmzugWithCleaning =
+    formData.service === 'umzug' &&
+    ['privatumzug', 'geschaeftsumzug'].includes(formData.umzugArt) &&
+    formData.additional_cleaning;
+
+  if (isReinigungWithArea || isPrivatumzugWithArea || isUmzugWithCleaning) {
+    if (formData.cleaning_area_size) {
+      serviceSpecificDetails.push(`Wohnungsfläche: ${getCleaningAreaSqmLabel(formData.cleaning_area_size)}`);
+    }
+  }
+
+  if (isReinigungWithArea || isUmzugWithCleaning) {
     const cleaningTypeLabels = {
-      'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie',
-      'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie',
-      'umzugsreinigung': 'Umzugsreinigung'
+      mit_abnahmegarantie: 'Endreinigung mit Abnahmegarantie',
+      ohne_abnahmegarantie: 'Endreinigung ohne Abnahmegarantie',
+      umzugsreinigung: 'Umzugsreinigung',
     };
-    if (formData.cleaning_type) serviceSpecificDetails.push(`Art der Reinigung: ${cleaningTypeLabels[formData.cleaning_type] || formData.cleaning_type}`);
-    
+    if (formData.cleaning_type) {
+      serviceSpecificDetails.push(`Art der Reinigung: ${cleaningTypeLabels[formData.cleaning_type] || formData.cleaning_type}`);
+    }
+
     const extras = [];
     if (formData.cleaning_extra_balkon) extras.push('Balkon');
     if (formData.cleaning_extra_keller) extras.push('Keller');

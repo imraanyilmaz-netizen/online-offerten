@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { MapPin, Calendar, Truck, Eye, CheckCircle, Package, Ban, Star, ShoppingCart, MessageSquare, Sparkles, Paintbrush } from 'lucide-react';
+import { MapPin, Calendar, Truck, Eye, CheckCircle, Package, Ban, Star, MessageSquare, Sparkles, Paintbrush } from 'lucide-react';
 import QuoteImages from './QuoteImages';
 import QuoteFiles from './QuoteFiles';
 import { countries } from '@/data/countries';
@@ -14,14 +14,68 @@ import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
 import ServiceDetails from '@/components/common/ServiceDetails';
 import { formatDate, formatMoveDateLine } from '@/lib/utils';
+import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
+
+/** Kauf-Limit (Admin) oder Kundenwunsch «Anzahl Offerten» */
+function getLeadSlotMeta(quote) {
+  const wanted = parseInt(String(quote.quoteswanted ?? ''), 10);
+  const quota = parseInt(String(quote.purchase_quota ?? ''), 10);
+  const ok = (n) => Number.isFinite(n) && n > 0;
+  const totalSlots = ok(quota) ? quota : ok(wanted) ? wanted : 0;
+  const displayWanted = ok(wanted) ? wanted : null;
+  const purchased = Number(quote.lead_purchase_count) || 0;
+  const remaining = Math.max(0, totalSlots - purchased);
+  return { displayWanted, totalSlots, purchased, remaining };
+}
+
+/** Nur wenn bereits Käufe – volle Liste verschwindet bei ausverkauftem Kontingent ohnehin */
+function formatInteressiertZeile(purchased, remaining) {
+  if (purchased <= 0 || remaining <= 0) return null;
+  const firmaWort = purchased === 1 ? 'Firma' : 'Firmen';
+  const platzWort = remaining === 1 ? 'Platz' : 'Plätze';
+  return `${purchased} ${firmaWort} interessiert – noch ${remaining} ${platzWort} verfügbar`;
+}
+
+const LeadAvailabilityCallout = ({ quote }) => {
+  const { displayWanted, totalSlots, purchased, remaining } = getLeadSlotMeta(quote);
+  const interessiertText = formatInteressiertZeile(purchased, remaining);
+
+  if (purchased === 0) {
+    if (displayWanted == null) return null;
+    return (
+      <div className="rounded-lg border border-amber-200 bg-amber-50/90 p-4 text-left shadow-sm">
+        <p className="text-sm font-semibold text-amber-950">
+          {displayWanted} Offerten gewünscht
+        </p>
+      </div>
+    );
+  }
+
+  if (!interessiertText) return null;
+
+  const headerZahl = displayWanted ?? (totalSlots > 0 ? totalSlots : null);
+
+  return (
+    <div className="rounded-lg border border-amber-200 bg-amber-50/90 p-4 text-left shadow-sm">
+      {headerZahl != null && (
+        <p className="text-sm font-semibold text-amber-950">
+          {headerZahl} Offerten gewünscht
+        </p>
+      )}
+      <p className={`text-sm text-amber-900 ${headerZahl != null ? 'mt-1' : ''}`}>
+        {interessiertText}
+      </p>
+    </div>
+  );
+};
 
 const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
-        <div className="flex items-start gap-3 text-sm text-gray-700">
-            <span className="font-bold text-gray-800">E-Mail-Bestätigung:</span> 
+        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-gray-700">
+            <span className="font-bold text-gray-800">E-Mail-Bestätigung:</span>
             <span className={isConfirmed ? 'text-green-700 font-semibold' : 'text-red-700 font-semibold'}>
-                {isConfirmed ? 'Bestätigt' : 'Nicht bestätigt'}
+                {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
     );
@@ -30,8 +84,8 @@ const EmailConfirmationDetail = ({ quote }) => {
 
 const DetailSection = ({ title, icon: Icon, children }) => (
     <div className="bg-white p-4 rounded-lg border shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2 border-b pb-2 mb-4 uppercase">
-            {Icon && <Icon className="w-5 h-5 text-green-600" />}
+        <h3 className="text-base font-semibold text-gray-900 flex items-center gap-2 border-b pb-1.5 mb-3 uppercase tracking-wide">
+            {Icon && <Icon className="w-4 h-4 shrink-0 text-green-600" />}
             {title}
         </h3>
         <div className="space-y-3">
@@ -114,8 +168,10 @@ const RejectionDialog = ({ open, onOpenChange, onConfirm }) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Anfrage ablehnen</DialogTitle>
-          <DialogDescription>Möchten Sie diese Anfrage wirklich ablehnen? Diese Aktion kann nicht rückgängig gemacht werden.</DialogDescription>
+          <DialogTitle>Kein Interesse?</DialogTitle>
+          <DialogDescription>
+            Sie geben damit an, an dieser Anfrage kein Interesse zu haben. Diese Entscheidung können Sie nicht mehr ändern.
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <Label htmlFor="reason">Grund (optional)</Label>
@@ -123,7 +179,7 @@ const RejectionDialog = ({ open, onOpenChange, onConfirm }) => {
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>Abbrechen</Button>
-          <Button variant="destructive" onClick={() => onConfirm(reason)}>Ablehnen</Button>
+          <Button variant="destructive" onClick={() => onConfirm(reason)}>Ja, kein Interesse</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -137,11 +193,11 @@ const PurchaseConfirmationDialog = ({ open, onOpenChange, onConfirm, quote, hasA
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Anfrage kaufen</DialogTitle>
+                    <DialogTitle>Kontakt freischalten</DialogTitle>
                     <DialogDescription>
                         {hasActiveSubscription
-                            ? 'Dank Ihres Abonnements ist diese Anfrage für Sie kostenlos. Möchten Sie sie jetzt freischalten?'
-                            : `Sie sind dabei, diese Anfrage für ${quote.lead_price.toFixed(2)} CHF zu kaufen. Möchten Sie fortfahren?`
+                            ? 'Dank Ihres Abonnements ist der Kontakt für Sie kostenlos. Möchten Sie ihn jetzt freischalten?'
+                            : `Sie schalten den Kontakt zu diesem Auftrag für ${quote.lead_price.toFixed(2)} CHF frei. Möchten Sie fortfahren?`
                         }
                     </DialogDescription>
                 </DialogHeader>
@@ -152,8 +208,8 @@ const PurchaseConfirmationDialog = ({ open, onOpenChange, onConfirm, quote, hasA
                 <DialogFooter>
                     <Button variant="outline" onClick={() => onOpenChange(false)}>Abbrechen</Button>
                     <Button onClick={onConfirm}>
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                        Jetzt kaufen
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        Kontakt freischalten
                     </Button>
                 </DialogFooter>
             </DialogContent>
@@ -227,8 +283,8 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                       {(() => {
                         const Icon = icon;
                         return (
-                          <div className="flex items-center gap-2 font-semibold text-base">
-                            <Icon className="w-5 h-5 text-green-600" />
+                          <div className="flex items-center gap-2 font-semibold text-lg text-gray-900">
+                            <Icon className="w-5 h-5 shrink-0 text-green-600" />
                             <span>{quote.servicetype}</span>
                           </div>
                         );
@@ -252,60 +308,57 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                   <CardContent className="p-4 sm:p-6 border-t bg-gray-50/70">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                       <div className="lg:col-span-2 space-y-6">
-                        <DetailSection title="Dienstleistungsdetails" icon={icon}>
-                            <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
-                            <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
-                            <EmailConfirmationDetail quote={quote} />
-                            {serviceCategory === 'moving' && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
-                        </DetailSection>
-
-                        {/* Umzug + Reinigung Zusatzinfos nebeneinander */}
-                        {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal || quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-                          <div className={`grid gap-4 ${(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
-                            {/* Umzug Zusatzleistungen */}
-                            {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
-                              <div className="bg-white p-4 rounded-lg border shadow-sm">
-                                <div className="flex items-center gap-2 mb-3">
-                                  <Truck className="w-4 h-4 text-blue-600" />
-                                  <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
-                                </div>
-                                <div className="space-y-2">
-                                  {movingExtrasText && <QuoteDetail label="Umzug inkl." value={movingExtrasText} />}
-                                </div>
-                              </div>
-                            )}
-                            {/* Reinigung Zusatzinfos */}
-                            {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-                              <div className="bg-white p-4 rounded-lg border shadow-sm">
-                                <div className="space-y-2">
-                                  {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
-                                    'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
-                                    '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
-                                  }[quote.cleaning_area_sqm] || quote.cleaning_area_sqm} />}
-                                  {quote.cleaning_type_guarantee && <QuoteDetail label="Art der Reinigung" value={{
-                                    'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'
-                                  }[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee} />}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          <DetailSection title="Dienstleistungsdetails" icon={icon}>
+                              <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
+                              <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
+                              {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
+                                <div className="space-y-2 border-t border-gray-100 pt-3 mt-2">
+                                  {quote.cleaning_area_sqm && (
+                                    <QuoteDetail label="Wohnungsfläche" value={getCleaningAreaSqmLabel(quote.cleaning_area_sqm)} />
+                                  )}
+                                  {quote.cleaning_type_guarantee && (
+                                    <QuoteDetail
+                                      label="Art der Reinigung"
+                                      value={{
+                                        mit_abnahmegarantie: 'Endreinigung mit Abnahmegarantie',
+                                        ohne_abnahmegarantie: 'Endreinigung ohne Abnahmegarantie',
+                                        umzugsreinigung: 'Umzugsreinigung',
+                                      }[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}
+                                    />
+                                  )}
                                   {(quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-                                    <QuoteDetail label="Zusatzflächen" value={
-                                      [quote.cleaning_additional_balcony && 'Balkon', quote.cleaning_additional_cellar && 'Keller', quote.cleaning_additional_garage && 'Garage'].filter(Boolean).join(', ')
-                                    } />
+                                    <QuoteDetail
+                                      label="Zusatzflächen"
+                                      value={[quote.cleaning_additional_balcony && 'Balkon', quote.cleaning_additional_cellar && 'Keller', quote.cleaning_additional_garage && 'Garage'].filter(Boolean).join(', ')}
+                                    />
                                   )}
                                 </div>
+                              )}
+                              {serviceCategory === 'moving' && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
+                          </DetailSection>
+                          <DetailSection title={serviceCategory === 'moving' ? 'Umzugsadressen' : 'Objektadresse'} icon={MapPin}>
+                              <div className="grid grid-cols-1 gap-4">
+                                  <AddressBox title={serviceCategory === 'moving' ? 'Von Adresse' : 'Adresse'} quote={quote} type="from" />
+                                  {serviceCategory === 'moving' && quote.to_zip && (
+                                      <AddressBox title="Nach Adresse" quote={quote} type="to" />
+                                  )}
                               </div>
-                            )}
+                          </DetailSection>
+                        </div>
+
+                        {/* Umzug – Zusatzleistungen (Reinigungsfelder siehe Dienstleistungsdetails) */}
+                        {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
+                          <div className="bg-white p-4 rounded-lg border shadow-sm">
+                            <div className="flex items-center gap-2 mb-3">
+                              <Truck className="w-4 h-4 text-blue-600" />
+                              <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
+                            </div>
+                            <div className="space-y-2">
+                              {movingExtrasText && <QuoteDetail label="Umzug inkl." value={movingExtrasText} />}
+                            </div>
                           </div>
                         )}
-                        
-                         <DetailSection title={serviceCategory === 'moving' ? "Umzugsadressen" : "Objektadresse"} icon={MapPin}>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <AddressBox title={serviceCategory === 'moving' ? "Von Adresse" : "Adresse"} quote={quote} type="from" />
-                                {serviceCategory === 'moving' && quote.to_zip && (
-                                    <AddressBox title="Nach Adresse" quote={quote} type="to" />
-                                )}
-                            </div>
-                        </DetailSection>
-
-
 
                         {quote.additional_info && (
                             <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
@@ -321,18 +374,22 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                         )}
                       </div>
                       <div className="lg:col-span-1 space-y-4">
-                         <div className={`p-4 rounded-lg text-center ${hasActiveSubscription ? 'bg-green-50 border-green-200' : (canAfford ? 'bg-blue-50 border-blue-200' : 'bg-red-50 border-red-200') } border`}>
+                        <LeadAvailabilityCallout quote={quote} />
+                        <div className="rounded-lg border border-gray-200 bg-white p-4 text-left shadow-sm">
+                          <EmailConfirmationDetail quote={quote} />
+                        </div>
+                         <div className={`p-3 rounded-lg text-center ${hasActiveSubscription ? 'bg-green-50/80 border-green-200' : (canAfford ? 'bg-slate-50 border-slate-200' : 'bg-white border-gray-200') } border`}>
                             {hasActiveSubscription ? (
                                 <>
-                                    <h4 className="font-bold text-lg text-green-800">Kostenlos mit Abo</h4>
-                                    <Star className="w-8 h-8 mx-auto text-yellow-500 my-2" />
+                                    <h4 className="font-semibold text-base text-green-800">Kostenlos mit Abo</h4>
+                                    <Star className="w-6 h-6 mx-auto text-yellow-500 my-1.5" />
                                     <p className="text-sm text-green-700">Diese Anfrage ist in Ihrem Abonnement enthalten.</p>
                                 </>
                             ) : (
                                 <>
-                                    <h4 className="text-sm font-medium text-gray-600">Preis der Anfrage</h4>
+                                    <h4 className="text-xs font-medium uppercase tracking-wide text-gray-500">Preis (Kontakt)</h4>
                                     {/* Rabatt bleibt in den Daten; Altpreis + %-Badge nicht anzeigen */}
-                                    <p className="text-3xl font-bold text-gray-800">{quote.lead_price.toFixed(2)} <span className="text-lg font-normal">CHF</span></p>
+                                    <p className="mt-1 text-lg font-semibold tabular-nums text-gray-700">{quote.lead_price.toFixed(2)} <span className="text-sm font-normal text-gray-500">CHF</span></p>
                                     {!canAfford && (
                                         <p className="text-xs text-red-600 mt-1">Guthaben nicht ausreichend.</p>
                                     )}
@@ -347,15 +404,15 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                                 className="w-full"
                             >
                                 <CheckCircle className="w-5 h-5 mr-2" /> 
-                                Anfrage kaufen
+                                Kontakt freischalten
                             </Button>
                             {!canPurchaseInsurance && (
                               <p className="text-xs text-orange-600 text-center">
                                 {insuranceStatus === 'in_review' ? (
-                                  <>⏳ Versicherung wird geprüft. Käufe nach Freigabe möglich.</>
+                                  <>⏳ Versicherung wird geprüft. Kontakt-Freischaltung nach Freigabe möglich.</>
                                 ) : (
                                   <>
-                                    ⚠️ Käufe erst nach Versicherungsprüfung möglich.
+                                    ⚠️ Kontakt-Freischaltung erst nach Versicherungsprüfung möglich.
                                     {onInsuranceUploadClick && (
                                       <button onClick={onInsuranceUploadClick} className="underline ml-1 font-semibold hover:text-orange-800">
                                         Jetzt hochladen
@@ -366,13 +423,13 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                               </p>
                             )}
                            <Button 
-                                variant="destructive" 
+                                variant="outline" 
                                 size="sm" 
-                                className="w-full"
+                                className="w-full border-gray-300 text-gray-800 hover:bg-gray-50"
                                 onClick={() => handleRejectClick(quote.id)}
                             >
-                                <Ban className="w-4 h-4 mr-2" /> 
-                                Ablehnen
+                                <Ban className="w-4 h-4 mr-2 opacity-70" /> 
+                                Kein Interesse
                             </Button>
                         </div>
                       </div>

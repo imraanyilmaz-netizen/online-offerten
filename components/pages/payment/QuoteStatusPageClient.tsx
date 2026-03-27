@@ -19,6 +19,7 @@ import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
 import { isCleaningService, isPaintingService, isDisposalService } from '@/lib/serviceCategorizer';
 import { formatMoveDateLine } from '@/lib/utils';
+import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 const StatusTimeline = ({ status }: { status: string }) => {
   const steps = [
@@ -292,7 +293,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
                     <div>
                       <p className="text-sm text-gray-500">Wohnungsfläche</p>
                       <div className="font-medium text-gray-800 text-sm">
-                        {({'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'} as Record<string, string>)[quote.cleaning_area_sqm] || quote.cleaning_area_sqm}
+                        {getCleaningAreaSqmLabel(quote.cleaning_area_sqm)}
                       </div>
                     </div>
                   </div>

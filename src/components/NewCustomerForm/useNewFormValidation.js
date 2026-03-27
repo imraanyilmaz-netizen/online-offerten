@@ -1,4 +1,5 @@
-﻿import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 const useNewFormValidation = (formData) => {
   const { t } = useTranslation('newCustomerForm');
@@ -102,7 +103,21 @@ const useNewFormValidation = (formData) => {
         if (!formData.move_date) step2errors.move_date = t('errors.dateRequired');
         if (!formData.quotes_wanted) step2errors.quotes_wanted = t('errors.quotesWantedRequired');
         if (!formData.datenschutz) step2errors.datenschutz = t('errors.datenschutzRequired') || 'Bitte akzeptieren Sie die Datenschutzerklärung.';
-        
+
+        const needsCleaningArea =
+          (formData.service === 'reinigung' && CLEANING_AREA_TYPES_WITH_FIELD.includes(formData.umzugArt)) ||
+          (formData.service === 'umzug' && formData.umzugArt === 'privatumzug');
+        if (needsCleaningArea && !formData.cleaning_area_size) {
+          step2errors.cleaning_area_size = t('errors.fieldRequired');
+        }
+
+        const needsCleaningType =
+          (formData.service === 'reinigung' && formData.umzugArt === 'umzugsreinigung') ||
+          (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning);
+        if (needsCleaningType && !formData.cleaning_type) {
+          step2errors.cleaning_type = t('errors.fieldRequired');
+        }
+
         return step2errors;
     };
     

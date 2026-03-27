@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
 
 const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) => {
   const { t } = useTranslation('newCustomerForm');
@@ -356,16 +357,6 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
 
 
 const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxChange, showCleaningType = false }) => {
-    const areaSizeOptions = [
-        { value: 'bis_40', label: 'bis 40 m²' },
-        { value: '40_60', label: '40 – 60 m²' },
-        { value: '60_80', label: '60 – 80 m²' },
-        { value: '80_100', label: '80 – 100 m²' },
-        { value: '100_120', label: '100 – 120 m²' },
-        { value: '120_140', label: '120 – 140 m²' },
-        { value: 'ueber_140', label: 'über 140 m²' },
-    ];
-
     const cleaningTypeOptions = [
         { value: 'mit_abnahmegarantie', label: 'Endreinigung mit Abnahmegarantie' },
         { value: 'ohne_abnahmegarantie', label: 'Endreinigung ohne Abnahmegarantie' },
@@ -375,18 +366,12 @@ const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxCha
         <div className="space-y-4 mt-3">
             {/* Wohnungsfläche */}
             <div>
-                <select
+                <CleaningAreaSelect
                     id="cleaning_area_size"
-                    name="cleaning_area_size"
-                    value={formData.cleaning_area_size || ''}
-                    onChange={(e) => handleSelectChange('cleaning_area_size', e.target.value)}
-                    className="w-full rounded-lg border-2 border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-green-500 focus:outline-none md:hover:border-green-300 transition-colors"
-                >
-                    <option value="">Wohnungsfläche (ca.) *</option>
-                    {areaSizeOptions.map(opt => (
-                        <option key={opt.value} value={opt.value}>{opt.label}</option>
-                    ))}
-                </select>
+                    value={formData.cleaning_area_size}
+                    onChange={(v) => handleSelectChange('cleaning_area_size', v)}
+                    selectClassName="rounded-lg border-2 border-gray-200 bg-white md:hover:border-green-300"
+                />
             </div>
 
             {/* Art der Reinigung - nur für Endreinigung */}

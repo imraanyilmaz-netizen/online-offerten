@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Label } from "@/components/ui/label";
@@ -7,11 +6,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Home, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText, Sparkles } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
+import { CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
+import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
+import LiftSelectField from '@/components/NewCustomerForm/LiftSelectField';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { countries } from '@/data/countries';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 // framer-motion removed - CSS transitions for better INP
 
@@ -360,18 +361,31 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
 
           {showLiftField && (
             <div>
-              <Select name={`${prefix}_lift`} value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
-                  <SelectValue placeholder={t('step2.liftLabel')} />
-                </SelectTrigger>
-                <SelectContent className="text-sm">
-                  <SelectItem value="true">{t('step2.liftOptionYes')}</SelectItem>
-                  <SelectItem value="false">{t('step2.liftOptionNo')}</SelectItem>
-                </SelectContent>
-              </Select>
+              <LiftSelectField
+                prefix={prefix}
+                formData={formData}
+                handleSelectChange={handleSelectChange}
+                t={t}
+                triggerClassName="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"
+                contentClassName="text-sm"
+              />
             </div>
           )}
         </div>
+
+        {prefix === 'from' &&
+          formData.service === 'umzug' &&
+          formData.umzugArt === 'privatumzug' &&
+          !formData.additional_cleaning && (
+            <div className="pt-3 mt-2 border-t border-gray-100">
+              <CleaningAreaSelect
+                id="cleaning_area_size"
+                value={formData.cleaning_area_size}
+                onChange={(v) => handleSelectChange('cleaning_area_size', v)}
+                error={errors?.cleaning_area_size}
+              />
+            </div>
+          )}
       </div>
       
     </div>
@@ -503,6 +517,9 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
     if (formData.service === 'reinigung') {
       return t('step3.additionalInfoPlaceholderCleaning');
     }
+    if (formData.service === 'umzug') {
+      return t('step3.additionalInfoPlaceholderMove');
+    }
     return t('step3.additionalInfoPlaceholder');
   };
 
@@ -627,32 +644,20 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
           </SectionCard>
         )}
 
-        {/* Sağ: Reinigung Angaben */}
-        {((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) ||
+        {/* Reinigung oder Umzug + Endreinigung: volle Reinigungs-Karte (Privatumzug ohne Endreinigung: Fläche in Von-Adresse) */}
+        {((formData.service === 'reinigung' && CLEANING_AREA_TYPES_WITH_FIELD.includes(formData.umzugArt)) ||
           (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) && (
           <SectionCard icon={<Sparkles className="w-6 h-6 text-green-600" />} titleKey="step3.cleaningDetailsTitle" descriptionKey="step3.cleaningDetailsDescription">
             <div className="space-y-4">
-              {/* Wohnungsfläche */}
               <div>
-                <select
-                  id="cleaning_area_size"
-                  name="cleaning_area_size"
-                  value={formData.cleaning_area_size || ''}
-                  onChange={(e) => handleSelectChange('cleaning_area_size', e.target.value)}
-                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none"
-                >
-                  <option value="">Wohnungsfläche (ca.) *</option>
-                  <option value="bis_40">bis 40 m²</option>
-                  <option value="40_60">40 – 60 m²</option>
-                  <option value="60_80">60 – 80 m²</option>
-                  <option value="80_100">80 – 100 m²</option>
-                  <option value="100_120">100 – 120 m²</option>
-                  <option value="120_140">120 – 140 m²</option>
-                  <option value="ueber_140">über 140 m²</option>
-                </select>
+                <CleaningAreaSelect
+                  id="cleaning_area_size_full"
+                  value={formData.cleaning_area_size}
+                  onChange={(v) => handleSelectChange('cleaning_area_size', v)}
+                  error={errors?.cleaning_area_size}
+                />
               </div>
 
-              {/* Art der Reinigung - nur für Endreinigung */}
               {(formData.umzugArt === 'umzugsreinigung' || (formData.service === 'umzug' && formData.additional_cleaning)) && (
                 <div>
                   <select
@@ -666,10 +671,11 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
                     <option value="mit_abnahmegarantie">Endreinigung mit Abnahmegarantie</option>
                     <option value="ohne_abnahmegarantie">Endreinigung ohne Abnahmegarantie</option>
                   </select>
+                  {errors && errors.cleaning_type && (
+                    <p className="text-xs text-red-500 mt-1">{errors.cleaning_type}</p>
+                  )}
                 </div>
               )}
-
-              {/* Zusatzflächen sind vorübergehend ausgeblendet. */}
             </div>
           </SectionCard>
         )}
@@ -701,36 +707,6 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
            {errors && errors.quotes_wanted && <p className="text-xs text-red-500 mt-1">{errors.quotes_wanted}</p>}
         </SectionCard>
       </div>
-
-      {/* Datenschutz Checkbox */}
-      <Card className="w-full bg-white shadow-md border-gray-200 rounded-lg overflow-hidden">
-        <CardContent className="p-4">
-          <div className="flex items-start space-x-3">
-            <Checkbox 
-              id="datenschutz" 
-              name="datenschutz" 
-              checked={formData.datenschutz || false} 
-              onCheckedChange={(checked) => handleCheckboxChange('datenschutz', checked)} 
-              className={`h-6 w-6 mt-0.5 ${errors && errors.datenschutz ? "border-red-500" : ""}`}
-              required
-            />
-            <Label htmlFor="datenschutz" className="font-medium text-base text-slate-800 leading-relaxed cursor-pointer flex-1">
-              Ich akzeptiere die{' '}
-              <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
-                AGB
-              </Link>
-              {' '}und die{' '}
-              <Link href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
-                Datenschutzerklärung
-              </Link>
-              .
-            </Label>
-          </div>
-          {errors && errors.datenschutz && (
-            <p className="text-sm text-red-500 mt-2">{errors.datenschutz}</p>
-          )}
-        </CardContent>
-      </Card>
     </div>
   );
 };

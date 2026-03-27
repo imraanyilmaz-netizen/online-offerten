@@ -79,7 +79,10 @@ serve(async (req) => {
       if (quote.additional_services_disposal) zusatz.push('Entsorgung');
 
       // Reinigung Details
-      const areaSizeLabels = { 'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²' };
+      const areaSizeLabels: Record<string, string> = {
+        bis_40: 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', ueber_140: 'über 140 m²',
+        sqm_40: '40 m²', sqm_60: '60 m²', sqm_70: '70 m²', sqm_80: '80 m²', sqm_90: '90 m²', sqm_100: '100 m²', sqm_120: '120 m²', sqm_150_plus: '150+ m²',
+      };
       const cleaningTypeLabels = { 'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung' };
       const cleaningExtras = [quote.cleaning_additional_balcony && 'Balkon', quote.cleaning_additional_cellar && 'Keller', quote.cleaning_additional_garage && 'Garage'].filter(Boolean);
 

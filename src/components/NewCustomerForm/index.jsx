@@ -1,11 +1,14 @@
 'use client'
 
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect, useCallback, useRef, useMemo, memo } from 'react';
 // framer-motion removed – using CSS transitions for better INP
 import { useTranslation } from 'react-i18next'; // i18n geri eklendi - müşteri formu için
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import Step1_Service from '@/components/NewCustomerForm/Step1_Service';
 import Step2_ServiceDetails from '@/components/NewCustomerForm/Step2_ServiceDetails';
 import Step2_DetailsAndContact from '@/components/NewCustomerForm/Step2_DetailsAndContact';
@@ -1154,26 +1157,62 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           {renderStepContent()}
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-end items-stretch sm:items-center pt-4 sm:pt-6 border-t border-gray-200 gap-3 sm:gap-4">
-          {currentStep < TOTAL_FORM_STEPS && (
-            <Button 
-              type="button" 
-              onClick={handleNextStep} 
-              className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={(currentStep === 1 && !isStep1Completed) || (currentStep === 2 && !isStep2Completed)}
-            >
-                {t('nextButton')}
-                <ArrowLeft className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1 rotate-180" />
-            </Button>
-          )}
-          
+        <div
+          className={
+            currentStep === TOTAL_FORM_STEPS
+              ? 'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200'
+              : 'flex flex-col sm:flex-row justify-end items-stretch sm:items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200'
+          }
+        >
           {currentStep === TOTAL_FORM_STEPS && (
-            <Button type="submit" className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base" disabled={isLoading}>
-              {submitButtonText}
-              {isLoading ? <Loader2 className="w-4 h-4 ml-2 animate-spin" /> : <Send className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1" />}
-            </Button>
+            <div className="min-w-0 flex-1 sm:max-w-[min(100%,36rem)]">
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="datenschutz"
+                  name="datenschutz"
+                  checked={formData.datenschutz || false}
+                  onCheckedChange={(checked) => handleCheckboxChange('datenschutz', checked)}
+                  className={`h-6 w-6 mt-0.5 shrink-0 ${formData.errors?.datenschutz ? 'border-red-500' : ''}`}
+                  required
+                />
+                <Label htmlFor="datenschutz" className="font-medium text-sm sm:text-base text-slate-800 leading-relaxed cursor-pointer">
+                  Ich akzeptiere die{' '}
+                  <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
+                    AGB
+                  </Link>
+                  {' '}und die{' '}
+                  <Link href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
+                    Datenschutzerklärung
+                  </Link>
+                  .
+                </Label>
+              </div>
+              {formData.errors?.datenschutz && (
+                <p className="text-sm text-red-500 mt-2 sm:pl-9">{formData.errors.datenschutz}</p>
+              )}
+            </div>
           )}
 
+          <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 ${currentStep === TOTAL_FORM_STEPS ? 'sm:flex-shrink-0 sm:self-center' : 'items-stretch sm:items-center w-full sm:w-auto'}`}>
+            {currentStep < TOTAL_FORM_STEPS && (
+              <Button
+                type="button"
+                onClick={handleNextStep}
+                className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={(currentStep === 1 && !isStep1Completed) || (currentStep === 2 && !isStep2Completed)}
+              >
+                {t('nextButton')}
+                <ArrowLeft className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1 rotate-180" />
+              </Button>
+            )}
+
+            {currentStep === TOTAL_FORM_STEPS && (
+              <Button type="submit" className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base" disabled={isLoading}>
+                {submitButtonText}
+                {isLoading ? <Loader2 className="w-4 h-4 ml-2 animate-spin" /> : <Send className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1" />}
+              </Button>
+            )}
+          </div>
         </div>
       </form>
 

@@ -22,7 +22,10 @@ const createAdminEmailHtml = (quoteDetails)=>{
   const additionalServicesStr = additionalServices.length > 0 ? additionalServices.join(', ') : 'Keine';
 
   // Reinigung Labels
-  const areaSizeLabels: Record<string, string> = { 'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²' };
+  const areaSizeLabels: Record<string, string> = {
+    bis_40: 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', ueber_140: 'über 140 m²',
+    sqm_40: '40 m²', sqm_60: '60 m²', sqm_70: '70 m²', sqm_80: '80 m²', sqm_90: '90 m²', sqm_100: '100 m²', sqm_120: '120 m²', sqm_150_plus: '150+ m²',
+  };
   const cleaningTypeLabels: Record<string, string> = { 'mit_abnahmegarantie': 'mit Abnahmegarantie', 'ohne_abnahmegarantie': 'ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung' };
   const extras = [cleaning_additional_balcony && 'Balkon', cleaning_additional_cellar && 'Keller', cleaning_additional_garage && 'Garage'].filter(Boolean);
 

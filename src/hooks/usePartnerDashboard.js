@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useToast } from '@/components/ui/use-toast';
@@ -129,9 +129,35 @@ export const usePartnerDashboard = (onActionSuccess) => {
       setPartnerData(partner);
       
       const viewedIds = new Set(dashboardData.viewed_quote_ids || []);
-      const enrichedAvailableQuotes = (dashboardData.available_quotes || []).map(quote => ({
+      const baseAvailableQuotes = dashboardData.available_quotes || [];
+      const availableQuoteIds = baseAvailableQuotes.map((q) => q.id).filter(Boolean);
+
+      let purchaseCountByQuoteId = {};
+      if (availableQuoteIds.length > 0) {
+        const { data: purchaseRows, error: purchaseCountError } = await supabase
+          .from('purchased_quotes')
+          .select('quote_id')
+          .in('quote_id', availableQuoteIds);
+
+        if (!purchaseCountError && purchaseRows) {
+          purchaseCountByQuoteId = purchaseRows.reduce((acc, row) => {
+            const qid = row.quote_id;
+            if (!qid) return acc;
+            acc[qid] = (acc[qid] || 0) + 1;
+            return acc;
+          }, {});
+        } else if (purchaseCountError) {
+          console.warn('Could not load lead purchase counts:', purchaseCountError.message);
+        }
+      }
+
+      const enrichedAvailableQuotes = baseAvailableQuotes.map((quote) => ({
         ...quote,
-        is_viewed: viewedIds.has(quote.id)
+        is_viewed: viewedIds.has(quote.id),
+        lead_purchase_count:
+          typeof quote.lead_purchase_count === 'number'
+            ? quote.lead_purchase_count
+            : purchaseCountByQuoteId[quote.id] || 0,
       }));
 
       setAvailableQuotes(enrichedAvailableQuotes);

@@ -226,6 +226,7 @@
       "etageEinfamilienhaus": "Floors in a Single-Family House"
     },
     "liftLabel": "Elevator Available?",
+    "liftHeading": "Elevator",
     "liftOptionYes": "Yes",
     "liftOptionNo": "No",
     "roomsLabel": "Number of Rooms",
@@ -331,7 +332,8 @@
     "cleaningDetailsDescription": "",
     "additionalPianoLabel": "I have a piano / grand piano to transport",
     "additionalInfoLabel": "Additional comments (optional)",
-    "additionalInfoPlaceholder": "Are there any special features? e.g., narrow access, special items, etc.",
+    "additionalInfoPlaceholder": "Any special notes? e.g., narrow access, heavy items, etc.",
+    "additionalInfoPlaceholderMove": "e.g. furniture to dismantle and reassemble, piano move, packing service needed, narrow access …",
     "additionalInfoPlaceholderCleaning": "Are there any special features? e.g., heavy soiling, pets, nicotine, etc.",
     "howFoundTitleOptional": "How did you find us?",
     "howFoundDescriptionOptional": "This information is voluntary and helps us improve our service.",
@@ -411,7 +413,8 @@
     "emailRequired": "Please enter your email address.",
     "phoneRequired": "Please enter your phone number.",
     "dateRequired": "Please specify a date.",
-    "quotesWantedRequired": "Please select the number of quotes."
+    "quotesWantedRequired": "Please select the number of quotes.",
+    "datenschutzRequired": "Please accept the Terms and the Privacy Policy."
   },
   "quoteFormPage": {
     "heroTitle": "Request Free Quotes",

@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from '@/components/ui/button';
 import { UserCircle, CalendarDays, Info, Search, Users, FileText } from 'lucide-react';
+import { CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
+import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
 
 
 const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
@@ -132,6 +134,9 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
     if (formData.service === 'reinigung') {
       return t('step3.additionalInfoPlaceholderCleaning');
     }
+    if (formData.service === 'umzug') {
+      return t('step3.additionalInfoPlaceholderMove');
+    }
     return t('step3.additionalInfoPlaceholder');
   };
 
@@ -216,32 +221,30 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
 
       <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle">
         <div className="space-y-3">
-            {/* Reinigung: Wohnungsfläche, Art der Reinigung, Zusatzflächen */}
-            {((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) ||
+            {formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && !formData.additional_cleaning && (
+              <CleaningAreaSelect
+                id="cleaning_area_size_s3_standalone"
+                value={formData.cleaning_area_size}
+                onChange={(v) => handleSelectChange('cleaning_area_size', v)}
+                error={errors?.cleaning_area_size}
+                textSizeClassName="text-sm sm:text-base"
+              />
+            )}
+
+            {((formData.service === 'reinigung' && CLEANING_AREA_TYPES_WITH_FIELD.includes(formData.umzugArt)) ||
               (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) && (
               <div className="space-y-4 pt-3 border-t border-gray-100">
                 <h4 className="font-semibold text-sm sm:text-base text-slate-800">Angaben zur Reinigung</h4>
-                {/* Wohnungsfläche */}
                 <div>
-                  <select
+                  <CleaningAreaSelect
                     id="cleaning_area_size_s3"
-                    name="cleaning_area_size"
-                    value={formData.cleaning_area_size || ''}
-                    onChange={(e) => handleSelectChange('cleaning_area_size', e.target.value)}
-                    className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm sm:text-base focus:bg-white focus:border-green-500 focus:outline-none"
-                  >
-                    <option value="">Wohnungsfläche (ca.) *</option>
-                    <option value="bis_40">bis 40 m²</option>
-                    <option value="40_60">40 – 60 m²</option>
-                    <option value="60_80">60 – 80 m²</option>
-                    <option value="80_100">80 – 100 m²</option>
-                    <option value="100_120">100 – 120 m²</option>
-                    <option value="120_140">120 – 140 m²</option>
-                    <option value="ueber_140">über 140 m²</option>
-                  </select>
+                    value={formData.cleaning_area_size}
+                    onChange={(v) => handleSelectChange('cleaning_area_size', v)}
+                    error={errors?.cleaning_area_size}
+                    textSizeClassName="text-sm sm:text-base"
+                  />
                 </div>
 
-                {/* Art der Reinigung - nur für Endreinigung */}
                 {(formData.umzugArt === 'umzugsreinigung' || (formData.service === 'umzug' && formData.additional_cleaning)) && (
                   <div>
                     <select
@@ -255,14 +258,19 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
                       <option value="mit_abnahmegarantie">Endreinigung mit Abnahmegarantie</option>
                       <option value="ohne_abnahmegarantie">Endreinigung ohne Abnahmegarantie</option>
                     </select>
+                    {errors && errors.cleaning_type && (
+                      <p className="text-xs text-red-500 mt-1">{errors.cleaning_type}</p>
+                    )}
                   </div>
                 )}
-
-                {/* Zusatzflächen sind vorübergehend ausgeblendet. */}
               </div>
             )}
         </div>
-        <div className={`space-y-1 ${((formData.service === 'reinigung' && ['wohnungsreinigung', 'hausreinigung', 'grundreinigung', 'buero', 'umzugsreinigung'].includes(formData.umzugArt)) || (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) ? 'pt-3' : ''}`}>
+        <div className={`space-y-1 ${(
+          (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && !formData.additional_cleaning) ||
+          (formData.service === 'reinigung' && CLEANING_AREA_TYPES_WITH_FIELD.includes(formData.umzugArt)) ||
+          (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)
+        ) ? 'pt-3' : ''}`}>
             <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm sm:text-base">{t('step3.additionalInfoLabel')}</Label>
             <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[90px] text-sm sm:text-base"/>
         </div>

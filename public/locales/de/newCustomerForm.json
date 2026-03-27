@@ -226,6 +226,7 @@
       "etageEinfamilienhaus": "Etagen in einem Einfamilienhaus"
     },
     "liftLabel": "Lift vorhanden?",
+    "liftHeading": "Lift vorhanden",
     "liftOptionYes": "Ja",
     "liftOptionNo": "Nein",
     "roomsLabel": "Anzahl Zimmer",
@@ -331,7 +332,8 @@
     "cleaningDetailsDescription": "",
     "additionalPianoLabel": "Ich habe ein Klavier / Flügel zu transportieren",
     "additionalInfoLabel": "Zusätzliche Bemerkungen (optional)",
-    "additionalInfoPlaceholder": "Gibt es Besonderheiten? z.B. enge Zufahrt, spezielle Gegenstände, usw.",
+    "additionalInfoPlaceholder": "Gibt es Besonderheiten? z.B. enge Zufahrt, schwere Gegenstände, usw.",
+    "additionalInfoPlaceholderMove": "z.B. Möbel müssen demontiert und wieder montiert werden, Klaviertransport, zusätzlicher Einpackservice gewünscht, enge Zufahrt …",
     "additionalInfoPlaceholderCleaning": "Gibt es Besonderheiten? z.B. starker Schmutz, Haustiere, Nikotin, usw.",
     "howFoundTitleOptional": "Wie haben Sie uns gefunden?",
     "howFoundDescriptionOptional": "Diese Information ist freiwillig und hilft uns, unseren Service zu verbessern.",
@@ -411,7 +413,8 @@
     "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
     "phoneRequired": "Bitte geben Sie Ihre Telefonnummer ein.",
     "dateRequired": "Bitte geben Sie ein Datum an.",
-    "quotesWantedRequired": "Bitte wählen Sie die Anzahl der Offerten aus."
+    "quotesWantedRequired": "Bitte wählen Sie die Anzahl der Offerten aus.",
+    "datenschutzRequired": "Bitte akzeptieren Sie die AGB und die Datenschutzerklärung."
   },
   "quoteFormPage": {
     "heroTitle": "Kostenlose Offerten anfordern",

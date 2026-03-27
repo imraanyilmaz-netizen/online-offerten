@@ -7,6 +7,7 @@ import { Home, Loader2, MapPin, ChevronsUpDown, Globe } from 'lucide-react';
 import { getCityFromZip } from './newFormUtils';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { countries } from '@/data/countries';
+import LiftSelectField from '@/components/NewCustomerForm/LiftSelectField';
 
 const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors, t, isMoveService }) => {
   const prefix = type;
@@ -295,15 +296,14 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
           )}
 
           <div>
-            <Select name={`${prefix}_lift`} value={formData[`${prefix}_lift`] === true ? 'true' : formData[`${prefix}_lift`] === false ? 'false' : ''} onValueChange={(value) => handleSelectChange(`${prefix}_lift`, value === 'true')}>
-              <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
-                <SelectValue placeholder={t('step2.liftLabel')} />
-              </SelectTrigger>
-              <SelectContent className="text-sm sm:text-base">
-                <SelectItem value="true">{t('step2.liftOptionYes')}</SelectItem>
-                <SelectItem value="false">{t('step2.liftOptionNo')}</SelectItem>
-              </SelectContent>
-            </Select>
+            <LiftSelectField
+              prefix={prefix}
+              formData={formData}
+              handleSelectChange={handleSelectChange}
+              t={t}
+              triggerClassName="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+              contentClassName="text-sm sm:text-base"
+            />
           </div>
         </div>
       </div>

@@ -13,6 +13,7 @@ import { de } from 'date-fns/locale/de';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
 import { formatMoveDateLine } from '@/lib/utils';
+import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing, allPartners = [], onSendToAdditionalPartners, onUpdatePurchaseQuota, onMarkSoldOut }) => {
   const { id, from_city, to_city, servicetype, created_at, status, lead_price, assigned_partner_ids, purchase_quota, partner_target_regions, email_confirmed, email_confirmed_at, move_date, review_email_sent_at, review_email_sent_count } = quote;
@@ -242,16 +243,6 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
     quote.special_transport_heavy && 'Flügel',
   ].filter(Boolean);
 
-  const cleaningAreaLabelMap = {
-    bis_40: 'bis 40 m²',
-    '40_60': '40-60 m²',
-    '60_80': '60-80 m²',
-    '80_100': '80-100 m²',
-    '100_120': '100-120 m²',
-    '120_140': '120-140 m²',
-    ueber_140: 'über 140 m²',
-  };
-
   const cleaningTypeLabelMap = {
     mit_abnahmegarantie: 'Mit Abnahmegarantie',
     ohne_abnahmegarantie: 'Ohne Abnahmegarantie',
@@ -259,7 +250,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   };
 
   const cleaningExtras = [
-    quote.cleaning_area_sqm && `Fläche: ${cleaningAreaLabelMap[quote.cleaning_area_sqm] || quote.cleaning_area_sqm}`,
+    quote.cleaning_area_sqm && `Fläche: ${getCleaningAreaSqmLabel(quote.cleaning_area_sqm)}`,
     quote.cleaning_type_guarantee && `Art: ${cleaningTypeLabelMap[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}`,
     (quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) &&
       `Zusatzflächen: ${[

@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 import { Textarea } from '@/components/ui/textarea';
 import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, Calendar, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle } from 'lucide-react';
 import { formatDate, formatMoveDateLine } from '@/lib/utils';
+import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
@@ -32,10 +33,10 @@ const ContactItem = ({ icon, label, value, subValue, isLink = false, linkType = 
 const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
-        <div className="flex items-start gap-3 text-sm text-gray-700">
-            <span className="font-bold text-gray-800">E-Mail-Bestätigung:</span> 
+        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-gray-700">
+            <span className="font-bold text-gray-800">E-Mail-Bestätigung:</span>
             <span className={isConfirmed ? 'text-green-700 font-semibold' : 'text-red-700 font-semibold'}>
-                {isConfirmed ? 'Bestätigt' : 'Nicht bestätigt'}
+                {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
     );
@@ -257,7 +258,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                         <div>
                           <p className="text-xs text-gray-500">E-Mail-Bestätigung</p>
                           <p className={`text-sm font-medium ${quote.email_confirmed ? 'text-green-700' : 'text-red-700'}`}>
-                            {quote.email_confirmed ? 'Bestätigt' : 'Nicht bestätigt'}
+                            {quote.email_confirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
                           </p>
                         </div>
                       </div>
@@ -288,10 +289,9 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                       {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
                         <div className="bg-white p-4 rounded-lg border shadow-sm">
                           <div className="space-y-2">
-                            {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
-                              'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
-                              '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
-                            }[quote.cleaning_area_sqm] || quote.cleaning_area_sqm} />}
+                            {quote.cleaning_area_sqm && (
+                              <QuoteDetail label="Wohnungsfläche" value={getCleaningAreaSqmLabel(quote.cleaning_area_sqm)} />
+                            )}
                             {quote.cleaning_type_guarantee && <QuoteDetail label="Art der Reinigung" value={{
                               'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'
                             }[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee} />}

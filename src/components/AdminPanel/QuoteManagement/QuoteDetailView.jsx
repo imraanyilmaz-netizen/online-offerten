@@ -10,6 +10,7 @@ import { countries } from '@/data/countries';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
 import { getServiceCategory, isMovingService, isCleaningService, isPaintingService } from '@/lib/serviceCategorizer';
+import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 const DetailSection = ({ title, icon: Icon, children }) => (
     <div className="bg-white p-4 sm:p-5 rounded-xl border border-gray-200 shadow-sm">
@@ -118,10 +119,10 @@ const ContactItem = ({ icon, label, value, subValue, isLink = false, linkType = 
 const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
-        <div className="flex items-start gap-3 text-sm text-gray-700">
-            <span className="font-semibold text-gray-800">E-Mail-Bestätigung:</span> 
+        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-gray-700">
+            <span className="font-semibold text-gray-800">E-Mail-Bestätigung:</span>
             <span className={isConfirmed ? 'text-green-700 font-semibold' : 'text-red-700 font-semibold'}>
-                {isConfirmed ? 'Bestätigt' : 'Nicht bestätigt'}
+                {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
     );
@@ -233,10 +234,9 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
                     <h4 className="font-semibold text-sm text-gray-800">Reinigung – Details</h4>
                   </div>
                   <div className="space-y-2">
-                    {quote.cleaning_area_sqm && <QuoteDetail label="Wohnungsfläche" value={{
-                      'bis_40': 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²',
-                      '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', 'ueber_140': 'über 140 m²'
-                    }[quote.cleaning_area_sqm] || quote.cleaning_area_sqm} />}
+                    {quote.cleaning_area_sqm && (
+                      <QuoteDetail label="Wohnungsfläche" value={getCleaningAreaSqmLabel(quote.cleaning_area_sqm)} />
+                    )}
                     {quote.cleaning_type_guarantee && <QuoteDetail label="Art der Reinigung" value={{
                       'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'
                     }[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee} />}
