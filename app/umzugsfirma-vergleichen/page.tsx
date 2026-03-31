@@ -3,16 +3,18 @@ import { Suspense } from 'react'
 import UmzugsfirmaVergleichenPageClient from '@/components/pages/info/UmzugsfirmaVergleichenPageClient'
 
 export const metadata: Metadata = {
-  title: 'Umzugsfirmen vergleichen in der Schweiz: Bis zu 5 kostenlose Umzugsofferten',
+  title:
+    'Bis zu 5 kostenlose Umzugsofferten in 2 Min. | Umzugsfirmen Schweiz vergleichen',
   description:
-    'Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen. Unverbindlich, transparent – Preise & Leistungen im Überblick.',
+    'Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen – schnell, unverbindlich, transparent. Jetzt Offerten einholen.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma-vergleichen',
   },
   openGraph: {
-    title: 'Umzugsfirmen vergleichen in der Schweiz: Bis zu 5 kostenlose Umzugsofferten',
+    title:
+      'Bis zu 5 kostenlose Umzugsofferten in 2 Min. | Umzugsfirmen Schweiz vergleichen',
     description:
-      'Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen. Unverbindlich, transparent – Preise & Leistungen im Überblick.',
+      'Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen – schnell, unverbindlich, transparent. Jetzt Offerten einholen.',
     url: 'https://online-offerten.ch/umzugsfirma-vergleichen',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -28,9 +30,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umzugsfirmen vergleichen in der Schweiz: Bis zu 5 kostenlose Umzugsofferten',
+    title:
+      'Bis zu 5 kostenlose Umzugsofferten in 2 Min. | Umzugsfirmen Schweiz vergleichen',
     description:
-      'Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen. Unverbindlich, transparent – Preise & Leistungen im Überblick.',
+      'Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen – schnell, unverbindlich, transparent. Jetzt Offerten einholen.',
     images: ['https://online-offerten.ch/umzug/29dafe69-70a5-4e15-b5fe-fac7d8d03bc7.webp'],
   },
   robots: {
