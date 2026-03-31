@@ -11,7 +11,7 @@ import {
   ArrowRight, CheckCircle, ShieldCheck, Clock, TrendingUp, Users, Award,
   Star, MapPin, Home, Building, Globe, Package, FileText, Mail,
   Truck, Navigation, ChevronRight, ArrowUpDown,
-  BarChart3, BadgePercent, HeartHandshake, Calculator, Lightbulb, AlertTriangle,
+  BarChart3, BadgePercent, Calculator, Lightbulb, AlertTriangle,
   ListChecks, ClipboardCheck, Search, Eye, XCircle, CalendarClock,
   ShieldAlert, FileWarning, Briefcase, Warehouse,
   PackageCheck, Wrench, Trash2
@@ -52,9 +52,9 @@ const UmzugsfirmaVergleichenPageClient = () => {
         },
         {
           "@type": "Service",
-          "name": "Umzugsfirmen vergleichen Schweiz",
+          "name": "Umzugsfirmen vergleichen in der Schweiz: Bis zu 5 kostenlose Umzugsofferten",
           "serviceType": "Umzugsfirma Vergleichsportal",
-          "description": "Vergleichen Sie kostenlos bis zu 5 Offerten von geprüften Umzugsfirmen in der Schweiz. Transparent, unverbindlich und bis zu 40% günstiger.",
+          "description": "Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen. Unverbindlich, transparent, in wenigen Minuten.",
           "provider": {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
@@ -219,18 +219,26 @@ const UmzugsfirmaVergleichenPageClient = () => {
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
-              <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
-                <BarChart3 className="h-4 w-4 mr-2" />
-                Vergleichsportal Schweiz
+              <div
+                className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3"
+                aria-label="In 2 Minuten, Gratis, 5 Offerten"
+              >
+                <Clock className="h-4 w-4 flex-shrink-0" aria-hidden />
+                <span>In 2 Minuten</span>
+                <span className="text-green-600/50" aria-hidden>
+                  ·
+                </span>
+                <span>Gratis</span>
+                <span className="text-green-600/50" aria-hidden>
+                  ·
+                </span>
+                <span>5 Offerten</span>
               </div>
               <h1 className="heading-1 !mt-0">
-                Umzugsfirmen vergleichen Schweiz: So finden Sie den besten Anbieter für Ihren Umzug
+                Umzugsfirmen vergleichen in der Schweiz: Bis zu 5 kostenlose Umzugsofferten
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-4 leading-relaxed">
-                Ein systematischer Vergleich von <Link href="/umzugsfirma" className="text-green-700 hover:text-green-800 underline font-medium">Umzugsfirmen</Link> spart Ihnen bis zu 40% der Kosten und schützt vor bösen Überraschungen. Die effizienteste Methode, Umzugsfirmen zu vergleichen, ist die Nutzung spezialisierter Online-Vergleichsportale.
-              </p>
               <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
-                Professionelle Umzugsfirmen nehmen Ihnen einen grossen Teil der Arbeit ab, indem sie den gesamten Arbeitsaufwand rund um den Umzug effizient und fachgerecht übernehmen. So profitieren Sie von der Erfahrung und dem Know-how der Umzugshelfer, was den Ablauf deutlich erleichtert.
+                Vergleichen Sie kostenlos regionale Umzugsfirmen für Ihren Umzug und erhalten Sie in 2 Minuten Gratis-Umzugsofferten.
               </p>
 
               {/* Service Buttons */}
@@ -344,23 +352,39 @@ const UmzugsfirmaVergleichenPageClient = () => {
                   </div>
                 </div>
                 <h3 className="heading-3 text-center">
-                  Umzugsfirmen vergleichen
+                  Finden Sie eine Umzugsfirma in Ihrer Nähe
                 </h3>
                 <div className="space-y-4">
                   {[
-                    { icon: TrendingUp, title: 'Bis zu 40% sparen', description: 'Bei identischen Leistungen liegen die Preise oft 300–800 CHF auseinander' },
-                    { icon: ShieldCheck, title: 'Geprüfte Partnerfirmen', description: 'Alle Firmen sind versichert und qualitätsgeprüft' },
-                    { icon: MapPin, title: 'Regionale Anbieter', description: 'Lokale Firmen kennen die Gegebenheiten vor Ort' },
-                    { icon: HeartHandshake, title: '100% unverbindlich', description: 'Keine Verpflichtung – die Wahl liegt bei Ihnen' },
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-start">
-                      <feature.icon className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                    {
+                      step: 1,
+                      title: 'Kurzes Formular ausfüllen – in ca. 2 Minuten erledigt',
+                      description: 'Nur die wichtigsten Angaben zu Ihrem Umzug – schnell und unkompliziert.',
+                    },
+                    {
+                      step: 2,
+                      title: 'Bis zu fünf Offerten regionaler Anbieter gegenüberstellen',
+                      description: 'Transparent vergleichen und das beste Preis-Leistungs-Verhältnis finden.',
+                    },
+                    {
+                      step: 3,
+                      title: 'Überzeugt ein Angebot? Umzugsfirma direkt beauftragen',
+                      description: 'Sie entscheiden – buchen Sie, wenn ein Angebot zu Ihnen passt.',
+                    },
+                  ].map((item) => (
+                    <div key={item.step} className="flex items-start gap-3">
+                      <span
+                        className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-bold text-white"
+                        aria-hidden
+                      >
+                        {item.step}
+                      </span>
                       <div>
-                        <p className="font-semibold text-gray-900">{feature.title}</p>
-                        <p className="text-sm text-gray-600">{feature.description}</p>
+                        <p className="font-semibold text-gray-900 leading-snug">{item.title}</p>
+                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
                       </div>
-                  </div>
-                ))}
+                    </div>
+                  ))}
                 </div>
               </div>
               </div>
@@ -521,17 +545,17 @@ const UmzugsfirmaVergleichenPageClient = () => {
             ))}
           </div>
 
-          {/* Vorteile von Vergleichsplattformen */}
+          {/* Vorteile Online-Offerten.ch */}
           <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Vorteile von Vergleichsplattformen gegenüber eigenständiger Suche</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Vorteile mit Online-Offerten.ch gegenüber eigenständiger Suche</h3>
             <p className="text-body mb-4">
-              Eine Vergleichsplattform spart Ihnen die zeitaufwändige Recherche im Internet. Statt einzelne Unternehmen anzurufen und Informationen zusammenzutragen, erhalten Sie mit einer einzigen Anfrage mehrere vergleichbare Offerten. Die geprüften Anbieter sind regional aktiv, verfügen über einen festen Standort in der Schweiz und sind auf Umzüge in Ihrer Region spezialisiert.
+              <strong>Online-Offerten.ch</strong> spart Ihnen die zeitaufwändige Recherche im Internet. Statt einzelne Unternehmen anzurufen und Informationen zusammenzutragen, erhalten Sie mit einer einzigen Anfrage mehrere vergleichbare Offerten. Die von uns vermittelten geprüften Anbieter sind regional aktiv, verfügen über einen festen Standort in der Schweiz und sind auf Umzüge in Ihrer Region spezialisiert.
             </p>
             <p className="text-body mb-4">
-              Viele Plattformen bieten zusätzlich Bewertungen und Erfahrungsberichte von früheren Kunden, was Ihnen bei der Auswahl hilft. Auch die Möglichkeit, gezielt nach Umzugsfirmen in Ihrer Region oder mit speziellen Zusatzleistungen wie <Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-medium">Endreinigung</Link> oder Montageservice zu filtern, macht die Suche einfacher.
+              Bei uns finden Sie zudem Bewertungen und Erfahrungsberichte früherer Kunden, die Ihnen bei der Auswahl helfen. Zusätzlich können Sie auf Online-Offerten.ch gezielt nach Umzugsfirmen in Ihrer Region oder mit speziellen Zusatzleistungen wie <Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-medium">Endreinigung</Link> oder Montageservice filtern – so wird die Suche für Sie einfacher.
             </p>
             <p className="text-body">
-              Insgesamt sind Vergleichsplattformen ein wertvolles Werkzeug, um Umzugsservices in der Schweiz effizient und sicher zu vergleichen und den besten Anbieter für Ihren Umzug zu finden.
+              So vergleichen Sie mit Online-Offerten.ch Umzugsservices in der Schweiz effizient und sicher und finden den passenden Anbieter für Ihren Umzug.
                     </p>
                   </div>
             </div>
@@ -545,7 +569,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             Kostenübersicht
           </div>
           <h2 className="heading-2 !mt-0">
-            Kostenübersicht nach Wohnungsgrösse
+            Umzugspreis nach Wohnungsgrösse
             </h2>
           <p className="text-body mb-8">
             Die <Link href="/umzugsfirma/umzugskosten" className="text-green-700 hover:text-green-800 underline font-medium">Umzugskosten in der Schweiz</Link> hängen von mehreren Faktoren ab. Die folgende Übersicht zeigt typische Preisbereiche:
@@ -1096,7 +1120,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl text-left">
             <h2 className="heading-2-white">
-              Jetzt kostenlose Offerten anfordern
+              Jetzt Umzugsofferten vergleichen
             </h2>
 
             {/* Search Form */}
