@@ -4,6 +4,9 @@ Allow: /
 # Sitemap
 Sitemap: https://online-offerten.ch/sitemap.xml
 
+# API-Routen (z. B. Tracking) nicht indexieren
+Disallow: /api/
+
 # Disallow admin and private routes
 Disallow: /admin-dashboard
 Disallow: /partner/dashboard

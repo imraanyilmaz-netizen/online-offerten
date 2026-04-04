@@ -54,7 +54,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           "@type": "Service",
           "name": "Umzugsfirmen vergleichen in der Schweiz: Bis zu 5 kostenlose Umzugsofferten",
           "serviceType": "Umzugsfirma Vergleichsportal",
-          "description": "Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen. Unverbindlich, transparent, in wenigen Minuten.",
+          "description": "Umzugsfirmen in der Schweiz vergleichen: Bis zu 5 kostenlose Umzugsofferten von regionalen Umzugsfirmen – schnell, unverbindlich, transparent. Jetzt Offerten einholen.",
           "provider": {
             "@type": "Organization",
             "name": "Online-Offerten.ch",

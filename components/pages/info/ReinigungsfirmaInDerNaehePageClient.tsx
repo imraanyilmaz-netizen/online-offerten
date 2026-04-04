@@ -13,6 +13,7 @@ import {
   ArrowRight, Zap,
   ChevronRight as ChevronRightIcon
 } from 'lucide-react'
+import { REINIGUNGSFIRMA_STAEDTE } from '@/components/pages/info/reinigungsfirmaStaedte'
 
 const ReinigungsfirmaInDerNaehePageClient = () => {
   const router = useRouter()
@@ -48,7 +49,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
           "@type": "Service",
           "name": "Reinigungsfirma in der Nähe finden",
           "serviceType": "Reinigungsservice",
-          "description": "Finden Sie die besten lokalen Reinigungsunternehmen. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Reinigungsanbietern in Ihrer Region für Büroreinigung, Haushaltsreinigung und mehr.",
+          "description": "Reinigungsfirma in der Schweiz vergleichen: Umzugsreinigung, Endreinigung, Wohnungsreinigung und Büroreinigung. Kostenlose Reinigungsofferten von geprüften Reinigungsdiensten – für Privat und Gewerbe.",
           "provider": {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
@@ -125,6 +126,30 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 "@type": "Answer",
                 "text": "Wir decken die gesamte Schweiz ab – von Grossstädten wie Zürich und Bern bis zu ländlichen Gemeinden. Unser Netzwerk wächst kontinuierlich."
               }
+            },
+            {
+              "@type": "Question",
+              "name": "Was kostet eine Umzugsreinigung oder Endreinigung?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Die Kosten hängen von Fläche, Aufwand, Region und Leistungsumfang ab – etwa bei Umzugsreinigung mit Abnahmegarantie. Über Online-Offerten.ch vergleichen Sie mehrere Reinigungsofferten parallel und sehen marktübliche Preise für Ihre konkrete Anfrage."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wie funktioniert das Einholen einer Reinigungsofferte?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sie beschreiben Ihr Projekt einmal im Formular: Art der Reinigung, Ort und Zeitfenster. Wir leiten Ihre Anfrage an passende Reinigungsfirmen weiter. Die Offerten sind für Sie kostenlos und unverbindlich."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Gibt es eine Endreinigung mit Abnahmegarantie?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Viele Partner bieten bei der Wohnungsübergabe eine Endreinigung mit Abnahmegarantie: Bei Beanstandung wird nachgebessert, sofern das im Leistungsumfang vereinbart ist. Fordern Sie dies in Ihrer Offertenanfrage explizit an."
+              }
             }
           ]
         }
@@ -180,6 +205,18 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
     {
       q: "In welchen Regionen der Schweiz ist der Service verfügbar?",
       a: "Wir decken die gesamte Schweiz ab – von Grossstädten wie Zürich und Bern bis zu ländlichen Gemeinden. Unser Netzwerk wächst kontinuierlich."
+    },
+    {
+      q: "Was kostet eine Umzugsreinigung oder Endreinigung?",
+      a: "Die Kosten hängen von Fläche, Aufwand, Region und Leistungsumfang ab – etwa bei Umzugsreinigung mit Abnahmegarantie. Über Online-Offerten.ch vergleichen Sie mehrere Reinigungsofferten parallel und sehen marktübliche Preise für Ihre konkrete Anfrage."
+    },
+    {
+      q: "Wie funktioniert das Einholen einer Reinigungsofferte?",
+      a: "Sie beschreiben Ihr Projekt einmal im Formular: Art der Reinigung, Ort und Zeitfenster. Wir leiten Ihre Anfrage an passende Reinigungsfirmen weiter. Die Offerten sind für Sie kostenlos und unverbindlich."
+    },
+    {
+      q: "Gibt es eine Endreinigung mit Abnahmegarantie?",
+      a: "Viele Partner bieten bei der Wohnungsübergabe eine Endreinigung mit Abnahmegarantie: Bei Beanstandung wird nachgebessert, sofern das im Leistungsumfang vereinbart ist. Fordern Sie dies in Ihrer Offertenanfrage explizit an."
     }
   ]
 
@@ -216,7 +253,12 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 Reinigungsfirma in der Nähe finden – Kostenlose Offerten vergleichen
               </h1>
               <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
-                Vergleichen Sie bis zu 5 Offerten von geprüften Reinigungsfirmen in Ihrer Region – kostenlos und unverbindlich.
+                Ob{' '}
+                <strong className="font-semibold text-gray-800">Umzugsreinigung</strong>,{' '}
+                <strong className="font-semibold text-gray-800">Endreinigung</strong> mit Abnahmegarantie,{' '}
+                <strong className="font-semibold text-gray-800">Wohnungsreinigung</strong> bei Auszug oder{' '}
+                <strong className="font-semibold text-gray-800">Büroreinigung</strong>: Beschreiben Sie Ihr Projekt einmal und holen Sie bis zu fünf{' '}
+                <strong className="font-semibold text-gray-800">Reinigungsofferten</strong> von geprüften Anbietern ein – kostenlos, unverbindlich, in der ganzen Schweiz.
               </p>
 
               {/* Reinigung Type Buttons */}
@@ -358,10 +400,10 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 Das Problem: Zuverlässige Reinigungsfirmen in der Nähe zu finden ist zeitaufwändig und schwierig
               </h2>
               <p className="text-body mb-6">
-                Die Suche nach einer passenden Reinigungsfirma in der Nähe kostet Zeit und Nerven. Dutzende Anbieter versprechen Qualität und Zuverlässigkeit, doch welches Reinigungsunternehmen hält wirklich, was es verspricht? Bewertungen auf Google liefern oft ein unvollständiges Bild, und persönliche Empfehlungen sind nicht immer verfügbar.
+                Wer eine <strong>Reinigungsfirma</strong> oder <strong>Reinigungsdienste in der Nähe</strong> sucht – etwa für <strong>Umzugsreinigung</strong>, <strong>Endreinigung</strong> oder <strong>Wohnungsabgabe</strong> – stösst auf unüberschaubar viele Treffer. Dutzende Anbieter versprechen Qualität; doch welches Reinigungsunternehmen liefert fairen Preis und klare Offerten? Bewertungen allein ersetzen keinen direkten <strong>Preisvergleich</strong>, und Einzelanfragen kosten viel Zeit.
               </p>
               <p className="text-body">
-                Online-Offerten.ch löst dieses Problem als neutrale Vergleichsplattform für die Schweiz. Statt selbst stundenlang zu recherchieren, beschreiben Sie einmalig Ihr Reinigungsprojekt – und erhalten direkt mehrere Angebote von regionalen Reinigungsfirmen. Die Anfrage ist <strong>kostenlos und unverbindlich</strong>, sodass Sie ohne Risiko die beste Wahl für Ihre Bedürfnisse treffen können.
+                Online-Offerten.ch bündelt Ihre Anfrage: Statt jede Putzfirma einzeln zu kontaktieren, erhalten Sie mehrere <strong>Reinigungsofferten</strong> von geprüften Partnern – passend zu Ihrer Region und Ihrem Auftrag. So vergleichen Sie <strong>Reinigungskosten</strong> und Leistungen transparent, ohne Verpflichtung zum Abschluss.
               </p>
             </div>
             <div>
@@ -474,10 +516,10 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-10">
             <h2 className="heading-2">
-              So funktioniert die Offerten-Anfrage
+              In 3 Schritten die besten Reinigungsfirmen Ihrer Region finden
             </h2>
             <p className="text-body">
-              In drei einfachen Schritten finden Sie die passende Reinigungsfirma für Ihr Projekt:
+              So funktioniert die Offerten-Anfrage – von der Beschreibung bis zum Vergleich der Angebote:
             </p>
           </div>
 
@@ -534,6 +576,27 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
         </div>
       </section>
 
+      {/* Städte-Landings (Mitte der Seite, nach Ablauf-Erklärung) */}
+      <section className="py-10 md:py-12 bg-gradient-to-b from-white to-gray-50 border-y border-gray-100">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
+          <h2 className="heading-2 !mt-0 mb-3">Reinigungsfirma in Ihrer Stadt</h2>
+          <p className="text-body mb-6 max-w-3xl">
+            Regionale Informationen und kostenlose Offerten – wählen Sie Ihre Stadt in der Schweiz.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {REINIGUNGSFIRMA_STAEDTE.map(({ label, slug }) => (
+              <Link
+                key={slug}
+                href={`/reinigungsfirma/${slug}`}
+                className="inline-flex items-center px-4 py-2 rounded-full border-2 border-gray-200 bg-white text-gray-800 font-medium text-sm hover:border-blue-500 hover:bg-blue-50 transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Reinigungsdienstleistungen Section */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -542,7 +605,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               Welche Reinigungsdienstleistungen finden Sie über unsere Plattform?
             </h2>
             <p className="text-body">
-              Unsere Partner-Reinigungsfirmen decken das gesamte Spektrum professioneller Reinigungsdienstleistungen ab – für Ihr Zuhause wie für Ihr Büro.
+              Von der <strong>Umzugsreinigung</strong> und <strong>Endreinigung mit Abnahmegarantie</strong> über <strong>Wohnungsreinigung</strong> und <strong>Grundreinigung</strong> bis zu <strong>Büroreinigung</strong> und <strong>Baureinigung</strong>: Unsere Partner-Reinigungsfirmen decken das gesamte Spektrum professioneller Reinigungsdienstleistungen ab – für Privathaushalte und Unternehmen in der ganzen Schweiz.
             </p>
           </div>
 
@@ -814,6 +877,39 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ratgeber: Suchanfragen & Absichten (hilfreicher Inhalt, kein Keyword-Stuffing) */}
+      <section
+        className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white border-t border-gray-100"
+        aria-labelledby="reinigungsfirma-ratgeber-heading"
+      >
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
+          <h2 id="reinigungsfirma-ratgeber-heading" className="heading-2 mb-6">
+            Von der Google-Suche zur passenden Reinigungsfirma
+          </h2>
+          <div className="max-w-4xl space-y-5 text-body">
+            <p>
+              Viele Menschen suchen zuerst nach Begriffen wie <em>Reinigungsfirma in der Nähe</em>,{' '}
+              <em>Umzugsreinigung Offerten</em> oder <em>Endreinigung Preise</em> – und merken erst im
+              Vergleich, wie stark <strong>Reinigungskosten</strong> und Leistungsumfänge variieren. Eine
+              einzige Offerte genügt selten, um ein faires Preis-Leistungs-Verhältnis einzuschätzen.
+            </p>
+            <p>
+              Mit einer strukturierten Anfrage bei Online-Offerten.ch beschreiben Sie Ihr Vorhaben einmal
+              (z.&nbsp;B. Wohnungsgrösse, Termin, Abnahmegarantie ja/nein). Anschliessend erhalten Sie
+              parallel mehrere <strong>Reinigungsofferten</strong> – ideal, wenn Sie{' '}
+              <strong>Umzug und Reinigung</strong> koordinieren oder kurzfristig eine{' '}
+              <strong>Wohnungsendreinigung</strong> brauchen.
+            </p>
+            <p>
+              Für lokale Informationen zu einzelnen Städten nutzen Sie den Abschnitt{' '}
+              <strong>Reinigungsfirma in Ihrer Stadt</strong> weiter oben auf dieser Seite; für die ganze
+              Schweiz reicht Ihre zentrale Offertenanfrage über unser Formular – unverbindlich und ohne
+              Kosten für Sie.
+            </p>
           </div>
         </div>
       </section>

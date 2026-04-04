@@ -15,9 +15,11 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+// Standard-Metadaten = Startseite; einzelne Routen überschreiben mit eigenem `metadata`.
 export const metadata: Metadata = {
-  title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung | Online-Offerten.ch',
-  description: 'Kostenlose Offerten für Umzug, Reinigung & Renovierung vergleichen. Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region. Unverbindlich & transparent.',
+  title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
+  description:
+    'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
   authors: [{ name: 'Online-Offerten.ch' }],
   creator: 'Online-Offerten.ch',
   publisher: 'Online-Offerten.ch',
@@ -27,21 +29,23 @@ export const metadata: Metadata = {
     locale: 'de_CH',
     url: 'https://online-offerten.ch',
     siteName: 'Online-Offerten.ch',
-    title: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
-    description: 'Bis zu 40% sparen mit geprüften Firmen aus Ihrer Region',
+    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
+    description:
+      'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
     images: [
       {
         url: 'https://online-offerten.ch/image/online-offerten.webp',
         width: 1200,
         height: 630,
-        alt: 'Offerten vergleichen - Kostenlose Offerten für Umzug & Reinigung',
+        alt: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Offerten vergleichen - Kostenlose Offerten',
-    description: 'Bis zu 40% sparen mit geprüften Firmen',
+    title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
+    description:
+      'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
   robots: {
