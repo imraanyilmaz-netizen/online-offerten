@@ -17,9 +17,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // --- Homepage ---
     { url: `${BASE_URL}/` },
 
-    // --- General pages ---
+    // --- General pages (/login nicht: robots disallow → nicht indexieren via Sitemap) ---
     { url: `${BASE_URL}/kontakt` },
-    { url: `${BASE_URL}/login` },
     { url: `${BASE_URL}/kostenlose-offerte-anfordern` },
     { url: `${BASE_URL}/kunden-bewertungen` },
     { url: `${BASE_URL}/offerten-portal` },
@@ -95,6 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // --- Reinigung main service pages ---
     { url: `${BASE_URL}/reinigung` },
     { url: `${BASE_URL}/reinigung/umzugsreinigung` },
+    { url: `${BASE_URL}/reinigung/endreinigung` },
     { url: `${BASE_URL}/reinigung/wohnungsreinigung` },
     { url: `${BASE_URL}/reinigung/bueroreinigung` },
     { url: `${BASE_URL}/reinigung/grundreinigung` },

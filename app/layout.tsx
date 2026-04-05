@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Suspense } from 'react'
-import Script from 'next/script'
 import './globals.css'
 import { AuthProvider } from '@/contexts/SupabaseAuthContext'
 import { Toaster } from '@/components/ui/toaster'
 import AppClient from '@/components/AppClient'
 import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper'
-import { SpeedInsights } from '@vercel/speed-insights/next'
-
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
@@ -19,7 +16,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
   description:
-    'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
+    'Vergleichen Sie kostenlos regionale Umzugsfirmen, Malerfirmen und Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
   authors: [{ name: 'Online-Offerten.ch' }],
   creator: 'Online-Offerten.ch',
   publisher: 'Online-Offerten.ch',
@@ -31,22 +28,15 @@ export const metadata: Metadata = {
     siteName: 'Online-Offerten.ch',
     title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
     description:
-      'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
-    images: [
-      {
-        url: 'https://online-offerten.ch/image/online-offerten.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-      },
-    ],
+      'Vergleichen Sie kostenlos regionale Umzugsfirmen, Malerfirmen und Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
+    /* og:image kommt aus app/opengraph-image.tsx (PNG, Meta/WhatsApp-kompatibel) */
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
     description:
-      'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
-    images: ['https://online-offerten.ch/image/online-offerten.webp'],
+      'Vergleichen Sie kostenlos regionale Umzugsfirmen, Malerfirmen und Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
+    /* twitter:image kommt aus app/twitter-image.tsx */
   },
   robots: {
     index: true,
@@ -89,41 +79,14 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Google Tag Manager — nur in Production */}
-        {isProduction && (
-          <Script
-            id="google-tag-manager"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `(function(w,d,s,l,i){
-              if(w.location.hostname!=='online-offerten.ch'&&w.location.hostname!=='www.online-offerten.ch')return;
-              w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-PNCCCGC5');`,
-            }}
-          />
-        )}
+        {/* GTM: Einwilligung → components/ConsentGtmLoader.tsx */}
       </head>
       <body className={inter.className}>
-        {/* Google Tag Manager (noscript) — nur in Production */}
-        {isProduction && (
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-PNCCCGC5"
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-        )}
         <AuthProvider>
           <ErrorBoundaryWrapper>
             <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
               <AppClient>
                 {children}
-                <SpeedInsights />
               </AppClient>
             </Suspense>
           </ErrorBoundaryWrapper>

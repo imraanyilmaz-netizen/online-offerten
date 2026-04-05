@@ -45,6 +45,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     '/reinigung/hausreinigung',
     '/reinigung/bueroreinigung',
     '/reinigung/umzugsreinigung',
+    '/reinigung/endreinigung',
     '/reinigung/unterhaltsreinigung',
     '/reinigung/grundreinigung',
     '/reinigung/baureinigung',

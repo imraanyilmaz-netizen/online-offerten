@@ -34,6 +34,7 @@ const Footer = React.memo(() => {
     { to: '/reinigung/wohnungsreinigung', text: 'Wohnungsreinigung' },
     { to: '/reinigung/hausreinigung', text: 'Hausreinigung' },
     { to: '/reinigung/bueroreinigung', text: 'Büroreinigung' },
+    { to: '/reinigung/endreinigung', text: 'Endreinigung' },
     { to: '/reinigung/umzugsreinigung', text: 'Umzugsreinigung' },
     { to: '/reinigung/unterhaltsreinigung', text: 'Unterhaltsreinigung' },
     { to: '/reinigung/fensterreinigung', text: 'Fensterreinigung' },

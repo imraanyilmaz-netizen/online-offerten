@@ -21,31 +21,25 @@ import {
 
 export const metadata: Metadata = {
   title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-  description: 'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
+  description:
+    'Vergleichen Sie kostenlos regionale Umzugsfirmen, Malerfirmen und Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
   alternates: {
     canonical: 'https://online-offerten.ch/',
   },
   openGraph: {
     title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-    description: 'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
+    description:
+      'Vergleichen Sie kostenlos regionale Umzugsfirmen, Malerfirmen und Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
     url: 'https://online-offerten.ch/',
     siteName: 'Online-Offerten.ch',
-    images: [
-      {
-        url: 'https://online-offerten.ch/image/online-offerten.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-      },
-    ],
     locale: 'de_CH',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Offerten vergleichen & passende Anbieter in der Schweiz finden',
-    description: 'Vergleichen Sie kostenlos regionale ✓ Umzugsfirmen, ✓ Malerfirmen und ✓ Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
-    images: ['https://online-offerten.ch/image/online-offerten.webp'],
+    description:
+      'Vergleichen Sie kostenlos regionale Umzugsfirmen, Malerfirmen und Reinigungsfirmen für Ihren Umzug, Ihre Malerarbeiten oder Ihre Reinigung.',
   },
   robots: {
     index: true,

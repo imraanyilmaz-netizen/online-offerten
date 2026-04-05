@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect, Suspense, useState, useMemo } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -7,6 +7,10 @@ import { HelmetProvider } from 'react-helmet-async'
 import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
+import CookieConsentBanner from '@/components/CookieConsentBanner'
+import ConsentGtmLoader from '@/components/ConsentGtmLoader'
+import VercelInsightsWithConsent from '@/components/VercelInsightsWithConsent'
+import { useCookieConsent } from '@/hooks/useCookieConsent'
 // logoUrl import kaldırıldı - Organization schema'sı sadece ana sayfada
 // Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
 import dynamic from 'next/dynamic'
@@ -34,6 +38,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isNavigating, setIsNavigating] = useState(false)
+  const { analyticsAllowed, ready: consentReady } = useCookieConsent()
 
   // Router cache refresh - REMOVED to prevent blank page issues
   // Next.js App Router handles cache automatically
@@ -67,17 +72,18 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Google Analytics
+  // Google Analytics – nur bei Cookie-Einwilligung (Analytics)
   useEffect(() => {
+    if (!consentReady || !analyticsAllowed) return
     initializeGA().then(() => {
       if (ReactGA && TRACKING_ID && TRACKING_ID !== "G-XXXXXXXXXX") {
-        ReactGA.send({ 
-          hitType: "pageview", 
-          page: pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '')
+        ReactGA.send({
+          hitType: "pageview",
+          page: pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : ''),
         })
       }
     })
-  }, [pathname, searchParams])
+  }, [pathname, searchParams, consentReady, analyticsAllowed])
 
   // Canonical URL redirect
   useEffect(() => {
@@ -211,6 +217,9 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   return (
     <HelmetProvider>
       <I18nextProvider i18n={i18n}>
+        <ConsentGtmLoader />
+        <CookieConsentBanner />
+        <VercelInsightsWithConsent />
         <ScrollToTop />
         <Layout>
           <Suspense fallback={
