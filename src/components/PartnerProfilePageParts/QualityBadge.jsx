@@ -1,24 +1,26 @@
-﻿import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Star } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { Badge } from '@/components/ui/badge';
 
-const QualityBadge = ({ titleKey, descriptionKey, icon: Icon = Star, iconColor = "text-amber-500" }) => {
-  const { t } = useTranslation('partnerProfilePage');
+const getBadgeClass = (tier) => {
+  switch (tier) {
+    case 'gold':
+      return 'bg-yellow-400 text-yellow-900 border-yellow-500';
+    case 'silver':
+      return 'bg-gray-300 text-gray-800 border-gray-400';
+    case 'bronze':
+      return 'bg-yellow-600 text-white border-yellow-700';
+    default:
+      return 'bg-slate-200 text-slate-800 border-slate-300';
+  }
+};
+
+const QualityBadge = ({ tier }) => {
+  if (!tier) return null;
+  const label = `${String(tier).charAt(0).toUpperCase()}${String(tier).slice(1)} Partner`;
   return (
-    <Card className="shadow-lg rounded-xl border border-gray-200 bg-white">
-      <CardContent className="p-4">
-        <div className="flex items-center gap-4">
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${iconColor.replace('text-', 'bg-').replace('-500', '-100')}`}>
-            <Icon size={22} className={iconColor} />
-          </div>
-          <div>
-            <h4 className="text-base font-bold text-gray-800">{t(titleKey)}</h4>
-            <p className="text-sm text-gray-600">{t(descriptionKey)}</p>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+    <Badge className={`text-xs font-bold uppercase tracking-wider ${getBadgeClass(tier)}`}>
+      {label}
+    </Badge>
   );
 };
 

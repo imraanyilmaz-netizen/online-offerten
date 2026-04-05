@@ -1,7 +1,7 @@
-﻿import React from 'react';
+import React from 'react';
     import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
     import StarRating from '@/components/PartnerProfilePageParts/StarRating';
-    import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
     import { UserCircle2, Star } from 'lucide-react';
 
     const DetailedStarRating = ({ label, rating }) => {
@@ -40,7 +40,7 @@
     };
 
     const ReviewCard = ({ review, formatDate }) => {
-      const { t } = useTranslation('partnerProfilePage');
+      const { t } = useStaticT('partnerProfilePage');
 
       return (
         <Card className="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">

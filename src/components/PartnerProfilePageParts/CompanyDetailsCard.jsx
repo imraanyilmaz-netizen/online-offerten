@@ -1,7 +1,7 @@
-﻿import React from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building, Users, ShieldCheck, FileText, Calendar, CheckCircle, XCircle } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 
 const DetailItem = ({ icon: Icon, label, value }) => (
   <div className="flex items-start text-gray-700 group">
@@ -32,7 +32,7 @@ const BooleanDetailItem = ({ icon: Icon, label, value }) => {
 
 
 const CompanyDetailsCard = ({ partner }) => {
-  const { t } = useTranslation('partnerProfilePage');
+  const { t } = useStaticT('partnerProfilePage');
 
   const hasDetails = partner.founding_year || partner.employee_count || partner.has_liability_insurance !== undefined || partner.commercial_register_number;
 

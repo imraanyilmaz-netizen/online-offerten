@@ -385,9 +385,12 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
 };
 
 
+type QuoteRow = { status?: string | null } & Record<string, unknown>
+
 const QuoteStatusPageClient = () => {
   const params = useParams();
-  const quoteId = params?.quoteId || params?.id;
+  const quoteIdRaw = params?.quoteId || params?.id;
+  const quoteId = Array.isArray(quoteIdRaw) ? quoteIdRaw[0] : quoteIdRaw;
   const [quote, setQuote] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -406,13 +409,15 @@ const QuoteStatusPageClient = () => {
         return;
       }
       try {
-        const { error: rpcError } = await supabase.rpc('confirm_email', { p_quote_id: quoteId });
+        const { error: rpcError } = await supabase.rpc('confirm_email', {
+          p_quote_id: quoteId as string,
+        } as any);
 
         if (rpcError) {
           console.warn('Could not update email confirmation status via RPC:', rpcError.message);
         }
 
-        const { data: quoteData, error: fetchError } = await supabase
+        const { data: quoteRaw, error: fetchError } = await supabase
           .from('quotes')
           .select('*')
           .eq('id', quoteId)
@@ -421,6 +426,7 @@ const QuoteStatusPageClient = () => {
         if (fetchError) {
           throw new Error('Anfrage nicht gefunden oder ein Fehler ist aufgetreten.');
         }
+        const quoteData = quoteRaw as QuoteRow;
         setQuote(quoteData);
 
         if (quoteData.status === 'sold_out' || quoteData.status === 'quota_filled' || quoteData.status === 'approved') {

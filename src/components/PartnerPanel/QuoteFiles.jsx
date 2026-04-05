@@ -1,11 +1,11 @@
-﻿import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { useStaticT } from '@/lib/staticTranslate';
 // framer-motion removed - CSS for better INP
 import { Paperclip, File as FileIcon, Download, Image as ImageIcon } from 'lucide-react';
 import { parseFileUrls } from '@/lib/utils';
 
 const QuoteFiles = ({ fileUrls }) => {
-  const { t } = useTranslation('partnerDashboard');
+  const { t } = useStaticT('partnerDashboard');
   
   const files = parseFileUrls(fileUrls);
 

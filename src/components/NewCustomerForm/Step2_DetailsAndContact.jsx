@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation, Trans } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -393,7 +393,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
 };
 
 const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
   return (
     <Card className="w-full bg-white shadow-md border-gray-200 rounded-lg overflow-hidden">
       <CardHeader className="bg-gradient-to-r from-emerald-50/70 via-emerald-50/40 to-slate-50 p-3 border-b border-emerald-100">
@@ -419,7 +419,7 @@ const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
 };
 
 const HowFoundButton = ({ id, labelKey, icon, selected, onClick }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     return (
       <Button
         type="button"
@@ -435,7 +435,7 @@ const HowFoundButton = ({ id, labelKey, icon, selected, onClick }) => {
 };
 
 const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     return (
       <Button
         type="button"
@@ -458,7 +458,7 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
 };
 
 const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, handleCheckboxChange, handleRadioGroupChange, handleHowFoundChange, handleQuotesWantedChange, errors }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
   const isMoveService = formData.service === 'umzug' && formData.umzugArt !== 'lagerung';
 
   const salutationOptions = [

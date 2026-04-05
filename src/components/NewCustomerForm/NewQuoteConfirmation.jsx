@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import React from 'react';
 // framer-motion removed - CSS transitions for better INP
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { Button } from '@/components/ui/button';
 import { MailCheck, CheckCircle2 as CheckCircle, ArrowLeft, PartyPopper, Link2, ListChecks, BookOpen, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const NewQuoteConfirmation = ({ onResetForm }) => {
-  const { t, i18n } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
 
   // Use existing paths (these pages currently exist only in German)
   const checklistenLink = '/umzugsfirma/checklists';

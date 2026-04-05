@@ -303,7 +303,6 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
 
   return (
     <div
-      layout
       className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
     >
       <div className="p-5 md:p-6">

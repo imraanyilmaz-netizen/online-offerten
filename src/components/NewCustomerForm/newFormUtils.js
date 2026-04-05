@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { getCleaningAreaSqmLabel, CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import { toast } from '@/components/ui/use-toast';
 import { v4 as uuidv4 } from 'uuid';
-import i18n from '@/i18n';
+import { tNewCustomerFormDe, translate } from '@/lib/deTranslations';
 
 export const getCityFromZip = async (zip, t) => {
   if (!zip || zip.length < 4) {
@@ -62,17 +62,8 @@ export const getCityFromZip = async (zip, t) => {
 };
 
 
-export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null) => {
-  // Admin Panel'e Almanca olarak gönderilmeli, bu yüzden Almanca çevirileri kullan
-  // i18nInstance verilirse onu kullan, yoksa global i18n'i kullan
-  const i18nToUse = i18nInstance || i18n;
-  
-  // Almanca çevirileri almak için getFixedT kullan
-  // Bu, mevcut dil ne olursa olsun Almanca çevirileri döndürür
-  const tGerman = i18nToUse.getFixedT('de', 'newCustomerForm');
-  
-  // Admin Panel'e gönderilecek tüm çeviriler için Almanca kullan
-  const tAdmin = tGerman;
+export const submitNewQuoteToSupabase = async (formData) => {
+  const tAdmin = tNewCustomerFormDe;
   let finalServiceType = formData.service;
   let serviceSpecificDetails = [];
 
@@ -250,7 +241,13 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     'entsorgung': tAdmin('step1.entsorgungTypeEntsorgungLabel'),
     'maler_privat': tAdmin('step1.painterTypePrivateLabel'),
     'maler_gewerbe': tAdmin('step1.painterTypeCommercialLabel'),
-    ...Object.fromEntries(Object.keys(tAdmin('step1.cleaningOptions', { returnObjects: true })).map(key => [key, tAdmin(`step1.cleaningOptions.${key}`)]))
+    ...Object.fromEntries(
+      (() => {
+        const raw = translate('newCustomerForm', 'step1.cleaningOptions', { returnObjects: true });
+        const keys = raw && typeof raw === 'object' && !Array.isArray(raw) ? Object.keys(raw) : [];
+        return keys.map((key) => [key, tNewCustomerFormDe(`step1.cleaningOptions.${key}`)]);
+      })()
+    )
   }[formData.umzugArt] || formData.umzugArt : null;
 
   const specialTransportTypeLabel = formData.special_transport_type ? {
@@ -306,7 +303,7 @@ export const submitNewQuoteToSupabase = async (formData, t, i18nInstance = null)
     // First try roomsOption (for detailed room options like "3_zimmer_wohnung", "3_zimmer_einfamilienhaus")
     // Handle dots in value by using the value as-is (i18next handles dots in keys)
     const roomsOptionKey = `step2.roomsOption.${value}`;
-    let label = tAdmin(roomsOptionKey, { defaultValue: roomsOptionKey });
+    let label = tAdmin(roomsOptionKey);
     // Check if translation was found (if it returns the key itself, translation not found)
     if (label && label !== roomsOptionKey) return label;
     

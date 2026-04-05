@@ -1,11 +1,11 @@
-﻿import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ArrowLeft, Loader2 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { toast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -142,7 +142,7 @@ const CheckoutForm = React.lazy(async () => {
 });
 
 const CreditTopUpModal = ({ open, onOpenChange, partnerId, onCreditUpdate }) => {
-  const { t } = useTranslation('partnerDashboard');
+  const { t } = useStaticT('partnerDashboard');
   const router = useRouter();
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
@@ -190,7 +190,7 @@ const CreditTopUpModal = ({ open, onOpenChange, partnerId, onCreditUpdate }) => 
   const handlePaymentSuccess = () => {
     toast({
       title: t('toast.purchaseSuccessTitle'),
-      description: t('Guthaben erfolgreich aufgeladen!'), // Add this translation
+      description: t('creditSuccessDescription'),
       variant: 'success',
     });
     onCreditUpdate();

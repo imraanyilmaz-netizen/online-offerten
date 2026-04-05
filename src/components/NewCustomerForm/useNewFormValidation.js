@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 const useNewFormValidation = (formData) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
 
   const validate = (step = 'all') => {
     let errors = {};

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -17,6 +17,11 @@ import { supabase } from '@/lib/supabaseClient';
 import PaymentModal from '@/components/PartnerPanel/PaymentModal';
 
 const quickAmounts = [50, 100, 200];
+
+/** app_settings.value JSON for key `topup_settings` (DB types may omit this table) */
+type TopupSettingsRow = {
+  value: { min_amount?: string | number } | null
+}
 
 const PartnerCreditTopUpPageClient = () => {
   // Removed useTranslation
@@ -55,7 +60,7 @@ const PartnerCreditTopUpPageClient = () => {
 
   useEffect(() => {
     const fetchMinAmount = async () => {
-      const { data, error } = await supabase
+      const { data: raw, error } = await supabase
         .from('app_settings')
         .select('value')
         .eq('key', 'topup_settings')
@@ -68,9 +73,10 @@ const PartnerCreditTopUpPageClient = () => {
         return;
       }
       
-      if (data?.value?.min_amount) {
+      const data = raw as TopupSettingsRow | null
+      if (data?.value?.min_amount != null) {
         // Parse to ensure it's a number
-        const parsedAmount = parseFloat(data.value.min_amount);
+        const parsedAmount = parseFloat(String(data.value.min_amount));
         if (!isNaN(parsedAmount) && parsedAmount > 0) {
           console.log('Min amount from admin settings:', parsedAmount);
           setMinAmount(parsedAmount);

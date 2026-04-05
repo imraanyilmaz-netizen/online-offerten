@@ -27,10 +27,8 @@ interface Review {
   review_text?: string
   service_type?: string
   partner_name?: string
-  partners?: {
-    slug: string
-    company_name: string
-  }
+  /** Supabase nested select returns an array for FK embeds */
+  partners?: { slug: string; company_name: string }[]
 }
 
 interface KundenBewertungenPageClientProps {
@@ -39,6 +37,7 @@ interface KundenBewertungenPageClientProps {
 }
 
 const ReviewCard = ({ review }: { review: Review }) => {
+  const partner = review.partners?.[0]
   const serviceName = getGermanServiceName(review.service_type)
   
   // Exakte Sternfüllung: 4.8 => letzter Stern 80% gefüllt, 4.5 => 50%, 4.0 => 4 volle Sterne
@@ -135,12 +134,12 @@ const ReviewCard = ({ review }: { review: Review }) => {
               {serviceName}
             </Badge>
           )}
-          {review.partners?.slug && (
+          {partner?.slug && (
             <Link 
-              href={`/partner/${review.partners.slug}`}
+              href={`/partner/${partner.slug}`}
               className="text-xs text-gray-500 hover:text-green-600 transition-colors"
             >
-              Für: {review.partner_name || review.partners.company_name}
+              Für: {review.partner_name || partner.company_name}
             </Link>
           )}
           <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">

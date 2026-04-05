@@ -1,0 +1,21 @@
+{
+  "toast": {
+    "purchaseSuccessTitle": "Zahlung erfolgreich",
+    "purchaseErrorTitle": "Zahlung fehlgeschlagen"
+  },
+  "topUpModal": {
+    "processing": "Wird verarbeitet…",
+    "payAmount": "Jetzt bezahlen",
+    "minAmountError": "Mindestbetrag: CHF {{amount}}",
+    "backToDashboard": "Zurück zum Dashboard",
+    "title": "Guthaben aufladen",
+    "description": "Laden Sie Ihr Kontingent auf, um weiterhin Offerten zu erhalten.",
+    "enterAmount": "Betrag (CHF)"
+  },
+  "quoteModal": {
+    "imagesTitle": "Bilder zur Offerte",
+    "filesTitle": "Dateien zur Offerte",
+    "downloadFile": "Herunterladen"
+  },
+  "creditSuccessDescription": "Guthaben erfolgreich aufgeladen!"
+}

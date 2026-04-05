@@ -1,19 +1,6 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import dynamicImport from 'next/dynamic'
-
-// Client-only import - SSR devre dışı (eski SPA mantığı)
-const AdminDashboardPageClient = dynamicImport(
-  () => import('@/components/pages/admin/AdminDashboardPageClient'),
-  { 
-    ssr: false, // SSR'ı tamamen devre dışı bırak
-    loading: () => (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
-      </div>
-    )
-  }
-)
+import AdminDashboardLoader from './AdminDashboardLoader'
 
 // Force dynamic - no static generation for admin panel
 export const dynamic = 'force-dynamic'
@@ -35,9 +22,7 @@ export default function AdminDashboardPage() {
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
       </div>
     }>
-      <AdminDashboardPageClient />
+      <AdminDashboardLoader />
     </Suspense>
   )
 }
-
-

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock } from 'lucide-react';
@@ -15,7 +15,6 @@ const QuoteItem = ({ quote, onAction, actionLabel, actionIcon, renderActions }) 
 
   return (
     <div
-      layout
       className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 hover:bg-slate-50 rounded-lg transition-colors"
     >
       <div className="flex-grow mb-3 sm:mb-0">

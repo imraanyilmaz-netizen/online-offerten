@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect, useCallback, useRef, useMemo, memo } from 'react';
 // framer-motion removed – using CSS transitions for better INP
-import { useTranslation } from 'react-i18next'; // i18n geri eklendi - müşteri formu için
+import { useStaticT } from '@/lib/staticTranslate';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -24,7 +24,7 @@ import { supabase } from '@/lib/supabaseClient';
 const TOTAL_FORM_STEPS = 3;
 
 const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
-  const { t } = useTranslation('newCustomerForm'); // i18n geri eklendi
+  const { t } = useStaticT('newCustomerForm');
   const totalStars = 5;
   const normalizedRating = Math.max(0, Math.min(totalStars, Number(rating) || 0));
 
@@ -52,7 +52,7 @@ const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
 };
 
 const TrustBadge = memo(() => {
-    const { t } = useTranslation('newCustomerForm'); // i18n geri eklendi
+    const { t } = useStaticT('newCustomerForm');
     const [stats, setStats] = useState({ average_rating: 0, review_count: 0 });
     const [loading, setLoading] = useState(true);
 
@@ -134,7 +134,7 @@ const TrustBadge = memo(() => {
 TrustBadge.displayName = 'TrustBadge';
 
 const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" }) => {
-  const { t, i18n } = useTranslation(['newCustomerForm', 'common']); // i18n geri eklendi
+  const { t } = useStaticT('newCustomerForm');
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -871,8 +871,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
 
     setIsLoading(true);
     try {
-      // Admin Panel'e Almanca olarak gönderilmeli, i18n instance'ını geçir
-      const { data, error } = await submitNewQuoteToSupabase(formData, t, i18n);
+      const { data, error } = await submitNewQuoteToSupabase(formData);
       if (error) throw error;
       setIsSubmitted(true);
       

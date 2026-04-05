@@ -1,10 +1,10 @@
-﻿import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { useStaticT } from '@/lib/staticTranslate';
 // framer-motion removed - CSS for better INP
 import { CheckCircle, Star } from 'lucide-react';
 
 const AdvantageItem = ({ textKey, delay }) => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
   return (
     <li
       className="flex items-start py-2"
@@ -16,7 +16,7 @@ const AdvantageItem = ({ textKey, delay }) => {
 };
 
 const Advantages = () => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
 
   return (
     <section className="pt-6 border-t border-gray-200">

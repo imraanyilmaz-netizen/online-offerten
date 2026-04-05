@@ -1,0 +1,19 @@
+{
+  "faq": {
+    "mainTitle": "Häufige Fragen zur Reinigung",
+    "q1": "Was kostet eine professionelle Reinigung?",
+    "a1": "Die Kosten hängen von Fläche, Verschmutzungsgrad und Leistungsumfang ab. Über unser Portal vergleichen Sie kostenlos mehrere Offerten.",
+    "q2": "Welche Kostenfaktoren gibt es?",
+    "a2_intro": "Typische Faktoren sind:",
+    "a2_costs": [
+      "Wohnungs- bzw. Objektgrösse",
+      "Art der Reinigung (z. B. Unterhalts- vs. Grundreinigung)",
+      "Zusatzleistungen wie Fenster oder Küche",
+      "Erreichbarkeit und Ausstattung vor Ort"
+    ],
+    "q3": "Wie wähle ich die richtige Reinigungsfirma?",
+    "a3": "Vergleichen Sie Bewertungen, Leistungsbeschreibungen und Preise. Regionale Anbieter mit Referenzen sind oft die sicherste Wahl.",
+    "q4": "Kann ich mehrere Offerten vergleichen?",
+    "a4": "Ja. Stellen Sie eine Anfrage und erhalten Sie unverbindliche Offerten – ohne Verpflichtung."
+  }
+}

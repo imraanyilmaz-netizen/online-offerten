@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 // framer-motion removed - CSS transitions for better INP
 import { Home, Sparkles, Recycle, Briefcase, ShieldQuestion, Pencil as Piano, VenetianMask, Weight, CheckCircle2, Globe, Truck, Building2, Paintbrush, Bath, Utensils as CookingPot, BedDouble, StepBack as Stairs, Square, Box, Layers, Grid, ChevronDown, Trash2, Archive, Wind, Leaf, Package, ArrowUpDown, ArrowRight } from 'lucide-react';
 import { PiPianoKeysFill } from 'react-icons/pi'; 
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
 
 const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
   
   // Her servis için renk ve icon ayarları
   const serviceConfig = {
@@ -115,7 +115,7 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
 };
 
 const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroupChange, errors }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     const whatToCleanOptions = [
         { id: 'bathroom', labelKey: 'step1.whatToClean.bathroom', icon: <Bath className="w-5 h-5 text-gray-600" /> },
         { id: 'kitchen', labelKey: 'step1.whatToClean.kitchen', icon: <CookingPot className="w-5 h-5 text-gray-600" /> },
@@ -176,7 +176,7 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
 };
 
 const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroupChange, errors }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     const floorTypeOptions = [
         { id: 'carpet', labelKey: 'step1.floorTypes.carpet', icon: <Square className="w-5 h-5 text-gray-600" /> },
         { id: 'parquet_laminate', labelKey: 'step1.floorTypes.parquet_laminate', icon: <Layers className="w-5 h-5 text-gray-600" /> },
@@ -237,7 +237,7 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
 };
 
 const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleCheckboxChange, errors }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     const flaecheOptions = ['bis_50', '50_100', '100_200', '200_500', 'ueber_500'];
     const erreichbarkeitOptions = ['einfach', 'mittel', 'schwierig'];
     const verschmutzungOptions = [
@@ -308,7 +308,7 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
 };
 
 const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     const anzahlOptions = ['1_5', '6_10', '11_20', '21_30', '30_plus'];
     const scopeOptions = ['nur_innenseiten', 'nur_aussenseiten', 'innen_aussen'];
     const zugangOptions = ['einfach', 'aussen_leiter', 'hoehenarbeit', 'spezialgeraet'];
@@ -429,7 +429,7 @@ const CleaningAreaAndExtras = ({ formData, handleSelectChange, handleCheckboxCha
 
 
 const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckboxChange, handleSelectChange, errors, subQuestionsRef }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     const cleaningFrequencyOptions = ['einmalig', 'woechentlich', 'zweiwoechig', 'monatlich'];
     const showGeneralCleaningDetails = false;
     const showFloorCleaningDetails = formData.umzugArt === 'bodenreinigung';
@@ -540,7 +540,7 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
 
 
 const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
   
   const cleaningGroups = {
     residential: ['wohnungsreinigung', 'hausreinigung', 'buero', 'praxisreinigung', 'treppenhausreinigung'],
@@ -596,7 +596,7 @@ const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
 
 
 const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, errors }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     const malerType = formData.umzugArt === 'maler_privat' ? 'privat' : 'gewerbe';
 
     const paintOptions = {
@@ -653,7 +653,7 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
 };
 
 const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     const conditionOptions = [
         { value: 'neubau', labelKey: 'step1.malerCurrentConditionOptions.neubau' },
         { value: 'vorgestrichen', labelKey: 'step1.malerCurrentConditionOptions.vorgestrichen' },
@@ -697,7 +697,7 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
 
 
 const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroupChange, handleChange, handleCheckboxChange, handleAdditionalCleaningChange, handleSelectChange, errors, umzugArtSectionRef }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
   const subQuestionsRef = useRef(null);
 
   useEffect(() => {

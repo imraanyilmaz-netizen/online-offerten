@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import CustomerForm from '@/components/NewCustomerForm';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 
 const QuoteFormPageClient = () => {
-  const { ready } = useTranslation('newCustomerForm');
+  const { ready } = useStaticT('newCustomerForm');
   const [mounted, setMounted] = useState(false);
   
   // Client-side mount kontrolü

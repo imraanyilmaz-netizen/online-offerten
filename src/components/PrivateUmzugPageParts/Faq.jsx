@@ -1,13 +1,12 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
-import { useTranslation, Trans } from 'react-i18next';
-// framer-motion removed - CSS for better INP
+import { useStaticT } from '@/lib/staticTranslate';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from '@/components/ui/button';
 import { HelpCircle, Info, Calculator, ArrowRight } from 'lucide-react';
 
 const FaqItem = ({ qKey, value, children }) => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
   return (
     <AccordionItem value={value} className="border-b border-gray-200 last:border-b-0">
       <AccordionTrigger className="text-left hover:no-underline py-5 px-2 text-base font-semibold text-gray-700 hover:text-green-600 transition-colors">
@@ -29,7 +28,7 @@ const FaqItem = ({ qKey, value, children }) => {
 };
 
 const CostTable = ({ dataKey, captionKey }) => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
   const costs = t(dataKey, { returnObjects: true });
 
   return (
@@ -59,7 +58,7 @@ const CostTable = ({ dataKey, captionKey }) => {
 };
 
 const BulletList = ({ itemsKey, titleKey }) => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
   const items = t(itemsKey, { returnObjects: true });
   return (
     <div className="my-2">
@@ -74,25 +73,22 @@ const BulletList = ({ itemsKey, titleKey }) => {
 };
 
 const Faq = () => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
 
   const faqItems = [
-    { 
-      qKey: "faq.q1", 
+    {
+      qKey: "faq.q1",
       value: "item-1",
       content: (
         <>
           <p>
-            <Trans 
-              i18nKey="faq.a1_intro_linked" 
-              ns="privateUmzugPage"
-              components={{
-                0: <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold" />
-              }}
-            />
+            Die Kosten für einen Privatumzug variieren stark. Eine erste Orientierung bietet unser{' '}
+            <Link href="/umzugsfirma/umzugskosten" className="text-green-600 hover:underline font-semibold">
+              Ratgeber zu Umzugskosten
+            </Link>.
           </p>
           <CostTable dataKey="faq.a1_costs" captionKey="faq.a1_costTableCaption" />
-           <p className="mt-3 text-sm text-gray-600">{t('faq.a1_tip')}</p>
+          <p className="mt-3 text-sm text-gray-600">{t('faq.a1_tip')}</p>
           <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg shadow-sm">
             <div className="flex items-start md:items-center">
               <Calculator className="w-8 h-8 md:w-6 md:h-6 mr-3 text-green-600 flex-shrink-0 mt-1 md:mt-0" />
@@ -108,8 +104,8 @@ const Faq = () => {
         </>
       )
     },
-    { 
-      qKey: "faq.q2", 
+    {
+      qKey: "faq.q2",
       value: "item-2",
       content: (
         <>
@@ -118,26 +114,24 @@ const Faq = () => {
         </>
       )
     },
-    { 
-      qKey: "faq.q3", 
+    {
+      qKey: "faq.q3",
       value: "item-3",
       content: (
         <>
           <p>
-            <Trans 
-              i18nKey="faq.a3_intro_linked" 
-              ns="privateUmzugPage"
-              components={{
-                0: <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold" />
-              }}
-            />
+            Eine strukturierte Planung hilft: Nutzen Sie unsere{' '}
+            <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold">
+              Checklisten
+            </Link>
+            , um Fristen und Aufgaben nicht zu vergessen.
           </p>
           <BulletList itemsKey="faq.a3_points" />
         </>
       )
     },
-    { 
-      qKey: "faq.q4", 
+    {
+      qKey: "faq.q4",
       value: "item-4",
       content: (
         <>
@@ -146,19 +140,17 @@ const Faq = () => {
         </>
       )
     },
-    { 
-      qKey: "faq.q5", 
+    {
+      qKey: "faq.q5",
       value: "item-5",
       content: (
         <>
           <p className="mb-2">
-             <Trans 
-              i18nKey="faq.a5_recommendation_linked" 
-              ns="privateUmzugPage"
-              components={{
-                0: <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold" />
-              }}
-            />
+            Ideal ist eine frühzeitige Buchung – besonders in Hochsaison. Orientieren Sie sich an unseren{' '}
+            <Link href="/umzugsfirma/checklists" className="text-green-600 hover:underline font-semibold">
+              Checklisten
+            </Link>
+            {' '}für einen realistischen Zeitplan.
           </p>
           <BulletList itemsKey="faq.a5_timeline_2months" titleKey="faq.a5_timeline_2months_title" />
           <BulletList itemsKey="faq.a5_timeline_1month" titleKey="faq.a5_timeline_1month_title" />
@@ -168,8 +160,8 @@ const Faq = () => {
         </>
       )
     },
-     { 
-      qKey: "faq.q6", 
+    {
+      qKey: "faq.q6",
       value: "item-6",
       content: (
         <>
@@ -187,10 +179,8 @@ const Faq = () => {
         {t('faq.mainTitle')}
       </h3>
       <Accordion type="single" collapsible className="w-full bg-slate-50 rounded-lg shadow">
-        {faqItems.map((item, index) => (
-           <div
-              key={item.value}
-            >
+        {faqItems.map((item) => (
+          <div key={item.value}>
             <FaqItem qKey={item.qKey} value={item.value}>
               {item.content}
             </FaqItem>

@@ -1,0 +1,92 @@
+{
+  "sidebar": {
+    "quickQuoteTitle": "Weitere Services"
+  },
+  "ctaButton": "Kostenlose Offerten anfordern",
+  "advantagesTitle": "Ihre Vorteile mit Online-Offerten.ch",
+  "advantage1": "Kostenlos und unverbindlich mehrere Offerten vergleichen",
+  "advantage2": "Geprüfte Partner in Ihrer Region",
+  "advantage3": "Zeit sparen mit einer zentralen Anfrage",
+  "advantage4": "Transparente Angaben zu Leistung und Preis",
+  "advantage5": "Digitale Abwicklung – schnell und übersichtlich",
+  "services": {
+    "privatumzug": "Privatumzug",
+    "geschaeftsumzug": "Geschäftsumzug",
+    "internationale": "Internationale Umzüge",
+    "spezialtransporte": "Spezialtransporte",
+    "klaviertransport": "Klaviertransport",
+    "reinigung": "Reinigung",
+    "raeumung": "Räumung & Entsorgung",
+    "malerarbeiten": "Malerarbeiten"
+  },
+  "faq": {
+    "mainTitle": "FAQ zum Privatumzug",
+    "tableHeaderSize": "Wohnungsgrösse",
+    "tableHeaderCost": "Richtpreis (Indikation)",
+    "costHint": "Angaben ohne Gewähr; der effektive Preis hängt von Zubehör, Stockwerk und Zugang ab.",
+    "q1": "Was kostet ein Privatumzug in der Schweiz?",
+    "a1_costTableCaption": "Beispielhafte Richtpreise für reine Transportkosten",
+    "a1_costs": [
+      { "size": "1–1.5 Zimmer", "cost": "ca. CHF 800 – 1 500" },
+      { "size": "2–3 Zimmer", "cost": "ca. CHF 1 200 – 2 500" },
+      { "size": "4–5 Zimmer", "cost": "ca. CHF 2 000 – 4 500" }
+    ],
+    "a1_tip": "Mit einer detaillierten Offerte erhalten Sie verlässlichere Preise als mit Pauschalen aus dem Internet.",
+    "a1_calculator_cta_text": "Nutzen Sie unseren Umzugskosten-Rechner für eine erste Orientierung.",
+    "a1_calculator_cta_button": "Zu den Umzugskosten",
+    "a2_intro": "Der Preis setzt sich typischerweise aus folgenden Faktoren zusammen:",
+    "a2_points": [
+      "Volumen und Gewicht des Umzugsguts",
+      "Distanz zwischen Alt- und Neuwohnung",
+      "Stockwerk und Lift",
+      "Zusatzleistungen (Einpacken, Möbeldemontage, Reinigung)"
+    ],
+    "q2": "Welche Kostenfaktoren gibt es?",
+    "q3": "Wie plane ich den Umzug sinnvoll?",
+    "q4": "Welche Checkliste hilft vor dem Umzug?",
+    "q5": "Wann sollte ich eine Umzugsfirma buchen?",
+    "q6": "Warum mehrere Offerten einholen?",
+    "a3_points": [
+      "Frühzeitig Kartons und Material besorgen",
+      "Möbelliste und Massangaben vorbereiten",
+      "Termine mit Hausverwaltung abstimmen"
+    ],
+    "a4_intro": "Eine Checkliste hilft, nichts zu vergessen – von der Kündigung bis zur Nachsendeauftrag bei der Post.",
+    "a4_checklist": [
+      "Wohnungskündigung und Übergabetermin",
+      "Adressänderungen und Versicherungen",
+      "Strom, Internet, Wasser an/abmelden"
+    ],
+    "a5_timeline_2months_title": "2 Monate vorher",
+    "a5_timeline_2months": [
+      "Umzugsfirma anfragen und Offerten vergleichen",
+      "Erste Kartons packen (Dachboden, Keller)"
+    ],
+    "a5_timeline_1month_title": "1 Monat vorher",
+    "a5_timeline_1month": [
+      "Umzugstermin fixieren",
+      "Freunde oder Helfer koordinieren"
+    ],
+    "a5_timeline_1week_title": "1 Woche vorher",
+    "a5_timeline_1week": [
+      "Restliche Kartons schliessen",
+      "Werkzeug und Schrauben bereitlegen"
+    ],
+    "a5_timeline_movingday_title": "Am Umzugstag",
+    "a5_timeline_movingday": [
+      "Verpflegung und Getränke einplanen",
+      "Schlüsselübergabe koordinieren"
+    ],
+    "a5_timeline_aftermove_title": "Nach dem Umzug",
+    "a5_timeline_aftermove": [
+      "Lampen und Regale montieren",
+      "Adresse überall aktualisieren"
+    ],
+    "a6_intro": "Mehrere Offerten erhöhen die Transparenz und helfen, ein faires Preis-Leistungs-Verhältnis zu finden.",
+    "a6_points": [
+      "Vergleichbare Leistungsbeschreibungen einholen",
+      "Auf Versicherungsschutz achten",
+      "Bewertungen und Referenzen prüfen"
+    ]
+  }
+}

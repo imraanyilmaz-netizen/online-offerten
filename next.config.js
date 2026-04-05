@@ -27,10 +27,12 @@ const nextConfig = {
       },
     ],
   },
+
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
     },
+
     optimizePackageImports: [
       'lucide-react',
       'react-icons',
@@ -47,22 +49,16 @@ const nextConfig = {
       '@radix-ui/react-scroll-area',
       '@radix-ui/react-separator',
       '@radix-ui/react-slider',
-    ],
-    // Turbo mode for faster builds
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+    ]
   },
+
   // React strict mode
   reactStrictMode: true,
+
   // Source maps: Disable in production to avoid "missing source maps" warnings
   // This is just a warning, not an error - third-party libraries may not include source maps
   productionBrowserSourceMaps: false,
+
   // Modern JavaScript: Use SWC compiler with modern JavaScript features
   // This helps Google Speed Test recognize modern JavaScript
   // Note: removeConsole is not supported with Turbo mode
@@ -72,9 +68,6 @@ const nextConfig = {
   //     exclude: ['error', 'warn'],
   //   } : false,
   // },
-  // Modern JavaScript output: Target modern browsers
-  // This reduces bundle size and improves performance
-  swcMinify: true,
   // Fix Router Cache issues - disable aggressive caching for client-side navigation
   onDemandEntries: {
     // Period (in ms) where the server will keep pages in the buffer
@@ -82,6 +75,7 @@ const nextConfig = {
     // Number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 2,
   },
+
   // Redirects for URL aliases
   async redirects() {
     return [
@@ -526,10 +520,13 @@ const nextConfig = {
       },
     ];
   },
+
   // Transpile packages if needed
   transpilePackages: ['@radix-ui/react-accordion', '@radix-ui/react-dialog'],
+
   // Exclude old src/pages directory from build
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+
   webpack: (config, { isServer }) => {
     // Ignore src/pages directory (old Pages Router)
     // Performance: Ignore more directories to speed up file watching
@@ -570,7 +567,6 @@ const nextConfig = {
         path.resolve(__dirname, 'contexts'),
       ],
       '@/data': path.resolve(__dirname, 'src/data'),
-      '@/i18n': path.resolve(__dirname, 'src/i18n.js'),
     };
     
     // Set primary alias (webpack doesn't support array, so use src first)
@@ -582,7 +578,6 @@ const nextConfig = {
       '@/hooks': path.resolve(__dirname, 'src/hooks'),
       '@/contexts': path.resolve(__dirname, 'src/contexts'),
       '@/data': path.resolve(__dirname, 'src/data'),
-      '@/i18n': path.resolve(__dirname, 'src/i18n.js'),
     };
     // Ignore src/pages files (old Pages Router - not used anymore, app directory is used instead)
     if (!config.plugins) {
@@ -671,6 +666,17 @@ const nextConfig = {
     
     return config;
   },
+
+  turbopack: {
+    // Proje kökü; üst klasördeki başka package-lock.json yanlış root seçimini engeller
+    root: __dirname,
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    }
+  }
 }
 
 export default nextConfig

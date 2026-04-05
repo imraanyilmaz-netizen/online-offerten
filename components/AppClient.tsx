@@ -2,9 +2,7 @@
 
 import React, { useEffect, Suspense, useState, useMemo } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { I18nextProvider } from 'react-i18next'
 import { HelmetProvider } from 'react-helmet-async'
-import i18n from '@/src/i18n'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/components/Layout/Layout'
 import CookieConsentBanner from '@/components/CookieConsentBanner'
@@ -216,23 +214,19 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
 
   return (
     <HelmetProvider>
-      <I18nextProvider i18n={i18n}>
-        <ConsentGtmLoader />
-        <CookieConsentBanner />
-        <VercelInsightsWithConsent />
-        <ScrollToTop />
-        <Layout>
-          <Suspense fallback={
-            <div className="flex justify-center items-center min-h-screen">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
-            </div>
-          }>
-            {/* Removed AnimatePresence and motion.div wrapper to prevent blank page issues */}
-            {/* Next.js App Router handles page transitions automatically */}
-            {children}
-          </Suspense>
-        </Layout>
-      </I18nextProvider>
+      <ConsentGtmLoader />
+      <CookieConsentBanner />
+      <VercelInsightsWithConsent />
+      <ScrollToTop />
+      <Layout>
+        <Suspense fallback={
+          <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+          </div>
+        }>
+          {children}
+        </Suspense>
+      </Layout>
     </HelmetProvider>
   )
 }

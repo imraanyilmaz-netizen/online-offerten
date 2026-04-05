@@ -1,11 +1,11 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 const CtaButton = () => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
 
   return (
     <div className="mt-10 text-center">

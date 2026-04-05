@@ -20,6 +20,24 @@ import { formatDate } from '@/lib/utils'; // Import formatDate from utils
 import Step2Regions from '@/src/components/PartnerRegistrationForm/Step2Regions';
 import { cantonMap } from '@/src/lib/dataMapping.js';
 
+/** partners row shape (generated DB types omit tables → Supabase infers never) */
+type PartnerRow = {
+  service_regions?: unknown
+  company_name?: string | null
+  contact_person?: string | null
+  phone?: string | null
+  website?: string | null
+  address_street?: string | null
+  address_zip?: string | null
+  address_city?: string | null
+  message?: string | null
+  company_description?: string | null
+  slug?: string | null
+  logo_url?: string | null
+  hero_image_url?: string | null
+  gallery_images?: unknown
+}
+
 /** Kantons-Codes aus DB normalisieren (ZH, BE, …) – gleiche Logik wie Partner-Registrierung */
 function normalizeServiceRegions(raw: unknown): string[] {
   if (!raw || !Array.isArray(raw)) return [];
@@ -97,12 +115,13 @@ const PartnerSettingsPageClient = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const { data, error } = await supabase
+      const { data: raw, error } = await supabase
         .from('partners')
         .select('*')
         .eq('id', user.id)
         .single();
       if (error) throw error;
+      const data = raw as PartnerRow;
       setPartnerData(data);
       setServiceRegions(normalizeServiceRegions(data.service_regions));
       setFormData({
@@ -184,8 +203,7 @@ const PartnerSettingsPageClient = () => {
     }
     setSavingRegions(true);
     try {
-      const { error } = await supabase
-        .from('partners')
+      const { error } = await (supabase.from('partners') as any)
         .update({ service_regions: serviceRegions })
         .eq('id', user.id);
       if (error) throw error;
@@ -210,8 +228,7 @@ const PartnerSettingsPageClient = () => {
     setSaving(true);
     try {
       const { phone, website, company_description } = formData;
-      const { error } = await supabase
-        .from('partners')
+      const { error } = await (supabase.from('partners') as any)
         .update({ phone, website, message: company_description }) // Database column is 'message'
         .eq('id', user.id);
       if (error) throw error;

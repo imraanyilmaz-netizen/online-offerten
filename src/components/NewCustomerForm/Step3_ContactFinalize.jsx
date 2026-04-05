@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { useTranslation, Trans } from 'react-i18next'; 
+import { useStaticT } from '@/lib/staticTranslate';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,7 @@ import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect'
 
 
 const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
   return (
     <Card className="w-full bg-white shadow-lg border-gray-200 rounded-xl overflow-hidden">
       <CardHeader className="bg-slate-50 p-5 border-b border-slate-200">
@@ -40,7 +40,7 @@ const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
 };
 
 const HowFoundButton = ({ id, labelKey, icon, selected, onClick }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     return (
       <Button
         type="button"
@@ -56,7 +56,7 @@ const HowFoundButton = ({ id, labelKey, icon, selected, onClick }) => {
 };
 
 const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick }) => {
-    const { t } = useTranslation('newCustomerForm');
+    const { t } = useStaticT('newCustomerForm');
     return (
       <Button
         type="button"
@@ -80,7 +80,7 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
 
 
 const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, handleCheckboxChange, handleRadioGroupChange, handleHowFoundChange, handleQuotesWantedChange, errors }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
 
   const salutationOptions = [
     { value: 'herr', label: t('step3.salutationMr') },

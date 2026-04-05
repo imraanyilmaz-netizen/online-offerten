@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 // framer-motion removed - CSS for better INP
@@ -30,7 +30,6 @@ const QuoteCard = ({ quote, onToggleMatch, onSend, onOpenDetails, isMatching, ch
 
   return (
     <div
-      layout
       className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
     >
       <div className="p-4">

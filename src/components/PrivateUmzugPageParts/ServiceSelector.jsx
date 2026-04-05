@@ -1,6 +1,6 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Home, Building, Globe, Sparkles, Trash2, Brush as PaintBrush, Box, ArrowRight } from 'lucide-react';
@@ -18,7 +18,7 @@ const services = [
 ];
 
 const ServiceItem = ({ nameKey, icon: Icon, path, active }) => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
   return (
     <Link href={path}>
       <div
@@ -37,7 +37,7 @@ const ServiceItem = ({ nameKey, icon: Icon, path, active }) => {
 };
 
 const ServiceSelector = () => {
-  const { t } = useTranslation('privateUmzugPage');
+  const { t } = useStaticT('privateUmzugPage');
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl">
       <h3 className="text-xl font-semibold text-gray-800 mb-4">{t('sidebar.quickQuoteTitle')}</h3>

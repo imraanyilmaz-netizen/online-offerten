@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
@@ -125,7 +125,7 @@ const PartnerReviewForm = ({ partner, quote, onBack, onComplete }: { partner: an
             approval_status: 'pending',
             review_type: 'partner',
             show_on_homepage: false,
-        });
+        } as any);
 
         setLoading(false);
         if (error) {
@@ -204,7 +204,7 @@ const PlatformReviewForm = ({ quote, onComplete }: { quote: any; onComplete: () 
             approval_status: 'pending',
             review_type: 'platform',
             show_on_homepage: false,
-        });
+        } as any);
 
         setLoading(false);
         if (error) {

@@ -1,12 +1,12 @@
-﻿import React from 'react';
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { ShieldCheck, Award } from 'lucide-react';
 import StarRating from '@/components/PartnerProfilePageParts/StarRating';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 
 const PartnerHeader = ({ partner, averageRating, reviewCount, onGetOffer }) => {
-  const { t } = useTranslation('partnerProfilePage');
+  const { t } = useStaticT('partnerProfilePage');
 
   const isGoldPartner = partner.status === 'gold' || (averageRating >= 4.5 && reviewCount >= 10); 
 

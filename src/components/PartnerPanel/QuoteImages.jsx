@@ -1,5 +1,5 @@
-﻿import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+import { useStaticT } from '@/lib/staticTranslate';
 // framer-motion removed - CSS for better INP
 import { Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
@@ -59,7 +59,7 @@ const Lightbox = ({ images, selectedIndex, onClose }) => {
 };
 
 const QuoteImages = ({ imageUrls }) => {
-  const { t } = useTranslation('partnerDashboard');
+  const { t } = useStaticT('partnerDashboard');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 

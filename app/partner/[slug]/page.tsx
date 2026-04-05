@@ -55,9 +55,10 @@ async function getPartnerReviewStats(partnerId: string) {
   }
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const partner = await getPartnerData(params.slug)
-  
+
   if (!partner) {
     return {
       title: 'Partner nicht gefunden',
@@ -65,7 +66,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const title = `${partner.company_name} | Bewertungen und Informationen`
-  
+
   // Generate description - use message field (database column name)
   let description = partner.message || partner.description
   if (!description) {
@@ -118,7 +119,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function PartnerProfilePage({ params }: { params: { slug: string } }) {
+export default async function PartnerProfilePage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const partner = await getPartnerData(params.slug)
 
   if (!partner) {

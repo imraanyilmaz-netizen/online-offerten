@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -313,7 +313,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
 };
 
 const Step2_AddressDate = ({ formData, handleChange, handleSelectChange, errors }) => {
-  const { t } = useTranslation('newCustomerForm');
+  const { t } = useStaticT('newCustomerForm');
   const isMoveService = formData.service === 'umzug';
 
   return (

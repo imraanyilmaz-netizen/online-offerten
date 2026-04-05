@@ -7,9 +7,10 @@ import { createStaticClient } from '@/lib/supabase/server'
 // Blog yazıları public veri olduğu için cookies gerekmez
 export const revalidate = 60
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const supabase = createStaticClient()
-  
+
   // Fetch post data for metadata - including meta_title, published_at, updated_at
   const { data: post, error } = await supabase
     .from('posts')
@@ -93,9 +94,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function RatgeberPostPage({ params }: { params: { slug: string } }) {
+export default async function RatgeberPostPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const supabase = createStaticClient()
-  
+
   // Fetch FULL post data for SSR (including content for SEO)
   const { data: post } = await supabase
     .from('posts')

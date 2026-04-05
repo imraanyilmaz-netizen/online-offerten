@@ -1,11 +1,11 @@
-﻿import React from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Phone, Mail, ExternalLink, MapPin } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useStaticT } from '@/lib/staticTranslate';
 import { Button } from '@/components/ui/button';
 
 const ContactCard = ({ partner }) => {
-  const { t } = useTranslation('partnerProfilePage');
+  const { t } = useStaticT('partnerProfilePage');
 
   return (
     <Card className="shadow-lg rounded-xl border border-gray-200 bg-white">
@@ -45,7 +45,7 @@ const ContactCard = ({ partner }) => {
           </Button>
         )}
         {!partner.phone && !partner.email && !partner.website && (
-            <p className="text-sm text-gray-500 italic">{t('common:notAvailable')}</p>
+            <p className="text-sm text-gray-500 italic">{t('notAvailable')}</p>
         )}
       </CardContent>
     </Card>
