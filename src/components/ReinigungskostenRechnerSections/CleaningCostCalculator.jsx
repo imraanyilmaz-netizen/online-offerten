@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Sparkles, ArrowRight, Loader2, ExternalLink } from 'lucide-react';
@@ -123,31 +123,9 @@ const CleaningCostCalculator = () => {
     }
   };
   
+  /** Nur service + step — das Anfrageformular liest die langen Rechner-Query-Params ohnehin nicht aus; saubere URL vermeidet Router-/Step-Konflikte. */
   const handleOpenQuoteForm = () => {
-    let fromRoomsValue = '';
-    const roomNumber = parseFloat(rooms);
-    if (propertyType === 'apartment') {
-      fromRoomsValue = `${roomNumber}_zimmer_wohnung`;
-    } else {
-      fromRoomsValue = `${roomNumber}_zimmer_einfamilienhaus`;
-    }
-    
-    // Weiterleitung zur Formularseite mit Parametern
-    const params = new URLSearchParams({
-      service: 'reinigung',
-      step: '2',
-      from_rooms: fromRoomsValue,
-    });
-    
-    // Zusätzliche Parameter hinzufügen, falls vorhanden
-    if (windows) params.set('windows', windows);
-    if (bathrooms) params.set('bathrooms', bathrooms);
-    if (kitchenCleaning) params.set('kitchen_cleaning', kitchenCleaning);
-    if (balconyTerrace) params.set('balcony_terrace', balconyTerrace);
-    if (blinds) params.set('blinds', blinds);
-    if (condition) params.set('condition', condition);
-    
-    window.location.href = `/kostenlose-offerte-anfordern?${params.toString()}`;
+    window.location.assign('/kostenlose-offerte-anfordern?service=reinigung&step=2');
   };
 
   return (
