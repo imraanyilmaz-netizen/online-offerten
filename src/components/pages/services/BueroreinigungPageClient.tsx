@@ -1,4 +1,5 @@
-﻿
+'use client'
+
 import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,7 @@ import Link from 'next/link';
 import { ArrowRight, Sparkles, ShieldCheck, Clock, CheckCircle, Users, Award, Star, Home, Calendar } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import CleaningRatgeberSidebar from '@/components/CleaningRatgeberSidebar';
+import ReinigungServiceHero from '@/components/reinigung/ReinigungServiceHero';
 
 const BueroreinigungPageClient = () => {
   const offerteHref = '/kostenlose-offerte-anfordern?service=reinigung&step=2';
@@ -80,98 +82,15 @@ const BueroreinigungPageClient = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <div className="bg-slate-50">
-        {/* Hero Section */}
-        <section
-          className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden"
-        >
-          {/* Background Image - Right Side */}
-          <div 
-            className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 h-full bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('https://online-offerten.ch/reinigungsfirma/bueroreinigung_modernes_buero.png')`,
-              maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%)'
-            }}
-          ></div>
-          
-          {/* Gradient Overlay - White from left to right with shadow effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
-          
-          {/* White shadow/glow effect towards the image */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/20 pointer-events-none"></div>
-          <div 
-            className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 pointer-events-none"
-            style={{
-              boxShadow: 'inset -100px 0 100px -50px rgba(255, 255, 255, 0.8)'
-            }}
-          ></div>
-          
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
-            <div className="max-w-full">
-              {/* Text Section */}
-              <div className="px-0 sm:px-4 py-4 sm:py-6 md:py-8 lg:py-12">
-                <div
-                >
-                  <h1 
-                    className="heading-1 break-words"
-                    style={{
-                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                      fontWeight: 700,
-                      textAlign: 'start',
-                      letterSpacing: 'normal',
-                      wordSpacing: '0px',
-                      fontStyle: 'normal',
-                      textTransform: 'none',
-                      textDecoration: 'none',
-                      textIndent: '0px'
-                    }}
-                  >
-                    Professionelle Büroreinigung
-                  </h1>
-                </div>
-                
-                <p
-                  className="text-base sm:text-body mb-8 leading-relaxed"
-                >
-                  Gründliche Büroreinigung für ein sauberes und produktives Arbeitsumfeld. Büroreinigungsofferten online vergleichen und bis zu 40% sparen.
-                </p>
-                
-                <div
-                  className="mb-4 md:mb-6"
-                >
-                  <Button 
-                    asChild
-                    size="lg" 
-                    className="bg-green-700 hover:bg-green-800 text-white font-bold group w-full sm:w-auto px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-                  >
-                    <Link href={offerteHref}>
-                      Jetzt kostenlose Offerten anfordern
-                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
-
-                {/* Additional Trust Elements */}
-                <div
-                  className="bg-blue-50 rounded-lg p-3 md:p-4 lg:p-6 flex flex-wrap gap-3 md:gap-4 lg:gap-6"
-                >
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-body font-medium">Bis zu 40% sparen</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-body font-medium">Nur geprüfte Firmen</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
-                    <span className="text-sm md:text-body font-medium">100% kostenlos & unverbindlich</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ReinigungServiceHero
+          breadcrumbCurrent="Büroreinigung"
+          backgroundImageUrl="https://online-offerten.ch/reinigungsfirma/bueroreinigung_modernes_buero.png"
+          title="Professionelle Büroreinigung"
+          intro="Gründliche Büroreinigung für ein sauberes und produktives Arbeitsumfeld. Büroreinigungsofferten online vergleichen und bis zu 40% sparen."
+          ctaLabel="Jetzt kostenlose Offerten anfordern"
+          ctaHref={offerteHref}
+          trustItems={['Bis zu 40% sparen', 'Nur geprüfte Firmen', '100% kostenlos & unverbindlich']}
+        />
 
         {/* Main Content */}
         <section className="py-8 md:py-12 lg:py-16 xl:py-24">

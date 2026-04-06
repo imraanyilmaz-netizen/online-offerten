@@ -6,9 +6,9 @@ export const revalidate = 86400
 const CANONICAL = 'https://online-offerten.ch/reinigung/endreinigung'
 
 const META_TITLE =
-  'Endreinigung mit Abnahmegarantie: Reinigungsfirmen vergleichen und 60% sparen'
+  'Endreinigung mit Abnahmegarantie: Reinigungsfirmen vergleichen und 40% sparen'
 const META_DESCRIPTION =
-  'Endreinigung und Wohnungsübergabe in der Schweiz: Kostenlose Reinigungsofferten von geprüften Reinigungsfirmen mit Abnahmegarantie vergleichen. Bis zu 60% sparen – unverbindlich.'
+  'Endreinigung und Wohnungsübergabe in der Schweiz: Kostenlose Reinigungsofferten von geprüften Reinigungsfirmen mit Abnahmegarantie vergleichen. Bis zu 40% sparen – unverbindlich.'
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -62,7 +62,7 @@ export default function EndreinigungPage() {
       a: 'Sie können bis zu fünf kostenlose Offerten von geprüften Reinigungsfirmen erhalten und Preis sowie Leistung transparent gegenüberstellen.',
     },
     {
-      q: 'Was bedeutet "bis zu 60% sparen"?',
+      q: 'Was bedeutet "bis zu 40% sparen"?',
       a: 'Viele Kunden zahlen nach dem Vergleich mehrerer Angebote weniger als bei der ersten Einzelofferte – der genaue Betrag hängt von Objekt und Markt ab.',
     },
     {

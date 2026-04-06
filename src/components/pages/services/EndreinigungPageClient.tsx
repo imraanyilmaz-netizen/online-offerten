@@ -5,57 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import {
-  ArrowRight,
-  Sparkles,
-  CheckCircle,
-  Droplets,
-  Truck,
-  Trash2,
-  Archive,
-  ChevronRight,
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import CleaningRatgeberSidebar from '@/components/CleaningRatgeberSidebar'
+import ReinigungServiceHero from '@/components/reinigung/ReinigungServiceHero'
 
 interface EndreinigungPageClientProps {
   faqItems: { q: string; a: string }[]
 }
 
 const H1_TITLE =
-  'Endreinigung mit Abnahmegarantie: Reinigungsfirmen vergleichen und 60% sparen'
-
-const heroOptions: {
-  label: string
-  sub: string
-  href: string
-  icon: React.ElementType
-}[] = [
-  {
-    label: 'Nur Reinigung',
-    sub: 'Reinigungsofferte ohne Umzug',
-    href: '/kostenlose-offerte-anfordern?service=reinigung&step=2',
-    icon: Droplets,
-  },
-  {
-    label: 'Umzug und Reinigung',
-    sub: 'Privatumzug inkl. Endreinigung',
-    href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug&endreinigung=ja',
-    icon: Truck,
-  },
-  {
-    label: 'Entsorgung',
-    sub: 'Fachgerechte Entsorgung',
-    href: '/kostenlose-offerte-anfordern?service=raeumung&step=3&raeumungArt=entsorgung',
-    icon: Trash2,
-  },
-  {
-    label: 'Entrümpelung und Räumung',
-    sub: 'Räumung & Leerung',
-    href: '/kostenlose-offerte-anfordern?service=raeumung&step=2&raeumungArt=raeumung',
-    icon: Archive,
-  },
-]
+  'Endreinigung mit Abnahmegarantie: Reinigungsfirmen vergleichen und 40% sparen'
 
 const EndreinigungPageClient = ({ faqItems }: EndreinigungPageClientProps) => {
   const router = useRouter()
@@ -67,90 +27,16 @@ const EndreinigungPageClient = ({ faqItems }: EndreinigungPageClientProps) => {
   return (
     <>
       <div className="bg-slate-50">
-        <section className="relative w-full py-8 md:py-14 overflow-hidden">
-          <div
-            className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 h-full bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('https://online-offerten.ch/reinigungsfirma/umzugsreinigung_team_saubere_wohnung.png')`,
-              maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 100%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 100%)',
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent" />
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
-            <nav className="mb-6 text-sm text-gray-600" aria-label="Breadcrumb">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="hover:text-green-700">
-                    Startseite
-                  </Link>
-                </li>
-                <ChevronRight className="w-4 h-4 text-gray-400 shrink-0" />
-                <li>
-                  <Link href="/reinigung" className="hover:text-green-700">
-                    Reinigung
-                  </Link>
-                </li>
-                <ChevronRight className="w-4 h-4 text-gray-400 shrink-0" />
-                <li className="text-gray-900 font-medium" aria-current="page">
-                  Endreinigung
-                </li>
-              </ol>
-            </nav>
-
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-4">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Abnahmegarantie &amp; Offertenvergleich
-              </div>
-              <h1 className="heading-1 !mt-0 text-balance">{H1_TITLE}</h1>
-              <p className="text-base sm:text-lg text-gray-600 mt-4 mb-8 leading-relaxed">
-                Professionelle <strong>Reinigungsfirmen</strong> für Ihre <strong>Wohnungsabgabe</strong>: Mehrere{' '}
-                <strong>kostenlose Reinigungsofferten</strong> vergleichen und oft deutlich günstiger abschliessen – bis
-                zu <strong>60&nbsp;%</strong> gegenüber der ersten Einzelofferte, abhängig von Objekt und Angebot.
-              </p>
-
-              <p className="text-sm font-semibold text-gray-800 mb-3">Passende Anfrage wählen:</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                {heroOptions.map((opt) => (
-                  <Link
-                    key={opt.href + opt.label}
-                    href={opt.href}
-                    className="flex items-start gap-3 p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-green-500 hover:bg-green-50/80 transition-all shadow-sm"
-                  >
-                    <div className="p-2 rounded-lg bg-green-100 text-green-700 shrink-0">
-                      <opt.icon className="w-5 h-5" aria-hidden />
-                    </div>
-                    <div>
-                      <span className="font-semibold text-gray-900 block">{opt.label}</span>
-                      <span className="text-sm text-gray-600">{opt.sub}</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              <Button
-                size="lg"
-                onClick={handleCta}
-                className="bg-green-700 hover:bg-green-800 text-white font-bold w-full sm:w-auto px-8 py-6 text-base"
-              >
-                Endreinigung Offerten anfordern
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-
-              <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-700">
-                <span className="inline-flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                  Geprüfte Reinigungsfirmen
-                </span>
-                <span className="inline-flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                  Kostenlos &amp; unverbindlich
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ReinigungServiceHero
+          breadcrumbCurrent="Endreinigung"
+          backgroundImageUrl="https://online-offerten.ch/reinigungsfirma/umzugsreinigung_team_saubere_wohnung.png"
+          badgeText="Abnahmegarantie & Offertenvergleich"
+          title={H1_TITLE}
+          intro="Vergleichen Sie kostenlos regionale Reinigungsfirmen für Ihre Reinigung."
+          ctaLabel="Endreinigung Offerten anfordern"
+          onCtaClick={handleCta}
+          trustItems={['Geprüfte Reinigungsfirmen', 'Kostenlos & unverbindlich']}
+        />
 
         <section className="py-10 md:py-16 bg-slate-50 border-t border-gray-100">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6">
@@ -187,12 +73,12 @@ const EndreinigungPageClient = ({ faqItems }: EndreinigungPageClientProps) => {
                   <strong>Endreinigung Preisen</strong> sinnvoll.
                 </p>
 
-                <h2 className="heading-2">Bis zu 60&nbsp;% sparen – wie funktioniert das?</h2>
+                <h2 className="heading-2">Bis zu 40&nbsp;% sparen – wie funktioniert das?</h2>
                 <p className="text-body">
                   Viele erste Einzelangebote liegen über dem, was bei Wettbewerb möglich ist. Wer{' '}
                   <strong>mehrere Reinigungsofferten</strong> parallel einholt, erkennt marktübliche Spannen und kann
                   verhandeln oder den günstigsten passenden Anbieter wählen. Kunden berichten häufig von{' '}
-                  <strong>erheblichen Ersparnissen</strong> – bis zu <strong>60&nbsp;%</strong> sind je nach Ausgangslage
+                  <strong>erheblichen Ersparnissen</strong> – bis zu <strong>40&nbsp;%</strong> sind je nach Ausgangslage
                   möglich, keine Garantie für jeden Einzelfall.
                 </p>
 
