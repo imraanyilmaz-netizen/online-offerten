@@ -946,10 +946,10 @@ export default async function UmzugsfirmaAargauPage() {
                     <h4 className="typography-h4">Kostenloser Umzugskosten-Rechner</h4>
                   </div>
                   <p className="typography-p mb-4">
-                    Nutzen Sie unseren <Link href="/umzugskosten" className="text-blue-600 hover:text-blue-800 underline font-semibold">Umzugskosten-Rechner</Link> für eine detaillierte Schätzung Ihrer Umzugskosten im Aargau. In nur 2 Minuten erhalten Sie eine realistische Preis-Einschätzung.
+                    Nutzen Sie unseren <Link href="/umzugsfirma/umzugskosten" className="text-blue-600 hover:text-blue-800 underline font-semibold">Umzugskosten-Rechner</Link> für eine detaillierte Schätzung Ihrer Umzugskosten im Aargau. In nur 2 Minuten erhalten Sie eine realistische Preis-Einschätzung.
                   </p>
                   <Button asChild variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-                    <Link href="/umzugskosten">
+                    <Link href="/umzugsfirma/umzugskosten">
                       Jetzt Kosten berechnen
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
@@ -965,12 +965,12 @@ export default async function UmzugsfirmaAargauPage() {
                 </p>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { icon: 'Startseite', title: 'Privatumzug', link: '/privatumzug', desc: 'Wohnungswechsel individuell' },
-                    { icon: 'Building', title: 'Geschäftsumzug', link: '/geschaeftsumzug', desc: 'Büro- und Firmenumzug' },
-                    { icon: 'Globe', title: 'Internationale Umzüge', link: '/internationale-umzuege', desc: 'Umzug ins Ausland' },
-                    { icon: 'Package', title: 'Spezialtransporte', link: '/spezialtransporte', desc: 'Klavier, Tresor, Maschinen' },
+                    { icon: 'Startseite', title: 'Privatumzug', link: '/umzugsfirma/privatumzug', desc: 'Wohnungswechsel individuell' },
+                    { icon: 'Building', title: 'Geschäftsumzug', link: '/umzugsfirma/geschaeftsumzug', desc: 'Büro- und Firmenumzug' },
+                    { icon: 'Globe', title: 'Internationale Umzüge', link: '/umzugsfirma/internationale-umzuege', desc: 'Umzug ins Ausland' },
+                    { icon: 'Package', title: 'Spezialtransporte', link: '/umzugsfirma/spezialtransporte', desc: 'Klavier, Tresor, Maschinen' },
                     { icon: 'Sparkles', title: 'Reinigung', link: '/reinigung', desc: 'Umzugsreinigung & mehr' },
-                    { icon: 'Sparkles', title: 'Umzugsreinigung', link: '/umzugsreinigung', desc: 'Mit Abnahmegarantie' },
+                    { icon: 'Sparkles', title: 'Umzugsreinigung', link: '/reinigung/umzugsreinigung', desc: 'Mit Abnahmegarantie' },
                     { icon: 'MapPin', title: 'Möbellagerung', link: '/umzugsfirma/aargau', desc: 'Sichere Zwischenlagerung' }
                   ].map((service, index) => (
                     <Link

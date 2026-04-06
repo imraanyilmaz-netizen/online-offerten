@@ -58,7 +58,7 @@ export default function NavbarClient({ children: logoSlot }) {
 
   const umzugLinks = [
     { to: '/umzugsfirma/privatumzug', text: 'Privatumzug' },
-    { to: '/umzugsfirma/klaviertransport', text: 'Klaviertransport' },
+    { to: '/umzugsfirma/spezialtransporte/klaviertransport', text: 'Klaviertransport' },
     { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug' },
     { to: '/umzugsfirma/internationale-umzuege', text: 'Internationale Umzüge' },
     { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirmen vergleichen' },
