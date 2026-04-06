@@ -1,29 +1,19 @@
-﻿'use client'
-
-import React, { useMemo } from 'react';
+﻿
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, ShieldCheck, Clock, CheckCircle, Users, Award, Star, Home, Calendar } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import CleaningRatgeberSidebar from '@/components/CleaningRatgeberSidebar';
-import { useUserLocation } from '@/hooks/useUserLocation';
 
 const BueroreinigungPageClient = () => {
-  const router = useRouter();
-  const { city, loading: locationLoading } = useUserLocation();
-  
-
-  const handleCtaClick = () => {
-    router.push('/kostenlose-offerte-anfordern?service=reinigung&step=2');
-  };
+  const offerteHref = '/kostenlose-offerte-anfordern?service=reinigung&step=2';
 
   // SEO Data
   const metaTitle = "Büroreinigung – Kostenlose Offerten vergleichen";
   const metaDescription = "Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Büroreinigung garantiert.";
   // Meta keywords removed - Google no longer uses this tag (since 2009)
-  const canonicalUrl = '/reinigung/bueroreinigung';
 
   // FAQ Data
   const faqItems = [
@@ -59,7 +49,7 @@ const BueroreinigungPageClient = () => {
 
 
   // Single JSON-LD Service schema
-  const schema = useMemo(() => ({
+  const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Professionelle Büroreinigung",
@@ -81,7 +71,7 @@ const BueroreinigungPageClient = () => {
       "price": "0",
       "name": "Kostenlose Offerte für Büroreinigung"
     }
-  }), [metaDescription]);
+  };
 
   return (
     <>
@@ -150,12 +140,14 @@ const BueroreinigungPageClient = () => {
                   className="mb-4 md:mb-6"
                 >
                   <Button 
+                    asChild
                     size="lg" 
-                    onClick={handleCtaClick}
                     className="bg-green-700 hover:bg-green-800 text-white font-bold group w-full sm:w-auto px-6 py-4 text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                   >
-                    Jetzt kostenlose Offerten anfordern
-                    <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    <Link href={offerteHref}>
+                      Jetzt kostenlose Offerten anfordern
+                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </Button>
                 </div>
 
@@ -227,21 +219,20 @@ const BueroreinigungPageClient = () => {
                   {/* CTA 1 - After Leistungen */}
                   <div className="mt-6 md:mt-8 p-4 md:p-6 bg-green-50 rounded-lg border border-green-200 mb-6 md:mb-8">
                     <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">
-                      {city && !locationLoading 
-                        ? `Professionelle Büroreinigung in ${city}`
-                        : 'Professionelle Büroreinigung buchen'
-                      }
+                      Professionelle Büroreinigung buchen
                     </h3>
                     <p className="text-body mb-3 md:mb-4">
                       Büroreinigungsofferten online vergleichen und bis zu 40% sparen.
                     </p>
                     <Button 
-                      onClick={handleCtaClick} 
+                      asChild
                       size="lg" 
                       className="bg-green-700 hover:bg-green-800 text-white w-full sm:w-auto text-base font-semibold"
                     >
-                      Schnelle Anfrage senden
-                      <ArrowRight className="w-5 h-5 ml-2" />
+                      <Link href={offerteHref}>
+                        Schnelle Anfrage senden
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Link>
                     </Button>
                   </div>
 
@@ -394,11 +385,13 @@ const BueroreinigungPageClient = () => {
                       {/* CTA Button */}
                       <div className="flex justify-center">
                         <Button
-                          onClick={handleCtaClick}
+                          asChild
                           className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 flex items-center gap-2"
                         >
-                          Kostenlose Offerten anfordern
-                          <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+                          <Link href={offerteHref}>
+                            Kostenlose Offerten anfordern
+                            <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+                          </Link>
                         </Button>
                       </div>
                     </div>
@@ -432,12 +425,14 @@ const BueroreinigungPageClient = () => {
                       Büroreinigungsofferten online vergleichen und bis zu 40% sparen. Ohne Aufpreis, ohne Verpflichtung. Starten Sie jetzt Ihre kostenlose Anfrage und finden Sie die perfekte Reinigungsfirma für Ihr Büro.
                     </p>
                     <Button 
-                      onClick={handleCtaClick} 
+                      asChild
                       size="lg" 
                       className="bg-blue-700 hover:bg-blue-800 text-white w-full sm:w-auto text-base font-semibold"
                     >
-                      Kostenlose Offerten anfordern
-                      <ArrowRight className="w-5 h-5 ml-2" />
+                      <Link href={offerteHref}>
+                        Kostenlose Offerten anfordern
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Link>
                     </Button>
                   </div>
 
@@ -479,10 +474,10 @@ const BueroreinigungPageClient = () => {
                       Kostenlos und unverbindlich Büroreinigungsofferten online vergleichen.
                     </p>
                     <Button 
-                      onClick={handleCtaClick}
+                      asChild
                       className="w-full bg-blue-700 hover:bg-blue-800 text-white text-base font-semibold"
                     >
-                      Offerten anfordern
+                      <Link href={offerteHref}>Offerten anfordern</Link>
                     </Button>
                   </div>
                 </div>

@@ -2,9 +2,8 @@
 
 import React, { useEffect, Suspense, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { HelmetProvider } from 'react-helmet-async'
 import ScrollToTop from '@/components/ScrollToTop'
-import Layout from '@/components/Layout/Layout'
+import Layout from '@/src/components/Layout/Layout'
 import CookieConsentBanner from '@/components/CookieConsentBanner'
 import ConsentGtmLoader from '@/components/ConsentGtmLoader'
 import VercelInsightsWithConsent from '@/components/VercelInsightsWithConsent'
@@ -169,7 +168,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   // WebSite JSON-LD: app/layout.tsx (server) — crawlers ohne JS
 
   return (
-    <HelmetProvider>
+    <>
       <ConsentGtmLoader />
       <CookieConsentBanner />
       <VercelInsightsWithConsent />
@@ -183,7 +182,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
           {children}
         </Suspense>
       </Layout>
-    </HelmetProvider>
+    </>
   )
 }
 

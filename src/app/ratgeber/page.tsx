@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import RatgeberPageClient from '@/components/pages/tools/RatgeberPageClient'
+import { createStaticClient } from '@/src/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: 'Ratgeber & Tipps für Umzug, Reinigung & Maler',
@@ -43,10 +44,34 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RatgeberPage() {
+type RatgeberPageProps = {
+  searchParams: Promise<{
+    tag?: string | string[]
+  }>
+}
+
+export default async function RatgeberPage({ searchParams }: RatgeberPageProps) {
+  const params = await searchParams
+  const tagParam = Array.isArray(params.tag) ? params.tag[0] : params.tag
+  const tagFilter = tagParam?.trim().toLowerCase()
+
+  const supabase = createStaticClient()
+  let query = supabase
+    .from('posts')
+    .select('*')
+    .eq('status', 'published')
+    .order('published_at', { ascending: false })
+
+  if (tagFilter) {
+    query = query.contains('tags', [tagFilter])
+  }
+
+  const { data } = await query
+  const posts = data ?? []
+
   return (
     <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
-      <RatgeberPageClient />
+      <RatgeberPageClient initialPosts={posts} tagFilter={tagFilter ?? null} />
     </Suspense>
   )
 }

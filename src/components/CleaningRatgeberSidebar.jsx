@@ -1,4 +1,5 @@
-﻿import Link from 'next/link';
+﻿'use client'
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { BookOpen, Loader2, ArrowRight } from 'lucide-react';

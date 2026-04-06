@@ -1,60 +1,39 @@
 ﻿'use client'
 
-import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabaseClient';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Loader2, ArrowRight } from 'lucide-react';
+import { Calendar, ArrowRight } from 'lucide-react';
 import RatgeberSidebar from '@/src/components/tools/RatgeberSidebar';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
-import SEO from '@/src/components/SEO';
 
-const RatgeberPageClient = () => {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+type Post = {
+  id: string | number
+  slug?: string | null
+  title?: string | null
+  category?: string | null
+  meta_description?: string | null
+  featured_image_url?: string | null
+  created_at?: string | null
+  read_more_text?: string | null
+}
+
+type RatgeberPageClientProps = {
+  initialPosts: Post[]
+  tagFilter?: string | null
+}
+
+const RatgeberPageClient = ({ initialPosts, tagFilter }: RatgeberPageClientProps) => {
+  const [posts, setPosts] = useState<Post[]>(initialPosts || []);
   const [visibleCount, setVisibleCount] = useState(10);
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   
   const ratgeberBasePath = '/ratgeber';
-  
-  const metaTitle = "Ratgeber & Tipps für Umzug, Reinigung & Lagerung";
-  const metaDescription = "Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und die richtige Lagerung. Machen Sie Ihren Übergang einfacher mit unserem Ratgeber.";
-  const metaKeywords = "ratgeber, umzugsratgeber, reinigungsratgeber, umzugstipps, reinigungstipps, umzugscheckliste, reinigungscheckliste, umzug planen, schweiz, umzugsguide, reinigungsguide, lagerung tipps";
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      const params = new URLSearchParams(searchParams?.toString());
-      const tagFilter = params.get('tag');
-
-      let query = supabase
-        .from('posts')
-        .select('*')
-        .eq('status', 'published')
-        .order('published_at', { ascending: false });
-
-      if (tagFilter) {
-        // nur Beiträge mit diesem Tag
-        query = query.contains('tags', [tagFilter.toLowerCase()]);
-      }
-
-      const { data, error } = await query;
-
-      if (error) {
-        console.error('Error fetching posts:', error);
-        setError('Beiträge konnten nicht geladen werden.');
-      } else {
-        setPosts(data);
-      }
-      setLoading(false);
-    };
-
-    fetchPosts();
-  }, [searchParams?.toString()]);
+    setPosts(initialPosts || [])
+    setVisibleCount(10)
+  }, [initialPosts, tagFilter])
 
   const getReadMoreText = (post: any) => {
     if (post.read_more_text && post.read_more_text.trim() !== '') {
@@ -63,52 +42,17 @@ const RatgeberPageClient = () => {
     return `Weiterlesen`;
   };
 
-  if (loading) {
-    return <div className="flex justify-center items-center h-screen"><Loader2 className="w-12 h-12 animate-spin text-green-600" /></div>;
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-20">
-        <h1 className="text-2xl font-bold mb-4">Fehler</h1>
-        <p className="text-gray-600">{error}</p>
-      </div>
-    );
+  const formatPostDate = (value?: string | null) => {
+    if (!value) return ''
+    const date = new Date(value)
+    if (Number.isNaN(date.getTime())) return ''
+    return date.toLocaleDateString('de-DE')
   }
 
   const recentPosts = posts.slice(0, 5);
 
   return (
     <>
-      <SEO
-        title={metaTitle}
-        description={metaDescription}
-        keywords={metaKeywords}
-        canonicalUrl={`https://online-offerten.ch${ratgeberBasePath}`}
-        ogImageUrl="https://online-offerten.ch/image/online-offerten.ch.jpg"
-        schemaMarkup={posts.length > 0 ? {
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          "name": metaTitle,
-          "description": metaDescription,
-          "url": `https://online-offerten.ch${ratgeberBasePath}`,
-          "mainEntity": {
-            "@type": "ItemList",
-            "itemListElement": posts.slice(0, 10).filter(post => post?.slug).map((post, index) => ({
-              "@type": "ListItem",
-              "position": index + 1,
-              "name": post.title,
-              "url": `https://online-offerten.ch${ratgeberBasePath}/${post.slug}`
-            }))
-          }
-        } : {
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          "name": metaTitle,
-          "description": metaDescription,
-          "url": `https://online-offerten.ch${ratgeberBasePath}`
-        }}
-      />
       <div className="bg-gray-50/70">
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="text-center mb-12">
@@ -156,7 +100,7 @@ const RatgeberPageClient = () => {
                       <div className="mt-auto flex justify-between items-center">
                         <div className="flex items-center text-sm text-gray-600">
                           <Calendar className="w-4 h-4 mr-2" />
-                          <span>{new Date(post.created_at).toLocaleDateString('de-DE')}</span>
+                          <span>{formatPostDate(post.created_at)}</span>
                         </div>
                         <div className="text-green-700 font-semibold text-sm flex items-center">
                           {getReadMoreText(post)} <ArrowRight className="ml-1.5 h-4 w-4" />

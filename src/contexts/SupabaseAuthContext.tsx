@@ -50,22 +50,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   const handleSession = useCallback(async (session: Session | null) => {
-    console.log('[AuthContext] handleSession called:', { 
-      hasSession: !!session, 
-      userEmail: session?.user?.email,
-      userRole: session?.user?.user_metadata?.role 
-    })
     setSession(session)
     setUser(session?.user ?? null)
     setLoading(false)
   }, [])
 
   const invalidateBrokenSession = useCallback(async (reason: string) => {
-    console.warn('[AuthContext] Invalid session detected:', reason)
     try {
       await supabase.auth.signOut()
     } catch (signOutError) {
-      console.warn('[AuthContext] Error during signOut while invalidating session:', signOutError)
+      void signOutError
     }
     clearClientAuthStorage()
     await handleSession(null)
@@ -115,13 +109,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
         async (event, session) => {
-          console.log('[AuthContext] onAuthStateChange:', { 
-            event, 
-            hasSession: !!session,
-            userEmail: session?.user?.email,
-            userRole: session?.user?.user_metadata?.role 
-          })
-          
           // Handle token refresh errors
           if (event === 'TOKEN_REFRESHED' && !session) {
             await invalidateBrokenSession('Token refresh failed')
@@ -138,7 +125,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           // sonst kann validateSessionWithServer hängen oder die Recovery-Session fälschlich invalidieren.
           if (event === 'PASSWORD_RECOVERY' && session && !recoveryHandled.current) {
             recoveryHandled.current = true
-            console.log('[AuthContext] PASSWORD_RECOVERY detected, applying session without extra getUser() round-trip')
             await handleSession(session)
             return
           }
@@ -193,19 +179,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = useCallback(
     async (email: string, password: string, options?: { silent?: boolean }) => {
       const silent = options?.silent === true
-      console.log('[AuthContext] signIn called:', { email })
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
-
-      console.log('[AuthContext] signIn result:', {
-        hasError: !!error,
-        errorMessage: error?.message,
-        hasSession: !!data?.session,
-        userEmail: data?.session?.user?.email,
-        userRole: data?.session?.user?.user_metadata?.role,
-      })
+      void data
 
       if (error) {
         let errorMessage = error.message || 'Etwas ist schief gelaufen'
@@ -231,8 +209,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             description: errorMessage,
           })
         }
-      } else {
-        console.log('[AuthContext] signIn successful, session should be set')
       }
 
       return { error }
@@ -245,7 +221,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await supabase.auth.signOut()
     } catch (e) {
-      console.warn('[AuthContext] signOut error (ignored):', e)
+      void e
     }
 
     // 2️⃣ Auth state'i hemen sıfırla
