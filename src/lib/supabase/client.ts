@@ -8,6 +8,29 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 // Cookie name format: sb-<project-ref>-auth-token
 const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
+/** JSON oturumda refresh_token yok/boşsa GoTrue yenileme denemesi AuthApiError üretebilir. */
+function sanitizeAuthTokenValue(key: string, raw: string | null): string | null {
+  if (raw == null) return null
+  if (!key.includes('auth-token') || key.includes('-code-verifier')) return raw
+
+  try {
+    const parsed = JSON.parse(raw) as Record<string, unknown>
+    if (!parsed || typeof parsed !== 'object' || !('access_token' in parsed)) return raw
+
+    const rt = parsed.refresh_token
+    if (rt === undefined || rt === null || rt === '') {
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('[Supabase Storage] Ungültige Session (kein refresh_token) — wird entfernt')
+      }
+      localStorage.removeItem(key)
+      return null
+    }
+  } catch {
+    return raw
+  }
+  return raw
+}
+
 // Custom storage that syncs between localStorage and cookies
 // Always returns a storage object to prevent Supabase warnings
 const createCookieStorage = () => {
@@ -26,10 +49,13 @@ const createCookieStorage = () => {
       // Read from localStorage only.
       // Intentionally do not re-create auth cookies from localStorage during reads.
       // This prevents a tampered cookie from being auto-healed before middleware checks.
-      return localStorage.getItem(key)
+      const raw = localStorage.getItem(key)
+      return sanitizeAuthTokenValue(key, raw)
     },
     setItem: (key: string, value: string): void => {
-      console.log('[Supabase Storage] setItem called:', { key, valueLength: value?.length })
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Supabase Storage] setItem called:', { key, valueLength: value?.length })
+      }
       
       // Store in localStorage (primary storage)
       localStorage.setItem(key, value)
@@ -41,7 +67,9 @@ const createCookieStorage = () => {
         const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
         const cookieString = `${key}=${encodeURIComponent(value)}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
         document.cookie = cookieString
-        console.log('[Supabase Storage] Cookie synced:', { key, cookieSet: true, expires: expires.toUTCString() })
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[Supabase Storage] Cookie synced:', { key, cookieSet: true, expires: expires.toUTCString() })
+        }
       }
     },
     removeItem: (key: string): void => {

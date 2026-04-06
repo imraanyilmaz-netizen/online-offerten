@@ -22,6 +22,33 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
+/** GoTrue / getSession / getUser hataları: oturumu tamamen temizlemek gerekir. */
+function shouldInvalidateAuthError(error: { message?: string; code?: string } | null | undefined): boolean {
+  if (!error) return false
+  const code = error.code
+  if (
+    code === 'refresh_token_not_found' ||
+    code === 'refresh_token_already_used' ||
+    code === 'session_expired' ||
+    code === 'session_not_found' ||
+    code === 'bad_jwt'
+  ) {
+    return true
+  }
+  const msg = (error.message || '').toLowerCase()
+  const raw = error.message || ''
+  return (
+    msg.includes('missing sub claim') ||
+    msg.includes('invalid claim') ||
+    msg.includes('invalid refresh token') ||
+    msg.includes('refresh token not found') ||
+    msg.includes('refresh_token') ||
+    msg.includes('jwt expired') ||
+    msg.includes('invalid jwt') ||
+    raw.includes('JWT')
+  )
+}
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast()
   const recoveryHandled = useRef(false)
@@ -70,7 +97,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const { data: { user: verifiedUser }, error: userError } = await supabase.auth.getUser()
     if (userError || !verifiedUser) {
-      await invalidateBrokenSession(userError?.message || 'getUser failed')
+      await invalidateBrokenSession(userError?.message || userError?.code || 'getUser failed')
       return null
     }
 
@@ -80,29 +107,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const initAuth = () => {
       const getSession = async () => {
-        const { data: { session }, error } = await supabase.auth.getSession()
-        
-        // Check for invalid token errors (missing sub claim, refresh token not found, etc.)
-        if (error && (
-          error.message?.includes('missing sub claim') || 
-          error.message?.includes('invalid claim') ||
-          error.message?.includes('JWT') ||
-          error.message?.includes('Invalid Refresh Token') ||
-          error.message?.includes('Refresh Token Not Found') ||
-          error.message?.includes('refresh_token')
-        )) {
-          await invalidateBrokenSession(error.message)
-          return
-        }
-        
-        // Validate session has proper user structure
-        if (session?.user && !session.user.id) {
-          await invalidateBrokenSession('Session missing user.id')
-          return
-        }
+        try {
+          const { data: { session }, error } = await supabase.auth.getSession()
 
-        const validatedSession = await validateSessionWithServer(session)
-        await handleSession(validatedSession)
+          if (error && shouldInvalidateAuthError(error)) {
+            await invalidateBrokenSession(error.message || error.code || 'getSession error')
+            return
+          }
+
+          // Validate session has proper user structure
+          if (session?.user && !session.user.id) {
+            await invalidateBrokenSession('Session missing user.id')
+            return
+          }
+
+          const validatedSession = await validateSessionWithServer(session)
+          await handleSession(validatedSession)
+        } catch (e) {
+          const err = e as { message?: string; code?: string }
+          if (shouldInvalidateAuthError(err)) {
+            await invalidateBrokenSession(err.message || err.code || 'getSession threw')
+            return
+          }
+          console.error('[AuthContext] getSession unexpected error:', e)
+          setLoading(false)
+        }
       }
 
       getSession()
