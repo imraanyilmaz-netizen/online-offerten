@@ -1,52 +1,9 @@
 import type { Metadata } from 'next'
-import { createStaticClient } from '@/src/lib/supabase/server'
 import EndreinigungPageClient from '@/components/pages/services/EndreinigungPageClient'
 
 export const revalidate = 86400
 
 const CANONICAL = 'https://online-offerten.ch/reinigung/endreinigung'
-
-const REINIGUNG_SERVICE_KEYS = [
-  'wohnungsreinigung',
-  'hausreinigung',
-  'buero_reinigung',
-  'unterhaltsreinigung',
-  'baureinigung',
-  'grundreinigung',
-  'fensterreinigung',
-  'bodenreinigung',
-  'fassadenreinigung',
-  'hofreinigung',
-  'umzugsreinigung',
-] as const
-
-function isReinigungPartner(partner: {
-  main_categories?: string[] | null
-  offered_services?: string[] | null
-}): boolean {
-  if (partner.main_categories?.includes('reinigung')) return true
-  if (partner.offered_services?.length) {
-    return REINIGUNG_SERVICE_KEYS.some((s) => partner.offered_services!.includes(s))
-  }
-  return false
-}
-
-async function getReinigungPartners() {
-  const supabase = createStaticClient()
-  const { data, error } = await supabase
-    .from('partners')
-    .select(
-      'id, company_name, slug, address_city, address_zip, average_rating, review_count, badge_tier, logo_url, main_categories, offered_services'
-    )
-    .eq('status', 'active')
-    .order('average_rating', { ascending: false })
-
-  if (error) {
-    console.error('endreinigung getReinigungPartners:', error)
-    return []
-  }
-  return (data || []).filter(isReinigungPartner)
-}
 
 const META_TITLE =
   'Endreinigung mit Abnahmegarantie: Reinigungsfirmen vergleichen und 60% sparen'
@@ -94,9 +51,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function EndreinigungPage() {
-  const partners = await getReinigungPartners()
-
+export default function EndreinigungPage() {
   const faqSchema = [
     {
       q: 'Was ist eine Endreinigung mit Abnahmegarantie?',
@@ -111,8 +66,8 @@ export default async function EndreinigungPage() {
       a: 'Viele Kunden zahlen nach dem Vergleich mehrerer Angebote weniger als bei der ersten Einzelofferte – der genaue Betrag hängt von Objekt und Markt ab.',
     },
     {
-      q: 'Sind die Partner auf dieser Seite Reinigungsfirmen?',
-      a: 'Ja. Die Liste zeigt verifizierte Partner, die Reinigungsleistungen anbieten – gefiltert aus unserem Partnernetzwerk.',
+      q: 'Wie finde ich passende Reinigungsfirmen?',
+      a: 'Stellen Sie über das Formular eine Anfrage – wir vermitteln Sie an geprüfte Reinigungsunternehmen in unserem Netzwerk, die sich bei Ihnen melden.',
     },
   ]
 
@@ -159,31 +114,13 @@ export default async function EndreinigungPage() {
           acceptedAnswer: { '@type': 'Answer', text: item.a },
         })),
       },
-      ...(partners.length > 0
-        ? [
-            {
-              '@type': 'ItemList',
-              name: 'Geprüfte Reinigungsfirmen Schweiz',
-              numberOfItems: partners.length,
-              itemListElement: partners.slice(0, 30).map((p: { company_name: string; slug: string }, i: number) => ({
-                '@type': 'ListItem',
-                position: i + 1,
-                item: {
-                  '@type': 'LocalBusiness',
-                  name: p.company_name,
-                  url: `https://online-offerten.ch/partner/${p.slug}`,
-                },
-              })),
-            },
-          ]
-        : []),
     ],
   }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serverSchema) }} />
-      <EndreinigungPageClient partners={partners} faqItems={faqSchema} />
+      <EndreinigungPageClient faqItems={faqSchema} />
     </>
   )
 }

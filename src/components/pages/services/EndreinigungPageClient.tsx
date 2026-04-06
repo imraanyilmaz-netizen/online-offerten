@@ -10,32 +10,15 @@ import {
   Sparkles,
   CheckCircle,
   Droplets,
-  Layers,
   Truck,
-  Package,
   Trash2,
   Archive,
-  Star,
-  MapPin,
   ChevronRight,
 } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import CleaningRatgeberSidebar from '@/components/CleaningRatgeberSidebar'
 
-export type EndreinigungPartner = {
-  id: string
-  company_name: string
-  slug: string
-  address_city?: string | null
-  address_zip?: string | null
-  average_rating?: number | null
-  review_count?: number | null
-  badge_tier?: string | null
-  logo_url?: string | null
-}
-
 interface EndreinigungPageClientProps {
-  partners: EndreinigungPartner[]
   faqItems: { q: string; a: string }[]
 }
 
@@ -55,22 +38,10 @@ const heroOptions: {
     icon: Droplets,
   },
   {
-    label: 'Endreinigung, Umzugsreinigung oder Baureinigung',
-    sub: 'Art im Formular wählen',
-    href: '/kostenlose-offerte-anfordern?service=reinigung&step=2',
-    icon: Layers,
-  },
-  {
     label: 'Umzug und Reinigung',
     sub: 'Privatumzug inkl. Endreinigung',
     href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug&endreinigung=ja',
     icon: Truck,
-  },
-  {
-    label: 'Kombi-Anfrage',
-    sub: 'Mehrere Leistungen anfragen',
-    href: '/kostenlose-offerte-anfordern?service=umzug&step=2',
-    icon: Package,
   },
   {
     label: 'Entsorgung',
@@ -86,7 +57,7 @@ const heroOptions: {
   },
 ]
 
-const EndreinigungPageClient = ({ partners, faqItems }: EndreinigungPageClientProps) => {
+const EndreinigungPageClient = ({ faqItems }: EndreinigungPageClientProps) => {
   const router = useRouter()
 
   const handleCta = () => {
@@ -181,96 +152,7 @@ const EndreinigungPageClient = ({ partners, faqItems }: EndreinigungPageClientPr
           </div>
         </section>
 
-        <section className="py-10 md:py-14 bg-white border-t border-gray-100">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-            <h2 className="heading-2 text-center mb-10">Geprüfte Reinigungsfirmen – unsere Partner</h2>
-            <p className="text-body text-center max-w-3xl mx-auto mb-10">
-              Auf dieser Seite listen wir <strong>ausschliesslich Partner</strong>, die{' '}
-              <strong>Reinigungsdienstleistungen</strong> anbieten – damit Sie bei der Suche nach einer{' '}
-              <strong>Putzfirma</strong> oder <strong>Reinigungsfirma</strong> direkt passende Anbieter sehen. Klicken
-              Sie auf ein Profil für Bewertungen und Details, oder fordern Sie über das Formular neue Offerten an.
-            </p>
-
-            {partners.length === 0 ? (
-              <p className="text-center text-body text-gray-600">
-                Partner werden geladen. Alternativ:{' '}
-                <Link href="/partner-suche" className="text-green-700 font-semibold underline">
-                  zur Partnerübersicht
-                </Link>{' '}
-                oder{' '}
-                <button type="button" onClick={handleCta} className="text-green-700 font-semibold underline">
-                  Offerte anfordern
-                </button>
-                .
-              </p>
-            ) : (
-              <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {partners.map((p) => {
-                  const slug = p.slug || p.id
-                  const rating = p.average_rating || 0
-                  const reviews = p.review_count || 0
-                  return (
-                    <li key={p.id}>
-                      <Link
-                        href={`/partner/${slug}`}
-                        className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-gray-200 hover:border-green-400 hover:shadow-md transition-all h-full"
-                      >
-                        <div className="relative w-16 h-16 shrink-0 rounded-lg bg-white border border-gray-200 overflow-hidden flex items-center justify-center p-2">
-                          {p.logo_url ? (
-                            <Image
-                              src={p.logo_url}
-                              alt={`Logo ${p.company_name} – Reinigungsfirma Schweiz`}
-                              width={64}
-                              height={64}
-                              className="object-contain w-full h-full"
-                              unoptimized
-                            />
-                          ) : (
-                            <Image
-                              src="/image/logo-icon.webp"
-                              alt=""
-                              width={48}
-                              height={48}
-                              className="object-contain"
-                            />
-                          )}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <span className="font-semibold text-gray-900 block truncate">{p.company_name}</span>
-                          {p.address_city && (
-                            <span className="text-sm text-gray-600 flex items-center gap-1 mt-0.5">
-                              <MapPin className="w-3.5 h-3.5 shrink-0" />
-                              {p.address_city}
-                              {p.address_zip ? ` ${p.address_zip}` : ''}
-                            </span>
-                          )}
-                          {rating > 0 && (
-                            <span className="text-sm text-amber-700 flex items-center gap-1 mt-1">
-                              <Star className="w-4 h-4 fill-amber-400 text-amber-500" />
-                              {rating.toFixed(1)}
-                              {reviews > 0 ? ` (${reviews} Bewertungen)` : ''}
-                            </span>
-                          )}
-                        </div>
-                        <ArrowRight className="w-5 h-5 text-gray-400 shrink-0" aria-hidden />
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
-
-            <p className="text-center mt-8 text-sm text-gray-500">
-              Alle Anbieter durchlaufen unsere Prüfung. Sie möchten nicht wählen?{' '}
-              <button type="button" onClick={handleCta} className="text-green-700 font-semibold underline">
-                Kostenlose Offerten
-              </button>{' '}
-              – wir vermitteln passende Reinigungsfirmen.
-            </p>
-          </div>
-        </section>
-
-        <section className="py-10 md:py-16 bg-slate-50">
+        <section className="py-10 md:py-16 bg-slate-50 border-t border-gray-100">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
               <article className="lg:col-span-2 space-y-8">
