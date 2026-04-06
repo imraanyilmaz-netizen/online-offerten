@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
@@ -189,16 +189,6 @@ const GrundreinigungPageClient = () => {
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die intensive Tiefenreinigung. Dazu gehören die intensive Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten Tiefenreinigung für verschiedene Anlässe: Einzug, Auszug, nach Renovierungsarbeiten oder periodisch zur intensiven Pflege. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken, speziellen Geräten wie Dampfreinigern und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert, haben Erfahrung mit intensiven Reinigungen und verwenden professionelle Methoden für alle Arten von Verschmutzungen.
                   </p>
 
-                  {/* Leistungen Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/grundreinigung_leistungen.png"
-                      alt="Grundreinigungsdienstleistungen - Professionelle intensive Tiefenreinigung"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
                   {/* Bullet Points - Leistungen */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Intensive Reinigung aller Räume</li>
@@ -270,31 +260,11 @@ const GrundreinigungPageClient = () => {
                     Professionelle Tiefenreinigung wird für verschiedene Anlässe angeboten, die alle intensive Reinigung erfordern. Tiefenreinigung bei Einzug sorgt dafür, dass Sie in eine saubere, hygienische Wohnung einziehen. Intensive Reinigung bei Auszug stellt sicher, dass die Wohnung den Anforderungen für die Übergabe entspricht. Tiefenreinigung nach Renovierungsarbeiten entfernt Bauschutt, Staub und Farbreste, die bei Renovierungen entstehen. Periodische Tiefenreinigung (ein- bis zweimal jährlich) hält Ihr Zuhause in optimalem Zustand und entfernt tief sitzenden Schmutz, der sich über Zeit ansammelt. Professionelle Reinigungsfirmen passen ihre Methoden und den Umfang der Reinigung an den spezifischen Anlass an.
                   </p>
 
-                  {/* Anlässe Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/grundreinigung_anlaesse.png"
-                      alt="Grundreinigung für verschiedene Anlässe - Einzug, Auszug, nach Renovation"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
                   {/* H2: Intensive Reinigungsmethoden und Spezialtechniken */}
                   <h2 className="heading-2">Intensive Reinigungsmethoden und Spezialtechniken</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Tiefenreinigung erfordert spezielle Methoden und Geräte, die über die normale Reinigung hinausgehen. Dampfreinigung wird für hartnäckige Verschmutzungen verwendet und entfernt tief sitzenden Schmutz und Bakterien. Hochdruckreinigung wird für Aussenbereiche und besonders verschmutzte Oberflächen eingesetzt. Spezielle Reinigungsmittel für Kalk, Fett oder Rost werden verwendet, um Ablagerungen zu entfernen. Professionelle Geräte für Teppichreinigung entfernen tief sitzenden Schmutz aus Textilien. Spezielle Techniken für empfindliche Oberflächen wie Holz oder Naturstein werden angewendet, um Schäden zu vermeiden. Professionelle Reinigungsfirmen haben das Wissen und die Ausrüstung für alle Arten von Verschmutzungen und verwenden die richtigen Methoden für jedes Material.
                   </p>
-
-                  {/* Methoden Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/grundreinigung_methoden.png"
-                      alt="Intensive Reinigungsmethoden und Spezialtechniken - Dampfreinigung, Hochdruckreinigung"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmittel */}
                   <h2 className="heading-2">Moderne und umweltfreundliche Reinigungsmittel</h2>

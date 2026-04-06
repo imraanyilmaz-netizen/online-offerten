@@ -8,6 +8,42 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 // Cookie name format: sb-<project-ref>-auth-token
 const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
+/**
+ * @supabase/auth-js _recoverAndRefresh içinde geçersiz refresh için console.error çağırıyor.
+ * Oturum zaten temizleniyor; bu bilinen gürültüyü konsolda göstermiyoruz.
+ */
+let supabaseRefreshNoiseFilterInstalled = false
+
+function shouldSuppressSupabaseRefreshConsoleNoise(args: unknown[]): boolean {
+  for (const arg of args) {
+    if (typeof arg === 'string') {
+      if (/invalid refresh token|refresh token not found/i.test(arg)) return true
+      continue
+    }
+    if (arg instanceof Error) {
+      const m = arg.message || ''
+      if (arg.name === 'AuthApiError' && /refresh token/i.test(m)) return true
+      if (/invalid refresh token|refresh token not found/i.test(m)) return true
+      continue
+    }
+    if (arg && typeof arg === 'object' && 'message' in arg) {
+      const m = String((arg as { message: unknown }).message)
+      if (/invalid refresh token|refresh token not found/i.test(m)) return true
+    }
+  }
+  return false
+}
+
+function installSupabaseRefreshConsoleFilter(): void {
+  if (typeof window === 'undefined' || supabaseRefreshNoiseFilterInstalled) return
+  supabaseRefreshNoiseFilterInstalled = true
+  const original = console.error.bind(console)
+  console.error = (...args: unknown[]) => {
+    if (shouldSuppressSupabaseRefreshConsoleNoise(args)) return
+    original(...args)
+  }
+}
+
 /** JSON oturumda refresh_token yok/boşsa GoTrue yenileme denemesi AuthApiError üretebilir. */
 function sanitizeAuthTokenValue(key: string, raw: string | null): string | null {
   if (raw == null) return null
@@ -98,6 +134,8 @@ let supabaseInstance: ReturnType<typeof createSupabaseClient> | null = null
 
 export function createClient() {
   if (!supabaseInstance) {
+    installSupabaseRefreshConsoleFilter()
+
     // Always provide storage (no-op on server-side) to prevent Supabase warnings
     const storage = createCookieStorage()
     
@@ -137,6 +175,11 @@ export function createClient() {
     }
   }
   return supabaseInstance
+}
+
+// Filter before singleton init so ilk _recoverAndRefresh logları da yakalanır
+if (typeof window !== 'undefined') {
+  installSupabaseRefreshConsoleFilter()
 }
 
 // Export singleton instance for backward compatibility

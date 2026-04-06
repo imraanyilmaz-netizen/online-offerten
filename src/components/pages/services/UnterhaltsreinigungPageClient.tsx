@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
@@ -189,16 +189,6 @@ const UnterhaltsreinigungPageClient = () => {
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die regelmässige Reinigung. Dazu gehören die regelmässige Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten flexible Reinigungsfrequenzen: wöchentliche, zweiwöchentliche oder monatliche Reinigung. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk sind versichert, ihre Mitarbeiter sind vertrauenswürdig und geschult, und sie bieten flexible Terminplanung, die sich an Ihre Bedürfnisse anpasst.
                   </p>
 
-                  {/* Leistungen Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/unterhaltsreinigung_leistungen.png"
-                      alt="Unterhaltsreinigungsdienstleistungen - Professionelle regelmässige Reinigung"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
                   {/* Bullet Points - Leistungen */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
                     <li>Regelmässige Reinigung aller Räume</li>
@@ -270,31 +260,11 @@ const UnterhaltsreinigungPageClient = () => {
                     Professionelle Reinigung wird für alle Räume und Bereiche angeboten, von kleinen Studios bis hin zu grossen Familienhäusern. Jeder Raum hat seine eigenen Besonderheiten: Küchen erfordern die Reinigung von Arbeitsflächen, Herd und Spüle, während Badezimmer besondere Aufmerksamkeit für Sanitäranlagen benötigen. Wohnzimmer und Schlafzimmer benötigen gründliches Staubwischen und Bodenreinigung. Professionelle Reinigungsfirmen passen ihre Methoden und den Umfang der Reinigung an die spezifischen Anforderungen jedes Raumes an. Unabhängig von der Grösse oder Art der Räume, alle Reinigungsfirmen in unserem Netzwerk bieten flexible Reinigungspläne, die sich an Ihre Bedürfnisse anpassen.
                   </p>
 
-                  {/* Räume Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/unterhaltsreinigung_raeume.png"
-                      alt="Unterhaltsreinigung für verschiedene Räume und Bereiche - Küche, Bad, Wohnzimmer"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
                   {/* H2: Flexible Reinigungsfrequenz – wöchentlich, zweiwöchentlich, monatlich */}
                   <h2 className="heading-2">Flexible Reinigungsfrequenz – wöchentlich, zweiwöchentlich, monatlich</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Die optimale Reinigungsfrequenz hängt von verschiedenen Faktoren ab: Grösse der Wohnung, Anzahl der Bewohner, Lebensstil und individuelle Präferenzen. Viele Haushalte wählen wöchentliche Reinigung für maximale Sauberkeit, während andere zweiwöchentliche oder monatliche Reinigung bevorzugen. Professionelle Reinigungsfirmen beraten Sie gerne bei der Wahl der passenden Frequenz für Ihre Wohnung. Die Frequenz kann auch angepasst werden, wenn sich Ihre Bedürfnisse ändern. Flexibilität ist ein wichtiger Vorteil bei der Unterhaltsreinigung, da Sie die Reinigung an Ihren Lebensstil anpassen können.
                   </p>
-
-                  {/* Frequenz Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/unterhaltsreinigung_frequenz.png"
-                      alt="Flexible Reinigungsfrequenz - Wöchentlich, zweiwöchentlich, monatlich"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmittel */}
                   <h2 className="heading-2">Moderne und umweltfreundliche Reinigungsmittel</h2>

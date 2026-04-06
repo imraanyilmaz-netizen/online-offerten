@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
@@ -270,31 +270,11 @@ const BaureinigungPageClient = () => {
                     Professionelle Reinigung nach Bauarbeiten wird für verschiedene Arten von Bauarbeiten angeboten, die alle spezielle Reinigungsanforderungen haben. Reinigung nach Renovierungsarbeiten entfernt Staub, Farbreste und Rückstände von Renovierungen. Reinigung nach Neubau umfasst die gründliche Reinigung eines komplett neuen Gebäudes, inklusive Entfernung von Bauschutt und Bauabfällen. Reinigung nach Umbau beinhaltet die Reinigung nach strukturellen Änderungen. Jede Art von Bauarbeit hinterlässt unterschiedliche Verschmutzungen, und professionelle Reinigungsfirmen passen ihre Methoden entsprechend an. Unabhängig von der Art der Bauarbeiten, alle Reinigungsfirmen in unserem Netzwerk haben Erfahrung mit Reinigung nach Bauarbeiten und verwenden die richtigen Methoden für jeden Fall.
                   </p>
 
-                  {/* Bauarbeiten Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/baureinigung_bauarbeiten.png"
-                      alt="Baureinigung nach verschiedenen Bauarbeiten - Renovation, Neubau, Umbau"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
                   {/* H2: Herausforderungen bei der Baureinigung (Bauschutt, Staub, Farbreste) */}
                   <h2 className="heading-2">Herausforderungen bei der Baureinigung (Bauschutt, Staub, Farbreste)</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Reinigung nach Bauarbeiten hat besondere Herausforderungen, die spezielle Methoden und Geräte erfordern. Feinstaub kann in alle Ritzen und schwer zugängliche Stellen eindringen und erfordert spezielle Filter und Sauger. Bauschutt muss fachgerecht entsorgt werden, was Kenntnisse der Entsorgungsvorschriften erfordert. Farbrückstände und Klebereste sind hartnäckig und erfordern spezielle Reinigungsmittel und Techniken. Zudem müssen empfindliche Oberflächen wie neue Böden oder Fenster geschützt werden. Professionelle Reinigungsfirmen haben die richtigen Geräte, Methoden und Erfahrung für alle diese Herausforderungen. Sie verwenden Feinstaubfilter, Hochleistungssauger, spezielle Reinigungsmittel und kennen die richtigen Techniken für jedes Material.
                   </p>
-
-                  {/* Herausforderungen Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/baureinigung_herausforderungen.png"
-                      alt="Herausforderungen bei der Baureinigung - Bauschutt, Staub, Farbreste"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmethoden */}
                   <h2 className="heading-2">Moderne und umweltfreundliche Reinigungsmethoden</h2>

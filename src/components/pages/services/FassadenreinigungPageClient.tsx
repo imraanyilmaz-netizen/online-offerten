@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
@@ -260,31 +260,11 @@ const FassadenreinigungPageClient = () => {
                     Verschiedene Fassadenmaterialien erfordern unterschiedliche Reinigungsmethoden und -mittel. Putzfassaden können mit Hochdruckreinigung oder schonender Reinigung behandelt werden, je nach Zustand und Alter. Klinker oder Naturstein benötigen spezielle Methoden, um die Oberfläche nicht zu beschädigen. Holzfassaden erfordern besonders schonende Reinigung, um das Material nicht zu schädigen. Metallfassaden benötigen spezielle Behandlung, um Korrosion zu vermeiden. Professionelle Fassadenreinigungsfirmen kennen die richtigen Methoden für jedes Material und passen ihre Technik entsprechend an. Sie verwenden die richtigen Reinigungsmittel und -methoden, um die Fassade gründlich zu reinigen, ohne sie zu beschädigen.
                   </p>
 
-                  {/* Materialien Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/fassadenreinigung_materialien.png"
-                      alt="Fassadenreinigung für verschiedene Materialien - Putz, Klinker, Naturstein, Holz"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-
                   {/* H2: Höhenarbeit und Sicherheit bei der Fassadenreinigung */}
                   <h2 className="heading-2">Höhenarbeit und Sicherheit bei der Fassadenreinigung</h2>
                   <p className="text-body mb-4 md:mb-6 leading-relaxed">
                     Fassadenreinigung erfordert oft Höhenarbeit, was besondere Sicherheitsmassnahmen erfordert. Professionelle Reinigungsfirmen haben die richtige Ausrüstung: Gerüste, Hubarbeitsbühnen oder Seilzugtechniken. Sie sind versichert und ihre Mitarbeiter sind geschult in Höhensicherheit und haben die notwendigen Zertifikate. Dies ist besonders wichtig bei mehrstöckigen Gebäuden, Bürogebäuden oder schwer zugänglichen Fassaden. Sicherheit hat oberste Priorität bei Fassadenreinigung, und professionelle Firmen halten alle Sicherheitsvorschriften ein. Sie verwenden die richtige persönliche Schutzausrüstung und sichern ihre Arbeitsplätze entsprechend ab. Dies gibt Ihnen Sicherheit und schützt sowohl die Reinigungskräfte als auch Ihr Eigentum.
                   </p>
-
-                  {/* Höhenarbeit Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/fassadenreinigung_hoehenarbeit.png"
-                      alt="Höhenarbeit und Sicherheit bei der Fassadenreinigung - Professionelle Ausrüstung"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
 
                   {/* H2: Moderne und umweltfreundliche Reinigungsmethoden */}
                   <h2 className="heading-2">Moderne und umweltfreundliche Reinigungsmethoden</h2>

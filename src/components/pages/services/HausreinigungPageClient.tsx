@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
@@ -201,16 +201,6 @@ const HausreinigungPageClient = () => {
                   <p className="text-body mb-6 break-words w-full">
                     Unser Netzwerk geprüfter Reinigungsfirmen bietet ein umfassendes Leistungsspektrum für die professionelle Reinigung. Dazu gehören die gründliche Reinigung aller Räume, inklusive Küche, Badezimmer, Wohnzimmer und Schlafzimmer. Wir bieten auch spezialisierte Dienstleistungen wie Fensterreinigung, Bodenreinigung, Fassadenreinigung und Baureinigung an. Alle unsere Partnerfirmen arbeiten mit modernsten Reinigungstechniken und umweltfreundlichen Reinigungsmitteln. Besonders wichtig: Alle Reinigungsfirmen in unserem Netzwerk bieten eine 100% Abnahmegarantie, sodass Sie sicher sein können, dass das Haus den Anforderungen entspricht.
                   </p>
-
-                  {/* Leistungen Image */}
-                  <div className="my-6 md:my-8 rounded-lg overflow-hidden">
-                    <img
-                      src="https://online-offerten.ch/reinigungsfirma/professionelle_Hausreinigung_team.webp"
-                      alt="Hausreinigungsdienstleistungen - Professionelle Reinigung aller Räume"
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
-                  </div>
 
                   {/* Bullet Points - Leistungen */}
                   <ul className="list-disc list-inside space-y-2 mb-6 md:mb-8 text-body">
