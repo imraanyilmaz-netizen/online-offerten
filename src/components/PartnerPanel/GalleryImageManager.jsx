@@ -2,7 +2,7 @@
     import React, { useState, useCallback } from 'react';
     import { useDropzone } from 'react-dropzone';
     import { supabase } from '@/lib/supabaseClient';
-    import { useToast } from '@/components/ui/use-toast';
+    import { useToast } from '@/src/components/ui/use-toast';
     import { Button } from '@/components/ui/button';
     import { Loader2, Upload, Trash2, X } from 'lucide-react';
     import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';

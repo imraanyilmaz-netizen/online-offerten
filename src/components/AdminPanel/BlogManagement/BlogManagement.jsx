@@ -1,7 +1,7 @@
 ﻿import Link from 'next/link';
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Loader2, PlusCircle, Trash2, Edit } from 'lucide-react';

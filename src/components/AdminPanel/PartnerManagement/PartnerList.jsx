@@ -12,7 +12,7 @@ import PartnerFilters from './PartnerFilters';
 import ManualCreditModal from './ManualCreditModal';
 import PartnerEmailModal from './PartnerEmailModal';
 import { supabase } from '@/lib/supabaseClient';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 
 const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) => {
   const { toast } = useToast();

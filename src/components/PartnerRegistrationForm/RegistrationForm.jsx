@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 // framer-motion removed - CSS for better INP
 import { supabase } from '@/lib/supabaseClient';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 import { Card } from '@/components/ui/card';
 import { Loader2, ArrowLeft } from 'lucide-react';
 

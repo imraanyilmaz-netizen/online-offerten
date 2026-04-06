@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
-import { useToast } from '@/components/ui/use-toast';
-import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { useToast } from '@/src/components/ui/use-toast';
+import { useAuth } from '@/src/contexts/SupabaseAuthContext';
 
 export const useQuoteManagement = () => {
     const [quotes, setQuotes] = useState([]);

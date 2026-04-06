@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { useAuth } from '@/src/contexts/SupabaseAuthContext';
 import { Gift, Loader2 } from 'lucide-react';
 
 const ManualCreditModal = ({ partner, isOpen, onClose, onRefresh }) => {

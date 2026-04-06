@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Coins, Search, Filter, Loader2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { supabase } from '@/lib/supabaseClient';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 
 const FinancialManagement = ({ partners }) => {
   const [transactions, setTransactions] = useState([]);

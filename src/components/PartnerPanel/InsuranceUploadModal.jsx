@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Upload, FileText, X, Loader2, ShieldCheck } from 'lucide-react';
 import { supabase } from '@/lib/customSupabaseClient';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 
 const InsuranceUploadModal = ({ open, onOpenChange, partnerId, onSuccess }) => {
   const { toast } = useToast();

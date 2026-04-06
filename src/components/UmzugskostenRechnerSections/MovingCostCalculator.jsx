@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/src/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useRouter } from 'next/navigation';
 

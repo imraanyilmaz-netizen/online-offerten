@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ShieldCheck, ShieldAlert, Clock, CheckCircle, XCircle, FileText, Search, ExternalLink, Loader2, AlertTriangle } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 
 const InsuranceManagement = ({ partners, onRefreshPartners }) => {
   const { toast } = useToast();

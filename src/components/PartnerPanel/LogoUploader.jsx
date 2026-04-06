@@ -3,7 +3,7 @@
     import { Loader2, UploadCloud, XCircle } from 'lucide-react';
     import { Button } from '@/components/ui/button';
     import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
-    import { useToast } from '@/components/ui/use-toast';
+    import { useToast } from '@/src/components/ui/use-toast';
     import { supabase } from '@/lib/customSupabaseClient';
     import { compressImage } from '@/lib/imageCompressor';
     

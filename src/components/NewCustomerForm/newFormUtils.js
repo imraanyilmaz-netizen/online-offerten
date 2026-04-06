@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 import { getCleaningAreaSqmLabel, CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/src/components/ui/use-toast';
 import { v4 as uuidv4 } from 'uuid';
 import { tNewCustomerFormDe, translate } from '@/lib/deTranslations';
 

@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { useStaticT } from '@/lib/staticTranslate';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/src/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
 
 // Lazy load Stripe only when needed

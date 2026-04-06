@@ -8,7 +8,7 @@ import {
 	ToastTitle,
 	ToastViewport,
 } from '@/components/ui/toast';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/src/components/ui/use-toast';
 import React from 'react';
 
 export function Toaster() {

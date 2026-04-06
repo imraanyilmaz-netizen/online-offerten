@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/src/components/ui/use-toast';
 import { ArrowRight, Calculator, Check, Loader2, ChevronsDown, ChevronsUp } from 'lucide-react';
 import { pricingData, countryDistances } from '@/data/internationalPricing';
 import CountryFlag from './CountryFlag';

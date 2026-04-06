@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import { useAuth } from '@/contexts/SupabaseAuthContext';
-import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/src/contexts/SupabaseAuthContext';
+import { useToast } from '@/src/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

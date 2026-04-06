@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
-import { useAuth } from '@/contexts/SupabaseAuthContext';
-import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/src/contexts/SupabaseAuthContext';
+import { useToast } from '@/src/components/ui/use-toast';
 
 // 🔔 Bildirim sesi — Web Audio API ile "ting" bell sesi üretir (dosya gereksiz)
 const playNotificationSound = () => {

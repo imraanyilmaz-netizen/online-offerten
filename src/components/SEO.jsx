@@ -121,8 +121,8 @@ const SEO = ({ title, description, ogImageUrl, schemaMarkup, keywords, ogType = 
       <link rel="canonical" href={canonicalUrl} />
       
       {/* Hreflang tags - DE-only */}
-      <link rel="alternate" hreflang="de" href={canonicalUrl} />
-      <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="de" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
       
       {/* Structured Data */}
       {schemaMarkup && (

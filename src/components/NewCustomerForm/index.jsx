@@ -13,7 +13,7 @@ import Step1_Service from '@/components/NewCustomerForm/Step1_Service';
 import Step2_ServiceDetails from '@/components/NewCustomerForm/Step2_ServiceDetails';
 import Step2_DetailsAndContact from '@/components/NewCustomerForm/Step2_DetailsAndContact';
 import NewQuoteConfirmation from '@/components/NewCustomerForm/NewQuoteConfirmation';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/src/components/ui/use-toast';
 import { ArrowLeft, Send, Home as HomeIcon, Loader2, ShieldCheck, Star, Clock, Lock, MapPin, ChevronLeft, ChevronRight, FileText, CheckCircle2 } from 'lucide-react';
 import useNewCustomerForm from './useNewCustomerForm';
 import useNewFormValidation from './useNewFormValidation';
