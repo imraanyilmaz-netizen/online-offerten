@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/src/components/ui/use-toast';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Loader2, Inbox, ArrowDown, ArrowUp, Gift, Star, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
 
-const TransactionHistory = ({ partnerId, key }) => {
+const TransactionHistory = ({ partnerId, refreshKey }) => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
@@ -38,7 +38,7 @@ const TransactionHistory = ({ partnerId, key }) => {
 
   useEffect(() => {
     fetchTransactions();
-  }, [fetchTransactions, key]);
+  }, [fetchTransactions, refreshKey]);
 
   const getTransactionTypeDetails = (type) => {
     switch (type) {

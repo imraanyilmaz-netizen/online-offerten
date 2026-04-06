@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
@@ -299,7 +299,7 @@ const PartnerPanel = ({ setCompanyName }) => {
                 <CardTitle className="text-xl sm:text-2xl font-bold text-gray-900">Transaktionsverlauf</CardTitle>
               </CardHeader>
               <CardContent className="p-5 sm:p-6">
-                <TransactionHistory key={refreshKey} partnerId={partnerId} />
+                <TransactionHistory key={refreshKey} partnerId={partnerId} refreshKey={refreshKey} />
               </CardContent>
             </Card>
           </TabsContent>
