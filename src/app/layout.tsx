@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next'
+import { Suspense } from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/src/contexts/SupabaseAuthContext'
 import { Toaster } from '@/components/ui/toaster'
-import Footer from '@/src/components/Layout/Footer'
-import Navbar from '@/src/components/Layout/Navbar'
+import AppClient from '@/components/AppClient'
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
@@ -107,9 +107,15 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AuthProvider>
-              <Navbar />
-                {children}
-                <Footer />
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600" />
+              </div>
+            }
+          >
+            <AppClient>{children}</AppClient>
+          </Suspense>
           <Toaster />
         </AuthProvider>
       </body>

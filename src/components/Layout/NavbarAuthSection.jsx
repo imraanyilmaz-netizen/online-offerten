@@ -94,6 +94,8 @@ const UserMenu = ({ user, onLogout, partnerBrand }) => {
 export default function NavbarAuthSection({ variant = 'desktop', onNavigate, NavItem }) {
   const [partnerBrand, setPartnerBrand] = useState({ logoUrl: null, companyName: null })
   const [mobileLogoFailed, setMobileLogoFailed] = useState(false)
+  /** Auth + Supabase ilk render'da sunucu ile istemci farklı olabiliyor; hydration uyumu için. */
+  const [mounted, setMounted] = useState(false)
   const { user, signOut, loading } = useAuth()
   const settingsPath = '/partner/einstellungen'
   const mobileLogoUrl = partnerBrand.logoUrl || user?.user_metadata?.logo_url || user?.user_metadata?.avatar_url || null
@@ -125,12 +127,25 @@ export default function NavbarAuthSection({ variant = 'desktop', onNavigate, Nav
     setMobileLogoFailed(false)
   }, [mobileLogoUrl])
 
+  useEffect(() => {
+    // Navbar auth: SSR ile ilk client render aynı kalsın (Supabase loading farkı hydration hatası veriyordu)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- kasıtlı: mount sonrası gerçek auth UI
+    setMounted(true)
+  }, [])
+
   const handleLogout = async () => {
     await signOut()
     window.location.replace('/login?reason=signed_out')
   }
 
   if (variant === 'desktop') {
+    if (!mounted) {
+      return (
+        <div className="hidden md:flex items-center gap-3" style={{ minHeight: '36px' }}>
+          <div className="h-9 w-[140px] rounded-md bg-gray-100" style={{ minHeight: '36px' }} aria-hidden />
+        </div>
+      )
+    }
     return (
       <div className="hidden md:flex items-center gap-3" style={{ minHeight: '36px' }}>
         {!loading && !user ? (
@@ -152,6 +167,14 @@ export default function NavbarAuthSection({ variant = 'desktop', onNavigate, Nav
   }
 
   /* mobile */
+  if (!mounted) {
+    return (
+      <div className="border-t pt-4 mt-4">
+        <div className="h-10 rounded-md bg-gray-100" aria-hidden />
+      </div>
+    )
+  }
+
   return (
     <div className="border-t pt-4 mt-4">
       {!loading && !user && (

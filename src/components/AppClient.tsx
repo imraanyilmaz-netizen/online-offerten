@@ -10,7 +10,6 @@ import VercelInsightsWithConsent from '@/components/VercelInsightsWithConsent'
 import { useCookieConsent } from '@/src/hooks/useCookieConsent'
 // logoUrl import kaldırıldı - Organization schema'sı sadece ana sayfada
 // Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
-import dynamic from 'next/dynamic'
 
 // Lazy load Google Analytics
 const TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"
