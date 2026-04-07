@@ -23,7 +23,10 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
 /** getUser() hängt manchmal (Netzwerk) — ohne Timeout bleibt loading ewig true. */
-const GET_USER_VALIDATE_MS = 8000
+const GET_USER_VALIDATE_MS = 12000
+
+/** Gleiche Session parallel validieren vermeiden (getSession + INITIAL_SESSION = 2× getUser). */
+const validateInFlight = new Map<string, Promise<Session | null>>()
 
 /** GoTrue / getSession / getUser hataları: oturumu tamamen temizlemek gerekir. */
 function shouldInvalidateAuthError(error: { message?: string; code?: string } | null | undefined): boolean {
@@ -112,37 +115,52 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const validateSessionWithServer = useCallback(async (session: Session | null) => {
     if (!session) return null
 
-    try {
-      const verifyPromise = (async (): Promise<Session | null> => {
-        const {
-          data: { user: verifiedUser },
-          error: userError,
-        } = await supabase.auth.getUser()
-        if (userError || !verifiedUser) {
-          await invalidateBrokenSession(userError?.message || userError?.code || 'getUser failed')
-          return null
+    const tokenKey = session.access_token ?? 'no-token'
+    const existing = validateInFlight.get(tokenKey)
+    if (existing) return existing
+
+    const run = (async (): Promise<Session | null> => {
+      try {
+        const verifyPromise = (async (): Promise<Session | null> => {
+          const {
+            data: { user: verifiedUser },
+            error: userError,
+          } = await supabase.auth.getUser()
+          if (userError || !verifiedUser) {
+            await invalidateBrokenSession(userError?.message || userError?.code || 'getUser failed')
+            return null
+          }
+          return { ...session, user: verifiedUser } as Session
+        })()
+
+        const timeoutPromise = new Promise<'timeout'>((resolve) => {
+          setTimeout(() => resolve('timeout'), GET_USER_VALIDATE_MS)
+        })
+
+        const raced = await Promise.race([
+          verifyPromise.then((v) => ({ kind: 'done' as const, value: v })),
+          timeoutPromise.then(() => ({ kind: 'timeout' as const })),
+        ])
+
+        if (raced.kind === 'timeout') {
+          if (process.env.NODE_ENV === 'development') {
+            console.warn('[AuthContext] getUser() timeout — using session from client storage')
+          }
+          return session
         }
-        return { ...session, user: verifiedUser } as Session
-      })()
-
-      const timeoutPromise = new Promise<'timeout'>((resolve) => {
-        setTimeout(() => resolve('timeout'), GET_USER_VALIDATE_MS)
-      })
-
-      const raced = await Promise.race([
-        verifyPromise.then((v) => ({ kind: 'done' as const, value: v })),
-        timeoutPromise.then(() => ({ kind: 'timeout' as const })),
-      ])
-
-      if (raced.kind === 'timeout') {
-        console.warn('[AuthContext] getUser() timeout — using session from client storage')
+        return raced.value
+      } catch (e) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('[AuthContext] validateSessionWithServer failed — using session from storage', e)
+        }
         return session
+      } finally {
+        validateInFlight.delete(tokenKey)
       }
-      return raced.value
-    } catch (e) {
-      console.warn('[AuthContext] validateSessionWithServer failed — using session from storage', e)
-      return session
-    }
+    })()
+
+    validateInFlight.set(tokenKey, run)
+    return run
   }, [invalidateBrokenSession, supabase])
 
   useEffect(() => {
@@ -179,6 +197,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
         async (event, session) => {
+          /** INITIAL_SESSION: getSession() im selben Effect liefert dieselbe Session — kein zweites getUser(). */
+          if (event === 'INITIAL_SESSION') {
+            return
+          }
+
           // Handle token refresh errors
           if (event === 'TOKEN_REFRESHED' && !session) {
             await invalidateBrokenSession('Token refresh failed')

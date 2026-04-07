@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useAuth } from '@/src/contexts/SupabaseAuthContext'
 import { useToast } from '@/src/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
@@ -147,7 +147,6 @@ const LoginPageClient = () => {
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isRedirectingAfterLogin, setIsRedirectingAfterLogin] = useState(false)
-  const [isValidatingCurrentSession, setIsValidatingCurrentSession] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
   const [loginFormError, setLoginFormError] = useState<string | null>(null)
@@ -159,81 +158,18 @@ const LoginPageClient = () => {
       ? `/forgot-password?email=${encodeURIComponent(email.trim())}`
       : '/forgot-password'
 
-  // Keep /login loop-safe: validate current session first, then redirect if valid.
-
+  /** Bereits eingeloggt: AuthContext hat Session validiert — keine zweite getSession/getUser/Cookie-Kette (war sehr langsam). */
   const getDashboardHrefByRole = (role?: string) => {
     if (role === 'admin' || role === 'editor') return '/admin-dashboard'
     if (role === 'partner') return '/partner/dashboard'
     return '/'
   }
 
-  useEffect(() => {
-    let isMounted = true
-
-    const validateCurrentSession = async () => {
-      if (loading) return
-
-      if (!user) {
-        if (isMounted) {
-          setIsValidatingCurrentSession(false)
-        }
-        return
-      }
-
-      setIsValidatingCurrentSession(true)
-      const supabase = createClient()
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
-
-      if (!isMounted) return
-
-      if (sessionError || !session?.access_token || !session?.user?.id) {
-        console.warn('[LoginPage] Existing session missing/invalid, clearing auth artifacts', sessionError?.message)
-        try {
-          await supabase.auth.signOut()
-        } catch (signOutError) {
-          console.warn('[LoginPage] signOut during session validation failed:', signOutError)
-        }
-        clearClientAuthArtifacts()
-        setIsValidatingCurrentSession(false)
-        return
-      }
-
-      const { data: { user: verifiedUser }, error: userError } = await supabase.auth.getUser(session.access_token)
-      if (userError || !verifiedUser) {
-        console.warn('[LoginPage] Existing session failed server validation, clearing auth artifacts', userError?.message)
-        try {
-          await supabase.auth.signOut()
-        } catch (signOutError) {
-          console.warn('[LoginPage] signOut during getUser validation failed:', signOutError)
-        }
-        clearClientAuthArtifacts()
-        setIsValidatingCurrentSession(false)
-        return
-      }
-
-      const cookieReady = await syncAuthCookieFromSession(session)
-      if (!cookieReady) {
-        console.warn('[LoginPage] Cookie sync failed for existing session, forcing re-login')
-        try {
-          await supabase.auth.signOut()
-        } catch (signOutError) {
-          console.warn('[LoginPage] signOut after cookie sync failure failed:', signOutError)
-        }
-        clearClientAuthArtifacts()
-        setIsValidatingCurrentSession(false)
-        return
-      }
-
-      setIsValidatingCurrentSession(false)
-      const redirectTarget = getDashboardHrefByRole(verifiedUser.user_metadata?.role)
-      window.location.replace(redirectTarget)
-    }
-
-    validateCurrentSession()
-    return () => {
-      isMounted = false
-    }
-  }, [loading, user])
+  useLayoutEffect(() => {
+    if (!mounted || loading || !user) return
+    const role = user.user_metadata?.role ?? user.app_metadata?.role
+    window.location.replace(getDashboardHrefByRole(role))
+  }, [mounted, loading, user])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -356,6 +292,10 @@ const LoginPageClient = () => {
     return <LoginShellPlaceholder />
   }
 
+  if (loading) {
+    return <LoginShellPlaceholder />
+  }
+
   if (isRedirectingAfterLogin) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
@@ -367,13 +307,11 @@ const LoginPageClient = () => {
     )
   }
 
-  if (!loading && user) {
+  if (user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
-        <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
-          <h1 className="text-2xl font-bold text-black mb-2">Sitzung wird überprüft</h1>
-          <p className="text-gray-600">{isValidatingCurrentSession ? 'Bitte einen Moment warten...' : 'Weiterleitung wird vorbereitet...'}</p>
-        </div>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
+        <Loader2 className="h-10 w-10 animate-spin text-green-600" />
+        <p className="mt-4 text-sm font-medium text-gray-700">Weiterleitung zum Dashboard…</p>
       </div>
     )
   }
