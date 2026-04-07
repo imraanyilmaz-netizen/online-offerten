@@ -22,8 +22,8 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
-/** getUser() hängt manchmal (Netzwerk) — ohne Timeout bleibt loading ewig true. */
-const GET_USER_VALIDATE_MS = 12000
+/** getUser() can stall on weak networks; keep validation timeout short. */
+const GET_USER_VALIDATE_MS = 2500
 
 /** Gleiche Session parallel validieren vermeiden (getSession + INITIAL_SESSION = 2× getUser). */
 const validateInFlight = new Map<string, Promise<Session | null>>()
@@ -163,6 +163,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return run
   }, [invalidateBrokenSession, supabase])
 
+  const validateSessionInBackground = useCallback((sessionToValidate: Session | null) => {
+    if (!sessionToValidate) return
+
+    void validateSessionWithServer(sessionToValidate).then((validatedSession) => {
+      if (validatedSession === null) {
+        // invalidateBrokenSession already cleared state
+        return
+      }
+      // Refresh user payload if server returned a richer/updated user object.
+      if (validatedSession.user?.id && validatedSession.user.id !== user?.id) {
+        void handleSession(validatedSession)
+      }
+    })
+  }, [handleSession, user?.id, validateSessionWithServer])
+
   useEffect(() => {
     const initAuth = () => {
       const getSession = async () => {
@@ -180,8 +195,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             return
           }
 
-          const validatedSession = await validateSessionWithServer(session)
-          await handleSession(validatedSession)
+          // Fast path: expose session immediately; do server validation asynchronously.
+          await handleSession(session)
+          validateSessionInBackground(session)
         } catch (e) {
           const err = e as { message?: string; code?: string }
           if (shouldInvalidateAuthError(err)) {
@@ -196,7 +212,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       getSession()
 
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
-        async (event, session) => {
+        async (event: string, session: Session | null) => {
           /** INITIAL_SESSION: getSession() im selben Effect liefert dieselbe Session — kein zweites getUser(). */
           if (event === 'INITIAL_SESSION') {
             return
@@ -222,8 +238,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             return
           }
 
-          const validatedSession = await validateSessionWithServer(session)
-          await handleSession(validatedSession)
+          // Keep UI responsive on auth changes, then validate in background.
+          await handleSession(session)
+          validateSessionInBackground(session)
         }
       )
 
@@ -237,7 +254,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       cleanupFn()
     }
-  }, [handleSession, invalidateBrokenSession, supabase, validateSessionWithServer])
+  }, [handleSession, invalidateBrokenSession, supabase, validateSessionInBackground])
 
   const signUp = useCallback(async (email: string, password: string, options?: any) => {
     const { error } = await supabase.auth.signUp({

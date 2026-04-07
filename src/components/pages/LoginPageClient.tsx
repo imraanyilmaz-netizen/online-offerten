@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 // framer-motion removed - CSS for better INP
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
 import { createClient } from '@/src/lib/supabase/client'
@@ -196,7 +197,7 @@ const LoginPageClient = () => {
           resolve()
         }, 800)
         
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {
           console.log('[LoginPage] Auth state change:', { event, hasSession: !!session })
           if (event === 'SIGNED_IN' && session) {
             clearTimeout(timeout)

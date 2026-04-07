@@ -1,16 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import DashboardSkeleton from '@/src/components/ui/DashboardSkeleton'
 
 const AdminDashboardPageClient = dynamic(
   () => import('@/components/pages/admin/AdminDashboardPageClient'),
   {
     ssr: false,
-    loading: () => (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600" />
-      </div>
-    ),
+    loading: () => <DashboardSkeleton />,
   }
 )
 

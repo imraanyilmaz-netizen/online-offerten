@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertTriangle, Loader2, MailWarning, Hourglass, Settings, PlusCircle, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { usePartnerDashboard } from '@/hooks/usePartnerDashboard';
+import DashboardSkeleton from '@/src/components/ui/DashboardSkeleton';
 
 import PartnerStats from '@/components/PartnerPanel/PartnerStats';
 import AvailableQuoteList from '@/components/PartnerPanel/AvailableQuoteList';
@@ -82,13 +83,7 @@ const PartnerPanel = ({ setCompanyName }) => {
   }, [fetchDashboardData]);
 
   if (loading) {
-    return (
-      <div className="flex flex-col justify-center items-center h-screen bg-slate-50 text-slate-700">
-        <Loader2 className="w-16 h-16 animate-spin text-green-600 mb-4" />
-        <h1 className="text-2xl font-semibold">Lade Dashboard...</h1>
-        <p className="text-slate-500">Einen Moment, wir bereiten alles für Sie vor.</p>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   if (panelStatus === 'error') {
@@ -132,13 +127,7 @@ const PartnerPanel = ({ setCompanyName }) => {
   }
   
   if (!partnerData) {
-     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-slate-50 text-slate-700">
-        <Loader2 className="w-16 h-16 animate-spin text-green-600 mb-4" />
-        <h1 className="text-2xl font-semibold">Lade Dashboard...</h1>
-        <p className="text-slate-500">Einen Moment, wir bereiten alles für Sie vor.</p>
-      </div>
-    );
+     return <DashboardSkeleton />;
   }
 
   const totalPurchasedCount = purchasedQuotes.length + archivedQuotes.length;
