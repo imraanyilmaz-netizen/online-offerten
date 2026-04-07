@@ -65,14 +65,14 @@ const UserMenu = ({ user, onLogout, partnerBrand }) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href={dashboardPath} className="cursor-pointer">
+          <Link prefetch={false} href={dashboardPath} className="cursor-pointer">
             <LayoutDashboard className="mr-2 h-4 w-4" />
             <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
         {user?.user_metadata?.role === 'partner' && (
           <DropdownMenuItem asChild>
-            <Link href={settingsPath} className="cursor-pointer">
+            <Link prefetch={false} href={settingsPath} className="cursor-pointer">
               <Settings className="mr-2 h-4 w-4" />
               <span>Einstellungen</span>
             </Link>
@@ -150,7 +150,7 @@ export default function NavbarAuthSection({ variant = 'desktop', onNavigate, Nav
       <div className="hidden md:flex items-center gap-3" style={{ minHeight: '36px' }}>
         {!loading && !user ? (
           <Button asChild size="sm" variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
-            <Link href="/partner-werden">Partner werden</Link>
+            <Link prefetch={false} href="/partner-werden">Partner werden</Link>
           </Button>
         ) : null}
         {loading ? (
@@ -159,7 +159,7 @@ export default function NavbarAuthSection({ variant = 'desktop', onNavigate, Nav
           <UserMenu user={user} onLogout={handleLogout} partnerBrand={partnerBrand} />
         ) : (
           <Button asChild size="sm" className="bg-green-600 hover:bg-green-700 text-white" style={{ minWidth: '80px' }}>
-            <Link href="/login">Anmelden</Link>
+            <Link prefetch={false} href="/login">Anmelden</Link>
           </Button>
         )}
       </div>

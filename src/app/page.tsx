@@ -604,7 +604,7 @@ export default async function HomePage() {
                       </div>
                       <div>
                         <h3 className="heading-4 mb-2">
-                          Persönliche Unterstützung bei größeren Umzügen
+                          Persönliche Unterstützung bei grösseren Umzügen
                         </h3>
                         <p className="text-body leading-relaxed">
                           Bei umfangreichen Umzügen oder längeren Strecken helfen wir Ihnen bei der Einordnung der Angebote, damit Sie die für Ihr Projekt passende Entscheidung treffen können.

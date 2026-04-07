@@ -22,6 +22,9 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
+/** getUser() hängt manchmal (Netzwerk) — ohne Timeout bleibt loading ewig true. */
+const GET_USER_VALIDATE_MS = 8000
+
 /** GoTrue / getSession / getUser hataları: oturumu tamamen temizlemek gerekir. */
 function shouldInvalidateAuthError(error: { message?: string; code?: string } | null | undefined): boolean {
   if (!error) return false
@@ -57,6 +60,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
+
+  /** Verhindert ewiges loading=true wenn getSession/getUser hängen (Navbar / Dashboard). */
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      setLoading((prev) => {
+        if (!prev) return prev
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('[AuthContext] Auth-Init dauert ungewöhnlich lange — loading wird freigegeben')
+        }
+        return false
+      })
+    }, 20000)
+    return () => clearTimeout(t)
+  }, [])
 
   const clearClientAuthStorage = useCallback(() => {
     if (typeof window === 'undefined') return
@@ -95,13 +112,37 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const validateSessionWithServer = useCallback(async (session: Session | null) => {
     if (!session) return null
 
-    const { data: { user: verifiedUser }, error: userError } = await supabase.auth.getUser()
-    if (userError || !verifiedUser) {
-      await invalidateBrokenSession(userError?.message || userError?.code || 'getUser failed')
-      return null
-    }
+    try {
+      const verifyPromise = (async (): Promise<Session | null> => {
+        const {
+          data: { user: verifiedUser },
+          error: userError,
+        } = await supabase.auth.getUser()
+        if (userError || !verifiedUser) {
+          await invalidateBrokenSession(userError?.message || userError?.code || 'getUser failed')
+          return null
+        }
+        return { ...session, user: verifiedUser } as Session
+      })()
 
-    return { ...session, user: verifiedUser } as Session
+      const timeoutPromise = new Promise<'timeout'>((resolve) => {
+        setTimeout(() => resolve('timeout'), GET_USER_VALIDATE_MS)
+      })
+
+      const raced = await Promise.race([
+        verifyPromise.then((v) => ({ kind: 'done' as const, value: v })),
+        timeoutPromise.then(() => ({ kind: 'timeout' as const })),
+      ])
+
+      if (raced.kind === 'timeout') {
+        console.warn('[AuthContext] getUser() timeout — using session from client storage')
+        return session
+      }
+      return raced.value
+    } catch (e) {
+      console.warn('[AuthContext] validateSessionWithServer failed — using session from storage', e)
+      return session
+    }
   }, [invalidateBrokenSession, supabase])
 
   useEffect(() => {

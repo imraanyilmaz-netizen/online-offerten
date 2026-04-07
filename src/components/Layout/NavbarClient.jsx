@@ -84,6 +84,7 @@ export default function NavbarClient({ children: logoSlot }) {
     return (
       <Link
         href={to}
+        prefetch={false}
         onClick={onClick}
         className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out ${
           isActive ? 'bg-green-100 text-green-700' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
@@ -100,7 +101,7 @@ export default function NavbarClient({ children: logoSlot }) {
       <div className="relative" onMouseEnter={() => openDesktopDropdown(menuKey)} onMouseLeave={scheduleCloseDesktopDropdown}>
         <div className="flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out">
           {baseHref ? (
-            <Link href={baseHref} className="leading-none text-gray-700 hover:text-gray-900">
+            <Link prefetch={false} href={baseHref} className="leading-none text-gray-700 hover:text-gray-900">
               {label}
             </Link>
           ) : (
@@ -127,6 +128,7 @@ export default function NavbarClient({ children: logoSlot }) {
             <Link
               key={link.to}
               href={link.to}
+              prefetch={false}
               onClick={() => setOpenDesktopMenu(null)}
               className="block rounded-sm px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
@@ -191,7 +193,7 @@ export default function NavbarClient({ children: logoSlot }) {
 
             <div className="pt-1">
               <div className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
-                <Link href="/umzugsfirma" onClick={closeMobile} className="flex-1 text-left">
+                <Link prefetch={false} href="/umzugsfirma" onClick={closeMobile} className="flex-1 text-left">
                   UMZUG
                 </Link>
                 <button

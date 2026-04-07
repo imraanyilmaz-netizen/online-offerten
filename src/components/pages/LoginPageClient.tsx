@@ -117,10 +117,27 @@ function mapLoginErrorMessage(error: { message?: string } | null): string {
   return 'Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.'
 }
 
+/** SSR ile ilk client çıktısı aynı olsun (useAuth loading/user farkı h1 vs CardTitle hydration hatası veriyordu). */
+const LoginShellPlaceholder = () => (
+  <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
+    <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8">
+      <div className="h-9 w-3/4 max-w-xs bg-gray-200/80 rounded-md animate-pulse mx-auto mb-4" />
+      <div className="h-4 w-full bg-gray-100/90 rounded animate-pulse mb-2" />
+      <div className="h-4 w-5/6 bg-gray-100/90 rounded animate-pulse" />
+    </div>
+  </div>
+)
+
 const LoginPageClient = () => {
   const { signIn, user, loading } = useAuth()
   const { toast } = useToast()
   const searchParams = useSearchParams()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- kasıtlı: hydration sonrası auth UI
+    setMounted(true)
+  }, [])
 
   const pageTitle = 'Partner Login'
   const welcomeMessage = 'Willkommen zurück!'
@@ -333,6 +350,10 @@ const LoginPageClient = () => {
   const cardVariants = {
     login: { height: 'auto' },
     register: { height: 'auto' },
+  }
+
+  if (!mounted) {
+    return <LoginShellPlaceholder />
   }
 
   if (isRedirectingAfterLogin) {
