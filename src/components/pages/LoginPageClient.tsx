@@ -14,29 +14,17 @@ import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 // framer-motion removed - CSS for better INP
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
 import { createClient } from '@/src/lib/supabase/client'
+import { getSupabaseAuthCookieName } from '@/src/lib/supabase/auth-cookie-name'
 
-const COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
+/**
+ * signInWithPassword bittikten sonra @supabase/ssr createBrowserClient oturumu
+ * zaten çerezlere yazar (base64 + refresh_token). Eski kod minimal JSON yazıp
+ * bunu eziyordu; sunucu tarafı getUser() oturumu geçersiz sayıyordu.
+ */
+const waitForAuthCookieReady = async (maxWait = 1500): Promise<boolean> => {
+  const base = getSupabaseAuthCookieName()
+  if (!base) return false
 
-const clearClientAuthArtifacts = () => {
-  if (typeof window === 'undefined') return
-
-  const authStorageKeys = Object.keys(localStorage).filter(
-    (key) => key.includes('supabase') || key.includes('auth-token')
-  )
-  authStorageKeys.forEach((key) => localStorage.removeItem(key))
-  sessionStorage.clear()
-
-  document.cookie.split(';').forEach((rawCookie) => {
-    const cookieName = rawCookie.split('=')[0]?.trim()
-    if (!cookieName) return
-    if (cookieName.includes('auth-token') || cookieName === COOKIE_NAME || cookieName.startsWith(`${COOKIE_NAME}.`)) {
-      document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`
-    }
-  })
-}
-
-// Helper function to wait for cookie to be set
-const waitForCookie = async (maxWait = 2000): Promise<boolean> => {
   const startTime = Date.now()
   while (Date.now() - startTime < maxWait) {
     const cookies = document.cookie.split(';').reduce((acc, cookie) => {
@@ -46,55 +34,15 @@ const waitForCookie = async (maxWait = 2000): Promise<boolean> => {
       }
       return acc
     }, {} as Record<string, string>)
-    
-    // Check if cookie exists (either full cookie or split cookies)
-    if (cookies[COOKIE_NAME] || cookies[`${COOKIE_NAME}.0`]) {
-      console.log('[LoginPage] Cookie found, ready to redirect')
+
+    if (cookies[base] || cookies[`${base}.0`]) {
       return true
     }
-    
-    await new Promise(resolve => setTimeout(resolve, 100))
+
+    await new Promise((resolve) => setTimeout(resolve, 50))
   }
-  console.warn('[LoginPage] Cookie not found after waiting')
+  console.warn('[LoginPage] Auth cookie not visible after sign-in; redirect may fail')
   return false
-}
-
-const syncAuthCookieFromSession = async (session: any): Promise<boolean> => {
-  if (!session?.access_token || !session?.user?.id) return false
-
-  const minimalSession = {
-    access_token: session.access_token,
-    user: {
-      id: session.user.id,
-      email: session.user.email,
-      user_metadata: {
-        role: session.user?.user_metadata?.role
-      }
-    }
-  }
-
-  const expires = new Date()
-  expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000) // 7 days
-  const secureFlag = window.location.protocol === 'https:' ? 'Secure;' : ''
-  const cookieValue = encodeURIComponent(JSON.stringify(minimalSession))
-
-  const MAX_COOKIE_SIZE = 3800
-  if (cookieValue.length > MAX_COOKIE_SIZE) {
-    let index = 0
-    let offset = 0
-    while (offset < cookieValue.length) {
-      const chunk = cookieValue.substring(offset, offset + MAX_COOKIE_SIZE)
-      const cookieName = index === 0 ? COOKIE_NAME : `${COOKIE_NAME}.${index}`
-      document.cookie = `${cookieName}=${chunk}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-      offset += MAX_COOKIE_SIZE
-      index++
-    }
-  } else {
-    document.cookie = `${COOKIE_NAME}=${cookieValue}; path=/; expires=${expires.toUTCString()}; SameSite=Lax; ${secureFlag}`
-  }
-
-  // Ensure cookie is readable before redirecting to protected route.
-  return waitForCookie(600)
 }
 
 /** Eine klare Meldung pro Fehlerfall (gleiche Logik wie AuthContext, für Inline-Anzeige) */
@@ -227,11 +175,10 @@ const LoginPageClient = () => {
       const userRole = session.user?.user_metadata?.role
       console.log('[LoginPage] User role detected:', userRole)
 
-      // Build cookie payload from current verified session (not from localStorage keys).
       if (session?.access_token && session?.user?.id) {
-        const cookieReady = await syncAuthCookieFromSession(session)
+        const cookieReady = await waitForAuthCookieReady()
         if (!cookieReady) {
-          console.error('[LoginPage] ❌ Cookie sync failed after login')
+          console.error('[LoginPage] ❌ Auth cookie not ready after login')
           toast({
             variant: "destructive",
             title: "Fehler",

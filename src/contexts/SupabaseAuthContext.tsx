@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from 'react'
 import { useToast } from '@/src/components/ui/use-toast'
 import { createClient } from '@/src/lib/supabase/client'
+import { getSupabaseAuthCookieName } from '@/src/lib/supabase/auth-cookie-name'
 import type { User, Session } from '@supabase/supabase-js'
 
 interface AuthContextType {
@@ -20,7 +21,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-const AUTH_COOKIE_NAME = 'sb-uhkiaodpzvhsuqfrwgih-auth-token'
 
 /** getUser() can stall on weak networks; keep validation timeout short. */
 const GET_USER_VALIDATE_MS = 2500
@@ -87,10 +87,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     authStorageKeys.forEach((key) => localStorage.removeItem(key))
     sessionStorage.clear()
 
+    const authBase = getSupabaseAuthCookieName()
     document.cookie.split(';').forEach((rawCookie) => {
       const cookieName = rawCookie.split('=')[0]?.trim()
       if (!cookieName) return
-      if (cookieName.includes('auth-token') || cookieName === AUTH_COOKIE_NAME || cookieName.startsWith(`${AUTH_COOKIE_NAME}.`)) {
+      const matchesProjectCookie =
+        authBase &&
+        (cookieName === authBase || cookieName.startsWith(`${authBase}.`))
+      if (cookieName.includes('auth-token') || matchesProjectCookie) {
         document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`
       }
     })
