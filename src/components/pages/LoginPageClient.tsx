@@ -10,40 +10,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
-import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 // framer-motion removed - CSS for better INP
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
-import { createClient } from '@/src/lib/supabase/client'
-import { getSupabaseAuthCookieName } from '@/src/lib/supabase/auth-cookie-name'
-
-/**
- * signInWithPassword bittikten sonra @supabase/ssr createBrowserClient oturumu
- * zaten çerezlere yazar (base64 + refresh_token). Eski kod minimal JSON yazıp
- * bunu eziyordu; sunucu tarafı getUser() oturumu geçersiz sayıyordu.
- */
-const waitForAuthCookieReady = async (maxWait = 1500): Promise<boolean> => {
-  const base = getSupabaseAuthCookieName()
-  if (!base) return false
-
-  const startTime = Date.now()
-  while (Date.now() - startTime < maxWait) {
-    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-      const [name, ...rest] = cookie.trim().split('=')
-      if (name && rest.length > 0) {
-        acc[name] = decodeURIComponent(rest.join('='))
-      }
-      return acc
-    }, {} as Record<string, string>)
-
-    if (cookies[base] || cookies[`${base}.0`]) {
-      return true
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 50))
-  }
-  console.warn('[LoginPage] Auth cookie not visible after sign-in; redirect may fail')
-  return false
-}
+import { postLoginHrefForRole, resolveAuthRole } from '@/src/lib/auth/role'
 
 /** Eine klare Meldung pro Fehlerfall (gleiche Logik wie AuthContext, für Inline-Anzeige) */
 function mapLoginErrorMessage(error: { message?: string } | null): string {
@@ -107,133 +76,60 @@ const LoginPageClient = () => {
       ? `/forgot-password?email=${encodeURIComponent(email.trim())}`
       : '/forgot-password'
 
-  /** Bereits eingeloggt: AuthContext hat Session validiert — keine zweite getSession/getUser/Cookie-Kette (war sehr langsam). */
-  const getDashboardHrefByRole = (role?: string) => {
-    if (role === 'admin' || role === 'editor') return '/admin-dashboard'
-    if (role === 'partner') return '/partner/dashboard'
-    return '/'
-  }
-
+  /** Zaten oturum açıksa: tam sayfa yönlendirme (proxy çerezleri okusun). */
   useLayoutEffect(() => {
     if (!mounted || loading || !user) return
-    const role = user.user_metadata?.role ?? user.app_metadata?.role
-    window.location.replace(getDashboardHrefByRole(role))
+    const href = postLoginHrefForRole(resolveAuthRole(user))
+    window.location.replace(href)
   }, [mounted, loading, user])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoginFormError(null)
     setIsSubmitting(true)
-    console.log('[LoginPage] handleLogin called:', { email })
 
-    const { error } = await signIn(email, password, { silent: true })
+    const { error, session } = await signIn(email, password, { silent: true })
 
-    console.log('[LoginPage] signIn result:', { hasError: !!error, errorMessage: error?.message })
-
-    if (!error) {
-      setFailedLoginAttempts(0)
-      console.log('[LoginPage] Login successful, waiting for auth state change...')
-      setIsRedirectingAfterLogin(true)
-      
-      // Wait for onAuthStateChange event to fire and session to be saved
-      const supabase = createClient()
-      
-      // Wait for SIGNED_IN event
-      await new Promise<void>((resolve) => {
-        const timeout = setTimeout(() => {
-          console.warn('[LoginPage] Auth state change timeout, proceeding anyway')
-          resolve()
-        }, 800)
-        
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {
-          console.log('[LoginPage] Auth state change:', { event, hasSession: !!session })
-          if (event === 'SIGNED_IN' && session) {
-            clearTimeout(timeout)
-            subscription.unsubscribe()
-            resolve()
-          }
-        })
-      })
-      
-      // Wait a bit more for localStorage to be updated
-      await new Promise(resolve => setTimeout(resolve, 100))
-      
-      // Get session to determine user role
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
-      
-      if (sessionError || !session) {
-        console.error('[LoginPage] Failed to get session after login:', sessionError)
-        toast({
-          variant: "destructive",
-          title: "Fehler",
-          description: "Session konnte nicht abgerufen werden.",
-        })
-        setIsSubmitting(false)
-        return
-      }
-
-      const userRole = session.user?.user_metadata?.role
-      console.log('[LoginPage] User role detected:', userRole)
-
-      if (session?.access_token && session?.user?.id) {
-        const cookieReady = await waitForAuthCookieReady()
-        if (!cookieReady) {
-          console.error('[LoginPage] ❌ Auth cookie not ready after login')
-          toast({
-            variant: "destructive",
-            title: "Fehler",
-            description: "Anmeldung konnte nicht stabilisiert werden. Bitte erneut versuchen.",
-          })
-          setIsRedirectingAfterLogin(false)
-          setIsSubmitting(false)
-          return
-        }
-      } else {
-        console.warn('[LoginPage] No valid session data available to sync cookie')
-      }
-
-      // Redirect based on role using window.location.href for full page reload
-      // This ensures middleware intercepts the request properly
-      if (userRole === 'admin' || userRole === 'editor') {
-        console.log('[LoginPage] Redirecting admin/editor to /admin-dashboard')
-        toast({
-          title: "Anmeldung erfolgreich",
-          description: userRole === 'editor' ? "Sie werden zum Ratgeber-Bereich weitergeleitet..." : "Sie werden zum Admin-Dashboard weitergeleitet...",
-        })
-        window.location.href = '/admin-dashboard'
-      } else if (userRole === 'partner') {
-        console.log('[LoginPage] Redirecting partner to /partner/dashboard')
-        toast({
-          title: "Anmeldung erfolgreich",
-          description: "Sie werden zum Partner-Dashboard weitergeleitet...",
-        })
-        window.location.href = '/partner/dashboard'
-      } else {
-        console.log('[LoginPage] No specific role, redirecting to home')
-      toast({
-        title: "Anmeldung erfolgreich",
-        description: "Sie werden weitergeleitet...",
-      })
-        window.location.href = '/'
-      }
-    } else {
-      console.log('[LoginPage] Login failed:', error?.message)
+    if (error || !session?.user) {
       setIsRedirectingAfterLogin(false)
-      setFailedLoginAttempts((n) => n + 1)
-      setLoginFormError(mapLoginErrorMessage(error))
+      if (error) {
+        setFailedLoginAttempts((n) => n + 1)
+        setLoginFormError(mapLoginErrorMessage(error))
+      } else {
+        setLoginFormError('Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.')
+      }
       setIsSubmitting(false)
+      return
     }
-  }
 
-  const formVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 50 },
-  }
-  
-  const cardVariants = {
-    login: { height: 'auto' },
-    register: { height: 'auto' },
+    setFailedLoginAttempts(0)
+    setIsRedirectingAfterLogin(true)
+    setIsSubmitting(false)
+
+    const role = resolveAuthRole(session.user)
+    const href = postLoginHrefForRole(role)
+
+    if (role === 'admin' || role === 'editor') {
+      toast({
+        title: 'Anmeldung erfolgreich',
+        description:
+          role === 'editor'
+            ? 'Sie werden zum Ratgeber-Bereich weitergeleitet...'
+            : 'Sie werden zum Admin-Dashboard weitergeleitet...',
+      })
+    } else if (role === 'partner') {
+      toast({
+        title: 'Anmeldung erfolgreich',
+        description: 'Sie werden zum Partner-Dashboard weitergeleitet...',
+      })
+    } else {
+      toast({
+        title: 'Anmeldung erfolgreich',
+        description: 'Sie werden weitergeleitet...',
+      })
+    }
+
+    window.location.assign(href)
   }
 
   if (!mounted) {

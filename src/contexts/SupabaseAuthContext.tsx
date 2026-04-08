@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState, useCallback, use
 import { useToast } from '@/src/components/ui/use-toast'
 import { createClient } from '@/src/lib/supabase/client'
 import { getSupabaseAuthCookieName } from '@/src/lib/supabase/auth-cookie-name'
-import type { User, Session } from '@supabase/supabase-js'
+import type { User, Session, AuthError } from '@supabase/supabase-js'
 
 interface AuthContextType {
   user: User | null
@@ -15,7 +15,7 @@ interface AuthContextType {
     email: string,
     password: string,
     options?: { silent?: boolean }
-  ) => Promise<{ error: any }>
+  ) => Promise<{ error: AuthError | null; session: Session | null }>
   signOut: () => Promise<{ error: any }>
   updateUserPassword: (newPassword: string) => Promise<{ data: any; error: any }>
 }
@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setLoading(false)
   }, [])
 
-  const invalidateBrokenSession = useCallback(async (reason: string) => {
+  const invalidateBrokenSession = useCallback(async (_reason: string) => {
     try {
       await supabase.auth.signOut()
     } catch (signOutError) {
@@ -297,7 +297,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         password,
       })
-      void data
 
       if (error) {
         let errorMessage = error.message || 'Etwas ist schief gelaufen'
@@ -323,9 +322,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             description: errorMessage,
           })
         }
+        return { error, session: null }
       }
 
-      return { error }
+      return { error: null, session: data.session ?? null }
     },
     [toast, supabase]
   )

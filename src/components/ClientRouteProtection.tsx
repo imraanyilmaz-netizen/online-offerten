@@ -3,76 +3,53 @@
 import { useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/src/contexts/SupabaseAuthContext'
+import {
+  adminAllowedRole,
+  isAdminProtectedPath,
+  isPartnerAppProtectedPath,
+  partnerAllowedRole,
+  postLoginHrefForRole,
+  resolveAuthRole,
+} from '@/src/lib/auth/role'
 
 /**
- * Client-side route protection component
- * Handles role-based redirects for admin and partner routes
- * This replaces middleware role checks - middleware only checks if user is authenticated
+ * İsteğe bağlı istemci tarafı yedek koruma (layout’a eklersen).
+ * Asıl koruma: src/proxy.ts + Supabase çerezleri.
  */
 export default function ClientRouteProtection() {
-  const pathname = usePathname()
+  const pathname = usePathname() ?? ''
   const router = useRouter()
   const { user, loading } = useAuth()
 
   useEffect(() => {
-    // Wait for auth to load
     if (loading) return
 
-    // No user - redirect protected routes to login
+    const role = resolveAuthRole(user)
+
     if (!user) {
-      const protectedRoutes = [
-        '/admin-dashboard',
-        '/partner/dashboard',
-        '/partner/credit-top-up',
-        '/partner/einstellungen'
-      ]
-
-      const isProtectedRoute = protectedRoutes.some(route => pathname?.startsWith(route))
-
-      if (isProtectedRoute) {
-        console.log('[ClientRouteProtection] No user, redirecting protected route to login')
+      const needsLogin =
+        isPartnerAppProtectedPath(pathname) || isAdminProtectedPath(pathname)
+      if (needsLogin) {
         router.replace('/login')
       }
       return
     }
 
-    const userRole = user?.user_metadata?.role
-
-    // Admin route protection (client-side)
-    if (pathname?.startsWith('/admin-dashboard')) {
-      if (userRole !== 'admin' && userRole !== 'editor') {
-        console.log('[ClientRouteProtection] Non-admin user on admin route, redirecting to login')
-        router.replace('/login')
-        return
-      }
+    if (isAdminProtectedPath(pathname) && !adminAllowedRole(role)) {
+      router.replace('/login')
+      return
     }
 
-    // Partner route protection (client-side)
-    if (
-      pathname?.startsWith('/partner/dashboard') ||
-      pathname?.startsWith('/partner/credit-top-up') ||
-      pathname?.startsWith('/partner/einstellungen')
-    ) {
-      if (userRole !== 'partner') {
-        console.log('[ClientRouteProtection] Non-partner user on partner route, redirecting to login')
-        router.replace('/login')
-        return
-      }
+    if (isPartnerAppProtectedPath(pathname) && !partnerAllowedRole(role)) {
+      router.replace('/login')
+      return
     }
 
-    // Redirect authenticated users away from auth pages
     const authRoutes = ['/forgot-password', '/partner-werden']
-    if (authRoutes.includes(pathname || '') && user) {
-      if (userRole === 'admin' || userRole === 'editor') {
-        router.replace('/admin-dashboard')
-      } else if (userRole === 'partner') {
-        router.replace('/partner/dashboard')
-      } else {
-        router.replace('/')
-      }
+    if (authRoutes.includes(pathname)) {
+      router.replace(postLoginHrefForRole(role))
     }
   }, [user, loading, pathname, router])
 
-  return null // Bu component sadece redirect için, UI render etmiyor
+  return null
 }
-

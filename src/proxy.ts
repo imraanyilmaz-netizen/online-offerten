@@ -1,43 +1,47 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/src/lib/supabase/middleware'
+import {
+  adminAllowedRole,
+  isAdminProtectedPath,
+  isPartnerAppProtectedPath,
+  partnerAllowedRole,
+  resolveAuthRole,
+} from '@/src/lib/auth/role'
 
-const PARTNER_PREFIX = '/partner'
-const ADMIN_PREFIX = '/admin-dashboard'
 const LOGIN_PATH = '/login'
 
 export async function proxy(request: NextRequest) {
   const { supabase, response } = createMiddlewareClient(request)
   const pathname = request.nextUrl.pathname
 
-  // Refresh auth cookies/session for SSR and server route protection.
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (pathname.startsWith(PARTNER_PREFIX)) {
+  if (isPartnerAppProtectedPath(pathname)) {
     if (!user) {
       const url = request.nextUrl.clone()
       url.pathname = LOGIN_PATH
       return NextResponse.redirect(url)
     }
 
-    const role = user.user_metadata?.role ?? user.app_metadata?.role
-    if (role !== 'partner') {
+    const role = resolveAuthRole(user)
+    if (!partnerAllowedRole(role)) {
       const url = request.nextUrl.clone()
       url.pathname = '/'
       return NextResponse.redirect(url)
     }
   }
 
-  if (pathname.startsWith(ADMIN_PREFIX)) {
+  if (isAdminProtectedPath(pathname)) {
     if (!user) {
       const url = request.nextUrl.clone()
       url.pathname = LOGIN_PATH
       return NextResponse.redirect(url)
     }
 
-    const role = user.user_metadata?.role ?? user.app_metadata?.role
-    if (role !== 'admin' && role !== 'editor') {
+    const role = resolveAuthRole(user)
+    if (!adminAllowedRole(role)) {
       const url = request.nextUrl.clone()
       url.pathname = '/'
       return NextResponse.redirect(url)
@@ -49,7 +53,15 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/partner/:path*',
+    '/partner/dashboard',
+    '/partner/dashboard/:path*',
+    '/partner/einstellungen',
+    '/partner/einstellungen/:path*',
+    '/partner/credit-top-up',
+    '/partner/credit-top-up/:path*',
+    '/partner/payment-status',
+    '/partner/payment-status/:path*',
+    '/admin-dashboard',
     '/admin-dashboard/:path*',
     '/login',
   ],
