@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, Calendar, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle } from 'lucide-react';
-import { formatDate, formatMoveDateLine } from '@/lib/utils';
+import { formatDate, formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
@@ -92,7 +92,7 @@ const AddressBox = ({ title, quote, type }) => {
                 {isInternational && country && <p><span className="font-bold">Land:</span> {country.name}</p>}
                 {!isInternational && canton && <p><span className="font-bold">Kanton:</span> {canton}</p>}
                 {(floor || lift !== null) && (
-                    <p>{[floor, lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</p>
+                    <p>{[normalizeFloorLabel(floor), lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</p>
                 )}
                 {(rooms || objectType) && (
                     <p>{[rooms, objectType ? objectType.charAt(0).toUpperCase() + objectType.slice(1) : null].filter(Boolean).join(' / ')}</p>
@@ -267,7 +267,9 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                   <DetailSection title="Dienstleistungsdetails" icon={icon}>
                       <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
                       <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
-                      {isMoving && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
+                      {isMoving && shouldShowUmzugsartDetail(quote.umzugart, quote.servicetype) && (
+                        <QuoteDetail label="Umzugsart" value={quote.umzugart} />
+                      )}
                   </DetailSection>
 
                   {/* Umzug + Reinigung Zusatzinfos nebeneinander */}

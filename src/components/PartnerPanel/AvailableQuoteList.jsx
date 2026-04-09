@@ -13,7 +13,7 @@ import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
 import ServiceDetails from '@/components/common/ServiceDetails';
-import { formatDate, formatMoveDateLine } from '@/lib/utils';
+import { formatDate, formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 /** Kauf-Limit (Admin) oder Kundenwunsch «Anzahl Offerten» */
@@ -122,7 +122,7 @@ const AddressBox = ({ title, icon: Icon, quote, type }) => {
                 {isInternational && country && <p><span className="font-bold">Land:</span> {country.name}</p>}
                 {!isInternational && canton && <p><span className="font-bold">Kanton:</span> {canton}</p>}
                 {(floor || lift !== null) && (
-                    <p>{[floor, lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</p>
+                    <p>{[normalizeFloorLabel(floor), lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</p>
                 )}
                 {(rooms || objectType) && (
                     <p>{[rooms, objectType ? objectType.charAt(0).toUpperCase() + objectType.slice(1) : null].filter(Boolean).join(' / ')}</p>
@@ -267,18 +267,24 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
   return (
     <>
       <Accordion type="single" collapsible className="w-full space-y-4">
-        {quotes.map((quote) => {
+        {quotes.map((quote, index) => {
           const canAfford = partnerBalance >= quote.lead_price;
-          const cardBackgroundColorClass = quote.is_viewed ? 'bg-white' : 'bg-green-50';
+          const stripeBg = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+          const unreadAccent = !quote.is_viewed ? 'border-l-4 border-l-green-500' : '';
           const serviceCategory = getServiceCategory(quote.servicetype);
           const icon = serviceCategory === 'moving' ? Truck : (serviceCategory === 'cleaning' ? Sparkles : Paintbrush);
           const movingExtrasText = getMovingExtrasText(quote);
 
           return (
             <AccordionItem key={quote.id} value={quote.id} className="border-none">
-              <Card className={`overflow-hidden transition-shadow hover:shadow-md ${cardBackgroundColorClass}`}>
+              <Card
+                className={`overflow-hidden transition-shadow hover:shadow-md ${stripeBg} ${unreadAccent}`}
+              >
                 <CardHeader className="p-0">
-                  <AccordionTrigger onClick={() => handleTriggerClick(quote)} className="flex items-center justify-between w-full p-4 hover:bg-gray-50 text-left">
+                  <AccordionTrigger
+                    onClick={() => handleTriggerClick(quote)}
+                    className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-100/60 data-[state=open]:bg-gray-100/40"
+                  >
                     <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
                       {(() => {
                         const Icon = icon;
@@ -335,7 +341,9 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                                   )}
                                 </div>
                               )}
-                              {serviceCategory === 'moving' && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
+                              {serviceCategory === 'moving' && shouldShowUmzugsartDetail(quote.umzugart, quote.servicetype) && (
+                                <QuoteDetail label="Umzugsart" value={quote.umzugart} />
+                              )}
                           </DetailSection>
                           <DetailSection title={serviceCategory === 'moving' ? 'Umzugsadressen' : 'Objektadresse'} icon={MapPin}>
                               <div className="grid grid-cols-1 gap-4">

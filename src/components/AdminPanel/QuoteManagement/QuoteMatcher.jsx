@@ -305,7 +305,7 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
         if (quote.status === 'new_quote' || quote.status === 'pending') {
           const criteria = {
             mainService: quote.umzugart === 'lagerung' ? 'lagerung_service' : quote.servicetype,
-            additionalServices: (quote.additional_services_cleaning || quote.umzugsreinigung) ? ['umzugsreinigung'] : [],
+            additionalServices: (quote.additional_cleaning || quote.additional_services_cleaning || quote.umzugsreinigung) ? ['umzugsreinigung'] : [],
             targetRegions: uniqueCantons,
           };
           const matched = findMatchingPartners(activePartners, criteria);
@@ -373,7 +373,7 @@ const QuoteMatcher = ({ quote, allPartners, onSave, onClose, isProcessing }) => 
     }
 
     const additionalServices = [];
-    if (quote.additional_services_cleaning || quote.umzugsreinigung) {
+    if (quote.additional_cleaning || quote.additional_services_cleaning || quote.umzugsreinigung) {
         additionalServices.push('umzugsreinigung');
     }
     // Add more additional services from the quote object as needed

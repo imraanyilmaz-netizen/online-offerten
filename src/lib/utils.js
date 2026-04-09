@@ -63,6 +63,34 @@ export function formatMoveDateLine(moveDate, moveDateFlexible) {
   return `${prefix} – ${datePart}`;
 }
 
+/**
+ * Stockwerk-Texte bereinigen: korrekte "N. Etage" bleibt erhalten;
+ * fehlerhafte Mehrfach-"Etage" (z. B. durch altes QuoteEditForm-formatFloor) wird zu "N. Etage".
+ */
+export function normalizeFloorLabel(floor) {
+  if (floor == null || floor === '') return floor;
+  const s = String(floor).trim();
+  if (!s) return s;
+
+  const lower = s.toLowerCase().replace(/\s+/g, ' ');
+
+  if (/^(\d+)\.\s*etage$/.test(lower)) {
+    const n = lower.match(/^(\d+)/)[1];
+    return `${n}. Etage`;
+  }
+
+  if (/^(\d+)(?:[\s.]*etage)+[\s.]*$/i.test(lower)) {
+    const n = lower.match(/^(\d+)/)[1];
+    return `${n}. Etage`;
+  }
+
+  if (/^\d+\.?$/i.test(s.trim())) {
+    return `${parseInt(s, 10)}. Etage`;
+  }
+
+  return s;
+}
+
 export function getServiceTypeLabel(serviceType) {
   switch (serviceType) {
     case 'Reinigung': return 'Reinigung';
@@ -75,6 +103,23 @@ export function getServiceTypeLabel(serviceType) {
     case 'Malerarbeiten': return 'Malerarbeiten';
     default: return serviceType;
   }
+}
+
+/**
+ * "Umzugsart" nur anzeigen, wenn sie nicht dieselbe Info wie "Dienstleistung" wiederholt
+ * (z. B. Kleintransport in beiden Feldern). Vergleicht Rohwert und getServiceTypeLabel(servicetype).
+ * @param {string|null|undefined} umzugart
+ * @param {string|null|undefined} servicetype – quotes.servicetype
+ */
+export function shouldShowUmzugsartDetail(umzugart, servicetype) {
+  if (umzugart == null || String(umzugart).trim() === '' || umzugart === 'Privatumzug') {
+    return false;
+  }
+  const norm = (s) => String(s ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
+  const u = norm(umzugart);
+  const sameAsService =
+    u === norm(servicetype) || u === norm(getServiceTypeLabel(servicetype));
+  return !sameAsService;
 }
 
 export function parseFileUrls(urls) {

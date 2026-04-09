@@ -12,7 +12,7 @@ import { format, isAfter, subDays } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 import { useToast } from '@/src/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
-import { formatMoveDateLine } from '@/lib/utils';
+import { formatMoveDateLine, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing, allPartners = [], onSendToAdditionalPartners, onUpdatePurchaseQuota, onMarkSoldOut }) => {
@@ -216,7 +216,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const isEditExpanded = expandedView === 'edit';
 
   const formatFloorLift = (floor, lift) =>
-    [floor, lift !== null && lift !== undefined ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null]
+    [normalizeFloorLabel(floor), lift !== null && lift !== undefined ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null]
       .filter(Boolean)
       .join(' / ');
 

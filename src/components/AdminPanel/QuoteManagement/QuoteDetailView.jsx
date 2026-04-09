@@ -5,7 +5,7 @@ import {
     MapPin, MessageSquare, Phone, Truck, User, Building, 
     Sparkles, Paintbrush, ExternalLink
 } from 'lucide-react';
-import { getServiceTypeLabel, formatDate, formatMoveDateLine } from '@/lib/utils';
+import { getServiceTypeLabel, formatDate, formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { countries } from '@/data/countries';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
@@ -89,7 +89,7 @@ const AddressBox = ({ title, quote, type }) => {
                 {isInternational && country && <p><span className="font-semibold">Land:</span> {country.name}</p>}
                 {!isInternational && canton && <p><span className="font-semibold">Kanton:</span> {canton}</p>}
                 {(floor || lift !== null) && (
-                    <p>{[floor, lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</p>
+                    <p>{[normalizeFloorLabel(floor), lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</p>
                 )}
                 {(rooms || objectType) && (
                     <p>{[rooms, objectType ? capitalizeFirstLetter(objectType) : null].filter(Boolean).join(' / ')}</p>
@@ -207,7 +207,10 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
             <QuoteDetail label="Dienstleistung" value={getServiceTypeLabel(quote.servicetype)} />
             <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
             <EmailConfirmationDetail quote={quote} />
-            {isMovingService(quote.servicetype) && quote.umzugart && quote.umzugart !== 'Privatumzug' && <QuoteDetail label="Umzugsart" value={quote.umzugart} />}
+            {isMovingService(quote.servicetype) &&
+              shouldShowUmzugsartDetail(quote.umzugart, quote.servicetype) && (
+                <QuoteDetail label="Umzugsart" value={quote.umzugart} />
+              )}
             {isCleaningService(quote.servicetype) && <CleaningDetails details={quote} />}
             {isPaintingService(quote.servicetype) && <PaintingDetails details={quote} />}
           </DetailSection>

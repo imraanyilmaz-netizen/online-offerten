@@ -6,9 +6,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, Save, X } from 'lucide-react';
-import { getServiceCategory, isMovingService } from '@/lib/serviceCategorizer';
+import { isMovingService, isCleaningService } from '@/lib/serviceCategorizer';
 import { CLEANING_AREA_LEGACY_SELECT_OPTIONS } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
+import { normalizeFloorLabel } from '@/lib/utils';
 
 const FormField = ({ id, label, children }) => (
   <div>
@@ -41,25 +42,13 @@ const formatString = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 
-// Helper function to format floor strings
 const formatFloor = (str) => {
     if (!str) return '';
-    str = str.trim();
-    if (str.length === 0) return '';
-
-    // Convert to lowercase for consistent checking
-    let lowerStr = str.toLowerCase();
-
-    if (lowerStr.endsWith('. etage') || lowerStr.endsWith(' etage')) {
-        return str.replace(/etage/gi, 'Etage').replace(/\./g, '').trim() + '. Etage';
-    }
-    if (lowerStr.endsWith('.')) {
-        return str.trim() + ' Etage';
-    }
-    if (!isNaN(parseInt(str, 10)) && !lowerStr.includes('etage')) {
-        return str.trim() + '. Etage';
-    }
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    const t = str.trim();
+    if (!t) return '';
+    const normalized = normalizeFloorLabel(t);
+    if (normalized !== t) return normalized;
+    return t.charAt(0).toUpperCase() + t.slice(1);
 };
 
 
@@ -74,8 +63,27 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
     return initialData;
   });
   
-  const serviceCategory = getServiceCategory(formData.servicetype);
   const showMovingFields = isMovingService(formData.servicetype);
+  /** Entspricht Kundenformular (Fläche, Art); Zusatzflächen-Boolean werden im Wizard nicht abgefragt → keine eigenen Felder hier */
+  const showReinigungFields =
+    isCleaningService(formData.servicetype) ||
+    !!formData.additional_cleaning ||
+    !!formData.additional_services_cleaning ||
+    !!formData.cleaning_area_sqm ||
+    !!(formData.cleaning_type_guarantee && String(formData.cleaning_type_guarantee).trim());
+
+  /** Nur bei echtem Spezialtransport (Formular-Schritt) oder wenn DB-Felder schon befüllt sind */
+  const servicetypeLower = (formData.servicetype || '').toLowerCase();
+  const umzugartLower = String(formData.umzugart || '').toLowerCase();
+  const showSpezialtransportFields =
+    showMovingFields &&
+    (servicetypeLower.includes('spezialtransport') ||
+      servicetypeLower.includes('klaviertransport') ||
+      servicetypeLower.includes('tresortransport') ||
+      umzugartLower.includes('spezial') ||
+      !!formData.special_transport ||
+      !!(formData.special_transport_type && String(formData.special_transport_type).trim()) ||
+      !!(formData.special_transport_other_details && String(formData.special_transport_other_details).trim()));
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -98,7 +106,7 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
   const handleCheckboxChange = (name, checked) => {
     setFormData(prev => ({ ...prev, [name]: checked }));
   };
-  
+
   const handleDateChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value === '' ? null : value }));
@@ -116,14 +124,23 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
       <form onSubmit={handleSave} className="p-4 sm:p-6 space-y-6">
         <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Anfrage bearbeiten</h3>
         
-        <Fieldset legend="Kunden- & Anfragedaten">
+        <Fieldset legend="Kundenkontakt">
           <FormField id="salutation" label="Anrede"><Input name="salutation" value={formData.salutation || ''} onChange={handleChange} /></FormField>
           <FormField id="firstname" label="Vorname"><Input name="firstname" value={formData.firstname || ''} onChange={handleChange} /></FormField>
           <FormField id="lastname" label="Nachname"><Input name="lastname" value={formData.lastname || ''} onChange={handleChange} /></FormField>
+          <FormField id="firmenname" label="Firma (optional)"><Input name="firmenname" value={formData.firmenname || ''} onChange={handleChange} /></FormField>
           <FormField id="email" label="E-Mail"><Input name="email" type="email" value={formData.email || ''} onChange={handleChange} /></FormField>
           <FormField id="phone" label="Telefon"><Input name="phone" value={formData.phone || ''} onChange={handleChange} /></FormField>
-          <FormField id="servicetype" label="Dienstleistung"><Input name="servicetype" value={formData.servicetype || ''} onChange={handleChange} /></FormField>
-          <FormField id="quoteswanted" label="Gewünschte Offerten"><Input name="quoteswanted" type="number" value={formData.quoteswanted || ''} onChange={handleChange} /></FormField>
+        </Fieldset>
+
+        <Fieldset legend="Anfrage & Leistung">
+          <div className="md:col-span-2 lg:col-span-4 space-y-1">
+            <FormField id="servicetype" label="Dienstleistung (DB-Wert)">
+              <Input name="servicetype" value={formData.servicetype || ''} onChange={handleChange} className="font-mono text-sm" />
+            </FormField>
+            <p className="text-xs text-gray-500 pl-0.5">Wie in der Datenbank gespeichert; nur ändern, wenn die Anzeige für Partner korrigiert werden muss.</p>
+          </div>
+          <FormField id="quoteswanted" label="Gewünschte Offerten (Anzahl)"><Input name="quoteswanted" type="number" value={formData.quoteswanted ?? ''} onChange={handleChange} min={0} /></FormField>
           <FormField id="how_found" label="Wie gefunden?"><Input name="how_found" value={formData.how_found || ''} onChange={handleChange} /></FormField>
         </Fieldset>
 
@@ -154,24 +171,17 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
             </Fieldset>
         )}
         
-        <Fieldset legend="Zeitpunkt & Zusatzleistungen">
+        <Fieldset legend="Termin & Erreichbarkeit">
             <FormField id="move_date" label="Wunschtermin"><Input type="date" name="move_date" value={formData.move_date ? formData.move_date.split('T')[0] : ''} onChange={handleDateChange} /></FormField>
-            <FormField id="preferredtime" label="Bevorzugte Zeit"><Input name="preferredtime" value={formData.preferredtime || ''} onChange={handleChange} /></FormField>
+            <FormField id="preferredtime" label="Telefonische Erreichbarkeit"><Input name="preferredtime" value={formData.preferredtime || ''} onChange={handleChange} placeholder="z. B. Vormittags, ab 17 Uhr …" /></FormField>
             <CheckboxField id="move_date_flexible" label="Datum flexibel?" checked={formData.move_date_flexible || false} onChange={(checked) => handleCheckboxChange('move_date_flexible', checked)} />
             {showMovingFields && (
-                <>
-                    <CheckboxField id="additional_services_cleaning" label="Zusätzliche Reinigung" checked={formData.additional_services_cleaning || false} onChange={(checked) => handleCheckboxChange('additional_services_cleaning', checked)} />
-                    <CheckboxField id="additional_services_piano" label="Klaviertransport" checked={formData.additional_services_piano || false} onChange={(checked) => handleCheckboxChange('additional_services_piano', checked)} />
-                    <CheckboxField id="additional_services_furniture_assembly" label="Möbel De-/Montage" checked={formData.additional_services_furniture_assembly || false} onChange={(checked) => handleCheckboxChange('additional_services_furniture_assembly', checked)} />
-                    <CheckboxField id="additional_services_packing" label="Verpackungsservice" checked={formData.additional_services_packing || false} onChange={(checked) => handleCheckboxChange('additional_services_packing', checked)} />
-                    <CheckboxField id="additional_services_furniture_lift" label="Möbellift" checked={formData.additional_services_furniture_lift || false} onChange={(checked) => handleCheckboxChange('additional_services_furniture_lift', checked)} />
-                    <CheckboxField id="additional_services_disposal" label="Entsorgung" checked={formData.additional_services_disposal || false} onChange={(checked) => handleCheckboxChange('additional_services_disposal', checked)} />
-                </>
+              <CheckboxField id="additional_cleaning" label="Endreinigung zum Umzug gewünscht" checked={formData.additional_cleaning || false} onChange={(checked) => handleCheckboxChange('additional_cleaning', checked)} />
             )}
         </Fieldset>
 
-        {/* Reinigung Zusatzfelder */}
-        <Fieldset legend="Reinigung Zusatzinfos">
+        {showReinigungFields && (
+        <Fieldset legend="Reinigung – Zusatzinfos">
             <FormField id="cleaning_area_sqm" label="Wohnungsfläche">
               <CleaningAreaSelect
                 id="cleaning_area_sqm"
@@ -191,12 +201,10 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
                 <option value="umzugsreinigung">Umzugsreinigung</option>
               </select>
             </FormField>
-            <CheckboxField id="cleaning_additional_balcony" label="Balkon" checked={formData.cleaning_additional_balcony || false} onChange={(checked) => handleCheckboxChange('cleaning_additional_balcony', checked)} />
-            <CheckboxField id="cleaning_additional_cellar" label="Keller" checked={formData.cleaning_additional_cellar || false} onChange={(checked) => handleCheckboxChange('cleaning_additional_cellar', checked)} />
-            <CheckboxField id="cleaning_additional_garage" label="Garage" checked={formData.cleaning_additional_garage || false} onChange={(checked) => handleCheckboxChange('cleaning_additional_garage', checked)} />
         </Fieldset>
+        )}
 
-        {showMovingFields && (
+        {showSpezialtransportFields && (
             <Fieldset legend="Spezialtransport">
                 <FormField id="special_transport_type" label="Art des Spezialtransports"><Input name="special_transport_type" value={formData.special_transport_type || ''} onChange={handleChange} /></FormField>
                 <div className="md:col-span-2 lg:col-span-3">
