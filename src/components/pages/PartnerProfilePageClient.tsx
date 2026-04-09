@@ -1,9 +1,8 @@
 ﻿'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/src/lib/supabase/client'
-import { useToast } from '@/src/components/ui/use-toast'
 import { Loader2 } from 'lucide-react'
 import PartnerHero from '@/components/PartnerProfilePageParts/PartnerHero'
 import Sidebar from '@/components/PartnerProfilePageParts/Sidebar'
@@ -23,14 +22,11 @@ interface PartnerProfilePageClientProps {
 }
 
 const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientProps) => {
-  const params = useParams()
   const router = useRouter()
-  const { toast } = useToast()
   const supabase = createClient()
   
   const [partner, setPartner] = useState(initialPartner)
   const [reviews, setReviews] = useState([])
-  const [loading, setLoading] = useState(false)
   const [averageRating, setAverageRating] = useState(0)
   const [reviewCount, setReviewCount] = useState(0)
 
@@ -38,73 +34,61 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
     if (!partner?.id) return
 
     try {
-      // Sadece bu partner'a ait onaylı partner yorumlarını al
-      // review_type = 'partner' olmalı - platform yorumları hariç
-      const { count: totalReviewCount, error: countError } = await supabase
-        .from('customer_reviews')
-        .select('*', { count: 'exact', head: true })
-        .eq('partner_id', partner.id)
-        .eq('approval_status', 'approved')
-        .eq('review_type', 'partner') // Sadece partner yorumları
+      const [countResult, allRatingsResult, latestReviewsResult] = await Promise.all([
+        supabase
+          .from('customer_reviews')
+          .select('*', { count: 'exact', head: true })
+          .eq('partner_id', partner.id)
+          .eq('approval_status', 'approved')
+          .eq('review_type', 'partner'),
+        supabase
+          .from('customer_reviews')
+          .select('rating')
+          .eq('partner_id', partner.id)
+          .eq('approval_status', 'approved')
+          .eq('review_type', 'partner'),
+        supabase
+          .from('customer_reviews')
+          .select('*')
+          .eq('partner_id', partner.id)
+          .eq('approval_status', 'approved')
+          .eq('review_type', 'partner')
+          .order('review_date', { ascending: false })
+          .limit(20),
+      ])
 
-      if (countError) {
-        console.error('Error fetching review count:', countError)
+      if (countResult.error) {
+        console.error('Error fetching review count:', countResult.error)
+      }
+      if (allRatingsResult.error) {
+        console.error('Error fetching all reviews:', allRatingsResult.error)
+      }
+      if (latestReviewsResult.error) {
+        console.error('Error fetching reviews:', latestReviewsResult.error)
       }
 
-      // Tüm yorumları al (average rating hesaplamak için)
-      // Sadece partner yorumları
-      const { data: allReviewsData, error: allReviewsError } = await supabase
-        .from('customer_reviews')
-        .select('rating')
-        .eq('partner_id', partner.id)
-        .eq('approval_status', 'approved')
-        .eq('review_type', 'partner') // Sadece partner yorumları
+      setReviews(latestReviewsResult.data || [])
 
-      if (allReviewsError) {
-        console.error('Error fetching all reviews:', allReviewsError)
-      }
+      const realReviewCount = countResult.count || 0
+      setReviewCount(realReviewCount)
 
-      // Son 20 yorumu gösterilmek için al
-      // Sadece partner yorumları
-      const { data: reviewsData, error: reviewsError } = await supabase
-        .from('customer_reviews')
-        .select('*')
-        .eq('partner_id', partner.id)
-        .eq('approval_status', 'approved')
-        .eq('review_type', 'partner') // Sadece partner yorumları
-        .order('review_date', { ascending: false })
-        .limit(20)
-
-      if (reviewsError) {
-        console.error('Error fetching reviews:', reviewsError)
+      const allReviewsData = allRatingsResult.data || []
+      if (allReviewsData.length > 0) {
+        const totalRating = allReviewsData.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
+        const avg = totalRating / allReviewsData.length
+        setAverageRating(avg)
+        setPartner((prev: any) => ({
+          ...prev,
+          average_rating: avg,
+          review_count: realReviewCount,
+        }))
       } else {
-        setReviews(reviewsData || [])
-        
-        // Gerçek toplam yorum sayısını kullan
-        const realReviewCount = totalReviewCount || 0
-        setReviewCount(realReviewCount)
-        
-        // Average rating'i tüm yorumlardan hesapla
-        if (allReviewsData && allReviewsData.length > 0) {
-          const totalRating = allReviewsData.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
-          const avg = totalRating / allReviewsData.length
-          setAverageRating(avg)
-          
-          // Update partner object with calculated rating and real review count
-          setPartner((prev: any) => ({
-            ...prev,
-            average_rating: avg,
-            review_count: realReviewCount
-          }))
-        } else {
-          // Yorum yoksa sıfırla
-          setAverageRating(0)
-          setPartner((prev: any) => ({
-            ...prev,
-            average_rating: 0,
-            review_count: 0
-          }))
-        }
+        setAverageRating(0)
+        setPartner((prev: any) => ({
+          ...prev,
+          average_rating: 0,
+          review_count: 0,
+        }))
       }
     } catch (error) {
       console.error('Error loading reviews:', error)
@@ -138,7 +122,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-slate-50 to-white">
       <PartnerHero 
         partner={partner} 
         onGetOffer={handleGetOffer}
@@ -146,31 +130,35 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
         reviewCount={reviewCount}
       />
       
-      <div className="container mx-auto max-w-7xl px-4 md:px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="container mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-8">
             {(partner.message || partner.description) && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Über uns</CardTitle>
+              <Card className="border-slate-200/70 shadow-sm">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-2xl tracking-tight text-slate-900">Über uns</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-body whitespace-pre-line">{partner.message || partner.description}</p>
+                  <p className="whitespace-pre-line leading-7 text-slate-700">
+                    {partner.message || partner.description}
+                  </p>
                 </CardContent>
               </Card>
             )}
 
             {partner.services && partner.services.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Unsere Dienstleistungen</CardTitle>
+              <Card className="border-slate-200/70 shadow-sm">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-2xl tracking-tight text-slate-900">
+                    Unsere Dienstleistungen
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {partner.services.map((service: string, index: number) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium"
+                        className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-800"
                       >
                         {service}
                       </span>
@@ -192,7 +180,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
             />
           </div>
 
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 lg:sticky lg:top-24 lg:self-start">
             <Sidebar 
               partner={partner} 
               averageRating={averageRating}

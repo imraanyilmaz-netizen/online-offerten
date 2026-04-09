@@ -15,6 +15,17 @@ import RegionList from './RegionList';
 
 const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
   // Removed useTranslation
+  const categories = partner.main_categories || [];
+  const hasUmzug = categories.includes('umzug');
+  const hasReinigung = categories.includes('reinigung');
+  const hasMaler = categories.includes('maler');
+
+  const offerTitle = (() => {
+    if (hasUmzug) return 'Umzugsofferte einholen';
+    if (hasReinigung) return 'Reinigungsofferte einholen';
+    if (hasMaler) return 'Malerofferte einholen';
+    return 'Kostenlose Offerte einholen';
+  })();
 
   const renderInfoItem = (Icon, label, value) => {
     if (!value) return null;
@@ -41,10 +52,22 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
   };
   
   return (
-    <div className="space-y-8">
-      <Card className="shadow-lg rounded-xl border border-gray-200 bg-white">
-        <CardHeader className="p-6 border-b border-gray-100">
-          <CardTitle className="text-xl font-bold text-gray-800">Kontakt & Informationen</CardTitle>
+    <div className="space-y-6">
+      <Card className="overflow-hidden rounded-2xl border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-white shadow-lg">
+        <CardContent className="p-6 text-center">
+            <h3 className="text-xl font-semibold tracking-tight text-slate-900">{offerTitle}</h3>
+            <p className="mb-5 mt-2 text-sm leading-6 text-slate-600">
+              Holen Sie sich jetzt eine unverbindliche Offerte von <span className="font-medium text-slate-800">{partner.company_name}</span>.
+            </p>
+            <Button onClick={onGetOffer} size="lg" className="h-12 w-full bg-green-600 text-base font-bold text-white shadow-sm hover:bg-green-700">
+              Kostenlose Offerte einholen
+            </Button>
+        </CardContent>
+      </Card>
+
+      <Card className="rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <CardHeader className="border-b border-gray-100 p-6">
+          <CardTitle className="text-xl font-bold tracking-tight text-slate-900">Kontakt & Informationen</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           <ul className="space-y-4">
@@ -60,29 +83,9 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
         </CardContent>
       </Card>
       
-      <Card className="shadow-lg rounded-xl border border-gray-200 bg-white">
-        <CardContent className="p-6 text-center">
-            <h3 className="text-lg font-semibold mb-2">{(() => {
-              const categories = partner.main_categories || [];
-              const hasUmzug = categories.includes('umzug');
-              const hasReinigung = categories.includes('reinigung');
-              const hasMaler = categories.includes('maler');
-
-              if (hasUmzug) return 'Umzugsofferte einholen';
-              if (hasReinigung) return 'Reinigungsofferte einholen';
-              if (hasMaler) return 'Malerofferte einholen';
-              return 'Kostenlose Offerte einholen';
-            })()}</h3>
-            <p className="text-sm text-gray-600 mb-4">Holen Sie sich jetzt eine Offerte von {partner.company_name}.</p>
-            <Button onClick={onGetOffer} size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg">
-              Kostenlose Offerte einholen
-            </Button>
-        </CardContent>
-      </Card>
-
-      <Card className="shadow-lg rounded-xl border border-gray-200 bg-white">
+      <Card className="rounded-2xl border border-gray-200 bg-white shadow-sm">
          <CardContent className="p-0">
-            <Accordion type="multiple" collapsible className="w-full" defaultValue={['services', 'regions']}>
+            <Accordion type="multiple" className="w-full" defaultValue={['services', 'regions']}>
               <AccordionItem value="services">
                 <AccordionTrigger className="px-6 py-4 text-base font-semibold">Angebotene Dienstleistungen</AccordionTrigger>
                 <AccordionContent className="px-6 pb-4">

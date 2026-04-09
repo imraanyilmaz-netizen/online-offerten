@@ -1,7 +1,11 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/src/lib/supabase/middleware'
 
-const PARTNER_PREFIX = '/partner'
+const PARTNER_PROTECTED_PREFIXES = [
+  '/partner/dashboard',
+  '/partner/credit-top-up',
+  '/partner/einstellungen',
+]
 const ADMIN_PREFIX = '/admin-dashboard'
 const LOGIN_PATH = '/login'
 
@@ -23,7 +27,11 @@ export async function proxy(request: NextRequest) {
       ?.app_metadata?.role
   const isAuthenticated = !claimsError && !!jwtClaims
 
-  if (pathname.startsWith(PARTNER_PREFIX)) {
+  const isPartnerProtectedRoute = PARTNER_PROTECTED_PREFIXES.some((prefix) =>
+    pathname.startsWith(prefix)
+  )
+
+  if (isPartnerProtectedRoute) {
     if (!isAuthenticated) {
       const url = request.nextUrl.clone()
       url.pathname = LOGIN_PATH
@@ -56,7 +64,9 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/partner/:path*',
+    '/partner/dashboard/:path*',
+    '/partner/credit-top-up/:path*',
+    '/partner/einstellungen/:path*',
     '/admin-dashboard/:path*',
   ],
 }
