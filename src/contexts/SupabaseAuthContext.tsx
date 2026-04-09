@@ -1,10 +1,9 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from 'react'
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react'
 import { useToast } from '@/src/components/ui/use-toast'
 import { createClient } from '@/src/lib/supabase/client'
-import { getSupabaseAuthCookieName } from '@/src/lib/supabase/auth-cookie-name'
-import type { User, Session, AuthError } from '@supabase/supabase-js'
+import type { User, Session } from '@supabase/supabase-js'
 
 interface AuthContextType {
   user: User | null
@@ -15,26 +14,18 @@ interface AuthContextType {
     email: string,
     password: string,
     options?: { silent?: boolean }
-  ) => Promise<{ error: AuthError | null; session: Session | null }>
+  ) => Promise<{ error: any; session: Session | null }>
   signOut: () => Promise<{ error: any }>
   updateUserPassword: (newPassword: string) => Promise<{ data: any; error: any }>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-/** getUser() can stall on weak networks; keep validation timeout short. */
-const GET_USER_VALIDATE_MS = 2500
-
-/** Gleiche Session parallel validieren vermeiden (getSession + INITIAL_SESSION = 2× getUser). */
-const validateInFlight = new Map<string, Promise<Session | null>>()
-
 /** GoTrue / getSession / getUser hataları: oturumu tamamen temizlemek gerekir. */
 function shouldInvalidateAuthError(error: { message?: string; code?: string } | null | undefined): boolean {
   if (!error) return false
   const code = error.code
   if (
-    code === 'refresh_token_not_found' ||
-    code === 'refresh_token_already_used' ||
     code === 'session_expired' ||
     code === 'session_not_found' ||
     code === 'bad_jwt'
@@ -46,9 +37,6 @@ function shouldInvalidateAuthError(error: { message?: string; code?: string } | 
   return (
     msg.includes('missing sub claim') ||
     msg.includes('invalid claim') ||
-    msg.includes('invalid refresh token') ||
-    msg.includes('refresh token not found') ||
-    msg.includes('refresh_token') ||
     msg.includes('jwt expired') ||
     msg.includes('invalid jwt') ||
     raw.includes('JWT')
@@ -57,7 +45,6 @@ function shouldInvalidateAuthError(error: { message?: string; code?: string } | 
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast()
-  const recoveryHandled = useRef(false)
 
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
@@ -78,109 +65,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => clearTimeout(t)
   }, [])
 
-  const clearClientAuthStorage = useCallback(() => {
-    if (typeof window === 'undefined') return
-
-    const authStorageKeys = Object.keys(localStorage).filter(
-      (key) => key.includes('supabase') || key.includes('auth-token')
-    )
-    authStorageKeys.forEach((key) => localStorage.removeItem(key))
-    sessionStorage.clear()
-
-    const authBase = getSupabaseAuthCookieName()
-    document.cookie.split(';').forEach((rawCookie) => {
-      const cookieName = rawCookie.split('=')[0]?.trim()
-      if (!cookieName) return
-      const matchesProjectCookie =
-        authBase &&
-        (cookieName === authBase || cookieName.startsWith(`${authBase}.`))
-      if (cookieName.includes('auth-token') || matchesProjectCookie) {
-        document.cookie = `${cookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`
-      }
-    })
-  }, [])
-
-  const handleSession = useCallback(async (session: Session | null) => {
+  const handleSession = useCallback((session: Session | null) => {
     setSession(session)
     setUser(session?.user ?? null)
     setLoading(false)
   }, [])
 
-  const invalidateBrokenSession = useCallback(async (_reason: string) => {
+  const invalidateBrokenSession = useCallback(async (reason: string) => {
     try {
       await supabase.auth.signOut()
     } catch (signOutError) {
       void signOutError
     }
-    clearClientAuthStorage()
-    await handleSession(null)
-  }, [clearClientAuthStorage, handleSession, supabase])
-
-  const validateSessionWithServer = useCallback(async (session: Session | null) => {
-    if (!session) return null
-
-    const tokenKey = session.access_token ?? 'no-token'
-    const existing = validateInFlight.get(tokenKey)
-    if (existing) return existing
-
-    const run = (async (): Promise<Session | null> => {
-      try {
-        const verifyPromise = (async (): Promise<Session | null> => {
-          const {
-            data: { user: verifiedUser },
-            error: userError,
-          } = await supabase.auth.getUser()
-          if (userError || !verifiedUser) {
-            await invalidateBrokenSession(userError?.message || userError?.code || 'getUser failed')
-            return null
-          }
-          return { ...session, user: verifiedUser } as Session
-        })()
-
-        const timeoutPromise = new Promise<'timeout'>((resolve) => {
-          setTimeout(() => resolve('timeout'), GET_USER_VALIDATE_MS)
-        })
-
-        const raced = await Promise.race([
-          verifyPromise.then((v) => ({ kind: 'done' as const, value: v })),
-          timeoutPromise.then(() => ({ kind: 'timeout' as const })),
-        ])
-
-        if (raced.kind === 'timeout') {
-          if (process.env.NODE_ENV === 'development') {
-            console.warn('[AuthContext] getUser() timeout — using session from client storage')
-          }
-          return session
-        }
-        return raced.value
-      } catch (e) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('[AuthContext] validateSessionWithServer failed — using session from storage', e)
-        }
-        return session
-      } finally {
-        validateInFlight.delete(tokenKey)
-      }
-    })()
-
-    validateInFlight.set(tokenKey, run)
-    return run
-  }, [invalidateBrokenSession, supabase])
-
-  const validateSessionInBackground = useCallback((sessionToValidate: Session | null) => {
-    if (!sessionToValidate) return
-
-    void validateSessionWithServer(sessionToValidate).then((validatedSession) => {
-      if (validatedSession === null) {
-        // invalidateBrokenSession already cleared state
-        return
-      }
-      // Refresh user payload if server returned a richer/updated user object.
-      if (validatedSession.user?.id && validatedSession.user.id !== user?.id) {
-        void handleSession(validatedSession)
-      }
-    })
-  }, [handleSession, user?.id, validateSessionWithServer])
+    handleSession(null)
+  }, [handleSession, supabase])
 
   useEffect(() => {
     const initAuth = () => {
@@ -199,11 +97,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             return
           }
 
-          // Fast path: expose session immediately; do server validation asynchronously.
-          await handleSession(session)
-          validateSessionInBackground(session)
+          handleSession(session)
         } catch (e) {
           const err = e as { message?: string; code?: string }
+          if ((e as { name?: string })?.name === 'AbortError') {
+            if (process.env.NODE_ENV === 'development') {
+              console.warn('[AuthContext] getSession aborted (lock contention), keeping current auth state')
+            }
+            setLoading(false)
+            return
+          }
           if (shouldInvalidateAuthError(err)) {
             await invalidateBrokenSession(err.message || err.code || 'getSession threw')
             return
@@ -216,35 +119,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       getSession()
 
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
-        async (event: string, session: Session | null) => {
-          /** INITIAL_SESSION: getSession() im selben Effect liefert dieselbe Session — kein zweites getUser(). */
-          if (event === 'INITIAL_SESSION') {
-            return
-          }
+        (event: string, session: Session | null) => {
+          // INITIAL_SESSION is already handled by getSession() above.
+          if (event === 'INITIAL_SESSION') return
 
-          // Handle token refresh errors
-          if (event === 'TOKEN_REFRESHED' && !session) {
-            await invalidateBrokenSession('Token refresh failed')
-            return
-          }
-          
-          // Validate session on auth state change
           if (session?.user && !session.user.id) {
-            await invalidateBrokenSession('Session missing user.id in onAuthStateChange')
+            void invalidateBrokenSession('Session missing user.id in onAuthStateChange')
             return
           }
 
-          // PASSWORD_RECOVERY: Session kommt direkt nach gültigem Recovery-Link – kein zusätzliches getUser(),
-          // sonst kann validateSessionWithServer hängen oder die Recovery-Session fälschlich invalidieren.
-          if (event === 'PASSWORD_RECOVERY' && session && !recoveryHandled.current) {
-            recoveryHandled.current = true
-            await handleSession(session)
-            return
-          }
-
-          // Keep UI responsive on auth changes, then validate in background.
-          await handleSession(session)
-          validateSessionInBackground(session)
+          handleSession(session)
         }
       )
 
@@ -258,7 +142,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       cleanupFn()
     }
-  }, [handleSession, invalidateBrokenSession, supabase, validateSessionInBackground])
+  }, [handleSession, invalidateBrokenSession, supabase])
 
   const signUp = useCallback(async (email: string, password: string, options?: any) => {
     const { error } = await supabase.auth.signUp({
@@ -297,6 +181,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         password,
       })
+      void data
 
       if (error) {
         let errorMessage = error.message || 'Etwas ist schief gelaufen'
@@ -322,10 +207,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             description: errorMessage,
           })
         }
-        return { error, session: null }
       }
 
-      return { error: null, session: data.session ?? null }
+      return { error, session: data?.session ?? null }
     },
     [toast, supabase]
   )
@@ -342,11 +226,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null)
     setSession(null)
 
-    // 3️⃣ Auth storage/cookie temizliği
-    clearClientAuthStorage()
-
     return { error: null }
-  }, [clearClientAuthStorage, supabase])
+  }, [supabase])
 
   const updateUserPassword = useCallback(async (newPassword: string) => {
     const { data, error } = await supabase.auth.updateUser({ password: newPassword })

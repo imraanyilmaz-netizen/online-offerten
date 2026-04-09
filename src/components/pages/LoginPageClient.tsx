@@ -4,7 +4,6 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useAuth } from '@/src/contexts/SupabaseAuthContext'
-import { useToast } from '@/src/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -12,7 +11,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Loader2, Eye, EyeOff } from 'lucide-react'
 // framer-motion removed - CSS for better INP
 import RegistrationForm from '@/components/PartnerRegistrationForm/RegistrationForm'
-import { postLoginHrefForRole, resolveAuthRole } from '@/src/lib/auth/role'
 
 /** Eine klare Meldung pro Fehlerfall (gleiche Logik wie AuthContext, für Inline-Anzeige) */
 function mapLoginErrorMessage(error: { message?: string } | null): string {
@@ -48,7 +46,6 @@ const LoginShellPlaceholder = () => (
 
 const LoginPageClient = () => {
   const { signIn, user, loading } = useAuth()
-  const { toast } = useToast()
   const searchParams = useSearchParams()
   const [mounted, setMounted] = useState(false)
 
@@ -64,7 +61,6 @@ const LoginPageClient = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isRedirectingAfterLogin, setIsRedirectingAfterLogin] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [view, setView] = useState(searchParams?.toString().includes('register') ? 'register' : 'login')
   const [loginFormError, setLoginFormError] = useState<string | null>(null)
@@ -76,60 +72,53 @@ const LoginPageClient = () => {
       ? `/forgot-password?email=${encodeURIComponent(email.trim())}`
       : '/forgot-password'
 
-  /** Zaten oturum açıksa: tam sayfa yönlendirme (proxy çerezleri okusun). */
+  /** Bereits eingeloggt: AuthContext hat Session validiert — keine zweite getSession/getUser/Cookie-Kette (war sehr langsam). */
+  const getDashboardHrefByRole = (role?: string) => {
+    if (role === 'admin' || role === 'editor') return '/admin-dashboard'
+    if (role === 'partner') return '/partner/dashboard'
+    return '/'
+  }
+
   useLayoutEffect(() => {
     if (!mounted || loading || !user) return
-    const href = postLoginHrefForRole(resolveAuthRole(user))
-    window.location.replace(href)
+    const role = user.user_metadata?.role ?? user.app_metadata?.role
+    window.location.replace(getDashboardHrefByRole(role))
   }, [mounted, loading, user])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoginFormError(null)
     setIsSubmitting(true)
+    console.log('[LoginPage] handleLogin called:', { email })
 
     const { error, session } = await signIn(email, password, { silent: true })
 
-    if (error || !session?.user) {
-      setIsRedirectingAfterLogin(false)
-      if (error) {
-        setFailedLoginAttempts((n) => n + 1)
-        setLoginFormError(mapLoginErrorMessage(error))
-      } else {
-        setLoginFormError('Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.')
-      }
+    console.log('[LoginPage] signIn result:', { hasError: !!error, errorMessage: error?.message })
+
+    if (!error) {
+      setFailedLoginAttempts(0)
+      const role = session?.user?.user_metadata?.role ?? session?.user?.app_metadata?.role
+      console.log('[LoginPage] Login successful, redirecting by session role', { role })
       setIsSubmitting(false)
+      window.location.assign(getDashboardHrefByRole(role))
       return
-    }
-
-    setFailedLoginAttempts(0)
-    setIsRedirectingAfterLogin(true)
-    setIsSubmitting(false)
-
-    const role = resolveAuthRole(session.user)
-    const href = postLoginHrefForRole(role)
-
-    if (role === 'admin' || role === 'editor') {
-      toast({
-        title: 'Anmeldung erfolgreich',
-        description:
-          role === 'editor'
-            ? 'Sie werden zum Ratgeber-Bereich weitergeleitet...'
-            : 'Sie werden zum Admin-Dashboard weitergeleitet...',
-      })
-    } else if (role === 'partner') {
-      toast({
-        title: 'Anmeldung erfolgreich',
-        description: 'Sie werden zum Partner-Dashboard weitergeleitet...',
-      })
     } else {
-      toast({
-        title: 'Anmeldung erfolgreich',
-        description: 'Sie werden weitergeleitet...',
-      })
+      console.log('[LoginPage] Login failed:', error?.message)
+      setFailedLoginAttempts((n) => n + 1)
+      setLoginFormError(mapLoginErrorMessage(error))
+      setIsSubmitting(false)
     }
+  }
 
-    window.location.assign(href)
+  const formVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 50 },
+  }
+  
+  const cardVariants = {
+    login: { height: 'auto' },
+    register: { height: 'auto' },
   }
 
   if (!mounted) {
@@ -138,17 +127,6 @@ const LoginPageClient = () => {
 
   if (loading) {
     return <LoginShellPlaceholder />
-  }
-
-  if (isRedirectingAfterLogin) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
-        <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8 text-center">
-          <h1 className="text-2xl font-bold text-black mb-2">Anmeldung wird abgeschlossen</h1>
-          <p className="text-gray-600">Bitte einen Moment warten...</p>
-        </div>
-      </div>
-    )
   }
 
   if (user) {

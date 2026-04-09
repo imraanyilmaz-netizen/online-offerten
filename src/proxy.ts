@@ -1,47 +1,50 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/src/lib/supabase/middleware'
-import {
-  adminAllowedRole,
-  isAdminProtectedPath,
-  isPartnerAppProtectedPath,
-  partnerAllowedRole,
-  resolveAuthRole,
-} from '@/src/lib/auth/role'
 
+const PARTNER_PREFIX = '/partner'
+const ADMIN_PREFIX = '/admin-dashboard'
 const LOGIN_PATH = '/login'
 
 export async function proxy(request: NextRequest) {
   const { supabase, response } = createMiddlewareClient(request)
   const pathname = request.nextUrl.pathname
 
+  // Refresh auth cookies/session and verify JWT claims server-side.
   const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    data: claimsData,
+    error: claimsError,
+  } = await supabase.auth.getClaims()
+  const jwtClaims = claimsData?.claims
 
-  if (isPartnerAppProtectedPath(pathname)) {
-    if (!user) {
+  const role =
+    (jwtClaims as { user_metadata?: { role?: string }; app_metadata?: { role?: string } } | null)
+      ?.user_metadata?.role ??
+    (jwtClaims as { user_metadata?: { role?: string }; app_metadata?: { role?: string } } | null)
+      ?.app_metadata?.role
+  const isAuthenticated = !claimsError && !!jwtClaims
+
+  if (pathname.startsWith(PARTNER_PREFIX)) {
+    if (!isAuthenticated) {
       const url = request.nextUrl.clone()
       url.pathname = LOGIN_PATH
       return NextResponse.redirect(url)
     }
 
-    const role = resolveAuthRole(user)
-    if (!partnerAllowedRole(role)) {
+    if (role !== 'partner') {
       const url = request.nextUrl.clone()
       url.pathname = '/'
       return NextResponse.redirect(url)
     }
   }
 
-  if (isAdminProtectedPath(pathname)) {
-    if (!user) {
+  if (pathname.startsWith(ADMIN_PREFIX)) {
+    if (!isAuthenticated) {
       const url = request.nextUrl.clone()
       url.pathname = LOGIN_PATH
       return NextResponse.redirect(url)
     }
 
-    const role = resolveAuthRole(user)
-    if (!adminAllowedRole(role)) {
+    if (role !== 'admin' && role !== 'editor') {
       const url = request.nextUrl.clone()
       url.pathname = '/'
       return NextResponse.redirect(url)
@@ -53,16 +56,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/partner/dashboard',
-    '/partner/dashboard/:path*',
-    '/partner/einstellungen',
-    '/partner/einstellungen/:path*',
-    '/partner/credit-top-up',
-    '/partner/credit-top-up/:path*',
-    '/partner/payment-status',
-    '/partner/payment-status/:path*',
-    '/admin-dashboard',
+    '/partner/:path*',
     '/admin-dashboard/:path*',
-    '/login',
   ],
 }
