@@ -1,13 +1,9 @@
-'use client'
-
-import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { CheckCircle, Clock3, ChevronRight, Home } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 const UmzugsfirmaPageClient = () => {
-  const canonicalUrl = 'https://online-offerten.ch/umzugsfirma'
   const faqItems = [
     {
       q: 'Wie kann ich über Online-Offerten eine passende Umzugsfirma finden?',
@@ -50,83 +46,6 @@ const UmzugsfirmaPageClient = () => {
       a: 'Es ist ratsam, eine Umzugsfirma möglichst früh zu buchen. Besonders zum Monatsende oder während der Hauptumzugszeiten sind viele Termine schnell vergeben.',
     },
   ]
-
-  // Inject structured data
-  useEffect(() => {
-    const schemaData = {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Startseite",
-              "item": "https://online-offerten.ch/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Umzugsfirma",
-              "item": canonicalUrl
-            }
-          ]
-        },
-        {
-          "@type": "Service",
-          "name": "Umzugsfirma finden und vergleichen",
-          "serviceType": "Umzugsservice",
-          "description": "Finden Sie die beste Umzugsfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen für Privatumzug, Geschäftsumzug und mehr.",
-          "provider": {
-            "@type": "Organization",
-            "name": "Online-Offerten.ch",
-            "url": "https://online-offerten.ch",
-            "logo": "https://online-offerten.ch/image/logo-icon.webp"
-          },
-          "areaServed": {
-            "@type": "Country",
-            "name": "Switzerland"
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2",
-            "priceCurrency": "CHF",
-            "price": "0",
-            "name": "Kostenlose Umzugsfirma Offerten"
-          }
-        }
-      ]
-    }
-
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify(schemaData)
-    script.id = 'umzugsfirma-schema'
-    
-    const existing = document.getElementById('umzugsfirma-schema')
-    if (existing && existing.parentNode) {
-      try {
-        existing.remove()
-      } catch (e) {
-        // Element zaten kaldırılmış olabilir
-      }
-    }
-    
-    document.head.appendChild(script)
-    
-    return () => {
-      if (typeof document === 'undefined') return
-      const scriptToRemove = document.getElementById('umzugsfirma-schema')
-      if (scriptToRemove && scriptToRemove.parentNode) {
-        try {
-          scriptToRemove.remove()
-        } catch (e) {
-          // Element zaten kaldırılmış olabilir
-        }
-      }
-    }
-  }, [])
 
   return (
     <>

@@ -3,7 +3,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Globe, Calendar, Shield, FileText, User, Building2 } from 'lucide-react';
-import StarRating from './StarRating';
 import {
   Accordion,
   AccordionContent,
@@ -69,7 +68,7 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
         <CardHeader className="border-b border-gray-100 p-6">
           <CardTitle className="text-xl font-bold tracking-tight text-slate-900">Kontakt & Informationen</CardTitle>
         </CardHeader>
-        <CardContent className="p-6">
+        <CardContent className="space-y-4 p-6">
           <ul className="space-y-4">
             {partner.company_name && renderInfoItem(Building2, 'Name:', partner.company_name)}
             {partner.contact_person && renderInfoItem(User, 'Geschäftsführer:', partner.contact_person)}
@@ -80,26 +79,27 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
             {renderInfoItem(FileText, 'Handelsregisternummer', partner.commercial_register_number)}
             {partner.liability_insurance && renderInfoItem(Shield, 'Haftpflichtversicherung vorhanden', true)}
           </ul>
-        </CardContent>
-      </Card>
-      
-      <Card className="rounded-2xl border border-gray-200 bg-white shadow-sm">
-         <CardContent className="p-0">
+          <div className="rounded-xl border border-slate-100 bg-slate-50/60">
             <Accordion type="multiple" className="w-full" defaultValue={['services', 'regions']}>
               <AccordionItem value="services">
-                <AccordionTrigger className="px-6 py-4 text-base font-semibold">Angebotene Dienstleistungen</AccordionTrigger>
-                <AccordionContent className="px-6 pb-4">
+                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-slate-800">
+                  Angebotene Dienstleistungen
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4">
                   <ServiceList services={partner.offered_services} />
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="regions">
-                <AccordionTrigger className="px-6 py-4 text-base font-semibold">Tätigkeitsregionen</AccordionTrigger>
-                <AccordionContent className="px-6 pb-4">
+                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-slate-800">
+                  Tätigkeitsregionen
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4">
                   <RegionList regions={partner.service_regions} />
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-         </CardContent>
+          </div>
+        </CardContent>
       </Card>
     </div>
   );

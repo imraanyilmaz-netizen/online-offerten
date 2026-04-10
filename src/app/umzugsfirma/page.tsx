@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import UmzugsfirmaPageClient from '@/components/pages/info/UmzugsfirmaPageClient'
+import UmzugsfirmaPageClient from './UmzugsfirmaPageContent'
 
 export const metadata: Metadata = {
   title: 'Umzugsfirma Schweiz | Geprüfte Anbieter vergleichen',
@@ -43,11 +42,64 @@ export const metadata: Metadata = {
   },
 }
 
+const CANONICAL_URL = 'https://online-offerten.ch/umzugsfirma'
+
+const umzugsfirmaJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Startseite',
+          item: 'https://online-offerten.ch/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Umzugsfirma',
+          item: CANONICAL_URL,
+        },
+      ],
+    },
+    {
+      '@type': 'Service',
+      name: 'Umzugsfirma finden und vergleichen',
+      serviceType: 'Umzugsservice',
+      description:
+        'Finden Sie die beste Umzugsfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen für Privatumzug, Geschäftsumzug und mehr.',
+      provider: {
+        '@type': 'Organization',
+        name: 'Online-Offerten.ch',
+        url: 'https://online-offerten.ch',
+        logo: 'https://online-offerten.ch/image/logo-icon.webp',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Switzerland',
+      },
+      offers: {
+        '@type': 'Offer',
+        url: 'https://online-offerten.ch/kostenlose-offerte-anfordern?service=umzug&step=2',
+        priceCurrency: 'CHF',
+        price: '0',
+        name: 'Kostenlose Umzugsfirma Offerten',
+      },
+    },
+  ],
+}
+
 export default function UmzugsfirmaPage() {
   return (
-    <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(umzugsfirmaJsonLd) }}
+      />
       <UmzugsfirmaPageClient />
-    </Suspense>
+    </>
   )
 }
 

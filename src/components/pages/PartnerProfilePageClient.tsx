@@ -1,6 +1,7 @@
 ﻿'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/src/lib/supabase/client'
 import { Loader2 } from 'lucide-react'
@@ -121,6 +122,13 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
     return <FullPageLoader />
   }
 
+  const sectionLinks = [
+    (partner.message || partner.description) && { id: 'about', label: 'Über uns' },
+    partner.services?.length > 0 && { id: 'services', label: 'Dienstleistungen' },
+    partner.images?.length > 0 && { id: 'gallery', label: 'Bilder' },
+    { id: 'reviews', label: 'Bewertungen' },
+  ].filter(Boolean) as Array<{ id: string; label: string }>
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-slate-50 to-white">
       <PartnerHero 
@@ -131,10 +139,28 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
       />
       
       <div className="container mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
+        <div className="mb-8 rounded-2xl border border-emerald-100 bg-white/90 p-3 shadow-sm backdrop-blur">
+          <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+            Schnellzugriff
+          </div>
+          <nav className="flex flex-wrap gap-2">
+            {sectionLinks.map((link) => (
+              <Link
+                key={link.id}
+                href={`#${link.id}`}
+                scroll={true}
+                className="rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-2 text-sm font-medium text-emerald-900 transition-colors hover:bg-emerald-100"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-8">
             {(partner.message || partner.description) && (
-              <Card className="border-slate-200/70 shadow-sm">
+              <Card id="about" className="scroll-mt-28 border-slate-200/70 shadow-sm">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-2xl tracking-tight text-slate-900">Über uns</CardTitle>
                 </CardHeader>
@@ -147,7 +173,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
             )}
 
             {partner.services && partner.services.length > 0 && (
-              <Card className="border-slate-200/70 shadow-sm">
+              <Card id="services" className="scroll-mt-28 border-slate-200/70 shadow-sm">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-2xl tracking-tight text-slate-900">
                     Unsere Dienstleistungen
@@ -169,15 +195,19 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
             )}
 
             {partner.images && partner.images.length > 0 && (
-              <ImageGallery images={partner.images} />
+              <div id="gallery" className="scroll-mt-28">
+                <ImageGallery images={partner.images} />
+              </div>
             )}
 
-            <ReviewsSection
-              reviews={reviews}
-              reviewCount={reviewCount}
-              formatDate={formatDate}
-              onShowAllReviews={() => router.push(`/partner/${partner.slug}/reviews`)}
-            />
+            <div id="reviews" className="scroll-mt-28">
+              <ReviewsSection
+                reviews={reviews}
+                reviewCount={reviewCount}
+                formatDate={formatDate}
+                onShowAllReviews={() => router.push(`/partner/${partner.slug}/reviews`)}
+              />
+            </div>
           </div>
 
           <div className="lg:col-span-1 lg:sticky lg:top-24 lg:self-start">

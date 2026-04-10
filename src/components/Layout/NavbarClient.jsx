@@ -99,7 +99,7 @@ export default function NavbarClient({ children: logoSlot }) {
     const isOpen = openDesktopMenu === menuKey
     return (
       <div className="relative" onMouseEnter={() => openDesktopDropdown(menuKey)} onMouseLeave={scheduleCloseDesktopDropdown}>
-        <div className="flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 ease-in-out">
+        <div className="flex items-center gap-1 rounded-xl border border-transparent px-3 py-2 text-sm font-semibold text-gray-600 transition-colors duration-150 ease-in-out hover:border-emerald-100 hover:bg-emerald-50/60 hover:text-gray-900">
           {baseHref ? (
             <Link prefetch={false} href={baseHref} className="leading-none text-gray-700 hover:text-gray-900">
               {label}
@@ -114,27 +114,32 @@ export default function NavbarClient({ children: logoSlot }) {
             aria-label={`${label} Menü öffnen`}
             aria-expanded={isOpen}
             onClick={() => setOpenDesktopMenu((prev) => (prev === menuKey ? null : menuKey))}
-            className="inline-flex items-center justify-center rounded-sm p-0.5 hover:bg-gray-200"
+            className="inline-flex items-center justify-center rounded-md p-0.5 hover:bg-emerald-100"
           >
-            <ChevronDown size={16} className="text-gray-500" />
+            <ChevronDown size={16} className={`text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
           </button>
         </div>
         <div
-          className={`absolute left-0 top-full z-[4000] min-w-[220px] rounded-md border border-gray-200 bg-white p-1 shadow-lg transition-all duration-150 ${
-            isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'
+          className={`absolute left-1/2 top-[calc(100%+10px)] z-[4000] w-[520px] max-w-[88vw] -translate-x-1/2 rounded-2xl border border-emerald-100 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-150 ${
+            isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-1 opacity-0 pointer-events-none'
           }`}
         >
-          {links.map((link) => (
-            <Link
-              key={link.to}
-              href={link.to}
-              prefetch={false}
-              onClick={() => setOpenDesktopMenu(null)}
-              className="block rounded-sm px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
-            >
-              {link.text}
-            </Link>
-          ))}
+          <div className="mb-2 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+            {label}
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {links.map((link) => (
+              <Link
+                key={link.to}
+                href={link.to}
+                prefetch={false}
+                onClick={() => setOpenDesktopMenu(null)}
+                className="rounded-xl border border-transparent bg-slate-50/70 px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-emerald-100 hover:bg-emerald-50 hover:text-emerald-900"
+              >
+                {link.text}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     )
@@ -143,14 +148,14 @@ export default function NavbarClient({ children: logoSlot }) {
   const closeMobile = () => setMobileMenuOpen(false)
 
   return (
-    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{ contain: 'layout style', zIndex: 3000 }}>
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md" style={{ contain: 'layout style', zIndex: 3000 }}>
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between h-16 gap-2" style={{ minHeight: '64px' }}>
           {logoSlot}
 
           <nav
             ref={desktopNavRef}
-            className="hidden md:flex items-center space-x-1 lg:space-x-2 flex-1 justify-center max-w-5xl mx-4"
+            className="mx-4 hidden max-w-5xl flex-1 items-center justify-center space-x-1 lg:space-x-2 md:flex"
             style={{ minHeight: '40px', contain: 'layout' }}
           >
             <NavItem to="/kostenlose-offerte-anfordern">OFFERTEN</NavItem>

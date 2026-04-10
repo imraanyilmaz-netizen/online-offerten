@@ -1,7 +1,4 @@
-﻿'use client'
-
-import React from 'react'
-// framer-motion removed - CSS for better INP
+﻿
 import Link from 'next/link'
 import { locations } from '@/data/locations'
 import { ArrowRight, Map } from 'lucide-react'

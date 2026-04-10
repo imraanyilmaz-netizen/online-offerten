@@ -147,9 +147,14 @@ export default function NavbarAuthSection({ variant = 'desktop', onNavigate, Nav
       )
     }
     return (
-      <div className="hidden md:flex items-center gap-3" style={{ minHeight: '36px' }}>
+      <div className="hidden md:flex items-center gap-2" style={{ minHeight: '36px' }}>
         {!loading && !user ? (
-          <Button asChild size="sm" variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+          <Button
+            asChild
+            size="sm"
+            variant="outline"
+            className="h-9 rounded-xl border-emerald-200 bg-emerald-50/50 px-4 font-semibold text-emerald-700 shadow-sm transition-colors hover:bg-emerald-100"
+          >
             <Link prefetch={false} href="/partner-werden">Partner werden</Link>
           </Button>
         ) : null}
@@ -158,7 +163,12 @@ export default function NavbarAuthSection({ variant = 'desktop', onNavigate, Nav
         ) : user ? (
           <UserMenu user={user} onLogout={handleLogout} partnerBrand={partnerBrand} />
         ) : (
-          <Button asChild size="sm" className="bg-green-600 hover:bg-green-700 text-white" style={{ minWidth: '80px' }}>
+          <Button
+            asChild
+            size="sm"
+            className="h-9 rounded-xl bg-emerald-600 px-4 font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700"
+            style={{ minWidth: '92px' }}
+          >
             <Link prefetch={false} href="/login">Anmelden</Link>
           </Button>
         )}
