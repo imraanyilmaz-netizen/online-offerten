@@ -134,11 +134,17 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
         </Fieldset>
 
         <Fieldset legend="Anfrage & Leistung">
-          <div className="md:col-span-2 lg:col-span-4 space-y-1">
-            <FormField id="servicetype" label="Dienstleistung (DB-Wert)">
-              <Input name="servicetype" value={formData.servicetype || ''} onChange={handleChange} className="font-mono text-sm" />
-            </FormField>
-            <p className="text-xs text-gray-500 pl-0.5">Wie in der Datenbank gespeichert; nur ändern, wenn die Anzeige für Partner korrigiert werden muss.</p>
+          <div className="md:col-span-2 lg:col-span-4">
+            <div className={`grid grid-cols-1 gap-4 ${showMovingFields ? 'md:grid-cols-2' : ''}`}>
+              <FormField id="servicetype" label="Dienstleistung">
+                <Input name="servicetype" value={formData.servicetype || ''} onChange={handleChange} className="text-sm" />
+              </FormField>
+              {showMovingFields && (
+                <FormField id="umzugart" label="Umzugsart">
+                  <Input name="umzugart" value={formData.umzugart || ''} onChange={handleChange} className="text-sm" />
+                </FormField>
+              )}
+            </div>
           </div>
           <FormField id="quoteswanted" label="Gewünschte Offerten (Anzahl)"><Input name="quoteswanted" type="number" value={formData.quoteswanted ?? ''} onChange={handleChange} min={0} /></FormField>
           <FormField id="how_found" label="Wie gefunden?"><Input name="how_found" value={formData.how_found || ''} onChange={handleChange} /></FormField>
