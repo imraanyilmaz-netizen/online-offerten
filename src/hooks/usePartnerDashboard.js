@@ -85,11 +85,31 @@ export const usePartnerDashboard = (onActionSuccess) => {
     // Nur beim ersten Laden den Loading-Spinner anzeigen
     if (!silent) setLoading(true);
     try {
-      const { data: dashboardData, error: dashboardError } = await supabase.rpc('get_partner_dashboard_data', {
-        p_partner_id: user.id,
+      if (!session?.access_token) {
+        throw new Error('Nicht angemeldet');
+      }
+
+      const dashRes = await fetch('/api/partner/dashboard', {
+        method: 'GET',
+        cache: 'no-store',
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          Accept: 'application/json',
+        },
       });
 
-      if (dashboardError) throw dashboardError;
+      if (!dashRes.ok) {
+        let msg = dashRes.statusText;
+        try {
+          const body = await dashRes.json();
+          if (body?.error) msg = body.error;
+        } catch {
+          /* ignore */
+        }
+        throw new Error(msg);
+      }
+
+      const dashboardData = await dashRes.json();
 
       const { data: partner, error: partnerError } = await supabase
         .from('partners')
@@ -234,7 +254,7 @@ export const usePartnerDashboard = (onActionSuccess) => {
     } finally {
       if (!silent) setLoading(false);
     }
-  }, [user, fetchRefundRequests]);
+  }, [user, session, fetchRefundRequests]);
 
   useEffect(() => {
     if (!user || !session) {
