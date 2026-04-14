@@ -21,6 +21,8 @@ function oo_reviews_shortcode($atts) {
         'limit'      => '5',
         'theme'      => 'light',
         'lang'       => 'de',
+        'position'   => 'right',
+        'autoplay'   => 'true',
     ), $atts, 'online_offerten_reviews');
 
     if (empty($atts['partner_id'])) {
@@ -42,6 +44,8 @@ function oo_reviews_shortcode($atts) {
     $html .= ' data-limit="' . esc_attr($atts['limit']) . '"';
     $html .= ' data-theme="' . esc_attr($atts['theme']) . '"';
     $html .= ' data-lang="' . esc_attr($atts['lang']) . '"';
+    $html .= ' data-position="' . esc_attr($atts['position']) . '"';
+    $html .= ' data-autoplay="' . esc_attr($atts['autoplay']) . '"';
     $html .= '></div>';
 
     if (!wp_script_is('oo-reviews-widget', 'enqueued')) {
@@ -89,10 +93,12 @@ function oo_reviews_settings_page() {
                 </thead>
                 <tbody>
                     <tr><td><code>partner_id</code></td><td>—</td><td>Ihre Online-Offerten Partner-ID (Pflichtfeld)</td></tr>
-                    <tr><td><code>type</code></td><td>list</td><td><code>list</code> = Vollständige Liste, <code>badge</code> = Kompaktes Badge</td></tr>
+                    <tr><td><code>type</code></td><td>list</td><td><code>list</code>, <code>carousel</code> oder <code>badge</code> – Floating Badge erscheint immer automatisch</td></tr>
                     <tr><td><code>limit</code></td><td>5</td><td>Anzahl der angezeigten Bewertungen (max. 20)</td></tr>
                     <tr><td><code>theme</code></td><td>light</td><td><code>light</code> oder <code>dark</code></td></tr>
                     <tr><td><code>lang</code></td><td>de</td><td><code>de</code>, <code>fr</code> oder <code>it</code></td></tr>
+                    <tr><td><code>position</code></td><td>right</td><td><code>right</code> oder <code>left</code> – Floating Badge Position</td></tr>
+                    <tr><td><code>autoplay</code></td><td>true</td><td><code>true</code> oder <code>false</code> – Karussell Autoplay</td></tr>
                 </tbody>
             </table>
 

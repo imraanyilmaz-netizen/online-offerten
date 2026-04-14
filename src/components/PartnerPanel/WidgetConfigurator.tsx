@@ -4,14 +4,15 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { Copy, Check, Code, ExternalLink, Monitor, Smartphone, Star, Loader2, CheckCircle2, UserCircle2, MessageCircle, LayoutList, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { Copy, Check, Code, ExternalLink, Monitor, Smartphone, Star, Loader2, CheckCircle2, UserCircle2, LayoutList, ChevronLeft, ChevronRight } from 'lucide-react'
+import SocialShareCard from './SocialShareCard'
 
 interface WidgetConfiguratorProps {
   partnerId: string
   partnerSlug: string
 }
 
-type WidgetType = 'list' | 'badge' | 'floating' | 'carousel'
+type WidgetType = 'list' | 'badge' | 'carousel'
 type WidgetTheme = 'light' | 'dark'
 
 interface ReviewData {
@@ -205,58 +206,6 @@ function ListPreview({ data, theme }: { data: WidgetData; theme: WidgetTheme }) 
   )
 }
 
-function FloatingPreview({ data, theme }: { data: WidgetData; theme: WidgetTheme }) {
-  const { partner, reviews } = data
-  const bg = theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-  const border = theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
-  const text = theme === 'dark' ? 'text-gray-100' : 'text-gray-800'
-  const muted = theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <div className="relative min-h-[340px] flex items-end justify-end">
-      {isOpen && (
-        <div className={`absolute bottom-[76px] right-0 w-[360px] ${bg} border ${border} rounded-2xl overflow-hidden shadow-2xl z-10 animate-in slide-in-from-bottom-2 duration-200`}>
-          <div className={`flex items-center justify-between pr-12 p-4 border-b ${border} relative`}>
-            <div className="flex items-center gap-2.5 min-w-0">
-              {partner.logo_url ? <img src={partner.logo_url} alt="" className="w-9 h-9 rounded-lg object-cover flex-shrink-0" /> : <div className={`w-9 h-9 rounded-lg ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'} flex-shrink-0`} />}
-              <div className="min-w-0">
-                <div className={`font-bold text-sm ${text} truncate`}>{partner.company_name}</div>
-                <div className={`text-[11px] ${muted}`}><StarRatingInline rating={partner.average_rating} size={12} /> {partner.review_count} Bewertungen</div>
-              </div>
-            </div>
-            <div className="text-right flex-shrink-0 pl-2">
-              <div className={`text-xl font-extrabold ${text}`}>{partner.average_rating.toFixed(1)}</div>
-              <div className={`text-[10px] ${muted}`}>von 5</div>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className={`absolute top-3 right-3 w-7 h-7 rounded-full border ${theme === 'dark' ? 'bg-gray-800 border-gray-600 text-gray-400 hover:text-gray-200 hover:border-gray-400' : 'bg-white border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-400'} flex items-center justify-center transition-all`}
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          </div>
-          <div className="max-h-[260px] overflow-y-auto p-3 space-y-2.5">
-            {reviews.length === 0
-              ? <div className={`py-6 text-center text-sm ${muted}`}>Noch keine Bewertungen.</div>
-              : reviews.map((r) => <ReviewCardPreview key={r.id} r={r} theme={theme} />)
-            }
-          </div>
-          <FooterPreview theme={theme} />
-        </div>
-      )}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-[62px] h-[62px] rounded-full bg-green-600 border-[3px] border-white shadow-xl flex flex-col items-center justify-center hover:scale-105 transition-transform relative"
-      >
-        <div className="absolute -inset-1 rounded-full border-2 border-green-600 opacity-0 animate-ping" />
-        <Star className="w-[18px] h-[18px] text-white fill-white" />
-        <span className="text-[13px] font-extrabold text-white leading-none mt-0.5">{partner.average_rating.toFixed(1)}</span>
-      </button>
-    </div>
-  )
-}
-
 function CarouselPreview({ data, theme }: { data: WidgetData; theme: WidgetTheme }) {
   const { partner, reviews } = data
   const bg = theme === 'dark' ? 'bg-gray-800' : 'bg-white'
@@ -336,7 +285,7 @@ function CarouselPreview({ data, theme }: { data: WidgetData; theme: WidgetTheme
 }
 
 export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetConfiguratorProps) {
-  const [widgetType, setWidgetType] = useState<WidgetType>('floating')
+  const [widgetType, setWidgetType] = useState<WidgetType>('list')
   const [theme, setTheme] = useState<WidgetTheme>('light')
   const [limit, setLimit] = useState(5)
   const [position, setPosition] = useState<'right' | 'left'>('right')
@@ -348,7 +297,7 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
   const fetchPreviewData = useCallback(async () => {
     setPreviewLoading(true)
     try {
-      const fetchType = (widgetType === 'floating' || widgetType === 'carousel') ? 'list' : widgetType
+      const fetchType = widgetType === 'carousel' ? 'list' : widgetType
       const res = await fetch(`/api/widget/reviews/${partnerId}?limit=${limit}&type=${fetchType}`)
       if (res.ok) setPreviewData(await res.json())
     } catch { /* */ } finally { setPreviewLoading(false) }
@@ -359,16 +308,16 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
   function buildEmbedCode() {
     const attrs = [`data-oo-partner-id="${partnerSlug}"`, `data-type="${widgetType}"`, `data-theme="${theme}"`]
     if (widgetType === 'list' || widgetType === 'carousel') attrs.push(`data-limit="${limit}"`)
-    if (widgetType === 'floating') attrs.push(`data-position="${position}"`)
     if (widgetType === 'carousel') attrs.push(`data-autoplay="${autoplay}"`)
+    attrs.push(`data-position="${position}"`)
     return `<div id="online-offerten-widget"\n     ${attrs.join('\n     ')}>\n</div>\n<script src="${BASE_URL}/widget/reviews.js" async><\/script>`
   }
 
   function buildWpCode() {
     let code = `[online_offerten_reviews partner_id="${partnerSlug}" type="${widgetType}" theme="${theme}"`
     if (widgetType === 'list' || widgetType === 'carousel') code += ` limit="${limit}"`
-    if (widgetType === 'floating') code += ` position="${position}"`
     if (widgetType === 'carousel') code += ` autoplay="${autoplay}"`
+    code += ` position="${position}"`
     return code + ']'
   }
 
@@ -385,28 +334,27 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
   }
 
   const widgetTypes = [
-    { id: 'floating' as const, icon: MessageCircle, label: 'Floating Badge', desc: 'Schwebendes Badge wie Trusted Shops' },
+    { id: 'list' as const, icon: Monitor, label: 'Bewertungsliste', desc: 'Vollständige Bewertungen mit Details' },
     { id: 'carousel' as const, icon: LayoutList, label: 'Karussell', desc: 'Horizontale Bewertungs-Slider' },
-    { id: 'list' as const, icon: Monitor, label: 'Bewertungsliste', desc: 'Vollständige Bewertungen' },
     { id: 'badge' as const, icon: Smartphone, label: 'Kompaktes Badge', desc: 'Kleine Box für Sidebar' },
   ]
 
   return (
     <div className="space-y-6">
+      <SocialShareCard partnerSlug={partnerSlug} partnerId={partnerId} />
+
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2"><Code className="h-5 w-5" />Bewertungs-Widget</CardTitle>
-          <CardDescription>Zeigen Sie Ihre verifizierten Online-Offerten Bewertungen auf Ihrer eigenen Webseite. Wählen Sie einen Widget-Typ und kopieren Sie den Code.</CardDescription>
+          <CardDescription>Wählen Sie ein zusätzliches Widget für eine bestimmte Seite. Das Floating Badge wird immer automatisch mitgeliefert.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-3">
             <Label className="text-sm font-semibold">Widget-Typ</Label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {widgetTypes.map((wt) => (
                 <button key={wt.id} type="button" onClick={() => setWidgetType(wt.id)}
                   className={`relative flex flex-col items-center gap-3 p-4 rounded-xl border-2 transition-all ${widgetType === wt.id ? 'border-green-500 bg-green-50 shadow-sm' : 'border-gray-200 hover:border-gray-300 bg-white'}`}>
-                  {wt.id === 'floating' && <span className="absolute top-2 right-2 text-[9px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded-full">NEU</span>}
-                  {wt.id === 'carousel' && <span className="absolute top-2 right-2 text-[9px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded-full">NEU</span>}
                   <wt.icon className={`h-8 w-8 ${widgetType === wt.id ? 'text-green-600' : 'text-gray-400'}`} />
                   <div className="text-center">
                     <div className={`font-semibold text-sm ${widgetType === wt.id ? 'text-green-700' : 'text-gray-700'}`}>{wt.label}</div>
@@ -444,19 +392,17 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
             </div>
           )}
 
-          {widgetType === 'floating' && (
-            <div className="space-y-3">
-              <Label className="text-sm font-semibold">Position</Label>
-              <div className="flex gap-3">
-                {(['right', 'left'] as const).map((p) => (
-                  <button key={p} type="button" onClick={() => setPosition(p)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-medium transition-all ${position === p ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
-                    {p === 'right' ? 'Rechts unten' : 'Links unten'}
-                  </button>
-                ))}
-              </div>
+          <div className="space-y-3">
+            <Label className="text-sm font-semibold">Floating Badge Position</Label>
+            <div className="flex gap-3">
+              {(['right', 'left'] as const).map((p) => (
+                <button key={p} type="button" onClick={() => setPosition(p)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-medium transition-all ${position === p ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
+                  {p === 'right' ? 'Rechts unten' : 'Links unten'}
+                </button>
+              ))}
             </div>
-          )}
+          </div>
 
           {widgetType === 'carousel' && (
             <div className="space-y-3">
@@ -477,9 +423,9 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
       <Card>
         <CardHeader>
           <CardTitle className="text-base">Vorschau</CardTitle>
-          <CardDescription>So sieht das Widget auf Ihrer Webseite aus.</CardDescription>
+          <CardDescription>So sieht das Widget auf Ihrer Webseite aus. Das Floating Badge erscheint immer zusätzlich.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           <div className={`rounded-xl p-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
             {previewLoading ? (
               <div className="flex items-center justify-center py-8">
@@ -487,14 +433,27 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
                 <span className="ml-2 text-sm text-gray-500">Vorschau wird geladen...</span>
               </div>
             ) : previewData ? (
-              widgetType === 'badge' ? <BadgePreview data={previewData} theme={theme} />
-              : widgetType === 'floating' ? <FloatingPreview data={previewData} theme={theme} />
-              : widgetType === 'carousel' ? <CarouselPreview data={previewData} theme={theme} />
-              : <ListPreview data={previewData} theme={theme} />
+              <div className="space-y-6">
+                {widgetType === 'badge' ? <BadgePreview data={previewData} theme={theme} />
+                  : widgetType === 'carousel' ? <CarouselPreview data={previewData} theme={theme} />
+                  : <ListPreview data={previewData} theme={theme} />
+                }
+              </div>
             ) : (
               <div className="text-center py-8 text-sm text-gray-500">Vorschau konnte nicht geladen werden.</div>
             )}
           </div>
+          {previewData && (
+            <div className="flex items-center gap-3 rounded-lg bg-green-50 border border-green-200 p-3">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-600 flex items-center justify-center shadow">
+                <Star className="w-4 h-4 text-white fill-white" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-green-800">+ Floating Badge</p>
+                <p className="text-[11px] text-green-600">Erscheint automatisch unten {position === 'right' ? 'rechts' : 'links'} auf jeder Seite</p>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 

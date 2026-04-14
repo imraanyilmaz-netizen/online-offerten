@@ -9,6 +9,7 @@ import PartnerHero from '@/components/PartnerProfilePageParts/PartnerHero'
 import Sidebar from '@/components/PartnerProfilePageParts/Sidebar'
 import ReviewsSection from '@/components/PartnerProfilePageParts/ReviewsSection'
 import ImageGallery from '@/components/PartnerProfilePageParts/ImageGallery'
+import PublicReviewForm from '@/components/PartnerProfilePageParts/PublicReviewForm'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatDate } from '@/lib/utils'
 
@@ -200,12 +201,16 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
               </div>
             )}
 
-            <div id="reviews" className="scroll-mt-28">
+            <div id="reviews" className="scroll-mt-28 space-y-6">
               <ReviewsSection
                 reviews={reviews}
                 reviewCount={reviewCount}
                 formatDate={formatDate}
                 onShowAllReviews={() => router.push(`/partner/${partner.slug}/reviews`)}
+              />
+              <PublicReviewForm
+                partnerId={partner.id}
+                partnerName={partner.company_name}
               />
             </div>
           </div>

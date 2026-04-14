@@ -12,6 +12,8 @@
   })();
   var API_PATH = '/api/widget/reviews/';
 
+  var floatingRendered = false;
+
   var containers = document.querySelectorAll(
     '[data-oo-partner-id], #online-offerten-reviews, #online-offerten-badge'
   );
@@ -33,6 +35,7 @@
     var lang = container.getAttribute('data-lang') || 'de';
     var position = container.getAttribute('data-position') || 'right';
     var autoplay = container.getAttribute('data-autoplay') !== 'false';
+    var showFloating = container.getAttribute('data-oo-floating') !== 'false';
 
     if (container.id === 'online-offerten-badge') type = 'badge';
 
@@ -45,10 +48,37 @@
       .then(function (res) { return res.json(); })
       .then(function (data) {
         if (!data.partner) return;
-        renderWidget(container, data, type, theme, lang, position, autoplay);
+
+        if (type === 'floating') {
+          // Explicit floating widget: render only the floating badge
+          if (!floatingRendered) {
+            floatingRendered = true;
+            renderFloatingBadge(container, data, theme, lang, position);
+          }
+        } else {
+          // Render the chosen widget (list, badge, carousel)
+          renderWidget(container, data, type, theme, lang, position, autoplay);
+
+          // Auto-attach floating badge alongside any widget type
+          if (showFloating && !floatingRendered) {
+            floatingRendered = true;
+            renderFloatingBadge(container, data, theme, lang, position);
+          }
+        }
       })
       .catch(function () {});
   });
+
+  function renderFloatingBadge(container, data, theme, lang, position) {
+    var s = getStyles(theme);
+    var t = getTexts(lang);
+    var partner = data.partner;
+    var reviews = data.reviews || [];
+    var profileUrl = BASE_URL + '/partner/' + partner.slug;
+    var rating = partner.average_rating || 0;
+    var count = partner.review_count || 0;
+    renderFloating(container, s, t, partner, reviews, profileUrl, rating, count, position);
+  }
 
   /* ─── Shared Helpers ─── */
 
@@ -240,9 +270,7 @@
     var rating = partner.average_rating || 0;
     var count = partner.review_count || 0;
 
-    if (type === 'floating') {
-      renderFloating(container, s, t, partner, reviews, profileUrl, rating, count, position);
-    } else if (type === 'carousel') {
+    if (type === 'carousel') {
       renderCarousel(container, s, t, partner, reviews, profileUrl, rating, count, autoplay);
     } else if (type === 'badge') {
       var shadow = container.attachShadow({ mode: 'closed' });
