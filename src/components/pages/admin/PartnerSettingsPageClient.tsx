@@ -12,10 +12,11 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Loader2, User, Lock, Image as ImageIcon, Star, ArrowLeft, Eye, EyeOff, MapPin, ExternalLink } from 'lucide-react';
+import { Loader2, User, Lock, Image as ImageIcon, Star, ArrowLeft, Eye, EyeOff, MapPin, ExternalLink, Code } from 'lucide-react';
 import ImageUploader from '@/components/PartnerPanel/ImageUploader';
 import GalleryImageUploader from '@/components/PartnerPanel/GalleryImageUploader';
 import ReviewCard from '@/components/PartnerProfilePageParts/ReviewCard';
+import WidgetConfigurator from '@/components/PartnerPanel/WidgetConfigurator';
 import { formatDate } from '@/lib/utils'; // Import formatDate from utils
 import Step2Regions from '@/src/components/PartnerRegistrationForm/Step2Regions';
 import { cantonMap } from '@/src/lib/dataMapping.js';
@@ -62,7 +63,7 @@ const PartnerSettingsPageClient = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tabParam = searchParams.get('tab');
-  const settingsTabs = ['profile', 'regions', 'images', 'security', 'reviews'] as const;
+  const settingsTabs = ['profile', 'regions', 'images', 'security', 'reviews', 'widget'] as const;
   const initialTab =
     tabParam && settingsTabs.includes(tabParam as (typeof settingsTabs)[number]) ? tabParam : 'profile';
   const { user: authUser, loading: authLoading } = useAuth();
@@ -304,12 +305,13 @@ const PartnerSettingsPageClient = () => {
             ) : null}
           </div>
           <Tabs key={initialTab} defaultValue={initialTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1 h-auto py-1">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1 h-auto py-1">
               <TabsTrigger value="profile" className="text-xs sm:text-sm"><User className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Profil</TabsTrigger>
               <TabsTrigger value="regions" className="text-xs sm:text-sm"><MapPin className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Einsatzgebiete</TabsTrigger>
               <TabsTrigger value="images" className="text-xs sm:text-sm"><ImageIcon className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Bilder</TabsTrigger>
               <TabsTrigger value="security" className="text-xs sm:text-sm"><Lock className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Sicherheit</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-xs sm:text-sm col-span-2 sm:col-span-1 lg:col-span-1"><Star className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Bewertungen</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-xs sm:text-sm"><Star className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Bewertungen</TabsTrigger>
+              <TabsTrigger value="widget" className="text-xs sm:text-sm"><Code className="mr-1 sm:mr-2 h-4 w-4 shrink-0" />Widget</TabsTrigger>
             </TabsList>
 
             <TabsContent value="profile" className="mt-6">
@@ -493,6 +495,18 @@ const PartnerSettingsPageClient = () => {
                   )}
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="widget" className="mt-6">
+              {partnerData?.id && partnerData?.slug ? (
+                <WidgetConfigurator partnerId={partnerData.id} partnerSlug={partnerData.slug} />
+              ) : (
+                <Card>
+                  <CardContent className="py-8">
+                    <p className="text-center text-gray-500">Widget-Konfiguration wird geladen...</p>
+                  </CardContent>
+                </Card>
+              )}
             </TabsContent>
           </Tabs>
         </div>
