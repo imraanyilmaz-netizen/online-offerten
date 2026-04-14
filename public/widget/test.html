@@ -6,34 +6,83 @@
   <title>Widget Test - Online-Offerten Bewertungen</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f3f4f6; padding: 40px 20px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f3f4f6; padding: 40px 20px 200px; }
     h1 { text-align: center; color: #1f2937; margin-bottom: 8px; font-size: 24px; }
     .subtitle { text-align: center; color: #6b7280; margin-bottom: 40px; font-size: 14px; }
-    .test-section { max-width: 700px; margin: 0 auto 48px; }
-    .test-section h2 { color: #374151; font-size: 18px; margin-bottom: 6px; }
+    .test-section { max-width: 800px; margin: 0 auto 48px; }
+    .test-section h2 { color: #374151; font-size: 18px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .test-section h2 .new { font-size: 10px; background: #16a34a; color: #fff; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
     .test-section p { color: #6b7280; font-size: 13px; margin-bottom: 16px; }
     .test-section code { display: block; background: #1f2937; color: #34d399; padding: 12px 16px; border-radius: 8px; font-size: 12px; margin-bottom: 16px; white-space: pre-wrap; word-break: break-all; }
     .widget-container { background: #fff; border: 2px dashed #d1d5db; border-radius: 12px; padding: 24px; min-height: 80px; }
     .dark-bg { background: #111827; }
-    hr { border: none; border-top: 1px solid #e5e7eb; margin: 48px auto; max-width: 700px; }
-    .status { text-align: center; padding: 12px; background: #fef3c7; border-radius: 8px; color: #92400e; font-size: 13px; max-width: 700px; margin: 0 auto 32px; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 48px auto; max-width: 800px; }
+    .status { text-align: center; padding: 12px; background: #fef3c7; border-radius: 8px; color: #92400e; font-size: 13px; max-width: 800px; margin: 0 auto 32px; }
   </style>
 </head>
 <body>
 
   <h1>Online-Offerten Widget Test</h1>
-  <p class="subtitle">Bu sayfa widget'ın farklı konfigürasyonlarını test etmek içindir.</p>
+  <p class="subtitle">Bu sayfa widget'in tüm tiplerini test etmek içindir.</p>
 
   <div class="status">
     ⚠️ Bu test sayfası <strong>localhost:3000</strong> üzerinden çalışmalıdır.
-    Dosyayı doğrudan açarsanız (file://) API çağrıları başarısız olur.
     <br>Adres: <strong>http://localhost:3000/widget/test.html</strong>
   </div>
 
-  <!-- TEST 1: Liste Widget (Light, Slug ile) -->
+  <!-- TEST 1: Floating Badge (Light, Right) -->
   <div class="test-section">
-    <h2>1. Liste Widget (Light) — Slug ile</h2>
-    <p>Slug kullanarak yorumları çeker. UUID gizli kalır.</p>
+    <h2>1. Floating Badge (Light, Rechts) <span class="new">NEU</span></h2>
+    <p>Trustedshops-tarzı yüzen rozet. Sağ alt köşede sabit durur, tıklanınca yorumlar açılır.</p>
+    <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="floating" data-position="right" data-theme="light"&gt;&lt;/div&gt;</code>
+    <div data-oo-partner-id="abah-transport-gmbh"
+         data-type="floating"
+         data-position="right"
+         data-theme="light"
+         data-limit="5">
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- TEST 2: Carousel (Light) -->
+  <div class="test-section">
+    <h2>2. Review Carousel (Light) <span class="new">NEU</span></h2>
+    <p>Yatay kayan yorum kartları. Ok butonları ve dot navigasyonu ile gezinilebilir.</p>
+    <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="carousel" data-limit="5" data-theme="light" data-autoplay="true"&gt;&lt;/div&gt;</code>
+    <div class="widget-container">
+      <div data-oo-partner-id="abah-transport-gmbh"
+           data-type="carousel"
+           data-limit="5"
+           data-theme="light"
+           data-autoplay="true">
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- TEST 3: Carousel (Dark) -->
+  <div class="test-section">
+    <h2>3. Review Carousel (Dark)</h2>
+    <p>Koyu tema carousel widget.</p>
+    <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="carousel" data-limit="5" data-theme="dark"&gt;&lt;/div&gt;</code>
+    <div class="widget-container dark-bg">
+      <div data-oo-partner-id="abah-transport-gmbh"
+           data-type="carousel"
+           data-limit="5"
+           data-theme="dark"
+           data-autoplay="false">
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- TEST 4: Liste Widget (Light, Slug) -->
+  <div class="test-section">
+    <h2>4. Liste Widget (Light)</h2>
+    <p>Slug kullanarak tam yorum listesi.</p>
     <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="list" data-limit="5" data-theme="light"&gt;&lt;/div&gt;</code>
     <div class="widget-container">
       <div data-oo-partner-id="abah-transport-gmbh"
@@ -46,10 +95,10 @@
 
   <hr>
 
-  <!-- TEST 2: Badge Widget (Light) -->
+  <!-- TEST 5: Badge Widget (Light) -->
   <div class="test-section">
-    <h2>2. Badge Widget (Light)</h2>
-    <p>Kompakt rozet görünümü, sidebar veya footer için ideal.</p>
+    <h2>5. Badge Widget (Light)</h2>
+    <p>Kompakt rozet görünümü.</p>
     <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="badge" data-theme="light"&gt;&lt;/div&gt;</code>
     <div class="widget-container">
       <div data-oo-partner-id="abah-transport-gmbh"
@@ -61,25 +110,9 @@
 
   <hr>
 
-  <!-- TEST 3: Liste Widget (Dark) -->
+  <!-- TEST 6: Badge Widget (Dark) -->
   <div class="test-section">
-    <h2>3. Liste Widget (Dark)</h2>
-    <p>Koyu tema, karanlık websiteleri için.</p>
-    <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="list" data-limit="5" data-theme="dark"&gt;&lt;/div&gt;</code>
-    <div class="widget-container dark-bg">
-      <div data-oo-partner-id="abah-transport-gmbh"
-           data-type="list"
-           data-limit="5"
-           data-theme="dark">
-      </div>
-    </div>
-  </div>
-
-  <hr>
-
-  <!-- TEST 4: Badge Widget (Dark) -->
-  <div class="test-section">
-    <h2>4. Badge Widget (Dark)</h2>
+    <h2>6. Badge Widget (Dark)</h2>
     <p>Koyu tema rozet.</p>
     <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="badge" data-theme="dark"&gt;&lt;/div&gt;</code>
     <div class="widget-container dark-bg">
@@ -92,20 +125,21 @@
 
   <hr>
 
-  <!-- TEST 5: UUID ile (geriye uyumluluk) -->
+  <!-- TEST 7: Liste (Dark) -->
   <div class="test-section">
-    <h2>5. UUID ile (geriye uyumluluk testi)</h2>
-    <p>Eski UUID formatı da hâlâ çalışmalı.</p>
-    <code>&lt;div data-oo-partner-id="14523b01-612d-43c3-8851-a8a465312224" data-type="badge" data-theme="light"&gt;&lt;/div&gt;</code>
-    <div class="widget-container">
-      <div data-oo-partner-id="14523b01-612d-43c3-8851-a8a465312224"
-           data-type="badge"
-           data-theme="light">
+    <h2>7. Liste Widget (Dark)</h2>
+    <p>Koyu tema tam yorum listesi.</p>
+    <code>&lt;div data-oo-partner-id="abah-transport-gmbh" data-type="list" data-limit="5" data-theme="dark"&gt;&lt;/div&gt;</code>
+    <div class="widget-container dark-bg">
+      <div data-oo-partner-id="abah-transport-gmbh"
+           data-type="list"
+           data-limit="5"
+           data-theme="dark">
       </div>
     </div>
   </div>
 
-  <!-- Widget Script — localhost'tan yüklenir -->
+  <!-- Widget Script -->
   <script src="/widget/reviews.js"></script>
 
 </body>
