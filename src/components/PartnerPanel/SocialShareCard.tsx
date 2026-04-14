@@ -340,14 +340,14 @@ export default function SocialShareCard({ partnerSlug, partnerId }: SocialShareC
         .select('gallery_images, hero_image_url')
         .eq('id', partnerId)
         .single()
-        .then(({ data }) => {
+        .then(({ data }: { data: { gallery_images: unknown; hero_image_url: string | null } | null }) => {
           if (data) {
             setPartnerData((prev) =>
               prev
                 ? {
                     ...prev,
                     hero_image_url: data.hero_image_url,
-                    gallery_images: Array.isArray(data.gallery_images) ? data.gallery_images : [],
+                    gallery_images: Array.isArray(data.gallery_images) ? data.gallery_images as string[] : [],
                   }
                 : prev
             )
