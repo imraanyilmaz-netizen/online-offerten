@@ -8,6 +8,8 @@ const CORS_HEADERS = {
   'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
 }
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
 export async function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS })
 }
@@ -20,7 +22,7 @@ export async function GET(
 
   if (!partnerId) {
     return NextResponse.json(
-      { error: 'Partner ID is required' },
+      { error: 'Partner ID or slug is required' },
       { status: 400, headers: CORS_HEADERS }
     )
   }
@@ -45,24 +47,15 @@ export async function GET(
   const limit = Math.min(parseInt(url.searchParams.get('limit') || '5', 10), 20)
   const type = url.searchParams.get('type') || 'list'
 
-  const [partnerResult, reviewsResult] = await Promise.all([
-    supabase
-      .from('partners')
-      .select('id, company_name, slug, logo_url, average_rating, review_count')
-      .eq('id', partnerId)
-      .eq('status', 'active')
-      .single(),
-    supabase
-      .from('customer_reviews')
-      .select(
-        'id, customer_name, rating, rating_price, rating_workflow, rating_administration, review_text, review_date, service_type, city'
-      )
-      .eq('partner_id', partnerId)
-      .eq('approval_status', 'approved')
-      .eq('review_type', 'partner')
-      .order('review_date', { ascending: false })
-      .limit(limit),
-  ])
+  const isUUID = UUID_REGEX.test(partnerId)
+  const filterColumn = isUUID ? 'id' : 'slug'
+
+  const partnerResult = await supabase
+    .from('partners')
+    .select('id, company_name, slug, logo_url, average_rating, review_count')
+    .eq(filterColumn, partnerId)
+    .eq('status', 'active')
+    .single()
 
   if (partnerResult.error || !partnerResult.data) {
     return NextResponse.json(
@@ -72,6 +65,18 @@ export async function GET(
   }
 
   const partner = partnerResult.data
+
+  const reviewsResult = await supabase
+    .from('customer_reviews')
+    .select(
+      'id, customer_name, rating, rating_price, rating_workflow, rating_administration, review_text, review_date, service_type, city'
+    )
+    .eq('partner_id', partner.id)
+    .eq('approval_status', 'approved')
+    .eq('review_type', 'partner')
+    .order('review_date', { ascending: false })
+    .limit(limit)
+
   const reviews = reviewsResult.data || []
 
   const totalRating = reviews.reduce((sum, r) => sum + (r.rating || 0), 0)

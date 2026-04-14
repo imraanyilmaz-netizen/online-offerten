@@ -242,12 +242,12 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
   }, [fetchPreviewData])
 
   const embedCode = widgetType === 'badge'
-    ? `<div id="online-offerten-badge"\n     data-oo-partner-id="${partnerId}"\n     data-type="badge"\n     data-theme="${theme}">\n</div>\n<script src="${BASE_URL}/widget/reviews.js" async><\/script>`
-    : `<div id="online-offerten-reviews"\n     data-oo-partner-id="${partnerId}"\n     data-type="list"\n     data-limit="${limit}"\n     data-theme="${theme}">\n</div>\n<script src="${BASE_URL}/widget/reviews.js" async><\/script>`
+    ? `<div id="online-offerten-badge"\n     data-oo-partner-id="${partnerSlug}"\n     data-type="badge"\n     data-theme="${theme}">\n</div>\n<script src="${BASE_URL}/widget/reviews.js" async><\/script>`
+    : `<div id="online-offerten-reviews"\n     data-oo-partner-id="${partnerSlug}"\n     data-type="list"\n     data-limit="${limit}"\n     data-theme="${theme}">\n</div>\n<script src="${BASE_URL}/widget/reviews.js" async><\/script>`
 
   const wordpressCode = widgetType === 'badge'
-    ? `[online_offerten_reviews partner_id="${partnerId}" type="badge" theme="${theme}"]`
-    : `[online_offerten_reviews partner_id="${partnerId}" type="list" limit="${limit}" theme="${theme}"]`
+    ? `[online_offerten_reviews partner_id="${partnerSlug}" type="badge" theme="${theme}"]`
+    : `[online_offerten_reviews partner_id="${partnerSlug}" type="list" limit="${limit}" theme="${theme}"]`
 
   const handleCopy = async (text: string, id: string) => {
     try {
