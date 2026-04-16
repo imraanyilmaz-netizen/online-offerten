@@ -203,6 +203,110 @@ export const cantonMap = {
 /** @param {string} key */
 export const getFullCantonName = (key) => cantonMap[key] || key;
 
+/**
+ * Optionale «Lokal»-Inhalte für Branchen-Stadtseiten (`/{category}/{city}`).
+ * Schlüssel: `location.slug` (z. B. zuerich) → Kategorie-Slug (`umzugsfirma` | `reinigungsfirma` | `malerfirma`).
+ * Wert `null` oder fehlender Eintrag: kein zusätzlicher Spotlight-Block.
+ *
+ * @type {Record<string, Partial<Record<string, {
+ *   kicker: string
+ *   title: string
+ *   paragraphs: string[]
+ *   highlights?: { label: string; value: string }[] | null
+ * } | null>>}
+ */
+export const locationCategorySpotlights = {
+  zuerich: {
+    umzugsfirma: {
+      kicker: 'Kurzportrait',
+      title: 'Umzug in Zürich: Limmatstadt, Seeufer, enge Zufahrten',
+      paragraphs: [
+        'Zürich mischt historische Gassen in der Altstadt mit modernen Hochhäusern am See und dicht bebauten Quartieren – genau dort entscheiden Liftmass, Parkzonen und kurze Haltefenster oft mehr als die reine Kilometerzahl.',
+        'Erfahrene Zügelunternehmen planen mit Ihnen Tragewege, Material und Zeitfenster; für Spezialtransporte oder Fernumzüge lohnt sich früh eine Offerte, damit Kapazitäten und Abläufe zu Ihrem Termin passen.',
+      ],
+      highlights: [
+        { label: 'Typische Herausforderungen', value: 'Parkbewilligungen, enge Treppenhäuser, See- und Hügelquartiere' },
+        { label: 'Praktischer Tipp', value: 'Haltezone und Lift früh abstimmen – spart Stress am Umzugstag.' },
+      ],
+    },
+    reinigungsfirma: {
+      kicker: 'Region',
+      title: 'Reinigung in Zürich: von der Altstadtwohnung bis zum Büro am Prime Tower',
+      paragraphs: [
+        'In der Stadt Zürich sind kurze Wege und hohe Termintreue gefragt – ob Unterhaltsreinigung, Büro oder eine Endreinigung mit Abnahmegarantie vor der Übergabe.',
+        'Vergleichen Sie mehrere Offerten, klären Sie Umfang, Zeitfenster und Abnahme schriftlich; so bleiben auch bei komplexen Objekten oder grossen Flächen die Erwartungen klar.',
+      ],
+      highlights: [
+        { label: 'Schwerpunkt', value: 'Wohnungsübergaben, Gewerbeflächen, regelmässige Einsätze' },
+        { label: 'Lohn sich zu klären', value: 'Abnahme, Nachbesserung und was zur Grundausstattung gehört.' },
+      ],
+    },
+    malerfirma: {
+      kicker: 'Vor Ort',
+      title: 'Malerarbeiten in Zürich: MFH, Loft und klassische Altbauwohnungen',
+      paragraphs: [
+        'Zürich bietet viele unterschiedliche Baualtersklassen – vom Gründerzeithaus bis zur Betonoptik in Neubauten. Gute Angebote trennen Vorbereitung, Anstrichsystem und Nacharbeiten klar.',
+        'Regionale Maler kennen typische Untergründe und können realistische Termine nennen. Mit mehreren Offerten sehen Sie schnell, wo Material und Stundenansatz zusammenpassen.',
+      ],
+      highlights: [
+        { label: 'Häufige Themen', value: 'Untergrund prüfen, Feuchträume, Farb- und Systemwahl' },
+        { label: 'Vergleich', value: 'Mehrere detaillierte Angebote – weniger Überraschungen bei der Rechnung.' },
+      ],
+    },
+  },
+  bern: {
+    umzugsfirma: {
+      kicker: 'Kurzportrait',
+      title: 'Umzug in Bern: Lauben, Matte und Hanglagen rund um die Aare',
+      paragraphs: [
+        'Die Berner Altstadt mit Lauben und Kopfsteinpflaster stellt andere Anforderungen als moderne Quartiere in Bümpliz oder Breitenrain – Trassen, Parken und Schutz der Liegenschaft wollen gut geplant sein.',
+        'Zuverlässige Umzugsfirmen berücksichtigen Zufahrten, Tragwege und mögliche Schutzmaterialien. Eine zentrale Offertenanfrage hilft, Kapazitäten und Preise für Ihren Wunschtermin transparent zu vergleichen.',
+      ],
+      highlights: [
+        { label: 'Besonderheit', value: 'UNESCO-Altstadt, enge Gassen, teils steile Zufahrten' },
+        { label: 'Planung', value: 'Besichtigung und Massen – besonders bei Möbeln mit Sondermass.' },
+      ],
+    },
+    reinigungsfirma: {
+      kicker: 'Region',
+      title: 'Reinigung in Bern: Bundesstadt mit Quartieren von der Matte bis Bümpliz',
+      paragraphs: [
+        'Bern verbindet dicht bebaute Innenstadtbereiche mit grünen Aussenquartieren – Reinigungsfirmen fahren kurze Wege, müssen aber oft Park- und Zugangsregeln der Liegenschaften beachten.',
+        'Für Endreinigungen mit Abnahmegarantie oder regelmässige Objektbetreuung lohnt der Vergleich mehrerer Offerten: Umfang, Termine und was bei der Abnahme gilt sollten von Anfang an klar sein.',
+      ],
+      highlights: [
+        { label: 'Häufig nachgefragt', value: 'Übergaben, Büroflächen, Unterhaltsreinigung in MFH' },
+        { label: 'Vor dem Start', value: 'Schlüssel, Zugang, Besonderheiten (Haustiere, Böden).' },
+      ],
+    },
+    malerfirma: {
+      kicker: 'Gebäude',
+      title: 'Malerarbeiten in Bern: Sandstein, Lauben und klassische Fassaden',
+      paragraphs: [
+        'In Bern begegnen Maler oft sensiblen Untergründen und Denkmalschutz-Themen – gerade in der Altstadt und bei älteren Mehrfamilienhäusern zählen Vorbereitung und abgestimmte Systeme.',
+        'Laden Sie mehrere Angebote ein, die Leistung und Ausschlüsse klar benennen. So lässt sich fair vergleichen, ohne dass Nacharbeiten oder Material später das Budget sprengen.',
+      ],
+      highlights: [
+        { label: 'Typisch Bern', value: 'Historische Bausubstanz, sorgfältige Untergrundvorbereitung' },
+        { label: 'Tipp', value: 'Farbmuster und Trocknungszeiten bei Aussenarbeiten früh festlegen.' },
+      ],
+    },
+  },
+}
+
+/**
+ * @param {string} locationSlug z. B. zuerich
+ * @param {string} categorySlug z. B. umzugsfirma
+ * @returns {{ kicker: string, title: string, paragraphs: string[], highlights?: { label: string, value: string }[] | null } | null}
+ */
+export function getLocationCategorySpotlight(locationSlug, categorySlug) {
+  const row = locationCategorySpotlights[locationSlug]
+  if (!row) return null
+  const block = row[categorySlug]
+  if (block == null) return null
+  return block
+}
+
 export const cantonOptions = Object.entries(cantonMap)
   .map(([value, label]) => ({ value, label }))
   .sort((a, b) => a.label.localeCompare(b.label, 'de-CH'));

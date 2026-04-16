@@ -23,7 +23,12 @@ import {
   DialogTitle as DialogTitleUi,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { cantonMap, getFullCantonName, locations } from '@/data/locations'
+import {
+  cantonMap,
+  getFullCantonName,
+  getLocationCategorySpotlight,
+  locations,
+} from '@/data/locations'
 import {
   getCategoryServiceCityPath,
   getServicePathSegment,
@@ -46,6 +51,7 @@ const DialogDescription = DialogDescriptionUi as FC<
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation'
 import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CategoryCityFaqSection from '@/components/pages/category/CategoryCityFaqSection'
+import CategoryCitySpotlight from '@/components/pages/category/CategoryCitySpotlight'
 import { getCityFaqsForCategory, getCityPageLocalContent } from '@/lib/cityPageFaqs'
 import { getCityHeroImageSrc } from '@/lib/cityHeroImage'
 import { getCantonPeerLocations } from '@/lib/cityPagePartnerStats'
@@ -263,6 +269,7 @@ export default function CategoryCityPageClient({
 
   const accentGrad = categoryAccentGradient(categorySlug)
   const partnerAside = partnerNetworkAsideCopy(categorySlug, locationName, serviceTitle)
+  const locationSpotlight = getLocationCategorySpotlight(locationSlug, categorySlug)
 
   return (
     <div className="bg-gradient-to-b from-neutral-50 via-white to-slate-50/90 dark:from-background dark:via-background dark:to-muted/25">
@@ -544,6 +551,10 @@ export default function CategoryCityPageClient({
           </div>
         </div>
       </section>
+
+      {locationSpotlight ? (
+        <CategoryCitySpotlight categorySlug={categorySlug} data={locationSpotlight} />
+      ) : null}
 
       <section className="relative overflow-hidden border-t border-slate-200/70 bg-gradient-to-b from-slate-50/40 via-white to-slate-50/50 dark:border-border dark:from-muted/20 dark:via-background dark:to-muted/15">
         <div
