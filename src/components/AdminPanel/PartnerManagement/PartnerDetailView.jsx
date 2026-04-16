@@ -2,7 +2,8 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Star, Building, Mail, Phone, MapPin, Globe, Calendar, Users, FileText, Shield, Check, X, ExternalLink } from 'lucide-react';
-import { getGermanServiceName, getFullCantonName } from '@/lib/dataMapping';
+import { getGermanServiceName } from '@/data/categories';
+import { getFullCantonName } from '@/data/locations';
 
 const DetailSection = ({ title, icon, children }) => (
   <div className="bg-white p-4 rounded-lg border border-gray-200">

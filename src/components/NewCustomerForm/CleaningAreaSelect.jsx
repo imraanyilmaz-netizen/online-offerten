@@ -21,13 +21,13 @@ export default function CleaningAreaSelect({
   return (
     <div className={cn('space-y-1', className)}>
       <div
-        className={cn(
-          'relative rounded-md border border-slate-300 bg-slate-50 focus-within:border-green-500 focus-within:bg-white',
+               className={cn(
+          'relative rounded-md border border-slate-300 dark:border-border bg-slate-50 dark:bg-muted/50 focus-within:border-green-500 dark:focus-within:border-primary focus-within:bg-white dark:focus-within:bg-background',
           selectClassName,
         )}
       >
         <div className={cn('pointer-events-none flex min-h-[40px] items-center px-3 py-2', textSizeClassName)}>
-          <span className={cn('truncate', !value && 'text-slate-500')}>
+          <span className={cn('truncate text-foreground', !value && 'text-slate-500 dark:text-muted-foreground')}>
             {value ? `Wohnungsfläche: ${getCleaningAreaSqmLabel(value)}` : placeholder}
           </span>
         </div>

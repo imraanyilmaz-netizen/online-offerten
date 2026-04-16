@@ -61,8 +61,8 @@ const FileUpload = ({ files, onFilesChange, onFileRemove }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-6 border-2 border-gray-300 border-dashed rounded-lg">
-        <Loader2 className="w-6 h-6 animate-spin text-gray-500" />
+      <div className="flex items-center justify-center p-6 border-2 border-gray-300 dark:border-border border-dashed rounded-lg">
+        <Loader2 className="w-6 h-6 animate-spin text-gray-500 dark:text-muted-foreground" />
       </div>
     );
   }
@@ -78,40 +78,40 @@ const FileUpload = ({ files, onFilesChange, onFileRemove }) => {
 
   const getFileIcon = (file) => {
     if (file.type.startsWith('image/')) {
-      return <ImageIcon className="w-5 h-5 text-gray-500 flex-shrink-0" />;
+      return <ImageIcon className="w-5 h-5 text-gray-500 dark:text-muted-foreground flex-shrink-0" />;
     }
-    return <FileIcon className="w-5 h-5 text-gray-500 flex-shrink-0" />;
+    return <FileIcon className="w-5 h-5 text-gray-500 dark:text-muted-foreground flex-shrink-0" />;
   };
 
   return (
     <div className="space-y-4">
       <div
         {...getRootProps()}
-        className={`flex flex-col items-center justify-center w-full p-6 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer transition-colors
-          ${isDragActive ? 'bg-green-50 border-green-400' : 'bg-gray-50 md:hover:bg-gray-100'}`}
+        className={`flex flex-col items-center justify-center w-full p-6 border-2 border-gray-300 dark:border-border border-dashed rounded-lg cursor-pointer transition-colors
+          ${isDragActive ? 'bg-green-50 dark:bg-emerald-950/40 border-green-400 dark:border-emerald-500' : 'bg-gray-50 dark:bg-muted/40 md:hover:bg-gray-100 dark:md:hover:bg-muted/60'}`}
       >
         <input {...getInputProps()} />
-        <UploadCloud className="w-10 h-10 mb-3 text-gray-500" />
-        <p className="mb-2 text-sm text-gray-500 text-center">
+        <UploadCloud className="w-10 h-10 mb-3 text-gray-500 dark:text-muted-foreground" />
+        <p className="mb-2 text-sm text-gray-500 dark:text-muted-foreground text-center">
           <span className="font-semibold">{t('step3.fileUploadClick')}</span> {t('step3.fileUploadDrag')}
         </p>
-        <p className="text-xs text-gray-500">{t('step3.fileUploadHint')}</p>
+        <p className="text-xs text-gray-500 dark:text-muted-foreground">{t('step3.fileUploadHint')}</p>
       </div>
 
       {files && files.length > 0 && (
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-gray-700">{t('step3.fileUploadSelectedFiles', { count: files.length })}</h4>
+          <h4 className="text-sm font-medium text-gray-700 dark:text-foreground">{t('step3.fileUploadSelectedFiles', { count: files.length })}</h4>
           <ul className="space-y-2 max-h-60 overflow-y-auto pr-2">
             {files.map((file, index) => (
-              <li key={`${file.name}-${index}`} className="flex items-center justify-between p-2 bg-gray-100 rounded-md">
+              <li key={`${file.name}-${index}`} className="flex items-center justify-between p-2 bg-gray-100 dark:bg-muted rounded-md">
                 <div className="flex items-center space-x-2 overflow-hidden">
                   {getFileIcon(file)}
                   <div className="flex-grow overflow-hidden">
-                    <p className="text-sm font-medium text-gray-800 truncate">{file.name}</p>
-                    <p className="text-xs text-gray-500">{formatBytes(file.size)}</p>
+                    <p className="text-sm font-medium text-gray-800 dark:text-foreground truncate">{file.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-muted-foreground">{formatBytes(file.size)}</p>
                   </div>
                 </div>
-                <Button type="button" variant="ghost" size="icon" onClick={() => onFileRemove(file)} className="h-7 w-7 text-gray-500 md:hover:text-red-500 md:hover:bg-red-100">
+                <Button type="button" variant="ghost" size="icon" onClick={() => onFileRemove(file)} className="h-7 w-7 text-gray-500 dark:text-muted-foreground md:hover:text-red-500 md:hover:bg-red-100 dark:md:hover:bg-red-950/50">
                   <X className="w-4 h-4" />
                 </Button>
               </li>

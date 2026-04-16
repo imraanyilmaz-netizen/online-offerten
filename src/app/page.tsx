@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { createStaticClient } from '@/src/lib/supabase/server'
+import { getHomepageReviewsBundle } from '@/lib/reviews/kundenBewertungenMerge'
 
 // Lazy load HomePageClient to improve initial page load performance
 // SSR enabled for SEO, but component is code-split for better mobile performance
@@ -12,11 +13,19 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import NextImage from 'next/image'
 import { Button } from '@/components/ui/button'
-import { 
-  Star, ArrowRight, MapPin, CheckCircle, 
-  FileText, Users, GitCompareArrows, 
-  Truck, Sparkles, Paintbrush, Trash2, Building2, Package,
-  ShieldCheck, Award
+import {
+  Star,
+  ArrowRight,
+  CheckCircle,
+  FileText,
+  Users,
+  GitCompareArrows,
+  Truck,
+  Sparkles,
+  Paintbrush,
+  Trash2,
+  ShieldCheck,
+  Award,
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -61,61 +70,24 @@ export const revalidate = 3600 // 1 Stunde – bessere Performance (TTFB), Slug-
 
 async function getHomePageData() {
   const supabase = createStaticClient()
-  
-  // Fetch reviews, posts, and rating stats in parallel with optimized queries
-  // Using select with specific fields to reduce data transfer
-  const [reviewsResult, postsResult, countResult, ratingsResult] = await Promise.all([
-    supabase
-      .from('customer_reviews')
-      .select(`
-        id, customer_name, rating, city, review_date, 
-        review_text,
-        service_type, partner_name,
-        partners (slug, company_name)
-      `)
-      .eq('approval_status', 'approved')
-      .eq('review_type', 'platform')
-      .eq('show_on_homepage', true)
-      .order('review_date', { ascending: false })
-      .limit(6),
+
+  const [bundle, postsResult] = await Promise.all([
+    getHomepageReviewsBundle(6),
     supabase
       .from('posts')
       .select('id, title, slug, meta_description, featured_image_url, category, tags')
       .eq('status', 'published')
       .order('published_at', { ascending: false })
       .limit(100),
-    // Fetch all approved platform reviews count (for homepage AggregateRating)
-    supabase
-      .from('customer_reviews')
-      .select('*', { count: 'exact', head: true })
-      .eq('approval_status', 'approved')
-      .eq('review_type', 'platform'),
-    // Fetch all approved platform reviews ratings for average calculation
-    supabase
-      .from('customer_reviews')
-      .select('rating')
-      .eq('approval_status', 'approved')
-      .eq('review_type', 'platform')
   ])
 
-  // Calculate average rating and total count
-  let averageRating = 0
-  let reviewCount = 0
-  
-  reviewCount = countResult.count || 0 // Use count from database query
-  
-  if (ratingsResult.data && ratingsResult.data.length > 0) {
-    const totalRating = ratingsResult.data.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
-    averageRating = totalRating / ratingsResult.data.length
-  }
-
   return {
-    reviews: reviewsResult.data || [],
+    reviews: bundle.carouselReviews,
     posts: postsResult.data || [],
     ratingStats: {
-      averageRating: Math.round(averageRating * 10) / 10, // Round to 1 decimal
-      reviewCount // Real review count only - no manipulation
-    }
+      averageRating: bundle.ratingStats.averageRating,
+      reviewCount: bundle.ratingStats.reviewCount,
+    },
   }
 }
 
@@ -184,7 +156,7 @@ const structuredData = {
 export default async function HomePage() {
   const { reviews, posts, ratingStats } = await getHomePageData()
 
-  // Add AggregateRating to Organization schema (only platform reviews)
+  // Add AggregateRating to Organization schema (Plattform: customer_reviews + reviews)
   const structuredDataWithRating = {
     ...structuredData,
     "@graph": structuredData["@graph"].map((item: any) => {
@@ -221,393 +193,318 @@ export default async function HomePage() {
 
       <div className="flex flex-col">
         <main className="flex-grow">
-          {/* Hero Section - SEO Optimized - SERVER RENDERED */}
-          <section 
-            className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-gray-100 z-20" 
+          {/* Hero — premium SaaS-style */}
+          <section
+            className="relative isolate z-20 w-full overflow-hidden bg-slate-50 pt-10 pb-14 dark:bg-background sm:pt-14 sm:pb-16 md:pt-16 md:pb-20 lg:pt-20 lg:pb-24"
             aria-label="Offerten vergleichen & passende Anbieter in der Schweiz finden"
           >
-            {/* Background Image - Right Side - Desktop Only - Optimized with Next.js Image */}
-            <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full overflow-hidden">
-              <NextImage
-                src="/fotos/umzug-reinigung-maler-offerten.webp"
-                alt="Umzug, Reinigung und Renovierung Services in der Schweiz"
-                fill
-                priority
-                quality={75}
-                className="object-cover object-right"
-                style={{
-                  maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)',
-                  WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)'
-                }}
-                sizes="(max-width: 1024px) 0vw, 55vw"
-              />
+            <div className="pointer-events-none absolute inset-0 -z-10">
+              <div className="absolute -left-32 top-0 h-[min(100%,420px)] w-[420px] rounded-full bg-emerald-400/25 blur-3xl" />
+              <div className="absolute -right-40 bottom-0 h-[360px] w-[360px] rounded-full bg-teal-400/20 blur-3xl" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_-8%,rgba(16,185,129,0.11),transparent_50%)]" />
             </div>
-            
-            {/* Gradient Overlay - White from left to right with shadow effect - Desktop Only */}
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent" style={{ width: '60%' }}></div>
-            
-            {/* White shadow/glow effect towards the image - Desktop Only */}
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/8 pointer-events-none"></div>
-            <div 
-              className="hidden lg:block absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] pointer-events-none"
-              style={{
-                boxShadow: 'inset -70px 0 70px -35px rgba(255, 255, 255, 0.5)'
-              }}
-            ></div>
-            
-            <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
-              <div className="max-w-2xl text-left">
-                <div className="mb-4">
-                  <div className="hidden sm:inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700 shadow-sm mb-3">
-                    Jetzt kostenlos vergleichen
+
+            <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+              <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                <div className="max-w-xl lg:max-w-none">
+                  <div className="mb-5 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center rounded-full border border-emerald-200/90 bg-white/90 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-emerald-900 shadow-sm backdrop-blur-sm dark:border-emerald-800/70 dark:bg-emerald-950/40 dark:text-emerald-200">
+                      Schweizweit
+                    </span>
+                    <span className="inline-flex items-center rounded-full border border-slate-200/90 bg-white/80 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-slate-700 shadow-sm backdrop-blur-sm dark:border-border dark:bg-card/80 dark:text-foreground">
+                      Kostenlos vergleichen
+                    </span>
+                    <span className="inline-flex items-center rounded-full border border-amber-200/80 bg-amber-50/90 px-3 py-1 text-[0.6875rem] font-semibold text-amber-950 shadow-sm dark:border-amber-800/60 dark:bg-amber-950/35 dark:text-amber-100">
+                      Bis zu 40% sparen
+                    </span>
                   </div>
-                  <div className="relative">
-                    <h1 className="heading-1 break-words pr-28 sm:pr-40">
-                      Offerten vergleichen & passende Anbieter in der Schweiz finden
-                    </h1>
-                    <div
-                      className="absolute right-0 -top-2 sm:-top-5 w-24 h-24 sm:w-32 sm:h-32 text-white rotate-[-10deg] flex items-center justify-center shrink-0"
-                    >
-                      <svg
-                        viewBox="0 0 100 100"
-                        className="absolute inset-0 w-full h-full"
-                        aria-hidden="true"
-                      >
-                        <polygon
-                          points="50,2 59,12 73,8 79,21 92,23 88,37 98,50 88,63 92,77 79,79 73,92 59,88 50,98 41,88 27,92 21,79 8,77 12,63 2,50 12,37 8,23 21,21 27,8 41,12"
-                          fill="#10b981"
-                          stroke="rgba(255,255,255,0.85)"
-                          strokeWidth="3"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <span className="relative z-10 text-xs sm:text-base font-black leading-tight text-center tracking-wide">
-                        BIS ZU
-                        <br />
-                        40%
-                        <br />
-                        SPAREN
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-base sm:text-lg mt-2">
-                    Bei Online-Offerten.ch erhalten Sie kostenlos und unverbindlich bis zu 5 Offerten von geprüften Umzugs- und Reinigungsfirmen aus Ihrer Region.
+
+                  <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-950 dark:text-foreground sm:text-4xl md:text-[2.6rem] md:leading-[1.1] lg:text-[2.75rem]">
+                    Offerten vergleichen &amp; passende Anbieter in der Schweiz finden
+                  </h1>
+                  <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 dark:text-muted-foreground sm:text-lg">
+                    Bei Online-Offerten.ch erhalten Sie kostenlos und unverbindlich bis zu fünf Offerten von
+                    geprüften Partnern aus Ihrer Region – transparent vergleichen und selbst entscheiden.
                   </p>
-                </div>
-                
-                <div className="rounded-2xl border border-gray-200 bg-white/80 p-3 sm:p-4 mb-6">
-                  <h2 className="text-base md:text-lg font-bold text-gray-800 mt-0 mb-2 text-left">
-                    SERVICE WÄHLEN
-                  </h2>
-                {/* Service Quick Links */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-0 mb-0">
-                  <Link
-                    href="/kostenlose-offerte-anfordern?service=umzug&step=2"
-                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-blue-400 hover:shadow-md group"
-                  >
-                    <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <Truck className="w-7 h-7 text-blue-600" />
-                    </div>
-                    <div className="flex-1 text-left min-w-0">
-                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Umzug</p>
-                      <p className="text-sm text-gray-700 leading-snug">Privat, Geschäftlich, International & Spezial</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
-                  </Link>
 
-                  <Link
-                    href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
-                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-purple-400 hover:shadow-md group"
-                  >
-                    <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-7 h-7 text-purple-600" />
+                  {ratingStats.reviewCount > 0 && ratingStats.averageRating > 0 ? (
+                    <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-slate-600 dark:text-muted-foreground">
+                      <span className="flex items-center gap-0.5 text-amber-400" aria-hidden>
+                        {[0, 1, 2, 3, 4].map((i) => (
+                          <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                        ))}
+                      </span>
+                      <span className="font-semibold text-slate-900 dark:text-foreground">
+                        Ø {ratingStats.averageRating.toFixed(1)} / 5
+                      </span>
+                      <span className="text-slate-300 dark:text-muted-foreground/40">·</span>
+                      <Link
+                        href="/kunden-bewertungen"
+                        className="font-medium text-emerald-700 underline-offset-4 hover:text-emerald-800 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300"
+                      >
+                        {ratingStats.reviewCount} Bewertungen
+                      </Link>
                     </div>
-                    <div className="flex-1 text-left min-w-0">
-                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Reinigung</p>
-                      <p className="text-sm text-gray-700 leading-snug">Umzugs-, Büro-, Fensterreinigung & mehr</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
-                  </Link>
+                  ) : null}
 
-                  <Link
-                    href="/kostenlose-offerte-anfordern?service=maler&step=2"
-                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-amber-400 hover:shadow-md group"
-                  >
-                    <div className="w-16 h-16 rounded-2xl bg-amber-100 flex items-center justify-center flex-shrink-0">
-                      <Paintbrush className="w-7 h-7 text-amber-600" />
-                    </div>
-                    <div className="flex-1 text-left min-w-0">
-                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Malerarbeiten</p>
-                      <p className="text-sm text-gray-700 leading-snug">Innen-, Aussenanstrich, Fassaden & mehr</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
-                  </Link>
+                  <div className="mt-8 rounded-[1.25rem] border border-slate-200/90 bg-white/75 p-4 shadow-[0_28px_64px_-28px_rgba(15,23,42,0.22)] backdrop-blur-xl ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card/80 dark:shadow-[0_28px_64px_-28px_rgba(0,0,0,0.45)] dark:ring-white/10 sm:p-5 md:p-6">
+                    <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-muted-foreground">
+                      Leistung wählen
+                    </p>
+                    <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <Link
+                        href="/kostenlose-offerte-anfordern?service=umzug&step=2"
+                        className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-sky-600/50"
+                      >
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-100 to-blue-50 text-sky-700 ring-1 ring-sky-200/60 dark:from-sky-950/50 dark:to-blue-950/40 dark:text-sky-300 dark:ring-sky-800/50">
+                          <Truck className="h-7 w-7" />
+                        </div>
+                        <div className="min-w-0 flex-1 text-left">
+                          <p className="font-semibold text-slate-900 dark:text-foreground">Umzug</p>
+                          <p className="text-sm text-slate-600 dark:text-muted-foreground">Privat, Geschäft, international</p>
+                        </div>
+                        <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-sky-600 dark:text-muted-foreground/50 dark:group-hover:text-sky-400" />
+                      </Link>
 
-                  <Link
-                    href="/kostenlose-offerte-anfordern?service=raeumung&step=2"
-                    className="w-full flex items-center justify-between gap-3 p-4 border rounded-xl transition-all duration-300 bg-white border-gray-300 hover:border-emerald-400 hover:shadow-md group"
-                  >
-                    <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                      <Trash2 className="w-7 h-7 text-emerald-600" />
-                    </div>
-                    <div className="flex-1 text-left min-w-0">
-                      <p className="font-bold text-base text-gray-900 leading-tight break-words">Räumung & Entsorgung</p>
-                      <p className="text-sm text-gray-700 leading-snug">Wohnungsräumung, Entrümpelung & mehr</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
-                  </Link>
-                </div>
-                </div>
-                
-                {/* Rating Card */}
-                <div 
-                  className="hidden bg-white rounded-xl p-5 sm:p-6 flex-col transition-all duration-300 mt-6"
-                  style={{
-                    boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
-                  }}
-                >
-                  <div className="flex flex-row items-start gap-4">
-                  <div className="flex-shrink-0 relative">
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16">
-                      {/* Main 3D Star */}
-                      <div className="absolute inset-0">
-                        <Star className="w-14 h-14 sm:w-16 sm:h-16 text-yellow-400 fill-yellow-400 absolute inset-0" 
-                          style={{ 
-                            filter: 'drop-shadow(0 4px 8px rgba(234, 179, 8, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
-                            transform: 'perspective(100px) rotateY(-5deg) rotateX(5deg)'
-                          }} 
-                        />
-                        {/* Inner smaller star for 3D effect */}
-                        <Star className="w-9 h-9 sm:w-10 sm:h-10 text-yellow-500 fill-yellow-500 absolute top-1 right-1" 
-                          style={{ 
-                            filter: 'drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3))',
-                            transform: 'perspective(100px) rotateY(-3deg) rotateX(3deg)'
-                          }} 
-                        />
-                      </div>
+                      <Link
+                        href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
+                        className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-violet-500/50"
+                      >
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-fuchsia-50 text-violet-800 ring-1 ring-violet-200/60 dark:from-violet-950/50 dark:to-fuchsia-950/40 dark:text-violet-300 dark:ring-violet-800/50">
+                          <Sparkles className="h-7 w-7" />
+                        </div>
+                        <div className="min-w-0 flex-1 text-left">
+                          <p className="font-semibold text-slate-900 dark:text-foreground">Reinigung</p>
+                          <p className="text-sm text-slate-600 dark:text-muted-foreground">End-, Büro-, Fenster &amp; mehr</p>
+                        </div>
+                        <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-violet-600 dark:text-muted-foreground/50 dark:group-hover:text-violet-400" />
+                      </Link>
+
+                      <Link
+                        href="/kostenlose-offerte-anfordern?service=maler&step=2"
+                        className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-amber-600/50"
+                      >
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-100 to-orange-50 text-amber-900 ring-1 ring-amber-200/60 dark:from-amber-950/45 dark:to-orange-950/35 dark:text-amber-200 dark:ring-amber-800/50">
+                          <Paintbrush className="h-7 w-7" />
+                        </div>
+                        <div className="min-w-0 flex-1 text-left">
+                          <p className="font-semibold text-slate-900 dark:text-foreground">Malerarbeiten</p>
+                          <p className="text-sm text-slate-600 dark:text-muted-foreground">Innen, aussen, Fassaden</p>
+                        </div>
+                        <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-amber-700 dark:text-muted-foreground/50 dark:group-hover:text-amber-400" />
+                      </Link>
+
+                      <Link
+                        href="/kostenlose-offerte-anfordern?service=raeumung&step=2"
+                        className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-emerald-600/50"
+                      >
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-teal-50 text-emerald-900 ring-1 ring-emerald-200/60 dark:from-emerald-950/50 dark:to-teal-950/40 dark:text-emerald-300 dark:ring-emerald-800/50">
+                          <Trash2 className="h-7 w-7" />
+                        </div>
+                        <div className="min-w-0 flex-1 text-left">
+                          <p className="font-semibold text-slate-900 dark:text-foreground">Räumung &amp; Entsorgung</p>
+                          <p className="text-sm text-slate-600 dark:text-muted-foreground">Entrümpelung &amp; Sperrgut</p>
+                        </div>
+                        <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-emerald-600 dark:text-muted-foreground/50 dark:group-hover:text-emerald-400" />
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex-1 pt-1 w-full md:w-auto">
-                    <p className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1" style={{ left: '4px', position: 'relative' }}>Basierend auf echten Kundenbewertungen</p>
-                    <div className="flex items-center gap-2 mb-2 relative" style={{ left: '4px', top: '-5px' }}>
-                      <div className="flex items-center gap-0.5 md:gap-1 flex-shrink-0">
-                        {[...Array(Math.floor(ratingStats.averageRating))].map((_, i) => (
-                          <Star key={`full-${i}`} size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                        ))}
-                        {ratingStats.averageRating % 1 !== 0 && (
-                          <div className="relative flex-shrink-0">
-                            <Star size={16} className="md:w-5 md:h-5 text-gray-300" />
-                            <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
-                              <Star size={16} className="md:w-5 md:h-5 text-yellow-400 fill-yellow-400" />
-                            </div>
-                          </div>
-                        )}
-                        {[...Array(5 - Math.floor(ratingStats.averageRating) - (ratingStats.averageRating % 1 !== 0 ? 1 : 0))].map((_, i) => (
-                          <Star key={`empty-${i}`} size={16} className="md:w-5 md:h-5 text-gray-300" />
-                        ))}
+
+                  <div className="mt-6 rounded-2xl border border-slate-200/85 bg-white/70 p-4 shadow-sm backdrop-blur-sm ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/70 dark:ring-white/10 sm:p-5">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-800/50">
+                          <ShieldCheck className="h-5 w-5" />
+                        </div>
+                        <p className="text-sm font-medium leading-snug text-slate-700 dark:text-foreground">
+                          Geprüfte Firmen · Kostenlos &amp; unverbindlich · Mehrere Offerten auf einen Blick
+                        </p>
                       </div>
-                      <span className="text-base sm:text-lg md:text-xl font-bold text-gray-900 leading-tight whitespace-nowrap">
-                        Ø {ratingStats.averageRating.toFixed(1)}/5 ({ratingStats.reviewCount}{' '}
-                        <Link 
-                          href="/kunden-bewertungen"
-                          className="underline"
-                        >
-                          Bewertungen
-                        </Link>
-                        )
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 border-t border-slate-200/80 pt-4 text-sm text-slate-600 dark:border-border dark:text-muted-foreground">
+                      <span className="inline-flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-emerald-600" />
+                        Keine versteckten Kosten
+                      </span>
+                      <span className="inline-flex items-center gap-2">
+                        <Award className="h-4 w-4 text-emerald-600" />
+                        Zeit &amp; Geld sparen
                       </span>
                     </div>
                   </div>
-                  </div>
                 </div>
 
-                {/* Trust Badges + Hint */}
-                <div 
-                  className="bg-white rounded-xl p-5 sm:p-6 flex flex-col gap-3 transition-all duration-300 mt-4"
-                  style={{
-                    boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
-                  }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                      <ShieldCheck className="h-4 w-4 text-green-700" />
-                    </div>
-                    <p className="text-sm sm:text-base font-medium text-green-800">
-                      Vergleichen Sie kostenlos regionale Umzugs- und Reinigungsfirmen für Ihren Umzug oder Ihre Reinigung.
-                    </p>
+                <div className="relative mx-auto hidden w-full max-w-lg lg:mx-0 lg:block lg:max-w-none">
+                  <div className="relative aspect-[5/4] overflow-hidden rounded-3xl border border-slate-200/90 bg-slate-100 shadow-[0_32px_64px_-24px_rgba(15,23,42,0.35)] ring-1 ring-slate-900/5 dark:border-border dark:bg-muted dark:shadow-[0_32px_64px_-24px_rgba(0,0,0,0.5)] dark:ring-white/10">
+                    <NextImage
+                      src="/fotos/umzug-reinigung-maler-offerten.webp"
+                      alt="Umzug, Reinigung und Renovierung in der Schweiz"
+                      fill
+                      priority
+                      quality={80}
+                      className="object-cover object-center"
+                      sizes="(max-width: 1024px) 0vw, 50vw"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent"
+                      aria-hidden
+                    />
                   </div>
-                  <div className="border-t border-gray-200 pt-3 flex flex-wrap items-center gap-4">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-700">Kostenlos & unverbindlich</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-700">Nur geprüfte Firmen</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-700">Zeit und Geld sparen</span>
-                    </div>
+                  <div className="absolute -bottom-4 -left-4 hidden max-w-[200px] rounded-2xl border border-white/80 bg-white/95 p-4 shadow-xl backdrop-blur-md dark:border-border dark:bg-card/95 dark:shadow-2xl xl:block">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-muted-foreground">Ein Portal</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-foreground">Umzug · Reinigung · Maler · Entsorgung</p>
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* So einfach geht's Section */}
-          <section className="py-12 md:py-16 lg:py-20 bg-white relative z-10">
+          {/* So einfach geht's */}
+          <section className="relative z-10 border-t border-slate-200/80 bg-white py-14 dark:border-border dark:bg-background md:py-20 lg:py-24">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-              <div className="mb-8 md:mb-12">
-                <h2 className="heading-2 mb-3 text-left">
-                  In 3 Schritten die besten Anbieter Ihrer Region finden
+              <div className="mb-10 max-w-2xl md:mb-14">
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                  Ablauf
+                </p>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl md:leading-tight">
+                  In drei Schritten zur passenden Offerte
                 </h2>
-                <p className="text-gray-600 text-base md:text-lg max-w-3xl">
-                  In drei klaren Schritten kommen Sie schnell zu passenden Angeboten aus Ihrer Region.
+                <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
+                  Klar strukturiert – von der Anfrage bis zur Auswahl Ihres Anbieters.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-                {/* Step 1 */}
-                <div className="group rounded-2xl border border-gray-200 bg-gradient-to-b from-white to-gray-50 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="bg-green-600 text-white rounded-lg px-3 py-1.5 text-xs font-semibold">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+                <div className="group relative h-full rounded-2xl border border-slate-200/90 bg-white p-6 shadow-[0_2px_16px_-4px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/[0.03] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/90 hover:shadow-lg dark:border-border dark:bg-card dark:ring-white/10 dark:hover:border-emerald-800/80 md:p-7">
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="rounded-full bg-emerald-600 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-wide text-white">
                       Schritt 1
-                    </div>
-                    <div className="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center">
-                      <FileText className="w-6 h-6 text-green-600" />
+                    </span>
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-800/50">
+                      <FileText className="h-6 w-6" />
                     </div>
                   </div>
-                  <h3 className="heading-4 mb-3">
-                    Kostenlose Offerten einholen
-                  </h3>
-                  <p className="text-body text-sm">
-                    Beschreiben Sie Ihr Projekt in wenigen Schritten online.
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-foreground">Kostenlose Offerten einholen</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
+                    Projekt in wenigen Minuten beschreiben – digital und unverbindlich.
                   </p>
-                  <div className="mt-5">
+                  <div className="mt-6">
                     <Button
                       asChild
                       variant="outline"
                       size="sm"
-                      className="border-green-600 text-green-700 hover:bg-green-50 font-semibold"
+                      className="rounded-xl border-emerald-600/80 font-semibold text-emerald-800 hover:bg-emerald-50 dark:border-emerald-500/60 dark:text-emerald-300 dark:hover:bg-emerald-950/40"
                     >
-                      <Link href="/kostenlose-offerte-anfordern">
-                        Gratis Anfrage starten
-                      </Link>
+                      <Link href="/kostenlose-offerte-anfordern">Anfrage starten</Link>
                     </Button>
                   </div>
                 </div>
 
-                {/* Step 2 */}
-                <div className="group rounded-2xl border border-gray-200 bg-gradient-to-b from-white to-gray-50 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="bg-green-600 text-white rounded-lg px-3 py-1.5 text-xs font-semibold">
+                <div className="group relative h-full rounded-2xl border border-slate-200/90 bg-white p-6 shadow-[0_2px_16px_-4px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/[0.03] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/90 hover:shadow-lg dark:border-border dark:bg-card dark:ring-white/10 dark:hover:border-emerald-800/80 md:p-7">
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="rounded-full bg-emerald-600 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-wide text-white">
                       Schritt 2
-                    </div>
-                    <div className="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center">
-                      <GitCompareArrows className="w-6 h-6 text-green-600" />
+                    </span>
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-800/50">
+                      <GitCompareArrows className="h-6 w-6" />
                     </div>
                   </div>
-                  <h3 className="heading-4 mb-3">
-                    Offerten vergleichen
-                  </h3>
-                  <p className="text-body text-sm">
-                    Bis zu 5 kostenlose Angebote von geprüften Partnern.
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-foreground">Offerten vergleichen</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
+                    Bis zu fünf Angebote von geprüften Partnern – Leistung und Preis gegenüberstellen.
                   </p>
                 </div>
 
-                {/* Step 3 */}
-                <div className="group rounded-2xl border border-gray-200 bg-gradient-to-b from-white to-gray-50 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="bg-green-600 text-white rounded-lg px-3 py-1.5 text-xs font-semibold">
+                <div className="group relative h-full rounded-2xl border border-slate-200/90 bg-white p-6 shadow-[0_2px_16px_-4px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/[0.03] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/90 hover:shadow-lg dark:border-border dark:bg-card dark:ring-white/10 dark:hover:border-emerald-800/80 md:p-7">
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="rounded-full bg-emerald-600 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-wide text-white">
                       Schritt 3
-                    </div>
-                    <div className="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center">
-                      <Users className="w-6 h-6 text-green-600" />
+                    </span>
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-800/50">
+                      <Users className="h-6 w-6" />
                     </div>
                   </div>
-                  <h3 className="heading-4 mb-3">
-                    Anbieter auswählen
-                  </h3>
-                  <p className="text-body text-sm">
-                    Vergleichen & den besten Anbieter auswählen.
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-foreground">Anbieter auswählen</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
+                    In Ruhe entscheiden – Sie bleiben jederzeit frei in der Wahl.
                   </p>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Warum Aroundhome? Section */}
-          <section className="py-12 md:py-16 lg:py-20 bg-white">
+          {/* Vorteile */}
+          <section className="border-t border-slate-200/80 bg-slate-50/50 py-14 dark:border-border dark:bg-muted/25 md:py-20 lg:py-24">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                {/* Left Side - Image */}
+              <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                 <div className="relative order-2 lg:order-1">
-                  <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                  <div className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-slate-100 shadow-[0_24px_48px_-24px_rgba(15,23,42,0.2)] ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-muted dark:ring-white/10">
                     <NextImage
                       src="/fotos/offerten.webp"
                       alt="Zufriedene Kunden"
                       width={600}
                       height={400}
-                      className="w-full h-auto object-cover"
+                      className="h-auto w-full object-cover"
                       loading="lazy"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    {/* Yellow L-shaped accent */}
-                    <div className="absolute top-0 left-0 w-24 h-24 bg-yellow-400 opacity-90 rounded-br-3xl"></div>
+                    <div
+                      className="pointer-events-none absolute left-0 top-0 h-20 w-20 rounded-br-3xl bg-gradient-to-br from-emerald-400/90 to-teal-600/80"
+                      aria-hidden
+                    />
                   </div>
                 </div>
 
-                {/* Right Side - Text Content */}
-                <div className="space-y-6 order-1 lg:order-2">
+                <div className="order-1 space-y-8 lg:order-2">
                   <div>
-                    <h3 className="heading-3 mb-6">
-                      Ihre Vorteile, wenn Sie den Umzug mit uns planen
+                    <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                      Vorteile
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl">
+                      Planen Sie entspannter – mit klaren Offerten
                     </h3>
                   </div>
 
-                  <div className="space-y-6">
+                  <div className="space-y-8">
                     {/* Reason 1 */}
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 mt-1">
-                        <CheckCircle className="h-6 w-6 text-green-600" />
+                    <div className="flex gap-4">
+                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200/70 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-800/50">
+                        <CheckCircle className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="heading-4 mb-2">
+                        <h4 className="text-base font-semibold text-slate-900 dark:text-foreground md:text-lg">
                           Schnell angefragt, klar verglichen
-                        </h3>
-                        <p className="text-body leading-relaxed">
-                          Mit unserem einfachen Formular stellen Sie Ihre Anfrage in rund 2 Minuten. Danach erhalten Sie mehrere passende Offerten und können durch den direkten Vergleich bis zu 40% sparen.
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground md:text-base">
+                          Ihre Anfrage in wenigen Minuten – mehrere passende Offerten und transparenter Vergleich.
                         </p>
                       </div>
                     </div>
 
-                    {/* Reason 2 */}
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 mt-1">
-                        <CheckCircle className="h-6 w-6 text-green-600" />
+                    <div className="flex gap-4">
+                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200/70 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-800/50">
+                        <CheckCircle className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="heading-4 mb-2">
-                          Geprüfte Anbieter aus Ihrer Region
-                        </h3>
-                        <p className="text-body leading-relaxed">
-                          Ihre Anfrage wird an geeignete Umzugsunternehmen aus Ihrer Umgebung weitergeleitet. So vergleichen Sie Bewertungen, Leistungen und Konditionen ohne lange eigene Suche.
+                        <h4 className="text-base font-semibold text-slate-900 dark:text-foreground md:text-lg">
+                          Geprüfte Anbieter aus der Region
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground md:text-base">
+                          Passende Firmen aus Ihrer Umgebung – ohne endlose Recherche.
                         </p>
                       </div>
                     </div>
 
-                    {/* Reason 3 */}
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 mt-1">
-                        <CheckCircle className="h-6 w-6 text-green-600" />
+                    <div className="flex gap-4">
+                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200/70 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-800/50">
+                        <CheckCircle className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="heading-4 mb-2">
-                          Persönliche Unterstützung bei größeren Umzügen
-                        </h3>
-                        <p className="text-body leading-relaxed">
-                          Bei umfangreichen Umzügen oder längeren Strecken helfen wir Ihnen bei der Einordnung der Angebote, damit Sie die für Ihr Projekt passende Entscheidung treffen können.
+                        <h4 className="text-base font-semibold text-slate-900 dark:text-foreground md:text-lg">
+                          Unterstützung bei grösseren Projekten
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground md:text-base">
+                          Bei umfangreichen Umzügen helfen wir bei der Einordnung – damit Sie sicher entscheiden.
                         </p>
                       </div>
                     </div>
@@ -617,182 +514,217 @@ export default async function HomePage() {
             </div>
           </section>
 
-          {/* Why Choose Us Section - SERVER RENDERED with long content */}
-          <section 
-            className="py-16 md:py-24 bg-gradient-to-br from-gray-50 via-white to-green-50/30 overflow-hidden relative"
-            style={{
-              backgroundImage: 'url(https://online-offerten.ch/image/7946a949-0354-4f72-aff6-a406d89f84db.webp)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-            <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-20">
-              <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
+          <section className="relative overflow-hidden border-t border-slate-200/80 py-16 dark:border-border md:py-24">
+            <div
+              className="pointer-events-none absolute inset-0 bg-[url('https://online-offerten.ch/image/7946a949-0354-4f72-aff6-a406d89f84db.webp')] bg-cover bg-center opacity-[0.14] dark:opacity-[0.08]"
+              aria-hidden
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-slate-50/95 dark:from-background/95 dark:via-background/92 dark:to-muted/30" aria-hidden />
+            <div className="container relative z-10 mx-auto max-w-7xl px-4 md:px-6">
+              <div className="mb-12 text-center md:mb-16">
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                  Leistungen
+                </p>
+                <h2 className="mx-auto mt-2 max-w-2xl text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl">
+                  Alles, was Sie für Umzug, Reinigung &amp; mehr brauchen
+                </h2>
+              </div>
+              <div className="mb-12 grid gap-6 md:mb-16 md:grid-cols-2 md:gap-8">
                 {/* Umzugsfirma */}
-                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                <div className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/90 p-8 shadow-[0_8px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-200/90 hover:shadow-xl dark:border-border dark:bg-card/90 dark:ring-white/10 dark:hover:border-sky-700/50 md:p-10">
                   <div className="relative z-10">
-                    <div className="flex items-start gap-5 mb-6">
-                      <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                        <Truck className="w-7 h-7 text-white" />
+                    <div className="mb-6 flex items-start gap-5">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg transition-transform duration-300 group-hover:scale-105">
+                        <Truck className="h-7 w-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="heading-4 mb-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-blue-600 dark:text-foreground dark:group-hover:text-blue-400 md:text-xl">
                           Umzugsfirma
                         </h3>
-                        <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+                        <div className="mt-2 h-1 w-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600" />
                       </div>
                     </div>
-                    <div className="space-y-4 mb-8">
-                      <p className="text-body leading-relaxed mb-4">
-                        Ein Umzug muss nicht anstrengend sein – mit den passenden <Link href="/umzugsfirma" className="text-gray-900 hover:opacity-80 font-semibold underline transition-opacity">Umzugsfirmen</Link> an Ihrer Seite wird er schnell und unkompliziert. Unsere erfahrenen Partner kümmern sich um jeden Schritt des Umzugs, von der detaillierten Planung bis zur reibungslosen Umsetzung.
+                    <div className="mb-8 space-y-4">
+                      <p className="text-body leading-relaxed text-slate-600 dark:text-muted-foreground">
+                        Ein Umzug muss nicht anstrengend sein – mit den passenden{' '}
+                        <Link href="/umzugsfirma" className="font-semibold text-slate-900 underline-offset-2 hover:underline dark:text-foreground">
+                          Umzugsfirmen
+                        </Link>{' '}
+                        an Ihrer Seite wird er schnell und unkompliziert.
                       </p>
-                      <p className="text-body leading-relaxed">
-                        Lehnen Sie sich entspannt zurück, während qualifizierte Umzugsexperten Ihre Möbel und Haushaltsgegenstände sicher, sorgfältig und termingerecht an Ihren neuen Wohnort transportieren. Ein Umzugsunternehmen aus der eigenen Region kann dabei besonders flexibel auf Ihre individuellen Bedürfnisse eingehen.
+                      <p className="text-body leading-relaxed text-slate-600 dark:text-muted-foreground">
+                        Qualifizierte Partner übernehmen Planung und Transport – regional besonders flexibel.
                       </p>
                     </div>
-                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
-                      <Link href="/umzugsfirma-in-der-naehe" className="inline-flex items-center">
+                    <Button
+                      asChild
+                      className="rounded-xl bg-emerald-600 font-semibold text-white shadow-md transition-all hover:bg-emerald-700 hover:shadow-lg group/btn"
+                    >
+                      <Link href="/umzugsfirma" className="inline-flex items-center">
                         Umzugsfirma finden
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
                     </Button>
                   </div>
                 </div>
 
                 {/* Reinigungsfirma */}
-                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                <div className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/90 p-8 shadow-[0_8px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-200/90 hover:shadow-xl dark:border-border dark:bg-card/90 dark:ring-white/10 dark:hover:border-orange-700/50 md:p-10">
                   <div className="relative z-10">
-                    <div className="flex items-start gap-5 mb-6">
-                      <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                        <Sparkles className="w-7 h-7 text-white" />
+                    <div className="mb-6 flex items-start gap-5">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg transition-transform duration-300 group-hover:scale-105">
+                        <Sparkles className="h-7 w-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="heading-4 mb-2 group-hover:text-orange-600 transition-colors">
+                        <h3 className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-orange-600 dark:text-foreground dark:group-hover:text-orange-400 md:text-xl">
                           Reinigungsfirma
                         </h3>
-                        <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+                        <div className="mt-2 h-1 w-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600" />
                       </div>
                     </div>
-                    <div className="space-y-4 mb-8">
-                      <p className="text-body leading-relaxed mb-4">
+                    <div className="mb-8 space-y-4">
+                      <p className="text-body leading-relaxed text-slate-600 dark:text-muted-foreground">
                         Ob nach einem Umzug, einer Renovation oder für die regelmässige Reinigung – unsere professionellen Reinigungsunternehmen garantieren höchste Sauberkeit mit umweltfreundlichen Reinigungsmitteln und höchster Qualität.
                       </p>
-                      <p className="text-body leading-relaxed">
-                        Zu den wichtigsten Dienstleistungen zählen die <Link href="/reinigung/umzugsreinigung" className="text-gray-900 hover:opacity-80 font-semibold underline transition-opacity">Endreinigung</Link> und <Link href="/reinigung/umzugsreinigung" className="text-gray-900 hover:opacity-80 font-semibold underline transition-opacity">Umzugsreinigung</Link> für die Wohnungsübergabe sowie die professionelle <Link href="/reinigung/bueroreinigung" className="text-gray-900 hover:opacity-80 font-semibold underline transition-opacity">Büroreinigung</Link> für Geschäftskunden. Ein erfahrenes Team sorgt mit fachmännischer Arbeit für einen positiven Eindruck.
+                      <p className="text-body leading-relaxed text-slate-600 dark:text-muted-foreground">
+                        Zu den wichtigsten Dienstleistungen zählen die{' '}
+                        <Link href="/reinigungsfirma/umzugsreinigung" className="font-semibold text-slate-900 underline-offset-2 hover:underline dark:text-foreground">
+                          Endreinigung
+                        </Link>{' '}
+                        und{' '}
+                        <Link href="/reinigungsfirma/umzugsreinigung" className="font-semibold text-slate-900 underline-offset-2 hover:underline dark:text-foreground">
+                          Umzugsreinigung
+                        </Link>{' '}
+                        für die Wohnungsübergabe sowie die professionelle{' '}
+                        <Link href="/reinigungsfirma/buero_reinigung" className="font-semibold text-slate-900 underline-offset-2 hover:underline dark:text-foreground">
+                          Büroreinigung
+                        </Link>{' '}
+                        für Geschäftskunden.
                       </p>
                     </div>
-                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                    <Button
+                      asChild
+                      className="rounded-xl bg-emerald-600 font-semibold text-white shadow-md transition-all hover:bg-emerald-700 hover:shadow-lg group/btn"
+                    >
                       <Link href="/reinigungsfirma" className="inline-flex items-center">
                         Reinigungsfirma finden
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
                     </Button>
                   </div>
                 </div>
 
                 {/* Maler */}
-                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                <div className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/90 p-8 shadow-[0_8px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-200/90 hover:shadow-xl dark:border-border dark:bg-card/90 dark:ring-white/10 dark:hover:border-violet-600/50 md:p-10">
                   <div className="relative z-10">
-                    <div className="flex items-start gap-5 mb-6">
-                      <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                        <Paintbrush className="w-7 h-7 text-white" />
+                    <div className="mb-6 flex items-start gap-5">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg transition-transform duration-300 group-hover:scale-105">
+                        <Paintbrush className="h-7 w-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="heading-4 mb-2 group-hover:text-purple-600 transition-colors">
+                        <h3 className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-purple-600 dark:text-foreground dark:group-hover:text-purple-400 md:text-xl">
                           Malerarbeiten
                         </h3>
-                        <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"></div>
+                        <div className="mt-2 h-1 w-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600" />
                       </div>
                     </div>
-                    <div className="space-y-4 mb-8">
-                      <p className="text-body leading-relaxed mb-4">
-                        Qualifizierte Malerbetriebe bieten Ihnen professionelle <Link href="/malerarbeitenkosten" className="text-gray-900 hover:opacity-80 font-semibold underline transition-opacity">Malerarbeiten</Link> für Innen- und Aussenbereiche. Sie übernehmen dabei auch das fachgerechte Streichen und Lackieren von Decken, sodass alle Flächen optimal geschützt und gestaltet werden.
+                    <div className="mb-8 space-y-4">
+                      <p className="text-body leading-relaxed text-slate-600 dark:text-muted-foreground">
+                        Qualifizierte Malerbetriebe bieten Ihnen professionelle{' '}
+                        <Link href="/malerarbeitenkosten" className="font-semibold text-slate-900 underline-offset-2 hover:underline dark:text-foreground">
+                          Malerarbeiten
+                        </Link>{' '}
+                        für Innen- und Aussenbereiche.
                       </p>
-                      <p className="text-body leading-relaxed">
-                        Ob Renovation von Wohnräumen oder fachgerechte Fassadengestaltung – unsere erfahrenen Maler sorgen für frische Farben und ein makelloses Ergebnis. Mit modernen Arbeitstechniken und hochwertigen Materialien verleihen sie Ihrem Zuhause ein neues, stilvolles Erscheinungsbild.
+                      <p className="text-body leading-relaxed text-slate-600 dark:text-muted-foreground">
+                        Ob Renovation von Wohnräumen oder fachgerechte Fassadengestaltung – unsere erfahrenen Maler sorgen für frische Farben und ein makelloses Ergebnis.
                       </p>
                     </div>
-                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                    <Button
+                      asChild
+                      className="rounded-xl bg-emerald-600 font-semibold text-white shadow-md transition-all hover:bg-emerald-700 hover:shadow-lg group/btn"
+                    >
                       <Link href="/malerfirma" className="inline-flex items-center">
                         Maler finden
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
                     </Button>
                   </div>
                 </div>
 
                 {/* Entsorgung */}
-                <div className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-200 hover:border-green-500/50 overflow-hidden">
+                <div className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/90 p-8 shadow-[0_8px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/90 hover:shadow-xl dark:border-border dark:bg-card/90 dark:ring-white/10 dark:hover:border-emerald-700/50 md:p-10">
                   <div className="relative z-10">
-                    <div className="flex items-start gap-5 mb-6">
-                      <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                        <Trash2 className="w-7 h-7 text-white" />
-              </div>
+                    <div className="mb-6 flex items-start gap-5">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg transition-transform duration-300 group-hover:scale-105">
+                        <Trash2 className="h-7 w-7 text-white" />
+                      </div>
                       <div className="flex-1">
-                        <h3 className="heading-4 mb-2 group-hover:text-emerald-600 transition-colors">
+                        <h3 className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-emerald-700 dark:text-foreground dark:group-hover:text-emerald-400 md:text-xl">
                           Entsorgung
-                    </h3>
-                        <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
-                  </div>
-                  </div>
-                    <div className="space-y-4 mb-8">
-                      <p className="text-body leading-relaxed">
-                        Entsorgung von altem Mobiliar, Sperrgut und Haushaltsabfaellen geplant? Fordern Sie jetzt kostenlos und unverbindlich mehrere Entsorgungsofferten an, vergleichen Sie Preise und Leistungen regionaler Anbieter und finden Sie schnell den passenden Service fuer Wohnungsraeumung, Kellerraeumung oder fachgerechte Entsorgung nach Umzug und Renovation.
-                    </p>
-                  </div>
-                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 group/btn">
+                        </h3>
+                        <div className="mt-2 h-1 w-12 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600" />
+                      </div>
+                    </div>
+                    <div className="mb-8">
+                      <p className="text-body leading-relaxed text-slate-600 dark:text-muted-foreground">
+                        Entsorgung von altem Mobiliar, Sperrgut und Haushaltsabfällen geplant? Fordern Sie kostenlos mehrere Entsorgungsofferten an und vergleichen Sie regionale Anbieter.
+                      </p>
+                    </div>
+                    <Button
+                      asChild
+                      className="rounded-xl bg-emerald-600 font-semibold text-white shadow-md transition-all hover:bg-emerald-700 hover:shadow-lg group/btn"
+                    >
                       <Link href="/kostenlose-offerte-anfordern?service=raeumung&step=2" className="inline-flex items-center">
                         Entsorgungsofferten
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
                     </Button>
+                  </div>
                 </div>
-                </div>
-
-                    </div>
-                    </div>
+              </div>
+            </div>
           </section>
 
-          {/* FAQ Section - visible for users only (no FAQ schema) */}
-          <section className="py-12 md:py-16 bg-white border-t border-gray-100">
-            <div className="container mx-auto max-w-4xl px-4 sm:px-6">
-              <h2 className="heading-2 mb-8">Häufige Fragen zu Anfragen und Offerten</h2>
-              <div className="space-y-6">
-                <div className="rounded-xl border border-gray-200 p-5">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Was kostet mich eine Anfrage?</h3>
-                  <p className="text-body">
-                    Die Anfrage ist komplett kostenlos und unverbindlich. Sie zahlen nichts für das Vergleichen von Offerten.
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-gray-200 p-5">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Was passiert nach meiner Anfrage?</h3>
-                  <p className="text-body">
-                    Passende Firmen aus Ihrer Region melden sich mit individuellen Offerten. Sie vergleichen in Ruhe und entscheiden selbst, ob Sie ein Angebot annehmen.
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-gray-200 p-5">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Wie viele Offerten erhalte ich?</h3>
-                  <p className="text-body">
-                    Sie können im Formular selbst auswählen, von wie vielen Firmen Sie Offerten erhalten möchten (zwischen 2 und 5). Maximal sind 5 Offerten möglich.
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-gray-200 p-5">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Bin ich verpflichtet, eine Offerte anzunehmen?</h3>
-                  <p className="text-body">
-                    Nein. Der Vergleich ist unverbindlich. Sie entscheiden frei, ob und welche Offerte zu Ihnen passt.
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-gray-200 p-5">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Wie schnell erhalte ich Rückmeldungen?</h3>
-                  <p className="text-body">
-                    Sie erhalten Ihre ersten Offerten in der Regel sehr schnell nach Ihrer Anfrage.
-                  </p>
-                </div>
+          <section className="border-t border-slate-200/80 bg-slate-50/40 py-14 dark:border-border dark:bg-muted/20 md:py-20">
+            <div className="container mx-auto max-w-3xl px-4 sm:px-6">
+              <p className="text-center text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                FAQ
+              </p>
+              <h2 className="mt-2 text-center text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl">
+                Häufige Fragen zu Anfragen und Offerten
+              </h2>
+              <div className="mt-10 space-y-4">
+                {[
+                  {
+                    q: 'Was kostet mich eine Anfrage?',
+                    a: 'Die Anfrage ist komplett kostenlos und unverbindlich. Sie zahlen nichts für das Vergleichen von Offerten.',
+                  },
+                  {
+                    q: 'Was passiert nach meiner Anfrage?',
+                    a: 'Passende Firmen aus Ihrer Region melden sich mit individuellen Offerten. Sie vergleichen in Ruhe und entscheiden selbst, ob Sie ein Angebot annehmen.',
+                  },
+                  {
+                    q: 'Wie viele Offerten erhalte ich?',
+                    a: 'Sie können im Formular auswählen, von wie vielen Firmen Sie Offerten erhalten möchten (zwischen 2 und 5).',
+                  },
+                  {
+                    q: 'Bin ich verpflichtet, eine Offerte anzunehmen?',
+                    a: 'Nein. Der Vergleich ist unverbindlich. Sie entscheiden frei, ob und welche Offerte zu Ihnen passt.',
+                  },
+                  {
+                    q: 'Wie schnell erhalte ich Rückmeldungen?',
+                    a: 'Sie erhalten Ihre ersten Offerten in der Regel sehr schnell nach Ihrer Anfrage.',
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.q}
+                    className="rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-sm ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/90 dark:ring-white/10 md:p-6"
+                  >
+                    <h3 className="text-base font-semibold text-slate-900 dark:text-foreground md:text-lg">{item.q}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground md:text-base">{item.a}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>

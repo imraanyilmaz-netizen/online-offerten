@@ -4,6 +4,7 @@ import React, { Suspense } from 'react'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Layout/Navbar'
 import Footer from '@/components/Layout/Footer'
+import FooterBeliebteStandorte from '@/components/Layout/FooterBeliebteStandorte'
 import FooterCTABanner from '@/components/Layout/FooterCTABanner'
 import { Loader2 } from 'lucide-react'
 
@@ -24,48 +25,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   
   // Seiten, auf denen der FooterCTABanner angezeigt werden soll
   const allowedCTABannerPages = [
-    // Hauptseite
     '/',
-    // Umzug Services
-    '/umzugsfirma/privatumzug',
-    '/umzugsfirma/geschaeftsumzug',
-    '/umzugsfirma/internationale-umzuege',
-    '/umzugsfirma/spezialtransporte',
-    '/umzugsfirma/spezialtransporte/klaviertransport',
-    // Weitere Services
     '/malerarbeitenkosten',
     '/raeumung-entsorgung',
-    // Kosten & Tools
-    '/umzugsfirma/umzugskosten',
-    '/reinigung/reinigungskosten',
     '/guenstig-umziehen',
     '/umzugsfirma-vergleichen',
-    // Reinigungsdienstleistungen
-    '/reinigung/wohnungsreinigung',
-    '/reinigung/hausreinigung',
-    '/reinigung/bueroreinigung',
-    '/reinigung/umzugsreinigung',
-    '/reinigung/endreinigung',
-    '/reinigung/unterhaltsreinigung',
-    '/reinigung/grundreinigung',
-    '/reinigung/baureinigung',
-    '/reinigung/fensterreinigung',
-    '/reinigung/bodenreinigung',
-    '/reinigung/fassadenreinigung',
-    '/reinigung/hofreinigung',
-    // Stadtseiten - Umzugsfirma
-    '/umzugsfirma/zuerich',
-    '/umzugsfirma/bern',
-    '/umzugsfirma/basel',
-    '/umzugsfirma/luzern',
-    '/umzugsfirma/st-gallen',
-    '/umzugsfirma/genf',
-    '/umzugsfirma/lausanne',
-    '/umzugsfirma/lugano',
-    '/umzugsfirma/aargau',
-    '/umzugsfirma/thun',
-    '/umzugsfirma/biel-bienne',
-    // Info-Seiten
     '/umzugsfirma',
     '/reinigung',
     '/malerfirma',
@@ -78,7 +42,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   // Prefixe für dynamische Seiten (z.B. /ratgeber/slug)
   const allowedCTABannerPrefixes = [
     '/ratgeber/',
-    '/umzugsfirma',
+    '/umzugsfirma/',
+    '/reinigung/',
+    '/malerfirma/',
   ]
   
   const shouldShowCTABanner = !isFormPage && (
@@ -112,6 +78,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </main>
       {!isFormPage && (
         <>
+          <FooterBeliebteStandorte />
           {shouldShowCTABanner && <FooterCTABanner />}
           <Footer />
         </>

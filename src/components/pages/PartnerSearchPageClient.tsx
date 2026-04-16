@@ -9,7 +9,7 @@ import SearchFilters from '@/components/PartnerSearch/SearchFilters'
 import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CustomerForm from '@/components/NewCustomerForm'
 import { supabase } from '@/lib/supabaseClient'
-import { cantonMap } from '@/lib/dataMapping'
+import { cantonMap } from '@/data/locations'
 
 // Reverse mapping: Canton name -> Canton code
 const cantonNameToCode = Object.fromEntries(

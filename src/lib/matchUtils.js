@@ -1,4 +1,4 @@
-﻿import { getGermanServiceName } from './dataMapping';
+﻿import { getGermanServiceName } from '@/data/categories';
 
 const serviceKeyMap = {
   // ── Teklif (Quote) tarafı: servicetype → normalized key ──

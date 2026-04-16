@@ -1,49 +1,43 @@
 ﻿import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import PostPageClient from '@/components/pages/tools/PostPageClient'
-import { createStaticClient } from '@/src/lib/supabase/server'
+import { notFound } from 'next/navigation'
+import PostArticle from '@/components/pages/tools/PostArticle'
+import {
+  getCachedPublishedPostForMeta,
+  getCachedPublishedPostFull,
+  getCachedRecentPostsExcluding,
+} from '@/lib/ratgeber/cached-posts'
+import { buildTableOfContentsFromPost } from '@/lib/ratgeber/toc'
 
-// ISR: Sayfa 60 saniyede bir arka planda yenilenir
-// Blog yazıları public veri olduğu için cookies gerekmez
 export const revalidate = 60
 
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const params = await props.params;
-  const supabase = createStaticClient()
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const params = await props.params
+  const { data: post, error } = await getCachedPublishedPostForMeta(params.slug)
 
-  // Fetch post data for metadata - including meta_title, published_at, updated_at
-  const { data: post, error } = await supabase
-    .from('posts')
-    .select('title, meta_title, meta_description, featured_image_url, category, published_at, updated_at, created_at')
-    .eq('slug', params.slug)
-    .eq('status', 'published')
-    .single()
-
-  // Default values
   let title = 'Ratgeber - Tipps & Ratgeber'
-  let description = 'Praktische Tipps und Expertenwissen für Umzug, Reinigung & mehr.'
+  let description =
+    'Praktische Tipps und Expertenwissen für Umzug, Reinigung & mehr.'
   let ogImage = 'https://online-offerten.ch/image/online-offerten.webp'
   let publishedTime: string | undefined
   let modifiedTime: string | undefined
 
   if (post && !error) {
-    // PRIORITY 1: Use meta_title if available (from admin panel)
     if (post.meta_title && post.meta_title.trim()) {
       title = post.meta_title.trim()
     } else {
-      // Fallback: Use post title directly (no suffix, no template)
       title = post.title || 'Ratgeber - Tipps & Ratgeber'
     }
-    
-    // Use meta_description if available, otherwise generate from title
-    description = post.meta_description || `Praktische Tipps und Expertenwissen zu ${post.title || 'Ratgeber'}. Lesen Sie unseren Ratgeber auf Online-Offerten.ch.`
-    
-    // Use featured image if available
+
+    description =
+      post.meta_description ||
+      `Praktische Tipps und Expertenwissen zu ${post.title || 'Ratgeber'}. Lesen Sie unseren Ratgeber auf Online-Offerten.ch.`
+
     if (post.featured_image_url) {
       ogImage = post.featured_image_url
     }
-    
-    // Set published and modified times for Article metadata
+
     publishedTime = post.published_at || post.created_at
     modifiedTime = post.updated_at || publishedTime
   }
@@ -95,102 +89,101 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
 }
 
 export default async function RatgeberPostPage(props: { params: Promise<{ slug: string }> }) {
-  const params = await props.params;
-  const supabase = createStaticClient()
+  const params = await props.params
+  const post = await getCachedPublishedPostFull(params.slug)
 
-  // Fetch FULL post data for SSR (including content for SEO)
-  const { data: post } = await supabase
-    .from('posts')
-    .select('*, meta_title, faq, faq_title, faq_description, custom_html')
-    .eq('slug', params.slug)
-    .eq('status', 'published')
-    .single()
+  if (!post) {
+    notFound()
+  }
 
-  // Fetch recent posts on server for SSR
-  const { data: recentPosts } = await supabase
-    .from('posts')
-    .select('title, slug, featured_image_url')
-    .eq('status', 'published')
-    .neq('slug', params.slug)
-    .order('published_at', { ascending: false })
-    .limit(5)
+  const recentPosts = await getCachedRecentPostsExcluding(params.slug)
+  const tableOfContents = buildTableOfContentsFromPost(post)
 
-  // Prepare schema data
-  const postTitle = post?.meta_title || post?.title || 'Ratgeber'
-  const postDescription = post?.meta_description || `Praktische Tipps und Expertenwissen zu ${post?.title || 'Ratgeber'}.`
-  const postImage = post?.featured_image_url || 'https://online-offerten.ch/image/online-offerten.webp'
-  const publishedTime = post?.published_at || post?.created_at
-  const modifiedTime = post?.updated_at || publishedTime
+  const postTitle = post.meta_title || post.title || 'Ratgeber'
+  const postDescription =
+    post.meta_description ||
+    `Praktische Tipps und Expertenwissen zu ${post?.title || 'Ratgeber'}.`
+  const postImage = post.featured_image_url || 'https://online-offerten.ch/image/online-offerten.webp'
+  const publishedTime = post.published_at || post.created_at
+  const modifiedTime = post.updated_at || publishedTime
   const canonicalUrl = `https://online-offerten.ch/ratgeber/${params.slug}`
 
-  // Article Schema
   const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": postTitle,
-    "description": postDescription,
-    "image": postImage,
-    "datePublished": publishedTime,
-    "dateModified": modifiedTime,
-    "author": {
-      "@type": "Organization",
-      "name": "Online-Offerten.ch"
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: postTitle,
+    description: postDescription,
+    image: postImage,
+    datePublished: publishedTime,
+    dateModified: modifiedTime,
+    author: {
+      '@type': 'Organization',
+      name: 'Online-Offerten.ch',
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Online-Offerten.ch",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://online-offerten.ch/image/logo-icon.webp"
-      }
+    publisher: {
+      '@type': 'Organization',
+      name: 'Online-Offerten.ch',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://online-offerten.ch/image/logo-icon.webp',
+      },
     },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": canonicalUrl
-    }
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
   }
 
-  // BreadcrumbList Schema
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Startseite",
-        "item": "https://online-offerten.ch/"
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Startseite',
+        item: 'https://online-offerten.ch/',
       },
       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Ratgeber",
-        "item": "https://online-offerten.ch/ratgeber"
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Ratgeber',
+        item: 'https://online-offerten.ch/ratgeber',
       },
       {
-        "@type": "ListItem",
-        "position": 3,
-        "name": post?.title || "Ratgeber-Artikel",
-        "item": canonicalUrl
-      }
-    ]
+        '@type': 'ListItem',
+        position: 3,
+        name: post?.title || 'Ratgeber-Artikel',
+        item: canonicalUrl,
+      },
+    ],
   }
 
-  // FAQPage Schema (only if FAQs exist)
-  const faqSchema = post?.faq && Array.isArray(post.faq) && post.faq.length > 0 && post.faq.some((faq: { question?: string; answer?: string }) => faq.question?.trim() && faq.answer?.trim()) ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": post.faq
-      .filter((faq: { question?: string; answer?: string }) => faq.question?.trim() && faq.answer?.trim())
-      .map((faq: { question: string; answer: string }) => ({
-        "@type": "Question",
-        "name": faq.question.trim(),
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer.trim()
+  const faqSchema =
+    post?.faq &&
+    Array.isArray(post.faq) &&
+    post.faq.length > 0 &&
+    post.faq.some(
+      (faq: { question?: string; answer?: string }) => faq.question?.trim() && faq.answer?.trim()
+    )
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: post.faq
+            .filter(
+              (faq: { question?: string; answer?: string }) =>
+                faq.question?.trim() && faq.answer?.trim()
+            )
+            .map((faq: { question: string; answer: string }) => ({
+              '@type': 'Question',
+              name: faq.question.trim(),
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer.trim(),
+              },
+            })),
         }
-      }))
-  } : null
+      : null
 
   return (
     <>
@@ -208,10 +201,7 @@ export default async function RatgeberPostPage(props: { params: Promise<{ slug: 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
-    <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
-      <PostPageClient initialPost={post} initialRecentPosts={recentPosts || []} />
-    </Suspense>
+      <PostArticle post={post} recentPosts={recentPosts} tableOfContents={tableOfContents} />
     </>
   )
 }
-

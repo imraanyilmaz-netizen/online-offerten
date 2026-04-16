@@ -6,15 +6,15 @@ import Image from 'next/image'
 import { 
   Users, HeartHandshake as Handshake, Target, Layers, Star, 
   Truck, Sparkles, Trash2, Paintbrush, ChevronLeft, ChevronRight, 
-  ArrowRight, User, MapPin, CheckCircle, Building2, ShieldCheck, 
+  ArrowRight, MapPin, CheckCircle, Building2, ShieldCheck, 
   Clock, FileText, Search, Award, ChevronRight as ChevronRightIcon
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useRouter } from 'next/navigation'
-import { formatDate, cn } from '@/lib/utils'
-import { getGermanServiceName } from '@/src/lib/dataMapping.js'
+import { formatDate, cn, getCustomerInitials } from '@/lib/utils'
+import { getGermanServiceName } from '@/data/categories'
 import { locations } from '@/src/data/locations.js'
 
 // Review Card Component
@@ -24,16 +24,17 @@ interface ReviewCardProps {
 }
 
 const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
-  const { 
-    customer_name, 
+  const {
+    customer_name,
     city,
     review_date,
     rating,
     review_text,
     service_type,
     partner_name,
-    partners: partner
-  } = review;
+    partners: rawPartners,
+  } = review
+  const partner = Array.isArray(rawPartners) ? rawPartners[0] : rawPartners
 
   const serviceName = getGermanServiceName(service_type);
   const displayRating = rating || 0
@@ -48,19 +49,28 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
         <CardContent className="p-6 flex-grow flex flex-col">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                <User className="w-5 h-5 text-gray-500" />
+              <div
+                className="w-10 h-10 rounded-full bg-gradient-to-br from-green-100 to-green-50 border border-green-200/80 flex items-center justify-center shrink-0"
+                aria-hidden
+              >
+                <span className="text-xs font-bold text-green-700 tracking-tight select-none">
+                  {getCustomerInitials(customer_name)}
+                </span>
               </div>
               <div>
                 <p className="font-bold text-gray-800">{customer_name}</p>
-                <div className="flex items-center gap-2 mt-1">
-                  {city && (
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                  {city ? (
                     <div className="flex items-center gap-1 text-xs text-gray-500">
                       <MapPin className="w-3 h-3 text-green-600" />
                       <span>{city}</span>
                     </div>
-                  )}
-                  <span className="text-xs text-gray-400">•</span>
+                  ) : null}
+                  {city ? (
+                    <span className="text-xs text-gray-400" aria-hidden>
+                      •
+                    </span>
+                  ) : null}
                   <span className="text-xs text-gray-500">{formatDate(review_date)}</span>
                 </div>
               </div>
@@ -186,7 +196,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
     el.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
   }, []);
 
-  const mainCities = locations.filter((loc: any) => loc.showOnHome).slice(0, 8)
+  const mainCities = locations
   
   return (
     <div className="bg-white">
@@ -694,7 +704,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
               {mainCities.map((city: any) => (
                 <Link 
                   key={city.slug}
-                  href={`/${city.slug}`}
+                  href={`/umzugsfirma/${city.slug}`}
                   className="block bg-white hover:bg-green-50 text-gray-700 hover:text-green-700 border border-gray-200 hover:border-green-300 px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200"
                 >
                   <span className="flex items-center gap-1.5">

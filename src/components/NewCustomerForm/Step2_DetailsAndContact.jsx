@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors, t, isMoveService }) => {
   const prefix = type;
   const titleKey = isMoveService ? (type === 'from' ? 'step2.fromAddressTitleMove' : 'step2.toAddressTitleMove') : 'step2.serviceAddressTitle';
-  const icon = <Home className="w-6 h-6 text-green-600 mr-2" />;
+  const icon = <Home className="w-6 h-6 text-green-600 dark:text-primary mr-2" />;
   const [isFetchingCity, setIsFetchingCity] = useState(false);
   
   const isInternationalMove = formData.umzugArt === 'international';
@@ -190,10 +190,10 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
   };
 
   return (
-    <div className="w-full space-y-4 p-4 border border-gray-200 rounded-lg shadow-sm bg-white">
+    <div className="w-full space-y-4 p-4 border border-gray-200 dark:border-border rounded-lg shadow-sm bg-white dark:bg-card">
       <div className="flex items-center mb-2">
         {icon}
-        <h3 className="text-base font-semibold text-slate-800">
+        <h3 className="text-base font-semibold text-slate-800 dark:text-foreground">
           {t(titleKey)}
         </h3>
       </div>
@@ -201,7 +201,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
       {isInternationalMove && (
           <div>
               <Select name={`${prefix}_country`} value={formData[`${prefix}_country`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_country`, value)}>
-                  <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base">
+                  <SelectTrigger className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm sm:text-base">
                       <SelectValue placeholder={`${t('step2.countryLabel')} *`} />
                   </SelectTrigger>
                   <SelectContent className="text-sm sm:text-base">
@@ -223,13 +223,13 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               onChange={handleStreetInputChange}
               onFocus={() => setIsStreetInputFocused(true)}
               placeholder={`${t('step2.streetLabel')} *`}
-              className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+              className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm sm:text-base"
               autoComplete={`section-${prefix} address-line1`}
             />
             {isStreetInputFocused && (addressLoading || suggestions.length > 0) && (
-              <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-72 overflow-y-auto">
+              <div className="absolute z-50 w-full mt-1 bg-white dark:bg-popover border border-gray-300 dark:border-border rounded-md shadow-lg max-h-72 overflow-y-auto">
                 {addressLoading && (
-                  <div className="p-3 text-sm text-gray-500 flex items-center">
+                  <div className="p-3 text-sm text-gray-500 dark:text-muted-foreground flex items-center">
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     {t('step2.addressSearching')}
                   </div>
@@ -239,18 +239,18 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                     {displayedStreetSuggestions.map((suggestion) => (
                       <li
                         key={suggestion.id}
-                        className="px-3 py-2 text-sm text-gray-700 md:hover:bg-gray-100 cursor-pointer flex items-start"
+                        className="px-3 py-2 text-sm text-gray-700 dark:text-foreground md:hover:bg-gray-100 dark:md:hover:bg-muted cursor-pointer flex items-start"
                         onMouseDown={(e) => {
                           e.preventDefault();
                           handleStreetSuggestionSelect(suggestion);
                         }}
                       >
-                        <MapPin className="w-4 h-4 mr-3 mt-0.5 text-gray-400 shrink-0" />
+                        <MapPin className="w-4 h-4 mr-3 mt-0.5 text-gray-400 dark:text-muted-foreground shrink-0" />
                         <div className="flex-grow">
                           <p className="font-medium text-sm sm:text-base">
                             {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
                           </p>
-                          <p className="text-xs sm:text-sm text-gray-500">
+                          <p className="text-xs sm:text-sm text-gray-500 dark:text-muted-foreground">
                             {suggestion.postcode} {suggestion.city}
                             {suggestion.suburb && suggestion.suburb !== suggestion.city ? `, ${suggestion.suburb}` : ''}
                           </p>
@@ -258,7 +258,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                       </li>
                     ))}
                     {!showAllStreetSuggestions && suggestions.length > 5 && (
-                      <li className="px-3 py-2 border-t border-gray-200">
+                      <li className="px-3 py-2 border-t border-gray-200 dark:border-border">
                         <button
                           type="button"
                           className="text-sm text-green-600 p-0 h-auto w-full justify-start flex items-center md:hover:underline"
@@ -275,7 +275,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                   </ul>
                 )}
                 {!addressLoading && formData[`${prefix}_street`] && formData[`${prefix}_street`].length >= 3 && suggestions.length === 0 && (
-                  <div className="p-3 text-sm text-gray-500">
+                  <div className="p-3 text-sm text-gray-500 dark:text-muted-foreground">
                     {t('step2.noSuggestionsFound')}
                   </div>
                 )}
@@ -292,11 +292,11 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                 value={formData[`${prefix}_zip`] || ''}
                 onChange={handleZipChange}
                 placeholder={`${t('step2.zipPlaceholder')} *`}
-                className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+                className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm sm:text-base"
                 maxLength={10}
                 autoComplete={`section-${prefix} postal-code`}
               />
-              {isFetchingCity && <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-gray-400" />}
+              {isFetchingCity && <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-gray-400 dark:text-muted-foreground" />}
               {errors && errors[`${prefix}_zip`] && <p className="text-sm text-red-500 mt-1">{errors[`${prefix}_zip`]}</p>}
             </div>
             <div className="col-span-2">
@@ -306,7 +306,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                 value={formData[`${prefix}_city`] || ''}
                 onChange={handleChange}
                 placeholder={t('step2.cityPlaceholder')}
-                className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
+                className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm sm:text-base"
                 readOnly={isFetchingCity}
                 autoComplete={`section-${prefix} address-level2`}
               />
@@ -320,7 +320,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
           {showFloorField && (
             <div>
               <Select name={`${prefix}_floor`} value={formData[`${prefix}_floor`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_floor`, value)}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
+                <SelectTrigger className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9">
                   <SelectValue placeholder={`${t('step2.floorLabel')} *`} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
@@ -334,7 +334,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
           {showRoomsField && (
             <div>
               <Select name={`${prefix}_rooms`} value={formData[`${prefix}_rooms`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_rooms`, value)}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
+                <SelectTrigger className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9">
                   <SelectValue placeholder={`${t('step2.roomsLabel')} *`} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
@@ -348,7 +348,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
           {showObjectTypeField && (
             <div>
               <Select name={`${prefix}_object_type`} value={formData[`${prefix}_object_type`] || ''} onValueChange={(value) => handleSelectChange(`${prefix}_object_type`, value)}>
-                <SelectTrigger className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9">
+                <SelectTrigger className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9">
                   <SelectValue placeholder={`${t('step2.objectTypeLabel')} *`} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
@@ -366,7 +366,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                 formData={formData}
                 handleSelectChange={handleSelectChange}
                 t={t}
-                triggerClassName="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"
+                triggerClassName="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9"
                 contentClassName="text-sm"
               />
             </div>
@@ -377,7 +377,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
           formData.service === 'umzug' &&
           formData.umzugArt === 'privatumzug' &&
           !formData.additional_cleaning && (
-            <div className="pt-3 mt-2 border-t border-gray-100">
+            <div className="pt-3 mt-2 border-t border-gray-100 dark:border-border">
               <CleaningAreaSelect
                 id="cleaning_area_size"
                 value={formData.cleaning_area_size}
@@ -395,16 +395,16 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
 const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
   const { t } = useStaticT('newCustomerForm');
   return (
-    <Card className="w-full bg-white shadow-md border-gray-200 rounded-lg overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-emerald-50/70 via-emerald-50/40 to-slate-50 p-3 border-b border-emerald-100">
+    <Card className="w-full bg-white dark:bg-card shadow-md border-gray-200 dark:border-border rounded-lg overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-emerald-50/70 via-emerald-50/40 to-slate-50 dark:from-emerald-950/40 dark:via-emerald-950/25 dark:to-muted/30 p-3 border-b border-emerald-100 dark:border-emerald-900/50">
         <div className="flex items-center gap-2">
-          {React.cloneElement(icon, { className: "w-5 h-5 text-green-600" })}
+          {React.cloneElement(icon, { className: "w-5 h-5 text-green-600 dark:text-primary" })}
           <div>
-            <CardTitle className="text-sm font-semibold text-slate-800">
+            <CardTitle className="text-sm font-semibold text-slate-800 dark:text-foreground">
               {t(titleKey)}
             </CardTitle>
             {descriptionKey && 
-              <CardDescription className="text-xs text-slate-600 mt-0.5">
+              <CardDescription className="text-xs text-slate-600 dark:text-muted-foreground mt-0.5">
                 {t(descriptionKey)}
               </CardDescription>
             }
@@ -426,7 +426,7 @@ const HowFoundButton = ({ id, labelKey, icon, selected, onClick }) => {
         variant="outline"
         onClick={() => onClick(id)}
         className={`flex-1 justify-start text-left h-auto py-2.5 px-3
-          ${selected ? 'bg-green-50 border-green-500 text-green-700 ring-1 ring-green-500' : 'text-gray-700 md:hover:bg-gray-50'}`}
+          ${selected ? 'bg-green-50 dark:bg-emerald-950/40 border-green-500 dark:border-emerald-500 text-green-700 dark:text-emerald-300 ring-1 ring-green-500 dark:ring-emerald-600' : 'text-gray-700 dark:text-foreground md:hover:bg-gray-50 dark:md:hover:bg-muted'}`}
       >
         {icon}
         <span className="ml-2 text-sm sm:text-base">{t(labelKey)}</span>
@@ -443,16 +443,16 @@ const QuotesWantedButton = ({ count, labelKey, recommended, selected, onClick })
         onClick={() => onClick(count)}
         className={`w-full h-auto py-2 px-1 flex flex-col items-center justify-center text-center transition-all duration-200
           ${selected 
-            ? 'bg-green-500 border-green-600 text-white md:hover:bg-green-600 shadow-lg ring-2 ring-green-500 ring-offset-1 transform scale-105' 
+            ? 'bg-green-500 dark:bg-primary border-green-600 dark:border-primary text-white md:hover:bg-green-600 dark:md:hover:bg-primary/90 shadow-lg ring-2 ring-green-500 dark:ring-primary ring-offset-1 dark:ring-offset-background transform scale-105' 
             : recommended 
-              ? 'border-green-400 text-green-700 md:hover:bg-green-50 md:hover:border-green-500' 
-              : 'text-gray-700 md:hover:bg-gray-50 md:hover:border-gray-400'
+              ? 'border-green-400 dark:border-emerald-600 text-green-700 dark:text-emerald-300 md:hover:bg-green-50 dark:md:hover:bg-emerald-950/30 md:hover:border-green-500 dark:md:hover:border-emerald-500'
+              : 'text-gray-700 dark:text-foreground md:hover:bg-gray-50 dark:md:hover:bg-muted md:hover:border-gray-400 dark:md:hover:border-border'
           }
         `}
       >
         <span className="block text-xl font-bold">{count}</span>
         <span className="block text-[11px] sm:text-xs leading-tight">{t(labelKey)}</span>
-        {recommended && <span className={`block text-[10px] sm:text-xs mt-0.5 ${selected ? 'text-green-100' : 'text-green-600'}`}>({t('step3.quotesWantedRecommended')})</span>}
+        {recommended && <span className={`block text-[10px] sm:text-xs mt-0.5 ${selected ? 'text-green-100 dark:text-emerald-200' : 'text-green-600 dark:text-primary'}`}>({t('step3.quotesWantedRecommended')})</span>}
       </Button>
     );
 };
@@ -474,10 +474,10 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
   ];
 
   const howFoundOptions = [
-    { id: 'google', labelKey: 'step3.howFoundGoogle', icon: <Search size={16} className="text-gray-500" /> },
-    { id: 'recommendation', labelKey: 'step3.howFoundRecommendation', icon: <Users size={16} className="text-gray-500" /> },
-    { id: 'news', labelKey: 'step3.howFoundNews', icon: <FileText size={16} className="text-gray-500" /> },
-    { id: 'social_media', labelKey: 'step3.howFoundSocialMedia', icon: <Users size={16} className="text-gray-500" /> },
+    { id: 'google', labelKey: 'step3.howFoundGoogle', icon: <Search size={16} className="text-gray-500 dark:text-muted-foreground" /> },
+    { id: 'recommendation', labelKey: 'step3.howFoundRecommendation', icon: <Users size={16} className="text-gray-500 dark:text-muted-foreground" /> },
+    { id: 'news', labelKey: 'step3.howFoundNews', icon: <FileText size={16} className="text-gray-500 dark:text-muted-foreground" /> },
+    { id: 'social_media', labelKey: 'step3.howFoundSocialMedia', icon: <Users size={16} className="text-gray-500 dark:text-muted-foreground" /> },
   ];
 
   const quotesWantedOptions = [
@@ -543,15 +543,15 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
       
       {/* Contact Details and Date - Side by Side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <SectionCard icon={<UserCircle className="w-6 h-6 text-green-600" />} titleKey="step3.contactDetailsTitle">
+        <SectionCard icon={<UserCircle className="w-6 h-6 text-green-600 dark:text-primary" />} titleKey="step3.contactDetailsTitle">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="md:col-span-2 space-y-1">
-              <Label className="font-medium text-slate-700 text-sm">{t('step3.salutationLabel')} <span className="text-red-500 ml-1">*</span></Label>
+              <Label className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.salutationLabel')} <span className="text-red-500 ml-1">*</span></Label>
               <RadioGroup name="salutation" value={formData.salutation || ''} onValueChange={(value) => handleRadioGroupChange('salutation', value)} className="flex items-center space-x-4 pt-1">
                 {salutationOptions.map(opt => (
                   <div key={opt.value} className="flex items-center space-x-2">
                     <RadioGroupItem value={opt.value} id={`salutation_${opt.value}`} className="h-6 w-6" />
-                    <Label htmlFor={`salutation_${opt.value}`} className="font-medium text-base text-slate-800 cursor-pointer">{opt.label}</Label>
+                    <Label htmlFor={`salutation_${opt.value}`} className="font-medium text-base text-slate-800 dark:text-foreground cursor-pointer">{opt.label}</Label>
                   </div>
                 ))}
               </RadioGroup>
@@ -563,44 +563,44 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
                 <div
                   className="space-y-1 md:col-span-2"
                 >
-                  <Label htmlFor="companyName" className="font-medium text-slate-700 text-sm">{t('step3.companyNameLabel')}</Label>
-                  <Input id="companyName" name="companyName" value={formData.companyName || ''} onChange={handleChange} placeholder={t('step3.companyNamePlaceholder')} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"/>
+                  <Label htmlFor="companyName" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.companyNameLabel')}</Label>
+                  <Input id="companyName" name="companyName" value={formData.companyName || ''} onChange={handleChange} placeholder={t('step3.companyNamePlaceholder')} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9"/>
                 </div>
               )}
             
 
             <div className="space-y-1">
-              <Label htmlFor="firstName" className="font-medium text-slate-700 text-sm">{t('step3.firstNameLabel')} <span className="text-red-500 ml-1">*</span></Label>
-              <Input id="firstName" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder={t('step3.firstNamePlaceholder')} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"/>
+              <Label htmlFor="firstName" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.firstNameLabel')} <span className="text-red-500 ml-1">*</span></Label>
+              <Input id="firstName" name="firstName" value={formData.firstName || ''} onChange={handleChange} placeholder={t('step3.firstNamePlaceholder')} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9"/>
               {errors && errors.firstName && <p className="text-xs text-red-500 mt-1">{errors.firstName}</p>}
             </div>
             <div className="space-y-1">
-              <Label htmlFor="lastName" className="font-medium text-slate-700 text-sm">{t('step3.lastNameLabel')} <span className="text-red-500 ml-1">*</span></Label>
-              <Input id="lastName" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder={t('step3.lastNamePlaceholder')} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"/>
+              <Label htmlFor="lastName" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.lastNameLabel')} <span className="text-red-500 ml-1">*</span></Label>
+              <Input id="lastName" name="lastName" value={formData.lastName || ''} onChange={handleChange} placeholder={t('step3.lastNamePlaceholder')} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9"/>
               {errors && errors.lastName && <p className="text-xs text-red-500 mt-1">{errors.lastName}</p>}
             </div>
             <div className="space-y-1">
-              <Label htmlFor="email" className="font-medium text-slate-700 text-sm">{t('step3.emailLabel')} <span className="text-red-500 ml-1">*</span></Label>
-              <Input type="email" id="email" name="email" value={formData.email || ''} onChange={handleChange} placeholder={t('step3.emailPlaceholder')} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"/>
+              <Label htmlFor="email" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.emailLabel')} <span className="text-red-500 ml-1">*</span></Label>
+              <Input type="email" id="email" name="email" value={formData.email || ''} onChange={handleChange} placeholder={t('step3.emailPlaceholder')} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9"/>
               {errors && errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
             </div>
             <div className="space-y-1">
-              <Label htmlFor="phone" className="font-medium text-slate-700 text-sm">{t('step3.phoneLabel')} <span className="text-red-500 ml-1">*</span></Label>
-              <Input type="tel" id="phone" name="phone" value={formData.phone || ''} onChange={handleChange} placeholder={t('step3.phonePlaceholder')} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9"/>
+              <Label htmlFor="phone" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.phoneLabel')} <span className="text-red-500 ml-1">*</span></Label>
+              <Input type="tel" id="phone" name="phone" value={formData.phone || ''} onChange={handleChange} placeholder={t('step3.phonePlaceholder')} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9"/>
               {errors && errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
             </div>
           </div>
         </SectionCard>
         
-        <SectionCard icon={<CalendarDays className="w-6 h-6 text-green-600" />} titleKey={getDateTitleKey()}>
+        <SectionCard icon={<CalendarDays className="w-6 h-6 text-green-600 dark:text-primary" />} titleKey={getDateTitleKey()}>
           <div className="space-y-3">
             <div className="space-y-1">
-              <Label htmlFor="move_date" className="font-medium text-slate-700 text-sm">{t(getDateLabelKey())} <span className="text-red-500 ml-1">*</span></Label>
-              <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9" min={new Date().toISOString().split("T")[0]} lang="de-CH" placeholder="TT.MM.JJJJ" title="TT.MM.JJJJ"/>
+              <Label htmlFor="move_date" className="font-medium text-slate-700 dark:text-foreground text-sm">{t(getDateLabelKey())} <span className="text-red-500 ml-1">*</span></Label>
+              <Input type="date" id="move_date" name="move_date" value={formData.move_date || ''} onChange={handleChange} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9" min={new Date().toISOString().split("T")[0]} lang="de-CH" placeholder="TT.MM.JJJJ" title="TT.MM.JJJJ"/>
               {errors && errors.move_date && <p className="text-xs text-red-500 mt-1">{errors.move_date}</p>}
             </div>
             <div className="space-y-2">
-              <p className="font-semibold text-slate-900 text-sm leading-snug">{t('step3.dateFlexibleQuestion')}</p>
+              <p className="font-semibold text-slate-900 dark:text-foreground text-sm leading-snug">{t('step3.dateFlexibleQuestion')}</p>
               <RadioGroup
                 name="move_date_flexible"
                 value={formData.move_date_flexible ? 'yes' : 'no'}
@@ -609,18 +609,18 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="yes" id="move_date_flexible_yes" className="h-4 w-4" />
-                  <Label htmlFor="move_date_flexible_yes" className="text-sm font-normal text-slate-700 cursor-pointer leading-snug">{t('step3.dateFlexibleOptionYes')}</Label>
+                  <Label htmlFor="move_date_flexible_yes" className="text-sm font-normal text-slate-700 dark:text-muted-foreground cursor-pointer leading-snug">{t('step3.dateFlexibleOptionYes')}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="no" id="move_date_flexible_no" className="h-4 w-4" />
-                  <Label htmlFor="move_date_flexible_no" className="text-sm font-normal text-slate-700 cursor-pointer leading-snug">{t('step3.dateFlexibleOptionNo')}</Label>
+                  <Label htmlFor="move_date_flexible_no" className="text-sm font-normal text-slate-700 dark:text-muted-foreground cursor-pointer leading-snug">{t('step3.dateFlexibleOptionNo')}</Label>
                 </div>
               </RadioGroup>
             </div>
             <div className="space-y-1">
-              <Label htmlFor="preferred_time" className="font-medium text-slate-700 text-sm">{t('step3.preferredTimeLabel')}</Label>
+              <Label htmlFor="preferred_time" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.preferredTimeLabel')}</Label>
               <Select name="preferred_time" value={formData.preferred_time || ''} onValueChange={(value) => handleSelectChange('preferred_time', value)}>
-                <SelectTrigger id="preferred_time" className="bg-slate-50 border-slate-300 focus:bg-white text-sm h-9 w-full">
+                <SelectTrigger id="preferred_time" className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9 w-full">
                   <SelectValue placeholder={t('step3.preferredTimePlaceholder')} />
                 </SelectTrigger>
                 <SelectContent className="text-sm">
@@ -636,10 +636,10 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Sol: Umzug Zusätzliche Leistungen */}
         {formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international') && (
-          <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle">
+          <SectionCard icon={<Info className="w-6 h-6 text-green-600 dark:text-primary" />} titleKey="step3.additionalOptionsTitle">
             <div className="space-y-1">
-              <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm">{t('step3.additionalInfoLabel')}</Label>
-              <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[70px] text-sm"/>
+              <Label htmlFor="additional_info" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.additionalInfoLabel')}</Label>
+              <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background min-h-[70px] text-sm"/>
             </div>
           </SectionCard>
         )}
@@ -647,7 +647,7 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
         {/* Reinigung oder Umzug + Endreinigung: volle Reinigungs-Karte (Privatumzug ohne Endreinigung: Fläche in Von-Adresse) */}
         {((formData.service === 'reinigung' && CLEANING_AREA_TYPES_WITH_FIELD.includes(formData.umzugArt)) ||
           (formData.service === 'umzug' && formData.umzugArt === 'privatumzug' && formData.additional_cleaning)) && (
-          <SectionCard icon={<Sparkles className="w-6 h-6 text-green-600" />} titleKey="step3.cleaningDetailsTitle" descriptionKey="step3.cleaningDetailsDescription">
+          <SectionCard icon={<Sparkles className="w-6 h-6 text-green-600 dark:text-primary" />} titleKey="step3.cleaningDetailsTitle" descriptionKey="step3.cleaningDetailsDescription">
             <div className="space-y-4">
               <div>
                 <CleaningAreaSelect
@@ -665,7 +665,7 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
                     name="cleaning_type"
                     value={formData.cleaning_type || ''}
                     onChange={(e) => handleSelectChange('cleaning_type', e.target.value)}
-                    className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm focus:bg-white focus:border-green-500 focus:outline-none"
+                    className="w-full rounded-md border border-slate-300 dark:border-border bg-slate-50 dark:bg-muted/50 px-3 py-2 text-sm focus:bg-white dark:focus:bg-background focus:border-green-500 dark:focus:border-primary focus:outline-none"
                   >
                     <option value="">Art der Reinigung *</option>
                     <option value="mit_abnahmegarantie">Endreinigung mit Abnahmegarantie</option>
@@ -682,16 +682,16 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
 
         {/* Zusätzliche Infos - sadece Umzug yoksa veya sadece Reinigung ise */}
         {!(formData.service === 'umzug' && (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug' || formData.umzugArt === 'international')) && (
-          <SectionCard icon={<Info className="w-6 h-6 text-green-600" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
+          <SectionCard icon={<Info className="w-6 h-6 text-green-600 dark:text-primary" />} titleKey="step3.additionalOptionsTitle" descriptionKey="step3.additionalOptionsDescription">
             <div className="space-y-1">
-              <Label htmlFor="additional_info" className="font-medium text-slate-700 text-sm">{t('step3.additionalInfoLabel')}</Label>
-              <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 border-slate-300 focus:bg-white min-h-[70px] text-sm"/>
+              <Label htmlFor="additional_info" className="font-medium text-slate-700 dark:text-foreground text-sm">{t('step3.additionalInfoLabel')}</Label>
+              <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background min-h-[70px] text-sm"/>
             </div>
           </SectionCard>
         )}
 
         {/* Wie viele Offerten - Grid içinde boş alanı doldurur */}
-        <SectionCard icon={<FileText className="w-6 h-6 text-green-600" />} titleKey="step3.quotesWantedTitle" descriptionKey="step3.quotesWantedDescription">
+        <SectionCard icon={<FileText className="w-6 h-6 text-green-600 dark:text-primary" />} titleKey="step3.quotesWantedTitle" descriptionKey="step3.quotesWantedDescription">
           <div className="grid grid-cols-4 gap-2">
               {quotesWantedOptions.map(opt => (
                   <QuotesWantedButton

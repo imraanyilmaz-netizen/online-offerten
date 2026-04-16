@@ -2,6 +2,10 @@
 
 import React from 'react';
 
+/** Rich text: tables, lists, quotes — tuned for light + dark */
+const TIPTAP_CONTENT_CLASS =
+  '[&_p]:whitespace-pre-wrap [&_p]:break-words [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 [&_li]:my-1 [&_strong]:text-foreground [&_em]:text-foreground [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:my-4 [&_blockquote]:text-muted-foreground [&_hr]:my-8 [&_hr]:border-border [&_pre]:bg-muted [&_pre]:rounded-lg [&_pre]:p-4 [&_pre]:overflow-x-auto [&_pre]:text-sm [&_code]:text-sm [&_img]:max-w-full [&_table]:w-full [&_table]:min-w-[600px] [&_table]:border-collapse [&_table]:border [&_table]:border-gray-300 dark:[&_table]:border-border [&_table]:my-0 [&_th]:border [&_th]:border-gray-300 dark:[&_th]:border-border [&_th]:bg-gray-100 dark:[&_th]:bg-muted [&_th]:px-4 [&_th]:py-2 [&_th]:font-semibold [&_th]:text-left [&_th]:whitespace-nowrap [&_td]:border [&_td]:border-gray-300 dark:[&_td]:border-border [&_td]:px-4 [&_td]:py-2 [&_td]:whitespace-nowrap [&_a]:text-primary [&_a]:underline [&_a]:font-medium';
+
 const TiptapRenderer = ({ jsonContent }) => {
   // Standard-Klassen zu HTML-Überschriften und Absatz-Tags hinzufügen
   const addStandardClasses = (html) => {
@@ -165,9 +169,7 @@ const TiptapRenderer = ({ jsonContent }) => {
   if (typeof jsonContent === 'string') {
     const processedContent = processHtml(jsonContent);
     return (
-      <div
-        className="[&_p]:whitespace-pre-wrap [&_p]:break-words [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_table]:w-full [&_table]:min-w-[600px] [&_table]:border-collapse [&_table]:border [&_table]:border-gray-300 [&_table]:my-0 [&_th]:border [&_th]:border-gray-300 [&_th]:bg-gray-100 [&_th]:px-4 [&_th]:py-2 [&_th]:font-semibold [&_th]:text-left [&_th]:whitespace-nowrap [&_td]:border [&_td]:border-gray-300 [&_td]:px-4 [&_td]:py-2 [&_td]:whitespace-nowrap"
-      >
+      <div className={TIPTAP_CONTENT_CLASS}>
         <div dangerouslySetInnerHTML={{ __html: processedContent }} />
       </div>
     );
@@ -185,7 +187,7 @@ const TiptapRenderer = ({ jsonContent }) => {
           if (mark.type === 'italic') formattedText = `<em>${formattedText}</em>`;
           if (mark.type === 'underline') formattedText = `<u>${formattedText}</u>`;
           if (mark.type === 'link' && mark.attrs?.href) {
-            formattedText = `<a href="${mark.attrs.href}" rel="noopener noreferrer" class="text-blue-600 underline cursor-pointer">${formattedText}</a>`;
+            formattedText = `<a href="${mark.attrs.href}" rel="noopener noreferrer" class="text-primary underline cursor-pointer font-medium">${formattedText}</a>`;
           }
         });
       }
@@ -274,9 +276,7 @@ const TiptapRenderer = ({ jsonContent }) => {
     const htmlContent = convertTipTapToHTML(jsonContent);
     const processedContent = processHtml(htmlContent);
     return (
-      <div
-        className="[&_p]:whitespace-pre-wrap [&_p]:break-words [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_table]:w-full [&_table]:min-w-[600px] [&_table]:border-collapse [&_table]:border [&_table]:border-gray-300 [&_table]:my-0 [&_th]:border [&_th]:border-gray-300 [&_th]:bg-gray-100 [&_th]:px-4 [&_th]:py-2 [&_th]:font-semibold [&_th]:text-left [&_th]:whitespace-nowrap [&_td]:border [&_td]:border-gray-300 [&_td]:px-4 [&_td]:py-2 [&_td]:whitespace-nowrap"
-      >
+      <div className={TIPTAP_CONTENT_CLASS}>
         <div dangerouslySetInnerHTML={{ __html: processedContent }} />
       </div>
     );

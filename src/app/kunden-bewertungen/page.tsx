@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
-import { createStaticClient } from '@/src/lib/supabase/server'
 import KundenBewertungenPageClient from '@/components/pages/KundenBewertungenPageClient'
+import { getMergedKundenBewertungenPage } from '@/lib/reviews/kundenBewertungenMerge'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -46,38 +46,8 @@ export const metadata: Metadata = {
 // ISR: Sayfa 5 dakikada bir otomatik yenilenecek
 export const revalidate = 300
 
-async function getInitialReviews() {
-  const supabase = createStaticClient()
-  
-  // İlk 10 platform yorumunu getir
-  const { data: reviews, error } = await supabase
-    .from('customer_reviews')
-      .select(`
-        id, customer_name, rating, city, review_date, 
-        review_text,
-        service_type, partner_name,
-        partners (slug, company_name)
-      `)
-    .eq('approval_status', 'approved')
-    .eq('review_type', 'platform')
-    .order('review_date', { ascending: false })
-    .limit(10)
-
-  // Toplam yorum sayısını al
-  const { count: totalCount } = await supabase
-    .from('customer_reviews')
-    .select('*', { count: 'exact', head: true })
-    .eq('approval_status', 'approved')
-    .eq('review_type', 'platform')
-
-  return {
-    reviews: reviews || [],
-    totalCount: totalCount || 0
-  }
-}
-
 export default async function KundenBewertungenPage() {
-  const { reviews, totalCount } = await getInitialReviews()
+  const { reviews, totalCount } = await getMergedKundenBewertungenPage(0, 10)
 
   // Schema.org CollectionPage - AggregateRating sadece Organization (ana sayfa) ve LocalBusiness (partner) sayfalarında
   const structuredData = {

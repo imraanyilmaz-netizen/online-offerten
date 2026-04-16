@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { X, Plus, Truck, Sparkles, Paintbrush, Sprout, Archive } from 'lucide-react';
-import { cantonOptions, getFullCantonName } from '@/lib/dataMapping.js';
+import { cantonOptions, getFullCantonName } from '@/data/locations';
 
 const mainCategories = [
   { id: 'umzug', label: 'Umzug', icon: Truck, services: [

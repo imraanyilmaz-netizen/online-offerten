@@ -19,7 +19,7 @@ import ReviewCard from '@/components/PartnerProfilePageParts/ReviewCard';
 import WidgetConfigurator from '@/components/PartnerPanel/WidgetConfigurator';
 import { formatDate } from '@/lib/utils'; // Import formatDate from utils
 import Step2Regions from '@/src/components/PartnerRegistrationForm/Step2Regions';
-import { cantonMap } from '@/src/lib/dataMapping.js';
+import { cantonMap } from '@/data/locations';
 
 /** partners row shape (generated DB types omit tables → Supabase infers never) */
 type PartnerRow = {

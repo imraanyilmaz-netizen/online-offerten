@@ -8,18 +8,18 @@ const RatgeberSidebar = ({ recentPosts }) => {
   return (
     <aside className="lg:sticky lg:top-24 space-y-8">
       {/* CTA Card */}
-      <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg">
+      <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-emerald-950/40 dark:to-emerald-950/20 border-green-200 dark:border-emerald-800 shadow-lg">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-green-600" />
+            <Sparkles className="w-5 h-5 text-green-600 dark:text-primary" />
             Gratis Offerten vergleichen
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 dark:text-muted-foreground">
             Erhalten Sie bis zu 5 unverbindliche Offerten von geprüften Anbietern in Ihrer Nähe – kostenlos und in wenigen Minuten.
           </p>
-          <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+          <Button asChild className="w-full bg-green-600 hover:bg-green-700 dark:bg-primary dark:hover:bg-primary/90">
             <Link href="/kostenlose-offerte-anfordern" rel="noopener noreferrer">
               Offerten einholen und vergleichen
               <ArrowRight className="ml-2 w-4 h-4" />
@@ -29,26 +29,26 @@ const RatgeberSidebar = ({ recentPosts }) => {
       </Card>
 
       {/* Helpful Tools */}
-      <Card>
+      <Card className="dark:bg-card dark:border-border">
         <CardHeader>
           <CardTitle className="text-lg">Hilfreiche Tools</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
             <Link href="/umzugsfirma/umzugskosten">
-              <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <Calculator className="w-5 h-5 text-green-600 dark:text-primary flex-shrink-0" />
               <span className="flex-grow">Umzugskosten-Rechner</span>
             </Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
             <Link href="/reinigung/reinigungskosten">
-              <Calculator className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <Calculator className="w-5 h-5 text-green-600 dark:text-primary flex-shrink-0" />
               <span className="flex-grow">Reinigungskosten-Rechner</span>
             </Link>
           </Button>
           <Button asChild variant="outline" className="w-full justify-start gap-3 text-left h-auto py-2">
             <Link href="/umzugsfirma/checklists">
-              <ListChecks className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <ListChecks className="w-5 h-5 text-green-600 dark:text-primary flex-shrink-0" />
               <span className="flex-grow">Checklisten</span>
             </Link>
           </Button>
@@ -57,10 +57,10 @@ const RatgeberSidebar = ({ recentPosts }) => {
 
       {/* Recent Posts */}
       {recentPosts && recentPosts.length > 0 && (
-        <Card>
+        <Card className="dark:bg-card dark:border-border">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Clock className="w-5 h-5 text-green-600" />
+              <Clock className="w-5 h-5 text-green-600 dark:text-primary" />
               Neueste Beiträge
             </CardTitle>
           </CardHeader>
@@ -78,7 +78,7 @@ const RatgeberSidebar = ({ recentPosts }) => {
                         />
                    </Link>
                   <div>
-                    <Link href={postHref} className="font-semibold text-sm text-gray-800 hover:text-green-600 leading-tight line-clamp-2">
+                    <Link href={postHref} className="font-semibold text-sm text-gray-800 dark:text-foreground hover:text-green-600 dark:hover:text-primary leading-tight line-clamp-2">
                       {recentPost.title}
                     </Link>
                   </div>

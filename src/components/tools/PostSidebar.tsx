@@ -1,4 +1,6 @@
-﻿import Link from 'next/link';
+﻿'use client'
+
+import Link from 'next/link';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -17,7 +19,7 @@ interface PostSidebarProps {
   recentPosts?: any[];
   ratgeberBasePath?: string;
   tableOfContents?: TableOfContentsItem[];
-  hideMobileTOC?: boolean; // PostPageClient mobil TOC'u kendisi render ediyorsa true
+  hideMobileTOC?: boolean; // true when mobile TOC is rendered beside the article (Ratgeber post page)
 }
 
 const PostSidebar: React.FC<PostSidebarProps> = ({ 
@@ -144,8 +146,8 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
             item.level === 3 ? 'pl-6 pr-3' : 'px-3'
           } ${
             activeSection === item.id
-              ? 'bg-green-100 text-green-700 font-semibold'
-              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              ? 'bg-green-100 dark:bg-emerald-950/50 text-green-700 dark:text-emerald-300 font-semibold'
+              : 'text-gray-700 dark:text-muted-foreground hover:bg-gray-100 dark:hover:bg-muted hover:text-gray-900 dark:hover:text-foreground'
           }`}
         >
           {item.title}
@@ -159,29 +161,29 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
       {/* Mobile TOC - Becomes Sticky After First H2 */}
       {!hideMobileTOC && tableOfContents && tableOfContents.length > 0 && (
         <div 
-          className={`lg:hidden z-40 bg-white border-b border-gray-200 shadow-sm mb-6 mobile-toc-container transition-all duration-300 ${
+          className={`lg:hidden z-40 bg-white dark:bg-card border-b border-gray-200 dark:border-border shadow-sm mb-6 mobile-toc-container transition-all duration-300 ${
             isTOCSticky ? 'sticky top-16' : 'relative'
           }`}
         >
           <div className="container mx-auto px-4">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="w-full flex items-center justify-between py-3 text-left hover:bg-gray-50 transition-colors"
+              className="w-full flex items-center justify-between py-3 text-left hover:bg-gray-50 dark:hover:bg-muted transition-colors"
             >
-              <span className="flex items-center gap-2 font-semibold text-gray-900">
-                <List className="w-5 h-5 text-gray-700" />
+              <span className="flex items-center gap-2 font-semibold text-gray-900 dark:text-foreground">
+                <List className="w-5 h-5 text-gray-700 dark:text-muted-foreground" />
                 Inhalt
               </span>
               {isMobileMenuOpen ? (
-                <ChevronUp className="w-5 h-5 text-gray-600" />
+                <ChevronUp className="w-5 h-5 text-gray-600 dark:text-muted-foreground" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-gray-600" />
+                <ChevronDown className="w-5 h-5 text-gray-600 dark:text-muted-foreground" />
               )}
             </button>
             
             {/* Dropdown Menu */}
             {isMobileMenuOpen && (
-              <div className="py-3 border-t border-gray-200 max-h-[70vh] overflow-y-auto">
+              <div className="py-3 border-t border-gray-200 dark:border-border max-h-[70vh] overflow-y-auto">
                 <TableOfContentsNav />
               </div>
             )}
@@ -191,12 +193,12 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
 
       {/* Sidebar - Desktop: sticky, Mobile: below article */}
       <aside className="lg:sticky lg:top-24 space-y-8 mt-8 lg:mt-0">
-        {/* Table of Contents - Desktop Only (mobil TOC PostPageClient'tan render edilir) */}
+        {/* Table of Contents - desktop only; mobile TOC is rendered in PostMobileToc */}
         {tableOfContents && tableOfContents.length > 0 && (
-          <Card className="hidden lg:block bg-gray-50 border-gray-200">
+          <Card className="hidden lg:block bg-gray-50 dark:bg-card border-gray-200 dark:border-border">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <List className="w-5 h-5 text-gray-700" />
+                <List className="w-5 h-5 text-gray-700 dark:text-muted-foreground" />
                 Inhalt
               </CardTitle>
             </CardHeader>
@@ -207,18 +209,18 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
       )}
 
       {/* CTA Card */}
-      <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg">
+      <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-emerald-950/40 dark:to-emerald-950/20 border-green-200 dark:border-emerald-800 shadow-lg">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-green-600" />
+            <Sparkles className="w-5 h-5 text-green-600 dark:text-primary" />
             Gratis Offerten vergleichen
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 dark:text-muted-foreground">
             Erhalten Sie bis zu 5 unverbindliche Offerten von geprüften Anbietern in Ihrer Nähe – kostenlos und in wenigen Minuten.
           </p>
-          <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+          <Button asChild className="w-full bg-green-600 hover:bg-green-700 dark:bg-primary dark:hover:bg-primary/90">
             <Link href="/kostenlose-offerte-anfordern" rel="noopener noreferrer">
               Offerten einholen und vergleichen
               <ArrowRight className="ml-2 w-4 h-4" />
@@ -229,10 +231,10 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
 
       {/* Recent Posts */}
       {recentPosts && recentPosts.length > 0 && (
-        <Card>
+        <Card className="dark:bg-card dark:border-border">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Clock className="w-5 h-5 text-green-600" />
+              <Clock className="w-5 h-5 text-green-600 dark:text-primary" />
               Neueste Beiträge
             </CardTitle>
           </CardHeader>
@@ -250,7 +252,7 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
                         />
                    </Link>
                   <div>
-                    <Link href={postHref} className="font-semibold text-sm text-gray-800 hover:text-green-600 leading-tight line-clamp-2">
+                    <Link href={postHref} className="font-semibold text-sm text-gray-800 dark:text-foreground hover:text-green-600 dark:hover:text-primary leading-tight line-clamp-2">
                       {recentPost.title}
                     </Link>
                   </div>
@@ -264,23 +266,23 @@ const PostSidebar: React.FC<PostSidebarProps> = ({
 
       {/* Category and Tags */}
       { (category || (tags && tags.length > 0)) && (
-        <Card>
+        <Card className="dark:bg-card dark:border-border">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Folder className="w-5 h-5 text-green-600" />
+              <Folder className="w-5 h-5 text-green-600 dark:text-primary" />
               Kategorie & Tags
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {category && (
               <div>
-                <h4 className="font-semibold text-sm mb-2">Kategorie</h4>
+                <h4 className="font-semibold text-sm mb-2 text-foreground">Kategorie</h4>
                 <Badge>{category}</Badge>
               </div>
             )}
             {tags && tags.length > 0 && (
               <div>
-                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2 text-foreground">
                   <Tag className="w-4 h-4" />
                   Tags
                 </h4>

@@ -3,7 +3,7 @@ import InternationaleUmzugPageClient from '@/components/pages/services/Internati
 
 const canonicalUrl = '/umzugsfirma/internationale-umzuege'
 
-// Service Schema - Enhanced
+// Service Schema - Enhanced 
 const serviceSchema = {
   "@type": "Service",
   "serviceType": "Internationale Umzüge",

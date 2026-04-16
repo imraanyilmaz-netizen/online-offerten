@@ -1,6 +1,6 @@
 ﻿import { useState, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import { cantonMap } from '@/lib/dataMapping';
+import { cantonMap } from '@/data/locations';
 
 // Reverse mapping: Canton name -> Canton code
 const cantonNameToCode = Object.fromEntries(

@@ -14,9 +14,9 @@ const ReviewsSection = ({ reviews, reviewCount, formatDate, onShowAllReviews }) 
   }
 
   return (
-    <Card className="shadow-lg rounded-xl border border-gray-200 bg-white">
-      <CardHeader className="p-6 border-b border-gray-100">
-        <CardTitle className="text-xl font-bold text-gray-800">Kundenbewertungen</CardTitle>
+    <Card className="shadow-lg rounded-xl border border-border bg-card text-card-foreground">
+      <CardHeader className="p-6 border-b border-border">
+        <CardTitle className="text-xl font-bold text-foreground">Kundenbewertungen</CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <div
@@ -32,7 +32,7 @@ const ReviewsSection = ({ reviews, reviewCount, formatDate, onShowAllReviews }) 
           </div>
           {reviewCount > reviews.length && (
             <div className="text-center mt-8">
-              <Button variant="outline" onClick={onShowAllReviews} className="text-green-600 border-green-500 hover:bg-green-50 font-semibold">
+              <Button variant="outline" onClick={onShowAllReviews} className="text-green-600 dark:text-emerald-400 border-green-500 dark:border-emerald-600 hover:bg-green-50 dark:hover:bg-emerald-950/40 font-semibold">
                 Alle {reviewCount} Bewertungen anzeigen
               </Button>
             </div>

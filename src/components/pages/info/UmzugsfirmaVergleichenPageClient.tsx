@@ -739,7 +739,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </div>
 
           <p className="text-body">
-            Die gezielte Auswahl dieser Zusatzleistungen ermöglicht es, den Umzugsservice optimal auf die eigenen Anforderungen abzustimmen. Erfahren Sie mehr über <Link href="/umzugsfirma/spezialtransporte" className="text-green-700 hover:text-green-800 underline font-medium">Spezialtransporte</Link> oder starten Sie jetzt Ihre <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-700 hover:text-green-800 underline font-medium">kostenlose Anfrage</Link>.
+            Die gezielte Auswahl dieser Zusatzleistungen ermöglicht es, den Umzugsservice optimal auf die eigenen Anforderungen abzustimmen. Erfahren Sie mehr über <Link href="/umzugsfirma/spezialtransport" className="text-green-700 hover:text-green-800 underline font-medium">Spezialtransporte</Link> oder starten Sie jetzt Ihre <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-700 hover:text-green-800 underline font-medium">kostenlose Anfrage</Link>.
           </p>
             </div>
           </section>
@@ -1002,8 +1002,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     { name: 'Umzugsfirma finden', href: '/umzugsfirma' },
                     { name: 'Privatumzug', href: '/umzugsfirma/privatumzug' },
                     { name: 'Geschäftsumzug', href: '/umzugsfirma/geschaeftsumzug' },
-                    { name: 'Internationale Umzüge', href: '/umzugsfirma/internationale-umzuege' },
-                    { name: 'Spezialtransporte', href: '/umzugsfirma/spezialtransporte' },
+                    { name: 'Internationale Umzüge', href: '/umzugsfirma/auslandumzug' },
+                    { name: 'Spezialtransporte', href: '/umzugsfirma/spezialtransport' },
                     { name: 'Umzugskosten', href: '/umzugsfirma/umzugskosten' },
                     { name: 'Umzugsfirma in der Nähe', href: '/umzugsfirma-in-der-naehe' },
                   ].map((item) => (
@@ -1029,7 +1029,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     { name: 'Reinigungsfirma finden', href: '/reinigung' },
                     { name: 'Umzugsreinigung', href: '/reinigung/umzugsreinigung' },
                     { name: 'Fensterreinigung', href: '/reinigung/fensterreinigung' },
-                    { name: 'Büroreinigung', href: '/reinigung/bueroreinigung' },
+                    { name: 'Büroreinigung', href: '/reinigung/buero_reinigung' },
                     { name: 'Baureinigung', href: '/reinigung/baureinigung' },
                     { name: 'Reinigungskosten', href: '/reinigung/reinigungskosten' },
                   ].map((item) => (

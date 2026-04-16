@@ -14,7 +14,7 @@ import { de } from 'date-fns/locale/de';
 import QuoteImages from '@/components/PartnerPanel/QuoteImages';
 import QuoteFiles from '@/components/PartnerPanel/QuoteFiles';
 import ReviewModal from '@/components/ReviewModal';
-import { getGermanServiceName } from '@/lib/dataMapping';
+import { getGermanServiceName } from '@/data/categories';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
 import { isCleaningService, isPaintingService, isDisposalService } from '@/lib/serviceCategorizer';

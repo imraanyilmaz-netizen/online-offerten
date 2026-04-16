@@ -1,17 +1,21 @@
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import RatgeberPageClient from '@/components/pages/tools/RatgeberPageClient'
-import { createStaticClient } from '@/src/lib/supabase/server'
+import RatgeberLoadMore from '@/components/pages/tools/RatgeberLoadMore'
+import RatgeberSidebar from '@/src/components/tools/RatgeberSidebar'
+import { getCachedRatgeberPostList } from '@/lib/ratgeber/cached-posts'
+
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Ratgeber & Tipps für Umzug, Reinigung & Maler',
-  description: 'Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und Malerarbeiten. Machen Sie Ihren Übergang einfacher mit unserem Ratgeber.',
+  description:
+    'Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und Malerarbeiten. Machen Sie Ihren Übergang einfacher mit unserem Ratgeber.',
   alternates: {
     canonical: 'https://online-offerten.ch/ratgeber',
   },
   openGraph: {
     title: 'Ratgeber & Tipps für Umzug, Reinigung & Maler',
-    description: 'Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und Malerarbeiten. Machen Sie Ihren Übergang einfacher mit unserem Ratgeber.',
+    description:
+      'Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und Malerarbeiten. Machen Sie Ihren Übergang einfacher mit unserem Ratgeber.',
     url: 'https://online-offerten.ch/ratgeber',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -28,7 +32,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Ratgeber & Tipps für Umzug, Reinigung & Maler',
-    description: 'Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und Malerarbeiten.',
+    description:
+      'Expertenwissen und praktische Tipps für Ihren Umzug, die Endreinigung und Malerarbeiten.',
     images: ['https://online-offerten.ch/image/online-offerten.webp'],
   },
   robots: {
@@ -53,27 +58,33 @@ type RatgeberPageProps = {
 export default async function RatgeberPage({ searchParams }: RatgeberPageProps) {
   const params = await searchParams
   const tagParam = Array.isArray(params.tag) ? params.tag[0] : params.tag
-  const tagFilter = tagParam?.trim().toLowerCase()
-
-  const supabase = createStaticClient()
-  let query = supabase
-    .from('posts')
-    .select('*')
-    .eq('status', 'published')
-    .order('published_at', { ascending: false })
-
-  if (tagFilter) {
-    query = query.contains('tags', [tagFilter])
-  }
-
-  const { data } = await query
-  const posts = data ?? []
+  const tagFilter = tagParam?.trim().toLowerCase() ?? ''
+  const posts = await getCachedRatgeberPostList(tagFilter)
+  const recentPosts = posts.slice(0, 5)
 
   return (
-    <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
-      <RatgeberPageClient initialPosts={posts} tagFilter={tagFilter ?? null} />
-    </Suspense>
+    <div className="bg-gray-50/70 dark:bg-muted/25">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-[36px] font-extrabold text-gray-900 dark:text-foreground mb-4 leading-tight">
+            Unser Ratgeber
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-muted-foreground max-w-3xl mx-auto">
+            Hier finden Sie nützliche Artikel, Tipps und Checklisten rund um Umzug, Reinigung und weitere
+            Dienstleistungen, um Ihnen die Planung zu erleichtern.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <main className="lg:col-span-8">
+            <RatgeberLoadMore key={tagFilter || 'all'} posts={posts} />
+          </main>
+
+          <aside className="lg:col-span-4">
+            <RatgeberSidebar recentPosts={recentPosts} />
+          </aside>
+        </div>
+      </div>
+    </div>
   )
 }
-
-

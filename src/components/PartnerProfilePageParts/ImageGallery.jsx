@@ -22,16 +22,16 @@ const ImageGallery = ({ images }) => {
 
   return (
     <>
-      <Card className="shadow-lg rounded-xl border border-gray-200 bg-white">
-        <CardHeader className="p-6 border-b border-gray-100">
-          <CardTitle className="text-xl font-bold text-gray-800">Galerie</CardTitle>
+      <Card className="shadow-lg rounded-xl border border-border bg-card text-card-foreground">
+        <CardHeader className="p-6 border-b border-border">
+          <CardTitle className="text-xl font-bold text-foreground">Galerie</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"> {/* Changed lg:grid-cols-4 to lg:grid-cols-5 */}
             {validImages.map((image, index) => (
               <div
                 key={index}
-                className="aspect-square overflow-hidden rounded-lg shadow-md cursor-pointer bg-gray-200"
+                className="aspect-square overflow-hidden rounded-lg shadow-md cursor-pointer bg-muted"
                 onClick={() => openLightbox(index)}
               >
                 <img 

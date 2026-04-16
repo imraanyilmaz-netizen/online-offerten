@@ -24,22 +24,22 @@ const StarRating = ({ rating, reviewCount, starSize = 20, textSize = 'text-sm', 
         ))}
         {hasHalfStar && (
           <div style={{ position: 'relative' }}>
-            <Star key="half-empty" size={starSize} className={`mr-0.5 text-gray-300`} />
+            <Star key="half-empty" size={starSize} className={`mr-0.5 text-muted-foreground/45`} />
             <div style={{ position: 'absolute', top: 0, left: 0, width: '50%', overflow: 'hidden' }}>
               <Star key="half-full" size={starSize} className={`mr-0.5 text-yellow-400 fill-yellow-400`} />
             </div>
           </div>
         )}
         {[...Array(emptyStars)].map((_, i) => (
-          <Star key={`empty-${i}`} size={starSize} className={`mr-0.5 text-gray-300`} />
+          <Star key={`empty-${i}`} size={starSize} className={`mr-0.5 text-muted-foreground/45`} />
         ))}
       </div>
       <div className={`flex items-baseline gap-1.5 ${textSize}`}>
         {showNumeric && (
-          <span className={`font-bold text-gray-700`}>{(rating || 0).toFixed(1)}</span>
+          <span className={`font-bold text-foreground`}>{(rating || 0).toFixed(1)}</span>
         )}
         {reviewCount !== undefined && reviewCount !== null && (
-          <span className={`text-gray-700 font-semibold`}>
+          <span className={`text-foreground font-semibold`}>
             {(rating || 0).toFixed(1)} {getReviewText()}
           </span>
         )}

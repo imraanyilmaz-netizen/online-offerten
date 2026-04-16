@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import { createStaticClient } from '@/src/lib/supabase/server'
+import { getHomepageReviewsBundle } from '@/lib/reviews/kundenBewertungenMerge'
 import AboutPageClient from '@/components/pages/AboutPageClient'
 
 export const metadata: Metadata = {
@@ -48,27 +48,8 @@ export const metadata: Metadata = {
 export const revalidate = 3600
 
 async function getReviews() {
-  const supabase = createStaticClient()
-  
-  // Platform yorumlarını getir (ana sayfadaki gibi)
-  const { data: reviews, error } = await supabase
-    .from('customer_reviews')
-    .select(`
-      id, customer_name, rating, city, review_date, 
-      review_text,
-      service_type, partner_name,
-      partners (slug, company_name)
-    `)
-    .eq('approval_status', 'approved')
-    .eq('review_type', 'platform')
-    .eq('show_on_homepage', true)
-    .order('review_date', { ascending: false })
-    .limit(6)
-
-  return {
-    reviews: reviews || [],
-    error
-  }
+  const { carouselReviews } = await getHomepageReviewsBundle(6)
+  return { reviews: carouselReviews }
 }
 
 export default async function AboutPage() {

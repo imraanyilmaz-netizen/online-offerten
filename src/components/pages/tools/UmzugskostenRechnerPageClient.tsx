@@ -43,10 +43,10 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-background text-foreground">
 
         {/* Hero Section */}
-        <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-green-50">
+        <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-muted/50 via-background to-primary/5 dark:from-muted/25 dark:via-background dark:to-primary/10">
           <div className="absolute inset-0 opacity-5">
             <div
               className="absolute inset-0"
@@ -59,52 +59,52 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
           </div>
           <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
             <nav className="mb-6" aria-label="Breadcrumb">
-              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+              <ol className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
+                  <Link href="/" className="hover:text-primary transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
                 </li>
-                <li><ChevronRightIcon className="w-4 h-4 text-gray-400" /></li>
+                <li><ChevronRightIcon className="w-4 h-4 text-muted-foreground/70" /></li>
                 <li>
-                  <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">Umzugsfirma</Link>
+                  <Link href="/umzugsfirma" className="hover:text-primary transition-colors">Umzugsfirma</Link>
                 </li>
-                <li><ChevronRightIcon className="w-4 h-4 text-gray-400" /></li>
-                <li className="text-gray-900 font-medium" aria-current="page">Umzugskosten</li>
+                <li><ChevronRightIcon className="w-4 h-4 text-muted-foreground/70" /></li>
+                <li className="text-foreground font-medium" aria-current="page">Umzugskosten</li>
               </ol>
             </nav>
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
               <div>
-                <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-4">
+                <div className="inline-flex items-center px-4 py-2 bg-primary/15 dark:bg-primary/20 rounded-full text-primary dark:text-emerald-300 font-semibold text-sm mb-4">
                   <Calculator className="h-4 w-4 mr-2" />
                   Umzugskosten vergleichen
                 </div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight mb-6 leading-tight">
                   Umzugskosten:
                   <span className="block">Was kostet mein Umzug?</span>
                 </h1>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
                   Vergleichen Sie bis zu 5 kostenlose Offerten von gepruften Umzugsfirmen und sparen Sie bei Ihrem nachsten Umzug.
                 </p>
-                <ul className="space-y-3 text-gray-700">
+                <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-start gap-2.5">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <span>Bis zu 5 Offerten von gepruften Umzugsfirmen</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <span>100% kostenlos und unverbindlich</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <span>In nur 2 Minuten ausgefullt</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <span>Regionale Anbieter in der ganzen Schweiz</span>
                   </li>
                 </ul>
               </div>
               <div className="relative">
-                <div className="bg-white rounded-2xl shadow-2xl border-4 border-green-200 overflow-hidden">
+                <div className="bg-card rounded-2xl shadow-2xl border-4 border-primary/25 dark:border-emerald-700/50 overflow-hidden">
                   <MovingCostCalculator 
                     onRequestQuote={() => {
                       openFormSection();
@@ -118,7 +118,7 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
           </div>
         </section>
 
-        <section className="py-12 md:py-16 bg-white">
+        <section className="py-12 md:py-16 bg-muted/20 dark:bg-muted/10">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="max-w-4xl space-y-10">
             <section>
@@ -135,7 +135,7 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
               <button
                 type="button"
                 onClick={openFormSection}
-                className="inline-flex items-center rounded-lg bg-green-600 px-5 py-3 text-white font-semibold hover:bg-green-700 transition-colors"
+                className="inline-flex items-center rounded-lg bg-green-600 px-5 py-3 text-white font-semibold hover:bg-green-700 dark:bg-primary dark:hover:bg-primary/90 transition-colors"
               >
                 Jetzt kostenlose Offerten anfordern
               </button>
@@ -195,20 +195,20 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
                 Was kostet ein Umzug in der Schweiz? Die folgende Ubersicht gibt Ihnen eine erste Orientierung uber durchschnittliche Umzugspreise nach Wohnungsgrosse:
               </p>
               <div className="overflow-x-auto">
-                <table className="w-full border border-gray-200 text-sm">
+                <table className="w-full border border-border text-sm bg-card text-card-foreground">
                   <thead>
-                    <tr className="bg-gray-50">
-                      <th className="p-3 text-left border-b">Wohnungsgrosse</th>
-                      <th className="p-3 text-left border-b">Lokaler Umzug (bis 50 km)</th>
-                      <th className="p-3 text-left border-b">Fernumzug (uber 100 km)</th>
+                    <tr className="bg-muted/60 dark:bg-muted/40">
+                      <th className="p-3 text-left border-b border-border">Wohnungsgrosse</th>
+                      <th className="p-3 text-left border-b border-border">Lokaler Umzug (bis 50 km)</th>
+                      <th className="p-3 text-left border-b border-border">Fernumzug (uber 100 km)</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td className="p-3 border-b">1.5-Zimmer-Wohnung (bis 40 m2)</td><td className="p-3 border-b">800 - 1.200 CHF</td><td className="p-3 border-b">1.200 - 1.800 CHF</td></tr>
-                    <tr><td className="p-3 border-b">2.5-Zimmer-Wohnung (bis 60 m2)</td><td className="p-3 border-b">1.200 - 1.800 CHF</td><td className="p-3 border-b">1.800 - 2.500 CHF</td></tr>
-                    <tr><td className="p-3 border-b">3.5-Zimmer-Wohnung (bis 80 m2)</td><td className="p-3 border-b">1.500 - 2.500 CHF</td><td className="p-3 border-b">2.500 - 3.500 CHF</td></tr>
-                    <tr><td className="p-3 border-b">4.5-Zimmer-Wohnung (bis 100 m2)</td><td className="p-3 border-b">2.000 - 3.200 CHF</td><td className="p-3 border-b">3.200 - 4.500 CHF</td></tr>
-                    <tr><td className="p-3 border-b">5.5-Zimmer-Wohnung (bis 120 m2)</td><td className="p-3 border-b">2.500 - 4.000 CHF</td><td className="p-3 border-b">4.000 - 5.500 CHF</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">1.5-Zimmer-Wohnung (bis 40 m2)</td><td className="p-3">800 - 1.200 CHF</td><td className="p-3">1.200 - 1.800 CHF</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">2.5-Zimmer-Wohnung (bis 60 m2)</td><td className="p-3">1.200 - 1.800 CHF</td><td className="p-3">1.800 - 2.500 CHF</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">3.5-Zimmer-Wohnung (bis 80 m2)</td><td className="p-3">1.500 - 2.500 CHF</td><td className="p-3">2.500 - 3.500 CHF</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">4.5-Zimmer-Wohnung (bis 100 m2)</td><td className="p-3">2.000 - 3.200 CHF</td><td className="p-3">3.200 - 4.500 CHF</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">5.5-Zimmer-Wohnung (bis 120 m2)</td><td className="p-3">2.500 - 4.000 CHF</td><td className="p-3">4.000 - 5.500 CHF</td></tr>
                     <tr><td className="p-3">6.5-Zimmer-Wohnung (uber 120 m2)</td><td className="p-3">3.500 - 5.000 CHF</td><td className="p-3">5.500 - 7.000 CHF</td></tr>
                   </tbody>
                 </table>
@@ -227,18 +227,18 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
                 Viele Umzugsfirmen rechnen auf Stundenbasis ab. Die Umzug Kosten pro Stunde hangen von der Teamgrosse und dem eingesetzten Material ab:
               </p>
               <div className="overflow-x-auto">
-                <table className="w-full border border-gray-200 text-sm">
+                <table className="w-full border border-border text-sm bg-card text-card-foreground">
                   <thead>
-                    <tr className="bg-gray-50">
-                      <th className="p-3 text-left border-b">Teamgrosse</th>
-                      <th className="p-3 text-left border-b">Umzugswagen</th>
-                      <th className="p-3 text-left border-b">Stundenpreis</th>
+                    <tr className="bg-muted/60 dark:bg-muted/40">
+                      <th className="p-3 text-left border-b border-border">Teamgrosse</th>
+                      <th className="p-3 text-left border-b border-border">Umzugswagen</th>
+                      <th className="p-3 text-left border-b border-border">Stundenpreis</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td className="p-3 border-b">2 Zugelmanner</td><td className="p-3 border-b">Kleiner Transporter (bis 12 m3)</td><td className="p-3 border-b">120 - 160 CHF/Stunde</td></tr>
-                    <tr><td className="p-3 border-b">3 Umzugshelfer</td><td className="p-3 border-b">Mittelgrosser LKW (bis 20 m3)</td><td className="p-3 border-b">150 - 190 CHF/Stunde</td></tr>
-                    <tr><td className="p-3 border-b">4 Zugelmanner</td><td className="p-3 border-b">Grosser LKW (bis 30 m3)</td><td className="p-3 border-b">180 - 220 CHF/Stunde</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">2 Zugelmanner</td><td className="p-3">Kleiner Transporter (bis 12 m3)</td><td className="p-3">120 - 160 CHF/Stunde</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">3 Umzugshelfer</td><td className="p-3">Mittelgrosser LKW (bis 20 m3)</td><td className="p-3">150 - 190 CHF/Stunde</td></tr>
+                    <tr className="border-b border-border"><td className="p-3">4 Zugelmanner</td><td className="p-3">Grosser LKW (bis 30 m3)</td><td className="p-3">180 - 220 CHF/Stunde</td></tr>
                     <tr><td className="p-3">5-6 Personen</td><td className="p-3">LKW mit Mobellift</td><td className="p-3">220 - 280 CHF/Stunde</td></tr>
                   </tbody>
                 </table>
@@ -275,29 +275,29 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
             <section>
               <h2 className="heading-2 mb-4">Zusatzleistungen und deren Kosten</h2>
               <div className="overflow-x-auto">
-                <table className="w-full border border-gray-200 text-sm">
+                <table className="w-full border border-border text-sm bg-card text-card-foreground">
                   <thead>
-                    <tr className="bg-gray-50">
-                      <th className="p-3 text-left border-b w-1/2">Zusatzleistung</th>
-                      <th className="p-3 text-left border-b">Kosten / Details</th>
+                    <tr className="bg-muted/60 dark:bg-muted/40">
+                      <th className="p-3 text-left border-b border-border w-1/2">Zusatzleistung</th>
+                      <th className="p-3 text-left border-b border-border">Kosten / Details</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="p-3 border-b font-medium">Umzug mit Reinigung</td>
-                      <td className="p-3 border-b">Professionelle Endreinigung: 4-10 CHF pro m2; 3.5-Zimmer-Wohnung (80 m2): 400-800 CHF; Vorteil: Abnahmegarantie durch professionelle Reinigungsfirmen</td>
+                    <tr className="border-b border-border">
+                      <td className="p-3 font-medium">Umzug mit Reinigung</td>
+                      <td className="p-3">Professionelle Endreinigung: 4-10 CHF pro m2; 3.5-Zimmer-Wohnung (80 m2): 400-800 CHF; Vorteil: Abnahmegarantie durch professionelle Reinigungsfirmen</td>
                     </tr>
-                    <tr>
-                      <td className="p-3 border-b font-medium">Einpackservice und Verpackungsmaterial</td>
-                      <td className="p-3 border-b">Kompletter Einpackservice: 200-500 CHF; Umzugskartons (Kauf): 5-8 CHF pro Stuck; Verpackungsmaterial (Kartons, Decken, Folie): 100-300 CHF</td>
+                    <tr className="border-b border-border">
+                      <td className="p-3 font-medium">Einpackservice und Verpackungsmaterial</td>
+                      <td className="p-3">Kompletter Einpackservice: 200-500 CHF; Umzugskartons (Kauf): 5-8 CHF pro Stuck; Verpackungsmaterial (Kartons, Decken, Folie): 100-300 CHF</td>
                     </tr>
-                    <tr>
-                      <td className="p-3 border-b font-medium">Mobelmontage und -demontage</td>
-                      <td className="p-3 border-b">Demontage/Montage pro Mobelstuck: 30-80 CHF; Kuchenmontage komplett: 300-600 CHF; Schrankwand oder grosses Bett: 80-150 CHF</td>
+                    <tr className="border-b border-border">
+                      <td className="p-3 font-medium">Mobelmontage und -demontage</td>
+                      <td className="p-3">Demontage/Montage pro Mobelstuck: 30-80 CHF; Kuchenmontage komplett: 300-600 CHF; Schrankwand oder grosses Bett: 80-150 CHF</td>
                     </tr>
-                    <tr>
-                      <td className="p-3 border-b font-medium">Einlagerungsservice</td>
-                      <td className="p-3 border-b">Lagerraum pro m3/Monat: 25-50 CHF; Mindestmietdauer meist 1-3 Monate</td>
+                    <tr className="border-b border-border">
+                      <td className="p-3 font-medium">Einlagerungsservice</td>
+                      <td className="p-3">Lagerraum pro m3/Monat: 25-50 CHF; Mindestmietdauer meist 1-3 Monate</td>
                     </tr>
                     <tr>
                       <td className="p-3 font-medium">Entsorgungsservice</td>
@@ -321,13 +321,13 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
             </section>
 
             <section>
-              <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-10 shadow-sm">
+              <div className="rounded-2xl border border-border bg-card text-card-foreground p-6 md:p-10 shadow-sm">
                 <div className="mb-8">
-                  <p className="text-sm font-semibold text-green-700 mb-2">Haufige Fragen</p>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                  <p className="text-sm font-semibold text-primary dark:text-emerald-400 mb-2">Haufige Fragen</p>
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                     Haufig gestellte Fragen zu Umzugskosten
                   </h2>
-                  <p className="text-gray-600 mt-3">
+                  <p className="text-muted-foreground mt-3">
                     Hier finden Sie die wichtigsten Antworten zu Preisen, Offerten und Vergleich.
                   </p>
                 </div>
@@ -335,10 +335,10 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
                 <Accordion type="single" collapsible className="w-full">
                   {faqs.map((faq, index) => (
                     <AccordionItem key={faq.question} value={`item-${index}`}>
-                      <AccordionTrigger className="text-left font-semibold text-gray-900">
+                      <AccordionTrigger className="text-left font-semibold text-foreground">
                         {faq.question}
                       </AccordionTrigger>
-                      <AccordionContent className="text-gray-600 leading-relaxed">
+                      <AccordionContent className="text-muted-foreground leading-relaxed">
                         {faq.answer}
                       </AccordionContent>
                     </AccordionItem>
@@ -347,7 +347,7 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
               </div>
             </section>
 
-            <section className="bg-green-50 border border-green-200 rounded-xl p-6">
+            <section className="bg-primary/10 dark:bg-emerald-950/40 border border-primary/20 dark:border-emerald-800/60 rounded-xl p-6">
               <h2 className="heading-2 mb-4">Jetzt kostenlose Umzugsofferten vergleichen</h2>
               <p className="text-body mb-4">
                 Sie kennen nun alle wichtigen Faktoren, die den Preis Ihres Umzugs beeinflussen. Der nachste Schritt: <strong>Vergleichen Sie konkrete Offerten fur Ihre individuelle Wohnsituation.</strong>
@@ -355,7 +355,7 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
               <button
                 type="button"
                 onClick={openFormSection}
-                className="inline-flex items-center rounded-lg bg-green-600 px-5 py-3 text-white font-semibold hover:bg-green-700 transition-colors mb-4"
+                className="inline-flex items-center rounded-lg bg-green-600 px-5 py-3 text-white font-semibold hover:bg-green-700 dark:bg-primary dark:hover:bg-primary/90 transition-colors mb-4"
               >
                 Jetzt kostenlose Offerten anfordern
               </button>
@@ -375,7 +375,7 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
         {shouldOpenForm && (
           <section 
             id="moving-cost-calculator-section" 
-            className="py-8 bg-white"
+            className="py-8 bg-background"
           >
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
               <MovingCostCalculator 

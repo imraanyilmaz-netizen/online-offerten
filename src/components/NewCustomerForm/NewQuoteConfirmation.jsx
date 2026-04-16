@@ -19,20 +19,20 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
       description: t('quoteConfirmation.helpfulResources.checklists.description'),
       buttonText: t('quoteConfirmation.helpfulResources.checklists.buttonText'),
       link: checklistenLink,
-      icon: <ListChecks className="h-8 w-8 text-green-600" />
+      icon: <ListChecks className="h-8 w-8 text-green-600 dark:text-primary" />
     },
     {
       title: t('quoteConfirmation.helpfulResources.guides.title'),
       description: t('quoteConfirmation.helpfulResources.guides.description'),
       buttonText: t('quoteConfirmation.helpfulResources.guides.buttonText'),
       link: ratgeberLink,
-      icon: <BookOpen className="h-8 w-8 text-green-600" />
+      icon: <BookOpen className="h-8 w-8 text-green-600 dark:text-primary" />
     }
   ];
 
   return (
     <div
-      className="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-12 md:py-20"
+      className="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-background dark:via-emerald-950/20 dark:to-background py-12 md:py-20"
     >
       <div className="container mx-auto px-4 max-w-3xl text-center">
         <div
@@ -42,52 +42,52 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
         </div>
 
         <h1
-          className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+          className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-foreground mb-4"
         >
           {t('quoteConfirmation.title')}
         </h1>
         <p
-          className="text-lg text-gray-700 mb-6"
+          className="text-lg text-gray-700 dark:text-muted-foreground mb-6"
         >
           {t('quoteConfirmation.subtitle')}
         </p>
 
         <div
-          className="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-left space-y-3 mb-8"
+          className="bg-white dark:bg-card p-6 rounded-lg shadow-md border border-gray-200 dark:border-border text-left space-y-3 mb-8"
         >
            <div className="flex items-start">
-            <MailCheck className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+            <MailCheck className="h-5 w-5 text-green-600 dark:text-primary mr-3 mt-1 flex-shrink-0" />
             <div>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-muted-foreground">
                 {t('quoteConfirmation.emailConfirmationSent')}
               </p>
             </div>
           </div>
 
-          <div className="border-t border-gray-200 my-4"></div>
+          <div className="border-t border-gray-200 dark:border-border my-4"></div>
           <div className="flex items-start">
-            <Link2 className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+            <Link2 className="h-5 w-5 text-green-600 dark:text-primary mr-3 mt-1 flex-shrink-0" />
             <div>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-muted-foreground">
                 {t('quoteConfirmation.statusLinkText')}
               </p>
             </div>
           </div>
-           <div className="border-t border-gray-200 my-4"></div>
-           <p className="font-semibold text-gray-700 text-center">
+           <div className="border-t border-gray-200 dark:border-border my-4"></div>
+           <p className="font-semibold text-gray-700 dark:text-foreground text-center">
             {t('quoteConfirmation.checkSpam')}
           </p>
         </div>
         
         <div
-          className="flex items-center justify-center gap-2 text-green-700 mb-8 p-3 bg-green-100 rounded-md"
+          className="flex items-center justify-center gap-2 text-green-700 dark:text-emerald-200 mb-8 p-3 bg-green-100 dark:bg-emerald-950/50 rounded-md"
         >
           <CheckCircle size={20} />
           <p className="text-sm">{t('quoteConfirmation.contactSoon')}</p>
         </div>
 
         <p
-          className="text-gray-600 mb-12"
+          className="text-gray-600 dark:text-muted-foreground mb-12"
         >
           {t('quoteConfirmation.thanksForTrust')}
         </p>
@@ -95,22 +95,22 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
         <div
           className="mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-foreground mb-6">
             {t('quoteConfirmation.whatHappensNext')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
             {helpfulResources.map((resource, index) => (
               <Link href={resource.link} key={index} className="block group">
-                <Card className="h-full flex flex-col shadow-md md:hover:shadow-xl md:hover:-translate-y-1 transition-all duration-300 border-gray-200 md:hover:border-green-400">
+                <Card className="h-full flex flex-col shadow-md md:hover:shadow-xl md:hover:-translate-y-1 transition-all duration-300 border-gray-200 dark:border-border bg-card md:hover:border-green-400 dark:md:hover:border-primary/60">
                   <CardHeader className="flex-row items-center gap-4">
                     {resource.icon}
-                    <CardTitle className="text-lg font-semibold text-gray-800">{resource.title}</CardTitle>
+                    <CardTitle className="text-lg font-semibold text-gray-800 dark:text-foreground">{resource.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <CardDescription className="text-gray-600">{resource.description}</CardDescription>
+                    <CardDescription className="text-gray-600 dark:text-muted-foreground">{resource.description}</CardDescription>
                   </CardContent>
                   <div className="p-4 pt-0">
-                      <div className="text-green-600 font-semibold flex items-center group-md:hover:text-green-700 transition-colors">
+                      <div className="text-green-600 dark:text-primary font-semibold flex items-center group-md:hover:text-green-700 dark:group-md:hover:text-primary/90 transition-colors">
                         {resource.buttonText}
                         <ArrowRight className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1" />
                       </div>
@@ -126,7 +126,7 @@ const NewQuoteConfirmation = ({ onResetForm }) => {
           <Button 
             onClick={onResetForm} 
             size="lg" 
-            className="bg-green-500 md:hover:bg-green-600 text-white group"
+            className="bg-green-500 dark:bg-primary md:hover:bg-green-600 dark:md:hover:bg-primary/90 text-white group"
           >
             <ArrowLeft size={20} className="mr-2 transition-transform group-md:hover:-translate-x-1" />
             {t('quoteConfirmation.newQuoteButton')}

@@ -43,6 +43,20 @@ export function formatDate(dateString) {
   }
 }
 
+/** First letter of first name + first letter of last name (e.g. Katharina Baumgartner → KB). */
+export function getCustomerInitials(fullName) {
+  const trimmed = (fullName || '').trim();
+  if (!trimmed) return '?';
+  const parts = trimmed.split(/\s+/).filter(Boolean);
+  const take = (s) => (s && s[0] ? s[0].toUpperCase() : '');
+  if (parts.length >= 2) {
+    return `${take(parts[0])}${take(parts[parts.length - 1])}` || '?';
+  }
+  const single = parts[0];
+  if (single.length >= 2) return `${take(single)}${single[1].toUpperCase()}`;
+  return take(single) || '?';
+}
+
 /** Formular-Checkbox „Datum ist flexibel“ / DB (boolean, Ja/Nein) */
 export function isMoveDateFlexible(moveDateFlexible) {
   if (moveDateFlexible === true) return true;
