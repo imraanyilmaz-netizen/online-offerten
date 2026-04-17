@@ -87,7 +87,7 @@ export async function getPartnersForCategoryLocation(
     const { data: rows, error } = await supabase
       .from('partners')
       .select(
-        'id, company_name, slug, address_city, address_zip, main_categories, service_regions, average_rating, review_count, logo_url, message, badge_tier'
+        'id, company_name, slug, address_street, address_city, address_zip, main_categories, service_regions, average_rating, review_count, logo_url, message, badge_tier'
       )
       .eq('status', 'active')
       .not('company_name', 'is', null)

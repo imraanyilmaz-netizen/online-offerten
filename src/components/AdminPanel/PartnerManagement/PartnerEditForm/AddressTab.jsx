@@ -2,6 +2,7 @@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
+import AddressInput from '@/components/PartnerRegistrationForm/AddressInput';
 
 const AddressTab = ({ formData, handleInputChange }) => {
   return (
@@ -9,7 +10,17 @@ const AddressTab = ({ formData, handleInputChange }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2">
           <Label htmlFor="address_street">Strasse</Label>
-          <Input id="address_street" value={formData.address_street} onChange={(e) => handleInputChange('address_street', e.target.value)} />
+          <AddressInput
+            inputId="address_street"
+            value={formData.address_street}
+            onChange={(e) => handleInputChange('address_street', e.target.value)}
+            onSelect={(addr) => {
+              handleInputChange('address_street', addr.street);
+              handleInputChange('address_zip', addr.postcode);
+              handleInputChange('address_city', addr.city);
+            }}
+            countryCode="CH"
+          />
         </div>
         <div>
           <Label htmlFor="address_zip">PLZ</Label>

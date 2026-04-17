@@ -49,6 +49,7 @@ const DialogDescription = DialogDescriptionUi as FC<
   PropsWithChildren<{ className?: string }>
 >
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation'
+import CategoryCityPartnersMap from '@/components/locations/CategoryCityPartnersMap'
 import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CategoryCityFaqSection from '@/components/pages/category/CategoryCityFaqSection'
 import CategoryCitySpotlight from '@/components/pages/category/CategoryCitySpotlight'
@@ -61,6 +62,7 @@ export type CategoryCityPartner = {
   id: string
   company_name: string
   slug?: string | null
+  address_street?: string | null
   address_city?: string | null
   address_zip?: string | null
   service_regions?: unknown
@@ -854,6 +856,13 @@ export default function CategoryCityPageClient({
       {partners.length > 0 ? (
         <section className="border-t border-slate-200/60 bg-gradient-to-b from-slate-50/80 to-white py-16 dark:border-border dark:from-muted/25 dark:to-background md:py-20">
           <div className="mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
+            <div className="mb-8 md:mb-10">
+              <CategoryCityPartnersMap
+                partners={partners}
+                locationName={locationName}
+                categorySlug={categorySlug}
+              />
+            </div>
             <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_4px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card dark:ring-white/10">
               <div className="grid lg:grid-cols-12 lg:items-stretch">
                 <div className="relative min-h-[300px] lg:col-span-5 lg:min-h-[480px]">

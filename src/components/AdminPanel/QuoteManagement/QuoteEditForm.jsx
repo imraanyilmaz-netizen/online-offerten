@@ -10,6 +10,7 @@ import { isMovingService, isCleaningService } from '@/lib/serviceCategorizer';
 import { CLEANING_AREA_LEGACY_SELECT_OPTIONS } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
 import { normalizeFloorLabel } from '@/lib/utils';
+import AddressInput from '@/components/PartnerRegistrationForm/AddressInput';
 
 const FormField = ({ id, label, children }) => (
   <div>
@@ -151,7 +152,22 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
         </Fieldset>
 
         <Fieldset legend={showMovingFields ? "Auszugsadresse" : "Objektadresse"}>
-            <FormField id="from_street" label="Strasse"><Input name="from_street" value={formData.from_street || ''} onChange={handleChange} /></FormField>
+            <FormField id="from_street" label="Strasse">
+              <AddressInput
+                inputId="from_street"
+                value={formData.from_street || ''}
+                onChange={(e) => handleChange({ target: { name: 'from_street', value: e.target.value } })}
+                onSelect={(addr) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    from_street: addr.street,
+                    from_zip: addr.postcode,
+                    from_city: addr.city,
+                  }));
+                }}
+                countryCode={formData.from_country || 'CH'}
+              />
+            </FormField>
             <FormField id="from_zip" label="PLZ"><Input name="from_zip" value={formData.from_zip || ''} onChange={handleChange} /></FormField>
             <FormField id="from_city" label="Ort"><Input name="from_city" value={formData.from_city || ''} onChange={handleChange} /></FormField>
             <FormField id="from_country" label="Land"><Input name="from_country" value={formData.from_country || ''} onChange={handleChange} /></FormField>
@@ -167,7 +183,22 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
         
         {showMovingFields && (
             <Fieldset legend="Einzugsadresse">
-                <FormField id="to_street" label="Strasse"><Input name="to_street" value={formData.to_street || ''} onChange={handleChange} /></FormField>
+                <FormField id="to_street" label="Strasse">
+                  <AddressInput
+                    inputId="to_street"
+                    value={formData.to_street || ''}
+                    onChange={(e) => handleChange({ target: { name: 'to_street', value: e.target.value } })}
+                    onSelect={(addr) => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        to_street: addr.street,
+                        to_zip: addr.postcode,
+                        to_city: addr.city,
+                      }));
+                    }}
+                    countryCode={formData.to_country || 'CH'}
+                  />
+                </FormField>
                 <FormField id="to_zip" label="PLZ"><Input name="to_zip" value={formData.to_zip || ''} onChange={handleChange} /></FormField>
                 <FormField id="to_city" label="Ort"><Input name="to_city" value={formData.to_city || ''} onChange={handleChange} /></FormField>
                 <FormField id="to_country" label="Land"><Input name="to_country" value={formData.to_country || ''} onChange={handleChange} /></FormField>

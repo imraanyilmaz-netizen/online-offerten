@@ -3,9 +3,10 @@ import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { Input } from '@/components/ui/input';
 import { Loader2 } from 'lucide-react';
 
-const AddressInput = ({ value, onChange, onSelect, countryCode = 'CH' }) => {
+const AddressInput = ({ value, onChange, onSelect, countryCode = 'CH', inputId = 'address_street' }) => {
     const [inputValue, setInputValue] = useState(value);
-    const { loading, suggestions, getSuggestions, clearSuggestions } = useAddressAutocomplete();
+    const [resolving, setResolving] = useState(false);
+    const { loading, suggestions, getSuggestions, clearSuggestions, resolveSuggestion } = useAddressAutocomplete();
     const wrapperRef = useRef(null);
 
     useEffect(() => {
@@ -35,27 +36,36 @@ const AddressInput = ({ value, onChange, onSelect, countryCode = 'CH' }) => {
         }
     };
 
-    const handleSelect = (suggestion) => {
-        const street = `${suggestion.street}${suggestion.housenumber ? ' ' + suggestion.housenumber : ''}`;
-        setInputValue(street);
-        onSelect({
-            street: street,
-            postcode: suggestion.postcode,
-            city: suggestion.city,
-        });
-        clearSuggestions();
+    const handleSelect = async (suggestion) => {
+        setResolving(true);
+        try {
+            const resolved = await resolveSuggestion(suggestion);
+            const street = `${resolved.street || ''}${resolved.housenumber ? ' ' + resolved.housenumber : ''}`.trim();
+            setInputValue(street);
+            onSelect({
+                street: street || resolved.street,
+                postcode: resolved.postcode,
+                city: resolved.city,
+            });
+            clearSuggestions();
+        } finally {
+            setResolving(false);
+        }
     };
 
     return (
         <div className="relative" ref={wrapperRef}>
             <div className="relative">
                 <Input
-                    id="address_street"
+                    id={inputId}
                     value={inputValue}
                     onChange={handleChange}
                     autoComplete="off"
+                    disabled={resolving}
                 />
-                {loading && <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-slate-400" />}
+                {(loading || resolving) && (
+                    <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-slate-400" />
+                )}
             </div>
             {suggestions.length > 0 && (
                 <ul className="absolute z-10 w-full bg-white border border-slate-200 rounded-md mt-1 shadow-lg max-h-60 overflow-y-auto">
@@ -63,10 +73,28 @@ const AddressInput = ({ value, onChange, onSelect, countryCode = 'CH' }) => {
                         <li
                             key={suggestion.id}
                             className="px-4 py-2 cursor-pointer hover:bg-slate-100"
-                            onClick={() => handleSelect(suggestion)}
+                            onMouseDown={(e) => {
+                                e.preventDefault();
+                                handleSelect(suggestion);
+                            }}
                         >
-                            <p className="font-medium text-sm">{suggestion.street} {suggestion.housenumber}</p>
-                            <p className="text-xs text-slate-500">{suggestion.postcode} {suggestion.city}</p>
+                            {suggestion.source === 'google' ? (
+                                <>
+                                    <p className="font-medium text-sm">{suggestion.main_text}</p>
+                                    {suggestion.secondary_text ? (
+                                        <p className="text-xs text-slate-500">{suggestion.secondary_text}</p>
+                                    ) : null}
+                                </>
+                            ) : (
+                                <>
+                                    <p className="font-medium text-sm">
+                                        {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
+                                    </p>
+                                    <p className="text-xs text-slate-500">
+                                        {suggestion.postcode} {suggestion.city}
+                                    </p>
+                                </>
+                            )}
                         </li>
                     ))}
                 </ul>
