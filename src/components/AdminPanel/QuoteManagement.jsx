@@ -1,4 +1,4 @@
-﻿import React, { useMemo } from 'react';
+import React, { useMemo } from 'react';
 // framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Loader2, SlidersHorizontal, CheckCircle, Archive, Send, RefreshCw } from 'lucide-react';
@@ -37,7 +37,7 @@ const QuoteManagement = () => {
   
   const renderQuoteList = (list) => {
     if (loading) return <div className="flex justify-center p-12"><Loader2 className="w-10 h-10 animate-spin text-green-600"/></div>;
-    if (list.length === 0) return <div className="text-center p-12 text-gray-500 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+    if (list.length === 0) return <div className="text-center p-12 text-muted-foreground bg-muted/30 rounded-xl border-2 border-dashed border-border">
       <p className="text-lg font-medium">In dieser Kategorie gibt es keine Anfragen zum Anzeigen.</p>
     </div>;
     
@@ -100,34 +100,34 @@ const QuoteManagement = () => {
 
   return (
     <div className="px-4 md:px-6 pb-6 md:pb-8">
-      <header className="mb-8 pb-4 border-b border-gray-200">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2 tracking-tight">Anfragen-Management</h1>
-        <p className="text-base text-gray-600 leading-relaxed max-w-3xl">Verwalten Sie eingehende Kundenanfragen, weisen Sie Partner zu und versenden Sie die Anfragen.</p>
+      <header className="mb-8 pb-4 border-b border-border">
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 tracking-tight">Anfragen-Management</h1>
+        <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">Verwalten Sie eingehende Kundenanfragen, weisen Sie Partner zu und versenden Sie die Anfragen.</p>
       </header>
       <Tabs defaultValue="new_quote" className="w-full">
-        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-gray-200 bg-gradient-to-b from-gray-50/50 to-white mb-6 sticky top-16 z-20">
+        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-border bg-gradient-to-b from-muted/40 to-background mb-6 sticky top-16 z-20">
           <TabsList className="p-2 bg-transparent rounded-lg justify-start sm:justify-start gap-2 min-h-[60px] items-center">
             <TabsTrigger 
               value="new_quote" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-muted-foreground data-[state=inactive]:bg-card data-[state=inactive]:hover:bg-muted data-[state=inactive]:hover:text-foreground border border-border dark:data-[state=active]:bg-primary dark:data-[state=active]:hover:bg-primary/90"
             >
                 <SlidersHorizontal className="w-4 h-4"/> Neue Anfragen ({filteredQuotes.new_quote.length})
             </TabsTrigger>
             <TabsTrigger 
               value="matched" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-muted-foreground data-[state=inactive]:bg-card data-[state=inactive]:hover:bg-muted data-[state=inactive]:hover:text-foreground border border-border dark:data-[state=active]:bg-primary dark:data-[state=active]:hover:bg-primary/90"
             >
                 <CheckCircle className="w-4 h-4"/> Zugewiesen ({filteredQuotes.matched.length})
             </TabsTrigger>
             <TabsTrigger 
               value="approved" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-muted-foreground data-[state=inactive]:bg-card data-[state=inactive]:hover:bg-muted data-[state=inactive]:hover:text-foreground border border-border dark:data-[state=active]:bg-primary dark:data-[state=active]:hover:bg-primary/90"
             >
                 <Send className="w-4 h-4"/> Versendet ({filteredQuotes.approved.length})
             </TabsTrigger>
             <TabsTrigger 
               value="refunds" 
-              className="relative flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="relative flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-muted-foreground data-[state=inactive]:bg-card data-[state=inactive]:hover:bg-muted data-[state=inactive]:hover:text-foreground border border-border dark:data-[state=active]:bg-primary dark:data-[state=active]:hover:bg-primary/90"
             >
                 <RefreshCw className="w-4 h-4"/> Rückerstattungen ({refundRequests.length})
                 {pendingRefundCount > 0 && (
@@ -138,7 +138,7 @@ const QuoteManagement = () => {
             </TabsTrigger>
             <TabsTrigger 
               value="archived" 
-              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-600 data-[state=inactive]:bg-white data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 border border-gray-200"
+              className="flex items-center gap-2 flex-shrink-0 px-5 py-3 rounded-lg font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-muted-foreground data-[state=inactive]:bg-card data-[state=inactive]:hover:bg-muted data-[state=inactive]:hover:text-foreground border border-border dark:data-[state=active]:bg-primary dark:data-[state=active]:hover:bg-primary/90"
             >
                 <Archive className="w-4 h-4"/> Archiv ({filteredQuotes.archived.length})
             </TabsTrigger>

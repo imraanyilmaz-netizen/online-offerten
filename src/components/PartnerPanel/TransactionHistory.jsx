@@ -43,19 +43,19 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
   const getTransactionTypeDetails = (type) => {
     switch (type) {
       case 'top-up':
-        return { label: 'Aufladung', icon: <ArrowUp className="h-4 w-4 text-green-500" />, color: 'text-green-600' };
+        return { label: 'Aufladung', icon: <ArrowUp className="h-4 w-4 text-green-500 dark:text-emerald-400" />, color: 'text-green-600 dark:text-emerald-400' };
       case 'purchase':
-        return { label: 'Anfragekauf', icon: <ArrowDown className="h-4 w-4 text-red-500" />, color: 'text-red-600' };
+        return { label: 'Anfragekauf', icon: <ArrowDown className="h-4 w-4 text-red-500 dark:text-red-400" />, color: 'text-red-600 dark:text-red-400' };
       case 'manual_credit':
-        return { label: 'Bonus-Gutschrift', icon: <Gift className="h-4 w-4 text-blue-500" />, color: 'text-blue-600' };
+        return { label: 'Bonus-Gutschrift', icon: <Gift className="h-4 w-4 text-blue-500 dark:text-blue-400" />, color: 'text-blue-600 dark:text-blue-400' };
       case 'purchase_subscription':
-        return { label: 'Abo-Anfrage', icon: <Star className="h-4 w-4 text-yellow-500" />, color: 'text-yellow-600' };
+        return { label: 'Abo-Anfrage', icon: <Star className="h-4 w-4 text-yellow-500 dark:text-yellow-400" />, color: 'text-yellow-600 dark:text-yellow-400' };
       case 'subscription':
-        return { label: 'Abo-Kauf', icon: <Star className="h-4 w-4 text-purple-500" />, color: 'text-purple-600' };
+        return { label: 'Abo-Kauf', icon: <Star className="h-4 w-4 text-purple-500 dark:text-purple-400" />, color: 'text-purple-600 dark:text-purple-400' };
       case 'refund':
-        return { label: 'Rückerstattung', icon: <RefreshCw className="h-4 w-4 text-orange-500" />, color: 'text-orange-600' };
+        return { label: 'Rückerstattung', icon: <RefreshCw className="h-4 w-4 text-orange-500 dark:text-orange-400" />, color: 'text-orange-600 dark:text-orange-400' };
       default:
-        return { label: type, icon: null, color: 'text-gray-600' };
+        return { label: type, icon: null, color: 'text-muted-foreground' };
     }
   };
 
@@ -84,7 +84,7 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-40">
-        <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
       </div>
     );
   }
@@ -92,9 +92,9 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
   if (transactions.length === 0) {
     return (
       <div className="text-center py-10">
-        <Inbox className="mx-auto h-12 w-12 text-gray-400" />
-        <h3 className="mt-2 text-sm font-medium text-gray-900">Keine Transaktionen</h3>
-        <p className="mt-1 text-sm text-gray-500">Bisher wurden keine Transaktionen erfasst.</p>
+        <Inbox className="mx-auto h-12 w-12 text-muted-foreground/60" />
+        <h3 className="mt-2 text-sm font-medium text-foreground">Keine Transaktionen</h3>
+        <p className="mt-1 text-sm text-muted-foreground">Bisher wurden keine Transaktionen erfasst.</p>
       </div>
     );
   }
@@ -104,12 +104,12 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
     <div className="overflow-x-auto">
       <Table>
         <TableHeader>
-            <TableRow className="bg-gradient-to-r from-gray-50 to-gray-50/50 hover:bg-gray-50 border-b-2 border-gray-200">
-              <TableHead className="font-bold text-gray-900 py-4 text-sm">Datum</TableHead>
-              <TableHead className="font-bold text-gray-900 py-4 text-sm">Typ</TableHead>
-              <TableHead className="font-bold text-gray-900 py-4 text-sm">Beschreibung</TableHead>
-              <TableHead className="text-right font-bold text-gray-900 py-4 text-sm">Betrag</TableHead>
-              <TableHead className="text-right font-bold text-gray-900 py-4 text-sm">Saldo danach</TableHead>
+            <TableRow className="bg-gradient-to-r from-muted/50 to-muted/30 hover:bg-muted/40 border-b-2 border-border">
+              <TableHead className="font-bold text-foreground py-4 text-sm">Datum</TableHead>
+              <TableHead className="font-bold text-foreground py-4 text-sm">Typ</TableHead>
+              <TableHead className="font-bold text-foreground py-4 text-sm">Beschreibung</TableHead>
+              <TableHead className="text-right font-bold text-foreground py-4 text-sm">Betrag</TableHead>
+              <TableHead className="text-right font-bold text-foreground py-4 text-sm">Saldo danach</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -119,20 +119,20 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
             return (
                 <TableRow 
                   key={tx.id}
-                  className="border-b border-gray-100 hover:bg-gradient-to-r hover:from-green-50/30 hover:to-transparent transition-all duration-200"
+                  className="border-b border-border hover:bg-gradient-to-r hover:from-green-50/40 hover:to-transparent dark:hover:from-emerald-950/25 dark:hover:to-transparent transition-all duration-200"
                 >
-                  <TableCell className="whitespace-nowrap py-3.5 text-sm text-gray-700">{formatDate(tx.created_at)}</TableCell>
+                  <TableCell className="whitespace-nowrap py-3.5 text-sm text-foreground">{formatDate(tx.created_at)}</TableCell>
                   <TableCell className="py-3.5">
                     <Badge variant="outline" className="flex items-center gap-1.5 w-fit">
                     {typeDetails.icon}
                     {typeDetails.label}
                   </Badge>
                 </TableCell>
-                  <TableCell className="py-3.5 text-sm text-gray-700">{tx.description}</TableCell>
+                  <TableCell className="py-3.5 text-sm text-foreground">{tx.description}</TableCell>
                   <TableCell className={`text-right font-semibold py-3.5 text-base ${typeDetails.color}`}>
                    {amount > 0 ? `+${amount.toFixed(2)}` : amount.toFixed(2)} CHF
                 </TableCell>
-                  <TableCell className="text-right py-3.5 font-semibold text-gray-900">{tx.balance_after?.toFixed(2)} CHF</TableCell>
+                  <TableCell className="text-right py-3.5 font-semibold text-foreground">{tx.balance_after?.toFixed(2)} CHF</TableCell>
               </TableRow>
             );
           })}
@@ -142,14 +142,14 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
 
       {/* Pagination */}
       {transactions.length > itemsPerPage && (
-        <div className="border-t border-gray-200 px-4 py-4 bg-gray-50/50 rounded-lg">
+        <div className="border-t border-border px-4 py-4 bg-muted/30 rounded-lg">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-sm text-gray-600">
-              Zeige <span className="font-semibold text-gray-900">{startIndex + 1}</span> bis{' '}
-              <span className="font-semibold text-gray-900">
+            <div className="text-sm text-muted-foreground">
+              Zeige <span className="font-semibold text-foreground">{startIndex + 1}</span> bis{' '}
+              <span className="font-semibold text-foreground">
                 {Math.min(endIndex, transactions.length)}
               </span>{' '}
-              von <span className="font-semibold text-gray-900">{transactions.length}</span> Transaktionen
+              von <span className="font-semibold text-foreground">{transactions.length}</span> Transaktionen
             </div>
             
             <div className="flex items-center gap-2">
@@ -179,7 +179,7 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
                     return (
                       <React.Fragment key={page}>
                         {showEllipsisBefore && (
-                          <span className="px-2 text-gray-400">...</span>
+                          <span className="px-2 text-muted-foreground/70">...</span>
                         )}
                         <Button
                           variant={currentPage === page ? "default" : "outline"}
@@ -187,8 +187,8 @@ const TransactionHistory = ({ partnerId, refreshKey }) => {
                           onClick={() => goToPage(page)}
                           className={`min-w-[40px] font-semibold h-9 ${
                             currentPage === page
-                              ? "bg-green-600 hover:bg-green-700 text-white"
-                              : "hover:bg-gray-100"
+                              ? "bg-green-600 hover:bg-green-700 text-white dark:bg-emerald-600 dark:hover:bg-emerald-700"
+                              : "hover:bg-muted"
                           }`}
                         >
                           {page}

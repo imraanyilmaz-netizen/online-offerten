@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -14,10 +14,9 @@ const mainCategories = [
     { id: 'privatumzug', label: 'Privatumzug', desc: 'Wohnung, Haus, WG-Zimmer' },
     { id: 'geschaeftsumzug', label: 'Geschäftsumzug', desc: 'Büro, Ladenlokal, Werkstatt' },
     { id: 'auslandumzug', label: 'Auslandumzug', desc: 'Umzüge ins oder aus dem Ausland' },
-    { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
+    { id: 'klaviertransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
     { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
     { id: 'lagerung_service', label: 'Lagerung', desc: 'Möbel sicher einlagern', icon: Archive },
-    { id: 'umzugsreinigung_opt', label: 'Endreinigung', desc: 'mit Abnahmegarantie' },
     { id: 'raeumung_service', label: 'Räumung' },
     { id: 'entsorgung_service', label: 'Entsorgung' },
   ]},

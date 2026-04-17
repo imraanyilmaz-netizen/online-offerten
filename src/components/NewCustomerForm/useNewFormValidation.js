@@ -13,7 +13,7 @@ const useNewFormValidation = (formData) => {
         step1Errors.service = t('errors.serviceMissing');
       } else if (formData.service === 'umzug') {
         if (!formData.umzugArt) step1Errors.umzugArt = t('errors.umzugArtMissing');
-        else if (formData.umzugArt === 'spezialtransport') {
+        else if (formData.umzugArt === 'klaviertransport' || formData.umzugArt === 'spezialtransport') {
           if (!formData.special_transport_type) step1Errors.special_transport_type = t('errors.fieldRequired');
           else if (formData.special_transport_type === 'sonstiges' && (!formData.special_transport_other_details || formData.special_transport_other_details.length < 10)) {
             step1Errors.special_transport_other_details = t('errors.malerDetailsMissing');

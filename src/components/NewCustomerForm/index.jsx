@@ -412,7 +412,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     params.delete('special_transport_type');
     params.delete('raeumung_scope');
     params.delete('endreinigung');
-    if (formData.special_transport_type && formData.umzugArt === 'spezialtransport') {
+    if (formData.special_transport_type && (formData.umzugArt === 'klaviertransport' || formData.umzugArt === 'spezialtransport')) {
       params.set('special_transport_type', formData.special_transport_type);
     }
     if (formData.raeumung_scope && formData.service === 'raeumung' && formData.umzugArt === 'raeumung') {
@@ -623,9 +623,12 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       return;
     }
     
-    // Servise özel parametreyi oku
-    const artValueFromUrl = params.get(paramName);
-    
+    // Servise özel parametreyi oku (alte Bookmarks: umzugArt=spezialtransport)
+    let artValueFromUrl = params.get(paramName);
+    if (artValueFromUrl === 'spezialtransport') {
+      artValueFromUrl = 'klaviertransport';
+    }
+
     if (artValueFromUrl && artValueFromUrl !== formData.umzugArt) {
       memoizedHandleUmzugArtChange(artValueFromUrl, true);
       hasInitializedUmzugArtFromUrl.current = true;
@@ -658,8 +661,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     const params = new URLSearchParams(searchParamsString);
     const specialTransportTypeFromUrl = params.get('special_transport_type');
     
-    // Nur wenn service=umzug, umzugArt=spezialtransport ist und special_transport_type in URL vorhanden ist
-    if (formData.service === 'umzug' && formData.umzugArt === 'spezialtransport' && specialTransportTypeFromUrl && specialTransportTypeFromUrl !== formData.special_transport_type) {
+    // Nur wenn service=umzug, umzugArt=klaviertransport ist und special_transport_type in URL vorhanden ist
+    if (formData.service === 'umzug' && (formData.umzugArt === 'klaviertransport' || formData.umzugArt === 'spezialtransport') && specialTransportTypeFromUrl && specialTransportTypeFromUrl !== formData.special_transport_type) {
       handleRadioGroupChange('special_transport_type', specialTransportTypeFromUrl);
     }
   }, [searchParamsString, formData.service, formData.umzugArt, formData.special_transport_type, handleRadioGroupChange]);
@@ -966,6 +969,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         case 'international':
           umzugArtLabel = t('step1.internationalMoveLabel');
           break;
+        case 'klaviertransport':
         case 'spezialtransport':
           if (formData.special_transport_type) {
             // Map special_transport_type to translation key

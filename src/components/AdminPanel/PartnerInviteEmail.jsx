@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -251,7 +251,7 @@ const PartnerInviteEmail = () => {
             <Button
               onClick={handleAddToList}
               disabled={addingToList}
-              className="bg-green-600 hover:bg-green-700 text-white flex-shrink-0"
+              className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white flex-shrink-0"
             >
               {addingToList ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -274,20 +274,20 @@ const PartnerInviteEmail = () => {
               <CardTitle className="flex items-center gap-2">
                 <Clock className="w-5 h-5" />
                 Einladungsliste
-                <span className="text-sm font-normal text-gray-500">({invitations.length})</span>
+                <span className="text-sm font-normal text-muted-foreground">({invitations.length})</span>
               </CardTitle>
               <CardDescription>
                 Verwalten Sie Ihre Partner-Einladungen.
-                <span className="inline-flex items-center gap-1 ml-2 text-xs">
-                  <Eye className="w-3 h-3 text-green-500" /> = E-Mail geöffnet
-                  <MousePointerClick className="w-3 h-3 text-blue-500 ml-2" /> = Link geklickt
+                <span className="inline-flex items-center gap-1 ml-2 text-xs text-muted-foreground">
+                  <Eye className="w-3 h-3 text-green-500 dark:text-emerald-400" /> = E-Mail geöffnet
+                  <MousePointerClick className="w-3 h-3 text-blue-500 dark:text-blue-400 ml-2" /> = Link geklickt
                 </span>
               </CardDescription>
             </div>
           </div>
           {invitations.length > 5 && (
             <div className="relative mt-3">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -300,15 +300,15 @@ const PartnerInviteEmail = () => {
         <CardContent>
           {loadingInvitations ? (
             <div className="flex justify-center p-8">
-              <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
+              <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
             </div>
           ) : filteredInvitations.length === 0 ? (
-            <div className="text-center p-8 text-gray-500 bg-gray-50 rounded-lg border-2 border-dashed">
-              <Mail className="w-10 h-10 mx-auto mb-2 text-gray-300" />
+            <div className="text-center p-8 text-muted-foreground bg-muted/30 rounded-lg border-2 border-dashed border-border">
+              <Mail className="w-10 h-10 mx-auto mb-2 text-muted-foreground/50" />
               <p className="text-sm font-medium">
                 {searchTerm ? 'Keine Ergebnisse gefunden.' : 'Noch keine Einladungen in der Liste.'}
               </p>
-              <p className="text-xs text-gray-400 mt-1">Fügen Sie oben eine Firma hinzu.</p>
+              <p className="text-xs text-muted-foreground mt-1">Fügen Sie oben eine Firma hinzu.</p>
             </div>
           ) : (
             <div className="space-y-2 max-h-[500px] overflow-y-auto">
@@ -319,19 +319,19 @@ const PartnerInviteEmail = () => {
                 const hasClicked = !!inv.link_clicked_at;
 
                 return (
-                  <div key={inv.id} className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${isSent ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'}`}>
+                  <div key={inv.id} className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${isSent ? 'bg-green-50 border-green-200 dark:bg-emerald-950/30 dark:border-emerald-800' : 'bg-muted/40 border-border hover:bg-muted/60'}`}>
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-semibold text-gray-900 truncate">{inv.company_name}</p>
+                        <p className="text-sm font-semibold text-foreground truncate">{inv.company_name}</p>
                         {isSent && (
-                          <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
+                          <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-100 dark:text-emerald-200 dark:bg-emerald-950/55 px-2 py-0.5 rounded-full">
                             <CheckCircle className="w-3 h-3" />
                             Gesendet
                           </span>
                         )}
                         {inv.status === 'pending' && (
-                          <span className="inline-flex items-center gap-1 text-xs font-medium text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">
+                          <span className="inline-flex items-center gap-1 text-xs font-medium text-yellow-700 bg-yellow-100 dark:text-amber-200 dark:bg-amber-950/45 px-2 py-0.5 rounded-full">
                             <Clock className="w-3 h-3" />
                             Ausstehend
                           </span>
@@ -340,20 +340,20 @@ const PartnerInviteEmail = () => {
                         {isSent && (
                           <div className="flex items-center gap-1.5 ml-1">
                             <span title={hasOpened ? `Geöffnet am ${format(new Date(inv.email_opened_at), "d. MMM yyyy, HH:mm", { locale: de })}` : 'Noch nicht geöffnet'}>
-                              <Eye className={`w-4 h-4 ${hasOpened ? 'text-green-500' : 'text-gray-300'}`} />
+                              <Eye className={`w-4 h-4 ${hasOpened ? 'text-green-500 dark:text-emerald-400' : 'text-muted-foreground/35'}`} />
                             </span>
                             <span title={hasClicked ? `Geklickt am ${format(new Date(inv.link_clicked_at), "d. MMM yyyy, HH:mm", { locale: de })}` : 'Noch nicht geklickt'}>
-                              <MousePointerClick className={`w-4 h-4 ${hasClicked ? 'text-blue-500' : 'text-gray-300'}`} />
+                              <MousePointerClick className={`w-4 h-4 ${hasClicked ? 'text-blue-500 dark:text-blue-400' : 'text-muted-foreground/35'}`} />
                             </span>
                           </div>
                         )}
                       </div>
-                      <p className="text-xs text-gray-500 truncate">{inv.email}</p>
+                      <p className="text-xs text-muted-foreground truncate">{inv.email}</p>
                       {isSent && inv.sent_at && (
-                        <p className="text-xs text-gray-400 mt-0.5">
+                        <p className="text-xs text-muted-foreground mt-0.5">
                           Gesendet am {format(new Date(inv.sent_at), "d. MMM yyyy, HH:mm", { locale: de })}
-                          {hasOpened && <span className="text-green-600 ml-2">• Geöffnet {format(new Date(inv.email_opened_at), "d. MMM, HH:mm", { locale: de })}</span>}
-                          {hasClicked && <span className="text-blue-600 ml-2">• Geklickt {format(new Date(inv.link_clicked_at), "d. MMM, HH:mm", { locale: de })}</span>}
+                          {hasOpened && <span className="text-green-600 dark:text-emerald-400 ml-2">• Geöffnet {format(new Date(inv.email_opened_at), "d. MMM, HH:mm", { locale: de })}</span>}
+                          {hasClicked && <span className="text-blue-600 dark:text-blue-400 ml-2">• Geklickt {format(new Date(inv.link_clicked_at), "d. MMM, HH:mm", { locale: de })}</span>}
                         </p>
                       )}
                     </div>
@@ -376,7 +376,7 @@ const PartnerInviteEmail = () => {
                           size="sm"
                           onClick={() => sendEmailForInvitation(inv)}
                           disabled={isSending}
-                          className="bg-green-600 hover:bg-green-700 text-white text-xs"
+                          className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white text-xs"
                         >
                           {isSending ? <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" /> : <Send className="w-3.5 h-3.5 mr-1" />}
                           Mail senden
@@ -386,7 +386,7 @@ const PartnerInviteEmail = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setDeleteDialog({ open: true, invitation: inv })}
-                        className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                        className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/40 dark:hover:text-red-400"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </Button>
@@ -408,11 +408,11 @@ const PartnerInviteEmail = () => {
               <div>
                 <p className="mb-3">Sie haben bereits eine Einladung an diese Firma gesendet:</p>
                 {resendDialog.invitation && (
-                  <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg mb-3">
-                    <p className="text-sm font-semibold text-gray-900">{resendDialog.invitation.company_name}</p>
-                    <p className="text-xs text-gray-500">{resendDialog.invitation.email}</p>
+                  <div className="p-3 bg-yellow-50 dark:bg-amber-950/35 border border-yellow-200 dark:border-amber-800 rounded-lg mb-3">
+                    <p className="text-sm font-semibold text-foreground">{resendDialog.invitation.company_name}</p>
+                    <p className="text-xs text-muted-foreground">{resendDialog.invitation.email}</p>
                     {resendDialog.invitation.sent_at && (
-                      <p className="text-xs text-yellow-700 mt-1">
+                      <p className="text-xs text-yellow-700 dark:text-amber-200 mt-1">
                         Zuletzt gesendet am {format(new Date(resendDialog.invitation.sent_at), "d. MMM yyyy, HH:mm", { locale: de })}
                       </p>
                     )}
@@ -424,7 +424,7 @@ const PartnerInviteEmail = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-            <AlertDialogAction onClick={handleResendConfirm} className="bg-green-600 hover:bg-green-700">
+            <AlertDialogAction onClick={handleResendConfirm} className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700">
               Trotzdem senden
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -446,7 +446,7 @@ const PartnerInviteEmail = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800">
               Löschen
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { Input } from '@/components/ui/input';
 import { Loader2 } from 'lucide-react';
@@ -64,15 +64,15 @@ const AddressInput = ({ value, onChange, onSelect, countryCode = 'CH', inputId =
                     disabled={resolving}
                 />
                 {(loading || resolving) && (
-                    <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-slate-400" />
+                    <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-muted-foreground" />
                 )}
             </div>
             {suggestions.length > 0 && (
-                <ul className="absolute z-10 w-full bg-white border border-slate-200 rounded-md mt-1 shadow-lg max-h-60 overflow-y-auto">
+                <ul className="absolute z-10 w-full bg-card border border-border rounded-md mt-1 shadow-lg max-h-60 overflow-y-auto">
                     {suggestions.map((suggestion) => (
                         <li
                             key={suggestion.id}
-                            className="px-4 py-2 cursor-pointer hover:bg-slate-100"
+                            className="px-4 py-2 cursor-pointer hover:bg-muted"
                             onMouseDown={(e) => {
                                 e.preventDefault();
                                 handleSelect(suggestion);
@@ -82,7 +82,7 @@ const AddressInput = ({ value, onChange, onSelect, countryCode = 'CH', inputId =
                                 <>
                                     <p className="font-medium text-sm">{suggestion.main_text}</p>
                                     {suggestion.secondary_text ? (
-                                        <p className="text-xs text-slate-500">{suggestion.secondary_text}</p>
+                                        <p className="text-xs text-muted-foreground">{suggestion.secondary_text}</p>
                                     ) : null}
                                 </>
                             ) : (
@@ -90,7 +90,7 @@ const AddressInput = ({ value, onChange, onSelect, countryCode = 'CH', inputId =
                                     <p className="font-medium text-sm">
                                         {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
                                     </p>
-                                    <p className="text-xs text-slate-500">
+                                    <p className="text-xs text-muted-foreground">
                                         {suggestion.postcode} {suggestion.city}
                                     </p>
                                 </>

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Star, Building, Mail, Phone, MapPin, Globe, Calendar, Users, FileText, Shield, Check, X, ExternalLink } from 'lucide-react';
@@ -6,16 +6,16 @@ import { getGermanServiceName } from '@/data/categories';
 import { getFullCantonName } from '@/data/locations';
 
 const DetailSection = ({ title, icon, children }) => (
-  <div className="bg-white p-4 rounded-lg border border-gray-200">
-    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2 text-gray-700">{icon}{title}</h3>
+  <div className="bg-card p-4 rounded-lg border border-border">
+    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2 text-foreground">{icon}{title}</h3>
     {children}
   </div>
 );
 
 const DetailItem = ({ label, value, children }) => (
   <div>
-    <p className="text-sm font-medium text-gray-500">{label}</p>
-    <div className="text-gray-800">{value || children || '-'}</div>
+    <p className="text-sm font-medium text-muted-foreground">{label}</p>
+    <div className="text-foreground">{value || children || '-'}</div>
   </div>
 );
 
@@ -27,7 +27,7 @@ const PartnerDetailView = ({ partner }) => {
       <div className={`p-4 rounded-lg border ${ partner.status === 'active' ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200' }`}>
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold text-gray-800">{partner.company_name || partner.name}</h2>
+            <h2 className="text-xl font-bold text-foreground">{partner.company_name || partner.name}</h2>
             <Badge className={`mt-1 ${ partner.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }`}>
               {partner.status}
             </Badge>
@@ -63,7 +63,7 @@ const PartnerDetailView = ({ partner }) => {
       </div>
 
       <DetailSection title="Adresse" icon={<MapPin className="w-5 h-5 text-green-600"/>}>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-muted-foreground">
             {partner.address_street}<br/>
             {partner.address_zip} {partner.address_city}
         </p>
@@ -96,7 +96,7 @@ const PartnerDetailView = ({ partner }) => {
           </div>
        </DetailSection>
        
-       <DetailSection title="Systeminformationen" icon={<Calendar className="w-5 h-5 text-gray-600"/>}>
+       <DetailSection title="Systeminformationen" icon={<Calendar className="w-5 h-5 text-muted-foreground"/>}>
           <div className="grid grid-cols-2 gap-4 text-sm">
              <DetailItem label="Partner ID" value={partner.id} />
              <DetailItem label="Registrierungsdatum" value={new Date(partner.created_at).toLocaleString('de-DE')} />

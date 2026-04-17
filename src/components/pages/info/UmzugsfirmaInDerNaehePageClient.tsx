@@ -303,7 +303,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                 
                 {/* Klaviertransport */}
                 <Link 
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport"
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport"
                   className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
                 >
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">

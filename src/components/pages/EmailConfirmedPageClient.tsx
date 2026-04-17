@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -35,11 +35,11 @@ const EmailConfirmedPageClient = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 dark:from-emerald-950/50 dark:via-background dark:to-slate-900 flex items-center justify-center p-4">
       <div
         className="w-full max-w-md"
       >
-        <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10 text-center">
+        <div className="bg-card border border-border rounded-2xl shadow-2xl p-8 md:p-10 text-center">
           {/* Success Icon with Animation */}
           <div
             className="mb-6 flex justify-center"

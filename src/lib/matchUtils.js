@@ -1,4 +1,4 @@
-﻿import { getGermanServiceName } from '@/data/categories';
+import { getGermanServiceName } from '@/data/categories';
 
 const serviceKeyMap = {
   // ── Teklif (Quote) tarafı: servicetype → normalized key ──
@@ -6,8 +6,8 @@ const serviceKeyMap = {
   'geschäftsumzug': 'geschaeftsumzug',
   'internationaler umzug': 'auslandumzug',
   'internationalumzug': 'auslandumzug',
-  'spezialtransport': 'spezialtransport',
-  'spezialtransporte': 'spezialtransport',
+  'spezialtransport': 'klaviertransport',
+  'spezialtransporte': 'klaviertransport',
   'kleintransport': 'kleintransport',
   'endreinigung': 'umzugsreinigung',        // ✅ Müşteri formu "Endreinigung" → umzugsreinigung
   'umzugsreinigung': 'umzugsreinigung',
@@ -38,7 +38,6 @@ const serviceKeyMap = {
   'geschaeftsumzug': 'geschaeftsumzug',
   'internationaler_umzug': 'auslandumzug',
   'auslandumzug': 'auslandumzug',
-  'umzugsreinigung_opt': 'umzugsreinigung',  // ✅ Partner Umzug kategorisi altında "Endreinigung" seçtiğinde
   'raeumung_service': 'raeumung_service',
   'entsorgung_service': 'entsorgung_service',
   'lagerung': 'lagerung',
@@ -123,7 +122,7 @@ export const findMatchingPartners = (allPartners, criteria) => {
   return allPartners.filter(partner => {
     if (partner.status !== 'active') return false;
 
-    // Partner servislerini de normalize et (örn. umzugsreinigung_opt → umzugsreinigung)
+    // Partner servislerini de normalize et
     const normalizedPartnerServices = new Set(
       (partner.offered_services || []).map(s => findServiceKey(s) || s)
     );

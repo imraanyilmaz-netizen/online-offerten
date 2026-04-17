@@ -8,18 +8,18 @@ export const QuoteDetail = ({ label, value, icon: Icon, className = '', noLabel 
   if (noLabel) {
     return (
       <div className={`flex items-start gap-2 text-sm ${className}`}>
-        {Icon && <Icon className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" />}
-        <div className="font-bold text-gray-900">{displayValue}</div>
+        {Icon && <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />}
+        <div className="font-bold text-foreground">{displayValue}</div>
       </div>
     );
   }
 
   return (
     <div className={`flex items-start gap-2 text-sm ${className}`}>
-      {Icon && <Icon className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" />}
+      {Icon && <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />}
       <div>
-        <span className="font-bold text-gray-800">{label}:</span>{' '}
-        <span className="text-gray-700">{displayValue}</span>
+        <span className="font-bold text-foreground">{label}:</span>{' '}
+        <span className="text-muted-foreground">{displayValue}</span>
       </div>
     </div>
   );

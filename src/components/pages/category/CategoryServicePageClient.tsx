@@ -9,7 +9,6 @@ import {
   MdAutoFixHigh,
   MdAutorenew,
   MdBusinessCenter,
-  MdCleaningServices,
   MdConstruction,
   MdFormatPaint,
   MdHome,
@@ -25,12 +24,22 @@ import {
   MdWindow,
   MdYard,
 } from 'react-icons/md'
-import { ArrowRight, ChevronRight, Sparkles } from 'lucide-react'
+import { ArrowRight, ChevronRight, MapPin, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ReinigungServiceHero from '@/components/reinigung/ReinigungServiceHero'
 import { quoteHrefForCategoryService } from '@/lib/quoteLinks'
-import { getCategoryServicePath, serviceCategories } from '@/data/categories'
+import {
+  findServiceInCategory,
+  getCategoryServiceCityPath,
+  getCategoryServicePath,
+  serviceCategories,
+} from '@/data/categories'
+import { locations } from '@/data/locations'
 import { cn } from '@/lib/utils'
+
+/** Grosse Gemeinden (Reihenfolge ~ Einwohnerzahl); lokale Service-Hub-Seiten verlinken. */
+const SERVICE_HUB_LOCAL_CITY_LIMIT = 36
+const serviceHubCityList = locations.slice(0, SERVICE_HUB_LOCAL_CITY_LIMIT)
 
 const SERVICE_TITLE: Record<string, string> = {
   umzugsfirma: 'Umzugsfirma',
@@ -67,10 +76,9 @@ const UMZUG_SERVICE_ICONS: Record<string, IconType> = {
   privatumzug: MdHome,
   geschaeftsumzug: MdBusinessCenter,
   auslandumzug: MdPublic,
-  spezialtransport: MdPiano,
+  klaviertransport: MdPiano,
   kleintransport: MdLocalShipping,
   lagerung_service: MdWarehouse,
-  umzugsreinigung_opt: MdCleaningServices,
   raeumung_service: MdInventory2,
   entsorgung_service: MdRecycling,
 }
@@ -91,6 +99,82 @@ function siblingServiceIcon(categorySlug: string, serviceId: string): IconType {
   if (categorySlug === 'umzugsfirma') return umzugServiceIcon(serviceId)
   if (categorySlug === 'malerfirma') return malerServiceIcon(serviceId)
   return MdApps
+}
+
+function ServiceHubLocalCitySection({
+  categorySlug,
+  serviceId,
+  serviceLabel,
+}: {
+  categorySlug: string
+  serviceId: string
+  serviceLabel: string
+}) {
+  const service = findServiceInCategory(categorySlug, serviceId)
+  if (!service) return null
+
+  const linkClass = cn(
+    'inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-slate-50/90 px-3.5 py-2 text-sm font-medium text-slate-800',
+    'shadow-sm transition hover:border-slate-300 hover:bg-white hover:text-slate-950 dark:border-border dark:bg-muted/50 dark:text-foreground dark:hover:bg-card',
+    categorySlug === 'reinigungsfirma' && 'hover:border-sky-300/80 hover:text-sky-900 dark:hover:border-sky-700/60',
+    categorySlug === 'malerfirma' && 'hover:border-violet-300/80 hover:text-violet-900 dark:hover:border-violet-700/60',
+    (categorySlug === 'umzugsfirma' || !['reinigungsfirma', 'malerfirma'].includes(categorySlug)) &&
+      'hover:border-emerald-300/80 hover:text-emerald-900 dark:hover:border-emerald-700/60'
+  )
+
+  const standorteLinkClass = cn(
+    'inline-flex shrink-0 items-center gap-1 text-sm font-semibold transition',
+    categorySlug === 'reinigungsfirma' && 'text-sky-700 hover:text-sky-800 dark:text-sky-400',
+    categorySlug === 'malerfirma' && 'text-violet-700 hover:text-violet-800 dark:text-violet-400',
+    (categorySlug === 'umzugsfirma' || !['reinigungsfirma', 'malerfirma'].includes(categorySlug)) &&
+      'text-emerald-700 hover:text-emerald-800 dark:text-emerald-400'
+  )
+
+  return (
+    <section className="border-t border-slate-200/80 bg-gradient-to-b from-white to-slate-50/90 py-12 dark:border-border dark:from-background dark:to-muted/15 md:py-16">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+        <div
+          className={cn(
+            'rounded-[1.5rem] border border-slate-200/85 bg-white/90 p-6 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/90 dark:ring-white/10 sm:p-8 md:p-9'
+          )}
+        >
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+            <div className="min-w-0 space-y-1">
+              <h2 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-foreground sm:text-2xl">
+                Weitere Orte in der Schweiz
+              </h2>
+              <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-muted-foreground sm:text-[0.9375rem]">
+                <span className="font-medium text-slate-800 dark:text-foreground">{serviceLabel}</span> regional
+                vergleichen – direkt zu den lokalen Seiten mit Offerten-Logik pro Gemeinde.
+              </p>
+            </div>
+            <Link href="/standorte" className={standorteLinkClass}>
+              Alle Standorte
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {serviceHubCityList.map((loc) => (
+              <li key={loc.slug}>
+                <Link
+                  href={getCategoryServiceCityPath(categorySlug, service, loc.slug)}
+                  className={linkClass}
+                >
+                  <MapPin className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
+                  {loc.name}
+                  {loc.canton ? (
+                    <span className="text-xs font-normal text-slate-500 dark:text-muted-foreground">
+                      {loc.canton}
+                    </span>
+                  ) : null}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export default function CategoryServicePageClient({
@@ -147,7 +231,7 @@ export default function CategoryServicePageClient({
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-        <div className="bg-slate-50">
+        <div className="bg-slate-50 dark:bg-background">
           <ReinigungServiceHero
             breadcrumbCurrent={serviceLabel}
             backgroundImageUrl={REINIGUNG_HERO_BG}
@@ -156,7 +240,7 @@ export default function CategoryServicePageClient({
               <>
                 {pageDescription}
                 {serviceDesc ? (
-                  <span className="block mt-3 text-slate-700">{serviceDesc}</span>
+                  <span className="block mt-3 text-slate-700 dark:text-foreground/90">{serviceDesc}</span>
                 ) : null}
               </>
             }
@@ -164,13 +248,13 @@ export default function CategoryServicePageClient({
             ctaHref={ctaHref}
             trustItems={['Bis zu 40% sparen', 'Nur geprüfte Firmen', '100% kostenlos & unverbindlich']}
           />
-          <section className="border-t border-slate-200/80 bg-gradient-to-b from-slate-50/90 via-white to-white py-12 md:py-16">
+          <section className="border-t border-slate-200/80 dark:border-border bg-gradient-to-b from-slate-50/90 via-white to-white dark:from-muted/20 dark:via-background dark:to-background py-12 md:py-16">
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
               <div className="mb-8 max-w-2xl md:mb-10">
-                <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-[1.75rem] md:leading-snug">
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-foreground md:text-[1.75rem] md:leading-snug">
                   Weitere Reinigungsarten
                 </h2>
-                <p className="mt-2 text-slate-600 md:text-[1.05rem] md:leading-relaxed">
+                <p className="mt-2 text-slate-600 dark:text-muted-foreground md:text-[1.05rem] md:leading-relaxed">
                   Schnell zur passenden Leistung – alle Reinigungsfirmen-Vergleiche auf einen Blick.
                 </p>
               </div>
@@ -182,27 +266,28 @@ export default function CategoryServicePageClient({
                       <Link
                         href={getCategoryServicePath('reinigungsfirma', s)}
                         className={cn(
-                          'group flex min-h-[4.25rem] items-center gap-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm',
-                          'transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300/90 hover:bg-sky-50/40 hover:shadow-md',
-                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2'
+                          'group flex min-h-[4.25rem] items-center gap-4 rounded-2xl border border-slate-200/90 dark:border-border bg-white dark:bg-card p-4 shadow-sm',
+                          'transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300/90 dark:hover:border-sky-700/60 hover:bg-sky-50/40 dark:hover:bg-sky-950/30 hover:shadow-md',
+                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-background'
                         )}
                       >
                         <span
                           className={cn(
                             'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl',
                             'bg-gradient-to-br from-sky-100 to-blue-50 text-sky-700',
-                            'ring-1 ring-sky-200/70 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.9)]',
-                            'transition-colors group-hover:from-sky-200/90 group-hover:to-blue-100'
+                            'dark:from-sky-950/50 dark:to-blue-950/35 dark:text-sky-300',
+                            'ring-1 ring-sky-200/70 dark:ring-sky-800/50 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.9)] dark:shadow-none',
+                            'transition-colors group-hover:from-sky-200/90 group-hover:to-blue-100 dark:group-hover:from-sky-900/60 dark:group-hover:to-blue-950/50'
                           )}
                           aria-hidden
                         >
                           <Icon className="h-6 w-6" />
                         </span>
-                        <span className="min-w-0 flex-1 text-left text-[0.9375rem] font-semibold leading-snug text-slate-900 group-hover:text-sky-950">
+                        <span className="min-w-0 flex-1 text-left text-[0.9375rem] font-semibold leading-snug text-slate-900 dark:text-foreground group-hover:text-sky-950 dark:group-hover:text-sky-200">
                           {s.label}
                         </span>
                         <ChevronRight
-                          className="h-4 w-4 shrink-0 text-slate-300 transition-colors group-hover:text-sky-600"
+                          className="h-4 w-4 shrink-0 text-slate-300 dark:text-muted-foreground transition-colors group-hover:text-sky-600 dark:group-hover:text-sky-400"
                           aria-hidden
                         />
                       </Link>
@@ -213,26 +298,26 @@ export default function CategoryServicePageClient({
                   <Link
                     href="/reinigungsfirma"
                     className={cn(
-                      'group flex min-h-[4.25rem] items-center gap-4 rounded-2xl border border-sky-300/80 bg-gradient-to-br from-sky-50 via-white to-blue-50/90 p-4 shadow-md',
-                      'ring-1 ring-sky-200/50 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2'
+                      'group flex min-h-[4.25rem] items-center gap-4 rounded-2xl border border-sky-300/80 dark:border-sky-700/60 bg-gradient-to-br from-sky-50 via-white to-blue-50/90 dark:from-sky-950/35 dark:via-background dark:to-blue-950/25 p-4 shadow-md',
+                      'ring-1 ring-sky-200/50 dark:ring-sky-800/40 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-400 dark:hover:border-sky-500 hover:shadow-lg',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-background'
                     )}
                   >
                     <span
                       className={cn(
                         'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl',
                         'bg-gradient-to-br from-sky-600 to-blue-700 text-white shadow-md',
-                        'ring-1 ring-sky-500/30'
+                        'ring-1 ring-sky-500/30 dark:from-sky-500 dark:to-blue-800'
                       )}
                       aria-hidden
                     >
                       <MdApps className="h-6 w-6" />
                     </span>
-                    <span className="min-w-0 flex-1 text-left text-[0.9375rem] font-semibold leading-snug text-sky-950">
+                    <span className="min-w-0 flex-1 text-left text-[0.9375rem] font-semibold leading-snug text-sky-950 dark:text-foreground">
                       Alle Leistungen
                     </span>
                     <ChevronRight
-                      className="h-4 w-4 shrink-0 text-sky-600 transition-transform group-hover:translate-x-0.5"
+                      className="h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400 transition-transform group-hover:translate-x-0.5"
                       aria-hidden
                     />
                   </Link>
@@ -240,6 +325,11 @@ export default function CategoryServicePageClient({
               </ul>
             </div>
           </section>
+          <ServiceHubLocalCitySection
+            categorySlug="reinigungsfirma"
+            serviceId={serviceId}
+            serviceLabel={serviceLabel}
+          />
         </div>
       </>
     )
@@ -439,6 +529,11 @@ export default function CategoryServicePageClient({
               </ul>
             </div>
           </section>
+          <ServiceHubLocalCitySection
+            categorySlug={categorySlug}
+            serviceId={serviceId}
+            serviceLabel={serviceLabel}
+          />
       </div>
     </>
   )

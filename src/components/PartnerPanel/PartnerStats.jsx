@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Package, ShoppingCart, Wallet, PlusCircle, Gift, Star, Clock } from 'lucide-react';
@@ -10,14 +10,14 @@ const StatCard = ({ title, value, icon: Icon, colorClass, delay, children, class
   <div 
     className={`h-full ${className}`}
   >
-    <Card className="hover:shadow-xl transition-all duration-200 h-full flex flex-col justify-between bg-white border border-gray-200 rounded-xl">
+    <Card className="hover:shadow-xl transition-all duration-200 h-full flex flex-col justify-between bg-card border border-border rounded-xl">
       <CardContent className="p-5 sm:p-6 flex items-start gap-4">
         <div className={`p-3 rounded-xl ${colorClass.bg} flex-shrink-0`}>
           <Icon className={`w-6 h-6 ${colorClass.text}`} />
         </div>
         <div className="flex-grow min-w-0">
-          <p className="text-sm font-semibold text-gray-600 mb-1">{title}</p>
-          <div className="text-2xl sm:text-3xl font-bold text-gray-900">{value}</div>
+          <p className="text-sm font-semibold text-muted-foreground mb-1">{title}</p>
+          <div className="text-2xl sm:text-3xl font-bold text-foreground">{value}</div>
         </div>
         {children}
       </CardContent>
@@ -61,7 +61,7 @@ const PartnerStats = ({ stats, onTopUpClick }) => {
             title="Verfügbare Anfragen" 
             value={stats.availableQuotes} 
             icon={Package} 
-            colorClass={{bg: 'bg-blue-100', text: 'text-blue-600'}}
+            colorClass={{bg: 'bg-blue-100 dark:bg-blue-950/50', text: 'text-blue-600 dark:text-blue-400'}}
             delay={0.1}
         />
       )}
@@ -70,7 +70,7 @@ const PartnerStats = ({ stats, onTopUpClick }) => {
         title="Gekaufte Anfragen" 
         value={stats.purchasedQuotes} 
         icon={ShoppingCart} 
-        colorClass={{bg: 'bg-green-100', text: 'text-green-600'}}
+        colorClass={{bg: 'bg-green-100 dark:bg-emerald-950/40', text: 'text-green-600 dark:text-emerald-400'}}
         delay={0.2}
       />
       
@@ -78,7 +78,7 @@ const PartnerStats = ({ stats, onTopUpClick }) => {
         title="Bonus-Guthaben" 
         value={`CHF ${stats.bonusBalance?.toFixed(2) || '0.00'}`} 
         icon={Gift} 
-        colorClass={{bg: 'bg-indigo-100', text: 'text-indigo-600'}}
+        colorClass={{bg: 'bg-indigo-100 dark:bg-indigo-950/50', text: 'text-indigo-600 dark:text-indigo-400'}}
         delay={0.3}
       />
 
@@ -86,7 +86,7 @@ const PartnerStats = ({ stats, onTopUpClick }) => {
         title="Ihr Guthaben" 
         value={`CHF ${stats.mainBalance?.toFixed(2) || '0.00'}`} 
         icon={Wallet} 
-        colorClass={{bg: 'bg-yellow-100', text: 'text-yellow-600'}}
+        colorClass={{bg: 'bg-yellow-100 dark:bg-yellow-950/40', text: 'text-yellow-600 dark:text-yellow-400'}}
         delay={0.4} 
       >
         <Button onClick={onTopUpClick} size="sm" className="sm:hidden flex items-center">

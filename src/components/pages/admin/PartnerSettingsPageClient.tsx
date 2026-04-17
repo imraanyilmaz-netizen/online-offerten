@@ -161,10 +161,10 @@ const PartnerSettingsPageClient = () => {
   // Show loading while checking auth or loading data
   if (loading && !user) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
+      <div className="flex justify-center items-center h-screen bg-background">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-green-600 animate-spin mx-auto" />
-          <p className="mt-4 text-lg text-gray-600">Laden...</p>
+          <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto" />
+          <p className="mt-4 text-lg text-muted-foreground">Laden...</p>
         </div>
       </div>
     );
@@ -285,7 +285,7 @@ const PartnerSettingsPageClient = () => {
   return (
     <>
       
-      <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
+      <div className="min-h-screen bg-background p-4 sm:p-8">
         <div className="max-w-5xl mx-auto">
           <div className="mb-6">
             <Button variant="ghost" onClick={() => router.push('/partner/dashboard')}>
@@ -294,7 +294,7 @@ const PartnerSettingsPageClient = () => {
             </Button>
           </div>
           <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h1 className="text-3xl font-bold text-gray-800">Einstellungen</h1>
+            <h1 className="text-3xl font-bold text-foreground">Einstellungen</h1>
             {partnerData?.slug ? (
               <Button variant="outline" size="sm" className="shrink-0 w-full sm:w-auto" asChild>
                 <Link href={`/partner/${partnerData.slug}`} target="_blank" rel="noopener noreferrer">

@@ -9,7 +9,7 @@ import InternationalPageNavigation from '@/components/international/Internationa
 
 const Section = ({ children, className = '' }: any) => (
   <section
-    className={`py-8 border-t border-gray-200 ${className}`}
+    className={`py-8 border-t border-border ${className}`}
   >
     {children}
   </section>
@@ -28,7 +28,7 @@ const SectionTitle = ({ icon, title }: any) => {
 const ListItem = ({ children }: any) => (
   <li className="flex items-start py-1">
     <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-    <span className="text-gray-700" dangerouslySetInnerHTML={{ __html: children }} />
+    <span className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: children }} />
   </li>
 );
 
@@ -92,7 +92,7 @@ const UmzugNachDaenemarkPageClient = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-slate-50 via-gray-50 to-white">
+      <div className="bg-gradient-to-b from-background via-muted/30 to-background">
         <section
           className="relative w-full bg-cover bg-center text-white"
         >
@@ -111,46 +111,46 @@ const UmzugNachDaenemarkPageClient = () => {
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
-            <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
+            <main className="lg:col-span-2 bg-card p-6 md:p-10 rounded-2xl border border-border/60 shadow-xl space-y-8">
               <Section className="border-t-0 pt-0">
                 <h2 className="heading-2 mb-4">🇩🇰 Velkommen til Danmark!</h2>
-                <p className="text-lg text-gray-600 leading-relaxed">Ein Umzug nach Dänemark ist der Beginn eines neuen Lebensgefühls: Hygge. Es ist die dänische Kunst, Glück in den kleinen, gemütlichen Dingen des Alltags zu finden. Ob Sie das urbane Leben in Kopenhagen, die Küstenlandschaften Jütlands oder den Charme der vielen Inseln suchen – Dänemark begrüsst Sie mit einer einzigartigen Mischung aus modernem Design, progressiver Gesellschaft und einer tiefen Verbundenheit zur Natur. Dieser Guide ist Ihr Kompass für einen perfekt organisierten Umzug von der Schweiz nach Dänemark.</p>
+                <p className="text-lg text-muted-foreground leading-relaxed">Ein Umzug nach Dänemark ist der Beginn eines neuen Lebensgefühls: Hygge. Es ist die dänische Kunst, Glück in den kleinen, gemütlichen Dingen des Alltags zu finden. Ob Sie das urbane Leben in Kopenhagen, die Küstenlandschaften Jütlands oder den Charme der vielen Inseln suchen – Dänemark begrüsst Sie mit einer einzigartigen Mischung aus modernem Design, progressiver Gesellschaft und einer tiefen Verbundenheit zur Natur. Dieser Guide ist Ihr Kompass für einen perfekt organisierten Umzug von der Schweiz nach Dänemark.</p>
               </Section>
 
               <Section>
                 <SectionTitle title="Was kostet ein Umzug nach Dänemark?" />
-                <p className="text-gray-700 leading-relaxed mb-4">Die Kosten für einen Umzug nach Dänemark liegen generell etwas höher als für einen Umzug nach Deutschland, was auf das höhere Preisniveau in Dänemark zurückzuführen ist. Eine sorgfältige Planung und ein detaillierter Offertenvergleich sind daher entscheidend, um das Budget im Griff zu haben.</p>
-                <p className="text-gray-700 leading-relaxed mb-8">Wichtige Faktoren sind das Volumen Ihres Hausrats, die zurückzulegende Distanz und spezielle Anforderungen wie der Transport über Fähren oder Brücken (z.B. Öresundbrücke). Zusatzleistungen wie ein Verpackungsservice oder die Möbelmontage beeinflussen den Preis ebenfalls.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">Die Kosten für einen Umzug nach Dänemark liegen generell etwas höher als für einen Umzug nach Deutschland, was auf das höhere Preisniveau in Dänemark zurückzuführen ist. Eine sorgfältige Planung und ein detaillierter Offertenvergleich sind daher entscheidend, um das Budget im Griff zu haben.</p>
+                <p className="text-muted-foreground leading-relaxed mb-8">Wichtige Faktoren sind das Volumen Ihres Hausrats, die zurückzulegende Distanz und spezielle Anforderungen wie der Transport über Fähren oder Brücken (z.B. Öresundbrücke). Zusatzleistungen wie ein Verpackungsservice oder die Möbelmontage beeinflussen den Preis ebenfalls.</p>
                 
-                <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Kostenübersicht für Ihren Umzug nach Dänemark</h3>
+                <div className="bg-muted/50 p-6 rounded-lg border border-border mt-8">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Kostenübersicht für Ihren Umzug nach Dänemark</h3>
                   <table className="w-full text-left">
                     <thead>
                       <tr className="border-b">
-                        <th className="py-2 font-semibold text-gray-600">Wohnungsgrösse / Volumen</th>
-                        <th className="py-2 font-semibold text-gray-600 text-right">Geschätzte Kosten (CHF)</th>
+                        <th className="py-2 font-semibold text-muted-foreground">Wohnungsgrösse / Volumen</th>
+                        <th className="py-2 font-semibold text-muted-foreground text-right">Geschätzte Kosten (CHF)</th>
                       </tr>
                     </thead>
                     <tbody>
                       {costTable.map((row, i) => (
-                        <tr key={i} className="border-b border-slate-200 last:border-0">
-                          <td className="py-3 text-gray-700">{row.size}</td>
-                          <td className="py-3 text-gray-800 font-medium text-right">{row.cost}</td>
+                        <tr key={i} className="border-b border-border last:border-0">
+                          <td className="py-3 text-muted-foreground">{row.size}</td>
+                          <td className="py-3 text-foreground font-medium text-right">{row.cost}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                  <p className="text-xs text-gray-500 mt-3 italic">Diese Preise sind Schätzungen. Holen Sie für eine genaue Kalkulation immer mehrere individuelle Offerten ein.</p>
+                  <p className="text-xs text-muted-foreground mt-3 italic">Diese Preise sind Schätzungen. Holen Sie für eine genaue Kalkulation immer mehrere individuelle Offerten ein.</p>
                 </div>
 
-                <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-4">Welche Faktoren beeinflussen die Kosten?</h3>
+                <h3 className="text-xl font-semibold text-foreground mt-8 mb-4">Welche Faktoren beeinflussen die Kosten?</h3>
                 <ul className="space-y-3">{costFactors.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
               </Section>
 
               <Section>
                 <SectionTitle icon={Star} title="Offerten vergleichen und das beste Umzugsunternehmen finden" />
-                <p className="text-gray-700 leading-relaxed mb-4">Der beste Weg, Kosten zu optimieren, ist der Vergleich von Offerten. Fordern Sie detaillierte Offerten von mehreren internationalen Speditionen an, die Erfahrung mit Umzügen nach Skandinavien haben. Achten Sie auf transparente Preisgestaltung und vergleichen Sie den Leistungsumfang genau.</p>
-                <p className="text-gray-700 leading-relaxed">Nutzen Sie unsere Plattform, um mit nur einer Anfrage massgeschneiderte Offerten von qualifizierten Umzugspartnern zu erhalten. Das spart Zeit und hilft Ihnen, das beste Preis-Leistungs-Verhältnis für Ihren Dänemark-Umzug zu finden.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">Der beste Weg, Kosten zu optimieren, ist der Vergleich von Offerten. Fordern Sie detaillierte Offerten von mehreren internationalen Speditionen an, die Erfahrung mit Umzügen nach Skandinavien haben. Achten Sie auf transparente Preisgestaltung und vergleichen Sie den Leistungsumfang genau.</p>
+                <p className="text-muted-foreground leading-relaxed">Nutzen Sie unsere Plattform, um mit nur einer Anfrage massgeschneiderte Offerten von qualifizierten Umzugspartnern zu erhalten. Das spart Zeit und hilft Ihnen, das beste Preis-Leistungs-Verhältnis für Ihren Dänemark-Umzug zu finden.</p>
               </Section>
 
               <Section>
@@ -178,13 +178,13 @@ const UmzugNachDaenemarkPageClient = () => {
 
               <Section>
                 <SectionTitle icon={ShieldCheck} title="Ihr Dänemark-Umzug: Sicher und zuverlässig mit uns" />
-                <p className="text-gray-700 leading-relaxed mb-4">Ein Umzug nach Dänemark erfordert Erfahrung, besonders mit den skandinavischen Gegebenheiten und Zollformalitäten. Wir arbeiten nur mit Umzugsunternehmen zusammen, die auf den Verkehr zwischen der Schweiz und Dänemark spezialisiert sind.</p>
-                <p className="text-gray-700 leading-relaxed">Verlassen Sie sich auf einen kompletten Service, der von der Planung bis zur Ankunft alles abdeckt. So können Sie sich voll und ganz auf Ihr neues Hygge-Leben in Dänemark freuen.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">Ein Umzug nach Dänemark erfordert Erfahrung, besonders mit den skandinavischen Gegebenheiten und Zollformalitäten. Wir arbeiten nur mit Umzugsunternehmen zusammen, die auf den Verkehr zwischen der Schweiz und Dänemark spezialisiert sind.</p>
+                <p className="text-muted-foreground leading-relaxed">Verlassen Sie sich auf einen kompletten Service, der von der Planung bis zur Ankunft alles abdeckt. So können Sie sich voll und ganz auf Ihr neues Hygge-Leben in Dänemark freuen.</p>
               </Section>
 
               <Section>
                 <SectionTitle icon={Heart} title="Was macht Dänemark als neues Zuhause so attraktiv?" />
-                <p className="text-gray-700 leading-relaxed mb-4">Dänemark wird regelmässig zu einem der glücklichsten Länder der Welt gekürt. Das liegt an einer einzigartigen Kombination aus sozialer Sicherheit, Work-Life-Balance und dem berühmten 'Hygge'-Lebensgefühl.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">Dänemark wird regelmässig zu einem der glücklichsten Länder der Welt gekürt. Das liegt an einer einzigartigen Kombination aus sozialer Sicherheit, Work-Life-Balance und dem berühmten 'Hygge'-Lebensgefühl.</p>
                 <ul className="space-y-3 mt-6">{attractionPoints.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
               </Section>
 
@@ -200,14 +200,14 @@ const UmzugNachDaenemarkPageClient = () => {
 
             <aside className="lg:col-span-1 space-y-8 self-start sticky top-28">
               <div
-                className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                className="bg-card p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-border/60"
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Truck size={24} className="mr-3 text-blue-500" />
                   Ihr Umzugsgut in besten Händen
                 </h3>
                 <img  alt="Ein Lastenrad steht in einer typisch dänischen Strasse" className="w-full h-56 object-cover rounded-lg shadow-md mb-3" src="https://images.unsplash.com/photo-1504846257989-a76209d9d2ac" />
-                <p className="text-sm text-gray-600 mt-2">Unsere Partner garantieren eine fachgerechte Verpackung und einen sicheren Transport.</p>
+                <p className="text-sm text-muted-foreground mt-2">Unsere Partner garantieren eine fachgerechte Verpackung und einen sicheren Transport.</p>
               </div>
               <div
                 className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200"

@@ -42,10 +42,10 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-4">{sectionTitle}</h2>
-        <p className="text-center text-slate-600 max-w-2xl mx-auto mb-12 text-base md:text-lg leading-relaxed">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-4">{sectionTitle}</h2>
+        <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12 text-base md:text-lg leading-relaxed">
           {sectionLead}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -53,15 +53,15 @@ const BenefitsSection = () => {
             <div
               key={index}
             >
-              <Card className="h-full shadow-md hover:shadow-xl transition-shadow duration-300">
+              <Card className="h-full shadow-md hover:shadow-xl transition-shadow duration-300 border-border">
                 <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                  <div className="bg-slate-100 p-3 rounded-lg">
+                  <div className="bg-muted p-3 rounded-lg">
                     <benefit.icon className="h-6 w-6 text-green-600" />
                   </div>
                   <CardTitle className="text-lg">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-slate-600">{benefit.desc}</p>
+                  <p className="text-sm text-muted-foreground">{benefit.desc}</p>
                 </CardContent>
               </Card>
             </div>

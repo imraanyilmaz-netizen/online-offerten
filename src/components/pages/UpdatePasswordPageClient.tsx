@@ -169,12 +169,12 @@ const UpdatePasswordPageClient = () => {
   // Erfolg-Ansicht
   if (success) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
-        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 dark:from-emerald-950/40 dark:to-slate-900 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-card/90 border border-border shadow-lg">
           <CardContent className="text-center py-12">
             <CheckCircle className="mx-auto h-16 w-16 text-green-600" />
-            <h2 className="text-2xl font-bold text-gray-800 mt-4">Passwort aktualisiert!</h2>
-            <p className="text-gray-600 mt-2">Sie werden zum Login weitergeleitet...</p>
+            <h2 className="text-2xl font-bold text-foreground mt-4">Passwort aktualisiert!</h2>
+            <p className="text-muted-foreground mt-2">Sie werden zum Login weitergeleitet...</p>
             <Link href="/login">
               <Button className="mt-6 bg-green-600 hover:bg-green-700">
                 Zum Login
@@ -195,12 +195,12 @@ const UpdatePasswordPageClient = () => {
 
   if (urlErrorCode) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
-        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 dark:from-emerald-950/40 dark:to-slate-900 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-card/90 border border-border shadow-lg">
           <CardContent className="text-center py-12">
             <AlertCircle className="mx-auto h-16 w-16 text-red-500" />
-            <h2 className="text-xl font-bold text-gray-800 mt-4">Link abgelaufen oder ungültig</h2>
-            <p className="text-gray-600 mt-2 text-left text-sm leading-relaxed">{urlErrorMessage}</p>
+            <h2 className="text-xl font-bold text-foreground mt-4">Link abgelaufen oder ungültig</h2>
+            <p className="text-muted-foreground mt-2 text-left text-sm leading-relaxed">{urlErrorMessage}</p>
             <div className="flex flex-col gap-3 mt-6">
               <Link href="/forgot-password">
                 <Button className="w-full bg-green-600 hover:bg-green-700">Neuen Link anfordern</Button>
@@ -219,12 +219,12 @@ const UpdatePasswordPageClient = () => {
 
   if (authStuck && authLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
-        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 dark:from-emerald-950/40 dark:to-slate-900 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-card/90 border border-border shadow-lg">
           <CardContent className="text-center py-12">
             <AlertCircle className="mx-auto h-12 w-12 text-amber-500" />
-            <p className="mt-4 text-lg text-gray-800 font-medium">Sitzung lädt zu lange</p>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-4 text-lg text-foreground font-medium">Sitzung lädt zu lange</p>
+            <p className="mt-2 text-sm text-muted-foreground">
               Bitte laden Sie die Seite neu. Falls das Problem bleibt, fordern Sie einen neuen Link an und öffnen Sie ihn
               in einem anderen Browser (oder im privaten Fenster).
             </p>
@@ -245,12 +245,12 @@ const UpdatePasswordPageClient = () => {
   // Lade-Ansicht (Session wird vorbereitet)
   if (authLoading || (!sessionReady && !sessionError)) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
-        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 dark:from-emerald-950/40 dark:to-slate-900 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-card/90 border border-border shadow-lg">
           <CardContent className="text-center py-12">
             <Loader2 className="mx-auto h-12 w-12 text-green-600 animate-spin" />
-            <p className="mt-4 text-lg text-gray-600">Sitzung wird vorbereitet...</p>
-            <p className="mt-2 text-sm text-gray-500">Bitte warten Sie einen Moment.</p>
+            <p className="mt-4 text-lg text-muted-foreground">Sitzung wird vorbereitet...</p>
+            <p className="mt-2 text-sm text-muted-foreground">Bitte warten Sie einen Moment.</p>
           </CardContent>
         </Card>
       </div>
@@ -260,12 +260,12 @@ const UpdatePasswordPageClient = () => {
   // Fehler-Ansicht (kein gültiger Recovery-Link)
   if (sessionError) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4">
-        <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 dark:from-emerald-950/40 dark:to-slate-900 p-4">
+        <Card className="w-full max-w-md backdrop-blur-sm bg-card/90 border border-border shadow-lg">
           <CardContent className="text-center py-12">
             <AlertCircle className="mx-auto h-16 w-16 text-red-500" />
-            <h2 className="text-xl font-bold text-gray-800 mt-4">Link abgelaufen oder ungültig</h2>
-            <p className="text-gray-600 mt-2">
+            <h2 className="text-xl font-bold text-foreground mt-4">Link abgelaufen oder ungültig</h2>
+            <p className="text-muted-foreground mt-2">
               Der Link zum Zurücksetzen des Passworts ist abgelaufen oder ungültig. 
               Bitte fordern Sie einen neuen Link an.
             </p>
@@ -289,13 +289,13 @@ const UpdatePasswordPageClient = () => {
 
   return (
     <div
-      className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 p-4"
+      className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 dark:from-emerald-950/40 dark:to-slate-900 p-4"
     >
-      <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+      <Card className="w-full max-w-md backdrop-blur-sm bg-card/90 border border-border shadow-lg">
         <CardHeader className="text-center">
           <KeyRound className="mx-auto h-12 w-12 text-green-600" />
-          <CardTitle className="text-3xl font-extrabold text-gray-800 mt-4">Neues Passwort festlegen</CardTitle>
-          <CardDescription className="text-gray-600 mt-2">
+          <CardTitle className="text-3xl font-extrabold text-foreground mt-4">Neues Passwort festlegen</CardTitle>
+          <CardDescription className="text-muted-foreground mt-2">
             Geben Sie Ihr neues Passwort ein, um wieder Zugriff auf Ihr Konto zu erhalten.
           </CardDescription>
         </CardHeader>
@@ -311,12 +311,12 @@ const UpdatePasswordPageClient = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="bg-white/80 border-gray-300 focus:border-green-500 focus:ring-green-500 pr-10"
+                  className="bg-background/80 dark:bg-muted/30 border-input focus:border-primary focus:ring-primary pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -333,12 +333,12 @@ const UpdatePasswordPageClient = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="bg-white/80 border-gray-300 focus:border-green-500 focus:ring-green-500 pr-10"
+                  className="bg-background/80 dark:bg-muted/30 border-input focus:border-primary focus:ring-primary pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   tabIndex={-1}
                 >
                   {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

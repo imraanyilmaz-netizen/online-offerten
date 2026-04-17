@@ -45,33 +45,33 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
 
   return (
     <div className="h-full">
-      <Card className="flex flex-col h-full bg-white shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
+      <Card className="flex flex-col h-full bg-card shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 border border-border">
         <CardContent className="p-6 flex-grow flex flex-col">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
               <div
-                className="w-10 h-10 rounded-full bg-gradient-to-br from-green-100 to-green-50 border border-green-200/80 flex items-center justify-center shrink-0"
+                className="w-10 h-10 rounded-full bg-gradient-to-br from-green-100 to-green-50 dark:from-green-900/60 dark:to-green-950/40 border border-green-200/80 dark:border-green-800/80 flex items-center justify-center shrink-0"
                 aria-hidden
               >
-                <span className="text-xs font-bold text-green-700 tracking-tight select-none">
+                <span className="text-xs font-bold text-green-700 dark:text-green-300 tracking-tight select-none">
                   {getCustomerInitials(customer_name)}
                 </span>
               </div>
               <div>
-                <p className="font-bold text-gray-800">{customer_name}</p>
+                <p className="font-bold text-foreground">{customer_name}</p>
                 <div className="flex items-center gap-2 mt-1 flex-wrap">
                   {city ? (
-                    <div className="flex items-center gap-1 text-xs text-gray-500">
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
                       <MapPin className="w-3 h-3 text-green-600" />
                       <span>{city}</span>
                     </div>
                   ) : null}
                   {city ? (
-                    <span className="text-xs text-gray-400" aria-hidden>
+                    <span className="text-xs text-muted-foreground/70" aria-hidden>
                       •
                     </span>
                   ) : null}
-                  <span className="text-xs text-gray-500">{formatDate(review_date)}</span>
+                  <span className="text-xs text-muted-foreground">{formatDate(review_date)}</span>
                 </div>
               </div>
             </div>
@@ -84,40 +84,40 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
               ))}
               {hasHalfStar && (
                 <div className="relative">
-                  <Star size={16} className="text-gray-300" />
+                  <Star size={16} className="text-muted-foreground/45" />
                   <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
                     <Star size={16} className="text-yellow-400 fill-yellow-400" />
                   </div>
                 </div>
               )}
               {[...Array(emptyStars)].map((_, i) => (
-                <Star key={`empty-${i}`} size={16} className="text-gray-300" />
+                <Star key={`empty-${i}`} size={16} className="text-muted-foreground/45" />
               ))}
             </div>
-            <span className="font-bold text-base text-gray-900">{displayRating.toFixed(2)}</span>
+            <span className="font-bold text-base text-foreground">{displayRating.toFixed(2)}</span>
           </div>
           
           {review_text && (
-            <p className="text-gray-700 text-sm italic mb-4">
+            <p className="text-muted-foreground text-sm italic mb-4">
               &quot;{review_text}&quot;
             </p>
           )}
 
-          <div className="mt-auto pt-4 space-y-3 border-t border-gray-100">
+          <div className="mt-auto pt-4 space-y-3 border-t border-border">
             <div className="flex flex-wrap items-center gap-2">
               {city && (
-                <Badge variant="outline" className="bg-gray-50 border-gray-200 text-gray-700 font-medium">
+                <Badge variant="outline" className="bg-muted/40 border-border text-muted-foreground font-medium">
                   <MapPin className="w-3 h-3 mr-1" />
                   {city}
                 </Badge>
               )}
               {serviceName && (
-                <Badge variant="outline" className="bg-green-50 border-green-200 text-green-700 font-medium">
+                <Badge variant="outline" className="bg-green-50 dark:bg-green-950/50 border-green-200 dark:border-green-800 text-green-700 dark:text-green-300 font-medium">
                   {serviceName}
                 </Badge>
               )}
               {partner && partner.slug ? (
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-muted-foreground">
                   Für Firma:{' '}
                   <Button asChild variant="link" className="p-0 h-auto text-xs">
                     <Link href={`/partner/${partner.slug}`} className="text-green-600 hover:underline">
@@ -199,10 +199,10 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
   const mainCities = locations
   
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <main>
         {/* Hero Section with Image */}
-        <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-green-50">
+        <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-muted/40 via-card to-green-50/80 dark:from-background dark:via-card dark:to-green-950/40">
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -212,12 +212,12 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
           <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
             {/* Breadcrumb */}
             <nav className="mb-6" aria-label="Breadcrumb">
-              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+              <ol className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/" className="hover:text-green-600 transition-colors">Startseite</Link>
                 </li>
-                <li><ChevronRightIcon className="w-4 h-4 text-gray-400" /></li>
-                <li className="text-gray-900 font-medium" aria-current="page">Über uns</li>
+                <li><ChevronRightIcon className="w-4 h-4 text-muted-foreground/70" /></li>
+                <li className="text-foreground font-medium" aria-current="page">Über uns</li>
               </ol>
             </nav>
 
@@ -228,13 +228,13 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   <Award className="h-4 w-4 mr-2" />
                   Unabhängiges Vergleichsportal
                 </div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight mb-6 leading-tight">
                   Über Online-Offerten.ch
                 </h1>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
                   Wir sind eine <strong>unabhängige Schweizer Vergleichsplattform</strong> für Umzug, Reinigung und Malerarbeiten. Mit einer einzigen Anfrage erhalten Sie <strong>bis zu 5 kostenlose Offerten</strong> von geprüften Partnerfirmen in Ihrer Region.
                 </p>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-700">
+                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
                     <span>100% kostenlos</span>
@@ -256,7 +256,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
 
               {/* Right: Image */}
               <div className="relative">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-border">
                   <Image
                     src="/umzug/vergleichsportal.webp"
                     alt="Online-Offerten.ch – Unabhängiges Vergleichsportal für Umzug, Reinigung und Malerarbeiten"
@@ -277,16 +277,16 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         </section>
 
         {/* Geprüfte & versicherte Partnerfirmen — Trust Section (SEO: erstes sichtbares Inhaltselement nach Hero) */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-green-50 via-emerald-50 to-white">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-green-50 via-emerald-50 to-card dark:from-green-950/30 dark:via-emerald-950/25 dark:to-background">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center px-3 py-1 bg-green-100 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+              <div className="inline-flex items-center px-3 py-1 bg-green-100 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                 IHRE SICHERHEIT
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Nur geprüfte & versicherte Partnerfirmen
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Ihre Sicherheit bei der Versicherung der Partner steht bei uns an erster Stelle: Bevor eine Firma über Online-Offerten.ch Kundenanfragen erhalten kann, müssen <strong>Versicherungsnachweise</strong> (Betriebshaftpflicht) eingereicht werden – <strong>diese Dokumente prüfen wir manuell</strong>. Eine umfassende Qualitäts- oder Betriebsprüfung der Firmen führen wir nicht durch; die Wahl des Anbieters treffen Sie selbst.
               </p>
             </div>
@@ -294,7 +294,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
             <div className="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
               {/* Left: Prüfprozess */}
               <div className="space-y-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Unser Prüfprozess im Detail</h3>
+                <h3 className="text-xl font-bold text-foreground mb-2">Unser Prüfprozess im Detail</h3>
                 {[
                   {
                     step: "1",
@@ -327,13 +327,13 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 ].map((item, index) => {
                   const StepIcon = item.icon;
                   return (
-                    <div key={index} className="flex items-start gap-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                    <div key={index} className="flex items-start gap-4 bg-card rounded-xl p-4 shadow-sm border border-border">
                       <div className={`w-12 h-12 rounded-xl ${item.color} flex items-center justify-center flex-shrink-0`}>
                         <StepIcon className="w-6 h-6" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-gray-900 mb-1">{item.title}</h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                        <h4 className="text-base font-bold text-foreground mb-1">{item.title}</h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
                       </div>
                     </div>
                   );
@@ -341,13 +341,13 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
               </div>
 
               {/* Right: Trust Card */}
-              <div className="bg-white rounded-2xl p-8 md:p-10 shadow-xl border border-green-100">
+              <div className="bg-card rounded-2xl p-8 md:p-10 shadow-xl border border-green-100 dark:border-green-900/60">
                 <div className="text-center mb-8">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-4">
                     <ShieldCheck className="w-10 h-10 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Versicherte Partner</h3>
-                  <p className="text-gray-600">Jede aktive Partnerfirma weist einen geprüften Versicherungsnachweis nach</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">Versicherte Partner</h3>
+                  <p className="text-muted-foreground">Jede aktive Partnerfirma weist einen geprüften Versicherungsnachweis nach</p>
                 </div>
                 <div className="space-y-4">
                   {[
@@ -359,16 +359,16 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                      <span className="text-gray-700 font-medium text-sm">{item}</span>
+                      <span className="text-muted-foreground font-medium text-sm">{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-8 pt-6 border-t border-gray-100">
-                  <div className="bg-green-50 rounded-xl p-4 text-center">
-                    <p className="text-sm text-green-800 font-semibold">
+                <div className="mt-8 pt-6 border-t border-border">
+                  <div className="bg-green-50 dark:bg-green-950/40 rounded-xl p-4 text-center">
+                    <p className="text-sm text-green-800 dark:text-green-200 font-semibold">
                       🛡️ Ihr Schutz ist unsere Verantwortung
                     </p>
-                    <p className="text-xs text-green-700 mt-1">
+                    <p className="text-xs text-green-700 dark:text-green-300/90 mt-1">
                       Wir vermitteln Firmen, deren Versicherungsnachweise unseren Anforderungen entsprechen. Die Beurteilung von Preis, Leistung und Zuverlässigkeit obliegt Ihnen beim Vergleich der Offerten.
                     </p>
                   </div>
@@ -379,16 +379,16 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         </section>
 
         {/* Wer wir sind */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-24 bg-card">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="grid md:grid-cols-5 gap-12 items-start">
               {/* Left: Content */}
               <div className="md:col-span-3">
-                <div className="inline-flex items-center px-3 py-1 bg-green-50 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+                <div className="inline-flex items-center px-3 py-1 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                   UNSERE GESCHICHTE
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Wer wir sind</h2>
-                <div className="space-y-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Wer wir sind</h2>
+                <div className="space-y-5 text-muted-foreground leading-relaxed text-base md:text-lg">
                   <p>
                     Mit über <strong>6 Jahren Erfahrung</strong> in der Vermittlungsbranche verfolgen wir bei <strong>Online-Offerten.ch</strong> eine klare Mission: <strong>Die Suche nach Umzugsfirmen, Reinigungsfirmen und Malerbetrieben einfacher, transparenter und fairer zu gestalten.</strong>
                   </p>
@@ -403,43 +403,43 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
 
               {/* Right: Key Facts Card */}
               <div className="md:col-span-2">
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-100">
-                  <h3 className="text-xl font-bold text-gray-900 mb-6">Auf einen Blick</h3>
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/30 rounded-2xl p-8 border border-green-100 dark:border-green-900/50">
+                  <h3 className="text-xl font-bold text-foreground mb-6">Auf einen Blick</h3>
                   <div className="space-y-5">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 flex items-center justify-center flex-shrink-0">
                         <FileText className="w-5 h-5 text-green-600" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">Über 6 Jahre Erfahrung</p>
-                        <p className="text-sm text-gray-600">Branchenkenntnis seit 2019</p>
+                        <p className="font-semibold text-foreground">Über 6 Jahre Erfahrung</p>
+                        <p className="text-sm text-muted-foreground">Branchenkenntnis seit 2019</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 flex items-center justify-center flex-shrink-0">
                         <MapPin className="w-5 h-5 text-green-600" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">Ganze Schweiz</p>
-                        <p className="text-sm text-gray-600">Partner in allen Kantonen</p>
+                        <p className="font-semibold text-foreground">Ganze Schweiz</p>
+                        <p className="text-sm text-muted-foreground">Partner in allen Kantonen</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 flex items-center justify-center flex-shrink-0">
                         <Layers className="w-5 h-5 text-green-600" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">4 Dienstleistungen</p>
-                        <p className="text-sm text-gray-600">Umzug, Reinigung, Maler, Räumung</p>
+                        <p className="font-semibold text-foreground">4 Dienstleistungen</p>
+                        <p className="text-sm text-muted-foreground">Umzug, Reinigung, Maler, Räumung</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 flex items-center justify-center flex-shrink-0">
                         <ShieldCheck className="w-5 h-5 text-green-600" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">Geprüfte Partner</p>
-                        <p className="text-sm text-gray-600">Qualität hat Priorität</p>
+                        <p className="font-semibold text-foreground">Geprüfte Partner</p>
+                        <p className="text-sm text-muted-foreground">Qualität hat Priorität</p>
                       </div>
                     </div>
                   </div>
@@ -450,31 +450,31 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         </section>
 
         {/* Unsere Philosophie */}
-        <section className="py-16 md:py-24 bg-gray-50">
+        <section className="py-16 md:py-24 bg-muted/40">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center px-3 py-1 bg-green-50 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+              <div className="inline-flex items-center px-3 py-1 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                 UNSERE PHILOSOPHIE
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Fair für alle Beteiligten</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Fair für alle Beteiligten</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Uns liegen sowohl die Kundinnen und Kunden als auch die Partnerfirmen am Herzen.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* Für Kunden */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="bg-card rounded-2xl p-8 shadow-sm border border-border hover:shadow-lg transition-shadow">
                 <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mb-6">
                   <Users className="w-7 h-7 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Für Kunden</h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">Für Kunden</h3>
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   Sie sparen Zeit und Geld, indem Sie mehrere Offerten mit nur einer Anfrage erhalten. Durch den transparenten Vergleich finden Sie den besten Preis bei der besten Qualität – ohne stundenlange Suche.
                 </p>
                 <ul className="space-y-2">
                   {['Bis zu 5 Offerten mit einer Anfrage', '100% kostenlos und unverbindlich', 'Geprüfte, regionale Firmen'].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                    <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                       {item}
                     </li>
@@ -483,17 +483,17 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
               </div>
 
               {/* Für Partner */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="bg-card rounded-2xl p-8 shadow-sm border border-border hover:shadow-lg transition-shadow">
                 <div className="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center mb-6">
                   <Handshake className="w-7 h-7 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Für Partnerfirmen</h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">Für Partnerfirmen</h3>
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   Jede Kundenanfrage wird an unser Partnernetzwerk weitergeleitet. Die ersten 5 Firmen, die sich für den Auftrag interessieren, erhalten die Möglichkeit, den Kunden direkt zu kontaktieren. Schnell sein lohnt sich!
                 </p>
                 <ul className="space-y-2">
                   {['Qualifizierte Anfragen aus der Region', 'Faire Chance auf jeden Auftrag', 'Keine Knebelverträge'].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                    <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                       {item}
                     </li>
@@ -513,13 +513,13 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         </section>
 
         {/* Was uns unterscheidet */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-24 bg-card">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center px-3 py-1 bg-green-50 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+              <div className="inline-flex items-center px-3 py-1 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                 UNSERE VORTEILE
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Was uns unterscheidet</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Was uns unterscheidet</h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
@@ -552,13 +552,13 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 return (
                   <div 
                     key={index}
-                    className="bg-gray-50 p-6 md:p-8 rounded-2xl text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                    className="bg-muted/40 p-6 md:p-8 rounded-2xl text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border"
                   >
                     <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${item.color} mb-5`}>
                       <IconComp className="w-7 h-7" />
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-3">{item.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                    <h3 className="text-lg font-bold text-foreground mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
                   </div>
                 )
               })}
@@ -567,14 +567,14 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         </section>
         
         {/* Wie es funktioniert */}
-        <section className="py-16 md:py-24 bg-gray-50">
+        <section className="py-16 md:py-24 bg-muted/40">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center px-3 py-1 bg-green-50 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+              <div className="inline-flex items-center px-3 py-1 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                 SO EINFACH GEHT&apos;S
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Wie es funktioniert</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Wie es funktioniert</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 In nur drei einfachen Schritten erhalten Sie passende Offerten von geprüften Firmen.
               </p>
             </div>
@@ -606,16 +606,16 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 return (
                   <div 
                     key={index}
-                    className="relative bg-white rounded-2xl p-8 shadow-sm border border-gray-100 text-center hover:shadow-lg transition-shadow"
+                    className="relative bg-card rounded-2xl p-8 shadow-sm border border-border text-center hover:shadow-lg transition-shadow"
                   >
                     <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${step.color} mb-5`}>
                       <StepIcon className="w-8 h-8 text-white" />
                     </div>
-                    <div className="absolute top-4 right-4 text-5xl font-extrabold text-gray-100">
+                    <div className="absolute top-4 right-4 text-5xl font-extrabold text-muted-foreground/20">
                       {step.step}
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    <h3 className="text-xl font-bold text-foreground mb-3">{step.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
                   </div>
                 )
               })}
@@ -624,14 +624,14 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         </section>
 
         {/* Unsere Dienstleistungen */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-24 bg-card">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center px-3 py-1 bg-green-50 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+              <div className="inline-flex items-center px-3 py-1 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                 UNSERE SERVICES
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Unsere Dienstleistungen</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Unsere Dienstleistungen</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Wir vermitteln geprüfte Partnerfirmen für verschiedene Dienstleistungen in der ganzen Schweiz.
               </p>
             </div>
@@ -671,13 +671,13 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   <Link
                     key={index}
                     href={service.link}
-                    className="group bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block"
+                    className="group bg-muted/40 p-6 rounded-2xl border border-border hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block"
                   >
                     <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl transition-colors ${service.color} mb-4`}>
                       <ServiceIcon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">{service.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-3">{service.description}</p>
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-green-600 transition-colors">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-3">{service.description}</p>
                     <span className="text-green-600 text-sm font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                       Mehr erfahren <ArrowRight className="w-4 h-4" />
                     </span>
@@ -689,14 +689,14 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         </section>
 
         {/* Standorte */}
-        <section className="py-16 md:py-24 bg-gray-50">
+        <section className="py-16 md:py-24 bg-muted/40">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center px-3 py-1 bg-green-50 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+              <div className="inline-flex items-center px-3 py-1 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                 REGIONALE ABDECKUNG
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Unsere Standorte</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Unsere Standorte</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Unser Partnernetzwerk erstreckt sich über alle Kantone der Schweiz.
               </p>
             </div>
@@ -705,7 +705,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 <Link 
                   key={city.slug}
                   href={`/umzugsfirma/${city.slug}`}
-                  className="block bg-white hover:bg-green-50 text-gray-700 hover:text-green-700 border border-gray-200 hover:border-green-300 px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200"
+                  className="block bg-card hover:bg-muted/80 dark:hover:bg-green-950/40 text-muted-foreground hover:text-green-700 dark:hover:text-green-300 border border-border hover:border-green-300/80 dark:hover:border-green-700 px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200"
                 >
                   <span className="flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5" />
@@ -720,7 +720,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 Alle Standorte →
               </Link>
             </div>
-            <p className="text-center text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
+            <p className="text-center text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
               Egal ob Sie in Zürich, Bern, Basel, Luzern, Genf, Lausanne oder einer anderen Stadt wohnen – wir finden die passenden Dienstleister in Ihrer Region.
             </p>
           </div>
@@ -746,7 +746,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 <Button
                   asChild
                   size="lg"
-                  className="bg-white text-green-700 hover:bg-gray-100 font-bold text-lg px-8 py-6"
+                  className="bg-card text-green-700 hover:bg-muted font-bold text-lg px-8 py-6"
                 >
                   <Link href="/partner-werden" className="inline-flex items-center gap-2">
                     Jetzt Partner werden
@@ -755,7 +755,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 </Button>
               </div>
               <div className="hidden md:flex justify-center">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-10 border border-white/20">
+                <div className="bg-card/10 backdrop-blur-sm rounded-2xl p-10 border border-white/20">
                   <Building2 className="w-24 h-24 text-white mx-auto mb-4" />
                   <p className="text-white text-center text-lg font-semibold">Partnerfirma werden</p>
                   <p className="text-green-200 text-center text-sm mt-1">Kostenlos registrieren</p>
@@ -767,16 +767,16 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
 
         {/* Customer Reviews Section */}
         {state.reviews.length > 0 ? (
-          <section className="py-16 md:py-24 bg-white">
+          <section className="py-16 md:py-24 bg-card">
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
               <div className="text-center mb-12">
-                <div className="inline-flex items-center px-3 py-1 bg-green-50 border border-green-200 rounded-full text-green-700 font-semibold text-xs mb-4">
+                <div className="inline-flex items-center px-3 py-1 bg-green-50 dark:bg-green-950/50 border border-green-200 dark:border-green-800 rounded-full text-green-700 dark:text-green-300 font-semibold text-xs mb-4">
                   KUNDENSTIMMEN
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                   Das sagen unsere Kunden
                 </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                   Echte Erfahrungen von Menschen, die unseren Service genutzt haben.
                 </p>
               </div>
@@ -797,7 +797,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   variant="outline" 
                   size="icon" 
                   className={cn(
-                    "absolute top-1/2 -translate-y-1/2 -left-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300",
+                    "absolute top-1/2 -translate-y-1/2 -left-4 z-10 rounded-full bg-card/80 backdrop-blur-sm shadow-lg hover:bg-card hidden md:flex transition-opacity duration-300",
                     state.canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"
                   )}
                   onClick={() => scroll('left')}
@@ -810,7 +810,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   variant="outline" 
                   size="icon" 
                   className={cn(
-                    "absolute top-1/2 -translate-y-1/2 -right-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300",
+                    "absolute top-1/2 -translate-y-1/2 -right-4 z-10 rounded-full bg-card/80 backdrop-blur-sm shadow-lg hover:bg-card hidden md:flex transition-opacity duration-300",
                     state.canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"
                   )}
                   onClick={() => scroll('right')}
@@ -824,7 +824,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                 <Button
                   asChild
                   variant="outline"
-                  className="bg-white hover:bg-gray-50 border-gray-300 text-gray-900 font-semibold px-6 py-3"
+                  className="bg-card hover:bg-muted/40 border-border text-foreground font-semibold px-6 py-3"
                 >
                   <Link href="/kunden-bewertungen" className="flex items-center gap-2">
                     Alle Bewertungen anzeigen
@@ -837,7 +837,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
         ) : null}
 
         {/* Final CTA */}
-        <section className="bg-white py-14 md:py-20">
+        <section className="bg-card py-14 md:py-20">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="relative overflow-hidden rounded-2xl">
               <div
@@ -851,12 +851,12 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     Das passende Umzugsunternehmen finden mit Online-offerten.ch
                   </h2>
-                  <p className="text-lg text-gray-100 max-w-2xl">
+                  <p className="text-lg text-white/90 max-w-2xl">
                     Finden Sie in wenigen Minuten die besten Dienstleister für Ihr Vorhaben. Unverbindlich und unkompliziert - 100% kostenlos.
                   </p>
                 </div>
 
-                <div className="bg-white rounded-xl p-5 md:p-6 shadow-lg">
+                <div className="bg-card rounded-xl p-5 md:p-6 shadow-lg">
                   <Button
                     asChild
                     size="lg"
@@ -866,7 +866,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                       Kostenlose Offerten anfordern
                     </Link>
                   </Button>
-                  <p className="text-gray-800 text-base leading-relaxed mt-4">
+                  <p className="text-muted-foreground text-base leading-relaxed mt-4">
                     Schnell, kostenlos und unverbindlich.
                   </p>
                 </div>

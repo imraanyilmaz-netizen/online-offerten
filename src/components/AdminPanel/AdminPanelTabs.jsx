@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -96,12 +96,12 @@ const AdminPanelTabs = ({
       </CardHeader>
       <CardContent className="p-0">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="overflow-x-auto scrollbar-hide border-b border-gray-200 bg-gradient-to-b from-gray-50 to-white">
+          <div className="overflow-x-auto scrollbar-hide border-b border-border bg-gradient-to-b from-muted/40 to-background">
             <TabsList className="inline-flex h-auto p-2 space-x-2 rounded-none bg-transparent">
               {!isEditor && (
                 <TabsTrigger 
                   value="quotes" 
-                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
                 >
                   <FileText className="w-4 h-4" />
                   Anfragen
@@ -110,7 +110,7 @@ const AdminPanelTabs = ({
               {!isEditor && (
                 <TabsTrigger 
                   value="partners" 
-                  className="relative flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                  className="relative flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
                 >
                   <Users className="w-4 h-4" />
                   Partner ({partners?.length || 0})
@@ -124,7 +124,7 @@ const AdminPanelTabs = ({
               {!isEditor && (
                 <TabsTrigger 
                   value="reviews"
-                  className="relative flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                  className="relative flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
                 >
                     <Star className="w-4 h-4" />
                     Bewertungen
@@ -137,7 +137,7 @@ const AdminPanelTabs = ({
               )}
               <TabsTrigger 
                 value="ratgeber"
-                className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
               >
                 <BookOpen className="w-4 h-4" />
                 Ratgeber
@@ -145,7 +145,7 @@ const AdminPanelTabs = ({
               {!isEditor && (
                 <TabsTrigger 
                   value="financials"
-                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
                 >
                   <Coins className="w-4 h-4" />
                   Finanzen
@@ -154,7 +154,7 @@ const AdminPanelTabs = ({
               {!isEditor && (
                 <TabsTrigger 
                   value="invite"
-                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
                 >
                   <Mail className="w-4 h-4" />
                   Partner Einladung
@@ -163,7 +163,7 @@ const AdminPanelTabs = ({
               {!isEditor && (
                 <TabsTrigger 
                   value="insurance"
-                  className="relative flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                  className="relative flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
                 >
                   <ShieldCheck className="w-4 h-4" />
                   Versicherung
@@ -177,7 +177,7 @@ const AdminPanelTabs = ({
               {!isEditor && (
                 <TabsTrigger 
                   value="settings"
-                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900"
+                  className="flex-shrink-0 px-5 py-3 text-sm font-semibold flex items-center gap-2 rounded-lg transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:scale-105 data-[state=inactive]:text-gray-600 data-[state=inactive]:hover:bg-gray-100 data-[state=inactive]:hover:text-gray-900 dark:data-[state=inactive]:text-muted-foreground dark:data-[state=inactive]:hover:bg-muted dark:data-[state=inactive]:hover:text-foreground"
                 >
                   <Settings className="w-4 h-4" />
                   Einstellungen

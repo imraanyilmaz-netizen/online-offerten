@@ -1,4 +1,4 @@
-﻿import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Loader2, UploadCloud, XCircle, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -140,7 +140,7 @@ const GalleryImageUploader = ({ partnerId, currentImages = [], onUpdate }) => {
           ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}`}
       >
         <input {...getInputProps()} />
-        <div className="flex flex-col items-center justify-center space-y-2 text-gray-500">
+        <div className="flex flex-col items-center justify-center space-y-2 text-muted-foreground">
           <UploadCloud className="w-10 h-10" />
           <p className="font-semibold">Bilder hierher ziehen oder klicken</p>
           <p className="text-xs">PNG, JPG, WEBP bis zu 10MB</p>
@@ -156,7 +156,7 @@ const GalleryImageUploader = ({ partnerId, currentImages = [], onUpdate }) => {
                 <img src={file.preview} alt="Vorschau" className="w-full h-24 object-cover rounded-md" loading="lazy" />
                 <button
                   onClick={() => removePreview(index)}
-                  className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute -top-2 -right-2 bg-card border border-border rounded-full p-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   <XCircle className="w-5 h-5 text-red-500" />
                 </button>
@@ -186,7 +186,7 @@ const GalleryImageUploader = ({ partnerId, currentImages = [], onUpdate }) => {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-gray-500">Noch keine Galeriebilder hochgeladen.</p>
+          <p className="text-sm text-muted-foreground">Noch keine Galeriebilder hochgeladen.</p>
         )}
       </div>
     </div>

@@ -35,11 +35,11 @@ function mapLoginErrorMessage(error: { message?: string } | null): string {
 
 /** SSR ile ilk client çıktısı aynı olsun (useAuth loading/user farkı h1 vs CardTitle hydration hatası veriyordu). */
 const LoginShellPlaceholder = () => (
-  <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
-    <div className="w-full max-w-md shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden p-8">
-      <div className="h-9 w-3/4 max-w-xs bg-gray-200/80 rounded-md animate-pulse mx-auto mb-4" />
-      <div className="h-4 w-full bg-gray-100/90 rounded animate-pulse mb-2" />
-      <div className="h-4 w-5/6 bg-gray-100/90 rounded animate-pulse" />
+  <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-background to-blue-100 dark:from-emerald-950/50 dark:via-background dark:to-slate-900 py-4 px-4">
+    <div className="w-full max-w-md shadow-2xl rounded-2xl bg-card/90 dark:bg-card/95 backdrop-blur-sm border border-border overflow-hidden p-8">
+      <div className="h-9 w-3/4 max-w-xs bg-muted rounded-md animate-pulse mx-auto mb-4" />
+      <div className="h-4 w-full bg-muted/80 rounded animate-pulse mb-2" />
+      <div className="h-4 w-5/6 bg-muted/80 rounded animate-pulse" />
     </div>
   </div>
 )
@@ -131,19 +131,19 @@ const LoginPageClient = () => {
 
   if (user) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4">
-        <Loader2 className="h-10 w-10 animate-spin text-green-600" />
-        <p className="mt-4 text-sm font-medium text-gray-700">Weiterleitung zum Dashboard…</p>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-green-100 via-background to-blue-100 dark:from-emerald-950/50 dark:via-background dark:to-slate-900 py-4 px-4">
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
+        <p className="mt-4 text-sm font-medium text-muted-foreground">Weiterleitung zum Dashboard…</p>
       </div>
     )
   }
 
   return (
     <div 
-      className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-gray-50 to-blue-100 py-4 px-4 transition-all duration-500"
+      className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-100 via-background to-blue-100 dark:from-emerald-950/50 dark:via-background dark:to-slate-900 py-4 px-4 transition-all duration-500"
     >
       <div
-        className={`w-full ${view === 'login' ? 'max-w-md' : 'max-w-navbar'} shadow-2xl rounded-2xl bg-white/80 backdrop-blur-sm border-none overflow-hidden transition-all duration-300`}
+        className={`w-full ${view === 'login' ? 'max-w-md' : 'max-w-navbar'} shadow-2xl rounded-2xl bg-card/90 dark:bg-card/95 backdrop-blur-sm border border-border overflow-hidden transition-all duration-300`}
       >
         
           {view === 'login' ? (
@@ -152,10 +152,10 @@ const LoginPageClient = () => {
             >
               <Card className="w-full border-none bg-transparent shadow-none">
                 <CardHeader className="text-center p-8">
-                  <CardTitle className="text-3xl md:text-4xl font-extrabold text-black">
+                  <CardTitle className="text-3xl md:text-4xl font-extrabold text-foreground">
                     {pageTitle}
                   </CardTitle>
-                  <CardDescription className="mt-3 text-gray-600">
+                  <CardDescription className="mt-3 text-muted-foreground">
                     {welcomeMessage} {pageSubtitle}
                   </CardDescription>
                 </CardHeader>
@@ -189,7 +189,7 @@ const LoginPageClient = () => {
                     )}
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="font-semibold text-gray-700">E-Mail-Adresse</Label>
+                      <Label htmlFor="email" className="font-semibold text-foreground">E-Mail-Adresse</Label>
                       <Input
                         id="email"
                         type="email"
@@ -216,12 +216,12 @@ const LoginPageClient = () => {
                           }
                         }}
                         required
-                        className="bg-white/70"
+                        className="bg-background/80 dark:bg-muted/30"
                       />
                     </div>
                     <div className="space-y-2">
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                          <Label htmlFor="password" className="font-semibold text-gray-700">Passwort</Label>
+                          <Label htmlFor="password" className="font-semibold text-foreground">Passwort</Label>
                           <Link
                             href={forgotPasswordHref}
                             className="text-sm font-medium text-green-600 hover:text-green-500 shrink-0"
@@ -251,12 +251,12 @@ const LoginPageClient = () => {
                             }
                           }}
                           required
-                          className="bg-white/70 pr-10"
+                          className="bg-background/80 dark:bg-muted/30 pr-10"
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+                          className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground"
                         >
                           {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                         </button>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { useRouter } from 'next/navigation'
@@ -18,14 +18,14 @@ const umzugServiceOptions: ServiceOption[] = [
   { id: 'geschaeftsumzug', label: 'Geschäftsumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug' },
   { id: 'geschaeftsumzug_reinigung', label: 'Geschäftsumzug und Reinigung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug&endreinigung=ja' },
   { id: 'international', label: 'Auslandumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international' },
-  { id: 'spezialtransport_klavier', label: 'Klavier / Flügel', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport' },
-  { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=tresortransport' },
-  { id: 'spezialtransport_maschinen', label: 'Maschinen / Schwere Geräte', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=maschinen_geraete' },
+  { id: 'spezialtransport_klavier', label: 'Klavier / Flügel', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport' },
+  { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=tresortransport' },
+  { id: 'spezialtransport_maschinen', label: 'Maschinen / Schwere Geräte', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=maschinen_geraete' },
   { id: 'kleintransport', label: 'Kleintransport', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport' },
   { id: 'lagerung', label: 'Lagerung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung' },
 ]
 
-const umzugKeywords = ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung']
+const umzugKeywords = ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'klaviertransport', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung']
 
 const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
   const router = useRouter()

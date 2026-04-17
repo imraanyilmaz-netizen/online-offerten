@@ -390,17 +390,17 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
     return (
       <Card className="overflow-hidden bg-transparent shadow-none rounded-none border-transparent">
         {/* Progress Indicator at the top */}
-        <div ref={formTopRef} className="border-b border-slate-100 bg-white px-6 md:px-12 pt-12 pb-10">
+        <div ref={formTopRef} className="border-b border-border bg-card px-6 md:px-12 pt-12 pb-10">
           <div className="max-w-4xl mx-auto">
             <div className="mb-10 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-slate-900 tracking-tight">Partner werden</h2>
-              <p className="text-slate-600 text-base md:text-lg">Registrieren Sie Ihr Unternehmen in wenigen Schritten</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground tracking-tight">Partner werden</h2>
+              <p className="text-muted-foreground text-base md:text-lg">Registrieren Sie Ihr Unternehmen in wenigen Schritten</p>
             </div>
             
             {/* Modern Stepper */}
             <div className="relative">
               {/* Progress Line */}
-              <div className="absolute top-6 left-0 right-0 h-[2px] bg-slate-200 hidden md:block">
+              <div className="absolute top-6 left-0 right-0 h-[2px] bg-border hidden md:block">
                 <div 
                   className="h-full bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-500 ease-out"
                   style={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
@@ -422,12 +422,12 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                             ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30 scale-110'
                             : isCompleted
                               ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-md'
-                              : 'bg-white border-2 border-slate-300 text-slate-400'
+                              : 'bg-card border-2 border-border text-muted-foreground'
                         }`}>
                           {isCompleted ? (
                             <CheckCircle2 className="w-6 h-6" strokeWidth={2.5} />
                           ) : (
-                            <span className={`font-bold text-sm ${isActive ? 'text-white' : 'text-slate-400'}`}>
+                            <span className={`font-bold text-sm ${isActive ? 'text-white' : 'text-muted-foreground'}`}>
                               {stepNumber}
                             </span>
                           )}
@@ -445,12 +445,12 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                           isActive 
                             ? 'text-green-600' 
                             : isCompleted 
-                              ? 'text-slate-700' 
-                              : 'text-slate-400'
+                              ? 'text-foreground' 
+                              : 'text-muted-foreground'
                         }`}>
                           {stepItem.name}
                         </p>
-                        <p className="text-xs text-slate-500 leading-snug hidden md:block">
+                        <p className="text-xs text-muted-foreground leading-snug hidden md:block">
                           {stepItem.description}
                         </p>
                       </div>
@@ -462,7 +462,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
           </div>
         </div>
         <div className="min-h-[600px]">
-          <div className="p-8 md:p-12 bg-white flex flex-col">
+          <div className="p-8 md:p-12 bg-card flex flex-col">
             
               {submitted ? (
                 <div className="flex-grow flex items-center justify-center">
@@ -479,7 +479,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                 </div>
               )}
             
-            <div className="flex justify-between mt-8 pt-8 border-t border-slate-200">
+            <div className="flex justify-between mt-8 pt-8 border-t border-border">
               <div>
                 {submitted ? (
                   <Button variant="outline" onClick={onBackToLogin}><ArrowLeft className="mr-2 h-4 w-4" /> Zurück zum Login</Button>
@@ -514,21 +514,21 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
   }
 
   return (
-    <section id="register" className="py-16 md:py-24 bg-slate-100">
+    <section id="register" className="py-16 md:py-24 bg-muted/40">
       <div className="container mx-auto max-w-6xl px-4 md:px-6">
-        <Card className="overflow-hidden bg-white shadow-2xl rounded-2xl border-transparent">
+        <Card className="overflow-hidden bg-card shadow-2xl rounded-2xl border-border">
           {/* Progress Indicator at the top */}
-          <div ref={formTopRef} className="border-b border-slate-100 bg-white px-6 md:px-12 pt-12 pb-10">
+          <div ref={formTopRef} className="border-b border-border bg-card px-6 md:px-12 pt-12 pb-10">
             <div className="max-w-4xl mx-auto">
               <div className="mb-10 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-slate-900 tracking-tight">Partner werden</h2>
-                <p className="text-slate-600 text-base md:text-lg">Registrieren Sie Ihr Unternehmen in wenigen Schritten</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground tracking-tight">Partner werden</h2>
+                <p className="text-muted-foreground text-base md:text-lg">Registrieren Sie Ihr Unternehmen in wenigen Schritten</p>
               </div>
               
               {/* Modern Stepper */}
               <div className="relative">
                 {/* Progress Line */}
-                <div className="absolute top-6 left-0 right-0 h-[2px] bg-slate-200 hidden md:block">
+                <div className="absolute top-6 left-0 right-0 h-[2px] bg-border hidden md:block">
                   <div 
                     className="h-full bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-500 ease-out"
                     style={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
@@ -550,12 +550,12 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                               ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30 scale-110'
                               : isCompleted
                                 ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-md'
-                                : 'bg-white border-2 border-slate-300 text-slate-400'
+                                : 'bg-card border-2 border-border text-muted-foreground'
                           }`}>
                             {isCompleted ? (
                               <CheckCircle2 className="w-6 h-6" strokeWidth={2.5} />
                             ) : (
-                              <span className={`font-bold text-sm ${isActive ? 'text-white' : 'text-slate-400'}`}>
+                              <span className={`font-bold text-sm ${isActive ? 'text-white' : 'text-muted-foreground'}`}>
                                 {stepNumber}
                               </span>
                             )}
@@ -573,12 +573,12 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                             isActive 
                               ? 'text-green-600' 
                               : isCompleted 
-                                ? 'text-slate-700' 
-                                : 'text-slate-400'
+                                ? 'text-foreground' 
+                                : 'text-muted-foreground'
                           }`}>
                             {stepItem.name}
                           </p>
-                          <p className="text-xs text-slate-500 leading-snug hidden md:block">
+                          <p className="text-xs text-muted-foreground leading-snug hidden md:block">
                             {stepItem.description}
                           </p>
                         </div>
@@ -590,7 +590,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
             </div>
           </div>
           <div className="min-h-[600px]">
-            <div className="p-8 md:p-12 bg-white flex flex-col">
+            <div className="p-8 md:p-12 bg-card flex flex-col">
               
                 {submitted ? (
                   <div className="flex-grow flex items-center justify-center">
@@ -608,7 +608,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                 )}
               
               {!submitted && (
-                <div className="flex justify-between mt-8 pt-8 border-t border-slate-200">
+                <div className="flex justify-between mt-8 pt-8 border-t border-border">
                   <div>
                     {step > 1 && (
                       <Button variant="outline" onClick={prevStep}>Zurück</Button>

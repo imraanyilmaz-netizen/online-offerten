@@ -165,7 +165,7 @@ const serviceButtons = [
   { label: 'Nur Reinigung', href: '/kostenlose-offerte-anfordern?service=reinigung&step=2' },
   { label: 'Büroumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug' },
   { label: 'Entsorgung', href: '/kostenlose-offerte-anfordern?service=raeumung&step=2' },
-  { label: 'Klavierumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport' },
+  { label: 'Klavierumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport' },
 ]
 
 const KundenBewertungenPageClient = ({ 

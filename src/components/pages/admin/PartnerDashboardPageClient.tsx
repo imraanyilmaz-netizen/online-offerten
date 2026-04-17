@@ -51,9 +51,9 @@ const PartnerDashboardPageClient = () => {
 
   if (!user || partnerRole(user) !== 'partner') {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-slate-50 text-slate-700">
-        <Loader2 className="w-12 h-12 animate-spin text-green-600 mb-4" />
-        <p className="text-sm text-slate-600">Weiterleitung…</p>
+      <div className="flex flex-col justify-center items-center h-screen bg-background text-foreground">
+        <Loader2 className="w-12 h-12 animate-spin text-primary mb-4" />
+        <p className="text-sm text-muted-foreground">Weiterleitung…</p>
       </div>
     )
   }

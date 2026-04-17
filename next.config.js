@@ -223,6 +223,21 @@ const nextConfig = {
     return config;
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/umzugsfirma/spezialtransport',
+        destination: '/umzugsfirma/klaviertransport',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma/spezialtransport/:path*',
+        destination: '/umzugsfirma/klaviertransport/:path*',
+        permanent: true,
+      },
+    ];
+  },
+
   turbopack: {
     // Proje kökü; üst klasördeki başka package-lock.json yanlış root seçimini engeller
     root: __dirname,

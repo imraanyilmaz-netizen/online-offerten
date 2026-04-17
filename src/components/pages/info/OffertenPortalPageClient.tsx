@@ -475,7 +475,7 @@ const OffertenPortalPageClient = () => {
               { label: 'Privatumzug', sub: 'Wohnungsumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug', icon: Home, color: 'blue' },
               { label: 'Geschäftsumzug', sub: 'Firmenumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug', icon: Building, color: 'purple' },
               { label: 'Auslandumzug', sub: 'International', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international', icon: Globe, color: 'emerald' },
-              { label: 'Klaviertransport', sub: 'Piano & Flügel', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport', icon: PiPianoKeysFill, color: 'amber' },
+              { label: 'Klaviertransport', sub: 'Piano & Flügel', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport', icon: PiPianoKeysFill, color: 'amber' },
               { label: 'Kleintransport', sub: 'Einzelne Gegenstände', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport', icon: Package, color: 'teal' },
               { label: 'Lagerung', sub: 'Möbel einlagern', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung', icon: Package, color: 'indigo' },
             ].map((item) => (
@@ -501,7 +501,7 @@ const OffertenPortalPageClient = () => {
             <li><Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Privatumzüge</Link>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
             <li><Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Geschäftsumzüge</Link>: Effiziente und schnelle Verlagerung von Büros und Gewerberäumen.</li>
             <li><Link href="/umzugsfirma/auslandumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
-            <li><Link href="/umzugsfirma/spezialtransport" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
+            <li><Link href="/umzugsfirma/klaviertransport" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
             <li><strong>Klaviertransport</strong>: Professioneller und schonender Transport von Klavieren und Flügeln mit Spezialtechnik.</li>
             <li><strong>Lagerung</strong>: Sichere Einlagerung Ihrer Möbel und Gegenstände während des Umzugs oder bei Platzmangel.</li>
           </ul>
@@ -672,7 +672,7 @@ const OffertenPortalPageClient = () => {
                     { name: 'Privatumzug', href: '/umzugsfirma/privatumzug' },
                     { name: 'Geschäftsumzug', href: '/umzugsfirma/geschaeftsumzug' },
                     { name: 'Internationale Umzüge', href: '/umzugsfirma/auslandumzug' },
-                    { name: 'Spezialtransporte', href: '/umzugsfirma/spezialtransport' },
+                    { name: 'Spezialtransporte', href: '/umzugsfirma/klaviertransport' },
                     { name: 'Umzugskosten', href: '/umzugsfirma/umzugskosten' },
                     { name: 'Umzugsfirma vergleichen', href: '/umzugsfirma-vergleichen' },
                   ].map((item) => (

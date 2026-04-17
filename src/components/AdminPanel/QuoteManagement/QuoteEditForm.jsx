@@ -14,14 +14,14 @@ import AddressInput from '@/components/PartnerRegistrationForm/AddressInput';
 
 const FormField = ({ id, label, children }) => (
   <div>
-    <Label htmlFor={id} className="text-sm font-medium text-gray-700">{label}</Label>
+    <Label htmlFor={id} className="text-sm font-medium text-foreground">{label}</Label>
     <div className="mt-1">{children}</div>
   </div>
 );
 
 const Fieldset = ({ legend, children, className = "" }) => (
-    <fieldset className={`border p-4 rounded-md space-y-4 ${className}`}>
-        <legend className="text-md font-semibold px-2 text-gray-800">{legend}</legend>
+    <fieldset className={`border border-border rounded-md bg-card/60 dark:bg-muted/25 p-4 space-y-4 ${className}`}>
+        <legend className="text-md font-semibold px-2 text-foreground">{legend}</legend>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {children}
         </div>
@@ -81,6 +81,7 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
     (servicetypeLower.includes('spezialtransport') ||
       servicetypeLower.includes('klaviertransport') ||
       servicetypeLower.includes('tresortransport') ||
+      umzugartLower.includes('klaviertransport') ||
       umzugartLower.includes('spezial') ||
       !!formData.special_transport ||
       !!(formData.special_transport_type && String(formData.special_transport_type).trim()) ||
@@ -120,10 +121,10 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
 
   return (
     <div
-      className="bg-slate-50 border-t border-slate-200 overflow-hidden"
+      className="bg-slate-50 dark:bg-muted/30 border-t border-slate-200 dark:border-border overflow-hidden"
     >
       <form onSubmit={handleSave} className="p-4 sm:p-6 space-y-6">
-        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Anfrage bearbeiten</h3>
+        <h3 className="text-lg font-semibold text-foreground border-b pb-2">Anfrage bearbeiten</h3>
         
         <Fieldset legend="Kundenkontakt">
           <FormField id="salutation" label="Anrede"><Input name="salutation" value={formData.salutation || ''} onChange={handleChange} /></FormField>
@@ -227,11 +228,11 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
                 onChange={(v) => handleChange({ target: { name: 'cleaning_area_sqm', value: v } })}
                 placeholder="—"
                 extraOptions={CLEANING_AREA_LEGACY_SELECT_OPTIONS}
-                selectClassName="border-gray-300 bg-white"
+                selectClassName="border-input bg-background"
               />
             </FormField>
             <FormField id="cleaning_type_guarantee" label="Art der Reinigung">
-              <select name="cleaning_type_guarantee" value={formData.cleaning_type_guarantee || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+              <select name="cleaning_type_guarantee" value={formData.cleaning_type_guarantee || ''} onChange={handleChange} className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                 <option value="">—</option>
                 <option value="mit_abnahmegarantie">mit Abnahmegarantie</option>
                 <option value="ohne_abnahmegarantie">ohne Abnahmegarantie</option>
@@ -251,7 +252,7 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
         )}
         
         <div className="space-y-4">
-            <Label className="text-md font-semibold px-2 text-gray-800">Zusätzliche Bemerkungen</Label>
+            <Label className="text-md font-semibold px-2 text-foreground">Zusätzliche Bemerkungen</Label>
             <Textarea name="additional_info" placeholder="Zusätzliche Informationen aus dem Formular..." value={formData.additional_info || ''} onChange={handleChange} rows={4} />
         </div>
 

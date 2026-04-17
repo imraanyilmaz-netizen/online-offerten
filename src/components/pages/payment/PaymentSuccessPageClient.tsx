@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -109,18 +109,18 @@ const PaymentSuccessPageClient = () => {
   return (
     <>
       
-      <div className="flex h-screen w-full items-center justify-center bg-gray-100">
+      <div className="flex h-screen w-full items-center justify-center bg-background">
       <div
-        className="w-full max-w-md rounded-xl bg-white p-8 text-center shadow-lg"
+        className="w-full max-w-md rounded-xl border border-border bg-card p-8 text-center shadow-lg"
       >
         <div
           key={status}
         >
           <StatusIcon />
         </div>
-        <h1 className="mt-6 text-2xl font-bold text-gray-800">{message}</h1>
-        {status === 'verifying' && <p className="mt-2 text-gray-600">Bitte warten Sie, während wir Ihre Zahlung verarbeiten...</p>}
-        {status !== 'verifying' && <p className="mt-2 text-gray-600">Sie werden zum Dashboard weitergeleitet...</p>}
+        <h1 className="mt-6 text-2xl font-bold text-foreground">{message}</h1>
+        {status === 'verifying' && <p className="mt-2 text-muted-foreground">Bitte warten Sie, während wir Ihre Zahlung verarbeiten...</p>}
+        {status !== 'verifying' && <p className="mt-2 text-muted-foreground">Sie werden zum Dashboard weitergeleitet...</p>}
       </div>
     </div>
     </>

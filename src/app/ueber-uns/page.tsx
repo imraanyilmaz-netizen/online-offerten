@@ -93,7 +93,7 @@ export default async function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Suspense fallback={<div className="min-h-screen bg-gray-50">Loading...</div>}>
+      <Suspense fallback={<div className="min-h-screen bg-background text-muted-foreground flex items-center justify-center">Loading...</div>}>
         <AboutPageClient initialReviews={reviews} />
       </Suspense>
     </>

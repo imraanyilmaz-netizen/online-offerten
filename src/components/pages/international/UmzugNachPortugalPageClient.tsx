@@ -10,7 +10,7 @@ import InternationalPageNavigation from '@/components/international/Internationa
 
 const Section = ({ children, className = '' }: any) => (
   <section
-    className={`py-10 md:py-14 border-t border-gray-100 ${className}`}
+    className={`py-10 md:py-14 border-t border-border ${className}`}
   >
     {children}
   </section>
@@ -29,7 +29,7 @@ const SectionTitle = ({ icon, title }: any) => {
 const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
   <li className="flex items-start py-2">
     <Icon className="w-6 h-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
-    <span className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: children }} />
+    <span className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: children }} />
   </li>
 );
 
@@ -109,7 +109,7 @@ const UmzugNachPortugalPageClient = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-slate-50 via-gray-50 to-white">
+      <div className="bg-gradient-to-b from-background via-muted/30 to-background">
         <section
           className="relative w-full bg-cover bg-center text-white"
         >
@@ -128,22 +128,22 @@ const UmzugNachPortugalPageClient = () => {
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
-            <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-10">
+            <main className="lg:col-span-2 bg-card p-6 md:p-10 rounded-2xl border border-border/60 shadow-xl space-y-10">
               <Section className="border-t-0 pt-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Von der Schweiz nach Lissabon, Porto oder an die Algarve</h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-4">Ein Umzug nach Portugal bedeutet mehr als nur einen Wohnortwechsel – es ist der Beginn eines Lebensabschnitts geprägt von Sonne, einer reichen Kultur und einer entspannten Lebensart. Portugal zieht mit seiner atemberaubenden Küste, historischen Städten und gastfreundlichen Bevölkerung immer mehr Schweizer an. Doch der Weg dorthin erfordert eine umsichtige Planung.</p>
-                <p className="text-gray-700 leading-relaxed">Dieser umfassende Ratgeber begleitet Sie auf jedem Schritt Ihres Umzugs. Wir erklären, wie Sie die Kosten realistisch kalkulieren, die Zollformalitäten meistern und die wichtige NIF-Steuernummer beantragen. Zudem zeigen wir Ihnen, wie Sie das ideale Umzugsunternehmen finden, das nicht nur Ihr Hab und Gut sicher transportiert, sondern auf Wunsch auch die Endreinigung Ihrer Schweizer Wohnung mit Abnahmegarantie übernimmt.</p>
-                 <p className="text-gray-700 leading-relaxed mt-4">Durch den Vergleich von Offerten stellen Sie sicher, dass Sie den besten Service zum fairsten Preis erhalten. So können Sie sich sorgenfrei auf Ihr neues Leben freuen: auf den ersten Pastel de Nata, Spaziergänge am Atlantik und das einzigartige portugiesische Lebensgefühl.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Von der Schweiz nach Lissabon, Porto oder an die Algarve</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">Ein Umzug nach Portugal bedeutet mehr als nur einen Wohnortwechsel – es ist der Beginn eines Lebensabschnitts geprägt von Sonne, einer reichen Kultur und einer entspannten Lebensart. Portugal zieht mit seiner atemberaubenden Küste, historischen Städten und gastfreundlichen Bevölkerung immer mehr Schweizer an. Doch der Weg dorthin erfordert eine umsichtige Planung.</p>
+                <p className="text-muted-foreground leading-relaxed">Dieser umfassende Ratgeber begleitet Sie auf jedem Schritt Ihres Umzugs. Wir erklären, wie Sie die Kosten realistisch kalkulieren, die Zollformalitäten meistern und die wichtige NIF-Steuernummer beantragen. Zudem zeigen wir Ihnen, wie Sie das ideale Umzugsunternehmen finden, das nicht nur Ihr Hab und Gut sicher transportiert, sondern auf Wunsch auch die Endreinigung Ihrer Schweizer Wohnung mit Abnahmegarantie übernimmt.</p>
+                 <p className="text-muted-foreground leading-relaxed mt-4">Durch den Vergleich von Offerten stellen Sie sicher, dass Sie den besten Service zum fairsten Preis erhalten. So können Sie sich sorgenfrei auf Ihr neues Leben freuen: auf den ersten Pastel de Nata, Spaziergänge am Atlantik und das einzigartige portugiesische Lebensgefühl.</p>
               </Section>
 
               <Section>
                 <SectionTitle icon={ShieldCheck} title="Intelligent vergleichen, sorglos umziehen" />
-                <p className="text-gray-700 leading-relaxed mb-8">Die Preise für einen Umzug nach Portugal können stark schwanken. Ein sorgfältiger Vergleich von spezialisierten Umzugsfirmen ist der Schlüssel, um Tausende Franken zu sparen und einen verlässlichen Partner für die lange Strecke zu finden.</p>
+                <p className="text-muted-foreground leading-relaxed mb-8">Die Preise für einen Umzug nach Portugal können stark schwanken. Ein sorgfältiger Vergleich von spezialisierten Umzugsfirmen ist der Schlüssel, um Tausende Franken zu sparen und einen verlässlichen Partner für die lange Strecke zu finden.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {whyCompareItems.map((item, i) => (
-                        <div key={i} className="bg-slate-50 p-5 rounded-lg border border-slate-200 transition-all duration-300 hover:shadow-md hover:border-green-200">
-                            <h4 className="font-bold text-lg text-gray-800 mb-2">{item.title}</h4>
-                            <p className="text-gray-600">{item.text}</p>
+                        <div key={i} className="bg-muted/50 p-5 rounded-lg border border-border transition-all duration-300 hover:shadow-md hover:border-green-200">
+                            <h4 className="font-bold text-lg text-foreground mb-2">{item.title}</h4>
+                            <p className="text-muted-foreground">{item.text}</p>
                         </div>
                     ))}
                 </div>
@@ -151,18 +151,18 @@ const UmzugNachPortugalPageClient = () => {
               
               <Section>
                 <SectionTitle icon={Home} title="Perfekte Planung für Ihr Abenteuer Portugal" />
-                <p className="text-gray-700 leading-relaxed mb-6">Ein Umzug über eine so weite Distanz erfordert eine exzellente Organisation. Beginnen Sie frühzeitig mit der Planung, um administrative Hürden wie die Beantragung der NIF-Nummer und logistische Herausforderungen entspannt zu meistern.</p>
+                <p className="text-muted-foreground leading-relaxed mb-6">Ein Umzug über eine so weite Distanz erfordert eine exzellente Organisation. Beginnen Sie frühzeitig mit der Planung, um administrative Hürden wie die Beantragung der NIF-Nummer und logistische Herausforderungen entspannt zu meistern.</p>
                 <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-8">
                   <p className="text-blue-800">Eine professionelle Umzugsfirma ist hierbei unerlässlich. Sie sorgt nicht nur für den sicheren Transport, sondern berät Sie auch bei der Erstellung der notwendigen Dokumente für eine reibungslose Zollabfertigung.</p>
                 </div>
-                <h3 className="text-2xl font-semibold text-gray-800 mt-10 mb-4">Ihre Checkliste für den Umzug nach Portugal:</h3>
+                <h3 className="text-2xl font-semibold text-foreground mt-10 mb-4">Ihre Checkliste für den Umzug nach Portugal:</h3>
                 <ul className="space-y-4">{movingChecklist.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
               </Section>
 
               <Section>
                 <SectionTitle icon={FileText} title="Zoll und die wichtige NIF-Nummer" />
-                 <p className="text-gray-700 leading-relaxed mb-6">Als Nicht-EU-Land muss Ihr Umzugsgut aus der Schweiz beim portugiesischen Zoll (Alfândega) deklariert werden. Bei einer Wohnsitzverlegung können Sie Ihr Hab und Gut als Übersiedlungsgut ('bens de mudança') zollfrei einführen.</p>
-                 <p className="text-gray-700 leading-relaxed mb-6">Hierfür benötigen Sie die Abmeldebestätigung aus der Schweiz, Ihre NIF-Nummer, einen Nachweis über Ihren neuen Wohnsitz in Portugal (z.B. Mietvertrag) und eine detaillierte Inventarliste. Ihre Umzugsfirma wird Sie bei der Zusammenstellung dieser Dokumente unterstützen.</p>
+                 <p className="text-muted-foreground leading-relaxed mb-6">Als Nicht-EU-Land muss Ihr Umzugsgut aus der Schweiz beim portugiesischen Zoll (Alfândega) deklariert werden. Bei einer Wohnsitzverlegung können Sie Ihr Hab und Gut als Übersiedlungsgut ('bens de mudança') zollfrei einführen.</p>
+                 <p className="text-muted-foreground leading-relaxed mb-6">Hierfür benötigen Sie die Abmeldebestätigung aus der Schweiz, Ihre NIF-Nummer, einen Nachweis über Ihren neuen Wohnsitz in Portugal (z.B. Mietvertrag) und eine detaillierte Inventarliste. Ihre Umzugsfirma wird Sie bei der Zusammenstellung dieser Dokumente unterstützen.</p>
                 <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
                     <h4 className="font-bold text-yellow-900">Profi-Tipp: Die NIF-Nummer ist entscheidend</h4>
                     <p className="text-yellow-800">Die NIF (Steuernummer) ist der Schlüssel zu fast allem in Portugal. Beantragen Sie diese so früh wie möglich. Ohne NIF können Sie kein Bankkonto eröffnen, keine Wohnung mieten und keinen Arbeitsvertrag unterzeichnen. Die Beantragung ist aus der Ferne möglich.</p>
@@ -171,32 +171,32 @@ const UmzugNachPortugalPageClient = () => {
 
               <Section>
                 <SectionTitle title="Was kostet ein Umzug nach Portugal?" />
-                <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Portugal sind aufgrund der grossen Distanz höher als bei Umzügen in Nachbarländer. Die Preise variieren stark je nach Volumen, Service und Route.</p>
+                <p className="text-muted-foreground leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Portugal sind aufgrund der grossen Distanz höher als bei Umzügen in Nachbarländer. Die Preise variieren stark je nach Volumen, Service und Route.</p>
                 
-                <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Richtpreise für einen Umzug nach Portugal</h3>
+                <div className="bg-muted/50 p-6 rounded-lg border border-border mt-8">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Richtpreise für einen Umzug nach Portugal</h3>
                   <div className="overflow-x-auto">
                     <table className="w-full min-w-max text-left">
                       <thead>
                         <tr className="border-b">
-                          <th className="py-3 px-2 font-semibold text-gray-600">Wohnungsgrösse / Ladevolumen</th>
-                          <th className="py-3 px-2 font-semibold text-gray-600 text-right">Geschätzte Kosten (CHF)</th>
+                          <th className="py-3 px-2 font-semibold text-muted-foreground">Wohnungsgrösse / Ladevolumen</th>
+                          <th className="py-3 px-2 font-semibold text-muted-foreground text-right">Geschätzte Kosten (CHF)</th>
                         </tr>
                       </thead>
                       <tbody>
                         {costTable.map((row, i) => (
-                          <tr key={i} className="border-b border-slate-200 last:border-0 hover:bg-slate-100">
-                            <td className="py-4 px-2 text-gray-700">{row.size}</td>
-                            <td className="py-4 px-2 text-gray-800 font-medium text-right">{row.cost}</td>
+                          <tr key={i} className="border-b border-border last:border-0 hover:bg-muted/80">
+                            <td className="py-4 px-2 text-muted-foreground">{row.size}</td>
+                            <td className="py-4 px-2 text-foreground font-medium text-right">{row.cost}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <p className="text-xs text-gray-500 mt-4 italic">*Diese Preise sind grobe Schätzungen. Holen Sie sich exakte Offerten für eine verlässliche Kalkulation.</p>
+                  <p className="text-xs text-muted-foreground mt-4 italic">*Diese Preise sind grobe Schätzungen. Holen Sie sich exakte Offerten für eine verlässliche Kalkulation.</p>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-gray-800 mt-12 mb-6">Faktoren, die den Preis beeinflussen:</h3>
+                <h3 className="text-2xl font-semibold text-foreground mt-12 mb-6">Faktoren, die den Preis beeinflussen:</h3>
                 <ul className="space-y-4 columns-1 md:columns-2">{costFactors.map((item, i) => <ListItem key={i}>{item.text}</ListItem>)}</ul>
               </Section>
               
@@ -208,7 +208,7 @@ const UmzugNachPortugalPageClient = () => {
                       <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
                         <h4 className="faq-question">{faq.question}</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="text-gray-700 leading-relaxed">
+                      <AccordionContent className="text-muted-foreground leading-relaxed">
                         <p dangerouslySetInnerHTML={{ __html: faq.answer }}></p>
                       </AccordionContent>
                     </AccordionItem>
@@ -228,14 +228,14 @@ const UmzugNachPortugalPageClient = () => {
 
             <aside className="lg:col-span-1 space-y-8 self-start sticky top-28">
               <div
-                className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                className="bg-card p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-border/60"
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Truck size={24} className="mr-3 text-blue-500" />
                   Profis für die Langstrecke
                 </h3>
                 <img alt="Ein Umzugswagen fährt entlang der portugiesischen Atlantikküste" className="w-full h-56 object-cover rounded-lg shadow-md mb-3" src="https://images.unsplash.com/photo-1555881400-69a2384edcd4" />
-                <p className="text-sm text-gray-600 mt-2">Vergleichen Sie Firmen, die auf die lange und anspruchsvolle Route nach Portugal spezialisiert sind.</p>
+                <p className="text-sm text-muted-foreground mt-2">Vergleichen Sie Firmen, die auf die lange und anspruchsvolle Route nach Portugal spezialisiert sind.</p>
               </div>
               <div
                 className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200"

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { useRouter } from 'next/navigation'
@@ -19,9 +19,9 @@ const serviceOptions: ServiceOption[] = [
   { id: 'geschaeftsumzug', label: 'Geschäftsumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug', category: 'Umzug' },
   { id: 'geschaeftsumzug_reinigung', label: 'Geschäftsumzug und Reinigung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug&endreinigung=ja', category: 'Umzug' },
   { id: 'international', label: 'Auslandumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international', category: 'Umzug' },
-  { id: 'spezialtransport_klavier', label: 'Klavier / Flügel', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport', category: 'Umzug' },
-  { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=tresortransport', category: 'Umzug' },
-  { id: 'spezialtransport_maschinen', label: 'Maschinen / Schwere Geräte', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=maschinen_geraete', category: 'Umzug' },
+  { id: 'spezialtransport_klavier', label: 'Klavier / Flügel', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport', category: 'Umzug' },
+  { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=tresortransport', category: 'Umzug' },
+  { id: 'spezialtransport_maschinen', label: 'Maschinen / Schwere Geräte', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=maschinen_geraete', category: 'Umzug' },
   { id: 'kleintransport', label: 'Kleintransport', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport', category: 'Umzug' },
   { id: 'lagerung', label: 'Lagerung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung', category: 'Umzug' },
   
@@ -48,7 +48,7 @@ const serviceOptions: ServiceOption[] = [
 ]
 
 const categoryKeywords: Record<string, string[]> = {
-  'Umzug': ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung'],
+  'Umzug': ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'klaviertransport', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung'],
   'Reinigung': ['reinigung', 'reinigen', 'reinigungs', 'wohnungsreinigung', 'hausreinigung', 'büroreinigung', 'umzugsreinigung', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung'],
   'Malerarbeiten': ['maler', 'malerarbeiten', 'streichen', 'anstrich', 'fassade'],
   'Räumung': ['räumung', 'entsorgung', 'entrümpelung']

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 import Link from 'next/link';
@@ -13,9 +13,9 @@ const PaymentCancelPageClient = () => {
   return (
     <>
       
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
         <div 
-          className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center"
+          className="bg-card border border-border p-8 rounded-2xl shadow-xl max-w-md w-full text-center"
         >
           <XCircle className="h-16 w-16 text-red-500 mx-auto mb-6" />
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Zahlung abgebrochen</h1>

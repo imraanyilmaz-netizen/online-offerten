@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import CountryCard from './CountryCard';
 
@@ -23,9 +23,9 @@ const InternationalPageNavigation = ({ currentCountrySlug }) => {
   }
 
   return (
-    <div className="border-t border-slate-200 pt-10 mt-12 md:mt-16">
+    <div className="border-t border-border pt-10 mt-12 md:mt-16">
       <h2
-        className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center"
+        className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center"
       >
         Beliebte Ziele für Ihren Umzug in Europa
       </h2>

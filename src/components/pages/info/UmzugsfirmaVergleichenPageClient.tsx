@@ -284,7 +284,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 </Link>
 
                 <Link
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport"
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport"
                   className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
                 >
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
@@ -739,7 +739,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </div>
 
           <p className="text-body">
-            Die gezielte Auswahl dieser Zusatzleistungen ermöglicht es, den Umzugsservice optimal auf die eigenen Anforderungen abzustimmen. Erfahren Sie mehr über <Link href="/umzugsfirma/spezialtransport" className="text-green-700 hover:text-green-800 underline font-medium">Spezialtransporte</Link> oder starten Sie jetzt Ihre <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-700 hover:text-green-800 underline font-medium">kostenlose Anfrage</Link>.
+            Die gezielte Auswahl dieser Zusatzleistungen ermöglicht es, den Umzugsservice optimal auf die eigenen Anforderungen abzustimmen. Erfahren Sie mehr über <Link href="/umzugsfirma/klaviertransport" className="text-green-700 hover:text-green-800 underline font-medium">Spezialtransporte</Link> oder starten Sie jetzt Ihre <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-700 hover:text-green-800 underline font-medium">kostenlose Anfrage</Link>.
           </p>
             </div>
           </section>
@@ -1003,7 +1003,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     { name: 'Privatumzug', href: '/umzugsfirma/privatumzug' },
                     { name: 'Geschäftsumzug', href: '/umzugsfirma/geschaeftsumzug' },
                     { name: 'Internationale Umzüge', href: '/umzugsfirma/auslandumzug' },
-                    { name: 'Spezialtransporte', href: '/umzugsfirma/spezialtransport' },
+                    { name: 'Spezialtransporte', href: '/umzugsfirma/klaviertransport' },
                     { name: 'Umzugskosten', href: '/umzugsfirma/umzugskosten' },
                     { name: 'Umzugsfirma in der Nähe', href: '/umzugsfirma-in-der-naehe' },
                   ].map((item) => (

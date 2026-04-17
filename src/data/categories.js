@@ -28,10 +28,9 @@ export const serviceCategories = [
       { id: 'privatumzug', label: 'Privatumzug', desc: 'Wohnung, Haus, WG-Zimmer' },
       { id: 'geschaeftsumzug', label: 'Geschäftsumzug', desc: 'Büro, Ladenlokal, Werkstatt' },
       { id: 'auslandumzug', label: 'Auslandumzug', desc: 'Umzüge ins oder aus dem Ausland' },
-      { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
+      { id: 'klaviertransport', label: 'Klaviertransport', desc: 'Klavier, Flügel & schweres Gut' },
       { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
       { id: 'lagerung_service', label: 'Lagerung', desc: 'Möbel sicher einlagern' },
-      { id: 'umzugsreinigung_opt', label: 'Endreinigung', desc: 'mit Abnahmegarantie' },
       { id: 'raeumung_service', label: 'Räumung' },
       { id: 'entsorgung_service', label: 'Entsorgung' },
     ]),
@@ -135,17 +134,21 @@ export function findServiceInCategory(categorySlug, segment) {
   if (!cat || !segment) return null
   const raw = segment.trim()
   const foldedSeg = foldServiceKey(raw)
-  return (
-    cat.services.find((s) => {
-      const path = getServicePathSegment(s)
-      return (
-        path === raw ||
-        s.id === raw ||
-        foldServiceKey(path) === foldedSeg ||
-        foldServiceKey(s.id) === foldedSeg
-      )
-    }) ?? null
-  )
+  const bySegment = cat.services.find((s) => {
+    const path = getServicePathSegment(s)
+    return (
+      path === raw ||
+      s.id === raw ||
+      foldServiceKey(path) === foldedSeg ||
+      foldServiceKey(s.id) === foldedSeg
+    )
+  })
+  if (bySegment) return bySegment
+  /* Alte URLs / Links: …/spezialtransport → Klaviertransport-Leistung */
+  if (cat.slug === 'umzugsfirma' && foldedSeg === foldServiceKey('spezialtransport')) {
+    return cat.services.find((s) => s.id === 'klaviertransport') ?? null
+  }
+  return null
 }
 
 /** Diakritik vereinheitlichen (z. B. Nutzereingabe «geschäftsumzug» → services[].id geschaeftsumzug). */
@@ -174,6 +177,11 @@ function buildLabelByServiceId() {
         m[foldServiceKey(getServicePathSegment(s))] = label
       }
     }
+  }
+  /* Legacy: früher spezialtransport → jetzt klaviertransport */
+  if (m.klaviertransport) {
+    m.spezialtransport = m.klaviertransport
+    m[foldServiceKey('spezialtransport')] = m.klaviertransport
   }
   return m
 }

@@ -192,17 +192,17 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
     switch (status) {
       case 'new_quote':
       case 'pending':
-        return <Badge variant="outline" className="border-blue-300 text-blue-700">Neu</Badge>;
+        return <Badge variant="outline" className="border-blue-300 text-blue-700 dark:border-blue-700 dark:bg-blue-950/40 dark:text-blue-300">Neu</Badge>;
       case 'matched':
-        return <Badge variant="outline" className="border-yellow-400 text-yellow-800 bg-yellow-50">Zugewiesen</Badge>;
+        return <Badge variant="outline" className="border-yellow-400 text-yellow-800 bg-yellow-50 dark:border-yellow-700 dark:bg-yellow-950/35 dark:text-yellow-200">Zugewiesen</Badge>;
       case 'approved':
-        return <Badge variant="secondary" className="bg-green-100 text-green-700">Versendet</Badge>;
+        return <Badge variant="secondary" className="bg-green-100 text-green-700 dark:bg-emerald-950/45 dark:text-emerald-300">Versendet</Badge>;
       case 'archived':
-        return <Badge variant="outline" className="bg-gray-100 text-gray-700">Archiviert</Badge>;
+        return <Badge variant="outline" className="bg-muted text-foreground border-border">Archiviert</Badge>;
       case 'quota_filled':
          return <Badge variant="destructive">Kontingent erfüllt</Badge>;
       case 'sold_out':
-         return <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300">Ausverkauft</Badge>;
+         return <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-700">Ausverkauft</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -263,7 +263,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const EmailConfirmationStatus = () => {
     if (email_confirmed && email_confirmed_at) {
       return (
-        <div className="inline-flex items-center rounded-md border border-green-200 bg-green-50 px-2.5 py-1 text-xs text-green-700">
+        <div className="inline-flex items-center rounded-md border border-green-200 bg-green-50 px-2.5 py-1 text-xs text-green-700 dark:border-emerald-800 dark:bg-emerald-950/35 dark:text-emerald-200">
           <CheckCircle className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
           <span className="font-medium">
             Kunde hat die E-Mail bestätigt am {format(new Date(email_confirmed_at), "dd.MM.yyyy HH:mm", { locale: de })}
@@ -272,7 +272,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
       );
     }
     return (
-      <div className="inline-flex items-center rounded-md border border-orange-200 bg-orange-50 px-2.5 py-1 text-xs text-orange-700">
+      <div className="inline-flex items-center rounded-md border border-orange-200 bg-orange-50 px-2.5 py-1 text-xs text-orange-700 dark:border-orange-800 dark:bg-orange-950/35 dark:text-orange-200">
         <X className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
         <span className="font-medium">Kunde hat die E-Mail noch nicht bestätigt</span>
       </div>
@@ -282,7 +282,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
   const ReviewEmailStatus = () => {
     if (review_email_sent_at) {
       return (
-        <div className="flex items-center text-xs text-green-700">
+        <div className="flex items-center text-xs text-green-700 dark:text-emerald-400">
             <CheckCircle className="w-4 h-4 mr-1.5 flex-shrink-0" />
             Bewertungs-E-Mail gesendet am {format(new Date(review_email_sent_at), 'dd.MM.yy HH:mm')}
         </div>
@@ -290,12 +290,12 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
     }
     if (!move_date) {
         return (
-            <div className="text-xs text-gray-500">Kein Umzugsdatum für Bewertung angegeben.</div>
+            <div className="text-xs text-muted-foreground">Kein Umzugsdatum für Bewertung angegeben.</div>
         );
     }
     if (!isReviewEmailButtonActive) {
         return (
-            <div className="text-xs text-gray-500">Bewertungslink kann ab {format(new Date(move_date), 'dd.MM.yyyy')} gesendet werden.</div>
+            <div className="text-xs text-muted-foreground">Bewertungslink kann ab {format(new Date(move_date), 'dd.MM.yyyy')} gesendet werden.</div>
         );
     }
     return null;
@@ -303,51 +303,51 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
 
   return (
     <div
-      className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
+      className="bg-card rounded-xl border border-border shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
     >
       <div className="p-5 md:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-3 flex-wrap">
-              <h3 className="font-bold text-gray-900 text-lg sm:text-xl">{servicetype}</h3>
+              <h3 className="font-bold text-foreground text-lg sm:text-xl">{servicetype}</h3>
               {getStatusBadge()}
           </div>
-          <p className="text-xs text-gray-500 text-left sm:text-right">Anfrage am: {formattedDate}</p>
+          <p className="text-xs text-muted-foreground text-left sm:text-right">Anfrage am: {formattedDate}</p>
         </div>
         <div className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
-              <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[148px] h-full flex flex-col">
-                <p className="text-sm font-medium text-gray-800">
+              <div className="rounded-lg border border-border bg-card px-3 py-2.5 min-h-[148px] h-full flex flex-col">
+                <p className="text-sm font-medium text-foreground">
                   {quote.firstname} {quote.lastname}
                 </p>
-                <p className="text-xs text-gray-600 mt-0.5">{quote.email}</p>
-                {quote.phone && <p className="text-xs text-gray-600 mt-0.5">{quote.phone}</p>}
+                <p className="text-xs text-muted-foreground mt-0.5">{quote.email}</p>
+                {quote.phone && <p className="text-xs text-muted-foreground mt-0.5">{quote.phone}</p>}
                 <div className="mt-2">
                   <EmailConfirmationStatus />
                 </div>
-                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-gray-600">
-                  <p className="font-bold text-gray-900">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</p>
+                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-muted-foreground">
+                  <p className="font-bold text-foreground">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</p>
                 </div>
               </div>
 
-               <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 min-h-[148px] h-full flex flex-col">
+               <div className="rounded-lg border border-border bg-muted/40 px-3 py-2.5 min-h-[148px] h-full flex flex-col">
                 {(() => {
                   const fromMapsUrl = buildMapsUrl(quote.from_street, quote.from_zip, quote.from_city);
                   const toMapsUrl = buildMapsUrl(quote.to_street, quote.to_zip, quote.to_city);
                   return (
                     <>
-                <p className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <p className="text-sm font-medium text-foreground flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-muted-foreground/70 flex-shrink-0" />
                   <span>{from_city} {to_city && `→ ${to_city}`}</span>
                 </p>
-                <div className="mt-1 space-y-1 text-xs text-gray-600 pl-6">
+                <div className="mt-1 space-y-1 text-xs text-muted-foreground pl-6">
                   <p>
-                    <span className="font-medium text-gray-700">Von:</span>{' '}
+                    <span className="font-medium text-foreground">Von:</span>{' '}
                     {fromMapsUrl ? (
                       <a
                         href={fromMapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-green-700 hover:text-green-900 hover:underline"
+                        className="text-green-700 hover:text-green-900 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300"
                       >
                         {[quote.from_street, quote.from_zip, quote.from_city].filter(Boolean).join(', ')}
                       </a>
@@ -357,13 +357,13 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                   </p>
                   {to_city && (
                     <p>
-                      <span className="font-medium text-gray-700">Nach:</span>{' '}
+                      <span className="font-medium text-foreground">Nach:</span>{' '}
                       {toMapsUrl ? (
                         <a
                           href={toMapsUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-green-700 hover:text-green-900 hover:underline"
+                          className="text-green-700 hover:text-green-900 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300"
                         >
                           {[quote.to_street, quote.to_zip, quote.to_city].filter(Boolean).join(', ')}
                         </a>
@@ -373,16 +373,16 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                     </p>
                   )}
                   {formatFloorLift(quote.from_floor, quote.from_lift) && (
-                    <p><span className="font-medium text-gray-700">Auszug:</span> {formatFloorLift(quote.from_floor, quote.from_lift)}</p>
+                    <p><span className="font-medium text-foreground">Auszug:</span> {formatFloorLift(quote.from_floor, quote.from_lift)}</p>
                   )}
                   {formatRoomsObject(quote.from_rooms, quote.from_object_type) && (
-                    <p><span className="font-medium text-gray-700">Objekt:</span> {formatRoomsObject(quote.from_rooms, quote.from_object_type)}</p>
+                    <p><span className="font-medium text-foreground">Objekt:</span> {formatRoomsObject(quote.from_rooms, quote.from_object_type)}</p>
                   )}
                 </div>
                 {(partner_target_regions && partner_target_regions.length > 0) && (
                   <div className="mt-2 flex flex-wrap items-center gap-1.5 pl-6">
                     {partner_target_regions.map(region => (
-                      <Badge key={region} variant="secondary" className="bg-green-50 text-green-700 border-green-200 font-medium text-[11px] px-2 py-0.5">
+                      <Badge key={region} variant="secondary" className="bg-green-50 text-green-700 border-green-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800 font-medium text-[11px] px-2 py-0.5">
                         {region}
                       </Badge>
                     ))}
@@ -394,17 +394,17 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
               </div>
 
               {(movingExtras.length > 0 || cleaningExtras.length > 0) && (
-                <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[148px] h-full flex flex-col">
-                  <p className="text-sm font-medium text-gray-700">Zusatzdetails</p>
-                  <div className="mt-1 space-y-1 text-xs text-gray-600 overflow-hidden">
+                <div className="rounded-lg border border-border bg-card px-3 py-2.5 min-h-[148px] h-full flex flex-col">
+                  <p className="text-sm font-medium text-foreground">Zusatzdetails</p>
+                  <div className="mt-1 space-y-1 text-xs text-muted-foreground overflow-hidden">
                     {movingExtras.length > 0 && (
                       <p className="line-clamp-2">
-                        <span className="font-medium text-gray-700">Umzug:</span> {movingExtras.join(', ')}
+                        <span className="font-medium text-foreground">Umzug:</span> {movingExtras.join(', ')}
                       </p>
                     )}
                     {cleaningExtras.length > 0 && (
                       <p className="line-clamp-3">
-                        <span className="font-medium text-gray-700">Reinigung:</span> {cleaningExtras.join(' | ')}
+                        <span className="font-medium text-foreground">Reinigung:</span> {cleaningExtras.join(' | ')}
                       </p>
                     )}
                   </div>
@@ -412,7 +412,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
               )}
 
               {status !== 'archived' && (status === 'approved' || status === 'quota_filled') && (
-                <div className="rounded-lg border border-gray-200 bg-white px-3 py-2.5 min-h-[148px] h-full flex flex-col justify-center">
+                <div className="rounded-lg border border-border bg-card px-3 py-2.5 min-h-[148px] h-full flex flex-col justify-center">
                   {isEditingPrice ? (
                     <div className="flex items-center justify-start gap-1">
                       <Input
@@ -435,18 +435,18 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                       <div className="flex items-center gap-2">
                         {discountPercent > 0 && (
                           <>
-                            <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
-                            <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
+                            <span className="text-sm text-muted-foreground/70 line-through">{quote.original_price} CHF</span>
+                            <span className="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-950/40 dark:text-red-400 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
                           </>
                         )}
-                        <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                        <p className="font-bold text-lg text-green-600 dark:text-emerald-400">{lead_price} CHF</p>
                       </div>
                       <Button size="icon" variant="ghost" className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Pencil className="w-3.5 h-3.5" />
                       </Button>
                     </div>
                   )}
-                  <div className="text-xs text-gray-500 flex items-center justify-start gap-1 mt-0.5">
+                  <div className="text-xs text-muted-foreground flex items-center justify-start gap-1 mt-0.5">
                     <ShoppingCart className="w-3 h-3"/>
                     <span>{purchasers.length} / {purchase_quota || '∞'} Gekauft</span>
                     <Button
@@ -465,23 +465,23 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
               )}
 
               {status !== 'archived' && status === 'matched' && (
-                <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 min-h-[148px] h-full flex flex-col justify-center">
+                <div className="rounded-lg border border-border bg-muted/40 px-3 py-2.5 min-h-[148px] h-full flex flex-col justify-center">
                   <div className="flex items-center justify-start gap-2">
                     {discountPercent > 0 && (
                       <>
-                        <span className="text-sm text-gray-400 line-through">{quote.original_price} CHF</span>
-                        <span className="text-xs font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
+                        <span className="text-sm text-muted-foreground/70 line-through">{quote.original_price} CHF</span>
+                        <span className="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-950/40 dark:text-red-400 px-1.5 py-0.5 rounded">-{discountPercent}%</span>
                       </>
                     )}
-                    <p className="font-bold text-lg text-green-600">{lead_price} CHF</p>
+                    <p className="font-bold text-lg text-green-600 dark:text-emerald-400">{lead_price} CHF</p>
                   </div>
-                  <p className="text-xs text-gray-500">{assigned_partner_ids?.length || 0} Partner</p>
+                  <p className="text-xs text-muted-foreground">{assigned_partner_ids?.length || 0} Partner</p>
                 </div>
               )}
             </div>
         </div>
         {/* Aktionsbereich: unten separat, damit rechts nichts gequetscht wirkt */}
-        <div className="mt-4 pt-3 border-t border-gray-200/80 flex flex-wrap justify-end items-center gap-2">
+        <div className="mt-4 pt-3 border-t border-border/80 flex flex-wrap justify-end items-center gap-2">
           {status === 'archived' && (
             <>
               <Button size="sm" variant="outline" onClick={() => onRestore(quote.id)}>
@@ -499,7 +499,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                 {parentIsProcessing ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2" />} 
                 {skipEmail ? 'Ohne E-Mail senden' : 'Senden'}
               </Button>
-              <label className="flex items-center gap-1.5 cursor-pointer text-xs text-gray-600 select-none">
+              <label className="flex items-center gap-1.5 cursor-pointer text-xs text-muted-foreground select-none">
                 <Checkbox 
                   checked={skipEmail} 
                   onCheckedChange={(checked) => setSkipEmail(!!checked)} 
@@ -512,7 +512,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
             <Button
               size="sm"
               variant="outline"
-              className="border-orange-300 text-orange-700 hover:bg-orange-50"
+              className="border-orange-300 text-orange-700 hover:bg-orange-50 dark:border-orange-700 dark:text-orange-300 dark:hover:bg-orange-950/40"
               onClick={() => setSoldOutDialogOpen(true)}
               disabled={parentIsProcessing || purchasers.length > 0}
               title={purchasers.length > 0 ? 'Bereits gekauft - kann nicht als Ausverkauft markiert werden' : 'Als Ausverkauft markieren'}
@@ -543,24 +543,24 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
             <Info className="w-4 h-4 mr-2"/>
             {isDetailsExpanded ? "Schliessen" : "Details"}
           </Button>
-          <Button size="sm" variant="ghost" className="text-gray-500 hover:bg-gray-100" onClick={() => onArchive(quote.id)}>
+          <Button size="sm" variant="ghost" className="text-muted-foreground hover:bg-muted" onClick={() => onArchive(quote.id)}>
             <Archive className="w-4 h-4"/>
           </Button>
         </div>
       </div>
        {(status === 'approved' || status === 'archived' || status === 'quota_filled') && (
-        <div className="p-5 md:p-6 border-t border-gray-200 bg-gradient-to-br from-gray-50 to-white">
+        <div className="p-5 md:p-6 border-t border-border bg-gradient-to-br from-muted/40 to-background dark:from-muted/25 dark:to-card/30">
           <div className="grid grid-cols-1 gap-y-5">
             {/* Zugewiesene Partner - Collapsible mit Kauf-Status */}
             {assigned_partner_ids && assigned_partner_ids.length > 0 && (
             <div>
               <button
                 onClick={() => setShowAssignedPartners(!showAssignedPartners)}
-                className="flex items-center gap-2 text-sm font-bold text-gray-800 mb-3 hover:text-green-700 transition-colors w-full text-left"
+                className="flex items-center gap-2 text-sm font-bold text-foreground mb-3 hover:text-green-700 dark:hover:text-emerald-400 transition-colors w-full text-left"
               >
-                <Send className="w-4 h-4 text-gray-500"/>
+                <Send className="w-4 h-4 text-muted-foreground"/>
                 Zugewiesene Partner ({assigned_partner_ids.length})
-                <span className="text-xs font-normal text-gray-500 ml-1">
+                <span className="text-xs font-normal text-muted-foreground ml-1">
                   — {purchasers.length} gekauft
                   {soldOutCount > 0 ? `, ${soldOutCount} ausverkauft` : ''}
                   {rejectedCount > 0 ? `, ${rejectedCount} abgelehnt` : ''}
@@ -575,40 +575,40 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                         key={p.id} 
                         className={`inline-flex items-center gap-2 border rounded-lg px-3 py-2 text-sm ${
                           p.hasPurchased 
-                            ? 'bg-green-50 border-green-200' 
+                            ? 'bg-green-50 border-green-200 dark:bg-emerald-950/35 dark:border-emerald-800' 
                             : p.isSoldOut
-                              ? 'bg-amber-50 border-amber-200'
+                              ? 'bg-amber-50 border-amber-200 dark:bg-amber-950/35 dark:border-amber-800'
                               : p.hasRejected
-                              ? 'bg-red-50 border-red-200'
-                              : 'bg-gray-50 border-gray-200'
+                              ? 'bg-red-50 border-red-200 dark:bg-red-950/30 dark:border-red-900'
+                              : 'bg-muted/40 border-border dark:bg-muted/30'
                         }`}
                       >
                         {p.hasPurchased ? (
-                          <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0"/>
+                          <CheckCircle className="w-3.5 h-3.5 text-green-500 dark:text-emerald-400 flex-shrink-0"/>
                         ) : p.isSoldOut ? (
-                          <ShoppingCart className="w-3.5 h-3.5 text-amber-500 flex-shrink-0"/>
+                          <ShoppingCart className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400 flex-shrink-0"/>
                         ) : p.hasRejected ? (
-                          <X className="w-3.5 h-3.5 text-red-400 flex-shrink-0"/>
+                          <X className="w-3.5 h-3.5 text-red-400 dark:text-red-400 flex-shrink-0"/>
                         ) : (
-                          <Building2 className="w-3.5 h-3.5 text-gray-400 flex-shrink-0"/>
+                          <Building2 className="w-3.5 h-3.5 text-muted-foreground/70 flex-shrink-0"/>
                         )}
-                        <span className="font-medium text-gray-800">{p.name}</span>
-                        {p.hasPurchased && <span className="text-xs text-green-600">Gekauft</span>}
-                        {p.isSoldOut && <span className="text-xs text-amber-600">Ausverkauft</span>}
-                        {p.hasRejected && !p.isSoldOut && <span className="text-xs text-red-500">Abgelehnt</span>}
+                        <span className="font-medium text-foreground">{p.name}</span>
+                        {p.hasPurchased && <span className="text-xs text-green-600 dark:text-emerald-400">Gekauft</span>}
+                        {p.isSoldOut && <span className="text-xs text-amber-600 dark:text-amber-400">Ausverkauft</span>}
+                        {p.hasRejected && !p.isSoldOut && <span className="text-xs text-red-500 dark:text-red-400">Abgelehnt</span>}
                       </div>
                     ))}
                   </div>
 
                   {/* Partner nachsenden */}
                   {(status === 'approved' || status === 'quota_filled') && unassignedPartners.length > 0 && (
-                    <div className="pt-2 border-t border-gray-100">
+                    <div className="pt-2 border-t border-border/80">
                       {!showAddPartner ? (
                         <Button 
                           size="sm" 
                           variant="outline" 
                           onClick={() => setShowAddPartner(true)}
-                          className="text-blue-600 border-blue-200 hover:bg-blue-50"
+                          className="text-blue-600 border-blue-200 hover:bg-blue-50 dark:text-sky-400 dark:border-sky-700 dark:hover:bg-sky-950/40"
                         >
                           <UserPlus className="w-4 h-4 mr-2"/>
                           Partner nachsenden
@@ -616,10 +616,10 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                       ) : (
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
-                            <h5 className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
+                            <h5 className="text-xs font-bold text-foreground flex items-center gap-1.5">
                               <UserPlus className="w-3.5 h-3.5"/>
                               Partner auswählen zum Nachsenden
-                              <span className="text-gray-400 font-normal">({unassignedPartners.length})</span>
+                              <span className="text-muted-foreground/70 font-normal">({unassignedPartners.length})</span>
                             </h5>
                             <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={() => { setShowAddPartner(false); setSelectedNewPartnerIds(new Set()); setPartnerSearchTerm(''); setListHeight(192); }}>
                               <X className="w-4 h-4"/>
@@ -627,7 +627,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                           </div>
                           {/* Suche */}
                           <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"/>
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/70"/>
                             <Input
                               type="text"
                               placeholder="Partner suchen..."
@@ -640,7 +640,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                             <div 
                               ref={listRef}
                               style={{ maxHeight: `${listHeight}px` }}
-                              className="overflow-y-auto border border-gray-200 rounded-lg divide-y divide-gray-100 transition-[max-height] duration-100"
+                              className="overflow-y-auto border border-border rounded-lg divide-y divide-border/80 transition-[max-height] duration-100"
                             >
                               {unassignedPartners
                                 .filter(p => {
@@ -653,8 +653,8 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                                 .map(p => (
                                 <label 
                                   key={p.id} 
-                                  className={`flex items-center gap-3 px-3 py-2.5 cursor-pointer hover:bg-blue-50 transition-colors ${
-                                    selectedNewPartnerIds.has(p.id) ? 'bg-blue-50' : ''
+                                  className={`flex items-center gap-3 px-3 py-2.5 cursor-pointer hover:bg-blue-50 dark:hover:bg-sky-950/30 transition-colors ${
+                                    selectedNewPartnerIds.has(p.id) ? 'bg-blue-50 dark:bg-sky-950/35' : ''
                                   }`}
                                 >
                                   <Checkbox
@@ -663,11 +663,11 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                                     className="h-4 w-4"
                                   />
                                   <div className="flex-1 min-w-0">
-                                    <span className="text-sm font-medium text-gray-800 block truncate">
+                                    <span className="text-sm font-medium text-foreground block truncate">
                                       {p.company_name || p.name || 'Unbekannt'}
                                     </span>
                                     {p.main_categories && p.main_categories.length > 0 && (
-                                      <span className="text-xs text-gray-500 block truncate">
+                                      <span className="text-xs text-muted-foreground block truncate">
                                         {getCategoryLabel(p.main_categories)}
                                       </span>
                                     )}
@@ -681,7 +681,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                                 const cat = getCategoryLabel(p.main_categories)?.toLowerCase() || '';
                                 return name.includes(term) || cat.includes(term);
                               }).length === 0 && (
-                                <div className="px-3 py-4 text-center text-sm text-gray-500">
+                                <div className="px-3 py-4 text-center text-sm text-muted-foreground">
                                   Kein Partner gefunden für &quot;{partnerSearchTerm}&quot;
                                 </div>
                               )}
@@ -690,10 +690,10 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                             <div
                               onMouseDown={handleDragStart}
                               onTouchStart={handleDragStart}
-                              className="flex items-center justify-center py-1 cursor-ns-resize hover:bg-gray-100 border border-t-0 border-gray-200 rounded-b-lg select-none"
+                              className="flex items-center justify-center py-1 cursor-ns-resize hover:bg-muted border border-t-0 border-border rounded-b-lg select-none"
                               title="Ziehen zum Vergrössern/Verkleinern"
                             >
-                              <GripHorizontal className="w-4 h-4 text-gray-400"/>
+                              <GripHorizontal className="w-4 h-4 text-muted-foreground/70"/>
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
@@ -701,7 +701,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                               size="sm"
                               onClick={handleSendAdditional}
                               disabled={selectedNewPartnerIds.size === 0 || isSendingAdditional || parentIsProcessing}
-                              className="bg-blue-600 hover:bg-blue-700"
+                              className="bg-blue-600 hover:bg-blue-700 dark:bg-sky-600 dark:hover:bg-sky-500"
                             >
                               {isSendingAdditional ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Send className="w-4 h-4 mr-2"/>}
                               An {selectedNewPartnerIds.size} Partner senden
@@ -719,9 +719,9 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
             </div>
             )}
             {(status === 'approved' || status === 'quota_filled') && isReviewEmailButtonActive && (
-            <div className="md:col-span-2 border-t border-gray-200 pt-5 mt-2">
-               <h4 className="text-sm font-bold text-gray-800 mb-3 flex items-center gap-2">
-                 <Star className="w-4 h-4 text-gray-500"/> 
+            <div className="md:col-span-2 border-t border-border pt-5 mt-2">
+               <h4 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+                 <Star className="w-4 h-4 text-muted-foreground"/> 
                  Kundenbewertung
                </h4>
                 <div className="flex items-center gap-4">
@@ -735,7 +735,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                     </Button>
                     <div className="flex flex-col">
                         <ReviewEmailStatus />
-                         <span className={`text-xs ${reviewSendLimitReached ? 'text-red-500 font-semibold' : 'text-gray-500'}`}>
+                         <span className={`text-xs ${reviewSendLimitReached ? 'text-red-500 dark:text-red-400 font-semibold' : 'text-muted-foreground'}`}>
                            Gesendet: {review_email_sent_count || 0}/3
                          </span>
                     </div>
@@ -755,7 +755,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-2">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Aktuell gekauft: <strong>{purchasers.length}</strong>
             </p>
             <Input

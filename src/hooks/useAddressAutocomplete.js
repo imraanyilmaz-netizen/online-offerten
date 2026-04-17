@@ -1,6 +1,6 @@
-﻿/* global google */
+/* global google */
 import { useState, useCallback, useRef } from 'react';
-import { loadGoogleMapsScript } from '@/lib/googleMapsLoader';
+import { isGoogleMapsAuthFailed, loadGoogleMapsScript } from '@/lib/googleMapsLoader';
 
 const hasGoogleMapsKey = Boolean(
   typeof process !== 'undefined' && process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -176,6 +176,9 @@ const useAddressAutocomplete = () => {
       try {
         await loadGoogleMapsScript();
         if (requestIdRef.current !== myId) return;
+        if (isGoogleMapsAuthFailed()) {
+          throw new Error('Google Maps authentication failed');
+        }
         const googleSuggestions = await getGooglePredictions(searchQuery.trim(), countryCode);
         if (requestIdRef.current !== myId) return;
         setSuggestions(googleSuggestions);
@@ -220,6 +223,9 @@ const useAddressAutocomplete = () => {
   const resolveSuggestion = useCallback(async (suggestion) => {
     if (suggestion?.source === 'google' && suggestion.place_id) {
       await loadGoogleMapsScript();
+      if (isGoogleMapsAuthFailed()) {
+        throw new Error('Google Maps authentication failed');
+      }
       const details = await getGooglePlaceDetails(suggestion.place_id);
       return {
         street: details.street,

@@ -84,8 +84,9 @@ export const submitNewQuoteToSupabase = async (formData) => {
       case 'international':
         finalServiceType = 'Auslandumzug';
         break;
+      case 'klaviertransport':
       case 'spezialtransport':
-        finalServiceType = 'Spezialtransport';
+        finalServiceType = 'Klaviertransport';
         break;
       case 'kleintransport':
         finalServiceType = 'Kleintransport';
@@ -234,6 +235,7 @@ export const submitNewQuoteToSupabase = async (formData) => {
     'privatumzug': tAdmin('step1.privateMoveLabel'),
     'geschaeftsumzug': tAdmin('step1.businessMoveLabel'),
     'international': tAdmin('step1.internationalMoveLabel'),
+    'klaviertransport': tAdmin('step1.specialTransportLabel'),
     'spezialtransport': tAdmin('step1.specialTransportLabel'),
     'kleintransport': tAdmin('step1.kleintransportLabel'),
     'lagerung': tAdmin('step1.lagerungLabel'), // Lagerung service

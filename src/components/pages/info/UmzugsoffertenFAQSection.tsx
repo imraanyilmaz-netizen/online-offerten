@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 // framer-motion removed - CSS for better INP
@@ -20,11 +20,10 @@ const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faq
           className="text-left mb-12"
         >
           <h2 
-          className="heading-2 mb-4"
+          className="heading-2 mb-4 text-foreground"
             style={{
               fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
               fontWeight: 700,
-              color: '#1c1d16',
               textAlign: 'left',
               letterSpacing: 'normal',
               wordSpacing: '0px',
@@ -61,13 +60,12 @@ const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faq
         <div className="w-full">
           <Accordion type="single" collapsible className="w-full">
             {faqItems.slice(0, 7).map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-b">
+              <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
                 <AccordionTrigger 
-                  className="text-[18px] md:text-[20px] leading-[23.94px] md:leading-[26.6px] text-left py-4 transition-all hover:no-underline"
+                  className="text-[18px] md:text-[20px] leading-[23.94px] md:leading-[26.6px] text-left py-4 transition-all hover:no-underline text-foreground"
                   style={{
                     fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
                     fontWeight: 700,
-                    color: '#1c1d16',
                     textAlign: 'start',
                     letterSpacing: 'normal',
                     wordSpacing: '0px',
@@ -80,9 +78,9 @@ const UmzugsoffertenFAQSection: React.FC<UmzugsoffertenFAQSectionProps> = ({ faq
                 >
                   <h4 className="faq-question">{item.q}</h4>
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-700 leading-relaxed">
+                <AccordionContent className="text-muted-foreground leading-relaxed">
                   <div 
-                    className="prose prose-sm max-w-none prose-strong:text-gray-900 prose-strong:font-semibold"
+                    className="prose prose-sm max-w-none dark:prose-invert prose-strong:text-foreground prose-strong:font-semibold"
                     dangerouslySetInnerHTML={{ __html: item.a }} 
                   />
                 </AccordionContent>

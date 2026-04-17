@@ -34,15 +34,15 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
   return (
     <div className="space-y-8">
     <div>
-        <h3 className="text-2xl font-bold mb-3 text-slate-900">Firmendaten eingeben</h3>
-        <p className="text-slate-600 text-base">Vervollständigen Sie Ihr Profil mit Ihren Firmendaten</p>
+        <h3 className="text-2xl font-bold mb-3 text-foreground">Firmendaten eingeben</h3>
+        <p className="text-muted-foreground text-base">Vervollständigen Sie Ihr Profil mit Ihren Firmendaten</p>
       </div>
       
       <div className="space-y-6">
         
-        <Card className="border-2 border-slate-200 shadow-sm">
-          <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
-            <CardTitle className="flex items-center gap-3 text-xl font-bold text-slate-900">
+        <Card className="border-2 border-border shadow-sm">
+          <CardHeader className="bg-gradient-to-r from-muted/60 to-muted border-b border-border dark:from-muted/40 dark:to-muted/60">
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-foreground">
               <div className="p-2 bg-green-100 rounded-lg">
                 <Building className="h-5 w-5 text-green-600" />
               </div>
@@ -52,10 +52,10 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
           <CardContent className="pt-6">
             <div className="space-y-6">
               <div>
-                <h4 className="text-sm font-semibold text-slate-700 mb-4">Kontaktdaten</h4>
+                <h4 className="text-sm font-semibold text-foreground mb-4">Kontaktdaten</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="companyName" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="companyName" className="text-sm font-semibold text-foreground">
                       Firmenname <span className="text-red-500">*</span>
                     </Label>
                     <Input 
@@ -63,7 +63,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                       value={formData.companyName} 
                       onChange={onInputChange} 
                       required 
-                      className={`h-11 ${errors.companyName ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      className={`h-11 ${errors.companyName ? "border-red-500 focus-visible:ring-red-500" : "border-border focus-visible:ring-green-500"}`}
                       placeholder="Firmenname eingeben"
                     />
                     {errors.companyName && (
@@ -71,7 +71,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     )}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="contactPerson" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="contactPerson" className="text-sm font-semibold text-foreground">
                       Ansprechpartner <span className="text-red-500">*</span>
                     </Label>
                     <Input 
@@ -79,7 +79,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                       value={formData.contactPerson} 
                       onChange={onInputChange} 
                       required 
-                      className={`h-11 ${errors.contactPerson ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      className={`h-11 ${errors.contactPerson ? "border-red-500 focus-visible:ring-red-500" : "border-border focus-visible:ring-green-500"}`}
                       placeholder="Name des Ansprechpartners"
                     />
                     {errors.contactPerson && (
@@ -87,7 +87,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     )}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="email" className="text-sm font-semibold text-foreground">
                       E-Mail-Adresse <span className="text-red-500">*</span>
                     </Label>
                     <Input 
@@ -96,7 +96,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                       value={formData.email} 
                       onChange={onInputChange} 
                       required 
-                      className={`h-11 ${errors.email ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      className={`h-11 ${errors.email ? "border-red-500 focus-visible:ring-red-500" : "border-border focus-visible:ring-green-500"}`}
                       placeholder="beispiel@firma.ch"
                     />
                     {errors.email && (
@@ -104,7 +104,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     )}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="phone" className="text-sm font-semibold text-foreground">
                       Telefonnummer <span className="text-red-500">*</span>
                     </Label>
                     <Input 
@@ -113,7 +113,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                       value={formData.phone} 
                       onChange={onInputChange} 
                       required 
-                      className={`h-11 ${errors.phone ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                      className={`h-11 ${errors.phone ? "border-red-500 focus-visible:ring-red-500" : "border-border focus-visible:ring-green-500"}`}
                       placeholder="+41 XX XXX XX XX"
                     />
                     {errors.phone && (
@@ -123,14 +123,14 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                 </div>
               </div>
               
-              <div className="pt-4 border-t border-slate-200">
-                <h4 className="text-sm font-semibold text-slate-700 mb-4 flex items-center gap-2">
+              <div className="pt-4 border-t border-border">
+                <h4 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-blue-600" />
                   Firmenadresse
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="address_street" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="address_street" className="text-sm font-semibold text-foreground">
                       Strasse
                     </Label>
                     <AddressInput
@@ -140,26 +140,26 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="address_zip" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="address_zip" className="text-sm font-semibold text-foreground">
                       PLZ
                     </Label>
                     <Input 
                       id="address_zip" 
                       value={formData.address_zip} 
                       onChange={onInputChange}
-                      className="h-11 border-slate-300 focus-visible:ring-green-500"
+                      className="h-11 border-border focus-visible:ring-green-500"
                       placeholder="z.B. 8000"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="address_city" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="address_city" className="text-sm font-semibold text-foreground">
                       Ort
                     </Label>
                     <Input 
                       id="address_city" 
                       value={formData.address_city} 
                       onChange={onInputChange}
-                      className="h-11 border-slate-300 focus-visible:ring-green-500"
+                      className="h-11 border-border focus-visible:ring-green-500"
                       placeholder="z.B. Zürich"
                     />
               </div>
@@ -184,7 +184,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                <Label htmlFor="password" className="text-sm font-semibold text-foreground flex items-center gap-2">
                   <Lock size={16} className="text-green-600" />
                   Passwort <span className="text-red-500">*</span>
                 </Label>
@@ -196,7 +196,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     onChange={handlePasswordChange}
                     placeholder="Mindestens 8 Zeichen"
                     required
-                    className={`h-11 pr-10 ${errors.password ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                    className={`h-11 pr-10 ${errors.password ? "border-red-500 focus-visible:ring-red-500" : "border-border focus-visible:ring-green-500"}`}
                   />
                   <Button
                     type="button"
@@ -206,22 +206,22 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-slate-400 hover:text-slate-600" />
+                      <EyeOff className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                     ) : (
-                      <Eye className="h-4 w-4 text-slate-400 hover:text-slate-600" />
+                      <Eye className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                     )}
                   </Button>
                 </div>
                 {errors.password ? (
                   <p className="text-sm text-red-600 font-medium mt-1.5">{errors.password}</p>
                 ) : (
-                  <p className="text-xs text-slate-500 mt-1.5">
+                  <p className="text-xs text-muted-foreground mt-1.5">
                   Mindestens 8 Zeichen, empfohlen: Gross-/Kleinbuchstaben, Zahlen und Sonderzeichen
                 </p>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                <Label htmlFor="confirmPassword" className="text-sm font-semibold text-foreground flex items-center gap-2">
                   <Lock size={16} className="text-green-600" />
                   Passwort bestätigen <span className="text-red-500">*</span>
                 </Label>
@@ -233,7 +233,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     onChange={handlePasswordChange}
                     placeholder="Passwort wiederholen"
                     required
-                    className={`h-11 pr-10 ${errors.confirmPassword ? "border-red-500 focus-visible:ring-red-500" : "border-slate-300 focus-visible:ring-green-500"}`}
+                    className={`h-11 pr-10 ${errors.confirmPassword ? "border-red-500 focus-visible:ring-red-500" : "border-border focus-visible:ring-green-500"}`}
                   />
                   <Button
                     type="button"
@@ -243,9 +243,9 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? (
-                      <EyeOff className="h-4 w-4 text-slate-400 hover:text-slate-600" />
+                      <EyeOff className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                     ) : (
-                      <Eye className="h-4 w-4 text-slate-400 hover:text-slate-600" />
+                      <Eye className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                     )}
                   </Button>
                 </div>
@@ -262,20 +262,20 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
           </CardContent>
         </Card>
 
-        <Card className="border-2 border-slate-200 shadow-sm">
-          <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
-            <CardTitle className="flex items-center gap-3 text-xl font-bold text-slate-900">
+        <Card className="border-2 border-border shadow-sm">
+          <CardHeader className="bg-gradient-to-r from-muted/60 to-muted border-b border-border dark:from-muted/40 dark:to-muted/60">
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-foreground">
               <div className="p-2 bg-purple-100 rounded-lg">
                 <Briefcase className="h-5 w-5 text-purple-600" />
               </div>
               Zusätzliche Details
             </CardTitle>
-            <p className="text-sm text-slate-600 mt-2">Optionale Informationen über Ihr Unternehmen</p>
+            <p className="text-sm text-muted-foreground mt-2">Optionale Informationen über Ihr Unternehmen</p>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="website" className="text-sm font-semibold text-slate-700">
+                <Label htmlFor="website" className="text-sm font-semibold text-foreground">
                   Website
                 </Label>
                 <Input 
@@ -283,11 +283,11 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                   value={formData.website} 
                   onChange={onInputChange} 
                   placeholder="https://www.beispiel.ch"
-                  className="h-11 border-slate-300 focus-visible:ring-green-500"
+                  className="h-11 border-border focus-visible:ring-green-500"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="year_founded" className="text-sm font-semibold text-slate-700">
+                <Label htmlFor="year_founded" className="text-sm font-semibold text-foreground">
                   Gründungsjahr
                 </Label>
                 <Input 
@@ -296,15 +296,15 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                   value={formData.year_founded} 
                   onChange={onInputChange} 
                   placeholder="z.B. 2020"
-                  className="h-11 border-slate-300 focus-visible:ring-green-500"
+                  className="h-11 border-border focus-visible:ring-green-500"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-slate-700">
+                <Label className="text-sm font-semibold text-foreground">
                   Anzahl Mitarbeiter
                 </Label>
                 <Select onValueChange={(value) => onValueChange('employee_count', value)} value={formData.employee_count}>
-                  <SelectTrigger className="h-11 border-slate-300 focus:ring-green-500">
+                  <SelectTrigger className="h-11 border-border focus:ring-green-500">
                     <SelectValue placeholder="Bitte wählen..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -315,7 +315,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-slate-700">
+                <Label className="text-sm font-semibold text-foreground">
                   Haftpflichtversicherung <span className="text-red-500">*</span>
                 </Label>
                 <RadioGroup
@@ -325,11 +325,11 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="true" id="liability_yes" />
-                    <Label htmlFor="liability_yes" className="font-normal cursor-pointer text-slate-700">Ja</Label>
+                    <Label htmlFor="liability_yes" className="font-normal cursor-pointer text-foreground">Ja</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="false" id="liability_no" />
-                    <Label htmlFor="liability_no" className="font-normal cursor-pointer text-slate-700">Nein</Label>
+                    <Label htmlFor="liability_no" className="font-normal cursor-pointer text-foreground">Nein</Label>
                   </div>
                 </RadioGroup>
                 {errors.liability_insurance && (
@@ -337,7 +337,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                 )}
               </div>
               <div className="md:col-span-2 space-y-2">
-                <Label htmlFor="commercial_register_number" className="text-sm font-semibold text-slate-700">
+                <Label htmlFor="commercial_register_number" className="text-sm font-semibold text-foreground">
                   Handelsregisternummer <span className="text-red-500">*</span>
                 </Label>
                 <Input 
@@ -345,7 +345,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                   value={formData.commercial_register_number} 
                   onChange={onInputChange} 
                   placeholder="z.B. CHE-123.456.789"
-                  className={`h-11 border-slate-300 focus-visible:ring-green-500 ${errors.commercial_register_number ? 'border-red-500' : ''}`}
+                  className={`h-11 border-border focus-visible:ring-green-500 ${errors.commercial_register_number ? 'border-red-500' : ''}`}
                 />
                 {errors.commercial_register_number && (
                   <p className="text-sm text-red-600 mt-1">{errors.commercial_register_number}</p>
@@ -354,7 +354,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
             </div>
             
             <div className="md:col-span-2 space-y-2 mt-4">
-              <Label htmlFor="company_description" className="text-sm font-semibold text-slate-700">
+              <Label htmlFor="company_description" className="text-sm font-semibold text-foreground">
                 Firmenbeschreibung
               </Label>
               <Textarea
@@ -362,10 +362,10 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                 value={formData.company_description}
                 onChange={onInputChange}
                 placeholder="Beschreiben Sie Ihr Unternehmen, Ihre Dienstleistungen und Ihre Erfahrung..."
-                className="min-h-[120px] border-slate-300 focus-visible:ring-green-500 resize-y"
+                className="min-h-[120px] border-border focus-visible:ring-green-500 resize-y"
                 rows={5}
               />
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Diese Beschreibung wird nach der Registrierung und nach der Genehmigung Ihres Partner-Kontos in Ihrem öffentlichen Profil angezeigt.
               </p>
             </div>
@@ -374,7 +374,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
 
         <Card className={`border-2 shadow-sm ${errors.agreedToTerms ? "border-red-200 bg-red-50/30" : "border-green-200 bg-gradient-to-br from-green-50/50 to-emerald-50/30"}`}>
           <CardHeader className={`border-b ${errors.agreedToTerms ? "bg-red-50 border-red-200" : "bg-gradient-to-r from-green-50 to-emerald-50 border-green-200"}`}>
-            <CardTitle className="flex items-center gap-3 text-xl font-bold text-slate-900">
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-foreground">
               <div className={`p-2 rounded-lg ${errors.agreedToTerms ? "bg-red-100" : "bg-green-100"}`}>
                 <ShieldCheck className={`h-5 w-5 ${errors.agreedToTerms ? "text-red-600" : "text-green-600"}`} />
               </div>
@@ -392,7 +392,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
               <div className="grid gap-2 leading-relaxed flex-1">
                 <label
                   htmlFor="agreedToTerms"
-                  className="text-sm text-slate-700 leading-relaxed cursor-pointer"
+                  className="text-sm text-foreground leading-relaxed cursor-pointer"
                 >
                   Ich akzeptiere die <a href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">Allgemeinen Geschäftsbedingungen</a> und die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">Datenschutzerklärung</a>.
                 </label>

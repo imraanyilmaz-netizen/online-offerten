@@ -137,7 +137,7 @@
             <div 
               {...getRootProps()} 
               className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-                isDragActive ? 'border-green-500 bg-green-50' : 'border-gray-300 hover:border-green-400 hover:bg-gray-50'
+                isDragActive ? 'border-green-500 bg-green-50 dark:bg-emerald-950/40' : 'border-border hover:border-green-400 hover:bg-muted/50'
               }`}
             >
               <input {...getInputProps()} />

@@ -35,11 +35,11 @@ const umzugTypes: UmzugType[] = [
     link: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=international'
   },
   {
-    id: 'spezialtransport',
+    id: 'klaviertransport',
     title: 'Spezialtransport',
     description: 'Klavier, Tresor, Kunst & mehr',
     icon: Truck,
-    link: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport'
+    link: '/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=klaviertransport'
   },
   {
     id: 'kleintransport',

@@ -102,7 +102,7 @@ export default function NavbarClient({ children: logoSlot }) {
 
   const umzugLinks = [
     { to: '/umzugsfirma/privatumzug', text: 'Privatumzug', desc: 'Wohnung, Haus & WG', Icon: Home },
-    { to: '/umzugsfirma/spezialtransport', text: 'Klaviertransport', desc: 'Spezial- & Schwertransport', Icon: Package },
+    { to: '/umzugsfirma/klaviertransport', text: 'Klaviertransport', desc: 'Spezial- & Schwertransport', Icon: Package },
     { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug', desc: 'Büro & Gewerbe', Icon: Building2 },
     { to: '/umzugsfirma/auslandumzug', text: 'Internationale Umzüge', desc: 'Über die Grenze', Icon: Globe2 },
     { to: '/umzugsfirma-vergleichen', text: 'Firmen vergleichen', desc: 'Bewertungen & Preise', Icon: GitCompare },

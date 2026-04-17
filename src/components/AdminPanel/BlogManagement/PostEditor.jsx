@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useAuth } from '@/src/contexts/SupabaseAuthContext';
 import { useToast } from '@/src/components/ui/use-toast';
@@ -422,14 +422,14 @@ const PostEditor = ({ post, onBack }) => {
           <h2 className="text-2xl font-bold">{post ? 'Beitrag bearbeiten' : 'Neuen Beitrag erstellen'}</h2>
         </div>
         <Input placeholder="Beitragstitel hier eingeben..." value={title} onChange={handleTitleChange} className="text-2xl font-bold h-14 border-0 shadow-none focus-visible:ring-0 px-2" />
-        <Suspense fallback={<div className="flex items-center justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-gray-400" /></div>}>
+        <Suspense fallback={<div className="flex items-center justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-muted-foreground" /></div>}>
           <TiptapEditor content={content} onChange={setContent} insertHtml={insertHtmlToEditor} />
         </Suspense>
 
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-green-600" />
+              <HelpCircle className="w-5 h-5 text-green-600 dark:text-emerald-400" />
               FAQ (Häufige Fragen)
             </CardTitle>
           </CardHeader>
@@ -438,7 +438,7 @@ const PostEditor = ({ post, onBack }) => {
               <p className="text-xs text-muted-foreground mb-3">
                 Fügen Sie Fragen und Antworten hinzu, die für Google AI Overview und Rich Results verwendet werden.
               </p>
-              <div className="p-4 border rounded-lg space-y-3 bg-blue-50 border-blue-200">
+              <div className="p-4 border rounded-lg space-y-3 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-900">
                 <div>
                   <Label className="text-xs">FAQ-Bereich Haupttitel (Title) - Optional</Label>
                   <Input
@@ -462,9 +462,9 @@ const PostEditor = ({ post, onBack }) => {
                 </div>
               </div>
               {faqs.map((faq, index) => (
-                <div key={index} className="p-4 border rounded-lg space-y-3 bg-gray-50">
+                <div key={index} className="p-4 border border-border rounded-lg space-y-3 bg-muted/40">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-semibold text-gray-700">Frage {index + 1}</span>
+                    <span className="text-sm font-semibold text-foreground">Frage {index + 1}</span>
                     <Button
                       type="button"
                       variant="ghost"
@@ -517,7 +517,7 @@ const PostEditor = ({ post, onBack }) => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Code className="w-5 h-5 text-green-600" />
+              <Code className="w-5 h-5 text-green-600 dark:text-emerald-400" />
               HTML Kodu (Custom HTML)
             </CardTitle>
           </CardHeader>
@@ -596,23 +596,23 @@ const PostEditor = ({ post, onBack }) => {
                     onChange={handleImageUrlChange}
                     className="w-full"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Sie können eine Bild-URL direkt einfügen oder eine Datei hochladen</p>
+                  <p className="text-xs text-muted-foreground mt-1">Sie können eine Bild-URL direkt einfügen oder eine Datei hochladen</p>
                 </div>
                 
                 {/* Divider */}
                 {(featuredImageUrl || imageFile) && (
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
-                      <span className="w-full border-t border-gray-300"></span>
+                      <span className="w-full border-t border-border"></span>
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                      <span className="bg-white px-2 text-gray-500">Oder</span>
+                      <span className="bg-card px-2 text-muted-foreground">Oder</span>
                     </div>
                   </div>
                 )}
 
                 {/* File Upload Dropzone */}
-                <div {...getRootProps()} className={`flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md cursor-pointer ${isDragActive ? 'border-green-500 bg-green-50' : 'border-gray-300'}`}>
+                <div {...getRootProps()} className={`flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md cursor-pointer ${isDragActive ? 'border-green-500 bg-green-50 dark:bg-emerald-950/35 dark:border-emerald-600' : 'border-border'}`}>
                 <input {...getInputProps()} />
                 {featuredImageUrl ? (
                   <div className="relative w-full h-40">
@@ -623,9 +623,9 @@ const PostEditor = ({ post, onBack }) => {
                   </div>
                 ) : (
                   <div className="space-y-1 text-center">
-                    <UploadCloud className="mx-auto h-12 w-12 text-gray-400" />
-                    <p className="text-sm text-gray-600">{isDragActive ? 'Bild hier ablegen...' : 'Bild hierher ziehen oder klicken'}</p>
-                    <p className="text-xs text-gray-500">PNG, JPG, GIF bis 5MB</p>
+                    <UploadCloud className="mx-auto h-12 w-12 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">{isDragActive ? 'Bild hier ablegen...' : 'Bild hierher ziehen oder klicken'}</p>
+                    <p className="text-xs text-muted-foreground/80">PNG, JPG, GIF bis 5MB</p>
                   </div>
                 )}
                 </div>
@@ -678,10 +678,10 @@ const PostEditor = ({ post, onBack }) => {
               <Label htmlFor="tags">Etiketten (Tags)</Label>
               <Input id="tags" value={tagInput} onChange={handleTagInputChange} onKeyDown={handleTagInputKeyDown} onFocus={() => setIsTagInputFocused(true)} onBlur={() => setTimeout(() => setIsTagInputFocused(false), 150)} placeholder="Tag hinzufügen und Enter/Komma..." />
               {isTagInputFocused && suggestedTags.length > 0 && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                <div className="absolute z-10 w-full mt-1 bg-popover text-popover-foreground border border-border rounded-md shadow-lg">
                   <ul className="py-1">
                     {suggestedTags.map((suggestion, index) => (
-                      <li key={index} className="px-3 py-2 cursor-pointer hover:bg-gray-100 flex items-center gap-2" onMouseDown={() => addTag(suggestion)}><Tag className="w-4 h-4 text-gray-500" />{suggestion}</li>
+                      <li key={index} className="px-3 py-2 cursor-pointer hover:bg-muted flex items-center gap-2" onMouseDown={() => addTag(suggestion)}><Tag className="w-4 h-4 text-muted-foreground" />{suggestion}</li>
                     ))}
                   </ul>
                 </div>
@@ -704,7 +704,7 @@ const PostEditor = ({ post, onBack }) => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <MessageSquare className="w-5 h-5 text-green-600" />
+              <MessageSquare className="w-5 h-5 text-green-600 dark:text-emerald-400" />
               Kundenrezensionen hinzufügen
             </CardTitle>
           </CardHeader>
@@ -712,7 +712,7 @@ const PostEditor = ({ post, onBack }) => {
             <ScrollArea className="h-72">
               <div className="space-y-4 pr-4">
                 {availableReviews.length > 0 ? availableReviews.map(review => (
-                  <div key={review.id} className="flex items-start gap-3 p-2 rounded-md hover:bg-gray-50">
+                  <div key={review.id} className="flex items-start gap-3 p-2 rounded-md hover:bg-muted/50">
                     <Checkbox
                       id={`review-${review.id}`}
                       checked={selectedReviewIds.includes(review.id)}

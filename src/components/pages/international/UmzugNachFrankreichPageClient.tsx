@@ -10,7 +10,7 @@ import InternationalPageNavigation from '@/components/international/Internationa
 
 const Section = ({ children, className = '' }: any) => (
   <section
-    className={`py-10 md:py-14 border-t border-gray-100 ${className}`}
+    className={`py-10 md:py-14 border-t border-border ${className}`}
   >
     {children}
   </section>
@@ -29,7 +29,7 @@ const SectionTitle = ({ icon, title }: any) => {
 const ListItem = ({ children, icon: Icon = CheckCircle }: any) => (
   <li className="flex items-start py-2">
     <Icon className="w-6 h-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
-    <span className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: children }} />
+    <span className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: children }} />
   </li>
 );
 
@@ -118,7 +118,7 @@ const UmzugNachFrankreichPageClient = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-slate-50 via-gray-50 to-white">
+      <div className="bg-gradient-to-b from-background via-muted/30 to-background">
         <section
           className="relative w-full bg-cover bg-center text-white"
         >
@@ -137,22 +137,22 @@ const UmzugNachFrankreichPageClient = () => {
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
-            <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-10">
+            <main className="lg:col-span-2 bg-card p-6 md:p-10 rounded-2xl border border-border/60 shadow-xl space-y-10">
               <Section className="border-t-0 pt-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Ihr Weg nach Frankreich: Ein Leitfaden für den perfekten Start</h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-4">Ein Umzug von der Schweiz nach Frankreich ist mehr als nur ein Transport von A nach B. Es ist der Beginn eines neuen Lebenskapitels, geprägt von einer reichen Kultur, exzellenter Küche und malerischen Landschaften. Doch bevor Sie das 'Savoir-vivre' geniessen können, steht eine sorgfältige Planung an. Die administrativen und logistischen Hürden eines Auslandumzugs können komplex sein, insbesondere im Hinblick auf Zollbestimmungen und die Auswahl des richtigen Partners.</p>
-                <p className="text-gray-700 leading-relaxed">Dieser umfassende Leitfaden soll Ihnen als verlässlicher Kompass dienen. Wir beleuchten alle wichtigen Aspekte Ihres Umzugs: von der detaillierten Kostenkalkulation über die notwendigen Zollformalitäten bis hin zur strategischen Auswahl der passenden Umzugsfirma. Das Ziel ist es, Ihnen nicht nur Geld und Zeit zu sparen, sondern auch den Stress zu minimieren, damit Ihre Ankunft in Frankreich so entspannt wie möglich verläuft.</p>
-                 <p className="text-gray-700 leading-relaxed mt-4">Durch den Vergleich von qualifizierten, auf Frankreich-Umzüge spezialisierten Unternehmen stellen Sie sicher, dass Ihr wertvolles Umzugsgut in erfahrenen Händen ist. So können Sie sich auf die Vorfreude konzentrieren – auf Croissants zum Frühstück, Spaziergänge an der Seine oder die Sonne an der Côte d'Azur.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Ihr Weg nach Frankreich: Ein Leitfaden für den perfekten Start</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">Ein Umzug von der Schweiz nach Frankreich ist mehr als nur ein Transport von A nach B. Es ist der Beginn eines neuen Lebenskapitels, geprägt von einer reichen Kultur, exzellenter Küche und malerischen Landschaften. Doch bevor Sie das 'Savoir-vivre' geniessen können, steht eine sorgfältige Planung an. Die administrativen und logistischen Hürden eines Auslandumzugs können komplex sein, insbesondere im Hinblick auf Zollbestimmungen und die Auswahl des richtigen Partners.</p>
+                <p className="text-muted-foreground leading-relaxed">Dieser umfassende Leitfaden soll Ihnen als verlässlicher Kompass dienen. Wir beleuchten alle wichtigen Aspekte Ihres Umzugs: von der detaillierten Kostenkalkulation über die notwendigen Zollformalitäten bis hin zur strategischen Auswahl der passenden Umzugsfirma. Das Ziel ist es, Ihnen nicht nur Geld und Zeit zu sparen, sondern auch den Stress zu minimieren, damit Ihre Ankunft in Frankreich so entspannt wie möglich verläuft.</p>
+                 <p className="text-muted-foreground leading-relaxed mt-4">Durch den Vergleich von qualifizierten, auf Frankreich-Umzüge spezialisierten Unternehmen stellen Sie sicher, dass Ihr wertvolles Umzugsgut in erfahrenen Händen ist. So können Sie sich auf die Vorfreude konzentrieren – auf Croissants zum Frühstück, Spaziergänge an der Seine oder die Sonne an der Côte d'Azur.</p>
               </Section>
 
               <Section>
                 <SectionTitle icon={ShieldCheck} title="Der klügste erste Schritt: Umzugsfirmen vergleichen" />
-                <p className="text-gray-700 leading-relaxed mb-8">Der Schlüssel zu einem erfolgreichen und preiswerten Umzug nach Frankreich liegt im systematischen Vergleich von Offerten. Die Preis- und Leistungsunterschiede sind oft enorm. Nur durch transparente Offerten können Sie versteckte Kosten aufdecken und ein Unternehmen finden, das Ihren individuellen Anforderungen gerecht wird.</p>
+                <p className="text-muted-foreground leading-relaxed mb-8">Der Schlüssel zu einem erfolgreichen und preiswerten Umzug nach Frankreich liegt im systematischen Vergleich von Offerten. Die Preis- und Leistungsunterschiede sind oft enorm. Nur durch transparente Offerten können Sie versteckte Kosten aufdecken und ein Unternehmen finden, das Ihren individuellen Anforderungen gerecht wird.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {whyCompareItems.map((item, i) => (
-                        <div key={i} className="bg-slate-50 p-5 rounded-lg border border-slate-200 transition-all duration-300 hover:shadow-md hover:border-green-200">
-                            <h4 className="font-bold text-lg text-gray-800 mb-2">{item.title}</h4>
-                            <p className="text-gray-600">{item.text}</p>
+                        <div key={i} className="bg-muted/50 p-5 rounded-lg border border-border transition-all duration-300 hover:shadow-md hover:border-green-200">
+                            <h4 className="font-bold text-lg text-foreground mb-2">{item.title}</h4>
+                            <p className="text-muted-foreground">{item.text}</p>
                         </div>
                     ))}
                 </div>
@@ -160,18 +160,18 @@ const UmzugNachFrankreichPageClient = () => {
               
               <Section>
                 <SectionTitle icon={Home} title="Die Umzugsplanung: Eine detaillierte Checkliste" />
-                <p className="text-gray-700 leading-relaxed mb-6">Eine strukturierte Planung ist die halbe Miete. Ob Sie privat mit Ihrer Familie umziehen oder einen komplexen Firmenstandort verlagern, eine gute Organisation verhindert Chaos und unerwartete Probleme.</p>
+                <p className="text-muted-foreground leading-relaxed mb-6">Eine strukturierte Planung ist die halbe Miete. Ob Sie privat mit Ihrer Familie umziehen oder einen komplexen Firmenstandort verlagern, eine gute Organisation verhindert Chaos und unerwartete Probleme.</p>
                 <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-8">
                   <p className="text-blue-800">Professionelle Umzugsfirmen unterstützen Sie bei jedem Schritt, von der Demontage der Möbel bis zur Zollabwicklung. Doch Ihre eigene Vorbereitung ist ebenso entscheidend.</p>
                 </div>
-                <h3 className="text-2xl font-semibold text-gray-800 mt-10 mb-4">Ihre Umzugs-Checkliste für Frankreich:</h3>
+                <h3 className="text-2xl font-semibold text-foreground mt-10 mb-4">Ihre Umzugs-Checkliste für Frankreich:</h3>
                 <ul className="space-y-4">{movingChecklist.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
               </Section>
 
               <Section>
                 <SectionTitle icon={FileText} title="Zollformalitäten: Reibungslos über die Grenze" />
-                 <p className="text-gray-700 leading-relaxed mb-6">Der Umzug von der Schweiz (Nicht-EU) nach Frankreich (EU) erfordert eine Zollanmeldung für Ihr Umzugsgut. Auch wenn Umzugsgut in der Regel zoll- und steuerfrei eingeführt werden kann, müssen bestimmte Bedingungen erfüllt und die richtigen Formulare ausgefüllt werden.</p>
-                 <p className="text-gray-700 leading-relaxed mb-6">Zu den Voraussetzungen gehört, dass Sie Ihren Hauptwohnsitz nach Frankreich verlegen und die Gegenstände seit mindestens sechs Monaten in Ihrem Besitz sind und von Ihnen genutzt wurden. Eine detaillierte Inventarliste (idealerweise auf Französisch) ist unerlässlich.</p>
+                 <p className="text-muted-foreground leading-relaxed mb-6">Der Umzug von der Schweiz (Nicht-EU) nach Frankreich (EU) erfordert eine Zollanmeldung für Ihr Umzugsgut. Auch wenn Umzugsgut in der Regel zoll- und steuerfrei eingeführt werden kann, müssen bestimmte Bedingungen erfüllt und die richtigen Formulare ausgefüllt werden.</p>
+                 <p className="text-muted-foreground leading-relaxed mb-6">Zu den Voraussetzungen gehört, dass Sie Ihren Hauptwohnsitz nach Frankreich verlegen und die Gegenstände seit mindestens sechs Monaten in Ihrem Besitz sind und von Ihnen genutzt wurden. Eine detaillierte Inventarliste (idealerweise auf Französisch) ist unerlässlich.</p>
                 <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
                     <h4 className="font-bold text-yellow-900">Profi-Tipp</h4>
                     <p className="text-yellow-800">Überlassen Sie die Zollabwicklung Ihrer Umzugsfirma! Erfahrene Unternehmen kennen die Prozeduren genau, erstellen die notwendigen Dokumente (z.B. Formular Cerfa n°10070) und sorgen für eine zügige Abfertigung an der Grenze. Das spart Ihnen enorm viel Zeit und Nerven.</p>
@@ -180,39 +180,39 @@ const UmzugNachFrankreichPageClient = () => {
 
               <Section>
                 <SectionTitle title="Was kostet ein Umzug von der Schweiz nach Frankreich?" />
-                <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug nach Frankreich variieren stark und hängen von diversen Faktoren ab. Das Volumen Ihres Haushalts, die Distanz (z.B. Genf-Paris vs. Zürich-Nizza), die Zugänglichkeit der Wohnungen und der Umfang der gewünschten Dienstleistungen sind die Hauptpreistreiber. Die folgende Tabelle gibt Ihnen eine erste Orientierung.</p>
+                <p className="text-muted-foreground leading-relaxed mb-8">Die Kosten für einen Umzug nach Frankreich variieren stark und hängen von diversen Faktoren ab. Das Volumen Ihres Haushalts, die Distanz (z.B. Genf-Paris vs. Zürich-Nizza), die Zugänglichkeit der Wohnungen und der Umfang der gewünschten Dienstleistungen sind die Hauptpreistreiber. Die folgende Tabelle gibt Ihnen eine erste Orientierung.</p>
                 
-                <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Kostenschätzung für einen Umzug nach Frankreich</h3>
+                <div className="bg-muted/50 p-6 rounded-lg border border-border mt-8">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Kostenschätzung für einen Umzug nach Frankreich</h3>
                   <div className="overflow-x-auto">
                     <table className="w-full min-w-max text-left">
                       <thead>
                         <tr className="border-b">
-                          <th className="py-3 px-2 font-semibold text-gray-600">Wohnungsgrösse / Ladevolumen</th>
-                          <th className="py-3 px-2 font-semibold text-gray-600 text-right">Geschätzte Kosten (CHF)</th>
+                          <th className="py-3 px-2 font-semibold text-muted-foreground">Wohnungsgrösse / Ladevolumen</th>
+                          <th className="py-3 px-2 font-semibold text-muted-foreground text-right">Geschätzte Kosten (CHF)</th>
                         </tr>
                       </thead>
                       <tbody>
                         {costTable.map((row, i) => (
-                          <tr key={i} className="border-b border-slate-200 last:border-0 hover:bg-slate-100">
-                            <td className="py-4 px-2 text-gray-700">{row.size}</td>
-                            <td className="py-4 px-2 text-gray-800 font-medium text-right">{row.cost}</td>
+                          <tr key={i} className="border-b border-border last:border-0 hover:bg-muted/80">
+                            <td className="py-4 px-2 text-muted-foreground">{row.size}</td>
+                            <td className="py-4 px-2 text-foreground font-medium text-right">{row.cost}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <p className="text-xs text-gray-500 mt-4 italic">*Dies sind Richtwerte. Die tatsächlichen Kosten können je nach Serviceumfang, Saison und Anbieter erheblich abweichen.</p>
+                  <p className="text-xs text-muted-foreground mt-4 italic">*Dies sind Richtwerte. Die tatsächlichen Kosten können je nach Serviceumfang, Saison und Anbieter erheblich abweichen.</p>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-gray-800 mt-12 mb-6">Diese Faktoren bestimmen den Endpreis:</h3>
+                <h3 className="text-2xl font-semibold text-foreground mt-12 mb-6">Diese Faktoren bestimmen den Endpreis:</h3>
                 <ul className="space-y-4 columns-1 md:columns-2">{costFactors.map((item, i) => <ListItem key={i}>{item.text}</ListItem>)}</ul>
               </Section>
               
               <Section>
                 <SectionTitle icon={Sparkles} title="Sorgenfreie Wohnungsübergabe dank Reinigung mit Abnahmegarantie" />
-                <p className="text-gray-700 leading-relaxed mb-4">Die Endreinigung Ihrer Schweizer Mietwohnung ist ein entscheidender letzter Schritt vor dem Umzug. Um Ihre Mietkaution vollständig zurückzuerhalten, ist eine professionelle Reinigung nach Schweizer Standards mit Abnahmegarantie fast immer die beste Wahl.</p>
-                <p className="text-gray-700 leading-relaxed font-semibold mb-8">Viele internationale Umzugsfirmen bieten diesen Service im Paket an, was die Koordination erheblich vereinfacht.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">Die Endreinigung Ihrer Schweizer Mietwohnung ist ein entscheidender letzter Schritt vor dem Umzug. Um Ihre Mietkaution vollständig zurückzuerhalten, ist eine professionelle Reinigung nach Schweizer Standards mit Abnahmegarantie fast immer die beste Wahl.</p>
+                <p className="text-muted-foreground leading-relaxed font-semibold mb-8">Viele internationale Umzugsfirmen bieten diesen Service im Paket an, was die Koordination erheblich vereinfacht.</p>
                 <ul className="space-y-4">{cleaningBenefits.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
               </Section>
               
@@ -224,7 +224,7 @@ const UmzugNachFrankreichPageClient = () => {
                       <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
                         <h4 className="faq-question">{faq.question}</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="text-gray-700 leading-relaxed">
+                      <AccordionContent className="text-muted-foreground leading-relaxed">
                         <p dangerouslySetInnerHTML={{ __html: faq.answer }}></p>
                       </AccordionContent>
                     </AccordionItem>
@@ -244,14 +244,14 @@ const UmzugNachFrankreichPageClient = () => {
 
             <aside className="lg:col-span-1 space-y-8 self-start sticky top-28">
               <div
-                className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                className="bg-card p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-border/60"
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Truck size={24} className="mr-3 text-blue-500" />
                   Erfahrene Partner für Frankreich
                 </h3>
                 <img  alt="Ein Umzugswagen fährt durch eine französische Landschaft" className="w-full h-56 object-cover rounded-lg shadow-md mb-3" src="https://images.unsplash.com/photo-1552539618-1647f2950541" />
-                <p className="text-sm text-gray-600 mt-2">Vergleichen Sie Offerten von qualifizierten Firmen, die die Routen und Bestimmungen für Umzüge nach Frankreich bestens kennen.</p>
+                <p className="text-sm text-muted-foreground mt-2">Vergleichen Sie Offerten von qualifizierten Firmen, die die Routen und Bestimmungen für Umzüge nach Frankreich bestens kennen.</p>
               </div>
               <div
                 className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200"

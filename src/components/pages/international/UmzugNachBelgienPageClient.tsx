@@ -8,7 +8,7 @@ import { ArrowRight, CheckCircle, FileText, Briefcase, Sparkles, Trash2, ShieldC
 
 // Lazy load InternationalPageNavigation to reduce bundle size
 const InternationalPageNavigation = dynamic(() => import('@/components/international/InternationalPageNavigation'), {
-  loading: () => <div className="h-20 animate-pulse bg-gray-100 rounded-lg" />
+  loading: () => <div className="h-20 animate-pulse bg-muted rounded-lg" />
 });
 
 interface SectionProps {
@@ -18,7 +18,7 @@ interface SectionProps {
 
 const Section = ({ children, className = '' }: SectionProps) => (
   <section
-    className={`py-8 md:py-12 border-t border-gray-100 animate-fade-in-up ${className}`}
+    className={`py-8 md:py-12 border-t border-border animate-fade-in-up ${className}`}
   >
     {children}
   </section>
@@ -48,7 +48,7 @@ interface ListItemProps {
 const ListItem = ({ children }: ListItemProps) => (
   <li className="flex items-start py-1">
     <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-    <span className="text-gray-700" dangerouslySetInnerHTML={{ __html: children }} />
+    <span className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: children }} />
   </li>
 );
 
@@ -124,7 +124,7 @@ const UmzugNachBelgienPageClient = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-slate-50 via-gray-50 to-white">
+      <div className="bg-gradient-to-b from-background via-muted/30 to-background">
         <section
           className="relative w-full bg-cover bg-center text-white animate-fade-in"
         >
@@ -142,21 +142,21 @@ const UmzugNachBelgienPageClient = () => {
 
         <div className="container mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-start">
-            <main className="lg:col-span-2 bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
+            <main className="lg:col-span-2 bg-card p-6 md:p-10 rounded-2xl border border-border/60 shadow-xl space-y-8">
               <Section className="border-t-0 pt-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Sorglos von der Schweiz nach Belgien umziehen</h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-4">Ein Umzug von der Schweiz nach Belgien bedeutet den Sprung in das Zentrum Europas, reich an Kultur, Geschichte und internationalem Flair. Ob Sie aus beruflichen Gründen nach Brüssel ziehen, Ihr Unternehmen verlagern oder einen neuen Lebensabschnitt in Flandern oder Wallonien beginnen – eine gute Vorbereitung ist entscheidend. Ein internationaler Umzug bringt spezifische Herausforderungen mit sich, von der Logistik bis zu den administrativen Hürden innerhalb der EU.</p>
-                <p className="text-gray-700 leading-relaxed">Um Ihnen den Start zu erleichtern, bieten wir Ihnen eine Plattform, auf der Sie schnell und einfach qualifizierte Umzugsfirmen finden. Erhalten Sie massgeschneiderte Offerten, die genau auf Ihre Bedürfnisse zugeschnitten sind – sei es für einen kompletten Privatumzug, einen spezialisierten Geschäftsumzug, die notwendige Endreinigung oder die Entsorgung von Altlasten. Beginnen Sie Ihr Abenteuer in Belgien bestens vorbereitet.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Sorglos von der Schweiz nach Belgien umziehen</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">Ein Umzug von der Schweiz nach Belgien bedeutet den Sprung in das Zentrum Europas, reich an Kultur, Geschichte und internationalem Flair. Ob Sie aus beruflichen Gründen nach Brüssel ziehen, Ihr Unternehmen verlagern oder einen neuen Lebensabschnitt in Flandern oder Wallonien beginnen – eine gute Vorbereitung ist entscheidend. Ein internationaler Umzug bringt spezifische Herausforderungen mit sich, von der Logistik bis zu den administrativen Hürden innerhalb der EU.</p>
+                <p className="text-muted-foreground leading-relaxed">Um Ihnen den Start zu erleichtern, bieten wir Ihnen eine Plattform, auf der Sie schnell und einfach qualifizierte Umzugsfirmen finden. Erhalten Sie massgeschneiderte Offerten, die genau auf Ihre Bedürfnisse zugeschnitten sind – sei es für einen kompletten Privatumzug, einen spezialisierten Geschäftsumzug, die notwendige Endreinigung oder die Entsorgung von Altlasten. Beginnen Sie Ihr Abenteuer in Belgien bestens vorbereitet.</p>
               </Section>
 
               <Section>
                 <SectionTitle icon={ShieldCheck} title="Preis und Leistung im Blick: Warum sich der Vergleich lohnt" />
-                <p className="text-gray-700 leading-relaxed mb-6">Die Kosten für einen internationalen Umzug können stark variieren. Indem Sie mehrere Offerten vergleichen, erhalten Sie nicht nur den besten Preis, sondern auch die Sicherheit, einen zuverlässigen und erfahrenen Partner für Ihren Umzug nach Belgien zu finden. Transparenz ist der Schlüssel zu einem stressfreien Erlebnis.</p>
+                <p className="text-muted-foreground leading-relaxed mb-6">Die Kosten für einen internationalen Umzug können stark variieren. Indem Sie mehrere Offerten vergleichen, erhalten Sie nicht nur den besten Preis, sondern auch die Sicherheit, einen zuverlässigen und erfahrenen Partner für Ihren Umzug nach Belgien zu finden. Transparenz ist der Schlüssel zu einem stressfreien Erlebnis.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {whyCompareItems.map((item, i) => (
-                        <div key={i} className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h4 className="font-semibold text-gray-800 mb-2">{item.title}</h4>
-                            <p className="text-sm text-gray-600">{item.text}</p>
+                        <div key={i} className="bg-muted/50 p-4 rounded-lg border border-border">
+                            <h4 className="font-semibold text-foreground mb-2">{item.title}</h4>
+                            <p className="text-sm text-muted-foreground">{item.text}</p>
                         </div>
                     ))}
                 </div>
@@ -164,15 +164,15 @@ const UmzugNachBelgienPageClient = () => {
               
               <Section>
                 <SectionTitle icon={Home} title="Privatumzug und Geschäftsumzug nach Belgien" />
-                <p className="text-gray-700 leading-relaxed mb-4">Die Anforderungen an einen Privatumzug unterscheiden sich grundlegend von denen eines Geschäftsumzugs. Während bei einem privaten Wohnungswechsel die persönliche Betreuung und sorgfältige Behandlung des Hausrats im Vordergrund stehen, geht es bei einem Firmenumzug um Effizienz, minimale Betriebsunterbrechung und den sicheren Transfer von Akten und Technik.</p>
-                <p className="text-gray-700 leading-relaxed mb-8">Unsere Partnerfirmen sind auf beide Szenarien spezialisiert. Sie erstellen einen detaillierten Umzugsplan, kümmern sich um die professionelle Verpackung und gewährleisten einen termingerechten Ablauf, damit Sie oder Ihr Unternehmen in Belgien schnell wieder startklar sind.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">Die Anforderungen an einen Privatumzug unterscheiden sich grundlegend von denen eines Geschäftsumzugs. Während bei einem privaten Wohnungswechsel die persönliche Betreuung und sorgfältige Behandlung des Hausrats im Vordergrund stehen, geht es bei einem Firmenumzug um Effizienz, minimale Betriebsunterbrechung und den sicheren Transfer von Akten und Technik.</p>
+                <p className="text-muted-foreground leading-relaxed mb-8">Unsere Partnerfirmen sind auf beide Szenarien spezialisiert. Sie erstellen einen detaillierten Umzugsplan, kümmern sich um die professionelle Verpackung und gewährleisten einen termingerechten Ablauf, damit Sie oder Ihr Unternehmen in Belgien schnell wieder startklar sind.</p>
                 <div className="space-y-6">
                     {movingSteps.map((step, i) => (
                          <div key={i} className="flex items-start">
-                            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center font-bold text-xl mr-4">{i + 1}</div>
+                            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-100 dark:bg-green-950/50 text-green-600 dark:text-green-400 flex items-center justify-center font-bold text-xl mr-4">{i + 1}</div>
                             <div>
-                                <h4 className="font-bold text-lg text-gray-800 mb-1">{step.title}</h4>
-                                <p className="text-gray-600">{step.text}</p>
+                                <h4 className="font-bold text-lg text-foreground mb-1">{step.title}</h4>
+                                <p className="text-muted-foreground">{step.text}</p>
                             </div>
                         </div>
                     ))}
@@ -181,48 +181,48 @@ const UmzugNachBelgienPageClient = () => {
 
               <Section>
                 <SectionTitle title="Welche Kosten entstehen bei einem Umzug nach Belgien?" />
-                <p className="text-gray-700 leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Belgien sind von mehreren Faktoren abhängig. Entscheidend sind das Ladevolumen (in m³), die genaue Distanz (z.B. von Zürich nach Brüssel), der gewünschte Serviceumfang (z.B. mit oder ohne Verpackungsservice) und die Gegebenheiten vor Ort wie Stockwerk und Lift.</p>
+                <p className="text-muted-foreground leading-relaxed mb-8">Die Kosten für einen Umzug von der Schweiz nach Belgien sind von mehreren Faktoren abhängig. Entscheidend sind das Ladevolumen (in m³), die genaue Distanz (z.B. von Zürich nach Brüssel), der gewünschte Serviceumfang (z.B. mit oder ohne Verpackungsservice) und die Gegebenheiten vor Ort wie Stockwerk und Lift.</p>
                 
-                <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mt-8">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Durchschnittliche Kosten (Schätzungen)</h3>
+                <div className="bg-muted/50 p-6 rounded-lg border border-border mt-8">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Durchschnittliche Kosten (Schätzungen)</h3>
                   <table className="w-full text-left">
                     <thead>
                       <tr className="border-b">
-                        <th className="py-2 font-semibold text-gray-600">Wohnungsgrösse</th>
-                        <th className="py-2 font-semibold text-gray-600 text-right">Geschätzte Kosten</th>
+                        <th className="py-2 font-semibold text-muted-foreground">Wohnungsgrösse</th>
+                        <th className="py-2 font-semibold text-muted-foreground text-right">Geschätzte Kosten</th>
                       </tr>
                     </thead>
                     <tbody>
                       {costTable.map((row, i) => (
-                        <tr key={i} className="border-b border-slate-200 last:border-0">
-                          <td className="py-3 text-gray-700">{row.size}</td>
-                          <td className="py-3 text-gray-800 font-medium text-right">{row.cost}</td>
+                        <tr key={i} className="border-b border-border last:border-0">
+                          <td className="py-3 text-muted-foreground">{row.size}</td>
+                          <td className="py-3 text-foreground font-medium text-right">{row.cost}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                  <p className="text-xs text-gray-500 mt-3 italic">*Diese Richtwerte dienen der Orientierung. Genaue Preise erhalten Sie durch individuelle Offerten.</p>
+                  <p className="text-xs text-muted-foreground mt-3 italic">*Diese Richtwerte dienen der Orientierung. Genaue Preise erhalten Sie durch individuelle Offerten.</p>
                 </div>
 
-                <h3 className="text-xl font-semibold text-gray-800 mt-10 mb-4">Preisbestimmende Faktoren:</h3>
+                <h3 className="text-xl font-semibold text-foreground mt-10 mb-4">Preisbestimmende Faktoren:</h3>
                 <ul className="space-y-3 columns-1 md:columns-2">{costFactors.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
               </Section>
               
               <Section>
                 <SectionTitle icon={Sparkles} title="Endreinigung in der Schweiz mit Abnahmegarantie" />
-                <p className="text-gray-700 leading-relaxed mb-4">Verlassen Sie Ihre alte Wohnung in der Schweiz ohne Stress. Eine professionelle Endreinigung mit Abnahmegarantie ist der Schlüssel zur problemlosen Wohnungsübergabe und zur vollständigen Rückerstattung Ihrer Mietkaution. Die Reinigungsfirma kümmert sich um alle Details, auf die Ihre Verwaltung Wert legt.</p>
-                <p className="text-gray-700 leading-relaxed font-semibold mb-6">Buchen Sie Umzug und Reinigung im Paket und profitieren Sie von attraktiven Kombi-Offerten und einem zentralen Ansprechpartner.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">Verlassen Sie Ihre alte Wohnung in der Schweiz ohne Stress. Eine professionelle Endreinigung mit Abnahmegarantie ist der Schlüssel zur problemlosen Wohnungsübergabe und zur vollständigen Rückerstattung Ihrer Mietkaution. Die Reinigungsfirma kümmert sich um alle Details, auf die Ihre Verwaltung Wert legt.</p>
+                <p className="text-muted-foreground leading-relaxed font-semibold mb-6">Buchen Sie Umzug und Reinigung im Paket und profitieren Sie von attraktiven Kombi-Offerten und einem zentralen Ansprechpartner.</p>
                 <ul className="space-y-3">{cleaningBenefits.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</ul>
               </Section>
 
               <Section>
                 <SectionTitle icon={Trash2} title="Platz schaffen: Entsorgung und Räumung" />
-                <p className="text-gray-700 leading-relaxed mb-6">Nutzen Sie den Umzug, um sich von Dingen zu trennen, die Sie nicht mehr benötigen. Viele Umzugsunternehmen bieten einen umfassenden Service für die Räumung und fachgerechte Entsorgung von Möbeln, Elektroschrott und anderem Sperrmüll. Das schafft nicht nur Platz im neuen Zuhause, sondern reduziert auch das Transportvolumen und somit die Umzugskosten.</p>
+                <p className="text-muted-foreground leading-relaxed mb-6">Nutzen Sie den Umzug, um sich von Dingen zu trennen, die Sie nicht mehr benötigen. Viele Umzugsunternehmen bieten einen umfassenden Service für die Räumung und fachgerechte Entsorgung von Möbeln, Elektroschrott und anderem Sperrmüll. Das schafft nicht nur Platz im neuen Zuhause, sondern reduziert auch das Transportvolumen und somit die Umzugskosten.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {disposalServices.map((item, i) => (
-                    <div key={i} className="flex items-center bg-gray-50 p-4 rounded-lg">
+                    <div key={i} className="flex items-center bg-muted/50 p-4 rounded-lg">
                       <CheckCircle className="w-6 h-6 text-green-500 mr-4 flex-shrink-0" />
-                      <span className="text-gray-700 font-medium">{item}</span>
+                      <span className="text-muted-foreground font-medium">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -240,14 +240,14 @@ const UmzugNachBelgienPageClient = () => {
 
             <aside className="lg:col-span-1 space-y-8 self-start sticky top-28">
               <div 
-                className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 animate-fade-in-right"
+                className="bg-card p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-border/60 animate-fade-in-right"
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Truck size={24} className="mr-3 text-blue-500" />
                   Ihr Umzug in besten Händen
                 </h3>
                 <img alt="Ein Umzugshelfer verlädt eine Box in einen Transporter" className="w-full h-56 object-cover rounded-lg shadow-md mb-3" src="https://images.unsplash.com/photo-1562905909-8e35a6e1993a" loading="lazy" />
-                <p className="text-sm text-gray-600 mt-2">Unsere Partner verfügen über jahrelange Erfahrung mit Umzügen nach Belgien und kennen die lokalen Gegebenheiten.</p>
+                <p className="text-sm text-muted-foreground mt-2">Unsere Partner verfügen über jahrelange Erfahrung mit Umzügen nach Belgien und kennen die lokalen Gegebenheiten.</p>
               </div>
               <div 
                 className="bg-green-50 p-6 rounded-2xl shadow-lg border border-green-200 animate-fade-in-right-delay"

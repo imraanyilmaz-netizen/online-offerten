@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/src/components/ui/use-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -113,7 +113,7 @@ const ReviewCard = ({ review, onUpdate }) => {
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="p-4 bg-gray-50 border-b">
+      <CardHeader className="p-4 bg-muted/40 border-b border-border">
         <div className="flex justify-between items-start">
             <div>
                 <CardTitle className="text-md">{review.customer_name}</CardTitle>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -12,9 +12,9 @@ const GuenstigUmziehenPageClient = () => {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-background">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-green-50 via-emerald-50 to-white overflow-hidden">
+        <section className="relative bg-gradient-to-br from-green-50 via-emerald-50 to-white dark:from-background dark:via-background dark:to-emerald-950/25 overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           <div className="relative container mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -29,7 +29,7 @@ const GuenstigUmziehenPageClient = () => {
                 <Button 
                   onClick={() => router.push('/kostenlose-offerte-anfordern')} 
                   size="lg" 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold group px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                  className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-bold group px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
                 >
                 Jetzt kostenlos & unverbindlich Offerten vergleichen
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -41,7 +41,7 @@ const GuenstigUmziehenPageClient = () => {
                     { label: "Bis zu 40% sparen", icon: TrendingDown }
                   ].map((stat, index) => (
                     <div key={index} className="flex items-center gap-2">
-                      <stat.icon className="w-5 h-5 text-green-600" />
+                      <stat.icon className="w-5 h-5 text-green-600 dark:text-emerald-400" />
                       <span className="text-body font-medium">{stat.label}</span>
                     </div>
                   ))}
@@ -64,7 +64,7 @@ const GuenstigUmziehenPageClient = () => {
         </section>
 
             {/* Main Content */}
-        <section className="py-12 md:py-16 bg-white">
+        <section className="py-12 md:py-16 bg-background">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <div className="max-w-4xl">
               {/* Main Content - Full Width */}
@@ -98,8 +98,8 @@ const GuenstigUmziehenPageClient = () => {
                       description: "Festpreis-Angebote schützen vor Überraschungen wie Stau-Zuschlägen oder Nachforderungen"
                     }
                   ].map((feature, index) => (
-                    <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="bg-green-600 p-2 rounded-lg flex-shrink-0">
+                    <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-muted/30 rounded-lg">
+                      <div className="bg-green-600 dark:bg-emerald-700 p-2 rounded-lg flex-shrink-0">
                         <feature.icon className="h-5 w-5 text-white" />
                       </div>
                       <div className="flex-1">
@@ -110,7 +110,7 @@ const GuenstigUmziehenPageClient = () => {
                   ))}
                 </div>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
                 {/* So funktioniert der Offertenvergleich - Card Design */}
                 <section className="mb-12">
@@ -150,30 +150,30 @@ const GuenstigUmziehenPageClient = () => {
                       >
                           {/* Verbindungslinie zwischen den Karten */}
                         {index < 2 && (
-                            <div className="hidden md:block absolute top-[60px] left-full w-full h-[2px] bg-gradient-to-r from-green-300 via-green-400 to-green-300 z-0 transform -translate-x-1/2" 
+                            <div className="hidden md:block absolute top-[60px] left-full w-full h-[2px] bg-gradient-to-r from-green-300 via-green-400 to-green-300 dark:from-emerald-800 dark:via-emerald-700 dark:to-emerald-800 z-0 transform -translate-x-1/2" 
                                  style={{ width: 'calc(100% + 1.5rem)', left: 'calc(100% + 0.75rem)' }} />
                           )}
                           
-                          <Card className="relative z-10 h-full border-2 border-green-200 hover:border-green-500 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-2 bg-white">
+                          <Card className="relative z-10 h-full border-2 border-green-200 dark:border-emerald-800 hover:border-green-500 dark:hover:border-emerald-500 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-2 bg-card">
                             <CardHeader className="text-center pb-4">
                               {/* Nummer in grünem Kreis */}
-                              <div className="bg-gradient-to-br from-green-600 to-emerald-600 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                              <div className="bg-gradient-to-br from-green-600 to-emerald-600 dark:from-emerald-700 dark:to-emerald-800 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
                               {step.number}
                             </div>
                               
                               {/* Icon */}
                             <div className="flex justify-center mb-4">
-                                <div className="bg-green-50 p-4 rounded-xl border-2 border-green-100 group-hover:bg-green-100 group-hover:border-green-300 transition-all duration-300">
-                                  <step.icon className="h-8 w-8 text-green-600 group-hover:scale-110 transition-transform duration-300" />
+                                <div className="bg-green-50 dark:bg-emerald-950/40 p-4 rounded-xl border-2 border-green-100 dark:border-emerald-800 group-hover:bg-green-100 dark:group-hover:bg-emerald-900/40 group-hover:border-green-300 dark:group-hover:border-emerald-600 transition-all duration-300">
+                                  <step.icon className="h-8 w-8 text-green-600 dark:text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
                                 </div>
                               </div>
                               
-                              <CardTitle className="heading-4 mb-2 text-gray-900 group-hover:text-green-600 transition-colors duration-300">
+                              <CardTitle className="heading-4 mb-2 text-foreground group-hover:text-green-600 dark:group-hover:text-emerald-400 transition-colors duration-300">
                                 {step.title}
                               </CardTitle>
                           </CardHeader>
                             <CardContent className="pt-0">
-                              <p className="text-body text-center text-gray-600 leading-relaxed" style={{ textAlign: 'center' }}>
+                              <p className="text-body text-center text-muted-foreground leading-relaxed" style={{ textAlign: 'center' }}>
                                 {step.description}
                               </p>
                           </CardContent>
@@ -184,7 +184,7 @@ const GuenstigUmziehenPageClient = () => {
                   </div>
                 </section>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
                 {/* Das sagen unsere Kunden - Professional Card Design */}
                 <section className="mb-12">
@@ -220,21 +220,21 @@ const GuenstigUmziehenPageClient = () => {
                       <div
                         key={index}
                       >
-                        <Card className="h-full bg-white shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
+                        <Card className="h-full bg-card shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 border border-border">
                           <CardContent className="p-6 flex flex-col h-full">
                             <div className="flex items-start justify-between mb-4">
                               <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                                  <User className="w-5 h-5 text-green-600" />
+                                <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-emerald-950/50 flex items-center justify-center">
+                                  <User className="w-5 h-5 text-green-600 dark:text-emerald-400" />
                                 </div>
                                 <div>
-                                  <p className="font-bold text-gray-800 text-body">{review.name}</p>
-                                  <p className="text-sm text-gray-500 text-body">{review.city}</p>
+                                  <p className="font-bold text-foreground text-body">{review.name}</p>
+                                  <p className="text-sm text-muted-foreground text-body">{review.city}</p>
                                 </div>
                               </div>
                               <div className="flex items-center gap-1">
                                 <Star size={18} className="text-yellow-400 fill-yellow-400" />
-                                <span className="font-bold text-base text-gray-800 text-body">{review.rating}.0</span>
+                                <span className="font-bold text-base text-foreground text-body">{review.rating}.0</span>
                               </div>
                             </div>
                             
@@ -244,7 +244,7 @@ const GuenstigUmziehenPageClient = () => {
                               ))}
                             </div>
 
-                            <p className="text-gray-700 italic flex-grow text-body">
+                            <p className="text-muted-foreground italic flex-grow text-body">
                               „{review.text}"
                             </p>
                           </CardContent>
@@ -254,7 +254,7 @@ const GuenstigUmziehenPageClient = () => {
                   </div>
                 </section>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
                 <div className="mb-6 rounded-lg overflow-hidden">
                   <img 
@@ -273,7 +273,7 @@ const GuenstigUmziehenPageClient = () => {
                       <h2 className="heading-2 mb-4">
                         10 bewährte Tipps für günstiges Umziehen in der Schweiz
                       </h2>
-                      <p className="text-body text-gray-600 max-w-3xl mx-auto">
+                      <p className="text-body text-muted-foreground max-w-3xl mx-auto">
                         Sparen Sie bis zu 40% bei Ihren Umzugskosten mit diesen bewährten Strategien und Insider-Tipps
                       </p>
                     </div>
@@ -282,13 +282,13 @@ const GuenstigUmziehenPageClient = () => {
                   <div className="space-y-8">
                     {/* Kategorie 1: Richtige Umzugsplanung */}
                     <div
-                      className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 md:p-8 border-2 border-blue-200"
+                      className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/25 rounded-2xl p-6 md:p-8 border-2 border-blue-200 dark:border-blue-800/60"
                     >
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="bg-blue-600 p-3 rounded-xl">
+                        <div className="bg-blue-600 dark:bg-blue-700 p-3 rounded-xl">
                           <Calendar className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="heading-3 text-gray-900 mb-0">Richtige Umzugsplanung</h3>
+                        <h3 className="heading-3 text-foreground mb-0">Richtige Umzugsplanung</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -305,14 +305,14 @@ const GuenstigUmziehenPageClient = () => {
                             text: "Kantonale Parkbewilligungen kosten 50-200 CHF pro Tag – rechtzeitige Organisation vermeidet Zusatzkosten"
                           }
                         ].map((tip, index) => (
-                          <div key={index} className="bg-white rounded-lg p-4 border border-blue-100 hover:border-blue-300 transition-colors">
+                          <div key={index} className="bg-white dark:bg-card rounded-lg p-4 border border-blue-100 dark:border-blue-900/50 hover:border-blue-300 dark:hover:border-blue-600 transition-colors">
                             <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                              <div className="flex-shrink-0 w-6 h-6 bg-blue-600 dark:bg-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
                                 {index + 1}
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <h4 className="font-semibold text-foreground mb-1">{tip.title}</h4>
+                                <p className="text-body text-muted-foreground text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -322,13 +322,13 @@ const GuenstigUmziehenPageClient = () => {
 
                     {/* Kategorie 2: Umzugsvolumen reduzieren */}
                     <div
-                      className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 md:p-8 border-2 border-purple-200"
+                      className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20 rounded-2xl p-6 md:p-8 border-2 border-purple-200 dark:border-purple-800/60"
                     >
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="bg-purple-600 p-3 rounded-xl">
+                        <div className="bg-purple-600 dark:bg-purple-700 p-3 rounded-xl">
                           <Package className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="heading-3 text-gray-900 mb-0">Umzugsvolumen reduzieren</h3>
+                        <h3 className="heading-3 text-foreground mb-0">Umzugsvolumen reduzieren</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -345,14 +345,14 @@ const GuenstigUmziehenPageClient = () => {
                             text: "Jeder Kubikmeter weniger spart Geld beim Umzugswagen und Umzugsteam"
                           }
                         ].map((tip, index) => (
-                          <div key={index} className="bg-white rounded-lg p-4 border border-purple-100 hover:border-purple-300 transition-colors">
+                          <div key={index} className="bg-white dark:bg-card rounded-lg p-4 border border-purple-100 dark:border-purple-900/50 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
                             <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                              <div className="flex-shrink-0 w-6 h-6 bg-purple-600 dark:bg-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
                                 {index + 4}
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <h4 className="font-semibold text-foreground mb-1">{tip.title}</h4>
+                                <p className="text-body text-muted-foreground text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -362,13 +362,13 @@ const GuenstigUmziehenPageClient = () => {
 
                     {/* Kategorie 3: Eigenleistung vs. Vollservice */}
                     <div
-                      className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8 border-2 border-green-200"
+                      className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-emerald-950/30 dark:to-emerald-950/20 rounded-2xl p-6 md:p-8 border-2 border-green-200 dark:border-emerald-800/60"
                     >
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="bg-green-600 p-3 rounded-xl">
+                        <div className="bg-green-600 dark:bg-emerald-700 p-3 rounded-xl">
                           <Users className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="heading-3 text-gray-900 mb-0">Eigenleistung vs. Vollservice</h3>
+                        <h3 className="heading-3 text-foreground mb-0">Eigenleistung vs. Vollservice</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -385,14 +385,14 @@ const GuenstigUmziehenPageClient = () => {
                             text: "Einfache De- und Montage selbst übernehmen, komplexe Arbeiten dem Umzugsunternehmen überlassen"
                           }
                         ].map((tip, index) => (
-                          <div key={index} className="bg-white rounded-lg p-4 border border-green-100 hover:border-green-300 transition-colors">
+                          <div key={index} className="bg-white dark:bg-card rounded-lg p-4 border border-green-100 dark:border-emerald-900/50 hover:border-green-300 dark:hover:border-emerald-600 transition-colors">
                             <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                              <div className="flex-shrink-0 w-6 h-6 bg-green-600 dark:bg-emerald-700 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
                                 {index + 7}
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <h4 className="font-semibold text-foreground mb-1">{tip.title}</h4>
+                                <p className="text-body text-muted-foreground text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -402,13 +402,13 @@ const GuenstigUmziehenPageClient = () => {
 
                     {/* Kategorie 4: Schweiz-spezifische Spartipps */}
                     <div
-                      className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 md:p-8 border-2 border-orange-200"
+                      className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/25 dark:to-amber-950/20 rounded-2xl p-6 md:p-8 border-2 border-orange-200 dark:border-orange-800/60"
                     >
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="bg-orange-600 p-3 rounded-xl">
+                        <div className="bg-orange-600 dark:bg-orange-700 p-3 rounded-xl">
                           <TrendingDown className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="heading-3 text-gray-900 mb-0">Schweiz-spezifische Spartipps</h3>
+                        <h3 className="heading-3 text-foreground mb-0">Schweiz-spezifische Spartipps</h3>
                       </div>
                       <div className="space-y-4">
                         {[
@@ -425,14 +425,14 @@ const GuenstigUmziehenPageClient = () => {
                             text: "Studenten und Teilzeitkräfte über JOBRUF kosten 25-35 CHF/Stunde gegenüber 45-65 CHF bei Profis"
                           }
                         ].map((tip, index) => (
-                          <div key={index} className="bg-white rounded-lg p-4 border border-orange-100 hover:border-orange-300 transition-colors">
+                          <div key={index} className="bg-white dark:bg-card rounded-lg p-4 border border-orange-100 dark:border-orange-900/50 hover:border-orange-300 dark:hover:border-orange-600 transition-colors">
                             <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 w-6 h-6 bg-orange-600 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                              <div className="flex-shrink-0 w-6 h-6 bg-orange-600 dark:bg-orange-700 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
                                 {index + 10}
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 mb-1">{tip.title}</h4>
-                                <p className="text-body text-gray-600 text-sm leading-relaxed">{tip.text}</p>
+                                <h4 className="font-semibold text-foreground mb-1">{tip.title}</h4>
+                                <p className="text-body text-muted-foreground text-sm leading-relaxed">{tip.text}</p>
                               </div>
                             </div>
                           </div>
@@ -442,33 +442,33 @@ const GuenstigUmziehenPageClient = () => {
                   </div>
                 </section>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
                 <h2 className="heading-2 mb-4">Umzugskosten in der Schweiz: Übersicht und Einsparpotenzial</h2>
                 <div className="overflow-x-auto mb-4">
-                  <table className="min-w-full border-collapse border border-gray-300">
+                  <table className="min-w-full border-collapse border border-border">
                     <thead>
-                      <tr className="bg-gray-100">
-                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Wohnungsgrösse</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Innerstädtisch</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Zwischen Kantonen</th>
+                      <tr className="bg-muted/50 dark:bg-muted/30">
+                        <th className="border border-border px-4 py-3 text-left heading-4">Wohnungsgrösse</th>
+                        <th className="border border-border px-4 py-3 text-left heading-4">Innerstädtisch</th>
+                        <th className="border border-border px-4 py-3 text-left heading-4">Zwischen Kantonen</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-body">2-3 Zimmer</td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">1'200-2'500 CHF</td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">2'500-3'500 CHF</td>
+                        <td className="border border-border px-4 py-3 text-body">2-3 Zimmer</td>
+                        <td className="border border-border px-4 py-3 text-body">1'200-2'500 CHF</td>
+                        <td className="border border-border px-4 py-3 text-body">2'500-3'500 CHF</td>
                       </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-body">3-4 Zimmer</td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">2'000-3'500 CHF</td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">3'500-5'000 CHF</td>
+                      <tr className="bg-muted/25 dark:bg-muted/15">
+                        <td className="border border-border px-4 py-3 text-body">3-4 Zimmer</td>
+                        <td className="border border-border px-4 py-3 text-body">2'000-3'500 CHF</td>
+                        <td className="border border-border px-4 py-3 text-body">3'500-5'000 CHF</td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-body">Haus</td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">3'500-6'000 CHF</td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">5'000-8'000 CHF</td>
+                        <td className="border border-border px-4 py-3 text-body">Haus</td>
+                        <td className="border border-border px-4 py-3 text-body">3'500-6'000 CHF</td>
+                        <td className="border border-border px-4 py-3 text-body">5'000-8'000 CHF</td>
                       </tr>
                     </tbody>
                   </table>
@@ -480,39 +480,39 @@ const GuenstigUmziehenPageClient = () => {
                   <strong>Versteckte Kosten erkennen</strong>: Achten Sie bei Offerten auf Faktoren wie Lagerung (80-150 CHF/Monat), Aufzugnutzung, Entsorgung von Umzugskartons und Umzugsmaterial sowie die Endreinigung der alten Wohnung.
                 </p>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
                 <h2 className="heading-2 mb-4">Checkliste für den günstigen Umzug</h2>
                 <div className="overflow-x-auto mb-6">
-                  <table className="min-w-full border-collapse border border-gray-300">
+                  <table className="min-w-full border-collapse border border-border">
                     <thead>
-                      <tr className="bg-gray-100">
-                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Zeitpunkt</th>
-                        <th className="border border-gray-300 px-4 py-3 text-left heading-4">Aufgabe</th>
+                      <tr className="bg-muted/50 dark:bg-muted/30">
+                        <th className="border border-border px-4 py-3 text-left heading-4">Zeitpunkt</th>
+                        <th className="border border-border px-4 py-3 text-left heading-4">Aufgabe</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>6-8 Wochen vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">Offerten anfordern, vergleichen und Budget festlegen</td>
+                        <td className="border border-border px-4 py-3 text-body"><strong>6-8 Wochen vorher</strong></td>
+                        <td className="border border-border px-4 py-3 text-body">Offerten anfordern, vergleichen und Budget festlegen</td>
                       </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>4 Wochen vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">Umzugsunternehmen beauftragen, Halteverbot beantragen, Kündigungsfristen prüfen</td>
+                      <tr className="bg-muted/25 dark:bg-muted/15">
+                        <td className="border border-border px-4 py-3 text-body"><strong>4 Wochen vorher</strong></td>
+                        <td className="border border-border px-4 py-3 text-body">Umzugsunternehmen beauftragen, Halteverbot beantragen, Kündigungsfristen prüfen</td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>2 Wochen vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">Kartons und Kisten besorgen, Adressänderungen vorbereiten, Lagerung organisieren</td>
+                        <td className="border border-border px-4 py-3 text-body"><strong>2 Wochen vorher</strong></td>
+                        <td className="border border-border px-4 py-3 text-body">Kartons und Kisten besorgen, Adressänderungen vorbereiten, Lagerung organisieren</td>
                       </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-300 px-4 py-3 text-body"><strong>1 Woche vorher</strong></td>
-                        <td className="border border-gray-300 px-4 py-3 text-body">Packen beginnen, Organisation finalisieren, letzte Details mit der Firma klären</td>
+                      <tr className="bg-muted/25 dark:bg-muted/15">
+                        <td className="border border-border px-4 py-3 text-body"><strong>1 Woche vorher</strong></td>
+                        <td className="border border-border px-4 py-3 text-body">Packen beginnen, Organisation finalisieren, letzte Details mit der Firma klären</td>
                       </tr>
                     </tbody>
                   </table>
                     </div>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
                 <h2 className="heading-2 mb-4">Häufige Fragen zum günstigen Umziehen</h2>
                 <div className="space-y-4 mb-6">
@@ -533,13 +533,13 @@ const GuenstigUmziehenPageClient = () => {
                   </p>
                   </div>
 
-                <hr className="my-8 border-gray-300" />
+                <hr className="my-8 border-border" />
 
                 <h2 className="heading-2 mb-4">Jetzt kostenlos Umzugsofferten vergleichen</h2>
                 <p className="text-body mb-4">
                   Der Schlüssel zum günstigen Umziehen liegt im transparenten Vergleich: Sparen Sie bis zu 40% bei Ihren Umzugskosten, ohne Kompromisse bei Qualität und Zuverlässigkeit. Unser neutrales Vergleichsportal verbindet Sie mit geprüften Schweizer Umzugsunternehmen – kostenlos und unverbindlich.
                 </p>
-                <div className="mb-6 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
+                <div className="mb-6 bg-gradient-to-br from-teal-700 to-green-800 dark:from-teal-900 dark:to-emerald-950 rounded-xl p-6 md:p-8 shadow-lg">
                   <div className="text-center mb-6">
                     <p className="text-green-100 mb-4 text-body text-lg" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)', fontSize: '22px' }}>
                       🔹 <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> 🔹

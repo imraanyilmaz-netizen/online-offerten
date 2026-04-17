@@ -654,7 +654,7 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
     { id: 'privatumzug', labelKey: 'step1.privateMoveLabel', subLabelKey: 'step1.privateMoveDescription', icon: <Home size={16} /> },
     { id: 'geschaeftsumzug', labelKey: 'step1.businessMoveLabel', subLabelKey: 'step1.businessMoveDescription', icon: <Briefcase size={16} /> },
     { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe size={16} /> },
-    { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
+    { id: 'klaviertransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
     { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck size={16} /> },
     { id: 'lagerung', labelKey: 'step1.lagerungLabel', subLabelKey: 'step1.lagerungDescription', icon: <Archive /> } // Lagerung
   ];

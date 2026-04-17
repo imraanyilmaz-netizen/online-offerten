@@ -38,7 +38,7 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
       borderColor: 'border-emerald-500 dark:border-emerald-500',
       bgColor: 'bg-emerald-50 dark:bg-emerald-950/30'
     },
-    spezialtransport: {
+    klaviertransport: {
       iconBg: 'bg-amber-100 dark:bg-amber-950/40',
       iconBgSelected: 'bg-amber-500',
       iconColor: 'text-amber-600 dark:text-amber-400',
@@ -64,7 +64,7 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
     }
   };
   
-  const config = serviceConfig[id] || {
+  const config = serviceConfig[id] || (id === 'spezialtransport' ? serviceConfig.klaviertransport : null) || {
     iconBg: 'bg-gray-100 dark:bg-muted',
     iconBgSelected: 'bg-gray-500',
     iconColor: 'text-gray-600 dark:text-muted-foreground',
@@ -712,7 +712,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
     { id: 'privatumzug', labelKey: 'step1.privateMoveLabel', subLabelKey: 'step1.privateMoveDescription', icon: <Home /> },
     { id: 'geschaeftsumzug', labelKey: 'step1.businessMoveLabel', subLabelKey: 'step1.businessMoveDescription', icon: <Building2 /> },
     { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe /> },
-    { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Package /> },
+    { id: 'klaviertransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Package /> },
     { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck /> },
     { id: 'lagerung', labelKey: 'step1.lagerungLabel', subLabelKey: 'step1.lagerungDescription', icon: <Archive /> }
   ];
@@ -939,7 +939,7 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
             
 
             
-              {formData.umzugArt === 'spezialtransport' && (
+              {(formData.umzugArt === 'klaviertransport' || formData.umzugArt === 'spezialtransport') && (
                 <div
                   className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-gray-100 dark:border-border"
                 >

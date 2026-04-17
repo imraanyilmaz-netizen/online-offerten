@@ -39,15 +39,10 @@ const SEO: Record<string, Record<string, { title: string; description: string }>
       description:
         'Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa.',
     },
-    spezialtransport: {
-      title: 'Spezialtransporte: Kostenlose Offerten vergleichen',
+    klaviertransport: {
+      title: 'Klaviertransport: Kostenlose Offerten vergleichen',
       description:
-        'Spezialtransporte: Vergleichen Sie kostenlos mehrere geprüfte Firmen für Klavier-, Tresor- und Maschinentransport. Sicher, versichert und professionell. Jetzt Offerten anfordern!',
-    },
-    umzugsreinigung_opt: {
-      title: 'Endreinigung mit Abnahmegarantie: Reinigungsfirmen vergleichen',
-      description:
-        'Endreinigung und Umzugsreinigung mit Abnahmegarantie: Kostenlose Offerten von geprüften Reinigungsfirmen vergleichen und bis zu 40% sparen.',
+        'Klaviertransport & schwere Stücke: Vergleichen Sie kostenlos geprüfte Umzugsfirmen. Sicher, versichert und professionell. Jetzt Offerten anfordern!',
     },
     raeumung_service: {
       title: 'Räumung & Entsorgung: Kostenlose Offerten vergleichen',

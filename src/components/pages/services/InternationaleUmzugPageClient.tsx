@@ -34,7 +34,7 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
   ]
 
   return (
-    <div className="prose prose-lg lg:prose-xl max-w-none text-slate-700 leading-relaxed text-left">
+    <div className="prose prose-lg lg:prose-xl prose-neutral dark:prose-invert max-w-none text-muted-foreground leading-relaxed text-left">
       {/* Warum Offerten vergleichen */}
       <section className="mb-12">
         <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 md:p-8 rounded-xl mb-8">
@@ -78,18 +78,18 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
         <p className="mb-6 text-body">Die Durchführung eines internationalen Umzugs ist ein Prozess, der idealerweise Monate im Voraus beginnt. Je früher Sie mit den Vorbereitungen starten, desto entspannter wird der Ablauf – und desto besser können Sie Kosten und Aufwand kontrollieren.</p>
         
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
+          <div className="bg-muted/50 p-6 rounded-lg border border-border">
             <h3 className="heading-3">6 Monate vor dem Umzug</h3>
             <p>Beginnen Sie mit der groben Planung. Klären Sie Ihre Aufenthaltsbewilligung im Zielland, informieren Sie sich über Kündigungsfristen Ihrer Wohnung in der Schweiz und recherchieren Sie Schulen oder Betreuungseinrichtungen für Kinder. Jetzt ist auch der richtige Zeitpunkt, erste internationale Umzugsofferten einzuholen, um ein Gefühl für das Budget zu bekommen.</p>
           </div>
-          <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
+          <div className="bg-muted/50 p-6 rounded-lg border border-border">
             <h3 className="heading-3">3 Monate vor dem Umzug</h3>
             <p>Konkretisieren Sie Ihre Pläne. Kündigen Sie Ihre Wohnung fristgerecht, melden Sie sich bei Ihrer Gemeinde ab und informieren Sie Versicherungen sowie Banken über Ihren Wegzug. Erfassen Sie Ihr Umzugsvolumen möglichst genau – dies ist die Basis für präzise Offerten. Beginnen Sie mit dem Entrümpeln: Jeder Kubikmeter weniger spart Transportkosten.</p>
           </div>
         </div>
 
-        <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
-          <h3 className="heading-3 text-blue-800">1 Monat vor dem Umzug</h3>
+        <div className="bg-blue-50 dark:bg-blue-950/30 p-6 rounded-lg border border-blue-200 dark:border-blue-800 mb-6">
+          <h3 className="heading-3 text-blue-800 dark:text-blue-200">1 Monat vor dem Umzug</h3>
           <p className="mb-4">Finalisieren Sie den Vertrag mit Ihrer gewählten Umzugsfirma. Bereiten Sie alle Dokumente für den Zoll vor: Eine detaillierte Inventarliste Ihres Umzugsguts ist in den meisten Fällen Pflicht. Bei Umzügen in EU-Länder gelten vereinfachte Regeln für Übersiedlungsgut, dennoch sind Nachweise wie Wohnsitzbestätigung und Ausfuhrformulare nötig. Beachten Sie Einfuhrbeschränkungen für bestimmte Güter wie Alkohol, Waffen oder Haustiere.</p>
         </div>
 
@@ -98,8 +98,8 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
           <p>Für Europäumzüge ab der Schweiz ist der Strassentransport per Lkw die gängigste Lösung. Je nach Ziel – etwa Skandinavien oder die iberische Halbinsel – können Fahrten mehrere Tage dauern. Bei sehr grossen Distanzen oder Umzügen auf Inseln (z.B. Balearen) kommt eine Kombination aus Landtransport und Seefracht oder Fähre in Frage. Luftfracht ist nur selten notwendig und primär für Überseeumzüge relevant.</p>
         </div>
 
-        <div className="bg-green-50 p-6 rounded-lg border border-green-200">
-          <h3 className="heading-3 text-green-800">Praktische Tipps für Ihre Planung</h3>
+        <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg border border-green-200 dark:border-green-800">
+          <h3 className="heading-3 text-green-800 dark:text-green-200">Praktische Tipps für Ihre Planung</h3>
           <ul className="space-y-2 list-none pl-0">
             <li className="flex items-start">
               <CheckCircle className="w-5 h-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
@@ -141,7 +141,7 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
       </section>
 
       {/* Umzug und Sicherheit */}
-      <section className="mb-12 bg-slate-50 p-6 md:p-8 rounded-xl">
+      <section className="mb-12 bg-muted/50 p-6 md:p-8 rounded-xl border border-border/60">
         <h2 className="heading-2">Umzug und Sicherheit: Worauf Sie beim Auslandsumzug achten sollten</h2>
         <p className="mb-4">Die Sicherheit Ihrer Güter und das Wohl Ihrer Familie stehen bei einem Auslandsumzug an oberster Stelle. Als erfahrene Umzugsfirma wissen wir, wie wichtig es ist, dass Ihre wertvollen Gegenstände während des gesamten Umzugsprozesses optimal geschützt sind. Deshalb bieten wir Ihnen einen umfassenden Versicherungsschutz, der Ihr Umzugsgut gegen Verlust, Beschädigung oder Diebstahl absichert – egal, ob Sie innerhalb Europas oder in ein weiter entferntes Land umziehen.</p>
         <p className="mb-4">Unser spezieller Verpackungsservice ist auf die Anforderungen internationaler Umzüge zugeschnitten. Wir verwenden hochwertige Materialien und moderne Techniken, um Möbel, Elektrogeräte und empfindliche Gegenstände sicher zu verpacken und für den Transport vorzubereiten. So minimieren wir das Risiko von Transportschäden und sorgen dafür, dass alles unversehrt an Ihrem neuen Zuhause ankommt.</p>
@@ -161,37 +161,37 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
         <h2 className="heading-2">Umzüge in verschiedene Länder</h2>
         
         {/* Deutschland */}
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz nach Deutschland</h3>
           <p className="mb-4">Deutschland ist eines der häufigsten Zielländer für Auswanderer und Grenzgänger aus der Schweiz. Regionen wie Baden-Württemberg, Bayern oder die Metropolregion Berlin ziehen jährlich zahlreiche Schweizerinnen und Schweizer an – sei es für eine neue Arbeitsstelle, ein Studium oder um näher bei der Familie zu sein.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Zoll- und Grenzformalitäten</h4>
+              <h4 className="font-semibold text-foreground mb-2">Zoll- und Grenzformalitäten</h4>
               <p className="text-sm">Obwohl Deutschland ein EU-Land ist, gilt die Schweiz als Drittland. Für Übersiedlungsgut benötigen Sie eine vollständige Inventarliste, eine Wohnsitzbestätigung und die entsprechenden Ausfuhr- bzw. Einfuhrformulare. An den Grenzübergängen (z.B. Basel, Schaffhausen, St. Margrethen) kann es zu Wartezeiten kommen.</p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Besonderheiten der Route</h4>
+              <h4 className="font-semibold text-foreground mb-2">Besonderheiten der Route</h4>
               <p className="text-sm">Die Distanzen variieren stark. Ein Umzug von Zürich nach Konstanz oder von Basel nach Freiburg im Breisgau ist in wenigen Stunden erledigt. Ein Umzug nach Berlin, Hamburg oder Köln hingegen bedeutet einen ganztägigen oder mehrtägigen Transport. Beachten Sie zudem Mautgebühren auf deutschen Autobahnen für Lkw sowie Umweltzonen in Städten wie Stuttgart, München oder Köln.</p>
             </div>
           </div>
         </div>
 
         {/* Italien */}
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <div className="flex flex-col md:flex-row gap-6 mb-4">
             <div className="flex-1">
               <h3 className="heading-3">Umzug von der Schweiz nach Italien</h3>
               <p className="mb-4">Italien lockt mit Dolce Vita, mediterranem Klima und kulturellem Reichtum. Beliebte Ziele für Schweizer Auswanderer sind Mailand, die Region Como, die Toskana oder Rom – sei es für den Ruhestand, eine Zweitwohnung oder einen beruflichen Einsatz.</p>
               <div className="mb-4">
-                <h4 className="font-semibold text-slate-800 mb-2">Herausforderungen der Route</h4>
+                <h4 className="font-semibold text-foreground mb-2">Herausforderungen der Route</h4>
                 <p className="text-sm mb-4">Die Alpenüberquerung über Pässe wie den Gotthard oder den San Bernardino stellt besondere Anforderungen an den Transport. In Italien selbst erschweren enge Altstadtgassen und Zufahrtsbeschränkungen in historischen Zentren (z.B. ZTL-Zonen in Florenz, Siena oder Rom) die Lieferung.</p>
               </div>
               <div className="mb-4">
-                <h4 className="font-semibold text-slate-800 mb-2">Zoll- und Einfuhrbestimmungen</h4>
+                <h4 className="font-semibold text-foreground mb-2">Zoll- und Einfuhrbestimmungen</h4>
                 <p className="text-sm mb-4">Als EU-Land gelten für Italien vereinfachte Regeln für Übersiedlungsgut. Dennoch benötigen Sie eine Inventarliste und müssen bei längerem Aufenthalt eine Aufenthaltsbewilligung beantragen.</p>
               </div>
               <div>
-                <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
+                <h4 className="font-semibold text-foreground mb-2">Beispielrouten</h4>
                 <ul className="text-sm space-y-1">
                   <li className="mb-6">• Zürich–Mailand: ca. 280 km, meist Tagesumzug möglich</li>
                   <li className="mb-6">• Lugano–Florenz: ca. 380 km, längere Fahrzeit durch Apennin</li>
@@ -209,16 +209,16 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
         </div>
 
         {/* Diğer ülkeler - kısa tutacağım */}
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz nach Österreich</h3>
           <p className="mb-4">Österreich ist für viele Schweizer Familien und Berufstätige ein attraktives Ziel. Städte wie Wien, Graz, Innsbruck oder die Vorarlberger Region (Bregenz, Dornbirn) bieten Lebensqualität, kulturelle Nähe und gute Karrieremöglichkeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Zollformalitäten</h4>
+              <h4 className="font-semibold text-foreground mb-2">Zollformalitäten</h4>
               <p className="text-sm">Österreich ist EU-Mitglied, daher gelten für Übersiedlungsgut aus der Schweiz die üblichen Drittland-Regelungen. Inventarliste, Wohnsitznachweis und Zolldokumente sind erforderlich.</p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
+              <h4 className="font-semibold text-foreground mb-2">Beispielrouten</h4>
               <ul className="text-sm space-y-1">
                 <li>• St. Gallen–Bregenz: ca. 30 km, Kurzstreckenumzug</li>
                 <li>• Genf–Wien: ca. 950 km, mehrtägiger Transport</li>
@@ -227,16 +227,16 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
           </div>
         </div>
 
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz nach Spanien</h3>
           <p className="mb-4">Spanien zählt zu den beliebtesten Auswanderungszielen überhaupt. Barcelona, Madrid, Valencia, die Costa Brava, die Costa del Sol oder die Balearen (Mallorca, Ibiza) locken mit Sonne, Meer und einem entspannten Lebensstil.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Die grosse Distanz</h4>
+              <h4 className="font-semibold text-foreground mb-2">Die grosse Distanz</h4>
               <p className="text-sm">Von der Schweiz bis nach Spanien sind es je nach Zielort 1'000 bis 2'000 Kilometer. Ein Umzug dauert oft 2–3 Tage reine Fahrzeit. Bei grösseren Umzügen kann eine Zwischenlagerung sinnvoll sein.</p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
+              <h4 className="font-semibold text-foreground mb-2">Beispielrouten</h4>
               <ul className="text-sm space-y-1">
                 <li>• Zürich–Barcelona: ca. 1'000 km</li>
                 <li>• Basel–Madrid: ca. 1'400 km</li>
@@ -246,16 +246,16 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
           </div>
         </div>
 
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz nach Portugal</h3>
           <p className="mb-4">Portugal erfreut sich wachsender Beliebtheit bei Auswanderern und Remote-Workern aus der Schweiz. Lissabon, Porto und die Algarve bieten ein mildes Klima, vergleichsweise günstige Lebenshaltungskosten und eine hohe Lebensqualität.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Lange Strecke per Lkw</h4>
+              <h4 className="font-semibold text-foreground mb-2">Lange Strecke per Lkw</h4>
               <p className="text-sm">Von der Schweiz bis nach Portugal sind es rund 2'000 Kilometer – eine der längsten europäischen Umzugsrouten. Der Transport dauert in der Regel 3–4 Tage.</p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
+              <h4 className="font-semibold text-foreground mb-2">Beispielrouten</h4>
               <ul className="text-sm space-y-1">
                 <li>• Zürich–Lissabon: ca. 1'900 km</li>
                 <li>• Lausanne–Faro: ca. 2'100 km</li>
@@ -264,16 +264,16 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
           </div>
         </div>
 
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz in die Niederlande</h3>
           <p className="mb-4">Die Niederlande sind ein Magnet für internationale Fachkräfte und Studierende. Amsterdam, Den Haag, Rotterdam und Utrecht bieten ein kosmopolitisches Umfeld und zahlreiche Karrieremöglichkeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Dichte Besiedelung</h4>
+              <h4 className="font-semibold text-foreground mb-2">Dichte Besiedelung</h4>
               <p className="text-sm">In niederländischen Städten herrscht chronischer Platzmangel. Enge Strassen, Grachten und eingeschränkte Parkmöglichkeiten für Lkw sind die Regel.</p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
+              <h4 className="font-semibold text-foreground mb-2">Beispielrouten</h4>
               <ul className="text-sm space-y-1">
                 <li>• Basel–Amsterdam: ca. 700 km, Fahrzeit rund 7 Stunden</li>
                 <li>• Zürich–Rotterdam: ca. 750 km</li>
@@ -282,31 +282,31 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
           </div>
         </div>
 
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz nach Belgien</h3>
           <p className="mb-4">Belgien – insbesondere Brüssel, Antwerpen, Gent und Brügge – zieht viele Schweizer an, die bei EU-Institutionen oder internationalen Unternehmen arbeiten.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Routenplanung</h4>
+              <h4 className="font-semibold text-foreground mb-2">Routenplanung</h4>
               <p className="text-sm">Je nach Startort führt die Route durch Deutschland oder Frankreich. Beachten Sie Mautgebühren und Umweltzonen entlang des Wegs.</p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Verkehr in Brüssel</h4>
+              <h4 className="font-semibold text-foreground mb-2">Verkehr in Brüssel</h4>
               <p className="text-sm">Die belgische Hauptstadt ist berüchtigt für Staus und Parkraummangel. Eine genaue Zeitplanung und allenfalls reservierte Parkplätze sind entscheidend.</p>
             </div>
           </div>
         </div>
 
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz nach Dänemark</h3>
           <p className="mb-4">Dänemark – mit Kopenhagen, Aarhus und Odense – ist für Familien und Fachkräfte attraktiv, erfordert aber eine längere Anreise ab der Schweiz.</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Route via Deutschland</h4>
+              <h4 className="font-semibold text-foreground mb-2">Route via Deutschland</h4>
               <p className="text-sm">Der Weg nach Dänemark führt durch ganz Deutschland. Je nach Zielort kommen Brücken- oder Fährpassagen hinzu (z.B. Storebæltbrücke, Fehmarnbelt-Fähre).</p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
+              <h4 className="font-semibold text-foreground mb-2">Beispielrouten</h4>
               <ul className="text-sm space-y-1">
                 <li>• Zürich–Kopenhagen: ca. 1'200 km, Fahrzeit rund 12–14 Stunden</li>
                 <li>• Bern–Aarhus: ca. 1'100 km</li>
@@ -315,15 +315,15 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
           </div>
         </div>
 
-        <div className="mb-8 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div className="mb-8 bg-card p-6 rounded-xl border border-border shadow-sm">
           <h3 className="heading-3">Umzug von der Schweiz nach Schweden</h3>
           <p className="mb-4">Schweden lockt mit hoher Lebensqualität, intakter Natur und attraktiven Arbeitsmöglichkeiten. Stockholm, Göteborg, Malmö und Uppsala gehören zu den beliebtesten Zielen.</p>
           <div className="mb-4">
-            <h4 className="font-semibold text-slate-800 mb-2">Lange Distanz, komplexe Route</h4>
+            <h4 className="font-semibold text-foreground mb-2">Lange Distanz, komplexe Route</h4>
             <p className="text-sm">Der Weg nach Schweden führt durch Deutschland und Dänemark, oft mit Brücken oder Fähren. Die Transportdauer beträgt mehrere Tage.</p>
           </div>
           <div>
-            <h4 className="font-semibold text-slate-800 mb-2">Beispielrouten</h4>
+            <h4 className="font-semibold text-foreground mb-2">Beispielrouten</h4>
             <ul className="text-sm space-y-1">
               <li>• Basel–Stockholm: ca. 1'800 km</li>
               <li>• Zürich–Göteborg: ca. 1'500 km</li>
@@ -333,52 +333,52 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
       </section>
 
       {/* Kostenfaktoren */}
-      <section className="mb-12 bg-gradient-to-br from-slate-50 to-blue-50 p-6 md:p-8 rounded-xl">
+      <section className="mb-12 bg-gradient-to-br from-muted/50 to-blue-50/90 dark:from-muted/30 dark:to-blue-950/25 p-6 md:p-8 rounded-xl border border-border/60">
         <h2 className="heading-2">Kostenfaktoren bei internationalen Umzügen mit einem Umzugsunternehmen</h2>
         <p className="mb-6">Internationale Umzugskosten variieren stark. Eine seriöse Kalkulation ist die Grundlage für Ihre Budgetplanung und hilft, böse Überraschungen zu vermeiden. Die sorgfältige Planung und der sichere Transport der Umzugsgüter sind entscheidend für einen erfolgreichen internationalen Umzug.</p>
         
-        <div className="bg-white p-6 rounded-lg mb-6">
+        <div className="bg-card p-6 rounded-lg mb-6 border border-border">
           <h3 className="heading-3">Die wichtigsten Kostenfaktoren</h3>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-slate-100">
-                  <th className="border border-slate-300 p-3 text-left font-semibold">Faktor</th>
-                  <th className="border border-slate-300 p-3 text-left font-semibold">Beschreibung</th>
+                <tr className="bg-muted">
+                  <th className="border border-border p-3 text-left font-semibold">Faktor</th>
+                  <th className="border border-border p-3 text-left font-semibold">Beschreibung</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-slate-300 p-3">Distanz</td>
-                  <td className="border border-slate-300 p-3">Kilometeranzahl und Fahrzeit beeinflussen den Preis direkt</td>
+                  <td className="border border-border p-3">Distanz</td>
+                  <td className="border border-border p-3">Kilometeranzahl und Fahrzeit beeinflussen den Preis direkt</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-300 p-3">Umzugsvolumen</td>
-                  <td className="border border-slate-300 p-3">Angabe in Kubikmetern (m³), abhängig von Wohnungsgrösse</td>
+                  <td className="border border-border p-3">Umzugsvolumen</td>
+                  <td className="border border-border p-3">Angabe in Kubikmetern (m³), abhängig von Wohnungsgrösse</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-300 p-3">Stockwerk & Tragewege</td>
-                  <td className="border border-slate-300 p-3">Höhere Stockwerke ohne Lift kosten mehr</td>
+                  <td className="border border-border p-3">Stockwerk & Tragewege</td>
+                  <td className="border border-border p-3">Höhere Stockwerke ohne Lift kosten mehr</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-300 p-3">Zoll- & Mautgebühren</td>
-                  <td className="border border-slate-300 p-3">Variieren je nach Route und Land</td>
+                  <td className="border border-border p-3">Zoll- & Mautgebühren</td>
+                  <td className="border border-border p-3">Variieren je nach Route und Land</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-300 p-3">Fähr- & Tunnelkosten</td>
-                  <td className="border border-slate-300 p-3">Relevant bei Skandinavien, Inseln oder Alpenquerungen</td>
+                  <td className="border border-border p-3">Fähr- & Tunnelkosten</td>
+                  <td className="border border-border p-3">Relevant bei Skandinavien, Inseln oder Alpenquerungen</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-300 p-3">Verpackungsmaterial</td>
-                  <td className="border border-slate-300 p-3">Professionelle Verpackung kostet extra, schützt aber</td>
+                  <td className="border border-border p-3">Verpackungsmaterial</td>
+                  <td className="border border-border p-3">Professionelle Verpackung kostet extra, schützt aber</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-300 p-3">Spezialtransport</td>
-                  <td className="border border-slate-300 p-3">Klavier, Safe, Kunstwerke erfordern besonderes Handling</td>
+                  <td className="border border-border p-3">Spezialtransport</td>
+                  <td className="border border-border p-3">Klavier, Safe, Kunstwerke erfordern besonderes Handling</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-300 p-3">Zusatzleistungen</td>
-                  <td className="border border-slate-300 p-3">Demontage, Montage, Lagerung, Entsorgung, Reinigung</td>
+                  <td className="border border-border p-3">Zusatzleistungen</td>
+                  <td className="border border-border p-3">Demontage, Montage, Lagerung, Entsorgung, Reinigung</td>
                 </tr>
               </tbody>
             </table>
@@ -404,28 +404,28 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
         <h2 className="heading-2">Vorteile, internationale Umzugsofferten zu vergleichen</h2>
         <p className="mb-6">Warum lohnt es sich, nicht einfach die erstbeste Umzugsfirma zu wählen, sondern mehrere Angebote zu vergleichen?</p>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-2">Preistransparenz</h4>
+          <div className="bg-green-50 dark:bg-green-950/35 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Preistransparenz</h4>
             <p className="text-sm">Sie sehen sofort, welche Firma welchen Preis für welche Leistung verlangt</p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-2">Versteckte Kosten vermeiden</h4>
+          <div className="bg-green-50 dark:bg-green-950/35 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Versteckte Kosten vermeiden</h4>
             <p className="text-sm">Detaillierte Offerten machen Zusatzkosten sichtbar</p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-2">Geprüfte Firmen</h4>
+          <div className="bg-green-50 dark:bg-green-950/35 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Geprüfte Firmen</h4>
             <p className="text-sm">Online-Offerten.ch arbeitet nur mit verifizierten Umzugsunternehmen zusammen</p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-2">Passende Leistungen</h4>
+          <div className="bg-green-50 dark:bg-green-950/35 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Passende Leistungen</h4>
             <p className="text-sm">Wählen Sie zwischen Full-Service und Teilservice je nach Bedürfnissen und Budget</p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-2">Qualitätssicherung</h4>
+          <div className="bg-green-50 dark:bg-green-950/35 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Qualitätssicherung</h4>
             <p className="text-sm">Vergleichen Sie Erfahrung, Kundenbewertungen und Versicherungsleistungen</p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-2">Stressreduktion</h4>
+          <div className="bg-green-50 dark:bg-green-950/35 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">Stressreduktion</h4>
             <p className="text-sm">Mit klaren Offerten planen Sie entspannter</p>
           </div>
         </div>
@@ -434,28 +434,28 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
       </section>
 
       {/* So funktioniert es */}
-      <section className="mb-12 bg-blue-50 p-6 md:p-8 rounded-xl">
+      <section className="mb-12 bg-blue-50 dark:bg-blue-950/25 p-6 md:p-8 rounded-xl border border-blue-200/80 dark:border-blue-900/50">
         <h2 className="heading-2">So funktioniert der Vergleich von internationalen Umzugsofferten auf Online-Offerten.ch</h2>
         <p className="mb-6">Der Prozess ist einfach und für Nutzer aus der ganzen Schweiz verfügbar:</p>
         <div className="space-y-4">
-          <div className="bg-white p-4 rounded-lg border border-blue-200">
-            <h4 className="font-semibold text-slate-800 mb-2">Schritt 1: Online-Formular ausfüllen</h4>
+          <div className="bg-card p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h4 className="font-semibold text-foreground mb-2">Schritt 1: Online-Formular ausfüllen</h4>
             <p className="text-sm">Geben Sie Ihre Angaben ein: Startort (z.B. Zürich), Zielort (z.B. Berlin), Wohnungsgrösse, Stockwerk, gewünschter Umzugstermin und besondere Gegenstände wie Klavier oder Antiquitäten.</p>
           </div>
-          <div className="bg-white p-4 rounded-lg border border-blue-200">
-            <h4 className="font-semibold text-slate-800 mb-2">Schritt 2: Anfrage wird weitergeleitet</h4>
+          <div className="bg-card p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h4 className="font-semibold text-foreground mb-2">Schritt 2: Anfrage wird weitergeleitet</h4>
             <p className="text-sm">Ihre Anfrage geht an passende, geprüfte internationale Umzugsfirmen, die auf Ihre gewünschte Route spezialisiert sind.</p>
           </div>
-          <div className="bg-white p-4 rounded-lg border border-blue-200">
-            <h4 className="font-semibold text-slate-800 mb-2">Schritt 3: Offerten erhalten</h4>
+          <div className="bg-card p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h4 className="font-semibold text-foreground mb-2">Schritt 3: Offerten erhalten</h4>
             <p className="text-sm">Sie erhalten mehrere Offerten direkt von den Umzugsfirmen – mit Preis, Leistungsumfang, Terminvorschlägen und Kontaktdaten.</p>
           </div>
-          <div className="bg-white p-4 rounded-lg border border-blue-200">
-            <h4 className="font-semibold text-slate-800 mb-2">Schritt 4: Vergleichen</h4>
+          <div className="bg-card p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h4 className="font-semibold text-foreground mb-2">Schritt 4: Vergleichen</h4>
             <p className="text-sm">Stellen Sie Preise, Leistungen, Bewertungen und Versicherungslösungen gegenüber. Nehmen Sie sich Zeit für Ihre Wahl.</p>
           </div>
-          <div className="bg-white p-4 rounded-lg border border-blue-200">
-            <h4 className="font-semibold text-slate-800 mb-2">Schritt 5: Direkt buchen</h4>
+          <div className="bg-card p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h4 className="font-semibold text-foreground mb-2">Schritt 5: Direkt buchen</h4>
             <p className="text-sm">Die Kontaktaufnahme und der Vertragsabschluss erfolgen ausschliesslich zwischen Ihnen und der ausgewählten Umzugsfirma – nicht mit Online-Offerten.ch.</p>
           </div>
         </div>
@@ -463,15 +463,15 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
       </section>
 
       {/* CTA Section */}
-      <div className="p-8 bg-blue-50 border border-blue-200 rounded-xl mb-12 text-center">
-        <h3 className="text-2xl md:text-3xl font-semibold text-blue-800 mb-4">Starten Sie sorgenfrei in Ihr neues Abenteuer</h3>
+      <div className="p-8 bg-blue-50 dark:bg-blue-950/25 border border-blue-200 dark:border-blue-800 rounded-xl mb-12 text-center">
+        <h3 className="text-2xl md:text-3xl font-semibold text-blue-800 dark:text-blue-200 mb-4">Starten Sie sorgenfrei in Ihr neues Abenteuer</h3>
         <p className="mb-6">Ein internationaler Umzug muss nicht stressig sein. Mit dem richtigen Partner an Ihrer Seite können Sie sich auf das konzentrieren, was wirklich zählt: Ihr neues Leben im Ausland.</p>
         <Button asChild size="lg" className="bg-green-500 hover:bg-green-600 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
           <Link href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international">Jetzt kostenlose Offerten für den Auslandsumzug anfordern</Link>
         </Button>
       </div>
 
-      <section className="not-prose py-12 md:py-16 bg-white border-t border-gray-200 mt-6">
+      <section className="not-prose py-12 md:py-16 bg-card border-t border-border mt-6">
         <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
           <div className="md:col-span-3">
             <div className="mb-8">
@@ -479,8 +479,8 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
             </div>
             <Accordion type="single" collapsible className="w-full">
               {faqItems.map((item, index) => (
-                <AccordionItem value={`item-${index}`} key={index} className="border-b border-gray-200 last:border-b-0">
-                  <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                <AccordionItem value={`item-${index}`} key={index} className="border-b border-border last:border-b-0">
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:text-green-600 dark:hover:text-green-400">
                     <h4 className="faq-question">{item.q}</h4>
                   </AccordionTrigger>
                   <AccordionContent className="text-body leading-relaxed">
@@ -491,7 +491,7 @@ const ArticleSection = ({ heroImageUrl }: { heroImageUrl: string }) => {
             </Accordion>
           </div>
           <div className="relative md:col-span-2">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-border">
               <img
                 src={heroImageUrl}
                 alt="Internationale Umzüge FAQ – Antworten zu Kosten, Dauer und Zollabwicklung"
@@ -521,9 +521,9 @@ const InternationaleUmzugPageClient = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-slate-50 to-white">
+      <div className="bg-background">
         <section
-          className="relative w-full bg-gray-100 pt-[5px] pb-12 md:pb-16 overflow-hidden"
+          className="relative w-full bg-muted pt-[5px] pb-12 md:pb-16 overflow-hidden dark:bg-muted/30"
         >
           {/* Background Image - Right Side (Desktop only) */}
           <div 
@@ -536,17 +536,17 @@ const InternationaleUmzugPageClient = () => {
           ></div>
           
           {/* Gradient Overlay (Desktop only) */}
-          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent"></div>
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-muted via-muted/90 to-transparent dark:from-background dark:via-background/85"></div>
           
           <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
             {/* Breadcrumb Navigation */}
             <nav className="mb-4 pt-4" aria-label="Breadcrumb">
-              <ol className="flex items-center space-x-2 text-sm text-gray-600">
+              <ol className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/" className="hover:text-green-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
                 </li>
                 <li>
-                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                  <ChevronRight className="w-4 h-4 text-muted-foreground/70" />
                 </li>
                 <li>
                   <Link href="/umzugsfirma" className="hover:text-green-600 transition-colors">
@@ -554,16 +554,16 @@ const InternationaleUmzugPageClient = () => {
                   </Link>
                 </li>
                 <li>
-                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                  <ChevronRight className="w-4 h-4 text-muted-foreground/70" />
                 </li>
-                <li className="text-gray-900 font-medium" aria-current="page">
+                <li className="text-foreground font-medium" aria-current="page">
                   Internationale Umzüge
                 </li>
               </ol>
             </nav>
             
             <div className="flex justify-start">
-              <article className="w-full md:w-1/2 bg-gray-100 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
+              <article className="w-full md:w-1/2 bg-muted/80 dark:bg-card/95 px-[1px] py-8 md:py-12 rounded-l-2xl md:rounded-l-2xl relative z-10">
                 <div>
                   <h1 className="heading-1">
                     Internationale Umzug
@@ -584,7 +584,7 @@ const InternationaleUmzugPageClient = () => {
                     </Link>
                   </Button>
                 </div>
-                <div className="bg-green-50 rounded-lg p-4 md:p-6 flex flex-col gap-4 md:gap-6 max-w-md">
+                <div className="bg-green-50 dark:bg-green-950/35 rounded-lg p-4 md:p-6 flex flex-col gap-4 md:gap-6 max-w-md border border-green-100 dark:border-green-900/50">
                   <div className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-600 mr-2 flex-shrink-0" />
                     <span className="text-sm md:text-body font-medium">Bis zu 40% Ersparnis möglich</span>
@@ -615,11 +615,11 @@ const InternationaleUmzugPageClient = () => {
           </div>
         </section>
 
-        <section className="py-12 md:py-20 bg-white">
+        <section className="py-12 md:py-20 bg-background">
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
               <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
-                <div className="bg-white rounded-2xl p-[1px]">
-                  <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-gray-900 mb-6 leading-tight">
+                <div className="bg-card rounded-2xl p-[1px] border border-border/50">
+                  <h1 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-foreground mb-6 leading-tight">
                     Offerte für Ihren Auslandsumzug ab Schweiz
                   </h1>
                   <h2 className="heading-2">
@@ -636,7 +636,7 @@ const InternationaleUmzugPageClient = () => {
             </div>
         </section>
 
-        <section className="py-12 md:py-20 bg-white">
+        <section className="py-12 md:py-20 bg-background">
           <div className="container mx-auto max-w-7xl px-4 md:px-6">
             <ArticleSection heroImageUrl={imageUrl} />
           </div>
@@ -646,12 +646,12 @@ const InternationaleUmzugPageClient = () => {
           <InternationalPageNavigation currentCountrySlug="internationale-umzuege" />
         </div>
 
-        <section className="py-12 md:py-20 bg-slate-100 mt-12 md:mt-16">
+        <section className="py-12 md:py-20 bg-muted/40 mt-12 md:mt-16">
           <div className="container mx-auto max-w-7xl px-4 md:px-6 text-center">
             <div>
               <Globe2 className="mx-auto text-green-500 h-16 w-16 mb-4" />
               <h2 className="heading-2">Bereit für Ihr neues Zuhause im Ausland?</h2>
-              <p className="text-slate-600 max-w-xl mx-auto mb-8">
+              <p className="text-muted-foreground max-w-xl mx-auto mb-8">
                 Starten Sie jetzt Ihre Anfrage und erhalten Sie unverbindliche Offerten von den besten internationalen Umzugsprofis.
               </p>
               <Button asChild size="lg" className="bg-green-500 hover:bg-green-600 text-white shadow-lg transform hover:scale-105 transition-transform duration-300 px-10 py-3">

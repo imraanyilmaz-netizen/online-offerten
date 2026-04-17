@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Loader2, MapPin } from 'lucide-react'
-import { loadGoogleMapsScript } from '@/lib/googleMapsLoader'
+import { isGoogleMapsAuthFailed, loadGoogleMapsScript } from '@/lib/googleMapsLoader'
 import { cn } from '@/lib/utils'
 
 export type PartnerMapMarker = {
@@ -33,7 +33,7 @@ function buildGeocodeQuery(p: PartnerMapMarker): string {
 
 const GEO_DELAY_MS = 100
 
-type MapStatus = 'idle' | 'loading' | 'ready' | 'empty' | 'error'
+type MapStatus = 'idle' | 'loading' | 'ready' | 'empty' | 'error' | 'billing'
 
 const hasGoogleMapsApiKey = Boolean(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
 
@@ -78,11 +78,20 @@ export default function CategoryCityPartnersMap({
 
     let cancelled = false
 
+    const onAuthFailure = () => {
+      if (!cancelled) setStatus('billing')
+    }
+    window.addEventListener('google-maps-auth-failure', onAuthFailure)
+
     const run = async () => {
       setStatus('loading')
       try {
         await loadGoogleMapsScript()
         if (cancelled || !containerRef.current) return
+        if (isGoogleMapsAuthFailed()) {
+          setStatus('billing')
+          return
+        }
 
         const g = window.google
         if (!g?.maps) {
@@ -91,13 +100,27 @@ export default function CategoryCityPartnersMap({
         }
 
         const el = containerRef.current
-        const map = new g.maps.Map(el, {
-          zoom: 11,
-          center: { lat: 46.8182, lng: 8.2275 },
-          mapTypeControl: false,
-          streetViewControl: false,
-          fullscreenControl: true,
-        })
+        let map: google.maps.Map
+        try {
+          map = new g.maps.Map(el, {
+            zoom: 11,
+            center: { lat: 46.8182, lng: 8.2275 },
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: true,
+          })
+        } catch {
+          if (isGoogleMapsAuthFailed()) {
+            setStatus('billing')
+            return
+          }
+          setStatus('error')
+          return
+        }
+        if (isGoogleMapsAuthFailed()) {
+          setStatus('billing')
+          return
+        }
         const geocoder = new g.maps.Geocoder()
 
         const geocode = (address: string): Promise<google.maps.LatLngLiteral | null> =>
@@ -197,7 +220,9 @@ export default function CategoryCityPartnersMap({
 
         setStatus('ready')
       } catch {
-        if (!cancelled) setStatus('error')
+        if (!cancelled) {
+          setStatus(isGoogleMapsAuthFailed() ? 'billing' : 'error')
+        }
       }
     }
 
@@ -205,6 +230,7 @@ export default function CategoryCityPartnersMap({
 
     return () => {
       cancelled = true
+      window.removeEventListener('google-maps-auth-failure', onAuthFailure)
       listenersRef.current.forEach((l) => l.remove())
       listenersRef.current = []
       markersRef.current.forEach((m) => m.setMap(null))
@@ -273,6 +299,18 @@ export default function CategoryCityPartnersMap({
       </div>
       <div className="relative aspect-[16/10] min-h-[280px] w-full sm:aspect-[21/9] sm:min-h-[320px]">
         <div ref={containerRef} className="absolute inset-0 h-full w-full" />
+        {status === 'billing' ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-slate-100/95 p-6 text-center text-sm text-slate-600 dark:bg-muted/80 dark:text-muted-foreground">
+            <p className="max-w-md font-medium text-slate-800 dark:text-foreground">
+              Google Maps ist derzeit nicht nutzbar (API-Schlüssel / Abrechnung).
+            </p>
+            <p className="max-w-md text-xs leading-relaxed">
+              Im Google Cloud Projekt müssen die Abrechnung aktiviert und die Maps JavaScript API sowie ggf.
+              Geocoding &amp; Places freigeschaltet sein. Die Partnerliste oberhalb bleibt unverändert
+              verfügbar.
+            </p>
+          </div>
+        ) : null}
         {status === 'error' ? (
           <div className="absolute inset-0 flex items-center justify-center bg-slate-100/95 p-6 text-center text-sm text-slate-600 dark:bg-muted/80 dark:text-muted-foreground">
             Karte konnte nicht geladen werden. Bitte später erneut versuchen.

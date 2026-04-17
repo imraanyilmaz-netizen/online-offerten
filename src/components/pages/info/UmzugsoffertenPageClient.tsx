@@ -22,15 +22,15 @@ const UmzugsoffertenFAQSection = dynamic(
   { 
     ssr: true,
     loading: () => (
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <div className="animate-pulse space-y-4">
-              <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+              <div className="h-8 bg-gray-200 dark:bg-muted rounded w-3/4 mx-auto"></div>
+              <div className="h-4 bg-gray-200 dark:bg-muted rounded w-1/2 mx-auto"></div>
               <div className="space-y-3 mt-8">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="h-16 bg-gray-100 rounded"></div>
+                  <div key={i} className="h-16 bg-gray-100 dark:bg-muted/50 rounded"></div>
                 ))}
               </div>
             </div>
@@ -46,13 +46,13 @@ const UmzugsoffertenSEORichContent = dynamic(
   { 
     ssr: true,
     loading: () => (
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <div className="animate-pulse space-y-4">
-              <div className="h-10 bg-gray-200 rounded w-2/3"></div>
-              <div className="h-4 bg-gray-200 rounded w-full"></div>
-              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-10 bg-gray-200 dark:bg-muted rounded w-2/3"></div>
+              <div className="h-4 bg-gray-200 dark:bg-muted rounded w-full"></div>
+              <div className="h-4 bg-gray-200 dark:bg-muted rounded w-5/6"></div>
             </div>
           </div>
         </div>
@@ -364,127 +364,127 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100">
+      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100 dark:bg-background">
         <div className="absolute inset-0 z-[1]">
-          <div className="absolute inset-0 bg-gray-100"></div>
+          <div className="absolute inset-0 bg-gray-100 dark:bg-background"></div>
         </div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
-              <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
+              <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-emerald-950/45 rounded-full text-green-700 dark:text-emerald-300 font-semibold text-sm mb-3 border border-green-200/60 dark:border-emerald-800">
                 <MapPin className="h-4 w-4 mr-2" />
                 Umzugsofferten kostenlos vergleichen
               </div>
               <h1 className="heading-1 !mt-0">
                 Umzugsofferten kostenlos vergleichen » Bis zu 40% sparen
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
                 Fordern Sie in nur 5 Minuten bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen an und sparen Sie bares Geld bei Ihrem Umzug.
               </p>
               
               {/* Umzug Type Buttons */}
-              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
+              <p className="text-sm font-semibold text-foreground mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-6">
                 {/* Privatumzug */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-card border-border hover:border-blue-500 dark:hover:border-sky-500 hover:bg-blue-50 dark:hover:bg-sky-950/35 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 dark:bg-sky-950/50 group-hover:bg-blue-500 dark:group-hover:bg-sky-600 transition-colors">
+                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-sky-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Privatumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Wohnungsumzug</p>
+                    <p className="font-semibold text-sm sm:text-base text-foreground">Privatumzug</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">Wohnungsumzug</p>
                   </div>
                 </Link>
                 
                 {/* Geschäftsumzug */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-card border-border hover:border-purple-500 dark:hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/30 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 dark:bg-purple-950/45 group-hover:bg-purple-500 dark:group-hover:bg-purple-600 transition-colors">
+                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-300 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Geschäftsumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Firmenumzug</p>
+                    <p className="font-semibold text-sm sm:text-base text-foreground">Geschäftsumzug</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">Firmenumzug</p>
                   </div>
                 </Link>
                 
                 {/* International */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-card border-border hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
-                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 dark:bg-emerald-950/45 group-hover:bg-emerald-500 dark:group-hover:bg-emerald-600 transition-colors">
+                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Auslandumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">International</p>
+                    <p className="font-semibold text-sm sm:text-base text-foreground">Auslandumzug</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">International</p>
                   </div>
                 </Link>
                 
                 {/* Klaviertransport */}
                 <Link 
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-card border-border hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
-                    <PiPianoKeysFill className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 dark:bg-amber-950/40 group-hover:bg-amber-500 dark:group-hover:bg-amber-600 transition-colors">
+                    <PiPianoKeysFill className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Klaviertransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Piano & Flügel</p>
+                    <p className="font-semibold text-sm sm:text-base text-foreground">Klaviertransport</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">Piano & Flügel</p>
                   </div>
                 </Link>
                 
                 {/* Kleintransport */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-card border-border hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-950/30 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 dark:bg-teal-950/45 group-hover:bg-teal-500 dark:group-hover:bg-teal-600 transition-colors">
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 dark:text-teal-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Kleintransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Einzelne Gegenstände</p>
+                    <p className="font-semibold text-sm sm:text-base text-foreground">Kleintransport</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">Einzelne Gegenstände</p>
                   </div>
                 </Link>
                 
                 {/* Lagerung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-card border-border hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 dark:bg-indigo-950/45 group-hover:bg-indigo-500 dark:group-hover:bg-indigo-600 transition-colors">
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Möbel einlagern</p>
+                    <p className="font-semibold text-sm sm:text-base text-foreground">Lagerung</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">Möbel einlagern</p>
                   </div>
                 </Link>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700">
+              <div className="mt-8 flex flex-wrap gap-6 text-sm text-foreground/90">
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2" />
                   <span>Versicherte Firmen</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2" />
                   <span>100% kostenlos</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2" />
                   <span>Angebote von geprüften Partnern</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2" />
                   <span>Jetzt kostenlose Offerten anfordern</span>
                 </div>
               </div>
@@ -509,7 +509,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
       </section>
 
       {/* SEO Content Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Table of Contents - Mobile: Sticky at top, Desktop: Left Sidebar */}
@@ -518,7 +518,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
               className="lg:col-span-4"
             >
               {/* Mobile TOC - Sticky below navbar */}
-              <div className="lg:hidden sticky top-[80px] z-[2999] mb-6 bg-white border-b border-gray-200 pb-4 -mx-4 px-4">
+              <div className="lg:hidden sticky top-[80px] z-[2999] mb-6 bg-background border-b border-border pb-4 -mx-4 px-4">
                 <div className="overflow-x-auto scrollbar-hide">
                   <div className="flex space-x-2 min-w-max py-2">
                     {tocItems.map((item) => (
@@ -527,8 +527,8 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
                         onClick={() => scrollToHeading(item.id)}
                         className={`px-4 py-2 rounded-md transition-colors text-sm whitespace-nowrap flex-shrink-0 ${
                           activeId === item.id
-                            ? 'bg-green-100 text-green-700 font-semibold'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ? 'bg-green-100 dark:bg-emerald-950/45 text-green-700 dark:text-emerald-300 font-semibold'
+                            : 'bg-muted text-foreground/80 hover:bg-muted/80 dark:hover:bg-muted'
                         }`}
                       >
                         {item.title.length > 35 
@@ -542,9 +542,9 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
 
               {/* Desktop TOC - Left Sidebar */}
               <div className="hidden lg:block sticky top-24">
-                <Card className="border border-gray-200 rounded-xl shadow-sm bg-white">
+                <Card className="border border-border rounded-xl shadow-sm bg-card">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg font-bold text-gray-800">
+                    <CardTitle className="text-lg font-bold text-foreground">
                       Inhalt
                     </CardTitle>
                   </CardHeader>
@@ -556,8 +556,8 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
                           onClick={() => scrollToHeading(item.id)}
                           className={`block w-full text-left px-3 py-2 rounded-md transition-colors text-sm ${
                             activeId === item.id
-                              ? 'bg-green-100 text-green-700 font-semibold'
-                              : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                              ? 'bg-green-100 dark:bg-emerald-950/45 text-green-700 dark:text-emerald-300 font-semibold'
+                              : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                           }`}
                         >
                           {item.title.length > 60 
@@ -592,36 +592,36 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
               Preis und Leistungsumfang unterscheiden sich je nach Anbieter deutlich. Durch den Vergleich sehen Sie, welche Offerte wirklich zu Ihrem Budget und Ihrem Umzug passt.
             </p>
             <div className="overflow-x-auto mb-8">
-              <table className="min-w-full border-collapse border border-gray-300">
+              <table className="min-w-full border-collapse border border-border">
                 <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Vorteil</th>
-                    <th className="border border-gray-300 px-4 py-2 text-left heading-4">Nutzen</th>
+                  <tr className="bg-muted/50 dark:bg-muted/30">
+                    <th className="border border-border px-4 py-2 text-left heading-4">Vorteil</th>
+                    <th className="border border-border px-4 py-2 text-left heading-4">Nutzen</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Bessere Preise</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Mehr Wettbewerb fuehrt oft zu besseren Konditionen.</td>
+                    <td className="border border-border px-4 py-2 text-body">Bessere Preise</td>
+                    <td className="border border-border px-4 py-2 text-body">Mehr Wettbewerb fuehrt oft zu besseren Konditionen.</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Mehr Transparenz</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Sie erkennen klar, welche Leistungen enthalten sind.</td>
+                    <td className="border border-border px-4 py-2 text-body">Mehr Transparenz</td>
+                    <td className="border border-border px-4 py-2 text-body">Sie erkennen klar, welche Leistungen enthalten sind.</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Mehr Sicherheit</td>
-                    <td className="border border-gray-300 px-4 py-2 text-body">Sie entscheiden auf Basis von Preis, Service und Bewertungen.</td>
+                    <td className="border border-border px-4 py-2 text-body">Mehr Sicherheit</td>
+                    <td className="border border-border px-4 py-2 text-body">Sie entscheiden auf Basis von Preis, Service und Bewertungen.</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             
-            <div className="mb-8 bg-gradient-to-br from-teal-700 to-green-800 rounded-xl p-6 md:p-8 shadow-lg">
+            <div className="mb-8 bg-gradient-to-br from-teal-700 to-green-800 dark:from-teal-900 dark:to-emerald-950 rounded-xl p-6 md:p-8 shadow-lg">
               <div className="text-center mb-6">
-                <h3 className="text-2xl md:text-3xl font-bold text-green-100 mb-3">
+                <h3 className="text-2xl md:text-3xl font-bold text-green-100 dark:text-emerald-100 mb-3">
                   Jetzt Umzugsofferten vergleichen und kostenlos Angebote erhalten
                 </h3>
-                <p className="text-green-50 text-base md:text-lg">
+                <p className="text-green-50 dark:text-emerald-50/95 text-base md:text-lg">
                   Eine Anfrage, mehrere passende Anbieter aus Ihrer Region.
                 </p>
               </div>
@@ -728,7 +728,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
 
       {/* Hero Form Section */}
       <section 
-        className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-[#E6F6EA] lg:bg-[#dbeadf] z-20" 
+        className="relative w-full py-8 sm:py-12 md:py-16 lg:py-24 overflow-hidden bg-[#E6F6EA] lg:bg-[#dbeadf] dark:bg-emerald-950/40 dark:lg:bg-emerald-950/35 z-20" 
         aria-label="Hero Section - Kostenlose Offerten für Umzug, Reinigung und Renovierung"
       >
         {/* Background Image - Right Side - Desktop Only */}
@@ -743,10 +743,10 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
         ></div>
         
         {/* Gradient Overlay - White from left to right with shadow effect - Desktop Only */}
-        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent" style={{ width: '60%' }}></div>
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent dark:from-background dark:via-background/80 dark:to-transparent" style={{ width: '60%' }}></div>
         
         {/* White shadow/glow effect towards the image - Desktop Only */}
-        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/8 pointer-events-none"></div>
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/8 dark:to-background/20 pointer-events-none"></div>
         <div 
           className="hidden lg:block absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] pointer-events-none"
           style={{
@@ -780,7 +780,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
             {/* Rating Card */}
             {ratingStats.reviewCount > 0 && (
               <div 
-                className="bg-white rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-start items-start gap-4 transition-all duration-300 mt-6"
+                className="bg-card rounded-xl border border-border p-5 sm:p-6 flex flex-col md:flex-row md:items-start items-start gap-4 transition-all duration-300 mt-6"
                 style={{
                   boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
                 }}
@@ -789,16 +789,16 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
                   {/* Trust Badges */}
                   <div className="flex flex-wrap justify-start items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Kostenlos & unverbindlich</span>
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400" />
+                      <span className="text-sm text-muted-foreground">Kostenlos & unverbindlich</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Nur geprüfte Firmen</span>
+                      <ShieldCheck className="h-5 w-5 text-green-600 dark:text-emerald-400" />
+                      <span className="text-sm text-muted-foreground">Nur geprüfte Firmen</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Bis zu 40% sparen</span>
+                      <Award className="h-5 w-5 text-green-600 dark:text-emerald-400" />
+                      <span className="text-sm text-muted-foreground">Bis zu 40% sparen</span>
                     </div>
                   </div>
                 </div>
