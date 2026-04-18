@@ -202,7 +202,13 @@ export default async function PartnerProfilePage(props: { params: Promise<{ slug
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="flex min-h-[40vh] items-center justify-center bg-background text-muted-foreground">
+            Laden…
+          </div>
+        }
+      >
         <PartnerProfilePageClient initialPartner={partner} />
       </Suspense>
     </>

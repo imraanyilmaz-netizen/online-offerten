@@ -14,8 +14,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatDate } from '@/lib/utils'
 
 const FullPageLoader = () => (
-  <div className="fixed inset-0 z-[9999] flex h-screen w-full items-center justify-center bg-white">
-    <Loader2 className="h-12 w-12 animate-spin text-green-600" />
+  <div className="fixed inset-0 z-[9999] flex h-screen w-full items-center justify-center bg-background">
+    <Loader2 className="h-12 w-12 animate-spin text-primary" />
   </div>
 )
 
@@ -131,7 +131,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
   ].filter(Boolean) as Array<{ id: string; label: string }>
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-slate-50 to-white dark:from-emerald-950/25 dark:via-background dark:to-background">
       <PartnerHero 
         partner={partner} 
         onGetOffer={handleGetOffer}
@@ -140,8 +140,8 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
       />
       
       <div className="container mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
-        <div className="mb-8 rounded-2xl border border-emerald-100 bg-white/90 p-3 shadow-sm backdrop-blur">
-          <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+        <div className="mb-8 rounded-2xl border border-emerald-100 dark:border-emerald-900/50 bg-white/90 dark:bg-card/90 p-3 shadow-sm backdrop-blur">
+          <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             Schnellzugriff
           </div>
           <nav className="flex flex-wrap gap-2">
@@ -150,7 +150,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
                 key={link.id}
                 href={`#${link.id}`}
                 scroll={true}
-                className="rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-2 text-sm font-medium text-emerald-900 transition-colors hover:bg-emerald-100"
+                className="rounded-xl border border-emerald-100 dark:border-emerald-800/60 bg-emerald-50/60 dark:bg-emerald-950/40 px-4 py-2 text-sm font-medium text-emerald-900 dark:text-emerald-100 transition-colors hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
               >
                 {link.label}
               </Link>
@@ -161,12 +161,12 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-8">
             {(partner.message || partner.description) && (
-              <Card id="about" className="scroll-mt-28 border-slate-200/70 shadow-sm">
+              <Card id="about" className="scroll-mt-28 border-border bg-card text-card-foreground shadow-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-2xl tracking-tight text-slate-900">Über uns</CardTitle>
+                  <CardTitle className="text-2xl tracking-tight text-foreground">Über uns</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="whitespace-pre-line leading-7 text-slate-700">
+                  <p className="whitespace-pre-line leading-7 text-muted-foreground">
                     {partner.message || partner.description}
                   </p>
                 </CardContent>
@@ -174,9 +174,9 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
             )}
 
             {partner.services && partner.services.length > 0 && (
-              <Card id="services" className="scroll-mt-28 border-slate-200/70 shadow-sm">
+              <Card id="services" className="scroll-mt-28 border-border bg-card text-card-foreground shadow-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-2xl tracking-tight text-slate-900">
+                  <CardTitle className="text-2xl tracking-tight text-foreground">
                     Unsere Dienstleistungen
                   </CardTitle>
                 </CardHeader>
@@ -185,7 +185,7 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
                     {partner.services.map((service: string, index: number) => (
                       <span
                         key={index}
-                        className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-800"
+                        className="rounded-full border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 text-sm font-medium text-emerald-800 dark:text-emerald-200"
                       >
                         {service}
                       </span>

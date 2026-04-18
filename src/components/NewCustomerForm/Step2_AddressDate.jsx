@@ -17,7 +17,8 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
   
   const isInternationalMove = formData.umzugArt === 'international';
 
-  const { loading: addressLoading, suggestions, getSuggestions, clearSuggestions } = useAddressAutocomplete();
+  const { loading: addressLoading, suggestions, getSuggestions, clearSuggestions, resolveSuggestion } = useAddressAutocomplete();
+  const [addressResolving, setAddressResolving] = useState(false);
   const [isStreetInputFocused, setIsStreetInputFocused] = useState(false);
   const [showAllStreetSuggestions, setShowAllStreetSuggestions] = useState(false);
   const streetWrapperRef = useRef(null);
@@ -46,16 +47,22 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
     setShowAllStreetSuggestions(false);
   };
 
-  const handleStreetSuggestionSelect = (suggestion) => {
-    const streetWithNumber = `${suggestion.street || ''} ${suggestion.housenumber || ''}`.trim();
-    
-    handleChange({ target: { name: `${prefix}_street`, value: streetWithNumber } });
-    handleChange({ target: { name: `${prefix}_zip`, value: suggestion.postcode } });
-    handleChange({ target: { name: `${prefix}_city`, value: suggestion.city } });
-    
-    clearSuggestions();
-    setIsStreetInputFocused(false);
-    setShowAllStreetSuggestions(false);
+  const handleStreetSuggestionSelect = async (suggestion) => {
+    setAddressResolving(true);
+    try {
+      const resolved = await resolveSuggestion(suggestion);
+      const streetWithNumber = `${resolved.street || ''} ${resolved.housenumber || ''}`.trim();
+
+      handleChange({ target: { name: `${prefix}_street`, value: streetWithNumber } });
+      handleChange({ target: { name: `${prefix}_zip`, value: resolved.postcode } });
+      handleChange({ target: { name: `${prefix}_city`, value: resolved.city } });
+
+      clearSuggestions();
+      setIsStreetInputFocused(false);
+      setShowAllStreetSuggestions(false);
+    } finally {
+      setAddressResolving(false);
+    }
   };
   
   const displayedStreetSuggestions = showAllStreetSuggestions ? suggestions : suggestions.slice(0, 5);
@@ -176,15 +183,15 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
               className="bg-slate-50 border-slate-300 focus:bg-white text-sm sm:text-base"
               autoComplete={`section-${prefix} address-line1`}
             />
-            {isStreetInputFocused && (addressLoading || suggestions.length > 0) && (
+            {isStreetInputFocused && (addressLoading || addressResolving || suggestions.length > 0) && (
               <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-72 overflow-y-auto">
-                {addressLoading && (
+                {(addressLoading || addressResolving) && (
                   <div className="p-3 text-sm text-gray-500 flex items-center">
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     {t('step2.addressSearching')}
                   </div>
                 )}
-                {!addressLoading && displayedStreetSuggestions.length > 0 && (
+                {!addressLoading && !addressResolving && displayedStreetSuggestions.length > 0 && (
                   <ul className="py-1">
                     {displayedStreetSuggestions.map((suggestion) => (
                       <li
@@ -197,13 +204,24 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                       >
                         <MapPin className="w-4 h-4 mr-3 mt-0.5 text-gray-400 shrink-0" />
                         <div className="flex-grow">
-                          <p className="font-medium text-sm sm:text-base">
-                            {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
-                          </p>
-                          <p className="text-xs sm:text-sm text-gray-500">
-                            {suggestion.postcode} {suggestion.city}
-                            {suggestion.suburb && suggestion.suburb !== suggestion.city ? `, ${suggestion.suburb}` : ''}
-                          </p>
+                          {suggestion.source === 'google' ? (
+                            <>
+                              <p className="font-medium text-sm sm:text-base">{suggestion.main_text}</p>
+                              {suggestion.secondary_text ? (
+                                <p className="text-xs sm:text-sm text-gray-500">{suggestion.secondary_text}</p>
+                              ) : null}
+                            </>
+                          ) : (
+                            <>
+                              <p className="font-medium text-sm sm:text-base">
+                                {suggestion.street} {suggestion.housenumber && `${suggestion.housenumber}`}
+                              </p>
+                              <p className="text-xs sm:text-sm text-gray-500">
+                                {suggestion.postcode} {suggestion.city}
+                                {suggestion.suburb && suggestion.suburb !== suggestion.city ? `, ${suggestion.suburb}` : ''}
+                              </p>
+                            </>
+                          )}
                         </div>
                       </li>
                     ))}
@@ -224,7 +242,7 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
                     )}
                   </ul>
                 )}
-                {!addressLoading && formData[`${prefix}_street`] && formData[`${prefix}_street`].length >= 3 && suggestions.length === 0 && (
+                {!addressLoading && !addressResolving && formData[`${prefix}_street`] && formData[`${prefix}_street`].length >= 3 && suggestions.length === 0 && (
                   <div className="p-3 text-sm text-gray-500">
                     {t('step2.noSuggestionsFound')}
                   </div>

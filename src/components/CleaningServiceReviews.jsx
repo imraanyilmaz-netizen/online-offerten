@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useState } from 'react';
 // framer-motion removed - CSS for better INP
-import { Star, User } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 import { Card, CardContent } from '@/components/ui/card';
-import { formatDate } from '@/lib/utils';
+import { formatDate, getCustomerInitials } from '@/lib/utils';
 
 const CleaningServiceReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -99,8 +99,13 @@ const CleaningServiceReviews = () => {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                        <User className="w-5 h-5 text-gray-500" />
+                      <div
+                        className="w-10 h-10 rounded-full bg-gradient-to-br from-green-100 to-green-50 border border-green-200/80 flex items-center justify-center flex-shrink-0"
+                        aria-hidden
+                      >
+                        <span className="text-xs font-bold text-green-700 tracking-tight select-none">
+                          {getCustomerInitials(review.customer_name)}
+                        </span>
                       </div>
                       <div className="min-w-0">
                         <p className="font-bold text-gray-800 text-base truncate">{review.customer_name}</p>

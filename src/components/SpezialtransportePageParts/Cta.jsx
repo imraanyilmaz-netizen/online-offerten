@@ -22,7 +22,7 @@ const Cta = () => {
           size="xl"
           className="bg-white text-green-700 hover:bg-green-50 group px-10 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
         >
-          <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=spezialtransport">
+          <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2&umzugArt=klaviertransport">
             Jetzt Offerten anfordern
             <ArrowRight className="w-6 h-6 ml-3 transition-transform group-hover:translate-x-1.5" />
           </Link>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useCallback, useRef, useEffect, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
@@ -111,7 +111,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         },
         codeBlock: {
           HTMLAttributes: {
-            class: 'bg-gray-100 rounded p-2 font-mono text-sm',
+            class: 'bg-muted rounded p-2 font-mono text-sm',
           },
         },
         bulletList: {
@@ -150,7 +150,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         autolink: true,
         linkOnPaste: true,
         HTMLAttributes: {
-          class: 'text-blue-600 underline cursor-pointer',
+          class: 'text-blue-600 dark:text-blue-400 underline cursor-pointer',
           rel: 'noopener noreferrer',
           target: null,
         },
@@ -164,23 +164,23 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
       }),
       Table.configure({
         HTMLAttributes: {
-          class: 'border-collapse border border-gray-300 w-full my-4',
+          class: 'border-collapse border border-border w-full my-4',
         },
         resizable: true,
       }),
       TableRow.configure({
         HTMLAttributes: {
-          class: 'border border-gray-300',
+          class: 'border border-border',
         },
       }),
       TableHeader.configure({
         HTMLAttributes: {
-          class: 'border border-gray-300 bg-gray-100 px-4 py-2 font-semibold text-left',
+          class: 'border border-border bg-muted px-4 py-2 font-semibold text-left',
         },
       }),
       TableCell.configure({
         HTMLAttributes: {
-          class: 'border border-gray-300 px-4 py-2',
+          class: 'border border-border px-4 py-2',
         },
       }),
     ],
@@ -194,7 +194,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px] p-6 [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-4 [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_h1]:!text-[28px] [&_h1]:sm:!text-[32px] [&_h1]:md:!text-[36px] [&_h1]:lg:!text-[40px] [&_h1]:!font-bold [&_h1]:!mt-8 [&_h1]:!mb-6 [&_h2]:!text-[22px] [&_h2]:md:!text-[30px] [&_h2]:!font-bold [&_h2]:!mt-6 [&_h2]:!mb-4 [&_h3]:!text-[20px] [&_h3]:md:!text-[24px] [&_h3]:!font-semibold [&_h3]:!mt-5 [&_h3]:!mb-3 [&_h4]:!text-[18px] [&_h4]:md:!text-[20px] [&_h4]:!font-semibold [&_h4]:!mt-4 [&_h4]:!mb-2 [&_h5]:!text-[16px] [&_h5]:md:!text-[18px] [&_h5]:!font-semibold [&_h5]:!mt-3 [&_h5]:!mb-2 [&_h6]:!text-[14px] [&_h6]:md:!text-[16px] [&_h6]:!font-semibold [&_h6]:!mt-2 [&_h6]:!mb-2 [&_p]:!text-[16px] [&_p]:md:!text-[18px] [&_ul]:!list-disc [&_ul]:!ml-6 [&_ul]:!mb-4 [&_ul]:!pl-6 [&_ol]:!list-decimal [&_ol]:!ml-6 [&_ol]:!mb-4 [&_ol]:!pl-6 [&_li]:!mb-2 [&_li]:!list-item [&_table]:!border-collapse [&_table]:!w-full [&_table]:!my-4 [&_table]:!border [&_table]:!border-gray-300 [&_th]:!border [&_th]:!border-gray-300 [&_th]:!bg-gray-100 [&_th]:!px-4 [&_th]:!py-2 [&_th]:!font-semibold [&_th]:!text-left [&_td]:!border [&_td]:!border-gray-300 [&_td]:!px-4 [&_td]:!py-2',
+        class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px] p-6 [&_p]:whitespace-pre-wrap [&_p]:break-words [&_p]:mb-4 [&_p:empty]:mb-3 [&_p:empty]:min-h-[1.5rem] [&_p:empty]:block [&_h1]:!text-[28px] [&_h1]:sm:!text-[32px] [&_h1]:md:!text-[36px] [&_h1]:lg:!text-[40px] [&_h1]:!font-bold [&_h1]:!mt-8 [&_h1]:!mb-6 [&_h2]:!text-[22px] [&_h2]:md:!text-[30px] [&_h2]:!font-bold [&_h2]:!mt-6 [&_h2]:!mb-4 [&_h3]:!text-[20px] [&_h3]:md:!text-[24px] [&_h3]:!font-semibold [&_h3]:!mt-5 [&_h3]:!mb-3 [&_h4]:!text-[18px] [&_h4]:md:!text-[20px] [&_h4]:!font-semibold [&_h4]:!mt-4 [&_h4]:!mb-2 [&_h5]:!text-[16px] [&_h5]:md:!text-[18px] [&_h5]:!font-semibold [&_h5]:!mt-3 [&_h5]:!mb-2 [&_h6]:!text-[14px] [&_h6]:md:!text-[16px] [&_h6]:!font-semibold [&_h6]:!mt-2 [&_h6]:!mb-2 [&_p]:!text-[16px] [&_p]:md:!text-[18px] [&_ul]:!list-disc [&_ul]:!ml-6 [&_ul]:!mb-4 [&_ul]:!pl-6 [&_ol]:!list-decimal [&_ol]:!ml-6 [&_ol]:!mb-4 [&_ol]:!pl-6 [&_li]:!mb-2 [&_li]:!list-item [&_table]:!border-collapse [&_table]:!w-full [&_table]:!my-4 [&_table]:!border [&_table]:!border-border [&_th]:!border [&_th]:!border-border [&_th]:!bg-muted [&_th]:!px-4 [&_th]:!py-2 [&_th]:!font-semibold [&_th]:!text-left [&_td]:!border [&_td]:!border-border [&_td]:!px-4 [&_td]:!py-2',
       },
       transformPastedHTML(html) {
         // Boş paragrafları koru - &nbsp; ekle
@@ -306,8 +306,8 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
 
   if (!isMounted || !editor) {
     return (
-      <div className="border rounded-lg overflow-hidden bg-white min-h-[500px] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+      <div className="border border-border rounded-lg overflow-hidden bg-card min-h-[500px] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600 dark:border-emerald-500"></div>
       </div>
     );
   }
@@ -319,11 +319,11 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
   ];
 
   return (
-    <div className="border rounded-lg bg-white">
+    <div className="border border-border rounded-lg bg-card text-card-foreground">
       {/* Toolbar */}
-      <div className="sticky top-16 z-50 bg-gray-50 border-b p-2 flex flex-wrap gap-1 rounded-t-lg shadow-sm">
+      <div className="sticky top-16 z-50 bg-muted/70 dark:bg-muted/50 border-b border-border p-2 flex flex-wrap gap-1 rounded-t-lg shadow-sm">
         {/* Text Formatting */}
-        <div className="flex gap-1 border-r pr-2 mr-2">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2">
           <Button
             variant={editor.isActive('bold') ? 'default' : 'ghost'}
             size="sm"
@@ -375,7 +375,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         </div>
 
         {/* Headings */}
-        <div className="flex gap-1 border-r pr-2 mr-2">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2">
           <Button
             variant={editor.isActive('heading', { level: 1 }) ? 'default' : 'ghost'}
             size="sm"
@@ -427,7 +427,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         </div>
 
         {/* Lists */}
-        <div className="flex gap-1 border-r pr-2 mr-2">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2">
           <Button
             variant={editor.isActive('bulletList') ? 'default' : 'ghost'}
             size="sm"
@@ -487,7 +487,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         </div>
 
         {/* Alignment */}
-        <div className="flex gap-1 border-r pr-2 mr-2">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2">
           <Button
             variant={editor.isActive({ textAlign: 'left' }) ? 'default' : 'ghost'}
             size="sm"
@@ -539,7 +539,7 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         </div>
 
         {/* Media & Links */}
-        <div className="flex gap-1 border-r pr-2 mr-2">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2">
           <Button
             variant={editor.isActive('link') ? 'default' : 'ghost'}
             size="sm"
@@ -559,17 +559,17 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         </div>
 
         {/* Font Family */}
-        <div className="flex gap-1 border-r pr-2 mr-2 relative group">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2 relative group">
           <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
             <Type className="h-4 w-4 mr-1" />
             Font
           </Button>
-          <div className="absolute top-full left-0 mt-1 bg-white border rounded-lg shadow-lg z-50 min-w-[180px] max-h-[300px] overflow-y-auto opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+          <div className="absolute top-full left-0 mt-1 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg z-50 min-w-[180px] max-h-[300px] overflow-y-auto opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
             {['Arial', 'Helvetica', 'Times New Roman', 'Courier New', 'Verdana', 'Georgia', 'Comic Sans MS', 'Impact'].map((font) => (
               <button
                 key={font}
                 onClick={() => editor.chain().focus().setFontFamily(font).run()}
-                className="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm"
+                className="w-full text-left px-3 py-2 hover:bg-muted text-sm"
                 style={{ fontFamily: font }}
               >
                 {font}
@@ -579,17 +579,17 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         </div>
 
         {/* Font Size */}
-        <div className="flex gap-1 border-r pr-2 mr-2 relative group">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2 relative group">
           <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
             <Type className="h-4 w-4 mr-1" />
             Size
           </Button>
-          <div className="absolute top-full left-0 mt-1 bg-white border rounded-lg shadow-lg z-50 min-w-[120px] max-h-[300px] overflow-y-auto opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+          <div className="absolute top-full left-0 mt-1 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg z-50 min-w-[120px] max-h-[300px] overflow-y-auto opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
             {fontSizes.map((size) => (
               <button
                 key={size}
                 onClick={() => setFontSize(size)}
-                className="w-full text-left px-3 py-2 hover:bg-gray-100 text-sm"
+                className="w-full text-left px-3 py-2 hover:bg-muted text-sm"
                 style={{ fontSize: `${size}px` }}
               >
                 {size}px
@@ -599,17 +599,17 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
         </div>
 
         {/* Color */}
-        <div className="flex gap-1 border-r pr-2 mr-2 relative group">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2 relative group">
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
             <Palette className="h-4 w-4" />
           </Button>
-          <div className="absolute top-full left-0 mt-1 bg-white border rounded-lg shadow-lg z-50 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+          <div className="absolute top-full left-0 mt-1 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg z-50 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
             <div className="grid grid-cols-5 gap-2">
               {colors.map((color) => (
                 <button
                   key={color}
                   onClick={() => setColor(color)}
-                  className="w-8 h-8 rounded border border-gray-300 hover:scale-110 transition-transform"
+                  className="w-8 h-8 rounded border border-border hover:scale-110 transition-transform"
                   style={{ backgroundColor: color }}
                 />
               ))}
@@ -617,13 +617,13 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
             <input
               type="color"
               onChange={(e) => setColor(e.target.value)}
-              className="mt-2 w-full h-8 rounded border"
+              className="mt-2 w-full h-8 rounded border border-border bg-background"
             />
           </div>
         </div>
 
         {/* Other */}
-        <div className="flex gap-1 border-r pr-2 mr-2">
+        <div className="flex gap-1 border-r border-border pr-2 mr-2">
           <Button
             variant="ghost"
             size="sm"

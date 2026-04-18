@@ -38,7 +38,7 @@ const QuoteFiles = ({ fileUrls }) => {
   };
 
   return (
-    <div className="p-3 bg-gray-100 border border-gray-200 rounded-lg">
+    <div className="p-3 bg-muted/50 border border-border rounded-lg">
       <div className="flex items-start gap-3">
         <Paperclip size={18} className="text-gray-600 mt-0.5 flex-shrink-0" />
         <div>
@@ -57,12 +57,12 @@ const QuoteFiles = ({ fileUrls }) => {
                   download={fileName}
                   className="block group"
                 >
-                  <div className="flex items-center p-2.5 bg-white rounded-md border border-gray-200 transition-all duration-300 hover:bg-gray-50 hover:shadow-sm">
+                  <div className="flex items-center p-2.5 bg-card rounded-md border border-border transition-all duration-300 hover:bg-muted/50 hover:shadow-sm">
                     <div className="flex-shrink-0 h-10 w-10 bg-gray-100 rounded-md flex items-center justify-center">
                       {getFileIcon(fileName)}
                     </div>
                     <div className="ml-2.5 flex-grow min-w-0">
-                      <p className="text-xs font-medium text-gray-800 truncate">{fileName}</p>
+                      <p className="text-xs font-medium text-foreground truncate">{fileName}</p>
                       <p className="text-[11px] text-gray-500">{t('quoteModal.downloadFile')}</p>
                     </div>
                     <Download className="h-4 w-4 text-gray-400 ml-2 flex-shrink-0 group-hover:text-blue-600 transition-colors" />

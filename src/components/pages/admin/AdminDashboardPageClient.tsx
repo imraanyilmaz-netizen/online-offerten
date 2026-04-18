@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -46,10 +46,10 @@ const AdminDashboardPageClient = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
+      <div className="flex justify-center items-center h-screen bg-background">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-blue-600 animate-spin mx-auto" />
-          <p className="mt-4 text-lg text-gray-600">Laden...</p>
+          <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto" />
+          <p className="mt-4 text-lg text-muted-foreground">Laden...</p>
         </div>
       </div>
     );
@@ -61,7 +61,7 @@ const AdminDashboardPageClient = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <AdminPanel userRole={userRole} />
     </div>
   );

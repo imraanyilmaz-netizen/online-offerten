@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { useRouter } from 'next/navigation'
@@ -18,14 +18,14 @@ const umzugServiceOptions: ServiceOption[] = [
   { id: 'geschaeftsumzug', label: 'Geschäftsumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug' },
   { id: 'geschaeftsumzug_reinigung', label: 'Geschäftsumzug und Reinigung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug&endreinigung=ja' },
   { id: 'international', label: 'Auslandumzug', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international' },
-  { id: 'spezialtransport_klavier', label: 'Klavier / Flügel', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport' },
-  { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=tresortransport' },
-  { id: 'spezialtransport_maschinen', label: 'Maschinen / Schwere Geräte', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=maschinen_geraete' },
+  { id: 'spezialtransport_klavier', label: 'Klavier / Flügel', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport' },
+  { id: 'spezialtransport_tresor', label: 'Tresor / Safe', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=tresortransport' },
+  { id: 'spezialtransport_maschinen', label: 'Maschinen / Schwere Geräte', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=maschinen_geraete' },
   { id: 'kleintransport', label: 'Kleintransport', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport' },
   { id: 'lagerung', label: 'Lagerung', url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung' },
 ]
 
-const umzugKeywords = ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung']
+const umzugKeywords = ['umzug', 'umziehen', 'umzugs', 'privatumzug', 'geschäftsumzug', 'auslandumzug', 'klaviertransport', 'spezialtransport', 'kleintransport', 'möbellift', 'klavier', 'flügel', 'tresor', 'safe', 'maschinen', 'geräte', 'privatumzug und reinigung', 'geschäftsumzug und reinigung']
 
 const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
   const router = useRouter()
@@ -128,11 +128,11 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="bg-white rounded-2xl p-6 md:p-8 mb-8"
+      className="bg-white dark:bg-card rounded-2xl p-6 md:p-8 mb-8 border border-border/50 dark:border-border"
     >
       <div className="flex flex-col md:flex-row gap-4 rounded-xl md:p-4 lg:p-0">
         <div className="flex-1 min-w-0">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-left">Was steht an?</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-foreground mb-2 text-left">Was steht an?</label>
           <div className="relative">
             <input
               ref={inputRef}
@@ -152,14 +152,14 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
                 }, 200)
               }}
               placeholder="z.B. Privatumzug, Geschäftsumzug, Auslandumzug"
-              className="w-full px-5 py-4 pr-12 md:pr-40 border-2 border-gray-200 rounded-3xl focus:border-green-500 focus:outline-none text-gray-900 bg-white"
+              className="w-full px-5 py-4 pr-12 md:pr-40 border-2 border-gray-200 dark:border-border rounded-3xl focus:border-green-500 dark:focus:border-emerald-500 focus:outline-none text-gray-900 dark:text-foreground bg-white dark:bg-background placeholder:text-muted-foreground"
               style={{ borderRadius: '0.65rem' }}
             />
             {serviceInput && (
               <button
                 type="button"
                 onClick={clearService}
-                className="absolute right-32 md:right-32 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden md:block"
+                className="absolute right-32 md:right-32 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-muted-foreground dark:hover:text-foreground hidden md:block"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -168,7 +168,7 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
               <button
                 type="button"
                 onClick={clearService}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 md:hidden"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-muted-foreground dark:hover:text-foreground md:hidden"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -176,7 +176,7 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
             <Button
               type="submit"
               size={undefined}
-              className="hidden md:block absolute right-1 top-1/2 -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
+              className="hidden md:block absolute right-1 top-1/2 -translate-y-1/2 bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
               style={{ borderRadius: '0.65rem' }}
             >
               Kostenlos anfragen
@@ -186,10 +186,10 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
             {showDropdown && filteredOptionsMemo.length > 0 && (
               <div
                 ref={dropdownRef}
-                className="absolute z-50 w-full mt-2 bg-white border-2 border-gray-200 rounded-lg max-h-64 overflow-y-auto"
+                className="absolute z-50 w-full mt-2 bg-white dark:bg-popover border-2 border-gray-200 dark:border-border rounded-lg max-h-64 overflow-y-auto shadow-lg"
               >
                 <div className="py-1">
-                  <div className="px-4 py-2.5 text-xs font-bold text-green-700 uppercase tracking-wider bg-green-50 border-b border-green-100">
+                  <div className="px-4 py-2.5 text-xs font-bold text-green-700 dark:text-emerald-300 uppercase tracking-wider bg-green-50 dark:bg-emerald-950/50 border-b border-green-100 dark:border-emerald-900/60">
                     Umzug
                   </div>
                   {filteredOptionsMemo.map((option) => (
@@ -198,10 +198,10 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
                       type="button"
                       onClick={(e) => handleServiceSelect(option, e)}
                       onMouseDown={(e) => e.preventDefault()}
-                      className="w-full text-left px-4 py-3 hover:bg-green-50 transition-colors flex items-center justify-between group border-b border-gray-50 last:border-b-0"
+                      className="w-full text-left px-4 py-3 hover:bg-green-50 dark:hover:bg-emerald-950/40 transition-colors flex items-center justify-between group border-b border-gray-50 dark:border-border/60 last:border-b-0"
                     >
-                      <span className="text-gray-800 font-medium group-hover:text-green-700">{option.label}</span>
-                      <ChevronDown className="h-4 w-4 text-gray-400 group-hover:text-green-600 rotate-[-90deg] transition-colors" />
+                      <span className="text-gray-800 dark:text-foreground font-medium group-hover:text-green-700 dark:group-hover:text-emerald-400">{option.label}</span>
+                      <ChevronDown className="h-4 w-4 text-gray-400 dark:text-muted-foreground group-hover:text-green-600 dark:group-hover:text-emerald-400 rotate-[-90deg] transition-colors" />
                     </button>
                   ))}
                 </div>
@@ -212,7 +212,7 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
           <Button
             type="submit"
             size={undefined}
-            className="md:hidden w-full mt-3 bg-green-600 hover:bg-green-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
+            className="md:hidden w-full mt-3 bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white px-6 !py-4 font-semibold text-sm !h-auto"
             style={{ borderRadius: '0.65rem' }}
           >
             Kostenlos anfragen
@@ -220,11 +220,11 @@ const UmzugsfirmaInDerNaeheHeroForm = memo(() => {
         </div>
       </div>
       
-      <div className="mt-4 pt-4 border-t border-gray-200">
-        <p className="flex flex-wrap items-center gap-1.5 text-sm md:text-base text-gray-600 leading-relaxed">
-          <Clock className="h-4 w-4 text-gray-500 flex-shrink-0" />
+      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-border">
+        <p className="flex flex-wrap items-center gap-1.5 text-sm md:text-base text-gray-600 dark:text-muted-foreground leading-relaxed">
+          <Clock className="h-4 w-4 text-gray-500 dark:text-muted-foreground flex-shrink-0" />
           <span>Die letzte Anfrage wurde vor</span>
-          <span className="font-semibold text-gray-800">{minutesAgo} Minuten</span>
+          <span className="font-semibold text-gray-800 dark:text-foreground">{minutesAgo} Minuten</span>
           <span>gestellt</span>
         </p>
       </div>

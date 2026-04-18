@@ -14,7 +14,7 @@ import { de } from 'date-fns/locale/de';
 import QuoteImages from '@/components/PartnerPanel/QuoteImages';
 import QuoteFiles from '@/components/PartnerPanel/QuoteFiles';
 import ReviewModal from '@/components/ReviewModal';
-import { getGermanServiceName } from '@/lib/dataMapping';
+import { getGermanServiceName } from '@/data/categories';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
 import { isCleaningService, isPaintingService, isDisposalService } from '@/lib/serviceCategorizer';
@@ -39,7 +39,7 @@ const StatusTimeline = ({ status }: { status: string }) => {
 
   return (
     <div className="relative">
-      <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-gray-200" aria-hidden="true"></div>
+      <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-border" aria-hidden="true"></div>
       <ul className="space-y-8">
         {steps.map((step, index) => {
           const isCompleted = index < currentStepIndex;
@@ -48,13 +48,13 @@ const StatusTimeline = ({ status }: { status: string }) => {
           return (
             <li key={step.id} className="flex items-start">
               <div className="flex-shrink-0 z-10">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isCompleted ? 'bg-green-500' : isCurrent ? 'bg-blue-500 animate-pulse' : 'bg-gray-300'}`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isCompleted ? 'bg-green-500' : isCurrent ? 'bg-blue-500 animate-pulse' : 'bg-muted'}`}>
                   {isCompleted ? <CheckCircle className="w-5 h-5 text-white" /> : <div className="text-white">{step.icon}</div>}
                 </div>
               </div>
               <div className="ml-4">
-                <h4 className={`font-semibold ${isCompleted || isCurrent ? 'text-gray-800' : 'text-gray-500'}`}>{step.label}</h4>
-                <p className="text-sm text-gray-600">{step.description}</p>
+                <h4 className={`font-semibold ${isCompleted || isCurrent ? 'text-foreground' : 'text-muted-foreground'}`}>{step.label}</h4>
+                <p className="text-sm text-muted-foreground">{step.description}</p>
               </div>
             </li>
           );
@@ -75,24 +75,24 @@ const StarRating = ({ rating, count }: { rating: number | null | undefined; coun
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm font-bold text-gray-700">{rating.toFixed(1)}</span>
+      <span className="text-sm font-bold text-foreground">{rating.toFixed(1)}</span>
       <div className="flex items-center">
         {[...Array(fullStars)].map((_, i) => (
           <Star key={`full-${i}`} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
         ))}
         {hasHalfStar && (
           <div style={{ position: 'relative' }}>
-            <Star key="half-empty" className="w-4 h-4 text-gray-300" />
+            <Star key="half-empty" className="w-4 h-4 text-muted-foreground/40" />
             <div style={{ position: 'absolute', top: 0, left: 0, width: '50%', overflow: 'hidden' }}>
               <Star key="half-full" className="w-4 h-4 text-yellow-400 fill-yellow-400" />
             </div>
           </div>
         )}
         {[...Array(emptyStars)].map((_, i) => (
-          <Star key={`empty-${i}`} className="w-4 h-4 text-gray-300" />
+          <Star key={`empty-${i}`} className="w-4 h-4 text-muted-foreground/40" />
         ))}
       </div>
-      {count !== undefined && <span className="text-xs text-gray-500">({count})</span>}
+      {count !== undefined && <span className="text-xs text-muted-foreground">({count})</span>}
     </div>
   );
 };
@@ -103,7 +103,7 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
   const getBadgeClass = (status: string) => {
     switch (status) {
       case 'gold': return 'bg-yellow-400 text-yellow-900 border-yellow-500';
-      case 'platinum': return 'bg-gray-400 text-gray-900 border-gray-500';
+      case 'platinum': return 'bg-gray-400 text-foreground border-gray-500';
       default: return 'hidden';
     }
   };
@@ -112,7 +112,7 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
 
   return (
     <div
-      className="bg-white rounded-lg shadow-md border overflow-hidden flex flex-col"
+      className="bg-card border-border rounded-lg shadow-md border overflow-hidden flex flex-col"
     >
       <div className="p-4 flex-grow">
         <div className="flex items-start gap-4">
@@ -120,7 +120,7 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
             <img
               src={partner.logo_url || '/image/logo-icon.webp'}
               alt={`Firmenlogo von ${partner.company_name}`}
-              className="w-20 h-20 rounded-md object-contain border bg-gray-50"
+              className="w-20 h-20 rounded-md object-contain border border-border bg-muted/40"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
@@ -131,7 +131,7 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
           <div className="flex-1">
             <div className="flex justify-between items-start">
               <Link href={partnerHref} className="hover:underline">
-                <h3 className="font-bold text-lg text-gray-800">{partner.company_name}</h3>
+                <h3 className="font-bold text-lg text-foreground">{partner.company_name}</h3>
               </Link>
               {partner.status && (partner.status === 'gold' || partner.status === 'platinum') &&
                 <Badge variant="outline" className={`capitalize flex items-center gap-1 text-xs ${getBadgeClass(partner.status)}`}>
@@ -143,16 +143,16 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
             <div className="mt-1">
               <StarRating rating={partner.average_rating} count={partner.review_count} />
             </div>
-            <div className="mt-3 space-y-2 text-sm text-gray-600">
+            <div className="mt-3 space-y-2 text-sm text-muted-foreground">
               {partner.phone &&
                 <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gray-400" />
+                  <Phone className="w-4 h-4 text-muted-foreground" />
                   <a href={`tel:${partner.phone}`} className="hover:text-blue-600">{partner.phone}</a>
                 </div>
               }
               {partner.email &&
                 <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-gray-400" />
+                  <Mail className="w-4 h-4 text-muted-foreground" />
                   <a href={`mailto:${partner.email}`} className="hover:text-blue-600">{partner.email}</a>
                 </div>
               }
@@ -160,7 +160,7 @@ const PurchasedByCard = ({ partner, isReviewable, onReviewClick }: { partner: an
           </div>
         </div>
       </div>
-      <div className="bg-gray-50 p-3 mt-auto">
+      <div className="bg-muted/40 p-3 mt-auto border-t border-border">
         <Button
           className="w-full"
           variant="outline"
@@ -183,14 +183,14 @@ const AddressCard = ({ title, icon, street, zip, city, floor, lift, rooms }: { t
     return (
         <div className="border-t pt-4">
             <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 text-gray-400 w-5 h-5">{icon}</div>
+                <div className="flex-shrink-0 text-muted-foreground w-5 h-5">{icon}</div>
                 <div className="flex-grow">
-                    <p className="text-sm text-gray-500">{title}</p>
-                    <div className="font-medium text-gray-800 text-sm mt-1 space-y-0.5">
+                    <p className="text-sm text-muted-foreground">{title}</p>
+                    <div className="font-medium text-foreground text-sm mt-1 space-y-0.5">
                         {street && <div>{street}</div>}
                         {(zip || city) && <div>{`${zip || ''} ${city || ''}`}</div>}
                         {(floor || lift !== null || rooms) && (
-                            <div className="text-xs text-gray-600 mt-1 space-y-0.5">
+                            <div className="text-xs text-muted-foreground mt-1 space-y-0.5">
                                 {(floor || lift !== null) && (
                                     <div>{[floor ? `${floor}` : null, lift !== null ? `Lift: ${lift ? 'Ja' : 'Nein'}` : null].filter(Boolean).join(' / ')}</div>
                                 )}
@@ -259,12 +259,12 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
     const labels = getDynamicLabels();
     
     return (
-        <div className="space-y-4 bg-gray-50 p-4 rounded-lg border">
+        <div className="space-y-4 bg-muted/40 p-4 rounded-lg border">
              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 text-gray-400 w-5 h-5"><FileTextIcon /></div>
+                <div className="flex-shrink-0 text-muted-foreground w-5 h-5"><FileTextIcon /></div>
                 <div className="flex-grow">
-                    <p className="text-sm text-gray-500">Dienstleistung</p>
-                    <div className="font-medium text-gray-800 text-sm">{combinedServices}</div>
+                    <p className="text-sm text-muted-foreground">Dienstleistung</p>
+                    <div className="font-medium text-foreground text-sm">{combinedServices}</div>
                 </div>
             </div>
             
@@ -274,7 +274,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
             {/* Umzug: Zusätzliche Leistungen */}
             {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
               <div className="border-t pt-4">
-                <p className="text-sm text-gray-500 mb-2">Zusätzliche Leistungen</p>
+                <p className="text-sm text-muted-foreground mb-2">Zusätzliche Leistungen</p>
                 <div className="flex flex-wrap gap-2">
                   {quote.additional_services_furniture_assembly && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Möbel De-/Montage</span>}
                   {quote.additional_services_packing && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">Einpackservice</span>}
@@ -289,10 +289,10 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
               <div className="border-t pt-4 space-y-2">
                 {quote.cleaning_area_sqm && (
                   <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Home /></div>
+                    <div className="flex-shrink-0 text-muted-foreground w-5 h-5"><Home /></div>
                     <div>
-                      <p className="text-sm text-gray-500">Wohnungsfläche</p>
-                      <div className="font-medium text-gray-800 text-sm">
+                      <p className="text-sm text-muted-foreground">Wohnungsfläche</p>
+                      <div className="font-medium text-foreground text-sm">
                         {getCleaningAreaSqmLabel(quote.cleaning_area_sqm)}
                       </div>
                     </div>
@@ -300,10 +300,10 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
                 )}
                 {quote.cleaning_type_guarantee && (
                   <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Sparkles /></div>
+                    <div className="flex-shrink-0 text-muted-foreground w-5 h-5"><Sparkles /></div>
                     <div>
-                      <p className="text-sm text-gray-500">Art der Reinigung</p>
-                      <div className="font-medium text-gray-800 text-sm">
+                      <p className="text-sm text-muted-foreground">Art der Reinigung</p>
+                      <div className="font-medium text-foreground text-sm">
                         {({'mit_abnahmegarantie': 'Endreinigung mit Abnahmegarantie', 'ohne_abnahmegarantie': 'Endreinigung ohne Abnahmegarantie', 'umzugsreinigung': 'Umzugsreinigung'} as Record<string, string>)[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}
                       </div>
                     </div>
@@ -311,7 +311,7 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
                 )}
                 {(quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
                   <div className="flex flex-wrap gap-2 mt-1">
-                    <span className="text-sm text-gray-500 mr-1">Zusatzflächen:</span>
+                    <span className="text-sm text-muted-foreground mr-1">Zusatzflächen:</span>
                     {quote.cleaning_additional_balcony && <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">Balkon</span>}
                     {quote.cleaning_additional_cellar && <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">Keller</span>}
                     {quote.cleaning_additional_garage && <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">Garage</span>}
@@ -321,10 +321,10 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
             )}
 
              <div className="border-t pt-4 flex items-start gap-3">
-                <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Calendar /></div>
+                <div className="flex-shrink-0 text-muted-foreground w-5 h-5"><Calendar /></div>
                 <div className="flex-grow">
-                    <p className="text-sm text-gray-500">Erstellt am</p>
-                    <div className="font-medium text-gray-800 text-sm">{format(new Date(quote.created_at), 'dd.MM.yyyy HH:mm', { locale: de })}</div>
+                    <p className="text-sm text-muted-foreground">Erstellt am</p>
+                    <div className="font-medium text-foreground text-sm">{format(new Date(quote.created_at), 'dd.MM.yyyy HH:mm', { locale: de })}</div>
                 </div>
             </div>
             
@@ -353,9 +353,9 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
             
             {quote.move_date && (
                  <div className="border-t pt-4 flex items-start gap-3">
-                    <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Calendar /></div>
+                    <div className="flex-shrink-0 text-muted-foreground w-5 h-5"><Calendar /></div>
                     <div className="flex-grow">
-                        <div className="font-bold text-gray-900 text-sm">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</div>
+                        <div className="font-bold text-foreground text-sm">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</div>
                     </div>
                 </div>
             )}
@@ -363,19 +363,19 @@ const QuoteDetails = ({ quote }: { quote: any }) => {
             <div className="pt-4 border-t space-y-4">
                 {quote.quoteswanted && (
                     <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 text-gray-400 w-5 h-5"><Hash /></div>
+                        <div className="flex-shrink-0 text-muted-foreground w-5 h-5"><Hash /></div>
                         <div className="flex-grow">
-                            <p className="text-sm text-gray-500">Gewünschte Offerten</p>
-                            <div className="font-medium text-gray-800 text-sm">{quote.quoteswanted}</div>
+                            <p className="text-sm text-muted-foreground">Gewünschte Offerten</p>
+                            <div className="font-medium text-foreground text-sm">{quote.quoteswanted}</div>
                         </div>
                     </div>
                 )}
                 {quote.additional_info && (
                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 text-gray-400 w-5 h-5"><MessageCircle /></div>
+                        <div className="flex-shrink-0 text-muted-foreground w-5 h-5"><MessageCircle /></div>
                         <div className="flex-grow">
-                            <p className="text-sm text-gray-500">Zusätzliche Bemerkungen</p>
-                            <div className="font-medium text-gray-800 text-sm whitespace-pre-wrap">{quote.additional_info}</div>
+                            <p className="text-sm text-muted-foreground">Zusätzliche Bemerkungen</p>
+                            <div className="font-medium text-foreground text-sm whitespace-pre-wrap">{quote.additional_info}</div>
                         </div>
                     </div>
                 )}
@@ -473,16 +473,16 @@ const QuoteStatusPageClient = () => {
   return (
     <>
       
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div
           >
             <Card className="shadow-lg overflow-hidden">
               <CardHeader>
-                <CardTitle className="text-2xl sm:text-3xl font-bold text-center text-gray-800">
+                <CardTitle className="text-2xl sm:text-3xl font-bold text-center text-foreground">
                   Status Ihrer Anfrage
                 </CardTitle>
-                <CardDescription className="text-center text-gray-600">
+                <CardDescription className="text-center text-muted-foreground">
                   {quote && quoteId ? `Anfrage-ID: ${typeof quoteId === 'string' ? quoteId.substring(0, 8) : String(quoteId).substring(0, 8)}` : 'Ihre Anfrage wird geladen...'}
                 </CardDescription>
               </CardHeader>
@@ -503,11 +503,11 @@ const QuoteStatusPageClient = () => {
                     <div key="content">
                       <div className="space-y-8">
                           <div>
-                              <h3 className="text-lg font-semibold mb-4 text-gray-700">Timeline</h3>
+                              <h3 className="text-lg font-semibold mb-4 text-foreground">Timeline</h3>
                               <StatusTimeline status={quote.status} />
                           </div>
                           <div>
-                              <h3 className="text-lg font-semibold mb-4 text-gray-700">Anfragedetails</h3>
+                              <h3 className="text-lg font-semibold mb-4 text-foreground">Anfragedetails</h3>
                               <QuoteDetails quote={quote} />
                           </div>
                       </div>
@@ -520,8 +520,8 @@ const QuoteStatusPageClient = () => {
                       )}
 
                       <div className="mt-12 pt-8 border-t">
-                        <h2 className="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-2">Ihre Offerten-Partner</h2>
-                        <p className="text-center text-gray-600 mb-8">Diese geprüften Partnerfirmen möchten Ihnen eine unverbindliche Offerte unterbreiten und werden sich in Kürze bei Ihnen melden.</p>
+                        <h2 className="text-xl sm:text-2xl font-bold text-center text-foreground mb-2">Ihre Offerten-Partner</h2>
+                        <p className="text-center text-muted-foreground mb-8">Diese geprüften Partnerfirmen möchten Ihnen eine unverbindliche Offerte unterbreiten und werden sich in Kürze bei Ihnen melden.</p>
                         {purchasingPartners.length > 0 ? (
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {purchasingPartners.map(partner => (
@@ -534,10 +534,10 @@ const QuoteStatusPageClient = () => {
                             ))}
                           </div>
                         ) : (
-                          <div className="text-center py-12 text-gray-500">
-                            <Building className="w-16 h-16 mx-auto text-gray-300 mb-4" />
+                          <div className="text-center py-12 text-muted-foreground">
+                            <Building className="w-16 h-16 mx-auto text-muted-foreground/40 mb-4" />
                             <h3 className="text-lg font-semibold">Ihre Anfrage wird gerade bearbeitet.</h3>
-                            <p className="text-sm text-gray-400">Unsere geprüften Partnerfirmen werden sich in Kürze bei Ihnen melden!</p>
+                            <p className="text-sm text-muted-foreground">Unsere geprüften Partnerfirmen werden sich in Kürze bei Ihnen melden!</p>
                           </div>
                         )}
                       </div>

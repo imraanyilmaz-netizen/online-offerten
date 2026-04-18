@@ -47,8 +47,8 @@ export const metadata: Metadata = {
 export default function QuoteFormPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 relative overflow-hidden flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 dark:from-background dark:via-background dark:to-emerald-950/20 relative overflow-hidden flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600 dark:border-primary"></div>
       </div>
     }>
       <QuoteFormPageClient />

@@ -130,9 +130,9 @@ const CleaningCostCalculator = () => {
 
   return (
     <>
-      <Card className="shadow-xl border-blue-500 border-2">
-        <CardHeader className="bg-blue-50 rounded-t-lg">
-          <CardTitle className="text-2xl font-bold text-blue-700 flex items-center">
+      <Card className="shadow-xl border-blue-500 dark:border-blue-500 border-2 bg-card text-card-foreground">
+        <CardHeader className="bg-blue-50 dark:bg-blue-950/50 rounded-t-lg border-b border-border">
+          <CardTitle className="text-2xl font-bold text-blue-700 dark:text-blue-300 flex items-center">
             <Sparkles size={28} className="mr-3" />
             Ihre Reinigungskosten schätzen
           </CardTitle>
@@ -141,7 +141,7 @@ const CleaningCostCalculator = () => {
         <CardContent className="p-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <Label htmlFor="propertyType" className="block text-sm font-medium text-gray-700 mb-1">Art der Immobilie</Label>
+              <Label htmlFor="propertyType" className="block text-sm font-medium text-foreground mb-1">Art der Immobilie</Label>
               <Select value={propertyType} onValueChange={setPropertyType}>
                 <SelectTrigger id="propertyType"><SelectValue placeholder="Wählen Sie die Art der Immobilie" /></SelectTrigger>
                 <SelectContent>
@@ -151,7 +151,7 @@ const CleaningCostCalculator = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="rooms" className="block text-sm font-medium text-gray-700 mb-1">Anzahl Zimmer</Label>
+              <Label htmlFor="rooms" className="block text-sm font-medium text-foreground mb-1">Anzahl Zimmer</Label>
               <Select value={rooms} onValueChange={setRooms}>
                 <SelectTrigger id="rooms"><SelectValue placeholder="Wählen Sie die Zimmeranzahl" /></SelectTrigger>
                 <SelectContent>
@@ -160,11 +160,11 @@ const CleaningCostCalculator = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="windows" className="block text-sm font-medium text-gray-700 mb-1">Anzahl Fenster (ca.)</Label>
+              <Label htmlFor="windows" className="block text-sm font-medium text-foreground mb-1">Anzahl Fenster (ca.)</Label>
               <Input type="number" id="windows" value={windows} onChange={(e) => setWindows(e.target.value)} placeholder="z.B. 10" />
             </div>
             <div>
-              <Label htmlFor="bathrooms" className="block text-sm font-medium text-gray-700 mb-1">Anzahl Badezimmer</Label>
+              <Label htmlFor="bathrooms" className="block text-sm font-medium text-foreground mb-1">Anzahl Badezimmer</Label>
               <Select value={bathrooms} onValueChange={setBathrooms}>
                 <SelectTrigger id="bathrooms"><SelectValue placeholder="Wählen Sie die Anzahl" /></SelectTrigger>
                 <SelectContent>
@@ -173,7 +173,7 @@ const CleaningCostCalculator = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="kitchenCleaning" className="block text-sm font-medium text-gray-700 mb-1">Küchenreinigung inklusive?</Label>
+              <Label htmlFor="kitchenCleaning" className="block text-sm font-medium text-foreground mb-1">Küchenreinigung inklusive?</Label>
               <Select value={kitchenCleaning} onValueChange={setKitchenCleaning}>
                 <SelectTrigger id="kitchenCleaning"><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -183,7 +183,7 @@ const CleaningCostCalculator = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="balconyTerrace" className="block text-sm font-medium text-gray-700 mb-1">Balkon/Terrasse Reinigung?</Label>
+              <Label htmlFor="balconyTerrace" className="block text-sm font-medium text-foreground mb-1">Balkon/Terrasse Reinigung?</Label>
               <Select value={balconyTerrace} onValueChange={setBalconyTerrace}>
                 <SelectTrigger id="balconyTerrace"><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -193,7 +193,7 @@ const CleaningCostCalculator = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="blinds" className="block text-sm font-medium text-gray-700 mb-1">Storen-/Rollladenreinigung?</Label>
+              <Label htmlFor="blinds" className="block text-sm font-medium text-foreground mb-1">Storen-/Rollladenreinigung?</Label>
               <Select value={blinds} onValueChange={setBlinds}>
                 <SelectTrigger id="blinds"><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -203,7 +203,7 @@ const CleaningCostCalculator = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="condition" className="block text-sm font-medium text-gray-700 mb-1">Zustand der Immobilie</Label>
+              <Label htmlFor="condition" className="block text-sm font-medium text-foreground mb-1">Zustand der Immobilie</Label>
               <Select value={condition} onValueChange={setCondition}>
                 <SelectTrigger id="condition"><SelectValue placeholder="Wählen Sie den Zustand" /></SelectTrigger>
                 <SelectContent>
@@ -217,18 +217,18 @@ const CleaningCostCalculator = () => {
             {!isLoading && <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />}
           </Button>
           
-          {error && <p className="text-red-600 text-sm text-center py-2 bg-red-50 rounded-md">{error}</p>}
+          {error && <p className="text-red-600 dark:text-red-400 text-sm text-center py-2 bg-red-50 dark:bg-red-950/40 rounded-md">{error}</p>}
 
           {calculatedCost !== null && (
             <div
-              className="mt-6 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-md shadow"
+              className="mt-6 p-6 bg-blue-50 dark:bg-blue-950/35 border-l-4 border-blue-500 dark:border-blue-400 rounded-md shadow"
             >
-              <h3 className="text-xl font-semibold text-blue-800 mb-3">Geschätzte Reinigungskosten</h3>
+              <h3 className="text-xl font-semibold text-blue-800 dark:text-blue-200 mb-3">Geschätzte Reinigungskosten</h3>
               <div className="space-y-2">
-                <p className="text-2xl font-bold text-blue-700">
+                <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
                   Ungefähre Kosten: <span className="font-bold">CHF {calculatedCost}</span>
                 </p>
-                <p className="text-xs text-gray-500 italic">Dies ist eine Schätzung. Die tatsächlichen Kosten können je nach Anbieter und spezifischen Anforderungen variieren.</p>
+                <p className="text-xs text-muted-foreground italic">Dies ist eine Schätzung. Die tatsächlichen Kosten können je nach Anbieter und spezifischen Anforderungen variieren.</p>
               </div>
               <Button onClick={handleOpenQuoteForm} size="lg" className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white group">
                 Detaillierte Offerten anfordern

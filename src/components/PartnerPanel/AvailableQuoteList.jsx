@@ -43,8 +43,8 @@ const LeadAvailabilityCallout = ({ quote }) => {
   if (purchased === 0) {
     if (displayWanted == null) return null;
     return (
-      <div className="rounded-lg border border-amber-200 bg-amber-50/90 p-4 text-left shadow-sm">
-        <p className="text-sm font-semibold text-amber-950">
+      <div className="rounded-lg border border-amber-200 bg-amber-50/90 dark:border-amber-800 dark:bg-amber-950/40 p-4 text-left shadow-sm">
+        <p className="text-sm font-semibold text-amber-950 dark:text-amber-100">
           {displayWanted} Offerten gewünscht
         </p>
       </div>
@@ -56,13 +56,13 @@ const LeadAvailabilityCallout = ({ quote }) => {
   const headerZahl = displayWanted ?? (totalSlots > 0 ? totalSlots : null);
 
   return (
-    <div className="rounded-lg border border-amber-200 bg-amber-50/90 p-4 text-left shadow-sm">
+    <div className="rounded-lg border border-amber-200 bg-amber-50/90 dark:border-amber-800 dark:bg-amber-950/40 p-4 text-left shadow-sm">
       {headerZahl != null && (
-        <p className="text-sm font-semibold text-amber-950">
+        <p className="text-sm font-semibold text-amber-950 dark:text-amber-100">
           {headerZahl} Offerten gewünscht
         </p>
       )}
-      <p className={`text-sm text-amber-900 ${headerZahl != null ? 'mt-1' : ''}`}>
+      <p className={`text-sm text-amber-900 dark:text-amber-200/90 ${headerZahl != null ? 'mt-1' : ''}`}>
         {interessiertText}
       </p>
     </div>
@@ -72,9 +72,9 @@ const LeadAvailabilityCallout = ({ quote }) => {
 const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
-        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-gray-700">
-            <span className="font-bold text-gray-800">E-Mail-Bestätigung:</span>
-            <span className={isConfirmed ? 'text-green-700 font-semibold' : 'text-red-700 font-semibold'}>
+        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-muted-foreground">
+            <span className="font-bold text-foreground">E-Mail-Bestätigung:</span>
+            <span className={isConfirmed ? 'text-green-700 dark:text-emerald-400 font-semibold' : 'text-red-700 dark:text-red-400 font-semibold'}>
                 {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
@@ -83,9 +83,9 @@ const EmailConfirmationDetail = ({ quote }) => {
 
 
 const DetailSection = ({ title, icon: Icon, children }) => (
-    <div className="bg-white p-4 rounded-lg border shadow-sm">
-        <h3 className="text-base font-semibold text-gray-900 flex items-center gap-2 border-b pb-1.5 mb-3 uppercase tracking-wide">
-            {Icon && <Icon className="w-4 h-4 shrink-0 text-green-600" />}
+    <div className="bg-card border-border p-4 rounded-lg border shadow-sm dark:shadow-none dark:ring-1 dark:ring-border/60 text-card-foreground">
+        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2 border-b border-border pb-2 mb-4 uppercase tracking-wide">
+            {Icon && <Icon className="w-5 h-5 shrink-0 text-green-600 dark:text-emerald-400" />}
             {title}
         </h3>
         <div className="space-y-3">
@@ -113,11 +113,11 @@ const AddressBox = ({ title, icon: Icon, quote, type }) => {
     
     return (
         <div>
-            <h4 className="font-bold text-md flex items-center gap-2 mb-1">
-                {Icon && <Icon className="w-5 h-5 text-blue-600" />}
+            <h4 className="font-bold text-md text-foreground flex items-center gap-2 mb-1">
+                {Icon && <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />}
                 {title}:
             </h4>
-            <div className="text-sm text-gray-700 pl-7 space-y-0.5">
+            <div className="text-sm text-muted-foreground pl-7 space-y-0.5">
                 <p className="font-semibold">{zip} {city}</p>
                 {isInternational && country && <p><span className="font-bold">Land:</span> {country.name}</p>}
                 {!isInternational && canton && <p><span className="font-bold">Kanton:</span> {canton}</p>}
@@ -201,9 +201,9 @@ const PurchaseConfirmationDialog = ({ open, onOpenChange, onConfirm, quote, hasA
                         }
                     </DialogDescription>
                 </DialogHeader>
-                <div className="my-4 p-4 bg-gray-50 rounded-md border">
+                <div className="my-4 p-4 bg-muted/40 rounded-md border border-border">
                     <p className="font-semibold">{quote.servicetype}</p>
-                    <p className="text-sm text-gray-600">{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip}` } {quote.to_city}</p>
+                    <p className="text-sm text-muted-foreground">{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip}` } {quote.to_city}</p>
                 </div>
                 <DialogFooter>
                     <Button variant="outline" onClick={() => onOpenChange(false)}>Abbrechen</Button>
@@ -257,9 +257,9 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
   if (!quotes || quotes.length === 0) {
     return (
       <div className="text-center py-10 px-4">
-        <Package className="mx-auto h-12 w-12 text-gray-400" />
-        <h3 className="mt-2 text-lg font-medium text-gray-900">Keine verfügbaren Anfragen</h3>
-        <p className="mt-1 text-sm text-gray-500">Sobald neue Anfragen für Sie verfügbar sind, erscheinen sie hier.</p>
+        <Package className="mx-auto h-12 w-12 text-muted-foreground" />
+        <h3 className="mt-2 text-lg font-medium text-foreground">Keine verfügbaren Anfragen</h3>
+        <p className="mt-1 text-sm text-muted-foreground">Sobald neue Anfragen für Sie verfügbar sind, erscheinen sie hier.</p>
       </div>
     );
   }
@@ -269,7 +269,7 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
       <Accordion type="single" collapsible className="w-full space-y-4">
         {quotes.map((quote, index) => {
           const canAfford = partnerBalance >= quote.lead_price;
-          const stripeBg = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+          const stripeBg = index % 2 === 0 ? 'bg-muted/35' : 'bg-card';
           const unreadAccent = !quote.is_viewed ? 'border-l-4 border-l-green-500' : '';
           const serviceCategory = getServiceCategory(quote.servicetype);
           const icon = serviceCategory === 'moving' ? Truck : (serviceCategory === 'cleaning' ? Sparkles : Paintbrush);
@@ -283,35 +283,35 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                 <CardHeader className="p-0">
                   <AccordionTrigger
                     onClick={() => handleTriggerClick(quote)}
-                    className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-100/60 data-[state=open]:bg-gray-100/40"
+                    className="flex items-center justify-between w-full p-4 text-left hover:bg-muted/50 data-[state=open]:bg-muted/40"
                   >
                     <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
                       {(() => {
                         const Icon = icon;
                         return (
-                          <div className="flex items-center gap-2 font-semibold text-lg text-gray-900">
-                            <Icon className="w-5 h-5 shrink-0 text-green-600" />
+                          <div className="flex items-center gap-2 font-semibold text-lg text-foreground">
+                            <Icon className="w-5 h-5 shrink-0 text-green-600 dark:text-primary" />
                             <span>{quote.servicetype}</span>
                           </div>
                         );
                       })()}
-                      <div className="flex items-center gap-2 text-gray-600">
+                      <div className="flex items-center gap-2 text-muted-foreground">
                         <MapPin className="w-4 h-4" />
                         <span>{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip} ${quote.to_city}`}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
+                      <div className="flex items-center gap-2 text-muted-foreground">
                         <Calendar className="w-4 h-4 shrink-0" />
-                        <span className="line-clamp-2 text-gray-600">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</span>
+                        <span className="line-clamp-2">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 ml-4">
                       {!quote.is_viewed && <Badge variant="destructive" className="animate-pulse">Neu</Badge>}
-                      <Eye className={`w-5 h-5 ${quote.is_viewed ? 'text-green-500' : 'text-gray-400'}`} />
+                      <Eye className={`w-5 h-5 ${quote.is_viewed ? 'text-green-500 dark:text-primary' : 'text-muted-foreground'}`} />
                     </div>
                   </AccordionTrigger>
                 </CardHeader>
                 <AccordionContent>
-                  <CardContent className="p-4 sm:p-6 border-t bg-gray-50/70">
+                  <CardContent className="p-4 sm:p-6 border-t border-border bg-muted/25">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                       <div className="lg:col-span-2 space-y-6">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -319,7 +319,7 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                               <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
                               <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
                               {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-                                <div className="space-y-2 border-t border-gray-100 pt-3 mt-2">
+                                <div className="space-y-2 border-t border-border pt-3 mt-2">
                                   {quote.cleaning_area_sqm && (
                                     <QuoteDetail label="Wohnungsfläche" value={getCleaningAreaSqmLabel(quote.cleaning_area_sqm)} />
                                   )}
@@ -357,10 +357,10 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
 
                         {/* Umzug – Zusatzleistungen (Reinigungsfelder siehe Dienstleistungsdetails) */}
                         {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
-                          <div className="bg-white p-4 rounded-lg border shadow-sm">
+                          <div className="bg-card border-border p-4 rounded-lg border shadow-sm">
                             <div className="flex items-center gap-2 mb-3">
-                              <Truck className="w-4 h-4 text-blue-600" />
-                              <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
+                              <Truck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                              <h4 className="font-semibold text-sm text-foreground">Umzug – Zusatzleistungen</h4>
                             </div>
                             <div className="space-y-2">
                               {movingExtrasText && <QuoteDetail label="Umzug inkl." value={movingExtrasText} />}
@@ -370,7 +370,7 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
 
                         {quote.additional_info && (
                             <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
-                                <p className="text-sm text-gray-700 whitespace-pre-wrap md:col-span-2">{quote.additional_info}</p>
+                                <p className="text-sm text-muted-foreground whitespace-pre-wrap md:col-span-2">{quote.additional_info}</p>
                             </DetailSection>
                         )}
 
@@ -383,21 +383,21 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                       </div>
                       <div className="lg:col-span-1 space-y-4">
                         <LeadAvailabilityCallout quote={quote} />
-                        <div className="rounded-lg border border-gray-200 bg-white p-4 text-left shadow-sm">
+                        <div className="rounded-lg border border-border bg-card p-4 text-left shadow-sm">
                           <EmailConfirmationDetail quote={quote} />
                         </div>
-                         <div className={`p-3 rounded-lg text-center ${hasActiveSubscription ? 'bg-green-50/80 border-green-200' : (canAfford ? 'bg-slate-50 border-slate-200' : 'bg-white border-gray-200') } border`}>
+                         <div className={`p-3 rounded-lg text-center border ${hasActiveSubscription ? 'bg-green-50/80 border-green-200 dark:bg-emerald-950/35 dark:border-emerald-800' : (canAfford ? 'bg-muted/40 border-border' : 'bg-card border-border') }`}>
                             {hasActiveSubscription ? (
                                 <>
-                                    <h4 className="font-semibold text-base text-green-800">Kostenlos mit Abo</h4>
+                                    <h4 className="font-semibold text-base text-green-800 dark:text-emerald-200">Kostenlos mit Abo</h4>
                                     <Star className="w-6 h-6 mx-auto text-yellow-500 my-1.5" />
-                                    <p className="text-sm text-green-700">Diese Anfrage ist in Ihrem Abonnement enthalten.</p>
+                                    <p className="text-sm text-green-700 dark:text-emerald-300/90">Diese Anfrage ist in Ihrem Abonnement enthalten.</p>
                                 </>
                             ) : (
                                 <>
-                                    <h4 className="text-xs font-medium uppercase tracking-wide text-gray-500">Preis (Kontakt)</h4>
+                                    <h4 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Preis (Kontakt)</h4>
                                     {/* Rabatt bleibt in den Daten; Altpreis + %-Badge nicht anzeigen */}
-                                    <p className="mt-1 text-lg font-semibold tabular-nums text-gray-700">{quote.lead_price.toFixed(2)} <span className="text-sm font-normal text-gray-500">CHF</span></p>
+                                    <p className="mt-1 text-lg font-semibold tabular-nums text-foreground">{quote.lead_price.toFixed(2)} <span className="text-sm font-normal text-muted-foreground">CHF</span></p>
                                     {!canAfford && (
                                         <p className="text-xs text-red-600 mt-1">Guthaben nicht ausreichend.</p>
                                     )}
@@ -433,7 +433,7 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                            <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="w-full border-gray-300 text-gray-800 hover:bg-gray-50"
+                                className="w-full border-border text-foreground hover:bg-muted"
                                 onClick={() => handleRejectClick(quote.id)}
                             >
                                 <Ban className="w-4 h-4 mr-2 opacity-70" /> 

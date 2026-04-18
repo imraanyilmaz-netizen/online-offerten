@@ -29,8 +29,8 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
   const renderInfoItem = (Icon, label, value) => {
     if (!value) return null;
     return (
-      <li className="flex items-start text-sm text-gray-700">
-        <Icon className="w-5 h-5 mr-3 mt-0.5 text-green-600 flex-shrink-0" />
+      <li className="flex items-start text-sm text-muted-foreground">
+        <Icon className="w-5 h-5 mr-3 mt-0.5 text-primary flex-shrink-0" />
         <span className="break-words">
             {label === 'Haftpflichtversicherung vorhanden' ? label : `${label} ${value}`}
         </span>
@@ -42,8 +42,8 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
     if (!value) return null;
     return (
       <li className="flex items-start text-sm">
-        <Icon className="w-5 h-5 mr-3 mt-0.5 text-green-600 flex-shrink-0" />
-        <a href={href} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline break-all">
+        <Icon className="w-5 h-5 mr-3 mt-0.5 text-primary flex-shrink-0" />
+        <a href={href} target="_blank" rel="noopener noreferrer" className="text-green-700 dark:text-emerald-400 hover:underline break-all">
           {value}
         </a>
       </li>
@@ -52,21 +52,21 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
   
   return (
     <div className="space-y-6">
-      <Card className="overflow-hidden rounded-2xl border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-white shadow-lg">
+      <Card className="overflow-hidden rounded-2xl border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 via-white to-white dark:from-emerald-950/40 dark:via-card dark:to-card shadow-lg">
         <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-semibold tracking-tight text-slate-900">{offerTitle}</h3>
-            <p className="mb-5 mt-2 text-sm leading-6 text-slate-600">
-              Holen Sie sich jetzt eine unverbindliche Offerte von <span className="font-medium text-slate-800">{partner.company_name}</span>.
+            <h3 className="text-xl font-semibold tracking-tight text-foreground">{offerTitle}</h3>
+            <p className="mb-5 mt-2 text-sm leading-6 text-muted-foreground">
+              Holen Sie sich jetzt eine unverbindliche Offerte von <span className="font-medium text-foreground">{partner.company_name}</span>.
             </p>
-            <Button onClick={onGetOffer} size="lg" className="h-12 w-full bg-green-600 text-base font-bold text-white shadow-sm hover:bg-green-700">
+            <Button onClick={onGetOffer} size="lg" className="h-12 w-full bg-green-600 text-base font-bold text-white shadow-sm hover:bg-green-700 dark:bg-primary dark:hover:bg-primary/90">
               Kostenlose Offerte einholen
             </Button>
         </CardContent>
       </Card>
 
-      <Card className="rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <CardHeader className="border-b border-gray-100 p-6">
-          <CardTitle className="text-xl font-bold tracking-tight text-slate-900">Kontakt & Informationen</CardTitle>
+      <Card className="rounded-2xl border border-border bg-card text-card-foreground shadow-sm">
+        <CardHeader className="border-b border-border p-6">
+          <CardTitle className="text-xl font-bold tracking-tight text-foreground">Kontakt & Informationen</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 p-6">
           <ul className="space-y-4">
@@ -79,10 +79,10 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
             {renderInfoItem(FileText, 'Handelsregisternummer', partner.commercial_register_number)}
             {partner.liability_insurance && renderInfoItem(Shield, 'Haftpflichtversicherung vorhanden', true)}
           </ul>
-          <div className="rounded-xl border border-slate-100 bg-slate-50/60">
+          <div className="rounded-xl border border-border bg-muted/40 dark:bg-muted/25">
             <Accordion type="multiple" className="w-full" defaultValue={['services', 'regions']}>
               <AccordionItem value="services">
-                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-slate-800">
+                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-foreground">
                   Angebotene Dienstleistungen
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4">
@@ -90,7 +90,7 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="regions">
-                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-slate-800">
+                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-foreground">
                   Tätigkeitsregionen
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4">

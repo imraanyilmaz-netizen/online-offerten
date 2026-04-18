@@ -24,19 +24,19 @@
             ]
           },
           {
-            de: "Diese Preise sind Schätzungen. Für eine genaue Offerte empfehlen wir, unseren Kostenrechner zu verwenden oder direkt eine Anfrage zu starten.",
-            en: "These prices are estimates. For an accurate quote, we recommend using our cost calculator or starting a request directly."
+            de: "Diese Preise sind Schätzungen. Für verbindliche Preise vergleichen Sie am besten mehrere Offerten von Firmen in Ihrer Region.",
+            en: "These prices are estimates. For binding prices, compare several quotes from companies in your area."
           },
           {
             type: 'calculator_link',
-            link: '/tools/umzugskosten',
+            link: '/kostenlose-offerte-anfordern',
             text: {
-              de: "Berechnen Sie Ihre Umzugskosten präzise.",
-              en: "Calculate your moving costs precisely."
+              de: "Starten Sie eine kostenlose Anfrage und erhalten Sie bis zu 5 vergleichbare Offerten für Ihren Umzug.",
+              en: "Start a free request and receive up to 5 comparable quotes for your move."
             },
             buttonText: {
-              de: "Zum Umzugskostenrechner",
-              en: "To the Moving Cost Calculator"
+              de: "Kostenlose Offerten anfordern",
+              en: "Request free quotes"
             }
           }
         ]
@@ -81,7 +81,7 @@
       },
       {
         question: {
-          de: "Was kosteteine Umzugsreinigung in {city}?",
+          de: "Was kostet eine Umzugsreinigung in {city}?",
           en: "How much does a move-out cleaning cost in {city}?"
         },
         answer: [
@@ -105,16 +105,16 @@
             de: "Für eine genaue und verbindliche Offerte starten Sie am besten eine Anfrage auf unserer Plattform.",
             en: "For an accurate and binding quote, it's best to start a request on our platform."
           },
-           {
+          {
             type: 'calculator_link',
-            link: '/tools/reinigungskosten',
+            link: '/kostenlose-offerte-anfordern',
             text: {
-              de: "Berechnen Sie Ihre Reinigungskosten im Detail.",
-              en: "Calculate your cleaning costs in detail."
+              de: "Mit einer Anfrage erhalten Sie massgeschneiderte Offerten für Ihre Reinigung – inklusive Abnahmegarantie, wenn gewünscht.",
+              en: "With one request, receive tailored quotes for your cleaning—including handover guarantee if desired."
             },
             buttonText: {
-              de: "Zum Reinigungskostenrechner",
-              en: "To the Cleaning Cost Calculator"
+              de: "Kostenlose Offerten anfordern",
+              en: "Request free quotes"
             }
           }
         ]

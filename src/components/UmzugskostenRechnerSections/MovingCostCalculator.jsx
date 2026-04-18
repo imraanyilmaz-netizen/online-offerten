@@ -67,13 +67,13 @@ const LocationInfo = ({ zip, onLocationUpdate }) => {
     }, [zip, onLocationUpdate]);
 
     if (loading) {
-        return <div className="text-xs text-gray-500 flex items-center mt-1"><Loader2 className="w-3 h-3 mr-1 animate-spin" />Lade Ort...</div>;
+        return <div className="text-xs text-muted-foreground flex items-center mt-1"><Loader2 className="w-3 h-3 mr-1 animate-spin" />Lade Ort...</div>;
     }
     if (error) {
          return <div className="text-xs text-red-500 flex items-center mt-1"><MapPin className="w-3 h-3 mr-1" />Ort nicht gefunden</div>;
     }
     if (location.city) {
-        return <div className="text-xs text-green-600 flex items-center mt-1"><MapPin className="w-3 h-3 mr-1" />{location.city}{location.canton ? `, ${location.canton}` : ''}</div>;
+        return <div className="text-xs text-primary dark:text-emerald-400 flex items-center mt-1"><MapPin className="w-3 h-3 mr-1" />{location.city}{location.canton ? `, ${location.canton}` : ''}</div>;
     }
     return null;
 };
@@ -300,9 +300,9 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
   return (
     <>
       {!hideCalculator && (
-      <Card className="shadow-xl border-green-500 border-2">
-        <CardHeader className="bg-green-50 rounded-t-lg">
-          <CardTitle className="text-2xl font-bold text-green-700 flex items-center">
+      <Card className="shadow-xl border-green-500 dark:border-emerald-600 border-2 bg-card text-card-foreground">
+        <CardHeader className="bg-green-50 dark:bg-emerald-950/50 rounded-t-lg border-b border-border">
+          <CardTitle className="text-2xl font-bold text-green-700 dark:text-emerald-300 flex items-center">
             <Calculator size={28} className="mr-3" />
             Umzugskostenrechner
           </CardTitle>
@@ -311,7 +311,7 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
         <CardContent className="p-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <Label htmlFor="rooms" className="block text-sm font-medium text-gray-700 mb-1">Anzahl Zimmer</Label>
+              <Label htmlFor="rooms" className="block text-sm font-medium text-foreground mb-1">Anzahl Zimmer</Label>
               <Select value={rooms} onValueChange={setRooms}>
                 <SelectTrigger id="rooms">
                   <SelectValue placeholder="Wohnungsgrösse auswählen" />
@@ -324,7 +324,7 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
               </Select>
             </div>
             <div>
-              <Label htmlFor="cleaning" className="block text-sm font-medium text-gray-700 mb-1">Mit Umzugsreinigung?</Label>
+              <Label htmlFor="cleaning" className="block text-sm font-medium text-foreground mb-1">Mit Umzugsreinigung?</Label>
               <Select value={cleaning} onValueChange={setCleaning}>
                 <SelectTrigger id="cleaning">
                   <SelectValue placeholder="Reinigung auswählen" />
@@ -336,7 +336,7 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
               </Select>
             </div>
             <div>
-              <Label htmlFor="furnitureAssembly" className="block text-sm font-medium text-gray-700 mb-1">Möbel De-/Montage?</Label>
+              <Label htmlFor="furnitureAssembly" className="block text-sm font-medium text-foreground mb-1">Möbel De-/Montage?</Label>
               <Select value={furnitureAssembly} onValueChange={setFurnitureAssembly}>
                 <SelectTrigger id="furnitureAssembly">
                   <SelectValue placeholder="Möbelmontage auswählen" />
@@ -348,12 +348,12 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
               </Select>
             </div>
             <div>
-              <Label htmlFor="from_zip" className="block text-sm font-medium text-gray-700 mb-1">Von (PLZ)</Label>
+              <Label htmlFor="from_zip" className="block text-sm font-medium text-foreground mb-1">Von (PLZ)</Label>
               <Input type="text" id="from_zip" value={fromZip} onChange={(e) => setFromZip(e.target.value)} placeholder="z.B. 8000" />
               <LocationInfo zip={fromZip} onLocationUpdate={handleFromLocationUpdate} />
             </div>
             <div>
-              <Label htmlFor="to_zip" className="block text-sm font-medium text-gray-700 mb-1">Nach (PLZ)</Label>
+              <Label htmlFor="to_zip" className="block text-sm font-medium text-foreground mb-1">Nach (PLZ)</Label>
               <Input type="text" id="to_zip" value={toZip} onChange={(e) => setToZip(e.target.value)} placeholder="z.B. 3000" />
               <LocationInfo zip={toZip} onLocationUpdate={handleToLocationUpdate} />
             </div>
@@ -386,23 +386,23 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
             )}
           </Button>
           
-          {error && <p className="text-red-600 text-sm text-center py-2 bg-red-50 rounded-md">{error}</p>}
+          {error && <p className="text-red-600 dark:text-red-400 text-sm text-center py-2 bg-red-50 dark:bg-red-950/40 rounded-md">{error}</p>}
 
           {calculatedCost !== null && (
             <div
-              className="mt-6 p-6 bg-green-50 border-l-4 border-green-500 rounded-md shadow"
+              className="mt-6 p-6 bg-green-50 dark:bg-emerald-950/35 border-l-4 border-green-500 dark:border-emerald-500 rounded-md shadow"
             >
-              <h3 className="text-xl font-semibold text-green-800 mb-3">Ihre Kostenschätzung</h3>
+              <h3 className="text-xl font-semibold text-green-800 dark:text-emerald-200 mb-3">Ihre Kostenschätzung</h3>
               <div className="space-y-2">
                 {calculatedDistance !== null && (
-                  <p className="text-gray-700">
-                    Geschätzte Distanz: <span className="font-bold">{calculatedDistance} km</span>
+                  <p className="text-muted-foreground">
+                    Geschätzte Distanz: <span className="font-bold text-foreground">{calculatedDistance} km</span>
                   </p>
                 )}
-                <p className="text-2xl font-bold text-green-700">
+                <p className="text-2xl font-bold text-green-700 dark:text-emerald-300">
                   Geschätzte Umzugskosten: <span className="font-bold">CHF {calculatedCost}</span>
                 </p>
-                <p className="text-xs text-gray-500 italic">Dies ist eine Schätzung. Der definitive Preis kann je nach Aufwand und Zusatzleistungen variieren.</p>
+                <p className="text-xs text-muted-foreground italic">Dies ist eine Schätzung. Der definitive Preis kann je nach Aufwand und Zusatzleistungen variieren.</p>
               </div>
               <Button onClick={handleOpenQuoteForm} size="lg" className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white group">
                 Detaillierte Offerten anfordern
@@ -417,7 +417,7 @@ const MovingCostCalculator = ({ onRequestQuote, hideInlineForm = false, shouldOp
       {showInlineForm && !hideInlineForm && (
         <div
           id="calculator-inline-form"
-          className="mt-8 p-6 bg-white rounded-lg border-2 border-gray-200 shadow-lg"
+          className="mt-8 p-6 bg-card text-card-foreground rounded-lg border-2 border-border shadow-lg"
         >
           <Suspense fallback={<FormLoadingSpinner />}>
            <NewCustomerForm 

@@ -336,15 +336,15 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
 
   const getStatusBadge = (status) => {
     const config = {
-      no_insurance: { label: 'Keine Versicherung', className: 'bg-gray-100 text-gray-800 border-gray-200', icon: ShieldAlert },
-      pending_upload: { label: 'Ausstehend', className: 'bg-yellow-100 text-yellow-800 border-yellow-200', icon: Clock },
-      in_review: { label: 'In Prüfung', className: 'bg-blue-100 text-blue-800 border-blue-200', icon: Clock },
-      approved: { label: 'Genehmigt', className: 'bg-green-100 text-green-800 border-green-200', icon: CheckCircle },
-      rejected: { label: 'Abgelehnt', className: 'bg-red-100 text-red-800 border-red-200', icon: XCircle },
-      expired: { label: 'Abgelaufen', className: 'bg-red-100 text-red-800 border-red-200', icon: AlertTriangle },
-      deadline_passed: { label: 'Frist abgelaufen', className: 'bg-red-100 text-red-800 border-red-200', icon: XCircle },
+      no_insurance: { label: 'Keine Versicherung', className: 'bg-muted text-foreground border-border dark:bg-muted/80', icon: ShieldAlert },
+      pending_upload: { label: 'Ausstehend', className: 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-amber-950/45 dark:text-amber-200 dark:border-amber-800', icon: Clock },
+      in_review: { label: 'In Prüfung', className: 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/45 dark:text-blue-200 dark:border-blue-800', icon: Clock },
+      approved: { label: 'Genehmigt', className: 'bg-green-100 text-green-800 border-green-200 dark:bg-emerald-950/50 dark:text-emerald-200 dark:border-emerald-800', icon: CheckCircle },
+      rejected: { label: 'Abgelehnt', className: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-950/45 dark:text-red-200 dark:border-red-900', icon: XCircle },
+      expired: { label: 'Abgelaufen', className: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-950/45 dark:text-red-200 dark:border-red-900', icon: AlertTriangle },
+      deadline_passed: { label: 'Frist abgelaufen', className: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-950/45 dark:text-red-200 dark:border-red-900', icon: XCircle },
     };
-    const c = config[status] || { label: status, className: 'bg-gray-100 text-gray-800 border-gray-200', icon: Clock };
+    const c = config[status] || { label: status, className: 'bg-muted text-foreground border-border', icon: Clock };
     const Icon = c.icon;
     return (
       <Badge variant="outline" className={`${c.className} border px-2.5 py-0.5 font-semibold`}>
@@ -357,13 +357,13 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
   const getDaysInfo = (record) => {
     if (record.status === 'pending_upload' && record.upload_deadline) {
       const daysLeft = Math.ceil((new Date(record.upload_deadline) - new Date()) / (1000 * 60 * 60 * 24));
-      if (daysLeft <= 0) return <span className="text-xs text-red-600 font-semibold">Frist abgelaufen</span>;
-      return <span className="text-xs text-yellow-600">Noch {daysLeft} Tage</span>;
+      if (daysLeft <= 0) return <span className="text-xs text-red-600 dark:text-red-400 font-semibold">Frist abgelaufen</span>;
+      return <span className="text-xs text-yellow-600 dark:text-amber-300">Noch {daysLeft} Tage</span>;
     }
     if (record.valid_until) {
       const daysLeft = Math.ceil((new Date(record.valid_until) - new Date()) / (1000 * 60 * 60 * 24));
-      if (daysLeft <= 0) return <span className="text-xs text-red-600 font-semibold">Abgelaufen</span>;
-      if (daysLeft <= 30) return <span className="text-xs text-orange-600">Noch {daysLeft} Tage gültig</span>;
+      if (daysLeft <= 0) return <span className="text-xs text-red-600 dark:text-red-400 font-semibold">Abgelaufen</span>;
+      if (daysLeft <= 30) return <span className="text-xs text-orange-600 dark:text-orange-400">Noch {daysLeft} Tage gültig</span>;
       return null;
     }
     return null;
@@ -372,7 +372,7 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-16">
-        <Loader2 className="w-8 h-8 animate-spin text-green-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-green-600 dark:text-emerald-400" />
       </div>
     );
   }
@@ -382,28 +382,28 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-green-600" />
+          <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-green-600 dark:text-emerald-400" />
             Versicherungsverwaltung
           </h2>
-          <p className="text-sm text-gray-500 mt-1">{enrichedRecords.length} Partner mit Versicherungsstatus</p>
+          <p className="text-sm text-muted-foreground mt-1">{enrichedRecords.length} Partner mit Versicherungsstatus</p>
         </div>
       </div>
 
       {/* Filters */}
-      <Card className="border border-gray-200">
+      <Card className="border border-border shadow-sm">
         <CardContent className="p-4 flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder="Partner suchen..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9"
+              className="pl-9 border-border focus-visible:ring-emerald-500/30"
             />
           </div>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-full sm:w-56">
+            <SelectTrigger className="w-full sm:w-56 border-border focus-visible:ring-emerald-500/30">
               <SelectValue placeholder="Status filtern" />
             </SelectTrigger>
             <SelectContent>
@@ -423,29 +423,29 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
       {filteredRecords.length > 0 ? (
         <div className="space-y-3">
           {filteredRecords.map(record => (
-            <Card key={record.id} className="border border-gray-200 hover:shadow-md transition-shadow">
+            <Card key={record.id} className="border border-border hover:shadow-md transition-shadow">
               <CardContent className="p-4 md:p-5">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 flex-wrap mb-2">
-                      <h3 className="text-base font-bold text-gray-900">{record.company_name}</h3>
+                      <h3 className="text-base font-bold text-foreground">{record.company_name}</h3>
                       {getStatusBadge(record.status)}
                     </div>
-                    <p className="text-sm text-gray-500 mb-2">{record.email}</p>
+                    <p className="text-sm text-muted-foreground mb-2">{record.email}</p>
                     <div className="flex items-center gap-4 flex-wrap text-sm">
                       {record.uploaded_at && record.status !== 'pending_upload' && record.status !== 'no_insurance' && record.status !== 'none' && (
-                        <span className="text-gray-500">
+                        <span className="text-muted-foreground">
                           📄 Hochgeladen: {new Date(record.uploaded_at).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
                         </span>
                       )}
                       {record.valid_until && (
-                        <span className="text-gray-600 font-medium">
+                        <span className="text-foreground font-medium">
                           📅 Gültig bis: {new Date(record.valid_until).toLocaleDateString('de-DE')}
                         </span>
                       )}
                       {getDaysInfo(record)}
                       {record.rejection_reason && (
-                        <span className="text-red-600 text-xs">Grund: {record.rejection_reason}</span>
+                        <span className="text-red-600 dark:text-red-400 text-xs">Grund: {record.rejection_reason}</span>
                       )}
                     </div>
                   </div>
@@ -464,7 +464,7 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
                     )}
                     {/* PDF fehlt Hinweis bei in_review ohne file_url */}
                     {record.status === 'in_review' && !record.file_url && (
-                      <span className="text-xs text-orange-600">⚠️ Kein PDF gefunden</span>
+                      <span className="text-xs text-orange-600 dark:text-orange-400">⚠️ Kein PDF gefunden</span>
                     )}
 
                     {/* Approve / Reject buttons — für in_review */}
@@ -474,7 +474,7 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
                           size="sm"
                           onClick={() => handleApprove(record)}
                           disabled={processingId === record.id}
-                          className="bg-green-600 hover:bg-green-700 text-white"
+                          className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white"
                         >
                           {processingId === record.id ? (
                             <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
@@ -501,7 +501,7 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
                         size="sm"
                         onClick={() => { setManualApproveDialog({ open: true, record }); setManualValidUntil(''); }}
                         disabled={processingId === record.id}
-                        className="bg-green-600 hover:bg-green-700 text-white"
+                        className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white"
                       >
                         {processingId === record.id ? (
                           <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
@@ -519,7 +519,7 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
                         size="sm"
                         onClick={() => handleRevoke(record)}
                         disabled={processingId === record.id}
-                        className="text-orange-600 border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+                        className="text-orange-600 border-orange-300 hover:bg-orange-50 hover:text-orange-700 dark:text-orange-400 dark:border-orange-700 dark:hover:bg-orange-950/40 dark:hover:text-orange-300"
                       >
                         {processingId === record.id ? (
                           <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
@@ -536,11 +536,11 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
           ))}
         </div>
       ) : (
-        <Card className="border-2 border-dashed border-gray-200">
+        <Card className="border-2 border-dashed border-border">
           <CardContent className="text-center py-16">
-            <ShieldAlert className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <p className="text-lg font-semibold text-gray-700 mb-1">Keine Einträge gefunden</p>
-            <p className="text-sm text-gray-500">Versuchen Sie, die Filterkriterien zu ändern.</p>
+            <ShieldAlert className="w-12 h-12 text-muted-foreground/50 mx-auto mb-4" />
+            <p className="text-lg font-semibold text-foreground mb-1">Keine Einträge gefunden</p>
+            <p className="text-sm text-muted-foreground">Versuchen Sie, die Filterkriterien zu ändern.</p>
           </CardContent>
         </Card>
       )}
@@ -602,7 +602,7 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
               />
             </div>
             {manualValidUntil && (
-              <p className="text-sm text-green-700 bg-green-50 p-2 rounded">
+              <p className="text-sm text-green-700 dark:text-emerald-200 bg-green-50 dark:bg-emerald-950/40 border border-green-200/60 dark:border-emerald-800 p-2 rounded">
                 ✅ Versicherung wird genehmigt bis <strong>{new Date(manualValidUntil).toLocaleDateString('de-DE')}</strong>
               </p>
             )}
@@ -614,7 +614,7 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
             <Button 
               onClick={handleManualApprove} 
               disabled={!manualValidUntil || processingId === manualApproveDialog.record?.id}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white"
             >
               {processingId === manualApproveDialog.record?.id ? (
                 <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />

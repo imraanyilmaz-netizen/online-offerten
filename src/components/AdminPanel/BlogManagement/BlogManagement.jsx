@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/src/components/ui/use-toast';
@@ -69,11 +69,11 @@ const BlogManagement = () => {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'published':
-        return <Badge className="bg-green-100 text-green-800 border-green-200 font-semibold">Veröffentlicht</Badge>;
+        return <Badge className="bg-green-100 text-green-800 border-green-200 dark:bg-emerald-950/55 dark:text-emerald-200 dark:border-emerald-800 font-semibold">Veröffentlicht</Badge>;
       case 'draft':
-        return <Badge variant="outline" className="border-gray-300 font-semibold">Entwurf</Badge>;
+        return <Badge variant="outline" className="border-border text-foreground font-semibold">Entwurf</Badge>;
       case 'scheduled':
-        return <Badge className="bg-blue-100 text-blue-800 border-blue-200 font-semibold">Geplant</Badge>;
+        return <Badge className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/50 dark:text-blue-200 dark:border-blue-800 font-semibold">Geplant</Badge>;
       default:
         return <Badge variant="secondary" className="font-semibold">{status}</Badge>;
     }
@@ -85,10 +85,10 @@ const BlogManagement = () => {
 
   return (
     <div className="px-4 md:px-6 pb-6 md:pb-8">
-      <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200">
+      <div className="flex justify-between items-center mb-8 pb-4 border-b border-border">
     <div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2 tracking-tight">Ratgeber-Beiträge</h2>
-          <p className="text-base text-gray-600 leading-relaxed max-w-3xl">Verwalten Sie Ratgeber-Beiträge, erstellen Sie neue Artikel und veröffentlichen Sie Inhalte.</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 tracking-tight">Ratgeber-Beiträge</h2>
+          <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">Verwalten Sie Ratgeber-Beiträge, erstellen Sie neue Artikel und veröffentlichen Sie Inhalte.</p>
         </div>
         <Button onClick={handleNewPost} className="flex-shrink-0 ml-4">
           <PlusCircle className="w-4 h-4 mr-2" />
@@ -98,53 +98,53 @@ const BlogManagement = () => {
 
       {loading ? (
         <div className="flex justify-center items-center py-16">
-          <Loader2 className="w-10 h-10 animate-spin text-green-600" />
+          <Loader2 className="w-10 h-10 animate-spin text-green-600 dark:text-emerald-400" />
         </div>
       ) : (
-        <Card className="border border-gray-200 shadow-sm overflow-hidden">
+        <Card className="border border-border shadow-sm overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-gray-50 to-gray-50/50 hover:bg-gray-50 border-b-2 border-gray-200">
-                <TableHead className="font-bold text-gray-900 py-4 text-sm">Titel</TableHead>
-                <TableHead className="font-bold text-gray-900 py-4 text-sm">Status</TableHead>
-                <TableHead className="font-bold text-gray-900 py-4 text-sm">Kategorie</TableHead>
-                <TableHead className="font-bold text-gray-900 py-4 text-sm">Etiketten (Tags)</TableHead>
-                <TableHead className="font-bold text-gray-900 py-4 text-sm">Erstellt am</TableHead>
-                <TableHead className="text-right font-bold text-gray-900 py-4 text-sm">Aktionen</TableHead>
+              <TableRow className="bg-gradient-to-r from-muted/50 to-muted/30 hover:bg-muted/40 border-b-2 border-border">
+                <TableHead className="font-bold text-foreground py-4 text-sm">Titel</TableHead>
+                <TableHead className="font-bold text-foreground py-4 text-sm">Status</TableHead>
+                <TableHead className="font-bold text-foreground py-4 text-sm">Kategorie</TableHead>
+                <TableHead className="font-bold text-foreground py-4 text-sm">Etiketten (Tags)</TableHead>
+                <TableHead className="font-bold text-foreground py-4 text-sm">Erstellt am</TableHead>
+                <TableHead className="text-right font-bold text-foreground py-4 text-sm">Aktionen</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {posts.length > 0 ? posts.map(post => (
                 <TableRow 
                   key={post.id}
-                  className="border-b border-gray-100 hover:bg-gradient-to-r hover:from-green-50/30 hover:to-transparent transition-all duration-200"
+                  className="border-b border-border hover:bg-gradient-to-r hover:from-green-50/30 hover:to-transparent dark:hover:from-emerald-950/25 dark:hover:to-transparent transition-all duration-200"
                 >
-                  <TableCell className="font-semibold text-gray-900 py-3.5">
+                  <TableCell className="font-semibold text-foreground py-3.5">
                     {post.status === 'published' ? (
-                       <Link href={`/ratgeber/${post.slug}`} target="_blank" className="hover:text-green-600 hover:underline transition-colors">{post.title}</Link>
+                       <Link href={`/ratgeber/${post.slug}`} target="_blank" className="text-foreground hover:text-green-600 dark:hover:text-emerald-400 hover:underline transition-colors">{post.title}</Link>
                     ) : (
-                      <span className="text-gray-700">{post.title}</span>
+                      <span className="text-foreground">{post.title}</span>
                     )}
                   </TableCell>
                   <TableCell className="py-3.5">{getStatusBadge(post.status)}</TableCell>
-                  <TableCell className="py-3.5 text-gray-700">{post.category || '-'}</TableCell>
+                  <TableCell className="py-3.5 text-muted-foreground">{post.category || '-'}</TableCell>
                   <TableCell className="py-3.5">
                     <div className="flex flex-wrap gap-1.5">
                       {(post.tags || []).slice(0, 3).map(tag => (
-                        <Badge key={tag} variant="secondary" className="bg-gray-100 text-gray-700 border-gray-200">{tag}</Badge>
+                        <Badge key={tag} variant="secondary" className="bg-muted text-foreground border-border">{tag}</Badge>
                       ))}
                       {post.tags?.length > 3 && (
-                        <Badge variant="outline" className="border-gray-300">+{post.tags.length - 3}</Badge>
+                        <Badge variant="outline" className="border-border">+{post.tags.length - 3}</Badge>
                       )}
                     </div>
                   </TableCell>
-                  <TableCell className="py-3.5 text-sm text-gray-600">{new Date(post.created_at).toLocaleDateString('de-DE')}</TableCell>
+                  <TableCell className="py-3.5 text-sm text-muted-foreground">{new Date(post.created_at).toLocaleDateString('de-DE')}</TableCell>
                   <TableCell className="text-right py-3.5">
                     <div className="flex items-center justify-end gap-2">
-                      <Button variant="ghost" size="icon" onClick={() => handleEditPost(post)} className="hover:bg-green-50 hover:text-green-600">
+                      <Button variant="ghost" size="icon" onClick={() => handleEditPost(post)} className="hover:bg-green-50 hover:text-green-600 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400">
                       <Edit className="w-4 h-4" />
                     </Button>
-                      <Button variant="ghost" size="icon" onClick={() => setPostToDelete(post)} className="hover:bg-red-50 hover:text-red-600">
+                      <Button variant="ghost" size="icon" onClick={() => setPostToDelete(post)} className="hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400">
                         <Trash2 className="w-4 h-4" />
                     </Button>
                     </div>
@@ -154,11 +154,11 @@ const BlogManagement = () => {
                 <TableRow>
                     <TableCell colSpan={6} className="text-center py-16">
                       <div className="flex flex-col items-center justify-center">
-                        <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
-                          <PlusCircle className="w-8 h-8 text-gray-400" />
+                        <div className="inline-flex items-center justify-center w-16 h-16 bg-muted rounded-full mb-4">
+                          <PlusCircle className="w-8 h-8 text-muted-foreground" />
                         </div>
-                        <p className="text-lg font-semibold text-gray-700 mb-1">Noch keine Beiträge erstellt</p>
-                        <p className="text-sm text-gray-500">Erstellen Sie Ihren ersten Ratgeber-Beitrag.</p>
+                        <p className="text-lg font-semibold text-foreground mb-1">Noch keine Beiträge erstellt</p>
+                        <p className="text-sm text-muted-foreground">Erstellen Sie Ihren ersten Ratgeber-Beitrag.</p>
                       </div>
                     </TableCell>
                 </TableRow>

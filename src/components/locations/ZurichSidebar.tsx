@@ -41,14 +41,14 @@ const ZurichSidebar = () => {
       url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international&city=Zürich'
     },
     { 
-      id: 'spezialtransport',
+      id: 'klaviertransport',
       name: 'Spezialtransport',
       description: 'Klavier, Tresor, Kunst',
       icon: PiPianoKeysFill,
       iconColor: 'text-amber-600',
       iconBg: 'bg-amber-100',
       iconBgHover: 'bg-amber-500',
-      url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport&city=Zürich'
+      url: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport&city=Zürich'
     },
     { 
       id: 'kleintransport',

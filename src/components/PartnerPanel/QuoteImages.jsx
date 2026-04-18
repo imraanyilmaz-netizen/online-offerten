@@ -87,7 +87,7 @@ const QuoteImages = ({ imageUrls }) => {
               {images.map((url, index) => (
                 <div
                   key={index}
-                  className="relative aspect-square w-full bg-gray-200 rounded-md overflow-hidden cursor-pointer group"
+                  className="relative aspect-square w-full bg-muted rounded-md overflow-hidden cursor-pointer group"
                   onClick={() => openLightbox(index)}
                 >
                   <img 

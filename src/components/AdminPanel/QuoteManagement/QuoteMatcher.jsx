@@ -11,7 +11,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
 import { findMatchingPartners } from '@/lib/matchUtils';
-import { getFullCantonName, getGermanServiceName, cantonOptions, cantonMap } from '@/lib/dataMapping';
+import { getGermanServiceName } from '@/data/categories';
+import { getFullCantonName, cantonOptions, cantonMap } from '@/data/locations';
 import { supabase } from '@/lib/customSupabaseClient';
 
 // Kanton-Wert normalisieren: "Zürich" → "ZH", "ZH" → "ZH"

@@ -1,7 +1,7 @@
-﻿import React from 'react';
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Check } from 'lucide-react';
-import { getGermanServiceName } from '@/lib/dataMapping';
+import { getGermanServiceName } from '@/data/categories';
 // Removed useTranslation
 
 const ServiceList = ({ services, mainCategories, className }) => {
@@ -19,7 +19,7 @@ const ServiceList = ({ services, mainCategories, className }) => {
     maler: { label: 'Malerarbeiten', services: [] },
   };
 
-  const umzugServices = ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'umzugsreinigung_opt', 'raeumung_service', 'entsorgung_service'];
+  const umzugServices = ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'klaviertransport', 'kleintransport', 'raeumung_service', 'entsorgung_service'];
   const reinigungServices = ['wohnungsreinigung', 'hausreinigung', 'buero_reinigung', 'umzugsreinigung', 'unterhaltsreinigung', 'grundreinigung', 'baureinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung'];
   const malerServices = ['maler_service'];
   
@@ -51,14 +51,14 @@ const ServiceList = ({ services, mainCategories, className }) => {
             if (category && category.services.length > 0) {
                 return (
                     <div key={categoryKey}>
-                        <h3 className="text-lg font-semibold text-gray-700 mb-3 border-b pb-2">{category.label}</h3>
+                        <h3 className="text-lg font-semibold text-foreground mb-3 border-b border-border pb-2">{category.label}</h3>
                         <ul className="space-y-2">
                         {category.services.map((service, index) => (
                             <li
                             key={`${service}-${index}`}
-                            className="flex items-center text-gray-600"
+                            className="flex items-center text-muted-foreground"
                             >
-                            <Check className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
+                            <Check className="w-5 h-5 mr-3 text-primary flex-shrink-0" />
                             <span>{getGermanServiceName(service)}</span>
                             </li>
                         ))}

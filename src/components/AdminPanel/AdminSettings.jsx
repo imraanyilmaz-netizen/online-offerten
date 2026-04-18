@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -131,15 +131,15 @@ const AdminSettings = () => {
     <div className="px-4 md:px-6 pb-6 md:pb-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Allgemeine Einstellungen - Left Card */}
-        <Card className="border border-gray-200 shadow-sm">
-          <CardHeader className="pb-4 border-b border-gray-100">
+        <Card className="border border-border shadow-sm">
+          <CardHeader className="pb-4 border-b border-border">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-green-50 rounded-lg">
-                <Settings className="w-5 h-5 text-green-600" />
+              <div className="p-2 bg-green-50 dark:bg-emerald-950/45 rounded-lg">
+                <Settings className="w-5 h-5 text-green-600 dark:text-emerald-400" />
               </div>
               <div>
-                <CardTitle className="text-lg font-bold text-gray-900">Allgemeine Einstellungen</CardTitle>
-                <CardDescription className="text-sm text-gray-600 mt-1">
+                <CardTitle className="text-lg font-bold text-foreground">Allgemeine Einstellungen</CardTitle>
+                <CardDescription className="text-sm text-muted-foreground mt-1">
                   Verwalten Sie hier die globalen Anwendungseinstellungen.
                 </CardDescription>
               </div>
@@ -148,9 +148,9 @@ const AdminSettings = () => {
           <CardContent className="pt-6 space-y-6">
             <form onSubmit={handleSubscriptionPriceChange} className="space-y-4">
               <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-3">Partner-Abonnement</h3>
+                <h3 className="text-base font-semibold text-foreground mb-3">Partner-Abonnement</h3>
             <div className="space-y-2">
-                  <Label htmlFor="subscriptionPrice" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="subscriptionPrice" className="text-sm font-medium text-foreground">
                     Monatlicher Preis (CHF)
                   </Label>
                 <Input
@@ -160,7 +160,7 @@ const AdminSettings = () => {
                   value={subscriptionPrice}
                   onChange={(e) => setSubscriptionPrice(e.target.value)}
                   required
-                    className="h-11 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                    className="h-11 border-border focus-visible:ring-emerald-500/30"
                     placeholder="0.00"
                 />
               </div>
@@ -168,7 +168,7 @@ const AdminSettings = () => {
               <Button 
                 type="submit" 
                 disabled={loadingSubscription}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold h-11"
+                className="w-full bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-semibold h-11"
               >
                 {loadingSubscription ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -179,16 +179,16 @@ const AdminSettings = () => {
             </Button>
           </form>
 
-            <div className="border-t border-gray-200 pt-6">
+            <div className="border-t border-border pt-6">
               <form onSubmit={handleMinTopUpAmountChange} className="space-y-4">
                 <div>
-                  <h3 className="text-base font-semibold text-gray-900 mb-3">Guthabenaufladung</h3>
+                  <h3 className="text-base font-semibold text-foreground mb-3">Guthabenaufladung</h3>
             <div className="space-y-2">
-                    <Label htmlFor="minTopUpAmount" className="text-sm font-medium text-gray-700">
+                    <Label htmlFor="minTopUpAmount" className="text-sm font-medium text-foreground">
                       Minimaler Aufladebetrag (CHF)
                     </Label>
                <div className="relative">
-                <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="minTopUpAmount"
                   type="number"
@@ -196,7 +196,7 @@ const AdminSettings = () => {
                   value={minTopUpAmount}
                   onChange={(e) => setMinTopUpAmount(e.target.value)}
                   required
-                        className="pl-10 h-11 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                        className="pl-10 h-11 border-border focus-visible:ring-emerald-500/30"
                         placeholder="0"
                 />
               </div>
@@ -205,7 +205,7 @@ const AdminSettings = () => {
                 <Button 
                   type="submit" 
                   disabled={loadingTopUp}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold h-11"
+                  className="w-full bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-semibold h-11"
                 >
                   {loadingTopUp ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -220,15 +220,15 @@ const AdminSettings = () => {
       </Card>
       
         {/* Admin-Konto - Right Card */}
-        <Card className="border border-gray-200 shadow-sm">
-          <CardHeader className="pb-4 border-b border-gray-100">
+        <Card className="border border-border shadow-sm">
+          <CardHeader className="pb-4 border-b border-border">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-green-50 rounded-lg">
-                <Lock className="w-5 h-5 text-green-600" />
+              <div className="p-2 bg-green-50 dark:bg-emerald-950/45 rounded-lg">
+                <Lock className="w-5 h-5 text-green-600 dark:text-emerald-400" />
               </div>
               <div>
-                <CardTitle className="text-lg font-bold text-gray-900">Admin-Konto</CardTitle>
-                <CardDescription className="text-sm text-gray-600 mt-1">
+                <CardTitle className="text-lg font-bold text-foreground">Admin-Konto</CardTitle>
+                <CardDescription className="text-sm text-muted-foreground mt-1">
                   Hier können Sie die Sicherheitseinstellungen Ihres Kontos ändern.
                 </CardDescription>
               </div>
@@ -236,10 +236,10 @@ const AdminSettings = () => {
           </CardHeader>
           <CardContent className="pt-6">
             <form onSubmit={handlePasswordChange} className="space-y-5">
-              <h3 className="text-base font-semibold text-gray-900">Passwort ändern</h3>
+              <h3 className="text-base font-semibold text-foreground">Passwort ändern</h3>
               
               <div className="space-y-2">
-                <Label htmlFor="oldPassword" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="oldPassword" className="text-sm font-medium text-foreground">
                   Altes Passwort
                 </Label>
                 <div className="relative">
@@ -249,13 +249,13 @@ const AdminSettings = () => {
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
                     required
-                    className="h-11 pr-10 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                    className="h-11 pr-10 border-border focus-visible:ring-emerald-500/30"
                     placeholder="••••••••"
                   />
                   <button
                     type="button"
                     onClick={() => setShowOldPassword(!showOldPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                   >
                     {showOldPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -263,7 +263,7 @@ const AdminSettings = () => {
               </div>
 
             <div className="space-y-2">
-                <Label htmlFor="newPassword" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="newPassword" className="text-sm font-medium text-foreground">
                   Neues Passwort
                 </Label>
                 <div className="relative">
@@ -273,13 +273,13 @@ const AdminSettings = () => {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
-                    className="h-11 pr-10 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                    className="h-11 pr-10 border-border focus-visible:ring-emerald-500/30"
                     placeholder="••••••••"
                   />
                   <button
                     type="button"
                     onClick={() => setShowNewPassword(!showNewPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                   >
                     {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -287,7 +287,7 @@ const AdminSettings = () => {
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="confirmPassword" className="text-sm font-medium text-foreground">
                   Neues Passwort bestätigen
                 </Label>
                 <div className="relative">
@@ -297,13 +297,13 @@ const AdminSettings = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
-                    className="h-11 pr-10 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                    className="h-11 pr-10 border-border focus-visible:ring-emerald-500/30"
                     placeholder="••••••••"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                   >
                     {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -313,7 +313,7 @@ const AdminSettings = () => {
               <Button 
                 type="submit" 
                 disabled={loadingPassword}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold h-11 mt-6"
+                className="w-full bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-semibold h-11 mt-6"
               >
                 {loadingPassword ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

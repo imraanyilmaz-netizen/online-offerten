@@ -64,12 +64,12 @@ const ForgotPasswordPageClient = () => {
 
   return (
     <div
-      className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 py-4 px-4"
+      className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-50 to-blue-100 dark:from-emerald-950/40 dark:to-slate-900 py-4 px-4"
     >
-      <Card className="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-lg border-none">
+      <Card className="w-full max-w-md backdrop-blur-sm bg-card/90 border border-border shadow-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-extrabold text-gray-800">Passwort vergessen?</CardTitle>
-          <CardDescription className="text-gray-600 mt-2">
+          <CardTitle className="text-3xl font-extrabold text-foreground">Passwort vergessen?</CardTitle>
+          <CardDescription className="text-muted-foreground mt-2">
             Kein Problem! Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen.
           </CardDescription>
         </CardHeader>
@@ -95,7 +95,7 @@ const ForgotPasswordPageClient = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="ihre.email@beispiel.com"
-                  className="bg-white/80 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                  className="bg-background/80 dark:bg-muted/30 border-input focus:border-primary focus:ring-primary"
                 />
               </div>
               {error && (

@@ -9,9 +9,8 @@ import { PiPianoKeysFill } from 'react-icons/pi';
 const services = [
   { nameKey: 'privatumzug', icon: Home, path: '/umzugsfirma/privatumzug', active: true },
   { nameKey: 'geschaeftsumzug', icon: Building, path: '/umzugsfirma/geschaeftsumzug' },
-  { nameKey: 'internationale', icon: Globe, path: '/umzugsfirma/internationale-umzuege' },
-  { nameKey: 'spezialtransporte', icon: Box, path: '/umzugsfirma/spezialtransporte' },
-  { nameKey: 'klaviertransport', icon: PiPianoKeysFill, path: '/umzugsfirma/spezialtransporte/klaviertransport' },
+  { nameKey: 'internationale', icon: Globe, path: '/umzugsfirma/auslandumzug' },
+  { nameKey: 'klaviertransport', icon: PiPianoKeysFill, path: '/umzugsfirma/klaviertransport' },
   { nameKey: 'reinigung', icon: Sparkles, path: '/reinigung' },
   { nameKey: 'raeumung', icon: Trash2, path: '/raeumung-entsorgung' },
   { nameKey: 'malerarbeiten', icon: PaintBrush, path: '/malerarbeitenkosten' },

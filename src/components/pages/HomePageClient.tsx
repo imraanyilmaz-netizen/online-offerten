@@ -10,7 +10,6 @@ import { Badge } from '@/components/ui/badge';
 // Sadece kullanılan ikonları import et
 import { 
   Star, 
-  User, 
   ChevronLeft, 
   ChevronRight, 
   ArrowRight, 
@@ -18,8 +17,8 @@ import {
 } from 'lucide-react';
 // Framer Motion kaldırıldı - kullanılmıyor
 // Supabase lazy loaded to reduce initial bundle size
-import { formatDate, cn } from '@/lib/utils';
-import { getGermanServiceName } from '@/src/lib/dataMapping.js';
+import { formatDate, cn, getCustomerInitials } from '@/lib/utils';
+import { getGermanServiceName } from '@/data/categories';
 import { locations } from '@/data/locations';
 
 const getCantonFlagSrc = (canton?: string): string => {
@@ -106,16 +105,17 @@ interface ReviewCardProps {
 }
 
 const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
-  const { 
-    customer_name, 
+  const {
+    customer_name,
     city,
     review_date,
     rating,
     review_text,
     service_type,
     partner_name,
-    partners: partner
-  } = review;
+    partners: rawPartners,
+  } = review
+  const partner = Array.isArray(rawPartners) ? rawPartners[0] : rawPartners
 
   const serviceName = getGermanServiceName(service_type);
 
@@ -124,24 +124,33 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
 
   return (
     <div className="h-full">
-      <Card className="flex flex-col h-full bg-white shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
-        <CardContent className="p-6 flex-grow flex flex-col">
+      <Card className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80 hover:shadow-lg dark:border-border dark:bg-card/95 dark:ring-white/10 dark:hover:border-emerald-800/70">
+        <CardContent className="flex flex-grow flex-col p-6">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                <User className="w-5 h-5 text-gray-500" />
+              <div
+                className="w-10 h-10 rounded-full bg-gradient-to-br from-green-100 to-green-50 dark:from-emerald-950/50 dark:to-emerald-950/25 border border-green-200/80 dark:border-emerald-800/60 flex items-center justify-center shrink-0"
+                aria-hidden
+              >
+                <span className="text-xs font-bold text-green-700 dark:text-emerald-300 tracking-tight select-none">
+                  {getCustomerInitials(customer_name)}
+                </span>
               </div>
               <div>
-                <p className="font-bold text-gray-800">{customer_name}</p>
-                <div className="flex items-center gap-2 mt-1">
-                  {city && (
-                    <div className="flex items-center gap-1 text-xs text-gray-500">
+                <p className="font-bold text-gray-800 dark:text-foreground">{customer_name}</p>
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                  {city ? (
+                    <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-muted-foreground">
                       <MapPin className="w-3 h-3 text-green-600" />
                       <span>{city}</span>
                     </div>
-                  )}
-                  <span className="text-xs text-gray-400">•</span>
-                  <span className="text-xs text-gray-500">{formatDate(review_date)}</span>
+                  ) : null}
+                  {city ? (
+                    <span className="text-xs text-gray-400 dark:text-muted-foreground/50" aria-hidden>
+                      •
+                    </span>
+                  ) : null}
+                  <span className="text-xs text-gray-500 dark:text-muted-foreground">{formatDate(review_date)}</span>
                 </div>
               </div>
             </div>
@@ -154,7 +163,7 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
                 const fillPercent = Math.max(0, Math.min(100, (displayRating - i) * 100))
                 return (
                   <div key={i} className="relative w-4 h-4">
-                    <Star size={16} className="absolute inset-0 text-gray-300" />
+                    <Star size={16} className="absolute inset-0 text-gray-300 dark:text-muted-foreground/40" />
                     {fillPercent > 0 && (
                       <div className="absolute inset-0 overflow-hidden" style={{ width: `${fillPercent}%` }}>
                         <Star size={16} className="text-yellow-400 fill-yellow-400" />
@@ -164,7 +173,7 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
                 )
               })}
             </div>
-            <span className="font-bold text-base text-gray-900">{displayRating.toFixed(2)}</span>
+            <span className="font-bold text-base text-gray-900 dark:text-foreground">{displayRating.toFixed(2)}</span>
           </div>
           
           {review_text && (
@@ -173,25 +182,25 @@ const ReviewCard = memo(({ review, index }: ReviewCardProps) => {
             </p>
           )}
 
-          <div className="mt-auto pt-4 space-y-3 border-t border-gray-100">
+          <div className="mt-auto pt-4 space-y-3 border-t border-gray-100 dark:border-border">
             <div className="flex flex-wrap items-center gap-2">
               {city && (
-                <Badge variant="outline" className="bg-gray-50 border-gray-200 text-gray-700 font-medium">
+                <Badge variant="outline" className="bg-gray-50 border-gray-200 text-gray-700 font-medium dark:bg-muted dark:border-border dark:text-foreground">
                   <MapPin className="w-3 h-3 mr-1" />
                   {city}
                 </Badge>
               )}
             {serviceName && (
-              <Badge variant="outline" className="bg-green-50 border-green-200 text-green-700 font-medium">
+              <Badge variant="outline" className="bg-green-50 border-green-200 text-green-700 font-medium dark:bg-emerald-950/40 dark:border-emerald-800/60 dark:text-emerald-300">
                 {serviceName}
               </Badge>
             )}
             </div>
             {partner && partner.slug ? (
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-500 dark:text-muted-foreground">
                 Für Firma:{' '}
                 <Button asChild variant="link" className="p-0 h-auto text-xs">
-                  <Link href={`/partner/${partner.slug}`} className="text-gray-900 hover:underline font-bold">
+                  <Link href={`/partner/${partner.slug}`} className="text-gray-900 hover:underline font-bold dark:text-foreground">
                     {partner_name || partner.company_name}
                   </Link>
                 </Button>
@@ -226,7 +235,7 @@ const PostCard = memo(({ post }: PostCardProps) => {
   };
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <Card className="flex flex-col h-full overflow-hidden border-border bg-card transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl dark:border-border">
       <Link href={postUrl} className="block group">
         <div className="aspect-video overflow-hidden relative">
           <NextImage 
@@ -241,12 +250,12 @@ const PostCard = memo(({ post }: PostCardProps) => {
       </Link>
       <CardContent className="p-6 flex flex-col flex-grow">
         {post.category && <Badge variant="secondary" className="mb-2 self-start">{post.category}</Badge>}
-        <h3 className="text-xl font-bold mb-2 text-gray-900 flex-grow group-hover:text-green-700">
+        <h3 className="text-xl font-bold mb-2 text-gray-900 flex-grow group-hover:text-green-700 dark:text-foreground dark:group-hover:text-emerald-400">
           <Link href={postUrl}>{post.title}</Link>
         </h3>
-        <p className="text-gray-700 text-sm mb-4">{excerpt}</p>
+        <p className="text-gray-700 text-sm mb-4 dark:text-muted-foreground">{excerpt}</p>
         <div className="mt-auto">
-          <Button asChild variant="link" className="p-0 self-start text-green-700 hover:text-green-800 font-semibold">
+          <Button asChild variant="link" className="p-0 self-start text-green-700 hover:text-green-800 font-semibold dark:text-emerald-400 dark:hover:text-emerald-300">
             <Link href={postUrl}>
               {getReadMoreText(post)} <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
@@ -405,7 +414,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
   const homeLocationItems = useMemo(() => {
     const linkedLocations = locations
-      .filter((city) => city?.slug && city.showOnHome !== false)
+      .filter((city) => city?.slug)
       .map((city) => ({ ...city, isLinked: true }));
 
     const existingCantons = new Set(linkedLocations.map((item) => item.canton));
@@ -425,14 +434,17 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
         
           {/* Customer Reviews Section */}
           {state.reviews.length > 0 ? (
-            <section className="py-16 md:py-24 bg-slate-50">
+            <section className="border-t border-slate-200/80 bg-gradient-to-b from-white via-slate-50/50 to-white py-16 dark:border-border dark:from-background dark:via-muted/20 dark:to-background md:py-24">
               <div className="container mx-auto max-w-navbar px-4 md:px-6">
-                <div className="text-center mb-12">
-                  <h2 className="heading-2">
-                    Das sagen unsere Kundinnen & Kunden
+                <div className="mb-12 text-center">
+                  <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                    Stimmen
+                  </p>
+                  <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl">
+                    Das sagen unsere Kundinnen &amp; Kunden
                   </h2>
-                  <p className="mt-4 text-body max-w-2xl mx-auto">
-                    100 % echte Stimmen – Erfahrungen von Menschen, die bereits mit uns umgezogen sind.
+                  <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
+                    Echte Bewertungen – transparent und nachvollziehbar.
                   </p>
                 </div>
 
@@ -452,7 +464,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     variant="outline" 
                     size="icon" 
                     className={cn(
-                      "absolute top-1/2 -translate-y-1/2 -left-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300",
+                      "absolute top-1/2 -translate-y-1/2 -left-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300 dark:bg-card/90 dark:hover:bg-card",
                       state.canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"
                     )}
                     onClick={() => scroll('left')}
@@ -465,7 +477,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     variant="outline" 
                     size="icon" 
                     className={cn(
-                      "absolute top-1/2 -translate-y-1/2 -right-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300",
+                      "absolute top-1/2 -translate-y-1/2 -right-4 z-10 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white hidden md:flex transition-opacity duration-300 dark:bg-card/90 dark:hover:bg-card",
                       state.canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"
                     )}
                     onClick={() => scroll('right')}
@@ -480,7 +492,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   <Button
                     asChild
                     variant="outline"
-                    className="bg-white hover:bg-gray-50 border-gray-300 text-gray-900 font-semibold px-6 py-3"
+                    className="rounded-xl border-slate-200 bg-white px-6 py-3 font-semibold text-slate-900 shadow-sm hover:border-emerald-300 hover:bg-emerald-50/50 dark:border-border dark:bg-card dark:text-foreground dark:hover:border-emerald-700 dark:hover:bg-emerald-950/30"
                   >
                     <Link href="/kunden-bewertungen" className="flex items-center gap-2">
                       Alle Bewertungen anzeigen
@@ -493,37 +505,43 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           ) : null}
 
           {/* Nationwide Presence Section */}
-          <section className="py-[50px] bg-gray-100 overflow-hidden relative">
-            {/* Decorative background elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-20 right-10 w-72 h-72 bg-green-700/20 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-20 left-10 w-96 h-96 bg-emerald-700/20 rounded-full blur-3xl"></div>
+          <section className="relative overflow-hidden border-t border-slate-200/80 bg-slate-50 py-16 dark:border-border dark:bg-muted/20 md:py-20">
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="absolute right-10 top-20 h-72 w-72 rounded-full bg-emerald-400/20 blur-3xl" />
+              <div className="absolute bottom-20 left-10 h-96 w-96 rounded-full bg-teal-400/15 blur-3xl" />
             </div>
-            
-            <div className="container mx-auto max-w-navbar px-4 md:px-6 relative z-10">
-              <div className="max-w-4xl mx-auto text-center">
-                <div className="mb-8">
-                  <div className="flex items-center justify-center mb-4 text-green-600">
-                    <MapPin className="w-8 h-8 md:w-10 md:h-10 mr-3" />
-                    <h2 className="heading-2 text-gray-900">
-                      In der ganzen Schweiz: Geprüfte Anbieter für Umzug, Reinigung und Malerarbeiten
+
+            <div className="container relative z-10 mx-auto max-w-navbar px-4 md:px-6">
+              <div className="mx-auto max-w-4xl text-center">
+                <div className="mb-10">
+                  <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                    Standorte
+                  </p>
+                  <div className="mt-3 flex flex-col items-center gap-3 md:flex-row md:justify-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-700 shadow-md ring-1 ring-slate-200/80 dark:bg-card dark:text-emerald-400 dark:ring-border">
+                      <MapPin className="h-6 w-6 md:h-7 md:w-7" />
+                    </div>
+                    <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl md:leading-tight">
+                      In der ganzen Schweiz: geprüfte Anbieter für Umzug, Reinigung &amp; Malerarbeiten
                     </h2>
                   </div>
-                  <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-                    Unser Partnernetzwerk ist in allen Kantonen <span className="text-green-700 font-semibold">online</span> für Sie da - von Zürich und Bern bis Lausanne, Lugano und in die Ostschweiz.
+                  <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
+                    Von Zürich und Bern bis Lausanne, Lugano und in die Ostschweiz –{' '}
+                    <span className="font-semibold text-emerald-800 dark:text-emerald-400">regional stark vernetzt</span>.
                   </p>
                 </div>
-                <div className="max-w-4xl mx-auto mb-8">
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-6">
+                <div className="mx-auto mb-10 max-w-4xl">
+                  <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
                     {homeLocationItems.map((item) => {
-                      const cardClassName = 'flex items-center justify-between bg-white text-gray-900 border border-gray-200 px-4 py-2.5 rounded-lg text-sm md:text-base font-semibold shadow-sm transition-all duration-200';
+                      const cardClassName =
+                        'flex items-center justify-between rounded-xl border border-slate-200/90 bg-white/90 px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-900/[0.02] transition-all duration-200 dark:border-border dark:bg-card/90 dark:text-foreground dark:ring-white/5 md:text-base';
 
                       const cardContent = (
                         <>
                           <span className="inline-flex items-center gap-2">
                             <span
                               aria-hidden="true"
-                              className="w-6 h-4 rounded-sm border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden"
+                              className="w-6 h-4 rounded-sm border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden dark:border-border"
                             >
                               <img
                                 src={getCantonFlagSrc(item.canton)}
@@ -534,7 +552,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                             </span>
                             <span>{item.name}</span>
                           </span>
-                          <span className="text-xs md:text-sm bg-gray-100 text-gray-700 px-2 py-0.5 rounded font-bold">
+                          <span className="text-xs md:text-sm bg-gray-100 text-gray-700 px-2 py-0.5 rounded font-bold dark:bg-muted dark:text-foreground">
                             {item.canton}
                           </span>
                         </>
@@ -544,8 +562,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                         return (
                           <Link
                             key={item.slug}
-                            href={`/${item.slug}`}
-                            className={`${cardClassName} hover:bg-green-50 hover:border-green-300`}
+                            href={`/umzugsfirma/${item.slug}`}
+                            className={`${cardClassName} hover:border-emerald-300 hover:bg-emerald-50/60 hover:shadow-md dark:hover:border-emerald-700 dark:hover:bg-emerald-950/35`}
                           >
                             {cardContent}
                           </Link>
@@ -560,34 +578,37 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     })}
                   </div>
                 </div>
-                <p className="text-base md:text-lg text-gray-700 font-medium mb-4">
-                  Online-Offerten.ch bringt Sie mit qualifizierten Anbietern zusammen, die zu Ihrem Bedarf passen. Mit nur einer Anfrage erhalten Sie mehrere passende Offerten, können Leistungen transparent gegenüberstellen und anschliessend den richtigen Partner auswählen.
+                <p className="mb-4 text-base font-medium leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
+                  Mit einer Anfrage mehrere passende Offerten – Leistungen transparent vergleichen und den richtigen Partner wählen.
                 </p>
-                <p className="text-lg text-gray-700 font-medium">
-                  Starten Sie jetzt und finden Sie den idealen Anbieter für Ihr Vorhaben.
+                <p className="text-lg font-semibold text-slate-800 dark:text-foreground">
+                  Jetzt starten und den idealen Anbieter finden.
                 </p>
               </div>
             </div>
           </section>
 
           {/* Partner werden Section */}
-          <section className="py-16 md:py-24 bg-white">
+          <section className="border-t border-slate-200/80 bg-white py-16 dark:border-border dark:bg-background md:py-24">
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                {/* Left Side - Text Content */}
+              <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                 <div className="space-y-6">
                   <div>
-                    <p className="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">
-                      Werden Sie Partner bei Online-Offerten.ch
+                    <p className="mb-2 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                      Partnerprogramm
                     </p>
-                    <h2 className="heading-2">
+                    <h2 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl">
                       Sind Sie Dienstleister?
                     </h2>
-                    <p className="text-body leading-relaxed">
-                      Wir verbinden Sie mit potenziellen Kundinnen und Kunden in Ihrer Region, die genau nach Ihren Dienstleistungen suchen. Erweitern Sie Ihre Reichweite und gewinnen Sie neue Aufträge.
+                    <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
+                      Wir verbinden Sie mit Auftraggebern in Ihrer Region. Reichweite erhöhen, qualifizierte Anfragen erhalten.
                     </p>
                   </div>
-                  <Button asChild size="lg" className="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 px-8 py-6 text-lg font-semibold">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-xl border-2 border-emerald-600 bg-white px-8 py-6 text-lg font-semibold text-emerald-700 shadow-sm hover:bg-emerald-50 dark:bg-card dark:text-emerald-300 dark:hover:bg-emerald-950/40"
+                  >
                     <Link href="/partner-werden" className="inline-flex items-center">
                       Jetzt Partner werden
                       <ArrowRight className="ml-2 h-5 w-5" />
@@ -597,13 +618,13 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
                 {/* Right Side - Image Collage */}
                 <div className="relative">
-                  <div className="relative w-full aspect-square max-w-md mx-auto">
+                  <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl border border-slate-200/90 shadow-[0_24px_48px_-24px_rgba(15,23,42,0.2)] ring-1 ring-slate-900/[0.04] dark:border-border dark:ring-white/10">
                     <NextImage
                       src="/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp"
                       alt="Partner werden"
                       width={600}
                       height={600}
-                      className="w-full h-full object-cover rounded-2xl"
+                      className="h-full w-full object-cover"
                       priority={false}
                       loading="lazy"
                       sizes="(max-width: 768px) 100vw, 50vw"
@@ -615,27 +636,22 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
           </section>
 
           {/* Useful Tools Section */}
-          <section className="py-16 md:py-24 bg-white">
+          <section className="border-t border-slate-200/80 bg-slate-50/40 py-16 dark:border-border dark:bg-muted/15 md:py-24">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-                {/* Left Side - Text Content */}
+              <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
                 <div className="space-y-6">
                   <div>
-                    <p className="text-sm font-semibold text-green-600 mb-2">Nützliche Helfer für Ihren Umzug und Reinigung</p>
-                    <h2 
-                      className="heading-2"
-                      style={{
-                        fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                        fontWeight: 700,
-                      }}
-                    >
-                      Planen Sie Ihren Umzug und Ihre Reinigung effizient mit unseren praktischen Tools und hilfreichen Ratgebern
+                    <p className="mb-2 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                      Tools &amp; Ratgeber
+                    </p>
+                    <h2 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl md:leading-tight">
+                      Planen Sie Umzug &amp; Reinigung mit klaren Hilfsmitteln
                     </h2>
-                    <p className="text-body leading-relaxed">
-                      Unsere Tools helfen Ihnen, Umzugskosten realistisch einzuschätzen und optimal zu planen. Nutzen Sie unsere Rechner und Checklisten für einen reibungslosen Umzug.
+                    <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
+                      Rechner und Checklisten für realistische Kosten und ruhigere Abläufe.
                     </p>
                   </div>
-                  <div className="mt-6 rounded-xl overflow-hidden">
+                  <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200/90 shadow-md ring-1 ring-slate-900/[0.03] dark:border-border dark:ring-white/10">
                     <NextImage
                       src="/fotos/182259.webp"
                       alt="Nützliche Helfer für Ihren Umzug und Reinigung"
@@ -655,16 +671,19 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                     { title: 'Reinigungskosten-Rechner', description: 'Kalkulieren Sie schnell und einfach die Kosten für Ihre Umzugsreinigung.', linkTo: '/reinigung/reinigungskosten', button: 'Kosten berechnen' },
                     { title: 'Umzugs-Checklisten', description: 'Behalten Sie jederzeit den Überblick mit unseren übersichtlichen Umzugs-Checklisten. Unsere Checklisten beantworten zudem häufig gestellte Fragen rund um die Umzugsplanung.', linkTo: '/umzugsfirma/checklists', button: 'Checkliste ansehen' }
                   ].map((tool) => (
-                    <Link key={tool.title} href={tool.linkTo} className="block group">
-                      <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-green-500 bg-white rounded-xl overflow-hidden">
+                    <Link key={tool.title} href={tool.linkTo} className="group block">
+                      <Card className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 shadow-md ring-1 ring-slate-900/[0.03] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/90 hover:shadow-lg dark:border-border dark:bg-card/95 dark:ring-white/10 dark:hover:border-emerald-800/70">
                         <CardContent className="p-6">
-                          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors">
+                          <h3 className="mb-3 text-xl font-semibold text-slate-900 transition-colors group-hover:text-emerald-700 dark:text-foreground dark:group-hover:text-emerald-400">
                             {tool.title}
                           </h3>
-                          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                          <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
                             {tool.description}
                           </p>
-                          <Button variant="outline" className="w-full border-green-600 text-green-600 hover:bg-green-50 group-hover:bg-green-50">
+                          <Button
+                            variant="outline"
+                            className="w-full rounded-xl border-emerald-600/80 font-semibold text-emerald-800 hover:bg-emerald-50 dark:border-emerald-500/50 dark:text-emerald-300 dark:hover:bg-emerald-950/40"
+                          >
                             {tool.button}
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
@@ -680,18 +699,13 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
 
           {/* Ratgeber Section */}
           {state.posts.length > 0 ? (
-            <section className="py-12 md:py-24 bg-white">
+            <section className="border-t border-slate-200/80 bg-white py-12 dark:border-border dark:bg-background md:py-24">
               <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-                {/* Header */}
-                <div className="mb-8">
-                  <p className="text-sm font-semibold text-green-600 mb-2">Tipps, Tricks und wertvolle Informationen</p>
-                  <h2 
-                    className="heading-2 mb-4"
-                    style={{
-                      fontFamily: '"Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                      fontWeight: 700,
-                    }}
-                  >
+                <div className="mb-10">
+                  <p className="mb-2 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+                    Wissen
+                  </p>
+                  <h2 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl">
                     Unser Ratgeber
                   </h2>
                 </div>
@@ -708,10 +722,10 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                             key={category}
                             onClick={() => setState(prev => ({ ...prev, selectedCategory: category, visiblePostsCount: 6 }))}
                             className={cn(
-                              "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                              'rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
                               state.selectedCategory === category
-                                ? "bg-green-700 text-white"
-                                : "bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
+                                ? 'bg-emerald-600 text-white shadow-md'
+                                : 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 dark:border-border dark:bg-card dark:text-foreground dark:hover:border-muted-foreground/40'
                             )}
                           >
                             {category}
@@ -723,35 +737,42 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {filteredPosts.slice(0, state.visiblePostsCount).map((post: any) => {
                           const postUrl = `/ratgeber/${post.slug}`;
-                          const isOverview = post.category?.toLowerCase().includes('übersicht') || post.title?.toLowerCase().includes('übersicht');
-                          
+
                           return (
-                            <Link key={post.id} href={postUrl} className="group">
-                              <Card className="flex flex-row h-full overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-green-500">
-                                <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
+                            <Link key={post.id} href={postUrl} className="group block h-full">
+                              <Card className="flex h-full min-h-[9.5rem] flex-row overflow-hidden rounded-2xl border border-slate-200/70 bg-white/90 shadow-[0_2px_24px_-6px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/[0.035] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/70 hover:shadow-[0_18px_42px_-14px_rgba(15,23,42,0.14)] dark:border-border dark:bg-card/95 dark:shadow-[0_2px_28px_-8px_rgba(0,0,0,0.45)] dark:ring-white/[0.06] dark:hover:border-emerald-800/55">
+                                <div className="relative w-[8.25rem] flex-shrink-0 self-stretch sm:w-40">
                                   <NextImage
                                     src={post.featured_image_url || "https://images.unsplash.com/photo-1504983875-d3b163aba9e6"}
                                     alt={post.title}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover transition-[transform,filter] duration-500 ease-out group-hover:scale-[1.04] group-hover:brightness-[1.02]"
                                     loading="lazy"
                                     sizes="(max-width: 768px) 50vw, 25vw"
                                     priority={false}
                                   />
+                                  <div
+                                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-slate-950/5 to-transparent opacity-80 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-100 dark:from-black/50 dark:via-black/10"
+                                    aria-hidden
+                                  />
                                 </div>
-                                <CardContent className="p-4 sm:p-6 flex flex-col justify-center flex-1">
-                                  <Badge 
-                                    variant="secondary" 
-                                    className="mb-2 self-start bg-blue-600 text-white hover:bg-blue-700 w-fit"
+                                <CardContent className="flex flex-1 flex-col justify-center gap-1.5 p-4 sm:gap-2 sm:p-6 sm:pl-5">
+                                  <Badge
+                                    variant="outline"
+                                    className="mb-0.5 w-fit border-emerald-200/90 bg-emerald-50/80 px-2.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-emerald-900 shadow-none dark:border-emerald-800/60 dark:bg-emerald-950/35 dark:text-emerald-200"
                                   >
                                     {post.category || 'Ratgeber'}
                                   </Badge>
-                                  <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-green-600 transition-colors line-clamp-2">
+                                  <h3 className="line-clamp-2 text-base font-semibold leading-snug tracking-tight text-slate-950 transition-colors group-hover:text-emerald-800 dark:text-foreground dark:group-hover:text-emerald-300 sm:text-lg">
                                     {post.title}
                                   </h3>
-                                  <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                                  <p className="line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
                                     {post.meta_description || ''}
                                   </p>
+                                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-emerald-800/85 transition-colors duration-200 group-hover:text-emerald-800 dark:text-emerald-400/90 dark:group-hover:text-emerald-300">
+                                    Zum Artikel
+                                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                                  </span>
                                 </CardContent>
                               </Card>
                             </Link>
@@ -765,10 +786,10 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 {/* Mehr Ratgeber anzeigen Button */}
                 {filteredPosts.length > state.visiblePostsCount && (
                   <div className="mt-10 text-center">
-                    <Button 
-                      variant="outline" 
-                      size="lg" 
-                      className="group border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all"
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="group rounded-xl border-emerald-600 font-semibold text-emerald-700 hover:bg-emerald-600 hover:text-white dark:border-emerald-500 dark:text-emerald-300 dark:hover:bg-emerald-600 dark:hover:text-white"
                       onClick={() => setState(prev => ({ ...prev, visiblePostsCount: prev.visiblePostsCount + 6 }))}
                     >
                       Weitere Ratgeber-Artikel anzeigen

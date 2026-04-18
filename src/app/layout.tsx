@@ -5,6 +5,7 @@ import './globals.css'
 import { AuthProvider } from '@/src/contexts/SupabaseAuthContext'
 import { Toaster } from '@/components/ui/toaster'
 import AppClient from '@/components/AppClient'
+import { ThemeProvider } from '@/components/ThemeProvider'
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
@@ -95,7 +96,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de-CH" className={inter.variable}>
+    <html lang="de-CH" className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -106,18 +107,20 @@ export default function RootLayout({
         {/* GTM: Einwilligung → components/ConsentGtmLoader.tsx */}
       </head>
       <body className={inter.className}>
-        <AuthProvider>
-          <Suspense
-            fallback={
-              <div className="flex justify-center items-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600" />
-              </div>
-            }
-          >
-            <AppClient>{children}</AppClient>
-          </Suspense>
-          <Toaster />
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <Suspense
+              fallback={
+                <div className="flex justify-center items-center min-h-screen">
+                  <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600" />
+                </div>
+              }
+            >
+              <AppClient>{children}</AppClient>
+            </Suspense>
+            <Toaster />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

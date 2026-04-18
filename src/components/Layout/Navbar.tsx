@@ -10,7 +10,7 @@ export default function Navbar() {
           <Send className="w-[18px] h-[18px] text-white" aria-hidden />
         </span>
         <span
-          className="text-[22px] md:text-2xl lg:text-[26px] leading-none font-bold italic tracking-tight text-black"
+          className="text-[22px] md:text-2xl lg:text-[26px] leading-none font-bold italic tracking-tight text-foreground"
           style={{
             fontFamily: 'Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif',
             fontSynthesis: 'none',
@@ -18,15 +18,8 @@ export default function Navbar() {
             fontFeatureSettings: '"liga" 1, "calt" 1',
           }}
         >
-          Online-Offerten.ch
+          Online Offerten
         </span>
-        {/* eslint-disable-next-line @next/next/no-img-element -- static public asset */}
-        <img
-          src="/image/schweiz.svg"
-          alt="Schweizer Flagge"
-          className="h-[16px] w-[22px] object-contain"
-          loading="lazy"
-        />
       </Link>
     </NavbarClient>
   )

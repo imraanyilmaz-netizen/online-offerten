@@ -8,15 +8,13 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { 
   Star, 
-  User, 
   ArrowRight,
   MessageSquare,
   CheckCircle,
   MapPin
 } from 'lucide-react'
-import { createClient } from '@/src/lib/supabase/client'
-import { formatDate } from '@/lib/utils'
-import { getGermanServiceName } from '@/src/lib/dataMapping.js'
+import { formatDate, getCustomerInitials } from '@/lib/utils'
+import { getGermanServiceName } from '@/data/categories'
 
 interface Review {
   id: string
@@ -48,19 +46,28 @@ const ReviewCard = ({ review }: { review: Review }) => {
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center border-2 border-green-200">
-              <User className="w-6 h-6 text-green-600" />
+            <div
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center border-2 border-green-200 shrink-0"
+              aria-hidden
+            >
+              <span className="text-sm font-bold text-green-700 tracking-tight select-none">
+                {getCustomerInitials(review.customer_name)}
+              </span>
             </div>
             <div>
               <p className="font-bold text-gray-900">{review.customer_name}</p>
               <div className="flex items-center gap-3 flex-wrap">
-                {review.city && (
+                {review.city ? (
                   <div className="flex items-center gap-1 text-sm text-gray-600">
                     <MapPin className="w-4 h-4 text-green-600" />
                     <span className="font-medium">{review.city}</span>
                   </div>
-                )}
-                <span className="text-sm text-gray-400">•</span>
+                ) : null}
+                {review.city ? (
+                  <span className="text-sm text-gray-400" aria-hidden>
+                    •
+                  </span>
+                ) : null}
                 <span className="text-sm text-gray-500">{formatDate(review.review_date)}</span>
               </div>
             </div>
@@ -158,7 +165,7 @@ const serviceButtons = [
   { label: 'Nur Reinigung', href: '/kostenlose-offerte-anfordern?service=reinigung&step=2' },
   { label: 'Büroumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug' },
   { label: 'Entsorgung', href: '/kostenlose-offerte-anfordern?service=raeumung&step=2' },
-  { label: 'Klavierumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport' },
+  { label: 'Klavierumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport' },
 ]
 
 const KundenBewertungenPageClient = ({ 
@@ -166,8 +173,7 @@ const KundenBewertungenPageClient = ({
   initialTotalCount 
 }: KundenBewertungenPageClientProps) => {
   const router = useRouter()
-  const supabase = createClient()
-  
+
   const [reviews, setReviews] = useState<Review[]>(initialReviews)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(initialReviews.length < initialTotalCount)
@@ -180,31 +186,30 @@ const KundenBewertungenPageClient = ({
 
     setLoading(true)
     try {
-      const { data: newReviews, error } = await supabase
-        .from('customer_reviews')
-        .select(`
-          id, customer_name, rating, city, review_date, 
-          review_text,
-          service_type, partner_name,
-          partners (slug, company_name)
-        `)
-        .eq('approval_status', 'approved')
-        .eq('review_type', 'platform')
-        .order('review_date', { ascending: false })
-        .range(reviews.length, reviews.length + 9)
-
-      if (error) {
-        console.error('Error loading more reviews:', error)
-      } else if (newReviews) {
-        setReviews(prev => [...prev, ...newReviews])
-        setHasMore(reviews.length + newReviews.length < totalCount)
+      const params = new URLSearchParams({
+        offset: String(reviews.length),
+        limit: '10',
+      })
+      const res = await fetch(`/api/kunden-bewertungen?${params.toString()}`)
+      if (!res.ok) {
+        console.error('Error loading more reviews:', res.status)
+        return
       }
+      const data = (await res.json()) as { reviews: Review[]; totalCount: number }
+      const newReviews = data.reviews || []
+      const tc = typeof data.totalCount === 'number' ? data.totalCount : totalCount
+      setTotalCount(tc)
+      setReviews((prev) => {
+        const merged = [...prev, ...newReviews]
+        setHasMore(merged.length < tc)
+        return merged
+      })
     } catch (error) {
       console.error('Error:', error)
     } finally {
       setLoading(false)
     }
-  }, [reviews.length, totalCount, hasMore, loading, supabase])
+  }, [reviews.length, totalCount, hasMore, loading])
 
   const handleGetOffer = () => {
     router.push('/kostenlose-offerte-anfordern')

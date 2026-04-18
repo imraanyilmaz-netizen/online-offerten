@@ -75,7 +75,7 @@ const FooterCTABanner = () => {
   const normalizedRating = Math.max(0, Math.min(5, Number(stats.average_rating) || 0))
 
   return (
-    <div className="sticky bottom-0 bg-white md:bg-gradient-to-r md:from-green-700 md:via-green-600 md:to-emerald-600 w-full py-3 md:py-4 z-[2000] overflow-hidden will-change-transform shadow-[0_-2px_10px_rgba(0,0,0,0.1)] md:shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+    <div className="sticky bottom-0 border-t border-border bg-background md:border-t-0 md:bg-gradient-to-r md:from-green-700 md:via-green-600 md:to-emerald-600 w-full py-3 md:py-4 z-[2000] overflow-hidden will-change-transform shadow-[0_-2px_10px_rgba(0,0,0,0.1)] md:shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         {/* Mobile Layout - Sadece Buton */}
         <div className="md:hidden">

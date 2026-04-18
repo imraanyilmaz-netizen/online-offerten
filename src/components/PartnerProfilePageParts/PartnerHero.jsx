@@ -30,7 +30,7 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
 
   return (
     <section
-      className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden bg-slate-50"
+      className="relative w-full py-8 md:py-12 lg:py-16 overflow-hidden bg-muted/50 dark:bg-background"
     >
       {/* Background Image - Right Side */}
       <div 
@@ -53,23 +53,17 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
         />
       </div>
       
-      {/* Gradient Overlay - White from left to right with shadow effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
-      
-      {/* White shadow/glow effect towards the image */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/20 pointer-events-none"></div>
-      <div 
-        className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 pointer-events-none"
-        style={{
-          boxShadow: 'inset 120px 0 100px -50px rgba(255, 255, 255, 0.8)'
-        }}
-      ></div>
+      {/* Gradient overlay: light fade on left; dark mode uses page background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent dark:from-background dark:via-background/92 dark:to-transparent"></div>
+
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/20 pointer-events-none dark:to-background/25"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 pointer-events-none shadow-[inset_120px_0_100px_-50px_rgba(255,255,255,0.8)] dark:shadow-[inset_120px_0_100px_-50px_rgba(0,0,0,0.5)]"></div>
       
       <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
         <div className="max-w-3xl">
           <div className="px-4 md:px-8 lg:px-10 py-6 md:py-8 lg:py-12">
             <div
-              className="flex-shrink-0 bg-white/90 rounded-2xl shadow-lg p-3 flex items-center justify-center mb-6 w-fit"
+              className="flex-shrink-0 bg-white/90 dark:bg-card/95 rounded-2xl shadow-lg border border-border/50 p-3 flex items-center justify-center mb-6 w-fit"
             >
               <img 
                 src={partner.logo_url || '/image/logo-icon.webp'}
@@ -113,7 +107,7 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
                 <Button 
                   onClick={onGetOffer} 
                   size="lg" 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg transition-transform transform hover:scale-105"
+                  className="bg-green-600 hover:bg-green-700 dark:bg-primary dark:hover:bg-primary/90 text-white font-bold shadow-lg transition-transform transform hover:scale-105"
                 >
                   <Send className="mr-2 h-5 w-5" />
                   Angebot anfordern

@@ -26,7 +26,8 @@
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    /* Slightly darker than default shadcn — body / secondary text reads less “washed out” */
+    --muted-foreground: 240 5% 38%;
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
@@ -35,6 +36,31 @@
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    /* Brighter secondary on dark backgrounds — less muddy gray */
+    --muted-foreground: 240 5% 76%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+    color-scheme: dark;
   }
 }
 
@@ -79,6 +105,11 @@
       font-size: 16px !important;
     }
   }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.22);
+    color: hsl(var(--foreground));
+  }
 }
 
 /* Zentrale Typografie-Stile für alle Seiten - Merkezi Tipografi Stilleri */
@@ -90,7 +121,7 @@
     font-size: 32px;
     line-height: 42.56px;
     font-weight: 700;
-    color: #000000;
+    color: hsl(var(--foreground));
     text-align: start;
     letter-spacing: normal;
     word-spacing: 0px;
@@ -116,7 +147,7 @@
     font-size: 24px;
     line-height: 31.92px;
     font-weight: 700;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     text-align: start;
     letter-spacing: normal;
     word-spacing: 0px;
@@ -141,7 +172,7 @@
     font-size: 20px;
     line-height: 26.6px;
     font-weight: 700;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     text-align: start;
     letter-spacing: normal;
     word-spacing: 0px;
@@ -166,7 +197,7 @@
     font-size: 18px;
     line-height: 23.94px;
     font-weight: 700;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     text-align: center;
     letter-spacing: normal;
     word-spacing: 0px;
@@ -192,7 +223,7 @@
     font-size: 16px;
     line-height: 21.28px;
     font-weight: 700;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     text-align: start;
     letter-spacing: normal;
     word-spacing: 0px;
@@ -217,7 +248,7 @@
     font-size: 14px;
     line-height: 18.62px;
     font-weight: 700;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     text-align: start;
     letter-spacing: normal;
     word-spacing: 0px;
@@ -242,7 +273,7 @@
     font-size: 16px;
     line-height: 26px;
     font-weight: 400;
-    color: #374151;
+    color: hsl(var(--muted-foreground));
     background-color: transparent;
     text-align: start;
     letter-spacing: normal;
@@ -262,7 +293,7 @@
     font-size: 18px;
     line-height: 23.94px;
     font-weight: 700;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     text-align: start;
     letter-spacing: normal;
     word-spacing: 0px;
@@ -306,13 +337,13 @@
     width: 10px;
   }
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: hsl(var(--muted));
     border-radius: 10px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #10b981 0%, #059669 100%);
     border-radius: 10px;
-    border: 2px solid #f1f5f9;
+    border: 2px solid hsl(var(--muted));
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #059669 0%, #047857 100%);
@@ -328,31 +359,13 @@
   }
 }
 
-/* Footer Layout Shift Prevention */
-footer.footer-fixed-height {
-  min-height: 550px;
-  contain: layout style paint;
-}
-
-@media (min-width: 768px) {
-  footer.footer-fixed-height {
-    min-height: 600px;
-  }
-}
-
-@media (min-width: 1024px) {
-  footer.footer-fixed-height {
-    min-height: 650px;
-  }
-}
-
 /* Tiptap Editor link styling */
 .prose a {
-  color: var(--primary);
+  color: hsl(var(--primary));
   text-decoration: underline;
 }
 .prose a:hover {
-  color: var(--primary);
+  color: hsl(var(--primary) / 0.85);
 }
 
 /* Lightweight CSS animations to replace Framer Motion */
@@ -438,7 +451,7 @@ footer.footer-fixed-height {
   .font-booster {
     font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
     font-weight: 700;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
   }
 
   .font-roboto {
@@ -446,7 +459,7 @@ footer.footer-fixed-height {
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
   }
 }
 
@@ -459,7 +472,7 @@ footer.footer-fixed-height {
     font-weight: 700;
     font-size: 28px;
     line-height: 1.2;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     margin-top: 2rem;
     margin-bottom: 1.5rem;
   }
@@ -535,7 +548,7 @@ footer.footer-fixed-height {
     font-weight: 700;
     font-size: 22px;
     line-height: 1.3;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     margin-top: 1.5rem;
     margin-bottom: 1rem;
   }
@@ -585,7 +598,7 @@ footer.footer-fixed-height {
     font-weight: 700;
     font-size: 20px;
     line-height: 1.3;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     margin-top: 1.25rem;
     margin-bottom: 0.75rem;
   }
@@ -610,7 +623,7 @@ footer.footer-fixed-height {
     font-weight: 700;
     font-size: 18px;
     line-height: 1.33;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     margin-top: 1rem;
     margin-bottom: 0.5rem;
   }
@@ -660,7 +673,7 @@ footer.footer-fixed-height {
     font-weight: 700;
     font-size: 16px;
     line-height: 1.33;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     margin-top: 0.75rem;
     margin-bottom: 0.5rem;
   }
@@ -684,7 +697,7 @@ footer.footer-fixed-height {
     font-weight: 700;
     font-size: 14px;
     line-height: 1.33;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     margin-top: 0.75rem;
     margin-bottom: 0.5rem;
   }
@@ -708,7 +721,7 @@ footer.footer-fixed-height {
     font-size: 16px;
     line-height: 26px;
     font-weight: 400;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
     margin-bottom: 1rem;
   }
   
@@ -747,7 +760,7 @@ footer.footer-fixed-height {
     font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
     font-weight: 600;
     line-height: 1.4;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
   }
 
   /* FAQ - Bölüm başlıkları (Häufige Fragen gibi) */
@@ -756,7 +769,7 @@ footer.footer-fixed-height {
     font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
     font-weight: 700;
     line-height: 1.3;
-    color: #1c1d16;
+    color: hsl(var(--foreground));
   }
 }
 

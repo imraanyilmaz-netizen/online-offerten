@@ -9,7 +9,7 @@ import SearchFilters from '@/components/PartnerSearch/SearchFilters'
 import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CustomerForm from '@/components/NewCustomerForm'
 import { supabase } from '@/lib/supabaseClient'
-import { cantonMap } from '@/lib/dataMapping'
+import { cantonMap } from '@/data/locations'
 
 // Reverse mapping: Canton name -> Canton code
 const cantonNameToCode = Object.fromEntries(
@@ -99,7 +99,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
         if (partner.main_categories && partner.main_categories.includes(categoryValue)) return true
         if (partner.offered_services && partner.offered_services.length > 0) {
           const categoryServiceMap: Record<string, string[]> = {
-            'umzug': ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'spezialtransport', 'kleintransport', 'lagerung_service', 'raeumung_service', 'entsorgung_service'],
+            'umzug': ['privatumzug', 'geschaeftsumzug', 'auslandumzug', 'klaviertransport', 'kleintransport', 'lagerung_service', 'raeumung_service', 'entsorgung_service'],
             'reinigung': ['wohnungsreinigung', 'hausreinigung', 'buero_reinigung', 'unterhaltsreinigung', 'baureinigung', 'grundreinigung', 'fensterreinigung', 'bodenreinigung', 'fassadenreinigung', 'hofreinigung', 'umzugsreinigung'],
             'maler': ['maler_service']
           }

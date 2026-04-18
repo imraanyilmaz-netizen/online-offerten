@@ -38,15 +38,15 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-12 md:py-16 bg-white">
+    <section className="py-12 md:py-16 bg-background">
       <div className="container mx-auto max-w-6xl px-4 md:px-6">
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-10 shadow-sm">
+        <div className="rounded-2xl border border-border bg-card p-6 md:p-10 shadow-sm">
           <div className="mb-8">
-            <p className="text-sm font-semibold text-green-700 mb-2">Häufige Fragen</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <p className="text-sm font-semibold text-green-700 dark:text-green-400 mb-2">Häufige Fragen</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
               Fragen zur Partnerschaft bei Online-Offerten.ch
             </h2>
-            <p className="text-gray-600 mt-3">
+            <p className="text-muted-foreground mt-3">
               Hier finden Sie die wichtigsten Antworten für einen schnellen Start als Partnerbetrieb.
             </p>
           </div>
@@ -54,10 +54,10 @@ const FAQSection = () => {
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={faq.question} value={`item-${index}`}>
-                <AccordionTrigger className="text-left font-semibold text-gray-900">
+                <AccordionTrigger className="text-left font-semibold text-foreground">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-600 leading-relaxed">
+                <AccordionContent className="text-muted-foreground leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

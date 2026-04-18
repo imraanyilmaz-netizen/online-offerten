@@ -77,21 +77,21 @@ const Step2Regions = ({
     <div>
       {!hideMarketingContent && (
         <>
-          <h3 className="text-xl font-semibold mb-2">Wählen Sie Ihre Service-Regionen</h3>
-          <p className="text-slate-500 mb-6">In welchen Regionen bieten Sie Ihre Dienstleistungen an?</p>
+          <h3 className="text-xl font-semibold text-foreground mb-2">Wählen Sie Ihre Service-Regionen</h3>
+          <p className="text-muted-foreground mb-6">In welchen Regionen bieten Sie Ihre Dienstleistungen an?</p>
         </>
       )}
 
       {hideMarketingContent && (
-        <p className="text-sm text-slate-600 mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           Hier können Sie Ihre bisher gewählten Kantone anpassen: In den Regionenlisten weitere Kantone aktivieren oder
           über die Badges im Abschnitt «{selectionTitle}» einzelne Einsatzgebiete wieder entfernen.
         </p>
       )}
       
       {errors.selectedRegions && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-sm text-red-600">{errors.selectedRegions}</p>
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-lg">
+          <p className="text-sm text-red-600 dark:text-red-400">{errors.selectedRegions}</p>
         </div>
       )}
       
@@ -101,7 +101,7 @@ const Step2Regions = ({
             <AccordionTrigger className="text-base font-semibold hover:no-underline">
               {group.name}
             </AccordionTrigger>
-            <AccordionContent className="p-4 bg-slate-50 rounded-b-md">
+            <AccordionContent className="p-4 bg-muted/50 dark:bg-muted/30 rounded-b-md border-t border-border">
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {group.cantons.map(canton => (
                   <div key={canton.id} className="flex items-center space-x-2">
@@ -120,15 +120,23 @@ const Step2Regions = ({
       </Accordion>
 
       <div className="mt-8">
-        <h4 className="font-semibold mb-2">{selectionTitle}</h4>
+        <h4 className="font-semibold text-foreground mb-2">{selectionTitle}</h4>
         {formData.selectedRegions.length > 0 ? (
-          <div className="flex flex-wrap gap-2 p-4 border rounded-lg bg-slate-50">
+          <div className="flex flex-wrap gap-2 p-4 border border-border rounded-lg bg-muted/40">
             {formData.selectedRegions.map(cantonId => {
               const canton = getCantonById(cantonId);
               return (
-                <Badge key={cantonId} variant="secondary" className="bg-green-100 text-green-800 text-sm py-1 px-3">
+                <Badge
+                  key={cantonId}
+                  variant="secondary"
+                  className="bg-green-100 text-green-800 dark:bg-emerald-950/55 dark:text-emerald-200 dark:border-emerald-800/60 text-sm py-1 px-3 border border-transparent"
+                >
                   {canton ? canton.name : cantonId}
-                  <button type="button" onClick={() => onRegionChange(cantonId)} className="ml-2 rounded-full hover:bg-green-200 p-0.5">
+                  <button
+                    type="button"
+                    onClick={() => onRegionChange(cantonId)}
+                    className="ml-2 rounded-full hover:bg-green-200 dark:hover:bg-emerald-900/70 p-0.5"
+                  >
                     <X className="h-3 w-3" />
                   </button>
                 </Badge>
@@ -136,22 +144,22 @@ const Step2Regions = ({
             })}
           </div>
         ) : (
-          <p className="text-sm text-slate-500">{emptyText}</p>
+          <p className="text-sm text-muted-foreground">{emptyText}</p>
         )}
         {!hideMarketingContent && (
-          <p className="text-xs text-slate-500 mt-2">Kunden finden Sie basierend auf den von Ihnen ausgewählten Regionen</p>
+          <p className="text-xs text-muted-foreground mt-2">Kunden finden Sie basierend auf den von Ihnen ausgewählten Regionen</p>
         )}
       </div>
 
       {!hideMarketingContent && (
-        <div className="mt-8 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
+        <div className="mt-8 p-4 bg-green-50 dark:bg-emerald-950/35 border-l-4 border-green-500 dark:border-emerald-600 rounded-r-lg">
           <div className="flex">
             <div className="flex-shrink-0">
-              <Info className="h-5 w-5 text-green-500" />
+              <Info className="h-5 w-5 text-green-600 dark:text-emerald-400" />
             </div>
             <div className="ml-3">
-              <h4 className="text-md font-semibold text-green-800">Warum ist das wichtig?</h4>
-              <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-green-700">
+              <h4 className="text-md font-semibold text-green-800 dark:text-emerald-200">Warum ist das wichtig?</h4>
+              <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-green-700 dark:text-emerald-200/90">
                 <li>Kunden finden Sie leichter, wenn sie nach Dienstleistungen in ihrer Region suchen</li>
                 <li>Sie erhalten relevantere Anfragen von Kunden in Ihrer Nähe</li>
                 <li>Ihr Unternehmen wird in den Suchergebnissen für die ausgewählten Regionen angezeigt</li>

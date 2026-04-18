@@ -6,16 +6,13 @@ import { ArrowRight, Map } from 'lucide-react'
 const LocationCard = ({ location, delay }: { location: any; delay: number }) => {
   if (!location?.slug) return null
 
-  const locationHref = `/${location.slug}`;
+  const locationHref = `/umzugsfirma/${location.slug}`;
 
   return (
     <div
       className="h-full"
     >
       <Link href={locationHref} className="group block bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 h-full flex flex-col">
-        <div className="relative">
-          <img src={location.image} className="w-full h-48 object-cover" alt={`Bild von ${location.name}`} />
-        </div>
         <div className="p-5 flex flex-col flex-grow">
           <h3 className="text-xl font-bold text-gray-800 mb-2">{location.name}</h3>
           <p className="text-gray-600 text-sm mb-4 flex-grow">Professionelle Umzugs-, Reinigungs- und Malerfirmen in Ihrer Nähe.</p>

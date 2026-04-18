@@ -1,4 +1,4 @@
-﻿import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
     import { useDropzone } from 'react-dropzone';
     import { Loader2, UploadCloud, XCircle } from 'lucide-react';
     import { Button } from '@/components/ui/button';
@@ -104,7 +104,7 @@
                     <img src={preview} alt="Vorschau" className="w-full h-full object-contain rounded-md" loading="lazy" />
                     <button
                       onClick={(e) => { e.stopPropagation(); setFile(null); setPreview(null); }}
-                      className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow-md"
+                      className="absolute -top-2 -right-2 bg-card border border-border rounded-full p-1 shadow-md"
                     >
                       <XCircle className="w-5 h-5 text-red-500" />
                     </button>

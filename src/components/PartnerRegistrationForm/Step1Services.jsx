@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
@@ -9,10 +9,9 @@ const mainCategories = [
     { id: 'privatumzug', label: 'Privatumzug' },
     { id: 'geschaeftsumzug', label: 'Geschäftsumzug' },
     { id: 'auslandumzug', label: 'Auslandsumzug' },
-    { id: 'spezialtransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
+    { id: 'klaviertransport', label: 'Spezialtransport', desc: 'Klavier, Tresor, Kunst & mehr' },
     { id: 'kleintransport', label: 'Kleintransport', desc: 'Einzelne Möbel, kleine Lasten' },
     { id: 'lagerung_service', label: 'Lagerung', icon: Archive },
-    { id: 'umzugsreinigung_opt', label: 'Endreinigung', desc: 'mit Abnahmegarantie' },
     { id: 'raeumung_service', label: 'Räumungsdienst' },
     { id: 'entsorgung_service', label: 'Entsorgungsservice' },
   ]},
@@ -79,8 +78,8 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
   return (
     <div className="space-y-6">
     <div>
-        <h3 className="text-2xl font-bold mb-3 text-slate-900">Wählen Sie Ihre Leistungen</h3>
-        <p className="text-slate-600 text-base">Bitte wählen Sie die Hauptkategorien und detaillierten Dienstleistungen aus, die Sie anbieten.</p>
+        <h3 className="text-2xl font-bold mb-3 text-foreground">Wählen Sie Ihre Leistungen</h3>
+        <p className="text-muted-foreground text-base">Bitte wählen Sie die Hauptkategorien und detaillierten Dienstleistungen aus, die Sie anbieten.</p>
       </div>
       
       {errors.mainCategories && (
@@ -101,18 +100,18 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
             <AccordionItem value={category.id} key={category.id}>
               <AccordionTrigger className="text-base font-semibold hover:no-underline">
                 <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${isCategoryActive ? 'bg-green-100' : 'bg-slate-100'}`}>
-                    <category.icon className={`w-5 h-5 ${isCategoryActive ? 'text-green-600' : 'text-slate-600'}`} />
+                  <div className={`p-2 rounded-lg ${isCategoryActive ? 'bg-green-100 dark:bg-green-950/50' : 'bg-muted'}`}>
+                    <category.icon className={`w-5 h-5 ${isCategoryActive ? 'text-green-600' : 'text-muted-foreground'}`} />
                   </div>
-                  <span className={isCategoryActive ? 'text-green-800 font-bold' : ''}>{category.label}</span>
+                  <span className={isCategoryActive ? 'text-green-800 dark:text-green-200 font-bold' : ''}>{category.label}</span>
                   {categoryServices.length > 0 && (
-                    <Badge variant="secondary" className="bg-green-100 text-green-800 ml-2">
+                    <Badge variant="secondary" className="bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-200 ml-2">
                       {categoryServices.length} ausgewählt
                     </Badge>
                   )}
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="p-4 bg-slate-50 rounded-b-md">
+              <AccordionContent className="p-4 bg-muted/50 rounded-b-md">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       {category.services.map(service => {
                         const isServiceSelected = formData.selectedServices.includes(service.id);
@@ -121,8 +120,8 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
                         key={service.id}
                         className={`flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
                               isServiceSelected
-                                ? 'bg-green-50 border-green-300 shadow-sm'
-                            : 'bg-white hover:bg-slate-50 border-slate-200 hover:border-slate-300'
+                                ? 'bg-green-50 dark:bg-green-950/35 border-green-300 dark:border-green-700 shadow-sm'
+                            : 'bg-card hover:bg-muted/80 border-border hover:border-border'
                             }`}
                         onClick={() => handleServiceChange(service.id)}
                       >
@@ -133,16 +132,16 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
                             <div className="grid gap-1 flex-1">
                               <span
                                 className={`font-semibold cursor-pointer flex items-center ${
-                                  isServiceSelected ? 'text-green-800' : 'text-slate-800'
+                                  isServiceSelected ? 'text-green-800 dark:text-green-200' : 'text-foreground'
                                 }`}
                               >
                             {service.icon && (
-                              <service.icon className={`w-4 h-4 mr-2 ${isServiceSelected ? 'text-green-600' : 'text-slate-500'}`} />
+                              <service.icon className={`w-4 h-4 mr-2 ${isServiceSelected ? 'text-green-600' : 'text-muted-foreground'}`} />
                             )}
                             {service.label}
                           </span>
                               {service.desc && (
-                                <p className={`text-xs ${isServiceSelected ? 'text-green-700' : 'text-slate-500'}`}>
+                                <p className={`text-xs ${isServiceSelected ? 'text-green-700 dark:text-green-300/90' : 'text-muted-foreground'}`}>
                                   {service.desc}
                                 </p>
                               )}
@@ -159,19 +158,19 @@ const Step1Services = ({ formData, onMainCategoryChange, onServiceChange, errors
 
       {formData.selectedServices.length > 0 && (
         <div className="mt-6">
-          <h4 className="text-sm font-semibold text-slate-700 mb-3">Ausgewählte Leistungen</h4>
-          <div className="flex flex-wrap gap-2 p-4 border rounded-lg bg-slate-50">
+          <h4 className="text-sm font-semibold text-foreground mb-3">Ausgewählte Leistungen</h4>
+          <div className="flex flex-wrap gap-2 p-4 border border-border rounded-lg bg-muted/50">
             {formData.selectedServices.map(serviceId => (
               <Badge 
                 key={serviceId} 
                 variant="secondary" 
-                className="bg-green-100 text-green-800 text-sm py-1 px-3"
+                className="bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-200 text-sm py-1 px-3"
               >
                 {getServiceLabel(serviceId)}
                 <button 
                   type="button" 
                   onClick={() => handleServiceChange(serviceId)} 
-                  className="ml-2 rounded-full hover:bg-green-200 p-0.5"
+                  className="ml-2 rounded-full hover:bg-green-200 dark:hover:bg-green-900/60 p-0.5"
                 >
                   <X className="h-3 w-3" />
                 </button>

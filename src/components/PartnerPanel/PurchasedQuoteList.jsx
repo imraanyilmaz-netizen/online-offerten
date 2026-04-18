@@ -15,16 +15,16 @@ import ServiceDetails from '@/components/common/ServiceDetails';
 
 const ContactItem = ({ icon, label, value, subValue, isLink = false, linkType = '' }) => (
     <div className="flex items-start gap-3 py-2 border-b last:border-b-0">
-      <div className="mt-1 text-gray-500">{icon}</div>
+      <div className="mt-1 text-muted-foreground">{icon}</div>
       <div>
-        <p className="text-xs text-gray-500">{label}</p>
+        <p className="text-xs text-muted-foreground">{label}</p>
         <div className="flex items-center gap-2">
             {isLink && value ? (
-              <a href={`${linkType}${value}`} className="text-sm font-medium text-blue-600 hover:underline">{value}</a>
+              <a href={`${linkType}${value}`} className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">{value}</a>
             ) : (
-              <p className="text-sm font-medium text-gray-800">{value || 'N/A'}</p>
+              <p className="text-sm font-medium text-foreground">{value || 'N/A'}</p>
             )}
-            {subValue && <span className="text-xs text-gray-500">({subValue})</span>}
+            {subValue && <span className="text-xs text-muted-foreground">({subValue})</span>}
         </div>
       </div>
     </div>
@@ -33,9 +33,9 @@ const ContactItem = ({ icon, label, value, subValue, isLink = false, linkType = 
 const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
-        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-gray-700">
-            <span className="font-bold text-gray-800">E-Mail-Bestätigung:</span>
-            <span className={isConfirmed ? 'text-green-700 font-semibold' : 'text-red-700 font-semibold'}>
+        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-foreground">
+            <span className="font-bold text-foreground">E-Mail-Bestätigung:</span>
+            <span className={isConfirmed ? 'text-green-700 dark:text-emerald-400 font-semibold' : 'text-red-700 dark:text-red-400 font-semibold'}>
                 {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
@@ -43,9 +43,9 @@ const EmailConfirmationDetail = ({ quote }) => {
 };
 
 const DetailSection = ({ title, icon: Icon, children }) => (
-    <div className="bg-white p-4 rounded-lg border shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2 border-b pb-2 mb-4 uppercase">
-             {Icon && <Icon className="w-5 h-5 text-green-600" />}
+    <div className="bg-card border-border p-4 rounded-lg border shadow-sm dark:shadow-none dark:ring-1 dark:ring-border/60">
+        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2 border-b border-border pb-2 mb-4 uppercase tracking-wide">
+             {Icon && <Icon className="w-5 h-5 text-green-600 dark:text-emerald-400" />}
             {title}
         </h3>
         <div className="space-y-3">
@@ -75,20 +75,20 @@ const AddressBox = ({ title, quote, type }) => {
     const mapsUrl = addressLine ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLine + ', Schweiz')}` : null;
 
     return (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <div className="bg-muted/40 border border-border rounded-lg p-4">
             <h4 className="font-bold text-md flex items-center gap-2 mb-2">
-                <MapPin className="w-4 h-4 text-green-600" />
+                <MapPin className="w-4 h-4 text-green-600 dark:text-emerald-400" />
                 {title}
             </h4>
             {mapsUrl ? (
-                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-green-700 hover:text-green-900 hover:underline inline-flex items-center gap-1">
+                <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-green-700 dark:text-emerald-300 hover:text-green-900 dark:hover:text-emerald-200 hover:underline inline-flex items-center gap-1">
                     {addressLine}
                     <ExternalLink className="w-3 h-3" />
                 </a>
             ) : (
-                <p className="text-sm font-semibold text-gray-800">{addressLine}</p>
+                <p className="text-sm font-semibold text-foreground">{addressLine}</p>
             )}
-            <div className="text-sm text-gray-600 mt-1 space-y-0.5">
+            <div className="text-sm text-muted-foreground mt-1 space-y-0.5">
                 {isInternational && country && <p><span className="font-bold">Land:</span> {country.name}</p>}
                 {!isInternational && canton && <p><span className="font-bold">Kanton:</span> {canton}</p>}
                 {(floor || lift !== null) && (
@@ -180,10 +180,10 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
 
   if (quotes.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500">
-        <ShoppingCart className="w-16 h-16 mx-auto text-gray-300 mb-4" />
+      <div className="text-center py-12 text-muted-foreground">
+        <ShoppingCart className="w-16 h-16 mx-auto text-muted-foreground/40 mb-4" />
         <h3 className="text-lg font-semibold">Keine gekauften Anfragen</h3>
-        <p className="text-sm text-gray-400">Gekaufte Kundenanfragen werden hier angezeigt.</p>
+        <p className="text-sm text-muted-foreground/70">Gekaufte Kundenanfragen werden hier angezeigt.</p>
       </div>
     );
   }
@@ -201,26 +201,26 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
         <div
           key={quote.purchase_info?.purchase_id || quote.id}
         >
-          <AccordionItem value={`item-${index}`} className="border rounded-lg bg-green-50">
-            <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg data-[state=open]:bg-green-100">
+          <AccordionItem value={`item-${index}`} className="border border-green-200 dark:border-emerald-900/60 rounded-lg bg-green-50/90 dark:bg-emerald-950/35">
+            <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg hover:bg-green-100/80 dark:hover:bg-emerald-950/50 data-[state=open]:bg-green-100 dark:data-[state=open]:bg-emerald-950/45">
               <div className="flex items-center justify-between w-full text-left">
                 <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
                   {(() => {
                     const Icon = icon;
                     return (
                       <div className="flex items-center gap-2 font-semibold text-base">
-                        <Icon className="w-5 h-5 text-green-600" />
+                        <Icon className="w-5 h-5 text-green-600 dark:text-emerald-400" />
                         <span>{quote.servicetype}</span>
                       </div>
                     );
                   })()}
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <MapPin className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <MapPin className="w-4 h-4 shrink-0" />
                     <span>{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip} ${quote.to_city}`}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                     <CalendarDays className="w-4 h-4 shrink-0" />
-                    <span className="line-clamp-2 text-gray-600">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</span>
+                    <span className="line-clamp-2">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 ml-4 flex-shrink-0">
@@ -239,25 +239,25 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                       <XCircle className="w-3 h-3 mr-1" /> Abgelehnt
                     </Badge>
                   )}
-                  <Badge variant="secondary" className="bg-white font-bold">CHF {quote.purchase_info?.purchase_price.toFixed(2)}</Badge>
+                  <Badge variant="secondary" className="bg-card font-bold">CHF {quote.purchase_info?.purchase_price.toFixed(2)}</Badge>
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="p-3 sm:p-4 border-t border-green-200 bg-white">
+            <AccordionContent className="p-3 sm:p-4 border-t border-green-200 dark:border-emerald-800 bg-card">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-4">
-                  <div className="p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
-                      <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2 border-b pb-2 mb-4 uppercase">Kundenkontakt</h3>
+                  <div className="p-3 sm:p-4 bg-card border border-border rounded-lg">
+                      <h3 className="text-lg font-semibold text-foreground flex items-center gap-2 border-b pb-2 mb-4 uppercase">Kundenkontakt</h3>
                       <ContactItem icon={<User size={16}/>} label="Name" value={`${quote.salutation ? quote.salutation + ' ' : ''}${quote.firstname} ${quote.lastname}`} />
                       {(quote.firmenname || quote.company_name) && <ContactItem icon={<Building size={16}/>} label="Firma" value={quote.firmenname || quote.company_name} />}
                       <ContactItem icon={<Phone size={16}/>} label="Telefon" value={quote.phone} />
                       <ContactItem icon={<CalendarDays size={16}/>} label="Telefonische Erreichbarkeit" value={quote.preferredtime} />
                       <ContactItem icon={<Mail size={16}/>} label="E-Mail" value={quote.email} isLink linkType="mailto:" />
                       <div className="flex items-start gap-3 py-2 border-b last:border-b-0">
-                        <div className="mt-1 text-gray-500"></div>
+                        <div className="mt-1 text-muted-foreground"></div>
                         <div>
-                          <p className="text-xs text-gray-500">E-Mail-Bestätigung</p>
-                          <p className={`text-sm font-medium ${quote.email_confirmed ? 'text-green-700' : 'text-red-700'}`}>
+                          <p className="text-xs text-muted-foreground">E-Mail-Bestätigung</p>
+                          <p className={`text-sm font-medium ${quote.email_confirmed ? 'text-green-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
                             {quote.email_confirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
                           </p>
                         </div>
@@ -277,10 +277,10 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                     <div className={`grid gap-4 ${(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
                       {/* Umzug Zusatzleistungen */}
                       {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
-                        <div className="bg-white p-4 rounded-lg border shadow-sm">
+                        <div className="bg-card border-border p-4 rounded-lg border shadow-sm">
                           <div className="flex items-center gap-2 mb-3">
-                            <Truck className="w-4 h-4 text-blue-600" />
-                            <h4 className="font-semibold text-sm text-gray-800">Umzug – Zusatzleistungen</h4>
+                            <Truck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                            <h4 className="font-semibold text-sm text-foreground">Umzug – Zusatzleistungen</h4>
                           </div>
                           <div className="space-y-2">
                             {movingExtrasText && <QuoteDetail label="Umzug inkl." value={movingExtrasText} />}
@@ -289,7 +289,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                       )}
                       {/* Reinigung Zusatzinfos */}
                       {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
-                        <div className="bg-white p-4 rounded-lg border shadow-sm">
+                        <div className="bg-card border-border p-4 rounded-lg border shadow-sm">
                           <div className="space-y-2">
                             {quote.cleaning_area_sqm && (
                               <QuoteDetail label="Wohnungsfläche" value={getCleaningAreaSqmLabel(quote.cleaning_area_sqm)} />
@@ -325,7 +325,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
               {quote.additional_info && (
                 <div className="mt-4">
                   <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
-                    <p className="text-sm text-gray-700 whitespace-pre-wrap">{quote.additional_info}</p>
+                    <p className="text-sm text-foreground whitespace-pre-wrap">{quote.additional_info}</p>
                   </DetailSection>
                 </div>
               )}
@@ -335,10 +335,10 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                 {refundRequestMap[quote.id] && (
                   <div className={`p-3 rounded-lg border text-sm ${
                     refundRequestMap[quote.id].status === 'approved' 
-                      ? 'bg-green-50 border-green-200 text-green-800'
+                      ? 'bg-green-50 border-green-200 text-green-800 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-200'
                       : refundRequestMap[quote.id].status === 'rejected'
-                      ? 'bg-red-50 border-red-200 text-red-800'
-                      : 'bg-yellow-50 border-yellow-200 text-yellow-800'
+                      ? 'bg-red-50 border-red-200 text-red-800 dark:bg-red-950/35 dark:border-red-900 dark:text-red-200'
+                      : 'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-950/35 dark:border-yellow-800 dark:text-yellow-200'
                   }`}>
                     <div className="flex items-center gap-2 font-semibold">
                       {refundRequestMap[quote.id].status === 'approved' && <CheckCircle className="w-4 h-4" />}
@@ -396,14 +396,14 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
 
       {/* Pagination */}
       {quotes.length > itemsPerPage && (
-        <div className="border-t border-gray-200 px-4 py-4 bg-gray-50/50 rounded-lg mt-6">
+        <div className="border-t border-border px-4 py-4 bg-muted/30 rounded-lg mt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-sm text-gray-600">
-              Zeige <span className="font-semibold text-gray-900">{startIndex + 1}</span> bis{' '}
-              <span className="font-semibold text-gray-900">
+            <div className="text-sm text-muted-foreground">
+              Zeige <span className="font-semibold text-foreground">{startIndex + 1}</span> bis{' '}
+              <span className="font-semibold text-foreground">
                 {Math.min(endIndex, quotes.length)}
               </span>{' '}
-              von <span className="font-semibold text-gray-900">{quotes.length}</span> Anfragen
+              von <span className="font-semibold text-foreground">{quotes.length}</span> Anfragen
             </div>
             
             <div className="flex items-center gap-2">
@@ -433,7 +433,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                     return (
                       <React.Fragment key={page}>
                         {showEllipsisBefore && (
-                          <span className="px-2 text-gray-400">...</span>
+                          <span className="px-2 text-muted-foreground/70">...</span>
                         )}
                         <Button
                           variant={currentPage === page ? "default" : "outline"}
@@ -441,8 +441,8 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                           onClick={() => goToPage(page)}
                           className={`min-w-[40px] font-semibold h-9 ${
                             currentPage === page
-                              ? "bg-green-600 hover:bg-green-700 text-white"
-                              : "hover:bg-gray-100"
+                              ? "bg-green-600 hover:bg-green-700 text-white dark:bg-emerald-600 dark:hover:bg-emerald-700"
+                              : "hover:bg-muted"
                           }`}
                         >
                           {page}
@@ -482,7 +482,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+              <label className="text-sm font-medium text-foreground mb-1.5 block">
                 Grund <span className="text-red-500">*</span>
               </label>
               <Textarea

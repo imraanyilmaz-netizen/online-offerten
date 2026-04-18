@@ -475,7 +475,7 @@ const OffertenPortalPageClient = () => {
               { label: 'Privatumzug', sub: 'Wohnungsumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug', icon: Home, color: 'blue' },
               { label: 'Geschäftsumzug', sub: 'Firmenumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug', icon: Building, color: 'purple' },
               { label: 'Auslandumzug', sub: 'International', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international', icon: Globe, color: 'emerald' },
-              { label: 'Klaviertransport', sub: 'Piano & Flügel', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport', icon: PiPianoKeysFill, color: 'amber' },
+              { label: 'Klaviertransport', sub: 'Piano & Flügel', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport', icon: PiPianoKeysFill, color: 'amber' },
               { label: 'Kleintransport', sub: 'Einzelne Gegenstände', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport', icon: Package, color: 'teal' },
               { label: 'Lagerung', sub: 'Möbel einlagern', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung', icon: Package, color: 'indigo' },
             ].map((item) => (
@@ -500,8 +500,8 @@ const OffertenPortalPageClient = () => {
           <ul className="text-body list-disc pl-5 space-y-2 mb-6">
             <li><Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Privatumzüge</Link>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
             <li><Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Geschäftsumzüge</Link>: Effiziente und schnelle Verlagerung von Büros und Gewerberäumen.</li>
-            <li><Link href="/umzugsfirma/internationale-umzuege" className="text-green-700 hover:text-green-800 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
-            <li><Link href="/umzugsfirma/spezialtransporte" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
+            <li><Link href="/umzugsfirma/auslandumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
+            <li><Link href="/umzugsfirma/klaviertransport" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
             <li><strong>Klaviertransport</strong>: Professioneller und schonender Transport von Klavieren und Flügeln mit Spezialtechnik.</li>
             <li><strong>Lagerung</strong>: Sichere Einlagerung Ihrer Möbel und Gegenstände während des Umzugs oder bei Platzmangel.</li>
           </ul>
@@ -564,7 +564,7 @@ const OffertenPortalPageClient = () => {
           <ul className="text-body list-disc pl-5 space-y-2 mb-4">
             <li><strong>Umzugsreinigung</strong>: Die komplette Endreinigung Ihrer alten Wohnung mit Abnahmegarantie.</li>
             <li><Link href="/reinigung/fensterreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Fensterreinigung</Link>: Streifenfreie Sauberkeit für Fenster, Rahmen und Storen.</li>
-            <li><Link href="/reinigung/bueroreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Büroreinigung</Link>: Regelmässige Unterhaltsreinigung für saubere und repräsentative Geschäftsräume.</li>
+            <li><Link href="/reinigung/buero_reinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Büroreinigung</Link>: Regelmässige Unterhaltsreinigung für saubere und repräsentative Geschäftsräume.</li>
             <li><Link href="/reinigung/baureinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Baureinigung</Link>: Professionelle Reinigung nach Neu- oder Umbauten für einen sauberen Start.</li>
                     </ul>
           <p className="text-body">Mehr Informationen finden Sie auf unserer Reinigungskosten-Seite.</p>
@@ -671,8 +671,8 @@ const OffertenPortalPageClient = () => {
                     { name: 'Umzugsfirma finden', href: '/umzugsfirma' },
                     { name: 'Privatumzug', href: '/umzugsfirma/privatumzug' },
                     { name: 'Geschäftsumzug', href: '/umzugsfirma/geschaeftsumzug' },
-                    { name: 'Internationale Umzüge', href: '/umzugsfirma/internationale-umzuege' },
-                    { name: 'Spezialtransporte', href: '/umzugsfirma/spezialtransporte' },
+                    { name: 'Internationale Umzüge', href: '/umzugsfirma/auslandumzug' },
+                    { name: 'Spezialtransporte', href: '/umzugsfirma/klaviertransport' },
                     { name: 'Umzugskosten', href: '/umzugsfirma/umzugskosten' },
                     { name: 'Umzugsfirma vergleichen', href: '/umzugsfirma-vergleichen' },
                   ].map((item) => (
@@ -698,7 +698,7 @@ const OffertenPortalPageClient = () => {
                     { name: 'Reinigungsfirma finden', href: '/reinigung' },
                     { name: 'Umzugsreinigung', href: '/reinigung/umzugsreinigung' },
                     { name: 'Fensterreinigung', href: '/reinigung/fensterreinigung' },
-                    { name: 'Büroreinigung', href: '/reinigung/bueroreinigung' },
+                    { name: 'Büroreinigung', href: '/reinigung/buero_reinigung' },
                     { name: 'Baureinigung', href: '/reinigung/baureinigung' },
                     { name: 'Grundreinigung', href: '/reinigung/grundreinigung' },
                     { name: 'Reinigungskosten', href: '/reinigung/reinigungskosten' },

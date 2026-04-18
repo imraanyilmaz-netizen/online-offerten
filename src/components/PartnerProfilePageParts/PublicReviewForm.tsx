@@ -66,7 +66,7 @@ function InteractiveStars({
           <div key={star} className="relative p-0.5 pointer-events-none">
             <Star
               style={{ width: size, height: size }}
-              className="text-gray-300"
+              className="text-muted-foreground/35"
             />
             {rounded >= star && (
               <Star
@@ -85,7 +85,7 @@ function InteractiveStars({
           </div>
         ))}
       </div>
-      <span className="font-bold text-lg text-gray-800 w-10 text-center tabular-nums">
+      <span className="w-10 text-center text-lg font-bold tabular-nums text-foreground">
         {display > 0 ? display.toFixed(1) : '–'}
       </span>
     </div>
@@ -159,11 +159,11 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
 
   if (state === 'success') {
     return (
-      <Card className="border-green-200 bg-green-50/50">
+      <Card className="border-emerald-200/80 bg-emerald-50/60 dark:border-emerald-900/50 dark:bg-emerald-950/35">
         <CardContent className="py-10 text-center">
-          <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-gray-800 mb-2">Vielen Dank für Ihre Bewertung!</h3>
-          <p className="text-gray-600 max-w-md mx-auto">
+          <CheckCircle2 className="mx-auto mb-4 h-16 w-16 text-emerald-600 dark:text-emerald-400" />
+          <h3 className="mb-2 text-xl font-bold text-foreground">Vielen Dank für Ihre Bewertung!</h3>
+          <p className="mx-auto max-w-md text-muted-foreground">
             Ihre Bewertung wird nach Prüfung durch unser Team veröffentlicht. Dies dauert in der
             Regel 1–2 Werktage.
           </p>
@@ -173,21 +173,25 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
   }
 
   return (
-    <Card className="shadow-lg rounded-xl border border-gray-200 bg-white overflow-hidden">
+    <Card className="overflow-hidden rounded-xl border-border shadow-lg">
       <CardHeader
-        className="p-5 cursor-pointer hover:bg-gray-50 transition-colors select-none"
+        className="cursor-pointer select-none p-5 transition-colors hover:bg-muted/40"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-lg font-bold text-gray-800">
+            <CardTitle className="text-lg font-bold text-card-foreground">
               Bewertung schreiben
             </CardTitle>
             <CardDescription className="mt-1">
               Teilen Sie Ihre Erfahrung mit {partnerName}
             </CardDescription>
           </div>
-          <Button variant="ghost" size="sm" className="text-green-600 hover:text-green-700 gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="gap-1 text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300"
+          >
             {isOpen ? (
               <>Schliessen <ChevronUp className="w-4 h-4" /></>
             ) : (
@@ -198,7 +202,7 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
       </CardHeader>
 
       {isOpen && (
-        <CardContent className="p-5 pt-0 border-t border-gray-100">
+        <CardContent className="border-t border-border p-5 pt-0">
           <form onSubmit={handleSubmit} className="space-y-6 mt-5">
             {/* Honeypot */}
             <div className="absolute -left-[9999px]" aria-hidden="true">
@@ -214,8 +218,8 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
             {/* Name + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="pr-name" className="font-medium text-sm">
-                  Ihr Name <span className="text-red-500">*</span>
+                <Label htmlFor="pr-name" className="text-sm font-medium text-foreground">
+                  Ihr Name <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="pr-name"
@@ -228,8 +232,8 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="pr-email" className="font-medium text-sm">
-                  E-Mail <span className="text-red-500">*</span>
+                <Label htmlFor="pr-email" className="text-sm font-medium text-foreground">
+                  E-Mail <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="pr-email"
@@ -239,14 +243,14 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <p className="text-[11px] text-gray-400">Wird nicht veröffentlicht.</p>
+                <p className="text-[11px] text-muted-foreground">Wird nicht veröffentlicht.</p>
               </div>
             </div>
 
             {/* City + Service */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="pr-city" className="font-medium text-sm">
+                <Label htmlFor="pr-city" className="text-sm font-medium text-foreground">
                   Stadt / Ort
                 </Label>
                 <Input
@@ -258,14 +262,14 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="pr-service" className="font-medium text-sm">
+                <Label htmlFor="pr-service" className="text-sm font-medium text-foreground">
                   Dienstleistung
                 </Label>
                 <select
                   id="pr-service"
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value)}
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 >
                   {SERVICE_OPTIONS.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -277,29 +281,29 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
             </div>
 
             {/* Ratings */}
-            <div className="space-y-4 rounded-xl border border-gray-100 bg-gray-50/50 p-4">
-              <p className="text-sm font-semibold text-gray-700">
-                Bewertung <span className="text-red-500">*</span>
+            <div className="space-y-4 rounded-xl border border-border bg-muted/40 p-4 dark:bg-muted/25">
+              <p className="text-sm font-semibold text-foreground">
+                Bewertung <span className="text-destructive">*</span>
               </p>
               <div className="space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                  <Label className="text-sm text-gray-600">Preiseinhaltung</Label>
+                <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-center">
+                  <Label className="text-sm text-muted-foreground">Preiseinhaltung</Label>
                   <InteractiveStars
                     value={ratings.price}
                     onChange={(val) => setRatings((p) => ({ ...p, price: val }))}
                     size={26}
                   />
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                  <Label className="text-sm text-gray-600">Arbeitsablauf / Qualität</Label>
+                <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-center">
+                  <Label className="text-sm text-muted-foreground">Arbeitsablauf / Qualität</Label>
                   <InteractiveStars
                     value={ratings.workflow}
                     onChange={(val) => setRatings((p) => ({ ...p, workflow: val }))}
                     size={26}
                   />
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                  <Label className="text-sm text-gray-600">Administration / Kommunikation</Label>
+                <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-center">
+                  <Label className="text-sm text-muted-foreground">Administration / Kommunikation</Label>
                   <InteractiveStars
                     value={ratings.administration}
                     onChange={(val) => setRatings((p) => ({ ...p, administration: val }))}
@@ -308,8 +312,8 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
                 </div>
               </div>
               {overallRating > 0 && (
-                <div className="flex items-center justify-between rounded-lg bg-white border border-gray-200 px-4 py-2.5 mt-2">
-                  <span className="font-semibold text-gray-700">Gesamtbewertung</span>
+                <div className="mt-2 flex items-center justify-between rounded-lg border border-border bg-card px-4 py-2.5">
+                  <span className="font-semibold text-foreground">Gesamtbewertung</span>
                   <div className="flex items-center gap-2">
                     <InteractiveStars value={overallRating} onChange={() => {}} size={20} />
                   </div>
@@ -319,7 +323,7 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
 
             {/* Comment */}
             <div className="space-y-1.5">
-              <Label htmlFor="pr-text" className="font-medium text-sm">
+              <Label htmlFor="pr-text" className="text-sm font-medium text-foreground">
                 Ihre Erfahrung (optional)
               </Label>
               <Textarea
@@ -330,19 +334,19 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
                 value={reviewText}
                 onChange={(e) => setReviewText(e.target.value)}
               />
-              <p className="text-[11px] text-gray-400 text-right">{reviewText.length}/2000</p>
+              <p className="text-right text-[11px] text-muted-foreground">{reviewText.length}/2000</p>
             </div>
 
             {/* Error */}
             {state === 'error' && errorMsg && (
-              <div className="flex items-start gap-2 rounded-lg bg-red-50 border border-red-200 p-3">
-                <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-red-700">{errorMsg}</p>
+              <div className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3 dark:border-destructive/40 dark:bg-destructive/15">
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+                <p className="text-sm text-destructive">{errorMsg}</p>
               </div>
             )}
 
             {/* Info */}
-            <p className="text-[11px] text-gray-400 leading-relaxed">
+            <p className="text-[11px] leading-relaxed text-muted-foreground">
               Mit dem Absenden bestätigen Sie, dass Sie tatsächlich eine Dienstleistung von{' '}
               {partnerName} in Anspruch genommen haben. Ihre Bewertung wird nach Prüfung durch unser
               Team veröffentlicht.
@@ -352,7 +356,7 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
             <Button
               type="submit"
               disabled={state === 'submitting'}
-              className="w-full bg-green-600 hover:bg-green-700 text-white h-11"
+              className="h-11 w-full bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500"
             >
               {state === 'submitting' ? (
                 <>

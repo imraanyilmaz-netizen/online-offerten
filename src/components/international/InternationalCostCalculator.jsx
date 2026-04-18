@@ -1,6 +1,7 @@
-﻿'use client'
+'use client'
 
-import React, { useState, useLayoutEffect, useMemo, lazy, Suspense } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useMemo, lazy, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -15,18 +16,29 @@ import CountryFlag from './CountryFlag';
 const NewCustomerForm = lazy(() => import('@/components/NewCustomerForm'));
 
 const FullPageLoader = () => (
-  <div className="flex h-64 w-full items-center justify-center bg-white/80 backdrop-blur-sm">
+  <div className="flex h-64 w-full items-center justify-center bg-background/80 backdrop-blur-sm">
     <Loader2 className="h-12 w-12 animate-spin text-green-600" />
   </div>
 );
 
+const POPULAR_ZIEL_FROM_URL = new Set(['DE', 'FR', 'IT', 'AT', 'ES', 'PT', 'BE', 'DK']);
 
-const InternationalCostCalculator = () => {
+function initialToCountryFromProp(code) {
+  if (!code) return 'DE';
+  const z = String(code).toUpperCase();
+  return POPULAR_ZIEL_FROM_URL.has(z) ? z : 'DE';
+}
+
+/**
+ * @param {object} props
+ * @param {string | null | undefined} [props.initialToCountryCode] ISO-like country code for the destination preset (e.g. DE, FR).
+ */
+const InternationalCostCalculator = ({ initialToCountryCode = null }) => {
   const [mounted, setMounted] = useState(false);
 
   // All hooks must be called before any conditional returns
   const [fromCountry, setFromCountry] = useState('CH');
-  const [toCountry, setToCountry] = useState('DE');
+  const [toCountry, setToCountry] = useState(() => initialToCountryFromProp(initialToCountryCode));
   const [moveType, setMoveType] = useState('private');
   const [rooms, setRooms] = useState(3.5);
   const [area, setArea] = useState(100);
@@ -92,13 +104,36 @@ const InternationalCostCalculator = () => {
     setMounted(true);
   }, []);
 
+  const searchParams = useSearchParams();
+  const zielParam = searchParams.get('ziel');
+
+  useEffect(() => {
+    if (initialToCountryCode) {
+      const z = initialToCountryFromProp(initialToCountryCode);
+      setFromCountry('CH');
+      setToCountry(z);
+    }
+  }, [initialToCountryCode]);
+
+  useEffect(() => {
+    if (!mounted || !zielParam || initialToCountryCode) return;
+    const z = zielParam.toUpperCase();
+    if (!POPULAR_ZIEL_FROM_URL.has(z)) return;
+    setFromCountry('CH');
+    setToCountry(z);
+    const el = document.getElementById('international-cost-calculator');
+    if (el) {
+      requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+  }, [mounted, zielParam, initialToCountryCode]);
+
   // Wait for component to be mounted
   if (!mounted) {
     return (
-      <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100">
+      <div className="bg-card p-6 md:p-8 rounded-2xl shadow-xl border border-border">
         <div className="flex items-center mb-6">
           <Calculator className="w-8 h-8 mr-4 text-green-500" />
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
             Internationaler Umzug Kostenrechner
           </h2>
         </div>
@@ -205,18 +240,19 @@ const InternationalCostCalculator = () => {
   return (
     <>
       <div
-        className="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100"
+        id="international-cost-calculator"
+        className="bg-card p-6 md:p-8 rounded-2xl shadow-xl border border-border scroll-mt-24"
       >
         <div className="flex items-center mb-6">
           <Calculator className="w-8 h-8 mr-4 text-green-500" />
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Internationaler Umzug Kostenrechner</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">Internationaler Umzug Kostenrechner</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="from-country" className="font-semibold text-slate-700">Von</Label>
+            <Label htmlFor="from-country" className="font-semibold text-foreground">Von</Label>
             <Select value={fromCountry} onValueChange={(val) => handleCountryChange('from', val)}>
-              <SelectTrigger id="from-country" className="mt-1 bg-slate-50">
+              <SelectTrigger id="from-country" className="mt-1 bg-muted/50">
                 <SelectValue placeholder="Land auswählen" />
               </SelectTrigger>
               <SelectContent>{countries.filter(c => c.code !== toCountry).map(renderCountryOption)}</SelectContent>
@@ -224,9 +260,9 @@ const InternationalCostCalculator = () => {
           </div>
 
           <div>
-            <Label htmlFor="to-country" className="font-semibold text-slate-700">Nach</Label>
+            <Label htmlFor="to-country" className="font-semibold text-foreground">Nach</Label>
             <Select value={toCountry} onValueChange={(val) => handleCountryChange('to', val)}>
-              <SelectTrigger id="to-country" className="mt-1 bg-slate-50">
+              <SelectTrigger id="to-country" className="mt-1 bg-muted/50">
                 <SelectValue placeholder="Land auswählen" />
               </SelectTrigger>
               <SelectContent>{countries.filter(c => c.code !== fromCountry).map(renderCountryOption)}</SelectContent>
@@ -235,7 +271,7 @@ const InternationalCostCalculator = () => {
         </div>
 
         <div className="mb-6">
-          <Label className="font-semibold text-slate-700">Umzugsart</Label>
+          <Label className="font-semibold text-foreground">Umzugsart</Label>
           <div className="grid grid-cols-2 gap-2 mt-2">
             <Button variant={moveType === 'private' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('private')} className={`transition-all ${moveType === 'private' ? 'bg-green-600 text-white' : ''}`}>Privat</Button>
             <Button variant={moveType === 'business' ? 'default' : 'outline'} onClick={() => handleMoveTypeChange('business')} className={`transition-all ${moveType === 'business' ? 'bg-green-600 text-white' : ''}`}>Geschäftlich</Button>
@@ -246,7 +282,7 @@ const InternationalCostCalculator = () => {
           {moveType === 'private' ? (
             <div key="private-rooms" className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <Label htmlFor="rooms-slider" className="font-semibold text-slate-700">Anzahl Zimmer</Label>
+                <Label htmlFor="rooms-slider" className="font-semibold text-foreground">Anzahl Zimmer</Label>
                 <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{rooms} Zimmer</span>
               </div>
               <Slider id="rooms-slider" value={[rooms]} onValueChange={(val) => setRooms(val[0])} min={1} max={10} step={0.5} />
@@ -254,7 +290,7 @@ const InternationalCostCalculator = () => {
           ) : (
             <div key="business-area" className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <Label htmlFor="area-slider" className="font-semibold text-slate-700">Fläche (m²)</Label>
+                <Label htmlFor="area-slider" className="font-semibold text-foreground">Fläche (m²)</Label>
                 <span className="px-3 py-1 text-sm font-bold text-white bg-green-500 rounded-full">{area} m²</span>
               </div>
               <Slider id="area-slider" value={[area]} onValueChange={(val) => setArea(val[0])} min={20} max={500} step={10} />
@@ -270,11 +306,11 @@ const InternationalCostCalculator = () => {
             >
               <div className="flex items-center space-x-2">
                 <Checkbox id="piano" checked={includePiano} onCheckedChange={setIncludePiano} />
-                <Label htmlFor="piano" className="text-slate-600 cursor-pointer">Klaviertransport inklusive</Label>
+                <Label htmlFor="piano" className="text-muted-foreground cursor-pointer">Klaviertransport inklusive</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox id="cleaning" checked={includeCleaning} onCheckedChange={setIncludeCleaning} />
-                <Label htmlFor="cleaning" className="text-slate-600 cursor-pointer">Umzugsreinigung inklusive</Label>
+                <Label htmlFor="cleaning" className="text-muted-foreground cursor-pointer">Umzugsreinigung inklusive</Label>
               </div>
             </div>
           )}
@@ -291,13 +327,13 @@ const InternationalCostCalculator = () => {
         
           {estimatedCost && (
             <div
-              className="mt-8 p-6 bg-slate-50 rounded-lg text-center border-t-4 border-green-400"
+              className="mt-8 p-6 bg-muted/50 rounded-lg text-center border-t-4 border-green-400"
             >
-              <h3 className="text-lg font-semibold text-slate-600 mb-2">Geschätzte Kosten</h3>
-              <p className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
+              <h3 className="text-lg font-semibold text-muted-foreground mb-2">Geschätzte Kosten</h3>
+              <p className="text-3xl md:text-4xl font-bold text-foreground mb-3">
                 CHF {estimatedCost.min.toLocaleString('de-CH')} - {estimatedCost.max.toLocaleString('de-CH')}
               </p>
-              <p className="text-xs text-slate-500 mb-6">*Die Kosten sind eine Schätzung und können je nach individuellen Umständen variieren.</p>
+              <p className="text-xs text-muted-foreground mb-6">*Die Kosten sind eine Schätzung und können je nach individuellen Umständen variieren.</p>
               
               <Button onClick={handleShowForm} className="bg-blue-500 hover:bg-blue-600 text-white group">
                 Offerten anfordern

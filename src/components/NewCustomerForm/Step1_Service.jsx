@@ -14,46 +14,46 @@ const ServiceButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) =
   // Her servis için renk ve icon ayarları
   const serviceConfig = {
     umzug: {
-      iconBg: 'bg-blue-100',
+      iconBg: 'bg-blue-100 dark:bg-blue-950/50',
       iconBgSelected: 'bg-blue-500',
-      iconColor: 'text-blue-600',
+      iconColor: 'text-blue-600 dark:text-blue-400',
       iconColorSelected: 'text-white',
-      borderColor: 'border-blue-500',
-      bgColor: 'bg-blue-50'
+      borderColor: 'border-blue-500 dark:border-blue-500',
+      bgColor: 'bg-blue-50 dark:bg-blue-950/30'
     },
     reinigung: {
-      iconBg: 'bg-purple-100',
+      iconBg: 'bg-purple-100 dark:bg-purple-950/45',
       iconBgSelected: 'bg-purple-500',
-      iconColor: 'text-purple-600',
+      iconColor: 'text-purple-600 dark:text-purple-400',
       iconColorSelected: 'text-white',
-      borderColor: 'border-purple-500',
-      bgColor: 'bg-purple-50'
+      borderColor: 'border-purple-500 dark:border-purple-500',
+      bgColor: 'bg-purple-50 dark:bg-purple-950/30'
     },
     maler: {
-      iconBg: 'bg-amber-100',
+      iconBg: 'bg-amber-100 dark:bg-amber-950/40',
       iconBgSelected: 'bg-amber-500',
-      iconColor: 'text-amber-600',
+      iconColor: 'text-amber-600 dark:text-amber-400',
       iconColorSelected: 'text-white',
-      borderColor: 'border-amber-500',
-      bgColor: 'bg-amber-50'
+      borderColor: 'border-amber-500 dark:border-amber-500',
+      bgColor: 'bg-amber-50 dark:bg-amber-950/30'
     },
     raeumung: {
-      iconBg: 'bg-emerald-100',
+      iconBg: 'bg-emerald-100 dark:bg-emerald-950/45',
       iconBgSelected: 'bg-emerald-500',
-      iconColor: 'text-emerald-600',
+      iconColor: 'text-emerald-600 dark:text-emerald-400',
       iconColorSelected: 'text-white',
-      borderColor: 'border-emerald-500',
-      bgColor: 'bg-emerald-50'
+      borderColor: 'border-emerald-500 dark:border-emerald-500',
+      bgColor: 'bg-emerald-50 dark:bg-emerald-950/30'
     },
   };
   
   const config = serviceConfig[id] || {
-    iconBg: 'bg-gray-100',
+    iconBg: 'bg-gray-100 dark:bg-muted',
     iconBgSelected: 'bg-gray-500',
-    iconColor: 'text-gray-600',
+    iconColor: 'text-gray-600 dark:text-muted-foreground',
     iconColorSelected: 'text-white',
-    borderColor: 'border-gray-500',
-    bgColor: 'bg-gray-50'
+    borderColor: 'border-gray-500 dark:border-border',
+    bgColor: 'bg-gray-50 dark:bg-muted/50'
   };
   
   return (
@@ -63,7 +63,7 @@ const ServiceButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) =
       className={`w-full flex items-center gap-4 p-4 sm:p-5 border-2 rounded-xl transition-all duration-300 md:hover:scale-[1.02] active:scale-[0.98]
         ${selected 
           ? `${config.bgColor} ${config.borderColor} shadow-lg` 
-          : 'bg-white border-gray-200 md:hover:border-green-400 md:hover:bg-green-50'
+          : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-400 dark:md:hover:border-emerald-600 md:hover:bg-green-50 dark:md:hover:bg-emerald-950/25'
         }`}
     >
       {/* Icon Container */}
@@ -80,18 +80,18 @@ const ServiceButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) =
       <div className="flex-1 text-left">
         <p className={`
           font-semibold text-base sm:text-lg transition-colors
-          ${selected ? 'text-gray-900' : 'text-gray-900'}
+          ${selected ? 'text-gray-900 dark:text-foreground' : 'text-gray-900 dark:text-foreground'}
         `}>
           {t(labelKey)}
         </p>
-        <p className="text-xs sm:text-sm text-gray-600 mt-1">{t(subLabelKey)}</p>
+        <p className="text-xs sm:text-sm text-gray-600 dark:text-muted-foreground mt-1">{t(subLabelKey)}</p>
       </div>
       
       {/* Selected Indicator */}
       {selected ? (
-        <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />
+        <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-primary flex-shrink-0" />
       ) : (
-        <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+        <ArrowRight className="w-5 h-5 text-gray-400 dark:text-muted-foreground flex-shrink-0" />
       )}
     </button>
   );
@@ -105,19 +105,19 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
       onClick={() => onClick(id)}
       className={`w-full p-2.5 sm:p-3 border-2 rounded-lg text-left transition-all duration-200 ease-in-out transform md:hover:-translate-y-0.5
         ${selected 
-          ? 'bg-teal-50 border-teal-500 shadow-md ring-1 ring-teal-500' 
-          : 'bg-white border-gray-200 md:hover:border-teal-400'
+          ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 dark:border-teal-500 shadow-md ring-1 ring-teal-500 dark:ring-teal-600' 
+          : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-teal-400 dark:md:hover:border-teal-500'
         }`}
     >
       <div className="flex items-center mb-0.5 sm:mb-1">
         {icon && (
-          <span className={`mr-1.5 sm:mr-2 p-1 sm:p-1.5 rounded-md ${selected ? 'bg-teal-100 text-teal-600' : 'bg-gray-100 text-gray-500'}`}>
+          <span className={`mr-1.5 sm:mr-2 p-1 sm:p-1.5 rounded-md ${selected ? 'bg-teal-100 dark:bg-teal-950/50 text-teal-600 dark:text-teal-300' : 'bg-gray-100 dark:bg-muted text-gray-500 dark:text-muted-foreground'}`}>
             {icon}
           </span>
         )}
-        <span className={`font-medium text-sm md:text-base ${selected ? 'text-teal-700' : 'text-gray-700'}`}>{t(labelKey)}</span>
+        <span className={`font-medium text-sm md:text-base ${selected ? 'text-teal-700 dark:text-teal-300' : 'text-gray-700 dark:text-foreground/90'}`}>{t(labelKey)}</span>
       </div>
-      <p className={`text-xs sm:text-sm ${selected ? 'text-teal-600' : 'text-gray-500'}`}>{t(subLabelKey)}</p>
+      <p className={`text-xs sm:text-sm ${selected ? 'text-teal-600 dark:text-teal-400/90' : 'text-gray-500 dark:text-muted-foreground'}`}>{t(subLabelKey)}</p>
     </button>
   );
 };
@@ -125,20 +125,20 @@ const UmzugArtButton = ({ id, labelKey, subLabelKey, icon, selected, onClick }) 
 const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroupChange, errors }) => {
     const { t } = useStaticT('newCustomerForm');
     const whatToCleanOptions = [
-        { id: 'bathroom', labelKey: 'step1.whatToClean.bathroom', icon: <Bath className="w-5 h-5 text-gray-600" /> },
-        { id: 'kitchen', labelKey: 'step1.whatToClean.kitchen', icon: <CookingPot className="w-5 h-5 text-gray-600" /> },
-        { id: 'living_sleeping', labelKey: 'step1.whatToClean.living_sleeping', icon: <BedDouble className="w-5 h-5 text-gray-600" /> },
-        { id: 'hallway_stairs', labelKey: 'step1.whatToClean.hallway_stairs', icon: <Stairs className="w-5 h-5 text-gray-600" /> },
+        { id: 'bathroom', labelKey: 'step1.whatToClean.bathroom', icon: <Bath className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
+        { id: 'kitchen', labelKey: 'step1.whatToClean.kitchen', icon: <CookingPot className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
+        { id: 'living_sleeping', labelKey: 'step1.whatToClean.living_sleeping', icon: <BedDouble className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
+        { id: 'hallway_stairs', labelKey: 'step1.whatToClean.hallway_stairs', icon: <Stairs className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
     ];
     const areaOptions = ['bis_50', '50_100', '100_150', 'ueber_150'];
 
     return (
         <div className="space-y-4">
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.whatToClean.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.whatToClean.title')} <span className="text-red-500">*</span></h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {whatToCleanOptions.map(option => (
-                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_clean?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_clean?.[option.id] ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`what_to_clean_${option.id}`}
@@ -147,7 +147,7 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                                     onCheckedChange={(checked) => handleCheckboxChange(`what_to_clean.${option.id}`, checked)}
                                     className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`what_to_clean_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 flex items-center gap-2">
+                                <Label htmlFor={`what_to_clean_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 dark:text-foreground flex items-center gap-2">
                                     {option.icon} {t(option.labelKey)}
                                 </Label>
                             </div>
@@ -157,7 +157,7 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                 {errors && errors.what_to_clean && <p className="text-sm text-red-500 mt-1.5">{errors.what_to_clean}</p>}
             </div>
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.estimatedArea.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.estimatedArea.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup
                     name="estimated_area"
                     value={formData.estimated_area || ''}
@@ -169,11 +169,11 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
                             key={option}
                             htmlFor={`area_${option}`}
                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                ${formData.estimated_area === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`
+                                ${formData.estimated_area === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`
                             }
                         >
                             <RadioGroupItem value={option} id={`area_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm sm:text-base text-gray-800">{t(`step1.estimatedArea.${option}`)}</span>
+                            <span className="font-normal text-sm sm:text-base text-gray-800 dark:text-foreground">{t(`step1.estimatedArea.${option}`)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
@@ -186,20 +186,20 @@ const GeneralCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGro
 const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroupChange, errors }) => {
     const { t } = useStaticT('newCustomerForm');
     const floorTypeOptions = [
-        { id: 'carpet', labelKey: 'step1.floorTypes.carpet', icon: <Square className="w-5 h-5 text-gray-600" /> },
-        { id: 'parquet_laminate', labelKey: 'step1.floorTypes.parquet_laminate', icon: <Layers className="w-5 h-5 text-gray-600" /> },
-        { id: 'tiles', labelKey: 'step1.floorTypes.tiles', icon: <Grid className="w-5 h-5 text-gray-600" /> },
-        { id: 'vinyl', labelKey: 'step1.floorTypes.vinyl', icon: <Box className="w-5 h-5 text-gray-600" /> },
+        { id: 'carpet', labelKey: 'step1.floorTypes.carpet', icon: <Square className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
+        { id: 'parquet_laminate', labelKey: 'step1.floorTypes.parquet_laminate', icon: <Layers className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
+        { id: 'tiles', labelKey: 'step1.floorTypes.tiles', icon: <Grid className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
+        { id: 'vinyl', labelKey: 'step1.floorTypes.vinyl', icon: <Box className="w-5 h-5 text-gray-600 dark:text-muted-foreground" /> },
     ];
     const areaOptions = ['bis_50', '50_100', '100_150', 'ueber_150'];
 
     return (
         <div className="space-y-4">
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.floorTypes.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.floorTypes.title')} <span className="text-red-500">*</span></h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {floorTypeOptions.map(option => (
-                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.floor_types?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.floor_types?.[option.id] ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`floor_type_${option.id}`}
@@ -208,7 +208,7 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                                     onCheckedChange={(checked) => handleCheckboxChange(`floor_types.${option.id}`, checked)}
                                     className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`floor_type_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 flex items-center gap-2">
+                                <Label htmlFor={`floor_type_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 dark:text-foreground flex items-center gap-2">
                                     {option.icon} {t(option.labelKey)}
                                 </Label>
                             </div>
@@ -218,7 +218,7 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                 {errors && errors.floor_types && <p className="text-sm text-red-500 mt-1.5">{errors.floor_types}</p>}
             </div>
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.estimatedArea.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.estimatedArea.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup
                     name="floor_area"
                     value={formData.floor_area || ''}
@@ -230,11 +230,11 @@ const FloorCleaningDetails = ({ formData, handleCheckboxChange, handleRadioGroup
                             key={option}
                             htmlFor={`floor_area_${option}`}
                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                ${formData.floor_area === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`
+                                ${formData.floor_area === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`
                             }
                         >
                             <RadioGroupItem value={option} id={`floor_area_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm sm:text-base text-gray-800">{t(`step1.estimatedArea.${option}`)}</span>
+                            <span className="font-normal text-sm sm:text-base text-gray-800 dark:text-foreground">{t(`step1.estimatedArea.${option}`)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
@@ -258,7 +258,7 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
     return (
         <div className="space-y-4">
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fassadenreinigung.flaeche.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.fassadenreinigung.flaeche.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup
                     name="fassadenreinigung_flaeche"
                     value={formData.fassadenreinigung_flaeche || ''}
@@ -266,16 +266,16 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                     className="grid grid-cols-2 gap-2"
                 >
                     {flaecheOptions.map(option => (
-                        <Label key={option} htmlFor={`flaeche_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_flaeche === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`flaeche_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_flaeche === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <RadioGroupItem value={option} id={`flaeche_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm text-gray-800">{t(`step1.fassadenreinigung.flaeche.${option}`)}</span>
+                            <span className="font-normal text-sm text-gray-800 dark:text-foreground">{t(`step1.fassadenreinigung.flaeche.${option}`)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
                 {errors.fassadenreinigung_flaeche && <p className="text-sm text-red-500 mt-2">{errors.fassadenreinigung_flaeche}</p>}
             </div>
              <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fassadenreinigung.erreichbarkeit.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.fassadenreinigung.erreichbarkeit.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup
                     name="fassadenreinigung_erreichbarkeit"
                     value={formData.fassadenreinigung_erreichbarkeit || ''}
@@ -283,19 +283,19 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                     className="grid grid-cols-1 sm:grid-cols-3 gap-2"
                 >
                     {erreichbarkeitOptions.map(option => (
-                        <Label key={option} htmlFor={`erreichbarkeit_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_erreichbarkeit === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`erreichbarkeit_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fassadenreinigung_erreichbarkeit === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <RadioGroupItem value={option} id={`erreichbarkeit_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm text-gray-800">{t(`step1.fassadenreinigung.erreichbarkeit.${option}`)}</span>
+                            <span className="font-normal text-sm text-gray-800 dark:text-foreground">{t(`step1.fassadenreinigung.erreichbarkeit.${option}`)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
                 {errors.fassadenreinigung_erreichbarkeit && <p className="text-sm text-red-500 mt-2">{errors.fassadenreinigung_erreichbarkeit}</p>}
             </div>
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fassadenreinigung.verschmutzung.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.fassadenreinigung.verschmutzung.title')} <span className="text-red-500">*</span></h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {verschmutzungOptions.map(option => (
-                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.fassadenreinigung_verschmutzung?.[option.id] ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <div key={option.id} className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.fassadenreinigung_verschmutzung?.[option.id] ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`verschmutzung_${option.id}`}
@@ -304,7 +304,7 @@ const FassadenreinigungDetails = ({ formData, handleRadioGroupChange, handleChec
                                     onCheckedChange={(checked) => handleCheckboxChange(`fassadenreinigung_verschmutzung.${option.id}`, checked)}
                                     className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`verschmutzung_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800">{t(option.labelKey)}</Label>
+                                <Label htmlFor={`verschmutzung_${option.id}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 dark:text-foreground">{t(option.labelKey)}</Label>
                             </div>
                         </div>
                     ))}
@@ -324,36 +324,36 @@ const FensterreinigungDetails = ({ formData, handleRadioGroupChange, errors }) =
     return (
         <div className="space-y-4">
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fensterreinigung.anzahl.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.fensterreinigung.anzahl.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup name="fensterreinigung_anzahl" value={formData.fensterreinigung_anzahl || ''} onValueChange={(value) => handleRadioGroupChange('fensterreinigung_anzahl', value)} className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {anzahlOptions.map(option => (
-                        <Label key={option} htmlFor={`anzahl_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_anzahl === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`anzahl_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_anzahl === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <RadioGroupItem value={option} id={`anzahl_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm text-gray-800">{t(`step1.fensterreinigung.anzahl.${option}`)}</span>
+                            <span className="font-normal text-sm text-gray-800 dark:text-foreground">{t(`step1.fensterreinigung.anzahl.${option}`)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
                 {errors.fensterreinigung_anzahl && <p className="text-sm text-red-500 mt-2">{errors.fensterreinigung_anzahl}</p>}
             </div>
             <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fensterreinigung.scope.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.fensterreinigung.scope.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup name="fensterreinigung_scope" value={formData.fensterreinigung_scope || ''} onValueChange={(value) => handleRadioGroupChange('fensterreinigung_scope', value)} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     {scopeOptions.map(option => (
-                        <Label key={option} htmlFor={`scope_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_scope === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`scope_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_scope === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <RadioGroupItem value={option} id={`scope_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm text-gray-800">{t(`step1.fensterreinigung.scope.${option}`)}</span>
+                            <span className="font-normal text-sm text-gray-800 dark:text-foreground">{t(`step1.fensterreinigung.scope.${option}`)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
                 {errors.fensterreinigung_scope && <p className="text-sm text-red-500 mt-2">{errors.fensterreinigung_scope}</p>}
             </div>
              <div>
-                <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.fensterreinigung.zugang.title')} <span className="text-red-500">*</span></h5>
+                <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.fensterreinigung.zugang.title')} <span className="text-red-500">*</span></h5>
                 <RadioGroup name="fensterreinigung_zugang" value={formData.fensterreinigung_zugang || ''} onValueChange={(value) => handleRadioGroupChange('fensterreinigung_zugang', value)} className="grid grid-cols-2 gap-2">
                     {zugangOptions.map(option => (
-                        <Label key={option} htmlFor={`zugang_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_zugang === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`}>
+                        <Label key={option} htmlFor={`zugang_${option}`} className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3 ${formData.fensterreinigung_zugang === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`}>
                             <RadioGroupItem value={option} id={`zugang_${option}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm text-gray-800">{t(`step1.fensterreinigung.zugang.${option}`)}</span>
+                            <span className="font-normal text-sm text-gray-800 dark:text-foreground">{t(`step1.fensterreinigung.zugang.${option}`)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
@@ -379,11 +379,11 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
     return (
         <div
             ref={subQuestionsRef}
-            className="p-4 sm:p-5 border-2 border-green-200 rounded-lg bg-green-50/70 shadow-md"
+            className="p-4 sm:p-5 border-2 border-green-200 dark:border-emerald-800 rounded-lg bg-green-50/70 dark:bg-emerald-950/35 shadow-md"
         >
             <div className="flex items-center mb-3">
-                <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 mr-2 sm:mr-3" />
-                <h4 className="text-base sm:text-lg font-semibold text-green-800">
+                <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 dark:text-emerald-400 mr-2 sm:mr-3" />
+                <h4 className="text-base sm:text-lg font-semibold text-green-800 dark:text-emerald-200">
                     {t('step1.additionalDetailsTitle')}
                 </h4>
             </div>
@@ -393,7 +393,7 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                     <div
                         key="frequency"
                     >
-                        <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t('step1.cleaningFrequency.title')} <span className="text-red-500">*</span></h5>
+                        <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t('step1.cleaningFrequency.title')} <span className="text-red-500">*</span></h5>
                         <RadioGroup
                             name="cleaning_frequency"
                             value={formData.cleaning_frequency || ''}
@@ -405,11 +405,11 @@ const CleaningSubQuestions = ({ formData, handleRadioGroupChange, handleCheckbox
                                     key={option}
                                     htmlFor={`freq_${option}`}
                                     className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                        ${formData.cleaning_frequency === option ? 'bg-green-100 border-green-400 shadow-sm' : 'bg-white border-gray-200 md:hover:border-green-300'}`
+                                        ${formData.cleaning_frequency === option ? 'bg-green-100 dark:bg-emerald-950/45 border-green-400 dark:border-emerald-600 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-green-300 dark:md:hover:border-emerald-600'}`
                                     }
                                 >
                                     <RadioGroupItem value={option} id={`freq_${option}`} className="h-5 w-5 shrink-0" />
-                                    <span className="font-normal text-sm sm:text-base text-gray-800">{t(`step1.cleaningFrequency.${option}`)}</span>
+                                    <span className="font-normal text-sm sm:text-base text-gray-800 dark:text-foreground">{t(`step1.cleaningFrequency.${option}`)}</span>
                                 </Label>
                             ))}
                         </RadioGroup>
@@ -485,11 +485,11 @@ const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
 
   return (
     <div
-      className="mt-4 sm:mt-6 p-4 sm:p-5 border-2 border-green-400 rounded-lg bg-green-50 shadow-md"
+      className="mt-4 sm:mt-6 p-4 sm:p-5 border-2 border-green-400 dark:border-emerald-600 rounded-lg bg-green-50 dark:bg-emerald-950/40 shadow-md"
     >
       <div className="flex items-center mb-2 sm:mb-3">
-        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 mr-2 sm:mr-3" />
-        <h4 className="text-base sm:text-lg font-semibold text-green-700">
+        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 dark:text-emerald-400 mr-2 sm:mr-3" />
+        <h4 className="text-base sm:text-lg font-semibold text-green-700 dark:text-emerald-300">
           {t('step1.cleaningTypeSelectionTitle')} <span className="text-red-500">*</span>
         </h4>
       </div>
@@ -501,21 +501,21 @@ const CleaningInfoBox = ({ formData, handleUmzugArtChange, errors }) => {
       >
         {Object.entries(cleaningGroups).map(([groupKey, options]) => (
           <div key={groupKey}>
-            <h5 className="font-semibold text-gray-700 mb-2 text-sm">{t(`step1.cleaningGroups.${groupKey}`)}</h5>
+            <h5 className="font-semibold text-gray-700 dark:text-foreground/90 mb-2 text-sm">{t(`step1.cleaningGroups.${groupKey}`)}</h5>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {options.map(option => (
                 <Label 
                   key={option}
                   htmlFor={`cleaning_${option}`}
                   className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                    ${formData.umzugArt === option ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 md:hover:border-teal-300'}`
+                    ${formData.umzugArt === option ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 dark:border-teal-500 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-teal-300 dark:md:hover:border-teal-600'}`
                   }
                 >
                   <RadioGroupItem value={option} id={`cleaning_${option}`} className="h-5 w-5 shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-normal text-sm sm:text-base text-gray-800">{t(`step1.cleaningOptions.${option}`)}</span>
+                    <span className="font-normal text-sm sm:text-base text-gray-800 dark:text-foreground">{t(`step1.cleaningOptions.${option}`)}</span>
                     {option === 'umzugsreinigung' && (
-                        <span className="text-xs text-gray-500">{t(`step1.cleaningOptions.umzugsreinigung_sublabel`)}</span>
+                        <span className="text-xs text-gray-500 dark:text-muted-foreground">{t(`step1.cleaningOptions.umzugsreinigung_sublabel`)}</span>
                     )}
                   </div>
                 </Label>
@@ -543,14 +543,14 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
 
     return (
         <div
-            className="space-y-3 sm:space-y-4 pt-4 sm:pt-4 border-t border-gray-100"
+            className="space-y-3 sm:space-y-4 pt-4 sm:pt-4 border-t border-gray-100 dark:border-border"
         >
-            <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.whatToPaintTitle')} <span className="text-red-500">*</span></h3>
-            <p className="text-sm sm:text-base text-gray-600 mb-2.5 sm:mb-3">{t('step1.whatToPaintSubtitle')}</p>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-foreground">{t('step1.whatToPaintTitle')} <span className="text-red-500">*</span></h3>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-muted-foreground mb-2.5 sm:mb-3">{t('step1.whatToPaintSubtitle')}</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 {currentOptions.map(option => (
                     <div key={option}>
-                        <div className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_paint?.[option] ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 md:hover:border-teal-400'}`}>
+                        <div className={`p-3 border-2 rounded-lg transition-all duration-200 ease-in-out ${formData.what_to_paint?.[option] ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 dark:border-teal-500 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-teal-400 dark:md:hover:border-teal-600'}`}>
                             <div className="flex items-center">
                                 <Checkbox
                                     id={`what_to_paint_${option}`}
@@ -559,7 +559,7 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
                                     onCheckedChange={(checked) => handleCheckboxChange(`what_to_paint.${option}`, checked)}
                                     className="h-6 w-6 mr-3"
                                 />
-                                <Label htmlFor={`what_to_paint_${option}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800">
+                                <Label htmlFor={`what_to_paint_${option}`} className="flex-grow cursor-pointer font-medium text-base text-slate-800 dark:text-foreground">
                                     {t(`step1.whatToPaint.${malerType}.${option}`)}
                                 </Label>
                             </div>
@@ -574,7 +574,7 @@ const WhatToPaintSection = ({ formData, handleCheckboxChange, handleChange, erro
                                     value={formData.maler_details_other || ''}
                                     onChange={handleChange}
                                     placeholder={t('step1.whatToPaint.otherPlaceholder')}
-                                    className="bg-slate-50 border-slate-300 focus:bg-white text-sm"
+                                                                       className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm"
                                 />
                             </div>
                         )}
@@ -597,13 +597,13 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
 
     return (
         <div
-            className="space-y-4 pt-4 border-t border-gray-100"
+            className="space-y-4 pt-4 border-t border-gray-100 dark:border-border"
         >
-            <h3 className="text-base sm:text-lg font-semibold text-gray-800">{t('step1.malerOptionalDetailsTitle')}</h3>
-            <p className="text-sm text-gray-600 -mt-2 mb-3">{t('step1.malerOptionalDetailsSubtitle')}</p>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-foreground">{t('step1.malerOptionalDetailsTitle')}</h3>
+            <p className="text-sm text-gray-600 dark:text-muted-foreground -mt-2 mb-3">{t('step1.malerOptionalDetailsSubtitle')}</p>
 
             <div>
-                <Label className="font-medium text-sm text-gray-700 mb-2 block">{t('step1.malerCurrentConditionLabel')}</Label>
+                <Label className="font-medium text-sm text-gray-700 dark:text-foreground/90 mb-2 block">{t('step1.malerCurrentConditionLabel')}</Label>
                 <RadioGroup 
                     name="maler_current_condition" 
                     value={formData.maler_current_condition || ''} 
@@ -615,11 +615,11 @@ const MalerOptionalDetails = ({ formData, handleRadioGroupChange, errors }) => {
                             key={opt.value}
                             htmlFor={`condition_${opt.value}`}
                             className={`p-3 border-2 rounded-lg transition-all cursor-pointer flex items-center gap-3
-                                ${formData.maler_current_condition === opt.value ? 'bg-teal-50 border-teal-500 shadow-sm' : 'bg-white border-gray-200 md:hover:border-teal-300'}`
+                                ${formData.maler_current_condition === opt.value ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 dark:border-teal-500 shadow-sm' : 'bg-white dark:bg-card border-gray-200 dark:border-border md:hover:border-teal-300 dark:md:hover:border-teal-600'}`
                             }
                         >
                             <RadioGroupItem value={opt.value} id={`condition_${opt.value}`} className="h-5 w-5 shrink-0" />
-                            <span className="font-normal text-sm sm:text-base text-gray-800">{t(opt.labelKey)}</span>
+                            <span className="font-normal text-sm sm:text-base text-gray-800 dark:text-foreground">{t(opt.labelKey)}</span>
                         </Label>
                     ))}
                 </RadioGroup>
@@ -654,7 +654,7 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
     { id: 'privatumzug', labelKey: 'step1.privateMoveLabel', subLabelKey: 'step1.privateMoveDescription', icon: <Home size={16} /> },
     { id: 'geschaeftsumzug', labelKey: 'step1.businessMoveLabel', subLabelKey: 'step1.businessMoveDescription', icon: <Briefcase size={16} /> },
     { id: 'international', labelKey: 'step1.internationalMoveLabel', subLabelKey: 'step1.internationalMoveDescription', icon: <Globe size={16} /> },
-    { id: 'spezialtransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
+    { id: 'klaviertransport', labelKey: 'step1.specialTransportLabel', subLabelKey: 'step1.specialTransportDescription', icon: <Truck size={16} /> },
     { id: 'kleintransport', labelKey: 'step1.kleintransportLabel', subLabelKey: 'step1.kleintransportDescription', icon: <Truck size={16} /> },
     { id: 'lagerung', labelKey: 'step1.lagerungLabel', subLabelKey: 'step1.lagerungDescription', icon: <Archive /> } // Lagerung
   ];
@@ -665,10 +665,10 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
   ];
 
   const specialTransportOptions = [
-    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600" /> },
-    { value: 'tresortransport', labelKey: 'step1.specialTransportTypeSafe', icon: <ShieldQuestion size={16} className="mr-2 text-gray-600" /> },
-    { value: 'maschinen_geraete', labelKey: 'step1.specialTransportTypeMachine', icon: <Weight size={16} className="mr-2 text-gray-600" /> },
-    { value: 'sonstiges', labelKey: 'step1.specialTransportTypeOther', icon: <VenetianMask size={16} className="mr-2 text-gray-600" /> },
+    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
+    { value: 'tresortransport', labelKey: 'step1.specialTransportTypeSafe', icon: <ShieldQuestion size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
+    { value: 'maschinen_geraete', labelKey: 'step1.specialTransportTypeMachine', icon: <Weight size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
+    { value: 'sonstiges', labelKey: 'step1.specialTransportTypeOther', icon: <VenetianMask size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
   ];
 
   const entsorgungSubTypes = [
@@ -683,8 +683,8 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
   return (
     <div className="space-y-6 sm:space-y-8">
       <div>
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1.5 sm:mb-2">{t('step1.mainServiceQuestion')} <span className="text-red-500">*</span></h2>
-        <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{t('step1.mainServiceDescription')}</p>
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-foreground mb-1.5 sm:mb-2">{t('step1.mainServiceQuestion')} <span className="text-red-500">*</span></h2>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-muted-foreground mb-3 sm:mb-4">{t('step1.mainServiceDescription')}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {mainServices.map((service) => (
             <ServiceButton 

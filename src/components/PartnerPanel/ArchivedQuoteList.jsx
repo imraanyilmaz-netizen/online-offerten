@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 // framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
@@ -8,13 +8,13 @@ import { formatDate, getServiceTypeLabel } from '@/lib/utils'; // Import formatD
 
 const ContactItem = ({ icon, label, value, isLink = false, linkType = '' }) => (
     <div className="flex items-start gap-3 py-2 border-b last:border-b-0">
-      <div className="mt-1 text-gray-500">{icon}</div>
+      <div className="mt-1 text-muted-foreground">{icon}</div>
       <div>
-        <p className="text-xs text-gray-500">{label}</p>
+        <p className="text-xs text-muted-foreground">{label}</p>
         {isLink && value ? (
-          <a href={`${linkType}${value}`} className="text-sm font-medium text-blue-600 hover:underline">{value}</a>
+          <a href={`${linkType}${value}`} className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">{value}</a>
         ) : (
-          <p className="text-sm font-medium text-gray-800">{value || 'N/A'}</p>
+          <p className="text-sm font-medium text-foreground">{value || 'N/A'}</p>
         )}
       </div>
     </div>
@@ -43,10 +43,10 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
 
   if (quotes.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500">
-        <Box className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-        <h3 className="text-lg font-semibold">Keine archivierten Anfragen</h3>
-        <p className="text-sm text-gray-400">Hier werden Ihre archivierten Anfragen angezeigt.</p>
+      <div className="text-center py-12 text-muted-foreground">
+        <Box className="w-16 h-16 mx-auto text-muted-foreground/40 mb-4" />
+        <h3 className="text-lg font-semibold text-foreground">Keine archivierten Anfragen</h3>
+        <p className="text-sm text-muted-foreground/80">Hier werden Ihre archivierten Anfragen angezeigt.</p>
       </div>
     );
   }
@@ -58,34 +58,34 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
         <div
           key={quote.purchase_info?.purchase_id || quote.id}
         >
-          <AccordionItem value={`item-${index}`} className="border rounded-lg bg-gray-50">
-            <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg data-[state=open]:bg-gray-100">
+          <AccordionItem value={`item-${index}`} className="border border-border rounded-lg bg-muted/30">
+            <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg data-[state=open]:bg-muted">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full text-left gap-2">
                 <div className="flex-1 space-y-1">
-                  <p className="text-sm font-semibold text-gray-500">{getServiceTypeLabel(quote.servicetype)}</p>
-                  <h3 className="text-base font-bold text-gray-800">{quote.firstname} {quote.lastname}</h3>
+                  <p className="text-sm font-semibold text-muted-foreground">{getServiceTypeLabel(quote.servicetype)}</p>
+                  <h3 className="text-base font-bold text-foreground">{quote.firstname} {quote.lastname}</h3>
                   {isMovingService(quote.servicetype) && (
-                    <div className="flex items-center text-xs text-gray-500 font-medium">
+                    <div className="flex items-center text-xs text-muted-foreground font-medium">
                       <span>{quote.from_city || quote.from_zip}</span>
                       {quote.to_city && <MoveRight className="w-3 h-3 mx-1.5" />}
                       {quote.to_city && <span>{quote.to_city || quote.to_zip}</span>}
                     </div>
                   )}
-                  <div className="text-sm font-semibold text-gray-600">CHF {quote.purchase_info?.purchase_price.toFixed(2)}</div>
+                  <div className="text-sm font-semibold text-foreground">CHF {quote.purchase_info?.purchase_price.toFixed(2)}</div>
                 </div>
                 <div className="flex items-center gap-2 sm:flex-col sm:items-end sm:text-right w-full sm:w-auto self-start sm:self-center">
-                  <Badge variant="outline" className="bg-white w-fit">
+                  <Badge variant="outline" className="bg-card w-fit">
                     <Archive className="w-3 h-3 mr-1.5"/>
                     Archiviert
                   </Badge>
-                  <p className="text-xs text-gray-500">{formatDate(quote.purchase_info?.purchased_at)}</p>
+                  <p className="text-xs text-muted-foreground">{formatDate(quote.purchase_info?.purchased_at)}</p>
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="p-3 sm:p-4 border-t border-gray-200">
+            <AccordionContent className="p-3 sm:p-4 border-t border-border">
                 <div className="space-y-4">
-                    <div className="p-3 sm:p-4 bg-white border border-gray-200 rounded-lg">
-                        <h4 className="text-md font-semibold text-gray-700 mb-2">Kundenkontakt</h4>
+                    <div className="p-3 sm:p-4 bg-card border border-border rounded-lg">
+                        <h4 className="text-md font-semibold text-foreground mb-2">Kundenkontakt</h4>
                         <ContactItem icon={<User size={16}/>} label="Name" value={`${quote.salutation ? quote.salutation + ' ' : ''}${quote.firstname} ${quote.lastname}`} />
                         <ContactItem icon={<Phone size={16}/>} label="Telefon" value={quote.phone} isLink linkType="tel:" />
                         <ContactItem icon={<Mail size={16}/>} label="E-Mail" value={quote.email} isLink linkType="mailto:" />
@@ -113,14 +113,14 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
 
       {/* Pagination */}
       {quotes.length > itemsPerPage && (
-        <div className="border-t border-gray-200 px-4 py-4 bg-gray-50/50 rounded-lg mt-6">
+        <div className="border-t border-border px-4 py-4 bg-muted/30 rounded-lg mt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-sm text-gray-600">
-              Zeige <span className="font-semibold text-gray-900">{startIndex + 1}</span> bis{' '}
-              <span className="font-semibold text-gray-900">
+            <div className="text-sm text-muted-foreground">
+              Zeige <span className="font-semibold text-foreground">{startIndex + 1}</span> bis{' '}
+              <span className="font-semibold text-foreground">
                 {Math.min(endIndex, quotes.length)}
               </span>{' '}
-              von <span className="font-semibold text-gray-900">{quotes.length}</span> Anfragen
+              von <span className="font-semibold text-foreground">{quotes.length}</span> Anfragen
             </div>
             
             <div className="flex items-center gap-2">
@@ -158,8 +158,8 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
                           onClick={() => goToPage(page)}
                           className={`min-w-[40px] font-semibold h-9 ${
                             currentPage === page
-                              ? "bg-green-600 hover:bg-green-700 text-white"
-                              : "hover:bg-gray-100"
+                              ? "bg-green-600 hover:bg-green-700 text-white dark:bg-emerald-600 dark:hover:bg-emerald-700"
+                              : "hover:bg-muted"
                           }`}
                         >
                           {page}

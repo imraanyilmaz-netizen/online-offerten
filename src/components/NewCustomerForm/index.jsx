@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import React, { useState, useEffect, useCallback, useRef, useMemo, memo } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo, memo } from 'react';
 // framer-motion removed – using CSS transitions for better INP
 import { useStaticT } from '@/lib/staticTranslate';
 import { Button } from '@/components/ui/button';
@@ -20,6 +20,7 @@ import useNewFormValidation from './useNewFormValidation';
 import { submitNewQuoteToSupabase } from './newFormUtils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription } from '@/components/ui/alert-dialog';
 import { supabase } from '@/lib/supabaseClient';
+import { countries } from '@/data/countries';
 
 const TOTAL_FORM_STEPS = 3;
 
@@ -35,7 +36,7 @@ const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
           const fillPercent = Math.max(0, Math.min(100, (normalizedRating - i) * 100));
           return (
             <div key={i} style={{ position: 'relative', width: starSize, height: starSize }}>
-                <Star size={starSize} className="absolute inset-0 text-gray-300" />
+                <Star size={starSize} className="absolute inset-0 text-gray-300 dark:text-muted" />
                 {fillPercent > 0 && (
                   <div style={{ position: 'absolute', top: 0, left: 0, width: `${fillPercent}%`, overflow: 'hidden' }}>
                     <Star size={starSize} className="text-yellow-400 fill-yellow-400" />
@@ -45,8 +46,8 @@ const StarRating = ({ rating, reviewCount, starSize = 16 }) => {
           );
         })}
       </div>
-      <span className="font-semibold text-gray-800">{(rating || 0).toFixed(1)}</span>
-      <a href="/kunden-bewertungen" target="_blank" rel="noopener noreferrer" className="text-gray-600 md:hover:text-green-600 md:hover:underline transition-colors">({reviewCount} {t('ratings', { count: reviewCount })})</a>
+      <span className="font-semibold text-gray-800 dark:text-foreground">{(rating || 0).toFixed(1)}</span>
+      <a href="/kunden-bewertungen" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-muted-foreground md:hover:text-green-600 dark:md:hover:text-primary md:hover:underline transition-colors">({reviewCount} {t('ratings', { count: reviewCount })})</a>
     </div>
   );
 };
@@ -109,8 +110,8 @@ const TrustBadge = memo(() => {
 
     if (loading) {
         return (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center justify-center animate-pulse">
-                <div className="h-4 bg-green-200 rounded w-3/4"></div>
+            <div className="bg-green-50 dark:bg-emerald-950/40 border border-green-200 dark:border-emerald-800 rounded-lg p-3 flex items-center justify-center animate-pulse">
+                <div className="h-4 bg-green-200 dark:bg-emerald-800/50 rounded w-3/4"></div>
             </div>
         );
     }
@@ -119,12 +120,12 @@ const TrustBadge = memo(() => {
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-center">
+            <div className="bg-green-50 dark:bg-emerald-950/40 border border-green-200 dark:border-emerald-800 rounded-lg p-3 text-sm text-center">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
                     <StarRating rating={stats.average_rating} reviewCount={stats.review_count} />
                 </div>
             </div>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-center font-medium text-green-800">
+            <div className="bg-green-50 dark:bg-emerald-950/40 border border-green-200 dark:border-emerald-800 rounded-lg p-3 text-sm text-center font-medium text-green-800 dark:text-emerald-200">
                 In 2 Minuten kostenlos Angebote erhalten
             </div>
         </div>
@@ -412,7 +413,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     params.delete('special_transport_type');
     params.delete('raeumung_scope');
     params.delete('endreinigung');
-    if (formData.special_transport_type && formData.umzugArt === 'spezialtransport') {
+    if (formData.special_transport_type && (formData.umzugArt === 'klaviertransport' || formData.umzugArt === 'spezialtransport')) {
       params.set('special_transport_type', formData.special_transport_type);
     }
     if (formData.raeumung_scope && formData.service === 'raeumung' && formData.umzugArt === 'raeumung') {
@@ -423,8 +424,27 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug')) {
       params.set('endreinigung', 'ja');
     }
+    if (formData.service === 'umzug' && formData.umzugArt === 'international') {
+      const z = formData.to_country;
+      if (z && z !== 'CH') {
+        params.set('ziel', z);
+      } else {
+        params.delete('ziel');
+      }
+    }
     router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
-  }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt, formData.special_transport_type, formData.raeumung_scope, formData.additional_cleaning]);
+  }, [
+    searchParamsString,
+    pathname,
+    router,
+    formRef,
+    formData.service,
+    formData.umzugArt,
+    formData.to_country,
+    formData.special_transport_type,
+    formData.raeumung_scope,
+    formData.additional_cleaning,
+  ]);
 
   const handleConfirmExit = () => {
     const navigationPath = pendingNavigation;
@@ -598,6 +618,58 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   }, [searchParamsString, formData.service, handleServiceSelect]);
 
+  // useLayoutEffect: Zielland aus ?ziel= vor dem ersten Paint setzen (vermeidet leeres „Land *“ nach Deep-Link)
+  useLayoutEffect(() => {
+    if (formData.umzugArt !== 'international') return;
+
+    const params = new URLSearchParams(searchParamsString);
+    const raw = params.get('ziel') || params.get('to_country');
+    if (!raw) return;
+
+    const code = raw.trim().toUpperCase();
+    if (!/^[A-Z]{2}$/.test(code)) return;
+    if (!countries.some((c) => c.code === code)) return;
+
+    // Nur vorausfüllen solange Ziel noch Default CH/leer (nicht manuelle Nutzerwahl überschreiben)
+    const needsDest = !formData.to_country || formData.to_country === 'CH';
+    if (!needsDest) return;
+
+    handleSelectChange('from_country', 'CH');
+    handleSelectChange('to_country', code);
+  }, [formData.umzugArt, formData.to_country, searchParamsString, handleSelectChange]);
+
+  const hasSyncedIntlFromCalculatorProps = useRef(false);
+
+  // Eingebetteter Rechner: initialDataFromProps.to_country zuverlässig übernehmen
+  useEffect(() => {
+    if (hasSyncedIntlFromCalculatorProps.current) return;
+    if (formId !== 'international-form') return;
+    if (formData.umzugArt !== 'international') return;
+
+    const tc = initialDataFromProps?.to_country;
+    const fc = initialDataFromProps?.from_country ?? 'CH';
+    if (!tc || tc === 'CH') {
+      hasSyncedIntlFromCalculatorProps.current = true;
+      return;
+    }
+    if (formData.to_country === tc && formData.from_country === fc) {
+      hasSyncedIntlFromCalculatorProps.current = true;
+      return;
+    }
+
+    hasSyncedIntlFromCalculatorProps.current = true;
+    handleSelectChange('from_country', fc);
+    handleSelectChange('to_country', tc);
+  }, [
+    formId,
+    formData.umzugArt,
+    formData.to_country,
+    formData.from_country,
+    initialDataFromProps?.to_country,
+    initialDataFromProps?.from_country,
+    handleSelectChange,
+  ]);
+
   // URL'den servise özel art parametresini oku ve otomatik setzen
   useEffect(() => {
     // Service seçilmemişse, art parametresi okuma
@@ -623,17 +695,53 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       return;
     }
     
-    // Servise özel parametreyi oku
-    const artValueFromUrl = params.get(paramName);
-    
+    // Servise özel parametreyi oku (alte Bookmarks: umzugArt=spezialtransport)
+    let artValueFromUrl = params.get(paramName);
+    if (artValueFromUrl === 'spezialtransport') {
+      artValueFromUrl = 'klaviertransport';
+    }
+
     if (artValueFromUrl && artValueFromUrl !== formData.umzugArt) {
       memoizedHandleUmzugArtChange(artValueFromUrl, true);
       hasInitializedUmzugArtFromUrl.current = true;
+      if (artValueFromUrl === 'international') {
+        const raw = params.get('ziel') || params.get('to_country');
+        if (raw) {
+          const code = raw.trim().toUpperCase();
+          if (/^[A-Z]{2}$/.test(code) && countries.some((c) => c.code === code)) {
+            handleSelectChange('from_country', 'CH');
+            handleSelectChange('to_country', code);
+          }
+        }
+      }
+    } else if (artValueFromUrl && artValueFromUrl === formData.umzugArt) {
+      hasInitializedUmzugArtFromUrl.current = true;
+      if (artValueFromUrl === 'international') {
+        const raw = params.get('ziel') || params.get('to_country');
+        if (raw) {
+          const code = raw.trim().toUpperCase();
+          if (/^[A-Z]{2}$/.test(code) && countries.some((c) => c.code === code)) {
+            const needsDest = !formData.to_country || formData.to_country === 'CH';
+            if (needsDest) {
+              handleSelectChange('from_country', 'CH');
+              handleSelectChange('to_country', code);
+            }
+          }
+        }
+      }
     } else if (!artValueFromUrl) {
       // URL'de parametre yoksa bile flag'i true yap, tekrar kontrol etme
       hasInitializedUmzugArtFromUrl.current = true;
     }
-  }, [searchParamsString, formData.service, formData.umzugArt, memoizedHandleUmzugArtChange, getServiceArtParamName]);
+  }, [
+    searchParamsString,
+    formData.service,
+    formData.umzugArt,
+    formData.to_country,
+    memoizedHandleUmzugArtChange,
+    getServiceArtParamName,
+    handleSelectChange,
+  ]);
 
   // umzugArt değiştiğinde additional_cleaning flag'lerini sıfırla
   useEffect(() => {
@@ -658,8 +766,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     const params = new URLSearchParams(searchParamsString);
     const specialTransportTypeFromUrl = params.get('special_transport_type');
     
-    // Nur wenn service=umzug, umzugArt=spezialtransport ist und special_transport_type in URL vorhanden ist
-    if (formData.service === 'umzug' && formData.umzugArt === 'spezialtransport' && specialTransportTypeFromUrl && specialTransportTypeFromUrl !== formData.special_transport_type) {
+    // Nur wenn service=umzug, umzugArt=klaviertransport ist und special_transport_type in URL vorhanden ist
+    if (formData.service === 'umzug' && (formData.umzugArt === 'klaviertransport' || formData.umzugArt === 'spezialtransport') && specialTransportTypeFromUrl && specialTransportTypeFromUrl !== formData.special_transport_type) {
       handleRadioGroupChange('special_transport_type', specialTransportTypeFromUrl);
     }
   }, [searchParamsString, formData.service, formData.umzugArt, formData.special_transport_type, handleRadioGroupChange]);
@@ -966,6 +1074,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         case 'international':
           umzugArtLabel = t('step1.internationalMoveLabel');
           break;
+        case 'klaviertransport':
         case 'spezialtransport':
           if (formData.special_transport_type) {
             // Map special_transport_type to translation key
@@ -1127,25 +1236,25 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     >
       <div className="p-2 sm:p-3">
           <div className="flex justify-between items-center mb-1.5 sm:mb-2 px-1 sm:px-2">
-              <span className="text-xs text-gray-500">{t('stepProgress', { currentStep, totalSteps: TOTAL_FORM_STEPS })}</span>
+              <span className="text-xs text-gray-500 dark:text-muted-foreground">{t('stepProgress', { currentStep, totalSteps: TOTAL_FORM_STEPS })}</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
+          <div className="w-full bg-gray-200 dark:bg-muted rounded-full h-1.5 sm:h-2">
               <div 
-              className="bg-green-500 h-full rounded-full transition-all duration-500 ease-in-out"
+              className="bg-green-500 dark:bg-primary h-full rounded-full transition-all duration-500 ease-in-out"
               style={{ width: `${progressPercentage}%` }}
               />
           </div>
       </div>
       
-      <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 border border-gray-200 rounded-xl shadow-lg bg-gradient-to-b from-emerald-50/30 via-white to-slate-50/30" noValidate>
+      <form onSubmit={handleSubmitForm} className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 border border-gray-200 dark:border-border rounded-xl shadow-lg bg-gradient-to-b from-emerald-50/30 via-white to-slate-50/30 dark:from-emerald-950/25 dark:via-card dark:to-muted/30" noValidate>
         {currentStep === 3 && (
-          <div className="text-center border border-emerald-100 bg-gradient-to-b from-emerald-50/60 to-white rounded-lg px-3 py-3 mb-1">
+          <div className="text-center border border-emerald-100 dark:border-emerald-900/50 bg-gradient-to-b from-emerald-50/60 to-white dark:from-emerald-950/35 dark:to-card rounded-lg px-3 py-3 mb-1">
             {selectedServiceText && (
-              <p className="inline-flex items-center mt-2 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs sm:text-sm text-emerald-800 font-medium">
+              <p className="inline-flex items-center mt-2 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 px-3 py-1 text-xs sm:text-sm text-emerald-800 dark:text-emerald-200 font-medium">
                 {selectedServiceText}
               </p>
             )}
-            <p className="text-base sm:text-lg md:text-xl text-gray-800 font-semibold leading-snug mt-2">{stepTitle}</p>
+            <p className="text-base sm:text-lg md:text-xl text-gray-800 dark:text-foreground font-semibold leading-snug mt-2">{stepTitle}</p>
           </div>
         )}
 
@@ -1159,8 +1268,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         <div
           className={
             currentStep === TOTAL_FORM_STEPS
-              ? 'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200'
-              : 'flex flex-col sm:flex-row justify-end items-stretch sm:items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200'
+              ? 'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200 dark:border-border'
+              : 'flex flex-col sm:flex-row justify-end items-stretch sm:items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200 dark:border-border'
           }
         >
           {currentStep === TOTAL_FORM_STEPS && (
@@ -1174,13 +1283,13 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
                   className={`h-6 w-6 mt-0.5 shrink-0 ${formData.errors?.datenschutz ? 'border-red-500' : ''}`}
                   required
                 />
-                <Label htmlFor="datenschutz" className="font-medium text-sm sm:text-base text-slate-800 leading-relaxed cursor-pointer">
+                <Label htmlFor="datenschutz" className="font-medium text-sm sm:text-base text-slate-800 dark:text-foreground leading-relaxed cursor-pointer">
                   Ich akzeptiere die{' '}
-                  <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
+                  <Link href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 dark:text-primary md:hover:text-green-800 dark:md:hover:text-primary/90 transition-colors">
                     AGB
                   </Link>
                   {' '}und die{' '}
-                  <Link href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 md:hover:text-green-800 transition-colors">
+                  <Link href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 dark:text-primary md:hover:text-green-800 dark:md:hover:text-primary/90 transition-colors">
                     Datenschutzerklärung
                   </Link>
                   .
@@ -1197,7 +1306,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
               <Button
                 type="button"
                 onClick={handleNextStep}
-                className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-green-500 dark:bg-primary md:hover:bg-green-600 dark:md:hover:bg-primary/90 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={(currentStep === 1 && !isStep1Completed) || (currentStep === 2 && !isStep2Completed)}
               >
                 {t('nextButton')}
@@ -1206,7 +1315,7 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             )}
 
             {currentStep === TOTAL_FORM_STEPS && (
-              <Button type="submit" className="bg-green-500 md:hover:bg-green-600 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base" disabled={isLoading}>
+              <Button type="submit" className="bg-green-500 dark:bg-primary md:hover:bg-green-600 dark:md:hover:bg-primary/90 text-white group w-full sm:w-auto py-2.5 text-sm sm:text-base" disabled={isLoading}>
                 {submitButtonText}
                 {isLoading ? <Loader2 className="w-4 h-4 ml-2 animate-spin" /> : <Send className="w-4 h-4 ml-2 transition-transform group-md:hover:translate-x-1" />}
               </Button>
@@ -1215,18 +1324,18 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         </div>
       </form>
 
-      <div className="mt-3 mb-2 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/70 via-white to-slate-50 p-4 sm:p-6 shadow-sm">
+      <div className="mt-3 mb-2 rounded-2xl border border-emerald-100 dark:border-emerald-900/40 bg-gradient-to-br from-emerald-50/70 via-white to-slate-50 dark:from-emerald-950/30 dark:via-card dark:to-muted/40 p-4 sm:p-6 shadow-sm">
         <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-emerald-200 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 font-medium">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white dark:bg-card border border-emerald-200 dark:border-emerald-800 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 dark:text-emerald-200 font-medium">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>{t('quoteFormPage.benefits.free')}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-emerald-200 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 font-medium">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white dark:bg-card border border-emerald-200 dark:border-emerald-800 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 dark:text-emerald-200 font-medium">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>{t('quoteFormPage.benefits.verified')}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-emerald-200 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 font-medium">
-            <Clock className="w-4 h-4 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white dark:bg-card border border-emerald-200 dark:border-emerald-800 px-3 py-1.5 text-xs sm:text-sm text-emerald-800 dark:text-emerald-200 font-medium">
+            <Clock className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>{t('quoteFormPage.benefits.fast')}</span>
           </div>
         </div>
@@ -1235,24 +1344,24 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
       {/* Zurück zur Startseite - jetzt nur in Step 1 im Button-Bereich sichtbar */}
 
       {/* Neueste Anfragen Ticker */}
-      <div className="mt-6 border-t border-gray-100 bg-gray-50 overflow-hidden">
+      <div className="mt-6 border-t border-gray-100 dark:border-border bg-gray-50 dark:bg-muted/40 overflow-hidden">
         {recentRequests.length > 0 && (
         <>
         <div className="py-3 px-4 sm:px-8">
           <div className="flex items-center justify-between max-w-4xl mx-auto">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Neueste Anfragen</p>
+            <p className="text-xs font-semibold text-gray-500 dark:text-muted-foreground uppercase tracking-wider">Neueste Anfragen</p>
             <div className="flex items-center gap-1">
               <button 
                 type="button"
                 onClick={() => setTickerIndex(prev => prev === 0 ? recentRequests.length - 1 : prev - 1)}
-                className="p-1 rounded-full md:hover:bg-gray-200 transition-colors text-gray-400 md:hover:text-gray-600"
+                className="p-1 rounded-full md:hover:bg-gray-200 dark:md:hover:bg-muted transition-colors text-gray-400 dark:text-muted-foreground md:hover:text-gray-600 dark:md:hover:text-foreground"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button 
                 type="button"
                 onClick={() => setTickerIndex(prev => (prev + 1) % recentRequests.length)}
-                className="p-1 rounded-full md:hover:bg-gray-200 transition-colors text-gray-400 md:hover:text-gray-600"
+                className="p-1 rounded-full md:hover:bg-gray-200 dark:md:hover:bg-muted transition-colors text-gray-400 dark:text-muted-foreground md:hover:text-gray-600 dark:md:hover:text-foreground"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -1264,36 +1373,36 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             key={tickerIndex}
             className="absolute inset-0 flex items-center px-4 sm:px-8 transition-opacity duration-300 ease-in-out"
           >
-            <div className="flex items-center justify-between w-full max-w-4xl mx-auto bg-white rounded-lg border border-gray-100 px-4 py-2.5 shadow-sm">
+            <div className="flex items-center justify-between w-full max-w-4xl mx-auto bg-white dark:bg-card rounded-lg border border-gray-100 dark:border-border px-4 py-2.5 shadow-sm">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-4 h-4 text-green-600" />
+                <div className="w-8 h-8 rounded-full bg-green-50 dark:bg-emerald-950/50 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 h-4 text-green-600 dark:text-emerald-400" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-gray-800 truncate">{recentRequests[tickerIndex]?.type}</p>
-                  <p className="text-xs text-gray-500 truncate">{recentRequests[tickerIndex]?.location}</p>
+                  <p className="text-sm font-medium text-gray-800 dark:text-foreground truncate">{recentRequests[tickerIndex]?.type}</p>
+                  <p className="text-xs text-gray-500 dark:text-muted-foreground truncate">{recentRequests[tickerIndex]?.location}</p>
                 </div>
               </div>
-              <span className="text-xs text-gray-400 flex-shrink-0 ml-3">{recentRequests[tickerIndex]?.timeLabel}</span>
+              <span className="text-xs text-gray-400 dark:text-muted-foreground flex-shrink-0 ml-3">{recentRequests[tickerIndex]?.timeLabel}</span>
             </div>
           </div>
         </div>
         </>
         )}
-        <div className="py-3 px-4 sm:px-8 border-t border-gray-100">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-sm text-gray-500 max-w-4xl mx-auto">
+        <div className="py-3 px-4 sm:px-8 border-t border-gray-100 dark:border-border">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-sm text-gray-500 dark:text-muted-foreground max-w-4xl mx-auto">
             <div className="flex items-center gap-2.5">
-              <Clock className="w-4 h-4 text-gray-400 flex-shrink-0" />
-              <span className="text-xs">Letzte Anfrage vor <span className="font-semibold text-green-600">6</span> Min.</span>
+              <Clock className="w-4 h-4 text-gray-400 dark:text-muted-foreground flex-shrink-0" />
+              <span className="text-xs">Letzte Anfrage vor <span className="font-semibold text-green-600 dark:text-primary">6</span> Min.</span>
             </div>
-            <div className="hidden sm:block w-px h-4 bg-gray-200" />
+            <div className="hidden sm:block w-px h-4 bg-gray-200 dark:bg-border" />
             <div className="flex items-center gap-2.5">
-              <FileText className="w-4 h-4 text-gray-400 flex-shrink-0" />
-              <span className="text-xs">Es wurden heute <span className="font-semibold text-green-600">{todayRequests}</span> Anfragen gestellt</span>
+              <FileText className="w-4 h-4 text-gray-400 dark:text-muted-foreground flex-shrink-0" />
+              <span className="text-xs">Es wurden heute <span className="font-semibold text-green-600 dark:text-primary">{todayRequests}</span> Anfragen gestellt</span>
             </div>
-            <div className="hidden sm:block w-px h-4 bg-gray-200" />
+            <div className="hidden sm:block w-px h-4 bg-gray-200 dark:bg-border" />
             <div className="flex items-center gap-2.5">
-              <Lock className="w-4 h-4 text-green-600 flex-shrink-0" />
+              <Lock className="w-4 h-4 text-green-600 dark:text-primary flex-shrink-0" />
               <span className="text-xs"><span className="font-semibold">SSL gesichert</span></span>
             </div>
           </div>
@@ -1309,8 +1418,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
             </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleStayInForm} className="bg-green-500 md:hover:bg-green-600 text-white border-none">{t('exitAlert.cancel')}</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmExit} className="bg-gray-100 md:hover:bg-gray-200 text-gray-600 border border-gray-300">{t('exitAlert.confirm')}</AlertDialogAction>
+            <AlertDialogCancel onClick={handleStayInForm} className="bg-green-500 dark:bg-primary md:hover:bg-green-600 dark:md:hover:bg-primary/90 text-white border-none">{t('exitAlert.cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmExit} className="bg-gray-100 dark:bg-muted md:hover:bg-gray-200 dark:md:hover:bg-muted/80 text-gray-600 dark:text-foreground border border-gray-300 dark:border-border">{t('exitAlert.confirm')}</AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

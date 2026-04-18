@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Accordion, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
@@ -8,10 +8,10 @@ import { formatDate, getServiceTypeLabel } from '@/lib/utils'; // Import formatD
 const MissedQuoteList = ({ quotes }) => {
   if (quotes.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500">
-        <PackageIcon className="w-16 h-16 mx-auto text-gray-300 mb-4" />
+      <div className="text-center py-12 text-muted-foreground">
+        <PackageIcon className="w-16 h-16 mx-auto text-muted-foreground/40 mb-4" />
         <h3 className="text-lg font-semibold">Keine verpassten Anfragen</h3>
-        <p className="text-sm text-gray-400">Gut gemacht! Sie haben keine Anfragen verpasst.</p>
+        <p className="text-sm text-muted-foreground/80">Gut gemacht! Sie haben keine Anfragen verpasst.</p>
       </div>
     );
   }
@@ -70,8 +70,8 @@ const MissedQuoteList = ({ quotes }) => {
           <div
             key={quote.id}
           >
-            <AccordionItem value={`item-${index}`} className="border rounded-lg bg-gray-50/70">
-              <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-lg data-[state=open]:bg-gray-200">
+            <AccordionItem value={`item-${index}`} className="border border-border rounded-lg bg-muted/35">
+              <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-lg data-[state=open]:bg-muted">
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-4 gap-y-3 w-full text-left items-center">
                   <div className="sm:col-span-8 space-y-2">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -81,17 +81,17 @@ const MissedQuoteList = ({ quotes }) => {
                         {reasonDetails.text}
                       </Badge>
                     </div>
-                    <div className="text-sm text-gray-600 pt-1">
+                    <div className="text-sm text-muted-foreground pt-1">
                       <span>{quote.move_date ? formatDate(quote.move_date).split(',')[0] : 'N/A'}</span>
                     </div>
                   </div>
 
                   <div className="sm:col-span-4 text-sm flex items-center gap-2 flex-wrap sm:justify-end sm:text-right">
-                    <span className="font-medium text-gray-800">{quote.from_zip} {quote.from_city}</span>
+                    <span className="font-medium text-foreground">{quote.from_zip} {quote.from_city}</span>
                     {isMovingService(quote.servicetype) && quote.to_zip && (
                       <>
-                        <ArrowRight className="w-4 h-4 text-gray-400 flex-shrink-0 mx-1 sm:mx-2" />
-                        <span className="font-medium text-gray-800">{quote.to_zip} {quote.to_city}</span>
+                        <ArrowRight className="w-4 h-4 text-muted-foreground flex-shrink-0 mx-1 sm:mx-2" />
+                        <span className="font-medium text-foreground">{quote.to_zip} {quote.to_city}</span>
                       </>
                     )}
                   </div>

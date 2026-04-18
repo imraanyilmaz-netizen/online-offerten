@@ -3,9 +3,29 @@
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
-import { Menu, X, Home, Mail, ChevronDown } from 'lucide-react'
+import { createPortal } from 'react-dom'
+import {
+  Menu,
+  X,
+  Home,
+  Mail,
+  ChevronDown,
+  Package,
+  Building2,
+  Globe2,
+  GitCompare,
+  Sparkles,
+  LayoutGrid,
+  Landmark,
+  Calculator,
+  FileText,
+  PiggyBank,
+  Wand2,
+  BookOpen,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import NavbarAuthSection from '@/src/components/Layout/NavbarAuthSection'
+import NavbarMegaMenuNav from '@/components/Layout/NavbarMegaMenuNav'
 
 export default function NavbarClient({ children: logoSlot }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -14,6 +34,7 @@ export default function NavbarClient({ children: logoSlot }) {
   const desktopMenuCloseTimeoutRef = React.useRef(null)
   const desktopNavRef = React.useRef(null)
   const pathname = usePathname()
+  const [mobilePortalReady, setMobilePortalReady] = useState(false)
 
   useEffect(() => {
     return () => {
@@ -33,6 +54,29 @@ export default function NavbarClient({ children: logoSlot }) {
     document.addEventListener('mousedown', handleDocumentClick)
     return () => document.removeEventListener('mousedown', handleDocumentClick)
   }, [])
+
+  useEffect(() => {
+    setMobilePortalReady(true)
+  }, [])
+
+  useEffect(() => {
+    if (pathname) setMobileMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const prevOverflow = document.body.style.overflow
+    const prevPaddingRight = document.body.style.paddingRight
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+    document.body.style.overflow = 'hidden'
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`
+    }
+    return () => {
+      document.body.style.overflow = prevOverflow
+      document.body.style.paddingRight = prevPaddingRight
+    }
+  }, [mobileMenuOpen])
 
   const toggleMobileSection = (section) => {
     setOpenMobileSections((prev) => ({
@@ -57,27 +101,73 @@ export default function NavbarClient({ children: logoSlot }) {
   }
 
   const umzugLinks = [
-    { to: '/umzugsfirma/privatumzug', text: 'Privatumzug' },
-    { to: '/umzugsfirma/spezialtransporte/klaviertransport', text: 'Klaviertransport' },
-    { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug' },
-    { to: '/umzugsfirma/internationale-umzuege', text: 'Internationale Umzüge' },
-    { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirmen vergleichen' },
+    { to: '/umzugsfirma/privatumzug', text: 'Privatumzug', desc: 'Wohnung, Haus & WG', Icon: Home },
+    { to: '/umzugsfirma/klaviertransport', text: 'Klaviertransport', desc: 'Spezial- & Schwertransport', Icon: Package },
+    { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug', desc: 'Büro & Gewerbe', Icon: Building2 },
+    { to: '/umzugsfirma/auslandumzug', text: 'Internationale Umzüge', desc: 'Ausland & Kostenrechner', Icon: Globe2 },
+    { to: '/umzugsfirma-vergleichen', text: 'Firmen vergleichen', desc: 'Bewertungen & Preise', Icon: GitCompare },
   ]
 
   const reinigungLinks = [
-    { to: '/reinigung/umzugsreinigung', text: 'Umzugsreinigung' },
-    { to: '/reinigung/wohnungsreinigung', text: 'Wohnungsreinigung' },
-    { to: '/reinigung/bueroreinigung', text: 'Büroreinigung' },
-    { to: '/reinigung/grundreinigung', text: 'Grundreinigung' },
-    { to: '/reinigungsfirma', text: 'Reinigungsfirma finden' },
+    { to: '/reinigungsfirma/umzugsreinigung', text: 'Endreinigung', desc: 'Mit Abnahmegarantie', Icon: Sparkles },
+    { to: '/reinigungsfirma/wohnungsreinigung', text: 'Wohnungsreinigung', desc: 'Gründlich & zuverlässig', Icon: LayoutGrid },
+    { to: '/reinigungsfirma/buero_reinigung', text: 'Büroreinigung', desc: 'Repräsentative Räume', Icon: Landmark },
+    { to: '/reinigungsfirma/grundreinigung', text: 'Grundreinigung', desc: 'Tiefenreinigung', Icon: Wand2 },
+    { to: '/reinigungsfirma', text: 'Reinigungsfirma finden', desc: 'Regional vergleichen', Icon: Sparkles },
   ]
 
   const kostenLinks = [
-    { to: '/umzugsfirma/umzugskosten', text: 'Umzugskosten Rechner' },
-    { to: '/reinigung/reinigungskosten', text: 'Reinigungskosten Rechner' },
-    { to: '/umzugsofferten', text: 'Umzugsofferte' },
-    { to: '/guenstig-umziehen', text: 'Günstig umziehen' },
+    { to: '/umzugsfirma/umzugskosten', text: 'Umzugskosten-Rechner', desc: 'Preisrahmen einschätzen', Icon: Calculator },
+    { to: '/reinigung/reinigungskosten', text: 'Reinigungskosten-Rechner', desc: 'Putzkosten planen', Icon: Calculator },
+    { to: '/umzugsofferten', text: 'Umzugsofferte', desc: 'Angebote einholen', Icon: FileText },
+    { to: '/guenstig-umziehen', text: 'Günstig umziehen', desc: 'Sparen ohne Stress', Icon: PiggyBank },
   ]
+
+  const megaFeatured = {
+    umzug: {
+      href: '/umzugsfirma',
+      title: 'Umzug planen',
+      subtitle: 'Geprüfte Partner in Ihrer Region — mehrere Offerten, ein Formular.',
+      cta: 'Zur Übersicht',
+      imageSrc: '/fotos/umzugstag.webp',
+      imageAlt: 'Umzug mit Umzugskartons',
+    },
+    reinigung: {
+      href: '/reinigungsfirma',
+      title: 'Sauber übergeben',
+      subtitle: 'End- und Unterhaltsreinigung mit klarer Kommunikation und Festpreisen.',
+      cta: 'Leistungen entdecken',
+      imageSrc: '/fotos/umzug-reinigung-maler-offerten.webp',
+      imageAlt: 'Professionelle Reinigung in der Schweiz',
+    },
+    kosten: {
+      href: '/kostenlose-offerte-anfordern',
+      title: 'Kostenlos vergleichen',
+      subtitle: 'Eine Anfrage — passende Anbieter — unverbindliche Offerten.',
+      cta: 'Jetzt Offerten',
+      imageSrc: '/fotos/offerten.webp',
+      imageAlt: 'Offerten für Umzug und Reinigung vergleichen',
+    },
+  }
+
+  const mobileIconAccent = {
+    umzug:
+      'bg-emerald-100 text-emerald-700 shadow-sm ring-1 ring-emerald-200/90 dark:bg-emerald-950/55 dark:text-emerald-400 dark:ring-emerald-500/25',
+    reinigung:
+      'bg-sky-100 text-sky-700 shadow-sm ring-1 ring-sky-200/90 dark:bg-sky-950/50 dark:text-sky-400 dark:ring-sky-500/25',
+    kosten:
+      'bg-amber-100 text-amber-800 shadow-sm ring-1 ring-amber-200/90 dark:bg-amber-950/45 dark:text-amber-300 dark:ring-amber-500/22',
+    surface:
+      'bg-slate-100/95 text-slate-700 shadow-sm ring-1 ring-slate-200/85 dark:bg-slate-800/65 dark:text-slate-200 dark:ring-slate-600/35',
+  }
+
+  const MobileRoundedNavIcon = ({ Icon: LinkIcon, accent }) => (
+    <span
+      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${mobileIconAccent[accent]}`}
+    >
+      <LinkIcon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden />
+    </span>
+  )
 
   const NavItem = ({ to, children, onClick }) => {
     const isActive = pathname === to
@@ -86,8 +176,10 @@ export default function NavbarClient({ children: logoSlot }) {
         href={to}
         prefetch={false}
         onClick={onClick}
-        className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out ${
-          isActive ? 'bg-green-100 text-green-700' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+        className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out ${
+          isActive
+            ? 'bg-green-100 text-green-700 dark:bg-primary/15 dark:text-primary'
+            : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-foreground'
         }`}
       >
         {children}
@@ -95,60 +187,159 @@ export default function NavbarClient({ children: logoSlot }) {
     )
   }
 
-  const DesktopDropdownNav = ({ label, links, menuKey, baseHref = null }) => {
-    const isOpen = openDesktopMenu === menuKey
-    return (
-      <div className="relative" onMouseEnter={() => openDesktopDropdown(menuKey)} onMouseLeave={scheduleCloseDesktopDropdown}>
-        <div className="flex items-center gap-1 rounded-xl border border-transparent px-3 py-2 text-sm font-semibold text-gray-600 transition-colors duration-150 ease-in-out hover:border-emerald-100 hover:bg-emerald-50/60 hover:text-gray-900">
-          {baseHref ? (
-            <Link prefetch={false} href={baseHref} className="leading-none text-gray-700 hover:text-gray-900">
-              {label}
-            </Link>
-          ) : (
-            <button type="button" onClick={() => openDesktopDropdown(menuKey)} className="leading-none text-gray-700 hover:text-gray-900">
-              {label}
-            </button>
-          )}
-          <button
-            type="button"
-            aria-label={`${label} Menü öffnen`}
-            aria-expanded={isOpen}
-            onClick={() => setOpenDesktopMenu((prev) => (prev === menuKey ? null : menuKey))}
-            className="inline-flex items-center justify-center rounded-md p-0.5 hover:bg-emerald-100"
-          >
-            <ChevronDown size={16} className={`text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-        <div
-          className={`absolute left-1/2 top-[calc(100%+10px)] z-[4000] w-[520px] max-w-[88vw] -translate-x-1/2 rounded-2xl border border-emerald-100 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-150 ${
-            isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-1 opacity-0 pointer-events-none'
-          }`}
-        >
-          <div className="mb-2 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-            {label}
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {links.map((link) => (
-              <Link
-                key={link.to}
-                href={link.to}
-                prefetch={false}
-                onClick={() => setOpenDesktopMenu(null)}
-                className="rounded-xl border border-transparent bg-slate-50/70 px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-emerald-100 hover:bg-emerald-50 hover:text-emerald-900"
-              >
-                {link.text}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   const closeMobile = () => setMobileMenuOpen(false)
 
+  const mobileMenuPortal =
+    mobilePortalReady &&
+    createPortal(
+      <div className="md:hidden">
+        {mobileMenuOpen ? (
+          <div
+            className="fixed left-0 right-0 top-16 bottom-0 z-[2990] bg-black/40"
+            aria-hidden
+            onClick={closeMobile}
+          />
+        ) : null}
+        <div
+          className={`fixed left-0 right-0 top-16 z-[2995] border-t border-border bg-background shadow-lg rounded-b-md transition-all duration-200 ease-in-out motion-reduce:transition-none ${
+            mobileMenuOpen
+              ? 'max-h-[min(85vh,calc(100dvh-4rem))] overflow-y-auto opacity-100'
+              : 'pointer-events-none max-h-0 overflow-hidden opacity-0'
+          }`}
+        >
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <nav className="pt-2 pb-5 space-y-1">
+              <NavItem to="/" onClick={closeMobile}>
+                <MobileRoundedNavIcon Icon={Home} accent="surface" />
+                Startseite
+              </NavItem>
+              <NavItem to="/kostenlose-offerte-anfordern" onClick={closeMobile}>
+                <MobileRoundedNavIcon Icon={FileText} accent="surface" />
+                OFFERTEN
+              </NavItem>
+
+              <div className="pt-1">
+                <div className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50 dark:text-muted-foreground dark:hover:bg-muted">
+                  <Link prefetch={false} href="/umzugsfirma" onClick={closeMobile} className="flex-1 text-left">
+                    UMZUG
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection('umzug')}
+                    aria-label="Umzug Menü öffnen"
+                    className="inline-flex items-center justify-center"
+                  >
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${openMobileSections.umzug ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                </div>
+                <div
+                  className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                    openMobileSections.umzug ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="pl-6 pt-1 space-y-1">
+                    {umzugLinks.map(({ to, text, Icon: LinkIcon }) => (
+                      <NavItem key={to} to={to} onClick={closeMobile}>
+                        <MobileRoundedNavIcon Icon={LinkIcon} accent="umzug" />
+                        {text}
+                      </NavItem>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-1">
+                <div className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50 dark:text-muted-foreground dark:hover:bg-muted">
+                  <Link prefetch={false} href="/reinigungsfirma" onClick={closeMobile} className="flex-1 text-left">
+                    REINIGUNG
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection('reinigung')}
+                    aria-label="Reinigung Menü öffnen"
+                    className="inline-flex items-center justify-center"
+                  >
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${openMobileSections.reinigung ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                </div>
+                <div
+                  className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                    openMobileSections.reinigung ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="pl-6 pt-1 space-y-1">
+                    {reinigungLinks.map(({ to, text, Icon: LinkIcon }) => (
+                      <NavItem key={to} to={to} onClick={closeMobile}>
+                        <MobileRoundedNavIcon Icon={LinkIcon} accent="reinigung" />
+                        {text}
+                      </NavItem>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection('kosten')}
+                  className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50 dark:text-muted-foreground dark:hover:bg-muted"
+                >
+                  <span>KOSTEN & TOOLS</span>
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform duration-200 ${openMobileSections.kosten ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                    openMobileSections.kosten ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="pl-6 pt-1 space-y-1">
+                    {kostenLinks.map(({ to, text, Icon: LinkIcon }) => (
+                      <NavItem key={to} to={to} onClick={closeMobile}>
+                        <MobileRoundedNavIcon Icon={LinkIcon} accent="kosten" />
+                        {text}
+                      </NavItem>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <NavItem to="/ratgeber" onClick={closeMobile}>
+                <MobileRoundedNavIcon Icon={BookOpen} accent="surface" />
+                RATGEBER
+              </NavItem>
+              <NavItem to="/kontakt" onClick={closeMobile}>
+                <MobileRoundedNavIcon Icon={Mail} accent="surface" />
+                Kontakt
+              </NavItem>
+
+              <NavbarAuthSection variant="mobile" onNavigate={closeMobile} NavItem={NavItem} />
+            </nav>
+          </div>
+        </div>
+      </div>,
+      document.body
+    )
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md" style={{ contain: 'layout style', zIndex: 3000 }}>
+    <>
+      {mobileMenuPortal}
+      <header
+        className={`sticky top-0 z-50 border-b border-border/80 shadow-sm ${
+          mobileMenuOpen
+            ? 'bg-background backdrop-blur-none dark:bg-background'
+            : 'bg-background/90 backdrop-blur-md dark:bg-background/95'
+        }`}
+        style={{ contain: 'layout style', zIndex: 3100 }}
+      >
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between h-16 gap-2" style={{ minHeight: '64px' }}>
           {logoSlot}
@@ -159,9 +350,38 @@ export default function NavbarClient({ children: logoSlot }) {
             style={{ minHeight: '40px', contain: 'layout' }}
           >
             <NavItem to="/kostenlose-offerte-anfordern">OFFERTEN</NavItem>
-            <DesktopDropdownNav label="UMZUG" links={umzugLinks} menuKey="umzug" baseHref="/umzugsfirma" />
-            <DesktopDropdownNav label="REINIGUNG" links={reinigungLinks} menuKey="reinigung" />
-            <DesktopDropdownNav label="KOSTEN & TOOLS" links={kostenLinks} menuKey="kosten" />
+            <NavbarMegaMenuNav
+              label="UMZUG"
+              baseHref="/umzugsfirma"
+              links={umzugLinks}
+              featured={megaFeatured.umzug}
+              isOpen={openDesktopMenu === 'umzug'}
+              onOpen={() => openDesktopDropdown('umzug')}
+              onScheduleClose={scheduleCloseDesktopDropdown}
+              onToggleMenu={() => setOpenDesktopMenu((prev) => (prev === 'umzug' ? null : 'umzug'))}
+              onNavigate={() => setOpenDesktopMenu(null)}
+            />
+            <NavbarMegaMenuNav
+              label="REINIGUNG"
+              baseHref="/reinigungsfirma"
+              links={reinigungLinks}
+              featured={megaFeatured.reinigung}
+              isOpen={openDesktopMenu === 'reinigung'}
+              onOpen={() => openDesktopDropdown('reinigung')}
+              onScheduleClose={scheduleCloseDesktopDropdown}
+              onToggleMenu={() => setOpenDesktopMenu((prev) => (prev === 'reinigung' ? null : 'reinigung'))}
+              onNavigate={() => setOpenDesktopMenu(null)}
+            />
+            <NavbarMegaMenuNav
+              label="KOSTEN & TOOLS"
+              links={kostenLinks}
+              featured={megaFeatured.kosten}
+              isOpen={openDesktopMenu === 'kosten'}
+              onOpen={() => openDesktopDropdown('kosten')}
+              onScheduleClose={scheduleCloseDesktopDropdown}
+              onToggleMenu={() => setOpenDesktopMenu((prev) => (prev === 'kosten' ? null : 'kosten'))}
+              onNavigate={() => setOpenDesktopMenu(null)}
+            />
             <NavItem to="/ratgeber">RATGEBER</NavItem>
           </nav>
 
@@ -181,118 +401,7 @@ export default function NavbarClient({ children: logoSlot }) {
           </div>
         </div>
       </div>
-
-      <div
-        className={`md:hidden bg-white border-t overflow-hidden overflow-y-auto transition-all duration-200 ease-in-out ${
-          mobileMenuOpen ? 'max-h-[85vh] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <nav className="pt-2 pb-4 space-y-1">
-            <NavItem to="/" onClick={closeMobile}>
-              <Home size={18} /> Startseite
-            </NavItem>
-            <NavItem to="/kostenlose-offerte-anfordern" onClick={closeMobile}>
-              OFFERTEN
-            </NavItem>
-
-            <div className="pt-1">
-              <div className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50">
-                <Link prefetch={false} href="/umzugsfirma" onClick={closeMobile} className="flex-1 text-left">
-                  UMZUG
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggleMobileSection('umzug')}
-                  aria-label="Umzug Menü öffnen"
-                  className="inline-flex items-center justify-center"
-                >
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform duration-200 ${openMobileSections.umzug ? 'rotate-180' : ''}`}
-                  />
-                </button>
-              </div>
-              <div
-                className={`overflow-hidden transition-all duration-200 ease-in-out ${
-                  openMobileSections.umzug ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="pl-6 pt-1 space-y-1">
-                  {umzugLinks.map((link) => (
-                    <NavItem key={link.to} to={link.to} onClick={closeMobile}>
-                      {link.text}
-                    </NavItem>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-1">
-              <button
-                type="button"
-                onClick={() => toggleMobileSection('reinigung')}
-                className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50"
-              >
-                <span>REINIGUNG</span>
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform duration-200 ${openMobileSections.reinigung ? 'rotate-180' : ''}`}
-                />
-              </button>
-              <div
-                className={`overflow-hidden transition-all duration-200 ease-in-out ${
-                  openMobileSections.reinigung ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="pl-6 pt-1 space-y-1">
-                  {reinigungLinks.map((link) => (
-                    <NavItem key={link.to} to={link.to} onClick={closeMobile}>
-                      {link.text}
-                    </NavItem>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-1">
-              <button
-                type="button"
-                onClick={() => toggleMobileSection('kosten')}
-                className="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold text-gray-500 rounded-md hover:bg-gray-50"
-              >
-                <span>KOSTEN & TOOLS</span>
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform duration-200 ${openMobileSections.kosten ? 'rotate-180' : ''}`}
-                />
-              </button>
-              <div
-                className={`overflow-hidden transition-all duration-200 ease-in-out ${
-                  openMobileSections.kosten ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="pl-6 pt-1 space-y-1">
-                  {kostenLinks.map((link) => (
-                    <NavItem key={link.to} to={link.to} onClick={closeMobile}>
-                      {link.text}
-                    </NavItem>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <NavItem to="/ratgeber" onClick={closeMobile}>
-              RATGEBER
-            </NavItem>
-            <NavItem to="/kontakt" onClick={closeMobile}>
-              <Mail size={18} /> Kontakt
-            </NavItem>
-
-            <NavbarAuthSection variant="mobile" onNavigate={closeMobile} NavItem={NavItem} />
-          </nav>
-        </div>
-      </div>
     </header>
+    </>
   )
 }

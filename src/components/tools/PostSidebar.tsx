@@ -1,306 +1,239 @@
-﻿import Link from 'next/link';
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Tag, Folder, Clock, Sparkles, ArrowRight, List, ChevronDown, ChevronUp } from 'lucide-react';
+﻿'use client'
 
-interface TableOfContentsItem {
-  id: string;
-  title: string;
-  level?: number; // 2 veya 3 (h3 için girinti)
+import Link from 'next/link'
+import React from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Tag, Folder, Clock, Sparkles, ArrowRight, List } from 'lucide-react'
+import type { TocItem } from '@/lib/ratgeber/toc'
+
+const PLACEHOLDER_IMG = 'https://online-offerten.ch/image/online-offerten.webp'
+
+type RecentPost = {
+  title?: string | null
+  slug?: string | null
+  featured_image_url?: string | null
 }
 
-interface PostSidebarProps {
-  category?: string | null;
-  tags?: string[];
-  recentPosts?: any[];
-  ratgeberBasePath?: string;
-  tableOfContents?: TableOfContentsItem[];
-  hideMobileTOC?: boolean; // PostPageClient mobil TOC'u kendisi render ediyorsa true
+type PostSidebarProps = {
+  category?: string | null
+  tags?: string[]
+  recentPosts?: RecentPost[]
+  ratgeberBasePath?: string
+  tableOfContents?: TocItem[]
 }
 
-const PostSidebar: React.FC<PostSidebarProps> = ({ 
-  category, 
-  tags, 
-  recentPosts, 
-  ratgeberBasePath = '/ratgeber', 
-  tableOfContents,
-  hideMobileTOC = false 
+const PostSidebar: React.FC<PostSidebarProps> = ({
+  category,
+  tags,
+  recentPosts,
+  ratgeberBasePath = '/ratgeber',
+  tableOfContents = [],
 }) => {
-  const [activeSection, setActiveSection] = React.useState('');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const [isTOCSticky, setIsTOCSticky] = React.useState(false);
+  const [activeSection, setActiveSection] = React.useState('')
 
   React.useEffect(() => {
-    if (!tableOfContents || tableOfContents.length === 0) return;
+    if (!tableOfContents || tableOfContents.length === 0) return
 
     const handleScroll = () => {
       const sections = tableOfContents
-        .map(item => document.getElementById(item.id))
-        .filter((section): section is HTMLElement => section !== null);
-      
-      // Find the current section
-      let current = '';
+        .map((item) => document.getElementById(item.id))
+        .filter((section): section is HTMLElement => section !== null)
+
+      let current = ''
       for (const section of sections) {
-        const rect = section.getBoundingClientRect();
+        const rect = section.getBoundingClientRect()
         if (rect.top <= 150 && rect.bottom >= 150) {
-          current = section.id;
-          break;
+          current = section.id
+          break
         }
       }
 
-      // If no section is in view, find the closest one
       if (!current) {
         for (const section of sections) {
-          const rect = section.getBoundingClientRect();
+          const rect = section.getBoundingClientRect()
           if (rect.top > 150) {
-            current = section.id;
-            break;
+            current = section.id
+            break
           }
         }
       }
 
       if (current && current !== activeSection) {
-        setActiveSection(current);
+        setActiveSection(current)
       }
-    };
-
-    handleScroll(); // Initial check
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [tableOfContents, activeSection]);
-
-  // Observe first H2 to make TOC sticky when it becomes visible
-  React.useEffect(() => {
-    if (!tableOfContents || tableOfContents.length === 0) return;
-
-    const firstSectionId = tableOfContents[0]?.id;
-    if (!firstSectionId) return;
-
-    const firstSection = document.getElementById(firstSectionId);
-    if (!firstSection) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // İlk H2 viewport'a girdiğinde sticky yap
-        // Ama sadece aşağı scroll yapılıyorsa (yukarı değil)
-        if (entry.isIntersecting) {
-          setIsTOCSticky(true);
-        } else if (entry.boundingClientRect.top > 0) {
-          // H2 henüz viewport'a girmemişse (üstte), sticky değil
-          setIsTOCSticky(false);
-        }
-        // H2 viewport'tan aşağı çıktıysa sticky kalacak
-      },
-      {
-        threshold: 0,
-        rootMargin: '-80px 0px 0px 0px' // Header için offset
-      }
-    );
-
-    observer.observe(firstSection);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [tableOfContents]);
-
-  // Close mobile menu when clicking outside
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (isMobileMenuOpen && !target.closest('.mobile-toc-container')) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    if (isMobileMenuOpen) {
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
     }
-  }, [isMobileMenuOpen]);
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [tableOfContents, activeSection])
 
   const handleNavClick = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
+    e.preventDefault()
+    const element = document.getElementById(id)
     if (element) {
-      const yOffset = -100; // Offset for sticky header
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      setActiveSection(id);
-      setIsMobileMenuOpen(false); // Close mobile menu after navigation
+      const yOffset = -100
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
+      setActiveSection(id)
     }
-  };
-
-  const TableOfContentsNav = () => (
-    <nav className="space-y-1">
-      {tableOfContents?.map((item) => (
-        <a
-          key={item.id}
-          href={`#${item.id}`}
-          onClick={(e) => handleNavClick(e, item.id)}
-          className={`block py-2 rounded-md text-sm transition-colors ${
-            item.level === 3 ? 'pl-6 pr-3' : 'px-3'
-          } ${
-            activeSection === item.id
-              ? 'bg-green-100 text-green-700 font-semibold'
-              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-          }`}
-        >
-          {item.title}
-        </a>
-      ))}
-    </nav>
-  );
+  }
 
   return (
-    <>
-      {/* Mobile TOC - Becomes Sticky After First H2 */}
-      {!hideMobileTOC && tableOfContents && tableOfContents.length > 0 && (
-        <div 
-          className={`lg:hidden z-40 bg-white border-b border-gray-200 shadow-sm mb-6 mobile-toc-container transition-all duration-300 ${
-            isTOCSticky ? 'sticky top-16' : 'relative'
-          }`}
-        >
-          <div className="container mx-auto px-4">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="w-full flex items-center justify-between py-3 text-left hover:bg-gray-50 transition-colors"
-            >
-              <span className="flex items-center gap-2 font-semibold text-gray-900">
-                <List className="w-5 h-5 text-gray-700" />
-                Inhalt
-              </span>
-              {isMobileMenuOpen ? (
-                <ChevronUp className="w-5 h-5 text-gray-600" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-gray-600" />
-              )}
-            </button>
-            
-            {/* Dropdown Menu */}
-            {isMobileMenuOpen && (
-              <div className="py-3 border-t border-gray-200 max-h-[70vh] overflow-y-auto">
-                <TableOfContentsNav />
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Sidebar - Desktop: sticky, Mobile: below article */}
-      <aside className="lg:sticky lg:top-24 space-y-8 mt-8 lg:mt-0">
-        {/* Table of Contents - Desktop Only (mobil TOC PostPageClient'tan render edilir) */}
-        {tableOfContents && tableOfContents.length > 0 && (
-          <Card className="hidden lg:block bg-gray-50 border-gray-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <List className="w-5 h-5 text-gray-700" />
-                Inhalt
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <TableOfContentsNav />
-          </CardContent>
-        </Card>
-      )}
-
-      {/* CTA Card */}
-      <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-green-600" />
-            Gratis Offerten vergleichen
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-sm text-gray-700">
-            Erhalten Sie bis zu 5 unverbindliche Offerten von geprüften Anbietern in Ihrer Nähe – kostenlos und in wenigen Minuten.
-          </p>
-          <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-            <Link href="/kostenlose-offerte-anfordern" rel="noopener noreferrer">
-              Offerten einholen und vergleichen
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
-
-      {/* Recent Posts */}
-      {recentPosts && recentPosts.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Clock className="w-5 h-5 text-green-600" />
-              Neueste Beiträge
+    <div className="space-y-8 lg:sticky lg:top-28 lg:self-start">
+      {tableOfContents && tableOfContents.length > 0 ? (
+        <Card className="hidden rounded-2xl border border-slate-200/80 bg-white/95 shadow-sm ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/95 dark:ring-white/[0.05] lg:block">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-slate-600 dark:text-muted-foreground">
+              <List className="h-4 w-4 text-emerald-700 dark:text-emerald-400" aria-hidden />
+              Auf dieser Seite
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-4">
-              {recentPosts.filter(recentPost => recentPost?.slug).map(recentPost => {
-                const postHref = `${ratgeberBasePath}/${recentPost.slug}`;
-                return (
-                <li key={recentPost.slug} className="flex items-start gap-4">
-                   <Link href={postHref} className="w-16 h-16 rounded-md overflow-hidden flex-shrink-0 block group">
-                       <img 
-                         src={recentPost.featured_image_url || 'https://via.placeholder.com/150'} 
-                         alt={recentPost.title} 
-                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-                        />
-                   </Link>
-                  <div>
-                    <Link href={postHref} className="font-semibold text-sm text-gray-800 hover:text-green-600 leading-tight line-clamp-2">
-                      {recentPost.title}
-                    </Link>
-                  </div>
-                </li>
-                );
-              })}
+            <nav className="space-y-1" aria-label="Inhaltsverzeichnis">
+              {tableOfContents.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`block rounded-xl py-2 text-sm transition-colors ${
+                    item.level === 3 ? 'pl-5 pr-2' : 'px-3'
+                  } ${
+                    activeSection === item.id
+                      ? 'bg-emerald-50 font-semibold text-emerald-900 dark:bg-emerald-950/45 dark:text-emerald-100'
+                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-950 dark:text-muted-foreground dark:hover:bg-muted/50 dark:hover:text-foreground'
+                  }`}
+                >
+                  {item.title}
+                </a>
+              ))}
+            </nav>
+          </CardContent>
+        </Card>
+      ) : null}
+
+      <div className="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-emerald-50/40 p-6 shadow-[0_2px_28px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] dark:border-border dark:from-card dark:via-card dark:to-emerald-950/25 dark:ring-white/[0.06]">
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-900/20">
+            <Sparkles className="h-5 w-5" aria-hidden />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight text-slate-950 dark:text-foreground">
+              Offerten vergleichen
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
+              Bis zu fünf unverbindliche Angebote von geprüften Anbietern — kostenlos und in wenigen Minuten.
+            </p>
+          </div>
+        </div>
+        <Button
+          asChild
+          className="mt-5 w-full rounded-xl bg-emerald-700 font-semibold text-white shadow-sm hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500"
+        >
+          <Link href="/kostenlose-offerte-anfordern" rel="noopener noreferrer">
+            Jetzt Offerten einholen
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+          </Link>
+        </Button>
+      </div>
+
+      {recentPosts && recentPosts.length > 0 ? (
+        <Card className="rounded-2xl border border-slate-200/80 bg-white/95 shadow-sm ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/95 dark:ring-white/[0.05]">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-slate-600 dark:text-muted-foreground">
+              <Clock className="h-4 w-4 text-emerald-700 dark:text-emerald-400" aria-hidden />
+              Weitere Artikel
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-5">
+              {recentPosts
+                .filter((recentPost) => recentPost?.slug)
+                .map((recentPost, index) => {
+                  const postHref = `${ratgeberBasePath}/${recentPost.slug}`
+                  return (
+                    <li key={recentPost.slug} className="flex gap-3">
+                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-[0.6875rem] font-bold text-white dark:bg-slate-800">
+                        {index + 1}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <Link
+                          href={postHref}
+                          className="group flex gap-3 rounded-lg outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600"
+                        >
+                          <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-lg bg-slate-100 ring-1 ring-slate-900/[0.06] dark:bg-muted">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={recentPost.featured_image_url || PLACEHOLDER_IMG}
+                              alt=""
+                              className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                              width={80}
+                              height={56}
+                              loading="lazy"
+                              decoding="async"
+                              aria-hidden
+                            />
+                          </div>
+                          <span className="line-clamp-2 text-sm font-medium leading-snug text-slate-900 transition-colors group-hover:text-emerald-800 dark:text-foreground dark:group-hover:text-emerald-300">
+                            {recentPost.title}
+                          </span>
+                        </Link>
+                      </div>
+                    </li>
+                  )
+                })}
             </ul>
           </CardContent>
         </Card>
-      )}
+      ) : null}
 
-      {/* Category and Tags */}
-      { (category || (tags && tags.length > 0)) && (
-        <Card>
+      {(category || (tags && tags.length > 0)) && (
+        <Card className="rounded-2xl border border-slate-200/80 bg-white/95 shadow-sm ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/95 dark:ring-white/[0.05]">
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Folder className="w-5 h-5 text-green-600" />
-              Kategorie & Tags
+            <CardTitle className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-slate-600 dark:text-muted-foreground">
+              <Folder className="h-4 w-4 text-emerald-700 dark:text-emerald-400" aria-hidden />
+              Einordnung
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {category && (
+          <CardContent className="space-y-5">
+            {category ? (
               <div>
-                <h4 className="font-semibold text-sm mb-2">Kategorie</h4>
-                <Badge>{category}</Badge>
+                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-muted-foreground">
+                  Kategorie
+                </h3>
+                <Link
+                  href={`${ratgeberBasePath}?${new URLSearchParams({ category }).toString()}`}
+                  className="inline-flex rounded-full border border-emerald-200/90 bg-emerald-50/80 px-2.5 py-0.5 text-xs font-semibold text-emerald-900 transition-colors hover:border-emerald-300 hover:bg-emerald-100/90 dark:border-emerald-800/60 dark:bg-emerald-950/35 dark:text-emerald-200 dark:hover:border-emerald-500/50"
+                >
+                  {category}
+                </Link>
               </div>
-            )}
-            {tags && tags.length > 0 && (
+            ) : null}
+            {tags && tags.length > 0 ? (
               <div>
-                <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                  <Tag className="w-4 h-4" />
-                  Tags
-                </h4>
+                <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-muted-foreground">
+                  <Tag className="h-3.5 w-3.5" aria-hidden />
+                  Schlagwörter
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {tags.map(tag => (
-                    <Badge key={tag} variant="secondary" asChild>
-                      <Link href={`${ratgeberBasePath}?tag=${encodeURIComponent(tag)}`}>
-                        #{tag}
-                      </Link>
-                    </Badge>
+                  {tags.map((tag) => (
+                    <Link
+                      key={tag}
+                      href={`${ratgeberBasePath}?tag=${encodeURIComponent(String(tag).trim().toLowerCase())}`}
+                      className="inline-flex rounded-full border border-slate-200/90 bg-slate-50/80 px-3 py-1 text-xs font-semibold text-slate-700 transition-colors hover:border-emerald-200 hover:bg-emerald-50/80 hover:text-emerald-900 dark:border-border dark:bg-muted/50 dark:text-foreground dark:hover:border-emerald-800/60"
+                    >
+                      {tag}
+                    </Link>
                   ))}
                 </div>
               </div>
-            )}
+            ) : null}
           </CardContent>
         </Card>
       )}
-    </aside>
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default PostSidebar;
+export default PostSidebar

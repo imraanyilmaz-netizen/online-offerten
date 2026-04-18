@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 import AdminPanelCore from './AdminPanelCore';
@@ -24,10 +24,10 @@ const AdminPanel = ({ userRole = 'admin' }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
+      <div className="flex justify-center items-center h-screen bg-background">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-blue-600 animate-spin mx-auto" />
-          <p className="mt-4 text-lg text-gray-600">Admin-Panel wird geladen...</p>
+          <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto" />
+          <p className="mt-4 text-lg text-muted-foreground">Admin-Panel wird geladen...</p>
         </div>
       </div>
     );

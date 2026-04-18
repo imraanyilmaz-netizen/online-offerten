@@ -66,7 +66,7 @@ const StarRating = ({ rating, setRating, interactive = true }: { rating: number;
                     const starValue = index + 1;
                     return (
                         <div key={starValue} className="p-1 relative pointer-events-none">
-                            <Star className="w-8 h-8 text-gray-300 transition-colors" />
+                            <Star className="w-8 h-8 text-muted-foreground/35 transition-colors" />
                             {roundedDisplayValue >= starValue && (
                                 <Star className="w-8 h-8 absolute top-1 left-1 text-yellow-400 fill-yellow-400 transition-colors" />
                             )}
@@ -79,7 +79,7 @@ const StarRating = ({ rating, setRating, interactive = true }: { rating: number;
                     );
                 })}
             </div>
-            <span className="font-bold text-xl text-gray-800 w-12 text-center">{displayValue.toFixed(1)}</span>
+            <span className="font-bold text-xl text-foreground w-12 text-center">{displayValue.toFixed(1)}</span>
         </div>
     );
 };
@@ -158,7 +158,7 @@ const PartnerReviewForm = ({ partner, quote, onBack, onComplete }: { partner: an
                             <StarRating rating={ratings.administration} setRating={val => setRatings(p => ({ ...p, administration: val }))} />
                         </div>
                     </div>
-                    <div className="bg-gray-50 rounded-lg p-4 flex justify-between items-center">
+                    <div className="bg-muted/50 rounded-lg p-4 flex justify-between items-center border border-border">
                         <Label className="font-bold text-lg">Gesamtbewertung</Label>
                         <StarRating rating={overallRating} interactive={false} />
                     </div>
@@ -333,13 +333,13 @@ const ReviewPageClient = () => {
                                     <div className="space-y-3">
                                     {partners.map(p => (
                                         <Button key={p.id} variant="outline" className="w-full justify-start h-auto py-3" onClick={() => handlePartnerSelect(p)}>
-                                            <Building className="mr-3 h-5 w-5 text-gray-500" />
+                                            <Building className="mr-3 h-5 w-5 text-muted-foreground" />
                                             <span className="font-semibold">{p.company_name}</span>
                                         </Button>
                                     ))}
                                     </div>
                                 ) : (
-                                    <p className="text-center text-gray-500 py-4">Für diese Anfrage wurden keine Firmen gefunden, die bewertet werden können.</p>
+                                    <p className="text-center text-muted-foreground py-4">Für diese Anfrage wurden keine Firmen gefunden, die bewertet werden können.</p>
                                 )}
                                 <div className="relative">
                                     <div className="absolute inset-0 flex items-center"><span className="w-full border-t" /></div>
@@ -356,8 +356,8 @@ const ReviewPageClient = () => {
                     {view === 'completed' && (
                          <div className="text-center p-8 sm:p-12">
                              <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6"/>
-                             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Vielen Dank für Ihr Feedback!</h2>
-                             <p className="mt-4 text-gray-600 max-w-md mx-auto">Ihre Bewertung wurde erfolgreich übermittelt und hilft uns, unseren Service stetig zu verbessern.</p>
+                             <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Vielen Dank für Ihr Feedback!</h2>
+                             <p className="mt-4 text-muted-foreground max-w-md mx-auto">Ihre Bewertung wurde erfolgreich übermittelt und hilft uns, unseren Service stetig zu verbessern.</p>
                              <Button asChild className="mt-8">
                                  <Link href="/">Zurück zur Startseite</Link>
                              </Button>
@@ -371,7 +371,7 @@ const ReviewPageClient = () => {
     return (
         <>
             
-            <div className="min-h-screen bg-gray-50 flex items-center py-12 px-4 sm:px-6 lg:px-8">
+            <div className="min-h-screen bg-background flex items-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl w-full mx-auto">
                     <Card className="shadow-2xl">
                         {renderContent()}

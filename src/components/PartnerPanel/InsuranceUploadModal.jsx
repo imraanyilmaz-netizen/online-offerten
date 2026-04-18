@@ -137,12 +137,12 @@ const InsuranceUploadModal = ({ open, onOpenChange, partnerId, onSuccess }) => {
         <div className="space-y-5 py-2">
           {/* PDF Upload */}
           <div>
-            <Label className="text-sm font-semibold text-gray-700 mb-2 block">Versicherungsdokument (PDF)</Label>
+            <Label className="text-sm font-semibold text-foreground mb-2 block">Versicherungsdokument (PDF)</Label>
             {!file ? (
               <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-green-400 hover:bg-green-50/50 transition-colors">
-                <Upload className="w-8 h-8 text-gray-400 mb-2" />
-                <span className="text-sm text-gray-500">PDF auswählen oder hierher ziehen</span>
-                <span className="text-xs text-gray-400 mt-1">Maximal 10 MB</span>
+                <Upload className="w-8 h-8 text-muted-foreground mb-2" />
+                <span className="text-sm text-muted-foreground">PDF auswählen oder hierher ziehen</span>
+                <span className="text-xs text-muted-foreground mt-1">Maximal 10 MB</span>
                 <input 
                   type="file" 
                   accept="application/pdf" 
@@ -154,10 +154,10 @@ const InsuranceUploadModal = ({ open, onOpenChange, partnerId, onSuccess }) => {
               <div className="flex items-center gap-3 p-3 border border-green-200 bg-green-50 rounded-lg">
                 <FileText className="w-8 h-8 text-green-600 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-800 truncate">{file.name}</p>
-                  <p className="text-xs text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
+                  <p className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                 </div>
-                <Button variant="ghost" size="sm" onClick={handleRemoveFile} className="text-gray-400 hover:text-red-500">
+                <Button variant="ghost" size="sm" onClick={handleRemoveFile} className="text-muted-foreground hover:text-red-500">
                   <X className="w-4 h-4" />
                 </Button>
               </div>
@@ -166,7 +166,7 @@ const InsuranceUploadModal = ({ open, onOpenChange, partnerId, onSuccess }) => {
 
           {/* Gültig bis */}
           <div>
-            <Label htmlFor="validUntil" className="text-sm font-semibold text-gray-700 mb-2 block">
+            <Label htmlFor="validUntil" className="text-sm font-semibold text-foreground mb-2 block">
               Gültig bis
             </Label>
             <Input
@@ -187,7 +187,7 @@ const InsuranceUploadModal = ({ open, onOpenChange, partnerId, onSuccess }) => {
               onCheckedChange={setConfirmed}
               className="mt-0.5"
             />
-            <Label htmlFor="insuranceConfirm" className="text-sm text-gray-700 leading-snug cursor-pointer">
+            <Label htmlFor="insuranceConfirm" className="text-sm text-foreground leading-snug cursor-pointer">
               Ich bestätige, dass die hochgeladene Versicherung meine gewerbliche Tätigkeit vollständig abdeckt.
             </Label>
           </div>

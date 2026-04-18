@@ -1,7 +1,8 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 // framer-motion removed - CSS for better INP
-import { Star, UserCircle2, Globe, MessageSquare } from 'lucide-react';
+import { Star, MessageSquare } from 'lucide-react';
+import { getCustomerInitials } from '@/lib/utils';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
@@ -26,7 +27,14 @@ const PlatformReviewCard = ({ review }) => {
       <CardHeader className="p-5 bg-gray-50/50 border-b">
          <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
-                  <UserCircle2 size={32} className="text-gray-400" />
+                  <div
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-green-100 to-green-50 border border-green-200 flex items-center justify-center shrink-0"
+                    aria-hidden
+                  >
+                    <span className="text-sm font-bold text-green-700 tracking-tight select-none">
+                      {getCustomerInitials(customer_name)}
+                    </span>
+                  </div>
                   <div>
                       <p className="text-base font-bold text-gray-800">{customer_name || 'Anonym'}</p>
                       <p className="text-sm text-gray-500">{city || 'Unbekannter Ort'}</p>

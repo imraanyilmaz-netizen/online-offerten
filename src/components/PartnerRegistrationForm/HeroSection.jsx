@@ -13,7 +13,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-green-50">
+    <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-br from-muted/40 via-card to-green-50/80 dark:from-background dark:via-card dark:to-green-950/40">
       <div className="absolute inset-0 opacity-5">
         <div
           className="absolute inset-0"
@@ -28,28 +28,28 @@ const HeroSection = () => {
       <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div>
-            <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-4">
+            <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-green-950/60 rounded-full text-green-700 dark:text-green-300 font-semibold text-sm mb-4">
               <Award className="h-4 w-4 mr-2" />
               Mehr Aufträge - Weniger Aufwand
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight mb-6 leading-tight">
               Partner werden und regelmässig neue Kundenanfragen erhalten
             </h1>
             <div className="space-y-3 mb-8">
-              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                 Online-Offerten.ch bringt Betriebe wie Ihres mit Kundinnen und Kunden zusammen, die in
                 der Schweiz aktiv Offerten einholen. Ohne Werbebudget im Voraus: Sie registrieren sich
                 unverbindlich und entscheiden erst bei der konkreten Anfrage, ob ein Angebot für Sie
                 sinnvoll ist.
               </p>
-              <p className="text-base md:text-lg text-gray-700 leading-relaxed font-medium">
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-medium">
                 Profil anlegen, Regionen festlegen – passende Anfragen folgen im Partner-Dashboard.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
               {trustPoints.map((point) => (
-                <div key={point} className="flex items-center text-sm text-gray-700">
+                <div key={point} className="flex items-center text-sm text-muted-foreground">
                   <CheckCircle2 className="h-5 w-5 text-green-600 mr-2 shrink-0" />
                   <span>{point}</span>
                 </div>
@@ -70,7 +70,7 @@ const HeroSection = () => {
           </div>
 
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-border">
               <Image
                 src="/fotos/5c399fc1.webp"
                 alt="Partnerfirmen erhalten qualifizierte Kundenanfragen über Online-Offerten.ch"

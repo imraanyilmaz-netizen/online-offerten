@@ -427,17 +427,17 @@ export default function SocialShareCard({ partnerSlug, partnerId }: SocialShareC
 
   return (
     <>
-      <Card className="border-green-200 bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 overflow-hidden">
+      <Card className="border-green-200 dark:border-emerald-800/80 bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 dark:from-emerald-950/50 dark:via-emerald-950/35 dark:to-emerald-950/50 overflow-hidden text-card-foreground shadow-sm">
         <CardContent className="p-5">
           <div className="flex items-center gap-3 mb-4">
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-600 flex items-center justify-center shadow">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-600 dark:bg-emerald-600 flex items-center justify-center shadow">
               <Share2 className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="font-bold text-green-800 text-[15px]">
+              <h3 className="font-bold text-green-800 dark:text-emerald-100 text-[15px]">
                 Teilen Sie Ihre Bewertungen in Social Media!
               </h3>
-              <p className="text-xs text-green-600">
+              <p className="text-xs text-green-600 dark:text-emerald-300/90">
                 Zeigen Sie Ihren Kunden, dass Sie top bewertet sind.
               </p>
             </div>
@@ -449,16 +449,16 @@ export default function SocialShareCard({ partnerSlug, partnerId }: SocialShareC
                 key={s.num}
                 type="button"
                 onClick={s.action}
-                className="flex items-center gap-3 p-3 rounded-xl bg-white border border-green-100 hover:border-green-300 hover:shadow-sm transition-all text-left group"
+                className="flex items-center gap-3 p-3 rounded-xl bg-card border border-green-100 dark:border-emerald-900/60 hover:border-green-300 dark:hover:border-emerald-600 hover:shadow-sm transition-all text-left group"
               >
                 <div className="flex-shrink-0">
                   <SocialIcon type={s.icon} />
                 </div>
                 <div className="min-w-0">
-                  <div className="font-semibold text-sm text-gray-800 group-hover:text-green-700 transition-colors">
+                  <div className="font-semibold text-sm text-foreground group-hover:text-green-700 dark:group-hover:text-emerald-400 transition-colors">
                     {s.label}
                   </div>
-                  <div className="text-[11px] text-gray-500 leading-tight">{s.desc}</div>
+                  <div className="text-[11px] text-muted-foreground leading-tight">{s.desc}</div>
                 </div>
               </button>
             ))}
@@ -469,29 +469,29 @@ export default function SocialShareCard({ partnerSlug, partnerId }: SocialShareC
       {/* Instagram Share Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-5 border-b">
+          <div className="bg-card border border-border rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-5 border-b border-border">
               <div className="flex items-center gap-2">
                 <SocialIcon type="instagram" />
-                <h3 className="font-bold text-gray-800">Instagram Post erstellen</h3>
+                <h3 className="font-bold text-foreground">Instagram Post erstellen</h3>
               </div>
               <button
                 onClick={() => setShowModal(false)}
-                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors"
               >
-                <X className="w-4 h-4 text-gray-500" />
+                <X className="w-4 h-4 text-muted-foreground" />
               </button>
             </div>
 
             <div className="p-5 space-y-4">
               {generating ? (
                 <div className="flex flex-col items-center justify-center py-12">
-                  <Loader2 className="w-8 h-8 animate-spin text-green-600 mb-3" />
-                  <p className="text-sm text-gray-500">Bild wird erstellt...</p>
+                  <Loader2 className="w-8 h-8 animate-spin text-green-600 dark:text-emerald-400 mb-3" />
+                  <p className="text-sm text-muted-foreground">Bild wird erstellt...</p>
                 </div>
               ) : imageUrl ? (
                 <>
-                  <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+                  <div className="rounded-xl overflow-hidden border border-border shadow-sm">
                     <img
                       ref={imageRef}
                       src={imageUrl}
@@ -509,15 +509,15 @@ export default function SocialShareCard({ partnerSlug, partnerId }: SocialShareC
                       Bild herunterladen
                     </Button>
 
-                    <div className="bg-gray-50 rounded-lg p-3 space-y-2">
-                      <p className="text-xs font-semibold text-gray-700">So geht&apos;s:</p>
-                      <ol className="text-xs text-gray-600 space-y-1 list-decimal list-inside">
+                    <div className="bg-muted/50 rounded-lg p-3 space-y-2 border border-border">
+                      <p className="text-xs font-semibold text-foreground">So geht&apos;s:</p>
+                      <ol className="text-xs text-muted-foreground space-y-1 list-decimal list-inside">
                         <li>Laden Sie das Bild herunter</li>
                         <li>Öffnen Sie Instagram und erstellen Sie einen neuen Post</li>
                         <li>Wählen Sie das heruntergeladene Bild</li>
                         <li>
                           Fügen Sie als Caption hinzu:{' '}
-                          <span className="text-green-700 font-medium">
+                          <span className="text-green-700 dark:text-emerald-400 font-medium">
                             &quot;⭐ {partnerData?.average_rating.toFixed(1)}/5 Sterne –
                             verifizierte Kundenbewertungen! {profileUrl}&quot;
                           </span>
@@ -539,7 +539,7 @@ export default function SocialShareCard({ partnerSlug, partnerId }: SocialShareC
                   </div>
                 </>
               ) : (
-                <div className="text-center py-8 text-sm text-gray-500">
+                <div className="text-center py-8 text-sm text-muted-foreground">
                   Bild konnte nicht erstellt werden.
                 </div>
               )}

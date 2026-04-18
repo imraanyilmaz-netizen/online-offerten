@@ -159,10 +159,10 @@ const PartnerCreditTopUpPageClient = () => {
   // Show loading while checking auth
   if (authLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
+      <div className="flex justify-center items-center h-screen bg-background">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-green-600 animate-spin mx-auto" />
-          <p className="mt-4 text-lg text-gray-600">Laden...</p>
+          <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto" />
+          <p className="mt-4 text-lg text-muted-foreground">Laden...</p>
         </div>
       </div>
     );
@@ -200,10 +200,10 @@ const PartnerCreditTopUpPageClient = () => {
           />
         )}
       
-      <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8 flex items-center justify-center">
+      <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8 flex items-center justify-center">
         <div className="w-full max-w-md">
           <div className="mb-4">
-            <Button asChild variant="ghost" className="text-gray-600 hover:text-gray-900">
+            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
               <Link href="/partner/dashboard">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Zurück zum Dashboard
@@ -217,12 +217,12 @@ const PartnerCreditTopUpPageClient = () => {
                 key="canceled"
                 className="mb-4"
               >
-                <Card className="bg-amber-50 border-amber-400">
+                <Card className="bg-amber-50 border-amber-400 dark:bg-amber-950/35 dark:border-amber-700">
                   <CardContent className="p-4 flex items-center">
-                    <ShieldX className="h-6 w-6 text-amber-600 mr-3 flex-shrink-0" />
+                    <ShieldX className="h-6 w-6 text-amber-600 dark:text-amber-400 mr-3 flex-shrink-0" />
                     <div>
-                      <p className="font-semibold text-amber-800">Zahlung abgebrochen</p>
-                      <p className="text-sm text-amber-700">Der Zahlungsvorgang wurde nicht abgeschlossen. Sie können es erneut versuchen.</p>
+                      <p className="font-semibold text-amber-800 dark:text-amber-200">Zahlung abgebrochen</p>
+                      <p className="text-sm text-amber-700 dark:text-amber-300/90">Der Zahlungsvorgang wurde nicht abgeschlossen. Sie können es erneut versuchen.</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -232,18 +232,18 @@ const PartnerCreditTopUpPageClient = () => {
           
           <Card className="shadow-lg animate-fade-in">
             <CardHeader className="text-center">
-              <div className="mx-auto bg-green-100 p-4 rounded-full w-fit mb-4">
-                <Zap className="h-8 w-8 text-green-600" />
+              <div className="mx-auto bg-green-100 dark:bg-emerald-950/45 p-4 rounded-full w-fit mb-4">
+                <Zap className="h-8 w-8 text-green-600 dark:text-emerald-400" />
               </div>
               <CardTitle className="text-3xl font-bold">Guthaben aufladen</CardTitle>
-              <CardDescription className="text-lg text-gray-600">Sie werden zur sicheren Zahlungsseite weitergeleitet.</CardDescription>
+              <CardDescription className="text-lg text-muted-foreground">Sie werden zur sicheren Zahlungsseite weitergeleitet.</CardDescription>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="amount" className="text-lg font-medium">Betrag eingeben</Label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">CHF</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-semibold">CHF</span>
                     <Input
                       id="amount"
                       type="text"

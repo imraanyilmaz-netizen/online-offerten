@@ -55,16 +55,16 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
     const activity = getRelativeTime(lastActivity);
     if (!activity) {
       return (
-        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-400">
-          <span className="w-2 h-2 rounded-full bg-gray-300" />
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+          <span className="w-2 h-2 rounded-full bg-muted-foreground/35" />
           Nie eingeloggt
         </span>
       );
     }
     const colorMap = {
-      green: { dot: 'bg-green-500', text: 'text-green-700', bg: 'bg-green-50' },
-      yellow: { dot: 'bg-yellow-500', text: 'text-yellow-700', bg: 'bg-yellow-50' },
-      red: { dot: 'bg-red-500', text: 'text-red-700', bg: 'bg-red-50' },
+      green: { dot: 'bg-green-500 dark:bg-emerald-500', text: 'text-green-700 dark:text-emerald-200', bg: 'bg-green-50 dark:bg-emerald-950/45' },
+      yellow: { dot: 'bg-yellow-500 dark:bg-amber-500', text: 'text-yellow-700 dark:text-amber-200', bg: 'bg-yellow-50 dark:bg-amber-950/40' },
+      red: { dot: 'bg-red-500', text: 'text-red-700 dark:text-red-300', bg: 'bg-red-50 dark:bg-red-950/40' },
     };
     const colors = colorMap[activity.color];
     return (
@@ -118,12 +118,12 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
 
   const getStatusBadge = (status) => {
     const statusConfig = {
-      active: { label: 'Aktiv', className: 'bg-green-100 text-green-800 border-green-200 font-semibold' },
-      inactive: { label: 'Inaktiv', className: 'bg-orange-100 text-orange-800 border-orange-200 font-semibold' },
-      pending: { label: 'Ausstehend', className: 'bg-yellow-100 text-yellow-800 border-yellow-200 font-semibold' },
-      rejected: { label: 'Abgelehnt', className: 'bg-red-100 text-red-800 border-red-200 font-semibold' },
+      active: { label: 'Aktiv', className: 'bg-green-100 text-green-800 border-green-200 dark:bg-emerald-950/55 dark:text-emerald-200 dark:border-emerald-800 font-semibold' },
+      inactive: { label: 'Inaktiv', className: 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-950/45 dark:text-orange-200 dark:border-orange-800 font-semibold' },
+      pending: { label: 'Ausstehend', className: 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-amber-950/45 dark:text-amber-200 dark:border-amber-800 font-semibold' },
+      rejected: { label: 'Abgelehnt', className: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-950/45 dark:text-red-200 dark:border-red-900 font-semibold' },
     };
-    const config = statusConfig[status] || { label: status, className: 'bg-gray-100 text-gray-800 border-gray-200 font-semibold' };
+    const config = statusConfig[status] || { label: status, className: 'bg-muted text-foreground border-border font-semibold' };
     return <Badge variant="outline" className={`${config.className} border px-3 py-1`}>{config.label}</Badge>;
   };
 
@@ -168,7 +168,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
           size="sm" 
           onClick={() => handleUpdateStatus(partner.id, 'inactive')} 
           disabled={isUpdating} 
-          className="text-orange-600 border-orange-300 hover:bg-orange-50 hover:text-orange-700 hover:border-orange-400 font-semibold"
+          className="text-orange-600 border-orange-300 hover:bg-orange-50 hover:text-orange-700 hover:border-orange-400 dark:text-orange-400 dark:border-orange-700 dark:hover:bg-orange-950/40 dark:hover:text-orange-300 dark:hover:border-orange-600 font-semibold"
         >
           {isUpdating ? <Loader2 className="w-4 h-4 mr-1.5 animate-spin" /> : <Pause className="w-4 h-4 mr-1.5" />} 
           Deaktivieren
@@ -182,7 +182,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
           size="sm" 
           onClick={() => handleUpdateStatus(partner.id, 'active')} 
           disabled={isUpdating} 
-          className="text-green-600 border-green-300 hover:bg-green-50 hover:text-green-700 hover:border-green-400 font-semibold"
+          className="text-green-600 border-green-300 hover:bg-green-50 hover:text-green-700 hover:border-green-400 dark:text-emerald-400 dark:border-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 dark:hover:border-emerald-600 font-semibold"
         >
           {isUpdating ? <Loader2 className="w-4 h-4 mr-1.5 animate-spin" /> : <Play className="w-4 h-4 mr-1.5" />} 
           Aktivieren
@@ -199,8 +199,8 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
     return (
       <Card>
         <CardContent className="text-center py-12">
-          <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg">Wird geladen...</p>
+          <Users className="w-16 h-16 text-muted-foreground/40 mx-auto mb-4" />
+          <p className="text-muted-foreground text-lg">Wird geladen...</p>
         </CardContent>
       </Card>
     );
@@ -224,19 +224,19 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
             <div 
               key={partner.id}
             >
-              <Card className={`transition-all duration-300 hover:shadow-xl border-l-4 ${
+              <Card className={`transition-all duration-300 hover:shadow-xl border-l-4 border-border ${
                 partner.status === 'active' 
-                  ? 'bg-white border-l-green-500 hover:border-l-green-600' 
+                  ? 'bg-card border-l-green-500 hover:border-l-green-600 dark:border-l-emerald-500 dark:hover:border-l-emerald-400' 
                   : partner.status === 'pending'
-                  ? 'bg-yellow-50/30 border-l-yellow-500 hover:border-l-yellow-600'
-                  : 'bg-gray-50/50 border-l-gray-400 hover:border-l-gray-500'
+                  ? 'bg-yellow-50/30 dark:bg-amber-950/20 border-l-yellow-500 hover:border-l-yellow-600 dark:border-l-amber-500 dark:hover:border-l-amber-400'
+                  : 'bg-muted/35 border-l-muted-foreground/50 hover:border-l-muted-foreground/70'
               }`}>
                 <CardContent className="p-5 md:p-6">
                   <div className="flex flex-col lg:flex-row items-start justify-between gap-5">
                     <div className="flex-1 min-w-0 w-full">
                       <div className="flex items-start justify-between gap-3 mb-3 flex-wrap">
                         <div className="flex items-center gap-3 flex-wrap">
-                          <h3 className="text-xl font-bold text-gray-900">{partner.company_name || partner.name}</h3>
+                          <h3 className="text-xl font-bold text-foreground">{partner.company_name || partner.name}</h3>
                           {getStatusBadge(partner.status)}
                           <ActivityBadge lastActivity={partner.last_activity} />
                         </div>
@@ -251,7 +251,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                             <Badge 
                               key={cat} 
                               variant="outline" 
-                              className="capitalize flex items-center gap-1.5 bg-gray-50 border-gray-200 text-gray-700 font-medium px-3 py-1"
+                              className="capitalize flex items-center gap-1.5 bg-muted/40 border-border text-foreground font-medium px-3 py-1"
                             >
                               <Icon className="w-3.5 h-3.5" /> {config.label}
                             </Badge>
@@ -260,45 +260,45 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                       </div>
 
                       <div className="mb-4">
-                        <p className="text-sm font-medium text-gray-700">{partner.email}</p>
+                        <p className="text-sm font-medium text-muted-foreground">{partner.email}</p>
                       </div>
 
-                      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 p-4 bg-gradient-to-br from-gray-50 to-white rounded-lg border border-gray-100">
+                      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 p-4 bg-gradient-to-br from-muted/50 to-background dark:from-muted/30 dark:to-muted/10 rounded-lg border border-border">
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">
-                            <Star className="w-4 h-4 text-yellow-500" />
-                            <span className="text-xs font-medium text-gray-500">Bewertung</span>
+                            <Star className="w-4 h-4 text-yellow-500 dark:text-amber-400" />
+                            <span className="text-xs font-medium text-muted-foreground">Bewertung</span>
                           </div>
-                          <span className="text-sm font-bold text-gray-900">
-                            {(partner.rating || 0).toFixed(1)} <span className="text-xs font-normal text-gray-500">({partner.review_count || 0})</span>
+                          <span className="text-sm font-bold text-foreground">
+                            {(partner.rating || 0).toFixed(1)} <span className="text-xs font-normal text-muted-foreground">({partner.review_count || 0})</span>
                           </span>
                         </div>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">
-                            <TrendingUp className="w-4 h-4 text-blue-500" />
-                            <span className="text-xs font-medium text-gray-500">Käufe</span>
+                            <TrendingUp className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+                            <span className="text-xs font-medium text-muted-foreground">Käufe</span>
                           </div>
-                          <span className="text-sm font-bold text-gray-900">{partner.total_purchases || 0}</span>
+                          <span className="text-sm font-bold text-foreground">{partner.total_purchases || 0}</span>
                         </div>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">
-                            <span className="text-xs font-medium text-gray-500">Umsatz</span>
+                            <span className="text-xs font-medium text-muted-foreground">Umsatz</span>
                           </div>
-                          <span className="text-sm font-bold text-gray-900">CHF {(partner.total_revenue || 0).toLocaleString()}</span>
+                          <span className="text-sm font-bold text-foreground">CHF {(partner.total_revenue || 0).toLocaleString()}</span>
                         </div>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">
-                            <Wallet className="w-4 h-4 text-green-500" />
-                            <span className="text-xs font-medium text-gray-500">Guthaben</span>
+                            <Wallet className="w-4 h-4 text-green-500 dark:text-emerald-400" />
+                            <span className="text-xs font-medium text-muted-foreground">Guthaben</span>
                           </div>
-                          <span className="text-sm font-bold text-green-600">CHF {((partner.main_balance || 0) + (partner.bonus_balance || 0)).toFixed(2)}</span>
+                          <span className="text-sm font-bold text-green-600 dark:text-emerald-400">CHF {((partner.main_balance || 0) + (partner.bonus_balance || 0)).toFixed(2)}</span>
                         </div>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">
-                            <Activity className="w-4 h-4 text-purple-500" />
-                            <span className="text-xs font-medium text-gray-500">Letzte Aktivität</span>
+                            <Activity className="w-4 h-4 text-purple-500 dark:text-purple-400" />
+                            <span className="text-xs font-medium text-muted-foreground">Letzte Aktivität</span>
                           </div>
-                          <span className="text-sm font-bold text-gray-900">
+                          <span className="text-sm font-bold text-foreground">
                             {partner.last_activity 
                               ? new Date(partner.last_activity).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })
                               : 'Nie'}
@@ -331,7 +331,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                           variant="outline" 
                           size="sm" 
                           onClick={() => setEmailPartner(partner)}
-                          className="font-medium text-blue-700 border-blue-200 hover:bg-blue-50"
+                          className="font-medium text-blue-700 border-blue-200 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-800 dark:hover:bg-blue-950/40 dark:hover:text-blue-300"
                         >
                           <Mail className="w-4 h-4 mr-1.5" />E-Mail
                         </Button>
@@ -347,7 +347,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                           variant="outline" 
                           size="sm" 
                           onClick={() => setCreditingPartner(partner)} 
-                          className="text-green-600 border-green-300 hover:bg-green-50 hover:text-green-700 hover:border-green-400 font-medium"
+                          className="text-green-600 border-green-300 hover:bg-green-50 hover:text-green-700 hover:border-green-400 dark:text-emerald-400 dark:border-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300 dark:hover:border-emerald-600 font-medium"
                         >
                           <Gift className="w-4 h-4 mr-1.5" />Guthaben
                         </Button>
@@ -363,7 +363,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-between pt-4 mt-5 border-t border-gray-200 flex-wrap gap-3">
+                  <div className="flex items-center justify-between pt-4 mt-5 border-t border-border flex-wrap gap-3">
                        <div className="flex items-center gap-2 flex-wrap">
                            {getStatusActions(partner)}
                        </div>
@@ -372,7 +372,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                         variant="link" 
                         size="sm" 
                         onClick={() => handleViewProfile(partner.slug)}
-                        className="text-green-600 hover:text-green-700 font-semibold"
+                        className="text-green-600 hover:text-green-700 dark:text-emerald-400 dark:hover:text-emerald-300 font-semibold"
                       >
                         Öffentliches Profil ansehen <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
                       </Button>
@@ -384,13 +384,13 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
           ))}
         </div>
       ) : (
-        <Card className="border-2 border-dashed border-gray-200">
+        <Card className="border-2 border-dashed border-border">
           <CardContent className="text-center py-16">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
-              <Users className="w-10 h-10 text-gray-400" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-muted rounded-full mb-4">
+              <Users className="w-10 h-10 text-muted-foreground" />
             </div>
-            <p className="text-lg font-semibold text-gray-700 mb-1">Keine Partner gefunden</p>
-            <p className="text-sm text-gray-500">Versuchen Sie, die Filterkriterien zu ändern.</p>
+            <p className="text-lg font-semibold text-foreground mb-1">Keine Partner gefunden</p>
+            <p className="text-sm text-muted-foreground">Versuchen Sie, die Filterkriterien zu ändern.</p>
           </CardContent>
         </Card>
       )}

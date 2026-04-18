@@ -50,8 +50,8 @@ const RefundRequestList = ({ refundRequests = [], onApprove, onReject, isProcess
 
   if (refundRequests.length === 0) {
     return (
-      <div className="text-center p-12 text-gray-500 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-        <Inbox className="w-12 h-12 mx-auto text-gray-300 mb-3" />
+      <div className="text-center p-12 text-muted-foreground bg-muted/30 rounded-xl border-2 border-dashed border-border">
+        <Inbox className="w-12 h-12 mx-auto text-muted-foreground/40 mb-3" />
         <p className="text-lg font-medium">Keine Rückerstattungsanfragen vorhanden.</p>
       </div>
     );
@@ -64,8 +64,8 @@ const RefundRequestList = ({ refundRequests = [], onApprove, onReject, isProcess
     return (
       <div
         key={request.id}
-        className={`bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden ${
-          request.status === 'pending' ? 'border-orange-200' : 'border-gray-200'
+        className={`bg-card rounded-lg border border-border shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden ${
+          request.status === 'pending' ? 'border-orange-200 dark:border-orange-800' : ''
         }`}
       >
         <div className="p-4 sm:p-5">
@@ -74,37 +74,37 @@ const RefundRequestList = ({ refundRequests = [], onApprove, onReject, isProcess
             <div className="flex-1 space-y-2">
               <div className="flex items-center gap-2 flex-wrap">
                 {getStatusBadge(request.status)}
-                <span className="text-xs text-gray-500">{formattedDate}</span>
+                <span className="text-xs text-muted-foreground">{formattedDate}</span>
               </div>
               
               <div className="flex items-center gap-2 text-sm">
-                <Building className="w-4 h-4 text-gray-500" />
-                <span className="font-semibold text-gray-800">{request.partners?.company_name || 'Unbekannter Partner'}</span>
+                <Building className="w-4 h-4 text-muted-foreground" />
+                <span className="font-semibold text-foreground">{request.partners?.company_name || 'Unbekannter Partner'}</span>
               </div>
 
               {request.quotes && (
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <MapPin className="w-4 h-4 text-gray-400" />
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <MapPin className="w-4 h-4 text-muted-foreground/80" />
                   <span>{request.quotes.servicetype} — {request.quotes.from_city}{request.quotes.to_city ? ` → ${request.quotes.to_city}` : ''}</span>
                 </div>
               )}
 
               <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mt-2">
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-gray-900">Grund:</span> {request.reason}
+                <p className="text-sm text-foreground">
+                  <span className="font-semibold text-foreground">Grund:</span> {request.reason}
                 </p>
               </div>
 
               {request.admin_note && (
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                  <p className="text-sm text-gray-700">
-                    <span className="font-semibold text-gray-900">Admin-Notiz:</span> {request.admin_note}
+                  <p className="text-sm text-foreground">
+                    <span className="font-semibold text-foreground">Admin-Notiz:</span> {request.admin_note}
                   </p>
                 </div>
               )}
 
               {resolvedDate && (
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-muted-foreground">
                   {request.status === 'approved' ? 'Erstattet' : 'Abgelehnt'} am {resolvedDate}
                 </p>
               )}
@@ -113,7 +113,7 @@ const RefundRequestList = ({ refundRequests = [], onApprove, onReject, isProcess
             {/* Right: Amount + Actions */}
             <div className="flex flex-col items-end gap-3">
               <div className="text-right">
-                <p className="text-xs text-gray-500">Betrag</p>
+                <p className="text-xs text-muted-foreground">Betrag</p>
                 <p className="text-xl font-bold text-orange-600">{request.amount.toFixed(2)} CHF</p>
               </div>
 
@@ -152,7 +152,7 @@ const RefundRequestList = ({ refundRequests = [], onApprove, onReject, isProcess
       {/* Pending Requests */}
       {pendingRequests.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+          <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-orange-500" />
             Ausstehende Anfragen ({pendingRequests.length})
           </h3>
@@ -165,8 +165,8 @@ const RefundRequestList = ({ refundRequests = [], onApprove, onReject, isProcess
       {/* Resolved Requests */}
       {resolvedRequests.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-            <CheckCircle className="w-5 h-5 text-gray-400" />
+          <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-muted-foreground/80" />
             Bearbeitete Anfragen ({resolvedRequests.length})
           </h3>
           <div className="space-y-3 opacity-75">
@@ -212,7 +212,7 @@ const RefundRequestList = ({ refundRequests = [], onApprove, onReject, isProcess
             </DialogDescription>
           </DialogHeader>
           <div className="py-2">
-            <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+            <label className="text-sm font-medium text-foreground mb-1.5 block">
               Begründung (optional)
             </label>
             <Textarea

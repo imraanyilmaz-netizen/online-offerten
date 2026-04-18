@@ -237,136 +237,136 @@ const UmzugsfirmaInDerNaehePageClient = () => {
   return (
     <>
       {/* Hero Section - Unique Design for Local Search */}
-      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100">
+      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100 dark:bg-muted/35">
         {/* Background */}
         <div className="absolute inset-0 z-[1]">
-          <div className="absolute inset-0 bg-gray-100"></div>
+          <div className="absolute inset-0 bg-gray-100 dark:bg-muted/35"></div>
         </div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
-              <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
+              <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-emerald-950/50 rounded-full text-green-700 dark:text-emerald-300 font-semibold text-sm mb-3">
                 <MapPin className="h-4 w-4 mr-2" />
                 Ihren Umzug günstig planen
               </div>
               <h1 className="heading-1 !mt-0">
                 Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-600 dark:text-muted-foreground mb-8 leading-relaxed">
                 Finden Sie geprüfte Umzugsunternehmen in Ihrer Region. Vergleichen Sie kostenlos bis zu 5 Offerten und sparen Sie bis zu 40% bei Ihrem Umzug.
               </p>
               
               {/* Umzug Type Buttons */}
-              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
+              <p className="text-sm font-semibold text-gray-700 dark:text-foreground/90 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-6">
                 {/* Privatumzug */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 dark:bg-blue-950/50 group-hover:bg-blue-500 transition-colors">
+                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Privatumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Wohnungsumzug</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Privatumzug</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Wohnungsumzug</p>
                   </div>
                 </Link>
                 
                 {/* Geschäftsumzug */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 dark:bg-purple-950/50 group-hover:bg-purple-500 transition-colors">
+                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Geschäftsumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Firmenumzug</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Geschäftsumzug</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Firmenumzug</p>
                   </div>
                 </Link>
                 
                 {/* International */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
-                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 dark:bg-emerald-950/45 group-hover:bg-emerald-500 transition-colors">
+                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Auslandumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">International</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Auslandumzug</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">International</p>
                   </div>
                 </Link>
                 
                 {/* Klaviertransport */}
                 <Link 
-                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=spezialtransport&special_transport_type=klaviertransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
+                  href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/35 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
-                    <PiPianoKeysFill className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 dark:bg-amber-950/45 group-hover:bg-amber-500 transition-colors">
+                    <PiPianoKeysFill className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Klaviertransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Piano & Flügel</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Klaviertransport</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Piano & Flügel</p>
                   </div>
                 </Link>
                 
                 {/* Kleintransport */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 dark:bg-teal-950/45 group-hover:bg-teal-500 transition-colors">
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 dark:text-teal-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Kleintransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Einzelne Gegenstände</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Kleintransport</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Einzelne Gegenstände</p>
                   </div>
                 </Link>
                 
                 {/* Lagerung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 dark:bg-indigo-950/45 group-hover:bg-indigo-500 transition-colors">
+                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Möbel einlagern</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Lagerung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Möbel einlagern</p>
                   </div>
                 </Link>
               </div>
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700">
+              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700 dark:text-muted-foreground">
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2 shrink-0" />
                   <span>Versicherte Firmen</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2 shrink-0" />
                   <span>100% kostenlos</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2 shrink-0" />
                   <span>Angebote von geprüften Partnern</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-2 shrink-0" />
                   <span>Jetzt Preise vergleichen & sparen</span>
                 </div>
               </div>
             </div>
             <div className="relative md:col-span-2">
-              <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
+              <div className="bg-white dark:bg-card rounded-2xl p-8 shadow-2xl border-4 border-green-200 dark:border-emerald-800/70">
                 <div className="flex items-center justify-center mb-6">
-                  <div className="bg-green-100 p-4 rounded-full">
-                    <Navigation className="h-12 w-12 text-green-600" />
+                  <div className="bg-green-100 dark:bg-emerald-950/50 p-4 rounded-full">
+                    <Navigation className="h-12 w-12 text-green-600 dark:text-emerald-400" />
                   </div>
                 </div>
                 <h3 className="heading-3 text-center">
@@ -375,10 +375,10 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                 <div className="space-y-4">
                   {features.slice(0, 4).map((feature, index) => (
                     <div key={index} className="flex items-start">
-                      <feature.icon className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <feature.icon className="h-6 w-6 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-gray-900">{feature.title}</p>
-                        <p className="text-sm text-gray-600">{feature.description}</p>
+                        <p className="font-semibold text-gray-900 dark:text-foreground">{feature.title}</p>
+                        <p className="text-sm text-gray-600 dark:text-muted-foreground">{feature.description}</p>
                       </div>
                     </div>
                   ))}
@@ -390,7 +390,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
       </section>
 
       {/* Why Local Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white dark:bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
@@ -408,19 +408,19 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                   </h3>
                   <ul className="space-y-3 text-body">
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                       <span><strong>Kürzere Anfahrtswege = niedrigere Kosten</strong></span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                       <span><strong>Lokale Expertise = reibungsloser Ablauf</strong></span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                       <span><strong>Schnellere Reaktionszeiten = mehr Flexibilität</strong></span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                       <span><strong>Persönlicher Service = individuelle Betreuung</strong></span>
                     </li>
                   </ul>
@@ -432,13 +432,13 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                   alt="Umzugsfirma in der Nähe finden und vergleichen" 
                   width={600} 
                   height={450} 
-                  className="w-full h-auto object-cover rounded-xl" 
+                  className="w-full h-auto object-cover rounded-xl ring-1 ring-black/5 dark:ring-white/10" 
                 />
               </div>
             </div>
             
-            <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            <div className="bg-green-50 dark:bg-emerald-950/30 rounded-lg p-6 border border-green-200 dark:border-emerald-800/60">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-foreground mb-3">
                 So finden Sie die beste Umzugsfirma in Ihrer Nähe
               </h3>
               <p className="text-body">
@@ -448,7 +448,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
 
             {/* Reinigungsfirma Section */}
             <div className="mt-12">
-              <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
+              <div className="inline-flex items-center px-4 py-2 bg-blue-100 dark:bg-blue-950/50 rounded-full text-blue-700 dark:text-blue-300 font-semibold text-sm mb-3">
                 <Sparkles className="h-4 w-4 mr-2" />
                 Reinigungsfirma finden
               </div>
@@ -459,117 +459,117 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                 Professionelle Reinigungsfirmen sorgen für makellose Sauberkeit – ob Umzugsreinigung, Büroreinigung oder Unterhaltsreinigung. Vergleichen Sie kostenlos Offerten von geprüften Reinigungsunternehmen in Ihrer Region.
               </p>
               
-              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
+              <p className="text-sm font-semibold text-gray-700 dark:text-foreground/90 mb-2">Wählen Sie Ihre gewünschte Dienstleistung aus:</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                 {/* Endreinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=umzugsreinigung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 dark:bg-blue-950/50 group-hover:bg-blue-500 transition-colors">
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Endreinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">mit Abnahmegarantie</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Endreinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">mit Abnahmegarantie</p>
                   </div>
                 </Link>
 
                 {/* Wohnungsreinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=wohnungsreinigung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 dark:bg-purple-950/50 group-hover:bg-purple-500 transition-colors">
+                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Wohnungsreinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Private Räume</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Wohnungsreinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Private Räume</p>
                   </div>
                 </Link>
 
                 {/* Büroreinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=buero"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
-                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 dark:bg-emerald-950/45 group-hover:bg-emerald-500 transition-colors">
+                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Büroreinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Geschäftsräume</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Büroreinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Geschäftsräume</p>
                   </div>
                 </Link>
 
                 {/* Grundreinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=grundreinigung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/35 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
-                    <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 dark:bg-amber-950/45 group-hover:bg-amber-500 transition-colors">
+                    <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Grundreinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Tiefenreinigung</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Grundreinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Tiefenreinigung</p>
                   </div>
                 </Link>
 
                 {/* Fensterreinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=fensterreinigung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                    <Grid2x2 className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 dark:bg-teal-950/45 group-hover:bg-teal-500 transition-colors">
+                    <Grid2x2 className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 dark:text-teal-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Fensterreinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Glas & Rahmen</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Fensterreinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Glas & Rahmen</p>
                   </div>
                 </Link>
 
                 {/* Unterhaltsreinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=unterhaltsreinigung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
-                    <SprayCan className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 dark:bg-indigo-950/45 group-hover:bg-indigo-500 transition-colors">
+                    <SprayCan className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Unterhaltsreinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Regelmässig</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Unterhaltsreinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Regelmässig</p>
                   </div>
                 </Link>
 
                 {/* Baureinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=baureinigung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-orange-500 hover:bg-orange-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/35 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-orange-100 group-hover:bg-orange-500 transition-colors">
-                    <Hammer className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-orange-100 dark:bg-orange-950/40 group-hover:bg-orange-500 transition-colors">
+                    <Hammer className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 dark:text-orange-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Baureinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Nach Umbau</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Baureinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Nach Umbau</p>
                   </div>
                 </Link>
 
                 {/* Bodenreinigung */}
                 <Link 
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=bodenreinigung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-rose-500 hover:bg-rose-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/35 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-rose-100 group-hover:bg-rose-500 transition-colors">
-                    <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-rose-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-rose-100 dark:bg-rose-950/40 group-hover:bg-rose-500 transition-colors">
+                    <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-rose-600 dark:text-rose-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Bodenreinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Alle Bodenarten</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Bodenreinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Alle Bodenarten</p>
                   </div>
                 </Link>
               </div>
@@ -579,7 +579,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white dark:from-muted/25 dark:to-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-12">
             <h2 className="heading-2">
@@ -613,22 +613,22 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                 className="relative"
               >
                 {index < 2 && (
-                  <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-green-200 z-0" style={{ width: 'calc(100% - 3rem)' }} />
+                  <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-green-200 dark:bg-emerald-800 z-0" style={{ width: 'calc(100% - 3rem)' }} />
                 )}
-                <Card className="relative z-10 h-full border-2 border-green-200 hover:border-green-500 transition-colors">
+                <Card className="relative z-10 h-full border-2 border-green-200 dark:border-emerald-800 hover:border-green-500 dark:hover:border-emerald-500 transition-colors">
                   <CardHeader className="text-center">
-                    <div className="bg-green-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                    <div className="bg-green-600 dark:bg-emerald-700 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                       {step.number}
                     </div>
                     <div className="flex justify-center mb-4">
-                      <div className="bg-green-100 p-3 rounded-lg">
-                        <step.icon className="h-6 w-6 text-green-600" />
+                      <div className="bg-green-100 dark:bg-emerald-950/50 p-3 rounded-lg">
+                        <step.icon className="h-6 w-6 text-green-600 dark:text-emerald-400" />
                       </div>
                     </div>
                     <CardTitle className="text-xl font-bold">{step.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 leading-relaxed text-center">{step.description}</p>
+                    <p className="text-gray-600 dark:text-muted-foreground leading-relaxed text-center">{step.description}</p>
                   </CardContent>
                 </Card>
               </div>
@@ -638,13 +638,13 @@ const UmzugsfirmaInDerNaehePageClient = () => {
       </section>
 
       {/* Location Links Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white dark:bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="heading-2">
               Umzugsfirmen in Ihrer Region
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-muted-foreground max-w-2xl mx-auto">
               Finden Sie Umzugsfirmen in den grössten Städten der Schweiz. Wir vermitteln Ihnen qualifizierte Anbieter aus Ihrer Region.
             </p>
           </div>
@@ -653,12 +653,12 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             {locations.map((location, index) => (
               <div key={index}>
                 <Link href={location.link}>
-                  <Card className="h-full hover:border-green-500 hover:shadow-lg transition-all cursor-pointer">
+                  <Card className="h-full hover:border-green-500 dark:hover:border-emerald-500 hover:shadow-lg transition-all cursor-pointer">
                     <CardContent className="p-6">
                       <div className="flex items-center">
-                        <MapPin className="h-5 w-5 text-green-600 mr-3" />
-                        <span className="font-semibold text-gray-900">{location.name}</span>
-                        <ArrowRight className="h-4 w-4 text-gray-400 ml-auto" />
+                        <MapPin className="h-5 w-5 text-green-600 dark:text-emerald-400 mr-3 shrink-0" />
+                        <span className="font-semibold text-gray-900 dark:text-foreground">{location.name}</span>
+                        <ArrowRight className="h-4 w-4 text-gray-400 dark:text-muted-foreground ml-auto shrink-0" />
                       </div>
                     </CardContent>
                   </Card>
@@ -685,7 +685,7 @@ const UmzugsfirmaInDerNaehePageClient = () => {
             {/* Rating Card */}
             {ratingStats.reviewCount > 0 && (
               <div 
-                className="bg-white rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-start items-start gap-4 transition-all duration-300 mt-6"
+                className="bg-white dark:bg-card rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-start items-start gap-4 transition-all duration-300 mt-6 border border-border/60 dark:border-border shadow-sm"
                 style={{
                   boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
                 }}
@@ -694,16 +694,16 @@ const UmzugsfirmaInDerNaehePageClient = () => {
                   {/* Trust Badges */}
                   <div className="flex flex-wrap justify-start items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Kostenlos & unverbindlich</span>
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-400 shrink-0" />
+                      <span className="text-sm text-gray-600 dark:text-muted-foreground">Kostenlos & unverbindlich</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Versicherte Partner</span>
+                      <ShieldCheck className="h-5 w-5 text-green-600 dark:text-emerald-400 shrink-0" />
+                      <span className="text-sm text-gray-600 dark:text-muted-foreground">Versicherte Partner</span>
             </div>
                     <div className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Bis zu 40% sparen</span>
+                      <Award className="h-5 w-5 text-green-600 dark:text-emerald-400 shrink-0" />
+                      <span className="text-sm text-gray-600 dark:text-muted-foreground">Bis zu 40% sparen</span>
               </div>
               </div>
               </div>
