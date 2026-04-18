@@ -1,6 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import webpack from 'next/dist/compiled/webpack/webpack-lib.js';
+import { legacyRedirects } from './legacy-redirects.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -224,28 +225,7 @@ const nextConfig = {
   },
 
   async redirects() {
-    return [
-      {
-        source: '/umzugsfirma/internationale-umzuege',
-        destination: '/umzugsfirma/auslandumzug',
-        permanent: true,
-      },
-      {
-        source: '/umzugsfirma/internationale-umzuege/:path*',
-        destination: '/umzugsfirma/auslandumzug',
-        permanent: true,
-      },
-      {
-        source: '/umzugsfirma/spezialtransport',
-        destination: '/umzugsfirma/klaviertransport',
-        permanent: true,
-      },
-      {
-        source: '/umzugsfirma/spezialtransport/:path*',
-        destination: '/umzugsfirma/klaviertransport/:path*',
-        permanent: true,
-      },
-    ];
+    return legacyRedirects;
   },
 
   turbopack: {

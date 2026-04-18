@@ -1,3 +1,8 @@
+/**
+ * Edge middleware for Supabase session refresh and role-gated routes.
+ * Legacy path redirects (e.g. `/privatumzug` → `/umzugsfirma/privatumzug`) live in
+ * `legacy-redirects.mjs` and `next.config.js` `redirects()`, not here.
+ */
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/src/lib/supabase/middleware'
 
