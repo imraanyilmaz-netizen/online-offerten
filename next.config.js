@@ -226,6 +226,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/umzugsfirma/internationale-umzuege',
+        destination: '/umzugsfirma/auslandumzug',
+        permanent: true,
+      },
+      {
+        source: '/umzugsfirma/internationale-umzuege/:path*',
+        destination: '/umzugsfirma/auslandumzug',
+        permanent: true,
+      },
+      {
         source: '/umzugsfirma/spezialtransport',
         destination: '/umzugsfirma/klaviertransport',
         permanent: true,

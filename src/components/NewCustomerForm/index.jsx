@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import React, { useState, useEffect, useCallback, useRef, useMemo, memo } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo, memo } from 'react';
 // framer-motion removed – using CSS transitions for better INP
 import { useStaticT } from '@/lib/staticTranslate';
 import { Button } from '@/components/ui/button';
@@ -20,6 +20,7 @@ import useNewFormValidation from './useNewFormValidation';
 import { submitNewQuoteToSupabase } from './newFormUtils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription } from '@/components/ui/alert-dialog';
 import { supabase } from '@/lib/supabaseClient';
+import { countries } from '@/data/countries';
 
 const TOTAL_FORM_STEPS = 3;
 
@@ -423,8 +424,27 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
         (formData.umzugArt === 'privatumzug' || formData.umzugArt === 'geschaeftsumzug')) {
       params.set('endreinigung', 'ja');
     }
+    if (formData.service === 'umzug' && formData.umzugArt === 'international') {
+      const z = formData.to_country;
+      if (z && z !== 'CH') {
+        params.set('ziel', z);
+      } else {
+        params.delete('ziel');
+      }
+    }
     router.push(`${pathname}?${params.toString()}`, { replace, scroll: false });
-  }, [searchParamsString, pathname, router, formRef, formData.service, formData.umzugArt, formData.special_transport_type, formData.raeumung_scope, formData.additional_cleaning]);
+  }, [
+    searchParamsString,
+    pathname,
+    router,
+    formRef,
+    formData.service,
+    formData.umzugArt,
+    formData.to_country,
+    formData.special_transport_type,
+    formData.raeumung_scope,
+    formData.additional_cleaning,
+  ]);
 
   const handleConfirmExit = () => {
     const navigationPath = pendingNavigation;
@@ -598,6 +618,58 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     }
   }, [searchParamsString, formData.service, handleServiceSelect]);
 
+  // useLayoutEffect: Zielland aus ?ziel= vor dem ersten Paint setzen (vermeidet leeres „Land *“ nach Deep-Link)
+  useLayoutEffect(() => {
+    if (formData.umzugArt !== 'international') return;
+
+    const params = new URLSearchParams(searchParamsString);
+    const raw = params.get('ziel') || params.get('to_country');
+    if (!raw) return;
+
+    const code = raw.trim().toUpperCase();
+    if (!/^[A-Z]{2}$/.test(code)) return;
+    if (!countries.some((c) => c.code === code)) return;
+
+    // Nur vorausfüllen solange Ziel noch Default CH/leer (nicht manuelle Nutzerwahl überschreiben)
+    const needsDest = !formData.to_country || formData.to_country === 'CH';
+    if (!needsDest) return;
+
+    handleSelectChange('from_country', 'CH');
+    handleSelectChange('to_country', code);
+  }, [formData.umzugArt, formData.to_country, searchParamsString, handleSelectChange]);
+
+  const hasSyncedIntlFromCalculatorProps = useRef(false);
+
+  // Eingebetteter Rechner: initialDataFromProps.to_country zuverlässig übernehmen
+  useEffect(() => {
+    if (hasSyncedIntlFromCalculatorProps.current) return;
+    if (formId !== 'international-form') return;
+    if (formData.umzugArt !== 'international') return;
+
+    const tc = initialDataFromProps?.to_country;
+    const fc = initialDataFromProps?.from_country ?? 'CH';
+    if (!tc || tc === 'CH') {
+      hasSyncedIntlFromCalculatorProps.current = true;
+      return;
+    }
+    if (formData.to_country === tc && formData.from_country === fc) {
+      hasSyncedIntlFromCalculatorProps.current = true;
+      return;
+    }
+
+    hasSyncedIntlFromCalculatorProps.current = true;
+    handleSelectChange('from_country', fc);
+    handleSelectChange('to_country', tc);
+  }, [
+    formId,
+    formData.umzugArt,
+    formData.to_country,
+    formData.from_country,
+    initialDataFromProps?.to_country,
+    initialDataFromProps?.from_country,
+    handleSelectChange,
+  ]);
+
   // URL'den servise özel art parametresini oku ve otomatik setzen
   useEffect(() => {
     // Service seçilmemişse, art parametresi okuma
@@ -632,11 +704,44 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
     if (artValueFromUrl && artValueFromUrl !== formData.umzugArt) {
       memoizedHandleUmzugArtChange(artValueFromUrl, true);
       hasInitializedUmzugArtFromUrl.current = true;
+      if (artValueFromUrl === 'international') {
+        const raw = params.get('ziel') || params.get('to_country');
+        if (raw) {
+          const code = raw.trim().toUpperCase();
+          if (/^[A-Z]{2}$/.test(code) && countries.some((c) => c.code === code)) {
+            handleSelectChange('from_country', 'CH');
+            handleSelectChange('to_country', code);
+          }
+        }
+      }
+    } else if (artValueFromUrl && artValueFromUrl === formData.umzugArt) {
+      hasInitializedUmzugArtFromUrl.current = true;
+      if (artValueFromUrl === 'international') {
+        const raw = params.get('ziel') || params.get('to_country');
+        if (raw) {
+          const code = raw.trim().toUpperCase();
+          if (/^[A-Z]{2}$/.test(code) && countries.some((c) => c.code === code)) {
+            const needsDest = !formData.to_country || formData.to_country === 'CH';
+            if (needsDest) {
+              handleSelectChange('from_country', 'CH');
+              handleSelectChange('to_country', code);
+            }
+          }
+        }
+      }
     } else if (!artValueFromUrl) {
       // URL'de parametre yoksa bile flag'i true yap, tekrar kontrol etme
       hasInitializedUmzugArtFromUrl.current = true;
     }
-  }, [searchParamsString, formData.service, formData.umzugArt, memoizedHandleUmzugArtChange, getServiceArtParamName]);
+  }, [
+    searchParamsString,
+    formData.service,
+    formData.umzugArt,
+    formData.to_country,
+    memoizedHandleUmzugArtChange,
+    getServiceArtParamName,
+    handleSelectChange,
+  ]);
 
   // umzugArt değiştiğinde additional_cleaning flag'lerini sıfırla
   useEffect(() => {

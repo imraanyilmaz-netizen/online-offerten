@@ -18,15 +18,8 @@ export default function Navbar() {
             fontFeatureSettings: '"liga" 1, "calt" 1',
           }}
         >
-          Online-Offerten.ch
+          Online Offerten
         </span>
-        {/* eslint-disable-next-line @next/next/no-img-element -- static public asset */}
-        <img
-          src="/image/schweiz.svg"
-          alt="Schweizer Flagge"
-          className="h-[16px] w-[22px] object-contain"
-          loading="lazy"
-        />
       </Link>
     </NavbarClient>
   )

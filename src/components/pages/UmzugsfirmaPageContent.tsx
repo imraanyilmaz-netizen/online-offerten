@@ -50,7 +50,7 @@ const UmzugsfirmaPageClient = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-9 pb-0 md:pt-14 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+      <section className="relative pt-9 pb-0 md:pt-14 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50 dark:from-background dark:via-background dark:to-blue-950/25">
         <div className="absolute inset-0 opacity-5">
           <div
             className="absolute inset-0"
@@ -64,41 +64,41 @@ const UmzugsfirmaPageClient = () => {
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
               <div>
-                <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
+                <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-emerald-950/50 rounded-full text-green-700 dark:text-emerald-300 font-semibold text-sm mb-3">
                   <Clock3 className="h-4 w-4 mr-2" />
                   In 2 Minuten kostenlos Angebote erhalten
                 </div>
                 <h1 className="heading-1 !mt-0">
                   Umzugsfirmen finden – Kostenlose Umzugsofferten vergleichen
                 </h1>
-                <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 dark:text-muted-foreground mb-8 leading-relaxed">
                   Vergleichen Sie bis zu 5 Offerten von <strong>geprüften Umzugsfirmen</strong> in Ihrer Region – kostenlos und unverbindlich.
                 </p>
 
                 <div className="mb-6">
                   <Link
                     href="https://online-offerten.ch/kostenlose-offerte-anfordern?step=2&service=umzug"
-                    className="inline-flex rounded-xl bg-green-600 px-6 py-3 text-center text-white shadow-md transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
+                    className="inline-flex rounded-xl bg-green-600 dark:bg-emerald-600 px-6 py-3 text-center text-white shadow-md transition-all duration-300 hover:bg-green-700 dark:hover:bg-emerald-700 hover:shadow-lg"
                   >
                     <span className="text-base font-bold sm:text-lg">Kostenlose Offerten anfordern</span>
                   </Link>
                 </div>
 
-                <div className="flex flex-wrap gap-6 text-sm text-gray-700">
+                <div className="flex flex-wrap gap-6 text-sm text-gray-700 dark:text-muted-foreground">
                   <div className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2 shrink-0" />
                     <span>100% kostenlos</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2 shrink-0" />
                     <span>Geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2 shrink-0" />
                     <span>Bis zu 5 Offerten</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2 shrink-0" />
                     <span>Bis zu 40% sparen</span>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ const UmzugsfirmaPageClient = () => {
             </div>
 
             <div className="relative md:col-span-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-border">
                 <Image
                   src="/umzug/b073e2a2-3bd4-4499-af1a-f2cf4f3e1a92.webp"
                   alt="Umzugsfirma in der Schweiz – Offerten vergleichen"
@@ -116,22 +116,22 @@ const UmzugsfirmaPageClient = () => {
                   priority
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 rounded-xl border border-gray-200 bg-white px-5 py-3 text-gray-900 shadow-sm">
+              <div className="absolute -bottom-4 -left-4 rounded-xl border border-gray-200 dark:border-border bg-white dark:bg-card px-5 py-3 text-gray-900 dark:text-foreground shadow-sm">
                 <p className="text-sm font-bold">Professioneller Umzugsservice</p>
-                <p className="text-xs text-gray-600">In Ihrer Region</p>
+                <p className="text-xs text-gray-600 dark:text-muted-foreground">In Ihrer Region</p>
               </div>
             </div>
           </div>
 
-          <nav className="mt-8 pt-4 pb-4 border-b border-gray-200 -mx-4 px-4 md:-mx-6 md:px-6" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2 text-sm text-gray-600">
+          <nav className="mt-8 pt-4 pb-4 border-b border-gray-200 dark:border-border -mx-4 px-4 md:-mx-6 md:px-6" aria-label="Breadcrumb">
+            <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-muted-foreground">
               <li>
-                <Link href="/" className="hover:text-blue-600 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
+                <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors" aria-label="Startseite"><Home className="w-4 h-4" /></Link>
               </li>
               <li>
-                <ChevronRight className="w-4 h-4 text-gray-400" />
+                <ChevronRight className="w-4 h-4 text-gray-400 dark:text-muted-foreground/70" />
               </li>
-              <li className="text-gray-900 font-medium" aria-current="page">
+              <li className="text-gray-900 dark:text-foreground font-medium" aria-current="page">
                 Umzugsfirma
               </li>
             </ol>
@@ -140,7 +140,7 @@ const UmzugsfirmaPageClient = () => {
       </section>
 
       {/* Content Section */}
-      <section className="py-14 md:py-20 bg-white">
+      <section className="py-14 md:py-20 bg-white dark:bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="max-w-4xl space-y-10">
             <header className="space-y-4">
@@ -197,26 +197,26 @@ const UmzugsfirmaPageClient = () => {
               </ul>
 
               <h4 className="heading-4">Durchschnittliche Umzugskosten</h4>
-              <div className="overflow-x-auto rounded-xl border border-gray-200">
+              <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-border">
                 <table className="min-w-full text-sm">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 dark:bg-muted/40">
                     <tr>
-                      <th className="px-4 py-3 text-left font-semibold text-gray-800">Wohnungsgrösse</th>
-                      <th className="px-4 py-3 text-left font-semibold text-gray-800">Durchschnittliche Umzugskosten</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-800 dark:text-foreground">Wohnungsgrösse</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-800 dark:text-foreground">Durchschnittliche Umzugskosten</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-gray-200 dark:divide-border bg-card dark:bg-card">
                     <tr>
-                      <td className="px-4 py-3 text-gray-700">1-2 Zimmer</td>
-                      <td className="px-4 py-3 text-gray-700">500 - 1&apos;200 CHF</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-muted-foreground">1-2 Zimmer</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-muted-foreground">500 - 1&apos;200 CHF</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-3 text-gray-700">3 Zimmer</td>
-                      <td className="px-4 py-3 text-gray-700">1&apos;200 - 2&apos;000 CHF</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-muted-foreground">3 Zimmer</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-muted-foreground">1&apos;200 - 2&apos;000 CHF</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-3 text-gray-700">4 Zimmer</td>
-                      <td className="px-4 py-3 text-gray-700">2&apos;000 - 3&apos;500 CHF</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-muted-foreground">4 Zimmer</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-muted-foreground">2&apos;000 - 3&apos;500 CHF</td>
                     </tr>
                   </tbody>
                 </table>
@@ -243,7 +243,7 @@ const UmzugsfirmaPageClient = () => {
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma Zürich</h3>
               <p className="text-body">
-                Viele Menschen suchen nach einer zuverlässigen <strong><Link href="/umzugsfirma/zuerich" className="text-green-700 hover:underline">Umzugsfirma in Zürich</Link></strong> oder einer
+                Viele Menschen suchen nach einer zuverlässigen <strong><Link href="/umzugsfirma/zuerich" className="text-green-700 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300">Umzugsfirma in Zürich</Link></strong> oder einer
                 professionellen Zügelfirma in Zürich, um ihren Umzug sicher und effizient durchzuführen.
                 In einer grossen Stadt wie Zürich sind Erfahrung und gute Planung besonders wichtig, da enge Strassen,
                 Parkplatzregelungen und hohe Verkehrsbelastung den Umzug komplizierter machen können.
@@ -258,7 +258,7 @@ const UmzugsfirmaPageClient = () => {
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma Bern</h3>
               <p className="text-body">
-                Auch in der Hauptstadt gibt es viele erfahrene <Link href="/umzugsfirma/bern" className="text-green-700 hover:underline">Umzugsfirmen in Bern</Link>, die private und geschäftliche Umzüge
+                Auch in der Hauptstadt gibt es viele erfahrene <Link href="/umzugsfirma/bern" className="text-green-700 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300">Umzugsfirmen in Bern</Link>, die private und geschäftliche Umzüge
                 professionell durchführen. Eine zuverlässige <strong>Zügelfirma in Bern</strong> übernimmt nicht nur den
                 Transport der Möbel, sondern bietet häufig zusätzliche Dienstleistungen wie Verpackung, Möbelmontage oder
                 Umzugsreinigung an.
@@ -273,7 +273,7 @@ const UmzugsfirmaPageClient = () => {
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma Luzern</h3>
               <p className="text-body">
-                In der Zentralschweiz gibt es zahlreiche professionelle <Link href="/umzugsfirma/luzern" className="text-green-700 hover:underline">Umzugsfirmen in Luzern</Link>, die Umzüge innerhalb der
+                In der Zentralschweiz gibt es zahlreiche professionelle <Link href="/umzugsfirma/luzern" className="text-green-700 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300">Umzugsfirmen in Luzern</Link>, die Umzüge innerhalb der
                 Region oder in andere Teile der Schweiz durchführen. Eine erfahrene Umzugsfirma in Luzern sorgt dafür, dass der
                 Transport Ihrer Möbel sicher und effizient organisiert wird.
               </p>
@@ -287,7 +287,7 @@ const UmzugsfirmaPageClient = () => {
             <article className="space-y-4">
               <h3 className="heading-3">Umzugsfirma St. Gallen</h3>
               <p className="text-body">
-                Eine professionelle <Link href="/umzugsfirma/st-gallen" className="text-green-700 hover:underline">Umzugsfirma in St. Gallen</Link>{' '}unterstützt sowohl private Haushalte als auch Unternehmen bei
+                Eine professionelle <Link href="/umzugsfirma/st-gallen" className="text-green-700 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300">Umzugsfirma in St. Gallen</Link>{' '}unterstützt sowohl private Haushalte als auch Unternehmen bei
                 regionalen und internationalen Umzügen. Durch ihre Erfahrung können Umzugsfirmen den gesamten Ablauf
                 effizient planen und durchführen.
               </p>
@@ -307,7 +307,7 @@ const UmzugsfirmaPageClient = () => {
               <h3 className="heading-3">Umzugsfirma Aargau</h3>
               <p className="text-body">
                 Wenn Sie in den Kanton Aargau ziehen oder innerhalb der Region umziehen, gibt es viele erfahrene
-                Umzugsfirmen. Eine professionelle <strong><Link href="/umzugsfirma/aargau" className="text-green-700 hover:underline">Zügelfirma im Aargau</Link></strong> hilft Ihnen dabei, den Umzug
+                Umzugsfirmen. Eine professionelle <strong><Link href="/umzugsfirma/aargau" className="text-green-700 hover:underline dark:text-emerald-400 dark:hover:text-emerald-300">Zügelfirma im Aargau</Link></strong> hilft Ihnen dabei, den Umzug
                 stressfrei zu organisieren und Ihre Möbel sicher an den neuen Wohnort zu transportieren.
               </p>
               <p className="text-body">Viele Unternehmen bieten zusätzliche Leistungen wie:</p>
@@ -322,34 +322,34 @@ const UmzugsfirmaPageClient = () => {
               </p>
             </article>
 
-            <article className="space-y-5 rounded-2xl border border-gray-200 bg-slate-50 p-6 md:p-8">
+            <article className="space-y-5 rounded-2xl border border-gray-200 dark:border-border bg-slate-50 dark:bg-muted/30 p-6 md:p-8">
               <h3 className="heading-3">Umzug in verschiedenen Städten der Schweiz</h3>
               <p className="text-body">
                 Ein Umzug kann je nach Stadt unterschiedliche Herausforderungen mit sich bringen. Mit online-offerten.ch
                 können Sie Umzugskosten in verschiedenen Städten der Schweiz vergleichen und schnell passende
                 {' '}<strong>Umzugsangebote</strong> für Ihre Region finden.
               </p>
-              <p className="text-body font-semibold text-gray-900">Beliebte Suchanfragen sind zum Beispiel:</p>
+              <p className="text-body font-semibold text-gray-900 dark:text-foreground">Beliebte Suchanfragen sind zum Beispiel:</p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/umzugsfirma/zuerich" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">
+                <Link href="/umzugsfirma/zuerich" className="inline-flex items-center rounded-lg border border-blue-200 dark:border-blue-800/60 bg-white dark:bg-card px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                   Umzug Zürich
                 </Link>
-                <Link href="/umzugsfirma/bern" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">
+                <Link href="/umzugsfirma/bern" className="inline-flex items-center rounded-lg border border-blue-200 dark:border-blue-800/60 bg-white dark:bg-card px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                   Umzug Bern
                 </Link>
-                <Link href="/umzugsfirma/basel" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">
+                <Link href="/umzugsfirma/basel" className="inline-flex items-center rounded-lg border border-blue-200 dark:border-blue-800/60 bg-white dark:bg-card px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                   Umzug Basel
                 </Link>
-                <Link href="/umzugsfirma/luzern" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">
+                <Link href="/umzugsfirma/luzern" className="inline-flex items-center rounded-lg border border-blue-200 dark:border-blue-800/60 bg-white dark:bg-card px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                   Umzug Luzern
                 </Link>
-                <Link href="/umzugsfirma/st-gallen" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">
+                <Link href="/umzugsfirma/st-gallen" className="inline-flex items-center rounded-lg border border-blue-200 dark:border-blue-800/60 bg-white dark:bg-card px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                   Umzug St. Gallen
                 </Link>
-                <Link href="/umzugsfirma/aargau" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">
+                <Link href="/umzugsfirma/aargau" className="inline-flex items-center rounded-lg border border-blue-200 dark:border-blue-800/60 bg-white dark:bg-card px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                   Umzug Aargau
                 </Link>
-                <Link href="/umzugsfirma/genf" className="inline-flex items-center rounded-lg border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors">
+                <Link href="/umzugsfirma/genf" className="inline-flex items-center rounded-lg border border-blue-200 dark:border-blue-800/60 bg-white dark:bg-card px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                   Umzug Genf
                 </Link>
               </div>
@@ -374,7 +374,7 @@ const UmzugsfirmaPageClient = () => {
               <p className="text-body">
                 <Link
                   href="https://online-offerten.ch/ratgeber/klaviertransport-schweiz"
-                  className="text-green-600 hover:text-green-700 font-semibold underline"
+                  className="text-green-600 hover:text-green-700 dark:text-emerald-400 dark:hover:text-emerald-300 font-semibold underline"
                 >
                   Klaviertransport Schweiz – Kosten, Ablauf & Offerten vergleichen
                 </Link>
@@ -460,22 +460,22 @@ const UmzugsfirmaPageClient = () => {
             </article>
 
             <article className="py-10">
-              <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-10 shadow-sm">
+              <div className="rounded-2xl border border-gray-200 dark:border-border bg-white dark:bg-card p-6 md:p-10 shadow-sm">
                 <div className="mb-8">
-                  <p className="text-sm font-semibold text-green-700 mb-2">FAQ</p>
-                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Häufig gestellte Fragen zu Umzugsfirmen</h3>
-                  <p className="text-base md:text-lg text-gray-600 mt-3 max-w-2xl">
+                  <p className="text-sm font-semibold text-green-700 dark:text-emerald-400 mb-2">FAQ</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-foreground">Häufig gestellte Fragen zu Umzugsfirmen</h3>
+                  <p className="text-base md:text-lg text-gray-600 dark:text-muted-foreground mt-3 max-w-2xl">
                     Hier finden Sie Antworten auf die wichtigsten Fragen rund um den Vergleich von Umzugsfirmen in der Schweiz.
                   </p>
                 </div>
 
                 <Accordion type="single" collapsible className="w-full">
                   {faqItems.map((item, index) => (
-                    <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
-                      <AccordionTrigger className="text-left font-semibold text-gray-900 hover:no-underline">
+                    <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 dark:border-border last:border-b-0">
+                      <AccordionTrigger className="text-left font-semibold text-gray-900 dark:text-foreground hover:no-underline">
                         <h4 className="faq-question text-left">{item.q}</h4>
                       </AccordionTrigger>
-                      <AccordionContent className="text-body leading-relaxed text-gray-600">
+                      <AccordionContent className="text-body leading-relaxed text-gray-600 dark:text-muted-foreground">
                         {item.a}
                       </AccordionContent>
                     </AccordionItem>
@@ -484,7 +484,7 @@ const UmzugsfirmaPageClient = () => {
               </div>
             </article>
 
-            <article className="space-y-4 bg-green-50 border border-green-200 rounded-xl p-6">
+            <article className="space-y-4 bg-green-50 dark:bg-emerald-950/30 border border-green-200 dark:border-emerald-800/60 rounded-xl p-6">
               <h3 className="heading-3">Jetzt Umzugsofferten vergleichen und bis zu 40% sparen</h3>
               <p className="text-body">
                 Planen Sie einen Umzug? Dann lohnt es sich, mehrere Offerten einzuholen und zu vergleichen.
@@ -503,7 +503,7 @@ const UmzugsfirmaPageClient = () => {
               <div>
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=2"
-                  className="inline-flex items-center rounded-lg bg-green-600 px-5 py-3 text-white font-semibold hover:bg-green-700 transition-colors"
+                  className="inline-flex items-center rounded-lg bg-green-600 dark:bg-emerald-600 px-5 py-3 text-white font-semibold hover:bg-green-700 dark:hover:bg-emerald-700 transition-colors"
                 >
                   Jetzt kostenlose Offerten anfordern
                 </Link>

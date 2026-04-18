@@ -35,7 +35,7 @@ const SEO: Record<string, Record<string, { title: string; description: string }>
         'Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen. Schnell, transparent und regional.',
     },
     auslandumzug: {
-      title: 'Internationale Umzüge: Kostenlose Offerten vergleichen',
+      title: 'Auslandumzug – Kostenlose Offerten vergleichen',
       description:
         'Internationale Umzüge: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Offerten für Umzüge nach Deutschland, Österreich, Frankreich & ganz Europa.',
     },

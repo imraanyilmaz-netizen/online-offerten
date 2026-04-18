@@ -50,11 +50,12 @@ export const getCachedRecentPostsExcluding = unstable_cache(
   { revalidate: 60, tags: [RATGEBER_TAG] }
 )
 
-/** `tagKey` empty string = no tag filter (stable cache key). */
+/** `tagKey` / `categoryKey` empty = no filter (arguments participate in cache identity). */
 export const getCachedRatgeberPostList = unstable_cache(
-  async (tagKey: string) => {
+  async (tagKey: string, categoryKey: string) => {
     const supabase = createStaticClient()
     const tagFilter = tagKey.trim().toLowerCase() || null
+    const categoryFilter = categoryKey.trim() || null
     let query = supabase
       .from('posts')
       .select('*')
@@ -63,6 +64,9 @@ export const getCachedRatgeberPostList = unstable_cache(
 
     if (tagFilter) {
       query = query.contains('tags', [tagFilter])
+    }
+    if (categoryFilter) {
+      query = query.eq('category', categoryFilter)
     }
 
     const { data } = await query

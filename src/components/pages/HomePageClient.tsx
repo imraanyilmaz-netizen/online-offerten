@@ -737,35 +737,42 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {filteredPosts.slice(0, state.visiblePostsCount).map((post: any) => {
                           const postUrl = `/ratgeber/${post.slug}`;
-                          const isOverview = post.category?.toLowerCase().includes('übersicht') || post.title?.toLowerCase().includes('übersicht');
-                          
+
                           return (
-                            <Link key={post.id} href={postUrl} className="group">
-                              <Card className="flex h-full flex-row overflow-hidden rounded-2xl border border-slate-200/90 bg-card shadow-sm ring-1 ring-slate-900/[0.02] transition-all duration-300 hover:border-emerald-200/90 hover:shadow-lg dark:border-border dark:ring-white/10 dark:hover:border-emerald-800/70">
-                                <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
+                            <Link key={post.id} href={postUrl} className="group block h-full">
+                              <Card className="flex h-full min-h-[9.5rem] flex-row overflow-hidden rounded-2xl border border-slate-200/70 bg-white/90 shadow-[0_2px_24px_-6px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/[0.035] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/70 hover:shadow-[0_18px_42px_-14px_rgba(15,23,42,0.14)] dark:border-border dark:bg-card/95 dark:shadow-[0_2px_28px_-8px_rgba(0,0,0,0.45)] dark:ring-white/[0.06] dark:hover:border-emerald-800/55">
+                                <div className="relative w-[8.25rem] flex-shrink-0 self-stretch sm:w-40">
                                   <NextImage
                                     src={post.featured_image_url || "https://images.unsplash.com/photo-1504983875-d3b163aba9e6"}
                                     alt={post.title}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover transition-[transform,filter] duration-500 ease-out group-hover:scale-[1.04] group-hover:brightness-[1.02]"
                                     loading="lazy"
                                     sizes="(max-width: 768px) 50vw, 25vw"
                                     priority={false}
                                   />
+                                  <div
+                                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-slate-950/5 to-transparent opacity-80 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-100 dark:from-black/50 dark:via-black/10"
+                                    aria-hidden
+                                  />
                                 </div>
-                                <CardContent className="p-4 sm:p-6 flex flex-col justify-center flex-1">
-                                  <Badge 
-                                    variant="secondary" 
-                                    className="mb-2 self-start bg-blue-600 text-white hover:bg-blue-700 w-fit"
+                                <CardContent className="flex flex-1 flex-col justify-center gap-1.5 p-4 sm:gap-2 sm:p-6 sm:pl-5">
+                                  <Badge
+                                    variant="outline"
+                                    className="mb-0.5 w-fit border-emerald-200/90 bg-emerald-50/80 px-2.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-emerald-900 shadow-none dark:border-emerald-800/60 dark:bg-emerald-950/35 dark:text-emerald-200"
                                   >
                                     {post.category || 'Ratgeber'}
                                   </Badge>
-                                  <h3 className="line-clamp-2 text-base font-semibold text-slate-900 transition-colors group-hover:text-emerald-700 dark:text-foreground dark:group-hover:text-emerald-400 sm:text-lg">
+                                  <h3 className="line-clamp-2 text-base font-semibold leading-snug tracking-tight text-slate-950 transition-colors group-hover:text-emerald-800 dark:text-foreground dark:group-hover:text-emerald-300 sm:text-lg">
                                     {post.title}
                                   </h3>
-                                  <p className="text-sm text-gray-500 mt-1 line-clamp-2 dark:text-muted-foreground">
+                                  <p className="line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
                                     {post.meta_description || ''}
                                   </p>
+                                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-emerald-800/85 transition-colors duration-200 group-hover:text-emerald-800 dark:text-emerald-400/90 dark:group-hover:text-emerald-300">
+                                    Zum Artikel
+                                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                                  </span>
                                 </CardContent>
                               </Card>
                             </Link>

@@ -212,24 +212,24 @@ const UmzugsfirmaVergleichenPageClient = () => {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100">
+      <section className="relative overflow-hidden bg-muted/60 py-12 md:py-16 dark:bg-muted/25">
         <div className="absolute inset-0 z-[1]">
-          <div className="absolute inset-0 bg-gray-100"></div>
+          <div className="absolute inset-0 bg-muted/60 dark:bg-muted/20" />
         </div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
               <div
-                className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3"
+                className="mb-3 inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-800 dark:bg-emerald-950/45 dark:text-emerald-300"
                 aria-label="In 2 Minuten, Gratis, 5 Offerten"
               >
                 <Clock className="h-4 w-4 flex-shrink-0" aria-hidden />
                 <span>In 2 Minuten</span>
-                <span className="text-green-600/50" aria-hidden>
+                <span className="text-emerald-600/50 dark:text-emerald-400/45" aria-hidden>
                   ·
                 </span>
                 <span>Gratis</span>
-                <span className="text-green-600/50" aria-hidden>
+                <span className="text-emerald-600/50 dark:text-emerald-400/45" aria-hidden>
                   ·
                 </span>
                 <span>5 Offerten</span>
@@ -237,107 +237,107 @@ const UmzugsfirmaVergleichenPageClient = () => {
               <h1 className="heading-1 !mt-0">
                 Umzugsfirmen vergleichen in der Schweiz: Bis zu 5 kostenlose Umzugsofferten
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="mb-8 text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Vergleichen Sie kostenlos regionale Umzugsfirmen für Ihren Umzug und erhalten Sie in 2 Minuten Gratis-Umzugsofferten.
               </p>
 
               {/* Service Buttons */}
-              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre Umzugsart:</p>
+              <p className="mb-2 text-sm font-semibold text-foreground">Wählen Sie Ihre Umzugsart:</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-6">
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
+                  className="group flex w-full items-center gap-2 rounded-lg border-2 border-border bg-card p-2.5 transition-all duration-300 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md dark:hover:bg-blue-950/35 sm:flex-col sm:items-center sm:p-3 sm:text-center"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                    <Home className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 transition-colors group-hover:bg-blue-500 dark:bg-blue-950/45 sm:h-10 sm:w-10">
+                    <Home className="h-4 w-4 text-blue-600 transition-colors group-hover:text-white sm:h-5 sm:w-5" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Privatumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Wohnungsumzug</p>
+                    <p className="text-sm font-semibold text-foreground sm:text-base">Privatumzug</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">Wohnungsumzug</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=geschaeftsumzug"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                  className="group flex w-full items-center gap-2 rounded-lg border-2 border-border bg-card p-2.5 transition-all duration-300 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md dark:hover:bg-purple-950/35 sm:flex-col sm:items-center sm:p-3 sm:text-center"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                    <Building className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-100 transition-colors group-hover:bg-purple-500 dark:bg-purple-950/45 sm:h-10 sm:w-10">
+                    <Building className="h-4 w-4 text-purple-600 transition-colors group-hover:text-white sm:h-5 sm:w-5" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Geschäftsumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Firmenumzug</p>
+                    <p className="text-sm font-semibold text-foreground sm:text-base">Geschäftsumzug</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">Firmenumzug</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=international"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md group"
+                  className="group flex w-full items-center gap-2 rounded-lg border-2 border-border bg-card p-2.5 transition-all duration-300 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md dark:hover:bg-emerald-950/35 sm:flex-col sm:items-center sm:p-3 sm:text-center"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-100 group-hover:bg-emerald-500 transition-colors">
-                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-100 transition-colors group-hover:bg-emerald-500 dark:bg-emerald-950/45 sm:h-10 sm:w-10">
+                    <Globe className="h-4 w-4 text-emerald-600 transition-colors group-hover:text-white sm:h-5 sm:w-5" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Auslandumzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">International</p>
+                    <p className="text-sm font-semibold text-foreground sm:text-base">Auslandumzug</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">International</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md group"
+                  className="group flex w-full items-center gap-2 rounded-lg border-2 border-border bg-card p-2.5 transition-all duration-300 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md dark:hover:bg-amber-950/35 sm:flex-col sm:items-center sm:p-3 sm:text-center"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-100 group-hover:bg-amber-500 transition-colors">
-                    <PiPianoKeysFill className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 group-hover:text-white transition-colors" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100 transition-colors group-hover:bg-amber-500 dark:bg-amber-950/45 sm:h-10 sm:w-10">
+                    <PiPianoKeysFill className="h-4 w-4 text-amber-600 transition-colors group-hover:text-white sm:h-5 sm:w-5" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Klaviertransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Piano & Flügel</p>
+                    <p className="text-sm font-semibold text-foreground sm:text-base">Klaviertransport</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">Piano & Flügel</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=kleintransport"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md group"
+                  className="group flex w-full items-center gap-2 rounded-lg border-2 border-border bg-card p-2.5 transition-all duration-300 hover:border-teal-500 hover:bg-teal-50 hover:shadow-md dark:hover:bg-teal-950/35 sm:flex-col sm:items-center sm:p-3 sm:text-center"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-teal-100 group-hover:bg-teal-500 transition-colors">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 group-hover:text-white transition-colors" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-100 transition-colors group-hover:bg-teal-500 dark:bg-teal-950/45 sm:h-10 sm:w-10">
+                    <Package className="h-4 w-4 text-teal-600 transition-colors group-hover:text-white sm:h-5 sm:w-5" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Kleintransport</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Einzelne Gegenstände</p>
+                    <p className="text-sm font-semibold text-foreground sm:text-base">Kleintransport</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">Einzelne Gegenstände</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=lagerung"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md group"
+                  className="group flex w-full items-center gap-2 rounded-lg border-2 border-border bg-card p-2.5 transition-all duration-300 hover:border-indigo-500 hover:bg-indigo-50 hover:shadow-md dark:hover:bg-indigo-950/35 sm:flex-col sm:items-center sm:p-3 sm:text-center"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-100 group-hover:bg-indigo-500 transition-colors">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 group-hover:text-white transition-colors" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-100 transition-colors group-hover:bg-indigo-500 dark:bg-indigo-950/45 sm:h-10 sm:w-10">
+                    <Package className="h-4 w-4 text-indigo-600 transition-colors group-hover:text-white sm:h-5 sm:w-5" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Lagerung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Möbel einlagern</p>
+                    <p className="text-sm font-semibold text-foreground sm:text-base">Lagerung</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">Möbel einlagern</p>
                   </div>
                 </Link>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700">
+              <div className="mt-8 flex flex-wrap gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="mr-2 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>Versicherte Firmen</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="mr-2 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>100% kostenlos</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="mr-2 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>Bis zu 5 Offerten vergleichen</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="mr-2 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>Bis zu 40% sparen</span>
                 </div>
               </div>
@@ -345,10 +345,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
 
             {/* Side Card */}
             <div className="relative md:col-span-2">
-              <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
-                <div className="flex items-center justify-center mb-6">
-                  <div className="bg-green-100 p-4 rounded-full">
-                    <BarChart3 className="h-12 w-12 text-green-600" />
+              <div className="rounded-2xl border-4 border-emerald-200 bg-card p-8 shadow-2xl dark:border-emerald-800/80">
+                <div className="mb-6 flex items-center justify-center">
+                  <div className="rounded-full bg-emerald-100 p-4 dark:bg-emerald-950/50">
+                    <BarChart3 className="h-12 w-12 text-emerald-600 dark:text-emerald-400" />
                   </div>
                 </div>
                 <h3 className="heading-3 text-center">
@@ -374,14 +374,14 @@ const UmzugsfirmaVergleichenPageClient = () => {
                   ].map((item) => (
                     <div key={item.step} className="flex items-start gap-3">
                       <span
-                        className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-bold text-white"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white dark:bg-emerald-500"
                         aria-hidden
                       >
                         {item.step}
                       </span>
                       <div>
-                        <p className="font-semibold text-gray-900 leading-snug">{item.title}</p>
-                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                        <p className="font-semibold leading-snug text-foreground">{item.title}</p>
+                        <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>
                       </div>
                     </div>
                   ))}
@@ -393,12 +393,12 @@ const UmzugsfirmaVergleichenPageClient = () => {
         </section>
 
       {/* ===== DER WEG ZUM STRESSFREIEN UMZUG ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
-              <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
-                <Lightbulb className="h-4 w-4 mr-2" />
+              <div className="mb-3 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-800 dark:bg-emerald-950/45 dark:text-emerald-300">
+                <Lightbulb className="mr-2 h-4 w-4" />
                 Der richtige Vergleich
               </div>
               <h2 className="heading-2 !mt-0">
@@ -408,7 +408,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 Ein Umzug in der Schweiz kostet durchschnittlich zwischen <strong>1&apos;500 und 4&apos;000 CHF</strong> – je nach Wohnungsgrösse und Distanz. Das Problem: Bei über 500 aktiven Umzugsfirmen schweizweit variieren die Preise für identische Leistungen um bis zu <strong>800 CHF</strong>. Ohne systematischen Vergleich zahlen Sie schnell zu viel oder landen bei einem Anbieter, dessen Service nicht Ihren Erwartungen entspricht.
               </p>
               <p className="text-body mb-6">
-                Die gute Nachricht: Mit einer strukturierten Suche nach Umzugsofferten finden Sie in wenigen Schritten den passenden Umzugspartner für Ihre Bedürfnisse. Über <strong>Online-Offerten.ch</strong> können Sie durch das Ausfüllen eines kurzen Formulars gezielt Angebote von Umzugsfirmen erhalten, die zu Ihren Anforderungen passen. Dieser Leitfaden zeigt Ihnen, wie Sie seriöse Umzugsunternehmen erkennen, typische Fehler vermeiden und das beste Preis-Leistungsverhältnis für Ihren <Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-medium">Privatumzug</Link> oder <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-medium">Firmenumzug</Link> erzielen.
+                Die gute Nachricht: Mit einer strukturierten Suche nach Umzugsofferten finden Sie in wenigen Schritten den passenden Umzugspartner für Ihre Bedürfnisse. Über <strong>Online-Offerten.ch</strong> können Sie durch das Ausfüllen eines kurzen Formulars gezielt Angebote von Umzugsfirmen erhalten, die zu Ihren Anforderungen passen. Dieser Leitfaden zeigt Ihnen, wie Sie seriöse Umzugsunternehmen erkennen, typische Fehler vermeiden und das beste Preis-Leistungsverhältnis für Ihren <Link href="/umzugsfirma/privatumzug" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Privatumzug</Link> oder <Link href="/umzugsfirma/geschaeftsumzug" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Firmenumzug</Link> erzielen.
               </p>
               <p className="text-body mb-6">
                 Beim Vergleich von Umzugsfirmen in der Schweiz ist die Qualität der Dienstleistung ein entscheidendes Kriterium. Achten Sie dabei besonders auf die Professionalität, Höflichkeit und die Servicequalität der Anbieter.
@@ -428,7 +428,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </section>
 
       {/* ===== WARUM VERGLEICHEN SINNVOLL IST ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="bg-gradient-to-b from-muted/45 to-background py-12 md:py-16 dark:from-muted/15">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <h2 className="heading-2">
             Warum Umzugsfirmen vergleichen sinnvoll ist
@@ -463,23 +463,26 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 description: 'Besonders während der Umzugshochsaison von Mai bis September sind gute Firmen früh ausgebucht. Wer mehrere Offerten einholt, hat bessere Chancen auf den Wunschtermin.'
               },
             ].map((item, index) => (
-              <Card key={index} className="bg-white shadow-md hover:shadow-lg transition-shadow border-2 border-gray-100 hover:border-green-200">
+              <Card
+                key={index}
+                className="border-2 border-border bg-card shadow-md transition-shadow hover:border-emerald-300/80 hover:shadow-lg dark:hover:border-emerald-700/50"
+              >
                       <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-lg font-bold text-gray-900">
-                    <div className="p-2 rounded-lg bg-green-100">
-                      <item.icon className="w-6 h-6 text-green-600" />
+                  <CardTitle className="flex items-center gap-3 text-lg font-bold text-foreground">
+                    <div className="rounded-lg bg-emerald-100 p-2 dark:bg-emerald-950/45">
+                      <item.icon className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
                           </div>
                             {item.title}
                           </CardTitle>
                       </CardHeader>
                       <CardContent>
-                  <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
                       </CardContent>
                     </Card>
             ))}
           </div>
 
-          <div className="bg-green-50 rounded-lg p-6 border border-green-200">
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50/90 p-6 dark:border-emerald-900/50 dark:bg-emerald-950/30">
             <p className="text-body italic">
               Mit einem strukturierten Vergleich verwandeln Sie die stressige Suche nach dem richtigen Umzugsservice in einen überschaubaren Prozess mit klarem Ergebnis.
             </p>
@@ -488,7 +491,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </section>
 
       {/* ===== WIE FUNKTIONIERT EIN UMZUGSVERGLEICH (5 Schritte) ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <h2 className="heading-2">
             Wie funktioniert ein Umzugsvergleich in der Schweiz
@@ -530,14 +533,14 @@ const UmzugsfirmaVergleichenPageClient = () => {
             ].map((step, index) => (
               <div key={index} className="flex gap-4 md:gap-6 items-start">
                 <div className="flex-shrink-0">
-                  <div className="bg-green-600 text-white rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center text-xl font-bold shadow-lg">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600 text-xl font-bold text-white shadow-lg dark:bg-emerald-500 md:h-14 md:w-14">
                         {step.number}
                       </div>
                 </div>
-                <div className="flex-1 bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+                <div className="flex-1 bg-card border border-border rounded-lg p-5 shadow-sm">
                   <div className="flex items-center gap-3 mb-2">
-                    <step.icon className="h-5 w-5 text-green-600 flex-shrink-0" />
-                    <h3 className="text-lg font-bold text-gray-900">{step.title}</h3>
+                    <step.icon className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                    <h3 className="text-lg font-bold text-foreground">{step.title}</h3>
                   </div>
                   <p className="text-body">{step.description}</p>
                       </div>
@@ -546,13 +549,13 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </div>
 
           {/* Vorteile Online-Offerten.ch */}
-          <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Vorteile mit Online-Offerten.ch gegenüber eigenständiger Suche</h3>
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50/90 p-6 dark:border-emerald-900/50 dark:bg-emerald-950/30">
+            <h3 className="mb-3 text-xl font-semibold text-foreground">Vorteile mit Online-Offerten.ch gegenüber eigenständiger Suche</h3>
             <p className="text-body mb-4">
               <strong>Online-Offerten.ch</strong> spart Ihnen die zeitaufwändige Recherche im Internet. Statt einzelne Unternehmen anzurufen und Informationen zusammenzutragen, erhalten Sie mit einer einzigen Anfrage mehrere vergleichbare Offerten. Die von uns vermittelten geprüften Anbieter sind regional aktiv, verfügen über einen festen Standort in der Schweiz und sind auf Umzüge in Ihrer Region spezialisiert.
             </p>
             <p className="text-body mb-4">
-              Bei uns finden Sie zudem Bewertungen und Erfahrungsberichte früherer Kunden, die Ihnen bei der Auswahl helfen. Zusätzlich können Sie auf Online-Offerten.ch gezielt nach Umzugsfirmen in Ihrer Region oder mit speziellen Zusatzleistungen wie <Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-medium">Endreinigung</Link> oder Montageservice filtern – so wird die Suche für Sie einfacher.
+              Bei uns finden Sie zudem Bewertungen und Erfahrungsberichte früherer Kunden, die Ihnen bei der Auswahl helfen. Zusätzlich können Sie auf Online-Offerten.ch gezielt nach Umzugsfirmen in Ihrer Region oder mit speziellen Zusatzleistungen wie <Link href="/reinigung/umzugsreinigung" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Endreinigung</Link> oder Montageservice filtern – so wird die Suche für Sie einfacher.
             </p>
             <p className="text-body">
               So vergleichen Sie mit Online-Offerten.ch Umzugsservices in der Schweiz effizient und sicher und finden den passenden Anbieter für Ihren Umzug.
@@ -562,43 +565,43 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </section>
 
       {/* ===== KOSTENÜBERSICHT NACH WOHNUNGSGRÖSSE ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="bg-gradient-to-b from-muted/45 to-background py-12 md:py-16 dark:from-muted/15">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
-            <Calculator className="h-4 w-4 mr-2" />
+          <div className="mb-3 inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 dark:bg-blue-950/45 dark:text-blue-300">
+            <Calculator className="mr-2 h-4 w-4" />
             Kostenübersicht
           </div>
           <h2 className="heading-2 !mt-0">
             Umzugspreis nach Wohnungsgrösse
             </h2>
           <p className="text-body mb-8">
-            Die <Link href="/umzugsfirma/umzugskosten" className="text-green-700 hover:text-green-800 underline font-medium">Umzugskosten in der Schweiz</Link> hängen von mehreren Faktoren ab. Die folgende Übersicht zeigt typische Preisbereiche:
+            Die <Link href="/umzugsfirma/umzugskosten" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Umzugskosten in der Schweiz</Link> hängen von mehreren Faktoren ab. Die folgende Übersicht zeigt typische Preisbereiche:
           </p>
 
           <div className="overflow-x-auto mb-8">
-            <table className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md">
+            <table className="w-full bg-card border border-border rounded-lg overflow-hidden shadow-md">
               <thead>
-                <tr className="bg-green-600 text-white">
+                <tr className="bg-emerald-600 text-white dark:bg-emerald-700">
                   <th className="px-6 py-4 text-left font-bold">Wohnungsgrösse</th>
                   <th className="px-6 py-4 text-left font-bold">Lokaler Umzug</th>
                   <th className="px-6 py-4 text-left font-bold">Kantonsübergreifend</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white">
-                  <td className="px-6 py-4 font-semibold text-gray-900 border-b border-gray-100">1–2 Zimmer</td>
-                  <td className="px-6 py-4 text-gray-700 border-b border-gray-100">800 – 1&apos;500 CHF</td>
-                  <td className="px-6 py-4 text-gray-700 border-b border-gray-100">1&apos;200 – 2&apos;200 CHF</td>
+                <tr className="bg-background">
+                  <td className="px-6 py-4 font-semibold text-foreground border-b border-border">1–2 Zimmer</td>
+                  <td className="px-6 py-4 text-muted-foreground border-b border-border">800 – 1&apos;500 CHF</td>
+                  <td className="px-6 py-4 text-muted-foreground border-b border-border">1&apos;200 – 2&apos;200 CHF</td>
                 </tr>
-                <tr className="bg-gray-50">
-                  <td className="px-6 py-4 font-semibold text-gray-900 border-b border-gray-100">3–4 Zimmer</td>
-                  <td className="px-6 py-4 text-gray-700 border-b border-gray-100">1&apos;500 – 2&apos;800 CHF</td>
-                  <td className="px-6 py-4 text-gray-700 border-b border-gray-100">2&apos;200 – 4&apos;000 CHF</td>
+                <tr className="bg-muted/35 dark:bg-muted/20">
+                  <td className="px-6 py-4 font-semibold text-foreground border-b border-border">3–4 Zimmer</td>
+                  <td className="px-6 py-4 text-muted-foreground border-b border-border">1&apos;500 – 2&apos;800 CHF</td>
+                  <td className="px-6 py-4 text-muted-foreground border-b border-border">2&apos;200 – 4&apos;000 CHF</td>
                 </tr>
-                <tr className="bg-white">
-                  <td className="px-6 py-4 font-semibold text-gray-900 border-b border-gray-100">5+ Zimmer</td>
-                  <td className="px-6 py-4 text-gray-700 border-b border-gray-100">2&apos;800 – 4&apos;500 CHF</td>
-                  <td className="px-6 py-4 text-gray-700 border-b border-gray-100">4&apos;000 – 7&apos;000 CHF</td>
+                <tr className="bg-background">
+                  <td className="px-6 py-4 font-semibold text-foreground border-b border-border">5+ Zimmer</td>
+                  <td className="px-6 py-4 text-muted-foreground border-b border-border">2&apos;800 – 4&apos;500 CHF</td>
+                  <td className="px-6 py-4 text-muted-foreground border-b border-border">4&apos;000 – 7&apos;000 CHF</td>
                 </tr>
               </tbody>
             </table>
@@ -606,12 +609,12 @@ const UmzugsfirmaVergleichenPageClient = () => {
 
           {/* Zusatzkosten & Preisfaktoren */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+              <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-orange-600" />
                 Zusatzkosten, die häufig anfallen
               </h3>
-              <ul className="text-sm text-gray-700 space-y-3">
+              <ul className="text-sm text-muted-foreground space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-orange-500 font-bold mt-0.5">•</span>
                   <span><strong>Verpackungsmaterial</strong> – Umzugskartons, Luftpolsterfolie, Klebeband: 50 bis 200 CHF</span>
@@ -630,12 +633,12 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 </li>
               </ul>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+              <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
                 <TrendingUp className="h-5 w-5 text-blue-600" />
                 Faktoren, die den Preis beeinflussen
               </h3>
-              <ul className="text-sm text-gray-700 space-y-3">
+              <ul className="text-sm text-muted-foreground space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-500 font-bold mt-0.5">•</span>
                   <span><strong>Stockwerk und Lift</strong> – Jedes Stockwerk ohne Aufzug erhöht die Kosten um 100 bis 200 CHF</span>
@@ -656,9 +659,9 @@ const UmzugsfirmaVergleichenPageClient = () => {
             </div>
                       </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+          <div className="rounded-lg border border-amber-200 bg-amber-50/90 p-6 dark:border-amber-900/50 dark:bg-amber-950/25">
             <div className="flex items-start gap-3">
-              <Lightbulb className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+              <Lightbulb className="mt-0.5 h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" />
               <p className="text-body">
                 <strong>Tipp:</strong> Fordern Sie immer einen Festpreis statt Stundenlohn an. So vermeiden Sie unerwartete Mehrkosten, wenn der Umzug länger dauert als geplant.
               </p>
@@ -668,10 +671,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
       </section>
 
       {/* ===== SPEZIALDIENSTLEISTUNGEN UND ZUSATZLEISTUNGEN ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="inline-flex items-center px-4 py-2 bg-purple-100 rounded-full text-purple-700 font-semibold text-sm mb-3">
-            <Truck className="h-4 w-4 mr-2" />
+          <div className="mb-3 inline-flex items-center rounded-full bg-purple-100 px-4 py-2 text-sm font-semibold text-purple-800 dark:bg-purple-950/45 dark:text-purple-300">
+            <Truck className="mr-2 h-4 w-4" />
             Dienstleistungen
           </div>
           <h2 className="heading-2 !mt-0">
@@ -724,33 +727,33 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 description: 'Spezialisierte Teams mit dem nötigen Know-how und Equipment für den sicheren Transport empfindlicher oder schwerer Instrumente.'
               },
             ].map((item, index) => (
-              <Card key={index} className="bg-white shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+              <Card key={index} className="border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
                 <CardContent className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2 rounded-lg bg-green-100">
-                      <item.icon className="w-5 h-5 text-green-600" />
+                  <div className="mb-3 flex items-center gap-3">
+                    <div className="rounded-lg bg-emerald-100 p-2 dark:bg-emerald-950/45">
+                      <item.icon className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
-                    <h4 className="font-bold text-gray-900">{item.title}</h4>
+                    <h4 className="font-bold text-foreground">{item.title}</h4>
                   </div>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
                     </CardContent>
                   </Card>
               ))}
           </div>
 
           <p className="text-body">
-            Die gezielte Auswahl dieser Zusatzleistungen ermöglicht es, den Umzugsservice optimal auf die eigenen Anforderungen abzustimmen. Erfahren Sie mehr über <Link href="/umzugsfirma/klaviertransport" className="text-green-700 hover:text-green-800 underline font-medium">Spezialtransporte</Link> oder starten Sie jetzt Ihre <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-green-700 hover:text-green-800 underline font-medium">kostenlose Anfrage</Link>.
+            Die gezielte Auswahl dieser Zusatzleistungen ermöglicht es, den Umzugsservice optimal auf die eigenen Anforderungen abzustimmen. Erfahren Sie mehr über <Link href="/umzugsfirma/klaviertransport" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Spezialtransporte</Link> oder starten Sie jetzt Ihre <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">kostenlose Anfrage</Link>.
           </p>
             </div>
           </section>
 
       {/* ===== SERIÖSE UMZUGSFIRMA ERKENNEN ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="bg-gradient-to-b from-muted/45 to-background py-12 md:py-16 dark:from-muted/15">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
-              <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
-                <ShieldCheck className="h-4 w-4 mr-2" />
+              <div className="mb-3 inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 dark:bg-blue-950/45 dark:text-blue-300">
+                <ShieldCheck className="mr-2 h-4 w-4" />
                 Qualitätskriterien
               </div>
               <h2 className="heading-2 !mt-0">
@@ -761,27 +764,27 @@ const UmzugsfirmaVergleichenPageClient = () => {
               </p>
 
               <div className="space-y-4 mb-6">
-                <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                  <h4 className="font-bold text-gray-900 mb-2">Rechtliche Kriterien:</h4>
-                  <ul className="text-sm text-gray-700 space-y-1.5">
-                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" /> Eintrag im Handelsregister mit Schweizer Geschäftssitz</li>
-                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" /> Gültige Mehrwertsteuer-Nummer (UID)</li>
-                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" /> Gewerbebewilligung für Gütertransporte</li>
+                <div className="bg-card border border-border rounded-lg p-4 shadow-sm">
+                  <h4 className="font-bold text-foreground mb-2">Rechtliche Kriterien:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1.5">
+                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" /> Eintrag im Handelsregister mit Schweizer Geschäftssitz</li>
+                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" /> Gültige Mehrwertsteuer-Nummer (UID)</li>
+                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" /> Gewerbebewilligung für Gütertransporte</li>
                   </ul>
                 </div>
 
-                <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                  <h4 className="font-bold text-gray-900 mb-2">Versicherungsschutz:</h4>
-                  <ul className="text-sm text-gray-700 space-y-1.5">
+                <div className="bg-card border border-border rounded-lg p-4 shadow-sm">
+                  <h4 className="font-bold text-foreground mb-2">Versicherungsschutz:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1.5">
                     <li className="flex items-start gap-2"><ShieldCheck className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" /> Transportversicherung mit mindestens 1&apos;000 CHF pro Kubikmeter</li>
                     <li className="flex items-start gap-2"><ShieldCheck className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" /> Haftpflichtversicherung für Schäden an Ihrem Eigentum und in der Wohnung</li>
                     <li className="flex items-start gap-2"><ShieldCheck className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" /> Klare Regelung zur Schadensmeldung und -abwicklung</li>
                   </ul>
                 </div>
 
-                <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                  <h4 className="font-bold text-gray-900 mb-2">Transparenz und Professionalität:</h4>
-                  <ul className="text-sm text-gray-700 space-y-1.5">
+                <div className="bg-card border border-border rounded-lg p-4 shadow-sm">
+                  <h4 className="font-bold text-foreground mb-2">Transparenz und Professionalität:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1.5">
                     <li className="flex items-start gap-2"><Eye className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" /> Detaillierte schriftliche Offerte mit allen Leistungen</li>
                     <li className="flex items-start gap-2"><Eye className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" /> Keine Forderung nach Vorauskasse</li>
                     <li className="flex items-start gap-2"><Eye className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" /> Kostenlose Besichtigung bei grösseren Umzügen</li>
@@ -789,10 +792,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
                   </ul>
                 </div>
 
-                <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                  <h4 className="font-bold text-gray-900 mb-2">Referenzen und Bewertungen:</h4>
-                  <ul className="text-sm text-gray-700 space-y-1.5">
-                    <li className="flex items-start gap-2"><Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" /> Positive <Link href="/kunden-bewertungen" className="text-green-700 hover:text-green-800 underline font-medium">Kundenbewertungen</Link> auf Google oder Bewertungsportalen</li>
+                <div className="bg-card border border-border rounded-lg p-4 shadow-sm">
+                  <h4 className="font-bold text-foreground mb-2">Referenzen und Bewertungen:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1.5">
+                    <li className="flex items-start gap-2"><Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" /> Positive <Link href="/kunden-bewertungen" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Kundenbewertungen</Link> auf Google oder Bewertungsportalen</li>
                     <li className="flex items-start gap-2"><Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" /> Mitgliedschaft im Schweizerischen Zügelverband (SZV)</li>
                     <li className="flex items-start gap-2"><Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" /> Nachweisbare Erfahrung und Empfehlungen</li>
                   </ul>
@@ -808,16 +811,16 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 className="w-full h-auto object-cover rounded-xl"
               />
               {/* Warnsignale */}
-              <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-                <h4 className="font-bold text-red-800 mb-3 flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5 text-red-600" />
+              <div className="rounded-lg border border-red-200 bg-red-50/90 p-6 dark:border-red-900/55 dark:bg-red-950/35">
+                <h4 className="mb-3 flex items-center gap-2 font-bold text-red-900 dark:text-red-200">
+                  <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400" />
                   Warnsignale, bei denen Sie vorsichtig sein sollten:
                 </h4>
-                <ul className="text-sm text-red-700 space-y-2">
-                  <li className="flex items-start gap-2"><XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" /> Angebote deutlich unter dem Marktpreis</li>
-                  <li className="flex items-start gap-2"><XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" /> Haustürgeschäfte ohne schriftliche Unterlagen</li>
-                  <li className="flex items-start gap-2"><XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" /> Fehlende oder unvollständige Kontaktdaten</li>
-                  <li className="flex items-start gap-2"><XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" /> Druck zur sofortigen Unterschrift ohne Bedenkzeit</li>
+                <ul className="space-y-2 text-sm text-red-800 dark:text-red-200/95">
+                  <li className="flex items-start gap-2"><XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500 dark:text-red-400" /> Angebote deutlich unter dem Marktpreis</li>
+                  <li className="flex items-start gap-2"><XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500 dark:text-red-400" /> Haustürgeschäfte ohne schriftliche Unterlagen</li>
+                  <li className="flex items-start gap-2"><XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500 dark:text-red-400" /> Fehlende oder unvollständige Kontaktdaten</li>
+                  <li className="flex items-start gap-2"><XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500 dark:text-red-400" /> Druck zur sofortigen Unterschrift ohne Bedenkzeit</li>
                 </ul>
               </div>
             </div>
@@ -826,10 +829,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
       </section>
 
       {/* ===== TYPISCHE FEHLER BEIM OFFERTENVERGLEICH ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="inline-flex items-center px-4 py-2 bg-orange-100 rounded-full text-orange-700 font-semibold text-sm mb-3">
-            <AlertTriangle className="h-4 w-4 mr-2" />
+          <div className="mb-3 inline-flex items-center rounded-full bg-orange-100 px-4 py-2 text-sm font-semibold text-orange-800 dark:bg-orange-950/45 dark:text-orange-300">
+            <AlertTriangle className="mr-2 h-4 w-4" />
             Fehler vermeiden
           </div>
           <h2 className="heading-2 !mt-0">
@@ -876,19 +879,22 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 color: "teal"
               }
             ].map((error, index) => (
-              <div key={index} className="bg-white border-2 border-gray-200 rounded-lg p-5 shadow-sm hover:border-orange-200 transition-colors">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="bg-orange-100 text-orange-700 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">
+              <div
+                key={index}
+                className="rounded-lg border-2 border-border bg-card p-5 shadow-sm transition-colors hover:border-orange-300/80 dark:hover:border-orange-700/50"
+              >
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-100 text-sm font-bold text-orange-800 dark:bg-orange-950/50 dark:text-orange-300">
                     {error.number}
                   </div>
-                  <h4 className="font-bold text-gray-900">{error.title}</h4>
+                  <h4 className="font-bold text-foreground">{error.title}</h4>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">{error.description}</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">{error.description}</p>
               </div>
             ))}
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+          <div className="rounded-lg border border-amber-200 bg-amber-50/90 p-6 dark:border-amber-900/50 dark:bg-amber-950/25">
             <p className="text-body italic">
               Erfahrung zeigt: 70% aller Beschwerden bei Konsumentenschutzstellen entstehen durch fehlende schriftliche Vereinbarungen oder unzureichenden Versicherungsschutz.
             </p>
@@ -897,52 +903,52 @@ const UmzugsfirmaVergleichenPageClient = () => {
       </section>
 
       {/* ===== FAZIT UND NÄCHSTE SCHRITTE ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="bg-gradient-to-b from-muted/45 to-background py-12 md:py-16 dark:from-muted/15">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <h2 className="heading-2">Fazit und nächste Schritte</h2>
           <p className="text-body mb-6">
             Der Vergleich von Umzugsfirmen in der Schweiz ist kein Luxus, sondern eine sinnvolle Investition Ihrer Zeit. Mit dem richtigen Vorgehen sparen Sie mehrere Hundert Franken und vermeiden Stress am Umzugstag.
           </p>
 
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Die wichtigsten Punkte zusammengefasst:</h3>
+          <div className="bg-card border border-border rounded-lg p-6 shadow-sm mb-8">
+            <h3 className="text-xl font-bold text-foreground mb-4">Die wichtigsten Punkte zusammengefasst:</h3>
             <ul className="space-y-3 text-body">
               <li className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <span>Holen Sie mindestens vier Offerten ein</span>
               </li>
               <li className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <span>Vergleichen Sie Leistungen, nicht nur Preise</span>
               </li>
               <li className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <span>Prüfen Sie Versicherung und Referenzen</span>
               </li>
               <li className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <span>Buchen Sie 4 bis 6 Wochen im Voraus</span>
               </li>
               <li className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <span>Lassen Sie alles schriftlich bestätigen</span>
               </li>
             </ul>
           </div>
 
-          <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-            <h3 className="text-xl font-bold text-gray-900 mb-3">Ihr nächster Schritt:</h3>
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50/90 p-6 dark:border-emerald-900/50 dark:bg-emerald-950/30">
+            <h3 className="mb-3 text-xl font-bold text-foreground">Ihr nächster Schritt:</h3>
             <p className="text-body mb-4">
               Starten Sie jetzt Ihre kostenlose Anfrage über <strong>Online-Offerten.ch</strong>. In wenigen Klicks erhalten Sie bis zu fünf unverbindliche Angebote von geprüften Umzugsfirmen aus Ihrer Umgebung. Der Service ist 100% kostenlos und ohne Verpflichtung.
             </p>
             <p className="text-body mb-6">
-              Egal ob <Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-medium">Privatumzug</Link> in <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:text-green-800 underline font-medium">Zürich</Link>, <Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-medium">Geschäftsumzug</Link> in <Link href="/umzugsfirma/bern" className="text-green-700 hover:text-green-800 underline font-medium">Bern</Link> oder Zügeln von Kanton zu Kanton: Die Plattform vermittelt neutral zwischen Ihnen und qualifizierten Partnerfirmen, die auf Ihre Art von Umzug spezialisiert sind.
+              Egal ob <Link href="/umzugsfirma/privatumzug" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Privatumzug</Link> in <Link href="/umzugsfirma/zuerich" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Zürich</Link>, <Link href="/umzugsfirma/geschaeftsumzug" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Geschäftsumzug</Link> in <Link href="/umzugsfirma/bern" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Bern</Link> oder Zügeln von Kanton zu Kanton: Die Plattform vermittelt neutral zwischen Ihnen und qualifizierten Partnerfirmen, die auf Ihre Art von Umzug spezialisiert sind.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   asChild
                   size="lg"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold group px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all"
+                className="group rounded-lg bg-emerald-600 px-8 py-3 font-bold text-white shadow-lg transition-all hover:bg-emerald-700 hover:shadow-xl dark:bg-emerald-600 dark:hover:bg-emerald-500"
                 >
                 <Link href="/kostenlose-offerte-anfordern?service=umzug&step=2">
                   Jetzt kostenlose Offerten anfordern
@@ -950,7 +956,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                   </Link>
                 </Button>
               </div>
-            <div className="mt-4 flex flex-wrap gap-4 text-sm text-green-700">
+            <div className="mt-4 flex flex-wrap gap-4 text-sm text-emerald-800 dark:text-emerald-300">
               <span>🔒 Geprüfte Anbieter</span>
               <span>|</span>
               <span>Neutrale Vermittlung</span>
@@ -962,24 +968,24 @@ const UmzugsfirmaVergleichenPageClient = () => {
       </section>
 
       {/* ===== REGIONAL LINKS ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="heading-2">Umzugsfirmen in Ihrer Region vergleichen</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Finden Sie <Link href="/umzugsfirma-in-der-naehe" className="text-green-700 hover:text-green-800 underline font-medium">Umzugsfirmen in der Nähe</Link> und vergleichen Sie die besten Anbieter in den grössten Städten der Schweiz.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Finden Sie <Link href="/umzugsfirma-in-der-naehe" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Umzugsfirmen in der Nähe</Link> und vergleichen Sie die besten Anbieter in den grössten Städten der Schweiz.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
             {locations.map((location) => (
               <Link key={location.name} href={location.href}>
-                <Card className="h-full hover:border-green-500 hover:shadow-lg transition-all cursor-pointer">
+                <Card className="h-full cursor-pointer transition-all hover:border-emerald-500 hover:shadow-lg dark:hover:border-emerald-600">
                   <CardContent className="p-6">
                     <div className="flex items-center">
-                      <MapPin className="h-5 w-5 text-green-600 mr-3" />
-                      <span className="font-semibold text-gray-900">Umzugsfirma {location.name}</span>
-                      <ArrowRight className="h-4 w-4 text-gray-400 ml-auto" />
+                      <MapPin className="mr-3 h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="font-semibold text-foreground">Umzugsfirma {location.name}</span>
+                      <ArrowRight className="ml-auto h-4 w-4 text-muted-foreground" />
                     </div>
                   </CardContent>
                 </Card>
@@ -989,10 +995,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
 
           {/* Service Links Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="bg-white shadow-md">
+            <Card className="bg-card shadow-md">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800">
-                  <Truck className="w-5 h-5 text-blue-600" />
+                <CardTitle className="flex items-center gap-3 text-lg font-bold text-foreground">
+                  <Truck className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   Umzug
                 </CardTitle>
               </CardHeader>
@@ -1007,8 +1013,12 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     { name: 'Umzugskosten', href: '/umzugsfirma/umzugskosten' },
                     { name: 'Umzugsfirma in der Nähe', href: '/umzugsfirma-in-der-naehe' },
                   ].map((item) => (
-                    <Link key={item.name} href={item.href} className="flex items-center gap-2 text-slate-700 hover:text-green-700 transition-colors py-1.5 px-2 rounded-md hover:bg-green-50 text-sm">
-                      <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0" />
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-emerald-500/10 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300"
+                    >
+                      <ChevronRight className="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400" />
                       {item.name}
                     </Link>
                   ))}
@@ -1016,10 +1026,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white shadow-md">
+            <Card className="bg-card shadow-md">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800">
-                  <Star className="w-5 h-5 text-yellow-500" />
+                <CardTitle className="flex items-center gap-3 text-lg font-bold text-foreground">
+                  <Star className="h-5 w-5 text-amber-500 dark:text-amber-400" />
                   Reinigung
                 </CardTitle>
               </CardHeader>
@@ -1033,8 +1043,12 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     { name: 'Baureinigung', href: '/reinigung/baureinigung' },
                     { name: 'Reinigungskosten', href: '/reinigung/reinigungskosten' },
                   ].map((item) => (
-                    <Link key={item.name} href={item.href} className="flex items-center gap-2 text-slate-700 hover:text-green-700 transition-colors py-1.5 px-2 rounded-md hover:bg-green-50 text-sm">
-                      <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0" />
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-emerald-500/10 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300"
+                    >
+                      <ChevronRight className="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400" />
                       {item.name}
                     </Link>
                   ))}
@@ -1042,10 +1056,10 @@ const UmzugsfirmaVergleichenPageClient = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white shadow-md">
+            <Card className="bg-card shadow-md">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800">
-                  <BarChart3 className="w-5 h-5 text-green-500" />
+                <CardTitle className="flex items-center gap-3 text-lg font-bold text-foreground">
+                  <BarChart3 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                   Vergleich & Info
                 </CardTitle>
               </CardHeader>
@@ -1057,8 +1071,12 @@ const UmzugsfirmaVergleichenPageClient = () => {
                     { name: 'Kundenbewertungen', href: '/kunden-bewertungen' },
                     { name: 'Ratgeber', href: '/ratgeber' },
                   ].map((item) => (
-                    <Link key={item.name} href={item.href} className="flex items-center gap-2 text-slate-700 hover:text-green-700 transition-colors py-1.5 px-2 rounded-md hover:bg-green-50 text-sm">
-                      <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0" />
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-emerald-500/10 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300"
+                    >
+                      <ChevronRight className="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400" />
                       {item.name}
                   </Link>
                   ))}
@@ -1070,7 +1088,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           </section>
 
       {/* ===== FAQ SECTION ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-start">
             <div className="md:col-span-3">
@@ -1083,8 +1101,8 @@ const UmzugsfirmaVergleichenPageClient = () => {
 
               <Accordion type="single" collapsible className="w-full">
                 {faqItems.map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="border-b">
-                    <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+                  <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
+                    <AccordionTrigger className="text-left font-semibold text-foreground hover:text-blue-600 dark:hover:text-blue-400">
                       <h4 className="faq-question">{item.q}</h4>
                     </AccordionTrigger>
                     <AccordionContent className="text-body leading-relaxed">
@@ -1096,7 +1114,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             </div>
 
             <div className="relative md:col-span-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              <div className="relative overflow-hidden rounded-2xl border-4 border-background shadow-2xl">
                 <NextImage
                   src="/bilder/umzugsfirma-privatumzug-600-400.webp"
                   alt="FAQ zum Vergleich von Umzugsfirmen in der Schweiz"
@@ -1129,7 +1147,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             {/* Rating Card */}
             {ratingStats.reviewCount > 0 && (
               <div
-                className="bg-white rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-start items-start gap-4 transition-all duration-300 mt-6"
+                className="mt-6 flex flex-col items-start gap-4 rounded-xl bg-card p-5 transition-all duration-300 sm:p-6 md:flex-row md:items-start"
                 style={{
                   boxShadow: '-4px 0 8px -2px rgba(0, 0, 0, 0.1)'
                 }}
@@ -1137,23 +1155,23 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 <div className="flex-1 pt-1 w-full md:w-auto">
                   <div className="flex flex-wrap justify-start items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Kostenlos & unverbindlich</span>
+                      <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-sm text-muted-foreground">Kostenlos & unverbindlich</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Versicherte Partner</span>
+                      <ShieldCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-sm text-muted-foreground">Versicherte Partner</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-green-600" />
-                      <span className="text-sm text-gray-600">Bis zu 40% sparen</span>
+                      <Award className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-sm text-muted-foreground">Bis zu 40% sparen</span>
                     </div>
                   </div>
                 </div>
               </div>
             )}
+          </div>
         </div>
-      </div>
       </section>
     </>
   )

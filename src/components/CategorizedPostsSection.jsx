@@ -18,27 +18,32 @@ const PostCard = ({ post }) => {
     };
 
     return (
-        <Card className="flex flex-col h-full overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl border border-gray-100 rounded-xl">
-            <Link href={`/ratgeber/${post.slug}`} className="block group">
-                <div className="aspect-video overflow-hidden rounded-t-xl">
+        <Card className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/70 bg-white/90 shadow-[0_2px_24px_-6px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/[0.035] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200/70 hover:shadow-[0_18px_42px_-14px_rgba(15,23,42,0.14)] dark:border-border dark:bg-card/95 dark:ring-white/[0.06] dark:hover:border-emerald-800/55">
+            <Link href={`/ratgeber/${post.slug}`} className="block">
+                <div className="relative aspect-video overflow-hidden bg-slate-100">
                     <img 
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+                        className="h-full w-full object-cover transition-[transform,filter] duration-500 ease-out group-hover:scale-[1.03] group-hover:brightness-[1.02]" 
                         alt={post.title}
                         src={post.featured_image_url || fallbackImageUrl} 
                         onError={(e) => { e.target.onerror = null; e.target.src=fallbackImageUrl; }}
                     />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-90 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-100 dark:from-black/45" aria-hidden />
                 </div>
             </Link>
-            <CardContent className="p-6 flex flex-col flex-grow">
-                {post.category && <Badge variant="secondary" className="mb-3 self-start bg-green-100 text-green-900">{post.category}</Badge>}
-                <h3 className="text-xl font-bold mb-2 text-gray-900 flex-grow group-hover:text-green-700 transition-colors">
+            <CardContent className="flex flex-grow flex-col p-6">
+                {post.category && (
+                    <Badge variant="outline" className="mb-3 w-fit self-start border-emerald-200/90 bg-emerald-50/80 px-2.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-emerald-900 dark:border-emerald-800/60 dark:bg-emerald-950/35 dark:text-emerald-200">
+                        {post.category}
+                    </Badge>
+                )}
+                <h3 className="mb-2 flex-grow text-xl font-semibold leading-snug tracking-tight text-slate-950 transition-colors group-hover:text-emerald-800 dark:text-foreground dark:group-hover:text-emerald-300">
                     <Link href={`/ratgeber/${post.slug}`}>{post.title}</Link>
                 </h3>
-                <p className="text-gray-700 text-sm mb-4">{excerpt}</p>
-                <div className="mt-auto">
-                    <Button asChild variant="link" className="p-0 self-start text-green-700 hover:text-green-800 font-semibold">
-                        <Link href={`/ratgeber/${post.slug}`}>
-                            {getReadMoreText(post)} <ArrowRight className="ml-2 w-4 h-4" />
+                <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">{excerpt}</p>
+                <div className="mt-auto border-t border-slate-100 pt-4 dark:border-border">
+                    <Button asChild variant="link" className="h-auto p-0 font-semibold text-emerald-800 hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-300">
+                        <Link href={`/ratgeber/${post.slug}`} className="inline-flex items-center gap-1">
+                            {getReadMoreText(post)} <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                         </Link>
                     </Button>
                 </div>

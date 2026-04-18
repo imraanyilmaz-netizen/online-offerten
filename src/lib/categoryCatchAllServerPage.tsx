@@ -1,11 +1,10 @@
-import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import {
   findServiceInCategory,
-  generateCategoryCatchAllStaticParams,
   getServiceCategoryBySlug,
   getServicePathSegment,
 } from '@/data/categories'
+import { findPopularDestinationBySlug } from '@/data/internationalPopularDestinations'
 import { locations } from '@/data/locations'
 import { getPartnersForCategoryLocation } from '@/lib/partners/forLocation'
 import CategoryCityPageClient from '@/components/pages/category/CategoryCityPageClient'
@@ -25,124 +24,12 @@ const SERVICE_TITLE: Record<string, string> = {
   malerfirma: 'Malerfirma',
 }
 
-type Props = { params: Promise<{ category: string; slug: string[] }> }
+type Props = { category: string; segments: string[] }
 
-export function generateStaticParams() {
-  return generateCategoryCatchAllStaticParams(locations)
-}
-
-export const revalidate = 3600
-
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { category: raw, slug: segments } = await props.params
-  const cat = getServiceCategoryBySlug(raw)
-  if (!cat) return { title: 'Seite nicht gefunden' }
-
-  const segs = Array.isArray(segments) ? segments.filter(Boolean) : []
-  if (segs.length === 0 || segs.length > 2) return { title: 'Seite nicht gefunden' }
-
-  if (segs.length === 1) {
-    const only = segs[0]
-    const loc = locations.find((l) => l.slug === only)
-    if (loc) {
-      const st = SERVICE_TITLE[cat.slug] || 'Anbieter'
-      const title = `${st} ${loc.name} – Offerten vergleichen`
-      const description = `${st} in ${loc.name} (Kanton ${loc.canton}): Geprüfte Anbieter vergleichen, kostenlose Offerten anfordern und bis zu 40% sparen.`
-      const canonical = `${SITE}/${cat.slug}/${loc.slug}`
-      return {
-        title,
-        description,
-        alternates: { canonical },
-        openGraph: {
-          title,
-          description,
-          url: canonical,
-          siteName: 'Online-Offerten.ch',
-          locale: 'de_CH',
-          type: 'website',
-        },
-        twitter: { card: 'summary_large_image', title, description },
-        robots: {
-          index: true,
-          follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
-          },
-        },
-      }
-    }
-
-    const svcMeta = getServiceLandingMetadata(cat.slug, only)
-    if (!svcMeta) return { title: 'Seite nicht gefunden' }
-
-    const { title, description, canonical } = svcMeta
-    return {
-      title,
-      description,
-      alternates: { canonical },
-      openGraph: {
-        title,
-        description,
-        url: canonical,
-        siteName: 'Online-Offerten.ch',
-        locale: 'de_CH',
-        type: 'website',
-      },
-      twitter: { card: 'summary_large_image', title, description },
-      robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
-      },
-    }
-  }
-
-  const [serviceSeg, citySeg] = segs
-  const loc = locations.find((l) => l.slug === citySeg)
-  if (!loc) return { title: 'Seite nicht gefunden' }
-  const svcMeta = getServiceCityLandingMetadata(cat.slug, serviceSeg, loc)
-  if (!svcMeta) return { title: 'Seite nicht gefunden' }
-
-  const { title, description, canonical } = svcMeta
-  return {
-    title,
-    description,
-    alternates: { canonical },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      siteName: 'Online-Offerten.ch',
-      locale: 'de_CH',
-      type: 'website',
-    },
-    twitter: { card: 'summary_large_image', title, description },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-  }
-}
-
-export default async function CategoryCatchAllPage(props: Props) {
-  const { category: raw, slug: segments } = await props.params
+export default async function CategoryCatchAllServerPage({
+  category: raw,
+  segments,
+}: Props) {
   const cat = getServiceCategoryBySlug(raw)
   if (!cat) notFound()
 
@@ -238,9 +125,28 @@ export default async function CategoryCatchAllPage(props: Props) {
   }
 
   const [serviceSeg, citySeg] = segs
-  const loc = locations.find((l) => l.slug === citySeg)
   const svc = findServiceInCategory(cat.slug, serviceSeg)
-  if (!loc || !svc) notFound()
+  if (!svc) notFound()
+
+  if (svc.id === 'auslandumzug') {
+    const dest = findPopularDestinationBySlug(citySeg)
+    if (dest) {
+      return (
+        <CategoryServicePageClient
+          categorySlug={cat.slug}
+          serviceId={svc.id}
+          pageTitle={dest.metaTitle}
+          heroTitle={dest.heroTitle}
+          pageDescription={dest.heroDescription}
+          serviceLabel={svc.label}
+          auslandDestination={dest}
+        />
+      )
+    }
+  }
+
+  const loc = locations.find((l) => l.slug === citySeg)
+  if (!loc) notFound()
 
   const svcMeta = getServiceCityLandingMetadata(cat.slug, serviceSeg, loc)
   if (!svcMeta) notFound()

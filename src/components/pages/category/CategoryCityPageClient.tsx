@@ -49,7 +49,6 @@ const DialogDescription = DialogDescriptionUi as FC<
   PropsWithChildren<{ className?: string }>
 >
 import LocationPageNavigation from '@/components/locations/LocationPageNavigation'
-import CategoryCityPartnersMap from '@/components/locations/CategoryCityPartnersMap'
 import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CategoryCityFaqSection from '@/components/pages/category/CategoryCityFaqSection'
 import CategoryCitySpotlight from '@/components/pages/category/CategoryCitySpotlight'
@@ -856,22 +855,15 @@ export default function CategoryCityPageClient({
       {partners.length > 0 ? (
         <section className="border-t border-slate-200/60 bg-gradient-to-b from-slate-50/80 to-white py-16 dark:border-border dark:from-muted/25 dark:to-background md:py-20">
           <div className="mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
-            <div className="mb-8 md:mb-10">
-              <CategoryCityPartnersMap
-                partners={partners}
-                locationName={locationName}
-                categorySlug={categorySlug}
-              />
-            </div>
             <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_4px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card dark:ring-white/10">
-              <div className="grid lg:grid-cols-12 lg:items-stretch">
-                <div className="relative min-h-[300px] lg:col-span-5 lg:min-h-[480px]">
+              <div className="flex flex-col">
+                <div className="relative min-h-[min(42svh,380px)] w-full sm:min-h-[340px] lg:min-h-[360px]">
                   <Image
                     src={heroSrc}
                     alt=""
                     fill
                     className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    sizes="100vw"
                     loading="lazy"
                   />
                   <div
@@ -883,7 +875,7 @@ export default function CategoryCityPageClient({
                     aria-hidden
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-90" aria-hidden />
-                  <div className="relative z-10 flex h-full min-h-[300px] flex-col justify-end p-8 md:p-10 lg:min-h-[480px]">
+                  <div className="relative z-10 flex h-full min-h-[min(42svh,380px)] flex-col justify-end p-8 sm:min-h-[340px] md:p-10 lg:min-h-[360px]">
                     <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/25 backdrop-blur-sm">
                       <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
                       Geprüftes Netzwerk
@@ -891,10 +883,10 @@ export default function CategoryCityPageClient({
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                       {partnerAside.kicker}
                     </p>
-                    <h2 className="mt-3 max-w-lg text-balance text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl md:leading-tight">
+                    <h2 className="mt-3 max-w-3xl text-balance text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl md:leading-tight">
                       {partnerAside.title}
                     </h2>
-                    <p className="mt-4 max-w-md text-sm font-normal leading-relaxed !text-white md:text-base md:leading-relaxed">
+                    <p className="mt-4 max-w-3xl text-sm font-normal leading-relaxed !text-white md:text-base md:leading-relaxed">
                       {partnerAside.body}
                     </p>
                     <p className="mt-6 text-xs font-medium text-white/55">
@@ -903,14 +895,14 @@ export default function CategoryCityPageClient({
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col bg-gradient-to-b from-white to-slate-50/90 p-6 dark:from-background dark:to-muted/20 sm:p-8 lg:col-span-7 lg:p-8 xl:p-10">
-                  <div className="mb-6 lg:hidden">
+                <div className="flex flex-col bg-gradient-to-b from-white to-slate-50/90 p-6 dark:from-background dark:to-muted/20 sm:p-8 lg:p-8 xl:p-10">
+                  <div className="mb-6">
                     <h2 className="text-xl font-semibold text-slate-900 dark:text-foreground">Partner in der Region</h2>
                     <p className="mt-1 text-sm text-slate-600 dark:text-muted-foreground">
                       Direkt vergleichbar – dieselben Kriterien für alle Anbieter.
                     </p>
                   </div>
-                  <div className="grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                     {partners.map((p) => (
                       <PartnerCard key={p.id} partner={p} />
                     ))}

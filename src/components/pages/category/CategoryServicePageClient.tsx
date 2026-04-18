@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo } from 'react'
+import dynamic from 'next/dynamic'
+import { Suspense, useMemo } from 'react'
 import type { IconType } from 'react-icons'
 import {
   MdApartment,
@@ -24,7 +25,7 @@ import {
   MdWindow,
   MdYard,
 } from 'react-icons/md'
-import { ArrowRight, ChevronRight, MapPin, Sparkles } from 'lucide-react'
+import { ArrowRight, ChevronRight, Globe2, MapPin, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ReinigungServiceHero from '@/components/reinigung/ReinigungServiceHero'
 import { quoteHrefForCategoryService } from '@/lib/quoteLinks'
@@ -36,6 +37,21 @@ import {
 } from '@/data/categories'
 import { locations } from '@/data/locations'
 import { cn } from '@/lib/utils'
+import InternationalCostCalculator from '@/components/international/InternationalCostCalculator'
+import InternationalPopularDestinations from '@/components/international/InternationalPopularDestinations'
+
+const AuslandumzugHeroGlobe = dynamic(
+  () => import('@/components/international/AuslandumzugHeroGlobe'),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="mx-auto aspect-square w-full max-w-[min(100%,420px)] lg:max-w-[480px] rounded-full bg-muted/50"
+        aria-hidden
+      />
+    ),
+  }
+)
 
 /** Grosse Gemeinden (Reihenfolge ~ Einwohnerzahl); lokale Service-Hub-Seiten verlinken. */
 const SERVICE_HUB_LOCAL_CITY_LIMIT = 36
@@ -99,6 +115,16 @@ function siblingServiceIcon(categorySlug: string, serviceId: string): IconType {
   if (categorySlug === 'umzugsfirma') return umzugServiceIcon(serviceId)
   if (categorySlug === 'malerfirma') return malerServiceIcon(serviceId)
   return MdApps
+}
+
+/** Länder-Landing für `auslandumzug` (siehe `internationalPopularDestinations.js`). */
+type AuslandLandingDestination = {
+  name: string
+  code: string
+  slug: string
+  flagEmoji?: string
+  calculatorHeading?: string
+  calculatorIntro?: string
 }
 
 function ServiceHubLocalCitySection({
@@ -185,6 +211,7 @@ export default function CategoryServicePageClient({
   pageDescription,
   serviceLabel,
   serviceDesc,
+  auslandDestination,
 }: {
   categorySlug: string
   serviceId: string
@@ -194,8 +221,18 @@ export default function CategoryServicePageClient({
   pageDescription: string
   serviceLabel: string
   serviceDesc?: string
+  /** Wenn gesetzt: Länder-URL z. B. /umzugsfirma/auslandumzug/deutschland */
+  auslandDestination?: AuslandLandingDestination
 }) {
-  const ctaHref = quoteHrefForCategoryService(categorySlug, serviceId)
+  const ctaHref = useMemo(
+    () =>
+      quoteHrefForCategoryService(
+        categorySlug,
+        serviceId,
+        serviceId === 'auslandumzug' && auslandDestination ? auslandDestination.code : undefined
+      ),
+    [categorySlug, serviceId, auslandDestination?.code]
+  )
   const hubLabel = SERVICE_TITLE[categorySlug] || 'Leistungen'
   const siblingServices = useMemo(() => {
     const cat = serviceCategories.find((c) => c.slug === categorySlug)
@@ -399,38 +436,175 @@ export default function CategoryServicePageClient({
                 <li>
                   <ChevronRight className="inline h-4 w-4 text-slate-400 dark:text-foreground/45" aria-hidden />
                 </li>
-                <li className="font-medium text-slate-900 dark:text-foreground">{serviceLabel}</li>
+                {serviceId === 'auslandumzug' && auslandDestination ? (
+                  <>
+                    <li>
+                      <Link
+                        href={`/${categorySlug}/auslandumzug`}
+                        className="hover:text-green-700 dark:hover:text-emerald-400"
+                      >
+                        {serviceLabel}
+                      </Link>
+                    </li>
+                    <li>
+                      <ChevronRight className="inline h-4 w-4 text-slate-400 dark:text-foreground/45" aria-hidden />
+                    </li>
+                    <li className="font-medium text-slate-900 dark:text-foreground">{auslandDestination.name}</li>
+                  </>
+                ) : (
+                  <li className="font-medium text-slate-900 dark:text-foreground">{serviceLabel}</li>
+                )}
               </ol>
             </nav>
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm dark:border-border dark:bg-card/90 dark:text-foreground">
-              <Sparkles className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden />
-              Geprüfte Anbieter in der Schweiz
-            </div>
-            <h1 className="heading-1 !mt-0 max-w-3xl">{heroTitle}</h1>
-            <p className="text-body mt-4 max-w-2xl">{pageDescription}</p>
-            {serviceDesc ? (
-              <p className="mt-3 max-w-2xl text-slate-700 dark:text-foreground/90">{serviceDesc}</p>
-            ) : null}
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild variant="cta" className="group h-12 px-7 text-base font-semibold tracking-tight">
-                <Link href={ctaHref}>
-                  Kostenlose Offerten anfordern
-                  <ArrowRight
-                    className="ml-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="h-12 rounded-2xl border-slate-300 bg-white px-6 text-base font-semibold tracking-tight shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50 dark:border-border dark:bg-card dark:hover:border-emerald-700/50 dark:hover:bg-muted/40"
-              >
-                <Link href={`/${categorySlug}`}>Zur Übersicht</Link>
-              </Button>
-            </div>
+            {serviceId === 'auslandumzug' ? (
+              <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+                <div className="min-w-0">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm dark:border-border dark:bg-card/90 dark:text-foreground">
+                    <Globe2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden />
+                    {auslandDestination ? (
+                      <>
+                        Zielland: {auslandDestination.name}
+                        {auslandDestination.flagEmoji ? (
+                          <span className="ml-1" aria-hidden>
+                            {auslandDestination.flagEmoji}
+                          </span>
+                        ) : null}
+                      </>
+                    ) : (
+                      'Umzüge ins oder aus dem Ausland'
+                    )}
+                  </div>
+                  <h1 className="heading-1 !mt-0 max-w-3xl">{heroTitle}</h1>
+                  <p className="text-body mt-4 max-w-2xl">{pageDescription}</p>
+                  {serviceDesc ? (
+                    <p className="mt-3 max-w-2xl text-slate-700 dark:text-foreground/90">{serviceDesc}</p>
+                  ) : null}
+                  <div className="mt-8 flex flex-wrap items-center gap-3">
+                    <Button
+                      asChild
+                      variant="cta"
+                      className={cn(
+                        'group relative isolate h-[3.375rem] min-h-[3.375rem] min-w-[min(100%,17.5rem)] overflow-hidden px-9 text-[0.9375rem] font-semibold leading-none tracking-tight',
+                        'shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4),inset_0_-1px_0_0_rgba(0,0,0,0.07),0_1px_2px_rgba(0,0,0,0.05),0_12px_32px_-10px_rgba(16,185,129,0.48),0_28px_56px_-22px_rgba(6,78,59,0.2)]',
+                        'ring-1 ring-emerald-950/[0.08] dark:ring-white/15',
+                        "before:pointer-events-none before:absolute before:inset-0 before:z-0 before:rounded-2xl before:bg-[linear-gradient(180deg,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.02)_42%,rgba(0,0,0,0.05)_100%)] before:content-['']",
+                        "after:pointer-events-none after:absolute after:inset-0 after:z-0 after:rounded-2xl after:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)] after:content-['']",
+                        'transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
+                        'hover:-translate-y-1 hover:from-emerald-400 hover:to-emerald-600 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.45),inset_0_-1px_0_0_rgba(0,0,0,0.06),0_16px_40px_-12px_rgba(16,185,129,0.55),0_36px_72px_-28px_rgba(6,78,59,0.26)]',
+                        'hover:ring-emerald-950/12 dark:hover:ring-white/25',
+                        'active:translate-y-0 active:scale-[0.985] active:duration-150',
+                        'focus-visible:ring-2 focus-visible:ring-emerald-400/90 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-emerald-500/70'
+                      )}
+                    >
+                      <Link href={ctaHref} className="relative z-[1] inline-flex items-center justify-center gap-0">
+                        <span className="drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]">Kostenlose Offerten anfordern</span>
+                        <ArrowRight
+                          className="ml-2.5 h-[1.05rem] w-[1.05rem] shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1"
+                          aria-hidden
+                          strokeWidth={2.25}
+                        />
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className={cn(
+                        'h-[3.375rem] rounded-2xl border-slate-300/90 bg-white/90 px-7 text-[0.9375rem] font-semibold tracking-tight shadow-[0_1px_0_0_rgba(255,255,255,0.9)_inset,0_4px_14px_-6px_rgba(15,23,42,0.12)] backdrop-blur-sm',
+                        'transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-emerald-300/70 hover:bg-white hover:shadow-[0_1px_0_0_rgba(255,255,255,1)_inset,0_8px_24px_-8px_rgba(15,23,42,0.14)]',
+                        'dark:border-border dark:bg-card/85 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset,0_8px_24px_-12px_rgba(0,0,0,0.35)] dark:hover:border-emerald-600/45 dark:hover:bg-card'
+                      )}
+                    >
+                      <Link href={`/${categorySlug}`}>Zur Übersicht</Link>
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex justify-center lg:justify-end">
+                  <AuslandumzugHeroGlobe />
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm dark:border-border dark:bg-card/90 dark:text-foreground">
+                  <Sparkles className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden />
+                  Geprüfte Anbieter in der Schweiz
+                </div>
+                <h1 className="heading-1 !mt-0 max-w-3xl">{heroTitle}</h1>
+                <p className="text-body mt-4 max-w-2xl">{pageDescription}</p>
+                {serviceDesc ? (
+                  <p className="mt-3 max-w-2xl text-slate-700 dark:text-foreground/90">{serviceDesc}</p>
+                ) : null}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Button asChild variant="cta" className="group h-12 px-7 text-base font-semibold tracking-tight">
+                    <Link href={ctaHref}>
+                      Kostenlose Offerten anfordern
+                      <ArrowRight
+                        className="ml-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-12 rounded-2xl border-slate-300 bg-white px-6 text-base font-semibold tracking-tight shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50 dark:border-border dark:bg-card dark:hover:border-emerald-700/50 dark:hover:bg-muted/40"
+                  >
+                    <Link href={`/${categorySlug}`}>Zur Übersicht</Link>
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </section>
+        {serviceId === 'auslandumzug' ? (
+          <section className="border-t border-slate-200/80 bg-gradient-to-b from-slate-50/90 via-white to-white py-12 dark:border-border dark:from-muted/20 dark:via-background dark:to-background md:py-16">
+            <div className="container mx-auto max-w-7xl px-4 md:px-6">
+              <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+                <div className="rounded-2xl border border-border/50 bg-card p-6 md:p-8">
+                  <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl md:leading-snug">
+                    {auslandDestination?.calculatorHeading
+                      ? auslandDestination.calculatorHeading
+                      : auslandDestination
+                        ? `Offerte für Ihren Umzug in die ${auslandDestination.name}`
+                        : 'Offerte für Ihren Auslandsumzug ab der Schweiz'}
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+                    {auslandDestination?.calculatorIntro ? (
+                      auslandDestination.calculatorIntro
+                    ) : auslandDestination ? (
+                      <>
+                        Der Rechner ist bereits auf <strong className="text-foreground">{auslandDestination.name}</strong>{' '}
+                        eingestellt (Abfahrt Schweiz). Ein internationaler Umzug hängt von Zoll, Distanz und Leistung ab –
+                        hier erhalten Sie eine erste Orientierung; anschliessend vergleichen Sie unverbindlich Offerten von
+                        geprüften Partnern.
+                      </>
+                    ) : (
+                      <>
+                        Ein internationaler Umzug ist mehr als Transport: Zoll, Distanz und Leistungsumfang beeinflussen
+                        den Preis stark. Nutzen Sie den Rechner für eine erste Orientierung – anschliessend vergleichen Sie
+                        unverbindlich Offerten von geprüften Partnern.
+                      </>
+                    )}
+                  </p>
+                </div>
+                <div>
+                  <Suspense
+                    fallback={
+                      <div className="flex min-h-[280px] items-center justify-center rounded-2xl border border-border bg-card p-8">
+                        <span className="text-sm text-muted-foreground">Kostenrechner wird geladen…</span>
+                      </div>
+                    }
+                  >
+                    <InternationalCostCalculator
+                      key={auslandDestination?.slug ?? 'ausland-hub'}
+                      initialToCountryCode={auslandDestination?.code ?? null}
+                    />
+                  </Suspense>
+                </div>
+              </div>
+              <InternationalPopularDestinations activeSlug={auslandDestination?.slug ?? null} />
+            </div>
+          </section>
+        ) : null}
         <section className="border-t border-slate-200/80 bg-gradient-to-b from-slate-50/90 via-white to-white py-12 dark:border-border dark:from-muted/20 dark:via-background dark:to-background md:py-16">
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
               <div className="mb-8 max-w-2xl md:mb-10">
@@ -529,11 +703,13 @@ export default function CategoryServicePageClient({
               </ul>
             </div>
           </section>
-          <ServiceHubLocalCitySection
-            categorySlug={categorySlug}
-            serviceId={serviceId}
-            serviceLabel={serviceLabel}
-          />
+          {serviceId !== 'auslandumzug' ? (
+            <ServiceHubLocalCitySection
+              categorySlug={categorySlug}
+              serviceId={serviceId}
+              serviceLabel={serviceLabel}
+            />
+          ) : null}
       </div>
     </>
   )

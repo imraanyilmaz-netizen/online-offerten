@@ -23,17 +23,17 @@
               ))}
               {hasHalfStar && (
                 <div style={{ position: 'relative' }}>
-                  <Star key="half-empty" size={size} className="text-gray-300" />
+                  <Star key="half-empty" size={size} className="text-muted-foreground/35" />
                   <div style={{ position: 'absolute', top: 0, left: 0, width: '50%', overflow: 'hidden' }}>
                     <Star key="half-full" size={size} className="text-yellow-400 fill-yellow-400" />
                   </div>
                 </div>
               )}
               {[...Array(emptyStars)].map((_, i) => (
-                <Star key={`empty-${i}`} size={size} className="text-gray-300" />
+                <Star key={`empty-${i}`} size={size} className="text-muted-foreground/35" />
               ))}
             </div>
-            <span className="font-bold text-lg text-gray-800">{rating.toFixed(1)}</span>
+            <span className="text-lg font-bold text-foreground">{rating.toFixed(1)}</span>
           </div>
         );
       };
@@ -95,7 +95,7 @@
     
                     return (
                         <div key={starValue} className="p-1 relative pointer-events-none">
-                            <Star className="w-7 h-7 text-gray-300 transition-colors" />
+                            <Star className="h-7 w-7 text-muted-foreground/35 transition-colors" />
                             {roundedDisplayValue >= starValue && (
                                 <Star className="w-7 h-7 absolute top-1 left-1 text-yellow-400 fill-yellow-400 transition-colors" />
                             )}
@@ -256,8 +256,8 @@
                   </div>
                 </div>
     
-                <div className="bg-gray-50 rounded-lg p-4 flex justify-between items-center">
-                    <Label className="font-bold text-base">Gesamtbewertung</Label>
+                <div className="flex items-center justify-between rounded-lg border border-border bg-muted/40 p-4 dark:bg-muted/25">
+                    <Label className="text-base font-bold">Gesamtbewertung</Label>
                     <StarRatingDisplay rating={overallRating} />
                 </div>
     

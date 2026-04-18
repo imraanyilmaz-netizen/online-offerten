@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Calendar, Folder, Home, ChevronRight, ArrowLeft } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import TiptapRenderer from '@/components/AdminPanel/BlogManagement/TiptapRenderer.jsx'
-import ImageWithFallback from '@/components/ui/ImageWithFallback'
-import PostSidebar from '@/src/components/tools/PostSidebar'
+import PostSidebar from '@/components/tools/PostSidebar'
 import PostMobileToc from '@/components/pages/tools/PostMobileToc'
 import PostFaqSection from '@/components/pages/tools/PostFaqSection'
 import type { TocItem } from '@/lib/ratgeber/toc'
+import { RatgeberPostHero } from '@/components/pages/ratgeber/RatgeberPostHero'
 
 const ratgeberBasePath = '/ratgeber'
 
@@ -19,9 +19,11 @@ type RecentPost = {
 type PostRecord = {
   title?: string | null
   meta_title?: string | null
+  meta_description?: string | null
   featured_image_url?: string | null
   category?: string | null
   created_at?: string | null
+  published_at?: string | null
   content?: unknown
   faq?: Array<{ question?: string; answer?: string }>
   faq_title?: string | null
@@ -36,108 +38,69 @@ type Props = {
 }
 
 export default function PostArticle({ post, recentPosts, tableOfContents }: Props) {
-  const heading =
-    post.meta_title && post.meta_title.trim()
-      ? post.meta_title.trim()
-      : post.title ?? ''
-
-  const h1Text =
+  const title =
     post.title && post.title.trim()
       ? post.title.trim()
       : post.meta_title && post.meta_title.trim()
         ? post.meta_title.trim()
-        : ''
+        : 'Ratgeber'
 
   return (
-    <>
-      <div className="container mx-auto max-w-7xl px-4 md:px-6 py-8 md:py-12 overflow-x-visible">
-        <nav className="flex items-center text-sm text-gray-500 dark:text-muted-foreground mb-8">
-          <Link href="/" className="hover:text-green-600 dark:hover:text-primary flex items-center">
-            <Home className="h-4 w-4 mr-1.5" /> Startseite
-          </Link>
-          <ChevronRight className="h-4 w-4 mx-1.5 opacity-70" />
-          <Link href={ratgeberBasePath} className="hover:text-green-600 dark:hover:text-primary">
-            Ratgeber
-          </Link>
-          <ChevronRight className="h-4 w-4 mx-1.5 opacity-70" />
-          <span className="font-medium text-gray-700 dark:text-foreground truncate max-w-[200px] md:max-w-xs">
-            {heading}
-          </span>
-        </nav>
+    <div className="min-h-screen bg-[#f6f7f9] dark:bg-background">
+      <RatgeberPostHero
+        title={title}
+        category={post.category}
+        publishedAt={post.published_at}
+        createdAt={post.created_at}
+        metaDescription={post.meta_description}
+        featuredImageUrl={post.featured_image_url}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:pt-10">
+        <div
+          className="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent sm:inset-x-6 dark:via-border"
+          aria-hidden
+        />
 
         <PostMobileToc tableOfContents={tableOfContents} />
 
-        <div className="min-w-0">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <main className="lg:col-span-2 min-w-0 overflow-x-visible">
-              <article className="bg-white dark:bg-card border border-transparent dark:border-border p-6 md:p-8 rounded-2xl shadow-lg overflow-visible min-w-0 max-w-full">
-                {post.featured_image_url && (
-                  <ImageWithFallback
-                    src={post.featured_image_url}
-                    alt={post.title ?? ''}
-                    className="w-full h-auto max-h-[500px] object-cover rounded-xl mb-8 shadow-md"
-                    loading="eager"
-                    fetchPriority="high"
-                  />
-                )}
-                <h1
-                  className="text-[26px] font-extrabold text-gray-900 dark:text-foreground mb-4 leading-normal break-words w-full min-w-0 max-w-none -mx-6 md:-mx-8 px-6 md:px-8"
-                  style={{
-                    wordBreak: 'break-word',
-                    overflowWrap: 'anywhere',
-                    width: 'calc(100% + 3rem)',
-                    maxWidth: 'none',
-                    overflow: 'visible',
-                    textOverflow: 'unset',
-                    whiteSpace: 'normal',
-                  }}
-                >
-                  {h1Text}
-                </h1>
-
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500 dark:text-muted-foreground mb-6 border-b border-border pb-4">
-                  {post.category && (
-                    <div className="flex items-center">
-                      <Folder className="h-4 w-4 mr-1.5" />
-                      <span>{post.category}</span>
-                    </div>
-                  )}
-                  {post.created_at && (
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1.5" />
-                      <span>{new Date(post.created_at).toLocaleDateString('de-DE')}</span>
-                    </div>
-                  )}
-                </div>
-
+        <div className="mt-8 grid grid-cols-1 gap-12 lg:mt-10 lg:grid-cols-12 lg:gap-10 xl:gap-14">
+          <main className="min-w-0 lg:col-span-8">
+            <article className="overflow-visible rounded-2xl border border-slate-200/80 bg-white/95 px-5 py-8 shadow-[0_2px_28px_-12px_rgba(15,23,42,0.1)] ring-1 ring-slate-900/[0.04] sm:px-8 sm:py-10 dark:border-border dark:bg-card/95 dark:ring-white/[0.05]">
+              <div className="article-content min-w-0 max-w-none [&_h2.heading-2]:scroll-mt-28 [&_h2.heading-2]:text-slate-900 dark:[&_h2.heading-2]:text-foreground">
                 <TiptapRenderer jsonContent={post.content} />
+              </div>
 
-                {post.faq && Array.isArray(post.faq) && (
-                  <PostFaqSection faq={post.faq} faq_title={post.faq_title} faq_description={post.faq_description} />
-                )}
+              {post.faq && Array.isArray(post.faq) ? (
+                <PostFaqSection faq={post.faq} faq_title={post.faq_title} faq_description={post.faq_description} />
+              ) : null}
 
-                <Button asChild variant="outline" className="mt-8">
+              <div className="mt-10 border-t border-slate-100 pt-8 dark:border-border">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="rounded-full border-slate-200/90 bg-white px-6 font-semibold text-slate-800 shadow-sm hover:border-emerald-300 hover:bg-emerald-50/80 hover:text-emerald-900 dark:border-border dark:bg-card dark:text-foreground dark:hover:border-emerald-800/60 dark:hover:bg-emerald-950/30"
+                >
                   <Link href={ratgeberBasePath}>
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Zurück zur Übersicht
+                    <ArrowLeft className="mr-2 h-4 w-4" aria-hidden />
+                    Zurück zum Ratgeber
                   </Link>
                 </Button>
-              </article>
-            </main>
+              </div>
+            </article>
+          </main>
 
-            <aside className="lg:col-span-1">
-              <PostSidebar
-                category={post.category}
-                tags={post.tags}
-                recentPosts={recentPosts}
-                ratgeberBasePath={ratgeberBasePath}
-                tableOfContents={tableOfContents}
-                hideMobileTOC={true}
-              />
-            </aside>
+          <div className="min-w-0 lg:col-span-4">
+            <PostSidebar
+              category={post.category}
+              tags={post.tags}
+              recentPosts={recentPosts}
+              ratgeberBasePath={ratgeberBasePath}
+              tableOfContents={tableOfContents}
+            />
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

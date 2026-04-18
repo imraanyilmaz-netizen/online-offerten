@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useLayoutEffect, useMemo, lazy, Suspense } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useMemo, lazy, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -20,13 +21,24 @@ const FullPageLoader = () => (
   </div>
 );
 
+const POPULAR_ZIEL_FROM_URL = new Set(['DE', 'FR', 'IT', 'AT', 'ES', 'PT', 'BE', 'DK']);
 
-const InternationalCostCalculator = () => {
+function initialToCountryFromProp(code) {
+  if (!code) return 'DE';
+  const z = String(code).toUpperCase();
+  return POPULAR_ZIEL_FROM_URL.has(z) ? z : 'DE';
+}
+
+/**
+ * @param {object} props
+ * @param {string | null | undefined} [props.initialToCountryCode] ISO-like country code for the destination preset (e.g. DE, FR).
+ */
+const InternationalCostCalculator = ({ initialToCountryCode = null }) => {
   const [mounted, setMounted] = useState(false);
 
   // All hooks must be called before any conditional returns
   const [fromCountry, setFromCountry] = useState('CH');
-  const [toCountry, setToCountry] = useState('DE');
+  const [toCountry, setToCountry] = useState(() => initialToCountryFromProp(initialToCountryCode));
   const [moveType, setMoveType] = useState('private');
   const [rooms, setRooms] = useState(3.5);
   const [area, setArea] = useState(100);
@@ -91,6 +103,29 @@ const InternationalCostCalculator = () => {
   useLayoutEffect(() => {
     setMounted(true);
   }, []);
+
+  const searchParams = useSearchParams();
+  const zielParam = searchParams.get('ziel');
+
+  useEffect(() => {
+    if (initialToCountryCode) {
+      const z = initialToCountryFromProp(initialToCountryCode);
+      setFromCountry('CH');
+      setToCountry(z);
+    }
+  }, [initialToCountryCode]);
+
+  useEffect(() => {
+    if (!mounted || !zielParam || initialToCountryCode) return;
+    const z = zielParam.toUpperCase();
+    if (!POPULAR_ZIEL_FROM_URL.has(z)) return;
+    setFromCountry('CH');
+    setToCountry(z);
+    const el = document.getElementById('international-cost-calculator');
+    if (el) {
+      requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+  }, [mounted, zielParam, initialToCountryCode]);
 
   // Wait for component to be mounted
   if (!mounted) {
@@ -205,7 +240,8 @@ const InternationalCostCalculator = () => {
   return (
     <>
       <div
-        className="bg-card p-6 md:p-8 rounded-2xl shadow-xl border border-border"
+        id="international-cost-calculator"
+        className="bg-card p-6 md:p-8 rounded-2xl shadow-xl border border-border scroll-mt-24"
       >
         <div className="flex items-center mb-6">
           <Calculator className="w-8 h-8 mr-4 text-green-500" />
@@ -214,7 +250,7 @@ const InternationalCostCalculator = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
-            <Label htmlFor="from-country" className="font-semibold text-slate-700">Von</Label>
+            <Label htmlFor="from-country" className="font-semibold text-foreground">Von</Label>
             <Select value={fromCountry} onValueChange={(val) => handleCountryChange('from', val)}>
               <SelectTrigger id="from-country" className="mt-1 bg-muted/50">
                 <SelectValue placeholder="Land auswählen" />
@@ -226,7 +262,7 @@ const InternationalCostCalculator = () => {
           <div>
             <Label htmlFor="to-country" className="font-semibold text-foreground">Nach</Label>
             <Select value={toCountry} onValueChange={(val) => handleCountryChange('to', val)}>
-              <SelectTrigger id="to-country" className="mt-1 bg-slate-50">
+              <SelectTrigger id="to-country" className="mt-1 bg-muted/50">
                 <SelectValue placeholder="Land auswählen" />
               </SelectTrigger>
               <SelectContent>{countries.filter(c => c.code !== fromCountry).map(renderCountryOption)}</SelectContent>

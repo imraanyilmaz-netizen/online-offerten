@@ -7,6 +7,7 @@ import { ThemeToggleTabs } from '@/components/Layout/ThemeToggleTabs'
 
 const toolsLinks = [
   { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirma vergleichen' },
+  { to: '/umzugsfirma/auslandumzug', text: 'Internationale Umzüge' },
   { to: '/kostenlose-offerte-anfordern', text: 'Kostenlose Offerten anfordern' },
   { to: '/standorte', text: 'Alle Standorte' },
 ]

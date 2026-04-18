@@ -1,5 +1,7 @@
+import { INTERNATIONAL_POPULAR_DESTINATIONS } from './internationalPopularDestinations'
+
 /**
- * Branchen-Modell für Routing unter `app/[category]` und `app/[category]/[...slug]`.
+ * Branchen-Modell für Routing unter `app/[category]`, `app/[category]/[slug]` und `app/[category]/[slug]/[sub]`.
  *
  * - **Kategorie-Hub:** `/{category.slug}` (z. B. /umzugsfirma, /reinigungsfirma)
  * - **Stadt:** `/{category.slug}/{location.slug}` (z. B. /reinigungsfirma/zuerich)
@@ -83,29 +85,42 @@ export function getCategoryServiceCityPath(categorySlug, service, locationSlug) 
 }
 
 /**
- * Statische Params für `app/[category]/[...slug]` (Catch-all, mind. ein Segment).
- * — je Kategorie: alle Städte, alle Leistungen, alle Kombinationen Leistung+Stadt.
+ * Statische Params für `app/[category]/[slug]` (ein URL-Segment nach der Kategorie).
  * @param {{ slug: string }[]} locationsList z. B. `locations` aus locations.js
  */
-export function generateCategoryCatchAllStaticParams(locationsList) {
+export function generateCategoryOneSegmentStaticParams(locationsList) {
   const cityParams = serviceCategories.flatMap((cat) =>
-    locationsList.map((loc) => ({ category: cat.slug, slug: [loc.slug] }))
+    locationsList.map((loc) => ({ category: cat.slug, slug: loc.slug })),
   )
   const serviceParams = serviceCategories.flatMap((cat) =>
     cat.services.map((s) => ({
       category: cat.slug,
-      slug: [getServicePathSegment(s)],
-    }))
+      slug: getServicePathSegment(s),
+    })),
   )
+  return [...cityParams, ...serviceParams]
+}
+
+/**
+ * Statische Params für `app/[category]/[slug]/[sub]` (zwei Segmente: Leistung+Stadt, Ausland+Land).
+ * @param {{ slug: string }[]} locationsList z. B. `locations` aus locations.js
+ */
+export function generateCategoryTwoSegmentStaticParams(locationsList) {
   const serviceCityParams = serviceCategories.flatMap((cat) =>
     cat.services.flatMap((s) =>
       locationsList.map((loc) => ({
         category: cat.slug,
-        slug: [getServicePathSegment(s), loc.slug],
-      }))
-    )
+        slug: getServicePathSegment(s),
+        sub: loc.slug,
+      })),
+    ),
   )
-  return [...cityParams, ...serviceParams, ...serviceCityParams]
+  const auslandCountryParams = INTERNATIONAL_POPULAR_DESTINATIONS.map((d) => ({
+    category: 'umzugsfirma',
+    slug: 'auslandumzug',
+    sub: d.slug,
+  }))
+  return [...serviceCityParams, ...auslandCountryParams]
 }
 
 /** @param {string} categoryId */
