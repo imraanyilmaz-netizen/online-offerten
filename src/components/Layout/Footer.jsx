@@ -62,11 +62,6 @@ export default function Footer() {
               <div key={cat.slug}>
                 <h2 className={sectionTitleClass}>{cat.label}</h2>
                 <ul className="mt-3 space-y-2">
-                  <li>
-                    <Link href={`/${cat.slug}`} className={`${linkClass} font-medium`}>
-                      Alle {cat.label}-Anbieter
-                    </Link>
-                  </li>
                   {cat.services.map((s) => (
                     <li key={`${cat.slug}-${s.id}`}>
                       <Link href={getCategoryServicePath(cat.slug, s)} className={linkClass}>

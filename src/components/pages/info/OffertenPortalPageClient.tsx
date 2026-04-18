@@ -210,95 +210,95 @@ const OffertenPortalPageClient = () => {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100">
+      <section className="relative py-12 md:py-16 overflow-hidden bg-gray-100 dark:bg-background">
         <div className="absolute inset-0 z-[1]">
-          <div className="absolute inset-0 bg-gray-100"></div>
+          <div className="absolute inset-0 bg-gray-100 dark:bg-background" />
         </div>
         <div className="container mx-auto max-w-7xl px-4 md:px-6 relative z-10">
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-3">
-              <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
+              <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-emerald-950/60 rounded-full text-green-700 dark:text-emerald-300 font-semibold text-sm mb-3">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Ihr Vergleichsportal für die Schweiz
               </div>
               <h1 className="heading-1 !mt-0">
                 Offerten von Umzugsfirma & Reinigungsfirma vergleichen
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
-                Willkommen auf <strong>Online-Offerten.ch</strong> – Ihrem zentralen Vergleichsportal für <Link href="/umzugsfirma" className="text-green-700 hover:text-green-800 underline font-medium">Umzug</Link>, <Link href="/reinigung" className="text-green-700 hover:text-green-800 underline font-medium">Reinigung</Link> und <Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-medium">Malerarbeiten</Link> in der ganzen Schweiz. Mit nur einer Anfrage erhalten Sie bis zu 5 Offerten von geprüften Firmen aus Ihrer Region.
+              <p className="text-base sm:text-lg text-gray-600 dark:text-muted-foreground mb-8 leading-relaxed">
+                Willkommen auf <strong>Online-Offerten.ch</strong> – Ihrem zentralen Vergleichsportal für <Link href="/umzugsfirma" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Umzug</Link>, <Link href="/reinigung" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Reinigung</Link> und <Link href="/malerarbeitenkosten" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Malerarbeiten</Link> in der ganzen Schweiz. Mit nur einer Anfrage erhalten Sie bis zu 5 Offerten von geprüften Firmen aus Ihrer Region.
               </p>
 
               {/* Service Buttons */}
-              <p className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Dienstleistung:</p>
+              <p className="text-sm font-semibold text-gray-700 dark:text-foreground mb-2">Wählen Sie Ihre gewünschte Dienstleistung:</p>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-6">
                 <Link
                   href="/kostenlose-offerte-anfordern?service=umzug&step=2"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 group-hover:bg-blue-500 transition-colors">
-                    <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-100 dark:bg-blue-950/60 group-hover:bg-blue-500 transition-colors">
+                    <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Umzug</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Privat, Geschäft, International</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Umzug</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Privat, Geschäft, International</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-yellow-500 hover:bg-yellow-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-yellow-100 group-hover:bg-yellow-500 transition-colors">
-                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-yellow-100 dark:bg-yellow-950/50 group-hover:bg-yellow-500 transition-colors">
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 dark:text-yellow-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Reinigung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">End-, Büro-, Fensterreinigung</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Reinigung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">End-, Büro-, Fensterreinigung</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=maler&step=2"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-purple-500 hover:bg-purple-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 group-hover:bg-purple-500 transition-colors">
-                    <Paintbrush className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-purple-100 dark:bg-purple-950/50 group-hover:bg-purple-500 transition-colors">
+                    <Paintbrush className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Malerarbeiten</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Innen-, Fassadenanstrich</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Malerarbeiten</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Innen-, Fassadenanstrich</p>
                   </div>
                 </Link>
 
                 <Link
                   href="/kostenlose-offerte-anfordern?service=raeumung&step=2"
-                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-pink-500 hover:bg-pink-50 hover:shadow-md group"
+                  className="w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white dark:bg-card border-gray-200 dark:border-border hover:border-pink-500 hover:bg-pink-50 dark:hover:bg-pink-950/40 hover:shadow-md group"
                 >
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-pink-100 group-hover:bg-pink-500 transition-colors">
-                    <Recycle className="w-4 h-4 sm:w-5 sm:h-5 text-pink-600 group-hover:text-white transition-colors" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-pink-100 dark:bg-pink-950/50 group-hover:bg-pink-500 transition-colors">
+                    <Recycle className="w-4 h-4 sm:w-5 sm:h-5 text-pink-600 dark:text-pink-400 group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 text-left sm:text-center">
-                    <p className="font-semibold text-sm sm:text-base text-gray-900">Räumung</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Entrümpelung & Entsorgung</p>
+                    <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">Räumung</p>
+                    <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">Entrümpelung & Entsorgung</p>
                   </div>
                 </Link>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700">
+              <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-700 dark:text-muted-foreground">
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-2" />
                   <span>Versicherte Firmen</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-2" />
                   <span>100% kostenlos & unverbindlich</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-2" />
                   <span>Bis zu 40% sparen</span>
                 </div>
                 <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-2" />
                   <span>Geprüfte Partnerfirmen</span>
                 </div>
               </div>
@@ -306,10 +306,10 @@ const OffertenPortalPageClient = () => {
 
             {/* Side Card */}
             <div className="relative md:col-span-2">
-              <div className="bg-white rounded-2xl p-8 shadow-2xl border-4 border-green-200">
+              <div className="bg-white dark:bg-card rounded-2xl p-8 shadow-2xl border-4 border-green-200 dark:border-emerald-800/60">
                 <div className="flex items-center justify-center mb-6">
-                  <div className="bg-green-100 p-4 rounded-full">
-                    <BarChart3 className="h-12 w-12 text-green-600" />
+                  <div className="bg-green-100 dark:bg-emerald-950/60 p-4 rounded-full">
+                    <BarChart3 className="h-12 w-12 text-green-600 dark:text-emerald-400" />
                   </div>
                 </div>
                 <h3 className="heading-3 text-center">
@@ -323,10 +323,10 @@ const OffertenPortalPageClient = () => {
                     { icon: HeartHandshake, title: 'Unverbindlich', description: 'Keine Verpflichtung – die Entscheidung liegt bei Ihnen' },
                   ].map((feature, index) => (
                     <div key={index} className="flex items-start">
-                      <feature.icon className="h-6 w-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                      <feature.icon className="h-6 w-6 text-green-600 dark:text-emerald-500 mr-3 mt-1 flex-shrink-0" />
                       <div>
-                        <p className="font-semibold text-gray-900">{feature.title}</p>
-                        <p className="text-sm text-gray-600">{feature.description}</p>
+                        <p className="font-semibold text-gray-900 dark:text-foreground">{feature.title}</p>
+                        <p className="text-sm text-gray-600 dark:text-muted-foreground">{feature.description}</p>
                       </div>
                     </div>
                   ))}
@@ -338,7 +338,7 @@ const OffertenPortalPageClient = () => {
         </section>
 
       {/* ===== HOW IT WORKS ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white dark:from-background dark:to-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-12">
             <h2 className="heading-2">
@@ -368,22 +368,22 @@ const OffertenPortalPageClient = () => {
             ].map((step, index) => (
               <div key={index} className="relative">
                 {index < 2 && (
-                  <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-green-200 z-0" style={{ width: 'calc(100% - 3rem)' }} />
+                  <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-green-200 dark:bg-emerald-800/80 z-0" style={{ width: 'calc(100% - 3rem)' }} />
                 )}
-                <Card className="relative z-10 h-full border-2 border-green-200 hover:border-green-500 transition-colors">
+                <Card className="relative z-10 h-full border-2 border-green-200 dark:border-emerald-800/60 hover:border-green-500 dark:hover:border-emerald-500 transition-colors">
                   <CardHeader className="text-center">
-                    <div className="bg-green-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                    <div className="bg-green-600 dark:bg-emerald-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                       {step.number}
                     </div>
                     <div className="flex justify-center mb-4">
-                      <div className="bg-green-100 p-3 rounded-lg">
-                        <step.icon className="h-6 w-6 text-green-600" />
+                      <div className="bg-green-100 dark:bg-emerald-950/60 p-3 rounded-lg">
+                        <step.icon className="h-6 w-6 text-green-600 dark:text-emerald-400" />
                         </div>
                     </div>
                     <CardTitle className="text-xl font-bold">{step.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 leading-relaxed text-center">{step.description}</p>
+                    <p className="text-gray-600 dark:text-muted-foreground leading-relaxed text-center">{step.description}</p>
                   </CardContent>
                 </Card>
                             </div>
@@ -393,11 +393,11 @@ const OffertenPortalPageClient = () => {
             </section>
 
       {/* ===== PORTAL INTRO / ABOUT ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white dark:bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
-              <div className="inline-flex items-center px-4 py-2 bg-green-100 rounded-full text-green-700 font-semibold text-sm mb-3">
+              <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-emerald-950/60 rounded-full text-green-700 dark:text-emerald-300 font-semibold text-sm mb-3">
                 <Target className="h-4 w-4 mr-2" />
                 Vergleichsportal Schweiz
               </div>
@@ -408,26 +408,26 @@ const OffertenPortalPageClient = () => {
                 Online-Offerten.ch ist Ihr zentrales <strong>Vergleichsportal</strong>, um schnell, einfach und kostenlos die besten Offerten für Umzüge, Reinigungen und Malerarbeiten in der gesamten Schweiz zu finden. Wir verbinden Sie mit einem Netzwerk von über 200 geprüften und qualifizierten Fachfirmen.
               </p>
               <p className="text-body mb-6">
-                Egal ob Sie einen Privatumzug planen, eine professionelle <Link href="/reinigung/umzugsreinigung" className="text-green-700 hover:text-green-800 underline font-medium">Endreinigung</Link> benötigen oder Ihre Wände neu streichen lassen möchten – unser Offertenportal spart Ihnen Zeit, Geld und Nerven. Mit nur einer Anfrage erreichen Sie mehrere Anbieter und können deren Offerten bequem online <Link href="/umzugsfirma-vergleichen" className="text-green-700 hover:text-green-800 underline font-medium">vergleichen</Link>.
+                Egal ob Sie einen Privatumzug planen, eine professionelle <Link href="/reinigung/umzugsreinigung" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Endreinigung</Link> benötigen oder Ihre Wände neu streichen lassen möchten – unser Offertenportal spart Ihnen Zeit, Geld und Nerven. Mit nur einer Anfrage erreichen Sie mehrere Anbieter und können deren Offerten bequem online <Link href="/umzugsfirma-vergleichen" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">vergleichen</Link>.
               </p>
 
               <div className="mb-6">
                 <h3 className="heading-3">Ihre Vorteile auf einen Blick:</h3>
                 <ul className="space-y-3 text-body">
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-3 mt-1 flex-shrink-0" />
                     <span><strong>Kostenlos & unverbindlich</strong> – keine versteckten Gebühren</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-3 mt-1 flex-shrink-0" />
                     <span><strong>Bis zu 5 Offerten</strong> von geprüften Firmen aus Ihrer Region</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-3 mt-1 flex-shrink-0" />
                     <span><strong>Bis zu 40% sparen</strong> durch direkten Preisvergleich</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-3 mt-1 flex-shrink-0" />
                     <span><strong>Alle Dienstleistungen</strong> – Umzug, Reinigung, Maler & Räumung</span>
                   </li>
                 </ul>
@@ -444,8 +444,8 @@ const OffertenPortalPageClient = () => {
             </div>
           </div>
 
-          <div className="bg-green-50 rounded-lg p-6 border border-green-200 mt-8">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
+          <div className="bg-green-50 dark:bg-emerald-950/30 rounded-lg p-6 border border-green-200 dark:border-emerald-800/50 mt-8">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-foreground mb-3">
               Warum ein Vergleichsportal nutzen?
             </h3>
             <p className="text-body">
@@ -456,9 +456,9 @@ const OffertenPortalPageClient = () => {
       </section>
 
       {/* ===== UMZUG SECTION ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white dark:from-background dark:to-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 font-semibold text-sm mb-3">
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 dark:bg-blue-950/50 rounded-full text-blue-700 dark:text-blue-300 font-semibold text-sm mb-3">
             <Truck className="h-4 w-4 mr-2" />
             Umzugsofferten vergleichen
           </div>
@@ -466,10 +466,10 @@ const OffertenPortalPageClient = () => {
             Alles rund um Ihren Umzug
           </h2>
           <p className="text-body mb-6">
-            Ein Umzug muss nicht stressig sein. Auf unserem Vergleichsportal finden Sie spezialisierte Umzugsfirmen für jede Art von Umzug – ob in <Link href="/umzugsfirma/zuerich" className="text-green-700 hover:text-green-800 underline font-medium">Zürich</Link>, <Link href="/umzugsfirma/bern" className="text-green-700 hover:text-green-800 underline font-medium">Bern</Link>, <Link href="/umzugsfirma/basel" className="text-green-700 hover:text-green-800 underline font-medium">Basel</Link> oder einer anderen Stadt in der Schweiz.
+            Ein Umzug muss nicht stressig sein. Auf unserem Vergleichsportal finden Sie spezialisierte Umzugsfirmen für jede Art von Umzug – ob in <Link href="/umzugsfirma/zuerich" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Zürich</Link>, <Link href="/umzugsfirma/bern" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Bern</Link>, <Link href="/umzugsfirma/basel" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Basel</Link> oder einer anderen Stadt in der Schweiz.
           </p>
 
-          <p className="text-sm font-semibold text-gray-700 mb-2">Umzugsart auswählen:</p>
+          <p className="text-sm font-semibold text-gray-700 dark:text-foreground mb-2">Umzugsart auswählen:</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-8">
             {[
               { label: 'Privatumzug', sub: 'Wohnungsumzug', href: '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=privatumzug', icon: Home, color: 'blue' },
@@ -482,14 +482,14 @@ const OffertenPortalPageClient = () => {
               <Link
                 key={item.label}
                 href={item.href}
-                className={`w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-${item.color}-500 hover:bg-${item.color}-50 hover:shadow-md group`}
+                className={`w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-${item.color}-500 hover:bg-${item.color}-50 hover:shadow-md group dark:bg-card dark:border-border`}
               >
-                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-${item.color}-100 group-hover:bg-${item.color}-500 transition-colors`}>
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-${item.color}-100 group-hover:bg-${item.color}-500 transition-colors dark:bg-neutral-900/55`}>
                   <item.icon className={`w-4 h-4 sm:w-5 sm:h-5 text-${item.color}-600 group-hover:text-white transition-colors`} />
                 </div>
                 <div className="flex-1 text-left sm:text-center">
-                  <p className="font-semibold text-sm sm:text-base text-gray-900">{item.label}</p>
-                  <p className="text-xs text-gray-600 mt-0.5">{item.sub}</p>
+                  <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">{item.label}</p>
+                  <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">{item.sub}</p>
                 </div>
               </Link>
             ))}
@@ -498,21 +498,21 @@ const OffertenPortalPageClient = () => {
           <h3 className="heading-3">Unsere Umzugsdienstleistungen</h3>
           <p className="text-body mb-4">Unsere Partner bieten ein breites Spektrum an Umzugsdienstleistungen an:</p>
           <ul className="text-body list-disc pl-5 space-y-2 mb-6">
-            <li><Link href="/umzugsfirma/privatumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Privatumzüge</Link>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
-            <li><Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Geschäftsumzüge</Link>: Effiziente und schnelle Verlagerung von Büros und Gewerberäumen.</li>
-            <li><Link href="/umzugsfirma/auslandumzug" className="text-green-700 hover:text-green-800 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
-            <li><Link href="/umzugsfirma/klaviertransport" className="text-green-700 hover:text-green-800 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
+            <li><Link href="/umzugsfirma/privatumzug" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-semibold">Privatumzüge</Link>: Vom kleinen Apartment bis zum grossen Einfamilienhaus.</li>
+            <li><Link href="/umzugsfirma/geschaeftsumzug" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-semibold">Geschäftsumzüge</Link>: Effiziente und schnelle Verlagerung von Büros und Gewerberäumen.</li>
+            <li><Link href="/umzugsfirma/auslandumzug" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-semibold">Internationale Umzüge</Link>: Komplettservice für Ihren Umzug ins oder aus dem Ausland.</li>
+            <li><Link href="/umzugsfirma/klaviertransport" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-semibold">Spezialtransporte</Link>: Sicherer Transport von Klavieren, Kunstwerken und anderen wertvollen Gütern.</li>
             <li><strong>Klaviertransport</strong>: Professioneller und schonender Transport von Klavieren und Flügeln mit Spezialtechnik.</li>
             <li><strong>Lagerung</strong>: Sichere Einlagerung Ihrer Möbel und Gegenstände während des Umzugs oder bei Platzmangel.</li>
           </ul>
-          <p className="text-body">Erfahren Sie mehr über <Link href="/umzugsfirma/umzugskosten" className="text-green-700 hover:text-green-800 underline font-medium">Umzugskosten in der Schweiz</Link>.</p>
+          <p className="text-body">Erfahren Sie mehr über <Link href="/umzugsfirma/umzugskosten" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Umzugskosten in der Schweiz</Link>.</p>
         </div>
             </section>
             
       {/* ===== REINIGUNG SECTION ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white dark:bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="inline-flex items-center px-4 py-2 bg-yellow-100 rounded-full text-yellow-700 font-semibold text-sm mb-3">
+          <div className="inline-flex items-center px-4 py-2 bg-yellow-100 dark:bg-yellow-950/40 rounded-full text-yellow-700 dark:text-yellow-300 font-semibold text-sm mb-3">
             <Sparkles className="h-4 w-4 mr-2" />
             Reinigungsofferten vergleichen
           </div>
@@ -520,10 +520,10 @@ const OffertenPortalPageClient = () => {
             Professionelle Reinigung mit Abnahmegarantie
           </h2>
           <p className="text-body mb-6">
-            Eine besenreine Wohnung ist bei der Übergabe Pflicht. Unsere Partner für professionelle Reinigungen garantieren eine reibungslose Wohnungsabgabe. Informieren Sie sich über die <Link href="/reinigung/reinigungskosten" className="text-green-700 hover:text-green-800 underline font-medium">Reinigungskosten</Link> in der Schweiz.
+            Eine besenreine Wohnung ist bei der Übergabe Pflicht. Unsere Partner für professionelle Reinigungen garantieren eine reibungslose Wohnungsabgabe. Informieren Sie sich über die <Link href="/reinigung/reinigungskosten" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Reinigungskosten</Link> in der Schweiz.
           </p>
 
-          <p className="text-sm font-semibold text-gray-700 mb-2">Reinigungsart auswählen:</p>
+          <p className="text-sm font-semibold text-gray-700 dark:text-foreground mb-2">Reinigungsart auswählen:</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 mb-8">
             {[
               { label: 'Endreinigung', sub: 'mit Abnahmegarantie', href: '/kostenlose-offerte-anfordern?service=reinigung&step=3&reinigungArt=umzugsreinigung', icon: Sparkles, color: 'blue' },
@@ -538,14 +538,14 @@ const OffertenPortalPageClient = () => {
               <Link
                 key={item.label}
                 href={item.href}
-                className={`w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-${item.color}-500 hover:bg-${item.color}-50 hover:shadow-md group`}
+                className={`w-full flex items-center gap-2 sm:flex-col sm:items-center sm:text-center p-2.5 sm:p-3 border-2 rounded-lg transition-all duration-300 bg-white border-gray-200 hover:border-${item.color}-500 hover:bg-${item.color}-50 hover:shadow-md group dark:bg-card dark:border-border`}
               >
-                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-${item.color}-100 group-hover:bg-${item.color}-500 transition-colors`}>
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-${item.color}-100 group-hover:bg-${item.color}-500 transition-colors dark:bg-neutral-900/55`}>
                   <item.icon className={`w-4 h-4 sm:w-5 sm:h-5 text-${item.color}-600 group-hover:text-white transition-colors`} />
                 </div>
                 <div className="flex-1 text-left sm:text-center">
-                  <p className="font-semibold text-sm sm:text-base text-gray-900">{item.label}</p>
-                  <p className="text-xs text-gray-600 mt-0.5">{item.sub}</p>
+                  <p className="font-semibold text-sm sm:text-base text-gray-900 dark:text-foreground">{item.label}</p>
+                  <p className="text-xs text-gray-600 dark:text-muted-foreground mt-0.5">{item.sub}</p>
                 </div>
               </Link>
             ))}
@@ -563,18 +563,18 @@ const OffertenPortalPageClient = () => {
           <p className="text-body mb-4">Unsere Partner decken ein breites Spektrum an Reinigungsarbeiten ab:</p>
           <ul className="text-body list-disc pl-5 space-y-2 mb-4">
             <li><strong>Umzugsreinigung</strong>: Die komplette Endreinigung Ihrer alten Wohnung mit Abnahmegarantie.</li>
-            <li><Link href="/reinigung/fensterreinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Fensterreinigung</Link>: Streifenfreie Sauberkeit für Fenster, Rahmen und Storen.</li>
-            <li><Link href="/reinigung/buero_reinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Büroreinigung</Link>: Regelmässige Unterhaltsreinigung für saubere und repräsentative Geschäftsräume.</li>
-            <li><Link href="/reinigung/baureinigung" className="text-green-700 hover:text-green-800 underline font-semibold">Baureinigung</Link>: Professionelle Reinigung nach Neu- oder Umbauten für einen sauberen Start.</li>
+            <li><Link href="/reinigung/fensterreinigung" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-semibold">Fensterreinigung</Link>: Streifenfreie Sauberkeit für Fenster, Rahmen und Storen.</li>
+            <li><Link href="/reinigung/buero_reinigung" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-semibold">Büroreinigung</Link>: Regelmässige Unterhaltsreinigung für saubere und repräsentative Geschäftsräume.</li>
+            <li><Link href="/reinigung/baureinigung" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-semibold">Baureinigung</Link>: Professionelle Reinigung nach Neu- oder Umbauten für einen sauberen Start.</li>
                     </ul>
           <p className="text-body">Mehr Informationen finden Sie auf unserer Reinigungskosten-Seite.</p>
                 </div>
             </section>
 
       {/* ===== MALER SECTION ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white dark:from-background dark:to-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
-          <div className="inline-flex items-center px-4 py-2 bg-purple-100 rounded-full text-purple-700 font-semibold text-sm mb-3">
+          <div className="inline-flex items-center px-4 py-2 bg-purple-100 dark:bg-purple-950/50 rounded-full text-purple-700 dark:text-purple-300 font-semibold text-sm mb-3">
             <Paintbrush className="h-4 w-4 mr-2" />
             Maler-Offerten vergleichen
           </div>
@@ -582,7 +582,7 @@ const OffertenPortalPageClient = () => {
             Professionelle Malerarbeiten für Ihr Zuhause
           </h2>
           <p className="text-body mb-6">
-            Neue Farbe bringt frischen Wind in Ihre Räume. Unsere qualifizierten Malerpartner sorgen für ein perfektes Ergebnis, das lange Freude bereitet. Erfahren Sie mehr über <Link href="/malerarbeitenkosten" className="text-green-700 hover:text-green-800 underline font-medium">Malerarbeiten und deren Kosten</Link>.
+            Neue Farbe bringt frischen Wind in Ihre Räume. Unsere qualifizierten Malerpartner sorgen für ein perfektes Ergebnis, das lange Freude bereitet. Erfahren Sie mehr über <Link href="/malerarbeitenkosten" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Malerarbeiten und deren Kosten</Link>.
           </p>
 
           <h3 className="heading-3">Unsere Maler-Dienstleistungen</h3>
@@ -597,11 +597,11 @@ const OffertenPortalPageClient = () => {
             </section>
 
       {/* ===== VORTEILE SECTION ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white dark:bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="heading-2">Ihre Vorteile mit unserem Vergleichsportal</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Über 200 geprüfte Partnerfirmen – ein Portal für alle Dienstleistungen</p>
+            <p className="text-lg text-gray-600 dark:text-muted-foreground max-w-2xl mx-auto">Über 200 geprüfte Partnerfirmen – ein Portal für alle Dienstleistungen</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
@@ -612,17 +612,17 @@ const OffertenPortalPageClient = () => {
               { icon: Users, title: 'Über 200 Partner', description: 'Ein grosses Netzwerk von qualifizierten Fachfirmen in der ganzen Schweiz steht Ihnen zur Verfügung.', color: 'teal' },
               { icon: HeartHandshake, title: '100% unverbindlich', description: 'Keine Verpflichtungen, keine versteckten Kosten. Die Entscheidung liegt vollständig bei Ihnen.', color: 'rose' },
             ].map((item, index) => (
-              <Card key={index} className="bg-white shadow-md hover:shadow-lg transition-shadow border-2 border-gray-100 hover:border-green-200">
+              <Card key={index} className="bg-card shadow-md hover:shadow-lg transition-shadow border-2 border-gray-100 dark:border-border hover:border-green-200 dark:hover:border-emerald-800/60">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-xl font-bold text-gray-900">
-                    <div className={`p-2 rounded-lg bg-${item.color}-100`}>
+                  <CardTitle className="flex items-center gap-3 text-xl font-bold text-gray-900 dark:text-foreground">
+                    <div className={`p-2 rounded-lg bg-${item.color}-100 dark:bg-neutral-900/60`}>
                       <item.icon className={`w-6 h-6 text-${item.color}-600`} />
                     </div>
                     {item.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-slate-600">{item.description}</p>
+                  <p className="text-slate-600 dark:text-muted-foreground">{item.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -631,11 +631,11 @@ const OffertenPortalPageClient = () => {
             </section>
             
       {/* ===== REGIONAL LINKS ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white dark:from-background dark:to-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="heading-2">Offerten in Ihrer Region</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-muted-foreground max-w-2xl mx-auto">
               Unser Vergleichsportal deckt die gesamte Schweiz ab. Finden Sie Umzugsfirmen, Reinigungsfirmen und Maler in Ihrer Nähe.
             </p>
           </div>
@@ -643,12 +643,12 @@ const OffertenPortalPageClient = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
             {locations.map((location) => (
               <Link key={location.name} href={location.href}>
-                <Card className="h-full hover:border-green-500 hover:shadow-lg transition-all cursor-pointer">
+                <Card className="h-full cursor-pointer transition-all hover:border-green-500 dark:hover:border-emerald-600 hover:shadow-lg">
                   <CardContent className="p-6">
                     <div className="flex items-center">
-                      <MapPin className="h-5 w-5 text-green-600 mr-3" />
-                      <span className="font-semibold text-gray-900">Umzugsfirma {location.name}</span>
-                      <ArrowRight className="h-4 w-4 text-gray-400 ml-auto" />
+                      <MapPin className="mr-3 h-5 w-5 text-green-600 dark:text-emerald-500" />
+                      <span className="font-semibold text-gray-900 dark:text-foreground">Umzugsfirma {location.name}</span>
+                      <ArrowRight className="ml-auto h-4 w-4 text-gray-400 dark:text-muted-foreground" />
                     </div>
                   </CardContent>
                 </Card>
@@ -658,10 +658,10 @@ const OffertenPortalPageClient = () => {
 
           {/* Service Links Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Card className="bg-white shadow-md">
+                    <Card className="bg-card shadow-md">
                         <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800">
-                  <Truck className="w-5 h-5 text-blue-600" />
+                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800 dark:text-foreground">
+                  <Truck className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   Umzug
                 </CardTitle>
                         </CardHeader>
@@ -676,8 +676,8 @@ const OffertenPortalPageClient = () => {
                     { name: 'Umzugskosten', href: '/umzugsfirma/umzugskosten' },
                     { name: 'Umzugsfirma vergleichen', href: '/umzugsfirma-vergleichen' },
                   ].map((item) => (
-                    <Link key={item.name} href={item.href} className="flex items-center gap-2 text-slate-700 hover:text-green-700 transition-colors py-1.5 px-2 rounded-md hover:bg-green-50 text-sm">
-                      <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0" />
+                    <Link key={item.name} href={item.href} className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-slate-700 transition-colors hover:bg-green-50 hover:text-green-700 dark:text-muted-foreground dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400">
+                      <ChevronRight className="h-3 w-3 flex-shrink-0 text-green-500 dark:text-emerald-500" />
                       {item.name}
                     </Link>
                   ))}
@@ -685,10 +685,10 @@ const OffertenPortalPageClient = () => {
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white shadow-md">
+                    <Card className="bg-card shadow-md">
                         <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800">
-                  <Sparkles className="w-5 h-5 text-yellow-500" />
+                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800 dark:text-foreground">
+                  <Sparkles className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />
                   Reinigung
                 </CardTitle>
                         </CardHeader>
@@ -703,8 +703,8 @@ const OffertenPortalPageClient = () => {
                     { name: 'Grundreinigung', href: '/reinigung/grundreinigung' },
                     { name: 'Reinigungskosten', href: '/reinigung/reinigungskosten' },
                   ].map((item) => (
-                    <Link key={item.name} href={item.href} className="flex items-center gap-2 text-slate-700 hover:text-green-700 transition-colors py-1.5 px-2 rounded-md hover:bg-green-50 text-sm">
-                      <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0" />
+                    <Link key={item.name} href={item.href} className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-slate-700 transition-colors hover:bg-green-50 hover:text-green-700 dark:text-muted-foreground dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400">
+                      <ChevronRight className="h-3 w-3 flex-shrink-0 text-green-500 dark:text-emerald-500" />
                       {item.name}
                     </Link>
                   ))}
@@ -712,17 +712,17 @@ const OffertenPortalPageClient = () => {
                         </CardContent>
                     </Card>
 
-                     <Card className="bg-white shadow-md">
+                     <Card className="bg-card shadow-md">
                         <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800">
-                  <Paintbrush className="w-5 h-5 text-purple-500" />
+                <CardTitle className="flex items-center gap-3 text-lg font-bold text-slate-800 dark:text-foreground">
+                  <Paintbrush className="h-5 w-5 text-purple-500 dark:text-purple-400" />
                   Malerarbeiten
                 </CardTitle>
                         </CardHeader>
                         <CardContent>
                 <div className="grid grid-cols-1 gap-1">
-                  <Link href="/malerarbeitenkosten" className="flex items-center gap-2 text-slate-700 hover:text-green-700 transition-colors py-1.5 px-2 rounded-md hover:bg-green-50 text-sm">
-                    <ChevronRight className="w-3 h-3 text-green-500 flex-shrink-0" />
+                  <Link href="/malerarbeitenkosten" className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-slate-700 transition-colors hover:bg-green-50 hover:text-green-700 dark:text-muted-foreground dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400">
+                    <ChevronRight className="h-3 w-3 flex-shrink-0 text-green-500 dark:text-emerald-500" />
                     Malerarbeiten & Kosten
                   </Link>
                 </div>
@@ -733,21 +733,21 @@ const OffertenPortalPageClient = () => {
             </section>
 
       {/* ===== FAQ SECTION ===== */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white dark:bg-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="heading-2">Häufig gestellte Fragen</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-muted-foreground max-w-2xl mx-auto">
               Alles, was Sie über unser Vergleichsportal wissen müssen
             </p>
           </div>
-          <Accordion type="single" collapsible className="w-full bg-white p-4 rounded-lg shadow-xl border border-gray-200">
+          <Accordion type="single" collapsible className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-xl dark:border-border dark:bg-card">
                     {faqItems.map((item, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
-                        <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline text-slate-800">
+                        <AccordionTrigger className="text-left text-lg font-semibold text-slate-800 hover:no-underline dark:text-foreground">
                           <h4 className="faq-question">{item.q}</h4>
                         </AccordionTrigger>
-                        <AccordionContent className="text-base text-slate-600 leading-relaxed pt-2 pb-4">
+                        <AccordionContent className="pb-4 pt-2 text-base leading-relaxed text-slate-600 dark:text-muted-foreground">
                             {item.a}
                         </AccordionContent>
                         </AccordionItem>

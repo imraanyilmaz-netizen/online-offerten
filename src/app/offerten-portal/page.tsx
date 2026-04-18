@@ -45,7 +45,13 @@ export const metadata: Metadata = {
 
 export default function OffertenPortalPage() {
   return (
-    <Suspense fallback={<div className="flex justify-center items-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div></div>}>
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-background">
+          <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-green-600 dark:border-emerald-500" />
+        </div>
+      }
+    >
       <OffertenPortalPageClient />
     </Suspense>
   )

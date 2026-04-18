@@ -105,7 +105,7 @@ export default function NavbarClient({ children: logoSlot }) {
     { to: '/umzugsfirma/klaviertransport', text: 'Klaviertransport', desc: 'Spezial- & Schwertransport', Icon: Package },
     { to: '/umzugsfirma/geschaeftsumzug', text: 'Geschäftsumzug', desc: 'Büro & Gewerbe', Icon: Building2 },
     { to: '/umzugsfirma/auslandumzug', text: 'Internationale Umzüge', desc: 'Ausland & Kostenrechner', Icon: Globe2 },
-    { to: '/umzugsfirma-vergleichen', text: 'Firmen vergleichen', desc: 'Bewertungen & Preise', Icon: GitCompare },
+    { to: '/umzugsfirma-vergleichen', text: 'Umzugsfirmen vergleichen', desc: 'Bewertungen & Preise', Icon: GitCompare },
   ]
 
   const reinigungLinks = [
