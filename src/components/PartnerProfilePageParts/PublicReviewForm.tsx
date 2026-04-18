@@ -1,27 +1,92 @@
 'use client'
 
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import { Star, Send, Loader2, CheckCircle2, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { getGermanServiceName, getServiceIdsForCategory } from '@/data/categories'
 
 interface PublicReviewFormProps {
   partnerId: string
   partnerName: string
+  offeredServices?: string[]
+  mainCategories?: string[]
 }
 
-const SERVICE_OPTIONS = [
-  { value: '', label: 'Bitte wählen...' },
-  { value: 'privatumzug', label: 'Privatumzug' },
-  { value: 'geschaeftsumzug', label: 'Geschäftsumzug' },
-  { value: 'reinigung', label: 'Reinigung' },
-  { value: 'endreinigung', label: 'Endreinigung' },
-  { value: 'malerarbeiten', label: 'Malerarbeiten' },
-  { value: 'sonstiges', label: 'Sonstiges' },
+type ServiceOption = { value: string; label: string }
+type ServiceGroup = { label: string; options: ServiceOption[] }
+
+const UMZUG_SERVICE_IDS = [
+  'privatumzug',
+  'geschaeftsumzug',
+  'auslandumzug',
+  'klaviertransport',
+  'kleintransport',
+  'raeumung_service',
+  'entsorgung_service',
 ]
+const REINIGUNG_SERVICE_IDS = [
+  'wohnungsreinigung',
+  'hausreinigung',
+  'buero_reinigung',
+  'umzugsreinigung',
+  'unterhaltsreinigung',
+  'grundreinigung',
+  'baureinigung',
+  'fensterreinigung',
+  'bodenreinigung',
+  'fassadenreinigung',
+  'hofreinigung',
+]
+const MALER_SERVICE_IDS = ['maler_service']
+
+function buildServiceGroups(
+  offeredServices?: string[],
+  mainCategories?: string[]
+): ServiceGroup[] {
+  /* Quelle wie im Sidebar-ServiceList: offered_services → sonst alle IDs der main_categories */
+  const sourceIds =
+    Array.isArray(offeredServices) && offeredServices.length > 0
+      ? offeredServices
+      : Array.isArray(mainCategories) && mainCategories.length > 0
+      ? mainCategories.flatMap((cat) => getServiceIdsForCategory(cat))
+      : []
+
+  const groups: Record<'umzug' | 'reinigung' | 'maler', ServiceGroup> = {
+    umzug: { label: 'Umzugsdienstleistungen', options: [] },
+    reinigung: { label: 'Reinigungsdienstleistungen', options: [] },
+    maler: { label: 'Malerarbeiten', options: [] },
+  }
+  const seenLabels: Record<'umzug' | 'reinigung' | 'maler', Set<string>> = {
+    umzug: new Set(),
+    reinigung: new Set(),
+    maler: new Set(),
+  }
+
+  for (const raw of sourceIds) {
+    const id = (raw || '').trim()
+    if (!id) continue
+    const label = getGermanServiceName(id)
+    if (!label) continue
+
+    let bucket: 'umzug' | 'reinigung' | 'maler' | null = null
+    if (UMZUG_SERVICE_IDS.includes(id)) bucket = 'umzug'
+    else if (REINIGUNG_SERVICE_IDS.includes(id)) bucket = 'reinigung'
+    else if (MALER_SERVICE_IDS.includes(id)) bucket = 'maler'
+    if (!bucket) continue
+
+    if (seenLabels[bucket].has(label)) continue
+    seenLabels[bucket].add(label)
+    groups[bucket].options.push({ value: id, label })
+  }
+
+  return (['umzug', 'reinigung', 'maler'] as const)
+    .map((k) => groups[k])
+    .filter((g) => g.options.length > 0)
+}
 
 function InteractiveStars({
   value,
@@ -92,10 +157,20 @@ function InteractiveStars({
   )
 }
 
-export default function PublicReviewForm({ partnerId, partnerName }: PublicReviewFormProps) {
+export default function PublicReviewForm({
+  partnerId,
+  partnerName,
+  offeredServices,
+  mainCategories,
+}: PublicReviewFormProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [state, setState] = useState<'form' | 'submitting' | 'success' | 'error'>('form')
   const [errorMsg, setErrorMsg] = useState('')
+
+  const serviceGroups = useMemo(
+    () => buildServiceGroups(offeredServices, mainCategories),
+    [offeredServices, mainCategories]
+  )
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -271,11 +346,17 @@ export default function PublicReviewForm({ partnerId, partnerName }: PublicRevie
                   onChange={(e) => setServiceType(e.target.value)}
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 >
-                  {SERVICE_OPTIONS.map((o) => (
-                    <option key={o.value} value={o.value}>
-                      {o.label}
-                    </option>
+                  <option value="">Bitte wählen...</option>
+                  {serviceGroups.map((group) => (
+                    <optgroup key={group.label} label={group.label}>
+                      {group.options.map((o) => (
+                        <option key={o.value} value={o.value}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </optgroup>
                   ))}
+                  <option value="sonstiges">Sonstiges</option>
                 </select>
               </div>
             </div>

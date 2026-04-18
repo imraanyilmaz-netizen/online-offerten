@@ -58,7 +58,7 @@ export default function Footer() {
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3 lg:col-span-6">
-            {serviceCategories.map((cat) => (
+            {serviceCategories.filter((cat) => cat.slug !== 'malerfirma').map((cat) => (
               <div key={cat.slug}>
                 <h2 className={sectionTitleClass}>{cat.label}</h2>
                 <ul className="mt-3 space-y-2">

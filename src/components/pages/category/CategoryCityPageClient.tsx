@@ -68,6 +68,7 @@ export type CategoryCityPartner = {
   average_rating?: number | null
   review_count?: number | null
   logo_url?: string | null
+  hero_image_url?: string | null
   message?: string | null
   badge_tier?: string | null
   main_categories?: string[]
@@ -187,20 +188,20 @@ function partnerNetworkAsideCopy(
   if (categorySlug === 'reinigungsfirma') {
     return {
       kicker: 'Reinigung in Ihrer Region',
-      title: `Die besten Unternehmen für Sie in ${city}`,
+      title: `Die besten Reinigungsfirmen in ${city}`,
       body: `Geprüfte Anbieter für Haushalt, Büro und Endreinigung – mit klaren Einsatzgebieten in und um ${city}. Eine Anfrage, mehrere Offerten, unverbindlich.`,
     }
   }
   if (categorySlug === 'malerfirma') {
     return {
       kicker: 'Malerarbeiten vor Ort',
-      title: `Die besten Unternehmen für Sie in ${city}`,
+      title: `Die besten Malerfirmen in ${city}`,
       body: `Qualifizierte Malerfirmen für Innen-, Aussen- und Renovationsarbeiten – ausgewählt und transparent, damit Sie in ${city} schnell vergleichen können.`,
     }
   }
   return {
     kicker: 'Umzug & Transport',
-    title: `Die besten Unternehmen für Sie in ${city}`,
+    title: `Die besten Umzugsfirmen in ${city}`,
     body: `Aktive ${serviceTitle} mit nachvollziehbaren Regionen – damit Sie in ${city} und Umgebung stressfrei Offerten einholen und bis zu 40 % sparen können.`,
   }
 }

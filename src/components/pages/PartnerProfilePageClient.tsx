@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
@@ -211,6 +211,8 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
               <PublicReviewForm
                 partnerId={partner.id}
                 partnerName={partner.company_name}
+                offeredServices={partner.offered_services || []}
+                mainCategories={partner.main_categories || []}
               />
             </div>
           </div>

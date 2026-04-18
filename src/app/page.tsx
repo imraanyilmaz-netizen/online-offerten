@@ -223,8 +223,8 @@ export default async function HomePage() {
                     Offerten vergleichen &amp; passende Anbieter in der Schweiz finden
                   </h1>
                   <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 dark:text-muted-foreground sm:text-lg">
-                    Bei Online-Offerten.ch erhalten Sie kostenlos und unverbindlich bis zu fünf Offerten von
-                    geprüften Partnern aus Ihrer Region – transparent vergleichen und selbst entscheiden.
+                    Bei Online-Offerten.ch erhalten Sie kostenlos und unverbindlich bis zu 5 Offerten von geprüften
+                    Umzugs- und Reinigungsfirmen aus Ihrer Region.
                   </p>
 
                   {ratingStats.reviewCount > 0 && ratingStats.averageRating > 0 ? (
@@ -249,7 +249,7 @@ export default async function HomePage() {
 
                   <div className="mt-8 rounded-[1.25rem] border border-slate-200/90 bg-white/75 p-4 shadow-[0_28px_64px_-28px_rgba(15,23,42,0.22)] backdrop-blur-xl ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card/80 dark:shadow-[0_28px_64px_-28px_rgba(0,0,0,0.45)] dark:ring-white/10 sm:p-5 md:p-6">
                     <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-muted-foreground">
-                      Leistung wählen
+                      Service wählen
                     </p>
                     <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                       <Link
@@ -317,7 +317,8 @@ export default async function HomePage() {
                           <ShieldCheck className="h-5 w-5" />
                         </div>
                         <p className="text-sm font-medium leading-snug text-slate-700 dark:text-foreground">
-                          Geprüfte Firmen · Kostenlos &amp; unverbindlich · Mehrere Offerten auf einen Blick
+                          Vergleichen Sie kostenlos regionale Umzugs- und Reinigungsfirmen für Ihren Umzug oder Ihre
+                          Reinigung.
                         </p>
                       </div>
                     </div>
@@ -351,8 +352,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="absolute -bottom-4 -left-4 hidden max-w-[200px] rounded-2xl border border-white/80 bg-white/95 p-4 shadow-xl backdrop-blur-md dark:border-border dark:bg-card/95 dark:shadow-2xl xl:block">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-muted-foreground">Ein Portal</p>
-                    <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-foreground">Umzug · Reinigung · Maler · Entsorgung</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-foreground">Umzug · Reinigung · Maler · Entsorgung</p>
                   </div>
                 </div>
               </div>
@@ -367,10 +367,10 @@ export default async function HomePage() {
                   Ablauf
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl md:leading-tight">
-                  In drei Schritten zur passenden Offerte
+                  In 3 Schritten die besten Anbieter Ihrer Region finden
                 </h2>
                 <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
-                  Klar strukturiert – von der Anfrage bis zur Auswahl Ihres Anbieters.
+                  In drei klaren Schritten kommen Sie schnell zu passenden Angeboten aus Ihrer Region.
                 </p>
               </div>
 

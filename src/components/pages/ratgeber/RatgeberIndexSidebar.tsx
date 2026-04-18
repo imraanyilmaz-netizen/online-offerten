@@ -5,7 +5,6 @@ import {
   Calculator,
   Clock,
   ListChecks,
-  Sparkles,
   Tag,
   LayoutGrid,
 } from 'lucide-react'
@@ -45,18 +44,13 @@ export function RatgeberIndexSidebar({
   return (
     <aside className="space-y-8 lg:sticky lg:top-28 lg:self-start">
       <div className="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-emerald-50/40 p-6 shadow-[0_2px_28px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] dark:border-border dark:from-card dark:via-card dark:to-emerald-950/25 dark:ring-white/[0.06]">
-        <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-900/20">
-            <Sparkles className="h-5 w-5" aria-hidden />
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold tracking-tight text-slate-950 dark:text-foreground">
-              Offerten vergleichen
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
-              Bis zu fünf unverbindliche Angebote von geprüften Anbietern — kostenlos und in wenigen Minuten.
-            </p>
-          </div>
+        <div>
+          <h2 className="text-lg font-semibold tracking-tight text-slate-950 dark:text-foreground">
+            Offerten vergleichen
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
+            Bis zu fünf unverbindliche Angebote von geprüften Anbietern — kostenlos und in wenigen Minuten.
+          </p>
         </div>
         <Button
           asChild

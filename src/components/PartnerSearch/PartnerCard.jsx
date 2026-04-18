@@ -1,4 +1,4 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import React from 'react'
 import { Star, MapPin, CheckCircle, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
@@ -27,6 +27,16 @@ const PartnerCard = ({ partner }) => {
   const mainCategories = partner.main_categories || []
   const hasUmzug = mainCategories.includes('umzug')
   const hasReinigung = mainCategories.includes('reinigung')
+  const hasMaler = mainCategories.includes('maler')
+
+  const getQuoteHref = () => {
+    const city = partner.address_city ? `&city=${encodeURIComponent(partner.address_city)}` : ''
+    if (hasUmzug) return `/kostenlose-offerte-anfordern?service=umzug&step=2${city}`
+    if (hasReinigung) return `/kostenlose-offerte-anfordern?service=reinigung&step=2${city}`
+    if (hasMaler) return `/kostenlose-offerte-anfordern?service=maler&step=2${city}`
+    return `/kostenlose-offerte-anfordern${city ? `?${city.slice(1)}` : ''}`
+  }
+  const quoteHref = getQuoteHref()
 
   const getDefaultImage = () => {
     if (hasReinigung && !hasUmzug) {
@@ -201,7 +211,7 @@ const PartnerCard = ({ partner }) => {
 
         <div className="mt-4 border-t border-slate-100 pt-3 dark:border-border">
           <Link
-            href={`/partner/${partnerSlug}`}
+            href={quoteHref}
             className={cn(
               'flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 text-sm font-semibold text-white',
               'shadow-sm shadow-emerald-900/10 transition-colors hover:bg-emerald-700',

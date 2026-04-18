@@ -4,7 +4,7 @@ import { cantonMap } from '@/data/locations'
 /** URL-Slug der Kategorie → main_categories in DB */
 const CATEGORY_SLUG_TO_MAIN: Record<string, string> = {
   umzugsfirma: 'umzug',
-  reinigung: 'reinigung',
+  reinigungsfirma: 'reinigung',
   malerfirma: 'maler',
 }
 
@@ -87,7 +87,7 @@ export async function getPartnersForCategoryLocation(
     const { data: rows, error } = await supabase
       .from('partners')
       .select(
-        'id, company_name, slug, address_street, address_city, address_zip, main_categories, service_regions, average_rating, review_count, logo_url, message, badge_tier'
+        'id, company_name, slug, address_street, address_city, address_zip, main_categories, service_regions, average_rating, review_count, logo_url, hero_image_url, message, badge_tier'
       )
       .eq('status', 'active')
       .not('company_name', 'is', null)

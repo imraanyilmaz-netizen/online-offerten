@@ -12,6 +12,8 @@ import {
   Star, 
   ChevronLeft, 
   ChevronRight, 
+  ChevronDown,
+  ChevronUp,
   ArrowRight, 
   MapPin
 } from 'lucide-react';
@@ -290,6 +292,8 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     visiblePostsCount: 6
   });
 
+  const [showAllLocations, setShowAllLocations] = useState(false);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const postsScrollRef = useRef<HTMLDivElement>(null);
 
@@ -429,6 +433,19 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     return [...linkedLocations, ...unlinkedCantons];
   }, []);
 
+  const collapsedHomeLocationItems = useMemo(() => {
+    const seen = new Set<string>();
+    const picked: typeof homeLocationItems = [];
+    for (const item of homeLocationItems) {
+      if (!item.canton || seen.has(item.canton)) continue;
+      seen.add(item.canton);
+      picked.push(item);
+    }
+    return picked;
+  }, [homeLocationItems]);
+
+  const visibleHomeLocationItems = showAllLocations ? homeLocationItems : collapsedHomeLocationItems;
+
   return (
     <>
         
@@ -532,7 +549,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 </div>
                 <div className="mx-auto mb-10 max-w-4xl">
                   <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
-                    {homeLocationItems.map((item) => {
+                    {visibleHomeLocationItems.map((item) => {
                       const cardClassName =
                         'flex items-center justify-between rounded-xl border border-slate-200/90 bg-white/90 px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-900/[0.02] transition-all duration-200 dark:border-border dark:bg-card/90 dark:text-foreground dark:ring-white/5 md:text-base';
 
@@ -577,6 +594,29 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       );
                     })}
                   </div>
+                  {homeLocationItems.length > collapsedHomeLocationItems.length ? (
+                    <div className="mt-6 flex justify-center">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setShowAllLocations((prev) => !prev)}
+                        aria-expanded={showAllLocations}
+                        className="rounded-xl border-slate-200 bg-white px-6 py-3 font-semibold text-slate-900 shadow-sm hover:border-emerald-300 hover:bg-emerald-50/50 dark:border-border dark:bg-card dark:text-foreground dark:hover:border-emerald-700 dark:hover:bg-emerald-950/30"
+                      >
+                        {showAllLocations ? (
+                          <>
+                            Weniger anzeigen
+                            <ChevronUp className="ml-2 h-4 w-4" />
+                          </>
+                        ) : (
+                          <>
+                            Alle Standorte anzeigen
+                            <ChevronDown className="ml-2 h-4 w-4" />
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  ) : null}
                 </div>
                 <p className="mb-4 text-base font-medium leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
                   Mit einer Anfrage mehrere passende Offerten – Leistungen transparent vergleichen und den richtigen Partner wählen.
