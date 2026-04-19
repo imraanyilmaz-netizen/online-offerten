@@ -284,7 +284,9 @@ export default function CategoryCityPageClient({
             src={heroSrc}
             alt={heroAlt}
             fill
-            priority
+            preload
+            fetchPriority="high"
+            loading="eager"
             className="object-cover object-[65%_center] sm:object-[72%_center] lg:object-[78%_center]"
             sizes="(max-width: 1024px) 100vw, 100vw"
             quality={80}

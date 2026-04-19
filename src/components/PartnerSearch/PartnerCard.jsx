@@ -61,7 +61,15 @@ const PartnerCard = ({ partner }) => {
       )}
     >
       <div className="relative shrink-0">
-        <Link href={`/partner/${partnerSlug}`} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2">
+        <Link
+          href={`/partner/${partnerSlug}`}
+          aria-label={
+            partner.company_name
+              ? `Partnerprofil von ${partner.company_name}`
+              : 'Partnerprofil'
+          }
+          className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+        >
           {partner.hero_image_url ? (
             <>
               <img
@@ -171,7 +179,7 @@ const PartnerCard = ({ partner }) => {
                   href={`/partner/${partnerSlug}`}
                   className="font-medium text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300"
                 >
-                  mehr
+                  Mehr zu {partner.company_name}
                 </Link>
               </>
             ) : (
@@ -213,9 +221,9 @@ const PartnerCard = ({ partner }) => {
           <Link
             href={quoteHref}
             className={cn(
-              'flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 text-sm font-semibold text-white',
-              'shadow-sm shadow-emerald-900/10 transition-colors hover:bg-emerald-700',
-              'focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2'
+              'flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-700 text-sm font-semibold text-white',
+              'shadow-sm shadow-emerald-900/10 transition-colors hover:bg-emerald-800',
+              'focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2'
             )}
           >
             Anfrage senden

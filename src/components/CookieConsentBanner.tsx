@@ -60,7 +60,7 @@ export default function CookieConsentBanner() {
               <Button
                 type="button"
                 onClick={acceptAll}
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold w-full sm:w-auto"
+                className="bg-green-700 hover:bg-green-800 text-white font-semibold w-full sm:w-auto"
               >
                 Alle akzeptieren
               </Button>
