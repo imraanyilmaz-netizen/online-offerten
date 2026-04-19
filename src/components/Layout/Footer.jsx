@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Mail, Send } from 'lucide-react'
+import { FaFacebook, FaInstagram } from 'react-icons/fa'
 import { getCategoryServicePath, serviceCategories } from '@/data/categories'
 import { ThemeToggleTabs } from '@/components/Layout/ThemeToggleTabs'
 
@@ -55,6 +56,27 @@ export default function Footer() {
               <Mail className="h-4 w-4 shrink-0" aria-hidden />
               info@online-offerten.ch
             </a>
+            <h2 className={`${sectionTitleClass} mt-6`}>Social Media</h2>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <a
+                href="https://www.instagram.com/online_offerten.ch/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 shadow-sm transition-colors hover:border-emerald-300 hover:text-emerald-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-emerald-700 dark:hover:text-emerald-400"
+                aria-label="Online-Offerten.ch auf Instagram"
+              >
+                <FaInstagram className="h-[22px] w-[22px]" aria-hidden />
+              </a>
+              <a
+                href="https://www.facebook.com/onlineofferten/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 shadow-sm transition-colors hover:border-emerald-300 hover:text-emerald-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-emerald-700 dark:hover:text-emerald-400"
+                aria-label="Online-Offerten.ch auf Facebook"
+              >
+                <FaFacebook className="h-[22px] w-[22px]" aria-hidden />
+              </a>
+            </div>
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3 lg:col-span-6">
