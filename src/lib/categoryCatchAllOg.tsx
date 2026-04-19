@@ -1,26 +1,10 @@
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
 import type { ResolvedCategoryCatchAll } from '@/lib/categoryCatchAllResolve'
 
 const OG_SIZE = { width: 1200, height: 630 }
 
-function toArrayBuffer(buf: Buffer): ArrayBuffer {
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer
-}
-
-let fontsPromise: Promise<{ inter400: ArrayBuffer; inter600: ArrayBuffer }> | null = null
-
-function loadInterLatinExtFonts(): Promise<{ inter400: ArrayBuffer; inter600: ArrayBuffer }> {
-  if (!fontsPromise) {
-    const base = join(process.cwd(), 'node_modules/@fontsource/inter/files')
-    fontsPromise = Promise.all([
-      readFile(join(base, 'inter-latin-ext-400-normal.woff')).then(toArrayBuffer),
-      readFile(join(base, 'inter-latin-ext-600-normal.woff')).then(toArrayBuffer),
-    ]).then(([inter400, inter600]) => ({ inter400, inter600 }))
-  }
-  return fontsPromise
-}
+const OG_FONT_FAMILY =
+  'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif'
 
 /** Decorative SVG: soft curves + corner brackets (Satori-safe, no filters). */
 function OgBackdropSvg() {
@@ -103,11 +87,9 @@ function OgHeaderBrandMark() {
   )
 }
 
-export async function createCategoryCatchAllOgResponse(
+export function createCategoryCatchAllOgResponse(
   resolved: ResolvedCategoryCatchAll,
-): Promise<ImageResponse> {
-  const { inter400, inter600 } = await loadInterLatinExtFonts()
-
+): ImageResponse {
   const titleFontSize =
     resolved.title.length > 72 ? 40 : resolved.title.length > 48 ? 46 : 52
 
@@ -127,7 +109,7 @@ export async function createCategoryCatchAllOgResponse(
           flexDirection: 'column',
           backgroundColor: '#022c22',
           overflow: 'hidden',
-          fontFamily: 'Inter',
+          fontFamily: OG_FONT_FAMILY,
         }}
       >
         <div
@@ -271,20 +253,6 @@ export async function createCategoryCatchAllOgResponse(
     ),
     {
       ...OG_SIZE,
-      fonts: [
-        {
-          name: 'Inter',
-          data: inter400,
-          style: 'normal',
-          weight: 400,
-        },
-        {
-          name: 'Inter',
-          data: inter600,
-          style: 'normal',
-          weight: 600,
-        },
-      ],
     },
   )
 }

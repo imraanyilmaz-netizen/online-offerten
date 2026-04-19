@@ -1,12 +1,22 @@
-import {
-  categoryCatchAllOgAlt as alt,
-  categoryCatchAllOgContentType as contentType,
-  categoryCatchAllOgImageOneSegment,
-  categoryCatchAllOgSize as size,
-} from '@/lib/categoryCatchAllImageHandlers'
+import { notFound } from 'next/navigation'
+import { createCategoryCatchAllOgResponse } from '@/lib/categoryCatchAllOg'
+import { resolveCategoryCatchAll } from '@/lib/categoryCatchAllResolve'
 
-export { alt, contentType, size }
+export const runtime = 'edge'
 
-export const runtime = 'nodejs'
+export const alt = 'Online-Offerten.ch – Seitenvorschau'
 
-export default categoryCatchAllOgImageOneSegment
+export const size = { width: 1200, height: 630 }
+
+export const contentType = 'image/png'
+
+export default async function OpenGraphImage({
+  params,
+}: {
+  params: Promise<{ category: string; slug: string }>
+}) {
+  const { category, slug } = await params
+  const resolved = resolveCategoryCatchAll(category, [slug])
+  if (!resolved) notFound()
+  return createCategoryCatchAllOgResponse(resolved)
+}

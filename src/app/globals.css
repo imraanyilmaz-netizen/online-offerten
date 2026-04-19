@@ -773,3 +773,51 @@
   }
 }
 
+/* Auslandumzug hero globe — orbiting transport emojis + animated route strokes */
+@layer utilities {
+  @keyframes globe-orbit-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes globe-orbit-counter {
+    from {
+      transform: translateX(-50%) rotate(0deg);
+    }
+    to {
+      transform: translateX(-50%) rotate(-360deg);
+    }
+  }
+  @keyframes globe-arc-flow {
+    to {
+      stroke-dashoffset: -36;
+    }
+  }
+  .globe-orbit-arm {
+    transform-origin: center center;
+    animation: globe-orbit-spin var(--globe-orbit-ms, 22s) linear infinite;
+    animation-delay: var(--globe-orbit-delay, 0s);
+  }
+  .globe-orbit-emoji {
+    transform-origin: center center;
+    animation: globe-orbit-counter var(--globe-orbit-ms, 22s) linear infinite;
+    animation-delay: var(--globe-orbit-delay, 0s);
+  }
+  .globe-arc-route {
+    stroke-linecap: round;
+    fill: none;
+    stroke-dasharray: 5 11;
+    animation: globe-arc-flow var(--globe-arc-ms, 4.5s) linear infinite;
+    animation-delay: var(--globe-arc-delay, 0s);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .globe-orbit-arm,
+    .globe-orbit-emoji {
+      animation-duration: 100s !important;
+    }
+    .globe-arc-route {
+      animation-duration: 18s !important;
+    }
+  }
+}
+
