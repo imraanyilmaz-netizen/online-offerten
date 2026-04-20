@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { createStaticClient } from '@/src/lib/supabase/server'
 import { cantonMap } from '@/data/locations'
 
@@ -75,35 +76,39 @@ function partnerMatchesLocation(
   return false
 }
 
-export async function getPartnersForCategoryLocation(
-  categorySlug: string,
-  location: LocationForPartners
-) {
-  const main = CATEGORY_SLUG_TO_MAIN[categorySlug]
-  if (!main) return []
+/**
+ * Wird sowohl von generateMetadata als auch von der Page-Komponente aufgerufen.
+ * React-`cache` dedupliziert innerhalb derselben Request-Lifecycle, sodass die
+ * Supabase-Abfrage nur einmal pro Request ausgeführt wird.
+ */
+export const getPartnersForCategoryLocation = cache(
+  async (categorySlug: string, location: LocationForPartners) => {
+    const main = CATEGORY_SLUG_TO_MAIN[categorySlug]
+    if (!main) return []
 
-  try {
-    const supabase = createStaticClient()
-    const { data: rows, error } = await supabase
-      .from('partners')
-      .select(
-        'id, company_name, slug, address_street, address_city, address_zip, main_categories, service_regions, average_rating, review_count, logo_url, hero_image_url, message, badge_tier'
-      )
-      .eq('status', 'active')
-      .not('company_name', 'is', null)
-      .contains('main_categories', [main])
+    try {
+      const supabase = createStaticClient()
+      const { data: rows, error } = await supabase
+        .from('partners')
+        .select(
+          'id, company_name, slug, address_street, address_city, address_zip, main_categories, service_regions, average_rating, review_count, logo_url, hero_image_url, message, badge_tier'
+        )
+        .eq('status', 'active')
+        .not('company_name', 'is', null)
+        .contains('main_categories', [main])
 
-    if (error || !rows?.length) return []
+      if (error || !rows?.length) return []
 
-    const filtered = rows.filter((p) => partnerMatchesLocation(p, location))
-    filtered.sort((a, b) => {
-      const ra = a.average_rating || 0
-      const rb = b.average_rating || 0
-      if (rb !== ra) return rb - ra
-      return (b.review_count || 0) - (a.review_count || 0)
-    })
-    return filtered
-  } catch {
-    return []
+      const filtered = rows.filter((p) => partnerMatchesLocation(p, location))
+      filtered.sort((a, b) => {
+        const ra = a.average_rating || 0
+        const rb = b.average_rating || 0
+        if (rb !== ra) return rb - ra
+        return (b.review_count || 0) - (a.review_count || 0)
+      })
+      return filtered
+    } catch {
+      return []
+    }
   }
-}
+)

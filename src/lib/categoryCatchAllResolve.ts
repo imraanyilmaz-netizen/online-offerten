@@ -8,6 +8,7 @@ import {
   getServiceCityLandingMetadata,
   getServiceLandingMetadata,
 } from '@/lib/serviceLanding/metadata'
+import { cityLandingVariants } from '@/lib/seoVariants'
 
 const SITE = 'https://online-offerten.ch'
 
@@ -15,6 +16,12 @@ const SERVICE_TITLE: Record<string, string> = {
   umzugsfirma: 'Umzugsfirma',
   reinigungsfirma: 'Reinigungsfirma',
   malerfirma: 'Malerfirma',
+}
+
+const SERVICE_TITLE_PLURAL: Record<string, string> = {
+  umzugsfirma: 'Umzugsfirmen',
+  reinigungsfirma: 'Reinigungsfirmen',
+  malerfirma: 'Malerfirmen',
 }
 
 export type ResolvedCategoryCatchAll = {
@@ -38,8 +45,16 @@ export function resolveCategoryCatchAll(
     const loc = locations.find((l) => l.slug === only)
     if (loc) {
       const st = SERVICE_TITLE[cat.slug] || 'Anbieter'
-      const title = `${st} ${loc.name} – Offerten vergleichen`
-      const description = `${st} in ${loc.name} (Kanton ${loc.canton}): Geprüfte Anbieter vergleichen, kostenlose Offerten anfordern und bis zu 40% sparen.`
+      const stPlural = SERVICE_TITLE_PLURAL[cat.slug] || 'Anbieter'
+      const { title, description } = cityLandingVariants(
+        {
+          branche: st,
+          branchePlural: stPlural,
+          stadt: loc.name,
+          kanton: loc.canton,
+        },
+        `${cat.slug}|${loc.slug}`
+      )
       const canonical = `${SITE}/${cat.slug}/${loc.slug}`
       return { title, description, canonical }
     }

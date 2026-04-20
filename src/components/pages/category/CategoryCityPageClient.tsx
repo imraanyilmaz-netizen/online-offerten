@@ -52,6 +52,7 @@ import LocationPageNavigation from '@/components/locations/LocationPageNavigatio
 import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CategoryCityFaqSection from '@/components/pages/category/CategoryCityFaqSection'
 import CategoryCitySpotlight from '@/components/pages/category/CategoryCitySpotlight'
+import ServiceStepsSection from '@/components/pages/category/ServiceStepsSection'
 import { getCityFaqsForCategory, getCityPageLocalContent } from '@/lib/cityPageFaqs'
 import { getCityHeroImageSrc } from '@/lib/cityHeroImage'
 import { getCantonPeerLocations } from '@/lib/cityPagePartnerStats'
@@ -233,7 +234,7 @@ export default function CategoryCityPageClient({
 }) {
   const isServiceCityPage = Boolean(servicePathSegment && serviceLabel && serviceId)
   const intro = heroIntroForPage(categorySlug, isServiceCityPage, serviceLabel)
-  const heroSrc = getCityHeroImageSrc(categorySlug, locationSlug)
+  const heroSrc = getCityHeroImageSrc(categorySlug, locationSlug, serviceId)
   const heroAlt = isServiceCityPage
     ? `${serviceLabel} in ${locationName} (Kanton ${canton}) – ${serviceTitle}`
     : `${serviceTitle} in ${locationName} (Kanton ${canton}) – Offerten vergleichen`
@@ -287,9 +288,9 @@ export default function CategoryCityPageClient({
             preload
             fetchPriority="high"
             loading="eager"
-            className="object-cover object-[65%_center] sm:object-[72%_center] lg:object-[78%_center]"
-            sizes="(max-width: 1024px) 100vw, 100vw"
-            quality={80}
+            className="object-cover object-[60%_center] sm:object-[68%_center] lg:object-[72%_center]"
+            sizes="100vw"
+            quality={90}
           />
         </div>
         {/* Left: readable panel — gradient to transparent toward the photo */}
@@ -338,7 +339,7 @@ export default function CategoryCityPageClient({
             </p>
           </div>
         </div>
-        <div className="relative z-10 mx-auto flex min-h-[min(92svh,720px)] max-w-navbar flex-col justify-end px-4 pb-12 pt-24 sm:px-6 md:pb-16 md:pt-28 lg:min-h-[560px] lg:justify-center lg:px-8 lg:py-20">
+        <div className="relative z-10 mx-auto flex min-h-[min(92svh,720px)] max-w-7xl flex-col justify-end px-4 pb-12 pt-24 sm:px-6 md:pb-16 md:pt-28 lg:min-h-[560px] lg:justify-center lg:px-8 lg:py-20">
           <div
             className={cn(
               'max-w-xl space-y-6 lg:max-w-[min(42rem,52%)]',
@@ -556,6 +557,13 @@ export default function CategoryCityPageClient({
         </div>
       </section>
 
+      <ServiceStepsSection
+        categorySlug={categorySlug}
+        serviceLabel={isServiceCityPage ? serviceLabel : undefined}
+        locationName={locationName}
+        ctaHref={primaryQuoteHref}
+      />
+
       {locationSpotlight ? (
         <CategoryCitySpotlight categorySlug={categorySlug} data={locationSpotlight} />
       ) : null}
@@ -583,7 +591,7 @@ export default function CategoryCityPageClient({
           )}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-navbar px-4 py-14 md:px-6 md:py-20 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20 lg:px-8">
           <div
             className={cn(
               'relative overflow-hidden rounded-[1.75rem] border border-slate-200/85',
@@ -793,7 +801,7 @@ export default function CategoryCityPageClient({
 
       {cantonPeers.length > 0 ? (
         <section className="border-t border-slate-200/70 bg-gradient-to-b from-white to-slate-50/90 py-12 dark:border-border dark:from-background dark:to-muted/20 md:py-14">
-          <div className="mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
             <div
               className={cn(
                 'rounded-[1.5rem] border border-slate-200/85 bg-white/90 p-6 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/90 dark:ring-white/10 sm:p-8 md:p-9'
@@ -821,7 +829,7 @@ export default function CategoryCityPageClient({
                   </p>
                 </div>
               </div>
-              <ul className="mt-6 flex flex-wrap gap-2">
+              <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                 {cantonPeers.map((peer) => {
                   const href =
                     isServiceCityPage && servicePathSegment
@@ -832,19 +840,20 @@ export default function CategoryCityPageClient({
                       <Link
                         href={href}
                         className={cn(
-                          'inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-slate-50/90 px-3.5 py-2 text-sm font-medium text-slate-800',
-                          'shadow-sm transition hover:border-slate-300 hover:bg-white hover:text-slate-950 dark:border-border dark:bg-muted/50 dark:text-foreground dark:hover:bg-card dark:hover:text-foreground',
+                          'group flex h-full min-h-[3.25rem] items-center gap-2 rounded-xl border border-slate-200/90 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800',
+                          'shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white hover:text-slate-950 hover:shadow-md',
+                          'dark:border-border dark:bg-card/90 dark:text-foreground dark:hover:bg-card dark:hover:text-foreground',
                           categorySlug === 'reinigungsfirma' &&
-                            'hover:border-sky-300/80 hover:text-sky-900',
+                            'hover:border-sky-300/80 hover:text-sky-900 dark:hover:border-sky-700/60',
                           categorySlug === 'malerfirma' &&
-                            'hover:border-violet-300/80 hover:text-violet-900',
+                            'hover:border-violet-300/80 hover:text-violet-900 dark:hover:border-violet-700/60',
                           (categorySlug === 'umzugsfirma' ||
                             !['reinigungsfirma', 'malerfirma'].includes(categorySlug)) &&
-                            'hover:border-emerald-300/80 hover:text-emerald-900'
+                            'hover:border-emerald-300/80 hover:text-emerald-900 dark:hover:border-emerald-700/60'
                         )}
                       >
                         <MapPin className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
-                        {peer.name}
+                        <span className="min-w-0 flex-1 truncate">{peer.name}</span>
                       </Link>
                     </li>
                   )
@@ -857,7 +866,7 @@ export default function CategoryCityPageClient({
 
       {partners.length > 0 ? (
         <section className="border-t border-slate-200/60 bg-gradient-to-b from-slate-50/80 to-white py-16 dark:border-border dark:from-muted/25 dark:to-background md:py-20">
-          <div className="mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
             <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_4px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card dark:ring-white/10">
               <div className="flex flex-col">
                 <div className="relative min-h-[min(42svh,380px)] w-full sm:min-h-[340px] lg:min-h-[360px]">
@@ -917,7 +926,7 @@ export default function CategoryCityPageClient({
         </section>
       ) : (
         <section className="border-t border-slate-200/60 bg-white py-16 dark:border-border dark:bg-background md:py-20">
-          <div className="mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
             <div className="mx-auto max-w-xl rounded-3xl border border-amber-200/80 bg-gradient-to-b from-amber-50/90 to-white px-8 py-10 text-center shadow-[0_20px_40px_-20px_rgba(180,83,9,0.2)] ring-1 ring-amber-900/5 dark:border-amber-900/40 dark:from-amber-950/30 dark:to-background dark:ring-amber-900/20">
               <p className="text-lg font-medium text-slate-900 dark:text-foreground">
                 Aktuell keine passenden Partner in unserem Netzwerk für {locationName}.
@@ -945,7 +954,7 @@ export default function CategoryCityPageClient({
 
       {partnerRegions.mode === 'broad' ? (
         <section className="border-t border-slate-200/60 bg-slate-50/90 py-14 dark:border-border dark:bg-muted/20 md:py-16">
-          <div className="mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
             <div
               className={cn(
                 'rounded-3xl border border-slate-200/85 bg-white p-6 shadow-[0_4px_24px_-8px_rgba(15,23,42,0.08)] md:p-10',
@@ -978,7 +987,7 @@ export default function CategoryCityPageClient({
         </section>
       ) : partnerRegions.items.length > 0 ? (
         <section className="border-t border-slate-200/60 bg-slate-50/90 py-14 dark:border-border dark:bg-muted/20 md:py-16">
-          <div className="mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
             <div className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-[0_4px_24px_-8px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card dark:ring-white/10 md:p-10">
               <h2 className="heading-3 text-slate-900 dark:text-foreground">Kantone &amp; Einsatzgebiete</h2>
               <p className="mt-2 max-w-3xl text-slate-600 dark:text-muted-foreground md:text-base md:leading-relaxed">
@@ -1027,7 +1036,7 @@ export default function CategoryCityPageClient({
 
       <CategoryCityFaqSection locationName={locationName} items={faqItems} />
 
-      <div className="mx-auto max-w-navbar px-4 pb-16 pt-4 md:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-4 md:px-6 lg:px-8">
         <LocationPageNavigation
           allLocations={locations}
           currentCity={locationName}

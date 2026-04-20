@@ -2,12 +2,25 @@ import {
   findServiceInCategory,
   getServicePathSegment,
 } from '@/data/categories'
+import { serviceCityLandingVariants } from '@/lib/seoVariants'
 
 const SITE = 'https://online-offerten.ch'
 
 const CATEGORY_LABEL_FOR_TITLE: Record<string, string> = {
   umzugsfirma: 'Umzugsfirma',
   reinigungsfirma: 'Reinigung',
+  malerfirma: 'Malerfirma',
+}
+
+const CATEGORY_LABEL_PLURAL: Record<string, string> = {
+  umzugsfirma: 'Umzugsfirmen',
+  reinigungsfirma: 'Reinigungsfirmen',
+  malerfirma: 'Malerfirmen',
+}
+
+const CATEGORY_BRANCHE_SINGULAR: Record<string, string> = {
+  umzugsfirma: 'Umzugsfirma',
+  reinigungsfirma: 'Reinigungsfirma',
   malerfirma: 'Malerfirma',
 }
 
@@ -151,10 +164,10 @@ export function getServiceLandingMetadata(
   }
 
   const catLabel = CATEGORY_LABEL_FOR_TITLE[categorySlug] || 'Online-Offerten.ch'
-  const title = `${svc.label} – Kostenlose Offerten vergleichen | ${catLabel}`
+  const title = `${svc.label} Schweiz: Kostenlose Offerten vergleichen & bis zu 40% sparen`
   const description = svc.desc
-    ? `${svc.label}: ${svc.desc}. Bis zu 5 kostenlose Offerten von geprüften Anbietern in der Schweiz – unverbindlich.`
-    : `${svc.label} in der Schweiz: Kostenlose Offerten von geprüften Anbietern vergleichen und bis zu 40% sparen.`
+    ? `${svc.label} (${svc.desc}): Bis zu 5 kostenlose Offerten von geprüften ${catLabel}-Anbietern vergleichen und bis zu 40% sparen – schnell & unverbindlich.`
+    : `${svc.label} in der Schweiz: Bis zu 5 kostenlose Offerten von geprüften Anbietern vergleichen und bis zu 40% sparen – schnell & unverbindlich.`
 
   return {
     title,
@@ -163,7 +176,13 @@ export function getServiceLandingMetadata(
   }
 }
 
-/** SEO für `/{category}/{serviceSegment}/{citySlug}` (Leistung in einer Stadt). */
+/** SEO für `/{category}/{serviceSegment}/{citySlug}` (Leistung in einer Stadt).
+ *
+ * Ziele:
+ *  - Nutzer erkennt Service + Ort + Intention (Offerten vergleichen) schon im Title
+ *  - Keine Keyword-Duplikation (früher war `${svc.label}` zwei Mal in der Description)
+ *  - Description bleibt unter 160 Zeichen (Google schneidet sonst ab)
+ */
 export function getServiceCityLandingMetadata(
   categorySlug: string,
   serviceUrlSegment: string,
@@ -173,12 +192,20 @@ export function getServiceCityLandingMetadata(
   if (!svc) return null
 
   const pathSeg = getServicePathSegment(svc)
-  const base = getServiceLandingMetadata(categorySlug, serviceUrlSegment)
-  if (!base) return null
 
-  const catLabel = CATEGORY_LABEL_FOR_TITLE[categorySlug] || 'Online-Offerten.ch'
-  const title = `${svc.label} ${location.name} – Offerten vergleichen | ${catLabel}`
-  const description = `${svc.label} in ${location.name} (Kanton ${location.canton}): ${base.description}`
+  const branche = CATEGORY_BRANCHE_SINGULAR[categorySlug] || 'Anbieter'
+  const branchePlural = CATEGORY_LABEL_PLURAL[categorySlug] || 'Anbieter'
+
+  const { title, description } = serviceCityLandingVariants(
+    {
+      service: svc.label,
+      stadt: location.name,
+      kanton: location.canton,
+      branche,
+      branchePlural,
+    },
+    `${categorySlug}|${svc.id}|${location.slug}`
+  )
 
   return {
     title,

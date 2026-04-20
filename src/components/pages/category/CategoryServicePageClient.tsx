@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import NextImage from 'next/image'
 import dynamic from 'next/dynamic'
 import { Suspense, useMemo } from 'react'
 import type { IconType } from 'react-icons'
@@ -25,9 +26,12 @@ import {
   MdWindow,
   MdYard,
 } from 'react-icons/md'
-import { ArrowRight, ChevronRight, Globe2, MapPin, Sparkles } from 'lucide-react'
+import { ArrowRight, ChevronRight, Globe2, MapPin, Paintbrush, Sparkles, Trash2, Truck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ReinigungServiceHero from '@/components/reinigung/ReinigungServiceHero'
+import ServiceStepsSection from '@/components/pages/category/ServiceStepsSection'
+import CategoryServiceFaqSection from '@/components/pages/category/CategoryServiceFaqSection'
+import { getServiceFaqs } from '@/lib/serviceFaqs'
 import { quoteHrefForCategoryService } from '@/lib/quoteLinks'
 import {
   findServiceInCategory,
@@ -140,8 +144,9 @@ function ServiceHubLocalCitySection({
   if (!service) return null
 
   const linkClass = cn(
-    'inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-slate-50/90 px-3.5 py-2 text-sm font-medium text-slate-800',
-    'shadow-sm transition hover:border-slate-300 hover:bg-white hover:text-slate-950 dark:border-border dark:bg-muted/50 dark:text-foreground dark:hover:bg-card',
+    'group flex h-full min-h-[3.25rem] items-center gap-2 rounded-xl border border-slate-200/90 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800',
+    'shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white hover:text-slate-950 hover:shadow-md',
+    'dark:border-border dark:bg-card/90 dark:text-foreground dark:hover:bg-card',
     categorySlug === 'reinigungsfirma' && 'hover:border-sky-300/80 hover:text-sky-900 dark:hover:border-sky-700/60',
     categorySlug === 'malerfirma' && 'hover:border-violet-300/80 hover:text-violet-900 dark:hover:border-violet-700/60',
     (categorySlug === 'umzugsfirma' || !['reinigungsfirma', 'malerfirma'].includes(categorySlug)) &&
@@ -179,7 +184,7 @@ function ServiceHubLocalCitySection({
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
-          <ul className="mt-6 flex flex-wrap gap-2">
+          <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
             {serviceHubCityList.map((loc) => (
               <li key={loc.slug}>
                 <Link
@@ -187,9 +192,9 @@ function ServiceHubLocalCitySection({
                   className={linkClass}
                 >
                   <MapPin className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
-                  {loc.name}
+                  <span className="min-w-0 flex-1 truncate">{loc.name}</span>
                   {loc.canton ? (
-                    <span className="text-xs font-normal text-slate-500 dark:text-muted-foreground">
+                    <span className="ml-auto shrink-0 text-[0.6875rem] font-medium uppercase tracking-wide text-slate-500 dark:text-muted-foreground">
                       {loc.canton}
                     </span>
                   ) : null}
@@ -234,11 +239,25 @@ export default function CategoryServicePageClient({
     [categorySlug, serviceId, auslandDestination?.code]
   )
   const hubLabel = SERVICE_TITLE[categorySlug] || 'Leistungen'
+  const heroImage = useMemo<{ src: string; alt: string } | null>(() => {
+    if (categorySlug === 'umzugsfirma' && serviceId === 'privatumzug') {
+      return {
+        src: '/privatumzug/7946a949.webp',
+        alt: `${serviceLabel} – Umzugsfirma in der Schweiz`,
+      }
+    }
+    return null
+  }, [categorySlug, serviceId, serviceLabel])
   const siblingServices = useMemo(() => {
     const cat = serviceCategories.find((c) => c.slug === categorySlug)
     if (!cat) return []
     return cat.services.filter((s) => s.id !== serviceId)
   }, [categorySlug, serviceId])
+
+  const faqItems = useMemo(
+    () => getServiceFaqs(categorySlug, serviceId, serviceLabel),
+    [categorySlug, serviceId, serviceLabel]
+  )
 
   const schema = useMemo(
     () => ({
@@ -284,6 +303,11 @@ export default function CategoryServicePageClient({
             ctaLabel="Jetzt kostenlose Offerten anfordern"
             ctaHref={ctaHref}
             trustItems={['Bis zu 40% sparen', 'Nur geprüfte Firmen', '100% kostenlos & unverbindlich']}
+          />
+          <ServiceStepsSection
+            categorySlug={categorySlug}
+            serviceLabel={serviceLabel}
+            ctaHref={ctaHref}
           />
           <section className="border-t border-slate-200/80 dark:border-border bg-gradient-to-b from-slate-50/90 via-white to-white dark:from-muted/20 dark:via-background dark:to-background py-12 md:py-16">
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -366,6 +390,10 @@ export default function CategoryServicePageClient({
             categorySlug="reinigungsfirma"
             serviceId={serviceId}
             serviceLabel={serviceLabel}
+          />
+          <CategoryServiceFaqSection
+            serviceLabel={serviceLabel}
+            items={faqItems}
           />
         </div>
       </>
@@ -523,38 +551,110 @@ export default function CategoryServicePageClient({
                 </div>
               </div>
             ) : (
-              <>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm dark:border-border dark:bg-card/90 dark:text-foreground">
-                  <Sparkles className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden />
-                  Geprüfte Anbieter in der Schweiz
+              <div className={cn(
+                heroImage ? 'grid items-center gap-10 lg:grid-cols-2 lg:gap-12' : ''
+              )}>
+                <div className="min-w-0">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm dark:border-border dark:bg-card/90 dark:text-foreground">
+                    <Sparkles className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden />
+                    Geprüfte Anbieter in der Schweiz
+                  </div>
+                  <h1 className="heading-1 !mt-0 max-w-3xl">{heroTitle}</h1>
+                  <p className="text-body mt-4 max-w-2xl">{pageDescription}</p>
+                  {serviceDesc ? (
+                    <p className="mt-3 max-w-2xl text-slate-700 dark:text-foreground/90">{serviceDesc}</p>
+                  ) : null}
+                  <div className="mt-8 max-w-2xl rounded-[1.25rem] border border-slate-200/90 bg-white/75 p-4 shadow-[0_28px_64px_-28px_rgba(15,23,42,0.22)] backdrop-blur-xl ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card/80 dark:shadow-[0_28px_64px_-28px_rgba(0,0,0,0.45)] dark:ring-white/10 sm:p-5 md:p-6">
+                  <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-muted-foreground">
+                    Service wählen
+                  </p>
+                  <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <Link
+                      href="/kostenlose-offerte-anfordern?service=umzug&step=2"
+                      className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-sky-600/50"
+                    >
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-100 to-blue-50 text-sky-700 ring-1 ring-sky-200/60 dark:from-sky-950/50 dark:to-blue-950/40 dark:text-sky-300 dark:ring-sky-800/50">
+                        <Truck className="h-7 w-7" />
+                      </div>
+                      <div className="min-w-0 flex-1 text-left">
+                        <p className="font-semibold text-slate-900 dark:text-foreground">Umzug</p>
+                        <p className="text-sm text-slate-600 dark:text-muted-foreground">Privat, Geschäft, international</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-sky-600 dark:text-muted-foreground/50 dark:group-hover:text-sky-400" />
+                    </Link>
+
+                    <Link
+                      href="/kostenlose-offerte-anfordern?service=reinigung&step=2"
+                      className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-violet-500/50"
+                    >
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-fuchsia-50 text-violet-800 ring-1 ring-violet-200/60 dark:from-violet-950/50 dark:to-fuchsia-950/40 dark:text-violet-300 dark:ring-violet-800/50">
+                        <Sparkles className="h-7 w-7" />
+                      </div>
+                      <div className="min-w-0 flex-1 text-left">
+                        <p className="font-semibold text-slate-900 dark:text-foreground">Reinigung</p>
+                        <p className="text-sm text-slate-600 dark:text-muted-foreground">End-, Büro-, Fenster &amp; mehr</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-violet-600 dark:text-muted-foreground/50 dark:group-hover:text-violet-400" />
+                    </Link>
+
+                    <Link
+                      href="/kostenlose-offerte-anfordern?service=maler&step=2"
+                      className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-amber-600/50"
+                    >
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-100 to-orange-50 text-amber-900 ring-1 ring-amber-200/60 dark:from-amber-950/45 dark:to-orange-950/35 dark:text-amber-200 dark:ring-amber-800/50">
+                        <Paintbrush className="h-7 w-7" />
+                      </div>
+                      <div className="min-w-0 flex-1 text-left">
+                        <p className="font-semibold text-slate-900 dark:text-foreground">Malerarbeiten</p>
+                        <p className="text-sm text-slate-600 dark:text-muted-foreground">Innen, aussen, Fassaden</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-amber-700 dark:text-muted-foreground/50 dark:group-hover:text-amber-400" />
+                    </Link>
+
+                    <Link
+                      href="/kostenlose-offerte-anfordern?service=raeumung&step=2"
+                      className="group flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white/90 p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300/80 hover:shadow-md dark:border-border dark:bg-card/90 dark:hover:border-emerald-600/50"
+                    >
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-teal-50 text-emerald-900 ring-1 ring-emerald-200/60 dark:from-emerald-950/50 dark:to-teal-950/40 dark:text-emerald-300 dark:ring-emerald-800/50">
+                        <Trash2 className="h-7 w-7" />
+                      </div>
+                      <div className="min-w-0 flex-1 text-left">
+                        <p className="font-semibold text-slate-900 dark:text-foreground">Räumung &amp; Entsorgung</p>
+                        <p className="text-sm text-slate-600 dark:text-muted-foreground">Entrümpelung &amp; Sperrgut</p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-emerald-600 dark:text-muted-foreground/50 dark:group-hover:text-emerald-400" />
+                    </Link>
+                  </div>
                 </div>
-                <h1 className="heading-1 !mt-0 max-w-3xl">{heroTitle}</h1>
-                <p className="text-body mt-4 max-w-2xl">{pageDescription}</p>
-                {serviceDesc ? (
-                  <p className="mt-3 max-w-2xl text-slate-700 dark:text-foreground/90">{serviceDesc}</p>
-                ) : null}
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Button asChild variant="cta" className="group h-12 px-7 text-base font-semibold tracking-tight">
-                    <Link href={ctaHref}>
-                      Kostenlose Offerten anfordern
-                      <ArrowRight
-                        className="ml-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                </div>
+                {heroImage ? (
+                  <div className="relative mx-auto hidden w-full max-w-lg lg:mx-0 lg:block lg:max-w-none">
+                    <div className="relative aspect-[5/4] overflow-hidden rounded-3xl border border-slate-200/90 bg-slate-100 shadow-[0_32px_64px_-24px_rgba(15,23,42,0.35)] ring-1 ring-slate-900/5 dark:border-border dark:bg-muted dark:shadow-[0_32px_64px_-24px_rgba(0,0,0,0.5)] dark:ring-white/10">
+                      <NextImage
+                        src={heroImage.src}
+                        alt={heroImage.alt}
+                        fill
+                        priority
+                        quality={80}
+                        className="object-cover object-center"
+                        sizes="(max-width: 1024px) 0vw, 50vw"
+                      />
+                      <div
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent"
                         aria-hidden
                       />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="h-12 rounded-2xl border-slate-300 bg-white px-6 text-base font-semibold tracking-tight shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50 dark:border-border dark:bg-card dark:hover:border-emerald-700/50 dark:hover:bg-muted/40"
-                  >
-                    <Link href={`/${categorySlug}`}>Zur Übersicht</Link>
-                  </Button>
-                </div>
-              </>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             )}
           </div>
         </section>
+        <ServiceStepsSection
+          categorySlug={categorySlug}
+          serviceLabel={serviceLabel}
+          ctaHref={ctaHref}
+        />
         {serviceId === 'auslandumzug' ? (
           <section className="border-t border-slate-200/80 bg-gradient-to-b from-slate-50/90 via-white to-white py-12 dark:border-border dark:from-muted/20 dark:via-background dark:to-background md:py-16">
             <div className="container mx-auto max-w-7xl px-4 md:px-6">
@@ -710,6 +810,10 @@ export default function CategoryServicePageClient({
               serviceLabel={serviceLabel}
             />
           ) : null}
+          <CategoryServiceFaqSection
+            serviceLabel={serviceLabel}
+            items={faqItems}
+          />
       </div>
     </>
   )

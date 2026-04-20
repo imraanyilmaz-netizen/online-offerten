@@ -15,6 +15,11 @@ import {
   getServiceLandingMetadata,
 } from '@/lib/serviceLanding/metadata'
 import { getPlatformReviewsTableStats } from '@/lib/reviews/platformReviewStats'
+import {
+  buildCityBreadcrumbJsonLd,
+  buildServiceBreadcrumbJsonLd,
+  buildServiceCityBreadcrumbJsonLd,
+} from '@/lib/seoBreadcrumb'
 
 const SITE = 'https://online-offerten.ch'
 
@@ -78,8 +83,14 @@ export default async function CategoryCatchAllServerPage({
             }
           : null
 
+      const breadcrumbSchema = buildCityBreadcrumbJsonLd(cat.slug, loc.slug, loc.name)
+
       return (
         <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+          />
           {itemListSchema ? (
             <script
               type="application/ld+json"
@@ -111,16 +122,29 @@ export default async function CategoryCatchAllServerPage({
     const svcMeta = getServiceLandingMetadata(cat.slug, only)
     if (!svcMeta) notFound()
 
+    const svcPathSeg = getServicePathSegment(svc)
+    const svcBreadcrumbSchema = buildServiceBreadcrumbJsonLd(
+      cat.slug,
+      svcPathSeg,
+      svc.label
+    )
+
     return (
-      <CategoryServicePageClient
-        categorySlug={cat.slug}
-        serviceId={svc.id}
-        pageTitle={svcMeta.title}
-        heroTitle={`${svc.label} – Kostenlose Offerten vergleichen`}
-        pageDescription={svcMeta.description}
-        serviceLabel={svc.label}
-        serviceDesc={svc.desc}
-      />
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(svcBreadcrumbSchema) }}
+        />
+        <CategoryServicePageClient
+          categorySlug={cat.slug}
+          serviceId={svc.id}
+          pageTitle={svcMeta.title}
+          heroTitle={`${svc.label} – Kostenlose Offerten vergleichen`}
+          pageDescription={svcMeta.description}
+          serviceLabel={svc.label}
+          serviceDesc={svc.desc}
+        />
+      </>
     )
   }
 
@@ -190,8 +214,20 @@ export default async function CategoryCatchAllServerPage({
         }
       : null
 
+  const svcCityBreadcrumbSchema = buildServiceCityBreadcrumbJsonLd(
+    cat.slug,
+    pathSeg,
+    svc.label,
+    loc.slug,
+    loc.name
+  )
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(svcCityBreadcrumbSchema) }}
+      />
       {itemListSchema ? (
         <script
           type="application/ld+json"

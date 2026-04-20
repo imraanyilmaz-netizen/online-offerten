@@ -14,6 +14,28 @@ const UMZUG_FALLBACK_POOL = [
   '/fotos/5c399fc1.webp',
 ] as const
 
+/**
+ * Privatumzug (umzugsfirma/privatumzug/{city}): dedizierter Pool,
+ * der deterministisch gleichmässig über alle Stadt-Seiten verteilt wird.
+ *
+ * Nur hoch aufgelöste Assets, damit das Hero-Bild nicht „weich"/pixelig
+ * wirkt, wenn Next/Image es auf > 1280 px skaliert. Kleine Motive
+ * (~40–90 KB) wurden bewusst entfernt.
+ */
+const PRIVATUMZUG_CITY_POOL = [
+  '/image/umzugsservice-Schweiz/umzugsofferten-zuerich-1.png',
+  '/image/umzugsservice-Schweiz/umzugsofferten-zuerich-2.png',
+  '/image/umzugsservice-Schweiz/umzugsofferten-zuerich-4.png',
+  '/image/umzugsservice-Schweiz/umzugshilfe-finden-vergleichen.png',
+  '/image/umzugsservice-Schweiz/umzugsfirma-zurich-standort.webp',
+  '/image/umzugsservice-Schweiz/umzug-reinigung-maler-gaertner-6-offerten-vergleichen.webp',
+  '/image/4e73e4b7-ab5b-4e20-9412-394b5b526cf0.webp',
+  '/image/15ea36f2-ae78-403b-9348-4ec683047a94.webp',
+  '/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp',
+  '/privatumzug/7946a949.webp',
+  '/privatumzug/privatumzug-kunden.avif',
+] as const
+
 /** Umzug: known slugs → concrete assets (override hash for important SEO cities). */
 const UMZUG_CITY_IMAGE: Record<string, string> = {
   zuerich: '/image/umzugsservice-Schweiz/umzugsofferten-zuerich-1.png',
@@ -44,10 +66,18 @@ function slugChecksum(slug: string): number {
   return h
 }
 
-export function getCityHeroImageSrc(categorySlug: string, locationSlug: string): string {
+export function getCityHeroImageSrc(
+  categorySlug: string,
+  locationSlug: string,
+  serviceId?: string
+): string {
   const slug = locationSlug.toLowerCase()
 
   if (categorySlug === 'umzugsfirma') {
+    if (serviceId === 'privatumzug') {
+      const idx = slugChecksum(`hero|privatumzug|${slug}`) % PRIVATUMZUG_CITY_POOL.length
+      return PRIVATUMZUG_CITY_POOL[idx]
+    }
     const explicit = UMZUG_CITY_IMAGE[slug]
     if (explicit) return explicit
     const idx = slugChecksum(`hero|${slug}|v2`) % UMZUG_FALLBACK_POOL.length

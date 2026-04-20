@@ -57,7 +57,7 @@ const CategoryCitySpotlight: FC<Props> = ({ categorySlug, data }) => {
         )}
         aria-hidden
       />
-      <div className="relative mx-auto max-w-navbar px-4 md:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <div
           className={cn(
             'relative overflow-hidden rounded-[1.65rem] border bg-white/85 shadow-[0_24px_56px_-28px_rgba(15,23,42,0.14)] backdrop-blur-md',

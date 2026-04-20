@@ -20,7 +20,7 @@ export default function CategoryCityFaqSection({
       className="border-t border-slate-200 bg-white py-12 dark:border-border dark:bg-background md:py-16"
       aria-labelledby="city-faq-heading"
     >
-      <div className="container mx-auto max-w-navbar px-4 md:px-6">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-800 dark:bg-emerald-950/45 dark:text-emerald-300">
