@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Package, ShoppingCart, Wallet, PlusCircle, Gift, Star, Clock } from 'lucide-react';
-// framer-motion removed - CSS for better INP
+import { Wallet, PlusCircle, Gift, Star, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 
@@ -52,42 +51,26 @@ const SubscriptionStat = ({ endDate, delay }) => {
 
 const PartnerStats = ({ stats, onTopUpClick }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
-      
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
+
       {stats.hasActiveSubscription ? (
         <SubscriptionStat endDate={stats.subscriptionEndDate} delay={0.1} />
-      ) : (
-        <StatCard 
-            title="Verfügbare Anfragen" 
-            value={stats.availableQuotes} 
-            icon={Package} 
-            colorClass={{bg: 'bg-blue-100 dark:bg-blue-950/50', text: 'text-blue-600 dark:text-blue-400'}}
-            delay={0.1}
-        />
-      )}
+      ) : null}
 
-      <StatCard 
-        title="Gekaufte Anfragen" 
-        value={stats.purchasedQuotes} 
-        icon={ShoppingCart} 
-        colorClass={{bg: 'bg-green-100 dark:bg-emerald-950/40', text: 'text-green-600 dark:text-emerald-400'}}
-        delay={0.2}
-      />
-      
-      <StatCard 
-        title="Bonus-Guthaben" 
-        value={`CHF ${stats.bonusBalance?.toFixed(2) || '0.00'}`} 
-        icon={Gift} 
+      <StatCard
+        title="Bonus-Guthaben"
+        value={`CHF ${stats.bonusBalance?.toFixed(2) || '0.00'}`}
+        icon={Gift}
         colorClass={{bg: 'bg-indigo-100 dark:bg-indigo-950/50', text: 'text-indigo-600 dark:text-indigo-400'}}
         delay={0.3}
       />
 
-      <StatCard 
-        title="Ihr Guthaben" 
-        value={`CHF ${stats.mainBalance?.toFixed(2) || '0.00'}`} 
-        icon={Wallet} 
+      <StatCard
+        title="Ihr Guthaben"
+        value={`CHF ${stats.mainBalance?.toFixed(2) || '0.00'}`}
+        icon={Wallet}
         colorClass={{bg: 'bg-yellow-100 dark:bg-yellow-950/40', text: 'text-yellow-600 dark:text-yellow-400'}}
-        delay={0.4} 
+        delay={0.4}
       >
         <Button onClick={onTopUpClick} size="sm" className="sm:hidden flex items-center">
           <PlusCircle className="w-4 h-4 mr-1" />

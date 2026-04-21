@@ -6,7 +6,6 @@
     import { Button } from '@/components/ui/button';
     import { Loader2, Upload, Trash2, X } from 'lucide-react';
     import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-    // framer-motion removed - CSS for better INP
 
     const GalleryImageManager = ({ partnerId, initialImages = [], onUpdate }) => {
       const [images, setImages] = useState(initialImages);

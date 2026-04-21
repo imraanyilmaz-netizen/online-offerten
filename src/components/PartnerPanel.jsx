@@ -1,15 +1,15 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertTriangle, Loader2, MailWarning, Hourglass, Settings, PlusCircle, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { usePartnerDashboard } from '@/hooks/usePartnerDashboard';
 import DashboardSkeleton from '@/src/components/ui/DashboardSkeleton';
+import { usePartnerCounts } from '@/src/components/PartnerPanel/PartnerCountsContext';
 
 import PartnerStats from '@/components/PartnerPanel/PartnerStats';
 import AvailableQuoteList from '@/components/PartnerPanel/AvailableQuoteList';
@@ -32,14 +32,45 @@ const StatusDisplay = ({ icon: Icon, title, description, children }) => (
   </div>
 );
 
+const VALID_TABS = ['available', 'purchased', 'archived', 'missed', 'transactions', 'subscription'];
+
 const PartnerPanel = ({ setCompanyName }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const [activeTab, setActiveTab] = useState('available');
+  const searchParams = useSearchParams();
+  const tabParam = searchParams?.get('tab');
+  const initialTab = tabParam && VALID_TABS.includes(tabParam) ? tabParam : 'available';
+
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [isInsuranceModalOpen, setIsInsuranceModalOpen] = useState(false);
 
+  /** URL ↔ activeTab senkronu: Sidebar "Gekauft"a tıklarsa ?tab=purchased gelir. */
+  useEffect(() => {
+    if (tabParam && VALID_TABS.includes(tabParam) && tabParam !== activeTab) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam, activeTab]);
+
+  /** Tab değiştiğinde URL'yi replaceState ile güncelle (history'yi kirletmeden). */
+  const handleTabChange = useCallback(
+    (value) => {
+      setActiveTab(value);
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams(Array.from(searchParams?.entries() || []));
+      if (value === 'available') {
+        params.delete('tab');
+      } else {
+        params.set('tab', value);
+      }
+      const qs = params.toString();
+      const newUrl = qs ? `${pathname}?${qs}` : pathname;
+      window.history.replaceState(null, '', newUrl);
+    },
+    [pathname, searchParams]
+  );
+
   const handleActionSuccess = (tab) => {
-    if(tab) setActiveTab(tab);
+    if (tab) handleTabChange(tab);
     fetchDashboardData(true); // silent: kein Loading-Spinner
   };
 
@@ -72,6 +103,17 @@ const PartnerPanel = ({ setCompanyName }) => {
       setCompanyName(partnerData.company_name);
     }
   }, [partnerData, setCompanyName]);
+
+  const { setCounts } = usePartnerCounts();
+  useEffect(() => {
+    setCounts({
+      available: availableQuotes.length,
+      unreadAvailable: availableQuotes.filter((q) => !q.is_viewed).length,
+      purchased: purchasedQuotes.length,
+      archived: archivedQuotes.length,
+      missed: missedQuotes.length,
+    });
+  }, [availableQuotes, purchasedQuotes, archivedQuotes, missedQuotes, setCounts]);
 
   // Check for payment success redirect (via URL params or sessionStorage)
   useEffect(() => {
@@ -143,9 +185,11 @@ const PartnerPanel = ({ setCompanyName }) => {
 
   return (
     <>
-    <div className="min-h-screen bg-background py-4 sm:py-6 lg:py-8">
-      <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <header className="mb-8 pb-6 border-b border-border">
+    {/* Desktop'ta Shell dikey boşluğu + konteyner genişliğini sağlıyor; sadece mobil/tablette kendi padding'ini kullan */}
+    <div className="min-h-screen lg:min-h-0 bg-background lg:bg-transparent py-4 sm:py-6 lg:py-0">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:max-w-none lg:px-6 lg:py-6">
+        {/* Üst başlık ve hızlı aksiyonlar: sadece mobil/tablette — desktop'ta sol sidebar var */}
+        <header className="lg:hidden mb-8 pb-6 border-b border-border">
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
           <div className="flex items-center gap-4">
             <Link href="/partner/einstellungen" className="relative group cursor-pointer">
@@ -189,10 +233,14 @@ const PartnerPanel = ({ setCompanyName }) => {
         {/* Insurance Banner */}
         <InsuranceBanner partnerData={partnerData} onUploadClick={() => setIsInsuranceModalOpen(true)} />
 
-        <PartnerStats stats={stats} onTopUpClick={() => router.push('/partner/credit-top-up')} />
+        {/* Büyük istatistik kartları sadece mobil/tablet'te — desktop'ta sol sidebar kompakt gösteriyor */}
+        <div className="lg:hidden">
+          <PartnerStats stats={stats} onTopUpClick={() => router.push('/partner/credit-top-up')} />
+        </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-border bg-gradient-to-b from-muted/30 to-background mb-6 py-3">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
+          {/* Sekme barı sadece mobilde — desktop'ta sol sidebar navigasyonu kullanılır */}
+          <div className="lg:hidden overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-border bg-gradient-to-b from-muted/30 to-background mb-6 py-3">
             <TabsList className="p-2 bg-transparent rounded-lg justify-start sm:justify-start gap-2 min-w-[700px] sm:min-w-0 min-h-[60px] items-center">
               <TabsTrigger 
                 value="available"
@@ -233,66 +281,48 @@ const PartnerPanel = ({ setCompanyName }) => {
               </TabsTrigger>
             </TabsList>
           </div>
-          <TabsContent value="available" className="mt-4">
-            <Card className="border-border shadow-sm">
-              <CardHeader className="pb-4 border-b border-border">
-                <CardTitle className="text-xl sm:text-2xl font-bold">Verfügbare Anfragen</CardTitle>
-              </CardHeader>
-              <CardContent className="p-5 sm:p-6">
-                <AvailableQuoteList 
-                  quotes={availableQuotes} 
-                  onPurchaseQuote={handlePurchaseQuote} 
-                  onQuoteViewed={handleMarkAsViewed}
-                  onRejectQuote={handleRejectQuote}
-                  partnerBalance={partnerData.main_balance + partnerData.bonus_balance}
-                  hasActiveSubscription={stats.hasActiveSubscription}
-                  insuranceStatus={partnerData?.insurance_status}
-                  onInsuranceUploadClick={() => setIsInsuranceModalOpen(true)}
-                />
-              </CardContent>
-            </Card>
+          {/* Her sekme içeriği: tek section — Shell'in kendi kartı sararken iç Card gereksiz.
+              Mobilde shell kartı olmadığı için list items kendi kartlarıyla görsel ağırlığı taşıyor. */}
+          <TabsContent value="available" className="mt-4 lg:mt-0 animate-tab-enter" key={`tab-available-${activeTab}`}>
+            <header className="mb-5 pb-4 border-b border-border">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">Verfügbare Anfragen</h1>
+            </header>
+            <AvailableQuoteList 
+              quotes={availableQuotes} 
+              onPurchaseQuote={handlePurchaseQuote} 
+              onQuoteViewed={handleMarkAsViewed}
+              onRejectQuote={handleRejectQuote}
+              partnerBalance={partnerData.main_balance + partnerData.bonus_balance}
+              hasActiveSubscription={stats.hasActiveSubscription}
+              insuranceStatus={partnerData?.insurance_status}
+              onInsuranceUploadClick={() => setIsInsuranceModalOpen(true)}
+            />
           </TabsContent>
-          <TabsContent value="purchased" className="mt-4">
-            <Card className="border-border shadow-sm">
-              <CardHeader className="pb-4 border-b border-border">
-                <CardTitle className="text-xl sm:text-2xl font-bold">Gekaufte Anfragen</CardTitle>
-              </CardHeader>
-              <CardContent className="p-5 sm:p-6">
-                <PurchasedQuoteList quotes={purchasedQuotes} onArchiveQuote={handleArchiveQuote} onRequestRefund={handleRequestRefund} refundRequests={refundRequests} />
-              </CardContent>
-            </Card>
+          <TabsContent value="purchased" className="mt-4 lg:mt-0 animate-tab-enter" key={`tab-purchased-${activeTab}`}>
+            <header className="mb-5 pb-4 border-b border-border">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">Gekaufte Anfragen</h1>
+            </header>
+            <PurchasedQuoteList quotes={purchasedQuotes} onArchiveQuote={handleArchiveQuote} onRequestRefund={handleRequestRefund} refundRequests={refundRequests} />
           </TabsContent>
-          <TabsContent value="archived" className="mt-4">
-            <Card className="border-border shadow-sm">
-              <CardHeader className="pb-4 border-b border-border">
-                <CardTitle className="text-xl sm:text-2xl font-bold">Archivierte Anfragen</CardTitle>
-              </CardHeader>
-              <CardContent className="p-5 sm:p-6">
-                <ArchivedQuoteList quotes={archivedQuotes} onUnarchiveQuote={handleUnarchiveQuote} />
-              </CardContent>
-            </Card>
+          <TabsContent value="archived" className="mt-4 lg:mt-0 animate-tab-enter" key={`tab-archived-${activeTab}`}>
+            <header className="mb-5 pb-4 border-b border-border">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">Archivierte Anfragen</h1>
+            </header>
+            <ArchivedQuoteList quotes={archivedQuotes} onUnarchiveQuote={handleUnarchiveQuote} />
           </TabsContent>
-          <TabsContent value="missed" className="mt-4">
-            <Card className="border-border shadow-sm">
-              <CardHeader className="pb-4 border-b border-border">
-                <CardTitle className="text-xl sm:text-2xl font-bold">Verpasste Anfragen</CardTitle>
-              </CardHeader>
-              <CardContent className="p-5 sm:p-6">
-                <MissedQuoteList quotes={missedQuotes} />
-              </CardContent>
-            </Card>
+          <TabsContent value="missed" className="mt-4 lg:mt-0 animate-tab-enter" key={`tab-missed-${activeTab}`}>
+            <header className="mb-5 pb-4 border-b border-border">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">Verpasste Anfragen</h1>
+            </header>
+            <MissedQuoteList quotes={missedQuotes} />
           </TabsContent>
-          <TabsContent value="transactions" className="mt-4">
-            <Card className="border-border shadow-sm">
-              <CardHeader className="pb-4 border-b border-border">
-                <CardTitle className="text-xl sm:text-2xl font-bold">Transaktionsverlauf</CardTitle>
-              </CardHeader>
-              <CardContent className="p-5 sm:p-6">
-                <TransactionHistory key={refreshKey} partnerId={partnerId} refreshKey={refreshKey} />
-              </CardContent>
-            </Card>
+          <TabsContent value="transactions" className="mt-4 lg:mt-0 animate-tab-enter" key={`tab-transactions-${activeTab}`}>
+            <header className="mb-5 pb-4 border-b border-border">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">Transaktionsverlauf</h1>
+            </header>
+            <TransactionHistory key={refreshKey} partnerId={partnerId} refreshKey={refreshKey} />
           </TabsContent>
-          <TabsContent value="subscription" className="mt-4">
+          <TabsContent value="subscription" className="mt-4 animate-tab-enter" key={`tab-subscription-${activeTab}`}>
              <SubscriptionManagement 
                 partnerData={partnerData} 
                 onSubscriptionSuccess={handleActionSuccess}

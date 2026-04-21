@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Copy, Check, Code, ExternalLink, Monitor, Smartphone, Star, Loader2, CheckCircle2, UserCircle2, LayoutList, ChevronLeft, ChevronRight } from 'lucide-react'
-import SocialShareCard from './SocialShareCard'
 
 interface WidgetConfiguratorProps {
   partnerId: string
@@ -341,8 +340,6 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
 
   return (
     <div className="space-y-6">
-      <SocialShareCard partnerSlug={partnerSlug} partnerId={partnerId} />
-
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2"><Code className="h-5 w-5" />Bewertungs-Widget</CardTitle>

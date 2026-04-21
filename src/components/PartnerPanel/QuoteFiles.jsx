@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStaticT } from '@/lib/staticTranslate';
-// framer-motion removed - CSS for better INP
 import { Paperclip, File as FileIcon, Download, Image as ImageIcon } from 'lucide-react';
 import { parseFileUrls } from '@/lib/utils';
 

@@ -22,6 +22,18 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   ]
   const isFormPage = formPages.includes(pathname || '')
   const hideAll = pathname === '/bewertung-abgeben' || pathname?.startsWith('/anfrage-status')
+
+  /** Partner- und Admin-Panel-Seiten — kein "Beliebte Standorte"-Block */
+  const panelPrefixes = [
+    '/partner/dashboard',
+    '/partner/einstellungen',
+    '/partner/credit-top-up',
+    '/partner/payment-status',
+    '/admin-dashboard',
+  ]
+  const isPanelPage = panelPrefixes.some(
+    (p) => pathname === p || pathname?.startsWith(`${p}/`)
+  )
   
   // Seiten, auf denen der FooterCTABanner angezeigt werden soll
   const allowedCTABannerPages = [
@@ -78,7 +90,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </main>
       {!isFormPage && (
         <>
-          <FooterBeliebteStandorte />
+          {!isPanelPage && <FooterBeliebteStandorte />}
           {shouldShowCTABanner && <FooterCTABanner />}
           <Footer />
         </>

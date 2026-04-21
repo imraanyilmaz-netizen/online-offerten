@@ -411,6 +411,66 @@
   }
 }
 
+/* Partner Dashboard – Tab-Wechsel + Karte-Aktionen */
+@keyframes tabContentEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardSlideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    max-height: 600px;
+    margin-bottom: 1rem;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px) scale(0.96);
+    max-height: 0;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes cardSlideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    max-height: 600px;
+    margin-bottom: 1rem;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.96);
+    max-height: 0;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes cardPurchaseSuccess {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 hsl(142 76% 45% / 0);
+  }
+  30% {
+    transform: scale(1.01);
+    box-shadow: 0 0 0 6px hsl(142 76% 45% / 0.18);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    max-height: 0;
+    margin-bottom: 0;
+    box-shadow: 0 0 0 0 hsl(142 76% 45% / 0);
+  }
+}
+
 @layer utilities {
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out;
@@ -436,13 +496,57 @@
     animation-fill-mode: both;
   }
 
+  /* Partner-Dashboard Utilities */
+  .animate-tab-enter {
+    animation: tabContentEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+
+  .animate-card-slide-out-right {
+    overflow: hidden;
+    animation: cardSlideOutRight 0.45s cubic-bezier(0.55, 0, 0.55, 0.2) forwards;
+    pointer-events: none;
+  }
+
+  .animate-card-slide-out-left {
+    overflow: hidden;
+    animation: cardSlideOutLeft 0.45s cubic-bezier(0.55, 0, 0.55, 0.2) forwards;
+    pointer-events: none;
+  }
+
+  .animate-card-purchase-success {
+    overflow: hidden;
+    animation: cardPurchaseSuccess 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+  }
+
+  /* Partner-Sidebar: Mobile-Drawer */
+  @keyframes sidebarSlideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-sidebar-slide-in {
+    animation: sidebarSlideIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+
   /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-in,
     .animate-fade-in-up,
     .animate-fade-in-up-delay,
     .animate-fade-in-right,
-    .animate-fade-in-right-delay {
+    .animate-fade-in-right-delay,
+    .animate-tab-enter,
+    .animate-card-slide-out-right,
+    .animate-card-slide-out-left,
+    .animate-card-purchase-success,
+    .animate-sidebar-slide-in {
       animation: none;
     }
   }

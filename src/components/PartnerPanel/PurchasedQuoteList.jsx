@@ -1,17 +1,15 @@
 import React, { useState, useMemo } from 'react';
-// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, Calendar, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle } from 'lucide-react';
 import { formatDate, formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
-import ServiceDetails from '@/components/common/ServiceDetails';
 
 const ContactItem = ({ icon, label, value, subValue, isLink = false, linkType = '' }) => (
     <div className="flex items-start gap-3 py-2 border-b last:border-b-0">
@@ -44,9 +42,9 @@ const EmailConfirmationDetail = ({ quote }) => {
 
 const DetailSection = ({ title, icon: Icon, children }) => (
     <div className="bg-card border-border p-4 rounded-lg border shadow-sm dark:shadow-none dark:ring-1 dark:ring-border/60">
-        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2 border-b border-border pb-2 mb-4 uppercase tracking-wide">
-             {Icon && <Icon className="w-5 h-5 text-green-600 dark:text-emerald-400" />}
-            {title}
+        <h3 className="text-[11px] sm:text-xs font-bold text-foreground flex items-center gap-2 border-b border-border pb-2 mb-3 uppercase tracking-wider">
+             {Icon && <Icon className="w-3.5 h-3.5 shrink-0 text-green-600 dark:text-emerald-400" />}
+            <span className="min-w-0 break-words leading-tight">{title}</span>
         </h3>
         <div className="space-y-3">
             {children}
@@ -135,7 +133,17 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
   const [refundDialog, setRefundDialog] = useState({ open: false, quote: null });
   const [refundReason, setRefundReason] = useState('');
   const [isSubmittingRefund, setIsSubmittingRefund] = useState(false);
+  const [archivingId, setArchivingId] = useState(null);
   const itemsPerPage = 20;
+
+  const handleArchiveClick = (purchaseId) => {
+    if (!purchaseId || archivingId) return;
+    setArchivingId(purchaseId);
+    /** 0.45s = CSS animation cardSlideOutRight */
+    setTimeout(() => {
+      onArchiveQuote(purchaseId);
+    }, 420);
+  };
 
   // Create a map of quote_id -> refund request for quick lookup
   const refundRequestMap = useMemo(() => {
@@ -197,30 +205,35 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
         const isMoving = serviceCategory === 'moving';
         const movingExtrasText = getMovingExtrasText(quote);
 
+        const purchaseId = quote.purchase_info?.purchase_id;
+        const isArchiving = archivingId && purchaseId === archivingId;
         return (
         <div
-          key={quote.purchase_info?.purchase_id || quote.id}
+          key={purchaseId || quote.id}
+          className={isArchiving ? 'animate-card-slide-out-right' : ''}
         >
           <AccordionItem value={`item-${index}`} className="border border-green-200 dark:border-emerald-900/60 rounded-lg bg-green-50/90 dark:bg-emerald-950/35">
             <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg hover:bg-green-100/80 dark:hover:bg-emerald-950/50 data-[state=open]:bg-green-100 dark:data-[state=open]:bg-emerald-950/45">
               <div className="flex items-center justify-between w-full text-left">
-                <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
+                <div className="flex-1 min-w-0">
                   {(() => {
                     const Icon = icon;
                     return (
-                      <div className="flex items-center gap-2 font-semibold text-base">
-                        <Icon className="w-5 h-5 text-green-600 dark:text-emerald-400" />
-                        <span>{quote.servicetype}</span>
+                      <div className="flex items-center gap-2 font-semibold text-[15px] text-foreground">
+                        <Icon className="w-4 h-4 shrink-0 text-green-600 dark:text-emerald-400" />
+                        <span className="truncate">{quote.servicetype}</span>
                       </div>
                     );
                   })()}
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <MapPin className="w-4 h-4 shrink-0" />
-                    <span>{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip} ${quote.to_city}`}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <CalendarDays className="w-4 h-4 shrink-0" />
-                    <span className="line-clamp-2">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</span>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5 min-w-0">
+                      <MapPin className="w-3.5 h-3.5 shrink-0" />
+                      <span className="truncate">{quote.from_zip} {quote.from_city}{quote.to_zip && ` → ${quote.to_zip} ${quote.to_city}`}</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <CalendarDays className="w-3.5 h-3.5 shrink-0" />
+                      <span>{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</span>
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 ml-4 flex-shrink-0">
@@ -377,13 +390,14 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                   <Button
                     variant="outline"
                     size="sm"
+                    disabled={isArchiving}
                     onClick={(e) => {
                       e.stopPropagation();
-                      onArchiveQuote(quote.purchase_info.purchase_id);
+                      handleArchiveClick(quote.purchase_info?.purchase_id);
                     }}
                   >
                     <Archive className="w-4 h-4 mr-2" />
-                    Archivieren
+                    {isArchiving ? 'Wird archiviert…' : 'Archivieren'}
                   </Button>
                 </div>
               </div>

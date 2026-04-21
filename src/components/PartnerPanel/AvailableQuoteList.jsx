@@ -12,8 +12,7 @@ import QuoteFiles from './QuoteFiles';
 import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
-import ServiceDetails from '@/components/common/ServiceDetails';
-import { formatDate, formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
+import { formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 /** Kauf-Limit (Admin) oder Kundenwunsch «Anzahl Offerten» */
@@ -84,9 +83,9 @@ const EmailConfirmationDetail = ({ quote }) => {
 
 const DetailSection = ({ title, icon: Icon, children }) => (
     <div className="bg-card border-border p-4 rounded-lg border shadow-sm dark:shadow-none dark:ring-1 dark:ring-border/60 text-card-foreground">
-        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2 border-b border-border pb-2 mb-4 uppercase tracking-wide">
-            {Icon && <Icon className="w-5 h-5 shrink-0 text-green-600 dark:text-emerald-400" />}
-            {title}
+        <h3 className="text-[11px] sm:text-xs font-bold text-foreground flex items-center gap-2 border-b border-border pb-2 mb-3 uppercase tracking-wider">
+            {Icon && <Icon className="w-3.5 h-3.5 shrink-0 text-green-600 dark:text-emerald-400" />}
+            <span className="min-w-0 break-words leading-tight">{title}</span>
         </h3>
         <div className="space-y-3">
             {children}
@@ -224,6 +223,8 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
   const [selectedQuoteForRejection, setSelectedQuoteForRejection] = useState(null);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [selectedQuoteForPurchase, setSelectedQuoteForPurchase] = useState(null);
+  const [purchasingId, setPurchasingId] = useState(null);
+  const [rejectingId, setRejectingId] = useState(null);
 
 
   const handleRejectClick = (quoteId) => {
@@ -232,9 +233,15 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
   };
 
   const confirmRejection = (reason) => {
-    onRejectQuote(selectedQuoteForRejection, reason);
+    const quoteId = selectedQuoteForRejection;
     setOpenRejectionDialog(false);
     setSelectedQuoteForRejection(null);
+    if (!quoteId) return;
+    setRejectingId(quoteId);
+    /** 0.45s = CSS animation cardSlideOutRight */
+    setTimeout(() => {
+      onRejectQuote(quoteId, reason);
+    }, 420);
   };
 
   const handlePurchaseClick = (quote) => {
@@ -243,9 +250,15 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
   };
 
   const confirmPurchase = () => {
-    onPurchaseQuote(selectedQuoteForPurchase.id);
+    const quote = selectedQuoteForPurchase;
     setIsPurchaseModalOpen(false);
     setSelectedQuoteForPurchase(null);
+    if (!quote) return;
+    setPurchasingId(quote.id);
+    /** 0.65s = CSS animation cardPurchaseSuccess */
+    setTimeout(() => {
+      onPurchaseQuote(quote.id);
+    }, 600);
   };
 
   const handleTriggerClick = useCallback((quote) => {
@@ -275,8 +288,16 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
           const icon = serviceCategory === 'moving' ? Truck : (serviceCategory === 'cleaning' ? Sparkles : Paintbrush);
           const movingExtrasText = getMovingExtrasText(quote);
 
+          const isPurchasing = purchasingId === quote.id;
+          const isRejecting = rejectingId === quote.id;
+          const exitClass = isPurchasing
+            ? 'animate-card-purchase-success'
+            : isRejecting
+            ? 'animate-card-slide-out-right'
+            : '';
+
           return (
-            <AccordionItem key={quote.id} value={quote.id} className="border-none">
+            <AccordionItem key={quote.id} value={quote.id} className={`border-none ${exitClass}`}>
               <Card
                 className={`overflow-hidden transition-shadow hover:shadow-md ${stripeBg} ${unreadAccent}`}
               >
@@ -285,23 +306,25 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                     onClick={() => handleTriggerClick(quote)}
                     className="flex items-center justify-between w-full p-4 text-left hover:bg-muted/50 data-[state=open]:bg-muted/40"
                   >
-                    <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-6 text-sm">
+                    <div className="flex-1 min-w-0">
                       {(() => {
                         const Icon = icon;
                         return (
-                          <div className="flex items-center gap-2 font-semibold text-lg text-foreground">
-                            <Icon className="w-5 h-5 shrink-0 text-green-600 dark:text-primary" />
-                            <span>{quote.servicetype}</span>
+                          <div className="flex items-center gap-2 font-semibold text-[15px] text-foreground">
+                            <Icon className="w-4 h-4 shrink-0 text-green-600 dark:text-primary" />
+                            <span className="truncate">{quote.servicetype}</span>
                           </div>
                         );
                       })()}
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <MapPin className="w-4 h-4" />
-                        <span>{quote.from_zip} {quote.from_city} {quote.to_zip && `→ ${quote.to_zip} ${quote.to_city}`}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Calendar className="w-4 h-4 shrink-0" />
-                        <span className="line-clamp-2">{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</span>
+                      <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                        <span className="inline-flex items-center gap-1.5 min-w-0">
+                          <MapPin className="w-3.5 h-3.5 shrink-0" />
+                          <span className="truncate">{quote.from_zip} {quote.from_city}{quote.to_zip && ` → ${quote.to_zip} ${quote.to_city}`}</span>
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 shrink-0" />
+                          <span>{formatMoveDateLine(quote.move_date, quote.move_date_flexible)}</span>
+                        </span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 ml-4">

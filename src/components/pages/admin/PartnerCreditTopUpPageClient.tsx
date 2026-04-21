@@ -200,9 +200,9 @@ const PartnerCreditTopUpPageClient = () => {
           />
         )}
       
-      <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8 flex items-center justify-center">
+      <div className="min-h-screen lg:min-h-0 bg-background lg:bg-transparent p-4 sm:p-6 lg:p-10 flex items-center justify-center">
         <div className="w-full max-w-md">
-          <div className="mb-4">
+          <div className="mb-4 lg:hidden">
             <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
               <Link href="/partner/dashboard">
                 <ArrowLeft className="mr-2 h-4 w-4" />

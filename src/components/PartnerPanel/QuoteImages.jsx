@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useStaticT } from '@/lib/staticTranslate';
-// framer-motion removed - CSS for better INP
 import { Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';

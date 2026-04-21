@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-// framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -28,7 +27,17 @@ const isMovingService = (servicetype) => {
 
 const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [unarchivingId, setUnarchivingId] = useState(null);
   const itemsPerPage = 20;
+
+  const handleUnarchiveClick = (purchaseId) => {
+    if (!purchaseId || unarchivingId) return;
+    setUnarchivingId(purchaseId);
+    /** 0.45s = CSS animation cardSlideOutLeft */
+    setTimeout(() => {
+      onUnarchiveQuote(purchaseId);
+    }, 420);
+  };
 
   // Calculate pagination
   const totalPages = Math.ceil(quotes.length / itemsPerPage);
@@ -54,9 +63,13 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
   return (
     <div className="space-y-4">
       <Accordion type="multiple" className="w-full space-y-4">
-        {paginatedQuotes.map((quote, index) => (
+        {paginatedQuotes.map((quote, index) => {
+        const purchaseId = quote.purchase_info?.purchase_id;
+        const isUnarchiving = unarchivingId && purchaseId === unarchivingId;
+        return (
         <div
-          key={quote.purchase_info?.purchase_id || quote.id}
+          key={purchaseId || quote.id}
+          className={isUnarchiving ? 'animate-card-slide-out-left' : ''}
         >
           <AccordionItem value={`item-${index}`} className="border border-border rounded-lg bg-muted/30">
             <AccordionTrigger className="p-3 sm:p-4 hover:no-underline rounded-t-lg data-[state=open]:bg-muted">
@@ -95,20 +108,22 @@ const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
                         <Button
                             variant="outline"
                             size="sm"
+                            disabled={isUnarchiving}
                             onClick={(e) => {
                             e.stopPropagation();
-                            onUnarchiveQuote(quote.purchase_info.purchase_id);
+                            handleUnarchiveClick(quote.purchase_info?.purchase_id);
                             }}
                         >
                             <Unarchive className="w-4 h-4 mr-2" />
-                            Dearchivieren
+                            {isUnarchiving ? 'Wird verschoben…' : 'Dearchivieren'}
                         </Button>
                     </div>
                 </div>
             </AccordionContent>
           </AccordionItem>
         </div>
-      ))}
+        );
+      })}
       </Accordion>
 
       {/* Pagination */}

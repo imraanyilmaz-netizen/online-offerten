@@ -285,9 +285,9 @@ const PartnerSettingsPageClient = () => {
   return (
     <>
       
-      <div className="min-h-screen bg-background p-4 sm:p-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-6">
+      <div className="min-h-screen lg:min-h-0 bg-background lg:bg-transparent p-4 sm:p-8 lg:p-6">
+        <div className="max-w-5xl mx-auto lg:max-w-none">
+          <div className="mb-6 lg:hidden">
             <Button variant="ghost" onClick={() => router.push('/partner/dashboard')}>
               <ArrowLeft className="mr-2 h-4 w-4" />
               Zurück zum Dashboard
