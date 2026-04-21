@@ -89,7 +89,60 @@ export const usePartnerDashboard = (onActionSuccess) => {
         throw new Error('Nicht angemeldet');
       }
 
-      const dashRes = await fetch('/api/partner/dashboard', {
+      /**
+       * Stage 1 — Kritischer Pfad (parallel):
+       *  - Dashboard-RPC (available/purchased/archived/missed + viewed_ids)
+       *  - Partner-Stammdaten + optional Insurance-Metadaten
+       * Beide laufen gleichzeitig, statt nacheinander — das war vorher der
+       * Hauptgrund für das "Sidebar schnell, Content langsam"-Gefühl.
+       */
+      const partnerWithInsurancePromise = (async () => {
+        const { data: partner, error: partnerError } = await supabase
+          .from('partners')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+
+        if (partnerError || !partner) {
+          return { partner: null, partnerError: partnerError || new Error('Partner not found') };
+        }
+
+        // Insurance-Zusatz nur holen wenn nötig — sonst ist der extra Roundtrip
+        // reine Verzögerung. Fehler hier dürfen das Dashboard nicht blockieren.
+        try {
+          if (partner.insurance_status === 'rejected') {
+            const { data: insData } = await supabase
+              .from('partner_insurance')
+              .select('rejection_reason, valid_until')
+              .eq('partner_id', user.id)
+              .order('updated_at', { ascending: false })
+              .limit(1)
+              .single();
+            if (insData) {
+              partner.insurance_rejection_reason = insData.rejection_reason;
+              partner.insurance_valid_until = insData.valid_until;
+            }
+          } else if (partner.insurance_status === 'approved') {
+            const { data: insData } = await supabase
+              .from('partner_insurance')
+              .select('valid_until')
+              .eq('partner_id', user.id)
+              .eq('status', 'approved')
+              .order('updated_at', { ascending: false })
+              .limit(1)
+              .single();
+            if (insData) {
+              partner.insurance_valid_until = insData.valid_until;
+            }
+          }
+        } catch (insErr) {
+          console.warn('Could not load partner_insurance metadata:', insErr?.message || insErr);
+        }
+
+        return { partner, partnerError: null };
+      })();
+
+      const dashPromise = fetch('/api/partner/dashboard', {
         method: 'GET',
         cache: 'no-store',
         headers: {
@@ -97,6 +150,11 @@ export const usePartnerDashboard = (onActionSuccess) => {
           Accept: 'application/json',
         },
       });
+
+      const [dashRes, { partner, partnerError }] = await Promise.all([
+        dashPromise,
+        partnerWithInsurancePromise,
+      ]);
 
       if (!dashRes.ok) {
         let msg = dashRes.statusText;
@@ -109,132 +167,134 @@ export const usePartnerDashboard = (onActionSuccess) => {
         throw new Error(msg);
       }
 
-      const dashboardData = await dashRes.json();
-
-      const { data: partner, error: partnerError } = await supabase
-        .from('partners')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
       if (partnerError) throw partnerError;
 
-      // Insurance: rejection_reason aus partner_insurance holen falls rejected
-      if (partner.insurance_status === 'rejected') {
-        const { data: insData } = await supabase
-          .from('partner_insurance')
-          .select('rejection_reason, valid_until')
-          .eq('partner_id', user.id)
-          .order('updated_at', { ascending: false })
-          .limit(1)
-          .single();
-        if (insData) {
-          partner.insurance_rejection_reason = insData.rejection_reason;
-          partner.insurance_valid_until = insData.valid_until;
-        }
-      } else if (partner.insurance_status === 'approved') {
-        const { data: insData } = await supabase
-          .from('partner_insurance')
-          .select('valid_until')
-          .eq('partner_id', user.id)
-          .eq('status', 'approved')
-          .order('updated_at', { ascending: false })
-          .limit(1)
-          .single();
-        if (insData) {
-          partner.insurance_valid_until = insData.valid_until;
-        }
-      }
+      const dashboardData = await dashRes.json();
 
-      setPartnerData(partner);
-      
       const viewedIds = new Set(dashboardData.viewed_quote_ids || []);
       const baseAvailableQuotes = dashboardData.available_quotes || [];
-      const availableQuoteIds = baseAvailableQuotes.map((q) => q.id).filter(Boolean);
+      const missedQuotesRaw = dashboardData.missed_quotes || [];
 
-      let purchaseCountByQuoteId = {};
-      if (availableQuoteIds.length > 0) {
-        const { data: purchaseRows, error: purchaseCountError } = await supabase
-          .from('purchased_quotes')
-          .select('quote_id')
-          .in('quote_id', availableQuoteIds);
-
-        if (!purchaseCountError && purchaseRows) {
-          purchaseCountByQuoteId = purchaseRows.reduce((acc, row) => {
-            const qid = row.quote_id;
-            if (!qid) return acc;
-            acc[qid] = (acc[qid] || 0) + 1;
-            return acc;
-          }, {});
-        } else if (purchaseCountError) {
-          console.warn('Could not load lead purchase counts:', purchaseCountError.message);
-        }
-      }
-
-      const enrichedAvailableQuotes = baseAvailableQuotes.map((quote) => ({
-        ...quote,
-        is_viewed: viewedIds.has(quote.id),
-        lead_purchase_count:
-          typeof quote.lead_purchase_count === 'number'
-            ? quote.lead_purchase_count
-            : purchaseCountByQuoteId[quote.id] || 0,
-      }));
-
-      setAvailableQuotes(enrichedAvailableQuotes);
-      setPurchasedQuotes(dashboardData.purchased_quotes || []);
-      setArchivedQuotes(dashboardData.archived_quotes || []);
-      const missedQuotes = dashboardData.missed_quotes || [];
-      let soldOutRejectedQuoteIds = new Set();
-
-      // Partnerin kendi red kayıtlarında "Ausverkauft" varsa bunu UI'a net yansıt.
-      if (missedQuotes.length > 0) {
-        const missedQuoteIds = missedQuotes.map((q) => q.id).filter(Boolean);
-        if (missedQuoteIds.length > 0) {
-          const { data: soldOutRows, error: soldOutRowsError } = await supabase
-            .from('partner_quote_rejections')
-            .select('quote_id')
-            .eq('partner_id', user.id)
-            .eq('reason', 'Ausverkauft')
-            .in('quote_id', missedQuoteIds);
-
-          if (!soldOutRowsError) {
-            soldOutRejectedQuoteIds = new Set((soldOutRows || []).map((row) => row.quote_id));
-          } else {
-            // Bu query hata verirse dashboard'ı bozma, fallback normalizasyonuyla devam et.
-            console.warn('Could not load sold-out rejection rows:', soldOutRowsError.message);
-          }
-        }
-      }
-
-      // Some backend paths can return "expired" or "manual" while quote is actually quota_filled/sold_out.
-      // Normalize this so partner UI shows "Ausverkauft" consistently.
-      const normalizedMissedQuotes = missedQuotes.map((q) => {
+      // Erste (schnelle) Normalisierung der Missed-Quotes ohne weitere DB-Abfrage.
+      // Die Sold-Out-Rejection-Erweiterung kommt gleich parallel im Hintergrund.
+      const preliminaryMissedQuotes = missedQuotesRaw.map((q) => {
         const reason = q?.missed_reason;
         const status = q?.status;
         if (
-          soldOutRejectedQuoteIds.has(q?.id) ||
           (
             (reason === 'expired' || reason === 'manual') &&
             (status === 'quota_filled' || status === 'sold_out')
           ) ||
-          (
-            String(reason || '').toLowerCase() === 'ausverkauft'
-          )
-        ) {
-          return { ...q, missed_reason: 'Ausverkauft' };
-        }
-        if (
-          reason === 'expired' &&
-          (status === 'quota_filled' || status === 'sold_out')
+          String(reason || '').toLowerCase() === 'ausverkauft'
         ) {
           return { ...q, missed_reason: 'Ausverkauft' };
         }
         return q;
       });
-      setMissedQuotes(normalizedMissedQuotes);
-      setPanelStatus('active');
 
-      // Update last_activity timestamp silently (for admin panel tracking)
+      // Available Quotes schon jetzt mit viewed-Flag + vorhandenem lead_purchase_count anzeigen.
+      // Der exakte Count wird ggf. gleich im Hintergrund nachgeladen.
+      const initialAvailableQuotes = baseAvailableQuotes.map((quote) => ({
+        ...quote,
+        is_viewed: viewedIds.has(quote.id),
+        lead_purchase_count:
+          typeof quote.lead_purchase_count === 'number' ? quote.lead_purchase_count : 0,
+      }));
+
+      // 🚀 Panel kann jetzt rendern — Stage-1-Daten sind vollständig.
+      setPartnerData(partner);
+      setAvailableQuotes(initialAvailableQuotes);
+      setPurchasedQuotes(dashboardData.purchased_quotes || []);
+      setArchivedQuotes(dashboardData.archived_quotes || []);
+      setMissedQuotes(preliminaryMissedQuotes);
+      setPanelStatus('active');
+      if (!silent) setLoading(false);
+
+      /**
+       * Stage 2 — Nicht-blockierende Anreicherung (parallel, im Hintergrund):
+       *  - lead_purchase_count für Available-Quotes (nur wenn RPC das nicht lieferte)
+       *  - Sold-Out-Rejections für Missed-Quotes (präzisere Normalisierung)
+       *  - Refund-Requests (werden nur im Gekauft-Tab gebraucht)
+       *  - last_activity Timestamp-Update (fire-and-forget)
+       * Fehler hier dürfen die UI nicht umwerfen — wir loggen nur.
+       */
+      const availableQuoteIds = baseAvailableQuotes.map((q) => q.id).filter(Boolean);
+      const needsPurchaseCounts =
+        availableQuoteIds.length > 0 &&
+        baseAvailableQuotes.some((q) => typeof q.lead_purchase_count !== 'number');
+      const missedQuoteIds = missedQuotesRaw.map((q) => q.id).filter(Boolean);
+
+      const purchaseCountsPromise = needsPurchaseCounts
+        ? supabase
+            .from('purchased_quotes')
+            .select('quote_id')
+            .in('quote_id', availableQuoteIds)
+        : Promise.resolve({ data: null, error: null });
+
+      const soldOutPromise =
+        missedQuoteIds.length > 0
+          ? supabase
+              .from('partner_quote_rejections')
+              .select('quote_id')
+              .eq('partner_id', user.id)
+              .eq('reason', 'Ausverkauft')
+              .in('quote_id', missedQuoteIds)
+          : Promise.resolve({ data: null, error: null });
+
+      // Parallel starten — wir warten nur noch auf sie zum Aktualisieren der States,
+      // nicht für das initiale Rendern.
+      Promise.all([purchaseCountsPromise, soldOutPromise])
+        .then(([purchaseCountsResult, soldOutResult]) => {
+          // Purchase-Counts einbauen
+          if (
+            needsPurchaseCounts &&
+            !purchaseCountsResult.error &&
+            Array.isArray(purchaseCountsResult.data)
+          ) {
+            const purchaseCountByQuoteId = purchaseCountsResult.data.reduce((acc, row) => {
+              const qid = row.quote_id;
+              if (!qid) return acc;
+              acc[qid] = (acc[qid] || 0) + 1;
+              return acc;
+            }, {});
+            setAvailableQuotes((prev) =>
+              prev.map((quote) => {
+                // Wenn RPC bereits einen Count lieferte, den behalten
+                if (typeof quote.lead_purchase_count === 'number' && quote.lead_purchase_count > 0) {
+                  return quote;
+                }
+                const count = purchaseCountByQuoteId[quote.id] || 0;
+                if (count === (quote.lead_purchase_count || 0)) return quote;
+                return { ...quote, lead_purchase_count: count };
+              })
+            );
+          } else if (purchaseCountsResult.error) {
+            console.warn('Could not load lead purchase counts:', purchaseCountsResult.error.message);
+          }
+
+          // Sold-Out-Rejections in Missed-Normalisierung einbauen
+          if (!soldOutResult.error && Array.isArray(soldOutResult.data) && soldOutResult.data.length > 0) {
+            const soldOutIds = new Set(soldOutResult.data.map((r) => r.quote_id));
+            setMissedQuotes((prev) =>
+              prev.map((q) =>
+                soldOutIds.has(q?.id) && q?.missed_reason !== 'Ausverkauft'
+                  ? { ...q, missed_reason: 'Ausverkauft' }
+                  : q
+              )
+            );
+          } else if (soldOutResult.error) {
+            console.warn('Could not load sold-out rejection rows:', soldOutResult.error.message);
+          }
+        })
+        .catch((bgErr) => {
+          // Stage-2 darf niemals die UI kaputtmachen
+          console.warn('Background enrichment failed (non-fatal):', bgErr?.message || bgErr);
+        });
+
+      // Refund-Requests ebenfalls im Hintergrund — werden nur im "Gekauft"-Tab gelesen.
+      fetchRefundRequests(user.id);
+
+      // Fire-and-forget: last_activity für Admin-Tracking
       supabase
         .from('partners')
         .update({ last_activity: new Date().toISOString() })
@@ -242,17 +302,13 @@ export const usePartnerDashboard = (onActionSuccess) => {
         .then(({ error: activityError }) => {
           if (activityError) console.warn('Could not update last_activity:', activityError.message);
         });
-
-      // Fetch refund requests
-      await fetchRefundRequests(user.id);
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
       if (!silent) {
         setError(err.message);
         setPanelStatus('error');
+        setLoading(false);
       }
-    } finally {
-      if (!silent) setLoading(false);
     }
   }, [user, session, fetchRefundRequests]);
 
