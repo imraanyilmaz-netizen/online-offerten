@@ -682,13 +682,13 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                 <div className="space-y-6">
                   <div>
                     <p className="mb-2 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
-                      Tools &amp; Ratgeber
+                      Nützliche Helfer für Ihren Umzug und Reinigung
                     </p>
                     <h2 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl md:leading-tight">
-                      Planen Sie Umzug &amp; Reinigung mit klaren Hilfsmitteln
+                      Planen Sie Ihren Umzug und Ihre Reinigung effizient mit unseren praktischen Tools und hilfreichen Ratgebern
                     </h2>
                     <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">
-                      Rechner und Checklisten für realistische Kosten und ruhigere Abläufe.
+                      Unsere Tools helfen Ihnen, Umzugskosten realistisch einzuschätzen und optimal zu planen. Nutzen Sie unsere Rechner und Checklisten für einen reibungslosen Umzug.
                     </p>
                   </div>
                   <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200/90 shadow-md ring-1 ring-slate-900/[0.03] dark:border-border dark:ring-white/10">

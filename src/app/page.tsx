@@ -454,7 +454,7 @@ export default async function HomePage() {
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-foreground">Kostenlose Offerten einholen</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
-                    Projekt in wenigen Minuten beschreiben – digital und unverbindlich.
+                    Beschreiben Sie Ihr Projekt in wenigen Schritten online.
                   </p>
                   <div className="mt-6">
                     <Button
@@ -479,7 +479,7 @@ export default async function HomePage() {
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-foreground">Offerten vergleichen</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
-                    Bis zu fünf Angebote von geprüften Partnern – Leistung und Preis gegenüberstellen.
+                    Bis zu 5 kostenlose Angebote von geprüften Partnern.
                   </p>
                 </div>
 
@@ -494,7 +494,7 @@ export default async function HomePage() {
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-foreground">Anbieter auswählen</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
-                    In Ruhe entscheiden – Sie bleiben jederzeit frei in der Wahl.
+                    Vergleichen &amp; den besten Anbieter auswählen.
                   </p>
                 </div>
               </div>
@@ -589,14 +589,6 @@ export default async function HomePage() {
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-slate-50/95 dark:from-background/95 dark:via-background/92 dark:to-muted/30" aria-hidden />
             <div className="container relative z-10 mx-auto max-w-7xl px-4 md:px-6">
-              <div className="mb-12 text-center md:mb-16">
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
-                  Leistungen
-                </p>
-                <h2 className="mx-auto mt-2 max-w-2xl text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl">
-                  Alles, was Sie für Umzug, Reinigung &amp; mehr brauchen
-                </h2>
-              </div>
               <div className="mb-12 grid gap-6 md:mb-16 md:grid-cols-2 md:gap-8">
                 {/* Umzugsfirma */}
                 <div className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white/90 p-8 shadow-[0_8px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-200/90 hover:shadow-xl dark:border-border dark:bg-card/90 dark:ring-white/10 dark:hover:border-sky-700/50 md:p-10">
