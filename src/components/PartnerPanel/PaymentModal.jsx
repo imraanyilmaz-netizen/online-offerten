@@ -20,7 +20,12 @@ const PaymentModalContent = lazy(async () => {
 
       const LoadingState = () => (
         <Dialog open={true} onOpenChange={onClose}>
-          <DialogContent className="flex flex-col items-center justify-center p-8 bg-card rounded-lg shadow-xl">
+          <DialogContent
+            className="flex flex-col items-center justify-center p-8 bg-card rounded-lg shadow-xl"
+            onPointerDownOutside={(e) => e.preventDefault()}
+            onInteractOutside={(e) => e.preventDefault()}
+            onEscapeKeyDown={(e) => e.preventDefault()}
+          >
             <div
             >
               <Loader2 className="h-12 w-12 animate-spin text-green-600" />
@@ -42,7 +47,12 @@ const PaymentModalContent = lazy(async () => {
 
       return (
         <Dialog open={true} onOpenChange={onClose}>
-          <DialogContent className="sm:max-w-lg p-0">
+          <DialogContent
+            className="sm:max-w-lg p-0"
+            onPointerDownOutside={(e) => e.preventDefault()}
+            onInteractOutside={(e) => e.preventDefault()}
+            onEscapeKeyDown={(e) => e.preventDefault()}
+          >
             <div
             >
               <DialogHeader className="p-6 pb-2">
@@ -70,7 +80,12 @@ const PaymentModal = ({ clientSecret, onClose }) => {
     <StripeProvider>
       <Suspense fallback={
         <Dialog open={true} onOpenChange={onClose}>
-          <DialogContent className="flex flex-col items-center justify-center p-8 bg-card rounded-lg shadow-xl">
+          <DialogContent
+            className="flex flex-col items-center justify-center p-8 bg-card rounded-lg shadow-xl"
+            onPointerDownOutside={(e) => e.preventDefault()}
+            onInteractOutside={(e) => e.preventDefault()}
+            onEscapeKeyDown={(e) => e.preventDefault()}
+          >
             <Loader2 className="h-12 w-12 animate-spin text-green-600" />
             <p className="mt-4 text-lg text-gray-700 font-medium">Zahlung wird geladen...</p>
           </DialogContent>

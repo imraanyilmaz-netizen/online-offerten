@@ -92,7 +92,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <>
           {!isPanelPage && <FooterBeliebteStandorte />}
           {shouldShowCTABanner && <FooterCTABanner />}
-          <Footer />
+          <Footer variant={isPanelPage ? 'minimal' : 'default'} />
         </>
       )}
     </div>

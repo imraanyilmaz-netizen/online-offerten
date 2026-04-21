@@ -26,8 +26,89 @@ const sectionTitleClass =
 const linkClass =
   'text-sm text-neutral-700 hover:text-emerald-700 hover:underline underline-offset-2 dark:text-neutral-300 dark:hover:text-emerald-400'
 
-export default function Footer() {
+/**
+ * Footer — zwei Varianten:
+ *  - 'default'  : voller Footer mit Dienstleistungen, Tools, Rechtslinks (öffentliche Seiten)
+ *  - 'minimal'  : schlanker Footer nur mit Logo, E-Mail, Social Media, Copyright, Theme-Toggle
+ *                 (wird im Partner- / Admin-Panel verwendet, wo die langen Link-Blöcke stören).
+ */
+export default function Footer({ variant = 'default' }) {
   const currentYear = new Date().getFullYear()
+
+  if (variant === 'minimal') {
+    /** Im Panel-Kontext ist "Partner werden" nicht sinnvoll — Nutzer ist bereits Partner/Admin. */
+    const panelUnternehmenLinks = unternehmenLinks.filter((l) => l.to !== '/partner-werden')
+
+    return (
+      <footer
+        className="flex-shrink-0 border-t border-neutral-200 bg-neutral-50 text-neutral-800 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-200"
+        style={{ contain: 'layout style' }}
+      >
+        <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 lg:py-10">
+          <div className="grid gap-8 sm:grid-cols-2">
+            <div className="flex flex-col items-start gap-3">
+              <Link href="/" className="flex items-center gap-2.5">
+                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-sm">
+                  <Send className="h-[17px] w-[17px]" aria-hidden />
+                </span>
+                <span className="text-lg font-bold italic tracking-tight text-neutral-900 md:text-xl dark:text-neutral-50">
+                  Online-Offerten.ch
+                </span>
+              </Link>
+              <a
+                href="mailto:info@online-offerten.ch"
+                className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-emerald-700 dark:text-neutral-400 dark:hover:text-emerald-400"
+              >
+                <Mail className="h-4 w-4 shrink-0" aria-hidden />
+                info@online-offerten.ch
+              </a>
+              <h2 className={`${sectionTitleClass} mt-2`}>Social Media</h2>
+              <div className="mt-1 flex flex-wrap items-center gap-2">
+                <a
+                  href="https://www.instagram.com/online_offerten.ch/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 shadow-sm transition-colors hover:border-emerald-300 hover:text-emerald-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-emerald-700 dark:hover:text-emerald-400"
+                  aria-label="Online-Offerten.ch auf Instagram"
+                >
+                  <FaInstagram className="h-[22px] w-[22px]" aria-hidden />
+                </a>
+                <a
+                  href="https://www.facebook.com/onlineofferten/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 shadow-sm transition-colors hover:border-emerald-300 hover:text-emerald-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-emerald-700 dark:hover:text-emerald-400"
+                  aria-label="Online-Offerten.ch auf Facebook"
+                >
+                  <FaFacebook className="h-[22px] w-[22px]" aria-hidden />
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h2 className={sectionTitleClass}>Unternehmen</h2>
+              <ul className="mt-3 space-y-2">
+                {panelUnternehmenLinks.map((link) => (
+                  <li key={link.to}>
+                    <Link href={link.to} className={linkClass}>
+                      {link.text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-neutral-200 pt-6 text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-400 sm:flex-row sm:items-center">
+            <p>© {currentYear} Online-Offerten.ch. Alle Rechte vorbehalten.</p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <ThemeToggleTabs />
+            </div>
+          </div>
+        </div>
+      </footer>
+    )
+  }
 
   return (
     <footer

@@ -289,7 +289,7 @@
       '.oo-badge { font-family: ' + FONT + '; background: ' + s.bg + '; border: 1px solid ' + s.border + '; border-radius: 12px; padding: 16px; width: 260px; text-decoration: none; display: block; transition: box-shadow 0.2s; }' +
       '.oo-badge:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }' +
       '.oo-badge-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }' +
-      '.oo-badge-logo { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; background: ' + s.bgCard + '; flex-shrink: 0; }' +
+      '.oo-badge-logo { width: 36px; height: 36px; border-radius: 8px; object-fit: contain; padding: 2px; box-sizing: border-box; background: ' + s.bgCard + '; flex-shrink: 0; }' +
       '.oo-badge-name { font-size: 14px; font-weight: 600; color: ' + s.text + '; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
       '.oo-badge-stars { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }' +
       '.oo-badge-rating { font-size: 22px; font-weight: 700; color: ' + s.text + '; }' +
@@ -328,7 +328,7 @@
       '.oo-widget { font-family: ' + FONT + '; background: ' + s.bg + '; border: 1px solid ' + s.border + '; border-radius: 16px; overflow: hidden; max-width: 520px; }' +
       '.oo-header { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid ' + s.border + '; }' +
       '.oo-header-left { display: flex; align-items: center; gap: 12px; min-width: 0; }' +
-      '.oo-logo { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: ' + s.bgCard + '; flex-shrink: 0; }' +
+      '.oo-logo { width: 44px; height: 44px; border-radius: 10px; object-fit: contain; padding: 3px; box-sizing: border-box; background: ' + s.bgCard + '; flex-shrink: 0; }' +
       '.oo-company { font-size: 15px; font-weight: 700; color: ' + s.text + '; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
       '.oo-summary { font-size: 12px; color: ' + s.textMuted + '; margin-top: 2px; }' +
       '.oo-header-right { text-align: right; flex-shrink: 0; padding-left: 12px; }' +
@@ -407,7 +407,7 @@
 
       '.oo-fl-header { padding: 16px 50px 16px 18px; border-bottom: 1px solid ' + s.border + '; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; position: relative; }' +
       '.oo-fl-header-left { display: flex; align-items: center; gap: 10px; min-width: 0; }' +
-      '.oo-fl-logo { width: 38px; height: 38px; border-radius: 8px; object-fit: cover; background: ' + s.bgCard + '; flex-shrink: 0; }' +
+      '.oo-fl-logo { width: 38px; height: 38px; border-radius: 8px; object-fit: contain; padding: 2px; box-sizing: border-box; background: ' + s.bgCard + '; flex-shrink: 0; }' +
       '.oo-fl-company { font-size: 14px; font-weight: 700; color: ' + s.text + '; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
       '.oo-fl-summary { font-size: 11px; color: ' + s.textMuted + '; margin-top: 2px; }' +
       '.oo-fl-header-right { text-align: right; flex-shrink: 0; padding-left: 8px; }' +
@@ -548,7 +548,7 @@
 
       '.oo-car-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid ' + s.border + '; }' +
       '.oo-car-header-left { display: flex; align-items: center; gap: 10px; min-width: 0; }' +
-      '.oo-car-logo { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; background: ' + s.bgCard + '; flex-shrink: 0; }' +
+      '.oo-car-logo { width: 36px; height: 36px; border-radius: 8px; object-fit: contain; padding: 2px; box-sizing: border-box; background: ' + s.bgCard + '; flex-shrink: 0; }' +
       '.oo-car-company { font-size: 14px; font-weight: 700; color: ' + s.text + '; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
       '.oo-car-header-summary { font-size: 11px; color: ' + s.textMuted + '; margin-top: 2px; }' +
       '.oo-car-header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }' +

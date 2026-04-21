@@ -27,7 +27,7 @@ export function ThemeToggleTabs({ className }: ThemeToggleTabsProps) {
   if (!mounted) {
     return (
       <div
-        className={cn('inline-flex h-9 w-[11.5rem] rounded-md bg-muted/60', className)}
+        className={cn('inline-flex h-9 w-[10rem] sm:w-[14rem] rounded-md bg-muted/60', className)}
         aria-hidden
       />
     )
@@ -40,7 +40,7 @@ export function ThemeToggleTabs({ className }: ThemeToggleTabsProps) {
       role="group"
       aria-label="Farbschema"
       className={cn(
-        'inline-flex h-9 w-[11.5rem] rounded-md bg-muted p-1 text-muted-foreground',
+        'inline-flex h-9 w-[10rem] sm:w-[14rem] rounded-md bg-muted p-1 text-muted-foreground',
         className
       )}
     >

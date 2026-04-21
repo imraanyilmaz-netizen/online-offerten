@@ -154,7 +154,7 @@ function BadgePreview({ data, theme }: { data: WidgetData; theme: WidgetTheme })
   return (
     <div className={`${bg} border ${border} rounded-xl p-4 w-[260px] transition-shadow hover:shadow-lg`}>
       <div className="flex items-center gap-2.5 mb-3">
-        {partner.logo_url ? <img src={partner.logo_url} alt="" className="w-9 h-9 rounded-lg object-cover flex-shrink-0" /> : <div className={`w-9 h-9 rounded-lg ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'} flex-shrink-0`} />}
+        {partner.logo_url ? <img src={partner.logo_url} alt="" className={`w-9 h-9 rounded-lg object-contain p-0.5 ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'} flex-shrink-0`} /> : <div className={`w-9 h-9 rounded-lg ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'} flex-shrink-0`} />}
         <div className={`font-semibold text-sm ${text} truncate`}>{partner.company_name}</div>
       </div>
       <div className="flex items-center gap-2 mb-1.5">
@@ -182,7 +182,7 @@ function ListPreview({ data, theme }: { data: WidgetData; theme: WidgetTheme }) 
     <div className={`${bg} border ${border} rounded-2xl overflow-hidden max-w-[520px]`}>
       <div className={`flex items-center justify-between p-5 border-b ${border}`}>
         <div className="flex items-center gap-3 min-w-0">
-          {partner.logo_url ? <img src={partner.logo_url} alt="" className="w-11 h-11 rounded-[10px] object-cover flex-shrink-0" /> : <div className={`w-11 h-11 rounded-[10px] ${bgCard} flex-shrink-0`} />}
+          {partner.logo_url ? <img src={partner.logo_url} alt="" className={`w-11 h-11 rounded-[10px] object-contain p-0.5 ${bgCard} flex-shrink-0`} /> : <div className={`w-11 h-11 rounded-[10px] ${bgCard} flex-shrink-0`} />}
           <div className="min-w-0">
             <div className={`font-bold text-[15px] ${text} truncate`}>{partner.company_name}</div>
             <div className={`text-xs ${muted} mt-0.5`}>{partner.review_count} Bewertungen</div>
@@ -218,7 +218,7 @@ function CarouselPreview({ data, theme }: { data: WidgetData; theme: WidgetTheme
     <div className={`${bg} border ${border} rounded-2xl overflow-hidden max-w-[520px]`}>
       <div className={`flex items-center justify-between p-4 border-b ${border}`}>
         <div className="flex items-center gap-2.5 min-w-0">
-          {partner.logo_url ? <img src={partner.logo_url} alt="" className="w-9 h-9 rounded-lg object-cover flex-shrink-0" /> : <div className={`w-9 h-9 rounded-lg ${bgCard} flex-shrink-0`} />}
+          {partner.logo_url ? <img src={partner.logo_url} alt="" className={`w-9 h-9 rounded-lg object-contain p-0.5 ${bgCard} flex-shrink-0`} /> : <div className={`w-9 h-9 rounded-lg ${bgCard} flex-shrink-0`} />}
           <div className="min-w-0">
             <div className={`font-bold text-sm ${text} truncate`}>{partner.company_name}</div>
             <div className={`text-[11px] ${muted}`}><StarRatingInline rating={partner.average_rating} size={12} /> {partner.review_count} Bewertungen</div>

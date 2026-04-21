@@ -25,6 +25,7 @@ import {
   LogOut,
   ChevronRight,
   ChevronDown,
+  Plus,
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { de } from 'date-fns/locale/de'
@@ -86,7 +87,7 @@ const dashboardGroup: NavGroup = {
       accentBadge: 'unreadAvailable',
     },
     {
-      label: 'Gekauft',
+      label: 'Angenommen',
       href: '/partner/dashboard?tab=purchased',
       icon: ShoppingCart,
       isActive: matchDashboardTab('purchased'),
@@ -195,13 +196,12 @@ export default function PartnerSidebar({ onNavigate }: { onNavigate?: () => void
   })
   const [signingOut, setSigningOut] = useState(false)
 
-  /** Aktif rota değişince ilgili grubu otomatik aç. */
+  /** Aktif rota değişince ilgili grubu otomatik aç; diğerlerini kapat (accordion). */
   useEffect(() => {
     setOpenGroups((prev) => {
-      const next = { ...prev }
-      if (dashboardGroup.matchPath(pathname)) next.overview = true
-      if (settingsGroup.matchPath(pathname)) next.settings = true
-      return next
+      if (dashboardGroup.matchPath(pathname)) return { overview: true, settings: false }
+      if (settingsGroup.matchPath(pathname)) return { overview: false, settings: true }
+      return prev
     })
   }, [pathname])
 
@@ -243,8 +243,16 @@ export default function PartnerSidebar({ onNavigate }: { onNavigate?: () => void
     }
   }
 
+  /** Accordion davranışı: tıklanan grup açılır, diğerleri kapanır.
+   *  Aynı gruba tekrar tıklanırsa kapanır (hepsi kapalı durum). */
   const toggleGroup = (id: string) => {
-    setOpenGroups((prev) => ({ ...prev, [id]: !prev[id] }))
+    setOpenGroups((prev) => {
+      const willOpen = !prev[id]
+      const next: Record<string, boolean> = {}
+      Object.keys(prev).forEach((k) => { next[k] = false })
+      next[id] = willOpen
+      return next
+    })
   }
 
   const isTopUpActive = pathname === '/partner/credit-top-up'
@@ -290,12 +298,14 @@ export default function PartnerSidebar({ onNavigate }: { onNavigate?: () => void
         </div>
       </Link>
 
-      {/* Kompakt Stats (nur Desktop-Sidebar) — Guthaben + Bonus + Abo-Status */}
+      {/* Kompakt Stats (nur Desktop-Sidebar) — Guthaben + Bonus + Abo-Status + Top-up CTA */}
       <SidebarStats
         hasActiveSub={hasActiveSub}
         subscriptionEndDate={partner?.subscription_end_date || null}
         bonusBalance={partner?.bonus_balance ?? null}
         mainBalance={partner?.main_balance ?? null}
+        isTopUpActive={isTopUpActive}
+        onNavigate={onNavigate}
       />
 
       {/* Scrollable body */}
@@ -310,20 +320,6 @@ export default function PartnerSidebar({ onNavigate }: { onNavigate?: () => void
           onNavigate={onNavigate}
           counts={counts}
         />
-
-        {/* Guthaben aufladen - direct link button */}
-        <Link
-          href="/partner/credit-top-up"
-          onClick={onNavigate}
-          className={`mt-2 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition-all ${
-            isTopUpActive
-              ? 'bg-green-600 text-white shadow-sm hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700'
-              : 'bg-green-50 text-green-800 hover:bg-green-100 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-950/60'
-          }`}
-        >
-          <Wallet className="h-4 w-4 flex-shrink-0" />
-          <span>Guthaben aufladen</span>
-        </Link>
 
         {/* Einstellungen Group */}
         <SidebarGroup
@@ -371,11 +367,15 @@ function SidebarStats({
   subscriptionEndDate,
   bonusBalance,
   mainBalance,
+  isTopUpActive,
+  onNavigate,
 }: {
   hasActiveSub: boolean
   subscriptionEndDate: string | null
   bonusBalance: number | null
   mainBalance: number | null
+  isTopUpActive: boolean
+  onNavigate?: () => void
 }) {
   const formatChf = (n: number | null) =>
     n === null ? '—' : `CHF ${n.toFixed(2)}`
@@ -415,6 +415,20 @@ function SidebarStats({
         iconBg="bg-yellow-100 dark:bg-yellow-950/40"
         iconColor="text-yellow-600 dark:text-yellow-400"
       />
+
+      {/* Guthaben aufladen — direkt unter den Bakiye-Rows, logisch gruppiert */}
+      <Link
+        href="/partner/credit-top-up"
+        onClick={onNavigate}
+        className={`mt-1 flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition-all ${
+          isTopUpActive
+            ? 'bg-green-600 text-white shadow-sm hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700'
+            : 'bg-green-50 text-green-700 hover:bg-green-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/60'
+        }`}
+      >
+        <Plus className="h-4 w-4 flex-shrink-0" />
+        <span>Guthaben aufladen</span>
+      </Link>
     </div>
   )
 }
@@ -470,7 +484,7 @@ function SidebarGroup({
   const groupUnread = counts?.unreadAvailable ?? 0
 
   return (
-    <div className="mb-1">
+    <div className="mb-2 rounded-xl border border-border bg-background/40 p-1.5 shadow-sm dark:bg-muted/20">
       <button
         type="button"
         onClick={onToggle}

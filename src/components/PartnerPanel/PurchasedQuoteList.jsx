@@ -134,7 +134,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
   const [refundReason, setRefundReason] = useState('');
   const [isSubmittingRefund, setIsSubmittingRefund] = useState(false);
   const [archivingId, setArchivingId] = useState(null);
-  const itemsPerPage = 20;
+  const itemsPerPage = 10;
 
   const handleArchiveClick = (purchaseId) => {
     if (!purchaseId || archivingId) return;
@@ -191,7 +191,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
       <div className="text-center py-12 text-muted-foreground">
         <ShoppingCart className="w-16 h-16 mx-auto text-muted-foreground/40 mb-4" />
         <h3 className="text-lg font-semibold">Keine gekauften Anfragen</h3>
-        <p className="text-sm text-muted-foreground/70">Gekaufte Kundenanfragen werden hier angezeigt.</p>
+        <p className="text-sm text-muted-foreground/70">Angenommene Kundenanfragen werden hier angezeigt.</p>
       </div>
     );
   }

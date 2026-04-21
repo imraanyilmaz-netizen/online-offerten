@@ -28,7 +28,7 @@ const isMovingService = (servicetype) => {
 const ArchivedQuoteList = ({ quotes, onUnarchiveQuote }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [unarchivingId, setUnarchivingId] = useState(null);
-  const itemsPerPage = 20;
+  const itemsPerPage = 10;
 
   const handleUnarchiveClick = (purchaseId) => {
     if (!purchaseId || unarchivingId) return;

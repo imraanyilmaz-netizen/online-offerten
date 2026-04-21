@@ -252,7 +252,7 @@ const PartnerPanel = ({ setCompanyName }) => {
                 value="purchased"
                 className="flex items-center gap-2 flex-shrink-0 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg text-sm font-semibold transition-all duration-200 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg dark:data-[state=active]:bg-primary dark:data-[state=active]:hover:bg-primary/90 data-[state=inactive]:text-muted-foreground data-[state=inactive]:bg-card data-[state=inactive]:hover:bg-muted data-[state=inactive]:hover:text-foreground border border-border"
               >
-                Gekauft ({purchasedQuotes.length})
+                Angenommen ({purchasedQuotes.length})
               </TabsTrigger>
               <TabsTrigger 
                 value="archived"
@@ -300,7 +300,7 @@ const PartnerPanel = ({ setCompanyName }) => {
           </TabsContent>
           <TabsContent value="purchased" className="mt-4 lg:mt-0 animate-tab-enter" key={`tab-purchased-${activeTab}`}>
             <header className="mb-5 pb-4 border-b border-border">
-              <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">Gekaufte Anfragen</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">Angenommene Anfragen</h1>
             </header>
             <PurchasedQuoteList quotes={purchasedQuotes} onArchiveQuote={handleArchiveQuote} onRequestRefund={handleRequestRefund} refundRequests={refundRequests} />
           </TabsContent>
