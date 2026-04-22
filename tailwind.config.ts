@@ -71,6 +71,10 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      transitionTimingFunction: {
+        /** Same curve as former ease-[cubic-bezier(...)] — avoids Tailwind ambiguity warning */
+        'out-expo': 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

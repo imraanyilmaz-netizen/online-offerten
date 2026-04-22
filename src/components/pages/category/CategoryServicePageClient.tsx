@@ -517,7 +517,7 @@ export default function CategoryServicePageClient({
                         'ring-1 ring-emerald-950/[0.08] dark:ring-white/15',
                         "before:pointer-events-none before:absolute before:inset-0 before:z-0 before:rounded-2xl before:bg-[linear-gradient(180deg,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.02)_42%,rgba(0,0,0,0.05)_100%)] before:content-['']",
                         "after:pointer-events-none after:absolute after:inset-0 after:z-0 after:rounded-2xl after:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)] after:content-['']",
-                        'transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
+                        'transition-all duration-300 ease-out-expo',
                         'hover:-translate-y-1 hover:from-emerald-400 hover:to-emerald-600 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.45),inset_0_-1px_0_0_rgba(0,0,0,0.06),0_16px_40px_-12px_rgba(16,185,129,0.55),0_36px_72px_-28px_rgba(6,78,59,0.26)]',
                         'hover:ring-emerald-950/12 dark:hover:ring-white/25',
                         'active:translate-y-0 active:scale-[0.985] active:duration-150',
@@ -527,7 +527,7 @@ export default function CategoryServicePageClient({
                       <Link href={ctaHref} className="relative z-[1] inline-flex items-center justify-center gap-0">
                         <span className="drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]">Kostenlose Offerten anfordern</span>
                         <ArrowRight
-                          className="ml-2.5 h-[1.05rem] w-[1.05rem] shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1"
+                          className="ml-2.5 h-[1.05rem] w-[1.05rem] shrink-0 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
                           aria-hidden
                           strokeWidth={2.25}
                         />
