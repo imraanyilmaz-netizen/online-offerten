@@ -27,10 +27,10 @@ const CATEGORIES: Category[] = [
   },
   {
     id: 'analytics',
-    title: 'Analyse & Performance',
+    title: 'Analyse, Marketing & Performance',
     description:
-      'Helfen uns, die Nutzung der Website anonymisiert zu messen und die Ladezeiten zu verbessern. Ohne Ihre Einwilligung werden diese Dienste nicht geladen.',
-    providers: 'Google Tag Manager · Google Analytics 4 · Vercel Speed Insights',
+      'Helfen uns, die Nutzung der Website anonymisiert zu messen, die Ladezeiten zu verbessern und die Wirksamkeit unserer Kampagnen auszuwerten. Ohne Ihre Einwilligung setzen wir keine Cookies; es werden dann lediglich anonyme, cookielose Signale über Google Consent Mode v2 übertragen, die keine Rückschlüsse auf Ihre Person erlauben.',
+    providers: 'Google Tag Manager · Google Analytics 4 · Google Ads · Vercel Speed Insights',
     required: false,
     icon: BarChart3,
   },
@@ -116,8 +116,8 @@ export default function CookieConsentBanner() {
               className="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground"
             >
               Wir setzen technisch notwendige Cookies ein, um die Website bereitzustellen. Mit Ihrer
-              Einwilligung nutzen wir zusätzlich Analyse- und Performance-Tools, um unser Angebot zu
-              verbessern. Sie können Ihre Auswahl jederzeit in der{' '}
+              Einwilligung nutzen wir zusätzlich Analyse-, Marketing- und Performance-Tools, um unser
+              Angebot zu verbessern. Sie können Ihre Auswahl jederzeit in der{' '}
               <Link
                 href="/datenschutz"
                 className="font-semibold text-emerald-700 underline underline-offset-2 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300"
