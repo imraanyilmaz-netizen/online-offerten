@@ -73,7 +73,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const invalidateBrokenSession = useCallback(async (reason: string) => {
     try {
-      await supabase.auth.signOut()
+      // Use scope:'local' so only THIS device/tab is signed out.
+      // Without a scope, Supabase defaults to 'global' which revokes ALL
+      // sessions for the user across every device — causing other devices to
+      // be kicked out just because one device had a transient JWT error.
+      await supabase.auth.signOut({ scope: 'local' })
     } catch (signOutError) {
       void signOutError
     }
@@ -102,9 +106,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           const err = e as { message?: string; code?: string }
           if ((e as { name?: string })?.name === 'AbortError') {
             if (process.env.NODE_ENV === 'development') {
-              console.warn('[AuthContext] getSession aborted (lock contention), keeping current auth state')
+              console.warn('[AuthContext] getSession aborted (lock contention) — keeping loading=true, will retry via onAuthStateChange')
             }
-            setLoading(false)
+            // Do NOT set loading=false here. User stays null while loading=true,
+            // which keeps the dashboard skeleton visible instead of triggering a
+            // redirect to /login. The onAuthStateChange subscription (which is
+            // still active) will fire the next auth event and call handleSession,
+            // properly resolving loading. The 20-second timeout is the safety net.
             return
           }
           if (shouldInvalidateAuthError(err)) {
@@ -120,8 +128,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
         (event: string, session: Session | null) => {
-          // INITIAL_SESSION is already handled by getSession() above.
-          if (event === 'INITIAL_SESSION') return
+          // INITIAL_SESSION: normally getSession() handles this, but if getSession()
+          // threw an AbortError (lock contention) we still need INITIAL_SESSION to
+          // set the correct auth state. Calling handleSession twice with the same
+          // data is harmless — the second call is a no-op if state hasn't changed.
+          // So we let INITIAL_SESSION through as a reliable fallback.
 
           if (session?.user && !session.user.id) {
             void invalidateBrokenSession('Session missing user.id in onAuthStateChange')
