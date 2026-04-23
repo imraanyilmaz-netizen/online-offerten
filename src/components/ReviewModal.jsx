@@ -6,7 +6,7 @@
     import { Textarea } from '@/components/ui/textarea';
     import { Star, Loader2 } from 'lucide-react';
     import { useToast } from '@/src/components/ui/use-toast';
-    import { supabase } from '@/lib/customSupabaseClient';
+    import { supabase } from '@/lib/supabaseClient';
     
     const StarRatingDisplay = ({ rating, size = 24 }) => {
         const totalStars = 5;

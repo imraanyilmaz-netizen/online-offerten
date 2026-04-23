@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
     import { Button } from '@/components/ui/button';
     import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
     import { useToast } from '@/src/components/ui/use-toast';
-    import { supabase } from '@/lib/customSupabaseClient';
+    import { supabase } from '@/lib/supabaseClient';
     import { compressImage } from '@/lib/imageCompressor';
     
     const LogoUploader = ({ partnerId, currentLogoUrl, onUploadComplete, open, setOpen }) => {

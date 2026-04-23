@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Loader2, UploadCloud, XCircle, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/src/components/ui/use-toast';
-import { supabase } from '@/lib/customSupabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { compressImage } from '@/lib/imageCompressor.js';
 
 const ImageUploader = ({ partnerId, currentImageUrl, onUpload, storagePath, dbField, title, description }) => {

@@ -9,6 +9,11 @@ interface AuthContextType {
   user: User | null
   session: Session | null
   loading: boolean
+  /** True while an explicit signOut() call is in-flight. Guards (e.g. the
+   *  dashboard useEffect) must skip their redirect-to-login logic when this is
+   *  true, otherwise they race against the navbar's window.location.replace and
+   *  trigger a "Failed to fetch RSC payload" error in Next.js App Router. */
+  signingOut: boolean
   signUp: (email: string, password: string, options?: any) => Promise<{ error: any }>
   signIn: (
     email: string,
@@ -49,6 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [signingOut, setSigningOut] = useState(false)
   const supabase = createClient()
 
   /** Verhindert ewiges loading=true wenn getSession/getUser hängen (Navbar / Dashboard). */
@@ -226,9 +232,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   )
 
   const signOut = useCallback(async () => {
-    // 1️⃣ Supabase oturumunu kapat
+    // Flag that an intentional sign-out is in progress.
+    // Dashboard guards check this to skip their redirect-to-/login useEffect,
+    // preventing a racing router.replace('/login') call that would conflict with
+    // the navbar's subsequent window.location.replace and cause the
+    // "Failed to fetch RSC payload" error in Next.js App Router.
+    setSigningOut(true)
+
+    // 1️⃣ Supabase oturumunu kapat — sadece bu cihaz/sekme
+    // IMPORTANT: scope must be 'local'. Supabase v2 default is 'global', which
+    // revokes EVERY refresh token for the user across all devices. That caused
+    // the reported bug: logging out on one device kicked the partner off their
+    // other devices and created redirect loops there. With 'local' only this
+    // device/browser is signed out; other devices stay logged in as expected.
     try {
-      await supabase.auth.signOut()
+      await supabase.auth.signOut({ scope: 'local' })
     } catch (e) {
       void e
     }
@@ -262,11 +280,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     user,
     session,
     loading,
+    signingOut,
     signUp,
     signIn,
     signOut,
     updateUserPassword,
-  }), [user, session, loading, signUp, signIn, signOut, updateUserPassword])
+  }), [user, session, loading, signingOut, signUp, signIn, signOut, updateUserPassword])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

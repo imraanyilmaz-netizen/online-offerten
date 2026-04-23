@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/src/components/ui/use-toast';
-import { supabase } from '@/lib/customSupabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { useAuth } from '@/src/contexts/SupabaseAuthContext';
 import { Loader2, Save, Wallet, Settings, Lock, Eye, EyeOff } from 'lucide-react';
 

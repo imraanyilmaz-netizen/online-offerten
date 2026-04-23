@@ -29,7 +29,7 @@ import {
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { de } from 'date-fns/locale/de'
-import { supabase } from '@/lib/customSupabaseClient'
+import { supabase } from '@/lib/supabaseClient'
 import { useAuth } from '@/src/contexts/SupabaseAuthContext'
 import { Button } from '@/components/ui/button'
 import { usePartnerCounts, type PartnerCounts } from './PartnerCountsContext'

@@ -13,7 +13,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { findMatchingPartners } from '@/lib/matchUtils';
 import { getGermanServiceName } from '@/data/categories';
 import { getFullCantonName, cantonOptions, cantonMap } from '@/data/locations';
-import { supabase } from '@/lib/customSupabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 
 // Kanton-Wert normalisieren: "Zürich" → "ZH", "ZH" → "ZH"
 const normalizeCantonToCode = (canton) => {

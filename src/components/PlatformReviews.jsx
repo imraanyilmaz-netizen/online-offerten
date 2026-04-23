@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { supabase } from '@/lib/customSupabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 // framer-motion removed - CSS for better INP
 import { Star, MessageSquare } from 'lucide-react';
 import { getCustomerInitials } from '@/lib/utils';

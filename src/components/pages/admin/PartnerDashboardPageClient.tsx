@@ -20,7 +20,7 @@ function partnerRole(user: User | null): string | undefined {
  */
 const PartnerDashboardPageClient = () => {
   const router = useRouter()
-  const { user, loading: authLoading } = useAuth()
+  const { user, loading: authLoading, signingOut } = useAuth()
   const [, setCompanyName] = useState('')
   /** SSR + ilk client frame: auth farkı yüzünden div vs Suspense hydration hatası — önce aynı placeholder. */
   const [mounted, setMounted] = useState(false)
@@ -32,6 +32,12 @@ const PartnerDashboardPageClient = () => {
 
   useEffect(() => {
     if (!mounted || authLoading) return
+    // Skip redirect when an explicit signOut() is in progress — the navbar
+    // will do a hard window.location.replace('/login?reason=signed_out') once
+    // signOut resolves. Firing router.replace here at the same time races
+    // against that hard navigation and causes Next.js to abort the RSC fetch
+    // ("Failed to fetch RSC payload" / "Load failed" error in the console).
+    if (signingOut) return
     if (!user) {
       router.replace('/login')
       return
@@ -39,7 +45,7 @@ const PartnerDashboardPageClient = () => {
     if (partnerRole(user) !== 'partner') {
       router.replace('/')
     }
-  }, [mounted, authLoading, user, router])
+  }, [mounted, authLoading, signingOut, user, router])
 
   if (!mounted) {
     return <LoadingFallback />

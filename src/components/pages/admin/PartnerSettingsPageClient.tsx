@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { supabase } from '@/lib/customSupabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/src/components/ui/use-toast';
 import { useAuth } from '@/src/contexts/SupabaseAuthContext';
 import { Button } from '@/components/ui/button';

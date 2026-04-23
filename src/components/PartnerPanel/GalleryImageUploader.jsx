@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Loader2, UploadCloud, XCircle, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/src/components/ui/use-toast';
-import { supabase } from '@/lib/customSupabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
 import { compressImage } from '@/lib/imageCompressor.js';
 

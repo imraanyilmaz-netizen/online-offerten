@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { supabase } from '@/lib/customSupabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { Loader2, CheckCircle, Send, FileText as FileTextIcon, Package, AlertCircle, Image as ImageIcon, Star, Phone, Mail, Building, Award, MessageSquare, MapPin, Home, ArrowRight, Hash, Calendar, Box, Check, X, Building2, Layers, Forklift as Lift, MessageCircle, User, Paintbrush, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
