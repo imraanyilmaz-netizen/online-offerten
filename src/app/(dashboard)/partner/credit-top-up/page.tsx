@@ -2,9 +2,6 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import PartnerCreditTopUpLoader from './PartnerCreditTopUpLoader'
 
-// Force dynamic - no static generation for partner panel
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'PartnerCreditTopUpPage - Online-Offerten.ch',

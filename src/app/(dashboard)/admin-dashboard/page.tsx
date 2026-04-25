@@ -3,9 +3,6 @@ import { Suspense } from 'react'
 import AdminDashboardLoader from './AdminDashboardLoader'
 import DashboardSkeleton from '@/src/components/ui/DashboardSkeleton'
 
-// Force dynamic - no static generation for admin panel
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'AdminDashboardPage - Online-Offerten.ch',

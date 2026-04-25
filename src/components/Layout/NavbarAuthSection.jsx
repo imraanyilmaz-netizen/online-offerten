@@ -42,7 +42,7 @@ const UserMenu = ({ user, onLogout, partnerBrand }) => {
             {logoUrl && !logoFailed ? (
               <img
                 src={logoUrl}
-                alt="Partner Logo"
+                alt={displayName ? `${displayName} Logo` : 'Partner Logo'}
                 className="w-9 h-9 rounded-full object-cover border border-gray-200 dark:border-border"
                 onError={() => setLogoFailed(true)}
                 loading="lazy"
@@ -271,7 +271,7 @@ export default function NavbarAuthSection({ variant = 'desktop', onNavigate, Nav
               {mobileLogoUrl && !mobileLogoFailed ? (
                 <img
                   src={mobileLogoUrl}
-                  alt="Partner Logo"
+                  alt={mobileDisplayName ? `${mobileDisplayName} Logo` : 'Partner Logo'}
                   className="w-7 h-7 rounded-full object-cover border border-gray-200 dark:border-border"
                   onError={() => setMobileLogoFailed(true)}
                   loading="lazy"

@@ -32,6 +32,74 @@ export function generateStaticParams() {
   return [...hubs, ...inDerNaehe]
 }
 
+const RZ_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Reinigungsfirma', item: `${SITE}/reinigungsfirma` },
+      ],
+    },
+    {
+      '@type': 'Service',
+      name: 'Reinigungsfirma finden und vergleichen',
+      serviceType: 'Reinigungsservice',
+      description:
+        'Finden Sie die beste Reinigungsfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Reinigungsfirmen für Umzugsreinigung, Endreinigung mit Abnahmegarantie, Wohnungs- und Büroreinigung.',
+      provider: {
+        '@type': 'Organization',
+        name: 'Online-Offerten.ch',
+        url: SITE,
+        logo: `${SITE}/image/logo-icon.webp`,
+      },
+      areaServed: { '@type': 'Country', name: 'Switzerland' },
+      offers: {
+        '@type': 'Offer',
+        url: `${SITE}/kostenlose-offerte-anfordern?service=reinigung&step=2`,
+        priceCurrency: 'CHF',
+        price: '0',
+        name: 'Kostenlose Reinigungsfirma Offerten',
+      },
+    },
+  ],
+}
+
+const ML_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Malerfirma', item: `${SITE}/malerfirma` },
+      ],
+    },
+    {
+      '@type': 'Service',
+      name: 'Malerfirma finden und vergleichen',
+      serviceType: 'Malerservice',
+      description:
+        'Finden Sie die beste Malerfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Malerfirmen für Innenanstrich, Aussenanstrich und Fassadenanstrich – bis zu 40% günstiger.',
+      provider: {
+        '@type': 'Organization',
+        name: 'Online-Offerten.ch',
+        url: SITE,
+        logo: `${SITE}/image/logo-icon.webp`,
+      },
+      areaServed: { '@type': 'Country', name: 'Switzerland' },
+      offers: {
+        '@type': 'Offer',
+        url: `${SITE}/kostenlose-offerte-anfordern?service=maler&step=2`,
+        priceCurrency: 'CHF',
+        price: '0',
+        name: 'Kostenlose Malerfirma Offerten',
+      },
+    },
+  ],
+}
+
 const UZ_JSON_LD = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -359,18 +427,32 @@ export default async function CategoryHubPage(props: Props) {
   }
 
   if (cat.slug === 'reinigungsfirma') {
-    return <CategoryReinigungHubClient />
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(RZ_JSON_LD) }}
+        />
+        <CategoryReinigungHubClient />
+      </>
+    )
   }
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-600" />
-        </div>
-      }
-    >
-      <MalerfirmaInDerNaehePageClient />
-    </Suspense>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ML_JSON_LD) }}
+      />
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-600" />
+          </div>
+        }
+      >
+        <MalerfirmaInDerNaehePageClient />
+      </Suspense>
+    </>
   )
 }

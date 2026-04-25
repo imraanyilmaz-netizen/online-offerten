@@ -6,19 +6,9 @@ export const metadata: Metadata = {
   title: 'Login | Online-Offerten.ch',
   description:
     'Login und Anmeldung für Partner: Melden Sie sich bei Online-Offerten.ch an, um Ihr Dashboard zu öffnen, Anfragen zu bearbeiten und Ihre Top Offerten zu verwalten. Neu hier? Die Registrierung erfolgt über «Partner werden».',
-  keywords: [
-    'Online-Offerten Login',
-    'Login Online-Offerten',
-    'Online-Offerten Anmeldung',
-    'Partner Login',
-    'Online-Offerten Partner',
-    'Anmeldung Partner',
-    'Online-Offerten registrieren',
-    'Top Offerten',
-  ],
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
   alternates: {
     canonical: 'https://online-offerten.ch/login',
