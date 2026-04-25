@@ -180,11 +180,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <link
-        rel="dns-prefetch"
-        href="https://online-offerten.ch"
-      />
-      
       {/* Structured Data for SEO */}
       <script
         type="application/ld+json"
@@ -199,12 +194,12 @@ export default async function HomePage() {
             aria-label="Offerten vergleichen & passende Anbieter in der Schweiz finden"
           >
             {/* Background Image - Right Side - Desktop Only - Optimized with Next.js Image */}
+            {/* `priority` entfernt: das Bild ist auf Mobil via CSS versteckt, wurde aber per <link rel="preload"> trotzdem geladen → LCP/SpeedIndex auf Mobil schlechter. */}
             <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[55%] h-full overflow-hidden">
               <NextImage
                 src="/fotos/umzug-reinigung-maler-offerten.webp"
                 alt="Umzug, Reinigung und Renovierung Services in der Schweiz"
                 fill
-                priority
                 quality={75}
                 className="object-cover object-right"
                 style={{

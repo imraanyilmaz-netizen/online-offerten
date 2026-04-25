@@ -1,11 +1,14 @@
 'use client'
 
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Layout/Navbar'
 import Footer from '@/components/Layout/Footer'
 import FooterBeliebteStandorte from '@/components/Layout/FooterBeliebteStandorte'
 import FooterCTABanner from '@/components/Layout/FooterCTABanner'
+import PartnerNavbar from '@/src/components/PartnerPanel/PartnerNavbar'
+import { PartnerCountsProvider } from '@/src/components/PartnerPanel/PartnerCountsContext'
+import { useAuth } from '@/src/contexts/SupabaseAuthContext'
 import { Loader2 } from 'lucide-react'
 
 const FullPageLoader = () => (
@@ -16,6 +19,15 @@ const FullPageLoader = () => (
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
+  const { user } = useAuth()
+  /** Hydration-sicher: Vor Mount immer die öffentliche Navbar rendern, damit
+   *  SSR- und erster Client-Render übereinstimmen. Nach dem Mount kann bei
+   *  eingeloggten Partnern auf die Panel-Navbar umgeschaltet werden. */
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  const isPartner = mounted && user?.user_metadata?.role === 'partner'
   const formPages = [
     '/kostenlose-offerte-anfordern',
     '/forgot-password'
@@ -74,13 +86,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     )
   }
 
-  return (
+  /** Eingeloggte Partner bekommen überall ihre Dashboard-Navbar (inkl.
+   *  Mobile-Drawer mit vollständiger Panel-Navigation). Alle anderen Nutzer
+   *  (Gäste, Kunden, Admins) sehen die öffentliche Marketing-Navbar. */
+  const mainContent = (
     <div className="min-h-screen flex flex-col bg-background" style={{ contain: 'layout style' }}>
-      <Navbar />
-      <main 
+      {isPartner ? <PartnerNavbar /> : <Navbar />}
+      <main
         className="flex-grow flex flex-col"
-        style={{ 
-          minHeight: 'calc(100vh - 200px)', 
+        style={{
+          minHeight: 'calc(100vh - 200px)',
           flex: '1 0 auto'
         }}
       >
@@ -96,6 +111,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </>
       )}
     </div>
+  )
+
+  /** Die PartnerCountsProvider-Wrapperebene stellt Badge-Zählungen für den
+   *  Mobile-Drawer bereit (Verfügbar/Angenommen/…). Nur aktiv, wenn ein
+   *  Partner eingeloggt ist — sonst fällt kein zusätzlicher Request an. */
+  return isPartner ? (
+    <PartnerCountsProvider>{mainContent}</PartnerCountsProvider>
+  ) : (
+    mainContent
   )
 }
 

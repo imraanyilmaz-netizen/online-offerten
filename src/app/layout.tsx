@@ -98,8 +98,7 @@ export default function RootLayout({
   return (
     <html lang="de-CH" className={inter.variable} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* `next/font/google` self-hostet Inter — externe `fonts.*`-Preconnects sind dadurch unnötig und ziehen nur DNS/TLS-Zeit. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}

@@ -26,6 +26,9 @@ const sectionTitleClass =
 const linkClass =
   'text-sm text-neutral-700 hover:text-emerald-700 hover:underline underline-offset-2 dark:text-neutral-300 dark:hover:text-emerald-400'
 
+/** Nur Footer: Räumung & Entsorgung ausblenden (IDs auch unter Umzug vorhanden). */
+const FOOTER_EXCLUDED_SERVICE_IDS = new Set(['raeumung_service', 'entsorgung_service'])
+
 /**
  * Footer — zwei Varianten:
  *  - 'default'  : voller Footer mit Dienstleistungen, Tools, Rechtslinks (öffentliche Seiten)
@@ -34,6 +37,12 @@ const linkClass =
  */
 export default function Footer({ variant = 'default' }) {
   const currentYear = new Date().getFullYear()
+  /** Footer blendet Maler aus — dann nur 2 Kategorien; `grid-cols-3` lässt eine leere Spalte (Lücke vor «Tools»). */
+  const footerServiceCategories = serviceCategories.filter((cat) => cat.slug !== 'malerfirma')
+  const footerMiddleGridClass =
+    footerServiceCategories.length >= 3
+      ? 'grid gap-10 sm:grid-cols-3 lg:col-span-6'
+      : 'grid gap-10 sm:grid-cols-2 lg:col-span-6'
 
   if (variant === 'minimal') {
     /** Im Panel-Kontext ist "Partner werden" nicht sinnvoll — Nutzer ist bereits Partner/Admin. */
@@ -162,12 +171,14 @@ export default function Footer({ variant = 'default' }) {
             </div>
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-3 lg:col-span-6">
-            {serviceCategories.filter((cat) => cat.slug !== 'malerfirma').map((cat) => (
+          <div className={footerMiddleGridClass}>
+            {footerServiceCategories.map((cat) => (
               <div key={cat.slug}>
                 <h2 className={sectionTitleClass}>{cat.label}</h2>
                 <ul className="mt-3 space-y-2">
-                  {cat.services.map((s) => (
+                  {cat.services
+                    .filter((s) => !FOOTER_EXCLUDED_SERVICE_IDS.has(s.id))
+                    .map((s) => (
                     <li key={`${cat.slug}-${s.id}`}>
                       <Link href={getCategoryServicePath(cat.slug, s)} className={linkClass}>
                         {s.label}
