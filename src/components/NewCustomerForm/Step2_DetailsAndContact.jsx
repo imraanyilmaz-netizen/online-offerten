@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { cn } from '@/lib/utils';
 import { useStaticT } from '@/lib/staticTranslate';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -461,6 +462,9 @@ const SectionCard = ({ icon, titleKey, descriptionKey, children, hideHeader = fa
   );
 };
 
+const yesNoBtnBase =
+  'inline-flex min-h-9 flex-1 items-center justify-center gap-1.5 rounded-md border px-3 text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] touch-manipulation [-webkit-tap-highlight-color:transparent]';
+
 const YesNoToggle = ({ name, value, onChange, label, icon, error }) => {
   const isYes = value === 'ja';
   const isNo = value === 'nein';
@@ -473,34 +477,34 @@ const YesNoToggle = ({ name, value, onChange, label, icon, error }) => {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-2">
-        <Button
+        <button
           type="button"
-          variant="outline"
-          size="sm"
+          aria-pressed={isYes}
           onClick={() => onChange(name, 'ja')}
-          className={`h-9 text-sm font-medium transition-all ${
+          className={cn(
+            yesNoBtnBase,
             isYes
-              ? 'bg-green-500 dark:bg-primary border-green-600 dark:border-primary text-white md:hover:bg-green-600 dark:md:hover:bg-primary/90 shadow-sm'
-              : 'text-slate-700 dark:text-foreground md:hover:bg-green-50 dark:md:hover:bg-emerald-950/30 md:hover:border-green-400'
-          }`}
+              ? 'border-green-700 bg-green-600 text-white shadow-md ring-2 ring-green-500/60 ring-offset-2 ring-offset-background dark:bg-emerald-600 dark:border-emerald-500 dark:ring-emerald-400/50'
+              : 'border-slate-200 bg-white text-slate-600 hover:border-green-300 hover:bg-green-50 dark:border-border dark:bg-muted/40 dark:text-muted-foreground dark:hover:bg-emerald-950/35'
+          )}
         >
-          <Check className={`w-4 h-4 mr-1.5 ${isYes ? 'text-white' : 'text-green-600 dark:text-primary'}`} />
+          <Check className={cn('h-4 w-4 shrink-0', isYes ? 'text-white' : 'text-green-600 dark:text-emerald-400')} aria-hidden />
           Ja
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
-          variant="outline"
-          size="sm"
+          aria-pressed={isNo}
           onClick={() => onChange(name, 'nein')}
-          className={`h-9 text-sm font-medium transition-all ${
+          className={cn(
+            yesNoBtnBase,
             isNo
-              ? 'bg-slate-700 dark:bg-slate-700 border-slate-800 text-white md:hover:bg-slate-800 shadow-sm'
-              : 'text-slate-700 dark:text-foreground md:hover:bg-slate-100 dark:md:hover:bg-muted'
-          }`}
+              ? 'border-slate-900 bg-slate-800 text-white shadow-md ring-2 ring-slate-600/50 ring-offset-2 ring-offset-background dark:bg-slate-700 dark:border-slate-600'
+              : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 dark:border-border dark:bg-muted/40 dark:text-muted-foreground dark:hover:bg-muted'
+          )}
         >
-          <X className={`w-4 h-4 mr-1.5 ${isNo ? 'text-white' : 'text-slate-500'}`} />
+          <X className={cn('h-4 w-4 shrink-0', isNo ? 'text-white' : 'text-slate-400')} aria-hidden />
           Nein
-        </Button>
+        </button>
       </div>
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
