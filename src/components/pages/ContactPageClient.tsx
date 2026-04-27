@@ -1,16 +1,20 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 // framer-motion removed - CSS for better INP
-import { Mail, Phone, MapPin, Send, Loader2, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Loader2, CheckCircle, ArrowRight, Handshake, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/src/components/ui/use-toast'
 import { createClient } from '@/src/lib/supabase/client'
+import { useAuth } from '@/src/contexts/SupabaseAuthContext'
 
 const ContactPageClient = () => {
   const { toast } = useToast()
+  const { user } = useAuth()
+  const isPartner = user?.user_metadata?.role === 'partner'
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSentSuccessfully, setIsSentSuccessfully] = useState(false)
@@ -91,10 +95,57 @@ const ContactPageClient = () => {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-semibold text-foreground">Erreichbarkeit</h3>
-                    <p className="text-muted-foreground">Montag - Freitag: 08:00 - 17:00 Uhr</p>
-                    <p className="text-muted-foreground">An Wochenenden und Feiertagen geschlossen</p>
+                    <p className="text-muted-foreground">Wir sind rund um die Uhr für Sie erreichbar.</p>
+                    <p className="text-muted-foreground">Um Ihnen so schnell wie möglich weiterzuhelfen, können Sie uns zu jeder Zeit kontaktieren.</p>
                   </div>
                 </div>
+
+                {!isPartner && (
+                  <>
+                    <div className="rounded-xl border border-emerald-200/70 dark:border-emerald-900/50 bg-gradient-to-br from-emerald-50 via-white to-emerald-50/30 dark:from-emerald-950/40 dark:via-card dark:to-emerald-950/20 p-5 shadow-sm">
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-green-100 dark:bg-emerald-950/60 rounded-full">
+                          <Search className="h-5 w-5 text-green-600 dark:text-emerald-400" aria-hidden />
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="text-base font-semibold text-foreground">Sie suchen einen Anbieter?</h3>
+                          <p className="text-sm text-muted-foreground mt-0.5">In wenigen Minuten kostenlos bis zu 5 Offerten erhalten und vergleichen.</p>
+                          <Button
+                            asChild
+                            className="mt-3 bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white"
+                          >
+                            <Link href="/kostenlose-offerte-anfordern" className="inline-flex items-center gap-2">
+                              Jetzt Offerten vergleichen
+                              <ArrowRight className="h-4 w-4" aria-hidden />
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-slate-100 dark:bg-muted rounded-full">
+                          <Handshake className="h-5 w-5 text-slate-700 dark:text-foreground" aria-hidden />
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="text-base font-semibold text-foreground">Sind Sie eine Firma?</h3>
+                          <p className="text-sm text-muted-foreground mt-0.5">Werden Sie Partner und erhalten Sie qualifizierte Anfragen aus Ihrer Region.</p>
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="mt-3 border-emerald-600/60 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-300 dark:border-emerald-700 dark:hover:bg-emerald-950/40"
+                          >
+                            <Link href="/partner-werden" className="inline-flex items-center gap-2">
+                              Jetzt als Firma registrieren
+                              <ArrowRight className="h-4 w-4" aria-hidden />
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div
