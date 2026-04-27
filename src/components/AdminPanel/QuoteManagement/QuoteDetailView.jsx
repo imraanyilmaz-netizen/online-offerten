@@ -3,9 +3,9 @@ import { Badge } from '@/components/ui/badge';
 import { 
     Calendar, Clock, File, Image, Mail, 
     MapPin, MessageSquare, Phone, Truck, User, Building, 
-    Sparkles, Paintbrush, ExternalLink
+    Sparkles, Paintbrush, ExternalLink, ListChecks
 } from 'lucide-react';
-import { getServiceTypeLabel, formatDate, formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
+import { getServiceTypeLabel, formatDate, formatMoveDateLineAdmin, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { countries } from '@/data/countries';
 import CleaningDetails from '@/components/common/CleaningDetails';
 import PaintingDetails from '@/components/common/PaintingDetails';
@@ -121,8 +121,8 @@ const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
         <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-gray-700">
-            <span className="font-semibold text-foreground">E-Mail-Bestätigung:</span>
-            <span className={isConfirmed ? 'text-green-700 font-semibold' : 'text-red-700 font-semibold'}>
+            <span className="font-semibold text-foreground">E-Mail:</span>
+            <span className={isConfirmed ? 'text-green-700 font-semibold' : 'text-muted-foreground font-normal'}>
                 {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
@@ -206,8 +206,11 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
 
           <DetailSection title="Dienstleistungsdetails" icon={getServiceIcon()}>
             <QuoteDetail label="Dienstleistung" value={getServiceTypeLabel(quote.servicetype)} />
-            <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
+            <QuoteDetail noLabel value={formatMoveDateLineAdmin(quote.move_date, quote.move_date_flexible)} />
             <EmailConfirmationDetail quote={quote} />
+            {quote.besichtigung_erwuenscht === true && (
+              <QuoteDetail label="Besichtigung erwünscht" value />
+            )}
             {isMovingService(quote.servicetype) &&
               shouldShowUmzugsartDetail(quote.umzugart, quote.servicetype) && (
                 <QuoteDetail label="Umzugsart" value={quote.umzugart} />
@@ -215,6 +218,22 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
             {isCleaningService(quote.servicetype) && <CleaningDetails details={quote} />}
             {isPaintingService(quote.servicetype) && <PaintingDetails details={quote} />}
           </DetailSection>
+
+          {(quote.additional_services_piano ||
+            quote.additional_services_furniture_assembly ||
+            quote.additional_services_lamp_demontage) && (
+              <div className="bg-card p-4 sm:p-5 rounded-xl border border-border shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <ListChecks className="w-4 h-4 text-emerald-600" />
+                  <h4 className="font-semibold text-sm text-foreground">Zusatzleistungen & Besonderheiten</h4>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <QuoteDetail label="Klavier / Flügel vorhanden" value={!!quote.additional_services_piano} />
+                  <QuoteDetail label="Möbel De-/Montage" value={!!quote.additional_services_furniture_assembly} />
+                  <QuoteDetail label="Lampen Demontage" value={!!quote.additional_services_lamp_demontage} />
+                </div>
+              </div>
+            )}
 
           {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal || quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
             <div className={`grid gap-4 ${(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>

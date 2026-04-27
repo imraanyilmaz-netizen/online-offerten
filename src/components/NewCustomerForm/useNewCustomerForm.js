@@ -66,6 +66,11 @@ const initialFormData = {
   fensterreinigung_scope: '',
   fensterreinigung_zugang: '',
   lagerung: false, // Lagerung field
+  // Service-Detail Ja/Nein Felder (servicespezifisch im Step2_DetailsAndContact)
+  has_piano: '', // 'ja' | 'nein' | '' -> Klavier vorhanden
+  needs_furniture_assembly: '', // 'ja' | 'nein' | '' -> Möbel De-/Montage gewünscht
+  needs_lamp_demontage: '', // 'ja' | 'nein' | '' -> Lampen Demontage gewünscht
+  besichtigung_erwuenscht: '', // 'ja' | 'nein' | '' -> Vor-Ort-Besichtigung gewünscht
 };
 
 const useNewCustomerForm = (initialData = {}) => {
@@ -136,6 +141,8 @@ const useNewCustomerForm = (initialData = {}) => {
           fensterreinigung_zugang: '', what_to_paint: {}, maler_details_other: '',
           maler_current_condition: '',
           lagerung: false, // Reset lagerung state when service changes
+          has_piano: '', needs_furniture_assembly: '',
+          needs_lamp_demontage: '', besichtigung_erwuenscht: '',
         };
       }
       const newErrors = { ...prev.errors };

@@ -4,7 +4,30 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Home, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText, Sparkles } from 'lucide-react';
+import { Home, Loader2, MapPin, ChevronsUpDown, Globe, UserCircle, CalendarDays, Info, Search, Users, FileText, Sparkles, Wrench, Lightbulb, Eye, Check, X } from 'lucide-react';
+
+/** Klaviatur – Lucide hat kein Piano-Icon; passt zu stroke=currentColor wie andere Lucide-Icons */
+const PianoIcon = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden
+  >
+    <rect x="2" y="6" width="20" height="13" rx="1.5" />
+    <line x1="6.5" y1="6" x2="6.5" y2="19" />
+    <line x1="11" y1="6" x2="11" y2="19" />
+    <line x1="15.5" y1="6" x2="15.5" y2="19" />
+    <rect x="4.5" y="6" width="3" height="6.5" rx="0.5" fill="currentColor" stroke="none" />
+    <rect x="9" y="6" width="3" height="6.5" rx="0.5" fill="currentColor" stroke="none" />
+    <rect x="13.5" y="6" width="3" height="6.5" rx="0.5" fill="currentColor" stroke="none" />
+  </svg>
+);
 import { getCityFromZip } from './newFormUtils';
 import { CLEANING_AREA_TYPES_WITH_FIELD } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import CleaningAreaSelect from '@/components/NewCustomerForm/CleaningAreaSelect';
@@ -410,29 +433,77 @@ const AddressBlock = ({ type, formData, handleChange, handleSelectChange, errors
   );
 };
 
-const SectionCard = ({ icon, titleKey, descriptionKey, children }) => {
+const SectionCard = ({ icon, titleKey, descriptionKey, children, hideHeader = false }) => {
   const { t } = useStaticT('newCustomerForm');
   return (
     <Card className="w-full bg-white dark:bg-card shadow-md border-gray-200 dark:border-border rounded-lg overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-emerald-50/70 via-emerald-50/40 to-slate-50 dark:from-emerald-950/40 dark:via-emerald-950/25 dark:to-muted/30 p-3 border-b border-emerald-100 dark:border-emerald-900/50">
-        <div className="flex items-center gap-2">
-          {React.cloneElement(icon, { className: "w-5 h-5 text-green-600 dark:text-primary" })}
-          <div>
-            <CardTitle className="text-sm font-semibold text-slate-800 dark:text-foreground">
-              {t(titleKey)}
-            </CardTitle>
-            {descriptionKey && 
-              <CardDescription className="text-xs text-slate-600 dark:text-muted-foreground mt-0.5">
-                {t(descriptionKey)}
-              </CardDescription>
-            }
+      {!hideHeader && (
+        <CardHeader className="bg-gradient-to-r from-emerald-50/70 via-emerald-50/40 to-slate-50 dark:from-emerald-950/40 dark:via-emerald-950/25 dark:to-muted/30 p-3 border-b border-emerald-100 dark:border-emerald-900/50">
+          <div className="flex items-center gap-2">
+            {icon && React.cloneElement(icon, { className: 'w-5 h-5 text-green-600 dark:text-primary' })}
+            <div>
+              <CardTitle className="text-sm font-semibold text-slate-800 dark:text-foreground">
+                {titleKey ? t(titleKey) : null}
+              </CardTitle>
+              {descriptionKey && (
+                <CardDescription className="text-xs text-slate-600 dark:text-muted-foreground mt-0.5">
+                  {t(descriptionKey)}
+                </CardDescription>
+              )}
+            </div>
           </div>
-        </div>
-      </CardHeader>
+        </CardHeader>
+      )}
       <CardContent className="p-4 space-y-3">
         {children}
       </CardContent>
     </Card>
+  );
+};
+
+const YesNoToggle = ({ name, value, onChange, label, icon, error }) => {
+  const isYes = value === 'ja';
+  const isNo = value === 'nein';
+  return (
+    <div className="space-y-2 p-3 rounded-lg border border-slate-200 dark:border-border bg-slate-50/40 dark:bg-muted/20">
+      <div className="flex items-start gap-2">
+        {icon && <span className="mt-0.5 shrink-0 text-green-600 dark:text-primary">{icon}</span>}
+        <div className="flex-1 min-w-0">
+          <Label className="font-medium text-slate-800 dark:text-foreground text-sm leading-tight block">{label}</Label>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => onChange(name, 'ja')}
+          className={`h-9 text-sm font-medium transition-all ${
+            isYes
+              ? 'bg-green-500 dark:bg-primary border-green-600 dark:border-primary text-white md:hover:bg-green-600 dark:md:hover:bg-primary/90 shadow-sm'
+              : 'text-slate-700 dark:text-foreground md:hover:bg-green-50 dark:md:hover:bg-emerald-950/30 md:hover:border-green-400'
+          }`}
+        >
+          <Check className={`w-4 h-4 mr-1.5 ${isYes ? 'text-white' : 'text-green-600 dark:text-primary'}`} />
+          Ja
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => onChange(name, 'nein')}
+          className={`h-9 text-sm font-medium transition-all ${
+            isNo
+              ? 'bg-slate-700 dark:bg-slate-700 border-slate-800 text-white md:hover:bg-slate-800 shadow-sm'
+              : 'text-slate-700 dark:text-foreground md:hover:bg-slate-100 dark:md:hover:bg-muted'
+          }`}
+        >
+          <X className={`w-4 h-4 mr-1.5 ${isNo ? 'text-white' : 'text-slate-500'}`} />
+          Nein
+        </Button>
+      </div>
+      {error && <p className="text-xs text-red-500">{error}</p>}
+    </div>
   );
 };
 
@@ -547,6 +618,36 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
     (formData.service === 'maler' && formData.umzugArt === 'maler_gewerbe') ||
     (formData.from_object_type === 'gewerbeimmobilie');
 
+  const isUmzugService = formData.service === 'umzug';
+  const isMalerService = formData.service === 'maler';
+  const isRaeumungService = formData.service === 'raeumung';
+  const isReinigungService = formData.service === 'reinigung';
+
+  const showPianoToggle =
+    (isUmzugService && ['privatumzug', 'international', 'lagerung'].includes(formData.umzugArt)) ||
+    isRaeumungService;
+
+  const showFurnitureAssemblyToggle =
+    (isUmzugService && ['privatumzug', 'international', 'lagerung'].includes(formData.umzugArt)) ||
+    isRaeumungService;
+
+  const showLampDemontageToggle =
+    (isUmzugService && ['privatumzug', 'international'].includes(formData.umzugArt)) ||
+    isRaeumungService;
+
+  const showBesichtigungToggle =
+    isUmzugService || isMalerService || isRaeumungService || isReinigungService;
+
+  /** Reinigung / Maler / Geschäftsumzug: keine Klavier-/Montage-/Lampen-Karte (Privat-/Intl.-Umzug & Räumung) */
+  const showServiceDetailsCard =
+    !isReinigungService &&
+    !isMalerService &&
+    (showPianoToggle || showFurnitureAssemblyToggle || showLampDemontageToggle);
+
+  const handleYesNoChange = (name, value) => {
+    handleSelectChange(name, value);
+  };
+
   return (
     <div className="space-y-6">
       {/* Address Blocks - Side by Side (only for move service) */}
@@ -558,7 +659,45 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
       ) : (
         <AddressBlock type="from" formData={formData} handleChange={handleChange} handleSelectChange={handleSelectChange} errors={errors} t={t} isMoveService={isMoveService} />
       )}
-      
+
+      {/* Zusatzleistungen / Service-Details (Ja/Nein Toggles) */}
+      {showServiceDetailsCard && (
+        <SectionCard hideHeader>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {showPianoToggle && (
+              <YesNoToggle
+                name="has_piano"
+                value={formData.has_piano}
+                onChange={handleYesNoChange}
+                label={t('step3.serviceDetailPianoLabel')}
+                icon={<PianoIcon className="w-4 h-4" />}
+                error={errors?.has_piano}
+              />
+            )}
+            {showFurnitureAssemblyToggle && (
+              <YesNoToggle
+                name="needs_furniture_assembly"
+                value={formData.needs_furniture_assembly}
+                onChange={handleYesNoChange}
+                label={t('step3.serviceDetailFurnitureAssemblyLabel')}
+                icon={<Wrench className="w-4 h-4" />}
+                error={errors?.needs_furniture_assembly}
+              />
+            )}
+            {showLampDemontageToggle && (
+              <YesNoToggle
+                name="needs_lamp_demontage"
+                value={formData.needs_lamp_demontage}
+                onChange={handleYesNoChange}
+                label={t('step3.serviceDetailLampDemontageLabel')}
+                icon={<Lightbulb className="w-4 h-4" />}
+                error={errors?.needs_lamp_demontage}
+              />
+            )}
+          </div>
+        </SectionCard>
+      )}
+
       {/* Contact Details and Date - Side by Side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <SectionCard icon={<UserCircle className="w-6 h-6 text-green-600 dark:text-primary" />} titleKey="step3.contactDetailsTitle">
@@ -607,6 +746,18 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
               <Input type="tel" id="phone" name="phone" value={formData.phone || ''} onChange={handleChange} placeholder={t('step3.phonePlaceholder')} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background text-sm h-9"/>
               {errors && errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
             </div>
+            {showBesichtigungToggle && (
+              <div className="md:col-span-2 pt-1">
+                <YesNoToggle
+                  name="besichtigung_erwuenscht"
+                  value={formData.besichtigung_erwuenscht}
+                  onChange={handleYesNoChange}
+                  label={t('step3.serviceDetailBesichtigungLabel')}
+                  icon={<Eye className="w-4 h-4" />}
+                  error={errors?.besichtigung_erwuenscht}
+                />
+              </div>
+            )}
           </div>
         </SectionCard>
         
@@ -626,11 +777,11 @@ const Step2_DetailsAndContact = ({ formData, handleChange, handleSelectChange, h
                 className="flex flex-col gap-1.5"
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="yes" id="move_date_flexible_yes" className="h-4 w-4" />
+                  <RadioGroupItem value="yes" id="move_date_flexible_yes" className="h-6 w-6" />
                   <Label htmlFor="move_date_flexible_yes" className="text-sm font-normal text-slate-700 dark:text-muted-foreground cursor-pointer leading-snug">{t('step3.dateFlexibleOptionYes')}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="no" id="move_date_flexible_no" className="h-4 w-4" />
+                  <RadioGroupItem value="no" id="move_date_flexible_no" className="h-6 w-6" />
                   <Label htmlFor="move_date_flexible_no" className="text-sm font-normal text-slate-700 dark:text-muted-foreground cursor-pointer leading-snug">{t('step3.dateFlexibleOptionNo')}</Label>
                 </div>
               </RadioGroup>

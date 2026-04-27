@@ -197,6 +197,17 @@ export const submitNewQuoteToSupabase = async (formData) => {
     if (formData.additional_services_disposal) serviceSpecificDetails.push('Entsorgung: Ja');
   }
 
+  // Service-Detail Ja/Nein Antworten (servicespezifisch in Step2_DetailsAndContact)
+  const yesNoLabel = (value) => (value === 'ja' ? 'Ja' : value === 'nein' ? 'Nein' : null);
+  const pianoAns = yesNoLabel(formData.has_piano);
+  if (pianoAns) serviceSpecificDetails.push(`Klavier / Flügel vorhanden: ${pianoAns}`);
+  const furnAns = yesNoLabel(formData.needs_furniture_assembly);
+  if (furnAns) serviceSpecificDetails.push(`Möbel De-/Montage gewünscht: ${furnAns}`);
+  const lampAns = yesNoLabel(formData.needs_lamp_demontage);
+  if (lampAns) serviceSpecificDetails.push(`Lampen Demontage gewünscht: ${lampAns}`);
+  const besichAns = yesNoLabel(formData.besichtigung_erwuenscht);
+  if (besichAns) serviceSpecificDetails.push(`Vor-Ort-Besichtigung erwünscht: ${besichAns}`);
+
   // Reinigung: Wohnungsfläche, Art der Reinigung, Zusatzflächen Infos — Privatumzug immer Fläche (auch ohne Endreinigung)
   const isReinigungWithArea =
     formData.service === 'reinigung' && CLEANING_AREA_TYPES_WITH_FIELD.includes(formData.umzugArt);
@@ -420,11 +431,13 @@ export const submitNewQuoteToSupabase = async (formData) => {
     move_date_flexible: formData.move_date_flexible,
     preferredtime: preferredTimeLabel,
     additional_cleaning: formData.additional_cleaning,
-    additional_services_piano: formData.additional_piano || formData.special_transport_piano || false,
-    additional_services_furniture_assembly: formData.furniture_assembly || false,
+    additional_services_piano: formData.additional_piano || formData.special_transport_piano || formData.has_piano === 'ja' || false,
+    additional_services_furniture_assembly: formData.furniture_assembly || formData.needs_furniture_assembly === 'ja' || false,
     additional_services_packing: formData.additional_services_packing || false,
     additional_services_furniture_lift: formData.additional_services_furniture_lift || false,
     additional_services_disposal: formData.additional_services_disposal || false,
+    additional_services_lamp_demontage: formData.needs_lamp_demontage === 'ja' || false,
+    besichtigung_erwuenscht: formData.besichtigung_erwuenscht === 'ja' || false,
     special_transport: formData.special_transport || false,
     special_transport_piano: formData.special_transport_piano || false,
     special_transport_safe: formData.special_transport_safe || false,

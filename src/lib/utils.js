@@ -69,12 +69,42 @@ export function isMoveDateFlexible(moveDateFlexible) {
   return Boolean(moveDateFlexible);
 }
 
-/** „Flexibler Termin – …“ oder „Fester Termin – …“ + formatiertes Datum */
+/** Nur Datumsteil für Umzugstermin: DD.MM.JJJJ (Schweiz/DE), ohne Monatsnamen/Wochentag */
+export function formatMoveDateNumeric(dateString) {
+  if (!dateString) return '';
+  try {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return String(dateString);
+    return format(date, 'dd.MM.yyyy');
+  } catch {
+    return String(dateString ?? '');
+  }
+}
+
+/** „Flexibler Termin – …“ oder „Fester Termin – …“ + Datum als Ziffern DD.MM.JJJJ */
 export function formatMoveDateLine(moveDate, moveDateFlexible) {
-  const datePart = formatDate(moveDate);
+  const datePart = formatMoveDateNumeric(moveDate);
   if (!datePart) return '';
   const prefix = isMoveDateFlexible(moveDateFlexible) ? 'Flexibler Termin' : 'Fester Termin';
   return `${prefix} – ${datePart}`;
+}
+
+/**
+ * Admin-Ansicht: zusätzlich Wochentag (Deutsch), Datum weiter DD.MM.JJJJ
+ * z. B. „Flexibler Termin – Sonntag, 24.05.2026“
+ */
+export function formatMoveDateLineAdmin(moveDate, moveDateFlexible) {
+  if (!moveDate) return '';
+  try {
+    const date = new Date(moveDate);
+    if (Number.isNaN(date.getTime())) return '';
+    const weekday = format(date, 'EEEE', { locale: de });
+    const dateNum = format(date, 'dd.MM.yyyy');
+    const prefix = isMoveDateFlexible(moveDateFlexible) ? 'Flexibler Termin' : 'Fester Termin';
+    return `${prefix} – ${weekday}, ${dateNum}`;
+  } catch {
+    return '';
+  }
 }
 
 /**

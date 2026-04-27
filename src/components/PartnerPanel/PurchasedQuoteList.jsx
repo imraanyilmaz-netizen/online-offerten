@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { ShoppingCart, User, Phone, Mail, MapPin, CalendarDays, Archive, Building, Truck, Sparkles, Paintbrush, MessageSquare, ChevronLeft, ChevronRight, ExternalLink, AlertTriangle, Clock, CheckCircle, XCircle, ListChecks } from 'lucide-react';
 import { formatDate, formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 import { countries } from '@/data/countries';
@@ -32,8 +32,8 @@ const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
         <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-foreground">
-            <span className="font-bold text-foreground">E-Mail-Bestätigung:</span>
-            <span className={isConfirmed ? 'text-green-700 dark:text-emerald-400 font-semibold' : 'text-red-700 dark:text-red-400 font-semibold'}>
+            <span className="font-bold text-foreground">E-Mail:</span>
+            <span className={isConfirmed ? 'text-green-700 dark:text-emerald-400 font-semibold' : 'text-muted-foreground font-normal'}>
                 {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
@@ -269,8 +269,8 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                       <div className="flex items-start gap-3 py-2 border-b last:border-b-0">
                         <div className="mt-1 text-muted-foreground"></div>
                         <div>
-                          <p className="text-xs text-muted-foreground">E-Mail-Bestätigung</p>
-                          <p className={`text-sm font-medium ${quote.email_confirmed ? 'text-green-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
+                          <p className="text-xs text-muted-foreground">E-Mail</p>
+                          <p className={quote.email_confirmed ? 'text-sm font-medium text-green-700 dark:text-emerald-400' : 'text-sm text-muted-foreground'}>
                             {quote.email_confirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
                           </p>
                         </div>
@@ -280,6 +280,12 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                   <DetailSection title="Dienstleistungsdetails" icon={icon}>
                       <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
                       <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
+                      {quote.besichtigung_erwuenscht === true && (
+                        <QuoteDetail
+                          label="Besichtigung erwünscht"
+                          value
+                        />
+                      )}
                       {isMoving && shouldShowUmzugsartDetail(quote.umzugart, quote.servicetype) && (
                         <QuoteDetail label="Umzugsart" value={quote.umzugart} />
                       )}
@@ -320,6 +326,7 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                       )}
                     </div>
                   )}
+
                 </div>
 
                 <div className="space-y-4">
@@ -330,6 +337,19 @@ const PurchasedQuoteList = ({ quotes, onArchiveQuote, onRequestRefund, refundReq
                               <AddressBox title="Einzugsadresse" quote={quote} type="to" />
                           )}
                       </div>
+                      {(quote.additional_services_piano ||
+                        quote.additional_services_furniture_assembly ||
+                        quote.additional_services_lamp_demontage) && (
+                        <div className="space-y-2 border-t border-border pt-3 mt-3">
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <ListChecks className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                            <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Zusatzleistungen</span>
+                          </div>
+                          <QuoteDetail label="Klavier" value={!!quote.additional_services_piano} />
+                          <QuoteDetail label="Möbel De-/Montage" value={!!quote.additional_services_furniture_assembly} />
+                          <QuoteDetail label="Lampen Demontage" value={!!quote.additional_services_lamp_demontage} />
+                        </div>
+                      )}
                   </DetailSection>
 
                 </div>

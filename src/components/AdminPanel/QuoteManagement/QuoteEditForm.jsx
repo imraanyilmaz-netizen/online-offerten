@@ -218,6 +218,33 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
             )}
         </Fieldset>
 
+        <Fieldset legend="Zusatzleistungen & Besonderheiten">
+            <CheckboxField
+              id="additional_services_piano"
+              label="Klavier / Flügel vorhanden"
+              checked={formData.additional_services_piano || false}
+              onChange={(checked) => handleCheckboxChange('additional_services_piano', checked)}
+            />
+            <CheckboxField
+              id="additional_services_furniture_assembly"
+              label="Möbel De-/Montage"
+              checked={formData.additional_services_furniture_assembly || false}
+              onChange={(checked) => handleCheckboxChange('additional_services_furniture_assembly', checked)}
+            />
+            <CheckboxField
+              id="additional_services_lamp_demontage"
+              label="Lampen Demontage"
+              checked={formData.additional_services_lamp_demontage || false}
+              onChange={(checked) => handleCheckboxChange('additional_services_lamp_demontage', checked)}
+            />
+            <CheckboxField
+              id="besichtigung_erwuenscht"
+              label="Besichtigung erwünscht"
+              checked={formData.besichtigung_erwuenscht || false}
+              onChange={(checked) => handleCheckboxChange('besichtigung_erwuenscht', checked)}
+            />
+        </Fieldset>
+
         {showReinigungFields && (
         <Fieldset legend="Reinigung – Zusatzinfos">
             <FormField id="cleaning_area_sqm" label="Wohnungsfläche">

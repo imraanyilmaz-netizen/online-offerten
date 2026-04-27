@@ -18,8 +18,8 @@ export const QuoteDetail = ({ label, value, icon: Icon, className = '', noLabel 
     <div className={`flex items-start gap-2 text-sm ${className}`}>
       {Icon && <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />}
       <div>
-        <span className="font-bold text-foreground">{label}:</span>{' '}
-        <span className="text-muted-foreground">{displayValue}</span>
+        <span className="font-normal text-muted-foreground">{label}:</span>{' '}
+        <span className="font-bold text-foreground">{displayValue}</span>
       </div>
     </div>
   );

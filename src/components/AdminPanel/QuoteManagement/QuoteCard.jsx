@@ -12,7 +12,7 @@ import { format, isAfter, subDays } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 import { useToast } from '@/src/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
-import { formatMoveDateLine, normalizeFloorLabel } from '@/lib/utils';
+import { formatMoveDateLineAdmin, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
 
 const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expandedView, purchasers = [], rejections = [], children, onUpdateQuote, isProcessing: parentIsProcessing, allPartners = [], onSendToAdditionalPartners, onUpdatePurchaseQuota, onMarkSoldOut }) => {
@@ -325,7 +325,7 @@ const QuoteCard = ({ quote, onToggleView, onSend, onArchive, onRestore, expanded
                   <EmailConfirmationStatus />
                 </div>
                 <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-muted-foreground">
-                  <p className="font-bold text-foreground">{quote.move_date ? formatMoveDateLine(quote.move_date, quote.move_date_flexible) : 'N/A'}</p>
+                  <p className="font-bold text-foreground">{quote.move_date ? formatMoveDateLineAdmin(quote.move_date, quote.move_date_flexible) : 'N/A'}</p>
                 </div>
               </div>
 

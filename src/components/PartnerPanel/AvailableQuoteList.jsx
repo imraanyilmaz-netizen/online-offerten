@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { MapPin, Calendar, Truck, Eye, CheckCircle, Package, Ban, Star, MessageSquare, Sparkles, Paintbrush } from 'lucide-react';
+import { MapPin, Calendar, Truck, Eye, CheckCircle, Package, Ban, Star, MessageSquare, Sparkles, Paintbrush, Phone } from 'lucide-react';
 import QuoteImages from './QuoteImages';
 import QuoteFiles from './QuoteFiles';
 import { countries } from '@/data/countries';
@@ -72,8 +72,8 @@ const EmailConfirmationDetail = ({ quote }) => {
     const isConfirmed = quote.email_confirmed;
     return (
         <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0 text-sm text-muted-foreground">
-            <span className="font-bold text-foreground">E-Mail-Bestätigung:</span>
-            <span className={isConfirmed ? 'text-green-700 dark:text-emerald-400 font-semibold' : 'text-red-700 dark:text-red-400 font-semibold'}>
+            <span className="font-bold text-foreground">E-Mail:</span>
+            <span className={isConfirmed ? 'text-green-700 dark:text-emerald-400 font-semibold' : 'text-muted-foreground font-normal'}>
                 {isConfirmed ? 'Bestätigt' : 'Noch nicht bestätigt'}
             </span>
         </div>
@@ -341,6 +341,12 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                           <DetailSection title="Dienstleistungsdetails" icon={icon}>
                               <QuoteDetail label="Dienstleistung" value={quote.servicetype} />
                               <QuoteDetail noLabel value={formatMoveDateLine(quote.move_date, quote.move_date_flexible)} />
+                              {quote.besichtigung_erwuenscht === true && (
+                                <QuoteDetail
+                                  label="Besichtigung erwünscht"
+                                  value
+                                />
+                              )}
                               {(quote.cleaning_area_sqm || quote.cleaning_type_guarantee || quote.cleaning_additional_balcony || quote.cleaning_additional_cellar || quote.cleaning_additional_garage) && (
                                 <div className="space-y-2 border-t border-border pt-3 mt-2">
                                   {quote.cleaning_area_sqm && (
@@ -375,6 +381,15 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                                       <AddressBox title="Nach Adresse" quote={quote} type="to" />
                                   )}
                               </div>
+                              {(quote.additional_services_piano ||
+                                quote.additional_services_furniture_assembly ||
+                                quote.additional_services_lamp_demontage) && (
+                                <div className="space-y-2 border-t border-border pt-3 mt-3">
+                                  <QuoteDetail label="Klavier" value={!!quote.additional_services_piano} />
+                                  <QuoteDetail label="Möbel De-/Montage" value={!!quote.additional_services_furniture_assembly} />
+                                  <QuoteDetail label="Lampen Demontage" value={!!quote.additional_services_lamp_demontage} />
+                                </div>
+                              )}
                           </DetailSection>
                         </div>
 
@@ -427,6 +442,14 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                                 </>
                             )}
                         </div>
+                        {quote.phone_preview && (
+                          <div className="rounded-lg border border-border bg-muted/25 px-3 py-2.5 text-center text-xs space-y-1.5">
+                            <div className="flex items-center justify-center gap-1.5 text-muted-foreground">
+                              <Phone className="w-3.5 h-3.5 shrink-0 opacity-80" aria-hidden />
+                              <span className="font-medium tabular-nums text-foreground">{quote.phone_preview}</span>
+                            </div>
+                          </div>
+                        )}
                         <div className="flex flex-col gap-2">
                            <Button 
                                 size="lg" 
