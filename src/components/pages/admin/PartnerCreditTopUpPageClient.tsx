@@ -6,17 +6,20 @@ import Link from 'next/link';
 import React, { useState, useCallback, useEffect } from 'react';
 // Removed useTranslation
 // framer-motion removed - CSS for better INP
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/src/components/ui/use-toast';
-import { CreditCard, ArrowLeft, Loader2, Zap, AlertCircle, ShieldX } from 'lucide-react';
+import { CreditCard, ArrowLeft, Loader2, AlertCircle, ShieldX, FileText } from 'lucide-react';
 import { useAuth } from '@/src/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 import PaymentModal from '@/components/PartnerPanel/PaymentModal';
+import PaymentReportCard from '@/components/PartnerPanel/PaymentReportCard';
+import { MastercardLogo, VisaLogo } from '@/components/icons/PaymentBrands';
 
-const quickAmounts = [50, 100, 200];
+const quickAmounts = [100, 200, 500, 1000];
 
 /** app_settings.value JSON for key `topup_settings` (DB types may omit this table) */
 type TopupSettingsRow = {
@@ -200,8 +203,8 @@ const PartnerCreditTopUpPageClient = () => {
           />
         )}
       
-      <div className="min-h-screen lg:min-h-0 bg-background lg:bg-transparent p-4 sm:p-6 lg:p-10 flex items-center justify-center">
-        <div className="w-full max-w-md">
+      <div className="min-h-screen lg:min-h-0 bg-background lg:bg-transparent p-4 sm:p-6 lg:p-10 flex items-start lg:items-center justify-center">
+        <div className="w-full max-w-2xl space-y-6">
           <div className="mb-4 lg:hidden">
             <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
               <Link href="/partner/dashboard">
@@ -230,88 +233,108 @@ const PartnerCreditTopUpPageClient = () => {
             )}
           
           
-          <Card className="shadow-lg animate-fade-in">
-            <CardHeader className="text-center">
-              <div className="mx-auto bg-green-100 dark:bg-emerald-950/45 p-4 rounded-full w-fit mb-4">
-                <Zap className="h-8 w-8 text-green-600 dark:text-emerald-400" />
-              </div>
-              <CardTitle className="text-3xl font-bold">Guthaben aufladen</CardTitle>
-              <CardDescription className="text-lg text-muted-foreground">Sie werden zur sicheren Zahlungsseite weitergeleitet.</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="amount" className="text-lg font-medium">Betrag eingeben</Label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-semibold">CHF</span>
-                    <Input
-                      id="amount"
-                      type="text"
-                      value={amount}
-                      onChange={handleAmountChange}
-                      placeholder="100.00"
-                      className="pl-14 text-2xl h-14 font-bold text-center"
-                    />
-                  </div>
-                  
-                    {error && (
-                      <p
-                        className="text-sm font-medium text-red-600 flex items-center pt-1"
-                      >
-                        <AlertCircle className="w-4 h-4 mr-1.5" />
-                        {error}
-                      </p>
-                    )}
-                  
-                </div>
-
-                <div className="flex justify-center items-center gap-3">
-                  {quickAmounts.map((qAmount) => (
-                    <Button
-                      key={qAmount}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleQuickAmountClick(qAmount)}
-                      className="rounded-full"
-                    >
-                      {qAmount} CHF
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div
-                className="mt-8"
+          <Tabs defaultValue="topup" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 h-12 p-1 bg-transparent gap-2">
+              <TabsTrigger
+                value="topup"
+                className="h-10 text-sm font-semibold gap-2 rounded-md border-2 border-transparent bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:border-green-600 data-[state=active]:text-green-700 data-[state=active]:shadow-none dark:data-[state=active]:border-emerald-500 dark:data-[state=active]:text-emerald-400"
               >
-                <Button
-                  onClick={handleTopUp}
-                  className="w-full text-lg py-6"
-                  size="lg"
-                  disabled={isLoading || !!error}
-                >
-                  
-                    {isLoading ? (
-                      <div
-                        key="loader"
-                        className="flex items-center"
-                      >
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        Wird verarbeitet...
+                <CreditCard className="h-4 w-4" />
+                Guthaben aufladen
+              </TabsTrigger>
+              <TabsTrigger
+                value="report"
+                className="h-10 text-sm font-semibold gap-2 rounded-md border-2 border-transparent bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground data-[state=active]:bg-transparent data-[state=active]:border-green-600 data-[state=active]:text-green-700 data-[state=active]:shadow-none dark:data-[state=active]:border-emerald-500 dark:data-[state=active]:text-emerald-400"
+              >
+                <FileText className="h-4 w-4" />
+                Zahlungsübersicht
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="topup" className="mt-4 animate-fade-in">
+              <Card className="shadow-lg">
+                <CardContent className="p-6 pt-6">
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="amount" className="text-lg font-medium">Betrag eingeben</Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-semibold">CHF</span>
+                        <Input
+                          id="amount"
+                          type="text"
+                          value={amount}
+                          onChange={handleAmountChange}
+                          placeholder="100.00"
+                          className="pl-14 text-2xl h-14 font-bold text-center"
+                        />
                       </div>
-                    ) : (
-                      <div
-                        key="pay"
-                        className="flex items-center"
-                      >
-                        <CreditCard className="mr-2 h-5 w-5" />
-                        Betrag zahlen
+
+                      {error && (
+                        <p className="text-sm font-medium text-red-600 flex items-center pt-1">
+                          <AlertCircle className="w-4 h-4 mr-1.5" />
+                          {error}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3">
+                      {quickAmounts.map((qAmount) => (
+                        <Button
+                          key={qAmount}
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleQuickAmountClick(qAmount)}
+                          className="rounded-full"
+                        >
+                          {qAmount} CHF
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-8 space-y-3">
+                    <Button
+                      onClick={handleTopUp}
+                      className="w-full text-lg py-6 font-bold uppercase tracking-wider"
+                      size="lg"
+                      disabled={isLoading || !!error}
+                    >
+                      {isLoading ? (
+                        <div key="loader" className="flex items-center">
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Wird verarbeitet...
+                        </div>
+                      ) : (
+                        <div key="pay" className="flex items-center">
+                          <CreditCard className="mr-2 h-5 w-5" />
+                          Aufladen
+                        </div>
+                      )}
+                    </Button>
+                    <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border">
+                      <div className="flex flex-col items-center gap-1.5">
+                        <span className="text-xs text-muted-foreground">Kreditkarte</span>
+                        <div className="flex items-center gap-2">
+                          <MastercardLogo className="h-6 w-auto" />
+                          <VisaLogo className="h-5 w-auto" />
+                        </div>
                       </div>
-                    )}
-                  
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+                      <div className="flex flex-col items-center gap-1 border-l border-border">
+                        <span className="text-xs text-muted-foreground">Anbieter</span>
+                        <span className="text-2xl font-extrabold leading-none tracking-tight text-[#635BFF]">
+                          stripe
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="report" className="mt-4 animate-fade-in">
+              <PaymentReportCard partnerId={user.id} />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </>

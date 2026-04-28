@@ -131,35 +131,6 @@ const AddressBox = ({ title, icon: Icon, quote, type }) => {
     );
 };
 
-const formatWithUnd = (items) => {
-  if (!items || items.length === 0) return '';
-  if (items.length === 1) return items[0];
-  if (items.length === 2) return `${items[0]} und ${items[1]}`;
-  return `${items.slice(0, -1).join(', ')} und ${items[items.length - 1]}`;
-};
-
-const getMovingExtrasText = (quote) => {
-  const selectedSpecialTransports = [
-    quote.special_transport_piano && 'Klavier',
-    quote.special_transport_safe && 'Tresor',
-    quote.special_transport_heavy && 'Flügel',
-  ].filter(Boolean);
-
-  const selectedMovingExtras = [
-    quote.additional_services_furniture_assembly && 'Möbel-De-/Montage',
-    quote.additional_services_packing && 'Einpackservice',
-    quote.additional_services_disposal && 'Entsorgung',
-    ...(quote.special_transport
-      ? selectedSpecialTransports.length > 0
-        ? selectedSpecialTransports
-        : ['Spezialtransporte']
-      : []),
-  ].filter(Boolean);
-
-  return formatWithUnd(selectedMovingExtras);
-};
-
-
 const RejectionDialog = ({ open, onOpenChange, onConfirm }) => {
   const [reason, setReason] = useState('');
 
@@ -286,7 +257,6 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
           const unreadAccent = !quote.is_viewed ? 'border-l-4 border-l-green-500' : '';
           const serviceCategory = getServiceCategory(quote.servicetype);
           const icon = serviceCategory === 'moving' ? Truck : (serviceCategory === 'cleaning' ? Sparkles : Paintbrush);
-          const movingExtrasText = getMovingExtrasText(quote);
 
           const isPurchasing = purchasingId === quote.id;
           const isRejecting = rejectingId === quote.id;
@@ -392,19 +362,6 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                               )}
                           </DetailSection>
                         </div>
-
-                        {/* Umzug – Zusatzleistungen (Reinigungsfelder siehe Dienstleistungsdetails) */}
-                        {(quote.additional_services_furniture_assembly || quote.additional_services_packing || quote.special_transport || quote.additional_services_disposal) && (
-                          <div className="bg-card border-border p-4 rounded-lg border shadow-sm">
-                            <div className="flex items-center gap-2 mb-3">
-                              <Truck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                              <h4 className="font-semibold text-sm text-foreground">Umzug – Zusatzleistungen</h4>
-                            </div>
-                            <div className="space-y-2">
-                              {movingExtrasText && <QuoteDetail label="Umzug inkl." value={movingExtrasText} />}
-                            </div>
-                          </div>
-                        )}
 
                         {quote.additional_info && (
                             <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
