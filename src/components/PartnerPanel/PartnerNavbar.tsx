@@ -10,7 +10,6 @@ import {
   X,
   LayoutDashboard,
   Settings,
-  Wallet,
   LogOut,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -36,7 +35,6 @@ type TopLink = {
 const TOP_LINKS: TopLink[] = [
   { href: '/partner/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/partner/einstellungen', label: 'Einstellungen', icon: Settings },
-  { href: '/partner/credit-top-up', label: 'Guthaben aufladen', icon: Wallet, primary: true },
 ]
 
 /**

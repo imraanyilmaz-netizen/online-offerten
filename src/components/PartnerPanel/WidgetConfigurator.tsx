@@ -312,16 +312,7 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
     return `<div id="online-offerten-widget"\n     ${attrs.join('\n     ')}>\n</div>\n<script src="${BASE_URL}/widget/reviews.js" async><\/script>`
   }
 
-  function buildWpCode() {
-    let code = `[online_offerten_reviews partner_id="${partnerSlug}" type="${widgetType}" theme="${theme}"`
-    if (widgetType === 'list' || widgetType === 'carousel') code += ` limit="${limit}"`
-    if (widgetType === 'carousel') code += ` autoplay="${autoplay}"`
-    code += ` position="${position}"`
-    return code + ']'
-  }
-
   const embedCode = buildEmbedCode()
-  const wordpressCode = buildWpCode()
 
   const handleCopy = async (text: string, id: string) => {
     try {
@@ -465,32 +456,6 @@ export default function WidgetConfigurator({ partnerId, partnerSlug }: WidgetCon
             <Button variant="outline" size="sm" className="absolute top-2 right-2 bg-card border-border" onClick={() => handleCopy(embedCode, 'html')}>
               {copied === 'html' ? <><Check className="h-3.5 w-3.5 mr-1.5 text-green-600" /> Kopiert!</> : <><Copy className="h-3.5 w-3.5 mr-1.5" /> Kopieren</>}
             </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base flex items-center gap-2">
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM3.009 12c0-1.717.49-3.32 1.333-4.683L8.63 18.73A8.99 8.99 0 013.009 12zm8.991 9a8.95 8.95 0 01-2.722-.423l2.89-8.396 2.96 8.112a.86.86 0 00.065.152A8.95 8.95 0 0112 21zm1.237-13.158c.58-.03 1.102-.089 1.102-.089.519-.06.458-.823-.06-.794 0 0-1.56.122-2.567.122-.948 0-2.538-.122-2.538-.122-.519-.03-.579.764-.06.794 0 0 .492.06 1.012.089l1.504 4.122-2.113 6.338-3.516-10.46c.58-.03 1.102-.089 1.102-.089.519-.06.458-.823-.06-.794 0 0-1.56.122-2.567.122-.18 0-.393-.005-.618-.013A8.978 8.978 0 0112 3.009c2.345 0 4.484.9 6.086 2.372-.039-.003-.076-.009-.116-.009-1.57 0-1.931 1.183-1.931 1.967 0 .645.34 1.192.703 1.838.274.47.593 1.074.593 1.945 0 .604-.232 1.304-.538 2.28l-.706 2.357-2.563-7.617zm4.717 11.004l2.357-6.812c.441-1.1.587-1.979.587-2.762 0-.284-.019-.547-.052-.796A8.96 8.96 0 0120.991 12a8.98 8.98 0 01-3.046 6.746z"/></svg>
-            WordPress Shortcode
-          </CardTitle>
-          <CardDescription>Falls Sie WordPress verwenden: Installieren Sie unser Plugin und nutzen Sie diesen Shortcode.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="relative">
-            <pre className="bg-gray-900 text-blue-400 p-4 rounded-lg text-xs overflow-x-auto leading-relaxed">{wordpressCode}</pre>
-            <Button variant="outline" size="sm" className="absolute top-2 right-2 bg-card border-border" onClick={() => handleCopy(wordpressCode, 'wp')}>
-              {copied === 'wp' ? <><Check className="h-3.5 w-3.5 mr-1.5 text-green-600" /> Kopiert!</> : <><Copy className="h-3.5 w-3.5 mr-1.5" /> Kopieren</>}
-            </Button>
-          </div>
-          <div className="bg-blue-50 border border-blue-200 dark:bg-blue-950/40 dark:border-blue-800 rounded-lg p-4 text-sm text-blue-800 dark:text-blue-200">
-            <p className="font-semibold mb-1">WordPress-Anleitung:</p>
-            <ol className="list-decimal list-inside space-y-1 text-xs text-blue-700 dark:text-blue-300/90">
-              <li>Laden Sie unser WordPress-Plugin herunter oder fügen Sie den HTML-Code direkt in ein &quot;Benutzerdefiniertes HTML&quot;-Widget ein.</li>
-              <li>Alternativ können Sie den HTML Embed-Code (oben) direkt in einen HTML-Block oder das Theme einfügen.</li>
-              <li>Das Widget lädt automatisch Ihre neuesten Bewertungen von Online-Offerten.ch.</li>
-            </ol>
           </div>
         </CardContent>
       </Card>

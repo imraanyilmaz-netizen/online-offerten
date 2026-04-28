@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { MapPin, Calendar, Truck, Eye, CheckCircle, Package, Ban, Star, MessageSquare, Sparkles, Paintbrush, Phone } from 'lucide-react';
+import { MapPin, Calendar, Truck, CheckCircle, Package, Ban, Star, MessageSquare, Sparkles, Paintbrush, Phone, Clock } from 'lucide-react';
 import QuoteImages from './QuoteImages';
 import QuoteFiles from './QuoteFiles';
 import { countries } from '@/data/countries';
@@ -14,6 +14,20 @@ import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
 import { formatMoveDateLine, shouldShowUmzugsartDetail, normalizeFloorLabel } from '@/lib/utils';
 import { getCleaningAreaSqmLabel } from '@/components/NewCustomerForm/cleaningAreaOptions';
+
+/** Format ISO-Datum als `DD.MM.YYYY, HH:MM` (de-CH). */
+const formatRequestedAt = (iso) => {
+  if (!iso) return '';
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return '';
+  return new Intl.DateTimeFormat('de-CH', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date);
+};
 
 /** Kauf-Limit (Admin) oder Kundenwunsch «Anzahl Offerten» */
 function getLeadSlotMeta(quote) {
@@ -274,9 +288,16 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                 <CardHeader className="p-0">
                   <AccordionTrigger
                     onClick={() => handleTriggerClick(quote)}
-                    className="flex items-center justify-between w-full p-4 text-left hover:bg-muted/50 data-[state=open]:bg-muted/40"
+                    className="flex items-center justify-between w-full p-4 text-left hover:bg-muted/50 data-[state=open]:bg-muted/40 [&>svg]:h-7 [&>svg]:w-7 [&>svg]:rounded-full [&>svg]:border [&>svg]:border-border [&>svg]:bg-card [&>svg]:p-1 [&>svg]:text-muted-foreground [&>svg]:ml-2 hover:[&>svg]:border-green-600 hover:[&>svg]:text-green-600 dark:hover:[&>svg]:border-emerald-500 dark:hover:[&>svg]:text-emerald-400"
                   >
                     <div className="flex-1 min-w-0">
+                      {quote.created_at && (
+                        <span className="sm:hidden inline-flex items-center gap-1 text-[11px] text-muted-foreground whitespace-nowrap mb-1" title="Anfragedatum">
+                          <Clock className="w-3 h-3 shrink-0" />
+                          <span className="font-medium">Anfragedatum:</span>
+                          {formatRequestedAt(quote.created_at)}
+                        </span>
+                      )}
                       {(() => {
                         const Icon = icon;
                         return (
@@ -297,9 +318,17 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                         </span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 ml-4">
-                      {!quote.is_viewed && <Badge variant="destructive" className="animate-pulse">Neu</Badge>}
-                      <Eye className={`w-5 h-5 ${quote.is_viewed ? 'text-green-500 dark:text-primary' : 'text-muted-foreground'}`} />
+                    <div className="flex flex-col items-end gap-1.5 ml-4 shrink-0">
+                      {quote.created_at && (
+                        <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-muted-foreground whitespace-nowrap" title="Anfragedatum">
+                          <Clock className="w-3 h-3 shrink-0" />
+                          <span className="font-medium">Anfragedatum:</span>
+                          {formatRequestedAt(quote.created_at)}
+                        </span>
+                      )}
+                      {!quote.is_viewed && (
+                        <Badge variant="destructive" className="animate-pulse">Neu</Badge>
+                      )}
                     </div>
                   </AccordionTrigger>
                 </CardHeader>
