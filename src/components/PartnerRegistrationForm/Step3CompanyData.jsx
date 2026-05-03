@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building, MapPin, Briefcase, ShieldCheck, Lock, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { normalizeWebsite } from '@/lib/normalizeWebsite';
 
 const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} }) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -31,6 +32,24 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
     onValueChange(id, value);
   };
 
+  const handleWebsiteFocus = (e) => {
+    if (!e.target.value || e.target.value.trim().length === 0) {
+      onValueChange('website', 'https://');
+    }
+  };
+
+  const handleWebsiteBlur = (e) => {
+    const value = e.target.value;
+    if (value === 'https://' || value === 'http://') {
+      onValueChange('website', '');
+      return;
+    }
+    const normalized = normalizeWebsite(value);
+    if (normalized !== value) {
+      onValueChange('website', normalized);
+    }
+  };
+
   return (
     <div className="space-y-8">
     <div>
@@ -41,10 +60,10 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
       <div className="space-y-6">
         
         <Card className="border-2 border-border shadow-sm">
-          <CardHeader className="bg-gradient-to-r from-muted/60 to-muted border-b border-border dark:from-muted/40 dark:to-muted/60">
+          <CardHeader className="bg-gradient-to-r from-muted/60 to-muted border-b border-border dark:from-green-950/45 dark:to-emerald-950/30 dark:border-green-900/45">
             <CardTitle className="flex items-center gap-3 text-xl font-bold text-foreground">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <Building className="h-5 w-5 text-green-600" />
+              <div className="p-2 bg-green-100 rounded-lg dark:bg-green-900/50">
+                <Building className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
               Kontaktdaten & Firmenadresse
             </CardTitle>
@@ -169,15 +188,15 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
           </CardContent>
         </Card>
 
-        <Card className="border-2 border-green-200 bg-gradient-to-br from-green-50/50 to-emerald-50/30 shadow-sm">
-          <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-200">
-            <CardTitle className="flex items-center gap-3 text-xl font-bold text-green-900">
-              <div className="p-2 bg-green-100 rounded-lg">
-              <Lock className="h-5 w-5 text-green-600" />
+        <Card className="border-2 border-green-200 bg-gradient-to-br from-green-50/50 to-emerald-50/30 shadow-sm dark:border-green-800/70 dark:from-green-950/40 dark:to-emerald-950/30">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-200 dark:from-green-950/55 dark:to-emerald-950/45 dark:border-green-800/70">
+            <CardTitle className="flex items-center gap-3 text-xl font-bold text-green-900 dark:text-green-100">
+              <div className="p-2 bg-green-100 rounded-lg dark:bg-green-900/55">
+              <Lock className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
               Partner Panel Zugang
             </CardTitle>
-            <p className="text-sm text-green-700 mt-2">
+            <p className="text-sm text-green-700 mt-2 dark:text-green-300/90">
               Erstellen Sie ein sicheres Passwort für den Zugang zu Ihrem Partner-Dashboard
             </p>
           </CardHeader>
@@ -185,7 +204,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-sm font-semibold text-foreground flex items-center gap-2">
-                  <Lock size={16} className="text-green-600" />
+                  <Lock size={16} className="text-green-600 dark:text-green-400" />
                   Passwort <span className="text-red-500">*</span>
                 </Label>
                 <div className="relative">
@@ -222,7 +241,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
               </div>
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword" className="text-sm font-semibold text-foreground flex items-center gap-2">
-                  <Lock size={16} className="text-green-600" />
+                  <Lock size={16} className="text-green-600 dark:text-green-400" />
                   Passwort bestätigen <span className="text-red-500">*</span>
                 </Label>
                 <div className="relative">
@@ -263,14 +282,14 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
         </Card>
 
         <Card className="border-2 border-border shadow-sm">
-          <CardHeader className="bg-gradient-to-r from-muted/60 to-muted border-b border-border dark:from-muted/40 dark:to-muted/60">
+          <CardHeader className="bg-gradient-to-r from-muted/60 to-muted border-b border-border dark:from-green-950/45 dark:to-emerald-950/30 dark:border-green-900/45">
             <CardTitle className="flex items-center gap-3 text-xl font-bold text-foreground">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <Briefcase className="h-5 w-5 text-purple-600" />
+              <div className="p-2 bg-purple-100 rounded-lg dark:bg-purple-950/55">
+                <Briefcase className="h-5 w-5 text-purple-600 dark:text-purple-400" />
               </div>
               Zusätzliche Details
             </CardTitle>
-            <p className="text-sm text-muted-foreground mt-2">Optionale Informationen über Ihr Unternehmen</p>
+            <p className="text-sm text-muted-foreground mt-2 dark:text-muted-foreground/90">Optionale Informationen über Ihr Unternehmen</p>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -278,11 +297,19 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                 <Label htmlFor="website" className="text-sm font-semibold text-foreground">
                   Website
                 </Label>
-                <Input 
-                  id="website" 
-                  value={formData.website} 
-                  onChange={onInputChange} 
-                  placeholder="https://www.beispiel.ch"
+                <Input
+                  id="website"
+                  name="website"
+                  type="text"
+                  inputMode="url"
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  value={formData.website}
+                  onChange={onInputChange}
+                  onFocus={handleWebsiteFocus}
+                  onBlur={handleWebsiteBlur}
+                  placeholder="z. B. online-offerten.ch"
                   className="h-11 border-border focus-visible:ring-green-500"
                 />
               </div>
@@ -372,11 +399,11 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
           </CardContent>
         </Card>
 
-        <Card className={`border-2 shadow-sm ${errors.agreedToTerms ? "border-red-200 bg-red-50/30" : "border-green-200 bg-gradient-to-br from-green-50/50 to-emerald-50/30"}`}>
-          <CardHeader className={`border-b ${errors.agreedToTerms ? "bg-red-50 border-red-200" : "bg-gradient-to-r from-green-50 to-emerald-50 border-green-200"}`}>
+        <Card className={`border-2 shadow-sm ${errors.agreedToTerms ? "border-red-200 bg-red-50/30 dark:border-red-900 dark:bg-red-950/25" : "border-green-200 bg-gradient-to-br from-green-50/50 to-emerald-50/30 dark:border-green-800/70 dark:from-green-950/40 dark:to-emerald-950/30"}`}>
+          <CardHeader className={`border-b ${errors.agreedToTerms ? "bg-red-50 border-red-200 dark:bg-red-950/45 dark:border-red-900/80" : "bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 dark:from-green-950/55 dark:to-emerald-950/45 dark:border-green-800/70"}`}>
             <CardTitle className="flex items-center gap-3 text-xl font-bold text-foreground">
-              <div className={`p-2 rounded-lg ${errors.agreedToTerms ? "bg-red-100" : "bg-green-100"}`}>
-                <ShieldCheck className={`h-5 w-5 ${errors.agreedToTerms ? "text-red-600" : "text-green-600"}`} />
+              <div className={`p-2 rounded-lg ${errors.agreedToTerms ? "bg-red-100 dark:bg-red-950/60" : "bg-green-100 dark:bg-green-900/55"}`}>
+                <ShieldCheck className={`h-5 w-5 ${errors.agreedToTerms ? "text-red-600 dark:text-red-400" : "text-green-600 dark:text-green-400"}`} />
               </div>
               Bestätigung
             </CardTitle>
@@ -394,7 +421,7 @@ const Step3CompanyData = ({ formData, onInputChange, onValueChange, errors = {} 
                   htmlFor="agreedToTerms"
                   className="text-sm text-foreground leading-relaxed cursor-pointer"
                 >
-                  Ich akzeptiere die <a href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">Allgemeinen Geschäftsbedingungen</a> und die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors">Datenschutzerklärung</a>.
+                  Ich akzeptiere die <a href="/agb" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors dark:text-green-400 dark:hover:text-green-300">Allgemeinen Geschäftsbedingungen</a> und die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-green-600 hover:text-green-800 transition-colors dark:text-green-400 dark:hover:text-green-300">Datenschutzerklärung</a>.
                 </label>
                 {errors.agreedToTerms && (
                   <p className="text-sm text-red-600 font-medium mt-1">{errors.agreedToTerms}</p>

@@ -207,24 +207,6 @@ const PrivacyPolicyPageClient = () => {
             </CardTitle>
             <p className="text-sm md:text-base text-muted-foreground">{lastUpdated}</p>
           </CardHeader>
-          <div className="mx-4 rounded-xl border border-emerald-200 bg-emerald-50/90 px-4 py-4 dark:border-emerald-800 dark:bg-emerald-950/35 md:mx-6 md:px-5 md:pb-5">
-            <p className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
-              Hinweis: Was bedeutet „geprüft&quot; auf dieser Website?
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-emerald-950/90 dark:text-emerald-100/85">
-              Mit „geprüften&quot; Partnerfirmen meinen wir geprüfte Unternehmen mit Eintrag im{' '}
-              <strong>Handelsregister</strong>, Geschäftssitz in der Schweiz und einem erst nach{' '}
-              <strong>manueller</strong> Stammdatenprüfung durch Online-Offerten.ch{' '}
-              <strong>aktivierten</strong> Profil. Ausführliche Definition und Grenzen siehe{' '}
-              <a
-                href="#begriff-geprueft"
-                className="font-semibold text-green-800 underline underline-offset-2 hover:text-green-900 dark:text-emerald-300 dark:hover:text-emerald-200"
-              >
-                Abschnitt&nbsp;7 dieser Datenschutzerklärung
-              </a>
-              .
-            </p>
-          </div>
           <CardContent className="max-w-none border-0 p-0 px-4 pb-8 pt-0 md:px-6 [&_a]:text-base [&_a]:font-normal [&_a]:text-green-700 dark:[&_a]:text-emerald-400 [&_a]:underline-offset-2 hover:[&_a]:underline [&_strong]:font-semibold [&_strong]:text-foreground [&_code]:rounded [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono">
             {sections.map((section, index) => {
               const blocks = Array.isArray(section.content)

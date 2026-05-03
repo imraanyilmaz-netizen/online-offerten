@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 // framer-motion removed - CSS for better INP
 import { supabase } from '@/lib/supabaseClient';
+import { normalizeWebsite } from '@/lib/normalizeWebsite';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/src/components/ui/use-toast';
 import { Card } from '@/components/ui/card';
@@ -282,7 +283,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
         address_street: formData.address_street,
         address_zip: formData.address_zip,
         address_city: formData.address_city,
-        website: formData.website,
+        website: normalizeWebsite(formData.website || ''),
         year_founded: formData.year_founded,
         employee_count: formData.employee_count,
         liability_insurance: formData.liability_insurance,
@@ -443,7 +444,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                       <div className="text-center max-w-[180px]">
                         <p className={`font-semibold text-sm mb-1 transition-colors ${
                           isActive 
-                            ? 'text-green-600' 
+                            ? 'text-green-600 dark:text-green-400' 
                             : isCompleted 
                               ? 'text-foreground' 
                               : 'text-muted-foreground'
@@ -479,7 +480,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                 </div>
               )}
             
-            <div className="flex justify-between mt-8 pt-8 border-t border-border">
+            <div className="flex flex-wrap justify-between gap-4 mt-8 pt-8 border-t border-border -mx-8 px-8 md:-mx-12 md:px-12 dark:border-border/80 dark:bg-muted/25">
               <div>
                 {submitted ? (
                   <Button variant="outline" onClick={onBackToLogin}><ArrowLeft className="mr-2 h-4 w-4" /> Zurück zum Login</Button>
@@ -571,7 +572,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                         <div className="text-center max-w-[180px]">
                           <p className={`font-semibold text-sm mb-1 transition-colors ${
                             isActive 
-                              ? 'text-green-600' 
+                              ? 'text-green-600 dark:text-green-400' 
                               : isCompleted 
                                 ? 'text-foreground' 
                                 : 'text-muted-foreground'
@@ -608,7 +609,7 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
                 )}
               
               {!submitted && (
-                <div className="flex justify-between mt-8 pt-8 border-t border-border">
+                <div className="flex flex-wrap justify-between gap-4 mt-8 pt-8 border-t border-border -mx-8 px-8 md:-mx-12 md:px-12 dark:border-border/80 dark:bg-muted/25">
                   <div>
                     {step > 1 && (
                       <Button variant="outline" onClick={prevStep}>Zurück</Button>

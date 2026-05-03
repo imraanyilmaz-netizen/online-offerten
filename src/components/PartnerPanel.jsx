@@ -20,6 +20,7 @@ import TransactionHistory from '@/components/PartnerPanel/TransactionHistory';
 import SubscriptionManagement from '@/components/PartnerPanel/SubscriptionManagement';
 import InsuranceBanner from '@/components/PartnerPanel/InsuranceBanner';
 import InsuranceUploadModal from '@/components/PartnerPanel/InsuranceUploadModal';
+import ProfileCompletionBanner from '@/components/PartnerPanel/ProfileCompletionBanner';
 
 const StatusDisplay = ({ icon: Icon, title, description, children }) => (
   <div className="flex flex-col justify-center items-center min-h-screen bg-muted/40 text-center p-4">
@@ -122,6 +123,26 @@ const PartnerPanel = ({ setCompanyName }) => {
       fetchDashboardData(true); // silent: kein Loading-Spinner
       sessionStorage.removeItem('fromPayment');
     }
+  }, [fetchDashboardData]);
+
+  // Nach Profil-Speichern in Einstellungen: Stammdaten kurz verzögert neu laden (Banner/Anzeigen).
+  useEffect(() => {
+    let flag;
+    try {
+      flag = sessionStorage.getItem('partnerProfileUpdated');
+    } catch {
+      return;
+    }
+    if (flag !== '1') return;
+    try {
+      sessionStorage.removeItem('partnerProfileUpdated');
+    } catch {
+      /* ignore */
+    }
+    const id = setTimeout(() => {
+      fetchDashboardData(true);
+    }, 200);
+    return () => clearTimeout(id);
   }, [fetchDashboardData]);
 
   if (loading) {
@@ -232,6 +253,9 @@ const PartnerPanel = ({ setCompanyName }) => {
 
         {/* Insurance Banner */}
         <InsuranceBanner partnerData={partnerData} onUploadClick={() => setIsInsuranceModalOpen(true)} />
+
+        {/* Profile Completion Banner — Logo, Beschreibung, Telefon, Webseite, Hero-Bild */}
+        <ProfileCompletionBanner partnerData={partnerData} />
 
         {/* Büyük istatistik kartları sadece mobil/tablet'te — desktop'ta sol sidebar kompakt gösteriyor */}
         <div className="lg:hidden">

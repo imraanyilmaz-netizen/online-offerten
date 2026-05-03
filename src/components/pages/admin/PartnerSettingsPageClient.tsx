@@ -18,6 +18,7 @@ import GalleryImageUploader from '@/components/PartnerPanel/GalleryImageUploader
 import ReviewCard from '@/components/PartnerProfilePageParts/ReviewCard';
 import WidgetConfigurator from '@/components/PartnerPanel/WidgetConfigurator';
 import { formatDate } from '@/lib/utils'; // Import formatDate from utils
+import { normalizeWebsite } from '@/lib/normalizeWebsite';
 import Step2Regions from '@/src/components/PartnerRegistrationForm/Step2Regions';
 import { cantonMap } from '@/data/locations';
 
@@ -180,6 +181,24 @@ const PartnerSettingsPageClient = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleWebsiteFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (!e.target.value || e.target.value.trim().length === 0) {
+      setFormData(prev => ({ ...prev, website: 'https://' }));
+    }
+  };
+
+  const handleWebsiteBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === 'https://' || value === 'http://') {
+      setFormData(prev => ({ ...prev, website: '' }));
+      return;
+    }
+    const normalized = normalizeWebsite(value);
+    if (normalized !== value) {
+      setFormData(prev => ({ ...prev, website: normalized }));
+    }
+  };
+
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPasswordData(prev => ({ ...prev, [name]: value }));
@@ -229,10 +248,16 @@ const PartnerSettingsPageClient = () => {
     setSaving(true);
     try {
       const { phone, website, company_description } = formData;
+      const normalizedWebsite = normalizeWebsite(website);
       const { error } = await (supabase.from('partners') as any)
-        .update({ phone, website, message: company_description }) // Database column is 'message'
+        .update({ phone, website: normalizedWebsite, message: company_description }) // Database column is 'message'
         .eq('id', user.id);
       if (error) throw error;
+      try {
+        sessionStorage.setItem('partnerProfileUpdated', '1');
+      } catch {
+        /* ignore */
+      }
       toast({ title: 'Erfolg', description: 'Profil erfolgreich aktualisiert.' });
     } catch (error) {
       toast({ variant: 'destructive', title: 'Fehler', description: 'Profil konnte nicht aktualisiert werden.' });
@@ -337,7 +362,20 @@ const PartnerSettingsPageClient = () => {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="website">Webseite</Label>
-                        <Input id="website" name="website" type="url" value={formData.website} onChange={handleInputChange} />
+                        <Input
+                          id="website"
+                          name="website"
+                          type="text"
+                          inputMode="url"
+                          autoCapitalize="off"
+                          autoCorrect="off"
+                          spellCheck={false}
+                          placeholder="z. B. online-offerten.ch"
+                          value={formData.website}
+                          onChange={handleInputChange}
+                          onFocus={handleWebsiteFocus}
+                          onBlur={handleWebsiteBlur}
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="address_street">Strasse</Label>
@@ -356,6 +394,9 @@ const PartnerSettingsPageClient = () => {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="company_description">Firmenbeschreibung</Label>
+                      <p className="text-sm text-muted-foreground">
+                        Dieser Text wird auf Ihrer öffentlichen Firmenprofilseite angezeigt — dort sehen Kunden ihn unter „Über uns“, wenn sie Ihr Profil besuchen.
+                      </p>
                       <Textarea id="company_description" name="company_description" value={formData.company_description} onChange={handleInputChange} rows={5} placeholder="Beschreiben Sie Ihr Unternehmen..." />
                     </div>
                     <div className="flex justify-end">
