@@ -18,7 +18,7 @@ const Article = () => {
           Gut geplant sparen Sie Zeit, Nerven und oft auch Kosten: Von der ersten Bestandsaufnahme bis zur Übergabe der alten Wohnung begleitet Sie eine professionelle Umzugsfirma durch die wichtigsten Schritte.
         </p>
         <p className="text-gray-700 leading-relaxed mt-4">
-          Auf Online-Offerten.ch vergleichen Sie kostenlos Offerten geprüfter Partner und finden Anbieter, die zu Ihrem Budget und Ihrer Situation passen.
+          Auf Online-Offerten.ch vergleichen Sie kostenlos Offerten geprüfte Partner und finden Anbieter, die zu Ihrem Budget und Ihrer Situation passen.
         </p>
       </section>
 

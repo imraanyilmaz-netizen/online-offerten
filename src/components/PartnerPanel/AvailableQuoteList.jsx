@@ -203,7 +203,6 @@ const PurchaseConfirmationDialog = ({ open, onOpenChange, onConfirm, quote, hasA
 
 
 const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQuote, partnerBalance, hasActiveSubscription, insuranceStatus, onInsuranceUploadClick }) => {
-  const canPurchaseInsurance = insuranceStatus === 'approved';
   const [openRejectionDialog, setOpenRejectionDialog] = useState(false);
   const [selectedQuoteForRejection, setSelectedQuoteForRejection] = useState(null);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
@@ -440,28 +439,12 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                            <Button 
                                 size="lg" 
                                 onClick={() => handlePurchaseClick(quote)} 
-                                disabled={(!canAfford && !hasActiveSubscription) || !canPurchaseInsurance} 
+                                disabled={!canAfford && !hasActiveSubscription} 
                                 className="w-full"
                             >
                                 <CheckCircle className="w-5 h-5 mr-2" /> 
                                 Kontakt freischalten
                             </Button>
-                            {!canPurchaseInsurance && (
-                              <p className="text-xs text-orange-600 text-center">
-                                {insuranceStatus === 'in_review' ? (
-                                  <>⏳ Versicherung wird geprüft. Kontakt-Freischaltung nach Freigabe möglich.</>
-                                ) : (
-                                  <>
-                                    ⚠️ Kontakt-Freischaltung erst nach Versicherungsprüfung möglich.
-                                    {onInsuranceUploadClick && (
-                                      <button onClick={onInsuranceUploadClick} className="underline ml-1 font-semibold hover:text-orange-800">
-                                        Jetzt hochladen
-                                      </button>
-                                    )}
-                                  </>
-                                )}
-                              </p>
-                            )}
                            <Button 
                                 variant="outline" 
                                 size="sm" 

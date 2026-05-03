@@ -231,7 +231,7 @@ const PartnerSearchPageClient = ({ initialPartners = [] }: PartnerSearchPageClie
         <section className="mt-16 mb-8">
           <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-gray-100">
             <h2 className="heading-2">
-              Geprüfte Umzugsfirmen und Reinigungsfirmen in der Schweiz
+              geprüfte Umzugsfirmen und Reinigungsfirmen in der Schweiz
             </h2>
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div>

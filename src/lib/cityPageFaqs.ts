@@ -162,7 +162,7 @@ export function getCityPageLocalContent(
       ],
       bullets: [
         'Klare Angebote: Vorbereitung, Material, Anstriche, Reinigung',
-        'Geprüfte Partner – Sie wählen den passenden Malerbetrieb',
+        'geprüfte Partner – Sie wählen den passenden Malerbetrieb',
         'Kostenlose Offerten – unverbindlich vergleichen',
       ],
     }

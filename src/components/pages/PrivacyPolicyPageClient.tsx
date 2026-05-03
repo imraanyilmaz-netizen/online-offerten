@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const PrivacyPolicyPageClient = () => {
   const pageTitle = "Datenschutzerklärung"
-  const lastUpdated = "Zuletzt aktualisiert: 22. April 2026"
+  const lastUpdated = "Zuletzt aktualisiert: 3. Mai 2026"
 
-  const sections = [
+  const sections: Array<{ title: string; content: string[]; anchorId?: string }> = [
     {
       title: "1. Verantwortlicher",
       content: [
@@ -85,13 +85,27 @@ const PrivacyPolicyPageClient = () => {
         "",
         "<strong>Zahlungsdaten:</strong> Für das Aufladen von Guthaben oder den Kauf von Abonnements werden Sie zu unserem Zahlungsdienstleister <strong>Stripe</strong> weitergeleitet. Zahlungsdaten (z. B. Kartendaten) werden direkt von Stripe verarbeitet und sind für uns nicht zugänglich. Wir erhalten lediglich Bestätigungsinformationen (Transaktions-ID, Betrag, Status).",
         "",
-        "<strong>Zweck:</strong> Vertragsabwicklung, Bereitstellung des Partner-Dashboards, Abrechnung und Qualitätssicherung (Prüfung der Firmenangaben, z. B. HR-Eintrag und Haftpflichtversicherung).",
+        "<strong>Zweck:</strong> Vertragsabwicklung, Bereitstellung des Partner-Dashboards, Abrechnung und Qualitätssicherung (Prüfung der Firmenangaben, z. B. HR-Eintrag). Optional eingereichte Versicherungsunterlagen werden zur Vergabe eines „Versichert&quot;-Badges im öffentlichen Partnerprofil geprüft.",
         "",
         "<strong>Rechtsgrundlage:</strong> Vertragserfüllung, gesetzliche Aufbewahrungspflichten sowie berechtigtes Interesse an einer qualitativ hochwertigen Vermittlungsplattform."
       ]
     },
     {
-      title: "7. Kontaktaufnahme",
+      anchorId: 'begriff-geprueft',
+      title: '7. Begriffsklärung: Was bedeutet „geprüft"?',
+      content: [
+        'Im Rahmen dieser Datenschutzerklärung sowie unserer Website, E-Mails und übrigen Kommunikation bezeichnet der Ausdruck <strong>„geprüft"</strong> bzw. <strong>„geprüfte Partnerfirmen"</strong> oder vergleichbare Formulierungen (z.&nbsp;B. „geprüfte Anbieter", „geprüfte Firmen") <strong>ausschliesslich</strong> die nachfolgend beschriebenen Mindestkriterien. Hiermit ist <strong>nicht</strong> eine umfassende Qualitäts-, Bonitäts-, Arbeitnehmer- oder Einzelauftragsprüfung gemeint.',
+        "",
+        '<strong>„Geprüft" im Sinne von Online-Offerten.ch bedeutet konkret:</strong>',
+        '• <strong>Eintrag im Handelsregister der Schweiz:</strong> Die Partnerfirma ist im zentralen Firmenindex der Schweiz (<abbr title="Zentraler Firmenindex">ZEFIX</abbr>) eingetragen; wir prüfen die angegebene Handelsregisternummer vor der Freischaltung auf Existenz und Aktivität.<br>• <strong>Geschäftssitz und Geschäftstätigkeit in der Schweiz:</strong> Der angegebene Firmensitz liegt in der Schweiz; über die Plattform werden Leistungen für Kundinnen und Kunden in der Schweiz angeboten.<br>• <strong>Aktives Profil nach manueller Freischaltung:</strong> Das Partnerprofil wird erst nach Prüfung der Stammdaten durch unser Team <strong>aktiviert</strong> – nicht automatisch allein durch Abschluss des Online-Formulars.<br>• <strong>Vertragliche Selbstauskunft:</strong> Der Partner bestätigt im Rahmen der Registrierung und der <strong>AGB für Partnerfirmen</strong> unter anderem, über eine gültige Betriebshaftpflichtversicherung sowie über die zur Ausführung der angebotenen Leistungen erforderlichen Bewilligungen und Qualifikationen zu verfügen.',
+        "",
+        '<strong>Optional – zusätzliches Signal „Versichert":</strong> Partnerfirmen können freiwillig Versicherungsunterlagen einreichen. Diese werden von uns manuell geprüft; bei Annahme erscheint ein „Versichert&quot;-Badge im öffentlichen Partnerprofil. Das Badge ist <strong>freiwillig</strong> und keine Voraussetzung dafür, dass eine Firma als „geprüft" im obigen Sinne geführt wird oder Anfragen vermittelt bekommt.',
+        "",
+        '<strong>Was wir nicht prüfen:</strong> Wir führen keine Betriebsbegehungen, keine Prüfung einzelner Arbeiten vor Ort und keine fortlaufende Überwachung der Geschäftstätigkeit durch. Für Preis, Ausführung und Qualität der Dienstleistung sind allein die Partnerfirma sowie die Vereinbarung zwischen Kundin/Kunde und Partnerfirma massgeblich.',
+      ],
+    },
+    {
+      title: "8. Kontaktaufnahme",
       content: [
         "Wenn Sie uns per E-Mail oder über das Kontaktformular kontaktieren, bearbeiten wir die von Ihnen freiwillig mitgeteilten Angaben (insbesondere Name, E-Mail-Adresse, Telefonnummer und Inhalt der Nachricht) ausschliesslich zur Beantwortung Ihrer Anfrage.",
         "",
@@ -99,7 +113,7 @@ const PrivacyPolicyPageClient = () => {
       ]
     },
     {
-      title: "8. Eingesetzte Dienstleister (Auftragsbearbeiter)",
+      title: "9. Eingesetzte Dienstleister (Auftragsbearbeiter)",
       content: [
         "Zur Bereitstellung und zum Betrieb unserer Plattform setzen wir sorgfältig ausgewählte Dienstleister ein, mit denen – soweit datenschutzrechtlich erforderlich – Auftragsbearbeitungsverträge abgeschlossen wurden:",
         "",
@@ -109,7 +123,7 @@ const PrivacyPolicyPageClient = () => {
       ]
     },
     {
-      title: "9. Cookies, LocalStorage und ähnliche Technologien",
+      title: "10. Cookies, LocalStorage und ähnliche Technologien",
       content: [
         "Wir setzen auf unserer Website Cookies und ähnliche Technologien (insbesondere LocalStorage) ein. Diese sind teils technisch notwendig, teils dienen sie der Messung und Verbesserung unseres Angebots.",
         "",
@@ -127,7 +141,7 @@ const PrivacyPolicyPageClient = () => {
       ]
     },
     {
-      title: "10. Datenübermittlung ins Ausland",
+      title: "11. Datenübermittlung ins Ausland",
       content: [
         "Die Bearbeitung und Speicherung Ihrer Kern-Daten (Formularangaben, Kontoinformationen der Partner) erfolgt grundsätzlich auf Servern in der EU (Deutschland/Irland).",
         "",
@@ -138,7 +152,7 @@ const PrivacyPolicyPageClient = () => {
       ]
     },
     {
-      title: "11. Speicherdauer",
+      title: "12. Speicherdauer",
       content: [
         "Wir speichern personenbezogene Daten nur so lange, wie dies für die jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten (insbesondere handels- und steuerrechtliche Pflichten von bis zu 10 Jahren) dies verlangen.",
         "",
@@ -146,7 +160,7 @@ const PrivacyPolicyPageClient = () => {
       ]
     },
     {
-      title: "12. Datensicherheit",
+      title: "13. Datensicherheit",
       content: [
         "Wir treffen angemessene technische und organisatorische Massnahmen, um Ihre Daten gegen Verlust, Manipulation und unbefugten Zugriff zu schützen. Dazu zählen insbesondere:",
         "• verschlüsselte Datenübertragung über SSL/TLS<br>• rollenbasierte Zugriffskontrollen im Partner- und Administrationsbereich<br>• regelmässige Aktualisierung der eingesetzten Software<br>• gesicherte Passwortverarbeitung durch unseren Auth-Dienstleister (Hash-Verfahren)<br>• Auswahl vertrauenswürdiger Dienstleister mit entsprechendem Datenschutzniveau",
@@ -155,7 +169,7 @@ const PrivacyPolicyPageClient = () => {
       ]
     },
     {
-      title: "13. Ihre Rechte",
+      title: "14. Ihre Rechte",
       content: [
         "Sie haben im Rahmen des anwendbaren Datenschutzrechts insbesondere folgende Rechte:",
         "",
@@ -168,17 +182,17 @@ const PrivacyPolicyPageClient = () => {
       ]
     },
     {
-      title: "14. Automatisierte Einzelentscheidungen",
+      title: "15. Automatisierte Einzelentscheidungen",
       content: [
         "Eine ausschliesslich automatisierte Entscheidungsfindung im Sinne von Art. 21 DSG bzw. Art. 22 DSGVO (inkl. Profiling mit rechtlicher Wirkung) findet auf unserer Plattform nicht statt. Die Zuordnung von Anfragen an Partnerfirmen erfolgt auf Basis von Dienstleistung und Region; die Entscheidung zur Angebotserstellung liegt stets bei der jeweiligen Partnerfirma.",
       ]
     },
     {
-      title: "15. Änderungen dieser Datenschutzerklärung",
+      title: "16. Änderungen dieser Datenschutzerklärung",
       content: [
         "Wir passen diese Datenschutzerklärung bei Bedarf an, z. B. wenn wir neue Dienste einsetzen oder rechtliche Anforderungen sich ändern. Es gilt jeweils die auf dieser Seite veröffentlichte Fassung. Wir empfehlen, diese Seite regelmässig zu konsultieren.",
         "",
-        "Stand: 22. April 2026"
+        "Stand: 3. Mai 2026"
       ]
     }
   ]
@@ -193,6 +207,24 @@ const PrivacyPolicyPageClient = () => {
             </CardTitle>
             <p className="text-sm md:text-base text-muted-foreground">{lastUpdated}</p>
           </CardHeader>
+          <div className="mx-4 rounded-xl border border-emerald-200 bg-emerald-50/90 px-4 py-4 dark:border-emerald-800 dark:bg-emerald-950/35 md:mx-6 md:px-5 md:pb-5">
+            <p className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
+              Hinweis: Was bedeutet „geprüft&quot; auf dieser Website?
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-emerald-950/90 dark:text-emerald-100/85">
+              Mit „geprüften&quot; Partnerfirmen meinen wir geprüfte Unternehmen mit Eintrag im{' '}
+              <strong>Handelsregister</strong>, Geschäftssitz in der Schweiz und einem erst nach{' '}
+              <strong>manueller</strong> Stammdatenprüfung durch Online-Offerten.ch{' '}
+              <strong>aktivierten</strong> Profil. Ausführliche Definition und Grenzen siehe{' '}
+              <a
+                href="#begriff-geprueft"
+                className="font-semibold text-green-800 underline underline-offset-2 hover:text-green-900 dark:text-emerald-300 dark:hover:text-emerald-200"
+              >
+                Abschnitt&nbsp;7 dieser Datenschutzerklärung
+              </a>
+              .
+            </p>
+          </div>
           <CardContent className="max-w-none border-0 p-0 px-4 pb-8 pt-0 md:px-6 [&_a]:text-base [&_a]:font-normal [&_a]:text-green-700 dark:[&_a]:text-emerald-400 [&_a]:underline-offset-2 hover:[&_a]:underline [&_strong]:font-semibold [&_strong]:text-foreground [&_code]:rounded [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_code]:font-mono">
             {sections.map((section, index) => {
               const blocks = Array.isArray(section.content)
@@ -201,6 +233,7 @@ const PrivacyPolicyPageClient = () => {
               return (
                 <section
                   key={index}
+                  id={section.anchorId}
                   className="scroll-mt-24 border-b border-border py-8 first:pt-2 last:border-b-0 last:pb-2"
                 >
                   <h2 className="mb-5 border-b border-border pb-3 text-xl font-bold tracking-tight text-foreground md:text-2xl">

@@ -8,13 +8,13 @@ export const revalidate = 3600 // 1 saat
 
 export const metadata: Metadata = {
   title: 'Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen',
-  description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.',
+  description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen - 100% unverbindlich.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsfirma/umzugskosten',
   },
   openGraph: {
     title: 'Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen',
-    description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.',
+    description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen - 100% unverbindlich.',
     url: 'https://online-offerten.ch/umzugsfirma/umzugskosten',
     siteName: 'Online-Offerten.ch',
     locale: 'de_CH',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen',
-    description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.',
+    description: 'Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen - 100% unverbindlich.',
     images: ['https://online-offerten.ch/image/umzugsfirma-kartons.webp'],
   },
   robots: {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 export default async function UmzugskostenPage() {
   // Server-side schema oluştur (Google için)
   const metaTitle = "Umzugskosten Schweiz berechnen | Bis zu 5 Offerten vergleichen";
-  const metaDescription = "Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen - 100% unverbindlich.";
+  const metaDescription = "Berechnen Sie Ihre Umzugskosten in der Schweiz und vergleichen Sie bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen - 100% unverbindlich.";
   
   const serverSchema = {
     "@context": "https://schema.org",
@@ -165,7 +165,7 @@ export default async function UmzugskostenPage() {
             "name": "Sind die berechneten Umzugskosten verbindlich?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Die Umzugskosten aus unserem Rechner sind Schätzungen und dienen als Richtwerte. Für eine verbindliche Offerte sollten Sie nach der ersten Preis-Schätzung kostenlose und unverbindliche Offerten von geprüften Umzugsfirmen in Ihrer Region anfordern."
+              "text": "Die Umzugskosten aus unserem Rechner sind Schätzungen und dienen als Richtwerte. Für eine verbindliche Offerte sollten Sie nach der ersten Preis-Schätzung kostenlose und unverbindliche Offerten von geprüfte Umzugsfirmen in Ihrer Region anfordern."
             }
           },
           {
@@ -181,7 +181,7 @@ export default async function UmzugskostenPage() {
             "name": "Ist die Umzugskosten-Berechnung kostenlos?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Ja, die Nutzung unseres Umzugskosten-Rechners ist vollständig kostenlos und unverbindlich. Sie können Ihre Umzugskosten so oft berechnen, wie Sie möchten, ohne dass Kosten entstehen. Nach der Berechnung können Sie optional kostenlose Offerten von geprüften Umzugsfirmen anfordern."
+              "text": "Ja, die Nutzung unseres Umzugskosten-Rechners ist vollständig kostenlos und unverbindlich. Sie können Ihre Umzugskosten so oft berechnen, wie Sie möchten, ohne dass Kosten entstehen. Nach der Berechnung können Sie optional kostenlose Offerten von geprüfte Umzugsfirmen anfordern."
             }
           },
           {

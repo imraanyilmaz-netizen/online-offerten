@@ -26,7 +26,7 @@ const ReinigungskostenRechnerPageClient = () => {
 
   // SEO Data - Updated for Endreinigung Wohnung Kosten
   const metaTitle = "Endreinigung Wohnung Kosten 2024: Ultimative Preis-Übersicht + 10 Spartipps";
-  const metaDescription = "Endreinigung Wohnung Kosten 2024: Der komplette Schweizer Kostenguide für stressfreie Wohnungsübergabe. Detaillierte Preistabellen, regionale Unterschiede und 10 bewährte Spartipps die wirklich funktionieren. Bis zu 30% sparen durch Preisvergleich.";
+  const metaDescription = "Endreinigung Wohnung Kosten 2024: Der komplette Kostenguide für die Schweiz für stressfreie Wohnungsübergabe. Detaillierte Preistabellen, regionale Unterschiede und 10 bewährte Spartipps die wirklich funktionieren. Bis zu 30% sparen durch Preisvergleich.";
   const canonicalUrl = '/reinigung/reinigungskosten';
 
   // FAQ Data - Updated with new questions from HTML content
@@ -257,10 +257,10 @@ const ReinigungskostenRechnerPageClient = () => {
             className="bg-card text-card-foreground border border-border p-6 md:p-10 rounded-xl shadow-lg"
           >
             <h2 className="heading-2">
-              Der komplette Schweizer Kostenguide für stressfreie Wohnungsübergabe
+              Der komplette Kostenguide für die Schweiz für stressfreie Wohnungsübergabe
             </h2>
             <p className="text-body mb-4 leading-relaxed">
-              Die Mietkaution zurückzubekommen gehört für viele Schweizer Mieter zu den stressigsten Momenten beim Umzug. Studien zeigen, dass rund <strong>40% aller Kautionsabzüge</strong> direkt mit mangelhafter Endreinigung zusammenhängen. Das bedeutet: Tausende Franken bleiben jährlich bei Verwaltungen hängen, weil die Wohnungsübergabe nicht besenrein erfolgte.
+              Die Mietkaution zurückzubekommen gehört für viele Mieter in der Schweiz zu den stressigsten Momenten beim Umzug. Studien zeigen, dass rund <strong>40% aller Kautionsabzüge</strong> direkt mit mangelhafter Endreinigung zusammenhängen. Das bedeutet: Tausende Franken bleiben jährlich bei Verwaltungen hängen, weil die Wohnungsübergabe nicht besenrein erfolgte.
             </p>
             <p className="text-body mb-4 leading-relaxed">
               Noch problematischer: <strong>73% der Mieter zahlen zu viel</strong> für ihre professionelle Endreinigung, weil sie weder die marktüblichen Preise kennen noch wissen, worauf bei der Offerte zu achten ist. Zwischen dem günstigsten und teuersten Anbieter liegen bei einer 3.5 Zimmer Wohnung schnell <strong>300-500 CHF Unterschied</strong> – bei identischer Leistung.
@@ -282,7 +282,7 @@ const ReinigungskostenRechnerPageClient = () => {
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-2">
                     <Check className="w-6 h-6 text-green-600 dark:text-emerald-400" />
-                    <CardTitle className="text-xl font-bold">Geprüfte Schweizer Reinigungsfirmen mit Abnahmegarantie</CardTitle>
+                    <CardTitle className="text-xl font-bold">geprüfte Reinigungsfirmen mit Abnahmegarantie</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -872,7 +872,7 @@ const ReinigungskostenRechnerPageClient = () => {
               <strong>Kein Risiko. Keine versteckten Kosten. Nur faire Preise und professionelle Endreinigung mit Abnahmegarantie.</strong>
             </p>
             <p className="text-sm mt-4 opacity-80 max-w-2xl mx-auto">
-              Innerhalb von 24 Stunden erhalten Sie bis zu 5 Angebote von geprüften Schweizer Reinigungsfirmen. Unverbindlich vergleichen, beste Offerte wählen, Kaution sichern.
+              Innerhalb von 24 Stunden erhalten Sie bis zu 5 Angebote von geprüfte Reinigungsfirmen. Unverbindlich vergleichen, beste Offerte wählen, Kaution sichern.
             </p>
           </section>
         </div>

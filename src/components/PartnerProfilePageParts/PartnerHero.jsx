@@ -1,10 +1,11 @@
-﻿import React from 'react';
+import React from 'react';
 // Removed useTranslation
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';
 import QualityBadge from './QualityBadge';
 import StarRating from './StarRating';
+import VerifiedInsuranceBadge from './VerifiedInsuranceBadge';
 
 const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   // Removed useTranslation
@@ -96,6 +97,7 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
                   </div>
                 )}
                 {partner.badge_tier && <QualityBadge tier={partner.badge_tier} />}
+                {partner.insurance_status === 'approved' && <VerifiedInsuranceBadge />}
               </div>
             </div>
             

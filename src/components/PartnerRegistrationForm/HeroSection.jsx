@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
   const trustPoints = [
-    'Schweizer Vergleichsplattform',
+    'geprüfte Vergleichsplattform',
     'Umzug, Reinigung & Malerarbeiten',
     'Anfragen nach Ihren Regionen',
     'Lead-Preis vor dem Kauf sichtbar',

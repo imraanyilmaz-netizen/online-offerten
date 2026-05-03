@@ -19,7 +19,7 @@ const SearchFilters = ({
   totalCount,
   clearFilters
 }) => {
-  // Vollständige Schweizer Kantone mit korrekten Namen
+  // Vollständige geprüfte Kantone mit korrekten Namen
   const regions = [
     'Zürich', 'Bern', 'Luzern', 'Aargau', 'Solothurn', 'Basel-Stadt', 'Basel-Landschaft',
     'St. Gallen', 'Thurgau', 'Appenzell Ausserrhoden', 'Appenzell Innerrhoden', 'Glarus',

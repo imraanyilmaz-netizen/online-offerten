@@ -521,7 +521,7 @@ const QuoteStatusPageClient = () => {
 
                       <div className="mt-12 pt-8 border-t">
                         <h2 className="text-xl sm:text-2xl font-bold text-center text-foreground mb-2">Ihre Offerten-Partner</h2>
-                        <p className="text-center text-muted-foreground mb-8">Diese geprüften Partnerfirmen möchten Ihnen eine unverbindliche Offerte unterbreiten und werden sich in Kürze bei Ihnen melden.</p>
+                        <p className="text-center text-muted-foreground mb-8">Diese geprüfte Partnerfirmen möchten Ihnen eine unverbindliche Offerte unterbreiten und werden sich in Kürze bei Ihnen melden.</p>
                         {purchasingPartners.length > 0 ? (
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {purchasingPartners.map(partner => (
@@ -537,7 +537,7 @@ const QuoteStatusPageClient = () => {
                           <div className="text-center py-12 text-muted-foreground">
                             <Building className="w-16 h-16 mx-auto text-muted-foreground/40 mb-4" />
                             <h3 className="text-lg font-semibold">Ihre Anfrage wird gerade bearbeitet.</h3>
-                            <p className="text-sm text-muted-foreground">Unsere geprüften Partnerfirmen werden sich in Kürze bei Ihnen melden!</p>
+                            <p className="text-sm text-muted-foreground">Unsere geprüfte Partnerfirmen werden sich in Kürze bei Ihnen melden!</p>
                           </div>
                         )}
                       </div>

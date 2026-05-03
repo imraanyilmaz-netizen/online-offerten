@@ -160,7 +160,7 @@ function heroIntroForPage(
     if (categorySlug === 'malerfirma') {
       return `Offerten für ${serviceLabel} einholen und regionale Malerfirmen transparent vergleichen – unverbindlich und kostenlos.`
     }
-    return `Geprüfte Betriebe für ${serviceLabel} vergleichen – eine Anfrage, mehrere Offerten und klare Konditionen vor Ort.`
+    return `geprüfte Betriebe für ${serviceLabel} vergleichen – eine Anfrage, mehrere Offerten und klare Konditionen vor Ort.`
   }
   return CATEGORY_INTRO[categorySlug] ?? CATEGORY_INTRO.umzugsfirma
 }
@@ -190,7 +190,7 @@ function partnerNetworkAsideCopy(
     return {
       kicker: 'Reinigung in Ihrer Region',
       title: `Die besten Reinigungsfirmen in ${city}`,
-      body: `Geprüfte Anbieter für Haushalt, Büro und Endreinigung – mit klaren Einsatzgebieten in und um ${city}. Eine Anfrage, mehrere Offerten, unverbindlich.`,
+      body: `geprüfte Anbieter für Haushalt, Büro und Endreinigung – mit klaren Einsatzgebieten in und um ${city}. Eine Anfrage, mehrere Offerten, unverbindlich.`,
     }
   }
   if (categorySlug === 'malerfirma') {
@@ -335,7 +335,7 @@ export default function CategoryCityPageClient({
               Bis zu 40% sparen
             </p>
             <p className="mt-1 text-[0.625rem] font-medium leading-snug text-slate-600 dark:text-foreground/80">
-              Geprüfte Anbieter · Kostenlos vergleichen
+              geprüfte Anbieter · Kostenlos vergleichen
             </p>
           </div>
         </div>
@@ -663,7 +663,7 @@ export default function CategoryCityPageClient({
                         <span className="text-slate-950 dark:text-foreground">
                           {listedPartnerCount}{' '}
                           {listedPartnerCount === 1
-                            ? 'geprüfter Anbieter'
+                            ? 'geprüfte Anbieter'
                             : 'geprüfte Anbieter'}
                         </span>
                         {ratingDisplay ? (
@@ -890,7 +890,7 @@ export default function CategoryCityPageClient({
                   <div className="relative z-10 flex h-full min-h-[min(42svh,380px)] flex-col justify-end p-8 sm:min-h-[340px] md:p-10 lg:min-h-[360px]">
                     <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/25 backdrop-blur-sm">
                       <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
-                      Geprüftes Netzwerk
+                      geprüftes Netzwerk
                     </div>
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                       {partnerAside.kicker}

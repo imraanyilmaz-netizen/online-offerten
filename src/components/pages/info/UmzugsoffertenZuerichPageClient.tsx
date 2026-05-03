@@ -189,7 +189,7 @@ const UmzugsoffertenZuerichPageClient = () => {
                 Umzugsofferten Zürich – kostenlos vergleichen & passende Zügelfirma finden
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-                Ein Umzug in Zürich bedeutet oft enge Treppenhäuser, Parkplatzprobleme und hohe Erwartungen an Pünktlichkeit. Wer sich diesen Stress sparen möchte, holt sich professionelle Unterstützung – und das beginnt mit dem richtigen Vergleich von Umzugsofferten. Über ein Online-Formular können Sie in wenigen Minuten Ihre Angaben eingeben und erhalten innerhalb von 2–4 Stunden mehrere Angebote von geprüften Umzugsfirmen direkt in Ihr Postfach.
+                Ein Umzug in Zürich bedeutet oft enge Treppenhäuser, Parkplatzprobleme und hohe Erwartungen an Pünktlichkeit. Wer sich diesen Stress sparen möchte, holt sich professionelle Unterstützung – und das beginnt mit dem richtigen Vergleich von Umzugsofferten. Über ein Online-Formular können Sie in wenigen Minuten Ihre Angaben eingeben und erhalten innerhalb von 2–4 Stunden mehrere Angebote von geprüfte Umzugsfirmen direkt in Ihr Postfach.
               </p>
               <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
                 Der Service ist für Nutzer in der Stadt Zürich und im Grossraum – etwa Winterthur, Uster oder Dietikon – komplett kostenlos und unverbindlich. Ob Privatumzug oder Firmenumzug, ob Sie zusätzlich Reinigung oder Entsorgung benötigen: Die Offerten werden individuell auf Ihre Bedürfnisse zugeschnitten und direkt von Unternehmen aus der Region zugestellt.
@@ -517,14 +517,14 @@ const UmzugsoffertenZuerichPageClient = () => {
         </div>
       </section>
 
-      {/* Geprüfte Umzugsfirmen Section */}
+      {/* geprüfte Umzugsfirmen Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div
             className="max-w-4xl mx-auto"
           >
             <h2 className="heading-2 mb-6">
-              Geprüfte Umzugsfirmen in Zürich vergleichen
+              geprüfte Umzugsfirmen in Zürich vergleichen
             </h2>
             <p className="text-body mb-8 leading-relaxed">
               Der Zürcher Markt bietet eine breite Auswahl an Umzugsunternehmen – von lokalen Spezialisten bis hin zu schweizweit tätigen Anbietern. Im Folgenden geben wir Ihnen eine Orientierung zu den verschiedenen Firmentypen, ohne Anspruch auf Vollständigkeit.
@@ -928,7 +928,7 @@ const UmzugsoffertenZuerichPageClient = () => {
           <div className="max-w-4xl mx-auto">
             <NextImage 
               src="/image/umzugsservice-Schweiz/umzugsofferten-zuerich-4.png" 
-              alt="Moderne Wohngebäude in einer Schweizer Stadt mit Tramgleisen" 
+              alt="Moderne Wohngebäude in einer geprüfte Stadt mit Tramgleisen" 
               width={1200}
               height={600}
               className="w-full h-auto rounded-lg shadow-lg"
@@ -1036,7 +1036,7 @@ const UmzugsoffertenZuerichPageClient = () => {
               Mit einem systematischen Vergleich von Umzugsofferten in Zürich sparen Sie nicht nur Geld, sondern auch Nerven. Die Qualität der Anbieter variiert stark – von Billig-Anbietern mit Risiko bis zu Full-Service-Partnern mit Leidenschaft für Details. Nehmen Sie sich die Zeit, Angebote sorgfältig zu prüfen, und setzen Sie auf Firmen mit nachweisbarer Zuverlässigkeit.
             </p>
             <p className="text-lg md:text-xl mb-8 leading-relaxed opacity-90">
-              Starten Sie jetzt Ihre Anfrage und erhalten Sie innerhalb weniger Stunden passende Umzugsangebote von geprüften Zügelfirmen aus Ihrer Region. So wird Ihr Umzug in Zürich entspannt statt stressig – und Ihr neues Zuhause wartet schon auf Sie.
+              Starten Sie jetzt Ihre Anfrage und erhalten Sie innerhalb weniger Stunden passende Umzugsangebote von geprüfte Zügelfirmen aus Ihrer Region. So wird Ihr Umzug in Zürich entspannt statt stressig – und Ihr neues Zuhause wartet schon auf Sie.
             </p>
             <Button
               onClick={handleCtaClick}

@@ -46,7 +46,7 @@ const OffertenPortalPageClient = () => {
           "@type": "WebApplication",
           "name": "Online-Offerten.ch – Offertenportal Schweiz",
           "applicationCategory": "Vergleichsportal",
-          "description": "Kostenloses Vergleichsportal für Umzug, Reinigung und Malerarbeiten in der Schweiz. Vergleichen Sie bis zu 5 Offerten von geprüften Firmen.",
+          "description": "Kostenloses Vergleichsportal für Umzug, Reinigung und Malerarbeiten in der Schweiz. Vergleichen Sie bis zu 5 Offerten von geprüfte Firmen.",
           "url": canonicalUrl,
           "operatingSystem": "Web",
           "offers": {
@@ -66,7 +66,7 @@ const OffertenPortalPageClient = () => {
           "@type": "Service",
           "serviceType": "Vermittlung von Dienstleistungsangeboten",
           "name": "Offertenportal für Umzug, Reinigung und Malerarbeiten in der Schweiz",
-          "description": "Vergleichen Sie kostenlos und unverbindlich Offerten für Umzüge, Reinigungen und Malerarbeiten. Bis zu 5 Offerten von geprüften Firmen aus Ihrer Region.",
+          "description": "Vergleichen Sie kostenlos und unverbindlich Offerten für Umzüge, Reinigungen und Malerarbeiten. Bis zu 5 Offerten von geprüfte Firmen aus Ihrer Region.",
           "provider": {
             "@type": "Organization",
             "name": "Online-Offerten.ch",
@@ -225,7 +225,7 @@ const OffertenPortalPageClient = () => {
                 Offerten von Umzugsfirma & Reinigungsfirma vergleichen
               </h1>
               <p className="text-base sm:text-lg text-gray-600 dark:text-muted-foreground mb-8 leading-relaxed">
-                Willkommen auf <strong>Online-Offerten.ch</strong> – Ihrem zentralen Vergleichsportal für <Link href="/umzugsfirma" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Umzug</Link>, <Link href="/reinigung" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Reinigung</Link> und <Link href="/malerarbeitenkosten" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Malerarbeiten</Link> in der ganzen Schweiz. Mit nur einer Anfrage erhalten Sie bis zu 5 Offerten von geprüften Firmen aus Ihrer Region.
+                Willkommen auf <strong>Online-Offerten.ch</strong> – Ihrem zentralen Vergleichsportal für <Link href="/umzugsfirma" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Umzug</Link>, <Link href="/reinigung" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Reinigung</Link> und <Link href="/malerarbeitenkosten" className="text-green-700 dark:text-emerald-400 hover:text-green-800 dark:hover:text-emerald-300 underline font-medium">Malerarbeiten</Link> in der ganzen Schweiz. Mit nur einer Anfrage erhalten Sie bis zu 5 Offerten von geprüfte Firmen aus Ihrer Region.
               </p>
 
               {/* Service Buttons */}
@@ -299,7 +299,7 @@ const OffertenPortalPageClient = () => {
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-2" />
-                  <span>Geprüfte Partnerfirmen</span>
+                  <span>geprüfte Partnerfirmen</span>
                 </div>
               </div>
             </div>
@@ -318,7 +318,7 @@ const OffertenPortalPageClient = () => {
                 <div className="space-y-4">
                   {[
                     { icon: Search, title: 'Schnell & einfach', description: 'Nur eine Anfrage für bis zu 5 Offerten' },
-                    { icon: ShieldCheck, title: 'Nur geprüfte Firmen', description: 'Alle Partner sind versichert und qualitätsgeprüft' },
+                    { icon: ShieldCheck, title: 'Nur geprüfte Firmen', description: 'Im Handelsregister eingetragen und manuell freigeschaltet' },
                     { icon: TrendingUp, title: 'Transparent vergleichen', description: 'Preise, Leistungen und Bewertungen auf einen Blick' },
                     { icon: HeartHandshake, title: 'Unverbindlich', description: 'Keine Verpflichtung – die Entscheidung liegt bei Ihnen' },
                   ].map((feature, index) => (
@@ -356,7 +356,7 @@ const OffertenPortalPageClient = () => {
               {
                 number: "02",
                 title: "Offerten erhalten",
-                description: "Sie erhalten bis zu 5 massgeschneiderte Offerten von qualitätsgeprüften Firmen aus Ihrer Region. Die Anbieter nehmen direkt Kontakt mit Ihnen auf.",
+                description: "Sie erhalten bis zu 5 massgeschneiderte Offerten von qualifizierten Firmen aus Ihrer Region. Die Anbieter nehmen direkt Kontakt mit Ihnen auf.",
                 icon: Mail
               },
               {
@@ -420,7 +420,7 @@ const OffertenPortalPageClient = () => {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-3 mt-1 flex-shrink-0" />
-                    <span><strong>Bis zu 5 Offerten</strong> von geprüften Firmen aus Ihrer Region</span>
+                    <span><strong>Bis zu 5 Offerten</strong> von geprüfte Firmen aus Ihrer Region</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-3 mt-1 flex-shrink-0" />
@@ -449,7 +449,7 @@ const OffertenPortalPageClient = () => {
               Warum ein Vergleichsportal nutzen?
             </h3>
             <p className="text-body">
-              Studien zeigen, dass die Kosten für identische Leistungen um bis zu 40% variieren können. Ein Vergleich mehrerer Anbieter ist der Schlüssel zu einem fairen Preis. Mit unserem Offertenportal erhalten Sie mit nur einer Anfrage bis zu 5 detaillierte Offerten von geprüften Firmen – ohne mühsames Suchen und Telefonieren. So behalten Sie die volle Kontrolle und treffen die beste Entscheidung.
+              Studien zeigen, dass die Kosten für identische Leistungen um bis zu 40% variieren können. Ein Vergleich mehrerer Anbieter ist der Schlüssel zu einem fairen Preis. Mit unserem Offertenportal erhalten Sie mit nur einer Anfrage bis zu 5 detaillierte Offerten von geprüfte Firmen – ohne mühsames Suchen und Telefonieren. So behalten Sie die volle Kontrolle und treffen die beste Entscheidung.
             </p>
           </div>
         </div>
@@ -606,7 +606,7 @@ const OffertenPortalPageClient = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { icon: BadgePercent, title: 'Bis zu 40% sparen', description: 'Durch den direkten Vergleich mehrerer Offerten finden Sie den besten Preis für Ihre Dienstleistung.', color: 'green' },
-              { icon: ShieldCheck, title: 'Nur geprüfte Firmen', description: 'Alle Partnerfirmen sind versichert, im Handelsregister eingetragen und qualitätsgeprüft.', color: 'blue' },
+              { icon: ShieldCheck, title: 'Nur geprüfte Firmen', description: 'Alle Partnerfirmen sind im Handelsregister der Schweiz eingetragen und werden vor der Freischaltung manuell geprüft.', color: 'blue' },
               { icon: Clock, title: 'Schnelle Antworten', description: 'Erhalten Sie die ersten Offerten bereits innerhalb von 24 Stunden nach Ihrer Anfrage.', color: 'orange' },
               { icon: Award, title: 'Zeit & Nerven sparen', description: 'Mit nur einer Anfrage erreichen Sie mehrere Anbieter. Kein mühsames Suchen und Telefonieren mehr.', color: 'purple' },
               { icon: Users, title: 'Über 200 Partner', description: 'Ein grosses Netzwerk von qualifizierten Fachfirmen in der ganzen Schweiz steht Ihnen zur Verfügung.', color: 'teal' },

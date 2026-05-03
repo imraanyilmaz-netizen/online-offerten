@@ -50,7 +50,7 @@ export const CustomerQuoteConfirmation = ({
             <Text className="text-base text-gray-700">
               wir haben Ihre Offertenanfrage mit der Referenznummer{' '}
               <span className="font-semibold text-green-600">#{quoteId.substring(0, 8)}</span>{' '}
-              erfolgreich erhalten. Unser Team prüft Ihre Angaben und wird sich in Kürze mit passenden Offerten von geprüften Partnerfirmen bei Ihnen melden.
+              erfolgreich erhalten. Unser Team prüft Ihre Angaben und wird sich in Kürze mit passenden Offerten von geprüfte Partnerfirmen bei Ihnen melden.
             </Text>
             <Section className="text-center my-6">
               <Button

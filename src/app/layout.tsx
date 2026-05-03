@@ -77,7 +77,7 @@ const websiteJsonLd = {
       url: 'https://online-offerten.ch/',
       name: 'Online-Offerten.ch',
       description:
-        'Vergleichen Sie kostenlose Offerten von geprüften Umzugsfirmen und Reinigungsfirmen. Zeit und Geld sparen – schnell, sicher und unverbindlich.',
+        'Vergleichen Sie kostenlose Offerten von geprüfte Umzugsfirmen und Reinigungsfirmen. Zeit und Geld sparen – schnell, sicher und unverbindlich.',
       potentialAction: {
         '@type': 'SearchAction',
         target: {

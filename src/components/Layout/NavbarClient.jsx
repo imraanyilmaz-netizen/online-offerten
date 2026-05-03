@@ -127,7 +127,7 @@ export default function NavbarClient({ children: logoSlot }) {
     umzug: {
       href: '/umzugsfirma',
       title: 'Umzug planen',
-      subtitle: 'Geprüfte Partner in Ihrer Region — mehrere Offerten, ein Formular.',
+      subtitle: 'geprüfte Partner in Ihrer Region — mehrere Offerten, ein Formular.',
       cta: 'Zur Übersicht',
       imageSrc: '/fotos/umzugstag.webp',
       imageAlt: 'Umzug mit Umzugskartons',

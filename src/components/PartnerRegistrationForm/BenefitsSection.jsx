@@ -16,13 +16,13 @@ const BenefitsSection = () => {
     },
     {
       icon: ShieldCheck,
-      title: 'Geprüfte Partner, seriöse Anfragen',
-      desc: 'Wir arbeiten mit einem klaren Onboarding inkl. Nachweisen (z. B. Versicherungsunterlagen). Für Sie bedeutet das: ein Umfeld, das zur Professionalität Ihres Gewerbes passt.',
+      title: 'Seriöse Plattform, qualifizierte Anfragen',
+      desc: 'Wir arbeiten mit einem klaren Onboarding-Prozess für Partnerfirmen. Optional können Sie Ihre Versicherungsunterlagen hochladen und erhalten ein „Versichert"-Badge in Ihrem Profil – ein Vertrauenssignal für Kunden.',
     },
     {
       icon: Eye,
       title: 'Sichtbarkeit ohne eigenes Portal-Budget',
-      desc: 'Ihr Profil und Ihre Bewertungen laufen auf einer etablierten Schweizer Plattform – ohne dass Sie zuerst eine eigene Kampagnenstruktur aufbauen müssen.',
+      desc: 'Ihr Profil und Ihre Bewertungen laufen auf einer etablierten geprüfte Plattform – ohne dass Sie zuerst eine eigene Kampagnenstruktur aufbauen müssen.',
     },
     {
       icon: ToggleRight,

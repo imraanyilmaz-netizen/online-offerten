@@ -89,7 +89,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
             {
               "@type": "Question",
               "name": "Sind die Angebote über Online-Vergleichsplattformen wirklich kostenlos und unverbindlich?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Ja, Plattformen wie Online-Offerten.ch bieten Ihnen kostenlose und unverbindliche Offerten von geprüften Umzugsfirmen in Ihrer Region an." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Ja, Plattformen wie Online-Offerten.ch bieten Ihnen kostenlose und unverbindliche Offerten von geprüfte Umzugsfirmen in Ihrer Region an." }
             },
             {
               "@type": "Question",
@@ -163,7 +163,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
     },
     {
       q: "Sind die Angebote über Online-Vergleichsplattformen wirklich kostenlos und unverbindlich?",
-      a: "Ja, Online-Offerten.ch bietet Ihnen kostenlose und unverbindliche Offerten von geprüften Umzugsfirmen in Ihrer Region an."
+      a: "Ja, Online-Offerten.ch bietet Ihnen kostenlose und unverbindliche Offerten von geprüfte Umzugsfirmen in Ihrer Region an."
     },
     {
       q: "Was sollte ich bei der Auswahl einer Umzugsfirma beachten?",
@@ -552,7 +552,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           <div className="rounded-lg border border-emerald-200 bg-emerald-50/90 p-6 dark:border-emerald-900/50 dark:bg-emerald-950/30">
             <h3 className="mb-3 text-xl font-semibold text-foreground">Vorteile mit Online-Offerten.ch gegenüber eigenständiger Suche</h3>
             <p className="text-body mb-4">
-              <strong>Online-Offerten.ch</strong> spart Ihnen die zeitaufwändige Recherche im Internet. Statt einzelne Unternehmen anzurufen und Informationen zusammenzutragen, erhalten Sie mit einer einzigen Anfrage mehrere vergleichbare Offerten. Die von uns vermittelten geprüften Anbieter sind regional aktiv, verfügen über einen festen Standort in der Schweiz und sind auf Umzüge in Ihrer Region spezialisiert.
+              <strong>Online-Offerten.ch</strong> spart Ihnen die zeitaufwändige Recherche im Internet. Statt einzelne Unternehmen anzurufen und Informationen zusammenzutragen, erhalten Sie mit einer einzigen Anfrage mehrere vergleichbare Offerten. Die von uns vermittelten geprüfte Anbieter sind regional aktiv, verfügen über einen festen Standort in der Schweiz und sind auf Umzüge in Ihrer Region spezialisiert.
             </p>
             <p className="text-body mb-4">
               Bei uns finden Sie zudem Bewertungen und Erfahrungsberichte früherer Kunden, die Ihnen bei der Auswahl helfen. Zusätzlich können Sie auf Online-Offerten.ch gezielt nach Umzugsfirmen in Ihrer Region oder mit speziellen Zusatzleistungen wie <Link href="/reinigung/umzugsreinigung" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Endreinigung</Link> oder Montageservice filtern – so wird die Suche für Sie einfacher.
@@ -767,7 +767,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 <div className="bg-card border border-border rounded-lg p-4 shadow-sm">
                   <h4 className="font-bold text-foreground mb-2">Rechtliche Kriterien:</h4>
                   <ul className="text-sm text-muted-foreground space-y-1.5">
-                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" /> Eintrag im Handelsregister mit Schweizer Geschäftssitz</li>
+                    <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" /> Eintrag im Handelsregister mit Geschäftssitz in der Schweiz</li>
                     <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" /> Gültige Mehrwertsteuer-Nummer (UID)</li>
                     <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" /> Gewerbebewilligung für Gütertransporte</li>
                   </ul>
@@ -939,7 +939,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
           <div className="rounded-lg border border-emerald-200 bg-emerald-50/90 p-6 dark:border-emerald-900/50 dark:bg-emerald-950/30">
             <h3 className="mb-3 text-xl font-bold text-foreground">Ihr nächster Schritt:</h3>
             <p className="text-body mb-4">
-              Starten Sie jetzt Ihre kostenlose Anfrage über <strong>Online-Offerten.ch</strong>. In wenigen Klicks erhalten Sie bis zu fünf unverbindliche Angebote von geprüften Umzugsfirmen aus Ihrer Umgebung. Der Service ist 100% kostenlos und ohne Verpflichtung.
+              Starten Sie jetzt Ihre kostenlose Anfrage über <strong>Online-Offerten.ch</strong>. In wenigen Klicks erhalten Sie bis zu fünf unverbindliche Angebote von geprüfte Umzugsfirmen aus Ihrer Umgebung. Der Service ist 100% kostenlos und ohne Verpflichtung.
             </p>
             <p className="text-body mb-6">
               Egal ob <Link href="/umzugsfirma/privatumzug" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Privatumzug</Link> in <Link href="/umzugsfirma/zuerich" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Zürich</Link>, <Link href="/umzugsfirma/geschaeftsumzug" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Geschäftsumzug</Link> in <Link href="/umzugsfirma/bern" className="text-emerald-700 underline font-medium hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300">Bern</Link> oder Zügeln von Kanton zu Kanton: Die Plattform vermittelt neutral zwischen Ihnen und qualifizierten Partnerfirmen, die auf Ihre Art von Umzug spezialisiert sind.
@@ -957,7 +957,7 @@ const UmzugsfirmaVergleichenPageClient = () => {
                 </Button>
               </div>
             <div className="mt-4 flex flex-wrap gap-4 text-sm text-emerald-800 dark:text-emerald-300">
-              <span>🔒 Geprüfte Anbieter</span>
+              <span>🔒 geprüfte Anbieter</span>
               <span>|</span>
               <span>Neutrale Vermittlung</span>
               <span>|</span>

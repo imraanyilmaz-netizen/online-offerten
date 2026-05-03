@@ -37,7 +37,7 @@ const GuenstigUmziehenPageClient = () => {
                 <div className="mt-8 flex flex-wrap gap-4">
                   {[
                     { label: "Kostenlos & Unverbindlich", icon: CheckCircle },
-                    { label: "Geprüfte Firmen", icon: ShieldCheck },
+                    { label: "geprüfte Firmen", icon: ShieldCheck },
                     { label: "Bis zu 40% sparen", icon: TrendingDown }
                   ].map((stat, index) => (
                     <div key={index} className="flex items-center gap-2">
@@ -73,7 +73,7 @@ const GuenstigUmziehenPageClient = () => {
                   Mehrere Umzugsofferten vergleichen und den besten Preis-Leistungs-Verhältnis finden
                 </h2>
                 <p className="text-body mb-4">
-                  Ein Umzug in der Schweiz kostet durchschnittlich zwischen 2'500 und 5'000 CHF – doch rund 40% der Schweizer zahlen mehr als nötig, weil sie das erste Umzugsunternehmen wählen, ohne Preise zu vergleichen. Das Problem: Ohne feste Tarife variieren die Kosten für identische Umzüge um bis zu 40% zwischen verschiedenen Umzugsfirmen.
+                  Ein Umzug in der Schweiz kostet durchschnittlich zwischen 2'500 und 5'000 CHF – doch rund 40% die Bewohner der Schweiz zahlen mehr als nötig, weil sie das erste Umzugsunternehmen wählen, ohne Preise zu vergleichen. Das Problem: Ohne feste Tarife variieren die Kosten für identische Umzüge um bis zu 40% zwischen verschiedenen Umzugsfirmen.
                 </p>
                 <p className="text-body mb-6">
                   Die Lösung ist einfach: Mehrere kostenlose Offerten einholen und transparent vergleichen. So finden Sie den optimalen Service für Ihr Budget – ohne Kompromisse bei Qualität und Zuverlässigkeit.
@@ -85,11 +85,11 @@ const GuenstigUmziehenPageClient = () => {
                     {
                       icon: TrendingDown,
                       title: "Bis zu 40% Kostenersparnis",
-                      description: "Durch den Vergleich von 3-5 Umzugsofferten sparen Schweizer Haushalte durchschnittlich 500 bis 2'000 CHF"
+                      description: "Durch den Vergleich von 3-5 Umzugsofferten sparen Haushalte in der Schweiz durchschnittlich 500 bis 2'000 CHF"
                     },
                     {
                       icon: ShieldCheck,
-                      title: "Geprüfte Schweizer Umzugsunternehmen",
+                      title: "geprüfte Umzugsunternehmen",
                       description: "Nur zertifizierte Firmen mit SVU-Mitgliedschaft und über 95% Pünktlichkeitsquote"
                     },
                     {
@@ -134,7 +134,7 @@ const GuenstigUmziehenPageClient = () => {
                       {
                         number: "02",
                         title: "Kostenlose Offerten erhalten",
-                        description: "Innerhalb kurzer Zeit 3-5 unverbindliche Angebote von geprüften Umzugsfirmen aus Ihrer Region",
+                        description: "Innerhalb kurzer Zeit 3-5 unverbindliche Angebote von geprüfte Umzugsfirmen aus Ihrer Region",
                         icon: Mail
                       },
                       {
@@ -474,7 +474,7 @@ const GuenstigUmziehenPageClient = () => {
                   </table>
               </div>
                 <p className="text-body mb-4">
-                  <strong>Preisunterschiede nach Region</strong>: Genf und Zürich liegen 20-30% über dem Schweizer Durchschnitt, ländliche Kantone bieten günstigere Konditionen.
+                  <strong>Preisunterschiede nach Region</strong>: Genf und Zürich liegen 20-30% über dem landesweiten Durchschnitt, ländliche Kantone bieten günstigere Konditionen.
                 </p>
                 <p className="text-body mb-6">
                   <strong>Versteckte Kosten erkennen</strong>: Achten Sie bei Offerten auf Faktoren wie Lagerung (80-150 CHF/Monat), Aufzugnutzung, Entsorgung von Umzugskartons und Umzugsmaterial sowie die Endreinigung der alten Wohnung.
@@ -523,7 +523,7 @@ const GuenstigUmziehenPageClient = () => {
                     <strong>Was ist bei Umzugsofferten zu beachten?</strong> Prüfen Sie Festpreis vs. Stundensatz, inkludierte Versicherung, Zusatzkosten für Montage und ob alle gewünschten Leistungen enthalten sind.
                   </p>
                   <p className="text-body">
-                    <strong>Welche Versicherung braucht man beim Umzug?</strong> Seriöse Schweizer Umzugsfirmen bieten Haftpflichtversicherung bis 500 CHF/m³ – bei Wertgegenständen Zusatzschutz vereinbaren.
+                    <strong>Welche Versicherung braucht man beim Umzug?</strong> Seriöse geprüfte Umzugsfirmen bieten Haftpflichtversicherung bis 500 CHF/m³ – bei Wertgegenständen Zusatzschutz vereinbaren.
                   </p>
                   <p className="text-body">
                     <strong>Wie kann man kurzfristig noch Geld sparen?</strong> Selbst packen, Umzugskartons kostenlos bei Migros oder Coop besorgen und flexible Umzugstermine unter der Woche wählen.
@@ -537,7 +537,7 @@ const GuenstigUmziehenPageClient = () => {
 
                 <h2 className="heading-2 mb-4">Jetzt kostenlos Umzugsofferten vergleichen</h2>
                 <p className="text-body mb-4">
-                  Der Schlüssel zum günstigen Umziehen liegt im transparenten Vergleich: Sparen Sie bis zu 40% bei Ihren Umzugskosten, ohne Kompromisse bei Qualität und Zuverlässigkeit. Unser neutrales Vergleichsportal verbindet Sie mit geprüften Schweizer Umzugsunternehmen – kostenlos und unverbindlich.
+                  Der Schlüssel zum günstigen Umziehen liegt im transparenten Vergleich: Sparen Sie bis zu 40% bei Ihren Umzugskosten, ohne Kompromisse bei Qualität und Zuverlässigkeit. Unser neutrales Vergleichsportal verbindet Sie mit geprüfte Umzugsunternehmen – kostenlos und unverbindlich.
                 </p>
                 <div className="mb-6 bg-gradient-to-br from-teal-700 to-green-800 dark:from-teal-900 dark:to-emerald-950 rounded-xl p-6 md:p-8 shadow-lg">
                   <div className="text-center mb-6">
@@ -545,7 +545,7 @@ const GuenstigUmziehenPageClient = () => {
                       🔹 <strong style={{ color: 'rgba(255, 255, 255, 1)' }}>Kostenlose Offerten anfordern und bis zu 40% sparen</strong> 🔹
                     </p>
                     <p className="text-green-50 mb-6 text-body" style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 1)' }}>
-                      ✓ 100% kostenlos und unverbindlich ✓ Geprüfte Partner mit Erfahrung ✓ Transparente Preise ohne Verpflichtung
+                      ✓ 100% kostenlos und unverbindlich ✓ geprüfte Partner mit Erfahrung ✓ Transparente Preise ohne Verpflichtung
                     </p>
                   </div>
                   <div className="flex justify-center">

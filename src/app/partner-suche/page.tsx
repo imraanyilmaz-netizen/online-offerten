@@ -71,7 +71,7 @@ export default async function PartnerSearchPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Umzugsfirmen & Reinigungsfirmen Schweiz",
-    "description": "Geprüfte Umzugsfirmen und Reinigungsfirmen in der Schweiz finden und vergleichen.",
+    "description": "geprüfte Umzugsfirmen und Reinigungsfirmen in der Schweiz finden und vergleichen.",
     "url": "https://online-offerten.ch/partner-suche",
     "numberOfItems": partners.length,
     "itemListElement": partners.slice(0, 50).map((partner: any, index: number) => ({

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/src/lib/supabase/client'
@@ -136,7 +136,7 @@ export default function TrustSignals({ variant = 'full', showLabels = true, clas
         <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200 text-center">
           <ShieldCheck className="h-8 w-8 text-green-600 mx-auto mb-2" />
           <div className="text-2xl font-bold text-gray-900">{formatNumber(stats.partnerCount)}+</div>
-          {showLabels && <div className="text-xs text-gray-600 mt-1">Geprüfte Partner</div>}
+          {showLabels && <div className="text-xs text-gray-600 mt-1">geprüfte Partner</div>}
         </div>
         <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200 text-center">
           <Star className="h-8 w-8 text-yellow-500 fill-yellow-500 mx-auto mb-2" />
@@ -177,7 +177,7 @@ export default function TrustSignals({ variant = 'full', showLabels = true, clas
         <div className="bg-white rounded-xl p-4 shadow-md text-center">
           <ShieldCheck className="h-10 w-10 text-green-600 mx-auto mb-3" />
           <div className="text-3xl font-bold text-gray-900 mb-1">{formatNumber(stats.partnerCount)}+</div>
-          {showLabels && <div className="text-sm text-gray-600">Geprüfte Partner</div>}
+          {showLabels && <div className="text-sm text-gray-600">geprüfte Partner</div>}
         </div>
         <div className="bg-white rounded-xl p-4 shadow-md text-center">
           <Star className="h-10 w-10 text-yellow-500 fill-yellow-500 mx-auto mb-3" />

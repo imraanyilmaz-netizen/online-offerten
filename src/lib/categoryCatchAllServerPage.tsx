@@ -62,7 +62,7 @@ export default async function CategoryCatchAllServerPage({
           ? {
               '@context': 'https://schema.org',
               '@type': 'ItemList',
-              name: `Geprüfte ${st} in ${loc.name}`,
+              name: `geprüfte ${st} in ${loc.name}`,
               numberOfItems: partners.length,
               itemListElement: partners.map((partner, index) => ({
                 '@type': 'ListItem',
@@ -193,7 +193,7 @@ export default async function CategoryCatchAllServerPage({
       ? {
           '@context': 'https://schema.org',
           '@type': 'ItemList',
-          name: `Geprüfte Anbieter: ${svc.label} in ${loc.name}`,
+          name: `geprüfte Anbieter: ${svc.label} in ${loc.name}`,
           numberOfItems: partners.length,
           itemListElement: partners.map((partner, index) => ({
             '@type': 'ListItem',

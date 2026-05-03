@@ -1,4 +1,4 @@
-﻿export const faqs = {
+export const faqs = {
     move: [
       {
         question: {
@@ -48,7 +48,7 @@
         },
         answer: [
           {
-            de: "Der beste Weg ist, mehrere Offerten zu vergleichen. Achten Sie nicht nur auf den Preis, sondern auch auf die Bewertungen, die enthaltenen Leistungen (Versicherung, Verpackungsmaterial) und den Gesamteindruck. Über unsere Plattform erhalten Sie mit nur einer Anfrage bis zu 5 Offerten von geprüften Firmen aus {city}.",
+            de: "Der beste Weg ist, mehrere Offerten zu vergleichen. Achten Sie nicht nur auf den Preis, sondern auch auf die Bewertungen, die enthaltenen Leistungen (Versicherung, Verpackungsmaterial) und den Gesamteindruck. Über unsere Plattform erhalten Sie mit nur einer Anfrage bis zu 5 Offerten von geprüfte Firmen aus {city}.",
             en: "The best way is to compare multiple quotes. Don't just look at the price, but also at the reviews, the included services (insurance, packing material), and the overall impression. Through our platform, you can receive up to 5 quotes from certified companies in {city} with just one request."
           }
         ]

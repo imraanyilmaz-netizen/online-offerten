@@ -4,13 +4,13 @@ import OffertenPortalPageClient from '@/components/pages/info/OffertenPortalPage
 
 export const metadata: Metadata = {
   title: 'Offertenportal Schweiz – Offerten kostenlos vergleichen | Online-Offerten.ch',
-  description: 'Offertenportal Schweiz ✓ Vergleichen Sie kostenlos & unverbindlich bis zu 5 Offerten für Umzug, Reinigung & Malerarbeiten von geprüften Firmen. Jetzt Offerten anfordern & bis zu 40% sparen!',
+  description: 'Offertenportal Schweiz ✓ Vergleichen Sie kostenlos & unverbindlich bis zu 5 Offerten für Umzug, Reinigung & Malerarbeiten von geprüfte Firmen. Jetzt Offerten anfordern & bis zu 40% sparen!',
   alternates: {
     canonical: 'https://online-offerten.ch/offerten-portal',
   },
   openGraph: {
     title: 'Offertenportal Schweiz » Offerten kostenlos vergleichen',
-    description: 'Ihr Vergleichsportal für Umzug, Reinigung & Malerarbeiten in der Schweiz. Bis zu 5 kostenlose Offerten von geprüften Firmen aus Ihrer Region. Jetzt vergleichen!',
+    description: 'Ihr Vergleichsportal für Umzug, Reinigung & Malerarbeiten in der Schweiz. Bis zu 5 kostenlose Offerten von geprüfte Firmen aus Ihrer Region. Jetzt vergleichen!',
     url: 'https://online-offerten.ch/offerten-portal',
     siteName: 'Online-Offerten.ch',
     images: [

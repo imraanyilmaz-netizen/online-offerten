@@ -29,7 +29,7 @@ const DESTINATIONS = [
       'Umzug nach Deutschland ab der Schweiz: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40% bei Ihrem Wohnungswechsel. Kostenorientierung für Möbeltransport und Grenzübertritt – das Zielland ist im Kostenrechner unten bereits für Sie vorausgewählt.',
     calculatorHeading: 'Offerte für Ihren Umzug nach Deutschland',
     calculatorIntro:
-      'Der Rechner ist bereits auf Deutschland eingestellt (Abfahrt Schweiz). Ein internationaler Umzug hängt stark von Zollbestimmungen, Distanz und dem gewünschten Service ab – hier erhalten Sie eine erste Preisorientierung für Ihren Möbeltransport. Anschliessend können Sie unverbindlich massgeschneiderte Offerten von geprüften Zügelunternehmen vergleichen.',
+      'Der Rechner ist bereits auf Deutschland eingestellt (Abfahrt Schweiz). Ein internationaler Umzug hängt stark von Zollbestimmungen, Distanz und dem gewünschten Service ab – hier erhalten Sie eine erste Preisorientierung für Ihren Möbeltransport. Anschliessend können Sie unverbindlich massgeschneiderte Offerten von geprüfte Zügelunternehmen vergleichen.',
   },
   {
     name: 'Frankreich',
@@ -38,13 +38,13 @@ const DESTINATIONS = [
     flagEmoji: '🇫🇷',
     metaTitle: 'Auslandsumzug Frankreich – Kostenlose Offerten vergleichen',
     metaDescription:
-      'Auslandsumzug und Umzug nach Frankreich ab der Schweiz: Geprüfte Umzugsfirmen vergleichen, bis zu 40% sparen. Zielland im Kostenrechner vorausgewählt.',
+      'Auslandsumzug und Umzug nach Frankreich ab der Schweiz: geprüfte Umzugsfirmen vergleichen, bis zu 40% sparen. Zielland im Kostenrechner vorausgewählt.',
     heroTitle: 'Auslandsumzug Frankreich – Kostenlose Offerten vergleichen',
     heroDescription:
       'Umzug nach Frankreich ab der Schweiz: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40% bei Ihrem Wohnungswechsel. Planen Sie Auswandern oder Möbeltransport – das Zielland ist im Kostenrechner unten bereits für Sie vorausgewählt.',
     calculatorHeading: 'Offerte für Ihren Umzug nach Frankreich',
     calculatorIntro:
-      'Der Rechner ist bereits auf Frankreich eingestellt (Abfahrt Schweiz). Ein internationaler Umzug hängt stark von Zollbestimmungen, Distanz und dem gewünschten Service ab – hier erhalten Sie eine erste Preisorientierung für Ihren Möbeltransport. Anschliessend können Sie unverbindlich massgeschneiderte Offerten von geprüften Zügelunternehmen vergleichen.',
+      'Der Rechner ist bereits auf Frankreich eingestellt (Abfahrt Schweiz). Ein internationaler Umzug hängt stark von Zollbestimmungen, Distanz und dem gewünschten Service ab – hier erhalten Sie eine erste Preisorientierung für Ihren Möbeltransport. Anschliessend können Sie unverbindlich massgeschneiderte Offerten von geprüfte Zügelunternehmen vergleichen.',
   },
   {
     name: 'Italien',
@@ -59,17 +59,17 @@ const DESTINATIONS = [
       'Zügeln nach Italien ab der Schweiz: Sparen Sie Zeit und Geld, indem Sie unverbindlich Offerten von zertifizierten Transportunternehmen vergleichen. So reduzieren Sie Ihre Umzugskosten um bis zu 40%. Das Zielland ist im Rechner bereits aktiv.',
     calculatorHeading: 'Offerte für Ihren Umzug nach Italien',
     calculatorIntro:
-      'Der Rechner ist bereits auf Italien eingestellt (Start in der Schweiz). Da ein grenzüberschreitender Umzug durch Faktoren wie Zollabwicklung, Kilometerzahl und Volumen bestimmt wird, bietet Ihnen dieses Tool eine schnelle erste Kostenschätzung. Vergleichen Sie danach in Ruhe die Angebote unserer geprüften Partner für Ihren stressfreien Start im Süden.',
+      'Der Rechner ist bereits auf Italien eingestellt (Start in der Schweiz). Da ein grenzüberschreitender Umzug durch Faktoren wie Zollabwicklung, Kilometerzahl und Volumen bestimmt wird, bietet Ihnen dieses Tool eine schnelle erste Kostenschätzung. Vergleichen Sie danach in Ruhe die Angebote unserer geprüfte Partner für Ihren stressfreien Start im Süden.',
   },
   {
     name: 'Österreich',
     code: 'AT',
     slug: 'oesterreich',
     flagEmoji: '🇦🇹',
-    metaTitle: 'Auslandsumzug Österreich – Geprüfte Umzugsfirmen vergleichen',
+    metaTitle: 'Auslandsumzug Österreich – geprüfte Umzugsfirmen vergleichen',
     metaDescription:
       'Auslandsumzug und Umzug nach Österreich ab der Schweiz: Umzugsfirma und Wohnsitzverlegung – kostenlose Angebote, bis zu 40% sparen. Zielland im Kalkulator markiert.',
-    heroTitle: 'Auslandsumzug Österreich – Geprüfte Umzugsfirmen vergleichen',
+    heroTitle: 'Auslandsumzug Österreich – geprüfte Umzugsfirmen vergleichen',
     heroDescription:
       'Umzug nach Österreich ab der Schweiz: Holen Sie sich kostenlos Angebote von erfahrenen Zügelfirmen ein und sparen Sie bis zu 40% der Kosten. Das Zielland ist im untenstehenden Kalkulator bereits für Sie markiert.',
     calculatorHeading: 'Kosten für Ihren Umzug nach Österreich berechnen',
@@ -104,7 +104,7 @@ const DESTINATIONS = [
       'Zügeln nach Portugal ab der Schweiz: Starten Sie entspannt in Ihr neues Leben. Vergleichen Sie kostenlos erfahrene Umzugsunternehmen und sparen Sie bis zu 40% der Transportkosten. Das Zielland ist im Preisrechner schon hinterlegt.',
     calculatorHeading: 'Offerte für Ihren Umzug nach Portugal',
     calculatorIntro:
-      'Der Rechner ist bereits auf Portugal eingestellt (Startpunkt Schweiz). Da die Strecke lang ist und das Umzugsgut sicher den Zoll passieren muss, gibt Ihnen unser Tool eine erste realistische Kosteneinschätzung. Danach haben Sie die Möglichkeit, Offerten von streng geprüften Zügelexperten massgeschneidert und unverbindlich zu vergleichen.',
+      'Der Rechner ist bereits auf Portugal eingestellt (Startpunkt Schweiz). Da die Strecke lang ist und das Umzugsgut sicher den Zoll passieren muss, gibt Ihnen unser Tool eine erste realistische Kosteneinschätzung. Danach haben Sie die Möglichkeit, Offerten von streng geprüfte Zügelexperten massgeschneidert und unverbindlich zu vergleichen.',
   },
   {
     name: 'Belgien',
@@ -113,7 +113,7 @@ const DESTINATIONS = [
     flagEmoji: '🇧🇪',
     metaTitle: 'Auslandsumzug Belgien – Kostenlose Offerten vergleichen',
     metaDescription:
-      'Umzug nach Belgien ab der Schweiz: Auslandsumzug mit geprüften Zügelfirmen vergleichen, bis zu 40% sparen. Möbeltransport – Zielland im Kostenrechner vorausgewählt.',
+      'Umzug nach Belgien ab der Schweiz: Auslandsumzug mit geprüfte Zügelfirmen vergleichen, bis zu 40% sparen. Möbeltransport – Zielland im Kostenrechner vorausgewählt.',
     heroTitle: 'Auslandumzug Belgien – Kostenlose Offerten vergleichen',
     heroDescription:
       'Umzug nach Belgien ab der Schweiz: Vergleichen Sie kostenlos mehrere geprüfte Umzugsfirmen und sparen Sie bis zu 40%. Das Zielland ist im Kostenrechner unten bereits für Sie vorausgewählt.',
@@ -134,7 +134,7 @@ const DESTINATIONS = [
       'Umzug nach Dänemark ab der Schweiz: Holen Sie kostenlos Offerten von erfahrenen Umzugsfirmen ein und sparen Sie bis zu 40%. Skandinavischer Fernumzug – das Zielland ist im Kostenrechner bereits vorausgewählt.',
     calculatorHeading: 'Offerte für Ihren Umzug nach Dänemark',
     calculatorIntro:
-      'Der Rechner ist bereits auf Dänemark eingestellt (Abfahrt Schweiz). Lange Distanz und Zollformalitäten beeinflussen den Preis – dieses Tool liefert eine erste Orientierung. Danach vergleichen Sie unverbindlich massgeschneiderte Angebote unserer geprüften Partner.',
+      'Der Rechner ist bereits auf Dänemark eingestellt (Abfahrt Schweiz). Lange Distanz und Zollformalitäten beeinflussen den Preis – dieses Tool liefert eine erste Orientierung. Danach vergleichen Sie unverbindlich massgeschneiderte Angebote unserer geprüfte Partner.',
   },
 ]
 

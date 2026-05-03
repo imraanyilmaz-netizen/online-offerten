@@ -557,7 +557,7 @@ export default function CategoryServicePageClient({
                 <div className="min-w-0">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm dark:border-border dark:bg-card/90 dark:text-foreground">
                     <Sparkles className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden />
-                    Geprüfte Anbieter in der Schweiz
+                    geprüfte Anbieter in der Schweiz
                   </div>
                   <h1 className="heading-1 !mt-0 max-w-3xl">{heroTitle}</h1>
                   <p className="text-body mt-4 max-w-2xl">{pageDescription}</p>

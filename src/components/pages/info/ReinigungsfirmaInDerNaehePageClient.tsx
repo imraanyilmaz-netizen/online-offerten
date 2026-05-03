@@ -819,7 +819,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 <CheckCircle className="h-6 w-6 text-blue-600 dark:text-sky-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="heading-5 mb-2">Schweizspezifische Kenntnisse</h4>
-                  <p className="text-body">Von Mietrecht über typische Abnahmestandards bis zu regionalen Preisen: Unsere Plattform ist auf den Schweizer Markt zugeschnitten.</p>
+                  <p className="text-body">Von Mietrecht über typische Abnahmestandards bis zu regionalen Preisen: Unsere Plattform ist auf den geprüfte Markt zugeschnitten.</p>
                 </div>
               </div>
             </div>
@@ -993,7 +993,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 text-blue-600 dark:text-sky-400 mr-2" />
-                <span>Geprüfte Schweizer Reinigungsunternehmen</span>
+                <span>Geprüfte geprüfte Reinigungsunternehmen</span>
               </div>
             </div>
           </div>

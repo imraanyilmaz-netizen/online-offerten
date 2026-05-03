@@ -277,7 +277,7 @@ const ReinigungsfirmaStadtPageClient = ({ stadtInfo }: ReinigungsfirmaStadtPageC
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
-                  <span>Geprüfte Firmen</span>
+                  <span>geprüfte Firmen</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />

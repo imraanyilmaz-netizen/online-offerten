@@ -54,7 +54,7 @@ export const aargauCityData: Record<string, AargauCityData> = {
     faqs: [
       {
         question: 'Wie finde ich eine seriöse Umzugsfirma in Aarau?',
-        answer: 'Vergleichen Sie mehrere Offerten von geprüften Umzugsfirmen. Achten Sie auf detaillierte Angebote, Versicherungsschutz und lokale Erfahrung. Seriöse Anbieter kennen die Parkregelungen in der Altstadt und können Halteverbotszonen professionell organisieren.'
+        answer: 'Vergleichen Sie mehrere Offerten von geprüfte Umzugsfirmen. Achten Sie auf detaillierte Angebote, Versicherungsschutz und lokale Erfahrung. Seriöse Anbieter kennen die Parkregelungen in der Altstadt und können Halteverbotszonen professionell organisieren.'
       },
       {
         question: 'Was kostet ein Umzug nach Aarau?',

@@ -5,13 +5,13 @@ import AboutPageClient from '@/components/pages/AboutPageClient'
 
 export const metadata: Metadata = {
   title: 'Über uns – Online-Offerten.ch | Unabhängiges Vergleichsportal für Umzug, Reinigung & Malerarbeiten',
-  description: 'Online-Offerten.ch ist ein unabhängiges Schweizer Vergleichsportal. Mit einer Anfrage bis zu 5 Offerten von geprüften Umzugs-, Reinigungs- und Malerfirmen erhalten. 100% kostenlos & unverbindlich.',
+  description: 'Online-Offerten.ch ist ein unabhängiges geprüftes Vergleichsportal. Mit einer Anfrage bis zu 5 Offerten von geprüfte Umzugs-, Reinigungs- und Malerfirmen erhalten. 100% kostenlos & unverbindlich.',
   alternates: {
     canonical: 'https://online-offerten.ch/ueber-uns',
   },
   openGraph: {
     title: 'Über Online-Offerten.ch – Ihr unabhängiges Vergleichsportal',
-    description: 'Unabhängiges Vergleichsportal für Umzug, Reinigung & Malerarbeiten. Bis zu 5 Offerten von geprüften Firmen vergleichen – 100% kostenlos.',
+    description: 'Unabhängiges Vergleichsportal für Umzug, Reinigung & Malerarbeiten. Bis zu 5 Offerten von geprüfte Firmen vergleichen – 100% kostenlos.',
     url: 'https://online-offerten.ch/ueber-uns',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -60,7 +60,7 @@ export default async function AboutPage() {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "Über Online-Offerten.ch – Unabhängiges Vergleichsportal",
-    "description": "Online-Offerten.ch ist ein unabhängiges Schweizer Vergleichsportal für Umzugs-, Reinigungs- und Malerofferten. Mit einer Anfrage bis zu 5 Offerten von geprüften Partnerfirmen erhalten – kostenlos und unverbindlich.",
+    "description": "Online-Offerten.ch ist ein unabhängiges geprüftes Vergleichsportal für Umzugs-, Reinigungs- und Malerofferten. Mit einer Anfrage bis zu 5 Offerten von geprüfte Partnerfirmen erhalten – kostenlos und unverbindlich.",
     "url": "https://online-offerten.ch/ueber-uns",
     "mainEntity": {
       "@type": "Organization",
@@ -68,7 +68,7 @@ export default async function AboutPage() {
       "name": "Online Offerten",
       "url": "https://online-offerten.ch",
       "logo": "https://online-offerten.ch/image/logo-icon.webp",
-      "description": "Unabhängiges Schweizer Vergleichsportal für Umzugs-, Reinigungs- und Malerofferten. Mit einer Anfrage bis zu 5 kostenlose Offerten von geprüften Partnerfirmen erhalten.",
+      "description": "Unabhängiges geprüftes Vergleichsportal für Umzugs-, Reinigungs- und Malerofferten. Mit einer Anfrage bis zu 5 kostenlose Offerten von geprüfte Partnerfirmen erhalten.",
       "contactPoint": {
         "@type": "ContactPoint",
         "email": "info@online-offerten.ch",

@@ -35,7 +35,7 @@ export default function LocationSidebar({
       <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
         <h3 className="font-semibold text-gray-900 mb-2">Offerte in {city}</h3>
         <p className="text-sm text-gray-600 mb-4">
-          Kostenlose, unverbindliche Offerten von geprüften Partnerfirmen in Ihrer Region.
+          Kostenlose, unverbindliche Offerten von geprüfte Partnerfirmen in Ihrer Region.
         </p>
         <Button asChild className="w-full" size="lg">
           <Link href={offerteHref(city)}>

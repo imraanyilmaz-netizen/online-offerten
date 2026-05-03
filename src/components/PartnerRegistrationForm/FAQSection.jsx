@@ -32,7 +32,7 @@ const faqs = [
   {
     question: 'Was passiert nach der Registrierung?',
     answer:
-      'Nach der Registrierung wird Ihr Profil geprüft und manuell aktiviert. Anschliessend fordern wir die notwendigen Versicherungsunterlagen an. Sobald diese geprüft und freigegeben sind, können Sie passende Anfragen einsehen.',
+      'Nach der Registrierung wird Ihr Profil von unserem Team geprüft und manuell aktiviert. Sobald Ihr Profil aktiv ist, können Sie passende Anfragen einsehen und kaufen. Optional können Sie Ihre Betriebshaftpflichtversicherung hochladen, um in Ihrem Profil ein „Versichert"-Badge zu erhalten und das Vertrauen Ihrer Kunden zu stärken.',
   },
 ];
 

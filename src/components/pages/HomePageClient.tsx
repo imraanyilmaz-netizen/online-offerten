@@ -539,7 +539,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       <MapPin className="h-6 w-6 md:h-7 md:w-7" />
                     </div>
                     <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl md:leading-tight">
-                      In der ganzen Schweiz: geprüfte Anbieter für Umzug, Reinigung &amp; Malerarbeiten
+                      In der ganzen Schweiz: Geprüfte Anbieter für Umzug, Reinigung &amp; Malerarbeiten
                     </h2>
                   </div>
                   <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-muted-foreground md:text-lg">

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -163,7 +163,7 @@ const TransportTabs = () => {
     article: {
       title: "Tresortransport: Sicherer und diskreter Tresor Transport mit höchster Sicherheit",
       paragraphs: [
-        "Der Transport eines Tresors erfordert Fachwissen, Spezialequipment und absolute Diskretion. Unsere geprüften Partner transportieren Ihren Wertschutzschrank sicher und unauffällig an seinen neuen Bestimmungsort.",
+        "Der Transport eines Tresors erfordert Fachwissen, Spezialequipment und absolute Diskretion. Unsere geprüfte Partner transportieren Ihren Wertschutzschrank sicher und unauffällig an seinen neuen Bestimmungsort.",
         "Tresore unterscheiden sich stark: Ein Möbeltresor wiegt oft unter 150 kg, während ein Wertschutzschrank mehrere Tonnen schwer und im Boden verankert sein kann. Unsere Experten analysieren Ihren Tresor und wählen die passende Transportmethode.",
         "Wir planen jeden Transport sorgfältig. Vor dem Transport prüfen wir den gesamten Weg, messen Türen und Gänge aus und kümmern uns um alle notwendigen Genehmigungen. Die fachgerechte Demontage der Verankerung erfolgt mit Spezialwerkzeug – diskret und professionell."
       ]

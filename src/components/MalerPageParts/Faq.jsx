@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HelpCircle, ChevronRight } from 'lucide-react';

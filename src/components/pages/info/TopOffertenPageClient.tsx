@@ -22,7 +22,7 @@ const faqItems = [
   },
   {
     q: 'Wie frage ich online mehrere Offerten an und vergleiche sie?',
-    a: 'Sie füllen einmal unser Formular aus. Anschliessend erhalten Sie – je nach Auftrag – bis zu mehrere Offerten von geprüften Firmen. Diese legen Sie in Ruhe nebeneinander: Leistung, Preis und Termine. So vergleichen Sie ohne mehrfaches Anfragen bei einzelnen Anbietern.',
+    a: 'Sie füllen einmal unser Formular aus. Anschliessend erhalten Sie – je nach Auftrag – bis zu mehrere Offerten von geprüfte Firmen. Diese legen Sie in Ruhe nebeneinander: Leistung, Preis und Termine. So vergleichen Sie ohne mehrfaches Anfragen bei einzelnen Anbietern.',
   },
   {
     q: 'Was bedeutet Top Offerten bei Online-Offerten.ch?',
@@ -296,7 +296,7 @@ const TopOffertenPageClient = () => {
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-600 dark:text-emerald-500 mr-2" />
-                  <span>Geprüfte Partnerfirmen</span>
+                  <span>geprüfte Partnerfirmen</span>
                 </div>
               </div>
             </div>
@@ -419,7 +419,7 @@ const TopOffertenPageClient = () => {
                 Ihre Vorteile mit Top Offerten bei uns auf Online-Offerten.ch
               </h2>
               <p className="text-body mb-6">
-                Hinter <strong>Online-Offerten.ch</strong> steht ein Netzwerk geprüfter Fachfirmen aus der Schweiz. Statt selbst Anbieter zu recherchieren und einzeln anzufragen, bündeln Sie den Aufwand: Sie erhalten strukturierte Offerten, die Sie
+                Hinter <strong>Online-Offerten.ch</strong> steht ein Netzwerk geprüfte Fachfirmen aus der Schweiz. Statt selbst Anbieter zu recherchieren und einzeln anzufragen, bündeln Sie den Aufwand: Sie erhalten strukturierte Offerten, die Sie
                 direkt vergleichen können.
               </p>
               <p className="text-body mb-6">
@@ -519,7 +519,7 @@ const TopOffertenPageClient = () => {
               },
               {
                 icon: ShieldCheck,
-                title: 'Geprüfte Partner',
+                title: 'geprüfte Partner',
                 description: 'Wir prüfen Firmendaten und Versicherung, bevor Partner im Netzwerk aktiv sind.',
                 color: 'blue',
               },
@@ -692,7 +692,7 @@ const TopOffertenPageClient = () => {
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5 text-green-400" />
-                <span>Geprüfte Partner</span>
+                <span>geprüfte Partner</span>
               </div>
               <div className="flex items-center gap-2">
                 <Award className="h-5 w-5 text-green-400" />

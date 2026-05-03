@@ -40,7 +40,7 @@ const StandortePageClient = () => {
             </h1>
           </div>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Schweizer Städten. Von Zürich bis Genf, von Basel bis Bern - wir haben Partner in Ihrer Nähe.
+            Finden Sie Umzugsfirmen und Reinigungsfirmen in allen Städten der Schweiz. Von Zürich bis Genf, von Basel bis Bern - wir haben Partner in Ihrer Nähe.
           </p>
         </div>
 

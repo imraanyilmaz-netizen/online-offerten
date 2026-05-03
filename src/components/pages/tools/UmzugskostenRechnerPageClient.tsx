@@ -182,7 +182,7 @@ const UmzugskostenRechnerPageClient: React.FC = () => {
             <section>
               <h2 className="heading-2 mb-4">Was uns von anderen Umzugsportalen unterscheidet</h2>
               <ul className="list-disc pl-6 space-y-2 text-body">
-                <li><strong>Ausschliesslich geprufte Schweizer Umzugsfirmen</strong> - Jedes Zugelunternehmen in unserem Netzwerk wurde auf Qualitat, Zuverlassigkeit und Betriebshaftpflichtversicherung gepruft</li>
+                <li><strong>Ausschliesslich geprufte geprüfte Umzugsfirmen</strong> - Jedes Zugelunternehmen in unserem Netzwerk wurde auf Qualitat, Zuverlassigkeit und Betriebshaftpflichtversicherung gepruft</li>
                 <li><strong>Keine Provision oder Vermittlungsgebuhren</strong> - Sie zahlen keinen Cent an uns, weder direkt noch versteckt im Preis der Umzugsfirma</li>
                 <li><strong>Neutrale Beratung garantiert</strong> - Da wir selbst keine Umzuge durchfuhren, haben wir kein Interesse daran, bestimmte Anbieter zu bevorzugen</li>
                 <li><strong>Schweizweite Abdeckung</strong> - Von Zurich bis Genf, von Basel bis Lugano finden wir regionale Anbieter, die Ihren Wohnort kennen</li>

@@ -50,7 +50,7 @@ export default function FooterBeliebteStandorte() {
                 Beliebte Standorte
               </h2>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 sm:text-base">
-                Vergleichen Sie Anbieter in grossen Schweizer Städten — pro Ort für Umzug,
+                Vergleichen Sie Anbieter in grossen Städten der Schweiz — pro Ort für Umzug,
                 Reinigung und Malerarbeiten.
               </p>
             </div>

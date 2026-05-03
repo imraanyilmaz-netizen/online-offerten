@@ -57,7 +57,7 @@ async function getReviewStats() {
 const faqItemsForSchema = [
   {
     q: "Was sind Umzugsofferten und wie funktioniert der Vergleich?",
-    a: "Umzugsofferten sind kostenlose Preisangebote von Umzugsfirmen für Ihren geplanten Umzug. Bei Online-Offerten.ch können Sie bis zu 5 Preisvorschläge von geprüften Umzugsfirmen in Ihrer Region kostenlos und unverbindlich anfordern. Sie füllen einfach ein kurzes Formular aus, beschreiben Ihren Umzug, und erhalten innerhalb von 24-48 Stunden mehrere Preisvorschläge per E-Mail. Diese können Sie dann in Ruhe vergleichen und die beste für Ihre Bedürfnisse auswählen. Der direkte Vergleich ist der effektivste Weg, um faire Preise zu finden und bis zu 40% zu sparen."
+    a: "Umzugsofferten sind kostenlose Preisangebote von Umzugsfirmen für Ihren geplanten Umzug. Bei Online-Offerten.ch können Sie bis zu 5 Preisvorschläge von geprüfte Umzugsfirmen in Ihrer Region kostenlos und unverbindlich anfordern. Sie füllen einfach ein kurzes Formular aus, beschreiben Ihren Umzug, und erhalten innerhalb von 24-48 Stunden mehrere Preisvorschläge per E-Mail. Diese können Sie dann in Ruhe vergleichen und die beste für Ihre Bedürfnisse auswählen. Der direkte Vergleich ist der effektivste Weg, um faire Preise zu finden und bis zu 40% zu sparen."
   },
   {
     q: "Sind Umzugsofferten wirklich kostenlos?",
@@ -65,7 +65,7 @@ const faqItemsForSchema = [
   },
   {
     q: "Wie viele Umzugsofferten erhalte ich?",
-    a: "Sie erhalten bis zu 5 Preisvorschläge von verschiedenen geprüften Umzugsfirmen aus Ihrer Region. Die Anzahl hängt von der Verfügbarkeit der Partnerfirmen in Ihrer Region und Ihrem Umzugsdatum ab. In Ballungsgebieten wie Zürich, Basel oder Bern erhalten Sie meist alle 5 Angebote, in ländlicheren Regionen können es auch 3-4 sein. Jede Offerte wird Ihnen per E-Mail zugesendet und enthält alle wichtigen Details wie Preis, Leistungen, Versicherungen und Kontaktinformationen."
+    a: "Sie erhalten bis zu 5 Preisvorschläge von verschiedenen geprüfte Umzugsfirmen aus Ihrer Region. Die Anzahl hängt von der Verfügbarkeit der Partnerfirmen in Ihrer Region und Ihrem Umzugsdatum ab. In Ballungsgebieten wie Zürich, Basel oder Bern erhalten Sie meist alle 5 Angebote, in ländlicheren Regionen können es auch 3-4 sein. Jede Offerte wird Ihnen per E-Mail zugesendet und enthält alle wichtigen Details wie Preis, Leistungen, Versicherungen und Kontaktinformationen."
   },
   {
     q: "Wie lange dauert es, bis ich Umzugsofferten erhalte?",
@@ -112,7 +112,7 @@ function getSchemaData(reviewStats: { reviewCount: number; averageRating: number
       "@type": "Service",
       "name": "Umzugsofferten kostenlos vergleichen",
       "serviceType": "Umzugsofferten",
-      "description": "Kostenlose Umzugsangebote von geprüften Umzugsfirmen in der Schweiz vergleichen. Bis zu 5 Preisvorschläge erhalten und bis zu 40% sparen.",
+      "description": "Kostenlose Umzugsangebote von geprüfte Umzugsfirmen in der Schweiz vergleichen. Bis zu 5 Preisvorschläge erhalten und bis zu 40% sparen.",
       "provider": {
         "@type": "Organization",
         "name": "Online-Offerten.ch",
@@ -182,7 +182,7 @@ function getSchemaData(reviewStats: { reviewCount: number; averageRating: number
     {
       "@type": "CreativeWorkSeries",
       "name": "Umzugsofferten: Kostenlos vergleichen",
-      "description": "Kostenlose Umzugsangebote von geprüften Umzugsfirmen in der Schweiz vergleichen. Bis zu 5 Preisvorschläge erhalten und bis zu 40% sparen.",
+      "description": "Kostenlose Umzugsangebote von geprüfte Umzugsfirmen in der Schweiz vergleichen. Bis zu 5 Preisvorschläge erhalten und bis zu 40% sparen.",
       ...(reviewStats.reviewCount > 0 && reviewStats.averageRating > 0 ? {
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -200,13 +200,13 @@ function getSchemaData(reviewStats: { reviewCount: number; averageRating: number
 
 export const metadata: Metadata = {
   title: 'Umzugsofferten vergleichen | Kostenlos & unverbindlich',
-  description: 'Bis zu 5 Umzugsofferten von geprüften Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
+  description: 'Bis zu 5 Umzugsofferten von geprüfte Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
   alternates: {
     canonical: 'https://online-offerten.ch/umzugsofferten',
   },
   openGraph: {
     title: 'Umzugsofferten vergleichen | Kostenlos & unverbindlich',
-    description: 'Bis zu 5 Umzugsofferten von geprüften Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
+    description: 'Bis zu 5 Umzugsofferten von geprüfte Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
     url: 'https://online-offerten.ch/umzugsofferten',
     siteName: 'Online-Offerten.ch',
     images: [
@@ -223,7 +223,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Umzugsofferten vergleichen | Kostenlos & unverbindlich',
-    description: 'Bis zu 5 Umzugsofferten von geprüften Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
+    description: 'Bis zu 5 Umzugsofferten von geprüfte Umzugsfirmen erhalten und direkt vergleichen. Schnell, einfach und kostenlos in der Schweiz.',
     images: ['https://online-offerten.ch/image/umzugsservice-Schweiz/umzugsofferten-kostenlos-vergleichen.png'],
   },
   robots: {

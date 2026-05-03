@@ -47,7 +47,7 @@ const RZ_JSON_LD = {
       name: 'Reinigungsfirma finden und vergleichen',
       serviceType: 'Reinigungsservice',
       description:
-        'Finden Sie die beste Reinigungsfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Reinigungsfirmen für Umzugsreinigung, Endreinigung mit Abnahmegarantie, Wohnungs- und Büroreinigung.',
+        'Finden Sie die beste Reinigungsfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüfte Reinigungsfirmen für Umzugsreinigung, Endreinigung mit Abnahmegarantie, Wohnungs- und Büroreinigung.',
       provider: {
         '@type': 'Organization',
         name: 'Online-Offerten.ch',
@@ -81,7 +81,7 @@ const ML_JSON_LD = {
       name: 'Malerfirma finden und vergleichen',
       serviceType: 'Malerservice',
       description:
-        'Finden Sie die beste Malerfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Malerfirmen für Innenanstrich, Aussenanstrich und Fassadenanstrich – bis zu 40% günstiger.',
+        'Finden Sie die beste Malerfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüfte Malerfirmen für Innenanstrich, Aussenanstrich und Fassadenanstrich – bis zu 40% günstiger.',
       provider: {
         '@type': 'Organization',
         name: 'Online-Offerten.ch',
@@ -115,7 +115,7 @@ const UZ_JSON_LD = {
       name: 'Umzugsfirma finden und vergleichen',
       serviceType: 'Umzugsservice',
       description:
-        'Finden Sie die beste Umzugsfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen für Privatumzug, Geschäftsumzug und mehr.',
+        'Finden Sie die beste Umzugsfirma in der Schweiz. Vergleichen Sie bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen für Privatumzug, Geschäftsumzug und mehr.',
       provider: {
         '@type': 'Organization',
         name: 'Online-Offerten.ch',
@@ -152,14 +152,14 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
 
   if (variant === 'umzugsfirma') {
     return {
-      title: 'Umzugsfirma in der Nähe finden – Geprüfte Partner',
+      title: 'Umzugsfirma in der Nähe finden – geprüfte Partner',
       description:
-        'Umzugsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und transparent. Jetzt kostenlos Offerten anfordern!',
+        'Umzugsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und transparent. Jetzt kostenlos Offerten anfordern!',
       alternates: { canonical: url },
       openGraph: {
-        title: 'Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen',
+        title: 'Umzugsfirma in der Nähe finden » geprüfte Partner vergleichen',
         description:
-          'Umzugsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und transparent.',
+          'Umzugsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen in Ihrer Region. Privatumzug, Geschäftsumzug – schnell, sicher und transparent.',
         url,
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
@@ -167,9 +167,9 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Umzugsfirma in der Nähe finden » Geprüfte Partner vergleichen',
+        title: 'Umzugsfirma in der Nähe finden » geprüfte Partner vergleichen',
         description:
-          'Umzugsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen in Ihrer Region.',
+          'Umzugsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen in Ihrer Region.',
       },
       robots,
     }
@@ -211,7 +211,7 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
         title:
           'Reinigungsfirma in der Nähe | Umzugsreinigung, Endreinigung & Reinigungsofferten vergleichen',
         description:
-          'Umzugsreinigung und Endreinigung vergleichen: bis zu 5 kostenlose Reinigungsofferten von geprüften Reinigungsfirmen in Ihrer Region.',
+          'Umzugsreinigung und Endreinigung vergleichen: bis zu 5 kostenlose Reinigungsofferten von geprüfte Reinigungsfirmen in Ihrer Region.',
         url,
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
@@ -231,12 +231,12 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
   return {
     title: 'Malerfirma in der Nähe finden – Bis zu 40% sparen',
     description:
-      'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
+      'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
     alternates: { canonical: url },
     openGraph: {
       title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen',
       description:
-        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich – professionell, sicher und bis zu 40% günstiger.',
+        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich – professionell, sicher und bis zu 40% günstiger.',
       url,
       siteName: 'Online-Offerten.ch',
       locale: 'de_CH',
@@ -246,7 +246,7 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
       card: 'summary_large_image',
       title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen',
       description:
-        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region.',
+        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region.',
     },
     robots,
   }
@@ -262,12 +262,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   if (cat.slug === 'umzugsfirma') {
     return {
-      title: 'Umzugsfirma Schweiz | Geprüfte Anbieter vergleichen',
+      title: 'Umzugsfirma Schweiz | geprüfte Anbieter vergleichen',
       description:
         'Finden Sie eine passende Umzugsfirma in der Schweiz und vergleichen Sie geprüfte Anbieter für Privat- und Geschäftsumzug sowie Spezialtransporte.',
       alternates: { canonical: `${SITE}/umzugsfirma` },
       openGraph: {
-        title: 'Umzugsfirma Schweiz | Geprüfte Anbieter vergleichen',
+        title: 'Umzugsfirma Schweiz | geprüfte Anbieter vergleichen',
         description:
           'Finden Sie eine passende Umzugsfirma in der Schweiz und vergleichen Sie geprüfte Anbieter für Privat- und Geschäftsumzug sowie Spezialtransporte.',
         url: `${SITE}/umzugsfirma`,
@@ -277,7 +277,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Umzugsfirma Schweiz | Geprüfte Anbieter vergleichen',
+        title: 'Umzugsfirma Schweiz | geprüfte Anbieter vergleichen',
         description:
           'Finden Sie eine passende Umzugsfirma in der Schweiz und vergleichen Sie geprüfte Anbieter für Privat- und Geschäftsumzug sowie Spezialtransporte.',
       },
@@ -299,12 +299,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return {
       title: 'Reinigungsfirma Schweiz – Kostenlose Offerten vergleichen & sparen',
       description:
-        'Reinigung für Privatpersonen & Unternehmen: Kostenlos bis zu 5 Offerten von geprüften Reinigungsfirmen in der Schweiz vergleichen. Umzugsreinigung, Wohnungsreinigung & Büroreinigung. Abnahmegarantie. 100% kostenlos',
+        'Reinigung für Privatpersonen & Unternehmen: Kostenlos bis zu 5 Offerten von geprüfte Reinigungsfirmen in der Schweiz vergleichen. Umzugsreinigung, Wohnungsreinigung & Büroreinigung. Abnahmegarantie. 100% kostenlos',
       alternates: { canonical: `${SITE}/reinigungsfirma` },
       openGraph: {
         title: 'Reinigungsfirma Schweiz – Kostenlose Offerten vergleichen & sparen',
         description:
-          'Reinigung für Privatpersonen & Unternehmen: Kostenlos bis zu 5 Offerten von geprüften Reinigungsfirmen in der Schweiz vergleichen.',
+          'Reinigung für Privatpersonen & Unternehmen: Kostenlos bis zu 5 Offerten von geprüfte Reinigungsfirmen in der Schweiz vergleichen.',
         url: `${SITE}/reinigungsfirma`,
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
@@ -314,7 +314,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title: 'Reinigungsfirma Schweiz – Kostenlose Offerten vergleichen & sparen',
         description:
-          'Reinigung für Privatpersonen & Unternehmen: Kostenlos Offerten von geprüften Reinigungsfirmen vergleichen.',
+          'Reinigung für Privatpersonen & Unternehmen: Kostenlos Offerten von geprüfte Reinigungsfirmen vergleichen.',
       },
       robots: {
         index: true,
@@ -333,12 +333,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: 'Malerfirma in der Nähe finden – Bis zu 40% sparen',
     description:
-      'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
+      'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich, Fassadenanstrich – professionell, sicher und bis zu 40% günstiger. Jetzt kostenlos Offerten anfordern!',
     alternates: { canonical: `${SITE}/malerfirma` },
     openGraph: {
       title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen',
       description:
-        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich – professionell, sicher und bis zu 40% günstiger.',
+        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region. Innenanstrich, Aussenanstrich – professionell, sicher und bis zu 40% günstiger.',
       url: `${SITE}/malerfirma`,
       siteName: 'Online-Offerten.ch',
       locale: 'de_CH',
@@ -348,7 +348,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen',
       description:
-        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüften Malerfirmen in Ihrer Region.',
+        'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region.',
     },
     robots: {
       index: true,

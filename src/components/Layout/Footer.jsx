@@ -139,7 +139,7 @@ export default function Footer({ variant = 'default' }) {
               Online-Offerten.ch ist ein Vergleichsportal für Umzug, Reinigung und Malerarbeiten in der Schweiz.
             </p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-              Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von geprüften Firmen aus Ihrer Region – kostenlos und unverbindlich.
+              Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von geprüfte Firmen aus Ihrer Region – kostenlos und unverbindlich.
             </p>
             <a
               href="mailto:info@online-offerten.ch"

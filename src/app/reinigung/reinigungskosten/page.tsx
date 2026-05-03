@@ -3,7 +3,7 @@ import ReinigungskostenRechnerPageClient from '@/components/pages/tools/Reinigun
 
 export const metadata: Metadata = {
   title: 'Reinigungskosten berechnen: Was kostet eine Reinigung in der Schweiz?',
-  description: 'Endreinigung Wohnung Kosten 2026: Der komplette Schweizer Kostenguide für stressfreie Wohnungsübergabe. Detaillierte Preistabellen, regionale Unterschiede und 10 bewährte Spartipps die wirklich funktionieren. Bis zu 30% sparen durch Preisvergleich.',
+  description: 'Endreinigung Wohnung Kosten 2026: Der komplette Kostenguide für die Schweiz für stressfreie Wohnungsübergabe. Detaillierte Preistabellen, regionale Unterschiede und 10 bewährte Spartipps die wirklich funktionieren. Bis zu 30% sparen durch Preisvergleich.',
   alternates: {
     canonical: 'https://online-offerten.ch/reinigung/reinigungskosten',
   },

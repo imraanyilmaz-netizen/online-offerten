@@ -372,7 +372,7 @@ const ChecklistsPageClient = () => {
               Bereit für Ihren stressfreien Umzug?
             </h2>
             <p className="text-lg text-slate-600 mb-8">
-              Nutzen Sie unsere Expertise und fordern Sie jetzt kostenlos und unverbindlich Offerten von geprüften Umzugsfirmen an.
+              Nutzen Sie unsere Expertise und fordern Sie jetzt kostenlos und unverbindlich Offerten von geprüfte Umzugsfirmen an.
             </p>
             <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white group transform hover:scale-105 transition-transform">
               <Link href="/kostenlose-offerte-anfordern">

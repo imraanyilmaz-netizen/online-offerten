@@ -1,8 +1,8 @@
-﻿import React from 'react';
+import React from 'react';
 // Removed useTranslation
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, Phone, Globe, Calendar, Shield, FileText, User, Building2 } from 'lucide-react';
+import { MapPin, Phone, Globe, Calendar, ShieldCheck, FileText, User, Building2 } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
@@ -77,7 +77,17 @@ const Sidebar = ({ partner, averageRating, reviewCount, onGetOffer }) => {
             {renderLinkItem(Globe, '', partner.website, partner.website?.startsWith('http') ? partner.website : `https://${partner.website}`)}
             {renderInfoItem(Calendar, 'Gegründet im Jahr', partner.year_founded)}
             {renderInfoItem(FileText, 'Handelsregisternummer', partner.commercial_register_number)}
-            {partner.liability_insurance && renderInfoItem(Shield, 'Haftpflichtversicherung vorhanden', true)}
+            {partner.insurance_status === 'approved' && (
+              <li className="flex items-start text-sm">
+                <ShieldCheck className="w-5 h-5 mr-3 mt-0.5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                <span className="font-semibold text-emerald-700 dark:text-emerald-300">
+                  Versicherung verifiziert
+                  <span className="ml-1.5 inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-200 dark:border-emerald-700 align-middle">
+                    geprüft
+                  </span>
+                </span>
+              </li>
+            )}
           </ul>
           <div className="rounded-xl border border-border bg-muted/40 dark:bg-muted/25">
             <Accordion type="multiple" className="w-full" defaultValue={['services', 'regions']}>

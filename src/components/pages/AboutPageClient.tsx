@@ -232,7 +232,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
                   Über Online-Offerten.ch
                 </h1>
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
-                  Wir sind eine <strong>unabhängige Schweizer Vergleichsplattform</strong> für Umzug, Reinigung und Malerarbeiten. Mit einer einzigen Anfrage erhalten Sie <strong>bis zu 5 kostenlose Offerten</strong> von geprüften Partnerfirmen in Ihrer Region.
+                  Wir sind eine <strong>unabhängige geprüfte Vergleichsplattform</strong> für Umzug, Reinigung und Malerarbeiten. Mit einer einzigen Anfrage erhalten Sie <strong>bis zu 5 kostenlose Offerten</strong> von geprüften Partnerfirmen in Ihrer Region.
                 </p>
                 <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center">

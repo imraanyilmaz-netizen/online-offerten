@@ -72,7 +72,7 @@ const UmzugsfirmaPageClient = () => {
                   Umzugsfirmen finden – Kostenlose Umzugsofferten vergleichen
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 dark:text-muted-foreground mb-8 leading-relaxed">
-                  Vergleichen Sie bis zu 5 Offerten von <strong>geprüften Umzugsfirmen</strong> in Ihrer Region – kostenlos und unverbindlich.
+                  Vergleichen Sie bis zu 5 Offerten von <strong>geprüfte Umzugsfirmen</strong> in Ihrer Region – kostenlos und unverbindlich.
                 </p>
 
                 <div className="mb-6">
@@ -91,7 +91,7 @@ const UmzugsfirmaPageClient = () => {
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2 shrink-0" />
-                    <span>Geprüfte Firmen</span>
+                    <span>geprüfte Firmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2 shrink-0" />
@@ -153,7 +153,7 @@ const UmzugsfirmaPageClient = () => {
               <p className="text-body">
                 Mit der <strong>Vergleichsplattform</strong> der Schweiz, <strong>online-offerten.ch</strong>, können Sie Umzugsofferten einfach
                 und kostenlos vergleichen und passende Anbieter finden. Durch einen schnellen Umzugspreisvergleich erhalten
-                Sie mehrere <strong>Umzugsangebote</strong> von geprüften Unternehmen und können die beste Lösung für Ihren Umzug
+                Sie mehrere <strong>Umzugsangebote</strong> von geprüfte Unternehmen und können die beste Lösung für Ihren Umzug
                 auswählen.
               </p>
               <p className="text-body">
@@ -172,7 +172,7 @@ const UmzugsfirmaPageClient = () => {
               <ul className="list-disc pl-6 space-y-2 text-body">
                 <li>Mehrere Umzugsofferten gleichzeitig erhalten</li>
                 <li>Preise und Leistungen transparent vergleichen</li>
-                <li>Geprüfte Umzugsfirmen finden</li>
+                <li>geprüfte Umzugsfirmen finden</li>
                 <li>Schnell ein günstiges Umzugsunternehmen buchen</li>
               </ul>
               <p className="text-body">
@@ -446,13 +446,13 @@ const UmzugsfirmaPageClient = () => {
             <article className="space-y-4">
               <h3 className="heading-3">Warum Online-Offerten.ch das ideale Offertenportal ist</h3>
               <p className="text-body">
-                Mit online-offerten.ch erhalten Sie schnell mehrere Angebote von geprüften Unternehmen.
+                Mit online-offerten.ch erhalten Sie schnell mehrere Angebote von geprüfte Unternehmen.
               </p>
               <p className="text-body">Ihre Vorteile:</p>
               <ul className="list-disc pl-6 space-y-2 text-body">
                 <li>Kostenlos und unverbindlich</li>
                 <li>Mehrere Umzugsofferten gleichzeitig</li>
-                <li>Geprüfte Anbieter</li>
+                <li>geprüfte Anbieter</li>
                 <li>Transparente Preise</li>
                 <li>Einfache Vergleichsfunktion</li>
               </ul>

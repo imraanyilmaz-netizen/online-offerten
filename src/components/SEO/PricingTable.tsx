@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 // framer-motion removed - CSS for better INP
 import { Calculator, TrendingDown, CheckCircle2 } from 'lucide-react'
@@ -131,7 +131,7 @@ export default function PricingTable({
         </div>
         <div className="flex items-center gap-2">
           <CheckCircle2 className="h-4 w-4 text-green-600" />
-          <span>Geprüfte Partner</span>
+          <span>geprüfte Partner</span>
         </div>
       </div>
     </section>

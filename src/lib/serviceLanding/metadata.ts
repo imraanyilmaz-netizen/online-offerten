@@ -30,12 +30,12 @@ const SEO: Record<string, Record<string, { title: string; description: string }>
     privatumzug: {
       title: 'Privatumzug Offerten kostenlos vergleichen » Bis zu 40% sparen',
       description:
-        'Privatumzug Offerten kostenlos vergleichen \u2713 Geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug. Sicher, stressfrei & bis zu 40% sparen. Jetzt vergleichen!',
+        'Privatumzug Offerten kostenlos vergleichen \u2713 geprüfte Umzugsfirmen für Wohnungsumzug & Hausumzug. Sicher, stressfrei & bis zu 40% sparen. Jetzt vergleichen!',
     },
     kleintransport: {
       title: 'Kleintransport – Kostenlose Offerten vergleichen',
       description:
-        'Kleintransport und Einzelmöbel: Bis zu 5 kostenlose Offerten von geprüften Umzugsfirmen in der Schweiz – schnell, transparent und regional.',
+        'Kleintransport und Einzelmöbel: Bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen in der Schweiz – schnell, transparent und regional.',
     },
     lagerung_service: {
       title: 'Möbellagerung – Kostenlose Offerten vergleichen',
@@ -45,7 +45,7 @@ const SEO: Record<string, Record<string, { title: string; description: string }>
     geschaeftsumzug: {
       title: 'Geschäftsumzug: Kostenlose Offerten vergleichen',
       description:
-        'Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüften Umzugsfirmen. Schnell, transparent und regional.',
+        'Kosten für Büroumzug & Firmenumzug vergleichen. Geschäftsumzug in der Nähe: Gratis Offerten von geprüfte Umzugsfirmen. Schnell, transparent und regional.',
     },
     auslandumzug: {
       title: 'Auslandumzug – Kostenlose Offerten vergleichen',
@@ -60,34 +60,34 @@ const SEO: Record<string, Record<string, { title: string; description: string }>
     raeumung_service: {
       title: 'Räumung & Entsorgung: Kostenlose Offerten vergleichen',
       description:
-        'Vergleichen Sie bis zu 5 kostenlose Offerten für Räumung und Entrümpelung in der Schweiz. Geprüfte Firmen, transparente Preise und schnelle Abwicklung.',
+        'Vergleichen Sie bis zu 5 kostenlose Offerten für Räumung und Entrümpelung in der Schweiz. geprüfte Firmen, transparente Preise und schnelle Abwicklung.',
     },
     entsorgung_service: {
       title: 'Entsorgung & Räumung: Kostenlose Offerten vergleichen',
       description:
-        'Fachgerechte Entsorgung und Räumung: Holen Sie kostenlose Offerten von geprüften Firmen ein – umweltgerecht, regional und unverbindlich.',
+        'Fachgerechte Entsorgung und Räumung: Holen Sie kostenlose Offerten von geprüfte Firmen ein – umweltgerecht, regional und unverbindlich.',
     },
   },
   reinigungsfirma: {
     wohnungsreinigung: {
       title: 'Wohnungsreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen',
       description:
-        'Professionelle Wohnungsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
+        'Professionelle Wohnungsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüfte Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
     },
     hausreinigung: {
       title: 'Hausreinigung mit Abnahmegarantie – Kostenlose Offerten vergleichen',
       description:
-        'Professionelle Hausreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Hausübergabe garantiert.',
+        'Professionelle Hausreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüfte Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Hausübergabe garantiert.',
     },
     buero_reinigung: {
       title: 'Büroreinigung – Kostenlose Offerten vergleichen',
       description:
-        'Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Büroreinigung garantiert.',
+        'Professionelle Büroreinigung. Erhalten Sie kostenlose Offerten von geprüfte Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Büroreinigung garantiert.',
     },
     umzugsreinigung: {
       title: 'Umzugsreinigung Preis – Kostenlose Offerten vergleichen',
       description:
-        'Umzugsreinigung Preis: Was kostet die professionelle Reinigung? Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
+        'Umzugsreinigung Preis: Was kostet die professionelle Reinigung? Professionelle Umzugsreinigung mit 100% Abnahmegarantie. Erhalten Sie kostenlose Offerten von geprüfte Reinigungsfirmen und vergleichen Sie Preise schnell und einfach. Sorgenfreie Wohnungsübergabe garantiert.',
     },
     unterhaltsreinigung: {
       title: 'Unterhaltsreinigung – Kostenlose Offerten vergleichen',
@@ -127,19 +127,19 @@ const SEO: Record<string, Record<string, { title: string; description: string }>
     raeumung_service: {
       title: 'Räumung & Entsorgung: Kostenlose Offerten vergleichen',
       description:
-        'Vergleichen Sie bis zu 5 kostenlose Offerten für Räumung und Entsorgung in der Schweiz. Geprüfte Firmen, transparente Preise und schnelle Abwicklung.',
+        'Vergleichen Sie bis zu 5 kostenlose Offerten für Räumung und Entsorgung in der Schweiz. geprüfte Firmen, transparente Preise und schnelle Abwicklung.',
     },
     entsorgung_service: {
       title: 'Entsorgung & Räumung: Kostenlose Offerten vergleichen',
       description:
-        'Fachgerechte Entsorgung und Räumung: Holen Sie kostenlose Offerten von geprüften Firmen ein – umweltgerecht, regional und unverbindlich.',
+        'Fachgerechte Entsorgung und Räumung: Holen Sie kostenlose Offerten von geprüfte Firmen ein – umweltgerecht, regional und unverbindlich.',
     },
   },
   malerfirma: {
     maler_service: {
       title: 'Malerarbeiten in der Schweiz – Kostenlose Offerten vergleichen',
       description:
-        'Malerarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüften Malerfirmen. Innenanstrich, Aussenanstrich, Fassadenanstrich & Renovierung – sicher, professionell und bis zu 40% günstiger.',
+        'Malerarbeiten Schweiz: Vergleichen Sie kostenlos Offerten von geprüfte Malerfirmen. Innenanstrich, Aussenanstrich, Fassadenanstrich & Renovierung – sicher, professionell und bis zu 40% günstiger.',
     },
   },
 }
@@ -166,7 +166,7 @@ export function getServiceLandingMetadata(
   const catLabel = CATEGORY_LABEL_FOR_TITLE[categorySlug] || 'Online-Offerten.ch'
   const title = `${svc.label} Schweiz: Kostenlose Offerten vergleichen & bis zu 40% sparen`
   const description = svc.desc
-    ? `${svc.label} (${svc.desc}): Bis zu 5 kostenlose Offerten von geprüften ${catLabel}-Anbietern vergleichen und bis zu 40% sparen – schnell & unverbindlich.`
+    ? `${svc.label} (${svc.desc}): Bis zu 5 kostenlose Offerten von geprüfte ${catLabel}-Anbietern vergleichen und bis zu 40% sparen – schnell & unverbindlich.`
     : `${svc.label} in der Schweiz: Bis zu 5 kostenlose Offerten von geprüften Anbietern vergleichen und bis zu 40% sparen – schnell & unverbindlich.`
 
   return {

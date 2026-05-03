@@ -11,7 +11,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const ReinigungPageClient = () => {
   // SEO Data (moved to server component, but kept for schema generation if needed client-side)
   const metaTitle = "Reinigungsfirma – Kostenlose Offerten vergleichen | Schweiz"
-  const metaDescription = "Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%."
+  const metaDescription = "Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüfte Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%."
   const metaKeywords = "umzugsreinigung mit abnahmegarantie, endreinigung wohnung, reinigungsfirma für umzug, wohnungsreinigung mit abnahmegarantie, umzugsreinigung preise, reinigungsofferte, endreinigung kosten, umzugsreinigung zürich, reinigung nach umzug, privatumzug reinigung"
   const canonicalUrl = "/reinigung"
 
@@ -104,7 +104,7 @@ const ReinigungPageClient = () => {
                   Reinigungsfirma finden & Offerten vergleichen » Bis zu 40% sparen
                 </h1>
                 <p className="text-body mb-8">
-                  Sorgenfrei zur Wohnungsübergabe. Unsere geprüften Partner sorgen für eine blitzblanke Sauberkeit, damit Sie sich auf Ihr neues Zuhause konzentrieren können. Ideal nach einem Privatumzug.
+                  Sorgenfrei zur Wohnungsübergabe. Unsere geprüfte Partner sorgen für eine blitzblanke Sauberkeit, damit Sie sich auf Ihr neues Zuhause konzentrieren können. Ideal nach einem Privatumzug.
                 </p>
 
                 <p id="reinigungsart" className="text-sm font-semibold text-gray-700 mb-2">Wählen Sie Ihre gewünschte Reinigungsart:</p>
@@ -192,7 +192,7 @@ const ReinigungPageClient = () => {
                 <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-gray-700">
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                    <span>Geprüfte Reinigungsfirmen</span>
+                    <span>geprüfte Reinigungsfirmen</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
@@ -443,7 +443,7 @@ const ReinigungPageClient = () => {
                 <h3 className="heading-3">So funktioniert der Offertenvergleich auf Online-Offerten.ch</h3>
                 <ol className="list-decimal pl-6 space-y-2 text-gray-700">
                   <li>Sie wählen die gewünschte Reinigungsart und erfassen die wichtigsten Angaben zum Objekt.</li>
-                  <li>Geprüfte Anbieter aus Ihrer Region senden Ihnen passende Offerten.</li>
+                  <li>geprüfte Anbieter aus Ihrer Region senden Ihnen passende Offerten.</li>
                   <li>Sie vergleichen Preise, Leistungsumfang, Verfügbarkeit und Bewertungen in Ruhe.</li>
                   <li>Sie wählen das Angebot, das fachlich und preislich am besten zu Ihrem Bedarf passt.</li>
                 </ol>

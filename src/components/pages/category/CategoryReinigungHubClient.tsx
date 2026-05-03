@@ -8,7 +8,7 @@ import { getCategoryServicePath, serviceCategories } from '@/data/categories'
 export default function CategoryReinigungHubClient() {
   const metaTitle = 'Reinigungsfirma – Kostenlose Offerten vergleichen | Schweiz'
   const metaDescription =
-    'Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüften Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%.'
+    'Professionelle Reinigungsdienstleistungen für Wohnung, Haus und Büro. Erhalten Sie kostenlose Offerten von geprüfte Reinigungsfirmen in Ihrer Region und sparen Sie bis zu 40%.'
 
   const services = useMemo(
     () => serviceCategories.find((c) => c.slug === 'reinigungsfirma')?.services ?? [],
@@ -128,7 +128,7 @@ export default function CategoryReinigungHubClient() {
             <ul className="mt-6 space-y-3 text-body max-w-2xl">
               <li className="flex gap-2">
                 <CheckCircle className="w-5 h-5 text-green-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                <span>Bis zu 5 kostenlose Offerten von geprüften Reinigungsfirmen</span>
+                <span>Bis zu 5 kostenlose Offerten von geprüfte Reinigungsfirmen</span>
               </li>
               <li className="flex gap-2">
                 <CheckCircle className="w-5 h-5 text-green-600 dark:text-emerald-400 shrink-0 mt-0.5" />

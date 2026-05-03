@@ -598,7 +598,7 @@ function defaultFaqsForCategory(categorySlug: string, serviceLabel: string): Ser
     },
     {
       question: `Wie läuft die Offertanfrage für ${serviceLabel} ab?`,
-      answer: `Sie beschreiben Ihr Projekt in wenigen Minuten online. Anschliessend erhalten Sie unverbindliche Offerten von geprüften ${branchePlural}, die Sie in Ruhe vergleichen können.`,
+      answer: `Sie beschreiben Ihr Projekt in wenigen Minuten online. Anschliessend erhalten Sie unverbindliche Offerten von geprüfte ${branchePlural}, die Sie in Ruhe vergleichen können.`,
     },
     {
       question: `Worauf sollte ich bei einer ${branche} achten?`,

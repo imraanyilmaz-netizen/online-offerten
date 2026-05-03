@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
 // framer-motion removed - CSS for better INP
 import { CheckCircle, ShieldCheck, Users, ArrowRight } from 'lucide-react';
@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 const benefits = [
   { text: "100% Kostenlos & Unverbindlich", icon: CheckCircle },
-  { text: "Geprüfte Malerfirmen", icon: ShieldCheck },
+  { text: "geprüfte Malerfirmen", icon: ShieldCheck },
   { text: "Bis zu 40% sparen", icon: CheckCircle },
   { text: "Schnell & Einfach", icon: Users },
   { text: "Regionale Anbieter", icon: CheckCircle },
