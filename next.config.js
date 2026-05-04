@@ -30,10 +30,23 @@ const nextConfig = {
     ],
   },
 
+  // Build-Timeout pro Static Page (Sekunden).
+  // Wichtig fuer schwere SEO-Seiten (Stadt-/Karten-/Statistik-Seiten),
+  // bei denen die externe BFS PX-Web API langsamer antworten kann.
+  // Standardwert (60s) ist bei 162 Staedten + Throttling zu knapp.
+  staticPageGenerationTimeout: 300,
+
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
     },
+
+    // Build-Worker-Anzahl auf 1 begrenzt, weil BFS PX-Web extrem
+    // empfindlich auf parallele Anfragen reagiert (HTTP 429).
+    // Build dauert dadurch laenger, ist aber zuverlaessig erfolgreich.
+    // Bei spaeterer Migration zu einem stabileren Datensponsor kann
+    // dieser Wert wieder auf 2-4 erhoeht werden.
+    cpus: 1,
 
     optimizePackageImports: [
       'lucide-react',

@@ -1,0 +1,426 @@
+/**
+ * BFS PX-Web Adapter — Demografische Bilanz nach institutionellen Gliederungen
+ * Cube-ID: px-x-0102020000_201 (1981–laufend)
+ *
+ * Nutzt die Standard-PX-Web-API von BFS. Wir lesen einmal die Metadaten,
+ * cachen sie pro Prozess und sorgen so für niedrige Latenz bei vielen
+ * gleichzeitigen Stadtanfragen.
+ *
+ * Komponenten (Demografische Komponente):
+ *  4 Einwanderung inkl. Änderung des Bevölkerungstyps  (Zuzug aus dem Ausland)
+ *  5 Interkantonaler Zuzug                              (Zuzug aus anderen Kantonen)
+ *  6 Intrakantonaler Zuzug                              (Zuzug aus anderen Gemeinden im Kanton)
+ *  7 Auswanderung                                       (Wegzug ins Ausland)
+ *  8 Interkantonaler Wegzug                             (Wegzug in andere Kantone)
+ *  9 Intrakantonaler Wegzug                             (Wegzug in andere Gemeinden im Kanton)
+ */
+
+import { BFS_CANTON_LABEL } from '@/data/bfsLocationIds'
+
+const CUBE_BASE = 'https://www.pxweb.bfs.admin.ch/api/v1/de/px-x-0102020000_201'
+const CUBE_URL = `${CUBE_BASE}/px-x-0102020000_201.px`
+
+// In-process cache: 6 Stunden
+const META_TTL_MS = 6 * 60 * 60 * 1000
+
+type PxVar = {
+  code: string
+  text: string
+  values: string[]
+  valueTexts: string[]
+  time?: boolean
+  elimination?: boolean
+}
+
+type PxMeta = {
+  title: string
+  variables: PxVar[]
+}
+
+type CachedMeta = {
+  fetchedAt: number
+  meta: PxMeta
+  /** BFS-Nr. → PX-Web `values`-Code für Gliederungs-Variable. */
+  bfsNrToCode: Map<number, string>
+  /** Kanton-Label → PX-Web `values`-Code (für Kanton-Fallback). */
+  cantonLabelToCode: Map<string, string>
+}
+
+let memoryCache: CachedMeta | null = null
+/** Promise-Cache, damit gleichzeitige Aufrufer denselben Meta-Fetch teilen. */
+let metaInFlight: Promise<CachedMeta> | null = null
+
+const VAR_GLIEDERUNG = 'Kanton (-) / Bezirk (>>) / Gemeinde (......)'
+const VAR_JAHR = 'Jahr'
+const VAR_KOMPONENTE = 'Demografische Komponente'
+const VAR_NATIONALITAET = 'Staatsangehörigkeit (Kategorie)'
+const VAR_GESCHLECHT = 'Geschlecht'
+
+// =====================================================================
+// Rate-Limit-Schutz: Concurrency=1 + Pre-Jitter + Retry mit 2s-Wartezeit
+// ---------------------------------------------------------------------
+// BFS PX-Web ist ausserordentlich empfindlich. Selbst zwei parallele
+// Anfragen koennen bereits HTTP 429 ausloesen. Aktuelle Strategie:
+//   - max. 1 gleichzeitiger Request pro Prozess (volle Serialisierung)
+//   - 200-500ms zufaelliger Jitter VOR jedem Request, damit der Server
+//     nicht im Sub-Sekunden-Takt getroffen wird
+//   - max. 3 Wiederholungsversuche mit jeweils 2s Wartezeit bei 429/5xx
+//   - dieselbe Slug-Anfrage wird nur einmal versendet (Promise-Coalescing)
+// Build dauert dadurch deutlich laenger, schliesst aber zuverlaessig ab.
+// =====================================================================
+
+const BFS_MAX_CONCURRENT = 1
+let bfsInFlight = 0
+const bfsQueue: Array<() => void> = []
+
+/** Wartet 200-500ms zufaellig, bevor der Request rausgeht. */
+async function preFetchJitter(): Promise<void> {
+  const wait = 200 + Math.floor(Math.random() * 300)
+  await new Promise((r) => setTimeout(r, wait))
+}
+
+async function withBfsConcurrency<T>(fn: () => Promise<T>): Promise<T> {
+  if (bfsInFlight >= BFS_MAX_CONCURRENT) {
+    await new Promise<void>((resolve) => bfsQueue.push(resolve))
+  }
+  bfsInFlight++
+  try {
+    // Zusaetzliche Pause direkt vor dem Request, damit selbst aufeinander
+    // folgende Calls zeitlich entkoppelt werden.
+    await preFetchJitter()
+    return await fn()
+  } finally {
+    bfsInFlight--
+    const next = bfsQueue.shift()
+    next?.()
+  }
+}
+
+async function withRetry<T>(fn: () => Promise<T>): Promise<T> {
+  // 3 Versuche mit jeweils 2s Wartezeit (+ kleiner Jitter, damit
+  // mehrere parallele Failures nicht synchron wiederkommen).
+  const MAX_ATTEMPTS = 3
+  const RETRY_WAIT_MS = 2000
+  let attempt = 0
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    try {
+      return await fn()
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      const isRetryable = /\((429|502|503|504)\)/.test(msg) || /fetch failed/i.test(msg)
+      if (!isRetryable || attempt >= MAX_ATTEMPTS - 1) throw err
+      const jitter = Math.floor(Math.random() * 350)
+      await new Promise((r) => setTimeout(r, RETRY_WAIT_MS + jitter))
+      attempt++
+    }
+  }
+}
+
+/** Promise-Coalescing: identische Schlüssel teilen denselben In-Flight-Request. */
+const queryPromiseCache = new Map<string, Promise<MigrationCubeResult>>()
+
+function dedupedCubeQuery(
+  cacheKey: string,
+  fn: () => Promise<MigrationCubeResult>
+): Promise<MigrationCubeResult> {
+  const existing = queryPromiseCache.get(cacheKey)
+  if (existing) return existing
+  const p = withBfsConcurrency(() => withRetry(fn))
+  queryPromiseCache.set(cacheKey, p)
+  // Bei Fehler aus dem Cache entfernen, damit ein späterer Aufruf neu versuchen kann.
+  p.catch(() => {
+    queryPromiseCache.delete(cacheKey)
+  })
+  return p
+}
+
+async function loadMeta(): Promise<CachedMeta> {
+  if (memoryCache && Date.now() - memoryCache.fetchedAt < META_TTL_MS) {
+    return memoryCache
+  }
+  if (metaInFlight) return metaInFlight
+
+  metaInFlight = (async () => {
+    const meta = await withBfsConcurrency(() =>
+      withRetry(async () => {
+        const res = await fetch(CUBE_URL, {
+          headers: { Accept: 'application/json' },
+          // force-cache: Beim Build wird dieselbe Meta-Antwort vielfach geteilt,
+          // anstatt BFS bei jedem Worker-Aufruf erneut anzufragen.
+          cache: 'force-cache',
+          next: { revalidate: 60 * 60 * 6 },
+        })
+        if (!res.ok) {
+          throw new Error(`BFS PX-Web Metadaten fehlgeschlagen (${res.status})`)
+        }
+        return (await res.json()) as PxMeta
+      })
+    )
+
+    const gli = meta.variables.find((v) => v.code === VAR_GLIEDERUNG)
+    if (!gli) throw new Error('Gliederungs-Variable nicht gefunden')
+
+    const bfsNrToCode = new Map<number, string>()
+    const cantonLabelToCode = new Map<string, string>()
+    // Erkenne Gemeinden ("......0001 …"), Kantons ("- Zürich"), Bezirke (">> …")
+    gli.valueTexts.forEach((label, idx) => {
+      const code = gli.values[idx]
+      const gemeindeMatch = /^\.{6}(\d{1,4})\s/.exec(label)
+      if (gemeindeMatch) {
+        bfsNrToCode.set(parseInt(gemeindeMatch[1], 10), code)
+        return
+      }
+      if (label.startsWith('- ')) {
+        const cantonName = label.slice(2).trim()
+        cantonLabelToCode.set(cantonName, code)
+      }
+    })
+
+    memoryCache = { fetchedAt: Date.now(), meta, bfsNrToCode, cantonLabelToCode }
+    return memoryCache
+  })()
+
+  metaInFlight.catch(() => {
+    // Bei Fehler den In-Flight-Promise zurücksetzen, damit ein nächster Aufruf neu lädt.
+    metaInFlight = null
+  })
+
+  return metaInFlight
+}
+
+export type MigrationYearRow = {
+  year: number
+  einwanderung: number
+  interkantonalerZuzug: number
+  intrakantonalerZuzug: number
+  auswanderung: number
+  interkantonalerWegzug: number
+  intrakantonalerWegzug: number
+}
+
+export type MigrationCubeResult = {
+  scope: 'gemeinde' | 'kanton'
+  scopeLabel: string
+  bfsCode: string
+  rows: MigrationYearRow[]
+  yearRange: [number, number]
+}
+
+const COMPONENT_INDICES = ['4', '5', '6', '7', '8', '9'] as const
+
+type ComponentKey = keyof Omit<MigrationYearRow, 'year'>
+
+const COMPONENT_KEY: Record<(typeof COMPONENT_INDICES)[number], ComponentKey> = {
+  '4': 'einwanderung',
+  '5': 'interkantonalerZuzug',
+  '6': 'intrakantonalerZuzug',
+  '7': 'auswanderung',
+  '8': 'interkantonalerWegzug',
+  '9': 'intrakantonalerWegzug',
+}
+
+async function queryByCode(
+  scopeCode: string,
+  scope: 'gemeinde' | 'kanton',
+  scopeLabel: string
+): Promise<MigrationCubeResult> {
+  const meta = (await loadMeta()).meta
+  const yearVar = meta.variables.find((v) => v.code === VAR_JAHR)
+  if (!yearVar) throw new Error('Jahr-Variable nicht gefunden')
+
+  const body = {
+    query: [
+      {
+        code: VAR_JAHR,
+        selection: { filter: 'all', values: ['*'] },
+      },
+      {
+        code: VAR_GLIEDERUNG,
+        selection: { filter: 'item', values: [scopeCode] },
+      },
+      {
+        code: VAR_NATIONALITAET,
+        selection: { filter: 'item', values: ['0'] }, // Total
+      },
+      {
+        code: VAR_GESCHLECHT,
+        selection: { filter: 'item', values: ['0'] }, // Total
+      },
+      {
+        code: VAR_KOMPONENTE,
+        selection: { filter: 'item', values: [...COMPONENT_INDICES] },
+      },
+    ],
+    response: { format: 'json-stat2' },
+  }
+
+  const res = await fetch(CUBE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(body),
+    // force-cache: Stadt-Statistik aendert sich nur jaehrlich; deshalb
+    // duerfen mehrere Build-Worker dieselbe Antwort teilen.
+    cache: 'force-cache',
+    next: { revalidate: 60 * 60 * 24 },
+  })
+  if (!res.ok) {
+    const text = await res.text().catch(() => '')
+    throw new Error(`BFS PX-Web Abfrage fehlgeschlagen (${res.status}): ${text.slice(0, 200)}`)
+  }
+  const json = (await res.json()) as JsonStat2
+  const rows = parseJsonStat2(json)
+  if (rows.length === 0) {
+    throw new Error('Keine Daten im JSON-stat2 Resultat')
+  }
+  const years = rows.map((r) => r.year).sort((a, b) => a - b)
+  return {
+    scope,
+    scopeLabel,
+    bfsCode: scopeCode,
+    rows,
+    yearRange: [years[0], years[years.length - 1]],
+  }
+}
+
+export async function getMigrationStatsForGemeinde(
+  bfsNr: number,
+  scopeLabel: string
+): Promise<MigrationCubeResult> {
+  const cache = await loadMeta()
+  const code = cache.bfsNrToCode.get(bfsNr)
+  if (!code) throw new Error(`BFS-Nr. ${bfsNr} nicht im Cube gefunden`)
+  return dedupedCubeQuery(`gemeinde:${bfsNr}`, () =>
+    queryByCode(code, 'gemeinde', scopeLabel)
+  )
+}
+
+export async function getMigrationStatsForKanton(
+  cantonCode: string,
+  cantonName?: string
+): Promise<MigrationCubeResult> {
+  const cache = await loadMeta()
+  const label = BFS_CANTON_LABEL[cantonCode] ?? cantonName ?? cantonCode
+  const code = cache.cantonLabelToCode.get(label)
+  if (!code) throw new Error(`Kanton "${label}" nicht im Cube gefunden`)
+  return dedupedCubeQuery(`kanton:${cantonCode}`, () =>
+    queryByCode(code, 'kanton', cantonName || label)
+  )
+}
+
+/**
+ * JSON-stat2 Format minimal parsen: dimensionsweise Schleife,
+ * jeder Beobachtungswert hat einen Index `i` der sich aus der
+ * Dimension-Reihenfolge × Position ergibt.
+ *
+ * Wir wissen, dass nach unserer Query nur 2 nicht-eliminierte Dimensionen
+ * variieren (Jahr & Demografische Komponente), die anderen sind auf 1 fixiert.
+ */
+type JsonStat2 = {
+  id: string[]
+  size: number[]
+  dimension: Record<
+    string,
+    {
+      label: string
+      category: { index: Record<string, number> | string[]; label: Record<string, string> }
+    }
+  >
+  value: Array<number | null>
+}
+
+function parseJsonStat2(j: JsonStat2): MigrationYearRow[] {
+  const yearDim = j.dimension[VAR_JAHR]
+  const compDim = j.dimension[VAR_KOMPONENTE]
+  if (!yearDim || !compDim) return []
+
+  // Index-Map (Code → Position). API kann Array oder Record liefern.
+  const yearIndex = normalizeIndex(yearDim.category.index)
+  const compIndex = normalizeIndex(compDim.category.index)
+
+  // Reihenfolge der Dimensionen aus `id` für die Linearisierungsformel.
+  const dimOrder = j.id
+  const dimSizes = j.size
+  const dimOf = new Map(dimOrder.map((d, i) => [d, i] as const))
+
+  const yearPosInId = dimOf.get(VAR_JAHR)
+  const compPosInId = dimOf.get(VAR_KOMPONENTE)
+  if (yearPosInId === undefined || compPosInId === undefined) return []
+
+  // Multiplikatoren für Linearisierung: lin = Σ idx[d] * mult[d]
+  const mults = new Array(dimOrder.length).fill(1)
+  for (let d = dimOrder.length - 2; d >= 0; d--) {
+    mults[d] = mults[d + 1] * dimSizes[d + 1]
+  }
+
+  const fixedIndices: number[] = dimOrder.map((d) => {
+    if (d === VAR_JAHR || d === VAR_KOMPONENTE) return 0
+    // Eliminierte/fixierte Dimensionen → es gibt nur eine Position.
+    return 0
+  })
+
+  const result: Map<number, MigrationYearRow> = new Map()
+  for (const [yearLabel, yPos] of Object.entries(yearIndex)) {
+    const yearNum = parseInt(yearLabel, 10)
+    if (Number.isNaN(yearNum)) continue
+    const row: MigrationYearRow = {
+      year: yearNum,
+      einwanderung: 0,
+      interkantonalerZuzug: 0,
+      intrakantonalerZuzug: 0,
+      auswanderung: 0,
+      interkantonalerWegzug: 0,
+      intrakantonalerWegzug: 0,
+    }
+    for (const compCode of COMPONENT_INDICES) {
+      const cPos = compIndex[compCode]
+      if (cPos === undefined) continue
+      const indices = fixedIndices.slice()
+      indices[yearPosInId] = yPos
+      indices[compPosInId] = cPos
+      let lin = 0
+      for (let d = 0; d < dimOrder.length; d++) lin += indices[d] * mults[d]
+      const v = j.value[lin]
+      if (typeof v === 'number') {
+        row[COMPONENT_KEY[compCode]] = v
+      }
+    }
+    result.set(yearNum, row)
+  }
+  return [...result.values()].sort((a, b) => a.year - b.year)
+}
+
+function normalizeIndex(
+  idx: Record<string, number> | string[]
+): Record<string, number> {
+  if (Array.isArray(idx)) {
+    const m: Record<string, number> = {}
+    idx.forEach((code, pos) => (m[code] = pos))
+    return m
+  }
+  return idx
+}
+
+export type MigrationAggregates = {
+  zuzuegeTotal: number[]
+  wegzuegeTotal: number[]
+  innerCantonZuzuege: number[]
+  innerCantonWegzuege: number[]
+  saldo: number[]
+  years: number[]
+}
+
+export function aggregateMigrationRows(rows: MigrationYearRow[]): MigrationAggregates {
+  const sorted = [...rows].sort((a, b) => a.year - b.year)
+  const years = sorted.map((r) => r.year)
+  const zuzuegeTotal = sorted.map(
+    (r) => r.einwanderung + r.interkantonalerZuzug + r.intrakantonalerZuzug
+  )
+  const wegzuegeTotal = sorted.map(
+    (r) => r.auswanderung + r.interkantonalerWegzug + r.intrakantonalerWegzug
+  )
+  const innerCantonZuzuege = sorted.map((r) => r.intrakantonalerZuzug)
+  const innerCantonWegzuege = sorted.map((r) => r.intrakantonalerWegzug)
+  const saldo = zuzuegeTotal.map((z, i) => z - wegzuegeTotal[i])
+  return { years, zuzuegeTotal, wegzuegeTotal, innerCantonZuzuege, innerCantonWegzuege, saldo }
+}

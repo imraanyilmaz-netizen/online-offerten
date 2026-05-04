@@ -10,6 +10,7 @@ import { getPartnersForCategoryLocation } from '@/lib/partners/forLocation'
 import CategoryCityPageClient from '@/components/pages/category/CategoryCityPageClient'
 import CategoryServicePageClient from '@/components/pages/category/CategoryServicePageClient'
 import { buildCityFaqJsonLd, getCityFaqsForCategory } from '@/lib/cityPageFaqs'
+import type { CityFaqItem } from '@/lib/cityPageFaqs'
 import {
   getServiceCityLandingMetadata,
   getServiceLandingMetadata,
@@ -20,6 +21,13 @@ import {
   buildServiceBreadcrumbJsonLd,
   buildServiceCityBreadcrumbJsonLd,
 } from '@/lib/seoBreadcrumb'
+import {
+  buildCityMigrationAnalysis,
+  buildStatBasedFaqItems,
+  getCityMigrationData,
+  type CityMigrationAnalysis,
+  type CityMigrationData,
+} from '@/lib/stats/migrationStats'
 
 const SITE = 'https://online-offerten.ch'
 
@@ -30,6 +38,41 @@ const SERVICE_TITLE: Record<string, string> = {
 }
 
 type Props = { category: string; segments: string[] }
+
+type UmzugStatsExtras = {
+  migrationData: CityMigrationData
+  migrationAnalysis: CityMigrationAnalysis
+  statFaqs: CityFaqItem[]
+}
+
+/**
+ * Lädt für Umzugs-Stadtseiten zusätzliche BFS-Statistik-Daten und baut
+ * daraus den SEO-Analyse-Block + datengetriebene FAQ-Einträge.
+ * Liefert `null`, wenn keine Daten verfügbar sind oder die Kategorie
+ * nicht „umzugsfirma" ist — sodass Reinigung/Maler unverändert bleiben.
+ */
+async function loadUmzugStatsExtras(
+  categorySlug: string,
+  citySlug: string,
+  cityName: string
+): Promise<UmzugStatsExtras | null> {
+  if (categorySlug !== 'umzugsfirma') return null
+  try {
+    const data = await getCityMigrationData(citySlug, cityName)
+    if (!data) return null
+    return {
+      migrationData: data,
+      migrationAnalysis: buildCityMigrationAnalysis(data, cityName),
+      statFaqs: buildStatBasedFaqItems(data, cityName),
+    }
+  } catch (err) {
+    console.warn(
+      `[categoryCatchAllServerPage] Stats-Extras fehlgeschlagen für ${citySlug}:`,
+      err instanceof Error ? err.message : err
+    )
+    return null
+  }
+}
 
 export default async function CategoryCatchAllServerPage({
   category: raw,
@@ -45,16 +88,20 @@ export default async function CategoryCatchAllServerPage({
     const only = segs[0]
     const loc = locations.find((l) => l.slug === only)
     if (loc) {
-      const [partners, platformReviewStats] = await Promise.all([
+      const [partners, platformReviewStats, statsExtras] = await Promise.all([
         getPartnersForCategoryLocation(cat.slug, {
           name: loc.name,
           slug: loc.slug,
           canton: loc.canton,
         }),
         getPlatformReviewsTableStats(),
+        loadUmzugStatsExtras(cat.slug, loc.slug, loc.name),
       ])
       const st = SERVICE_TITLE[cat.slug] || 'Anbieter'
-      const faqItems = getCityFaqsForCategory(cat.slug, loc.name)
+      const baseFaqItems = getCityFaqsForCategory(cat.slug, loc.name)
+      const faqItems = statsExtras
+        ? [...statsExtras.statFaqs, ...baseFaqItems]
+        : baseFaqItems
       const faqSchema = buildCityFaqJsonLd(faqItems)
 
       const itemListSchema =
@@ -111,6 +158,18 @@ export default async function CategoryCatchAllServerPage({
             canton={loc.canton}
             partners={partners}
             platformReviewStats={platformReviewStats}
+            faqItems={faqItems}
+            migrationAnalysis={statsExtras?.migrationAnalysis ?? null}
+            migrationMeta={
+              statsExtras
+                ? {
+                    yearRange: statsExtras.migrationData.yearRange,
+                    fallbackUsed: statsExtras.migrationData.fallbackUsed,
+                    scopeName: statsExtras.migrationData.scopeName,
+                    source: statsExtras.migrationData.source,
+                  }
+                : null
+            }
           />
         </>
       )
@@ -175,16 +234,20 @@ export default async function CategoryCatchAllServerPage({
   const svcMeta = getServiceCityLandingMetadata(cat.slug, serviceSeg, loc)
   if (!svcMeta) notFound()
 
-  const [partners, platformReviewStats] = await Promise.all([
+  const [partners, platformReviewStats, statsExtras] = await Promise.all([
     getPartnersForCategoryLocation(cat.slug, {
       name: loc.name,
       slug: loc.slug,
       canton: loc.canton,
     }),
     getPlatformReviewsTableStats(),
+    loadUmzugStatsExtras(cat.slug, loc.slug, loc.name),
   ])
   const st = SERVICE_TITLE[cat.slug] || 'Anbieter'
-  const faqItems = getCityFaqsForCategory(cat.slug, loc.name)
+  const baseFaqItems = getCityFaqsForCategory(cat.slug, loc.name)
+  const faqItems = statsExtras
+    ? [...statsExtras.statFaqs, ...baseFaqItems]
+    : baseFaqItems
   const faqSchema = buildCityFaqJsonLd(faqItems)
   const pathSeg = getServicePathSegment(svc)
 
@@ -251,6 +314,18 @@ export default async function CategoryCatchAllServerPage({
         servicePathSegment={pathSeg}
         serviceLabel={svc.label}
         platformReviewStats={platformReviewStats}
+        faqItems={faqItems}
+        migrationAnalysis={statsExtras?.migrationAnalysis ?? null}
+        migrationMeta={
+          statsExtras
+            ? {
+                yearRange: statsExtras.migrationData.yearRange,
+                fallbackUsed: statsExtras.migrationData.fallbackUsed,
+                scopeName: statsExtras.migrationData.scopeName,
+                source: statsExtras.migrationData.source,
+              }
+            : null
+        }
       />
     </>
   )

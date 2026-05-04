@@ -1,6 +1,7 @@
 'use client'
 
 import type { FC, PropsWithChildren } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -53,10 +54,39 @@ import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CategoryCityFaqSection from '@/components/pages/category/CategoryCityFaqSection'
 import CategoryCitySpotlight from '@/components/pages/category/CategoryCitySpotlight'
 import ServiceStepsSection from '@/components/pages/category/ServiceStepsSection'
-import { getCityFaqsForCategory, getCityPageLocalContent } from '@/lib/cityPageFaqs'
+import { getCityFaqsForCategory, getCityPageLocalContent, type CityFaqItem } from '@/lib/cityPageFaqs'
 import { getCityHeroImageSrc } from '@/lib/cityHeroImage'
 import { getCantonPeerLocations } from '@/lib/cityPagePartnerStats'
 import type { PlatformReviewsTableStats } from '@/lib/reviews/platformReviewStats'
+import { isLocationSupported } from '@/data/bfsLocationIds'
+import CityMigrationAnalysisCard from '@/components/locations/CityMigrationAnalysisCard'
+import CityMigrationKpiStrip from '@/components/locations/CityMigrationKpiStrip'
+import CityServiceAreaMap from '@/components/locations/CityServiceAreaMap'
+import type { CityMigrationAnalysis } from '@/lib/stats/migrationStats'
+
+const MigrationStatsSection = dynamic(
+  () => import('@/components/locations/MigrationStatsSection'),
+  {
+    ssr: false,
+    loading: () => (
+      <section className="mx-auto max-w-7xl px-4 pb-10 pt-2 md:px-6" aria-hidden>
+        <div className="h-32 animate-pulse rounded-2xl bg-muted/40" />
+      </section>
+    ),
+  }
+)
+
+const MovingChecklistSection = dynamic(
+  () => import('@/components/locations/MovingChecklistSection'),
+  {
+    ssr: true,
+    loading: () => (
+      <section className="mx-auto max-w-7xl px-4 py-10 md:px-6" aria-hidden>
+        <div className="h-40 animate-pulse rounded-2xl bg-muted/40" />
+      </section>
+    ),
+  }
+)
 
 export type CategoryCityPartner = {
   id: string
@@ -207,6 +237,22 @@ function partnerNetworkAsideCopy(
   }
 }
 
+export type CategoryCityMigrationMeta = {
+  yearRange: [number, number]
+  fallbackUsed: boolean
+  scopeName: string
+  source: {
+    publisher: string
+    publisherShort: string
+    cubeId: string
+    cubeTitle: string
+    catalogUrl: string
+    opendataSwiss: string
+    license: string
+    displayName: string
+  }
+}
+
 export default function CategoryCityPageClient({
   categorySlug,
   serviceTitle,
@@ -218,6 +264,9 @@ export default function CategoryCityPageClient({
   servicePathSegment,
   serviceLabel,
   platformReviewStats = { count: 0, averageRating: null },
+  faqItems: faqItemsProp,
+  migrationAnalysis,
+  migrationMeta,
 }: {
   categorySlug: string
   serviceTitle: string
@@ -231,6 +280,11 @@ export default function CategoryCityPageClient({
   serviceLabel?: string
   /** Aggregat aus `reviews`-Tabelle (Plattform), nicht Partner-Profilfelder */
   platformReviewStats?: PlatformReviewsTableStats
+  /** Vom Server angereicherte FAQ-Items (statistik-basiert + statisch). */
+  faqItems?: CityFaqItem[]
+  /** Analyse-Block (SSR), falls BFS-Daten verfügbar sind. */
+  migrationAnalysis?: CityMigrationAnalysis | null
+  migrationMeta?: CategoryCityMigrationMeta | null
 }) {
   const isServiceCityPage = Boolean(servicePathSegment && serviceLabel && serviceId)
   const intro = heroIntroForPage(categorySlug, isServiceCityPage, serviceLabel)
@@ -239,7 +293,10 @@ export default function CategoryCityPageClient({
     ? `${serviceLabel} in ${locationName} (Kanton ${canton}) – ${serviceTitle}`
     : `${serviceTitle} in ${locationName} (Kanton ${canton}) – Offerten vergleichen`
   const localContent = getCityPageLocalContent(categorySlug, locationName, canton)
-  const faqItems = getCityFaqsForCategory(categorySlug, locationName)
+  const faqItems =
+    faqItemsProp && faqItemsProp.length > 0
+      ? faqItemsProp
+      : getCityFaqsForCategory(categorySlug, locationName)
   const partnerRegions = collectPartnerRegionsForCityPage(partners, canton)
   const navTitle =
     categorySlug === 'umzugsfirma'
@@ -274,6 +331,15 @@ export default function CategoryCityPageClient({
   const partnerAside = partnerNetworkAsideCopy(categorySlug, locationName, serviceTitle)
   const locationSpotlight = getLocationCategorySpotlight(locationSlug, categorySlug)
 
+  const categoryLabelSingular =
+    categorySlug === 'umzugsfirma'
+      ? 'Umzugsfirma'
+      : categorySlug === 'reinigungsfirma'
+        ? 'Reinigungsfirma'
+        : categorySlug === 'malerfirma'
+          ? 'Malerfirma'
+          : serviceTitle
+
   return (
     <div className="bg-gradient-to-b from-neutral-50 via-white to-slate-50/90 dark:from-background dark:via-background dark:to-muted/25">
       <section
@@ -290,7 +356,7 @@ export default function CategoryCityPageClient({
             loading="eager"
             className="object-cover object-[60%_center] sm:object-[68%_center] lg:object-[72%_center]"
             sizes="100vw"
-            quality={90}
+            quality={85}
           />
         </div>
         {/* Left: readable panel — gradient to transparent toward the photo */}
@@ -557,6 +623,16 @@ export default function CategoryCityPageClient({
         </div>
       </section>
 
+      {categorySlug === 'umzugsfirma' && migrationAnalysis && migrationMeta ? (
+        <CityMigrationKpiStrip
+          analysis={migrationAnalysis}
+          cityName={locationName}
+          yearRange={migrationMeta.yearRange}
+          fallbackUsed={migrationMeta.fallbackUsed}
+          scopeName={migrationMeta.scopeName}
+        />
+      ) : null}
+
       <ServiceStepsSection
         categorySlug={categorySlug}
         serviceLabel={isServiceCityPage ? serviceLabel : undefined}
@@ -564,10 +640,110 @@ export default function CategoryCityPageClient({
         ctaHref={primaryQuoteHref}
       />
 
+      {/* === Partners (Hero altına taşındı — kullanıcı önce sosyal kanıtı görsün) === */}
+      {partners.length > 0 ? (
+        <section className="border-t border-slate-200/60 bg-gradient-to-b from-slate-50/80 to-white py-16 dark:border-border dark:from-muted/25 dark:to-background md:py-20">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+            <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_4px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card dark:ring-white/10">
+              <div className="flex flex-col">
+                <div className="relative min-h-[min(42svh,380px)] w-full sm:min-h-[340px] lg:min-h-[360px]">
+                  <Image
+                    src={heroSrc}
+                    alt=""
+                    fill
+                    className="object-cover object-center"
+                    sizes="100vw"
+                    loading="lazy"
+                  />
+                  <div
+                    className={cn(
+                      'absolute inset-0 bg-gradient-to-br from-slate-950/92 via-slate-900/75 to-slate-900/35',
+                      categorySlug === 'reinigungsfirma' && 'from-sky-950/90 via-slate-900/70',
+                      categorySlug === 'malerfirma' && 'from-violet-950/88 via-slate-900/72'
+                    )}
+                    aria-hidden
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-90" aria-hidden />
+                  <div className="relative z-10 flex h-full min-h-[min(42svh,380px)] flex-col justify-end p-8 sm:min-h-[340px] md:p-10 lg:min-h-[360px]">
+                    <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/25 backdrop-blur-sm">
+                      <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
+                      geprüftes Netzwerk
+                    </div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                      {partnerAside.kicker}
+                    </p>
+                    <h2 className="mt-3 max-w-3xl text-balance text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl md:leading-tight">
+                      {partnerAside.title}
+                    </h2>
+                    <p className="mt-4 max-w-3xl text-sm font-normal leading-relaxed !text-white md:text-base md:leading-relaxed">
+                      {partnerAside.body}
+                    </p>
+                    <p className="mt-6 text-xs font-medium text-white/55">
+                      Kanton {canton} · {partners.length}{' '}
+                      {partners.length === 1 ? 'Partner' : 'Partner'} auf dieser Seite
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col bg-gradient-to-b from-white to-slate-50/90 p-6 dark:from-background dark:to-muted/20 sm:p-8 lg:p-8 xl:p-10">
+                  <div className="mb-6">
+                    <h2 className="text-xl font-semibold text-slate-900 dark:text-foreground">Partner in der Region</h2>
+                    <p className="mt-1 text-sm text-slate-600 dark:text-muted-foreground">
+                      Direkt vergleichbar – dieselben Kriterien für alle Anbieter.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+                    {partners.map((p) => (
+                      <PartnerCard key={p.id} partner={p} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="border-t border-slate-200/60 bg-white py-16 dark:border-border dark:bg-background md:py-20">
+          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+            <div className="mx-auto max-w-xl rounded-3xl border border-amber-200/80 bg-gradient-to-b from-amber-50/90 to-white px-8 py-10 text-center shadow-[0_20px_40px_-20px_rgba(180,83,9,0.2)] ring-1 ring-amber-900/5 dark:border-amber-900/40 dark:from-amber-950/30 dark:to-background dark:ring-amber-900/20">
+              <p className="text-lg font-medium text-slate-900 dark:text-foreground">
+                Aktuell keine passenden Partner in unserem Netzwerk für {locationName}.
+              </p>
+              <p className="mt-3 text-slate-600 leading-relaxed dark:text-muted-foreground">
+                Stellen Sie eine kostenlose Anfrage – wir vermitteln passende Firmen in Ihrer Region.
+              </p>
+              <Button
+                asChild
+                variant="cta"
+                className="group mt-8 h-12 px-8 text-base font-semibold tracking-tight"
+              >
+                <Link href={primaryQuoteHref}>
+                  Kostenlose Offerten anfordern
+                  <ArrowRight
+                    className="ml-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* === Interaktive Checklist (engagement) === */}
+      {categorySlug === 'umzugsfirma' ? (
+        <MovingChecklistSection
+          citySlug={locationSlug}
+          cityName={locationName}
+          canton={canton}
+        />
+      ) : null}
+
+      {/* === Lokales Spotlight (kurzer Ortsporträt) === */}
       {locationSpotlight ? (
         <CategoryCitySpotlight categorySlug={categorySlug} data={locationSpotlight} />
       ) : null}
 
+      {/* === Vor-Ort-Kontext (Local Content) === */}
       <section className="relative overflow-hidden border-t border-slate-200/70 bg-gradient-to-b from-slate-50/40 via-white to-slate-50/50 dark:border-border dark:from-muted/20 dark:via-background dark:to-muted/15">
         <div
           className={cn(
@@ -799,6 +975,30 @@ export default function CategoryCityPageClient({
         </div>
       </section>
 
+      {/* === Detaillierte Migrations-Analyse + Charts (was zeigen die Daten?) === */}
+      {categorySlug === 'umzugsfirma' && migrationAnalysis && migrationMeta ? (
+        <div id="migration-analyse">
+          <CityMigrationAnalysisCard
+            analysis={migrationAnalysis}
+            cityName={locationName}
+            yearRange={migrationMeta.yearRange}
+            fallbackUsed={migrationMeta.fallbackUsed}
+            scopeName={migrationMeta.scopeName}
+            source={{
+              publisher: migrationMeta.source.publisher,
+              cubeTitle: migrationMeta.source.cubeTitle,
+              cubeId: migrationMeta.source.cubeId,
+              catalogUrl: migrationMeta.source.catalogUrl,
+              license: migrationMeta.source.license,
+            }}
+          />
+        </div>
+      ) : null}
+
+      {categorySlug === 'umzugsfirma' && isLocationSupported(locationSlug) ? (
+        <MigrationStatsSection citySlug={locationSlug} cityName={locationName} />
+      ) : null}
+
       {cantonPeers.length > 0 ? (
         <section className="border-t border-slate-200/70 bg-gradient-to-b from-white to-slate-50/90 py-12 dark:border-border dark:from-background dark:to-muted/20 md:py-14">
           <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
@@ -863,94 +1063,6 @@ export default function CategoryCityPageClient({
           </div>
         </section>
       ) : null}
-
-      {partners.length > 0 ? (
-        <section className="border-t border-slate-200/60 bg-gradient-to-b from-slate-50/80 to-white py-16 dark:border-border dark:from-muted/25 dark:to-background md:py-20">
-          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_4px_32px_-12px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-card dark:ring-white/10">
-              <div className="flex flex-col">
-                <div className="relative min-h-[min(42svh,380px)] w-full sm:min-h-[340px] lg:min-h-[360px]">
-                  <Image
-                    src={heroSrc}
-                    alt=""
-                    fill
-                    className="object-cover object-center"
-                    sizes="100vw"
-                    loading="lazy"
-                  />
-                  <div
-                    className={cn(
-                      'absolute inset-0 bg-gradient-to-br from-slate-950/92 via-slate-900/75 to-slate-900/35',
-                      categorySlug === 'reinigungsfirma' && 'from-sky-950/90 via-slate-900/70',
-                      categorySlug === 'malerfirma' && 'from-violet-950/88 via-slate-900/72'
-                    )}
-                    aria-hidden
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-90" aria-hidden />
-                  <div className="relative z-10 flex h-full min-h-[min(42svh,380px)] flex-col justify-end p-8 sm:min-h-[340px] md:p-10 lg:min-h-[360px]">
-                    <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/25 backdrop-blur-sm">
-                      <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
-                      geprüftes Netzwerk
-                    </div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                      {partnerAside.kicker}
-                    </p>
-                    <h2 className="mt-3 max-w-3xl text-balance text-2xl font-semibold leading-tight tracking-tight text-white md:text-3xl md:leading-tight">
-                      {partnerAside.title}
-                    </h2>
-                    <p className="mt-4 max-w-3xl text-sm font-normal leading-relaxed !text-white md:text-base md:leading-relaxed">
-                      {partnerAside.body}
-                    </p>
-                    <p className="mt-6 text-xs font-medium text-white/55">
-                      Kanton {canton} · {partners.length}{' '}
-                      {partners.length === 1 ? 'Partner' : 'Partner'} auf dieser Seite
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col bg-gradient-to-b from-white to-slate-50/90 p-6 dark:from-background dark:to-muted/20 sm:p-8 lg:p-8 xl:p-10">
-                  <div className="mb-6">
-                    <h2 className="text-xl font-semibold text-slate-900 dark:text-foreground">Partner in der Region</h2>
-                    <p className="mt-1 text-sm text-slate-600 dark:text-muted-foreground">
-                      Direkt vergleichbar – dieselben Kriterien für alle Anbieter.
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-                    {partners.map((p) => (
-                      <PartnerCard key={p.id} partner={p} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section className="border-t border-slate-200/60 bg-white py-16 dark:border-border dark:bg-background md:py-20">
-          <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-            <div className="mx-auto max-w-xl rounded-3xl border border-amber-200/80 bg-gradient-to-b from-amber-50/90 to-white px-8 py-10 text-center shadow-[0_20px_40px_-20px_rgba(180,83,9,0.2)] ring-1 ring-amber-900/5 dark:border-amber-900/40 dark:from-amber-950/30 dark:to-background dark:ring-amber-900/20">
-              <p className="text-lg font-medium text-slate-900 dark:text-foreground">
-                Aktuell keine passenden Partner in unserem Netzwerk für {locationName}.
-              </p>
-              <p className="mt-3 text-slate-600 leading-relaxed dark:text-muted-foreground">
-                Stellen Sie eine kostenlose Anfrage – wir vermitteln passende Firmen in Ihrer Region.
-              </p>
-              <Button
-                asChild
-                variant="cta"
-                className="group mt-8 h-12 px-8 text-base font-semibold tracking-tight"
-              >
-                <Link href={primaryQuoteHref}>
-                  Kostenlose Offerten anfordern
-                  <ArrowRight
-                    className="ml-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-      )}
 
       {partnerRegions.mode === 'broad' ? (
         <section className="border-t border-slate-200/60 bg-slate-50/90 py-14 dark:border-border dark:bg-muted/20 md:py-16">
@@ -1033,6 +1145,15 @@ export default function CategoryCityPageClient({
           </div>
         </section>
       ) : null}
+
+      {/* === Lokales Einsatzgebiet (Karte) — direkt vor der FAQ für lokale SEO-Signale === */}
+      <CityServiceAreaMap
+        cityName={locationName}
+        cantonName={cantonNameFull}
+        cantonCode={canton}
+        categoryLabel={categoryLabelSingular}
+        serviceLabel={isServiceCityPage ? serviceLabel : undefined}
+      />
 
       <CategoryCityFaqSection locationName={locationName} items={faqItems} />
 
