@@ -1,13 +1,16 @@
 'use client'
 
-import { ArrowDownRight, ArrowUpRight, Info, ScanLine, Scale, TrendingUp } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, Info, Lightbulb, ScanLine, Scale, TrendingUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { CityMigrationAnalysis } from '@/lib/stats/migrationStats'
 
 type Props = {
   analysis: CityMigrationAnalysis
   cityName: string
-  yearRange: [number, number]
+  /** Aktuellster Jahresstand (z. B. 2024). */
+  latestYear: number
+  /** Vorjahr (z. B. 2023) — wird im Header für den Vergleichshinweis genutzt. */
+  previousYear: number | null
   fallbackUsed: boolean
   scopeName: string
   source: {
@@ -27,11 +30,16 @@ type Props = {
 export default function CityMigrationAnalysisCard({
   analysis,
   cityName,
-  yearRange,
+  latestYear,
+  previousYear,
   fallbackUsed,
   scopeName,
   source,
 }: Props) {
+  // Bewusst neutrales Label: nur der aktuellste Datenstand wird angezeigt.
+  // Der Vorjahresvergleich folgt im Fliesstext — sonst entsteht der Eindruck,
+  // die Headline-Zahl waere bereits eine Delta-/Aenderungsgroesse.
+  const periodLabel = `BFS · Datenstand ${latestYear}`
   return (
     <section
       className="mx-auto max-w-7xl px-4 pb-2 pt-10 md:px-6 md:pt-14 lg:px-8"
@@ -47,7 +55,7 @@ export default function CityMigrationAnalysisCard({
           <div className="lg:flex-1">
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/80 bg-white/85 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-emerald-800 shadow-sm dark:border-emerald-900/60 dark:bg-emerald-950/45 dark:text-emerald-300">
               <ScanLine className="h-3 w-3" aria-hidden />
-              Daten-Analyse · BFS {yearRange[0]}–{yearRange[1]}
+              {periodLabel}
             </span>
             <h2
               id={`migration-analysis-${cityName}`}
@@ -63,6 +71,31 @@ export default function CityMigrationAnalysisCard({
                 <p key={i}>{p}</p>
               ))}
             </div>
+
+            {analysis.localTip ? (
+              <aside
+                className={cn(
+                  'mt-6 rounded-2xl border border-amber-200/70 bg-amber-50/70 px-4 py-4 sm:px-5',
+                  'dark:border-amber-900/45 dark:bg-amber-950/20'
+                )}
+                aria-label={analysis.localTip.headline}
+              >
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/45 dark:text-amber-300">
+                    <Lightbulb className="h-4 w-4" aria-hidden />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-amber-800 dark:text-amber-300">
+                      {analysis.localTip.headline}
+                    </p>
+                    <p className="mt-1 text-[0.95rem] leading-[1.65] text-amber-950 dark:text-amber-100/90">
+                      {analysis.localTip.text}
+                    </p>
+                  </div>
+                </div>
+              </aside>
+            ) : null}
+
             {fallbackUsed ? (
               <p className="mt-4 inline-flex items-start gap-2 rounded-lg bg-amber-50/80 px-3 py-2 text-xs leading-relaxed text-amber-900 dark:bg-amber-950/30 dark:text-amber-200">
                 <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />

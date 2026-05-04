@@ -62,7 +62,7 @@ async function loadUmzugStatsExtras(
     if (!data) return null
     return {
       migrationData: data,
-      migrationAnalysis: buildCityMigrationAnalysis(data, cityName),
+      migrationAnalysis: buildCityMigrationAnalysis(data, cityName, citySlug),
       statFaqs: buildStatBasedFaqItems(data, cityName),
     }
   } catch (err) {
@@ -164,6 +164,8 @@ export default async function CategoryCatchAllServerPage({
               statsExtras
                 ? {
                     yearRange: statsExtras.migrationData.yearRange,
+                    latestYear: statsExtras.migrationData.latestYear,
+                    previousYear: statsExtras.migrationData.totals.previousYear,
                     fallbackUsed: statsExtras.migrationData.fallbackUsed,
                     scopeName: statsExtras.migrationData.scopeName,
                     source: statsExtras.migrationData.source,
@@ -320,6 +322,8 @@ export default async function CategoryCatchAllServerPage({
           statsExtras
             ? {
                 yearRange: statsExtras.migrationData.yearRange,
+                latestYear: statsExtras.migrationData.latestYear,
+                previousYear: statsExtras.migrationData.totals.previousYear,
                 fallbackUsed: statsExtras.migrationData.fallbackUsed,
                 scopeName: statsExtras.migrationData.scopeName,
                 source: statsExtras.migrationData.source,

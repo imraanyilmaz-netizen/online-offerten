@@ -58,23 +58,9 @@ import { getCityFaqsForCategory, getCityPageLocalContent, type CityFaqItem } fro
 import { getCityHeroImageSrc } from '@/lib/cityHeroImage'
 import { getCantonPeerLocations } from '@/lib/cityPagePartnerStats'
 import type { PlatformReviewsTableStats } from '@/lib/reviews/platformReviewStats'
-import { isLocationSupported } from '@/data/bfsLocationIds'
 import CityMigrationAnalysisCard from '@/components/locations/CityMigrationAnalysisCard'
-import CityMigrationKpiStrip from '@/components/locations/CityMigrationKpiStrip'
 import CityServiceAreaMap from '@/components/locations/CityServiceAreaMap'
 import type { CityMigrationAnalysis } from '@/lib/stats/migrationStats'
-
-const MigrationStatsSection = dynamic(
-  () => import('@/components/locations/MigrationStatsSection'),
-  {
-    ssr: false,
-    loading: () => (
-      <section className="mx-auto max-w-7xl px-4 pb-10 pt-2 md:px-6" aria-hidden>
-        <div className="h-32 animate-pulse rounded-2xl bg-muted/40" />
-      </section>
-    ),
-  }
-)
 
 const MovingChecklistSection = dynamic(
   () => import('@/components/locations/MovingChecklistSection'),
@@ -238,7 +224,15 @@ function partnerNetworkAsideCopy(
 }
 
 export type CategoryCityMigrationMeta = {
+  /**
+   * Vollstaendiger BFS-Datenrange (z.B. 1981..2024). Wird zu Quellen-Zwecken
+   * mitgefuehrt, in den Texten aber nicht mehr referenziert.
+   */
   yearRange: [number, number]
+  /** Aktuellster verfuegbarer Jahresstand (z.B. 2024). */
+  latestYear: number
+  /** Vorjahr (z.B. 2023). `null`, falls nicht verfuegbar. */
+  previousYear: number | null
   fallbackUsed: boolean
   scopeName: string
   source: {
@@ -623,16 +617,6 @@ export default function CategoryCityPageClient({
         </div>
       </section>
 
-      {categorySlug === 'umzugsfirma' && migrationAnalysis && migrationMeta ? (
-        <CityMigrationKpiStrip
-          analysis={migrationAnalysis}
-          cityName={locationName}
-          yearRange={migrationMeta.yearRange}
-          fallbackUsed={migrationMeta.fallbackUsed}
-          scopeName={migrationMeta.scopeName}
-        />
-      ) : null}
-
       <ServiceStepsSection
         categorySlug={categorySlug}
         serviceLabel={isServiceCityPage ? serviceLabel : undefined}
@@ -975,30 +959,6 @@ export default function CategoryCityPageClient({
         </div>
       </section>
 
-      {/* === Detaillierte Migrations-Analyse + Charts (was zeigen die Daten?) === */}
-      {categorySlug === 'umzugsfirma' && migrationAnalysis && migrationMeta ? (
-        <div id="migration-analyse">
-          <CityMigrationAnalysisCard
-            analysis={migrationAnalysis}
-            cityName={locationName}
-            yearRange={migrationMeta.yearRange}
-            fallbackUsed={migrationMeta.fallbackUsed}
-            scopeName={migrationMeta.scopeName}
-            source={{
-              publisher: migrationMeta.source.publisher,
-              cubeTitle: migrationMeta.source.cubeTitle,
-              cubeId: migrationMeta.source.cubeId,
-              catalogUrl: migrationMeta.source.catalogUrl,
-              license: migrationMeta.source.license,
-            }}
-          />
-        </div>
-      ) : null}
-
-      {categorySlug === 'umzugsfirma' && isLocationSupported(locationSlug) ? (
-        <MigrationStatsSection citySlug={locationSlug} cityName={locationName} />
-      ) : null}
-
       {cantonPeers.length > 0 ? (
         <section className="border-t border-slate-200/70 bg-gradient-to-b from-white to-slate-50/90 py-12 dark:border-border dark:from-background dark:to-muted/20 md:py-14">
           <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
@@ -1146,7 +1106,7 @@ export default function CategoryCityPageClient({
         </section>
       ) : null}
 
-      {/* === Lokales Einsatzgebiet (Karte) — direkt vor der FAQ für lokale SEO-Signale === */}
+      {/* === Lokales Einsatzgebiet (Karte) === */}
       <CityServiceAreaMap
         cityName={locationName}
         cantonName={cantonNameFull}
@@ -1154,6 +1114,27 @@ export default function CategoryCityPageClient({
         categoryLabel={categoryLabelSingular}
         serviceLabel={isServiceCityPage ? serviceLabel : undefined}
       />
+
+      {/* === Umzugs-Statistik / Daten-Analyse — direkt vor der FAQ === */}
+      {categorySlug === 'umzugsfirma' && migrationAnalysis && migrationMeta ? (
+        <div id="migration-analyse">
+          <CityMigrationAnalysisCard
+            analysis={migrationAnalysis}
+            cityName={locationName}
+            latestYear={migrationMeta.latestYear}
+            previousYear={migrationMeta.previousYear}
+            fallbackUsed={migrationMeta.fallbackUsed}
+            scopeName={migrationMeta.scopeName}
+            source={{
+              publisher: migrationMeta.source.publisher,
+              cubeTitle: migrationMeta.source.cubeTitle,
+              cubeId: migrationMeta.source.cubeId,
+              catalogUrl: migrationMeta.source.catalogUrl,
+              license: migrationMeta.source.license,
+            }}
+          />
+        </div>
+      ) : null}
 
       <CategoryCityFaqSection locationName={locationName} items={faqItems} />
 
