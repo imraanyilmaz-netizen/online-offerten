@@ -12,6 +12,14 @@ export const revalidate = 3600
 const BASE_URL = 'https://online-offerten.ch'
 
 /**
+ * Static pages and category/service/city entries don't have a real DB timestamp,
+ * but we still want to signal Google that content was last reviewed recently.
+ * This date is set to the latest SEO content update and should be bumped
+ * whenever titles, descriptions, or schemas change significantly.
+ */
+const CONTENT_LAST_MODIFIED = new Date('2026-05-06')
+
+/**
  * Wichtigste SEO-Städte (Wirtschaftszentren). Diese erhalten erhöhte
  * Sitemap-Priority, damit Google seine Crawl-Kapazität bevorzugt dort investiert.
  * Kein Filter – alle anderen Städte bleiben weiter in der Sitemap, nur mit
@@ -33,32 +41,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ============================================
   const staticPages: MetadataRoute.Sitemap = [
     // --- Homepage ---
-    { url: `${BASE_URL}/`, priority: 1.0, changeFrequency: 'daily' },
+    { url: `${BASE_URL}/`, priority: 1.0, changeFrequency: 'daily', lastModified: CONTENT_LAST_MODIFIED },
 
     // --- General pages (/login nicht: robots disallow → nicht indexieren via Sitemap) ---
-    { url: `${BASE_URL}/kontakt`, priority: 0.5 },
-    { url: `${BASE_URL}/kostenlose-offerte-anfordern`, priority: 0.9, changeFrequency: 'weekly' },
-    { url: `${BASE_URL}/kunden-bewertungen`, priority: 0.6, changeFrequency: 'weekly' },
-    { url: `${BASE_URL}/offerten-portal`, priority: 0.7 },
-    { url: `${BASE_URL}/top-offerten-schweiz`, priority: 0.7 },
-    { url: `${BASE_URL}/partner-suche`, priority: 0.7 },
-    { url: `${BASE_URL}/partner-werden`, priority: 0.5 },
-    { url: `${BASE_URL}/standorte`, priority: 0.7 },
-    { url: `${BASE_URL}/ueber-uns`, priority: 0.4 },
-    { url: `${BASE_URL}/ratgeber`, priority: 0.6, changeFrequency: 'weekly' },
+    { url: `${BASE_URL}/kontakt`, priority: 0.5, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/kostenlose-offerte-anfordern`, priority: 0.9, changeFrequency: 'weekly', lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/kunden-bewertungen`, priority: 0.6, changeFrequency: 'weekly', lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/offerten-portal`, priority: 0.7, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/top-offerten-schweiz`, priority: 0.7, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/partner-suche`, priority: 0.7, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/partner-werden`, priority: 0.5, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/standorte`, priority: 0.7, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/ueber-uns`, priority: 0.4, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/ratgeber`, priority: 0.6, changeFrequency: 'weekly', lastModified: CONTENT_LAST_MODIFIED },
 
     // --- Umzug main service pages ---
-    { url: `${BASE_URL}/umzugsfirma`, priority: 0.9, changeFrequency: 'weekly' },
-    { url: `${BASE_URL}/umzugsfirma-vergleichen`, priority: 0.8 },
-    { url: `${BASE_URL}/umzugsofferten`, priority: 0.8 },
-    { url: `${BASE_URL}/guenstig-umziehen`, priority: 0.7 },
-    { url: `${BASE_URL}/malerarbeitenkosten`, priority: 0.7 },
-    { url: `${BASE_URL}/raeumung-entsorgung`, priority: 0.7 },
-    { url: `${BASE_URL}/umzugskosten-aargau`, priority: 0.6 },
+    { url: `${BASE_URL}/umzugsfirma`, priority: 0.9, changeFrequency: 'weekly', lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/umzugsfirma-vergleichen`, priority: 0.8, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/umzugsofferten`, priority: 0.8, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/guenstig-umziehen`, priority: 0.7, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/malerarbeitenkosten`, priority: 0.7, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/raeumung-entsorgung`, priority: 0.7, lastModified: CONTENT_LAST_MODIFIED },
+    { url: `${BASE_URL}/umzugskosten-aargau`, priority: 0.6, lastModified: CONTENT_LAST_MODIFIED },
 
-    { url: `${BASE_URL}/reinigung`, priority: 0.9, changeFrequency: 'weekly' },
+    { url: `${BASE_URL}/reinigung`, priority: 0.9, changeFrequency: 'weekly', lastModified: CONTENT_LAST_MODIFIED },
 
-    { url: `${BASE_URL}/malerfirma`, priority: 0.9, changeFrequency: 'weekly' },
+    { url: `${BASE_URL}/malerfirma`, priority: 0.9, changeFrequency: 'weekly', lastModified: CONTENT_LAST_MODIFIED },
   ]
 
   const categoryCityPages: MetadataRoute.Sitemap = serviceCategories.flatMap((cat) =>
@@ -66,6 +74,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${BASE_URL}/${cat.slug}/${loc.slug}`,
       priority: PRIORITY_CITY_SLUGS.has(loc.slug) ? 0.8 : 0.6,
       changeFrequency: 'weekly' as const,
+      lastModified: CONTENT_LAST_MODIFIED,
     }))
   )
 
@@ -73,8 +82,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...serviceCategories.map((cat) => ({
       url: `${BASE_URL}/${cat.slug}-in-der-naehe`,
       priority: 0.6,
+      lastModified: CONTENT_LAST_MODIFIED,
     })),
-    { url: `${BASE_URL}/reinigungsfirma-in-der-naehe`, priority: 0.6 },
+    { url: `${BASE_URL}/reinigungsfirma-in-der-naehe`, priority: 0.6, lastModified: CONTENT_LAST_MODIFIED },
   ]
 
   const categoryServicePages: MetadataRoute.Sitemap = serviceCategories.flatMap((cat) =>
@@ -82,6 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${BASE_URL}/${cat.slug}/${getServicePathSegment(s)}`,
       priority: 0.8,
       changeFrequency: 'weekly' as const,
+      lastModified: CONTENT_LAST_MODIFIED,
     }))
   )
 
@@ -91,6 +102,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${BASE_URL}/${cat.slug}/${getServicePathSegment(s)}/${loc.slug}`,
         priority: PRIORITY_CITY_SLUGS.has(loc.slug) ? 0.7 : 0.5,
         changeFrequency: 'monthly' as const,
+        lastModified: CONTENT_LAST_MODIFIED,
       }))
     )
   )

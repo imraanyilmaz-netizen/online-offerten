@@ -91,6 +91,29 @@ async function getHomePageData() {
   }
 }
 
+const HOME_FAQS = [
+  {
+    q: 'Was kostet mich eine Anfrage?',
+    a: 'Die Anfrage ist komplett kostenlos und unverbindlich. Sie zahlen nichts für das Vergleichen von Offerten.',
+  },
+  {
+    q: 'Was passiert nach meiner Anfrage?',
+    a: 'Passende Firmen aus Ihrer Region melden sich mit individuellen Offerten. Sie vergleichen in Ruhe und entscheiden selbst, ob Sie ein Angebot annehmen.',
+  },
+  {
+    q: 'Wie viele Offerten erhalte ich?',
+    a: 'Sie können im Formular auswählen, von wie vielen Firmen Sie Offerten erhalten möchten (zwischen 2 und 5).',
+  },
+  {
+    q: 'Bin ich verpflichtet, eine Offerte anzunehmen?',
+    a: 'Nein. Der Vergleich ist unverbindlich. Sie entscheiden frei, ob und welche Offerte zu Ihnen passt.',
+  },
+  {
+    q: 'Wie schnell erhalte ich Rückmeldungen?',
+    a: 'Sie erhalten Ihre ersten Offerten in der Regel sehr schnell nach Ihrer Anfrage.',
+  },
+]
+
 // Schema Data - Organization + Service + FAQPage (All schemas in Server Component)
 const structuredData = {
   "@context": "https://schema.org",
@@ -149,6 +172,17 @@ const structuredData = {
         "availability": "https://schema.org/InStock",
         "url": "https://online-offerten.ch/kostenlose-offerte-anfordern"
       }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": HOME_FAQS.map((item) => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a,
+        },
+      })),
     }
   ]
 }
@@ -750,28 +784,7 @@ export default async function HomePage() {
                 Häufige Fragen zu Anfragen und Offerten
               </h2>
               <div className="mt-10 space-y-4">
-                {[
-                  {
-                    q: 'Was kostet mich eine Anfrage?',
-                    a: 'Die Anfrage ist komplett kostenlos und unverbindlich. Sie zahlen nichts für das Vergleichen von Offerten.',
-                  },
-                  {
-                    q: 'Was passiert nach meiner Anfrage?',
-                    a: 'Passende Firmen aus Ihrer Region melden sich mit individuellen Offerten. Sie vergleichen in Ruhe und entscheiden selbst, ob Sie ein Angebot annehmen.',
-                  },
-                  {
-                    q: 'Wie viele Offerten erhalte ich?',
-                    a: 'Sie können im Formular auswählen, von wie vielen Firmen Sie Offerten erhalten möchten (zwischen 2 und 5).',
-                  },
-                  {
-                    q: 'Bin ich verpflichtet, eine Offerte anzunehmen?',
-                    a: 'Nein. Der Vergleich ist unverbindlich. Sie entscheiden frei, ob und welche Offerte zu Ihnen passt.',
-                  },
-                  {
-                    q: 'Wie schnell erhalte ich Rückmeldungen?',
-                    a: 'Sie erhalten Ihre ersten Offerten in der Regel sehr schnell nach Ihrer Anfrage.',
-                  },
-                ].map((item) => (
+                {HOME_FAQS.map((item) => (
                   <div
                     key={item.q}
                     className="rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-sm ring-1 ring-slate-900/[0.03] dark:border-border dark:bg-card/90 dark:ring-white/10 md:p-6"

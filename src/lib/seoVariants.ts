@@ -44,6 +44,12 @@ const CITY_TITLE_VARIANTS = [
     `${stadt}: ${branche} vergleichen & bis zu 5 Offerten erhalten`,
   ({ branche, stadt }: CityCtx) =>
     `${branche} ${stadt} gesucht? Kostenlose Offerten vergleichen`,
+  ({ branchePlural, kanton }: CityCtx) =>
+    `Kanton ${kanton}: ${branchePlural} finden & Preise vergleichen`,
+  ({ branche, stadt }: CityCtx) =>
+    `${branche} ${stadt}: Preise vergleichen & bis zu 40% günstiger`,
+  ({ branchePlural, stadt }: CityCtx) =>
+    `Geprüfte ${branchePlural} ${stadt} – sicher & unverbindlich`,
 ] as const
 
 const CITY_DESC_VARIANTS = [
@@ -54,7 +60,11 @@ const CITY_DESC_VARIANTS = [
   ({ branchePlural, stadt }: CityCtx) =>
     `${branchePlural} in ${stadt} kostenlos vergleichen: Fordern Sie bis zu 5 Offerten von geprüfte Profis an und sparen Sie bis zu 40% – einfach, transparent und unverbindlich.`,
   ({ branchePlural, stadt, kanton }: CityCtx) =>
-    `geprüfte ${branchePlural} in ${stadt} (${kanton}) und Umgebung: Offerten kostenlos vergleichen, Preise direkt senken und bis zu 40% sparen – unverbindlich.`,
+    `Geprüfte ${branchePlural} in ${stadt} (${kanton}) und Umgebung: Offerten kostenlos vergleichen, Preise direkt senken und bis zu 40% sparen – unverbindlich.`,
+  ({ branche, stadt, kanton }: CityCtx) =>
+    `Jetzt ${branche} in ${stadt} (${kanton}) finden: Bis zu 5 Offerten anfordern, Preise vergleichen und sicher bis zu 40% sparen – unverbindlich & kostenlos.`,
+  ({ branchePlural, stadt }: CityCtx) =>
+    `${branchePlural} ${stadt} im Vergleich: Offerten kostenlos einholen, Leistungen prüfen und den besten Anbieter in Ihrer Region wählen – bis zu 40% günstiger.`,
 ] as const
 
 /** Deterministische Variante anhand eines stabilen Schlüssels (z.B. city slug). */
@@ -90,6 +100,12 @@ const SVC_CITY_TITLE_VARIANTS = [
     `${service} ${stadt}: Bis zu 5 Offerten von geprüften Anbietern`,
   ({ service, stadt }: SvcCityCtx) =>
     `Günstige ${service} in ${stadt} – Offerten kostenlos vergleichen`,
+  ({ service, kanton }: SvcCityCtx) =>
+    `${service} im Kanton ${kanton}: Preise vergleichen & sparen`,
+  ({ service, stadt }: SvcCityCtx) =>
+    `${service} ${stadt}: Anbieter vergleichen & bis zu 40% günstiger`,
+  ({ service, stadt, branchePlural }: SvcCityCtx) =>
+    `Geprüfte ${branchePlural} für ${service} in ${stadt} – unverbindlich`,
 ] as const
 
 const SVC_CITY_DESC_VARIANTS = [
@@ -100,7 +116,11 @@ const SVC_CITY_DESC_VARIANTS = [
   ({ service, stadt, branchePlural }: SvcCityCtx) =>
     `${service} in ${stadt}: Kostenlos bis zu 5 Offerten von geprüfte ${branchePlural} einholen, Preise vergleichen und den besten Anbieter Ihrer Region wählen.`,
   ({ service, stadt, kanton, branchePlural }: SvcCityCtx) =>
-    `geprüfte ${branchePlural} für ${service} in ${stadt} (${kanton}): Offerten kostenlos vergleichen und bis zu 40% sparen – schnell & unverbindlich.`,
+    `Geprüfte ${branchePlural} für ${service} in ${stadt} (${kanton}): Offerten kostenlos vergleichen und bis zu 40% sparen – schnell & unverbindlich.`,
+  ({ service, stadt, kanton }: SvcCityCtx) =>
+    `${service} in ${stadt} (${kanton}): Offerten anfordern, Preise direkt vergleichen und bis zu 40% bei geprüften Anbietern sparen – kostenlos & unverbindlich.`,
+  ({ service, branchePlural, stadt }: SvcCityCtx) =>
+    `${service} ${stadt} im Vergleich: Bis zu 5 Offerten von geprüfte ${branchePlural} kostenlos einholen und den besten Preis in Ihrer Region sichern.`,
 ] as const
 
 export function serviceCityLandingVariants(ctx: SvcCityCtx, hashKey: string): {

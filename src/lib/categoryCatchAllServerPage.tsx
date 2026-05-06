@@ -39,6 +39,67 @@ const SERVICE_TITLE: Record<string, string> = {
   malerfirma: 'Malerfirma',
 }
 
+const SERVICE_TYPE: Record<string, string> = {
+  umzugsfirma: 'Umzugsservice',
+  reinigungsfirma: 'Reinigungsservice',
+  malerfirma: 'Malerservice',
+}
+
+const ORG = {
+  '@type': 'Organization',
+  name: 'Online-Offerten.ch',
+  url: SITE,
+  logo: `${SITE}/image/logo-icon.webp`,
+}
+
+function buildCityServiceSchema({
+  categorySlug,
+  serviceLabel,
+  locationName,
+  canton,
+  locationSlug,
+  reviewStats,
+}: {
+  categorySlug: string
+  serviceLabel: string
+  locationName: string
+  canton: string
+  locationSlug: string
+  reviewStats: import('@/lib/reviews/platformReviewStats').PlatformReviewsTableStats
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `${serviceLabel} in ${locationName} – Offerten vergleichen`,
+    serviceType: SERVICE_TYPE[categorySlug] || serviceLabel,
+    provider: ORG,
+    areaServed: {
+      '@type': 'City',
+      name: locationName,
+      addressRegion: canton,
+      addressCountry: 'CH',
+    },
+    url: `${SITE}/${categorySlug}/${locationSlug}`,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'CHF',
+      name: `Kostenlose ${serviceLabel} Offerten in ${locationName}`,
+    },
+    ...(reviewStats.count > 0 && reviewStats.averageRating !== null
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: reviewStats.averageRating.toFixed(1),
+            reviewCount: String(reviewStats.count),
+            bestRating: '5',
+            worstRating: '1',
+          },
+        }
+      : {}),
+  }
+}
+
 type Props = { category: string; segments: string[] }
 
 type UmzugStatsExtras = {
@@ -133,12 +194,24 @@ export default async function CategoryCatchAllServerPage({
           : null
 
       const breadcrumbSchema = buildCityBreadcrumbJsonLd(cat.slug, loc.slug, loc.name)
+      const cityServiceSchema = buildCityServiceSchema({
+        categorySlug: cat.slug,
+        serviceLabel: st,
+        locationName: loc.name,
+        canton: loc.canton,
+        locationSlug: loc.slug,
+        reviewStats: platformReviewStats,
+      })
 
       return (
         <>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(cityServiceSchema) }}
           />
           {itemListSchema ? (
             <script
@@ -185,18 +258,52 @@ export default async function CategoryCatchAllServerPage({
     const svcMeta = getServiceLandingMetadata(cat.slug, only)
     if (!svcMeta) notFound()
 
+    const [svcPlatformStats] = await Promise.all([getPlatformReviewsTableStats()])
     const svcPathSeg = getServicePathSegment(svc)
     const svcBreadcrumbSchema = buildServiceBreadcrumbJsonLd(
       cat.slug,
       svcPathSeg,
       svc.label
     )
+    const svcServiceSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: svcMeta.title,
+      description: svcMeta.description,
+      serviceType: SERVICE_TYPE[cat.slug] || svc.label,
+      provider: ORG,
+      areaServed: { '@type': 'Country', name: 'Switzerland' },
+      url: svcMeta.canonical,
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'CHF',
+        name: `Kostenlose ${svc.label} Offerten vergleichen`,
+        url: `${SITE}/kostenlose-offerte-anfordern`,
+        availability: 'https://schema.org/InStock',
+      },
+      ...(svcPlatformStats.count > 0 && svcPlatformStats.averageRating !== null
+        ? {
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: svcPlatformStats.averageRating.toFixed(1),
+              reviewCount: String(svcPlatformStats.count),
+              bestRating: '5',
+              worstRating: '1',
+            },
+          }
+        : {}),
+    }
 
     return (
       <>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(svcBreadcrumbSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(svcServiceSchema) }}
         />
         <CategoryServicePageClient
           categorySlug={cat.slug}
@@ -315,12 +422,24 @@ export default async function CategoryCatchAllServerPage({
     loc.slug,
     loc.name
   )
+  const svcCityServiceSchema = buildCityServiceSchema({
+    categorySlug: cat.slug,
+    serviceLabel: svc.label,
+    locationName: loc.name,
+    canton: loc.canton,
+    locationSlug: `${pathSeg}/${loc.slug}`,
+    reviewStats: platformReviewStats,
+  })
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(svcCityBreadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(svcCityServiceSchema) }}
       />
       {itemListSchema ? (
         <script

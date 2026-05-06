@@ -28,31 +28,31 @@ async function getPartnerData(slug: string) {
 
 async function getPartnerReviewStats(partnerId: string) {
   const supabase = createStaticClient()
-  
-  // Sadece bu partner'a ait onaylı partner yorumlarını say (Schema.org için)
-  // review_type = 'partner' olmalı - platform yorumları hariç
+
   const { data: reviews, error } = await supabase
     .from('customer_reviews')
-    .select('rating')
+    .select('rating, reviewer_name, comment, created_at')
     .eq('partner_id', partnerId)
     .eq('approval_status', 'approved')
-    .eq('review_type', 'partner') // Sadece partner yorumları
+    .eq('review_type', 'partner')
+    .order('created_at', { ascending: false })
 
   if (error || !reviews || reviews.length === 0) {
-    return {
-      reviewCount: 0,
-      averageRating: 0
-    }
+    return { reviewCount: 0, averageRating: 0, topReviews: [] }
   }
 
   const reviewCount = reviews.length
-  const totalRating = reviews.reduce((sum: number, review: any) => sum + (review.rating || 0), 0)
-  const averageRating = totalRating / reviewCount
+  const totalRating = reviews.reduce((sum: number, r: any) => sum + (r.rating || 0), 0)
+  const averageRating = Math.round((totalRating / reviewCount) * 10) / 10
 
-  return {
-    reviewCount,
-    averageRating: Math.round(averageRating * 10) / 10 // Auf 1 Dezimalstelle runden
-  }
+  const topReviews = reviews.slice(0, 5).map((r: any) => ({
+    name: r.reviewer_name || 'Kunde',
+    rating: r.rating,
+    body: r.comment || '',
+    datePublished: r.created_at ? r.created_at.slice(0, 10) : undefined,
+  }))
+
+  return { reviewCount, averageRating, topReviews }
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -163,6 +163,20 @@ export default async function PartnerProfilePage(props: { params: Promise<{ slug
         "bestRating": "5",
         "worstRating": "1"
       }
+    }),
+    ...(reviewStats.topReviews.length > 0 && {
+      "review": reviewStats.topReviews.map((r) => ({
+        "@type": "Review",
+        "author": { "@type": "Person", "name": r.name },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": String(r.rating),
+          "bestRating": "5",
+          "worstRating": "1",
+        },
+        ...(r.body ? { "reviewBody": r.body } : {}),
+        ...(r.datePublished ? { "datePublished": r.datePublished } : {}),
+      }))
     })
   }
 

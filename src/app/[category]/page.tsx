@@ -5,6 +5,7 @@ import { categoryHubSlugs, getServiceCategoryBySlug, serviceCategories } from '@
 import UmzugsfirmaPageClient from '@/components/pages/UmzugsfirmaPageContent'
 import CategoryReinigungHubClient from '@/components/pages/category/CategoryReinigungHubClient'
 import MalerfirmaInDerNaehePageClient from '@/components/pages/info/MalerfirmaInDerNaehePageClient'
+import MalerfirmaHubPageClient from '@/components/pages/info/MalerfirmaPageClient'
 import UmzugsfirmaInDerNaehePageClient from '@/components/pages/info/UmzugsfirmaInDerNaehePageClient'
 import ReinigungsfirmaInDerNaehePageClient from '@/components/pages/info/ReinigungsfirmaInDerNaehePageClient'
 
@@ -150,6 +151,8 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
     },
   }
 
+  const OG_IMAGE = `${SITE}/opengraph-image`
+
   if (variant === 'umzugsfirma') {
     return {
       title: 'Umzugsfirma in der Nähe finden – geprüfte Partner',
@@ -164,12 +167,14 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
         type: 'website',
+        images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Umzugsfirma in der Nähe finden' }],
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Umzugsfirma in der Nähe finden » geprüfte Partner vergleichen',
         description:
           'Umzugsfirma in der Nähe finden ✓ Bis zu 5 kostenlose Offerten von geprüfte Umzugsfirmen in Ihrer Region.',
+        images: [OG_IMAGE],
       },
       robots,
     }
@@ -189,12 +194,14 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
         type: 'website',
+        images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Reinigungsfirma in der Nähe finden' }],
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Reinigungsfirma in der Nähe finden » Offerten vergleichen',
         description:
           'Reinigungsfirma in der Nähe: Umzugsreinigung, Endreinigung, Wohnungs- und Büroreinigung – kostenlos Offerten vergleichen.',
+        images: [OG_IMAGE],
       },
       robots,
     }
@@ -216,6 +223,7 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
         type: 'website',
+        images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Reinigungsfirma in der Nähe finden' }],
       },
       twitter: {
         card: 'summary_large_image',
@@ -223,6 +231,7 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
           'Reinigungsfirma in der Nähe | Umzugsreinigung, Endreinigung & Reinigungsofferten vergleichen',
         description:
           'Reinigungsfirma finden: Umzugsreinigung, Wohnungsreinigung, Büro – kostenlose Reinigungsofferten vergleichen.',
+        images: [OG_IMAGE],
       },
       robots,
     }
@@ -241,12 +250,14 @@ function inDerNaeheMetadata(pathSegment: string, variant: InDerNaeheVariant): Me
       siteName: 'Online-Offerten.ch',
       locale: 'de_CH',
       type: 'website',
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Malerfirma in der Nähe finden' }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen',
       description:
         'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region.',
+      images: [OG_IMAGE],
     },
     robots,
   }
@@ -259,6 +270,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const cat = getServiceCategoryBySlug(raw)
   if (!cat) return { title: 'Seite nicht gefunden' }
+
+  const HUB_OG_IMAGE = `${SITE}/opengraph-image`
 
   if (cat.slug === 'umzugsfirma') {
     return {
@@ -274,12 +287,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
         type: 'website',
+        images: [{ url: HUB_OG_IMAGE, width: 1200, height: 630, alt: 'Umzugsfirma Schweiz – geprüfte Anbieter vergleichen' }],
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Umzugsfirma Schweiz | geprüfte Anbieter vergleichen',
         description:
           'Finden Sie eine passende Umzugsfirma in der Schweiz und vergleichen Sie geprüfte Anbieter für Privat- und Geschäftsumzug sowie Spezialtransporte.',
+        images: [HUB_OG_IMAGE],
       },
       robots: {
         index: true,
@@ -309,12 +324,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
         siteName: 'Online-Offerten.ch',
         locale: 'de_CH',
         type: 'website',
+        images: [{ url: HUB_OG_IMAGE, width: 1200, height: 630, alt: 'Reinigungsfirma Schweiz – Offerten vergleichen' }],
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Reinigungsfirma Schweiz – Kostenlose Offerten vergleichen & sparen',
         description:
           'Reinigung für Privatpersonen & Unternehmen: Kostenlos Offerten von geprüfte Reinigungsfirmen vergleichen.',
+        images: [HUB_OG_IMAGE],
       },
       robots: {
         index: true,
@@ -343,12 +360,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       siteName: 'Online-Offerten.ch',
       locale: 'de_CH',
       type: 'website',
+      images: [{ url: HUB_OG_IMAGE, width: 1200, height: 630, alt: 'Malerfirma in der Nähe finden – bis zu 40% sparen' }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Malerfirma in der Nähe finden » Bis zu 40% sparen',
       description:
         'Malerfirma in der Nähe finden. Bis zu 5 kostenlose Offerten von geprüfte Malerfirmen in Ihrer Region.',
+      images: [HUB_OG_IMAGE],
     },
     robots: {
       index: true,
@@ -390,24 +409,96 @@ export default async function CategoryHubPage(props: Props) {
   const { category: raw } = await props.params
   const inDerNaehe = resolveInDerNaeheSegment(raw)
   if (inDerNaehe === 'umzugsfirma') {
+    const uzNaeheSchema = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Umzugsfirma', item: `${SITE}/umzugsfirma` },
+            { '@type': 'ListItem', position: 3, name: 'Umzugsfirma in der Nähe', item: `${SITE}/umzugsfirma-in-der-naehe` },
+          ],
+        },
+        {
+          '@type': 'Service',
+          name: 'Umzugsfirma in der Nähe finden',
+          serviceType: 'Umzugsservice',
+          provider: { '@type': 'Organization', name: 'Online-Offerten.ch', url: SITE },
+          areaServed: { '@type': 'Country', name: 'Switzerland' },
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'CHF' },
+        },
+      ],
+    }
     return (
-      <InDerNaeheSuspense borderClass="border-green-600">
-        <UmzugsfirmaInDerNaehePageClient />
-      </InDerNaeheSuspense>
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(uzNaeheSchema) }} />
+        <InDerNaeheSuspense borderClass="border-green-600">
+          <UmzugsfirmaInDerNaehePageClient />
+        </InDerNaeheSuspense>
+      </>
     )
   }
   if (inDerNaehe === 'reinigung' || inDerNaehe === 'reinigungsfirma') {
+    const rzNaeheSchema = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Reinigungsfirma', item: `${SITE}/reinigungsfirma` },
+            { '@type': 'ListItem', position: 3, name: 'Reinigungsfirma in der Nähe', item: `${SITE}/reinigungsfirma-in-der-naehe` },
+          ],
+        },
+        {
+          '@type': 'Service',
+          name: 'Reinigungsfirma in der Nähe finden',
+          serviceType: 'Reinigungsservice',
+          provider: { '@type': 'Organization', name: 'Online-Offerten.ch', url: SITE },
+          areaServed: { '@type': 'Country', name: 'Switzerland' },
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'CHF' },
+        },
+      ],
+    }
     return (
-      <InDerNaeheSuspense borderClass="border-blue-600">
-        <ReinigungsfirmaInDerNaehePageClient />
-      </InDerNaeheSuspense>
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rzNaeheSchema) }} />
+        <InDerNaeheSuspense borderClass="border-blue-600">
+          <ReinigungsfirmaInDerNaehePageClient />
+        </InDerNaeheSuspense>
+      </>
     )
   }
   if (inDerNaehe === 'malerfirma') {
+    const mlNaeheSchema = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Malerfirma', item: `${SITE}/malerfirma` },
+            { '@type': 'ListItem', position: 3, name: 'Malerfirma in der Nähe', item: `${SITE}/malerfirma-in-der-naehe` },
+          ],
+        },
+        {
+          '@type': 'Service',
+          name: 'Malerfirma in der Nähe finden',
+          serviceType: 'Malerservice',
+          provider: { '@type': 'Organization', name: 'Online-Offerten.ch', url: SITE },
+          areaServed: { '@type': 'Country', name: 'Switzerland' },
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'CHF' },
+        },
+      ],
+    }
     return (
-      <InDerNaeheSuspense borderClass="border-purple-600">
-        <MalerfirmaInDerNaehePageClient />
-      </InDerNaeheSuspense>
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(mlNaeheSchema) }} />
+        <InDerNaeheSuspense borderClass="border-purple-600">
+          <MalerfirmaInDerNaehePageClient />
+        </InDerNaeheSuspense>
+      </>
     )
   }
 
@@ -444,15 +535,7 @@ export default async function CategoryHubPage(props: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ML_JSON_LD) }}
       />
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center min-h-screen">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-600" />
-          </div>
-        }
-      >
-        <MalerfirmaInDerNaehePageClient />
-      </Suspense>
+      <MalerfirmaHubPageClient />
     </>
   )
 }

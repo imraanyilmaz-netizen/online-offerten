@@ -74,11 +74,13 @@ export async function buildCategoryCatchAllMetadata(
       siteName: 'Online-Offerten.ch',
       locale: 'de_CH',
       type: 'website',
+      images: [{ url: `${canonical}/opengraph-image`, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: [`${canonical}/opengraph-image`],
     },
     robots: noindex
       ? {
