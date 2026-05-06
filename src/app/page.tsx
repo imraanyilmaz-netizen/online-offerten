@@ -503,7 +503,7 @@ export default async function HomePage() {
                 <div className="relative order-2 lg:order-1">
                   <div className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-slate-100 shadow-[0_24px_48px_-24px_rgba(15,23,42,0.2)] ring-1 ring-slate-900/[0.04] dark:border-border dark:bg-muted dark:ring-white/10">
                     <NextImage
-                      src="/fotos/offerten.webp"
+                      src="/fotos/umzug-reinigung-maler-offerten.webp"
                       alt="Zufriedene Kunden"
                       width={600}
                       height={400}

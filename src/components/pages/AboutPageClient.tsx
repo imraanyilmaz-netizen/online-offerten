@@ -842,7 +842,7 @@ const AboutPageClient = ({ initialReviews = [] }: AboutPageClientProps) => {
             <div className="relative overflow-hidden rounded-2xl">
               <div
                 className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: "url('/fotos/offerten.webp')" }}
+                style={{ backgroundImage: "url('/fotos/umzug-reinigung-maler-offerten.webp')" }}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/45" />
 

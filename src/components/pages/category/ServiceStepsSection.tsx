@@ -3,9 +3,13 @@
 import Link from 'next/link'
 import {
   ArrowRight,
+  Briefcase,
   ClipboardList,
+  GitCompareArrows,
   HeartHandshake,
+  Mail,
   Paintbrush,
+  PencilLine,
   Send,
   Sparkles,
   Truck,
@@ -26,12 +30,16 @@ import { cn } from '@/lib/utils'
  */
 export default function ServiceStepsSection({
   categorySlug,
+  serviceId,
   serviceLabel,
   locationName,
   ctaHref,
   maxWidthClass = 'max-w-7xl',
 }: {
   categorySlug: string
+  /** Optional: Konkrete Leistungs-ID, z. B. "klaviertransport".
+   *  Wird für leistungsspezifische Schritt-Inhalte (Klavier/Flügel) verwendet. */
+  serviceId?: string
   serviceLabel?: string
   locationName?: string
   ctaHref: string
@@ -107,13 +115,32 @@ export default function ServiceStepsSection({
 
   const step3Body = `Preis, Leistung, Versicherung und Bewertungen vergleichen – anschliessend unverbindlich die passende ${hubSingular}${ortSuffix} beauftragen.`
 
-  const heading = locationName
-    ? `In 3 Schritten die besten ${hubPlural} in ${locationName} finden`
-    : `In 3 Schritten die besten ${hubPlural} Ihrer Region finden`
+  const isKlavier = categorySlug === 'umzugsfirma' && serviceId === 'klaviertransport'
+  const isGeschaeft = categorySlug === 'umzugsfirma' && serviceId === 'geschaeftsumzug'
 
-  const subheading = locationName
-    ? `In drei klaren Schritten kommen Sie schnell zu passenden Offerten${serviceLabel ? ` für ${serviceLabel}` : ''} in ${locationName}.`
-    : 'In drei klaren Schritten kommen Sie schnell zu passenden Offerten aus Ihrer Region.'
+  const heading = isKlavier
+    ? locationName
+      ? `So funktioniert's: in 3 Schritten zum Klaviertransport in ${locationName}`
+      : "So funktioniert's: in 3 Schritten zum Klaviertransport"
+    : isGeschaeft
+      ? locationName
+        ? `So funktioniert's: in 3 Schritten zum Geschäftsumzug in ${locationName}`
+        : "So funktioniert's: in 3 Schritten zum Geschäftsumzug"
+      : locationName
+        ? `In 3 Schritten die besten ${hubPlural} in ${locationName} finden`
+        : `In 3 Schritten die besten ${hubPlural} Ihrer Region finden`
+
+  const subheading = isKlavier
+    ? locationName
+      ? `Klaviertransport Offerten vergleichen in ${locationName} – Klavier & Flügel zügeln, Pianotransport Schweiz mit erfahrenen Spezialisten. Eine Anfrage, bis zu 5 Angebote, kostenlos und unverbindlich.`
+      : 'Klaviertransport Offerten vergleichen in der Schweiz – Klavier & Flügel zügeln, Pianotransport mit erfahrenen Spezialisten. Eine Anfrage, bis zu 5 Angebote, kostenlos und unverbindlich.'
+    : isGeschaeft
+      ? locationName
+        ? `B2B-Geschäftsumzug in ${locationName} – Büroumzug, Firmenumzug, Ladenlokal, Werkstatt. Online-Offerten.ch ist ein B2B-Vergleichsportal: Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von auf Geschäftsumzüge spezialisierten Partnern – kostenlos und unverbindlich.`
+        : 'B2B-Geschäftsumzug in der Schweiz – Büroumzug, Firmenumzug mit erfahrenen Anbietern. Online-Offerten.ch ist ein B2B-Vergleichsportal: Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von auf Geschäftsumzüge spezialisierten Partnern – kostenlos und unverbindlich.'
+      : locationName
+        ? `In drei klaren Schritten kommen Sie schnell zu passenden Offerten${serviceLabel ? ` für ${serviceLabel}` : ''} in ${locationName}.`
+        : 'In drei klaren Schritten kommen Sie schnell zu passenden Offerten aus Ihrer Region.'
 
   const step2Icon: LucideIcon =
     categorySlug === 'reinigungsfirma'
@@ -124,18 +151,104 @@ export default function ServiceStepsSection({
           ? Truck
           : Send
 
-  const steps: ReadonlyArray<{ num: number; Icon: LucideIcon; title: string; body: string }> = [
+  const ortKurz = locationName ?? 'Ihrer Region'
+
+  /**
+   * Klaviertransport-Schritte spiegeln den tatsächlichen Formular-Ablauf wider:
+   *  Step 1 (Form): Service "Spezialtransport → Klaviertransport", Start-/Zieladresse
+   *                 und Wunschdatum eintragen.
+   *  Step 2: Anfrage geht an Klaviertransport-Anbieter, bis zu 5 Offerten kommen zurück.
+   *  Step 3: Preise und Angebote vergleichen, Anbieter wählen.
+   *
+   * Wichtig: Hier KEINE technischen Detailfragen (Treppenhaus-Mass, Marke, Gewicht
+   * etc.) versprechen, die das Formular gar nicht abfragt – sonst entsteht Bruch.
+   * Auch keine harten Garantien zu Versicherung, Klimaschutz o. Ä. – das verhandeln
+   * Kunde und Klaviertransport-Firma direkt.
+   */
+  const klaviertransportSteps: ReadonlyArray<{
+    num: number
+    Icon: LucideIcon
+    title: string
+    body: string
+  }> = [
+    {
+      num: 1,
+      Icon: PencilLine,
+      title: 'Klaviertransport-Anfrage ausfüllen',
+      body: `Wählen Sie "Spezialtransport → Klaviertransport", geben Sie Start- und Zieladresse${ortKurz === 'Ihrer Region' ? '' : ` rund um ${ortKurz}`} sowie Ihr Wunschdatum für den Klavier- oder Flügeltransport an. Die Anfrage dauert nur wenige Minuten – kostenlos und unverbindlich.`,
+    },
+    {
+      num: 2,
+      Icon: Mail,
+      title: 'Bis zu 5 Klaviertransport-Offerten',
+      body: `Klaviertransport-Anbieter mit Einsatzgebiet ${ortKurz} prüfen Ihre Anfrage und senden bis zu 5 individuelle Offerten – direkt in Ihr Postfach, ohne dass Sie 5 Firmen einzeln über Google heraussuchen müssen.`,
+    },
+    {
+      num: 3,
+      Icon: GitCompareArrows,
+      title: 'Vergleichen & Anbieter wählen',
+      body: `Sie vergleichen Klaviertransport-Preise, enthaltene Leistungen und Bewertungen in Ruhe. Den Auftrag erteilen Sie direkt der gewünschten Klavier­transport-Firma – ohne Druck und nur wenn ein Angebot wirklich passt.`,
+    },
+  ]
+
+  /*
+   * Geschäftsumzug-Schritte spiegeln den realen Formular-Ablauf:
+   *  Step 1: "Geschäftsumzug" auswählen, Start-/Zieladresse und Wunschdatum
+   *  Step 2: Anfrage geht an spezialisierte Geschäftsumzug-Firmen
+   *  Step 3: Konzept, Zeitplan und Preis vergleichen, Anbieter wählen
+   *
+   * Bewusst keine Versprechen zu Zusatzleistungen wie Aktenvernichtung oder
+   * IT-Dienst – das verhandeln Kunde und Firmenumzug-Anbieter direkt.
+   */
+  const geschaeftsumzugSteps: ReadonlyArray<{
+    num: number
+    Icon: LucideIcon
+    title: string
+    body: string
+  }> = [
+    {
+      num: 1,
+      Icon: PencilLine,
+      title: 'Geschäftsumzug-Anfrage ausfüllen',
+      body: `Wählen Sie "Geschäftsumzug" als Umzugsart, geben Sie Start- und Zieladresse${ortKurz === 'Ihrer Region' ? '' : ` in ${ortKurz} und Umgebung`}, Wunschdatum und ungefähre Bürogrösse oder Mitarbeiter­zahl an. Die Anfrage dauert nur wenige Minuten – kostenlos und unverbindlich.`,
+    },
+    {
+      num: 2,
+      Icon: Briefcase,
+      title: 'Bis zu 5 Firmenumzug-Offerten',
+      body: `Geschäftsumzug-Anbieter mit Erfahrung in ${ortKurz} prüfen Ihre Anfrage und senden bis zu 5 individuelle Konzepte mit Zeitplan und Preis – ohne dass Sie 5 Firmen einzeln anrufen müssen.`,
+    },
+    {
+      num: 3,
+      Icon: GitCompareArrows,
+      title: 'Vergleichen & Geschäftsumzug planen',
+      body: `Sie vergleichen Konzept, Zeitplan, Leistungen und Preis in Ruhe und beauftragen die passende Firmenumzug-Firma direkt – mit klarem Plan für Wochenend-Etappen, IT-Slot und Anlieferzonen vor Ort.`,
+    },
+  ]
+
+  const defaultSteps: ReadonlyArray<{
+    num: number
+    Icon: LucideIcon
+    title: string
+    body: string
+  }> = [
     { num: 1, Icon: ClipboardList, title: step1Title, body: step1Body },
     { num: 2, Icon: step2Icon, title: 'Bis zu 5 Offerten erhalten', body: step2Body },
     { num: 3, Icon: HeartHandshake, title: 'Vergleichen & beauftragen', body: step3Body },
   ]
+
+  const steps = isKlavier
+    ? klaviertransportSteps
+    : isGeschaeft
+      ? geschaeftsumzugSteps
+      : defaultSteps
 
   return (
     <section className="relative z-10 border-t border-slate-200/80 bg-white py-14 dark:border-border dark:bg-background md:py-20">
       <div className={cn('container mx-auto px-4 md:px-6', maxWidthClass)}>
         <div className="mb-10 max-w-3xl md:mb-12">
           <p className={cn('text-[0.6875rem] font-semibold uppercase tracking-[0.2em]', theme.kicker)}>
-            Ablauf
+            {isKlavier || isGeschaeft ? "So funktioniert's" : 'Ablauf'}
           </p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-foreground md:text-3xl md:leading-tight">
             {heading}
@@ -173,7 +286,11 @@ export default function ServiceStepsSection({
                 <div className="mt-6">
                   <Button asChild variant="cta" className="group h-11 px-5 text-sm font-semibold tracking-tight">
                     <Link href={ctaHref}>
-                      Jetzt Offerten vergleichen
+                      {isKlavier
+                        ? 'Anfrage starten – gratis Offerten'
+                        : isGeschaeft
+                          ? 'Geschäftsumzug-Offerten anfragen'
+                          : 'Jetzt Offerten vergleichen'}
                       <ArrowRight
                         className="ml-2 h-4 w-4 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
                         aria-hidden

@@ -9,8 +9,10 @@ import { locations } from '@/data/locations'
 import { getPartnersForCategoryLocation } from '@/lib/partners/forLocation'
 import CategoryCityPageClient from '@/components/pages/category/CategoryCityPageClient'
 import CategoryServicePageClient from '@/components/pages/category/CategoryServicePageClient'
+import { buildKlaviertransportPriceSchema } from '@/lib/klaviertransportPricing'
 import { buildCityFaqJsonLd, getCityFaqsForCategory } from '@/lib/cityPageFaqs'
 import type { CityFaqItem } from '@/lib/cityPageFaqs'
+import { getServiceFaqs } from '@/lib/serviceFaqs'
 import {
   getServiceCityLandingMetadata,
   getServiceLandingMetadata,
@@ -236,6 +238,9 @@ export default async function CategoryCatchAllServerPage({
   const svcMeta = getServiceCityLandingMetadata(cat.slug, serviceSeg, loc)
   if (!svcMeta) notFound()
 
+  const isKlaviertransportCity = cat.slug === 'umzugsfirma' && svc.id === 'klaviertransport'
+  const isGeschaeftsumzugCity = cat.slug === 'umzugsfirma' && svc.id === 'geschaeftsumzug'
+
   const [partners, platformReviewStats, statsExtras] = await Promise.all([
     getPartnersForCategoryLocation(cat.slug, {
       name: loc.name,
@@ -243,14 +248,38 @@ export default async function CategoryCatchAllServerPage({
       canton: loc.canton,
     }),
     getPlatformReviewsTableStats(),
-    loadUmzugStatsExtras(cat.slug, loc.slug, loc.name),
+    /* Generic Umzugsstatistik (BFS Privat-Migrationen) passt thematisch
+       weder zum Klaviertransport noch zum Geschäftsumzug. */
+    isKlaviertransportCity || isGeschaeftsumzugCity
+      ? Promise.resolve(null)
+      : loadUmzugStatsExtras(cat.slug, loc.slug, loc.name),
   ])
   const st = SERVICE_TITLE[cat.slug] || 'Anbieter'
-  const baseFaqItems = getCityFaqsForCategory(cat.slug, loc.name)
+
+  /**
+   * Klaviertransport- und Geschäftsumzug-Stadtseiten erhalten eine dedizierte,
+   * service­spezifische FAQ-Liste (mit Stadt-Personalisierung) statt der
+   * generischen Umzug-City-FAQs. Andere Services bleiben unverändert.
+   */
+  const baseFaqItems =
+    isKlaviertransportCity || isGeschaeftsumzugCity
+      ? getServiceFaqs(cat.slug, svc.id, svc.label, loc.name).map<CityFaqItem>((f) => ({
+          question: f.question,
+          blocks: [{ type: 'paragraph', text: f.answer }],
+          plainAnswer: f.answer,
+        }))
+      : getCityFaqsForCategory(cat.slug, loc.name)
   const faqItems = statsExtras
     ? [...statsExtras.statFaqs, ...baseFaqItems]
     : baseFaqItems
   const faqSchema = buildCityFaqJsonLd(faqItems)
+  const klavierPriceSchema = isKlaviertransportCity
+    ? buildKlaviertransportPriceSchema({
+        cityName: loc.name,
+        canton: loc.canton,
+        citySlug: loc.slug,
+      })
+    : null
   const pathSeg = getServicePathSegment(svc)
 
   const itemListSchema =
@@ -303,6 +332,12 @@ export default async function CategoryCatchAllServerPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      ) : null}
+      {klavierPriceSchema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(klavierPriceSchema) }}
         />
       ) : null}
       <CategoryCityPageClient

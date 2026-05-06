@@ -6,10 +6,8 @@
 /** Reihenfolge bewusst anders als früher: frischere Standard-Motive zuerst. */
 const UMZUG_FALLBACK_POOL = [
   '/fotos/umzugstag.webp',
-  '/fotos/offerten.webp',
   '/fotos/umzug-reinigung-maler-offerten.webp',
   '/image/4e73e4b7-ab5b-4e20-9412-394b5b526cf0.webp',
-  '/fotos/182259.webp',
   '/image/c6bed9bf-0e88-4eaf-b57f-0938374cdb53.webp',
   '/fotos/5c399fc1.webp',
 ] as const
@@ -39,24 +37,45 @@ const PRIVATUMZUG_CITY_POOL = [
 /** Umzug: known slugs → concrete assets (override hash for important SEO cities). */
 const UMZUG_CITY_IMAGE: Record<string, string> = {
   zuerich: '/image/umzugsservice-Schweiz/umzugsofferten-zuerich-1.png',
-  carouge: '/fotos/offerten.webp',
-  genf: '/fotos/offerten.webp',
   bern: '/fotos/umzugstag.webp',
   basel: '/fotos/umzug-reinigung-maler-offerten.webp',
-  lausanne: '/fotos/182259.webp',
 }
 
 const REINIGUNG_POOL = [
-  '/fotos/offerten.webp',
   '/fotos/umzug-reinigung-maler-offerten.webp',
   '/image/4e73e4b7-ab5b-4e20-9412-394b5b526cf0.webp',
 ] as const
 
 const MALER_POOL = [
   '/image/malerarbeit.webp',
-  '/fotos/offerten.webp',
   '/fotos/umzug-reinigung-maler-offerten.webp',
 ] as const
+
+/**
+ * Klaviertransport (umzugsfirma/klaviertransport/{city}): ausschliesslich
+ * piano-/flügel-spezifische Aufnahmen. Das Hero soll auf einen Blick zeigen,
+ * dass es sich um Klaviertransport handelt – keine generischen Umzugsbilder.
+ *
+ * Die Auswahl rotiert deterministisch pro Stadt-Slug, damit benachbarte
+ * SEO-Seiten nicht identisch wirken.
+ */
+const KLAVIERTRANSPORT_CITY_POOL = [
+  '/bilder/klaviertransport.avif',
+  '/umzug/e4c3a8de.webp',
+] as const
+
+/**
+ * Geschäftsumzug (umzugsfirma/geschaeftsumzug/{city}): ausschliesslich
+ * professionelle Büro-/Firmenumzug-Motive. Auf einen Blick muss erkennbar
+ * sein, dass es sich um einen B2B-Umzug (Büro, Server, Aktenarchiv) handelt
+ * und nicht um einen Privatumzug.
+ *
+ * Bewusste Vorgabe (User-Wunsch): Für ALLE Geschäftsumzug-Stadtseiten wird
+ * exklusiv `firmenumzug.webp` als Hero-Bild verwendet. Die Differenzierung
+ * der Stadtseiten erfolgt rein über die einzigartigen Hero-Headlines, lokalen
+ * Texte (geschaeftsumzugCityContent / Kanton-Fallback) und FAQs.
+ */
+const GESCHAEFTSUMZUG_CITY_POOL = ['/bilder/firmenumzug.webp'] as const
 
 function slugChecksum(slug: string): number {
   let h = 0
@@ -74,6 +93,16 @@ export function getCityHeroImageSrc(
   const slug = locationSlug.toLowerCase()
 
   if (categorySlug === 'umzugsfirma') {
+    if (serviceId === 'klaviertransport') {
+      const idx =
+        slugChecksum(`hero|klavier|${slug}`) % KLAVIERTRANSPORT_CITY_POOL.length
+      return KLAVIERTRANSPORT_CITY_POOL[idx]
+    }
+    if (serviceId === 'geschaeftsumzug') {
+      const idx =
+        slugChecksum(`hero|geschaeft|${slug}`) % GESCHAEFTSUMZUG_CITY_POOL.length
+      return GESCHAEFTSUMZUG_CITY_POOL[idx]
+    }
     if (serviceId === 'privatumzug') {
       const idx = slugChecksum(`hero|privatumzug|${slug}`) % PRIVATUMZUG_CITY_POOL.length
       return PRIVATUMZUG_CITY_POOL[idx]

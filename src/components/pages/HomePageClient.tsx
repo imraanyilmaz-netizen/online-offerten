@@ -693,7 +693,7 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                   </div>
                   <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200/90 shadow-md ring-1 ring-slate-900/[0.03] dark:border-border dark:ring-white/10">
                     <NextImage
-                      src="/fotos/182259.webp"
+                      src="/fotos/5c399fc1.webp"
                       alt="Nützliche Helfer für Ihren Umzug und Reinigung"
                       width={500}
                       height={300}

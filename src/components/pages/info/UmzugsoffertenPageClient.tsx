@@ -494,7 +494,7 @@ const UmzugsoffertenPageClient: React.FC<UmzugsoffertenPageClientProps> = ({ ini
             <div className="relative md:col-span-2">
               <div className="relative w-full h-full min-h-[300px] md:min-h-[400px] flex items-center justify-center">
                 <NextImage
-                  src="/fotos/offerten.webp"
+                  src="/fotos/umzug-reinigung-maler-offerten.webp"
                   alt="Umzugsofferten vergleichen Schweiz"
                   width={600}
                   height={400}

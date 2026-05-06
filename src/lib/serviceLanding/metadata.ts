@@ -183,6 +183,110 @@ export function getServiceLandingMetadata(
  *  - Keine Keyword-Duplikation (früher war `${svc.label}` zwei Mal in der Description)
  *  - Description bleibt unter 160 Zeichen (Google schneidet sonst ab)
  */
+/**
+ * Klaviertransport-Stadtseiten erhalten dedizierte, jeweils einzigartige
+ * Title-/Description-Varianten (deterministisch aus dem Slug). So vermeiden
+ * wir copy-paste-Eindrücke und decken Long-Tail-Keywords ab:
+ *  - klaviertransport kosten schweiz
+ *  - klaviertransport aargau
+ *  - klaviertransport luzern
+ *  - flügeltransport
+ *  - klaviertransport [stadt] preise
+ */
+function klavierSeed(slug: string): number {
+  let h = 0
+  for (let i = 0; i < slug.length; i++) h = (h + slug.charCodeAt(i) * (i + 5)) % 1031
+  return h
+}
+
+function klaviertransportCityMetadata(location: {
+  name: string
+  slug: string
+  canton: string
+}): { title: string; description: string } {
+  /*
+   * Title-Längen-Budget:
+   *  - Google zeigt ~50–60 Zeichen vor Ellipse (~580 px).
+   *  - Wir kalkulieren mit dem längsten Stadt-Namen "La Chaux-de-Fonds" (17 Z.)
+   *    bzw. "Yverdon-les-Bains" (17 Z.). Die Varianten liegen damit zwischen
+   *    ~46 (Zürich) und ~60 Zeichen (CH-de-F.) – jede passt komplett in die SERP.
+   *  - Keyword "Klaviertransport" steht möglichst vorne, wo Google am meisten
+   *    Gewicht für Ranking und CTR vergibt.
+   */
+  const c = location.name
+  const k = location.canton
+  const titleVariants = [
+    `Klaviertransport ${c} – Offerten vergleichen`,
+    `Klaviertransport ${c} (${k}) – Preise & Offerten`,
+    `Klaviertransport ${c}: Klavier & Flügel zügeln`,
+    `Pianotransport ${c} – Klaviertransport-Anbieter`,
+    `Klaviertransport ${c} Preise – Offerten gratis`,
+  ]
+
+  /*
+   * Description-Längen-Budget: ~150–160 Zeichen, Google schneidet danach ab.
+   * Mit ${c} = 17 Z. liegen die Varianten zwischen ~125 und ~150 Zeichen.
+   * Keine Soft-Hyphens (­) in Metadaten – Google zählt sie als Zeichen und
+   * sie können in Snippets als sichtbare Bindestriche erscheinen.
+   */
+  const descVariants = [
+    `Klaviertransport ${c}: Klavier & Flügel zügeln, Klaviertransport-Offerten vergleichen. Pianotransport Schweiz – jetzt gratis Offerten einholen.`,
+    `Klaviertransport ${c} Preise auf einen Blick. Klavier- und Flügeltransport im ${k} – Klaviertransport-Anbieter vergleichen und sparen.`,
+    `Klaviertransport in ${c} (${k}): Klaviertransport Preisvergleich Schweiz für Klavier (Upright) und Flügel (Stutz-/Konzertflügel).`,
+    `Klavier & Flügel zügeln Preise ${c}: Pianotransport Schweiz, Klaviertransport-Anbieter vergleichen, gratis Klaviertransport-Offerten.`,
+    `Professioneller Klaviertransport in ${c}: Klavier & Flügel zügeln, Klaviertransport-Offerten vergleichen, gratis Anfrage.`,
+  ]
+  const seed = klavierSeed(location.slug)
+  return {
+    title: titleVariants[seed % titleVariants.length],
+    description: descVariants[(seed + 2) % descVariants.length],
+  }
+}
+
+/**
+ * Geschäftsumzug-Stadtseiten erhalten dedizierte, einzigartige Title-/
+ * Description-Varianten (deterministisch aus dem Slug).
+ *  - Title-Limit ≤60 Zeichen, getestet mit "La Chaux-de-Fonds" (17 Z.).
+ *  - Keywords: Geschäftsumzug, Firmenumzug, Büroumzug, Geschäftsumzug Schweiz.
+ */
+function geschaeftsumzugSeed(slug: string): number {
+  let h = 0
+  for (let i = 0; i < slug.length; i++) h = (h + slug.charCodeAt(i) * (i + 11)) % 1049
+  return h
+}
+
+function geschaeftsumzugCityMetadata(location: {
+  name: string
+  slug: string
+  canton: string
+}): { title: string; description: string } {
+  const c = location.name
+  const k = location.canton
+  /* Title ≤ 60 Zeichen auch bei "La Chaux-de-Fonds" (17 Z.):
+   *   "Geschäftsumzug " (15) + 17 + Suffix max 28 = 60.
+   *   "Firmenumzug "    (12) + 17 + Suffix max 31 = 60. */
+  const titleVariants = [
+    `Geschäftsumzug ${c} – Offerten vergleichen`,
+    `Geschäftsumzug ${c} (${k}) – Preise & Offerten`,
+    `Firmenumzug ${c}: Büro, Ladenlokal, Werkstatt`,
+    `Büroumzug ${c} – Geschäftsumzug-Anbieter`,
+    `Geschäftsumzug ${c}: Firmenumzug-Offerten`,
+  ]
+
+  const descVariants = [
+    `Geschäftsumzug ${c}: Büroumzug, Firmenumzug, Ladenlokal & Werkstatt. Geschäftsumzug-Offerten vergleichen – jetzt gratis Offerten einholen.`,
+    `Geschäftsumzug ${c} Preise auf einen Blick. Büroumzug und Firmenumzug im ${k} – Geschäftsumzug-Anbieter vergleichen und sparen.`,
+    `Firmenumzug in ${c} (${k}): Geschäftsumzug-Anbieter mit Wochenend-Etappen, IT-Slot und klarem Konzept – kostenlose Offerten vergleichen.`,
+    `Büroumzug ${c}: Geschäftsumzug Schweiz, Firmenumzug-Anbieter vergleichen, gratis Geschäftsumzug-Offerten – kostenlos und unverbindlich.`,
+    `Professioneller Geschäftsumzug in ${c}: Büroumzug, Firmenumzug, Ladenlokal-Umzug, Werkstatt – jetzt Offerten vergleichen.`,
+  ]
+  const seed = geschaeftsumzugSeed(location.slug)
+  return {
+    title: titleVariants[seed % titleVariants.length],
+    description: descVariants[(seed + 2) % descVariants.length],
+  }
+}
+
 export function getServiceCityLandingMetadata(
   categorySlug: string,
   serviceUrlSegment: string,
@@ -192,6 +296,24 @@ export function getServiceCityLandingMetadata(
   if (!svc) return null
 
   const pathSeg = getServicePathSegment(svc)
+
+  if (categorySlug === 'umzugsfirma' && svc.id === 'klaviertransport') {
+    const { title, description } = klaviertransportCityMetadata(location)
+    return {
+      title,
+      description,
+      canonical: `${SITE}/${categorySlug}/${pathSeg}/${location.slug}`,
+    }
+  }
+
+  if (categorySlug === 'umzugsfirma' && svc.id === 'geschaeftsumzug') {
+    const { title, description } = geschaeftsumzugCityMetadata(location)
+    return {
+      title,
+      description,
+      canonical: `${SITE}/${categorySlug}/${pathSeg}/${location.slug}`,
+    }
+  }
 
   const branche = CATEGORY_BRANCHE_SINGULAR[categorySlug] || 'Anbieter'
   const branchePlural = CATEGORY_LABEL_PLURAL[categorySlug] || 'Anbieter'

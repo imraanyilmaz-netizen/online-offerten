@@ -51,29 +51,29 @@ const UMZUG_FAQS: FaqDict = {
   ],
   geschaeftsumzug: [
     {
-      question: 'Was kostet ein Geschäftsumzug in der Schweiz?',
+      question: 'Wie minimiere ich den Betriebsausfall (Downtime) beim Geschäftsumzug?',
       answer:
-        'Ein Büroumzug wird individuell offeriert: Büromaterial, IT-Infrastruktur, Aktenarchiv und Mobiliar beeinflussen den Preis. Als Orientierung: kleine Büros ab CHF 1\u2019500, mittlere Firmen CHF 3\u2019000–8\u2019000, grössere Projekte werden nach Besichtigung kalkuliert.',
+        'Den Betriebsausfall reduzieren Geschäftsumzug-Spezialisten typischerweise mit drei Hebeln: (1) Wochenend-Schichten Freitag–Sonntag, damit Mitarbeitende am Montag am neuen Standort starten; (2) Nacht-Etappen oder mehrstufige Migration für kritische Abteilungen; (3) Beschriftungssystem (Etagen, Räume, Arbeitsplätze) plus festem Ansprechpartner pro Stockwerk. Online-Offerten.ch ist ein B2B-Vergleichsportal und führt den Geschäftsumzug nicht selbst durch – nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von auf Geschäftsumzüge spezialisierten Partnern, die ihren Downtime-Plan offen darlegen.',
     },
     {
-      question: 'Wie minimiere ich den Betriebsausfall beim Geschäftsumzug?',
+      question: 'Wie laufen Server-Migration und IT-Umzug beim Geschäftsumzug ab?',
       answer:
-        'Planen Sie den Umzug über ein Wochenende oder in mehreren Etappen. Ein Projektplan mit IT-Abbau/-Aufbau, Beschriftungssystem und klarer Kommunikation ans Team reduziert Ausfallzeiten auf ein Minimum.',
+        'Beim IT-/Server-Umzug planen erfahrene Firmenumzug-Anbieter einen klaren Cut-Over: Backup vor Abbau, antistatische Verpackung von Servern und Switches, Transport in temperaturkontrollierten Fahrzeugen, Wieder­aufbau im neuen Serverraum mit dokumentierter Verkabelung und IT-Test. Die Umsetzung erfolgt meist über das Wochenende oder in der Nacht, damit produktive Systeme am Werktag wieder online sind. Welche IT-Leistungen ein Geschäftsumzug-Partner selbst erbringt und welche der hauseigene IT-Dienstleister übernimmt, klärt die Offerte.',
     },
     {
-      question: 'Ab wann sollte ein Unternehmensumzug geplant werden?',
+      question: 'Sind Wochenend- und Nachtschichten beim Firmenumzug üblich?',
       answer:
-        'Für KMU empfehlen wir 2–3 Monate Vorlauf. Grössere Firmen mit 20+ Arbeitsplätzen oder sensibler IT-Infrastruktur profitieren von 4–6 Monaten Planung inklusive Raumplanung und Umzugskonzept.',
+        'Ja – bei Büroumzügen, Ladenlokal-Umzügen und Geschäfts­umzügen mit IT- oder Produktions­anlagen sind Wochenend-Schichten (Fr-So) und Nacht-Etappen Standard, weil tagsüber der Betrieb läuft. Geschäfts­umzug-Spezialisten kalkulieren die Aufschläge transparent in der Offerte und koordinieren Liefer-Slots, Halteverbots-Bewilligungen und Anlieferzonen passend zum Wochenend- oder Nacht-Termin. Vergleichen Sie über Online-Offerten.ch bis zu 5 B2B-Offerten und wählen den Partner mit dem besten Schicht-Konzept.',
     },
     {
-      question: 'Welche Zusatzleistungen sind bei Geschäftsumzügen üblich?',
+      question: 'Welche B2B-Zusatzleistungen sind bei einem Büroumzug typisch?',
       answer:
-        'Abbau/Aufbau von Arbeitsplätzen und Serverracks, Spezialtransporte (Tresore, Laborgeräte), Aktenvernichtung nach DSG, Entsorgung alter Möbel sowie End- und Baureinigung der alten Räume.',
+        'B2B-spezifische Zusatz­leistungen beim Geschäfts­umzug umfassen: Abbau und Aufbau von Arbeitsplätzen, Server-Racks und Konferenz­räumen; Spezial­transporte für Tresore, Laborgeräte und Maschinen; revisions­sichere Aktenvernichtung nach DSG; Entsorgung von Altmobiliar; End-/Baureinigung mit Abnahme­begleitung der gewerblichen Mieträume; Zollabwicklung bei grenzüberschreitenden Firmen­umzügen. Welche Leistungen ein Anbieter wirklich übernimmt und zu welchem Preis, steht in der jeweiligen Geschäftsumzug-Offerte.',
     },
     {
-      question: 'Wie vergleiche ich Geschäftsumzug-Offerten richtig?',
+      question: 'Wie vergleiche ich B2B-Geschäftsumzug-Offerten richtig?',
       answer:
-        'Achten Sie auf ein gleiches Leistungs-Scope (gleicher Umfang, gleiche Zusatzleistungen), Haftpflichtdeckung, Referenzen aus Ihrer Branche und einen klaren Zeitplan mit Meilensteinen.',
+        'Beim B2B-Geschäftsumzug-Preisvergleich zählt mehr als der reine Preis: Achten Sie auf identisches Leistungs-Scope, Betriebs- und Transport­haftpflicht mit angemessener Deckungssumme, Referenzen aus Ihrer Branche (Pharma, Banking, KMU, Retail), einen klaren Zeitplan mit Meilensteinen und einen festen Projekt­leiter. Online-Offerten.ch ist ein B2B-Vergleichsportal: Sie erhalten nach einer einzigen Anfrage bis zu 5 Offerten von auf Geschäftsumzüge spezialisierten Partnern und entscheiden auf Basis von Konzept, Zeitplan und Preis – kostenlos und unverbindlich.',
     },
   ],
   auslandumzug: [
@@ -105,29 +105,29 @@ const UMZUG_FAQS: FaqDict = {
   ],
   klaviertransport: [
     {
-      question: 'Was kostet ein Klaviertransport in der Schweiz?',
+      question: 'Wie viel kostet ein Klaviertransport in der Schweiz?',
       answer:
-        'Ein normaler Klaviertransport innerhalb der gleichen Stadt kostet CHF 350–700. Flügel, Treppen oder grössere Distanzen können den Preis auf CHF 800–1\u2019500 heben. Ein Klavierlift ist bei engen Treppenhäusern oft nötig.',
+        'Ein Klaviertransport innerhalb derselben Stadt kostet typischerweise CHF 350–700. Flügeltransport, Treppen ab dem 2. OG oder grössere Distanzen können den Klaviertransport-Preis auf CHF 800–1\u2019500 heben. Klaviertransport-Kosten in der Schweiz hängen von Instrumententyp (Klavier oder Flügel), Stockwerk, Treppenbreite, Liftbedarf und Distanz ab. Wer Klavier­transport-Offerten vergleichen möchte, holt am besten Angebote mehrerer Klaviertransport-Anbieter ein – so wird der konkrete Klaviertransport-Preis schnell sichtbar, in Aargau, Luzern, Zürich oder Bern.',
     },
     {
-      question: 'Wann ist ein Klavierlift oder Möbellift erforderlich?',
+      question: 'Transportieren Klaviertransport-Anbieter auch Flügel oder nur Klaviere?',
       answer:
-        'Sobald ein Flügel oder Klavier nicht durchs Treppenhaus passt oder ab 3.–4. Obergeschoss wird ein Aussenlift empfohlen. Die Firma prüft dies bei der Besichtigung oder per Foto.',
+        'Beide. Spezialisierte Klaviertransport-Firmen führen sowohl klassischen Klaviertransport (Upright) als auch Flügeltransport (Stutzflügel, Konzertflügel) durch. Bei Flügeln werden in der Regel Beine und Pedalwerk demontiert, der Flügel wird auf ein Spezial­gestell gelegt und am Zielort wieder fachgerecht montiert. Welche genaue Leistungen die jeweilige Klaviertransport-Firma anbietet (z. B. Demontage, Polsterung, Schutzhaube), steht in der individuellen Klaviertransport-Offerte.',
     },
     {
-      question: 'Muss ein Klavier nach dem Transport neu gestimmt werden?',
+      question: 'Muss das Klavier nach dem Transport gestimmt werden?',
       answer:
-        'Ja – durch Temperatur- und Luftfeuchtigkeitswechsel verstimmt sich das Instrument meist. Wir empfehlen die Stimmung 2–4 Wochen nach dem Umzug, damit sich das Holz akklimatisieren kann.',
+        'Ja. Durch Temperatur- und Luftfeuchtigkeits­wechsel verstimmt sich ein Klavier oder Flügel nach einem Klaviertransport praktisch immer. Klavierbauer empfehlen, das Instrument 2–4 Wochen nach dem Klavier­transport stimmen zu lassen, damit sich Holz und Saiten am neuen Standort akklimatisieren können. Manche Klaviertransport-Anbieter führen die Stimmung selbst durch oder bieten sie als Zusatzleistung an – das geht aus der jeweiligen Klaviertransport-Offerte hervor.',
     },
     {
-      question: 'Welche Versicherung gilt bei einem Klaviertransport?',
+      question: 'Wann ist beim Klaviertransport ein Möbellift oder Aussenkran nötig?',
       answer:
-        'Eine Spezialtransport-Versicherung zum Zeitwert oder Wiederbeschaffungswert ist Standard. Prüfen Sie die Deckungssumme und Selbstbehalt. Seriöse Anbieter haben Erfahrung mit Yamaha, Steinway & Co. und dokumentieren den Zustand vor dem Transport.',
+        'Sobald ein Klavier oder Flügel nicht durchs Treppenhaus passt oder ab dem 3.–4. Obergeschoss wird beim Klaviertransport häufig ein Möbellift oder Aussenkran eingesetzt. Die Klaviertransport-Anbieter prüfen das auf Basis Ihrer Angaben oder per Foto und kalkulieren die Kosten transparent in die Klavier­transport-Offerte ein – typisch in engen Altbau-Treppenhäusern in Klaviertransport Bern, Aargau, Luzern oder Zürich.',
     },
     {
-      question: 'Worauf sollte ich bei der Wahl einer Klaviertransport-Firma achten?',
+      question: 'Worauf sollte ich beim Klaviertransport-Anbieter achten?',
       answer:
-        'Spezialausrüstung (Klavierrollen, Gurte, Polsterung), Erfahrung mit Flügeltransport, positive Rezensionen und klare Versicherung. Günstigster Preis ist beim Klavier selten die beste Wahl.',
+        'Wichtig ist Erfahrung mit Klavier- und Flügeltransport (Marken wie Yamaha, Steinway, Kawai, Bechstein, Schimmel oder Bösendorfer), passendes Equipment für Klaviertransport (Spezialgurte, Klavierroller, Polsterung, ggf. Möbellift) sowie eine klare Klaviertransport-Offerte mit Leistungs- und Preisangaben. Lassen Sie sich Versicherungs­umfang, Selbstbehalt und Zustands­dokumentation explizit bestätigen – das macht den Klaviertransport-Preisvergleich Schweiz fair.',
     },
   ],
   kleintransport: [

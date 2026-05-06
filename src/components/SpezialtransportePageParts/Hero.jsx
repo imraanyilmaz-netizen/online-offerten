@@ -6,7 +6,7 @@ import { ArrowRight, CheckCircle, ShieldCheck, TrendingUp, ChevronRight, MapPin,
 import Image from 'next/image';
 
 const Hero = () => {
-  const imageUrl = "/image/b87025c3-7292-44e6-8a2c-7c1105b554bc.webp";
+  const imageUrl = "/bilder/klaviertransport.avif";
 
   return (
     <section

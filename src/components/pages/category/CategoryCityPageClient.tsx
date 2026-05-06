@@ -54,12 +54,14 @@ import PartnerCard from '@/components/PartnerSearch/PartnerCard'
 import CategoryCityFaqSection from '@/components/pages/category/CategoryCityFaqSection'
 import CategoryCitySpotlight from '@/components/pages/category/CategoryCitySpotlight'
 import ServiceStepsSection from '@/components/pages/category/ServiceStepsSection'
+import KlaviertransportPriceSection from '@/components/pages/category/KlaviertransportPriceSection'
 import { getCityFaqsForCategory, getCityPageLocalContent, type CityFaqItem } from '@/lib/cityPageFaqs'
 import { getCityHeroImageSrc } from '@/lib/cityHeroImage'
+import { KLAVIERTRANSPORT_CITY_CONTENT } from '@/data/klaviertransportCityContent'
+import { GESCHAEFTSUMZUG_CITY_CONTENT } from '@/data/geschaeftsumzugCityContent'
 import { getCantonPeerLocations } from '@/lib/cityPagePartnerStats'
 import type { PlatformReviewsTableStats } from '@/lib/reviews/platformReviewStats'
 import CityMigrationAnalysisCard from '@/components/locations/CityMigrationAnalysisCard'
-import CityServiceAreaMap from '@/components/locations/CityServiceAreaMap'
 import type { CityMigrationAnalysis } from '@/lib/stats/migrationStats'
 
 const MovingChecklistSection = dynamic(
@@ -167,8 +169,17 @@ const CATEGORY_INTRO: Record<string, string> = {
 function heroIntroForPage(
   categorySlug: string,
   isServiceCityPage: boolean,
-  serviceLabel?: string
+  serviceLabel?: string,
+  serviceId?: string,
+  locationName?: string
 ): string {
+  if (isServiceCityPage && serviceId === 'klaviertransport' && locationName) {
+    return `Professioneller Klaviertransport in ${locationName} und Umgebung – sicher, diskret und fachgerecht. Klaviertransport Offerten vergleichen in ${locationName}: Klavier & Flügel zügeln, Pianotransport Schweiz mit erfahrenen Spezialisten. Eine Anfrage, bis zu 5 Angebote – kostenlos und unverbindlich.`
+  }
+
+  if (isServiceCityPage && serviceId === 'geschaeftsumzug' && locationName) {
+    return `Geschäftsumzug ${locationName}: Offerten für Firmenumzug & Büroumzug vergleichen. Online-Offerten.ch ist Ihr B2B-Vergleichsportal – wir führen den Geschäftsumzug nicht selbst durch, sondern bringen Sie mit auf Geschäftsumzüge spezialisierten Partnern zusammen. Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von auf Geschäftsumzüge spezialisierten Partnern – kostenlos und unverbindlich.`
+  }
   if (isServiceCityPage && serviceLabel) {
     if (categorySlug === 'reinigungsfirma') {
       return `Zuverlässige Anbieter für ${serviceLabel} finden und Offerten aus der Region vergleichen – kostenlos und unverbindlich.`
@@ -199,9 +210,25 @@ function categorySoftSurface(categorySlug: string): string {
 function partnerNetworkAsideCopy(
   categorySlug: string,
   locationName: string,
-  serviceTitle: string
+  serviceTitle: string,
+  serviceId?: string
 ): { kicker: string; title: string; body: string } {
   const city = locationName
+  if (categorySlug === 'umzugsfirma' && serviceId === 'klaviertransport') {
+    return {
+      kicker: 'Klaviertransport-Anbieter',
+      title: `Klaviertransport ${city} – Klavier & Flügel zügeln`,
+      body: `Klavier- und Flügeltransport in ${city} und Umgebung mit Klaviertransport-Anbietern, die das Instrument als Spezialgut bewegen – von Upright über Stutzflügel bis zum Konzertflügel. Klaviertransport Preisvergleich Schweiz auf einen Blick: eine Anfrage, bis zu 5 Klaviertransport-Offerten zum Vergleichen.`,
+    }
+  }
+
+  if (categorySlug === 'umzugsfirma' && serviceId === 'geschaeftsumzug') {
+    return {
+      kicker: 'B2B-Vergleichsportal',
+      title: `Geschäftsumzug ${city} – Büro, Ladenlokal, Werkstatt`,
+      body: `Online-Offerten.ch ist ein B2B-Vergleichsportal für Geschäftsumzüge in ${city} und Umgebung – wir transportieren nicht selbst, sondern verbinden Sie mit Geschäftsumzug-Spezialisten, die IT-Server, Aktenarchive, Mobiliar und Spezialgüter als Projekt verstehen. Nach einer einzigen Anfrage erhalten Sie bis zu 5 Offerten von auf Geschäftsumzüge spezialisierten Partnern – kostenlos und unverbindlich.`,
+    }
+  }
   if (categorySlug === 'reinigungsfirma') {
     return {
       kicker: 'Reinigung in Ihrer Region',
@@ -281,23 +308,71 @@ export default function CategoryCityPageClient({
   migrationMeta?: CategoryCityMigrationMeta | null
 }) {
   const isServiceCityPage = Boolean(servicePathSegment && serviceLabel && serviceId)
-  const intro = heroIntroForPage(categorySlug, isServiceCityPage, serviceLabel)
+  const isKlaviertransportCity =
+    categorySlug === 'umzugsfirma' && serviceId === 'klaviertransport' && isServiceCityPage
+  const isGeschaeftsumzugCity =
+    categorySlug === 'umzugsfirma' && serviceId === 'geschaeftsumzug' && isServiceCityPage
+  const intro = heroIntroForPage(
+    categorySlug,
+    isServiceCityPage,
+    serviceLabel,
+    serviceId,
+    locationName
+  )
   const heroSrc = getCityHeroImageSrc(categorySlug, locationSlug, serviceId)
-  const heroAlt = isServiceCityPage
-    ? `${serviceLabel} in ${locationName} (Kanton ${canton}) – ${serviceTitle}`
-    : `${serviceTitle} in ${locationName} (Kanton ${canton}) – Offerten vergleichen`
-  const localContent = getCityPageLocalContent(categorySlug, locationName, canton)
+  const heroAlt = isKlaviertransportCity
+    ? `Flügel Tresor Klaviertransport in ${locationName} (Kanton ${canton})`
+    : isGeschaeftsumzugCity
+      ? `Geschäftsumzug in ${locationName} (Kanton ${canton}) – Büroumzug, Firmenumzug`
+      : isServiceCityPage
+        ? `${serviceLabel} in ${locationName} (Kanton ${canton}) – ${serviceTitle}`
+        : `${serviceTitle} in ${locationName} (Kanton ${canton}) – Offerten vergleichen`
+  const localContent = getCityPageLocalContent(categorySlug, locationName, canton, {
+    serviceId,
+    locationSlug,
+  })
   const faqItems =
     faqItemsProp && faqItemsProp.length > 0
       ? faqItemsProp
       : getCityFaqsForCategory(categorySlug, locationName)
   const partnerRegions = collectPartnerRegionsForCityPage(partners, canton)
+
+  /*
+   * Navigation-Titel wird service-spezifisch, sobald wir auf einer
+   * Spezial­transport-/Geschäftsumzug-Stadt­seite sind. Sonst würde die Liste
+   * Links zu generischen Umzugs­städten zeigen – das wäre Themenbruch und
+   * SEO-Verschwendung (Klaviertransport- bzw. Geschäftsumzug-Seiten sollen
+   * zu weiteren Klaviertransport- bzw. Geschäftsumzug-Seiten verlinken).
+   */
   const navTitle =
-    categorySlug === 'umzugsfirma'
-      ? 'Weitere Umzugsstandorte in der Schweiz'
-      : categorySlug === 'reinigungsfirma'
-        ? 'Weitere Reinigungs-Standorte in der Schweiz'
-        : 'Weitere Maler-Standorte in der Schweiz'
+    isServiceCityPage && serviceId === 'klaviertransport'
+      ? 'Weitere Klaviertransport-Standorte in der Schweiz'
+      : isServiceCityPage && serviceId === 'geschaeftsumzug'
+        ? 'Weitere Geschäftsumzug-Standorte in der Schweiz'
+        : categorySlug === 'umzugsfirma'
+          ? 'Weitere Umzugsstandorte in der Schweiz'
+          : categorySlug === 'reinigungsfirma'
+            ? 'Weitere Reinigungs-Standorte in der Schweiz'
+            : 'Weitere Maler-Standorte in der Schweiz'
+
+  /*
+   * Service-Slug + bevorzugte Stadt-Slugs für die Navigation.
+   * Klaviertransport: 30 Klaviertransport-Top-Städte zuerst.
+   * Geschäftsumzug:   30 Geschäftsumzug-Top-Städte zuerst.
+   */
+  const navServiceSlug =
+    isServiceCityPage && serviceId === 'klaviertransport'
+      ? 'klaviertransport'
+      : isServiceCityPage && serviceId === 'geschaeftsumzug'
+        ? 'geschaeftsumzug'
+        : undefined
+
+  const navPreferredSlugs =
+    isServiceCityPage && serviceId === 'klaviertransport'
+      ? Object.keys(KLAVIERTRANSPORT_CITY_CONTENT)
+      : isServiceCityPage && serviceId === 'geschaeftsumzug'
+        ? Object.keys(GESCHAEFTSUMZUG_CITY_CONTENT)
+        : undefined
 
   const primaryQuoteHref = buildQuoteHref(categorySlug, locationName, serviceId)
 
@@ -322,24 +397,45 @@ export default function CategoryCityPageClient({
     : `Leistungen in ${locationName} (${serviceTitle})`
 
   const accentGrad = categoryAccentGradient(categorySlug)
-  const partnerAside = partnerNetworkAsideCopy(categorySlug, locationName, serviceTitle)
+  const partnerAside = partnerNetworkAsideCopy(categorySlug, locationName, serviceTitle, serviceId)
   const locationSpotlight = getLocationCategorySpotlight(locationSlug, categorySlug)
 
-  const categoryLabelSingular =
-    categorySlug === 'umzugsfirma'
-      ? 'Umzugsfirma'
-      : categorySlug === 'reinigungsfirma'
-        ? 'Reinigungsfirma'
-        : categorySlug === 'malerfirma'
-          ? 'Malerfirma'
-          : serviceTitle
+  /*
+   * Klaviertransport- und Geschäftsumzug-Hero:
+   *  - Mobile: kompakt, Foto füllt den Rahmen via cover (kein leerer Streifen).
+   *  - Desktop (lg): Foto wird auf der rechten Hälfte mit `object-contain`
+   *    voll dargestellt (kein extremer Zoom mehr) und nach rechts ausgerichtet,
+   *    damit das Motiv neben dem Textpanel sichtbar bleibt.
+   *
+   * Hintergrund­farbe `bg-slate-100` füllt den Rest – das ergibt einen sauberen
+   * Studio-Look statt einem aufgeblasenen Detailausschnitt.
+   */
+  const useFullBleedRightHero = isKlaviertransportCity || isGeschaeftsumzugCity
+
+  const heroSectionClass = useFullBleedRightHero
+    ? 'relative isolate min-h-[min(78svh,580px)] overflow-hidden border-b border-slate-200/80 bg-slate-100 dark:border-border dark:bg-muted lg:min-h-[520px]'
+    : 'relative isolate min-h-[min(92svh,720px)] overflow-hidden border-b border-slate-200/80 bg-slate-100 dark:border-border dark:bg-muted lg:min-h-[560px]'
+
+  const heroImageClass = useFullBleedRightHero
+    ? 'object-cover object-center sm:object-cover sm:object-right lg:object-contain lg:object-right xl:object-right'
+    : 'object-cover object-[60%_center] sm:object-[68%_center] lg:object-[72%_center]'
+
+  /*
+   * Trust-Badge oben rechts liegt direkt auf dem Hero-Foto. Auf jeder
+   * Service-Stadt­seite (Klavier­transport, Geschäfts­umzug, Privatumzug,
+   * Auslandumzug, Reinigungs- und Maler-Services usw.) wechseln wir deshalb
+   * auf eine dunkle, opak­ere Karte mit weisser Typografie – damit der Text
+   * unabhängig vom Foto­hintergrund hochkontrastreich lesbar bleibt.
+   *
+   * Auf reinen Kategorie-Stadt­seiten (z. B. /umzugsfirma/zuerich) bleibt das
+   * helle Standard-Badge erhalten, damit dort keine optische Regression
+   * entsteht.
+   */
+  const useDarkHeroBadge = isServiceCityPage
 
   return (
     <div className="bg-gradient-to-b from-neutral-50 via-white to-slate-50/90 dark:from-background dark:via-background dark:to-muted/25">
-      <section
-        className="relative isolate min-h-[min(92svh,720px)] overflow-hidden border-b border-slate-200/80 bg-slate-100 dark:border-border dark:bg-muted lg:min-h-[560px]"
-        aria-label="Einleitung"
-      >
+      <section className={heroSectionClass} aria-label="Einleitung">
         <div className="absolute inset-0">
           <Image
             src={heroSrc}
@@ -348,7 +444,7 @@ export default function CategoryCityPageClient({
             preload
             fetchPriority="high"
             loading="eager"
-            className="object-cover object-[60%_center] sm:object-[68%_center] lg:object-[72%_center]"
+            className={heroImageClass}
             sizes="100vw"
             quality={85}
           />
@@ -362,16 +458,32 @@ export default function CategoryCityPageClient({
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-white/30 dark:from-slate-950/45 dark:to-background/35 lg:hidden"
           aria-hidden
         />
-        {/* Trust-style badge on photo */}
+        {/* Trust-style badge on photo.
+            Auf jeder Service-Stadt­seite (Klavier­transport, Geschäfts­umzug,
+            Privatumzug, Auslandumzug, Reinigungs- und Maler-Services usw.)
+            wechseln wir auf eine dunkle, opak­ere Karte mit weisser
+            Typografie – damit der Text unabhängig vom Foto­hintergrund
+            hochkontrastreich lesbar bleibt. Akzentfarbe für "Bis zu 40 %"
+            bleibt kategorie-treu (Umzug = emerald, Reinigung = sky, Maler =
+            violet) – nur in helleren Tönen für den Kontrast auf Dunkel.
+            Reine Kategorie-Stadt­seiten verwenden weiterhin das helle Standard-
+            Badge, damit dort keine optische Regression entsteht. */}
         <div className="pointer-events-none absolute right-3 top-20 z-20 max-w-[12rem] select-none sm:right-5 sm:top-24 sm:max-w-[13.25rem] md:right-8 md:top-28 lg:right-10 lg:top-[7.5rem] xl:right-14">
           <div
             className={cn(
-              'rounded-2xl border bg-white/93 px-3.5 py-3 shadow-[0_12px_40px_-8px_rgba(15,23,42,0.28)] backdrop-blur-md',
-              'ring-1 ring-slate-900/[0.07] dark:bg-card/92 dark:shadow-[0_12px_40px_-8px_rgba(0,0,0,0.45)] dark:ring-white/10',
-              categorySlug === 'reinigungsfirma' && 'border-sky-200/85 dark:border-sky-800/60',
-              categorySlug === 'malerfirma' && 'border-violet-200/85 dark:border-violet-800/60',
-              (categorySlug === 'umzugsfirma' ||
-                !['reinigungsfirma', 'malerfirma'].includes(categorySlug)) &&
+              'rounded-2xl border px-3.5 py-3 backdrop-blur-md',
+              useDarkHeroBadge
+                ? 'bg-slate-900/82 ring-1 ring-white/15 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.55)] dark:bg-slate-950/85 dark:ring-white/15 border-white/15'
+                : 'bg-white/93 ring-1 ring-slate-900/[0.07] shadow-[0_12px_40px_-8px_rgba(15,23,42,0.28)] dark:bg-card/92 dark:shadow-[0_12px_40px_-8px_rgba(0,0,0,0.45)] dark:ring-white/10',
+              !useDarkHeroBadge &&
+                categorySlug === 'reinigungsfirma' &&
+                'border-sky-200/85 dark:border-sky-800/60',
+              !useDarkHeroBadge &&
+                categorySlug === 'malerfirma' &&
+                'border-violet-200/85 dark:border-violet-800/60',
+              !useDarkHeroBadge &&
+                (categorySlug === 'umzugsfirma' ||
+                  !['reinigungsfirma', 'malerfirma'].includes(categorySlug)) &&
                 'border-emerald-200/85 dark:border-emerald-800/60'
             )}
           >
@@ -380,21 +492,42 @@ export default function CategoryCityPageClient({
                 <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
               ))}
             </div>
-            <p className="mt-2 text-[0.8125rem] font-bold leading-snug tracking-tight text-slate-900 dark:text-foreground">
-              {serviceTitle} {locationName}
+            <p
+              className={cn(
+                'mt-2 text-[0.8125rem] font-bold leading-snug tracking-tight',
+                useDarkHeroBadge ? 'text-white' : 'text-slate-900 dark:text-foreground'
+              )}
+            >
+              {isKlaviertransportCity
+                ? `Klaviertransport ${locationName}`
+                : isGeschaeftsumzugCity
+                  ? `Geschäftsumzug ${locationName}`
+                  : `${serviceTitle} ${locationName}`}
             </p>
             <p
               className={cn(
                 'mt-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.08em]',
-                categorySlug === 'reinigungsfirma' && 'text-sky-700 dark:text-sky-400',
-                categorySlug === 'malerfirma' && 'text-violet-700 dark:text-violet-400',
-                (categorySlug === 'umzugsfirma' ||
-                  !['reinigungsfirma', 'malerfirma'].includes(categorySlug)) && 'text-emerald-700 dark:text-emerald-400'
+                useDarkHeroBadge
+                  ? categorySlug === 'reinigungsfirma'
+                    ? 'text-sky-300'
+                    : categorySlug === 'malerfirma'
+                      ? 'text-violet-300'
+                      : 'text-emerald-300'
+                  : categorySlug === 'reinigungsfirma'
+                    ? 'text-sky-700 dark:text-sky-400'
+                    : categorySlug === 'malerfirma'
+                      ? 'text-violet-700 dark:text-violet-400'
+                      : 'text-emerald-700 dark:text-emerald-400'
               )}
             >
               Bis zu 40% sparen
             </p>
-            <p className="mt-1 text-[0.625rem] font-medium leading-snug text-slate-600 dark:text-foreground/80">
+            <p
+              className={cn(
+                'mt-1 text-[0.625rem] font-medium leading-snug',
+                useDarkHeroBadge ? 'text-white/85' : 'text-slate-600 dark:text-foreground/80'
+              )}
+            >
               geprüfte Anbieter · Kostenlos vergleichen
             </p>
           </div>
@@ -457,7 +590,13 @@ export default function CategoryCityPageClient({
                 <span className="text-slate-800 dark:text-foreground/95">Kanton {canton}</span>
               </p>
               <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 dark:text-foreground sm:text-4xl lg:text-[2.5rem] lg:leading-[1.12]">
-                {isServiceCityPage ? `${serviceLabel} ${locationName}` : `${serviceTitle} ${locationName}`}
+                {isKlaviertransportCity
+                  ? `Flügel Tresor Klaviertransport ${locationName}`
+                  : isGeschaeftsumzugCity
+                    ? `Geschäftsumzug ${locationName} – Büro, Ladenlokal, Werkstatt`
+                    : isServiceCityPage
+                      ? `${serviceLabel} ${locationName}`
+                      : `${serviceTitle} ${locationName}`}
               </h1>
             </div>
             <p className="max-w-xl text-base leading-relaxed text-slate-700 dark:text-foreground/92 sm:text-lg sm:leading-relaxed">
@@ -619,10 +758,21 @@ export default function CategoryCityPageClient({
 
       <ServiceStepsSection
         categorySlug={categorySlug}
+        serviceId={serviceId}
         serviceLabel={isServiceCityPage ? serviceLabel : undefined}
         locationName={locationName}
         ctaHref={primaryQuoteHref}
       />
+
+      {isKlaviertransportCity ? (
+        <KlaviertransportPriceSection
+          cityName={locationName}
+          citySlug={locationSlug}
+          canton={canton}
+          cantonName={cantonNameFull}
+          ctaHref={primaryQuoteHref}
+        />
+      ) : null}
 
       {/* === Partners (Hero altına taşındı — kullanıcı önce sosyal kanıtı görsün) === */}
       {partners.length > 0 ? (
@@ -713,8 +863,11 @@ export default function CategoryCityPageClient({
         </section>
       )}
 
-      {/* === Interaktive Checklist (engagement) === */}
-      {categorySlug === 'umzugsfirma' ? (
+      {/* === Interaktive Checklist (engagement) ===
+          Klaviertransport-Seiten haben einen eigenen, instrument­spezifischen
+          Ablauf (Steps + Preistabelle) – die generische Umzugscheckliste ist
+          dort bewusst ausgeblendet. */}
+      {categorySlug === 'umzugsfirma' && !isKlaviertransportCity && !isGeschaeftsumzugCity ? (
         <MovingChecklistSection
           citySlug={locationSlug}
           cityName={locationName}
@@ -1106,17 +1259,15 @@ export default function CategoryCityPageClient({
         </section>
       ) : null}
 
-      {/* === Lokales Einsatzgebiet (Karte) === */}
-      <CityServiceAreaMap
-        cityName={locationName}
-        cantonName={cantonNameFull}
-        cantonCode={canton}
-        categoryLabel={categoryLabelSingular}
-        serviceLabel={isServiceCityPage ? serviceLabel : undefined}
-      />
-
-      {/* === Umzugs-Statistik / Daten-Analyse — direkt vor der FAQ === */}
-      {categorySlug === 'umzugsfirma' && migrationAnalysis && migrationMeta ? (
+      {/* === Umzugs-Statistik / Daten-Analyse — direkt vor der FAQ ===
+          Auf Klavier­transport- und Geschäftsumzug-Seiten wirkt eine
+          generische Zu-/Wegzugs-Statistik (Privat-Umzüge) themenfremd,
+          daher ausgeblendet. */}
+      {categorySlug === 'umzugsfirma' &&
+      !isKlaviertransportCity &&
+      !isGeschaeftsumzugCity &&
+      migrationAnalysis &&
+      migrationMeta ? (
         <div id="migration-analyse">
           <CityMigrationAnalysisCard
             analysis={migrationAnalysis}
@@ -1143,9 +1294,15 @@ export default function CategoryCityPageClient({
           allLocations={locations}
           currentCity={locationName}
           categoryPath={categorySlug}
+          serviceSlug={navServiceSlug}
+          preferredSlugs={navPreferredSlugs}
           title={navTitle}
           prioritizeCanton={canton}
-          maxItems={12}
+          maxItems={
+            navServiceSlug === 'klaviertransport' || navServiceSlug === 'geschaeftsumzug'
+              ? 18
+              : 12
+          }
           showAllStandorteLink
         />
       </div>

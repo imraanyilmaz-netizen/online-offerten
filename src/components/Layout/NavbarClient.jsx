@@ -145,7 +145,7 @@ export default function NavbarClient({ children: logoSlot }) {
       title: 'Kostenlos vergleichen',
       subtitle: 'Eine Anfrage — passende Anbieter — unverbindliche Offerten.',
       cta: 'Jetzt Offerten',
-      imageSrc: '/fotos/offerten.webp',
+      imageSrc: '/fotos/umzug-reinigung-maler-offerten.webp',
       imageAlt: 'Offerten für Umzug und Reinigung vergleichen',
     },
   }
