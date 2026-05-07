@@ -1,11 +1,14 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 // framer-motion removed - CSS for better INP
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
 const Hero = () => {
-  const heroImageUrl = "https://online-offerten.ch/bilder/malerarbeiten-600-400.webp";
+  // LCP-Bild: server-rendered <Image> mit priority sorgt für vorab generierten
+  // <link rel="preload"> + AVIF/WebP. Wichtig für PageSpeed-LCP < 2.5s.
+  const heroImageUrl = "/bilder/malerarbeiten-600-400.webp";
 
   return (
     <section
@@ -57,12 +60,15 @@ const Hero = () => {
             </div>
           </div>
           <div className="md:col-span-1 relative h-64 md:h-auto md:min-h-[400px] overflow-hidden">
-            <img
+            <Image
               src={heroImageUrl}
               alt="Professionelle Malerarbeiten"
-              className="w-full h-full object-cover"
-              loading="eager"
+              fill
+              priority
               fetchPriority="high"
+              sizes="(max-width: 768px) 100vw, 33vw"
+              quality={75}
+              className="object-cover"
             />
           </div>
         </div>

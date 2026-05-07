@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 // framer-motion removed - CSS for better INP
 import { CheckCircle, ShieldCheck, Users, ArrowRight } from 'lucide-react';
@@ -39,7 +40,17 @@ const Sidebar = () => {
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Finden Sie den besten Maler
         </h3>
-        <img alt="Lächelnder Maler mit Farbrolle" className="w-full h-56 object-cover rounded-lg shadow-md mb-4" src="/image/malerarbeit.webp" loading="lazy" decoding="async" />
+        <div className="relative w-full h-56 mb-4">
+          <Image
+            src="/image/malerarbeit.webp"
+            alt="Lächelnder Maler mit Farbrolle"
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            quality={75}
+            loading="lazy"
+            className="object-cover rounded-lg shadow-md"
+          />
+        </div>
         <p className="text-gray-600 mb-5">Starten Sie jetzt Ihren Vergleich und verschönern Sie Ihr Zuhause.</p>
         <Button asChild size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white group">
           <Link href="/kostenlose-offerte-anfordern?service=maler&step=2">
