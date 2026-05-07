@@ -2,12 +2,22 @@
 
 import React, { useEffect, Suspense, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import ScrollToTop from '@/components/ScrollToTop'
 import Layout from '@/src/components/Layout/Layout'
-import CookieConsentBanner from '@/components/CookieConsentBanner'
 import ConsentGtmLoader from '@/components/ConsentGtmLoader'
-import VercelInsightsWithConsent from '@/components/VercelInsightsWithConsent'
 import { useCookieConsent } from '@/src/hooks/useCookieConsent'
+// CookieConsentBanner & VercelInsightsWithConsent werden lazy geladen, damit sie
+// initial JS Bundle nicht aufblähen (~30 KB gzipped + lucide icons + radix).
+// CookieConsentBanner: ssr false, da kein SEO-relevanter Inhalt + LocalStorage-Lookup im Effekt.
+// VercelInsightsWithConsent: ssr false, da nur Client-Tracking.
+const CookieConsentBanner = dynamic(() => import('@/components/CookieConsentBanner'), {
+  ssr: false,
+})
+const VercelInsightsWithConsent = dynamic(
+  () => import('@/components/VercelInsightsWithConsent'),
+  { ssr: false }
+)
 // logoUrl import kaldırıldı - Organization schema'sı sadece ana sayfada
 // Removed framer-motion imports - no longer using AnimatePresence/motion.div wrapper
 

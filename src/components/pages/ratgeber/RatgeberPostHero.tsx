@@ -1,7 +1,12 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, Users } from 'lucide-react'
-import ImageWithFallback from '@/components/ui/ImageWithFallback'
+
+// 1x1 transparent base64 placeholder for blur (verhindert Layout-Shift bei Supabase-Bildern,
+// für die wir keinen statischen blurDataURL berechnen können). Sehr klein -> kein Bandwidth-Overhead.
+const BLUR_PLACEHOLDER =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiIHZpZXdCb3g9IjAgMCA4IDYiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjYiIGZpbGw9IiMxZTI5M2IiLz48L3N2Zz4='
 
 function formatArticleDate(value?: string | null) {
   if (!value) return ''
@@ -121,18 +126,22 @@ export function RatgeberPostHero({
             </div>
           </div>
 
-          {hasImage ? (
+          {hasImage && featuredImageUrl ? (
             <div className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] ring-1 ring-white/15">
-                <div className="absolute inset-0 [&>picture]:block [&>picture]:h-full [&>picture]:w-full">
-                  <ImageWithFallback
-                    src={featuredImageUrl ?? undefined}
-                    alt={title}
-                    className="h-full w-full object-cover"
-                    loading="eager"
-                    fetchPriority="high"
-                  />
-                </div>
+                {/* LCP-Bild: server-rendered <Image> mit priority generiert <link rel="preload">
+                    + AVIF/WebP automatisch. fetchPriority="high" wird durch priority gesetzt. */}
+                <Image
+                  src={featuredImageUrl}
+                  alt={title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 26rem, 30rem"
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL={BLUR_PLACEHOLDER}
+                  className="object-cover"
+                />
                 <div
                   className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent"
                   aria-hidden

@@ -21,6 +21,13 @@ export function quoteHrefForCategoryService(
       }
       return base
     }
+    // Klaviertransport: Formular nutzt `umzugArt=klaviertransport` als Oberkategorie
+    // ("Spezialtransport") UND `special_transport_type=klaviertransport` als konkrete
+    // Auswahl im Step 2 RadioGroup. Beide müssen gesetzt sein, sonst zeigt das
+    // Formular die generische Spezialtransport-Auswahl statt direkt zu Step 3 zu springen.
+    if (serviceId === 'klaviertransport') {
+      return '/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=klaviertransport&special_transport_type=klaviertransport'
+    }
     return `/kostenlose-offerte-anfordern?service=umzug&step=3&umzugArt=${encodeURIComponent(serviceId)}`
   }
 
