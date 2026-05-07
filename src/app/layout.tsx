@@ -103,6 +103,17 @@ export default function RootLayout({
     <html lang="de-CH" className={inter.variable} suppressHydrationWarning>
       <head>
         {/* `next/font/google` self-hostet Inter — externe `fonts.*`-Preconnects sind dadurch unnötig und ziehen nur DNS/TLS-Zeit. */}
+        {/* Supabase Storage preconnect: Partner-Bilder & API-Calls werden ~300 ms früher
+            verfügbar (Lighthouse-Empfehlung, vor allem für City-/Hub-Seiten relevant). */}
+        <link
+          rel="preconnect"
+          href="https://uhkiaodpzvhsuqfrwgih.supabase.co"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="dns-prefetch"
+          href="https://uhkiaodpzvhsuqfrwgih.supabase.co"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}

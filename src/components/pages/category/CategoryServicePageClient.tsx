@@ -41,8 +41,28 @@ import {
 } from '@/data/categories'
 import { locations } from '@/data/locations'
 import { cn } from '@/lib/utils'
-import InternationalCostCalculator from '@/components/international/InternationalCostCalculator'
-import InternationalPopularDestinations from '@/components/international/InternationalPopularDestinations'
+// `InternationalCostCalculator` und `InternationalPopularDestinations` ziehen
+// `react-world-flags` mit ~3.8 MB inline-SVG-Flaggen mit. Da sie nur auf
+// `auslandumzug`-Seiten gerendert werden, laden wir sie dynamisch — Chunks
+// wie `/umzugsfirma/privatumzug` o.ä. werden dadurch um ~3.5 MB kleiner.
+const InternationalCostCalculator = dynamic(
+  () => import('@/components/international/InternationalCostCalculator'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-96 animate-pulse rounded-2xl bg-muted/40" aria-hidden />
+    ),
+  }
+)
+const InternationalPopularDestinations = dynamic(
+  () => import('@/components/international/InternationalPopularDestinations'),
+  {
+    ssr: true,
+    loading: () => (
+      <div className="h-64 animate-pulse rounded-2xl bg-muted/40" aria-hidden />
+    ),
+  }
+)
 
 const AuslandumzugHeroGlobe = dynamic(
   () => import('@/components/international/AuslandumzugHeroGlobe'),

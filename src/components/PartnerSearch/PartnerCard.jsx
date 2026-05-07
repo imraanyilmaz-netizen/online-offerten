@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 import { Star, MapPin, CheckCircle, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
@@ -72,35 +73,31 @@ const PartnerCard = ({ partner }) => {
         >
           {partner.hero_image_url ? (
             <>
-              <img
-                src={partner.hero_image_url}
-                alt=""
-                className="h-32 w-full object-cover sm:h-36"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.onerror = null
-                  if (defaultImage) {
-                    e.target.src = defaultImage
-                  } else {
-                    e.target.style.display = 'none'
-                    e.target.parentElement.classList.add('bg-gradient-to-br', 'from-slate-100', 'to-slate-50')
-                  }
-                }}
-              />
+              <div className="relative h-32 w-full sm:h-36">
+                <Image
+                  src={partner.hero_image_url}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                  loading="lazy"
+                  unoptimized={false}
+                />
+              </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/5 to-transparent" />
             </>
           ) : defaultImage ? (
             <>
-              <img
-                src={defaultImage}
-                alt=""
-                className="h-32 w-full object-cover sm:h-36"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.style.display = 'none'
-                  e.target.parentElement.classList.add('h-32', 'bg-gradient-to-br', 'from-slate-100', 'to-slate-50', 'sm:h-36')
-                }}
-              />
+              <div className="relative h-32 w-full sm:h-36">
+                <Image
+                  src={defaultImage}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/35 via-transparent to-transparent" />
             </>
           ) : (
@@ -109,14 +106,13 @@ const PartnerCard = ({ partner }) => {
         </Link>
 
         <div className="absolute bottom-2 left-2 sm:bottom-2.5 sm:left-2.5">
-          <img
+          <Image
             src={partner.logo_url || '/image/logo-icon.webp'}
             alt=""
+            width={56}
+            height={56}
+            sizes="56px"
             className="h-12 w-12 rounded-full border-2 border-white object-cover shadow-md ring-1 ring-black/5 sm:h-14 sm:w-14"
-            onError={(e) => {
-              e.target.onerror = null
-              e.target.src = '/image/logo-icon.webp'
-            }}
           />
         </div>
 

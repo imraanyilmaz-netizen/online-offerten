@@ -324,30 +324,47 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
     };
   }, []);
 
-  // Scroll handler
+  // Scroll handler — Layout-Reads laufen in requestAnimationFrame, damit
+  // sie den nächsten Frame nicht blockieren (vermeidet Forced Reflow).
   const handleScroll = useCallback(() => {
     const el = scrollContainerRef.current;
     if (!el) return;
-    setState(prev => ({
-      ...prev,
-      canScrollLeft: el.scrollLeft > 0,
-      canScrollRight: el.scrollLeft < el.scrollWidth - el.clientWidth - 1
-    }));
+    requestAnimationFrame(() => {
+      const left = el.scrollLeft;
+      const sw = el.scrollWidth;
+      const cw = el.clientWidth;
+      setState(prev => {
+        const canLeft = left > 0;
+        const canRight = left < sw - cw - 1;
+        if (prev.canScrollLeft === canLeft && prev.canScrollRight === canRight) {
+          return prev;
+        }
+        return { ...prev, canScrollLeft: canLeft, canScrollRight: canRight };
+      });
+    });
   }, []);
 
   // Throttled scroll handler (100ms throttle for mobile performance)
   const throttledHandleScroll = useMemo(() => throttle(handleScroll, 100), [handleScroll, throttle]);
 
-  // Posts scroll handler
+  // Posts scroll handler — gleiche RAF-Strategie wie oben.
   const handlePostsScroll = useCallback(() => {
     const el = postsScrollRef.current;
     if (!el) return;
-    const hasOverflow = el.scrollWidth > el.clientWidth;
-    setState(prev => ({
-      ...prev,
-      canScrollLeftPosts: el.scrollLeft > 0,
-      canScrollRightPosts: hasOverflow && el.scrollLeft < el.scrollWidth - el.clientWidth - 1
-    }));
+    requestAnimationFrame(() => {
+      const left = el.scrollLeft;
+      const sw = el.scrollWidth;
+      const cw = el.clientWidth;
+      const hasOverflow = sw > cw;
+      setState(prev => {
+        const canLeft = left > 0;
+        const canRight = hasOverflow && left < sw - cw - 1;
+        if (prev.canScrollLeftPosts === canLeft && prev.canScrollRightPosts === canRight) {
+          return prev;
+        }
+        return { ...prev, canScrollLeftPosts: canLeft, canScrollRightPosts: canRight };
+      });
+    });
   }, []);
 
   // Throttled posts scroll handler (100ms throttle for mobile performance)
@@ -691,9 +708,9 @@ const HomePageClient = ({ initialReviews = [], initialPosts = [] }: HomePageClie
                       Unsere Tools helfen Ihnen, Umzugskosten realistisch einzuschätzen und optimal zu planen. Nutzen Sie unsere Rechner und Checklisten für einen reibungslosen Umzug.
                     </p>
                   </div>
-                  <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200/90 shadow-md ring-1 ring-slate-900/[0.03] dark:border-border dark:ring-white/10">
+                  <div className="mt-6 overflow-hidden rounded-2xl">
                     <NextImage
-                      src="/fotos/5c399fc1.webp"
+                      src="/fotos/182259.webp"
                       alt="Nützliche Helfer für Ihren Umzug und Reinigung"
                       width={500}
                       height={300}

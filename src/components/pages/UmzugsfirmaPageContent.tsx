@@ -114,6 +114,9 @@ const UmzugsfirmaPageClient = () => {
                   height={450}
                   className="w-full h-auto object-cover"
                   priority
+                  fetchPriority="high"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 480px"
+                  quality={75}
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 rounded-xl border border-gray-200 dark:border-border bg-white dark:bg-card px-5 py-3 text-gray-900 dark:text-foreground shadow-sm">
