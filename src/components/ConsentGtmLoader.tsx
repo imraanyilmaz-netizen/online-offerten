@@ -103,10 +103,58 @@ function pushConsentUpdate(): void {
 
 export default function ConsentGtmLoader() {
   useEffect(() => {
-    injectConsentAndGtm()
+    if (typeof window === 'undefined') return
+
+    // GTM verzögert laden, damit es LCP/TBT auf langsamen Mobilgeräten nicht
+    // blockiert. Wir warten auf:
+    //   • erste Nutzerinteraktion (scroll/click/touch/key) — Google ist
+    //     trotzdem zufrieden, weil reale Sessions getrackt werden, ODER
+    //   • requestIdleCallback (Browser ist frei), ODER
+    //   • Sicherheits-Timeout 3500 ms (Bots / passive Tabs)
+    let loaded = false
+    let idleId: number | undefined
+    let timeoutId: number | undefined
+
+    const fire = () => {
+      if (loaded) return
+      loaded = true
+      try { if (idleId !== undefined) (window as any).cancelIdleCallback?.(idleId) } catch {}
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId)
+      window.removeEventListener('scroll', fire)
+      window.removeEventListener('pointerdown', fire)
+      window.removeEventListener('touchstart', fire)
+      window.removeEventListener('keydown', fire)
+      injectConsentAndGtm()
+    }
+
+    window.addEventListener('scroll', fire, { once: true, passive: true })
+    window.addEventListener('pointerdown', fire, { once: true, passive: true })
+    window.addEventListener('touchstart', fire, { once: true, passive: true })
+    window.addEventListener('keydown', fire, { once: true })
+
+    const ric = (window as any).requestIdleCallback as
+      | ((cb: () => void, opts?: { timeout: number }) => number)
+      | undefined
+    if (typeof ric === 'function') {
+      idleId = ric(fire, { timeout: 3500 })
+    } else {
+      timeoutId = window.setTimeout(fire, 3500)
+    }
+    if (timeoutId === undefined && idleId === undefined) {
+      timeoutId = window.setTimeout(fire, 3500)
+    }
+
     const onChange = () => pushConsentUpdate()
     window.addEventListener('cookie-consent-changed', onChange)
-    return () => window.removeEventListener('cookie-consent-changed', onChange)
+    return () => {
+      window.removeEventListener('cookie-consent-changed', onChange)
+      window.removeEventListener('scroll', fire)
+      window.removeEventListener('pointerdown', fire)
+      window.removeEventListener('touchstart', fire)
+      window.removeEventListener('keydown', fire)
+      try { if (idleId !== undefined) (window as any).cancelIdleCallback?.(idleId) } catch {}
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId)
+    }
   }, [])
 
   return null
