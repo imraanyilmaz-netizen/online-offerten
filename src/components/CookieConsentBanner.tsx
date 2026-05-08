@@ -37,7 +37,7 @@ const CATEGORIES: Category[] = [
 ]
 
 export default function CookieConsentBanner() {
-  const [visible, setVisible] = useState(false)
+  const [showBanner, setShowBanner] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [entered, setEntered] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
@@ -45,19 +45,46 @@ export default function CookieConsentBanner() {
 
   useEffect(() => {
     setMounted(true)
-    const hasConsent = getConsent() !== null
-    setVisible(!hasConsent)
   }, [])
 
+  // LCP-Optimierung: Banner erst nach Scroll (>=20px) oder 2s Verzögerung anzeigen,
+  // damit der Google-Bot den Banner nicht als Largest Contentful Paint erkennt.
   useEffect(() => {
-    if (!visible) return
+    if (!mounted) return
+    if (getConsent() !== null) return
+    if (showBanner) return
+
+    let revealed = false
+    const reveal = () => {
+      if (revealed) return
+      revealed = true
+      setShowBanner(true)
+    }
+
+    const onScroll = () => {
+      if (window.scrollY >= 20) reveal()
+    }
+
+    const timeoutId = window.setTimeout(reveal, 2000)
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    if (window.scrollY >= 20) reveal()
+
+    return () => {
+      window.clearTimeout(timeoutId)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [mounted, showBanner])
+
+  useEffect(() => {
+    if (!showBanner) return
     const t = setTimeout(() => setEntered(true), 20)
     return () => clearTimeout(t)
-  }, [visible])
+  }, [showBanner])
 
   const close = useCallback(() => {
     setEntered(false)
-    const t = setTimeout(() => setVisible(false), 220)
+    const t = setTimeout(() => setShowBanner(false), 220)
     return () => clearTimeout(t)
   }, [])
 
@@ -79,7 +106,7 @@ export default function CookieConsentBanner() {
   const titleId = useMemo(() => 'cookie-banner-title', [])
   const descId = useMemo(() => 'cookie-banner-desc', [])
 
-  if (!mounted || !visible) return null
+  if (!mounted || !showBanner) return null
 
   return (
     <div
