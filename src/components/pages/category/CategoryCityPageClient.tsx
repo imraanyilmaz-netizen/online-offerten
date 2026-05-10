@@ -436,26 +436,31 @@ export default function CategoryCityPageClient({
   return (
     <div className="bg-gradient-to-b from-neutral-50 via-white to-slate-50/90 dark:from-background dark:via-background dark:to-muted/25">
       <section className={heroSectionClass} aria-label="Einleitung">
-        <div className="absolute inset-0">
+        {/* Hero-Foto: auf Mobil komplett ausgeblendet UND nicht geladen
+            (display:none + lazy + sizes=0px verhindert den Bild-Request).
+            Ab `md` (>= 768px) wird das Foto wie gewohnt voll geladen. */}
+        <div className="absolute inset-0 hidden md:block">
           <Image
             src={heroSrc}
             alt={heroAlt}
             fill
-            preload
             fetchPriority="high"
             loading="eager"
             className={heroImageClass}
-            sizes="100vw"
+            sizes="(max-width: 767px) 0px, 100vw"
             quality={85}
           />
         </div>
-        {/* Left: readable panel — gradient to transparent toward the photo */}
+        {/* Left: readable panel — gradient to transparent toward the photo.
+            Auf Mobil entfällt der Foto-Hintergrund, daher auch der
+            Foto-Verlauf weg (sonst würde der weisse Verlauf auf den
+            Section-bg-slate-100 unnötig kontrastlos wirken). */}
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white from-0% via-white/97 via-[22%] via-white/80 via-[40%] to-transparent to-[72%] sm:via-white/92 sm:via-[26%] sm:via-white/65 sm:via-[44%] sm:to-[68%] lg:via-white/95 lg:via-[30%] lg:via-white/45 lg:via-[48%] lg:to-[62%] dark:from-background dark:via-background/96 dark:via-[22%] dark:via-background/78 dark:via-[40%] dark:to-transparent dark:to-[72%] dark:sm:via-background/90 dark:sm:via-[26%] dark:sm:via-background/55 dark:sm:via-[44%] dark:sm:to-[68%] dark:lg:via-background/92 dark:lg:via-[30%] dark:lg:via-background/40 dark:lg:via-[48%] dark:lg:to-[62%]"
+          className="pointer-events-none absolute inset-0 hidden md:block bg-gradient-to-r from-white from-0% via-white/97 via-[22%] via-white/80 via-[40%] to-transparent to-[72%] sm:via-white/92 sm:via-[26%] sm:via-white/65 sm:via-[44%] sm:to-[68%] lg:via-white/95 lg:via-[30%] lg:via-white/45 lg:via-[48%] lg:to-[62%] dark:from-background dark:via-background/96 dark:via-[22%] dark:via-background/78 dark:via-[40%] dark:to-transparent dark:to-[72%] dark:sm:via-background/90 dark:sm:via-[26%] dark:sm:via-background/55 dark:sm:via-[44%] dark:sm:to-[68%] dark:lg:via-background/92 dark:lg:via-[30%] dark:lg:via-background/40 dark:lg:via-[48%] dark:lg:to-[62%]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-white/30 dark:from-slate-950/45 dark:to-background/35 lg:hidden"
+          className="pointer-events-none absolute inset-0 hidden md:block bg-gradient-to-t from-slate-900/20 via-transparent to-white/30 dark:from-slate-950/45 dark:to-background/35 lg:hidden"
           aria-hidden
         />
         {/* Trust-style badge on photo.
