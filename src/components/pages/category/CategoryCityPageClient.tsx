@@ -49,19 +49,12 @@ const DialogTitle = DialogTitleUi as FC<PropsWithChildren<{ className?: string }
 const DialogDescription = DialogDescriptionUi as FC<
   PropsWithChildren<{ className?: string }>
 >
-import LocationPageNavigation from '@/components/locations/LocationPageNavigation'
-import PartnerCard from '@/components/PartnerSearch/PartnerCard'
-import CategoryCityFaqSection from '@/components/pages/category/CategoryCityFaqSection'
-import CategoryCitySpotlight from '@/components/pages/category/CategoryCitySpotlight'
-import ServiceStepsSection from '@/components/pages/category/ServiceStepsSection'
-import KlaviertransportPriceSection from '@/components/pages/category/KlaviertransportPriceSection'
 import { getCityFaqsForCategory, getCityPageLocalContent, type CityFaqItem } from '@/lib/cityPageFaqs'
 import { getCityHeroImageSrc } from '@/lib/cityHeroImage'
 import { KLAVIERTRANSPORT_CITY_CONTENT } from '@/data/klaviertransportCityContent'
 import { GESCHAEFTSUMZUG_CITY_CONTENT } from '@/data/geschaeftsumzugCityContent'
 import { getCantonPeerLocations } from '@/lib/cityPagePartnerStats'
 import type { PlatformReviewsTableStats } from '@/lib/reviews/platformReviewStats'
-import CityMigrationAnalysisCard from '@/components/locations/CityMigrationAnalysisCard'
 import type { CityMigrationAnalysis } from '@/lib/stats/migrationStats'
 
 const MovingChecklistSection = dynamic(
@@ -74,6 +67,26 @@ const MovingChecklistSection = dynamic(
       </section>
     ),
   }
+)
+
+const LocationPageNavigation = dynamic(
+  () => import('@/components/locations/LocationPageNavigation')
+)
+const PartnerCard = dynamic(() => import('@/components/PartnerSearch/PartnerCard'))
+const CategoryCityFaqSection = dynamic(
+  () => import('@/components/pages/category/CategoryCityFaqSection')
+)
+const CategoryCitySpotlight = dynamic(
+  () => import('@/components/pages/category/CategoryCitySpotlight')
+)
+const ServiceStepsSection = dynamic(
+  () => import('@/components/pages/category/ServiceStepsSection')
+)
+const KlaviertransportPriceSection = dynamic(
+  () => import('@/components/pages/category/KlaviertransportPriceSection')
+)
+const CityMigrationAnalysisCard = dynamic(
+  () => import('@/components/locations/CityMigrationAnalysisCard')
 )
 
 export type CategoryCityPartner = {
