@@ -11,7 +11,7 @@ import Step1Services from './Step1Services';
 import Step2Regions from './Step2Regions';
 import Step3CompanyData from './Step3CompanyData';
 import SuccessMessage from './SuccessMessage';
-import { CheckCircle2, Edit3 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
   const { toast } = useToast();
@@ -46,19 +46,14 @@ const RegistrationForm = ({ embedded = false, onBackToLogin }) => {
   // Scroll to top when step changes (but not on initial mount)
   useEffect(() => {
     if (prevStepRef.current !== step && formTopRef.current) {
-      // Calculate scroll position
       const element = formTopRef.current;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - 20; // 20px offset from top
-      
-      // Smooth scroll
-      setTimeout(() => {
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
+      const timeoutId = window.setTimeout(() => {
+        window.requestAnimationFrame(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       }, 150);
       prevStepRef.current = step;
+      return () => window.clearTimeout(timeoutId);
     }
   }, [step]);
 

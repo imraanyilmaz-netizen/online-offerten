@@ -6,6 +6,11 @@ import { getConsent } from '@/lib/cookieConsent'
 const GTM_ID = 'GTM-PNCCCGC5'
 
 type ConsentValue = 'granted' | 'denied'
+type IdleWindow = Window &
+  typeof globalThis & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
+    cancelIdleCallback?: (id: number) => void
+  }
 
 declare global {
   interface Window {
@@ -105,20 +110,18 @@ export default function ConsentGtmLoader() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // GTM verzögert laden, damit es LCP/TBT auf langsamen Mobilgeräten nicht
-    // blockiert. Wir warten auf:
-    //   • erste Nutzerinteraktion (scroll/click/touch/key) — Google ist
-    //     trotzdem zufrieden, weil reale Sessions getrackt werden, ODER
-    //   • requestIdleCallback (Browser ist frei), ODER
-    //   • Sicherheits-Timeout 3500 ms (Bots / passive Tabs)
+    // GTM nicht mehr per 3,5s-Timeout in den Lighthouse-Lauf ziehen.
+    // Ohne Consent laden wir erst nach echter Nutzerinteraktion; mit bereits
+    // erteilter Analytics-Einwilligung darf GTM im Idle nachladen.
     let loaded = false
     let idleId: number | undefined
     let timeoutId: number | undefined
+    const hasAnalyticsConsent = getConsent()?.analytics === true
 
     const fire = () => {
       if (loaded) return
       loaded = true
-      try { if (idleId !== undefined) (window as any).cancelIdleCallback?.(idleId) } catch {}
+      try { if (idleId !== undefined) (window as IdleWindow).cancelIdleCallback?.(idleId) } catch {}
       if (timeoutId !== undefined) window.clearTimeout(timeoutId)
       window.removeEventListener('scroll', fire)
       window.removeEventListener('pointerdown', fire)
@@ -132,19 +135,22 @@ export default function ConsentGtmLoader() {
     window.addEventListener('touchstart', fire, { once: true, passive: true })
     window.addEventListener('keydown', fire, { once: true })
 
-    const ric = (window as any).requestIdleCallback as
-      | ((cb: () => void, opts?: { timeout: number }) => number)
-      | undefined
-    if (typeof ric === 'function') {
-      idleId = ric(fire, { timeout: 3500 })
-    } else {
-      timeoutId = window.setTimeout(fire, 3500)
-    }
-    if (timeoutId === undefined && idleId === undefined) {
-      timeoutId = window.setTimeout(fire, 3500)
+    if (hasAnalyticsConsent) {
+      const ric = (window as IdleWindow).requestIdleCallback
+      if (typeof ric === 'function') {
+        idleId = ric(fire, { timeout: 8000 })
+      } else {
+        timeoutId = window.setTimeout(fire, 8000)
+      }
     }
 
-    const onChange = () => pushConsentUpdate()
+    const onChange = () => {
+      if (getConsent()?.analytics === true) {
+        fire()
+      } else {
+        pushConsentUpdate()
+      }
+    }
     window.addEventListener('cookie-consent-changed', onChange)
     return () => {
       window.removeEventListener('cookie-consent-changed', onChange)
@@ -152,7 +158,7 @@ export default function ConsentGtmLoader() {
       window.removeEventListener('pointerdown', fire)
       window.removeEventListener('touchstart', fire)
       window.removeEventListener('keydown', fire)
-      try { if (idleId !== undefined) (window as any).cancelIdleCallback?.(idleId) } catch {}
+      try { if (idleId !== undefined) (window as IdleWindow).cancelIdleCallback?.(idleId) } catch {}
       if (timeoutId !== undefined) window.clearTimeout(timeoutId)
     }
   }, [])

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin } from 'lucide-react'
 import { locations } from '@/data/locations'
 
@@ -8,7 +9,7 @@ const TOP_CITIES = locations.slice(0, 10)
 
 /** Decorative Swiss landscape; swap for a branded `/public` asset when available. */
 const STANDORTE_IMAGE =
-  'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=80'
+  'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=700&q=55'
 
 const standortLinkClass =
   'inline-flex items-center rounded-lg border border-neutral-200/90 bg-white px-2.5 py-1 text-xs font-medium text-neutral-700 shadow-sm transition-colors hover:border-emerald-300 hover:bg-emerald-50/80 hover:text-emerald-900 dark:border-border dark:bg-card dark:text-foreground dark:hover:border-emerald-600/50 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-300'
@@ -26,13 +27,12 @@ export default function FooterBeliebteStandorte() {
         >
           {/* Left: image + overlay copy */}
           <div className="relative min-h-[220px] w-full shrink-0 lg:min-h-0 lg:w-[42%] lg:max-w-xl">
-            <img
+            <Image
               src={STANDORTE_IMAGE}
               alt=""
-              width={1200}
-              height={900}
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
               loading="lazy"
-              decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div

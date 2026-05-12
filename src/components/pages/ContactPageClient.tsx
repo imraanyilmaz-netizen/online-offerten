@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 // framer-motion removed - CSS for better INP
-import { Mail, Phone, MapPin, Send, Loader2, CheckCircle, ArrowRight, Handshake, Search } from 'lucide-react'
+import { Mail, Send, Loader2, CheckCircle, ArrowRight, Handshake, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -15,15 +15,9 @@ const ContactPageClient = () => {
   const { toast } = useToast()
   const { user } = useAuth()
   const isPartner = user?.user_metadata?.role === 'partner'
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSentSuccessfully, setIsSentSuccessfully] = useState(false)
-  const supabase = createClient()
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target
-    setFormData((prev) => ({ ...prev, [id]: value }))
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,8 +25,17 @@ const ContactPageClient = () => {
     setIsSentSuccessfully(false)
 
     try {
+      const form = e.currentTarget as HTMLFormElement
+      const values = new FormData(form)
+      const payload = {
+        name: String(values.get('name') || ''),
+        email: String(values.get('email') || ''),
+        subject: String(values.get('subject') || ''),
+        message: String(values.get('message') || ''),
+      }
+      const supabase = createClient()
       const { error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData,
+        body: payload,
       })
 
       if (error) {
@@ -40,12 +43,13 @@ const ContactPageClient = () => {
       }
 
       setIsSentSuccessfully(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      form.reset()
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Unbekannter Fehler'
       toast({
         title: "Fehler beim Senden",
-        description: `Ihre Nachricht konnte leider nicht gesendet werden. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail. ${error.message}`,
+        description: `Ihre Nachricht konnte leider nicht gesendet werden. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail. ${message}`,
         variant: 'destructive',
       })
     } finally {
@@ -55,7 +59,7 @@ const ContactPageClient = () => {
 
   const handleSendNewMessage = () => {
     setIsSentSuccessfully(false)
-    setFormData({ name: '', email: '', subject: '', message: '' })
+    formRef.current?.reset()
   }
 
   const contactDetails = [
@@ -162,23 +166,23 @@ const ContactPageClient = () => {
                     </Button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="bg-card border border-border p-8 rounded-lg shadow-lg space-y-6">
+                  <form ref={formRef} onSubmit={handleSubmit} className="bg-card border border-border p-8 rounded-lg shadow-lg space-y-6">
                     <h2 className="heading-2 mb-6">Senden Sie uns eine Nachricht</h2>
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-foreground">Ihr Name</label>
-                      <Input id="name" placeholder="Max Mustermann" value={formData.name} onChange={handleInputChange} required />
+                      <Input id="name" name="name" placeholder="Max Mustermann" required />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium text-foreground">Ihre E-Mail-Adresse</label>
-                      <Input id="email" type="email" placeholder="max.mustermann@example.com" value={formData.email} onChange={handleInputChange} required />
+                      <Input id="email" name="email" type="email" placeholder="max.mustermann@example.com" required />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="subject" className="text-sm font-medium text-foreground">Betreff</label>
-                      <Input id="subject" placeholder="Worum geht es?" value={formData.subject} onChange={handleInputChange} required />
+                      <Input id="subject" name="subject" placeholder="Worum geht es?" required />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="message" className="text-sm font-medium text-foreground">Ihre Nachricht</label>
-                      <Textarea id="message" placeholder="Schreiben Sie hier Ihre Nachricht..." value={formData.message} onChange={handleInputChange} required rows={5} />
+                      <Textarea id="message" name="message" placeholder="Schreiben Sie hier Ihre Nachricht..." required rows={5} />
                     </div>
                     <Button type="submit" disabled={isSubmitting} className="w-full bg-green-600 hover:bg-green-700 dark:bg-emerald-600 dark:hover:bg-emerald-700">
                       {isSubmitting ? (

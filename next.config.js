@@ -19,6 +19,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'uhkiaodpzvhsuqfrwgih.supabase.co' },
       { protocol: 'https', hostname: 'storage.googleapis.com' },
       { protocol: 'https', hostname: 'online-offerten.ch' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
   },
 
