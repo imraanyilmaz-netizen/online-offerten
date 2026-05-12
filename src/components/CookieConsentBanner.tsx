@@ -47,8 +47,8 @@ export default function CookieConsentBanner() {
     setMounted(true)
   }, [])
 
-  // LCP-Optimierung: Banner erst nach Scroll (>=20px) oder 2s Verzögerung anzeigen,
-  // damit der Google-Bot den Banner nicht als Largest Contentful Paint erkennt.
+  // LCP-Optimierung: Banner erst nach echtem Scroll anzeigen. Kein Timeout:
+  // der Cookie-Dialog darf den ersten Render nicht als LCP-Kandidat verdrängen.
   useEffect(() => {
     if (!mounted) return
     if (getConsent() !== null) return
@@ -65,13 +65,11 @@ export default function CookieConsentBanner() {
       if (window.scrollY >= 20) reveal()
     }
 
-    const timeoutId = window.setTimeout(reveal, 2000)
     window.addEventListener('scroll', onScroll, { passive: true })
 
     if (window.scrollY >= 20) reveal()
 
     return () => {
-      window.clearTimeout(timeoutId)
       window.removeEventListener('scroll', onScroll)
     }
   }, [mounted, showBanner])

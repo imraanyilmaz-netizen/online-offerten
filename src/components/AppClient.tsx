@@ -44,7 +44,8 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isNavigating, setIsNavigating] = useState(false)
-  const { analyticsAllowed, ready: consentReady } = useCookieConsent()
+  const [shouldLoadCookieBanner, setShouldLoadCookieBanner] = useState(false)
+  const { consent, analyticsAllowed, ready: consentReady } = useCookieConsent()
 
   // Router cache refresh - REMOVED to prevent blank page issues
   // Next.js App Router handles cache automatically
@@ -90,6 +91,27 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
       }
     })
   }, [pathname, searchParams, consentReady, analyticsAllowed])
+
+  // LCP: Cookie banner chunk erst nach echtem Scroll laden. Ohne bestehende
+  // Einwilligung bleibt der erste Render dadurch frei von Banner-JS und Overlay.
+  useEffect(() => {
+    if (!consentReady) return
+    if (consent !== null) return
+    if (shouldLoadCookieBanner) return
+
+    const reveal = () => {
+      if (window.scrollY >= 20) {
+        setShouldLoadCookieBanner(true)
+      }
+    }
+
+    const frameId = window.requestAnimationFrame(reveal)
+    window.addEventListener('scroll', reveal, { passive: true })
+    return () => {
+      window.cancelAnimationFrame(frameId)
+      window.removeEventListener('scroll', reveal)
+    }
+  }, [consent, consentReady, shouldLoadCookieBanner])
 
   // Canonical URL redirect
   useEffect(() => {
@@ -179,7 +201,7 @@ export default function AppClient({ children }: { children: React.ReactNode }) {
   return (
     <>
       <ConsentGtmLoader />
-      <CookieConsentBanner />
+      {shouldLoadCookieBanner ? <CookieConsentBanner /> : null}
       <VercelInsightsWithConsent />
       <ScrollToTop />
       <Layout>
