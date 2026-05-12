@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react';
 
@@ -38,8 +38,8 @@ const TiptapRenderer = ({ jsonContent }) => {
     addClassToTag('h2', 'heading-2');
     addClassToTag('h3', 'heading-3');
     addClassToTag('h4', 'heading-4');
-    addClassToTag('h5', 'heading-5');
-    addClassToTag('h6', 'heading-6');
+    addClassToTag('h5', 'mt-3 mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground');
+    addClassToTag('h6', 'mt-3 mb-2 text-sm md:text-base font-bold leading-[1.33] text-foreground');
     addClassToTag('p', 'text-body');
     
     return processed;

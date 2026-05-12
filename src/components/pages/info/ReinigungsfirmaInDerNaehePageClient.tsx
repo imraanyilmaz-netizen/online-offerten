@@ -788,7 +788,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-blue-600 dark:text-sky-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">Neutrale Plattform</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">Neutrale Plattform</h4>
                   <p className="text-body">Wir vermitteln ausschliesslich und haben kein Interesse daran, einen bestimmten Anbieter zu bevorzugen. Ihre freie Wahl steht im Mittelpunkt.</p>
                 </div>
               </div>
@@ -798,7 +798,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-blue-600 dark:text-sky-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">Fokus auf regionale Anbieter</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">Fokus auf regionale Anbieter</h4>
                   <p className="text-body">Ob Zürich, Bern, Basel oder ländliche Regionen: Wir kennen die lokalen Gegebenheiten und verbinden Sie mit Reinigungsfirmen in Ihrer Nähe.</p>
                 </div>
               </div>
@@ -808,7 +808,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-blue-600 dark:text-sky-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">Transparenter Vergleichsprozess</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">Transparenter Vergleichsprozess</h4>
                   <p className="text-body">Was Sie sehen, ist was Sie bekommen. Keine Gebühren, keine Verpflichtungen, keine Überraschungen.</p>
                 </div>
               </div>
@@ -818,7 +818,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-blue-600 dark:text-sky-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">Schweizspezifische Kenntnisse</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">Schweizspezifische Kenntnisse</h4>
                   <p className="text-body">Von Mietrecht über typische Abnahmestandards bis zu regionalen Preisen: Unsere Plattform ist auf den geprüfte Markt zugeschnitten.</p>
                 </div>
               </div>
@@ -842,7 +842,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <ShieldCheck className="h-6 w-6 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">100% kostenlose Nutzung</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">100% kostenlose Nutzung</h4>
                   <p className="text-body">Für Privatkunden und Unternehmen. Die Anfrage, der Vergleich und die Beratung kosten Sie nichts.</p>
                 </div>
               </div>
@@ -852,7 +852,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <ShieldCheck className="h-6 w-6 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">Keine Vermittlungsgebühren</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">Keine Vermittlungsgebühren</h4>
                   <p className="text-body">Sie bezahlen ausschliesslich die Reinigungsfirma Ihrer Wahl für deren erbrachte Dienstleistungen. Keine versteckten Kosten.</p>
                 </div>
               </div>
@@ -862,7 +862,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <ShieldCheck className="h-6 w-6 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">Faire Konditionen</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">Faire Konditionen</h4>
                   <p className="text-body">Die Reinigungsunternehmen entrichten eine Gebühr für qualifizierte Anfragen. Dies stellt sicher, dass nur seriöse Betriebe aktiv sind.</p>
                 </div>
               </div>
@@ -872,7 +872,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
               <div className="flex items-start">
                 <ShieldCheck className="h-6 w-6 text-green-600 dark:text-emerald-400 mr-3 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="heading-5 mb-2">Volle Preistransparenz</h4>
+                  <h4 className="mb-2 text-base md:text-lg font-bold leading-[1.33] text-foreground">Volle Preistransparenz</h4>
                   <p className="text-body">Die Preise für die eigentliche Reinigung legen die Anbieter fest. Durch den Vergleich sehen Sie sofort, welche Kosten marktüblich sind.</p>
                 </div>
               </div>

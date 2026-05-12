@@ -112,207 +112,6 @@
   }
 }
 
-/* Zentrale Typografie-Stile für alle Seiten - Merkezi Tipografi Stilleri */
-@layer components {
-  /* H1 Stil - Ana Başlıklar */
-  h1.typography-h1,
-  .typography-h1 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 32px;
-    line-height: 42.56px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    text-align: start;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-  }
-
-  @media (min-width: 768px) {
-    h1.typography-h1,
-    .typography-h1 {
-      font-size: 40px;
-      line-height: 53.2px;
-    }
-  }
-
-  /* H2 Stil - Alt Başlıklar */
-  h2.typography-h2,
-  .typography-h2 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 24px;
-    line-height: 31.92px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    text-align: start;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-  }
-
-  @media (min-width: 768px) {
-    h2.typography-h2,
-    .typography-h2 {
-      font-size: 32px;
-      line-height: 42.56px;
-    }
-  }
-
-  /* H3 Stil - Bölüm Başlıkları */
-  h3.typography-h3,
-  .typography-h3 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 20px;
-    line-height: 26.6px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    text-align: start;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-  }
-
-  @media (min-width: 768px) {
-    h3.typography-h3,
-    .typography-h3 {
-      font-size: 24px;
-      line-height: 31.92px;
-    }
-  }
-
-  /* H4 Stil - Kart Başlıkları */
-  h4.typography-h4,
-  .typography-h4 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 18px;
-    line-height: 23.94px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    text-align: center;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-    font-variant: no-common-ligatures;
-  }
-
-  @media (min-width: 768px) {
-    h4.typography-h4,
-    .typography-h4 {
-      font-size: 20px;
-      line-height: 26.6px;
-    }
-  }
-
-  /* H5 Stil */
-  h5.typography-h5,
-  .typography-h5 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 16px;
-    line-height: 21.28px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    text-align: start;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-  }
-
-  @media (min-width: 768px) {
-    h5.typography-h5,
-    .typography-h5 {
-      font-size: 18px;
-      line-height: 23.94px;
-    }
-  }
-
-  /* H6 Stil */
-  h6.typography-h6,
-  .typography-h6 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 14px;
-    line-height: 18.62px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    text-align: start;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-  }
-
-  @media (min-width: 768px) {
-    h6.typography-h6,
-    .typography-h6 {
-      font-size: 16px;
-      line-height: 21.28px;
-    }
-  }
-
-  /* P Stil - Paragraf Metni */
-  p.typography-p,
-  .typography-p {
-    font-family: Inter, "Inter Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 16px;
-    line-height: 26px;
-    font-weight: 400;
-    color: hsl(var(--muted-foreground));
-    background-color: transparent;
-    text-align: start;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-    vertical-align: baseline;
-  }
-
-  /* Span Stil - Inline Metin (FAQ soruları için) */
-  span.typography-span,
-  .typography-span {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 18px;
-    line-height: 23.94px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    text-align: start;
-    letter-spacing: normal;
-    word-spacing: 0px;
-    font-style: normal;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0px;
-    font-variant: no-common-ligatures;
-  }
-
-  @media (min-width: 768px) {
-    span.typography-span,
-    .typography-span {
-      font-size: 20px;
-      line-height: 26.6px;
-    }
-  }
-}
-
 /* Scrollbar Stilleri */
 @layer utilities {
   ::-webkit-scrollbar {
@@ -389,28 +188,6 @@
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 /* Partner Dashboard – Tab-Wechsel + Karte-Aktionen */
 @keyframes tabContentEnter {
   from {
@@ -476,26 +253,6 @@
     animation: fadeIn 0.8s ease-out;
   }
 
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
-    animation-fill-mode: both;
-  }
-
-  .animate-fade-in-up-delay {
-    animation: fadeInUp 0.6s ease-out 0.3s;
-    animation-fill-mode: both;
-  }
-
-  .animate-fade-in-right {
-    animation: fadeInRight 0.6s ease-out;
-    animation-fill-mode: both;
-  }
-
-  .animate-fade-in-right-delay {
-    animation: fadeInRight 0.6s ease-out 0.4s;
-    animation-fill-mode: both;
-  }
-
   /* Partner-Dashboard Utilities */
   .animate-tab-enter {
     animation: tabContentEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -520,51 +277,17 @@
     pointer-events: none;
   }
 
-  /* Partner-Sidebar: Mobile-Drawer */
-  @keyframes sidebarSlideIn {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  .animate-sidebar-slide-in {
-    animation: sidebarSlideIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    animation-fill-mode: both;
-  }
-
   /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-in,
-    .animate-fade-in-up,
-    .animate-fade-in-up-delay,
-    .animate-fade-in-right,
-    .animate-fade-in-right-delay,
     .animate-tab-enter,
     .animate-card-slide-out-right,
     .animate-card-slide-out-left,
-    .animate-card-purchase-success,
-    .animate-sidebar-slide-in {
+    .animate-card-purchase-success {
       animation: none;
     }
   }
 
-  /* Font utility classes - Inline stilleri azaltmak için */
-  .font-booster {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-  }
-
-  .font-roboto {
-    font-family: 'Roboto', ui-sans-serif, system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 400;
-    color: hsl(var(--foreground));
-  }
 }
 
 /* STANDART TİPOGRAFİ SİSTEMİ - Tüm sayfalarda aynı başlık stilleri */
@@ -603,44 +326,6 @@
   @media (min-width: 1024px) {
     h1.heading-1,
     .heading-1 {
-      font-size: 40px;
-    }
-  }
-
-  /* H1 Variant - Beyaz text (Hero sections) */
-  h1.heading-1-white,
-  .heading-1-white {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 1.2;
-    color: #ffffff;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  h1.heading-1-white:first-child,
-  .heading-1-white:first-child {
-    margin-top: 0;
-  }
-
-  @media (min-width: 640px) {
-    h1.heading-1-white,
-    .heading-1-white {
-      font-size: 32px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    h1.heading-1-white,
-    .heading-1-white {
-      font-size: 36px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h1.heading-1-white,
-    .heading-1-white {
       font-size: 40px;
     }
   }
@@ -745,79 +430,6 @@
     }
   }
 
-  /* H4 - Beyaz renk (CTA bölümleri için) */
-  h4.heading-4-white,
-  .heading-4-white {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 1.33;
-    color: #ffffff;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  h4.heading-4-white:first-child,
-  .heading-4-white:first-child {
-    margin-top: 0;
-  }
-
-  @media (min-width: 768px) {
-    h4.heading-4-white,
-    .heading-4-white {
-      font-size: 36px;
-      line-height: 1.3;
-    }
-  }
-
-  /* H5 - Küçük başlıklar - Standart CTA bölümündeki başlık */
-  h5.heading-5,
-  .heading-5 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.33;
-    color: hsl(var(--foreground));
-    margin-top: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  h5.heading-5:first-child,
-  .heading-5:first-child {
-    margin-top: 0;
-  }
-
-  @media (min-width: 768px) {
-    h5.heading-5,
-    .heading-5 {
-      font-size: 18px;
-    }
-  }
-
-  /* H6 - En küçük başlıklar - Standart */
-  h6.heading-6,
-  .heading-6 {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.33;
-    color: hsl(var(--foreground));
-    margin-top: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  h6.heading-6:first-child,
-  .heading-6:first-child {
-    margin-top: 0;
-  }
-
-  @media (min-width: 768px) {
-    h6.heading-6,
-    .heading-6 {
-      font-size: 16px;
-    }
-  }
-
   /* P - Paragraf - Standart */
   p.text-body,
   .text-body {
@@ -834,30 +446,6 @@
     margin-bottom: 0;
   }
 
-  /* P - Paragraf - Beyaz renk (CTA bölümleri için) */
-  p.text-body-white,
-  .text-body-white {
-    font-family: 'Inter', "Inter Fallback", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 16px;
-    line-height: 26px;
-    font-weight: 400;
-    color: #ffffff;
-    margin-bottom: 1rem;
-  }
-  
-  p.text-body-white:last-child,
-  .text-body-white:last-child {
-    margin-bottom: 0;
-  }
-
-  @media (min-width: 768px) {
-    p.text-body-white,
-    .text-body-white {
-      font-size: 18px;
-      line-height: 28px;
-    }
-  }
-
   /* FAQ - Soru başlıkları */
   h4.faq-question,
   .faq-question {
@@ -867,14 +455,6 @@
     color: hsl(var(--foreground));
   }
 
-  /* FAQ - Bölüm başlıkları (Häufige Fragen gibi) */
-  h3.faq-title,
-  .faq-title {
-    font-family: "Booster Next FY", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    line-height: 1.3;
-    color: hsl(var(--foreground));
-  }
 }
 
 /* Auslandumzug hero globe — orbiting transport emojis + animated route strokes */
