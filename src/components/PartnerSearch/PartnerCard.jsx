@@ -4,7 +4,7 @@ import React from 'react'
 import { Star, MapPin, CheckCircle, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { transformSupabaseUrl, isSupabaseStorageUrl } from '@/src/lib/supabaseImage'
+import { isSupabaseStorageUrl, supabaseLoader } from '@/src/lib/supabaseImage'
 
 const PartnerCard = ({ partner }) => {
   if (!partner) return null
@@ -26,12 +26,10 @@ const PartnerCard = ({ partner }) => {
   const reviewCount = partner.review_count || 0
   const partnerSlug = partner.slug || partner.id
 
-  const heroUrl = partner.hero_image_url
-    ? transformSupabaseUrl(partner.hero_image_url, { width: 800, height: 400, quality: 75, resize: 'cover' })
-    : null
+  const heroUrl = partner.hero_image_url || null
   const heroIsSupabase = isSupabaseStorageUrl(partner.hero_image_url)
 
-  const logoSrc = transformSupabaseUrl(partner.logo_url || '/image/logo-icon.webp', { width: 128, quality: 80 })
+  const logoSrc = partner.logo_url || '/image/logo-icon.webp'
   const logoIsSupabase = isSupabaseStorageUrl(partner.logo_url)
 
   const mainCategories = partner.main_categories || []
@@ -87,10 +85,11 @@ const PartnerCard = ({ partner }) => {
                   src={heroUrl}
                   alt=""
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover"
                   loading="lazy"
-                  unoptimized={heroIsSupabase}
+                  quality={70}
+                  {...(heroIsSupabase ? { loader: supabaseLoader } : {})}
                 />
               </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/5 to-transparent" />
@@ -121,8 +120,9 @@ const PartnerCard = ({ partner }) => {
             width={56}
             height={56}
             sizes="56px"
+            quality={75}
             className="h-12 w-12 rounded-full border-2 border-white object-cover shadow-md ring-1 ring-black/5 sm:h-14 sm:w-14"
-            unoptimized={logoIsSupabase}
+            {...(logoIsSupabase ? { loader: supabaseLoader } : {})}
           />
         </div>
 

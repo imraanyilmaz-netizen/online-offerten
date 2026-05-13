@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense } from 'react'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Layout/Navbar'
 import Footer from '@/components/Layout/Footer'
@@ -20,14 +20,10 @@ const FullPageLoader = () => (
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
   const { user } = useAuth()
-  /** Hydration-sicher: Vor Mount immer die öffentliche Navbar rendern, damit
-   *  SSR- und erster Client-Render übereinstimmen. Nach dem Mount kann bei
-   *  eingeloggten Partnern auf die Panel-Navbar umgeschaltet werden. */
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-  const isPartner = mounted && user?.user_metadata?.role === 'partner'
+  /** AuthProvider initial value `user: null` (SSR ve ilk client render aynı).
+   *  Bu yüzden `mounted` gate'ine gerek yok — hydration mismatch oluşmaz.
+   *  Auth resolve olduğunda `user` değişir, normal React update tetiklenir. */
+  const isPartner = user?.user_metadata?.role === 'partner'
   const formPages = [
     '/kostenlose-offerte-anfordern',
     '/forgot-password'

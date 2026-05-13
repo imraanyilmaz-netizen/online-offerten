@@ -6,10 +6,15 @@ import { AuthProvider } from '@/src/contexts/SupabaseAuthContext'
 import { Toaster } from '@/components/ui/toaster'
 import AppClient from '@/components/AppClient'
 import { ThemeProvider } from '@/components/ThemeProvider'
-const inter = Inter({ 
+// `display: 'optional'` → Browser ~100ms font bekler. Gelmezse fallback KALIR
+// (swap yapmaz) → LCP element'i değişmez, layout shift olmaz. Sonraki ziyarette
+// cached font kullanılır. `adjustFontFallback: true` (default) ile fallback metrik
+// olarak Inter'a yakındır, görsel fark minimal.
+const inter = Inter({
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional',
   variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
 })
 
 // Standard-Metadaten = Startseite; einzelne Routen überschreiben mit eigenem `metadata`.

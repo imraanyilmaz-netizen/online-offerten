@@ -115,6 +115,33 @@ export function buildSupabaseSrcSet(
 }
 
 /**
+ * next/image için custom loader. `loader` prop'una verildiğinde Next.js
+ * deviceSizes/imageSizes'a göre otomatik srcSet üretir, her width için
+ * Supabase transform URL'i döner. Sonuç: responsive, kotasız.
+ *
+ * Kullanım:
+ *   <Image src={originalSupabaseUrl} loader={supabaseLoader} sizes="..." fill />
+ */
+export const supabaseLoader = ({
+  src,
+  width,
+  quality,
+}: {
+  src: string
+  width: number
+  quality?: number
+}): string => {
+  if (!src) return ''
+  const ref = parseSupabaseUrl(src)
+  if (!ref) return src
+  return buildSupabaseImageUrl(ref.bucket, ref.path, {
+    width,
+    quality: quality ?? 75,
+    resize: 'cover',
+  })
+}
+
+/**
  * Bucket başına standart preset'ler. Tutarlı boyutlar için.
  */
 export const SUPABASE_IMAGE_PRESETS = {

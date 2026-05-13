@@ -6,7 +6,7 @@ import { Send } from 'lucide-react';
 import QualityBadge from './QualityBadge';
 import StarRating from './StarRating';
 import VerifiedInsuranceBadge from './VerifiedInsuranceBadge';
-import { transformSupabaseUrl } from '@/src/lib/supabaseImage';
+import { transformSupabaseUrl, buildSupabaseSrcSet, isSupabaseStorageUrl } from '@/src/lib/supabaseImage';
 
 const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   // Removed useTranslation
@@ -25,8 +25,25 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   };
 
   const rawHeroUrl = partner.hero_image_url || getHeroFallbackImage();
-  const heroImageUrl = transformSupabaseUrl(rawHeroUrl, { width: 1600, quality: 80 });
-  const logoUrl = transformSupabaseUrl(partner.logo_url || '/image/logo-icon.webp', { width: 256, quality: 80 });
+  const heroIsSupabase = isSupabaseStorageUrl(rawHeroUrl);
+  // Mobile için 640w, tablet için 1024w, desktop için 1600w. Hero'nun gerçek genişliği
+  // mobile'da ekran tam (max 768px), desktop'ta yarım ekran (~960px). 2x retina ile 1600 max.
+  const heroImageUrl = heroIsSupabase
+    ? transformSupabaseUrl(rawHeroUrl, { width: 1024, quality: 75 })
+    : rawHeroUrl;
+  const heroSrcSet = heroIsSupabase
+    ? buildSupabaseSrcSet(rawHeroUrl, [640, 1024, 1600], { quality: 75, resize: 'cover' })
+    : undefined;
+
+  const rawLogoUrl = partner.logo_url || '/image/logo-icon.webp';
+  const logoIsSupabase = isSupabaseStorageUrl(rawLogoUrl);
+  // Logo display: max 192px → retina 384px. 256 default, srcSet 192/384 retina için.
+  const logoUrl = logoIsSupabase
+    ? transformSupabaseUrl(rawLogoUrl, { width: 256, quality: 80 })
+    : rawLogoUrl;
+  const logoSrcSet = logoIsSupabase
+    ? buildSupabaseSrcSet(rawLogoUrl, [192, 384], { quality: 80, resize: 'cover' })
+    : undefined;
 
   // Gerçek yorum sayısı ve rating'i kullan (prop'tan gelen veya partner objesinden)
   const displayRating = averageRating !== undefined ? averageRating : (partner.average_rating || 0);
@@ -46,6 +63,8 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
       >
         <img
           src={heroImageUrl}
+          srcSet={heroSrcSet}
+          sizes="(max-width: 768px) 100vw, 50vw"
           alt={`${partner.company_name} Hero`}
           className="w-full h-full object-contain object-right"
           loading="eager"
@@ -74,6 +93,8 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
             >
               <img
                 src={logoUrl}
+                srcSet={logoSrcSet}
+                sizes="(max-width: 768px) 160px, 192px"
                 alt={`${partner.company_name} Logo`}
                 className="max-w-40 max-h-40 md:max-w-48 md:max-h-48 w-auto h-auto object-contain"
                 loading="eager"
