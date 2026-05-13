@@ -123,10 +123,14 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
     return <FullPageLoader />
   }
 
+  const galleryImages: string[] = Array.isArray(partner.gallery_images)
+    ? partner.gallery_images.filter((url: unknown): url is string => typeof url === 'string' && url.length > 0)
+    : []
+
   const sectionLinks = [
     (partner.message || partner.description) && { id: 'about', label: 'Über uns' },
     partner.services?.length > 0 && { id: 'services', label: 'Dienstleistungen' },
-    partner.images?.length > 0 && { id: 'gallery', label: 'Bilder' },
+    galleryImages.length > 0 && { id: 'gallery', label: 'Bilder' },
     { id: 'reviews', label: 'Bewertungen' },
   ].filter(Boolean) as Array<{ id: string; label: string }>
 
@@ -195,9 +199,9 @@ const PartnerProfilePageClient = ({ initialPartner }: PartnerProfilePageClientPr
               </Card>
             )}
 
-            {partner.images && partner.images.length > 0 && (
+            {galleryImages.length > 0 && (
               <div id="gallery" className="scroll-mt-28">
-                <ImageGallery images={partner.images} />
+                <ImageGallery images={galleryImages} />
               </div>
             )}
 

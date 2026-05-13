@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { 
-    Calendar, Clock, File, Image, Mail, 
+    Calendar, Clock, File, Mail, 
     MapPin, MessageSquare, Phone, Truck, User, Building, 
     Sparkles, Paintbrush, ExternalLink, ListChecks
 } from 'lucide-react';
@@ -290,35 +290,6 @@ const QuoteDetailView = ({ quote, purchasers = [] }) => {
       {quote.additional_info && (
         <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
           <p className="text-sm text-gray-700 whitespace-pre-wrap">{quote.additional_info}</p>
-        </DetailSection>
-      )}
-
-      {(quote.image_urls?.length > 0 || quote.file_urls?.length > 0) && (
-        <DetailSection title="Anhänge" icon={Image}>
-          {quote.image_urls?.length > 0 && (
-            <div className="mb-4">
-              <h4 className="font-semibold text-md mb-2">Bilder</h4>
-              <div className="flex flex-wrap gap-2">
-                {quote.image_urls.map((url, i) => (
-                  <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-                    <img src={url} alt={`Anhang ${i+1}`} className="w-24 h-24 object-cover rounded-md border" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-          {quote.file_urls?.length > 0 && (
-            <div>
-              <h4 className="font-semibold text-md mb-2">Dateien</h4>
-              <div className="flex flex-col gap-2">
-                {quote.file_urls.map((url, i) => (
-                  <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline flex items-center gap-2 text-sm">
-                    <File size={14} /> Datei {i+1}
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
         </DetailSection>
       )}
 

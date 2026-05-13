@@ -7,8 +7,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { MapPin, Calendar, Truck, CheckCircle, Package, Ban, Star, MessageSquare, Sparkles, Paintbrush, Phone, Clock } from 'lucide-react';
-import QuoteImages from './QuoteImages';
-import QuoteFiles from './QuoteFiles';
 import { countries } from '@/data/countries';
 import { getServiceCategory } from '@/lib/serviceCategorizer';
 import { QuoteDetail } from '@/components/common/QuoteDetail';
@@ -395,13 +393,6 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                             <DetailSection title="Bemerkungen des Kunden" icon={MessageSquare}>
                                 <p className="text-sm text-muted-foreground whitespace-pre-wrap md:col-span-2">{quote.additional_info}</p>
                             </DetailSection>
-                        )}
-
-                         {(quote.image_urls && quote.image_urls.length > 0) && (
-                            <QuoteImages imageUrls={quote.image_urls} />
-                        )}
-                         {(quote.file_urls && quote.file_urls.length > 0) && (
-                            <QuoteFiles fileUrls={quote.file_urls} />
                         )}
                       </div>
                       <div className="lg:col-span-1 space-y-4">

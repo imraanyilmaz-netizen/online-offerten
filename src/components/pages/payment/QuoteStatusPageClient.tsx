@@ -4,15 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
-import { Loader2, CheckCircle, Send, FileText as FileTextIcon, Package, AlertCircle, Image as ImageIcon, Star, Phone, Mail, Building, Award, MessageSquare, MapPin, Home, ArrowRight, Hash, Calendar, Box, Check, X, Building2, Layers, Forklift as Lift, MessageCircle, User, Paintbrush, Sparkles } from 'lucide-react';
+import { Loader2, CheckCircle, Send, FileText as FileTextIcon, Package, AlertCircle, Star, Phone, Mail, Building, Award, MessageSquare, MapPin, Home, ArrowRight, Hash, Calendar, Box, Check, X, Building2, Layers, Forklift as Lift, MessageCircle, User, Paintbrush, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 // framer-motion removed - CSS for better INP
 import { format, isPast } from 'date-fns';
 import { de } from 'date-fns/locale/de';
-import QuoteImages from '@/components/PartnerPanel/QuoteImages';
-import QuoteFiles from '@/components/PartnerPanel/QuoteFiles';
 import ReviewModal from '@/components/ReviewModal';
 import { getGermanServiceName } from '@/data/categories';
 import CleaningDetails from '@/components/common/CleaningDetails';
@@ -512,13 +510,6 @@ const QuoteStatusPageClient = () => {
                           </div>
                       </div>
                       
-                      {(quote.image_urls || quote.file_urls) && (
-                        <div className="mt-8 pt-6 border-t space-y-4">
-                           {quote.image_urls && quote.image_urls.length > 0 && <QuoteImages imageUrls={quote.image_urls} />}
-                           {quote.file_urls && quote.file_urls.length > 0 && <QuoteFiles fileUrls={quote.file_urls} />}
-                        </div>
-                      )}
-
                       <div className="mt-12 pt-8 border-t">
                         <h2 className="text-xl sm:text-2xl font-bold text-center text-foreground mb-2">Ihre Offerten-Partner</h2>
                         <p className="text-center text-muted-foreground mb-8">Diese geprüfte Partnerfirmen möchten Ihnen eine unverbindliche Offerte unterbreiten und werden sich in Kürze bei Ihnen melden.</p>

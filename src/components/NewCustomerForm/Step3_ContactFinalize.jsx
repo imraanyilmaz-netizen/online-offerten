@@ -275,8 +275,6 @@ const Step3_ContactFinalize = ({ formData, handleChange, handleSelectChange, han
             <Textarea id="additional_info" name="additional_info" value={formData.additional_info || ''} onChange={handleChange} placeholder={getAdditionalInfoPlaceholder()} className="bg-slate-50 dark:bg-muted/50 border-slate-300 dark:border-border focus:bg-white dark:focus:bg-background min-h-[90px] text-sm sm:text-base"/>
         </div>
       </SectionCard>
-      
-      {/* FileUpload component removed as requested */}
 
       {/* "Wie haben Sie uns gefunden?" - vorübergehend ausgeblendet */}
       {/* <SectionCard icon={<Search className="w-6 h-6 text-green-600" />} titleKey="step3.howFoundTitleOptional" descriptionKey="step3.howFoundDescriptionOptional">

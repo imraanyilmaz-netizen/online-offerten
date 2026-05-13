@@ -19,6 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getServiceTypeLabel } from '@/lib/utils';
+import { compressImage } from '@/lib/imageCompressor';
 
 const PostEditor = ({ post, onBack }) => {
   const { user } = useAuth();
@@ -276,15 +277,26 @@ const PostEditor = ({ post, onBack }) => {
   const handleImageUpload = async () => {
     if (!imageFile) return featuredImageUrl;
     setIsUploading(true);
-    const fileName = `${uuidv4()}-${imageFile.name}`;
-    const { error } = await supabase.storage.from('posts-images').upload(fileName, imageFile);
-    setIsUploading(false);
-    if (error) {
+    try {
+      const compressed = await compressImage(imageFile, {
+        quality: 0.8,
+        maxWidth: 1600,
+        maxHeight: 1200,
+      });
+      const ext = compressed.name.split('.').pop() || 'webp';
+      const fileName = `${uuidv4()}.${ext}`;
+      const { error } = await supabase.storage
+        .from('posts-images')
+        .upload(fileName, compressed, { cacheControl: '31536000', upsert: false });
+      if (error) throw error;
+      const { data: { publicUrl } } = supabase.storage.from('posts-images').getPublicUrl(fileName);
+      return publicUrl;
+    } catch (error) {
       toast({ title: 'Upload Fehler', description: `Bild konnte nicht hochgeladen werden: ${error.message}`, variant: 'destructive' });
       throw error;
+    } finally {
+      setIsUploading(false);
     }
-    const { data: { publicUrl } } = supabase.storage.from('posts-images').getPublicUrl(fileName);
-    return publicUrl;
   };
 
   const removeImage = () => {

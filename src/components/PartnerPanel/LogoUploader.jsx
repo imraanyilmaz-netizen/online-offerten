@@ -23,13 +23,17 @@ import React, { useState, useCallback } from 'react';
     
       const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: { 'image/*': ['.jpeg', '.png', '.jpg', '.gif', '.svg'] },
+        accept: {
+          'image/jpeg': ['.jpeg', '.jpg'],
+          'image/png': ['.png'],
+          'image/webp': ['.webp'],
+        },
         multiple: false,
-        maxSize: 10 * 1024 * 1024, // 10MB before compression
+        maxSize: 10 * 1024 * 1024,
         onDropRejected: (fileRejections) => {
-            const message = fileRejections[0].errors[0].message === 'File is larger than 10485760 bytes'
+            const message = fileRejections[0].errors[0].code === 'file-too-large'
                 ? 'Datei ist zu gross (max. 10MB).'
-                : 'Ungültiger Dateityp.';
+                : 'Ungültiger Dateityp. Erlaubt: JPG, PNG, WebP.';
             toast({ title: 'Fehler beim Hochladen', description: message, variant: 'destructive' });
         }
       });
@@ -48,7 +52,7 @@ import React, { useState, useCallback } from 'react';
     
           const { error: uploadError } = await supabase.storage
             .from('partner-logos')
-            .upload(filePath, compressedFile);
+            .upload(filePath, compressedFile, { cacheControl: '31536000', upsert: false });
     
           if (uploadError) throw uploadError;
     
@@ -89,7 +93,7 @@ import React, { useState, useCallback } from 'react';
             <DialogHeader>
               <DialogTitle>Logo hochladen</DialogTitle>
               <DialogDescription>
-                Laden Sie hier Ihr Firmenlogo hoch. Empfohlen: Quadratisches Format, max. 10MB.
+                Laden Sie hier Ihr Firmenlogo hoch. Empfohlen: Quadratisches Format. JPG, PNG oder WebP, max. 10MB.
               </DialogDescription>
             </DialogHeader>
             <div className="py-4">
@@ -115,7 +119,7 @@ import React, { useState, useCallback } from 'react';
                     <p className="text-sm text-gray-600">
                       {isDragActive ? 'Logo hier ablegen...' : 'Logo hierher ziehen oder klicken'}
                     </p>
-                    <p className="text-xs text-gray-500">PNG, JPG, GIF oder SVG bis zu 10MB</p>
+                    <p className="text-xs text-gray-500">JPG, PNG oder WebP bis zu 10MB</p>
                   </div>
                 )}
               </div>

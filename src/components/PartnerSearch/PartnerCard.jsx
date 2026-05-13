@@ -4,6 +4,7 @@ import React from 'react'
 import { Star, MapPin, CheckCircle, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { transformSupabaseUrl, isSupabaseStorageUrl } from '@/src/lib/supabaseImage'
 
 const PartnerCard = ({ partner }) => {
   if (!partner) return null
@@ -24,6 +25,14 @@ const PartnerCard = ({ partner }) => {
   const rating = partner.average_rating || partner.rating || 0
   const reviewCount = partner.review_count || 0
   const partnerSlug = partner.slug || partner.id
+
+  const heroUrl = partner.hero_image_url
+    ? transformSupabaseUrl(partner.hero_image_url, { width: 800, height: 400, quality: 75, resize: 'cover' })
+    : null
+  const heroIsSupabase = isSupabaseStorageUrl(partner.hero_image_url)
+
+  const logoSrc = transformSupabaseUrl(partner.logo_url || '/image/logo-icon.webp', { width: 128, quality: 80 })
+  const logoIsSupabase = isSupabaseStorageUrl(partner.logo_url)
 
   const mainCategories = partner.main_categories || []
   const hasUmzug = mainCategories.includes('umzug')
@@ -71,17 +80,17 @@ const PartnerCard = ({ partner }) => {
           }
           className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
         >
-          {partner.hero_image_url ? (
+          {heroUrl ? (
             <>
               <div className="relative h-32 w-full sm:h-36">
                 <Image
-                  src={partner.hero_image_url}
+                  src={heroUrl}
                   alt=""
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover"
                   loading="lazy"
-                  unoptimized={false}
+                  unoptimized={heroIsSupabase}
                 />
               </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/5 to-transparent" />
@@ -107,12 +116,13 @@ const PartnerCard = ({ partner }) => {
 
         <div className="absolute bottom-2 left-2 sm:bottom-2.5 sm:left-2.5">
           <Image
-            src={partner.logo_url || '/image/logo-icon.webp'}
+            src={logoSrc}
             alt=""
             width={56}
             height={56}
             sizes="56px"
             className="h-12 w-12 rounded-full border-2 border-white object-cover shadow-md ring-1 ring-black/5 sm:h-14 sm:w-14"
+            unoptimized={logoIsSupabase}
           />
         </div>
 

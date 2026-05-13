@@ -48,23 +48,17 @@ const InsuranceUploadModal = ({ open, onOpenChange, partnerId, onSuccess }) => {
 
       const { error: uploadError } = await supabase.storage
         .from('partner-insurance-docs')
-        .upload(filePath, file, { cacheControl: '3600', upsert: false });
+        .upload(filePath, file, { cacheControl: '31536000', upsert: false });
 
       if (uploadError) throw uploadError;
 
-      // 2) Public URL erhalten
-      const { data: publicUrlData } = supabase.storage
-        .from('partner-insurance-docs')
-        .getPublicUrl(filePath);
-
-      const fileUrl = publicUrlData?.publicUrl || '';
-
-      // 3) partner_insurance Eintrag erstellen/aktualisieren
+      // Hinweis: file_url wird nicht mehr gespeichert. Der Bucket ist privat,
+      // wir generieren bei jedem Aufruf einen Signed URL aus file_path.
       const { error: insertError } = await supabase
         .from('partner_insurance')
         .upsert({
           partner_id: partnerId,
-          file_url: fileUrl,
+          file_url: null,
           file_path: filePath,
           valid_until: validUntil,
           status: 'in_review',
@@ -76,12 +70,11 @@ const InsuranceUploadModal = ({ open, onOpenChange, partnerId, onSuccess }) => {
         });
 
       if (insertError) {
-        // Falls kein Unique Constraint auf partner_id, einfach INSERT
         const { error: fallbackError } = await supabase
           .from('partner_insurance')
           .insert({
             partner_id: partnerId,
-            file_url: fileUrl,
+            file_url: null,
             file_path: filePath,
             valid_until: validUntil,
             status: 'in_review',

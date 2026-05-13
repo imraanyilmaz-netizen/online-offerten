@@ -26,13 +26,17 @@ const ImageUploader = ({ partnerId, currentImageUrl, onUpload, storagePath, dbFi
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { 'image/*': ['.jpeg', '.png', '.jpg', '.gif', '.svg', '.webp'] },
+    accept: {
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/png': ['.png'],
+      'image/webp': ['.webp'],
+    },
     multiple: false,
-    maxSize: 10 * 1024 * 1024, // 10MB before compression
+    maxSize: 10 * 1024 * 1024,
     onDropRejected: (fileRejections) => {
       const message = fileRejections[0].errors[0].code === 'file-too-large'
         ? 'Datei ist zu gross (max. 10MB).'
-        : 'Ungültiger Dateityp.';
+        : 'Ungültiger Dateityp. Erlaubt: JPG, PNG, WebP.';
       toast({ title: 'Fehler beim Hochladen', description: message, variant: 'destructive' });
     }
   });
@@ -51,7 +55,7 @@ const ImageUploader = ({ partnerId, currentImageUrl, onUpload, storagePath, dbFi
 
       const { error: uploadError } = await supabase.storage
         .from(storagePath)
-        .upload(filePath, compressedFile, { upsert: false });
+        .upload(filePath, compressedFile, { cacheControl: '31536000', upsert: false });
 
       if (uploadError) throw uploadError;
 

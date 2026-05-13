@@ -23,13 +23,17 @@ const GalleryImageUploader = ({ partnerId, currentImages = [], onUpdate }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { 'image/*': ['.jpeg', '.png', '.jpg', '.webp'] },
+    accept: {
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/png': ['.png'],
+      'image/webp': ['.webp'],
+    },
     multiple: true,
-    maxSize: 10 * 1024 * 1024, // 10MB before compression
-    onDropRejected: (fileRejections) => {
+    maxSize: 10 * 1024 * 1024,
+    onDropRejected: () => {
       toast({
         title: 'Fehler beim Hochladen',
-        description: 'Einige Dateien konnten nicht hinzugefügt werden. (Max. 10MB, nur Bilder)',
+        description: 'Einige Dateien konnten nicht hinzugefügt werden. Erlaubt: JPG, PNG, WebP (max. 10MB).',
         variant: 'destructive'
       });
     }
@@ -55,7 +59,7 @@ const GalleryImageUploader = ({ partnerId, currentImages = [], onUpdate }) => {
 
         const { error: uploadError } = await supabase.storage
           .from('partner-gallery-images')
-          .upload(filePath, compressedFile);
+          .upload(filePath, compressedFile, { cacheControl: '31536000', upsert: false });
 
         if (uploadError) {
           throw new Error(`Fehler beim Hochladen von ${file.name}: ${uploadError.message}`);
@@ -143,7 +147,7 @@ const GalleryImageUploader = ({ partnerId, currentImages = [], onUpdate }) => {
         <div className="flex flex-col items-center justify-center space-y-2 text-muted-foreground">
           <UploadCloud className="w-10 h-10" />
           <p className="font-semibold">Bilder hierher ziehen oder klicken</p>
-          <p className="text-xs">PNG, JPG, WEBP bis zu 10MB</p>
+          <p className="text-xs">JPG, PNG oder WebP bis zu 10MB</p>
         </div>
       </div>
 

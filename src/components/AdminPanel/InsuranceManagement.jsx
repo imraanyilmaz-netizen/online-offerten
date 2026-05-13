@@ -22,6 +22,41 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
   const [rejectionReason, setRejectionReason] = useState('');
   const [manualApproveDialog, setManualApproveDialog] = useState({ open: false, record: null });
   const [manualValidUntil, setManualValidUntil] = useState('');
+  const [openingPdfId, setOpeningPdfId] = useState(null);
+
+  const handleViewPdf = useCallback(async (record) => {
+    setOpeningPdfId(record.id);
+    try {
+      if (record.file_path) {
+        const { data, error } = await supabase.storage
+          .from('partner-insurance-docs')
+          .createSignedUrl(record.file_path, 60);
+        if (error) throw error;
+        if (data?.signedUrl) {
+          window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+          return;
+        }
+      }
+      if (record.file_url) {
+        window.open(record.file_url, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      toast({
+        title: 'Fehler',
+        description: 'Versicherungsdokument konnte nicht geöffnet werden.',
+        variant: 'destructive',
+      });
+    } catch (error) {
+      console.error('Error opening insurance PDF:', error);
+      toast({
+        title: 'Fehler',
+        description: `Dokument konnte nicht geöffnet werden: ${error.message}`,
+        variant: 'destructive',
+      });
+    } finally {
+      setOpeningPdfId(null);
+    }
+  }, [toast]);
 
   const fetchInsuranceRecords = useCallback(async () => {
     try {
@@ -452,18 +487,23 @@ const InsuranceManagement = ({ partners, onRefreshPartners }) => {
 
                   <div className="flex items-center gap-2 flex-wrap">
                     {/* PDF ansehen */}
-                    {record.file_url && (
-                      <Button 
-                        variant="outline" 
+                    {(record.file_path || record.file_url) && (
+                      <Button
+                        variant="outline"
                         size="sm"
-                        onClick={() => window.open(record.file_url, '_blank')}
+                        onClick={() => handleViewPdf(record)}
+                        disabled={openingPdfId === record.id}
                       >
-                        <FileText className="w-4 h-4 mr-1.5" />
+                        {openingPdfId === record.id ? (
+                          <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
+                        ) : (
+                          <FileText className="w-4 h-4 mr-1.5" />
+                        )}
                         PDF ansehen
                       </Button>
                     )}
-                    {/* PDF fehlt Hinweis bei in_review ohne file_url */}
-                    {record.status === 'in_review' && !record.file_url && (
+                    {/* PDF fehlt Hinweis bei in_review ohne Datei */}
+                    {record.status === 'in_review' && !record.file_path && !record.file_url && (
                       <span className="text-xs text-orange-600 dark:text-orange-400">⚠️ Kein PDF gefunden</span>
                     )}
 

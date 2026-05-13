@@ -19,7 +19,7 @@ import { Mark } from '@tiptap/core';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/src/components/ui/use-toast';
 import { v4 as uuidv4 } from 'uuid';
-import { normalizeFileName } from '@/lib/utils';
+import { compressImage } from '@/lib/imageCompressor';
 import {
   Bold,
   Italic,
@@ -231,20 +231,25 @@ const TiptapEditor = ({ content, onChange, insertHtml }) => {
   const handleImageUpload = useCallback(async () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
+    input.setAttribute('accept', 'image/jpeg,image/png,image/webp');
     input.click();
 
     input.onchange = async () => {
       const file = input.files?.[0];
       if (!file) return;
 
-      const normalizedName = normalizeFileName(file.name);
-      const fileName = `${uuidv4()}-${normalizedName}`;
-
       try {
+        const compressed = await compressImage(file, {
+          quality: 0.8,
+          maxWidth: 1600,
+          maxHeight: 1200,
+        });
+        const ext = compressed.name.split('.').pop() || 'webp';
+        const fileName = `${uuidv4()}.${ext}`;
+
         const { error: uploadError } = await supabase.storage
           .from('posts-images')
-          .upload(fileName, file);
+          .upload(fileName, compressed, { cacheControl: '31536000', upsert: false });
 
         if (uploadError) {
           throw uploadError;

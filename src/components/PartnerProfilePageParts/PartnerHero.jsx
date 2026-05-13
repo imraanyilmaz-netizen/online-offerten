@@ -6,6 +6,7 @@ import { Send } from 'lucide-react';
 import QualityBadge from './QualityBadge';
 import StarRating from './StarRating';
 import VerifiedInsuranceBadge from './VerifiedInsuranceBadge';
+import { transformSupabaseUrl } from '@/src/lib/supabaseImage';
 
 const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
   // Removed useTranslation
@@ -23,8 +24,10 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
     return '/image/online-offerten.webp';
   };
 
-  const heroImageUrl = partner.hero_image_url || getHeroFallbackImage();
-  
+  const rawHeroUrl = partner.hero_image_url || getHeroFallbackImage();
+  const heroImageUrl = transformSupabaseUrl(rawHeroUrl, { width: 1600, quality: 80 });
+  const logoUrl = transformSupabaseUrl(partner.logo_url || '/image/logo-icon.webp', { width: 256, quality: 80 });
+
   // Gerçek yorum sayısı ve rating'i kullan (prop'tan gelen veya partner objesinden)
   const displayRating = averageRating !== undefined ? averageRating : (partner.average_rating || 0);
   const displayReviewCount = reviewCount !== undefined ? reviewCount : (partner.review_count || 0);
@@ -47,6 +50,9 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
           className="w-full h-full object-contain object-right"
           loading="eager"
           decoding="async"
+          fetchPriority="high"
+          width="1600"
+          height="900"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = getHeroFallbackImage();
@@ -66,12 +72,14 @@ const PartnerHero = ({ partner, onGetOffer, averageRating, reviewCount }) => {
             <div
               className="flex-shrink-0 bg-white/90 dark:bg-card/95 rounded-2xl shadow-lg border border-border/50 p-3 flex items-center justify-center mb-6 w-fit"
             >
-              <img 
-                src={partner.logo_url || '/image/logo-icon.webp'}
-                alt={`${partner.company_name} Logo`} 
+              <img
+                src={logoUrl}
+                alt={`${partner.company_name} Logo`}
                 className="max-w-40 max-h-40 md:max-w-48 md:max-h-48 w-auto h-auto object-contain"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
+                width="192"
+                height="192"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = '/image/logo-icon.webp';
