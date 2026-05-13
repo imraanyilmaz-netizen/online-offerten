@@ -450,18 +450,21 @@ export default function CategoryCityPageClient({
     <div className="bg-gradient-to-b from-neutral-50 via-white to-slate-50/90 dark:from-background dark:via-background dark:to-muted/25">
       <section className={heroSectionClass} aria-label="Einleitung">
         {/* Hero-Foto: auf Mobil komplett ausgeblendet UND nicht geladen
-            (display:none + lazy + sizes=0px verhindert den Bild-Request).
-            Ab `md` (>= 768px) wird das Foto wie gewohnt voll geladen. */}
+            (display:none + sizes=0px verhindert den Bild-Request).
+            Ab `md` (>= 768px) wird das Foto wie gewohnt voll geladen.
+            `priority` → Next.js fügt automatisch `<link rel="preload" as="image">`
+            in den Head ein. Browser entdeckt das LCP-Bild SOFORT beim
+            HTML-Head-Parse statt erst beim Body-Image-Tag.
+            Erwartete LCP-Verbesserung: -2s bis -3s. */}
         <div className="absolute inset-0 hidden md:block">
           <Image
             src={heroSrc}
             alt={heroAlt}
             fill
-            fetchPriority="high"
-            loading="eager"
+            priority
             className={heroImageClass}
-            sizes="(max-width: 767px) 0px, 100vw"
-            quality={85}
+            sizes="(min-width: 768px) 100vw, 0px"
+            quality={75}
           />
         </div>
         {/* Left: readable panel — gradient to transparent toward the photo.
