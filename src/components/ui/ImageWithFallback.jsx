@@ -9,7 +9,7 @@ const ImageWithFallback = ({
   src,
   fallbackSrc = PLACEHOLDER,
   alt,
-  transform,
+  transform = undefined,
   ...props
 }) => {
   const [imgSrc, setImgSrc] = useState(src);
