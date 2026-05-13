@@ -203,7 +203,7 @@ export default function CategoryReinigungHubClient() {
                   <Sparkles className="mr-2 h-4 w-4" />
                   Professionelle Reinigung in der Schweiz
                 </div>
-                <h1 className="heading-1 !mt-0">
+                <h1 className="!mt-0 mb-6 text-[28px] font-bold leading-[1.2] text-foreground sm:text-[32px] md:text-[36px] lg:text-[40px]">
                   Reinigungsfirma finden und kostenlose Offerten vergleichen
                 </h1>
                 <p className="mb-6 max-w-3xl text-base leading-relaxed text-slate-700 dark:text-muted-foreground sm:text-lg">
@@ -278,8 +278,8 @@ export default function CategoryReinigungHubClient() {
               <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
                 Reinigungsarten
               </p>
-              <h2 className="heading-2">Welche Reinigungsfirma passt zu Ihrem Auftrag?</h2>
-              <p className="mt-3 text-body">
+              <h2 className="mt-6 mb-4 text-[22px] font-bold leading-[1.3] text-foreground md:text-[30px] md:leading-[1.33]">Welche Reinigungsfirma passt zu Ihrem Auftrag?</h2>
+              <p className="mt-3 mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                 Je genauer die Leistung beschrieben ist, desto besser lassen sich Preise und Umfang
                 vergleichen. Wählen Sie die passende Reinigungsart und erhalten Sie spezialisierte
                 Anbieter für Ihren Bedarf.
@@ -312,14 +312,14 @@ export default function CategoryReinigungHubClient() {
         <section className="border-t border-border bg-slate-50 py-12 dark:bg-muted/20 md:py-16">
           <div className="container mx-auto grid max-w-7xl gap-10 px-4 md:px-6 lg:grid-cols-2">
             <div className="space-y-5">
-              <h2 className="heading-2">Reinigungsfirma vergleichen statt einzeln anfragen</h2>
-              <p className="text-body">
+              <h2 className="mb-4 text-[22px] font-bold leading-[1.3] text-foreground md:text-[30px] md:leading-[1.33]">Reinigungsfirma vergleichen statt einzeln anfragen</h2>
+              <p className="mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                 Eine professionelle Reinigungsfirma spart Zeit und sorgt dafür, dass Wohnung, Haus
                 oder Büro sauber und termingerecht übergeben werden. Besonders bei einer
                 Umzugsreinigung mit Abnahmegarantie ist es wichtig, dass Leistungsumfang,
                 Nachreinigung und Termin klar geregelt sind.
               </p>
-              <p className="text-body">
+              <p className="mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                 Mit einem Offertenvergleich sehen Sie schneller, welche Anbieter verfügbar sind,
                 welche Leistungen enthalten sind und wo Preisunterschiede entstehen. So vermeiden
                 Sie unklare Pauschalen und finden eine Reinigungsfirma, die zum Objekt und Budget
@@ -351,7 +351,7 @@ export default function CategoryReinigungHubClient() {
                   <p className="text-sm text-muted-foreground">Mehr Klarheit vor der Beauftragung</p>
                 </div>
               </div>
-              <ul className="space-y-3 text-body">
+              <ul className="space-y-3 mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                 <li className="flex gap-2">
                   <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>Bis zu 5 kostenlose Offerten von geprüften Reinigungsfirmen</span>
@@ -381,8 +381,8 @@ export default function CategoryReinigungHubClient() {
                   <Clock3 className="h-4 w-4" />
                   Ablauf
                 </p>
-                <h2 className="heading-2">So funktioniert die Anfrage</h2>
-                <p className="mt-3 text-body">
+                <h2 className="mt-6 mb-4 text-[22px] font-bold leading-[1.3] text-foreground md:text-[30px] md:leading-[1.33]">So funktioniert die Anfrage</h2>
+                <p className="mt-3 mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                   Eine gute Offerte beginnt mit den richtigen Angaben. Beschreiben Sie Objekt,
                   Reinigungsart, Termin und gewünschte Zusatzleistungen einmal und vergleichen Sie
                   danach passende Angebote.
@@ -412,15 +412,15 @@ export default function CategoryReinigungHubClient() {
         <section className="border-t border-border bg-slate-50 py-12 dark:bg-muted/20 md:py-16">
           <div className="container mx-auto grid max-w-7xl gap-8 px-4 md:px-6 lg:grid-cols-2">
             <div className="rounded-2xl border border-border bg-card p-6">
-              <h2 className="heading-2">Was beeinflusst die Reinigungskosten?</h2>
-              <p className="mt-3 text-body">
+              <h2 className="mb-4 text-[22px] font-bold leading-[1.3] text-foreground md:text-[30px] md:leading-[1.33]">Was beeinflusst die Reinigungskosten?</h2>
+              <p className="mt-3 mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                 Pauschale Preise wirken einfach, sind aber oft schwer vergleichbar. Eine faire
                 Reinigungsofferte berücksichtigt den Zustand, die Fläche und die gewünschten
                 Zusatzarbeiten.
               </p>
               <ul className="mt-6 space-y-3">
                 {priceFactors.map((factor) => (
-                  <li key={factor} className="flex gap-2 text-body">
+                  <li key={factor} className="flex gap-2 mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                     <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                     <span>{factor}</span>
                   </li>
@@ -429,8 +429,8 @@ export default function CategoryReinigungHubClient() {
             </div>
 
             <div className="rounded-2xl border border-border bg-card p-6">
-              <h2 className="heading-2">Reinigungsfirma in Ihrer Stadt</h2>
-              <p className="mt-3 text-body">
+              <h2 className="mb-4 text-[22px] font-bold leading-[1.3] text-foreground md:text-[30px] md:leading-[1.33]">Reinigungsfirma in Ihrer Stadt</h2>
+              <p className="mt-3 mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                 Vergleichen Sie lokale Anbieter in wichtigen Schweizer Städten und erhalten Sie
                 Reinigungsofferten von Firmen, die Ihre Region kennen.
               </p>
@@ -457,8 +457,8 @@ export default function CategoryReinigungHubClient() {
                 <HelpCircle className="h-3.5 w-3.5" />
                 Häufige Fragen
               </div>
-              <h2 className="heading-2">FAQ zur Reinigungsfirma</h2>
-              <p className="mt-2 text-body">
+              <h2 className="mt-6 mb-4 text-[22px] font-bold leading-[1.3] text-foreground md:text-[30px] md:leading-[1.33]">FAQ zur Reinigungsfirma</h2>
+              <p className="mt-2 mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0">
                 Antworten zu Offerten, Kosten, Abnahmegarantie und Auswahl einer passenden
                 Reinigungsfirma.
               </p>
@@ -486,3 +486,4 @@ export default function CategoryReinigungHubClient() {
     </>
   )
 }
+

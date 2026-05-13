@@ -15,6 +15,21 @@ import {
 } from 'lucide-react'
 import { REINIGUNGSFIRMA_STAEDTE } from '@/components/pages/info/reinigungsfirmaStaedte'
 
+const heading1ClassName =
+  '!mt-0 mb-6 text-[28px] font-bold leading-[1.2] text-foreground sm:text-[32px] md:text-[36px] lg:text-[40px]'
+const heading2ClassName =
+  'mt-6 mb-4 text-[22px] font-bold leading-[1.3] text-foreground md:text-[30px] md:leading-[1.33]'
+const heading4NoTopClassName =
+  '!mt-0 mb-2 text-lg font-bold leading-[1.33] text-foreground md:text-xl'
+const textBodyClassName =
+  'mb-4 text-base font-normal leading-[26px] text-foreground last:mb-0'
+const textBodyMb6ClassName =
+  'mb-6 text-base font-normal leading-[26px] text-foreground'
+const textBodyMb8ClassName =
+  'mb-8 text-base font-normal leading-[26px] text-foreground'
+const textBodyItalicClassName =
+  'mb-4 text-base font-normal italic leading-[26px] text-foreground last:mb-0'
+
 const ReinigungsfirmaInDerNaehePageClient = () => {
   const router = useRouter()
   const canonicalUrl = 'https://online-offerten.ch/reinigungsfirma'
@@ -165,7 +180,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
     if (existing && existing.parentNode) {
       try {
         existing.remove()
-      } catch (e) {
+      } catch {
         // Element zaten kaldırılmış olabilir
       }
     }
@@ -178,7 +193,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       if (scriptToRemove && scriptToRemove.parentNode) {
         try {
           scriptToRemove.remove()
-        } catch (e) {
+        } catch {
           // Element zaten kaldırılmış olabilir
         }
       }
@@ -249,7 +264,7 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                 <MapPin className="h-4 w-4 mr-2" />
                 Lokale Reinigungsfirmen finden
               </div>
-              <h1 className="heading-1 !mt-0">
+              <h1 className={heading1ClassName}>
                 Reinigungsfirma in der Nähe finden – Kostenlose Offerten vergleichen
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground mb-8 leading-relaxed">
@@ -396,13 +411,13 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
-              <h2 className="heading-2">
+              <h2 className={heading2ClassName}>
                 Das Problem: Zuverlässige Reinigungsfirmen in der Nähe zu finden ist zeitaufwändig und schwierig
               </h2>
-              <p className="text-body mb-6">
+              <p className={textBodyMb6ClassName}>
                 Wer eine <strong>Reinigungsfirma</strong> oder <strong>Reinigungsdienste in der Nähe</strong> sucht – etwa für <strong>Umzugsreinigung</strong>, <strong>Endreinigung</strong> oder <strong>Wohnungsabgabe</strong> – stösst auf unüberschaubar viele Treffer. Dutzende Anbieter versprechen Qualität; doch welches Reinigungsunternehmen liefert fairen Preis und klare Offerten? Bewertungen allein ersetzen keinen direkten <strong>Preisvergleich</strong>, und Einzelanfragen kosten viel Zeit.
               </p>
-              <p className="text-body">
+              <p className={textBodyClassName}>
                 Online-Offerten.ch bündelt Ihre Anfrage: Statt jede Putzfirma einzeln zu kontaktieren, erhalten Sie mehrere <strong>Reinigungsofferten</strong> von geprüften Partnern – passend zu Ihrer Region und Ihrem Auftrag. So vergleichen Sie <strong>Reinigungskosten</strong> und Leistungen transparent, ohne Verpflichtung zum Abschluss.
               </p>
             </div>
@@ -423,10 +438,10 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
       <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white dark:from-muted/20 dark:to-background">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-10">
-            <h2 className="heading-2">
+            <h2 className={heading2ClassName}>
               Warum Online-Offerten.ch für Ihre Reinigungsfirma-Suche nutzen?
             </h2>
-            <p className="text-body mb-8">
+            <p className={textBodyMb8ClassName}>
               Fünf überzeugende Gründe sprechen für unsere Plattform bei der Auswahl Ihrer Reinigungsfirma:
             </p>
           </div>
@@ -438,11 +453,11 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   <div className="bg-blue-100 dark:bg-sky-950/45 p-3 rounded-lg mr-4">
                     <MapPin className="h-6 w-6 text-blue-600 dark:text-sky-400" />
                   </div>
-                  <CardTitle className="heading-4 !mt-0">Bis zu 5 regionale Anbieter</CardTitle>
+                  <CardTitle className={heading4NoTopClassName}>Bis zu 5 regionale Anbieter</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-body">Reinigungsfirmen aus Ihrer Umgebung melden sich persönlich bei Ihnen, ob in Zürich, Bern oder einer anderen Region der Schweiz.</p>
+                <p className={textBodyClassName}>Reinigungsfirmen aus Ihrer Umgebung melden sich persönlich bei Ihnen, ob in Zürich, Bern oder einer anderen Region der Schweiz.</p>
               </CardContent>
             </Card>
 
@@ -452,11 +467,11 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   <div className="bg-green-100 dark:bg-emerald-950/40 p-3 rounded-lg mr-4">
                     <ShieldCheck className="h-6 w-6 text-green-600 dark:text-emerald-400" />
                   </div>
-                  <CardTitle className="heading-4 !mt-0">100% kostenlos</CardTitle>
+                  <CardTitle className={heading4NoTopClassName}>100% kostenlos</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-body">Für Sie entstehen keine Kosten, weder für die Anfrage noch für den Vergleich der Offerten. Komplett unverbindlich.</p>
+                <p className={textBodyClassName}>Für Sie entstehen keine Kosten, weder für die Anfrage noch für den Vergleich der Offerten. Komplett unverbindlich.</p>
               </CardContent>
             </Card>
 
@@ -466,11 +481,11 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   <div className="bg-purple-100 dark:bg-purple-950/40 p-3 rounded-lg mr-4">
                     <CheckCircle className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                   </div>
-                  <CardTitle className="heading-4 !mt-0">Verifizierte Betriebe</CardTitle>
+                  <CardTitle className={heading4NoTopClassName}>Verifizierte Betriebe</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-body">Wir arbeiten ausschliesslich mit geprüften Partner-Betrieben zusammen, die über nachweisliches Know-how verfügen.</p>
+                <p className={textBodyClassName}>Wir arbeiten ausschliesslich mit geprüften Partner-Betrieben zusammen, die über nachweisliches Know-how verfügen.</p>
               </CardContent>
             </Card>
 
@@ -480,11 +495,11 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   <div className="bg-amber-100 dark:bg-amber-950/40 p-3 rounded-lg mr-4">
                     <Star className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                   </div>
-                  <CardTitle className="heading-4 !mt-0">Transparenter Vergleich</CardTitle>
+                  <CardTitle className={heading4NoTopClassName}>Transparenter Vergleich</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-body">Sie sehen Preise, Leistungen und Konditionen auf einen Blick und treffen Ihre Wahl unabhängig.</p>
+                <p className={textBodyClassName}>Sie sehen Preise, Leistungen und Konditionen auf einen Blick und treffen Ihre Wahl unabhängig.</p>
               </CardContent>
             </Card>
 
@@ -494,17 +509,17 @@ const ReinigungsfirmaInDerNaehePageClient = () => {
                   <div className="bg-teal-100 dark:bg-teal-950/40 p-3 rounded-lg mr-4">
                     <Clock className="h-6 w-6 text-teal-600 dark:text-teal-400" />
                   </div>
-                  <CardTitle className="heading-4 !mt-0">Zeitersparnis</CardTitle>
+                  <CardTitle className={heading4NoTopClassName}>Zeitersparnis</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-body">Statt fünf separate Anfragen zu stellen, erreichen Sie alle relevanten Anbieter mit einem einzigen Formular.</p>
+                <p className={textBodyClassName}>Statt fünf separate Anfragen zu stellen, erreichen Sie alle relevanten Anbieter mit einem einzigen Formular.</p>
               </CardContent>
             </Card>
           </div>
 
           <div className="bg-blue-50 dark:bg-sky-950/25 rounded-lg p-6 border border-blue-200 dark:border-sky-800/60">
-            <p className="text-body italic">
+            <p className={textBodyItalicClassName}>
               Mit Online-Offerten.ch erhalten Sie die Kraft eines professionellen Reinigungsservice ohne den Aufwand der Suche. Entwickelt für Privathaushalte und Unternehmen, liefert unsere Plattform Ergebnisse in wenigen Stunden.
             </p>
           </div>
