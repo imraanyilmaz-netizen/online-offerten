@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Star, Building, Mail, Phone, MapPin, Globe, Calendar, Users, FileText, Shield, Check, X, ExternalLink } from 'lucide-react';
+import { Star, Building, Mail, Phone, MapPin, Globe, Calendar, Users, FileText, Shield, Check, X, ExternalLink, CreditCard } from 'lucide-react';
 import { getGermanServiceName } from '@/data/categories';
 import { getFullCantonName } from '@/data/locations';
 
@@ -19,8 +19,47 @@ const DetailItem = ({ label, value, children }) => (
   </div>
 );
 
+const formatDateTime = (dateString) => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleString('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
+const getSubscriptionStatus = (partner) => {
+  const endDate = partner.subscription_end_date ? new Date(partner.subscription_end_date) : null;
+  const hasEndDate = endDate && !Number.isNaN(endDate.getTime());
+  const isActive = !!(partner.has_active_subscription && hasEndDate && endDate > new Date());
+
+  if (isActive) {
+    return {
+      label: 'Aktiv',
+      className: 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/55 dark:text-blue-200 dark:border-blue-800',
+    };
+  }
+
+  if (partner.has_active_subscription || hasEndDate) {
+    return {
+      label: 'Abgelaufen',
+      className: 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-950/45 dark:text-orange-200 dark:border-orange-800',
+    };
+  }
+
+  return {
+    label: 'Kein Abo',
+    className: 'bg-muted text-muted-foreground border-border',
+  };
+};
+
 const PartnerDetailView = ({ partner }) => {
   if (!partner) return null;
+  const subscriptionStatus = getSubscriptionStatus(partner);
   
   return (
     <div className="space-y-6">
@@ -61,6 +100,20 @@ const PartnerDetailView = ({ partner }) => {
            </div>
         </DetailSection>
       </div>
+
+      <DetailSection title="Abonnement" icon={<CreditCard className="w-5 h-5 text-blue-600"/>}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <DetailItem label="Status">
+            <Badge variant="outline" className={`${subscriptionStatus.className} border font-semibold`}>
+              {subscriptionStatus.label}
+            </Badge>
+          </DetailItem>
+          <DetailItem label="Gültig bis" value={formatDateTime(partner.subscription_end_date) || '-'} />
+          <DetailItem label="Unbegrenzte Anfragen">
+            {subscriptionStatus.label === 'Aktiv' ? <Check className="text-green-600"/> : <X className="text-red-600"/>}
+          </DetailItem>
+        </div>
+      </DetailSection>
 
       <DetailSection title="Adresse" icon={<MapPin className="w-5 h-5 text-green-600"/>}>
         <p className="text-sm text-muted-foreground">

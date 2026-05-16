@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/src/components/ui/use-toast';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { supabase } from '@/lib/supabaseClient';
@@ -12,15 +13,19 @@ import { Mail, Plus, Loader2, Send, Clock, Search, Trash2, RotateCcw, CheckCircl
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale/de';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const PartnerInviteEmail = () => {
   const { toast } = useToast();
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
+  const [bulkJson, setBulkJson] = useState('');
   const [invitations, setInvitations] = useState([]);
   const [loadingInvitations, setLoadingInvitations] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sendingId, setSendingId] = useState(null);
   const [addingToList, setAddingToList] = useState(false);
+  const [addingBulk, setAddingBulk] = useState(false);
 
   // Dialoge
   const [resendDialog, setResendDialog] = useState({ open: false, invitation: null });
@@ -68,8 +73,7 @@ const PartnerInviteEmail = () => {
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!EMAIL_REGEX.test(email)) {
       toast({ variant: "destructive", title: "Fehler", description: "Ungültige E-Mail-Adresse." });
       return;
     }
@@ -110,6 +114,110 @@ const PartnerInviteEmail = () => {
       toast({ variant: "destructive", title: "Fehler", description: error.message || "Fehler beim Hinzufügen." });
     } finally {
       setAddingToList(false);
+    }
+  };
+
+  const normalizeBulkInvite = (item, index) => {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) {
+      throw new Error(`Eintrag ${index + 1}: Bitte ein Objekt mit Firma und E-Mail verwenden.`);
+    }
+
+    const name = String(item.company_name || item.name || item.company || item.firma || '').trim();
+    const email = String(item.email || item.e_mail || '').trim();
+
+    if (!name || !email) {
+      throw new Error(`Eintrag ${index + 1}: Firma und E-Mail sind erforderlich.`);
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      throw new Error(`Eintrag ${index + 1}: Ungültige E-Mail-Adresse (${email}).`);
+    }
+
+    return { company_name: name, email, status: 'pending' };
+  };
+
+  const handleBulkJsonAdd = async () => {
+    if (!bulkJson.trim()) {
+      toast({ variant: "destructive", title: "Fehler", description: "Bitte JSON einfügen." });
+      return;
+    }
+
+    let parsed;
+    try {
+      parsed = JSON.parse(bulkJson);
+    } catch (error) {
+      toast({ variant: "destructive", title: "Fehler", description: "JSON ist ungültig. Bitte Syntax prüfen." });
+      return;
+    }
+
+    const rawItems = Array.isArray(parsed) ? parsed : [parsed];
+    if (rawItems.length === 0) {
+      toast({ variant: "destructive", title: "Fehler", description: "JSON enthält keine Einträge." });
+      return;
+    }
+
+    let invitesToInsert;
+    try {
+      invitesToInsert = rawItems.map(normalizeBulkInvite);
+    } catch (error) {
+      toast({ variant: "destructive", title: "Fehler", description: error.message });
+      return;
+    }
+
+    const seenEmails = new Set();
+    const duplicateEmail = invitesToInsert.find((invite) => {
+      const normalizedEmail = invite.email.toLowerCase();
+      if (seenEmails.has(normalizedEmail)) return true;
+      seenEmails.add(normalizedEmail);
+      return false;
+    });
+
+    if (duplicateEmail) {
+      toast({
+        variant: "destructive",
+        title: "Fehler",
+        description: `${duplicateEmail.email} kommt im JSON mehrfach vor.`,
+      });
+      return;
+    }
+
+    setAddingBulk(true);
+    try {
+      const emails = invitesToInsert.map((invite) => invite.email);
+      const { data: existingPartners, error: partnerError } = await supabase
+        .from('partners')
+        .select('company_name, email')
+        .in('email', emails);
+
+      if (partnerError) throw partnerError;
+
+      if (existingPartners?.length) {
+        const partnerNames = existingPartners
+          .map((partner) => partner.company_name || partner.email)
+          .join(', ');
+        toast({
+          variant: "destructive",
+          title: "⚠️ Bereits registrierte Partner",
+          description: `${partnerNames} sind bereits als Partner registriert. Bitte aus dem JSON entfernen.`,
+        });
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('partner_invitations')
+        .insert(invitesToInsert)
+        .select();
+
+      if (error) throw error;
+
+      setInvitations(prev => [...(data || []), ...prev]);
+      setBulkJson('');
+      toast({ title: "Hinzugefügt", description: `${invitesToInsert.length} Einladungen wurden zur Liste hinzugefügt.` });
+    } catch (error) {
+      console.error('Error adding bulk invitations:', error);
+      toast({ variant: "destructive", title: "Fehler", description: error.message || "Fehler beim Hinzufügen." });
+    } finally {
+      setAddingBulk(false);
     }
   };
 
@@ -262,6 +370,41 @@ const PartnerInviteEmail = () => {
                 </>
               )}
             </Button>
+          </div>
+          <div className="mt-6 border-t border-border pt-5">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="bulk-invite-json">Mehrere Firmen per JSON hinzufügen</Label>
+              <Textarea
+                id="bulk-invite-json"
+                value={bulkJson}
+                onChange={(e) => setBulkJson(e.target.value)}
+                placeholder={`[
+  { "company_name": "Muster GmbH", "email": "kontakt@muster.de" },
+  { "name": "Beispiel AG", "email": "info@beispiel.de" }
+]`}
+                className="min-h-[150px] font-mono text-xs"
+              />
+              <p className="text-xs text-muted-foreground">
+                Unterstützt eine JSON-Liste oder ein einzelnes Objekt. Erlaubte Firmennamen-Felder: company_name, name, company, firma.
+              </p>
+              <div>
+                <Button
+                  onClick={handleBulkJsonAdd}
+                  disabled={addingBulk}
+                  variant="outline"
+                  className="flex-shrink-0"
+                >
+                  {addingBulk ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4 mr-1" />
+                      JSON hinzufügen
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>

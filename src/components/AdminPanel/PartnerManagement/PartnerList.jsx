@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush, Clock, Activity, Mail } from 'lucide-react';
+import { Users, Eye, Edit, Pause, Play, Star, TrendingUp, Calendar, Trash2, ExternalLink, Gift, Wallet, Loader2, Truck, Sparkles, Paintbrush, Clock, Activity, Mail, CreditCard } from 'lucide-react';
 // framer-motion removed - CSS for better INP
 import PartnerDetailView from './PartnerDetailView';
 import PartnerEditModal from './PartnerEditModal';
@@ -18,6 +18,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [subscriptionFilter, setSubscriptionFilter] = useState('all');
   const [selectedPartner, setSelectedPartner] = useState(null);
   const [editingPartner, setEditingPartner] = useState(null);
   const [deletingPartner, setDeletingPartner] = useState(null);
@@ -127,6 +128,58 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
     return <Badge variant="outline" className={`${config.className} border px-3 py-1`}>{config.label}</Badge>;
   };
 
+  const formatDate = (dateString, options = {}) => {
+    if (!dateString) return null;
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return null;
+    return date.toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+      ...options,
+    });
+  };
+
+  const getSubscriptionInfo = (partner) => {
+    const endDate = partner.subscription_end_date ? new Date(partner.subscription_end_date) : null;
+    const hasEndDate = endDate && !Number.isNaN(endDate.getTime());
+    const isActive = !!(partner.has_active_subscription && hasEndDate && endDate > new Date());
+
+    if (isActive) {
+      return {
+        status: 'active',
+        badgeLabel: 'Abo aktiv',
+        label: `Bis ${formatDate(partner.subscription_end_date)}`,
+        className: 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/55 dark:text-blue-200 dark:border-blue-800 font-semibold',
+      };
+    }
+
+    if (partner.has_active_subscription || hasEndDate) {
+      return {
+        status: 'expired',
+        badgeLabel: 'Abo abgelaufen',
+        label: hasEndDate ? `Seit ${formatDate(partner.subscription_end_date)}` : 'Abgelaufen',
+        className: 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-950/45 dark:text-orange-200 dark:border-orange-800 font-semibold',
+      };
+    }
+
+    return {
+      status: 'none',
+      badgeLabel: 'Kein Abo',
+      label: 'Kein Abo',
+      className: 'bg-muted text-muted-foreground border-border font-semibold',
+    };
+  };
+
+  const getSubscriptionBadge = (partner) => {
+    const subscription = getSubscriptionInfo(partner);
+    return (
+      <Badge variant="outline" className={`${subscription.className} border px-3 py-1`}>
+        {subscription.badgeLabel}
+      </Badge>
+    );
+  };
+
   const filteredPartners = useMemo(() => {
     const filtered = partners.filter(partner => {
       const searchLower = searchTerm.toLowerCase();
@@ -135,7 +188,8 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                            (partner.name && partner.name.toLowerCase().includes(searchLower)) ||
                            (partner.email && partner.email.toLowerCase().includes(searchLower));
       const matchesStatus = statusFilter === 'all' || partner.status === statusFilter;
-      return matchesSearch && matchesStatus;
+      const matchesSubscription = subscriptionFilter === 'all' || getSubscriptionInfo(partner).status === subscriptionFilter;
+      return matchesSearch && matchesStatus && matchesSubscription;
     });
 
     // Sort by selected criteria
@@ -153,9 +207,14 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
         const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
         return bTime - aTime;
       }
+      if (sortBy === 'subscription_end_date') {
+        const aTime = a.subscription_end_date ? new Date(a.subscription_end_date).getTime() : 0;
+        const bTime = b.subscription_end_date ? new Date(b.subscription_end_date).getTime() : 0;
+        return bTime - aTime;
+      }
       return 0;
     });
-  }, [partners, searchTerm, statusFilter, sortBy]);
+  }, [partners, searchTerm, statusFilter, subscriptionFilter, sortBy]);
 
   const getStatusActions = (partner) => {
     const isUpdating = updatingStatusId === partner.id;
@@ -213,6 +272,8 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
         setSearchTerm={setSearchTerm} 
         statusFilter={statusFilter} 
         setStatusFilter={setStatusFilter}
+        subscriptionFilter={subscriptionFilter}
+        setSubscriptionFilter={setSubscriptionFilter}
         filteredCount={filteredPartners.length}
         sortBy={sortBy}
         setSortBy={setSortBy}
@@ -238,6 +299,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                         <div className="flex items-center gap-3 flex-wrap">
                           <h3 className="text-xl font-bold text-foreground">{partner.company_name || partner.name}</h3>
                           {getStatusBadge(partner.status)}
+                          {getSubscriptionBadge(partner)}
                           <ActivityBadge lastActivity={partner.last_activity} />
                         </div>
                       </div>
@@ -263,7 +325,7 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                         <p className="text-sm font-medium text-muted-foreground">{partner.email}</p>
                       </div>
 
-                      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 p-4 bg-gradient-to-br from-muted/50 to-background dark:from-muted/30 dark:to-muted/10 rounded-lg border border-border">
+                      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 p-4 bg-gradient-to-br from-muted/50 to-background dark:from-muted/30 dark:to-muted/10 rounded-lg border border-border">
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">
                             <Star className="w-4 h-4 text-yellow-500 dark:text-amber-400" />
@@ -292,6 +354,15 @@ const PartnerList = ({ partners, onUpdatePartner, onDeletePartner, onRefresh }) 
                             <span className="text-xs font-medium text-muted-foreground">Guthaben</span>
                           </div>
                           <span className="text-sm font-bold text-green-600 dark:text-emerald-400">CHF {((partner.main_balance || 0) + (partner.bonus_balance || 0)).toFixed(2)}</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <CreditCard className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+                            <span className="text-xs font-medium text-muted-foreground">Abo</span>
+                          </div>
+                          <span className={`text-sm font-bold ${getSubscriptionInfo(partner).status === 'active' ? 'text-blue-700 dark:text-blue-300' : 'text-foreground'}`}>
+                            {getSubscriptionInfo(partner).label}
+                          </span>
                         </div>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5 mb-1">

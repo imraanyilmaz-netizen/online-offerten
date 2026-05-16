@@ -2,9 +2,19 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Users, Search, Filter, ArrowUpDown } from 'lucide-react';
+import { Users, Search, Filter, ArrowUpDown, CreditCard } from 'lucide-react';
 
-const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilter, filteredCount, sortBy, setSortBy }) => {
+const PartnerFilters = ({
+  searchTerm,
+  setSearchTerm,
+  statusFilter,
+  setStatusFilter,
+  subscriptionFilter,
+  setSubscriptionFilter,
+  filteredCount,
+  sortBy,
+  setSortBy,
+}) => {
   return (
     <Card className="border-border shadow-sm">
       <CardHeader className="pb-4 border-b border-border">
@@ -21,7 +31,7 @@ const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilt
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-5">
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
@@ -33,7 +43,7 @@ const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilt
               />
             </div>
           </div>
-          <div className="w-full md:w-52">
+          <div className="w-full lg:w-52">
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="h-11 border-border focus-visible:ring-emerald-500/30">
                 <Filter className="w-4 h-4 mr-2 text-muted-foreground" />
@@ -47,7 +57,21 @@ const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilt
               </SelectContent>
             </Select>
           </div>
-          <div className="w-full md:w-56">
+          <div className="w-full lg:w-52">
+            <Select value={subscriptionFilter} onValueChange={setSubscriptionFilter}>
+              <SelectTrigger className="h-11 border-border focus-visible:ring-emerald-500/30">
+                <CreditCard className="w-4 h-4 mr-2 text-muted-foreground" />
+                <SelectValue placeholder="Abo filtern" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle Abos</SelectItem>
+                <SelectItem value="active">Aktives Abo</SelectItem>
+                <SelectItem value="expired">Abo abgelaufen</SelectItem>
+                <SelectItem value="none">Kein Abo</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="w-full lg:w-56">
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="h-11 border-border focus-visible:ring-emerald-500/30">
                 <ArrowUpDown className="w-4 h-4 mr-2 text-muted-foreground" />
@@ -57,6 +81,7 @@ const PartnerFilters = ({ searchTerm, setSearchTerm, statusFilter, setStatusFilt
                 <SelectItem value="last_activity">Letzte Aktivität</SelectItem>
                 <SelectItem value="name">Name (A-Z)</SelectItem>
                 <SelectItem value="created_at">Beitrittsdatum</SelectItem>
+                <SelectItem value="subscription_end_date">Abo-Ende</SelectItem>
               </SelectContent>
             </Select>
           </div>
