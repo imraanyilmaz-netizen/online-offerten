@@ -263,12 +263,22 @@ export const submitNewQuoteToSupabase = async (formData) => {
     )
   }[formData.umzugArt] || formData.umzugArt : null;
 
+  // Klavier und Flügel werden beide als "Klaviertransport" gespeichert,
+  // der genaue Typ wird im neuen Feld piano_type ('klavier' oder 'fluegel') hinterlegt.
   const specialTransportTypeLabel = formData.special_transport_type ? {
-    'klaviertransport': tAdmin('step1.specialTransportTypePiano'),
+    'klaviertransport': tAdmin('step1.specialTransportTypePianoCategory'),
+    'fluegel': tAdmin('step1.specialTransportTypePianoCategory'),
     'tresortransport': tAdmin('step1.specialTransportTypeSafe'),
     'maschinen_geraete': tAdmin('step1.specialTransportTypeMachine'),
     'sonstiges': tAdmin('step1.specialTransportTypeOther'),
   }[formData.special_transport_type] || formData.special_transport_type : null;
+
+  // Piano-Typ (nur relevant bei Klaviertransport)
+  const pianoTypeValue = formData.special_transport_type === 'fluegel'
+    ? 'fluegel'
+    : formData.special_transport_type === 'klaviertransport'
+      ? 'klavier'
+      : null;
   
   // Helper function to get properly formatted labels
   const getFloorLabel = (value) => {
@@ -402,6 +412,7 @@ export const submitNewQuoteToSupabase = async (formData) => {
     servicetype: finalServiceType,
     umzugart: umzugArtLabel,
     special_transport_type: specialTransportTypeLabel,
+    piano_type: pianoTypeValue,
     special_transport_other_details: formData.special_transport_other_details || null,
     additional_info: formData.additional_info || null,
     services_detail1: serviceDetailsString || null,

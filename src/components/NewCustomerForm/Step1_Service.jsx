@@ -665,7 +665,8 @@ const Step1_Service = ({ formData, handleServiceSelect, handleUmzugArtChange, ha
   ];
 
   const specialTransportOptions = [
-    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
+    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', descriptionKey: 'step1.specialTransportTypePianoDescription', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
+    { value: 'fluegel', labelKey: 'step1.specialTransportTypeFluegel', descriptionKey: 'step1.specialTransportTypeFluegelDescription', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
     { value: 'tresortransport', labelKey: 'step1.specialTransportTypeSafe', icon: <ShieldQuestion size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
     { value: 'maschinen_geraete', labelKey: 'step1.specialTransportTypeMachine', icon: <Weight size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
     { value: 'sonstiges', labelKey: 'step1.specialTransportTypeOther', icon: <VenetianMask size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },

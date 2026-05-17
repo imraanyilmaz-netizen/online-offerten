@@ -32,7 +32,7 @@ const createAdminEmailHtml = (quoteDetails: any) => {
     move_date, move_date_flexible,
     umzugart,
     additional_cleaning, additional_info, how_found, salutation, id,
-    special_transport, special_transport_type, special_transport_other_details,
+    special_transport, special_transport_type, special_transport_other_details, piano_type,
     additional_services_piano, additional_services_furniture_assembly, additional_services_packing,
     additional_services_furniture_lift, additional_services_disposal, additional_services_lamp_demontage,
     besichtigung_erwuenscht,
@@ -235,6 +235,7 @@ const createAdminEmailHtml = (quoteDetails: any) => {
           ${additional_services_disposal ? `<tr><td class="label">Entsorgung</td><td class="value"><span class="yes-badge">Ja</span></td></tr>` : ''}
           ${special_transport ? `<tr><td class="label">Spezialtransport</td><td class="value"><span class="yes-badge">Ja</span></td></tr>` : ''}
           ${special_transport_type ? `<tr><td class="label">Art Spezialtransport</td><td class="value">${special_transport_type}</td></tr>` : ''}
+          ${piano_type ? `<tr><td class="label">Klavier-Typ</td><td class="value">${piano_type === 'fluegel' ? 'Flügel' : 'Klavier'}</td></tr>` : ''}
           ${special_transport_other_details ? `<tr><td class="label">Details Spezialtransport</td><td class="value">${special_transport_other_details}</td></tr>` : ''}
         </table>
         ` : ''}

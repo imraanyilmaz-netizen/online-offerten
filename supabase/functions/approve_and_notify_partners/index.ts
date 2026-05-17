@@ -78,6 +78,14 @@ serve(async (req) => {
       }
       if (quote.additional_services_disposal) zusatz.push('Entsorgung');
 
+      // Spezialtransport-Typ und Klavier-Untertyp (Klavier / Flügel) — getrennt anzeigen
+      const specialTransportLine = quote.special_transport_type || null;
+      const pianoTypeLine = quote.piano_type === 'fluegel'
+        ? 'Flügel'
+        : quote.piano_type === 'klavier'
+          ? 'Klavier'
+          : null;
+
       // Reinigung Details
       const areaSizeLabels: Record<string, string> = {
         bis_40: 'bis 40 m²', '40_60': '40 – 60 m²', '60_80': '60 – 80 m²', '80_100': '80 – 100 m²', '100_120': '100 – 120 m²', '120_140': '120 – 140 m²', ueber_140: 'über 140 m²',
@@ -120,6 +128,9 @@ ${quote.to_city ? `<p><strong>Nach:</strong> ${quote.to_zip} ${quote.to_city}</p
 ${quote.to_city && toFloorLift ? `<p class="sub-info">${toFloorLift}</p>` : ''}
 ${quote.to_city && toRoomsObj ? `<p class="sub-info">${toRoomsObj}</p>` : ''}
 
+${specialTransportLine ? `<p><strong>Art Spezialtransport:</strong> ${specialTransportLine}</p>` : ''}
+${pianoTypeLine ? `<p><strong>Klavier-Typ:</strong> ${pianoTypeLine}</p>` : ''}
+${quote.special_transport_other_details ? `<p><strong>Spezialtransport Details:</strong> ${quote.special_transport_other_details}</p>` : ''}
 ${zusatz.length > 0 ? `<p><strong>Zusatzleistungen:</strong> ${zusatz.join(', ')}</p>` : ''}
 ${quote.cleaning_area_sqm ? `<p><strong>Wohnungsfläche:</strong> ${areaSizeLabels[quote.cleaning_area_sqm] || quote.cleaning_area_sqm}</p>` : ''}
 ${quote.cleaning_type_guarantee ? `<p><strong>Art der Reinigung:</strong> ${cleaningTypeLabels[quote.cleaning_type_guarantee] || quote.cleaning_type_guarantee}</p>` : ''}

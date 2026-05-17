@@ -272,7 +272,20 @@ const QuoteEditForm = ({ quote, onSave, onCancel, isProcessing }) => {
         {showSpezialtransportFields && (
             <Fieldset legend="Spezialtransport">
                 <FormField id="special_transport_type" label="Art des Spezialtransports"><Input name="special_transport_type" value={formData.special_transport_type || ''} onChange={handleChange} /></FormField>
-                <div className="md:col-span-2 lg:col-span-3">
+                <FormField id="piano_type" label="Klavier-Typ">
+                  <select
+                    id="piano_type"
+                    name="piano_type"
+                    value={formData.piano_type || ''}
+                    onChange={handleChange}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="">– Nicht angegeben –</option>
+                    <option value="klavier">Klavier</option>
+                    <option value="fluegel">Flügel</option>
+                  </select>
+                </FormField>
+                <div className="md:col-span-2 lg:col-span-2">
                   <FormField id="special_transport_other_details" label="Details zum Spezialtransport"><Textarea name="special_transport_other_details" value={formData.special_transport_other_details || ''} onChange={handleChange} /></FormField>
                 </div>
             </Fieldset>

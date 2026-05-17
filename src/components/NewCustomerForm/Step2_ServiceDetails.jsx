@@ -723,7 +723,8 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
   ];
 
   const specialTransportOptions = [
-    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
+    { value: 'klaviertransport', labelKey: 'step1.specialTransportTypePiano', descriptionKey: 'step1.specialTransportTypePianoDescription', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
+    { value: 'fluegel', labelKey: 'step1.specialTransportTypeFluegel', descriptionKey: 'step1.specialTransportTypeFluegelDescription', icon: <PiPianoKeysFill size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
     { value: 'tresortransport', labelKey: 'step1.specialTransportTypeSafe', icon: <ShieldQuestion size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
     { value: 'maschinen_geraete', labelKey: 'step1.specialTransportTypeMachine', icon: <Weight size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
     { value: 'sonstiges', labelKey: 'step1.specialTransportTypeOther', icon: <VenetianMask size={16} className="mr-2 text-gray-600 dark:text-muted-foreground" /> },
@@ -952,10 +953,17 @@ const Step2_ServiceDetails = ({ formData, handleUmzugArtChange, handleRadioGroup
                   >
                     {specialTransportOptions.map(opt => (
                       <div key={opt.value} className={`p-2.5 sm:p-3 border rounded-md transition-colors ${formData.special_transport_type === opt.value ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-400 dark:border-blue-500' : 'bg-gray-50 dark:bg-muted/50 border-gray-200 dark:border-border md:hover:border-gray-300 dark:md:hover:border-muted-foreground/30'}`}>
-                        <div className="flex items-center">
-                          <RadioGroupItem value={opt.value} id={`special_transport_${opt.value}`} className="mr-2 sm:mr-3" />
-                          {opt.icon}
-                          <Label htmlFor={`special_transport_${opt.value}`} className="font-normal text-sm sm:text-base cursor-pointer flex-grow">{t(opt.labelKey)}</Label>
+                        <div className="flex items-start">
+                          <RadioGroupItem value={opt.value} id={`special_transport_${opt.value}`} className="mr-2 sm:mr-3 mt-0.5" />
+                          <span className="mt-0.5">{opt.icon}</span>
+                          <Label htmlFor={`special_transport_${opt.value}`} className="font-normal text-sm sm:text-base cursor-pointer flex-grow">
+                            <span>{t(opt.labelKey)}</span>
+                            {opt.descriptionKey && (
+                              <span className="block text-xs sm:text-sm text-gray-500 dark:text-muted-foreground font-normal mt-0.5">
+                                {t(opt.descriptionKey)}
+                              </span>
+                            )}
+                          </Label>
                         </div>
                       </div>
                     ))}

@@ -1079,7 +1079,8 @@ const CustomerForm = ({ initialDataFromProps = {}, formId = "new-customer-form" 
           if (formData.special_transport_type) {
             // Map special_transport_type to translation key
             const transportTypeMap = {
-              'klaviertransport': 'specialTransportTypePiano',
+              'klaviertransport': 'specialTransportTypePianoCategory',
+              'fluegel': 'specialTransportTypePianoCategory',
               'tresortransport': 'specialTransportTypeSafe',
               'maschinen_geraete': 'specialTransportTypeMachine',
               'sonstiges': 'specialTransportTypeOther'

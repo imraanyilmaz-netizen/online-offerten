@@ -67,10 +67,10 @@ const initialFormData = {
   fensterreinigung_zugang: '',
   lagerung: false, // Lagerung field
   // Service-Detail Ja/Nein Felder (servicespezifisch im Step2_DetailsAndContact)
-  has_piano: '', // 'ja' | 'nein' | '' -> Klavier vorhanden
-  needs_furniture_assembly: '', // 'ja' | 'nein' | '' -> Möbel De-/Montage gewünscht
-  needs_lamp_demontage: '', // 'ja' | 'nein' | '' -> Lampen Demontage gewünscht
-  besichtigung_erwuenscht: '', // 'ja' | 'nein' | '' -> Vor-Ort-Besichtigung gewünscht
+  has_piano: 'nein', // 'ja' | 'nein' | '' -> Klavier vorhanden (Default: nein)
+  needs_furniture_assembly: 'nein', // 'ja' | 'nein' | '' -> Möbel De-/Montage gewünscht (Default: nein)
+  needs_lamp_demontage: 'nein', // 'ja' | 'nein' | '' -> Lampen Demontage gewünscht (Default: nein)
+  besichtigung_erwuenscht: 'ja', // 'ja' | 'nein' | '' -> Vor-Ort-Besichtigung gewünscht (Default: ja)
 };
 
 const useNewCustomerForm = (initialData = {}) => {
@@ -141,8 +141,8 @@ const useNewCustomerForm = (initialData = {}) => {
           fensterreinigung_zugang: '', what_to_paint: {}, maler_details_other: '',
           maler_current_condition: '',
           lagerung: false, // Reset lagerung state when service changes
-          has_piano: '', needs_furniture_assembly: '',
-          needs_lamp_demontage: '', besichtigung_erwuenscht: '',
+          has_piano: 'nein', needs_furniture_assembly: 'nein',
+          needs_lamp_demontage: 'nein', besichtigung_erwuenscht: 'ja',
         };
       }
       const newErrors = { ...prev.errors };

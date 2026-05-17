@@ -369,6 +369,18 @@ const AvailableQuoteList = ({ quotes, onPurchaseQuote, onQuoteViewed, onRejectQu
                               {serviceCategory === 'moving' && shouldShowUmzugsartDetail(quote.umzugart, quote.servicetype) && (
                                 <QuoteDetail label="Umzugsart" value={quote.umzugart} />
                               )}
+                              {quote.special_transport_type && (
+                                <QuoteDetail label="Art Spezialtransport" value={quote.special_transport_type} />
+                              )}
+                              {quote.piano_type && (
+                                <QuoteDetail
+                                  label="Klavier-Typ"
+                                  value={quote.piano_type === 'fluegel' ? 'Flügel' : 'Klavier'}
+                                />
+                              )}
+                              {quote.special_transport_other_details && (
+                                <QuoteDetail label="Spezialtransport Details" value={quote.special_transport_other_details} />
+                              )}
                           </DetailSection>
                           <DetailSection title={serviceCategory === 'moving' ? 'Umzugsadressen' : 'Objektadresse'} icon={MapPin}>
                               <div className="grid grid-cols-1 gap-4">
