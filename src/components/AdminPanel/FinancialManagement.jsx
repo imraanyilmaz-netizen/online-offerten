@@ -5,10 +5,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Coins, Search, Filter, Loader2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Coins, Search, Filter, Loader2, ChevronLeft, ChevronRight, FileDown } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/src/components/ui/use-toast';
+import { generateStripeInvoicePdf } from '@/lib/generateStripeInvoicePdf';
 
 const FinancialManagement = ({ partners }) => {
   const [transactions, setTransactions] = useState([]);
@@ -17,9 +18,55 @@ const FinancialManagement = ({ partners }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [downloadingId, setDownloadingId] = useState(null);
   const itemsPerPage = 20;
 
   const partnerMap = useMemo(() => new Map(partners.map(p => [p.id, p.company_name])), [partners]);
+
+  const handleDownloadInvoice = useCallback(async (tx) => {
+    if (!tx?.id || !tx?.partner_id) {
+      toast({
+        title: 'Fehler',
+        description: 'Transaktion oder Partner-ID fehlt.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    setDownloadingId(tx.id);
+    try {
+      const { data: partner, error: partnerErr } = await supabase
+        .from('partners')
+        .select('company_name, address_street, address_zip, address_city, email, slug')
+        .eq('id', tx.partner_id)
+        .maybeSingle();
+
+      if (partnerErr) throw partnerErr;
+
+      await generateStripeInvoicePdf({
+        transaction: {
+          id: tx.id,
+          created_at: tx.created_at,
+          amount: tx.amount,
+          description: tx.description,
+        },
+        partner: partner || { company_name: tx.partner_name },
+      });
+
+      toast({
+        title: 'Rechnung erstellt',
+        description: `PDF wurde heruntergeladen.`,
+      });
+    } catch (err) {
+      console.error('Invoice PDF error:', err);
+      toast({
+        title: 'Fehler beim Erstellen',
+        description: err?.message || 'PDF konnte nicht erstellt werden.',
+        variant: 'destructive',
+      });
+    } finally {
+      setDownloadingId(null);
+    }
+  }, [toast]);
 
   const fetchTransactions = useCallback(async () => {
     setLoading(true);
@@ -163,6 +210,7 @@ const FinancialManagement = ({ partners }) => {
                     <TableHead className="font-bold text-foreground py-4 text-sm">Beschreibung</TableHead>
                     <TableHead className="text-right font-bold text-foreground py-4 text-sm">Betrag (CHF)</TableHead>
                     <TableHead className="text-right font-bold text-foreground py-4 text-sm">Endsaldo (CHF)</TableHead>
+                    <TableHead className="text-center font-bold text-foreground py-4 text-sm">Rechnung</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -194,12 +242,35 @@ const FinancialManagement = ({ partners }) => {
                           <TableCell className="text-right font-semibold text-foreground py-3.5 whitespace-nowrap">
                             {Number(tx.balance_after || 0).toFixed(2)}
                         </TableCell>
+                          <TableCell className="text-center py-3.5">
+                            {tx.transaction_type === 'top-up' ? (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleDownloadInvoice(tx)}
+                                disabled={downloadingId === tx.id}
+                                className="h-8 px-2.5 font-medium border-green-200 dark:border-emerald-900 text-green-700 dark:text-emerald-300 hover:bg-green-50 dark:hover:bg-emerald-950/40"
+                                title="Rechnung als PDF herunterladen"
+                              >
+                                {downloadingId === tx.id ? (
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                ) : (
+                                  <>
+                                    <FileDown className="w-4 h-4 mr-1.5" />
+                                    PDF
+                                  </>
+                                )}
+                              </Button>
+                            ) : (
+                              <span className="text-xs text-muted-foreground/60">—</span>
+                            )}
+                          </TableCell>
                         </TableRow>
                       );
                     })
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center py-16">
+                      <TableCell colSpan={7} className="text-center py-16">
                         <div className="flex flex-col items-center justify-center">
                           <div className="inline-flex items-center justify-center w-16 h-16 bg-muted rounded-full mb-4">
                             <Coins className="w-8 h-8 text-muted-foreground" />

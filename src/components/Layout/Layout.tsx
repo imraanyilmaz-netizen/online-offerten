@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Layout/Navbar'
 import Footer from '@/components/Layout/Footer'
@@ -20,10 +20,27 @@ const FullPageLoader = () => (
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
   const { user } = useAuth()
-  /** AuthProvider initial value `user: null` (SSR ve ilk client render aynı).
-   *  Bu yüzden `mounted` gate'ine gerek yok — hydration mismatch oluşmaz.
-   *  Auth resolve olduğunda `user` değişir, normal React update tetiklenir. */
-  const isPartner = user?.user_metadata?.role === 'partner'
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration sonrası auth'a bağlı shell'e geçilir
+    setMounted(true)
+  }, [])
+
+  const isPartner =
+    user?.user_metadata?.role === 'partner' || user?.app_metadata?.role === 'partner'
+  const partnerPanelPrefixes = [
+    '/partner/dashboard',
+    '/partner/einstellungen',
+    '/partner/credit-top-up',
+    '/partner/payment-status',
+  ]
+  const isPartnerPanelPage = partnerPanelPrefixes.some(
+    (p) => pathname === p || pathname?.startsWith(`${p}/`)
+  )
+  /** Partner panel URL'leri SSR ve ilk client render'da aynı shell'i alır.
+   *  Partner kullanıcının public sayfalardaki özel navbar'ı ise hydration sonrası açılır. */
+  const showPartnerShell = isPartnerPanelPage || (mounted && isPartner)
   const formPages = [
     '/kostenlose-offerte-anfordern',
     '/forgot-password'
@@ -33,10 +50,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   /** Partner- und Admin-Panel-Seiten — kein "Beliebte Standorte"-Block */
   const panelPrefixes = [
-    '/partner/dashboard',
-    '/partner/einstellungen',
-    '/partner/credit-top-up',
-    '/partner/payment-status',
+    ...partnerPanelPrefixes,
     '/admin-dashboard',
   ]
   const isPanelPage = panelPrefixes.some(
@@ -87,7 +101,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
    *  (Gäste, Kunden, Admins) sehen die öffentliche Marketing-Navbar. */
   const mainContent = (
     <div className="min-h-screen flex flex-col bg-background" style={{ contain: 'layout style' }}>
-      {isPartner ? <PartnerNavbar /> : <Navbar />}
+      {showPartnerShell ? <PartnerNavbar /> : <Navbar />}
       <main
         className="flex-grow flex flex-col"
         style={{
@@ -110,9 +124,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   )
 
   /** Die PartnerCountsProvider-Wrapperebene stellt Badge-Zählungen für den
-   *  Mobile-Drawer bereit (Verfügbar/Angenommen/…). Nur aktiv, wenn ein
-   *  Partner eingeloggt ist — sonst fällt kein zusätzlicher Request an. */
-  return isPartner ? (
+   *  Mobile-Drawer bereit (Verfügbar/Angenommen/…). Ohne Session bleibt sie
+   *  request-frei, hält die Partner-Shell aber SSR/client-stabil. */
+  return showPartnerShell ? (
     <PartnerCountsProvider>{mainContent}</PartnerCountsProvider>
   ) : (
     mainContent
